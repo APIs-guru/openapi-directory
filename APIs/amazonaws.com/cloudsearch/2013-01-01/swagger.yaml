@@ -39,8 +39,10 @@ x-hasEquivalentPaths: true
 schemes:
   - https
   - http
-consumes: []
-produces: []
+consumes:
+  - text/xml
+produces:
+  - text/xml
 parameters:
   Action:
     name: Action
@@ -97,7 +99,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /:
+  '/#Action=BuildSuggesters':
     post:
       operationId: BuildSuggesters
       description: 'Indexes the search suggestions. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html#configuring-suggesters">Configuring Suggesters</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
@@ -122,11 +124,20 @@ paths:
           schema:
             $ref: '#/definitions/InternalException'
       parameters:
-        - name: body
-          in: body
+        - name: DomainName
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/BuildSuggestersRequest'
+          description: 'A string that represents the name of a domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+          type: string
+          pattern: '[a-z][a-z0-9\-]+'
+          minLength: 3
+          maxLength: 28
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - BuildSuggesters
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -137,7 +148,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateDomain':
+  '/#Action=CreateDomain':
     post:
       operationId: CreateDomain
       description: 'Creates a new search domain. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/creating-domains.html" target="_blank">Creating a Search Domain</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
@@ -162,11 +173,20 @@ paths:
           schema:
             $ref: '#/definitions/InternalException'
       parameters:
-        - name: body
-          in: body
+        - name: DomainName
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/CreateDomainRequest'
+          description: 'A string that represents the name of a domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+          type: string
+          pattern: '[a-z][a-z0-9\-]+'
+          minLength: 3
+          maxLength: 28
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - CreateDomain
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -177,7 +197,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DefineAnalysisScheme':
+  '/#Action=DefineAnalysisScheme':
     post:
       operationId: DefineAnalysisScheme
       description: 'Configures an analysis scheme that can be applied to a <code>text</code> or <code>text-array</code> field to define language-specific text processing options. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html" target="_blank">Configuring Analysis Schemes</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
@@ -202,11 +222,35 @@ paths:
           schema:
             $ref: '#/definitions/InternalException'
       parameters:
-        - name: body
-          in: body
+        - name: DomainName
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/DefineAnalysisSchemeRequest'
+          description: 'A string that represents the name of a domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+          type: string
+          pattern: '[a-z][a-z0-9\-]+'
+          minLength: 3
+          maxLength: 28
+        - name: AnalysisScheme.AnalysisSchemeName
+          in: query
+          description: |
+            Configuration information for an analysis scheme. Each analysis scheme has a unique name and specifies the language of the text to be processed. The following options can be configured for an analysis scheme: <code>Synonyms</code>, <code>Stopwords</code>, <code>StemmingDictionary</code>, <code>JapaneseTokenizationDictionary</code> and <code>AlgorithmicStemming</code>.
+          type: string
+        - name: AnalysisScheme.AnalysisSchemeLanguage
+          in: query
+          description: |
+            Configuration information for an analysis scheme. Each analysis scheme has a unique name and specifies the language of the text to be processed. The following options can be configured for an analysis scheme: <code>Synonyms</code>, <code>Stopwords</code>, <code>StemmingDictionary</code>, <code>JapaneseTokenizationDictionary</code> and <code>AlgorithmicStemming</code>.
+          type: string
+        - name: AnalysisScheme.AnalysisOptions
+          in: query
+          description: |
+            Configuration information for an analysis scheme. Each analysis scheme has a unique name and specifies the language of the text to be processed. The following options can be configured for an analysis scheme: <code>Synonyms</code>, <code>Stopwords</code>, <code>StemmingDictionary</code>, <code>JapaneseTokenizationDictionary</code> and <code>AlgorithmicStemming</code>.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DefineAnalysisScheme
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -217,7 +261,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DefineExpression':
+  '/#Action=DefineExpression':
     post:
       operationId: DefineExpression
       description: 'Configures an <code><a>Expression</a></code> for the search domain. Used to create new expressions and modify existing ones. If the expression exists, the new configuration replaces the old one. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html" target="_blank">Configuring Expressions</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
@@ -242,11 +286,30 @@ paths:
           schema:
             $ref: '#/definitions/InternalException'
       parameters:
-        - name: body
-          in: body
+        - name: DomainName
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/DefineExpressionRequest'
+          description: 'A string that represents the name of a domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+          type: string
+          pattern: '[a-z][a-z0-9\-]+'
+          minLength: 3
+          maxLength: 28
+        - name: Expression.ExpressionName
+          in: query
+          description: |
+            A named expression that can be evaluated at search time. Can be used to sort the search results, define other expressions, or return computed information in the search results. 
+          type: string
+        - name: Expression.ExpressionValue
+          in: query
+          description: |
+            A named expression that can be evaluated at search time. Can be used to sort the search results, define other expressions, or return computed information in the search results. 
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DefineExpression
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -257,7 +320,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DefineIndexField':
+  '/#Action=DefineIndexField':
     post:
       operationId: DefineIndexField
       description: 'Configures an <code><a>IndexField</a></code> for the search domain. Used to create new fields and modify existing ones. You must specify the name of the domain you are configuring and an index field configuration. The index field configuration specifies a unique name, the index field type, and the options you want to configure for the field. The options you can specify depend on the <code><a>IndexFieldType</a></code>. If the field exists, the new configuration replaces the old one. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-index-fields.html" target="_blank">Configuring Index Fields</a> in the <i>Amazon CloudSearch Developer Guide</i>. '
@@ -282,11 +345,86 @@ paths:
           schema:
             $ref: '#/definitions/InternalException'
       parameters:
-        - name: body
-          in: body
+        - name: DomainName
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/DefineIndexFieldRequest'
+          description: 'A string that represents the name of a domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+          type: string
+          pattern: '[a-z][a-z0-9\-]+'
+          minLength: 3
+          maxLength: 28
+        - name: IndexField.IndexFieldName
+          in: query
+          description: |-
+            Configuration information for a field in the index, including its name, type, and options. The supported options depend on the <code><a>IndexFieldType</a></code>.
+            <p>A string that represents the name of an index field. CloudSearch supports regular index fields as well as dynamic fields. A dynamic field's name defines a pattern that begins or ends with a wildcard. Any document fields that don't map to a regular index field but do match a dynamic field's pattern are configured with the dynamic field's indexing options. </p> <p>Regular field names begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore). Dynamic field names must begin or end with a wildcard (*). The wildcard can also be the only character in a dynamic field name. Multiple wildcards, and wildcards embedded within a string are not supported. </p> <p>The name <code>score</code> is reserved and cannot be used as a field name. To reference a document's ID, you can use the name <code>_id</code>. </p>
+          type: string
+        - name: IndexField.IndexFieldType
+          in: query
+          description: |
+            Configuration information for a field in the index, including its name, type, and options. The supported options depend on the <code><a>IndexFieldType</a></code>.
+          type: string
+        - name: IndexField.IntOptions
+          in: query
+          description: |
+            Configuration information for a field in the index, including its name, type, and options. The supported options depend on the <code><a>IndexFieldType</a></code>.
+          type: string
+        - name: IndexField.DoubleOptions
+          in: query
+          description: |
+            Configuration information for a field in the index, including its name, type, and options. The supported options depend on the <code><a>IndexFieldType</a></code>.
+          type: string
+        - name: IndexField.LiteralOptions
+          in: query
+          description: |
+            Configuration information for a field in the index, including its name, type, and options. The supported options depend on the <code><a>IndexFieldType</a></code>.
+          type: string
+        - name: IndexField.TextOptions
+          in: query
+          description: |
+            Configuration information for a field in the index, including its name, type, and options. The supported options depend on the <code><a>IndexFieldType</a></code>.
+          type: string
+        - name: IndexField.DateOptions
+          in: query
+          description: |
+            Configuration information for a field in the index, including its name, type, and options. The supported options depend on the <code><a>IndexFieldType</a></code>.
+          type: string
+        - name: IndexField.LatLonOptions
+          in: query
+          description: |
+            Configuration information for a field in the index, including its name, type, and options. The supported options depend on the <code><a>IndexFieldType</a></code>.
+          type: string
+        - name: IndexField.IntArrayOptions
+          in: query
+          description: |
+            Configuration information for a field in the index, including its name, type, and options. The supported options depend on the <code><a>IndexFieldType</a></code>.
+          type: string
+        - name: IndexField.DoubleArrayOptions
+          in: query
+          description: |
+            Configuration information for a field in the index, including its name, type, and options. The supported options depend on the <code><a>IndexFieldType</a></code>.
+          type: string
+        - name: IndexField.LiteralArrayOptions
+          in: query
+          description: |
+            Configuration information for a field in the index, including its name, type, and options. The supported options depend on the <code><a>IndexFieldType</a></code>.
+          type: string
+        - name: IndexField.TextArrayOptions
+          in: query
+          description: |
+            Configuration information for a field in the index, including its name, type, and options. The supported options depend on the <code><a>IndexFieldType</a></code>.
+          type: string
+        - name: IndexField.DateArrayOptions
+          in: query
+          description: |
+            Configuration information for a field in the index, including its name, type, and options. The supported options depend on the <code><a>IndexFieldType</a></code>.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DefineIndexField
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -297,7 +435,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DefineSuggester':
+  '/#Action=DefineSuggester':
     post:
       operationId: DefineSuggester
       description: 'Configures a suggester for a domain. A suggester enables you to display possible matches before users finish typing their queries. When you configure a suggester, you must specify the name of the text field you want to search for possible matches and a unique name for the suggester. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html" target="_blank">Getting Search Suggestions</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
@@ -322,11 +460,30 @@ paths:
           schema:
             $ref: '#/definitions/InternalException'
       parameters:
-        - name: body
-          in: body
+        - name: DomainName
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/DefineSuggesterRequest'
+          description: 'A string that represents the name of a domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+          type: string
+          pattern: '[a-z][a-z0-9\-]+'
+          minLength: 3
+          maxLength: 28
+        - name: Suggester.SuggesterName
+          in: query
+          description: |
+            Configuration information for a search suggester. Each suggester has a unique name and specifies the text field you want to use for suggestions. The following options can be configured for a suggester: <code>FuzzyMatching</code>, <code>SortExpression</code>. 
+          type: string
+        - name: Suggester.DocumentSuggesterOptions
+          in: query
+          description: |
+            Configuration information for a search suggester. Each suggester has a unique name and specifies the text field you want to use for suggestions. The following options can be configured for a suggester: <code>FuzzyMatching</code>, <code>SortExpression</code>. 
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DefineSuggester
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -337,7 +494,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteAnalysisScheme':
+  '/#Action=DeleteAnalysisScheme':
     post:
       operationId: DeleteAnalysisScheme
       description: 'Deletes an analysis scheme. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html" target="_blank">Configuring Analysis Schemes</a> in the <i>Amazon CloudSearch Developer Guide</i>. '
@@ -362,11 +519,28 @@ paths:
           schema:
             $ref: '#/definitions/InternalException'
       parameters:
-        - name: body
-          in: body
+        - name: DomainName
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/DeleteAnalysisSchemeRequest'
+          description: 'A string that represents the name of a domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+          type: string
+          pattern: '[a-z][a-z0-9\-]+'
+          minLength: 3
+          maxLength: 28
+        - name: AnalysisSchemeName
+          in: query
+          required: true
+          description: 'Names must begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore).'
+          type: string
+          pattern: '[a-z][a-z0-9_]*'
+          minLength: 1
+          maxLength: 64
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeleteAnalysisScheme
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -377,7 +551,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteDomain':
+  '/#Action=DeleteDomain':
     post:
       operationId: DeleteDomain
       description: 'Permanently deletes a search domain and all of its data. Once a domain has been deleted, it cannot be recovered. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/deleting-domains.html" target="_blank">Deleting a Search Domain</a> in the <i>Amazon CloudSearch Developer Guide</i>. '
@@ -397,11 +571,20 @@ paths:
           schema:
             $ref: '#/definitions/InternalException'
       parameters:
-        - name: body
-          in: body
+        - name: DomainName
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/DeleteDomainRequest'
+          description: 'A string that represents the name of a domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+          type: string
+          pattern: '[a-z][a-z0-9\-]+'
+          minLength: 3
+          maxLength: 28
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeleteDomain
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -412,7 +595,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteExpression':
+  '/#Action=DeleteExpression':
     post:
       operationId: DeleteExpression
       description: 'Removes an <code><a>Expression</a></code> from the search domain. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html" target="_blank">Configuring Expressions</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
@@ -437,11 +620,28 @@ paths:
           schema:
             $ref: '#/definitions/InternalException'
       parameters:
-        - name: body
-          in: body
+        - name: DomainName
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/DeleteExpressionRequest'
+          description: 'A string that represents the name of a domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+          type: string
+          pattern: '[a-z][a-z0-9\-]+'
+          minLength: 3
+          maxLength: 28
+        - name: ExpressionName
+          in: query
+          required: true
+          description: 'Names must begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore).'
+          type: string
+          pattern: '[a-z][a-z0-9_]*'
+          minLength: 1
+          maxLength: 64
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeleteExpression
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -452,7 +652,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteIndexField':
+  '/#Action=DeleteIndexField':
     post:
       operationId: DeleteIndexField
       description: 'Removes an <code><a>IndexField</a></code> from the search domain. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-index-fields.html" target="_blank">Configuring Index Fields</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
@@ -477,11 +677,28 @@ paths:
           schema:
             $ref: '#/definitions/InternalException'
       parameters:
-        - name: body
-          in: body
+        - name: DomainName
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/DeleteIndexFieldRequest'
+          description: 'A string that represents the name of a domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+          type: string
+          pattern: '[a-z][a-z0-9\-]+'
+          minLength: 3
+          maxLength: 28
+        - name: IndexFieldName
+          in: query
+          required: true
+          description: The name of the index field your want to remove from the domain's indexing options.
+          type: string
+          pattern: '([a-z][a-z0-9_]*\*?|\*[a-z0-9_]*)'
+          minLength: 1
+          maxLength: 64
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeleteIndexField
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -492,7 +709,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteSuggester':
+  '/#Action=DeleteSuggester':
     post:
       operationId: DeleteSuggester
       description: 'Deletes a suggester. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html" target="_blank">Getting Search Suggestions</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
@@ -517,11 +734,28 @@ paths:
           schema:
             $ref: '#/definitions/InternalException'
       parameters:
-        - name: body
-          in: body
+        - name: DomainName
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/DeleteSuggesterRequest'
+          description: 'A string that represents the name of a domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+          type: string
+          pattern: '[a-z][a-z0-9\-]+'
+          minLength: 3
+          maxLength: 28
+        - name: SuggesterName
+          in: query
+          required: true
+          description: 'Names must begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore).'
+          type: string
+          pattern: '[a-z][a-z0-9_]*'
+          minLength: 1
+          maxLength: 64
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeleteSuggester
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -532,7 +766,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeAnalysisSchemes':
+  '/#Action=DescribeAnalysisSchemes':
     post:
       operationId: DescribeAnalysisSchemes
       description: 'Gets the analysis schemes configured for a domain. An analysis scheme defines language-specific text processing options for a <code>text</code> field. Can be limited to specific analysis schemes by name. By default, shows all analysis schemes and includes any pending changes to the configuration. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html" target="_blank">Configuring Analysis Schemes</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
@@ -557,11 +791,32 @@ paths:
           schema:
             $ref: '#/definitions/InternalException'
       parameters:
-        - name: body
-          in: body
+        - name: DomainName
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/DescribeAnalysisSchemesRequest'
+          description: 'A string that represents the name of a domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+          type: string
+          pattern: '[a-z][a-z0-9\-]+'
+          minLength: 3
+          maxLength: 28
+        - name: AnalysisSchemeNames
+          in: query
+          required: false
+          description: The analysis schemes you want to describe.
+          type: array
+          items:
+            type: string
+        - name: Deployed
+          in: query
+          required: false
+          description: Whether to display the deployed configuration (<code>true</code>) or include any pending changes (<code>false</code>). Defaults to <code>false</code>.
+          type: boolean
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeAnalysisSchemes
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -572,7 +827,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeAvailabilityOptions':
+  '/#Action=DescribeAvailabilityOptions':
     post:
       operationId: DescribeAvailabilityOptions
       description: 'Gets the availability options configured for a domain. By default, shows the configuration with any pending changes. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-availability-options.html" target="_blank">Configuring Availability Options</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
@@ -597,11 +852,25 @@ paths:
           schema:
             $ref: '#/definitions/InternalException'
       parameters:
-        - name: body
-          in: body
+        - name: DomainName
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/DescribeAvailabilityOptionsRequest'
+          description: 'A string that represents the name of a domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+          type: string
+          pattern: '[a-z][a-z0-9\-]+'
+          minLength: 3
+          maxLength: 28
+        - name: Deployed
+          in: query
+          required: false
+          description: Whether to display the deployed configuration (<code>true</code>) or include any pending changes (<code>false</code>). Defaults to <code>false</code>.
+          type: boolean
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeAvailabilityOptions
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -612,7 +881,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeDomains':
+  '/#Action=DescribeDomains':
     post:
       operationId: DescribeDomains
       description: 'Gets information about the search domains owned by this account. Can be limited to specific domains. Shows all domains by default. To get the number of searchable documents in a domain, use the console or submit a <code>matchall</code> request to your domain''s search endpoint: <code>q=matchall&amp;amp;q.parser=structured&amp;amp;size=0</code>. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-domain-info.html" target="_blank">Getting Information about a Search Domain</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
@@ -632,11 +901,19 @@ paths:
           schema:
             $ref: '#/definitions/InternalException'
       parameters:
-        - name: body
-          in: body
+        - name: DomainNames
+          in: query
+          required: false
+          description: A list of domain names.
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/DescribeDomainsRequest'
+          type: string
+          enum:
+            - DescribeDomains
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -647,7 +924,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeExpressions':
+  '/#Action=DescribeExpressions':
     post:
       operationId: DescribeExpressions
       description: 'Gets the expressions configured for the search domain. Can be limited to specific expressions by name. By default, shows all expressions and includes any pending changes to the configuration. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html" target="_blank">Configuring Expressions</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
@@ -672,11 +949,32 @@ paths:
           schema:
             $ref: '#/definitions/InternalException'
       parameters:
-        - name: body
-          in: body
+        - name: DomainName
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/DescribeExpressionsRequest'
+          description: 'A string that represents the name of a domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+          type: string
+          pattern: '[a-z][a-z0-9\-]+'
+          minLength: 3
+          maxLength: 28
+        - name: ExpressionNames
+          in: query
+          required: false
+          description: 'Limits the <code><a>DescribeExpressions</a></code> response to the specified expressions. If not specified, all expressions are shown.'
+          type: array
+          items:
+            type: string
+        - name: Deployed
+          in: query
+          required: false
+          description: Whether to display the deployed configuration (<code>true</code>) or include any pending changes (<code>false</code>). Defaults to <code>false</code>.
+          type: boolean
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeExpressions
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -687,7 +985,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeIndexFields':
+  '/#Action=DescribeIndexFields':
     post:
       operationId: DescribeIndexFields
       description: 'Gets information about the index fields configured for the search domain. Can be limited to specific fields by name. By default, shows all fields and includes any pending changes to the configuration. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-domain-info.html" target="_blank">Getting Domain Information</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
@@ -712,11 +1010,32 @@ paths:
           schema:
             $ref: '#/definitions/InternalException'
       parameters:
-        - name: body
-          in: body
+        - name: DomainName
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/DescribeIndexFieldsRequest'
+          description: 'A string that represents the name of a domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+          type: string
+          pattern: '[a-z][a-z0-9\-]+'
+          minLength: 3
+          maxLength: 28
+        - name: FieldNames
+          in: query
+          required: false
+          description: 'A list of the index fields you want to describe. If not specified, information is returned for all configured index fields.'
+          type: array
+          items:
+            type: string
+        - name: Deployed
+          in: query
+          required: false
+          description: Whether to display the deployed configuration (<code>true</code>) or include any pending changes (<code>false</code>). Defaults to <code>false</code>.
+          type: boolean
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeIndexFields
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -727,7 +1046,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeScalingParameters':
+  '/#Action=DescribeScalingParameters':
     post:
       operationId: DescribeScalingParameters
       description: 'Gets the scaling parameters configured for a domain. A domain''s scaling parameters specify the desired search instance type and replication count. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-scaling-options.html" target="_blank">Configuring Scaling Options</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
@@ -752,11 +1071,20 @@ paths:
           schema:
             $ref: '#/definitions/InternalException'
       parameters:
-        - name: body
-          in: body
+        - name: DomainName
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/DescribeScalingParametersRequest'
+          description: 'A string that represents the name of a domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+          type: string
+          pattern: '[a-z][a-z0-9\-]+'
+          minLength: 3
+          maxLength: 28
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeScalingParameters
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -767,7 +1095,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeServiceAccessPolicies':
+  '/#Action=DescribeServiceAccessPolicies':
     post:
       operationId: DescribeServiceAccessPolicies
       description: 'Gets information about the access policies that control access to the domain''s document and search endpoints. By default, shows the configuration with any pending changes. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-access.html" target="_blank">Configuring Access for a Search Domain</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
@@ -792,11 +1120,25 @@ paths:
           schema:
             $ref: '#/definitions/InternalException'
       parameters:
-        - name: body
-          in: body
+        - name: DomainName
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/DescribeServiceAccessPoliciesRequest'
+          description: 'A string that represents the name of a domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+          type: string
+          pattern: '[a-z][a-z0-9\-]+'
+          minLength: 3
+          maxLength: 28
+        - name: Deployed
+          in: query
+          required: false
+          description: Whether to display the deployed configuration (<code>true</code>) or include any pending changes (<code>false</code>). Defaults to <code>false</code>.
+          type: boolean
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeServiceAccessPolicies
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -807,7 +1149,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeSuggesters':
+  '/#Action=DescribeSuggesters':
     post:
       operationId: DescribeSuggesters
       description: 'Gets the suggesters configured for a domain. A suggester enables you to display possible matches before users finish typing their queries. Can be limited to specific suggesters by name. By default, shows all suggesters and includes any pending changes to the configuration. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html" target="_blank">Getting Search Suggestions</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
@@ -832,11 +1174,32 @@ paths:
           schema:
             $ref: '#/definitions/InternalException'
       parameters:
-        - name: body
-          in: body
+        - name: DomainName
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/DescribeSuggestersRequest'
+          description: 'A string that represents the name of a domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+          type: string
+          pattern: '[a-z][a-z0-9\-]+'
+          minLength: 3
+          maxLength: 28
+        - name: SuggesterNames
+          in: query
+          required: false
+          description: The suggesters you want to describe.
+          type: array
+          items:
+            type: string
+        - name: Deployed
+          in: query
+          required: false
+          description: Whether to display the deployed configuration (<code>true</code>) or include any pending changes (<code>false</code>). Defaults to <code>false</code>.
+          type: boolean
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeSuggesters
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -847,7 +1210,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#IndexDocuments':
+  '/#Action=IndexDocuments':
     post:
       operationId: IndexDocuments
       description: Tells the search domain to start indexing its documents using the latest indexing options. This operation must be invoked to activate options whose <a>OptionStatus</a> is <code>RequiresIndexDocuments</code>.
@@ -872,11 +1235,20 @@ paths:
           schema:
             $ref: '#/definitions/InternalException'
       parameters:
-        - name: body
-          in: body
+        - name: DomainName
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/IndexDocumentsRequest'
+          description: 'A string that represents the name of a domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+          type: string
+          pattern: '[a-z][a-z0-9\-]+'
+          minLength: 3
+          maxLength: 28
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - IndexDocuments
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -887,7 +1259,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListDomainNames':
+  '/#Action=ListDomainNames':
     post:
       operationId: ListDomainNames
       description: Lists all search domains owned by an account.
@@ -901,6 +1273,13 @@ paths:
           x-aws-exception: true
           schema:
             $ref: '#/definitions/BaseException'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ListDomainNames
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -911,7 +1290,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateAvailabilityOptions':
+  '/#Action=UpdateAvailabilityOptions':
     post:
       operationId: UpdateAvailabilityOptions
       description: 'Configures the availability options for a domain. Enabling the Multi-AZ option expands an Amazon CloudSearch domain to an additional Availability Zone in the same Region to increase fault tolerance in the event of a service disruption. Changes to the Multi-AZ option can take about half an hour to become active. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-availability-options.html" target="_blank">Configuring Availability Options</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
@@ -936,11 +1315,25 @@ paths:
           schema:
             $ref: '#/definitions/InternalException'
       parameters:
-        - name: body
-          in: body
+        - name: DomainName
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/UpdateAvailabilityOptionsRequest'
+          description: 'A string that represents the name of a domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+          type: string
+          pattern: '[a-z][a-z0-9\-]+'
+          minLength: 3
+          maxLength: 28
+        - name: MultiAZ
+          in: query
+          required: true
+          description: 'You expand an existing search domain to a second Availability Zone by setting the Multi-AZ option to true. Similarly, you can turn off the Multi-AZ option to downgrade the domain to a single Availability Zone by setting the Multi-AZ option to <code>false</code>. '
+          type: boolean
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - UpdateAvailabilityOptions
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -951,7 +1344,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateScalingParameters':
+  '/#Action=UpdateScalingParameters':
     post:
       operationId: UpdateScalingParameters
       description: 'Configures scaling parameters for a domain. A domain''s scaling parameters specify the desired search instance type and replication count. Amazon CloudSearch will still automatically scale your domain based on the volume of data and traffic, but not below the desired instance type and replication count. If the Multi-AZ option is enabled, these values control the resources used per Availability Zone. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-scaling-options.html" target="_blank">Configuring Scaling Options</a> in the <i>Amazon CloudSearch Developer Guide</i>. '
@@ -976,11 +1369,38 @@ paths:
           schema:
             $ref: '#/definitions/InternalException'
       parameters:
-        - name: body
-          in: body
+        - name: DomainName
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/UpdateScalingParametersRequest'
+          description: 'A string that represents the name of a domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+          type: string
+          pattern: '[a-z][a-z0-9\-]+'
+          minLength: 3
+          maxLength: 28
+        - name: ScalingParameters.DesiredInstanceType
+          in: query
+          description: |-
+            The desired instance type and desired number of replicas of each index partition.
+            The instance type that you want to preconfigure for your domain. For example, <code>search.m1.small</code>.
+          type: string
+        - name: ScalingParameters.DesiredReplicationCount
+          in: query
+          description: |-
+            The desired instance type and desired number of replicas of each index partition.
+            The number of replicas you want to preconfigure for each index partition.
+          type: string
+        - name: ScalingParameters.DesiredPartitionCount
+          in: query
+          description: |-
+            The desired instance type and desired number of replicas of each index partition.
+            The number of partitions you want to preconfigure for your domain. Only valid when you select <code>m2.2xlarge</code> as the desired instance type.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - UpdateScalingParameters
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -991,7 +1411,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateServiceAccessPolicies':
+  '/#Action=UpdateServiceAccessPolicies':
     post:
       operationId: UpdateServiceAccessPolicies
       description: 'Configures the access rules that control access to the domain''s document and search endpoints. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-access.html" target="_blank"> Configuring Access for an Amazon CloudSearch Domain</a>.'
@@ -1016,11 +1436,25 @@ paths:
           schema:
             $ref: '#/definitions/InternalException'
       parameters:
-        - name: body
-          in: body
+        - name: DomainName
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/UpdateServiceAccessPoliciesRequest'
+          description: 'A string that represents the name of a domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+          type: string
+          pattern: '[a-z][a-z0-9\-]+'
+          minLength: 3
+          maxLength: 28
+        - name: AccessPolicies
+          in: query
+          required: true
+          description: 'Access rules for a domain''s document or search service endpoints. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-access.html" target="_blank">Configuring Access for a Search Domain</a> in the <i>Amazon CloudSearch Developer Guide</i>. The maximum size of a policy document is 100 KB.'
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - UpdateServiceAccessPolicies
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1038,14 +1472,6 @@ definitions:
       FieldNames:
         $ref: '#/definitions/FieldNameList'
     description: The result of a <code>BuildSuggester</code> request. Contains a list of the fields used for suggestions.
-  BuildSuggestersRequest:
-    type: object
-    required:
-      - DomainName
-    properties:
-      DomainName:
-        $ref: '#/definitions/DomainName'
-    description: Container for the parameters to the <code><a>BuildSuggester</a></code> operation. Specifies the name of the domain you want to update.
   BaseException:
     type: object
     properties:
@@ -1068,15 +1494,6 @@ definitions:
       DomainStatus:
         $ref: '#/definitions/DomainStatus'
     description: The result of a <code>CreateDomainRequest</code>. Contains the status of a newly created domain.
-  CreateDomainRequest:
-    type: object
-    required:
-      - DomainName
-    properties:
-      DomainName:
-        $ref: '#/definitions/DomainName'
-        description: 'A name for the domain you are creating. Allowed characters are a-z (lower-case letters), 0-9, and hyphen (-). Domain names must start with a letter or number and be at least 3 and no more than 28 characters long.'
-    description: Container for the parameters to the <code><a>CreateDomain</a></code> operation. Specifies a name for the new search domain.
   LimitExceededException:
     type: object
     properties: {}
@@ -1089,501 +1506,6 @@ definitions:
       AnalysisScheme:
         $ref: '#/definitions/AnalysisSchemeStatus'
     description: The result of a <code><a>DefineAnalysisScheme</a></code> request. Contains the status of the newly-configured analysis scheme.
-  DefineAnalysisSchemeRequest:
-    type: object
-    required:
-      - DomainName
-      - AnalysisScheme
-    properties:
-      DomainName:
-        $ref: '#/definitions/DomainName'
-      AnalysisScheme:
-        $ref: '#/definitions/AnalysisScheme'
-    description: Container for the parameters to the <code><a>DefineAnalysisScheme</a></code> operation. Specifies the name of the domain you want to update and the analysis scheme configuration.
-  InvalidTypeException:
-    type: object
-    properties: {}
-    description: The request was rejected because it specified an invalid type definition.
-  DefineExpressionResponse:
-    type: object
-    required:
-      - Expression
-    properties:
-      Expression:
-        $ref: '#/definitions/ExpressionStatus'
-    description: The result of a <code>DefineExpression</code> request. Contains the status of the newly-configured expression.
-  DefineExpressionRequest:
-    type: object
-    required:
-      - DomainName
-      - Expression
-    properties:
-      DomainName:
-        $ref: '#/definitions/DomainName'
-      Expression:
-        $ref: '#/definitions/Expression'
-    description: Container for the parameters to the <code><a>DefineExpression</a></code> operation. Specifies the name of the domain you want to update and the expression you want to configure.
-  DefineIndexFieldResponse:
-    type: object
-    required:
-      - IndexField
-    properties:
-      IndexField:
-        $ref: '#/definitions/IndexFieldStatus'
-    description: The result of a <code><a>DefineIndexField</a></code> request. Contains the status of the newly-configured index field.
-  DefineIndexFieldRequest:
-    type: object
-    required:
-      - DomainName
-      - IndexField
-    properties:
-      DomainName:
-        $ref: '#/definitions/DomainName'
-      IndexField:
-        $ref: '#/definitions/IndexField'
-        description: 'The index field and field options you want to configure. '
-    description: Container for the parameters to the <code><a>DefineIndexField</a></code> operation. Specifies the name of the domain you want to update and the index field configuration.
-  DefineSuggesterResponse:
-    type: object
-    required:
-      - Suggester
-    properties:
-      Suggester:
-        $ref: '#/definitions/SuggesterStatus'
-    description: The result of a <code>DefineSuggester</code> request. Contains the status of the newly-configured suggester.
-  DefineSuggesterRequest:
-    type: object
-    required:
-      - DomainName
-      - Suggester
-    properties:
-      DomainName:
-        $ref: '#/definitions/DomainName'
-      Suggester:
-        $ref: '#/definitions/Suggester'
-    description: Container for the parameters to the <code><a>DefineSuggester</a></code> operation. Specifies the name of the domain you want to update and the suggester configuration.
-  DeleteAnalysisSchemeResponse:
-    type: object
-    required:
-      - AnalysisScheme
-    properties:
-      AnalysisScheme:
-        $ref: '#/definitions/AnalysisSchemeStatus'
-        description: The status of the analysis scheme being deleted.
-    description: The result of a <code>DeleteAnalysisScheme</code> request. Contains the status of the deleted analysis scheme.
-  DeleteAnalysisSchemeRequest:
-    type: object
-    required:
-      - DomainName
-      - AnalysisSchemeName
-    properties:
-      DomainName:
-        $ref: '#/definitions/DomainName'
-      AnalysisSchemeName:
-        $ref: '#/definitions/StandardName'
-        description: The name of the analysis scheme you want to delete.
-    description: 'Container for the parameters to the <code><a>DeleteAnalysisScheme</a></code> operation. Specifies the name of the domain you want to update and the analysis scheme you want to delete. '
-  DeleteDomainResponse:
-    type: object
-    properties:
-      DomainStatus:
-        $ref: '#/definitions/DomainStatus'
-    description: 'The result of a <code>DeleteDomain</code> request. Contains the status of a newly deleted domain, or no status if the domain has already been completely deleted.'
-  DeleteDomainRequest:
-    type: object
-    required:
-      - DomainName
-    properties:
-      DomainName:
-        $ref: '#/definitions/DomainName'
-        description: The name of the domain you want to permanently delete.
-    description: Container for the parameters to the <code><a>DeleteDomain</a></code> operation. Specifies the name of the domain you want to delete.
-  DeleteExpressionResponse:
-    type: object
-    required:
-      - Expression
-    properties:
-      Expression:
-        $ref: '#/definitions/ExpressionStatus'
-        description: The status of the expression being deleted.
-    description: The result of a <code><a>DeleteExpression</a></code> request. Specifies the expression being deleted.
-  DeleteExpressionRequest:
-    type: object
-    required:
-      - DomainName
-      - ExpressionName
-    properties:
-      DomainName:
-        $ref: '#/definitions/DomainName'
-      ExpressionName:
-        $ref: '#/definitions/StandardName'
-        description: The name of the <code><a>Expression</a></code> to delete.
-    description: Container for the parameters to the <code><a>DeleteExpression</a></code> operation. Specifies the name of the domain you want to update and the name of the expression you want to delete.
-  DeleteIndexFieldResponse:
-    type: object
-    required:
-      - IndexField
-    properties:
-      IndexField:
-        $ref: '#/definitions/IndexFieldStatus'
-        description: The status of the index field being deleted.
-    description: The result of a <code><a>DeleteIndexField</a></code> request.
-  DeleteIndexFieldRequest:
-    type: object
-    required:
-      - DomainName
-      - IndexFieldName
-    properties:
-      DomainName:
-        $ref: '#/definitions/DomainName'
-      IndexFieldName:
-        $ref: '#/definitions/DynamicFieldName'
-        description: The name of the index field your want to remove from the domain's indexing options.
-    description: Container for the parameters to the <code><a>DeleteIndexField</a></code> operation. Specifies the name of the domain you want to update and the name of the index field you want to delete.
-  DeleteSuggesterResponse:
-    type: object
-    required:
-      - Suggester
-    properties:
-      Suggester:
-        $ref: '#/definitions/SuggesterStatus'
-        description: The status of the suggester being deleted.
-    description: The result of a <code>DeleteSuggester</code> request. Contains the status of the deleted suggester.
-  DeleteSuggesterRequest:
-    type: object
-    required:
-      - DomainName
-      - SuggesterName
-    properties:
-      DomainName:
-        $ref: '#/definitions/DomainName'
-      SuggesterName:
-        $ref: '#/definitions/StandardName'
-        description: Specifies the name of the suggester you want to delete.
-    description: Container for the parameters to the <code><a>DeleteSuggester</a></code> operation. Specifies the name of the domain you want to update and name of the suggester you want to delete.
-  DescribeAnalysisSchemesResponse:
-    type: object
-    required:
-      - AnalysisSchemes
-    properties:
-      AnalysisSchemes:
-        $ref: '#/definitions/AnalysisSchemeStatusList'
-        description: The analysis scheme descriptions.
-    description: The result of a <code>DescribeAnalysisSchemes</code> request. Contains the analysis schemes configured for the domain specified in the request.
-  DescribeAnalysisSchemesRequest:
-    type: object
-    required:
-      - DomainName
-    properties:
-      DomainName:
-        $ref: '#/definitions/DomainName'
-        description: The name of the domain you want to describe.
-      AnalysisSchemeNames:
-        $ref: '#/definitions/StandardNameList'
-        description: The analysis schemes you want to describe.
-      Deployed:
-        $ref: '#/definitions/Boolean'
-        description: Whether to display the deployed configuration (<code>true</code>) or include any pending changes (<code>false</code>). Defaults to <code>false</code>.
-    description: 'Container for the parameters to the <code><a>DescribeAnalysisSchemes</a></code> operation. Specifies the name of the domain you want to describe. To limit the response to particular analysis schemes, specify the names of the analysis schemes you want to describe. To show the active configuration and exclude any pending changes, set the <code>Deployed</code> option to <code>true</code>. '
-  DescribeAvailabilityOptionsResponse:
-    type: object
-    properties:
-      AvailabilityOptions:
-        $ref: '#/definitions/AvailabilityOptionsStatus'
-        description: 'The availability options configured for the domain. Indicates whether Multi-AZ is enabled for the domain. '
-    description: 'The result of a <code>DescribeAvailabilityOptions</code> request. Indicates whether or not the Multi-AZ option is enabled for the domain specified in the request. '
-  DescribeAvailabilityOptionsRequest:
-    type: object
-    required:
-      - DomainName
-    properties:
-      DomainName:
-        $ref: '#/definitions/DomainName'
-        description: The name of the domain you want to describe.
-      Deployed:
-        $ref: '#/definitions/Boolean'
-        description: Whether to display the deployed configuration (<code>true</code>) or include any pending changes (<code>false</code>). Defaults to <code>false</code>.
-    description: 'Container for the parameters to the <code><a>DescribeAvailabilityOptions</a></code> operation. Specifies the name of the domain you want to describe. To show the active configuration and exclude any pending changes, set the Deployed option to <code>true</code>.'
-  DisabledOperationException:
-    type: object
-    properties: {}
-    description: The request was rejected because it attempted an operation which is not enabled.
-  DescribeDomainsResponse:
-    type: object
-    required:
-      - DomainStatusList
-    properties:
-      DomainStatusList:
-        $ref: '#/definitions/DomainStatusList'
-    description: The result of a <code>DescribeDomains</code> request. Contains the status of the domains specified in the request or all domains owned by the account.
-  DescribeDomainsRequest:
-    type: object
-    properties:
-      DomainNames:
-        $ref: '#/definitions/DomainNameList'
-        description: The names of the domains you want to include in the response.
-    description: 'Container for the parameters to the <code><a>DescribeDomains</a></code> operation. By default shows the status of all domains. To restrict the response to particular domains, specify the names of the domains you want to describe.'
-  DescribeExpressionsResponse:
-    type: object
-    required:
-      - Expressions
-    properties:
-      Expressions:
-        $ref: '#/definitions/ExpressionStatusList'
-        description: The expressions configured for the domain.
-    description: The result of a <code>DescribeExpressions</code> request. Contains the expressions configured for the domain specified in the request.
-  DescribeExpressionsRequest:
-    type: object
-    required:
-      - DomainName
-    properties:
-      DomainName:
-        $ref: '#/definitions/DomainName'
-        description: The name of the domain you want to describe.
-      ExpressionNames:
-        $ref: '#/definitions/StandardNameList'
-        description: 'Limits the <code><a>DescribeExpressions</a></code> response to the specified expressions. If not specified, all expressions are shown.'
-      Deployed:
-        $ref: '#/definitions/Boolean'
-        description: Whether to display the deployed configuration (<code>true</code>) or include any pending changes (<code>false</code>). Defaults to <code>false</code>.
-    description: 'Container for the parameters to the <code><a>DescribeDomains</a></code> operation. Specifies the name of the domain you want to describe. To restrict the response to particular expressions, specify the names of the expressions you want to describe. To show the active configuration and exclude any pending changes, set the <code>Deployed</code> option to <code>true</code>.'
-  DescribeIndexFieldsResponse:
-    type: object
-    required:
-      - IndexFields
-    properties:
-      IndexFields:
-        $ref: '#/definitions/IndexFieldStatusList'
-        description: The index fields configured for the domain.
-    description: The result of a <code>DescribeIndexFields</code> request. Contains the index fields configured for the domain specified in the request.
-  DescribeIndexFieldsRequest:
-    type: object
-    required:
-      - DomainName
-    properties:
-      DomainName:
-        $ref: '#/definitions/DomainName'
-        description: The name of the domain you want to describe.
-      FieldNames:
-        $ref: '#/definitions/DynamicFieldNameList'
-        description: 'A list of the index fields you want to describe. If not specified, information is returned for all configured index fields.'
-      Deployed:
-        $ref: '#/definitions/Boolean'
-        description: Whether to display the deployed configuration (<code>true</code>) or include any pending changes (<code>false</code>). Defaults to <code>false</code>.
-    description: 'Container for the parameters to the <code><a>DescribeIndexFields</a></code> operation. Specifies the name of the domain you want to describe. To restrict the response to particular index fields, specify the names of the index fields you want to describe. To show the active configuration and exclude any pending changes, set the <code>Deployed</code> option to <code>true</code>.'
-  DescribeScalingParametersResponse:
-    type: object
-    required:
-      - ScalingParameters
-    properties:
-      ScalingParameters:
-        $ref: '#/definitions/ScalingParametersStatus'
-    description: The result of a <code>DescribeScalingParameters</code> request. Contains the scaling parameters configured for the domain specified in the request.
-  DescribeScalingParametersRequest:
-    type: object
-    required:
-      - DomainName
-    properties:
-      DomainName:
-        $ref: '#/definitions/DomainName'
-    description: 'Container for the parameters to the <code><a>DescribeScalingParameters</a></code> operation. Specifies the name of the domain you want to describe. '
-  DescribeServiceAccessPoliciesResponse:
-    type: object
-    required:
-      - AccessPolicies
-    properties:
-      AccessPolicies:
-        $ref: '#/definitions/AccessPoliciesStatus'
-        description: The access rules configured for the domain specified in the request.
-    description: The result of a <code>DescribeServiceAccessPolicies</code> request.
-  DescribeServiceAccessPoliciesRequest:
-    type: object
-    required:
-      - DomainName
-    properties:
-      DomainName:
-        $ref: '#/definitions/DomainName'
-        description: The name of the domain you want to describe.
-      Deployed:
-        $ref: '#/definitions/Boolean'
-        description: Whether to display the deployed configuration (<code>true</code>) or include any pending changes (<code>false</code>). Defaults to <code>false</code>.
-    description: 'Container for the parameters to the <code><a>DescribeServiceAccessPolicies</a></code> operation. Specifies the name of the domain you want to describe. To show the active configuration and exclude any pending changes, set the <code>Deployed</code> option to <code>true</code>.'
-  DescribeSuggestersResponse:
-    type: object
-    required:
-      - Suggesters
-    properties:
-      Suggesters:
-        $ref: '#/definitions/SuggesterStatusList'
-        description: The suggesters configured for the domain specified in the request.
-    description: The result of a <code>DescribeSuggesters</code> request.
-  DescribeSuggestersRequest:
-    type: object
-    required:
-      - DomainName
-    properties:
-      DomainName:
-        $ref: '#/definitions/DomainName'
-        description: The name of the domain you want to describe.
-      SuggesterNames:
-        $ref: '#/definitions/StandardNameList'
-        description: The suggesters you want to describe.
-      Deployed:
-        $ref: '#/definitions/Boolean'
-        description: Whether to display the deployed configuration (<code>true</code>) or include any pending changes (<code>false</code>). Defaults to <code>false</code>.
-    description: 'Container for the parameters to the <code><a>DescribeSuggester</a></code> operation. Specifies the name of the domain you want to describe. To restrict the response to particular suggesters, specify the names of the suggesters you want to describe. To show the active configuration and exclude any pending changes, set the <code>Deployed</code> option to <code>true</code>.'
-  IndexDocumentsResponse:
-    type: object
-    properties:
-      FieldNames:
-        $ref: '#/definitions/FieldNameList'
-        description: The names of the fields that are currently being indexed.
-    description: 'The result of an <code>IndexDocuments</code> request. Contains the status of the indexing operation, including the fields being indexed.'
-  IndexDocumentsRequest:
-    type: object
-    required:
-      - DomainName
-    properties:
-      DomainName:
-        $ref: '#/definitions/DomainName'
-    description: Container for the parameters to the <code><a>IndexDocuments</a></code> operation. Specifies the name of the domain you want to re-index.
-  ListDomainNamesResponse:
-    type: object
-    properties:
-      DomainNames:
-        $ref: '#/definitions/DomainNameMap'
-        description: The names of the search domains owned by an account.
-    description: The result of a <code>ListDomainNames</code> request. Contains a list of the domains owned by an account.
-  UpdateAvailabilityOptionsResponse:
-    type: object
-    properties:
-      AvailabilityOptions:
-        $ref: '#/definitions/AvailabilityOptionsStatus'
-        description: 'The newly-configured availability options. Indicates whether Multi-AZ is enabled for the domain. '
-    description: 'The result of a <code>UpdateAvailabilityOptions</code> request. Contains the status of the domain''s availability options. '
-  UpdateAvailabilityOptionsRequest:
-    type: object
-    required:
-      - DomainName
-      - MultiAZ
-    properties:
-      DomainName:
-        $ref: '#/definitions/DomainName'
-      MultiAZ:
-        $ref: '#/definitions/Boolean'
-        description: 'You expand an existing search domain to a second Availability Zone by setting the Multi-AZ option to true. Similarly, you can turn off the Multi-AZ option to downgrade the domain to a single Availability Zone by setting the Multi-AZ option to <code>false</code>. '
-    description: Container for the parameters to the <code><a>UpdateAvailabilityOptions</a></code> operation. Specifies the name of the domain you want to update and the Multi-AZ availability option.
-  UpdateScalingParametersResponse:
-    type: object
-    required:
-      - ScalingParameters
-    properties:
-      ScalingParameters:
-        $ref: '#/definitions/ScalingParametersStatus'
-    description: The result of a <code>UpdateScalingParameters</code> request. Contains the status of the newly-configured scaling parameters.
-  UpdateScalingParametersRequest:
-    type: object
-    required:
-      - DomainName
-      - ScalingParameters
-    properties:
-      DomainName:
-        $ref: '#/definitions/DomainName'
-      ScalingParameters:
-        $ref: '#/definitions/ScalingParameters'
-    description: Container for the parameters to the <code><a>UpdateScalingParameters</a></code> operation. Specifies the name of the domain you want to update and the scaling parameters you want to configure.
-  UpdateServiceAccessPoliciesResponse:
-    type: object
-    required:
-      - AccessPolicies
-    properties:
-      AccessPolicies:
-        $ref: '#/definitions/AccessPoliciesStatus'
-        description: The access rules configured for the domain.
-    description: The result of an <code>UpdateServiceAccessPolicies</code> request. Contains the new access policies.
-  UpdateServiceAccessPoliciesRequest:
-    type: object
-    required:
-      - DomainName
-      - AccessPolicies
-    properties:
-      DomainName:
-        $ref: '#/definitions/DomainName'
-      AccessPolicies:
-        $ref: '#/definitions/PolicyDocument'
-        description: 'The access rules you want to configure. These rules replace any existing rules. '
-    description: Container for the parameters to the <code><a>UpdateServiceAccessPolicies</a></code> operation. Specifies the name of the domain you want to update and the access rules you want to configure.
-  APIVersion:
-    type: string
-    description: 'The Amazon CloudSearch API version for a domain: 2011-02-01 or 2013-01-01.'
-  ARN:
-    type: string
-    description: 'The Amazon Resource Name (ARN) of the search domain. See <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html" target="_blank">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i> for more information.'
-  PolicyDocument:
-    type: string
-    description: 'Access rules for a domain''s document or search service endpoints. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-access.html" target="_blank">Configuring Access for a Search Domain</a> in the <i>Amazon CloudSearch Developer Guide</i>. The maximum size of a policy document is 100 KB.'
-  OptionStatus:
-    type: object
-    required:
-      - CreationDate
-      - UpdateDate
-      - State
-    properties:
-      CreationDate:
-        $ref: '#/definitions/UpdateTimestamp'
-        description: A timestamp for when this option was created.
-      UpdateDate:
-        $ref: '#/definitions/UpdateTimestamp'
-        description: A timestamp for when this option was last updated.
-      UpdateVersion:
-        $ref: '#/definitions/UIntValue'
-        description: A unique integer that indicates when this option was last updated.
-      State:
-        $ref: '#/definitions/OptionState'
-        description: '<p>The state of processing a change to an option. Possible values:</p> <ul> <li> <code>RequiresIndexDocuments</code>: the option''s latest value will not be deployed until <a>IndexDocuments</a> has been called and indexing is complete.</li> <li> <code>Processing</code>: the option''s latest value is in the process of being activated. </li> <li> <code>Active</code>: the option''s latest value is completely deployed.</li> <li> <code>FailedToValidate</code>: the option value is not compatible with the domain''s data and cannot be used to index the data. You must either modify the option value or update or remove the incompatible documents.</li> </ul>'
-      PendingDeletion:
-        $ref: '#/definitions/Boolean'
-        description: Indicates that the option will be deleted once processing is complete.
-    description: The status of domain configuration option.
-  AccessPoliciesStatus:
-    type: object
-    required:
-      - Options
-      - Status
-    properties:
-      Options:
-        $ref: '#/definitions/PolicyDocument'
-      Status:
-        $ref: '#/definitions/OptionStatus'
-    description: 'The configured access rules for the domain''s document and search endpoints, and the current status of those rules.'
-  AlgorithmicStemming:
-    type: string
-    enum:
-      - none
-      - minimal
-      - light
-      - full
-  String:
-    type: string
-  AnalysisOptions:
-    type: object
-    properties:
-      Synonyms:
-        $ref: '#/definitions/String'
-        description: 'A JSON object that defines synonym groups and aliases. A synonym group is an array of arrays, where each sub-array is a group of terms where each term in the group is considered a synonym of every other term in the group. The aliases value is an object that contains a collection of string:value pairs where the string specifies a term and the array of values specifies each of the aliases for that term. An alias is considered a synonym of the specified term, but the term is not considered a synonym of the alias. For more information about specifying synonyms, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html#synonyms">Synonyms</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
-      Stopwords:
-        $ref: '#/definitions/String'
-        description: 'A JSON array of terms to ignore during indexing and searching. For example, <code>["a", "an", "the", "of"]</code>. The stopwords dictionary must explicitly list each word you want to ignore. Wildcards and regular expressions are not supported. '
-      StemmingDictionary:
-        $ref: '#/definitions/String'
-        description: 'A JSON object that contains a collection of string:value pairs that each map a term to its stem. For example, <code>{"term1": "stem1", "term2": "stem2", "term3": "stem3"}</code>. The stemming dictionary is applied in addition to any algorithmic stemming. This enables you to override the results of the algorithmic stemming to correct specific cases of overstemming or understemming. The maximum size of a stemming dictionary is 500 KB.'
-      JapaneseTokenizationDictionary:
-        $ref: '#/definitions/String'
-        description: 'A JSON array that contains a collection of terms, tokens, readings and part of speech for Japanese Tokenizaiton. The Japanese tokenization dictionary enables you to override the default tokenization for selected terms. This is only valid for Japanese language fields.'
-      AlgorithmicStemming:
-        $ref: '#/definitions/AlgorithmicStemming'
-        description: 'The level of algorithmic stemming to perform: <code>none</code>, <code>minimal</code>, <code>light</code>, or <code>full</code>. The available levels vary depending on the language. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/text-processing.html#text-processing-settings" target="_blank">Language Specific Text Processing Settings</a> in the <i>Amazon CloudSearch Developer Guide</i> '
-    description: 'Synonyms, stopwords, and stemming options for an analysis scheme. Includes tokenization dictionary for Japanese.'
   StandardName:
     type: string
     pattern: '[a-z][a-z0-9_]*'
@@ -1629,6 +1551,571 @@ definitions:
       - zh-Hans
       - zh-Hant
     description: 'An <a href="http://tools.ietf.org/html/rfc4646" target="_blank">IETF RFC 4646</a> language code or <code>mul</code> for multiple languages.'
+  AnalysisOptions:
+    type: object
+    properties:
+      Synonyms:
+        $ref: '#/definitions/String'
+        description: 'A JSON object that defines synonym groups and aliases. A synonym group is an array of arrays, where each sub-array is a group of terms where each term in the group is considered a synonym of every other term in the group. The aliases value is an object that contains a collection of string:value pairs where the string specifies a term and the array of values specifies each of the aliases for that term. An alias is considered a synonym of the specified term, but the term is not considered a synonym of the alias. For more information about specifying synonyms, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html#synonyms">Synonyms</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
+      Stopwords:
+        $ref: '#/definitions/String'
+        description: 'A JSON array of terms to ignore during indexing and searching. For example, <code>["a", "an", "the", "of"]</code>. The stopwords dictionary must explicitly list each word you want to ignore. Wildcards and regular expressions are not supported. '
+      StemmingDictionary:
+        $ref: '#/definitions/String'
+        description: 'A JSON object that contains a collection of string:value pairs that each map a term to its stem. For example, <code>{"term1": "stem1", "term2": "stem2", "term3": "stem3"}</code>. The stemming dictionary is applied in addition to any algorithmic stemming. This enables you to override the results of the algorithmic stemming to correct specific cases of overstemming or understemming. The maximum size of a stemming dictionary is 500 KB.'
+      JapaneseTokenizationDictionary:
+        $ref: '#/definitions/String'
+        description: 'A JSON array that contains a collection of terms, tokens, readings and part of speech for Japanese Tokenizaiton. The Japanese tokenization dictionary enables you to override the default tokenization for selected terms. This is only valid for Japanese language fields.'
+      AlgorithmicStemming:
+        $ref: '#/definitions/AlgorithmicStemming'
+        description: 'The level of algorithmic stemming to perform: <code>none</code>, <code>minimal</code>, <code>light</code>, or <code>full</code>. The available levels vary depending on the language. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/text-processing.html#text-processing-settings" target="_blank">Language Specific Text Processing Settings</a> in the <i>Amazon CloudSearch Developer Guide</i> '
+    description: 'Synonyms, stopwords, and stemming options for an analysis scheme. Includes tokenization dictionary for Japanese.'
+  String:
+    type: string
+  AlgorithmicStemming:
+    type: string
+    enum:
+      - none
+      - minimal
+      - light
+      - full
+  InvalidTypeException:
+    type: object
+    properties: {}
+    description: The request was rejected because it specified an invalid type definition.
+  DefineExpressionResponse:
+    type: object
+    required:
+      - Expression
+    properties:
+      Expression:
+        $ref: '#/definitions/ExpressionStatus'
+    description: The result of a <code>DefineExpression</code> request. Contains the status of the newly-configured expression.
+  ExpressionValue:
+    type: string
+    description: 'The expression to evaluate for sorting while processing a search request. The <code>Expression</code> syntax is based on JavaScript expressions. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html" target="_blank">Configuring Expressions</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
+    minLength: 1
+    maxLength: 10240
+  DefineIndexFieldResponse:
+    type: object
+    required:
+      - IndexField
+    properties:
+      IndexField:
+        $ref: '#/definitions/IndexFieldStatus'
+    description: The result of a <code><a>DefineIndexField</a></code> request. Contains the status of the newly-configured index field.
+  DynamicFieldName:
+    type: string
+    pattern: '([a-z][a-z0-9_]*\*?|\*[a-z0-9_]*)'
+    minLength: 1
+    maxLength: 64
+  IndexFieldType:
+    type: string
+    enum:
+      - int
+      - double
+      - literal
+      - text
+      - date
+      - latlon
+      - int-array
+      - double-array
+      - literal-array
+      - text-array
+      - date-array
+    description: 'The type of field. The valid options for a field depend on the field type. For more information about the supported field types, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-index-fields.html" target="_blank">Configuring Index Fields</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
+  IntOptions:
+    type: object
+    properties:
+      DefaultValue:
+        $ref: '#/definitions/Long'
+        description: A value to use for the field if the field isn't specified for a document. This can be important if you are using the field in an expression and that field is not present in every document.
+      SourceField:
+        $ref: '#/definitions/FieldName'
+        description: 'The name of the source field to map to the field. '
+      FacetEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether facet information can be returned for the field.
+      SearchEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the contents of the field are searchable.
+      ReturnEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the contents of the field can be returned in the search results.
+      SortEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the field can be used to sort the search results.
+    description: Options for a 64-bit signed integer field. Present if <code>IndexFieldType</code> specifies the field is of type <code>int</code>. All options are enabled by default.
+  DoubleOptions:
+    type: object
+    properties:
+      DefaultValue:
+        $ref: '#/definitions/Double'
+        description: A value to use for the field if the field isn't specified for a document. This can be important if you are using the field in an expression and that field is not present in every document.
+      SourceField:
+        $ref: '#/definitions/FieldName'
+        description: 'The name of the source field to map to the field. '
+      FacetEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether facet information can be returned for the field.
+      SearchEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the contents of the field are searchable.
+      ReturnEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the contents of the field can be returned in the search results.
+      SortEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the field can be used to sort the search results.
+    description: Options for a double-precision 64-bit floating point field. Present if <code>IndexFieldType</code> specifies the field is of type <code>double</code>. All options are enabled by default.
+  LiteralOptions:
+    type: object
+    properties:
+      DefaultValue:
+        $ref: '#/definitions/FieldValue'
+        description: A value to use for the field if the field isn't specified for a document.
+      SourceField:
+        $ref: '#/definitions/FieldName'
+      FacetEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether facet information can be returned for the field.
+      SearchEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the contents of the field are searchable.
+      ReturnEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the contents of the field can be returned in the search results.
+      SortEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the field can be used to sort the search results.
+    description: Options for literal field. Present if <code>IndexFieldType</code> specifies the field is of type <code>literal</code>. All options are enabled by default.
+  TextOptions:
+    type: object
+    properties:
+      DefaultValue:
+        $ref: '#/definitions/FieldValue'
+        description: A value to use for the field if the field isn't specified for a document.
+      SourceField:
+        $ref: '#/definitions/FieldName'
+      ReturnEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the contents of the field can be returned in the search results.
+      SortEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the field can be used to sort the search results.
+      HighlightEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether highlights can be returned for the field.
+      AnalysisScheme:
+        $ref: '#/definitions/Word'
+        description: The name of an analysis scheme for a <code>text</code> field.
+    description: Options for text field. Present if <code>IndexFieldType</code> specifies the field is of type <code>text</code>. A <code>text</code> field is always searchable. All options are enabled by default.
+  DateOptions:
+    type: object
+    properties:
+      DefaultValue:
+        $ref: '#/definitions/FieldValue'
+        description: A value to use for the field if the field isn't specified for a document.
+      SourceField:
+        $ref: '#/definitions/FieldName'
+      FacetEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether facet information can be returned for the field.
+      SearchEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the contents of the field are searchable.
+      ReturnEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the contents of the field can be returned in the search results.
+      SortEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the field can be used to sort the search results.
+    description: 'Options for a date field. Dates and times are specified in UTC (Coordinated Universal Time) according to IETF RFC3339: yyyy-mm-ddT00:00:00Z. Present if <code>IndexFieldType</code> specifies the field is of type <code>date</code>. All options are enabled by default.'
+  LatLonOptions:
+    type: object
+    properties:
+      DefaultValue:
+        $ref: '#/definitions/FieldValue'
+        description: A value to use for the field if the field isn't specified for a document.
+      SourceField:
+        $ref: '#/definitions/FieldName'
+      FacetEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether facet information can be returned for the field.
+      SearchEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the contents of the field are searchable.
+      ReturnEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the contents of the field can be returned in the search results.
+      SortEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the field can be used to sort the search results.
+    description: Options for a latlon field. A latlon field contains a location stored as a latitude and longitude value pair. Present if <code>IndexFieldType</code> specifies the field is of type <code>latlon</code>. All options are enabled by default.
+  IntArrayOptions:
+    type: object
+    properties:
+      DefaultValue:
+        $ref: '#/definitions/Long'
+        description: A value to use for the field if the field isn't specified for a document.
+      SourceFields:
+        $ref: '#/definitions/FieldNameCommaList'
+        description: 'A list of source fields to map to the field. '
+      FacetEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether facet information can be returned for the field.
+      SearchEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the contents of the field are searchable.
+      ReturnEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the contents of the field can be returned in the search results.
+    description: Options for a field that contains an array of 64-bit signed integers. Present if <code>IndexFieldType</code> specifies the field is of type <code>int-array</code>. All options are enabled by default.
+  DoubleArrayOptions:
+    type: object
+    properties:
+      DefaultValue:
+        $ref: '#/definitions/Double'
+        description: A value to use for the field if the field isn't specified for a document.
+      SourceFields:
+        $ref: '#/definitions/FieldNameCommaList'
+        description: 'A list of source fields to map to the field. '
+      FacetEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether facet information can be returned for the field.
+      SearchEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the contents of the field are searchable.
+      ReturnEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the contents of the field can be returned in the search results.
+    description: Options for a field that contains an array of double-precision 64-bit floating point values. Present if <code>IndexFieldType</code> specifies the field is of type <code>double-array</code>. All options are enabled by default.
+  LiteralArrayOptions:
+    type: object
+    properties:
+      DefaultValue:
+        $ref: '#/definitions/FieldValue'
+        description: A value to use for the field if the field isn't specified for a document.
+      SourceFields:
+        $ref: '#/definitions/FieldNameCommaList'
+        description: 'A list of source fields to map to the field. '
+      FacetEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether facet information can be returned for the field.
+      SearchEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the contents of the field are searchable.
+      ReturnEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the contents of the field can be returned in the search results.
+    description: Options for a field that contains an array of literal strings. Present if <code>IndexFieldType</code> specifies the field is of type <code>literal-array</code>. All options are enabled by default.
+  TextArrayOptions:
+    type: object
+    properties:
+      DefaultValue:
+        $ref: '#/definitions/FieldValue'
+        description: A value to use for the field if the field isn't specified for a document.
+      SourceFields:
+        $ref: '#/definitions/FieldNameCommaList'
+        description: 'A list of source fields to map to the field. '
+      ReturnEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the contents of the field can be returned in the search results.
+      HighlightEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether highlights can be returned for the field.
+      AnalysisScheme:
+        $ref: '#/definitions/Word'
+        description: The name of an analysis scheme for a <code>text-array</code> field.
+    description: Options for a field that contains an array of text strings. Present if <code>IndexFieldType</code> specifies the field is of type <code>text-array</code>. A <code>text-array</code> field is always searchable. All options are enabled by default.
+  DateArrayOptions:
+    type: object
+    properties:
+      DefaultValue:
+        $ref: '#/definitions/FieldValue'
+        description: A value to use for the field if the field isn't specified for a document.
+      SourceFields:
+        $ref: '#/definitions/FieldNameCommaList'
+        description: 'A list of source fields to map to the field. '
+      FacetEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether facet information can be returned for the field.
+      SearchEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the contents of the field are searchable.
+      ReturnEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the contents of the field can be returned in the search results.
+    description: Options for a field that contains an array of dates. Present if <code>IndexFieldType</code> specifies the field is of type <code>date-array</code>. All options are enabled by default.
+  Long:
+    type: integer
+  FieldName:
+    type: string
+    pattern: '[a-z][a-z0-9_]*'
+    description: '<p>A string that represents the name of an index field. CloudSearch supports regular index fields as well as dynamic fields. A dynamic field''s name defines a pattern that begins or ends with a wildcard. Any document fields that don''t map to a regular index field but do match a dynamic field''s pattern are configured with the dynamic field''s indexing options. </p> <p>Regular field names begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore). Dynamic field names must begin or end with a wildcard (*). The wildcard can also be the only character in a dynamic field name. Multiple wildcards, and wildcards embedded within a string are not supported. </p> <p>The name <code>score</code> is reserved and cannot be used as a field name. To reference a document''s ID, you can use the name <code>_id</code>. </p>'
+    minLength: 1
+    maxLength: 64
+  Boolean:
+    type: boolean
+  Double:
+    type: number
+    format: double
+  FieldValue:
+    type: string
+    description: The value of a field attribute.
+    minLength: 0
+    maxLength: 1024
+  Word:
+    type: string
+    pattern: '[\S]+'
+  FieldNameCommaList:
+    type: string
+    pattern: '\s*[a-z*][a-z0-9_]*\*?\s*(,\s*[a-z*][a-z0-9_]*\*?\s*)*'
+  DefineSuggesterResponse:
+    type: object
+    required:
+      - Suggester
+    properties:
+      Suggester:
+        $ref: '#/definitions/SuggesterStatus'
+    description: The result of a <code>DefineSuggester</code> request. Contains the status of the newly-configured suggester.
+  DocumentSuggesterOptions:
+    type: object
+    required:
+      - SourceField
+    properties:
+      SourceField:
+        $ref: '#/definitions/FieldName'
+        description: 'The name of the index field you want to use for suggestions. '
+      FuzzyMatching:
+        $ref: '#/definitions/SuggesterFuzzyMatching'
+        description: 'The level of fuzziness allowed when suggesting matches for a string: <code>none</code>, <code>low</code>, or <code>high</code>. With none, the specified string is treated as an exact prefix. With low, suggestions must differ from the specified string by no more than one character. With high, suggestions can differ by up to two characters. The default is none. '
+      SortExpression:
+        $ref: '#/definitions/String'
+        description: 'An expression that computes a score for each suggestion to control how they are sorted. The scores are rounded to the nearest integer, with a floor of 0 and a ceiling of 2^31-1. A document''s relevance score is not computed for suggestions, so sort expressions cannot reference the <code>_score</code> value. To sort suggestions using a numeric field or existing expression, simply specify the name of the field or expression. If no expression is configured for the suggester, the suggestions are sorted with the closest matches listed first.'
+    description: Options for a search suggester.
+  SuggesterFuzzyMatching:
+    type: string
+    enum:
+      - none
+      - low
+      - high
+  DeleteAnalysisSchemeResponse:
+    type: object
+    required:
+      - AnalysisScheme
+    properties:
+      AnalysisScheme:
+        $ref: '#/definitions/AnalysisSchemeStatus'
+        description: The status of the analysis scheme being deleted.
+    description: The result of a <code>DeleteAnalysisScheme</code> request. Contains the status of the deleted analysis scheme.
+  DeleteDomainResponse:
+    type: object
+    properties:
+      DomainStatus:
+        $ref: '#/definitions/DomainStatus'
+    description: 'The result of a <code>DeleteDomain</code> request. Contains the status of a newly deleted domain, or no status if the domain has already been completely deleted.'
+  DeleteExpressionResponse:
+    type: object
+    required:
+      - Expression
+    properties:
+      Expression:
+        $ref: '#/definitions/ExpressionStatus'
+        description: The status of the expression being deleted.
+    description: The result of a <code><a>DeleteExpression</a></code> request. Specifies the expression being deleted.
+  DeleteIndexFieldResponse:
+    type: object
+    required:
+      - IndexField
+    properties:
+      IndexField:
+        $ref: '#/definitions/IndexFieldStatus'
+        description: The status of the index field being deleted.
+    description: The result of a <code><a>DeleteIndexField</a></code> request.
+  DeleteSuggesterResponse:
+    type: object
+    required:
+      - Suggester
+    properties:
+      Suggester:
+        $ref: '#/definitions/SuggesterStatus'
+        description: The status of the suggester being deleted.
+    description: The result of a <code>DeleteSuggester</code> request. Contains the status of the deleted suggester.
+  DescribeAnalysisSchemesResponse:
+    type: object
+    required:
+      - AnalysisSchemes
+    properties:
+      AnalysisSchemes:
+        $ref: '#/definitions/AnalysisSchemeStatusList'
+        description: The analysis scheme descriptions.
+    description: The result of a <code>DescribeAnalysisSchemes</code> request. Contains the analysis schemes configured for the domain specified in the request.
+  DescribeAvailabilityOptionsResponse:
+    type: object
+    properties:
+      AvailabilityOptions:
+        $ref: '#/definitions/AvailabilityOptionsStatus'
+        description: 'The availability options configured for the domain. Indicates whether Multi-AZ is enabled for the domain. '
+    description: 'The result of a <code>DescribeAvailabilityOptions</code> request. Indicates whether or not the Multi-AZ option is enabled for the domain specified in the request. '
+  DisabledOperationException:
+    type: object
+    properties: {}
+    description: The request was rejected because it attempted an operation which is not enabled.
+  DescribeDomainsResponse:
+    type: object
+    required:
+      - DomainStatusList
+    properties:
+      DomainStatusList:
+        $ref: '#/definitions/DomainStatusList'
+    description: The result of a <code>DescribeDomains</code> request. Contains the status of the domains specified in the request or all domains owned by the account.
+  DomainName:
+    type: string
+    pattern: '[a-z][a-z0-9\-]+'
+    description: 'A string that represents the name of a domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+    minLength: 3
+    maxLength: 28
+  DescribeExpressionsResponse:
+    type: object
+    required:
+      - Expressions
+    properties:
+      Expressions:
+        $ref: '#/definitions/ExpressionStatusList'
+        description: The expressions configured for the domain.
+    description: The result of a <code>DescribeExpressions</code> request. Contains the expressions configured for the domain specified in the request.
+  DescribeIndexFieldsResponse:
+    type: object
+    required:
+      - IndexFields
+    properties:
+      IndexFields:
+        $ref: '#/definitions/IndexFieldStatusList'
+        description: The index fields configured for the domain.
+    description: The result of a <code>DescribeIndexFields</code> request. Contains the index fields configured for the domain specified in the request.
+  DescribeScalingParametersResponse:
+    type: object
+    required:
+      - ScalingParameters
+    properties:
+      ScalingParameters:
+        $ref: '#/definitions/ScalingParametersStatus'
+    description: The result of a <code>DescribeScalingParameters</code> request. Contains the scaling parameters configured for the domain specified in the request.
+  DescribeServiceAccessPoliciesResponse:
+    type: object
+    required:
+      - AccessPolicies
+    properties:
+      AccessPolicies:
+        $ref: '#/definitions/AccessPoliciesStatus'
+        description: The access rules configured for the domain specified in the request.
+    description: The result of a <code>DescribeServiceAccessPolicies</code> request.
+  DescribeSuggestersResponse:
+    type: object
+    required:
+      - Suggesters
+    properties:
+      Suggesters:
+        $ref: '#/definitions/SuggesterStatusList'
+        description: The suggesters configured for the domain specified in the request.
+    description: The result of a <code>DescribeSuggesters</code> request.
+  IndexDocumentsResponse:
+    type: object
+    properties:
+      FieldNames:
+        $ref: '#/definitions/FieldNameList'
+        description: The names of the fields that are currently being indexed.
+    description: 'The result of an <code>IndexDocuments</code> request. Contains the status of the indexing operation, including the fields being indexed.'
+  ListDomainNamesResponse:
+    type: object
+    properties:
+      DomainNames:
+        $ref: '#/definitions/DomainNameMap'
+        description: The names of the search domains owned by an account.
+    description: The result of a <code>ListDomainNames</code> request. Contains a list of the domains owned by an account.
+  UpdateAvailabilityOptionsResponse:
+    type: object
+    properties:
+      AvailabilityOptions:
+        $ref: '#/definitions/AvailabilityOptionsStatus'
+        description: 'The newly-configured availability options. Indicates whether Multi-AZ is enabled for the domain. '
+    description: 'The result of a <code>UpdateAvailabilityOptions</code> request. Contains the status of the domain''s availability options. '
+  UpdateScalingParametersResponse:
+    type: object
+    required:
+      - ScalingParameters
+    properties:
+      ScalingParameters:
+        $ref: '#/definitions/ScalingParametersStatus'
+    description: The result of a <code>UpdateScalingParameters</code> request. Contains the status of the newly-configured scaling parameters.
+  PartitionInstanceType:
+    type: string
+    enum:
+      - search.m1.small
+      - search.m1.large
+      - search.m2.xlarge
+      - search.m2.2xlarge
+      - search.m3.medium
+      - search.m3.large
+      - search.m3.xlarge
+      - search.m3.2xlarge
+    description: The instance type (such as <code>search.m1.small</code>) on which an index partition is hosted.
+  UIntValue:
+    type: integer
+    minimum: 0
+  UpdateServiceAccessPoliciesResponse:
+    type: object
+    required:
+      - AccessPolicies
+    properties:
+      AccessPolicies:
+        $ref: '#/definitions/AccessPoliciesStatus'
+        description: The access rules configured for the domain.
+    description: The result of an <code>UpdateServiceAccessPolicies</code> request. Contains the new access policies.
+  APIVersion:
+    type: string
+    description: 'The Amazon CloudSearch API version for a domain: 2011-02-01 or 2013-01-01.'
+  ARN:
+    type: string
+    description: 'The Amazon Resource Name (ARN) of the search domain. See <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html" target="_blank">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i> for more information.'
+  PolicyDocument:
+    type: string
+    description: 'Access rules for a domain''s document or search service endpoints. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-access.html" target="_blank">Configuring Access for a Search Domain</a> in the <i>Amazon CloudSearch Developer Guide</i>. The maximum size of a policy document is 100 KB.'
+  OptionStatus:
+    type: object
+    required:
+      - CreationDate
+      - UpdateDate
+      - State
+    properties:
+      CreationDate:
+        $ref: '#/definitions/UpdateTimestamp'
+        description: A timestamp for when this option was created.
+      UpdateDate:
+        $ref: '#/definitions/UpdateTimestamp'
+        description: A timestamp for when this option was last updated.
+      UpdateVersion:
+        $ref: '#/definitions/UIntValue'
+        description: A unique integer that indicates when this option was last updated.
+      State:
+        $ref: '#/definitions/OptionState'
+        description: '<p>The state of processing a change to an option. Possible values:</p> <ul> <li> <code>RequiresIndexDocuments</code>: the option''s latest value will not be deployed until <a>IndexDocuments</a> has been called and indexing is complete.</li> <li> <code>Processing</code>: the option''s latest value is in the process of being activated. </li> <li> <code>Active</code>: the option''s latest value is completely deployed.</li> <li> <code>FailedToValidate</code>: the option value is not compatible with the domain''s data and cannot be used to index the data. You must either modify the option value or update or remove the incompatible documents.</li> </ul>'
+      PendingDeletion:
+        $ref: '#/definitions/Boolean'
+        description: Indicates that the option will be deleted once processing is complete.
+    description: The status of domain configuration option.
+  AccessPoliciesStatus:
+    type: object
+    required:
+      - Options
+      - Status
+    properties:
+      Options:
+        $ref: '#/definitions/PolicyDocument'
+      Status:
+        $ref: '#/definitions/OptionStatus'
+    description: 'The configured access rules for the domain''s document and search endpoints, and the current status of those rules.'
   AnalysisScheme:
     type: object
     required:
@@ -1678,19 +2165,28 @@ definitions:
   ErrorMessage:
     type: string
     description: A human-readable string error or warning message.
-  Boolean:
-    type: boolean
-  DomainName:
-    type: string
-    pattern: '[a-z][a-z0-9\-]+'
-    description: 'A string that represents the name of a domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
-    minLength: 3
-    maxLength: 28
+  BuildSuggestersRequest:
+    type: object
+    required:
+      - DomainName
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+    description: Container for the parameters to the <code><a>BuildSuggester</a></code> operation. Specifies the name of the domain you want to update.
   FieldNameList:
     type: array
     description: A list of field names.
     items:
       $ref: '#/definitions/FieldName'
+  CreateDomainRequest:
+    type: object
+    required:
+      - DomainName
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+        description: 'A name for the domain you are creating. Allowed characters are a-z (lower-case letters), 0-9, and hyphen (-). Domain names must start with a letter or number and be at least 3 and no more than 28 characters long.'
+    description: Container for the parameters to the <code><a>CreateDomain</a></code> operation. Specifies a name for the new search domain.
   DomainStatus:
     type: object
     required:
@@ -1734,60 +2230,17 @@ definitions:
       Limits:
         $ref: '#/definitions/Limits'
     description: The current status of the search domain.
-  FieldValue:
-    type: string
-    description: The value of a field attribute.
-    minLength: 0
-    maxLength: 1024
-  FieldNameCommaList:
-    type: string
-    pattern: '\s*[a-z*][a-z0-9_]*\*?\s*(,\s*[a-z*][a-z0-9_]*\*?\s*)*'
-  DateArrayOptions:
+  DefineAnalysisSchemeRequest:
     type: object
+    required:
+      - DomainName
+      - AnalysisScheme
     properties:
-      DefaultValue:
-        $ref: '#/definitions/FieldValue'
-        description: A value to use for the field if the field isn't specified for a document.
-      SourceFields:
-        $ref: '#/definitions/FieldNameCommaList'
-        description: 'A list of source fields to map to the field. '
-      FacetEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether facet information can be returned for the field.
-      SearchEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the contents of the field are searchable.
-      ReturnEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the contents of the field can be returned in the search results.
-    description: Options for a field that contains an array of dates. Present if <code>IndexFieldType</code> specifies the field is of type <code>date-array</code>. All options are enabled by default.
-  FieldName:
-    type: string
-    pattern: '[a-z][a-z0-9_]*'
-    description: '<p>A string that represents the name of an index field. CloudSearch supports regular index fields as well as dynamic fields. A dynamic field''s name defines a pattern that begins or ends with a wildcard. Any document fields that don''t map to a regular index field but do match a dynamic field''s pattern are configured with the dynamic field''s indexing options. </p> <p>Regular field names begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore). Dynamic field names must begin or end with a wildcard (*). The wildcard can also be the only character in a dynamic field name. Multiple wildcards, and wildcards embedded within a string are not supported. </p> <p>The name <code>score</code> is reserved and cannot be used as a field name. To reference a document''s ID, you can use the name <code>_id</code>. </p>'
-    minLength: 1
-    maxLength: 64
-  DateOptions:
-    type: object
-    properties:
-      DefaultValue:
-        $ref: '#/definitions/FieldValue'
-        description: A value to use for the field if the field isn't specified for a document.
-      SourceField:
-        $ref: '#/definitions/FieldName'
-      FacetEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether facet information can be returned for the field.
-      SearchEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the contents of the field are searchable.
-      ReturnEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the contents of the field can be returned in the search results.
-      SortEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the field can be used to sort the search results.
-    description: 'Options for a date field. Dates and times are specified in UTC (Coordinated Universal Time) according to IETF RFC3339: yyyy-mm-ddT00:00:00Z. Present if <code>IndexFieldType</code> specifies the field is of type <code>date</code>. All options are enabled by default.'
+      DomainName:
+        $ref: '#/definitions/DomainName'
+      AnalysisScheme:
+        $ref: '#/definitions/AnalysisScheme'
+    description: Container for the parameters to the <code><a>DefineAnalysisScheme</a></code> operation. Specifies the name of the domain you want to update and the analysis scheme configuration.
   Expression:
     type: object
     required:
@@ -1799,6 +2252,17 @@ definitions:
       ExpressionValue:
         $ref: '#/definitions/ExpressionValue'
     description: 'A named expression that can be evaluated at search time. Can be used to sort the search results, define other expressions, or return computed information in the search results. '
+  DefineExpressionRequest:
+    type: object
+    required:
+      - DomainName
+      - Expression
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+      Expression:
+        $ref: '#/definitions/Expression'
+    description: Container for the parameters to the <code><a>DefineExpression</a></code> operation. Specifies the name of the domain you want to update and the expression you want to configure.
   ExpressionStatus:
     type: object
     required:
@@ -1845,6 +2309,18 @@ definitions:
       DateArrayOptions:
         $ref: '#/definitions/DateArrayOptions'
     description: 'Configuration information for a field in the index, including its name, type, and options. The supported options depend on the <code><a>IndexFieldType</a></code>.'
+  DefineIndexFieldRequest:
+    type: object
+    required:
+      - DomainName
+      - IndexField
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+      IndexField:
+        $ref: '#/definitions/IndexField'
+        description: 'The index field and field options you want to configure. '
+    description: Container for the parameters to the <code><a>DefineIndexField</a></code> operation. Specifies the name of the domain you want to update and the index field configuration.
   IndexFieldStatus:
     type: object
     required:
@@ -1867,6 +2343,17 @@ definitions:
       DocumentSuggesterOptions:
         $ref: '#/definitions/DocumentSuggesterOptions'
     description: 'Configuration information for a search suggester. Each suggester has a unique name and specifies the text field you want to use for suggestions. The following options can be configured for a suggester: <code>FuzzyMatching</code>, <code>SortExpression</code>. '
+  DefineSuggesterRequest:
+    type: object
+    required:
+      - DomainName
+      - Suggester
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+      Suggester:
+        $ref: '#/definitions/Suggester'
+    description: Container for the parameters to the <code><a>DefineSuggester</a></code> operation. Specifies the name of the domain you want to update and the suggester configuration.
   SuggesterStatus:
     type: object
     required:
@@ -1878,25 +2365,126 @@ definitions:
       Status:
         $ref: '#/definitions/OptionStatus'
     description: The value of a <code>Suggester</code> and its current status.
-  DynamicFieldName:
-    type: string
-    pattern: '([a-z][a-z0-9_]*\*?|\*[a-z0-9_]*)'
-    minLength: 1
-    maxLength: 64
+  DeleteAnalysisSchemeRequest:
+    type: object
+    required:
+      - DomainName
+      - AnalysisSchemeName
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+      AnalysisSchemeName:
+        $ref: '#/definitions/StandardName'
+        description: The name of the analysis scheme you want to delete.
+    description: 'Container for the parameters to the <code><a>DeleteAnalysisScheme</a></code> operation. Specifies the name of the domain you want to update and the analysis scheme you want to delete. '
+  DeleteDomainRequest:
+    type: object
+    required:
+      - DomainName
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+        description: The name of the domain you want to permanently delete.
+    description: Container for the parameters to the <code><a>DeleteDomain</a></code> operation. Specifies the name of the domain you want to delete.
+  DeleteExpressionRequest:
+    type: object
+    required:
+      - DomainName
+      - ExpressionName
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+      ExpressionName:
+        $ref: '#/definitions/StandardName'
+        description: The name of the <code><a>Expression</a></code> to delete.
+    description: Container for the parameters to the <code><a>DeleteExpression</a></code> operation. Specifies the name of the domain you want to update and the name of the expression you want to delete.
+  DeleteIndexFieldRequest:
+    type: object
+    required:
+      - DomainName
+      - IndexFieldName
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+      IndexFieldName:
+        $ref: '#/definitions/DynamicFieldName'
+        description: The name of the index field your want to remove from the domain's indexing options.
+    description: Container for the parameters to the <code><a>DeleteIndexField</a></code> operation. Specifies the name of the domain you want to update and the name of the index field you want to delete.
+  DeleteSuggesterRequest:
+    type: object
+    required:
+      - DomainName
+      - SuggesterName
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+      SuggesterName:
+        $ref: '#/definitions/StandardName'
+        description: Specifies the name of the suggester you want to delete.
+    description: Container for the parameters to the <code><a>DeleteSuggester</a></code> operation. Specifies the name of the domain you want to update and name of the suggester you want to delete.
   StandardNameList:
     type: array
     items:
       $ref: '#/definitions/StandardName'
+  DescribeAnalysisSchemesRequest:
+    type: object
+    required:
+      - DomainName
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+        description: The name of the domain you want to describe.
+      AnalysisSchemeNames:
+        $ref: '#/definitions/StandardNameList'
+        description: The analysis schemes you want to describe.
+      Deployed:
+        $ref: '#/definitions/Boolean'
+        description: Whether to display the deployed configuration (<code>true</code>) or include any pending changes (<code>false</code>). Defaults to <code>false</code>.
+    description: 'Container for the parameters to the <code><a>DescribeAnalysisSchemes</a></code> operation. Specifies the name of the domain you want to describe. To limit the response to particular analysis schemes, specify the names of the analysis schemes you want to describe. To show the active configuration and exclude any pending changes, set the <code>Deployed</code> option to <code>true</code>. '
+  DescribeAvailabilityOptionsRequest:
+    type: object
+    required:
+      - DomainName
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+        description: The name of the domain you want to describe.
+      Deployed:
+        $ref: '#/definitions/Boolean'
+        description: Whether to display the deployed configuration (<code>true</code>) or include any pending changes (<code>false</code>). Defaults to <code>false</code>.
+    description: 'Container for the parameters to the <code><a>DescribeAvailabilityOptions</a></code> operation. Specifies the name of the domain you want to describe. To show the active configuration and exclude any pending changes, set the Deployed option to <code>true</code>.'
   DomainNameList:
     type: array
     description: A list of domain names.
     items:
       $ref: '#/definitions/DomainName'
+  DescribeDomainsRequest:
+    type: object
+    properties:
+      DomainNames:
+        $ref: '#/definitions/DomainNameList'
+        description: The names of the domains you want to include in the response.
+    description: 'Container for the parameters to the <code><a>DescribeDomains</a></code> operation. By default shows the status of all domains. To restrict the response to particular domains, specify the names of the domains you want to describe.'
   DomainStatusList:
     type: array
     description: A list that contains the status of each requested domain.
     items:
       $ref: '#/definitions/DomainStatus'
+  DescribeExpressionsRequest:
+    type: object
+    required:
+      - DomainName
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+        description: The name of the domain you want to describe.
+      ExpressionNames:
+        $ref: '#/definitions/StandardNameList'
+        description: 'Limits the <code><a>DescribeExpressions</a></code> response to the specified expressions. If not specified, all expressions are shown.'
+      Deployed:
+        $ref: '#/definitions/Boolean'
+        description: Whether to display the deployed configuration (<code>true</code>) or include any pending changes (<code>false</code>). Defaults to <code>false</code>.
+    description: 'Container for the parameters to the <code><a>DescribeDomains</a></code> operation. Specifies the name of the domain you want to describe. To restrict the response to particular expressions, specify the names of the expressions you want to describe. To show the active configuration and exclude any pending changes, set the <code>Deployed</code> option to <code>true</code>.'
   ExpressionStatusList:
     type: array
     description: Contains the status of multiple expressions.
@@ -1906,11 +2494,34 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/DynamicFieldName'
+  DescribeIndexFieldsRequest:
+    type: object
+    required:
+      - DomainName
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+        description: The name of the domain you want to describe.
+      FieldNames:
+        $ref: '#/definitions/DynamicFieldNameList'
+        description: 'A list of the index fields you want to describe. If not specified, information is returned for all configured index fields.'
+      Deployed:
+        $ref: '#/definitions/Boolean'
+        description: Whether to display the deployed configuration (<code>true</code>) or include any pending changes (<code>false</code>). Defaults to <code>false</code>.
+    description: 'Container for the parameters to the <code><a>DescribeIndexFields</a></code> operation. Specifies the name of the domain you want to describe. To restrict the response to particular index fields, specify the names of the index fields you want to describe. To show the active configuration and exclude any pending changes, set the <code>Deployed</code> option to <code>true</code>.'
   IndexFieldStatusList:
     type: array
     description: Contains the status of multiple index fields.
     items:
       $ref: '#/definitions/IndexFieldStatus'
+  DescribeScalingParametersRequest:
+    type: object
+    required:
+      - DomainName
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+    description: 'Container for the parameters to the <code><a>DescribeScalingParameters</a></code> operation. Specifies the name of the domain you want to describe. '
   ScalingParametersStatus:
     type: object
     required:
@@ -1922,47 +2533,48 @@ definitions:
       Status:
         $ref: '#/definitions/OptionStatus'
     description: 'The status and configuration of a search domain''s scaling parameters. '
+  DescribeServiceAccessPoliciesRequest:
+    type: object
+    required:
+      - DomainName
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+        description: The name of the domain you want to describe.
+      Deployed:
+        $ref: '#/definitions/Boolean'
+        description: Whether to display the deployed configuration (<code>true</code>) or include any pending changes (<code>false</code>). Defaults to <code>false</code>.
+    description: 'Container for the parameters to the <code><a>DescribeServiceAccessPolicies</a></code> operation. Specifies the name of the domain you want to describe. To show the active configuration and exclude any pending changes, set the <code>Deployed</code> option to <code>true</code>.'
+  DescribeSuggestersRequest:
+    type: object
+    required:
+      - DomainName
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+        description: The name of the domain you want to describe.
+      SuggesterNames:
+        $ref: '#/definitions/StandardNameList'
+        description: The suggesters you want to describe.
+      Deployed:
+        $ref: '#/definitions/Boolean'
+        description: Whether to display the deployed configuration (<code>true</code>) or include any pending changes (<code>false</code>). Defaults to <code>false</code>.
+    description: 'Container for the parameters to the <code><a>DescribeSuggester</a></code> operation. Specifies the name of the domain you want to describe. To restrict the response to particular suggesters, specify the names of the suggesters you want to describe. To show the active configuration and exclude any pending changes, set the <code>Deployed</code> option to <code>true</code>.'
   SuggesterStatusList:
     type: array
     description: Contains the status of multiple suggesters.
     items:
       $ref: '#/definitions/SuggesterStatus'
-  SuggesterFuzzyMatching:
-    type: string
-    enum:
-      - none
-      - low
-      - high
-  DocumentSuggesterOptions:
-    type: object
-    required:
-      - SourceField
-    properties:
-      SourceField:
-        $ref: '#/definitions/FieldName'
-        description: 'The name of the index field you want to use for suggestions. '
-      FuzzyMatching:
-        $ref: '#/definitions/SuggesterFuzzyMatching'
-        description: 'The level of fuzziness allowed when suggesting matches for a string: <code>none</code>, <code>low</code>, or <code>high</code>. With none, the specified string is treated as an exact prefix. With low, suggestions must differ from the specified string by no more than one character. With high, suggestions can differ by up to two characters. The default is none. '
-      SortExpression:
-        $ref: '#/definitions/String'
-        description: 'An expression that computes a score for each suggestion to control how they are sorted. The scores are rounded to the nearest integer, with a floor of 0 and a ceiling of 2^31-1. A document''s relevance score is not computed for suggestions, so sort expressions cannot reference the <code>_score</code> value. To sort suggestions using a numeric field or existing expression, simply specify the name of the field or expression. If no expression is configured for the suggester, the suggestions are sorted with the closest matches listed first.'
-    description: Options for a search suggester.
   DomainId:
     type: string
     description: An internally generated unique identifier for a domain.
     minLength: 1
     maxLength: 64
   DomainNameMap:
-    type: array
+    type: object
     description: A collection of domain names.
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/DomainName'
-        value:
-          $ref: '#/definitions/APIVersion'
+    additionalProperties:
+      $ref: '#/definitions/APIVersion'
   ServiceEndpoint:
     type: object
     properties:
@@ -1989,214 +2601,14 @@ definitions:
         $ref: '#/definitions/MaximumReplicationCount'
       MaximumPartitionCount:
         $ref: '#/definitions/MaximumPartitionCount'
-  Double:
-    type: number
-    format: double
-  DoubleArrayOptions:
+  IndexDocumentsRequest:
     type: object
+    required:
+      - DomainName
     properties:
-      DefaultValue:
-        $ref: '#/definitions/Double'
-        description: A value to use for the field if the field isn't specified for a document.
-      SourceFields:
-        $ref: '#/definitions/FieldNameCommaList'
-        description: 'A list of source fields to map to the field. '
-      FacetEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether facet information can be returned for the field.
-      SearchEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the contents of the field are searchable.
-      ReturnEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the contents of the field can be returned in the search results.
-    description: Options for a field that contains an array of double-precision 64-bit floating point values. Present if <code>IndexFieldType</code> specifies the field is of type <code>double-array</code>. All options are enabled by default.
-  DoubleOptions:
-    type: object
-    properties:
-      DefaultValue:
-        $ref: '#/definitions/Double'
-        description: A value to use for the field if the field isn't specified for a document. This can be important if you are using the field in an expression and that field is not present in every document.
-      SourceField:
-        $ref: '#/definitions/FieldName'
-        description: 'The name of the source field to map to the field. '
-      FacetEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether facet information can be returned for the field.
-      SearchEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the contents of the field are searchable.
-      ReturnEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the contents of the field can be returned in the search results.
-      SortEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the field can be used to sort the search results.
-    description: Options for a double-precision 64-bit floating point field. Present if <code>IndexFieldType</code> specifies the field is of type <code>double</code>. All options are enabled by default.
-  ExpressionValue:
-    type: string
-    description: 'The expression to evaluate for sorting while processing a search request. The <code>Expression</code> syntax is based on JavaScript expressions. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html" target="_blank">Configuring Expressions</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
-    minLength: 1
-    maxLength: 10240
-  IndexFieldType:
-    type: string
-    enum:
-      - int
-      - double
-      - literal
-      - text
-      - date
-      - latlon
-      - int-array
-      - double-array
-      - literal-array
-      - text-array
-      - date-array
-    description: 'The type of field. The valid options for a field depend on the field type. For more information about the supported field types, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-index-fields.html" target="_blank">Configuring Index Fields</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
-  IntOptions:
-    type: object
-    properties:
-      DefaultValue:
-        $ref: '#/definitions/Long'
-        description: A value to use for the field if the field isn't specified for a document. This can be important if you are using the field in an expression and that field is not present in every document.
-      SourceField:
-        $ref: '#/definitions/FieldName'
-        description: 'The name of the source field to map to the field. '
-      FacetEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether facet information can be returned for the field.
-      SearchEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the contents of the field are searchable.
-      ReturnEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the contents of the field can be returned in the search results.
-      SortEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the field can be used to sort the search results.
-    description: Options for a 64-bit signed integer field. Present if <code>IndexFieldType</code> specifies the field is of type <code>int</code>. All options are enabled by default.
-  LiteralOptions:
-    type: object
-    properties:
-      DefaultValue:
-        $ref: '#/definitions/FieldValue'
-        description: A value to use for the field if the field isn't specified for a document.
-      SourceField:
-        $ref: '#/definitions/FieldName'
-      FacetEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether facet information can be returned for the field.
-      SearchEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the contents of the field are searchable.
-      ReturnEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the contents of the field can be returned in the search results.
-      SortEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the field can be used to sort the search results.
-    description: Options for literal field. Present if <code>IndexFieldType</code> specifies the field is of type <code>literal</code>. All options are enabled by default.
-  TextOptions:
-    type: object
-    properties:
-      DefaultValue:
-        $ref: '#/definitions/FieldValue'
-        description: A value to use for the field if the field isn't specified for a document.
-      SourceField:
-        $ref: '#/definitions/FieldName'
-      ReturnEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the contents of the field can be returned in the search results.
-      SortEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the field can be used to sort the search results.
-      HighlightEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether highlights can be returned for the field.
-      AnalysisScheme:
-        $ref: '#/definitions/Word'
-        description: The name of an analysis scheme for a <code>text</code> field.
-    description: Options for text field. Present if <code>IndexFieldType</code> specifies the field is of type <code>text</code>. A <code>text</code> field is always searchable. All options are enabled by default.
-  LatLonOptions:
-    type: object
-    properties:
-      DefaultValue:
-        $ref: '#/definitions/FieldValue'
-        description: A value to use for the field if the field isn't specified for a document.
-      SourceField:
-        $ref: '#/definitions/FieldName'
-      FacetEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether facet information can be returned for the field.
-      SearchEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the contents of the field are searchable.
-      ReturnEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the contents of the field can be returned in the search results.
-      SortEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the field can be used to sort the search results.
-    description: Options for a latlon field. A latlon field contains a location stored as a latitude and longitude value pair. Present if <code>IndexFieldType</code> specifies the field is of type <code>latlon</code>. All options are enabled by default.
-  IntArrayOptions:
-    type: object
-    properties:
-      DefaultValue:
-        $ref: '#/definitions/Long'
-        description: A value to use for the field if the field isn't specified for a document.
-      SourceFields:
-        $ref: '#/definitions/FieldNameCommaList'
-        description: 'A list of source fields to map to the field. '
-      FacetEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether facet information can be returned for the field.
-      SearchEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the contents of the field are searchable.
-      ReturnEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the contents of the field can be returned in the search results.
-    description: Options for a field that contains an array of 64-bit signed integers. Present if <code>IndexFieldType</code> specifies the field is of type <code>int-array</code>. All options are enabled by default.
-  LiteralArrayOptions:
-    type: object
-    properties:
-      DefaultValue:
-        $ref: '#/definitions/FieldValue'
-        description: A value to use for the field if the field isn't specified for a document.
-      SourceFields:
-        $ref: '#/definitions/FieldNameCommaList'
-        description: 'A list of source fields to map to the field. '
-      FacetEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether facet information can be returned for the field.
-      SearchEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the contents of the field are searchable.
-      ReturnEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the contents of the field can be returned in the search results.
-    description: Options for a field that contains an array of literal strings. Present if <code>IndexFieldType</code> specifies the field is of type <code>literal-array</code>. All options are enabled by default.
-  TextArrayOptions:
-    type: object
-    properties:
-      DefaultValue:
-        $ref: '#/definitions/FieldValue'
-        description: A value to use for the field if the field isn't specified for a document.
-      SourceFields:
-        $ref: '#/definitions/FieldNameCommaList'
-        description: 'A list of source fields to map to the field. '
-      ReturnEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the contents of the field can be returned in the search results.
-      HighlightEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether highlights can be returned for the field.
-      AnalysisScheme:
-        $ref: '#/definitions/Word'
-        description: The name of an analysis scheme for a <code>text-array</code> field.
-    description: Options for a field that contains an array of text strings. Present if <code>IndexFieldType</code> specifies the field is of type <code>text-array</code>. A <code>text-array</code> field is always searchable. All options are enabled by default.
-  Long:
-    type: integer
+      DomainName:
+        $ref: '#/definitions/DomainName'
+    description: Container for the parameters to the <code><a>IndexDocuments</a></code> operation. Specifies the name of the domain you want to re-index.
   MaximumReplicationCount:
     type: integer
     minimum: 1
@@ -2214,21 +2626,6 @@ definitions:
   UpdateTimestamp:
     type: string
     format: date-time
-  UIntValue:
-    type: integer
-    minimum: 0
-  PartitionInstanceType:
-    type: string
-    enum:
-      - search.m1.small
-      - search.m1.large
-      - search.m2.xlarge
-      - search.m2.2xlarge
-      - search.m3.medium
-      - search.m3.large
-      - search.m3.xlarge
-      - search.m3.2xlarge
-    description: The instance type (such as <code>search.m1.small</code>) on which an index partition is hosted.
   ScalingParameters:
     type: object
     properties:
@@ -2245,6 +2642,38 @@ definitions:
   ServiceUrl:
     type: string
     description: 'The endpoint to which service requests can be submitted. For example, <code>search-imdb-movies-oopcnjfn6ugofer3zx5iadxxca.eu-west-1.cloudsearch.amazonaws.com</code> or <code>doc-imdb-movies-oopcnjfn6ugofer3zx5iadxxca.eu-west-1.cloudsearch.amazonaws.com</code>.'
-  Word:
-    type: string
-    pattern: '[\S]+'
+  UpdateAvailabilityOptionsRequest:
+    type: object
+    required:
+      - DomainName
+      - MultiAZ
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+      MultiAZ:
+        $ref: '#/definitions/Boolean'
+        description: 'You expand an existing search domain to a second Availability Zone by setting the Multi-AZ option to true. Similarly, you can turn off the Multi-AZ option to downgrade the domain to a single Availability Zone by setting the Multi-AZ option to <code>false</code>. '
+    description: Container for the parameters to the <code><a>UpdateAvailabilityOptions</a></code> operation. Specifies the name of the domain you want to update and the Multi-AZ availability option.
+  UpdateScalingParametersRequest:
+    type: object
+    required:
+      - DomainName
+      - ScalingParameters
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+      ScalingParameters:
+        $ref: '#/definitions/ScalingParameters'
+    description: Container for the parameters to the <code><a>UpdateScalingParameters</a></code> operation. Specifies the name of the domain you want to update and the scaling parameters you want to configure.
+  UpdateServiceAccessPoliciesRequest:
+    type: object
+    required:
+      - DomainName
+      - AccessPolicies
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+      AccessPolicies:
+        $ref: '#/definitions/PolicyDocument'
+        description: 'The access rules you want to configure. These rules replace any existing rules. '
+    description: Container for the parameters to the <code><a>UpdateServiceAccessPolicies</a></code> operation. Specifies the name of the domain you want to update and the access rules you want to configure.

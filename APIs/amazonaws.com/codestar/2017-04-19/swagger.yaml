@@ -99,7 +99,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /:
+  '/#X-Amz-Target=CodeStar_20170419.AssociateTeamMember':
     post:
       operationId: AssociateTeamMember
       description: Adds an IAM user to the team for an AWS CodeStar project.
@@ -142,6 +142,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AssociateTeamMemberRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeStar_20170419.AssociateTeamMember
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -152,7 +158,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateProject':
+  '/#X-Amz-Target=CodeStar_20170419.CreateProject':
     post:
       operationId: CreateProject
       description: 'Creates a project, including project resources. This action creates a project based on a submitted project request. A set of source code files and a toolchain template file can be included with the project request. If these are not provided, an empty project is created.'
@@ -195,6 +201,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateProjectRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeStar_20170419.CreateProject
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -205,7 +217,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateUserProfile':
+  '/#X-Amz-Target=CodeStar_20170419.CreateUserProfile':
     post:
       operationId: CreateUserProfile
       description: 'Creates a profile for a user that includes user preferences, such as the display name and email address assocciated with the user, in AWS CodeStar. The user profile is not project-specific. Information in the user profile is displayed wherever the user''s information appears to other users in AWS CodeStar.'
@@ -228,6 +240,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateUserProfileRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeStar_20170419.CreateUserProfile
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -238,7 +256,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteProject':
+  '/#X-Amz-Target=CodeStar_20170419.DeleteProject':
     post:
       operationId: DeleteProject
       description: 'Deletes a project, including project resources. Does not delete users associated with the project, but does delete the IAM roles that allowed access to the project.'
@@ -265,6 +283,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteProjectRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeStar_20170419.DeleteProject
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -275,7 +299,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteUserProfile':
+  '/#X-Amz-Target=CodeStar_20170419.DeleteUserProfile':
     post:
       operationId: DeleteUserProfile
       description: 'Deletes a user profile in AWS CodeStar, including all personal preference data associated with that profile, such as display name and email address. It does not delete the history of that user, for example the history of commits made by that user.'
@@ -294,6 +318,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteUserProfileRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeStar_20170419.DeleteUserProfile
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -304,7 +334,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeProject':
+  '/#X-Amz-Target=CodeStar_20170419.DescribeProject':
     post:
       operationId: DescribeProject
       description: Describes a project and its resources.
@@ -339,6 +369,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeProjectRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeStar_20170419.DescribeProject
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -349,7 +385,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeUserProfile':
+  '/#X-Amz-Target=CodeStar_20170419.DescribeUserProfile':
     post:
       operationId: DescribeUserProfile
       description: Describes a user in AWS CodeStar and the user attributes across all projects.
@@ -372,6 +408,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeUserProfileRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeStar_20170419.DescribeUserProfile
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -382,7 +424,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DisassociateTeamMember':
+  '/#X-Amz-Target=CodeStar_20170419.DisassociateTeamMember':
     post:
       operationId: DisassociateTeamMember
       description: Removes a user from a project. Removing a user from a project also removes the IAM policies from that user that allowed access to the project and its resources. Disassociating a team member does not remove that user's profile from AWS CodeStar. It does not remove the user from IAM.
@@ -413,6 +455,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DisassociateTeamMemberRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeStar_20170419.DisassociateTeamMember
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -423,7 +471,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListProjects':
+  '/#X-Amz-Target=CodeStar_20170419.ListProjects':
     post:
       operationId: ListProjects
       description: Lists all projects in AWS CodeStar associated with your AWS account.
@@ -446,6 +494,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListProjectsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeStar_20170419.ListProjects
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -456,7 +510,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListResources':
+  '/#X-Amz-Target=CodeStar_20170419.ListResources':
     post:
       operationId: ListResources
       description: Lists resources associated with a project in AWS CodeStar.
@@ -483,6 +537,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListResourcesRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeStar_20170419.ListResources
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -493,7 +553,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListTagsForProject':
+  '/#X-Amz-Target=CodeStar_20170419.ListTagsForProject':
     post:
       operationId: ListTagsForProject
       description: Gets the tags for a project.
@@ -520,6 +580,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListTagsForProjectRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeStar_20170419.ListTagsForProject
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -530,7 +596,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListTeamMembers':
+  '/#X-Amz-Target=CodeStar_20170419.ListTeamMembers':
     post:
       operationId: ListTeamMembers
       description: Lists all team members associated with a project.
@@ -557,6 +623,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListTeamMembersRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeStar_20170419.ListTeamMembers
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -567,7 +639,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListUserProfiles':
+  '/#X-Amz-Target=CodeStar_20170419.ListUserProfiles':
     post:
       operationId: ListUserProfiles
       description: Lists all the user profiles configured for your AWS account in AWS CodeStar.
@@ -590,6 +662,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListUserProfilesRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeStar_20170419.ListUserProfiles
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -600,7 +678,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#TagProject':
+  '/#X-Amz-Target=CodeStar_20170419.TagProject':
     post:
       operationId: TagProject
       description: Adds tags to a project.
@@ -631,6 +709,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/TagProjectRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeStar_20170419.TagProject
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -641,7 +725,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UntagProject':
+  '/#X-Amz-Target=CodeStar_20170419.UntagProject':
     post:
       operationId: UntagProject
       description: Removes tags from a project.
@@ -672,6 +756,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UntagProjectRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeStar_20170419.UntagProject
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -682,7 +772,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateProject':
+  '/#X-Amz-Target=CodeStar_20170419.UpdateProject':
     post:
       operationId: UpdateProject
       description: Updates a project in AWS CodeStar.
@@ -705,6 +795,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateProjectRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeStar_20170419.UpdateProject
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -715,7 +811,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateTeamMember':
+  '/#X-Amz-Target=CodeStar_20170419.UpdateTeamMember':
     post:
       operationId: UpdateTeamMember
       description: 'Updates a team member''s attributes in an AWS CodeStar project. For example, you can change a team member''s role in the project, or change whether they have remote access to project resources.'
@@ -758,6 +854,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateTeamMemberRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeStar_20170419.UpdateTeamMember
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -768,7 +870,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateUserProfile':
+  '/#X-Amz-Target=CodeStar_20170419.UpdateUserProfile':
     post:
       operationId: UpdateUserProfile
       description: 'Updates a user''s profile in AWS CodeStar. The user profile is not project-specific. Information in the user profile is displayed wherever the user''s information appears to other users in AWS CodeStar. '
@@ -791,6 +893,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateUserProfileRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeStar_20170419.UpdateUserProfile
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1431,14 +1539,9 @@ definitions:
         description: 'The list of parameter overrides to be passed into the toolchain template during stack provisioning, if any.'
     description: The toolchain template file provided with the project request. AWS CodeStar uses the template to provision the toolchain stack in AWS CloudFormation.
   Tags:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/TagKey'
-        value:
-          $ref: '#/definitions/TagValue'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/TagValue'
   ProjectArn:
     type: string
     pattern: '^arn:aws[^:\s]*:codestar:[^:\s]+:[0-9]{12}:project\/[a-z]([a-z0-9|-])+$'
@@ -1606,15 +1709,10 @@ definitions:
     maxLength: 100
     format: password
   TemplateParameterMap:
-    type: array
-    maxItems: 25
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/TemplateParameterKey'
-        value:
-          $ref: '#/definitions/TemplateParameterValue'
+    type: object
+    maxProperties: 25
+    additionalProperties:
+      $ref: '#/definitions/TemplateParameterValue'
   ToolchainSource:
     type: object
     required:

@@ -99,7 +99,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /:
+  '/#X-Amz-Target=AWSLicenseManager.CreateLicenseConfiguration':
     post:
       operationId: CreateLicenseConfiguration
       description: 'Creates a new license configuration object. A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (licensing by instance, socket, CPU, or VCPU), tenancy (shared tenancy, Amazon EC2 Dedicated Instance, Amazon EC2 Dedicated Host, or any of these), host affinity (how long a VM must be associated with a host), the number of licenses purchased and used.'
@@ -138,6 +138,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateLicenseConfigurationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLicenseManager.CreateLicenseConfiguration
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -148,7 +154,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteLicenseConfiguration':
+  '/#X-Amz-Target=AWSLicenseManager.DeleteLicenseConfiguration':
     post:
       operationId: DeleteLicenseConfiguration
       description: Deletes an existing license configuration. This action fails if the configuration is in use.
@@ -183,6 +189,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteLicenseConfigurationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLicenseManager.DeleteLicenseConfiguration
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -193,7 +205,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetLicenseConfiguration':
+  '/#X-Amz-Target=AWSLicenseManager.GetLicenseConfiguration':
     post:
       operationId: GetLicenseConfiguration
       description: Returns a detailed description of a license configuration.
@@ -228,6 +240,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetLicenseConfigurationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLicenseManager.GetLicenseConfiguration
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -238,7 +256,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetServiceSettings':
+  '/#X-Amz-Target=AWSLicenseManager.GetServiceSettings':
     post:
       operationId: GetServiceSettings
       description: 'Gets License Manager settings for a region. Exposes the configured S3 bucket, SNS topic, etc., for inspection. '
@@ -269,6 +287,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetServiceSettingsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLicenseManager.GetServiceSettings
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -279,7 +303,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListAssociationsForLicenseConfiguration':
+  '/#X-Amz-Target=AWSLicenseManager.ListAssociationsForLicenseConfiguration':
     post:
       operationId: ListAssociationsForLicenseConfiguration
       description: 'Lists the resource associations for a license configuration. Resource associations need not consume licenses from a license configuration. For example, an AMI or a stopped instance may not consume a license (depending on the license rules). Use this operation to find all resources associated with a license configuration.'
@@ -318,6 +342,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListAssociationsForLicenseConfigurationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLicenseManager.ListAssociationsForLicenseConfiguration
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -328,7 +358,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListLicenseConfigurations':
+  '/#X-Amz-Target=AWSLicenseManager.ListLicenseConfigurations':
     post:
       operationId: ListLicenseConfigurations
       description: 'Lists license configuration objects for an account, each containing the name, description, license type, and other license terms modeled from a license agreement.'
@@ -367,6 +397,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListLicenseConfigurationsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLicenseManager.ListLicenseConfigurations
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -377,7 +413,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListLicenseSpecificationsForResource':
+  '/#X-Amz-Target=AWSLicenseManager.ListLicenseSpecificationsForResource':
     post:
       operationId: ListLicenseSpecificationsForResource
       description: Returns the license configuration for a resource.
@@ -412,6 +448,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListLicenseSpecificationsForResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLicenseManager.ListLicenseSpecificationsForResource
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -422,7 +464,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListResourceInventory':
+  '/#X-Amz-Target=AWSLicenseManager.ListResourceInventory':
     post:
       operationId: ListResourceInventory
       description: Returns a detailed list of resources.
@@ -465,6 +507,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListResourceInventoryRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLicenseManager.ListResourceInventory
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -475,7 +523,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListTagsForResource':
+  '/#X-Amz-Target=AWSLicenseManager.ListTagsForResource':
     post:
       operationId: ListTagsForResource
       description: Lists tags attached to a resource.
@@ -510,6 +558,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListTagsForResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLicenseManager.ListTagsForResource
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -520,7 +574,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListUsageForLicenseConfiguration':
+  '/#X-Amz-Target=AWSLicenseManager.ListUsageForLicenseConfiguration':
     post:
       operationId: ListUsageForLicenseConfiguration
       description: 'Lists all license usage records for a license configuration, displaying license consumption details by resource at a selected point in time. Use this action to audit the current license consumption for any license inventory and configuration.'
@@ -559,6 +613,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListUsageForLicenseConfigurationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLicenseManager.ListUsageForLicenseConfiguration
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -569,7 +629,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#TagResource':
+  '/#X-Amz-Target=AWSLicenseManager.TagResource':
     post:
       operationId: TagResource
       description: Attach one of more tags to any resource.
@@ -604,6 +664,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/TagResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLicenseManager.TagResource
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -614,7 +680,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UntagResource':
+  '/#X-Amz-Target=AWSLicenseManager.UntagResource':
     post:
       operationId: UntagResource
       description: Remove tags from a resource.
@@ -649,6 +715,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UntagResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLicenseManager.UntagResource
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -659,7 +731,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateLicenseConfiguration':
+  '/#X-Amz-Target=AWSLicenseManager.UpdateLicenseConfiguration':
     post:
       operationId: UpdateLicenseConfiguration
       description: 'Modifies the attributes of an existing license configuration object. A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (Instances, cores, sockets, VCPUs), tenancy (shared or Dedicated Host), host affinity (how long a VM is associated with a host), the number of licenses purchased and used.'
@@ -694,6 +766,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateLicenseConfigurationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLicenseManager.UpdateLicenseConfiguration
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -704,7 +782,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateLicenseSpecificationsForResource':
+  '/#X-Amz-Target=AWSLicenseManager.UpdateLicenseSpecificationsForResource':
     post:
       operationId: UpdateLicenseSpecificationsForResource
       description: 'Adds or removes license configurations for a specified AWS resource. This operation currently supports updating the license specifications of AMIs, instances, and hosts. Launch templates and AWS CloudFormation templates are not managed from this operation as those resources send the license configurations directly to a resource creation operation, such as <code>RunInstances</code>.'
@@ -747,6 +825,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateLicenseSpecificationsForResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLicenseManager.UpdateLicenseSpecificationsForResource
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -757,7 +841,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateServiceSettings':
+  '/#X-Amz-Target=AWSLicenseManager.UpdateServiceSettings':
     post:
       operationId: UpdateServiceSettings
       description: Updates License Manager service settings.
@@ -792,6 +876,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateServiceSettingsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLicenseManager.UpdateServiceSettings
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'

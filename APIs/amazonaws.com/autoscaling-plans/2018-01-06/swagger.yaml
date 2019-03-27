@@ -99,7 +99,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /:
+  '/#X-Amz-Target=AnyScaleScalingPlannerFrontendService.CreateScalingPlan':
     post:
       operationId: CreateScalingPlan
       description: Creates a scaling plan.
@@ -130,6 +130,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateScalingPlanRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AnyScaleScalingPlannerFrontendService.CreateScalingPlan
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -140,7 +146,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteScalingPlan':
+  '/#X-Amz-Target=AnyScaleScalingPlannerFrontendService.DeleteScalingPlan':
     post:
       operationId: DeleteScalingPlan
       description: '<p>Deletes the specified scaling plan.</p> <p>Deleting a scaling plan deletes the underlying <a>ScalingInstruction</a> for all of the scalable resources that are covered by the plan.</p> <p>If the plan has launched resources or has scaling activities in progress, you must delete those resources separately.</p>'
@@ -171,6 +177,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteScalingPlanRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AnyScaleScalingPlannerFrontendService.DeleteScalingPlan
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -181,7 +193,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeScalingPlanResources':
+  '/#X-Amz-Target=AnyScaleScalingPlannerFrontendService.DescribeScalingPlanResources':
     post:
       operationId: DescribeScalingPlanResources
       description: Describes the scalable resources in the specified scaling plan.
@@ -212,6 +224,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeScalingPlanResourcesRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AnyScaleScalingPlannerFrontendService.DescribeScalingPlanResources
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -222,7 +240,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeScalingPlans':
+  '/#X-Amz-Target=AnyScaleScalingPlannerFrontendService.DescribeScalingPlans':
     post:
       operationId: DescribeScalingPlans
       description: Describes one or more of your scaling plans.
@@ -253,6 +271,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeScalingPlansRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AnyScaleScalingPlannerFrontendService.DescribeScalingPlans
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -263,7 +287,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetScalingPlanResourceForecastData':
+  '/#X-Amz-Target=AnyScaleScalingPlannerFrontendService.GetScalingPlanResourceForecastData':
     post:
       operationId: GetScalingPlanResourceForecastData
       description: '<p>Retrieves the forecast data for a scalable resource.</p> <p>Capacity forecasts are represented as predicted values, or data points, that are calculated using historical data points from a specified CloudWatch load metric. Data points are available for up to 56 days. </p>'
@@ -286,6 +310,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetScalingPlanResourceForecastDataRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AnyScaleScalingPlannerFrontendService.GetScalingPlanResourceForecastData
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -296,7 +326,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateScalingPlan':
+  '/#X-Amz-Target=AnyScaleScalingPlannerFrontendService.UpdateScalingPlan':
     post:
       operationId: UpdateScalingPlan
       description: '<p>Updates the specified scaling plan.</p> <p>You cannot update a scaling plan if it is in the process of being created, updated, or deleted.</p>'
@@ -327,6 +357,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateScalingPlanRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AnyScaleScalingPlannerFrontendService.UpdateScalingPlan
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'

@@ -120,7 +120,17 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CancelJobRequest'
+            type: object
+            required:
+              - jobId
+              - reason
+            properties:
+              jobId:
+                description: The AWS Batch job ID of the job to cancel.
+                type: string
+              reason:
+                description: 'A message to attach to the job that explains the reason for canceling it. This message is returned by future <a>DescribeJobs</a> operations on the job. This message is also recorded in the AWS Batch activity logs. '
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -153,7 +163,80 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateComputeEnvironmentRequest'
+            type: object
+            required:
+              - computeEnvironmentName
+              - type
+              - computeResources
+              - serviceRole
+            properties:
+              computeEnvironmentName:
+                description: 'The name for your compute environment. Up to 128 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed.'
+                type: string
+              type:
+                description: 'The type of the compute environment. For more information, see <a href="http://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html">Compute Environments</a> in the <i>AWS Batch User Guide</i>.'
+                type: string
+                enum:
+                  - MANAGED
+                  - UNMANAGED
+              state:
+                description: 'The state of the compute environment. If the state is <code>ENABLED</code>, then the compute environment accepts jobs from a queue and can scale out automatically based on queues.'
+                type: string
+                enum:
+                  - ENABLED
+                  - DISABLED
+              computeResources:
+                description: An object representing an AWS Batch compute resource.
+                type: object
+                properties:
+                  type:
+                    $ref: '#/definitions/CRType'
+                    description: The type of compute environment.
+                  minvCpus:
+                    $ref: '#/definitions/Integer'
+                    description: 'The minimum number of EC2 vCPUs that an environment should maintain (even if the compute environment is <code>DISABLED</code>). '
+                  maxvCpus:
+                    $ref: '#/definitions/Integer'
+                    description: 'The maximum number of EC2 vCPUs that an environment can reach. '
+                  desiredvCpus:
+                    $ref: '#/definitions/Integer'
+                    description: 'The desired number of EC2 vCPUS in the compute environment. '
+                  instanceTypes:
+                    $ref: '#/definitions/StringList'
+                    description: 'The instances types that may be launched. You can specify instance families to launch any instance type within those families (for example, <code>c4</code> or <code>p3</code>), or you can specify specific sizes within a family (such as <code>c4.8xlarge</code>). You can also choose <code>optimal</code> to pick instance types (from the latest C, M, and R instance families) on the fly that match the demand of your job queues.'
+                  imageId:
+                    $ref: '#/definitions/String'
+                    description: The Amazon Machine Image (AMI) ID used for instances launched in the compute environment.
+                  subnets:
+                    $ref: '#/definitions/StringList'
+                    description: 'The VPC subnets into which the compute resources are launched. '
+                  securityGroupIds:
+                    $ref: '#/definitions/StringList'
+                    description: 'The EC2 security group that is associated with instances launched in the compute environment. '
+                  ec2KeyPair:
+                    $ref: '#/definitions/String'
+                    description: The EC2 key pair that is used for instances launched in the compute environment.
+                  instanceRole:
+                    $ref: '#/definitions/String'
+                    description: 'The Amazon ECS instance profile applied to Amazon EC2 instances in a compute environment. You can specify the short name or full Amazon Resource Name (ARN) of an instance profile. For example, <code>ecsInstanceRole</code> or <code>arn:aws:iam::&lt;aws_account_id&gt;:instance-profile/ecsInstanceRole</code>. For more information, see <a href="http://docs.aws.amazon.com/batch/latest/userguide/instance_IAM_role.html">Amazon ECS Instance Role</a> in the <i>AWS Batch User Guide</i>.'
+                  tags:
+                    $ref: '#/definitions/TagsMap'
+                    description: 'Key-value pair tags to be applied to resources that are launched in the compute environment. '
+                  placementGroup:
+                    $ref: '#/definitions/String'
+                    description: 'The Amazon EC2 placement group to associate with your compute resources. If you intend to submit multi-node parallel jobs to your compute environment, you should consider creating a cluster placement group and associate it with your compute resources. This keeps your multi-node parallel job on a logical grouping of instances within a single Availability Zone with high network flow potential. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html">Placement Groups</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.'
+                  bidPercentage:
+                    $ref: '#/definitions/Integer'
+                    description: 'The maximum percentage that a Spot Instance price can be when compared with the On-Demand price for that instance type before instances are launched. For example, if your maximum percentage is 20%, then the Spot price must be below 20% of the current On-Demand price for that EC2 instance. You always pay the lowest (market) price and never more than your maximum percentage. If you leave this field empty, the default value is 100% of the On-Demand price.'
+                  spotIamFleetRole:
+                    $ref: '#/definitions/String'
+                    description: The Amazon Resource Name (ARN) of the Amazon EC2 Spot Fleet IAM role applied to a <code>SPOT</code> compute environment.
+                  launchTemplate:
+                    $ref: '#/definitions/LaunchTemplateSpecification'
+                    description: 'The launch template to use for your compute resources. Any other compute resource parameters that you specify in a <a>CreateComputeEnvironment</a> API operation override the same parameters in the launch template. You must specify either the launch template ID or launch template name in the request, but not both. '
+              serviceRole:
+                description: '<p>The full Amazon Resource Name (ARN) of the IAM role that allows AWS Batch to make calls to other AWS services on your behalf.</p> <p>If your specified role has a path other than <code>/</code>, then you must either specify the full role ARN (this is recommended) or prefix the role name with the path.</p> <note> <p>Depending on how you created your AWS Batch service role, its ARN may contain the <code>service-role</code> path prefix. When you only specify the name of the service role, AWS Batch assumes that your ARN does not use the <code>service-role</code> path prefix. Because of this, we recommend that you specify the full ARN of your service role when you create compute environments.</p> </note>'
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -186,7 +269,29 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateJobQueueRequest'
+            type: object
+            required:
+              - jobQueueName
+              - priority
+              - computeEnvironmentOrder
+            properties:
+              jobQueueName:
+                description: The name of the job queue.
+                type: string
+              state:
+                description: 'The state of the job queue. If the job queue state is <code>ENABLED</code>, it is able to accept jobs.'
+                type: string
+                enum:
+                  - ENABLED
+                  - DISABLED
+              priority:
+                description: 'The priority of the job queue. Job queues with a higher priority (or a higher integer value for the <code>priority</code> parameter) are evaluated first when associated with the same compute environment. Priority is determined in descending order, for example, a job queue with a priority value of <code>10</code> is given scheduling preference over a job queue with a priority value of <code>1</code>.'
+                type: integer
+              computeEnvironmentOrder:
+                description: The set of compute environments mapped to a job queue and their order relative to each other. The job scheduler uses this parameter to determine which compute environment should execute a given job. Compute environments must be in the <code>VALID</code> state before you can associate them with a job queue. You can associate up to three compute environments with a job queue.
+                type: array
+                items:
+                  $ref: '#/definitions/ComputeEnvironmentOrder'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -219,7 +324,13 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/DeleteComputeEnvironmentRequest'
+            type: object
+            required:
+              - computeEnvironment
+            properties:
+              computeEnvironment:
+                description: 'The name or Amazon Resource Name (ARN) of the compute environment to delete. '
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -252,7 +363,13 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/DeleteJobQueueRequest'
+            type: object
+            required:
+              - jobQueue
+            properties:
+              jobQueue:
+                description: 'The short name or full Amazon Resource Name (ARN) of the queue to delete. '
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -285,7 +402,13 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/DeregisterJobDefinitionRequest'
+            type: object
+            required:
+              - jobDefinition
+            properties:
+              jobDefinition:
+                description: 'The name and revision (<code>name:revision</code>) or full Amazon Resource Name (ARN) of the job definition to deregister. '
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -318,7 +441,19 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/DescribeComputeEnvironmentsRequest'
+            type: object
+            properties:
+              computeEnvironments:
+                description: 'A list of up to 100 compute environment names or full Amazon Resource Name (ARN) entries. '
+                type: array
+                items:
+                  $ref: '#/definitions/String'
+              maxResults:
+                description: 'The maximum number of cluster results returned by <code>DescribeComputeEnvironments</code> in paginated output. When this parameter is used, <code>DescribeComputeEnvironments</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeComputeEnvironments</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>DescribeComputeEnvironments</code> returns up to 100 results and a <code>nextToken</code> value if applicable.'
+                type: integer
+              nextToken:
+                description: <p>The <code>nextToken</code> value returned from a previous paginated <code>DescribeComputeEnvironments</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when there are no more results to return.</p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -351,7 +486,25 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/DescribeJobDefinitionsRequest'
+            type: object
+            properties:
+              jobDefinitions:
+                description: A space-separated list of up to 100 job definition names or full Amazon Resource Name (ARN) entries.
+                type: array
+                items:
+                  $ref: '#/definitions/String'
+              maxResults:
+                description: 'The maximum number of results returned by <code>DescribeJobDefinitions</code> in paginated output. When this parameter is used, <code>DescribeJobDefinitions</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeJobDefinitions</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>DescribeJobDefinitions</code> returns up to 100 results and a <code>nextToken</code> value if applicable.'
+                type: integer
+              jobDefinitionName:
+                description: The name of the job definition to describe.
+                type: string
+              status:
+                description: The status with which to filter job definitions.
+                type: string
+              nextToken:
+                description: <p>The <code>nextToken</code> value returned from a previous paginated <code>DescribeJobDefinitions</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when there are no more results to return.</p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -384,7 +537,19 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/DescribeJobQueuesRequest'
+            type: object
+            properties:
+              jobQueues:
+                description: A list of up to 100 queue names or full queue Amazon Resource Name (ARN) entries.
+                type: array
+                items:
+                  $ref: '#/definitions/String'
+              maxResults:
+                description: 'The maximum number of results returned by <code>DescribeJobQueues</code> in paginated output. When this parameter is used, <code>DescribeJobQueues</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeJobQueues</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>DescribeJobQueues</code> returns up to 100 results and a <code>nextToken</code> value if applicable.'
+                type: integer
+              nextToken:
+                description: <p>The <code>nextToken</code> value returned from a previous paginated <code>DescribeJobQueues</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when there are no more results to return.</p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -417,7 +582,15 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/DescribeJobsRequest'
+            type: object
+            required:
+              - jobs
+            properties:
+              jobs:
+                description: A space-separated list of up to 100 job IDs.
+                type: array
+                items:
+                  $ref: '#/definitions/String'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -450,7 +623,34 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/ListJobsRequest'
+            type: object
+            properties:
+              jobQueue:
+                description: The name or full Amazon Resource Name (ARN) of the job queue with which to list jobs.
+                type: string
+              arrayJobId:
+                description: The job ID for an array job. Specifying an array job ID with this parameter lists all child jobs from within the specified array.
+                type: string
+              multiNodeJobId:
+                description: The job ID for a multi-node parallel job. Specifying a multi-node parallel job ID with this parameter lists all nodes that are associated with the specified job.
+                type: string
+              jobStatus:
+                description: 'The job status with which to filter jobs in the specified queue. If you do not specify a status, only <code>RUNNING</code> jobs are returned.'
+                type: string
+                enum:
+                  - SUBMITTED
+                  - PENDING
+                  - RUNNABLE
+                  - STARTING
+                  - RUNNING
+                  - SUCCEEDED
+                  - FAILED
+              maxResults:
+                description: 'The maximum number of results returned by <code>ListJobs</code> in paginated output. When this parameter is used, <code>ListJobs</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListJobs</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListJobs</code> returns up to 100 results and a <code>nextToken</code> value if applicable.'
+                type: integer
+              nextToken:
+                description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListJobs</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when there are no more results to return.</p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -483,7 +683,96 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/RegisterJobDefinitionRequest'
+            type: object
+            required:
+              - jobDefinitionName
+              - type
+              - nodeProperties
+            properties:
+              jobDefinitionName:
+                description: 'The name of the job definition to register. Up to 128 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed.'
+                type: string
+              type:
+                description: The type of job definition.
+                type: string
+                enum:
+                  - container
+                  - multinode
+              parameters:
+                description: Default parameter substitution placeholders to set in the job definition. Parameters are specified as a key-value pair mapping. Parameters in a <code>SubmitJob</code> request override any corresponding parameter defaults from the job definition.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/String'
+              containerProperties:
+                description: Container properties are used in job definitions to describe the container that is launched as part of a job.
+                type: object
+                properties:
+                  image:
+                    $ref: '#/definitions/String'
+                    description: '<p>The image used to start a container. This string is passed directly to the Docker daemon. Images in the Docker Hub registry are available by default. Other repositories are specified with <code> <i>repository-url</i>/<i>image</i>:<i>tag</i> </code>. Up to 255 letters (uppercase and lowercase), numbers, hyphens, underscores, colons, periods, forward slashes, and number signs are allowed. This parameter maps to <code>Image</code> in the <a href="https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container">Create a container</a> section of the <a href="https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/">Docker Remote API</a> and the <code>IMAGE</code> parameter of <a href="https://docs.docker.com/engine/reference/run/">docker run</a>.</p> <ul> <li> <p>Images in Amazon ECR repositories use the full registry and repository URI (for example, <code>012345678910.dkr.ecr.&lt;region-name&gt;.amazonaws.com/&lt;repository-name&gt;</code>). </p> </li> <li> <p>Images in official repositories on Docker Hub use a single name (for example, <code>ubuntu</code> or <code>mongo</code>).</p> </li> <li> <p>Images in other repositories on Docker Hub are qualified with an organization name (for example, <code>amazon/amazon-ecs-agent</code>).</p> </li> <li> <p>Images in other online repositories are qualified further by a domain name (for example, <code>quay.io/assemblyline/ubuntu</code>).</p> </li> </ul>'
+                  vcpus:
+                    $ref: '#/definitions/Integer'
+                    description: 'The number of vCPUs reserved for the container. This parameter maps to <code>CpuShares</code> in the <a href="https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container">Create a container</a> section of the <a href="https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/">Docker Remote API</a> and the <code>--cpu-shares</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>. Each vCPU is equivalent to 1,024 CPU shares. You must specify at least one vCPU.'
+                  memory:
+                    $ref: '#/definitions/Integer'
+                    description: '<p>The hard limit (in MiB) of memory to present to the container. If your container attempts to exceed the memory specified here, the container is killed. This parameter maps to <code>Memory</code> in the <a href="https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container">Create a container</a> section of the <a href="https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/">Docker Remote API</a> and the <code>--memory</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>. You must specify at least 4 MiB of memory for a job.</p> <note> <p>If you are trying to maximize your resource utilization by providing your jobs as much memory as possible for a particular instance type, see <a href="http://docs.aws.amazon.com/batch/latest/userguide/memory-management.html">Memory Management</a> in the <i>AWS Batch User Guide</i>.</p> </note>'
+                  command:
+                    $ref: '#/definitions/StringList'
+                    description: 'The command that is passed to the container. This parameter maps to <code>Cmd</code> in the <a href="https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container">Create a container</a> section of the <a href="https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/">Docker Remote API</a> and the <code>COMMAND</code> parameter to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>. For more information, see <a href="https://docs.docker.com/engine/reference/builder/#cmd">https://docs.docker.com/engine/reference/builder/#cmd</a>.'
+                  jobRoleArn:
+                    $ref: '#/definitions/String'
+                    description: The Amazon Resource Name (ARN) of the IAM role that the container can assume for AWS permissions.
+                  volumes:
+                    $ref: '#/definitions/Volumes'
+                    description: A list of data volumes used in a job.
+                  environment:
+                    $ref: '#/definitions/EnvironmentVariables'
+                    description: '<p>The environment variables to pass to a container. This parameter maps to <code>Env</code> in the <a href="https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container">Create a container</a> section of the <a href="https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/">Docker Remote API</a> and the <code>--env</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>.</p> <important> <p>We do not recommend using plaintext environment variables for sensitive information, such as credential data.</p> </important> <note> <p>Environment variables must not start with <code>AWS_BATCH</code>; this naming convention is reserved for variables that are set by the AWS Batch service.</p> </note>'
+                  mountPoints:
+                    $ref: '#/definitions/MountPoints'
+                    description: 'The mount points for data volumes in your container. This parameter maps to <code>Volumes</code> in the <a href="https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container">Create a container</a> section of the <a href="https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/">Docker Remote API</a> and the <code>--volume</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>.'
+                  readonlyRootFilesystem:
+                    $ref: '#/definitions/Boolean'
+                    description: 'When this parameter is true, the container is given read-only access to its root file system. This parameter maps to <code>ReadonlyRootfs</code> in the <a href="https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container">Create a container</a> section of the <a href="https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/">Docker Remote API</a> and the <code>--read-only</code> option to <code>docker run</code>.'
+                  privileged:
+                    $ref: '#/definitions/Boolean'
+                    description: 'When this parameter is true, the container is given elevated privileges on the host container instance (similar to the <code>root</code> user). This parameter maps to <code>Privileged</code> in the <a href="https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container">Create a container</a> section of the <a href="https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/">Docker Remote API</a> and the <code>--privileged</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>.'
+                  ulimits:
+                    $ref: '#/definitions/Ulimits'
+                    description: 'A list of <code>ulimits</code> to set in the container. This parameter maps to <code>Ulimits</code> in the <a href="https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container">Create a container</a> section of the <a href="https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/">Docker Remote API</a> and the <code>--ulimit</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>.'
+                  user:
+                    $ref: '#/definitions/String'
+                    description: 'The user name to use inside the container. This parameter maps to <code>User</code> in the <a href="https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container">Create a container</a> section of the <a href="https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/">Docker Remote API</a> and the <code>--user</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>.'
+                  instanceType:
+                    $ref: '#/definitions/String'
+                    description: The instance type to use for a multi-node parallel job. Currently all node groups in a multi-node parallel job must use the same instance type. This parameter is not valid for single-node container jobs.
+              nodeProperties:
+                description: An object representing the node properties of a multi-node parallel job.
+                type: object
+                properties:
+                  numNodes:
+                    $ref: '#/definitions/Integer'
+                    description: The number of nodes associated with a multi-node parallel job.
+                  mainNode:
+                    $ref: '#/definitions/Integer'
+                    description: Specifies the node index for the main node of a multi-node parallel job.
+                  nodeRangeProperties:
+                    $ref: '#/definitions/NodeRangeProperties'
+                    description: A list of node ranges and their properties associated with a multi-node parallel job.
+              retryStrategy:
+                description: The retry strategy associated with a job.
+                type: object
+                properties:
+                  attempts:
+                    $ref: '#/definitions/Integer'
+                    description: 'The number of times to move a job to the <code>RUNNABLE</code> status. You may specify between 1 and 10 attempts. If the value of <code>attempts</code> is greater than one, the job is retried on failure the same number of attempts as the value.'
+              timeout:
+                description: An object representing a job timeout configuration.
+                type: object
+                properties:
+                  attemptDurationSeconds:
+                    $ref: '#/definitions/Integer'
+                    description: The time duration in seconds (measured from the job attempt's <code>startedAt</code> timestamp) after which AWS Batch terminates your jobs if they have not finished.
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -516,7 +805,78 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/SubmitJobRequest'
+            type: object
+            required:
+              - jobName
+              - jobQueue
+              - jobDefinition
+            properties:
+              jobName:
+                description: 'The name of the job. The first character must be alphanumeric, and up to 128 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed. '
+                type: string
+              jobQueue:
+                description: 'The job queue into which the job is submitted. You can specify either the name or the Amazon Resource Name (ARN) of the queue. '
+                type: string
+              arrayProperties:
+                description: An object representing an AWS Batch array job.
+                type: object
+                properties:
+                  size:
+                    $ref: '#/definitions/Integer'
+                    description: The size of the array job.
+              dependsOn:
+                description: 'A list of dependencies for the job. A job can depend upon a maximum of 20 jobs. You can specify a <code>SEQUENTIAL</code> type dependency without specifying a job ID for array jobs so that each child array job completes sequentially, starting at index 0. You can also specify an <code>N_TO_N</code> type dependency with a job ID for array jobs. In that case, each index child of this job must wait for the corresponding index child of each dependency to complete before it can begin.'
+                type: array
+                items:
+                  $ref: '#/definitions/JobDependency'
+              jobDefinition:
+                description: 'The job definition used by this job. This value can be either a <code>name:revision</code> or the Amazon Resource Name (ARN) for the job definition.'
+                type: string
+              parameters:
+                description: Additional parameters passed to the job that replace parameter substitution placeholders that are set in the job definition. Parameters are specified as a key and value pair mapping. Parameters in a <code>SubmitJob</code> request override any corresponding parameter defaults from the job definition.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/String'
+              containerOverrides:
+                description: The overrides that should be sent to a container.
+                type: object
+                properties:
+                  vcpus:
+                    $ref: '#/definitions/Integer'
+                    description: The number of vCPUs to reserve for the container. This value overrides the value set in the job definition.
+                  memory:
+                    $ref: '#/definitions/Integer'
+                    description: The number of MiB of memory reserved for the job. This value overrides the value set in the job definition.
+                  command:
+                    $ref: '#/definitions/StringList'
+                    description: The command to send to the container that overrides the default command from the Docker image or the job definition.
+                  instanceType:
+                    $ref: '#/definitions/String'
+                    description: The instance type to use for a multi-node parallel job. This parameter is not valid for single-node container jobs.
+                  environment:
+                    $ref: '#/definitions/EnvironmentVariables'
+                    description: '<p>The environment variables to send to the container. You can add new environment variables, which are added to the container at launch, or you can override the existing environment variables from the Docker image or the job definition.</p> <note> <p>Environment variables must not start with <code>AWS_BATCH</code>; this naming convention is reserved for variables that are set by the AWS Batch service.</p> </note>'
+              nodeOverrides:
+                description: Object representing any node overrides to a job definition that is used in a <a>SubmitJob</a> API operation.
+                type: object
+                properties:
+                  nodePropertyOverrides:
+                    $ref: '#/definitions/NodePropertyOverrides'
+                    description: The node property overrides for the job.
+              retryStrategy:
+                description: The retry strategy associated with a job.
+                type: object
+                properties:
+                  attempts:
+                    $ref: '#/definitions/Integer'
+                    description: 'The number of times to move a job to the <code>RUNNABLE</code> status. You may specify between 1 and 10 attempts. If the value of <code>attempts</code> is greater than one, the job is retried on failure the same number of attempts as the value.'
+              timeout:
+                description: An object representing a job timeout configuration.
+                type: object
+                properties:
+                  attemptDurationSeconds:
+                    $ref: '#/definitions/Integer'
+                    description: The time duration in seconds (measured from the job attempt's <code>startedAt</code> timestamp) after which AWS Batch terminates your jobs if they have not finished.
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -549,7 +909,17 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/TerminateJobRequest'
+            type: object
+            required:
+              - jobId
+              - reason
+            properties:
+              jobId:
+                description: The AWS Batch job ID of the job to terminate.
+                type: string
+              reason:
+                description: 'A message to attach to the job that explains the reason for canceling it. This message is returned by future <a>DescribeJobs</a> operations on the job. This message is also recorded in the AWS Batch activity logs. '
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -582,7 +952,35 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateComputeEnvironmentRequest'
+            type: object
+            required:
+              - computeEnvironment
+            properties:
+              computeEnvironment:
+                description: The name or full Amazon Resource Name (ARN) of the compute environment to update.
+                type: string
+              state:
+                description: The state of the compute environment. Compute environments in the <code>ENABLED</code> state can accept jobs from a queue and scale in or out automatically based on the workload demand of its associated queues.
+                type: string
+                enum:
+                  - ENABLED
+                  - DISABLED
+              computeResources:
+                description: An object representing the attributes of a compute environment that can be updated.
+                type: object
+                properties:
+                  minvCpus:
+                    $ref: '#/definitions/Integer'
+                    description: The minimum number of EC2 vCPUs that an environment should maintain.
+                  maxvCpus:
+                    $ref: '#/definitions/Integer'
+                    description: The maximum number of EC2 vCPUs that an environment can reach.
+                  desiredvCpus:
+                    $ref: '#/definitions/Integer'
+                    description: The desired number of EC2 vCPUS in the compute environment.
+              serviceRole:
+                description: '<p>The full Amazon Resource Name (ARN) of the IAM role that allows AWS Batch to make calls to other AWS services on your behalf.</p> <p>If your specified role has a path other than <code>/</code>, then you must either specify the full role ARN (this is recommended) or prefix the role name with the path.</p> <note> <p>Depending on how you created your AWS Batch service role, its ARN may contain the <code>service-role</code> path prefix. When you only specify the name of the service role, AWS Batch assumes that your ARN does not use the <code>service-role</code> path prefix. Because of this, we recommend that you specify the full ARN of your service role when you create compute environments.</p> </note>'
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -615,7 +1013,27 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateJobQueueRequest'
+            type: object
+            required:
+              - jobQueue
+            properties:
+              jobQueue:
+                description: The name or the Amazon Resource Name (ARN) of the job queue.
+                type: string
+              state:
+                description: Describes the queue's ability to accept new jobs.
+                type: string
+                enum:
+                  - ENABLED
+                  - DISABLED
+              priority:
+                description: 'The priority of the job queue. Job queues with a higher priority (or a higher integer value for the <code>priority</code> parameter) are evaluated first when associated with the same compute environment. Priority is determined in descending order, for example, a job queue with a priority value of <code>10</code> is given scheduling preference over a job queue with a priority value of <code>1</code>.'
+                type: integer
+              computeEnvironmentOrder:
+                description: 'Details the set of compute environments mapped to a job queue and their order relative to each other. This is one of the parameters used by the job scheduler to determine which compute environment should execute a given job. '
+                type: array
+                items:
+                  $ref: '#/definitions/ComputeEnvironmentOrder'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -631,21 +1049,6 @@ definitions:
     type: object
     example: {}
     properties: {}
-  CancelJobRequest:
-    type: object
-    required:
-      - jobId
-      - reason
-    example:
-      jobId: 1d828f65-7a4d-42e8-996d-3b900ed59dc4
-      reason: Cancelling job.
-    properties:
-      jobId:
-        $ref: '#/definitions/String'
-        description: The AWS Batch job ID of the job to cancel.
-      reason:
-        $ref: '#/definitions/String'
-        description: 'A message to attach to the job that explains the reason for canceling it. This message is returned by future <a>DescribeJobs</a> operations on the job. This message is also recorded in the AWS Batch activity logs. '
   ClientException: {}
   ServerException: {}
   CreateComputeEnvironmentResponse:
@@ -660,52 +1063,36 @@ definitions:
       computeEnvironmentArn:
         $ref: '#/definitions/String'
         description: 'The Amazon Resource Name (ARN) of the compute environment. '
-  CreateComputeEnvironmentRequest:
+  CRType:
+    type: string
+    enum:
+      - EC2
+      - SPOT
+  Integer:
+    type: integer
+  StringList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  String:
+    type: string
+  TagsMap:
     type: object
-    required:
-      - computeEnvironmentName
-      - type
-      - serviceRole
-    example:
-      type: MANAGED
-      computeEnvironmentName: M4Spot
-      computeResources:
-        type: SPOT
-        bidPercentage: 20
-        desiredvCpus: 4
-        ec2KeyPair: id_rsa
-        instanceRole: ecsInstanceRole
-        instanceTypes:
-          - m4
-        maxvCpus: 128
-        minvCpus: 0
-        securityGroupIds:
-          - sg-cf5093b2
-        spotIamFleetRole: 'arn:aws:iam::012345678910:role/aws-ec2-spot-fleet-role'
-        subnets:
-          - subnet-220c0e0a
-          - subnet-1a95556d
-          - subnet-978f6dce
-        tags:
-          Name: Batch Instance - M4Spot
-      serviceRole: 'arn:aws:iam::012345678910:role/AWSBatchServiceRole'
-      state: ENABLED
+    additionalProperties:
+      $ref: '#/definitions/String'
+  LaunchTemplateSpecification:
+    type: object
     properties:
-      computeEnvironmentName:
+      launchTemplateId:
         $ref: '#/definitions/String'
-        description: 'The name for your compute environment. Up to 128 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed.'
-      type:
-        $ref: '#/definitions/CEType'
-        description: 'The type of the compute environment. For more information, see <a href="http://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html">Compute Environments</a> in the <i>AWS Batch User Guide</i>.'
-      state:
-        $ref: '#/definitions/CEState'
-        description: 'The state of the compute environment. If the state is <code>ENABLED</code>, then the compute environment accepts jobs from a queue and can scale out automatically based on queues.'
-      computeResources:
-        $ref: '#/definitions/ComputeResource'
-        description: Details of the compute resources managed by the compute environment. This parameter is required for managed compute environments.
-      serviceRole:
+        description: The ID of the launch template.
+      launchTemplateName:
         $ref: '#/definitions/String'
-        description: '<p>The full Amazon Resource Name (ARN) of the IAM role that allows AWS Batch to make calls to other AWS services on your behalf.</p> <p>If your specified role has a path other than <code>/</code>, then you must either specify the full role ARN (this is recommended) or prefix the role name with the path.</p> <note> <p>Depending on how you created your AWS Batch service role, its ARN may contain the <code>service-role</code> path prefix. When you only specify the name of the service role, AWS Batch assumes that your ARN does not use the <code>service-role</code> path prefix. Because of this, we recommend that you specify the full ARN of your service role when you create compute environments.</p> </note>'
+        description: The name of the launch template.
+      version:
+        $ref: '#/definitions/String'
+        description: '<p>The version number of the launch template.</p> <p>Default: The default version of the launch template.</p>'
+    description: 'An object representing a launch template associated with a compute resource. You must specify either the launch template ID or launch template name in the request, but not both. '
   CreateJobQueueResponse:
     type: object
     required:
@@ -721,76 +1108,31 @@ definitions:
       jobQueueArn:
         $ref: '#/definitions/String'
         description: The Amazon Resource Name (ARN) of the job queue.
-  CreateJobQueueRequest:
+  ComputeEnvironmentOrder:
     type: object
     required:
-      - jobQueueName
-      - priority
-      - computeEnvironmentOrder
-    example:
-      computeEnvironmentOrder:
-        - computeEnvironment: C4OnDemand
-          order: 1
-        - computeEnvironment: M4Spot
-          order: 2
-      jobQueueName: HighPriority
-      priority: 10
-      state: ENABLED
+      - order
+      - computeEnvironment
     properties:
-      jobQueueName:
-        $ref: '#/definitions/String'
-        description: The name of the job queue.
-      state:
-        $ref: '#/definitions/JQState'
-        description: 'The state of the job queue. If the job queue state is <code>ENABLED</code>, it is able to accept jobs.'
-      priority:
+      order:
         $ref: '#/definitions/Integer'
-        description: 'The priority of the job queue. Job queues with a higher priority (or a higher integer value for the <code>priority</code> parameter) are evaluated first when associated with the same compute environment. Priority is determined in descending order, for example, a job queue with a priority value of <code>10</code> is given scheduling preference over a job queue with a priority value of <code>1</code>.'
-      computeEnvironmentOrder:
-        $ref: '#/definitions/ComputeEnvironmentOrders'
-        description: The set of compute environments mapped to a job queue and their order relative to each other. The job scheduler uses this parameter to determine which compute environment should execute a given job. Compute environments must be in the <code>VALID</code> state before you can associate them with a job queue. You can associate up to three compute environments with a job queue.
+        description: The order of the compute environment.
+      computeEnvironment:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the compute environment.
+    description: 'The order in which compute environments are tried for job placement within a queue. Compute environments are tried in ascending order. For example, if two compute environments are associated with a job queue, the compute environment with a lower order integer value is tried for job placement first.'
   DeleteComputeEnvironmentResponse:
     type: object
     example: {}
     properties: {}
-  DeleteComputeEnvironmentRequest:
-    type: object
-    required:
-      - computeEnvironment
-    example:
-      computeEnvironment: P2OnDemand
-    properties:
-      computeEnvironment:
-        $ref: '#/definitions/String'
-        description: 'The name or Amazon Resource Name (ARN) of the compute environment to delete. '
   DeleteJobQueueResponse:
     type: object
     example: {}
     properties: {}
-  DeleteJobQueueRequest:
-    type: object
-    required:
-      - jobQueue
-    example:
-      jobQueue: GPGPU
-    properties:
-      jobQueue:
-        $ref: '#/definitions/String'
-        description: 'The short name or full Amazon Resource Name (ARN) of the queue to delete. '
   DeregisterJobDefinitionResponse:
     type: object
     example: {}
     properties: {}
-  DeregisterJobDefinitionRequest:
-    type: object
-    required:
-      - jobDefinition
-    example:
-      jobDefinition: sleep10
-    properties:
-      jobDefinition:
-        $ref: '#/definitions/String'
-        description: 'The name and revision (<code>name:revision</code>) or full Amazon Resource Name (ARN) of the job definition to deregister. '
   DescribeComputeEnvironmentsResponse:
     type: object
     example:
@@ -827,21 +1169,6 @@ definitions:
       nextToken:
         $ref: '#/definitions/String'
         description: 'The <code>nextToken</code> value to include in a future <code>DescribeComputeEnvironments</code> request. When the results of a <code>DescribeJobDefinitions</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
-  DescribeComputeEnvironmentsRequest:
-    type: object
-    example:
-      computeEnvironments:
-        - P2OnDemand
-    properties:
-      computeEnvironments:
-        $ref: '#/definitions/StringList'
-        description: 'A list of up to 100 compute environment names or full Amazon Resource Name (ARN) entries. '
-      maxResults:
-        $ref: '#/definitions/Integer'
-        description: 'The maximum number of cluster results returned by <code>DescribeComputeEnvironments</code> in paginated output. When this parameter is used, <code>DescribeComputeEnvironments</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeComputeEnvironments</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>DescribeComputeEnvironments</code> returns up to 100 results and a <code>nextToken</code> value if applicable.'
-      nextToken:
-        $ref: '#/definitions/String'
-        description: <p>The <code>nextToken</code> value returned from a previous paginated <code>DescribeComputeEnvironments</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when there are no more results to return.</p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
   DescribeJobDefinitionsResponse:
     type: object
     example:
@@ -869,26 +1196,6 @@ definitions:
       nextToken:
         $ref: '#/definitions/String'
         description: 'The <code>nextToken</code> value to include in a future <code>DescribeJobDefinitions</code> request. When the results of a <code>DescribeJobDefinitions</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
-  DescribeJobDefinitionsRequest:
-    type: object
-    example:
-      status: ACTIVE
-    properties:
-      jobDefinitions:
-        $ref: '#/definitions/StringList'
-        description: A space-separated list of up to 100 job definition names or full Amazon Resource Name (ARN) entries.
-      maxResults:
-        $ref: '#/definitions/Integer'
-        description: 'The maximum number of results returned by <code>DescribeJobDefinitions</code> in paginated output. When this parameter is used, <code>DescribeJobDefinitions</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeJobDefinitions</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>DescribeJobDefinitions</code> returns up to 100 results and a <code>nextToken</code> value if applicable.'
-      jobDefinitionName:
-        $ref: '#/definitions/String'
-        description: The name of the job definition to describe.
-      status:
-        $ref: '#/definitions/String'
-        description: The status with which to filter job definitions.
-      nextToken:
-        $ref: '#/definitions/String'
-        description: <p>The <code>nextToken</code> value returned from a previous paginated <code>DescribeJobDefinitions</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when there are no more results to return.</p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
   DescribeJobQueuesResponse:
     type: object
     example:
@@ -909,21 +1216,6 @@ definitions:
       nextToken:
         $ref: '#/definitions/String'
         description: 'The <code>nextToken</code> value to include in a future <code>DescribeJobQueues</code> request. When the results of a <code>DescribeJobQueues</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
-  DescribeJobQueuesRequest:
-    type: object
-    example:
-      jobQueues:
-        - HighPriority
-    properties:
-      jobQueues:
-        $ref: '#/definitions/StringList'
-        description: A list of up to 100 queue names or full queue Amazon Resource Name (ARN) entries.
-      maxResults:
-        $ref: '#/definitions/Integer'
-        description: 'The maximum number of results returned by <code>DescribeJobQueues</code> in paginated output. When this parameter is used, <code>DescribeJobQueues</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeJobQueues</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>DescribeJobQueues</code> returns up to 100 results and a <code>nextToken</code> value if applicable.'
-      nextToken:
-        $ref: '#/definitions/String'
-        description: <p>The <code>nextToken</code> value returned from a previous paginated <code>DescribeJobQueues</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when there are no more results to return.</p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
   DescribeJobsResponse:
     type: object
     example:
@@ -955,17 +1247,6 @@ definitions:
       jobs:
         $ref: '#/definitions/JobDetailList'
         description: 'The list of jobs. '
-  DescribeJobsRequest:
-    type: object
-    required:
-      - jobs
-    example:
-      jobs:
-        - 24fa2d7a-64c4-49d2-8b47-f8da4fbde8e9
-    properties:
-      jobs:
-        $ref: '#/definitions/StringList'
-        description: A space-separated list of up to 100 job IDs.
   ListJobsResponse:
     type: object
     required:
@@ -981,30 +1262,6 @@ definitions:
       nextToken:
         $ref: '#/definitions/String'
         description: 'The <code>nextToken</code> value to include in a future <code>ListJobs</code> request. When the results of a <code>ListJobs</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
-  ListJobsRequest:
-    type: object
-    example:
-      jobQueue: HighPriority
-      jobStatus: SUBMITTED
-    properties:
-      jobQueue:
-        $ref: '#/definitions/String'
-        description: The name or full Amazon Resource Name (ARN) of the job queue with which to list jobs.
-      arrayJobId:
-        $ref: '#/definitions/String'
-        description: The job ID for an array job. Specifying an array job ID with this parameter lists all child jobs from within the specified array.
-      multiNodeJobId:
-        $ref: '#/definitions/String'
-        description: The job ID for a multi-node parallel job. Specifying a multi-node parallel job ID with this parameter lists all nodes that are associated with the specified job.
-      jobStatus:
-        $ref: '#/definitions/JobStatus'
-        description: 'The job status with which to filter jobs in the specified queue. If you do not specify a status, only <code>RUNNING</code> jobs are returned.'
-      maxResults:
-        $ref: '#/definitions/Integer'
-        description: 'The maximum number of results returned by <code>ListJobs</code> in paginated output. When this parameter is used, <code>ListJobs</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListJobs</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListJobs</code> returns up to 100 results and a <code>nextToken</code> value if applicable.'
-      nextToken:
-        $ref: '#/definitions/String'
-        description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListJobs</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when there are no more results to return.</p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
   RegisterJobDefinitionResponse:
     type: object
     required:
@@ -1025,43 +1282,28 @@ definitions:
       revision:
         $ref: '#/definitions/Integer'
         description: The revision of the job definition.
-  RegisterJobDefinitionRequest:
-    type: object
-    required:
-      - jobDefinitionName
-      - type
-    example:
-      type: container
-      containerProperties:
-        command:
-          - sleep
-          - '10'
-        image: busybox
-        memory: 128
-        vcpus: 1
-      jobDefinitionName: sleep10
-    properties:
-      jobDefinitionName:
-        $ref: '#/definitions/String'
-        description: 'The name of the job definition to register. Up to 128 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed.'
-      type:
-        $ref: '#/definitions/JobDefinitionType'
-        description: The type of job definition.
-      parameters:
-        $ref: '#/definitions/ParametersMap'
-        description: Default parameter substitution placeholders to set in the job definition. Parameters are specified as a key-value pair mapping. Parameters in a <code>SubmitJob</code> request override any corresponding parameter defaults from the job definition.
-      containerProperties:
-        $ref: '#/definitions/ContainerProperties'
-        description: 'An object with various properties specific to single-node container-based jobs. If the job definition''s <code>type</code> parameter is <code>container</code>, then you must specify either <code>containerProperties</code> or <code>nodeProperties</code>.'
-      nodeProperties:
-        $ref: '#/definitions/NodeProperties'
-        description: 'An object with various properties specific to multi-node parallel jobs. If you specify node properties for a job, it becomes a multi-node parallel job. For more information, see <a href="http://docs.aws.amazon.com/batch/latest/userguide/multi-node-parallel-jobs.html">Multi-node Parallel Jobs</a> in the <i>AWS Batch User Guide</i>. If the job definition''s <code>type</code> parameter is <code>container</code>, then you must specify either <code>containerProperties</code> or <code>nodeProperties</code>.'
-      retryStrategy:
-        $ref: '#/definitions/RetryStrategy'
-        description: 'The retry strategy to use for failed jobs that are submitted with this job definition. Any retry strategy that is specified during a <a>SubmitJob</a> operation overrides the retry strategy defined here. If a job is terminated due to a timeout, it is not retried. '
-      timeout:
-        $ref: '#/definitions/JobTimeout'
-        description: 'The timeout configuration for jobs that are submitted with this job definition, after which AWS Batch terminates your jobs if they have not finished. If a job is terminated due to a timeout, it is not retried. The minimum value for the timeout is 60 seconds. Any timeout configuration that is specified during a <a>SubmitJob</a> operation overrides the timeout configuration defined here. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html">Job Timeouts</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
+  Volumes:
+    type: array
+    items:
+      $ref: '#/definitions/Volume'
+  EnvironmentVariables:
+    type: array
+    items:
+      $ref: '#/definitions/KeyValuePair'
+  MountPoints:
+    type: array
+    items:
+      $ref: '#/definitions/MountPoint'
+  Boolean:
+    type: boolean
+  Ulimits:
+    type: array
+    items:
+      $ref: '#/definitions/Ulimit'
+  NodeRangeProperties:
+    type: array
+    items:
+      $ref: '#/definitions/NodeRangeProperty'
   SubmitJobResponse:
     type: object
     required:
@@ -1077,66 +1319,24 @@ definitions:
       jobId:
         $ref: '#/definitions/String'
         description: The unique identifier for the job.
-  SubmitJobRequest:
+  JobDependency:
     type: object
-    required:
-      - jobName
-      - jobQueue
-      - jobDefinition
-    example:
-      jobDefinition: sleep60
-      jobName: example
-      jobQueue: HighPriority
     properties:
-      jobName:
+      jobId:
         $ref: '#/definitions/String'
-        description: 'The name of the job. The first character must be alphanumeric, and up to 128 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed. '
-      jobQueue:
-        $ref: '#/definitions/String'
-        description: 'The job queue into which the job is submitted. You can specify either the name or the Amazon Resource Name (ARN) of the queue. '
-      arrayProperties:
-        $ref: '#/definitions/ArrayProperties'
-        description: 'The array properties for the submitted job, such as the size of the array. The array size can be between 2 and 10,000. If you specify array properties for a job, it becomes an array job. For more information, see <a href="http://docs.aws.amazon.com/batch/latest/userguide/array_jobs.html">Array Jobs</a> in the <i>AWS Batch User Guide</i>.'
-      dependsOn:
-        $ref: '#/definitions/JobDependencyList'
-        description: 'A list of dependencies for the job. A job can depend upon a maximum of 20 jobs. You can specify a <code>SEQUENTIAL</code> type dependency without specifying a job ID for array jobs so that each child array job completes sequentially, starting at index 0. You can also specify an <code>N_TO_N</code> type dependency with a job ID for array jobs. In that case, each index child of this job must wait for the corresponding index child of each dependency to complete before it can begin.'
-      jobDefinition:
-        $ref: '#/definitions/String'
-        description: 'The job definition used by this job. This value can be either a <code>name:revision</code> or the Amazon Resource Name (ARN) for the job definition.'
-      parameters:
-        $ref: '#/definitions/ParametersMap'
-        description: Additional parameters passed to the job that replace parameter substitution placeholders that are set in the job definition. Parameters are specified as a key and value pair mapping. Parameters in a <code>SubmitJob</code> request override any corresponding parameter defaults from the job definition.
-      containerOverrides:
-        $ref: '#/definitions/ContainerOverrides'
-        description: A list of container overrides in JSON format that specify the name of a container in the specified job definition and the overrides it should receive. You can override the default command for a container (that is specified in the job definition or the Docker image) with a <code>command</code> override. You can also override existing environment variables (that are specified in the job definition or Docker image) on a container or add new environment variables to it with an <code>environment</code> override.
-      nodeOverrides:
-        $ref: '#/definitions/NodeOverrides'
-        description: A list of node overrides in JSON format that specify the node range to target and the container overrides for that node range.
-      retryStrategy:
-        $ref: '#/definitions/RetryStrategy'
-        description: 'The retry strategy to use for failed jobs from this <a>SubmitJob</a> operation. When a retry strategy is specified here, it overrides the retry strategy defined in the job definition.'
-      timeout:
-        $ref: '#/definitions/JobTimeout'
-        description: 'The timeout configuration for this <a>SubmitJob</a> operation. You can specify a timeout duration after which AWS Batch terminates your jobs if they have not finished. If a job is terminated due to a timeout, it is not retried. The minimum value for the timeout is 60 seconds. This configuration overrides any timeout configuration specified in the job definition. For array jobs, child jobs have the same timeout configuration as the parent job. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html">Job Timeouts</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
+        description: The job ID of the AWS Batch job associated with this dependency.
+      type:
+        $ref: '#/definitions/ArrayJobDependency'
+        description: The type of the job dependency.
+    description: An object representing an AWS Batch job dependency.
+  NodePropertyOverrides:
+    type: array
+    items:
+      $ref: '#/definitions/NodePropertyOverride'
   TerminateJobResponse:
     type: object
     example: {}
     properties: {}
-  TerminateJobRequest:
-    type: object
-    required:
-      - jobId
-      - reason
-    example:
-      jobId: 61e743ed-35e4-48da-b2de-5c8333821c84
-      reason: Terminating job.
-    properties:
-      jobId:
-        $ref: '#/definitions/String'
-        description: The AWS Batch job ID of the job to terminate.
-      reason:
-        $ref: '#/definitions/String'
-        description: 'A message to attach to the job that explains the reason for canceling it. This message is returned by future <a>DescribeJobs</a> operations on the job. This message is also recorded in the AWS Batch activity logs. '
   UpdateComputeEnvironmentResponse:
     type: object
     example:
@@ -1149,26 +1349,6 @@ definitions:
       computeEnvironmentArn:
         $ref: '#/definitions/String'
         description: 'The Amazon Resource Name (ARN) of the compute environment. '
-  UpdateComputeEnvironmentRequest:
-    type: object
-    required:
-      - computeEnvironment
-    example:
-      computeEnvironment: P2OnDemand
-      state: DISABLED
-    properties:
-      computeEnvironment:
-        $ref: '#/definitions/String'
-        description: The name or full Amazon Resource Name (ARN) of the compute environment to update.
-      state:
-        $ref: '#/definitions/CEState'
-        description: The state of the compute environment. Compute environments in the <code>ENABLED</code> state can accept jobs from a queue and scale in or out automatically based on the workload demand of its associated queues.
-      computeResources:
-        $ref: '#/definitions/ComputeResourceUpdate'
-        description: Details of the compute resources managed by the compute environment. Required for a managed compute environment.
-      serviceRole:
-        $ref: '#/definitions/String'
-        description: '<p>The full Amazon Resource Name (ARN) of the IAM role that allows AWS Batch to make calls to other AWS services on your behalf.</p> <p>If your specified role has a path other than <code>/</code>, then you must either specify the full role ARN (this is recommended) or prefix the role name with the path.</p> <note> <p>Depending on how you created your AWS Batch service role, its ARN may contain the <code>service-role</code> path prefix. When you only specify the name of the service role, AWS Batch assumes that your ARN does not use the <code>service-role</code> path prefix. Because of this, we recommend that you specify the full ARN of your service role when you create compute environments.</p> </note>'
   UpdateJobQueueResponse:
     type: object
     example:
@@ -1181,44 +1361,15 @@ definitions:
       jobQueueArn:
         $ref: '#/definitions/String'
         description: The Amazon Resource Name (ARN) of the job queue.
-  UpdateJobQueueRequest:
-    type: object
-    required:
-      - jobQueue
-    example:
-      jobQueue: GPGPU
-      state: DISABLED
-    properties:
-      jobQueue:
-        $ref: '#/definitions/String'
-        description: The name or the Amazon Resource Name (ARN) of the job queue.
-      state:
-        $ref: '#/definitions/JQState'
-        description: Describes the queue's ability to accept new jobs.
-      priority:
-        $ref: '#/definitions/Integer'
-        description: 'The priority of the job queue. Job queues with a higher priority (or a higher integer value for the <code>priority</code> parameter) are evaluated first when associated with the same compute environment. Priority is determined in descending order, for example, a job queue with a priority value of <code>10</code> is given scheduling preference over a job queue with a priority value of <code>1</code>.'
-      computeEnvironmentOrder:
-        $ref: '#/definitions/ComputeEnvironmentOrders'
-        description: 'Details the set of compute environments mapped to a job queue and their order relative to each other. This is one of the parameters used by the job scheduler to determine which compute environment should execute a given job. '
   ArrayJobDependency:
     type: string
     enum:
       - N_TO_N
       - SEQUENTIAL
-  String:
-    type: string
-  Integer:
-    type: integer
   ArrayJobStatusSummary:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/String'
-        value:
-          $ref: '#/definitions/Integer'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/Integer'
   ArrayProperties:
     type: object
     properties:
@@ -1297,8 +1448,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/AttemptDetail'
-  Boolean:
-    type: boolean
   CEState:
     type: string
     enum:
@@ -1318,11 +1467,18 @@ definitions:
     enum:
       - MANAGED
       - UNMANAGED
-  CRType:
-    type: string
-    enum:
-      - EC2
-      - SPOT
+  CancelJobRequest:
+    type: object
+    required:
+      - jobId
+      - reason
+    properties:
+      jobId:
+        $ref: '#/definitions/String'
+        description: The AWS Batch job ID of the job to cancel.
+      reason:
+        $ref: '#/definitions/String'
+        description: 'A message to attach to the job that explains the reason for canceling it. This message is returned by future <a>DescribeJobs</a> operations on the job. This message is also recorded in the AWS Batch activity logs. '
   ComputeResource:
     type: object
     required:
@@ -1418,49 +1574,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ComputeEnvironmentDetail'
-  ComputeEnvironmentOrder:
-    type: object
-    required:
-      - order
-      - computeEnvironment
-    properties:
-      order:
-        $ref: '#/definitions/Integer'
-        description: The order of the compute environment.
-      computeEnvironment:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the compute environment.
-    description: 'The order in which compute environments are tried for job placement within a queue. Compute environments are tried in ascending order. For example, if two compute environments are associated with a job queue, the compute environment with a lower order integer value is tried for job placement first.'
   ComputeEnvironmentOrders:
     type: array
     items:
       $ref: '#/definitions/ComputeEnvironmentOrder'
-  StringList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  TagsMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/String'
-        value:
-          $ref: '#/definitions/String'
-  LaunchTemplateSpecification:
-    type: object
-    properties:
-      launchTemplateId:
-        $ref: '#/definitions/String'
-        description: The ID of the launch template.
-      launchTemplateName:
-        $ref: '#/definitions/String'
-        description: The name of the launch template.
-      version:
-        $ref: '#/definitions/String'
-        description: '<p>The version number of the launch template.</p> <p>Default: The default version of the launch template.</p>'
-    description: 'An object representing a launch template associated with a compute resource. You must specify either the launch template ID or launch template name in the request, but not both. '
   ComputeResourceUpdate:
     type: object
     properties:
@@ -1474,22 +1591,6 @@ definitions:
         $ref: '#/definitions/Integer'
         description: The desired number of EC2 vCPUS in the compute environment.
     description: An object representing the attributes of a compute environment that can be updated.
-  Volumes:
-    type: array
-    items:
-      $ref: '#/definitions/Volume'
-  EnvironmentVariables:
-    type: array
-    items:
-      $ref: '#/definitions/KeyValuePair'
-  MountPoints:
-    type: array
-    items:
-      $ref: '#/definitions/MountPoint'
-  Ulimits:
-    type: array
-    items:
-      $ref: '#/definitions/Ulimit'
   ContainerDetail:
     type: object
     properties:
@@ -1623,19 +1724,134 @@ definitions:
         $ref: '#/definitions/String'
         description: A short (255 max characters) human-readable string to provide additional details about a running or stopped container.
     description: An object representing summary details of a container within a job.
+  CreateComputeEnvironmentRequest:
+    type: object
+    required:
+      - computeEnvironmentName
+      - type
+      - serviceRole
+    properties:
+      computeEnvironmentName:
+        $ref: '#/definitions/String'
+        description: 'The name for your compute environment. Up to 128 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed.'
+      type:
+        $ref: '#/definitions/CEType'
+        description: 'The type of the compute environment. For more information, see <a href="http://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html">Compute Environments</a> in the <i>AWS Batch User Guide</i>.'
+      state:
+        $ref: '#/definitions/CEState'
+        description: 'The state of the compute environment. If the state is <code>ENABLED</code>, then the compute environment accepts jobs from a queue and can scale out automatically based on queues.'
+      computeResources:
+        $ref: '#/definitions/ComputeResource'
+        description: Details of the compute resources managed by the compute environment. This parameter is required for managed compute environments.
+      serviceRole:
+        $ref: '#/definitions/String'
+        description: '<p>The full Amazon Resource Name (ARN) of the IAM role that allows AWS Batch to make calls to other AWS services on your behalf.</p> <p>If your specified role has a path other than <code>/</code>, then you must either specify the full role ARN (this is recommended) or prefix the role name with the path.</p> <note> <p>Depending on how you created your AWS Batch service role, its ARN may contain the <code>service-role</code> path prefix. When you only specify the name of the service role, AWS Batch assumes that your ARN does not use the <code>service-role</code> path prefix. Because of this, we recommend that you specify the full ARN of your service role when you create compute environments.</p> </note>'
   JQState:
     type: string
     enum:
       - ENABLED
       - DISABLED
+  CreateJobQueueRequest:
+    type: object
+    required:
+      - jobQueueName
+      - priority
+      - computeEnvironmentOrder
+    properties:
+      jobQueueName:
+        $ref: '#/definitions/String'
+        description: The name of the job queue.
+      state:
+        $ref: '#/definitions/JQState'
+        description: 'The state of the job queue. If the job queue state is <code>ENABLED</code>, it is able to accept jobs.'
+      priority:
+        $ref: '#/definitions/Integer'
+        description: 'The priority of the job queue. Job queues with a higher priority (or a higher integer value for the <code>priority</code> parameter) are evaluated first when associated with the same compute environment. Priority is determined in descending order, for example, a job queue with a priority value of <code>10</code> is given scheduling preference over a job queue with a priority value of <code>1</code>.'
+      computeEnvironmentOrder:
+        $ref: '#/definitions/ComputeEnvironmentOrders'
+        description: The set of compute environments mapped to a job queue and their order relative to each other. The job scheduler uses this parameter to determine which compute environment should execute a given job. Compute environments must be in the <code>VALID</code> state before you can associate them with a job queue. You can associate up to three compute environments with a job queue.
+  DeleteComputeEnvironmentRequest:
+    type: object
+    required:
+      - computeEnvironment
+    properties:
+      computeEnvironment:
+        $ref: '#/definitions/String'
+        description: 'The name or Amazon Resource Name (ARN) of the compute environment to delete. '
+  DeleteJobQueueRequest:
+    type: object
+    required:
+      - jobQueue
+    properties:
+      jobQueue:
+        $ref: '#/definitions/String'
+        description: 'The short name or full Amazon Resource Name (ARN) of the queue to delete. '
+  DeregisterJobDefinitionRequest:
+    type: object
+    required:
+      - jobDefinition
+    properties:
+      jobDefinition:
+        $ref: '#/definitions/String'
+        description: 'The name and revision (<code>name:revision</code>) or full Amazon Resource Name (ARN) of the job definition to deregister. '
+  DescribeComputeEnvironmentsRequest:
+    type: object
+    properties:
+      computeEnvironments:
+        $ref: '#/definitions/StringList'
+        description: 'A list of up to 100 compute environment names or full Amazon Resource Name (ARN) entries. '
+      maxResults:
+        $ref: '#/definitions/Integer'
+        description: 'The maximum number of cluster results returned by <code>DescribeComputeEnvironments</code> in paginated output. When this parameter is used, <code>DescribeComputeEnvironments</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeComputeEnvironments</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>DescribeComputeEnvironments</code> returns up to 100 results and a <code>nextToken</code> value if applicable.'
+      nextToken:
+        $ref: '#/definitions/String'
+        description: <p>The <code>nextToken</code> value returned from a previous paginated <code>DescribeComputeEnvironments</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when there are no more results to return.</p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+  DescribeJobDefinitionsRequest:
+    type: object
+    properties:
+      jobDefinitions:
+        $ref: '#/definitions/StringList'
+        description: A space-separated list of up to 100 job definition names or full Amazon Resource Name (ARN) entries.
+      maxResults:
+        $ref: '#/definitions/Integer'
+        description: 'The maximum number of results returned by <code>DescribeJobDefinitions</code> in paginated output. When this parameter is used, <code>DescribeJobDefinitions</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeJobDefinitions</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>DescribeJobDefinitions</code> returns up to 100 results and a <code>nextToken</code> value if applicable.'
+      jobDefinitionName:
+        $ref: '#/definitions/String'
+        description: The name of the job definition to describe.
+      status:
+        $ref: '#/definitions/String'
+        description: The status with which to filter job definitions.
+      nextToken:
+        $ref: '#/definitions/String'
+        description: <p>The <code>nextToken</code> value returned from a previous paginated <code>DescribeJobDefinitions</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when there are no more results to return.</p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
   JobDefinitionList:
     type: array
     items:
       $ref: '#/definitions/JobDefinition'
+  DescribeJobQueuesRequest:
+    type: object
+    properties:
+      jobQueues:
+        $ref: '#/definitions/StringList'
+        description: A list of up to 100 queue names or full queue Amazon Resource Name (ARN) entries.
+      maxResults:
+        $ref: '#/definitions/Integer'
+        description: 'The maximum number of results returned by <code>DescribeJobQueues</code> in paginated output. When this parameter is used, <code>DescribeJobQueues</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeJobQueues</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>DescribeJobQueues</code> returns up to 100 results and a <code>nextToken</code> value if applicable.'
+      nextToken:
+        $ref: '#/definitions/String'
+        description: <p>The <code>nextToken</code> value returned from a previous paginated <code>DescribeJobQueues</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when there are no more results to return.</p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
   JobQueueDetailList:
     type: array
     items:
       $ref: '#/definitions/JobQueueDetail'
+  DescribeJobsRequest:
+    type: object
+    required:
+      - jobs
+    properties:
+      jobs:
+        $ref: '#/definitions/StringList'
+        description: A space-separated list of up to 100 job IDs.
   JobDetailList:
     type: array
     items:
@@ -1667,14 +1883,9 @@ definitions:
       - VALID
       - INVALID
   ParametersMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/String'
-        value:
-          $ref: '#/definitions/String'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/String'
   RetryStrategy:
     type: object
     properties:
@@ -1750,16 +1961,6 @@ definitions:
     enum:
       - container
       - multinode
-  JobDependency:
-    type: object
-    properties:
-      jobId:
-        $ref: '#/definitions/String'
-        description: The job ID of the AWS Batch job associated with this dependency.
-      type:
-        $ref: '#/definitions/ArrayJobDependency'
-        description: The type of the job dependency.
-    description: An object representing an AWS Batch job dependency.
   JobDependencyList:
     type: array
     items:
@@ -1934,6 +2135,27 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/JobSummary'
+  ListJobsRequest:
+    type: object
+    properties:
+      jobQueue:
+        $ref: '#/definitions/String'
+        description: The name or full Amazon Resource Name (ARN) of the job queue with which to list jobs.
+      arrayJobId:
+        $ref: '#/definitions/String'
+        description: The job ID for an array job. Specifying an array job ID with this parameter lists all child jobs from within the specified array.
+      multiNodeJobId:
+        $ref: '#/definitions/String'
+        description: The job ID for a multi-node parallel job. Specifying a multi-node parallel job ID with this parameter lists all nodes that are associated with the specified job.
+      jobStatus:
+        $ref: '#/definitions/JobStatus'
+        description: 'The job status with which to filter jobs in the specified queue. If you do not specify a status, only <code>RUNNING</code> jobs are returned.'
+      maxResults:
+        $ref: '#/definitions/Integer'
+        description: 'The maximum number of results returned by <code>ListJobs</code> in paginated output. When this parameter is used, <code>ListJobs</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListJobs</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListJobs</code> returns up to 100 results and a <code>nextToken</code> value if applicable.'
+      nextToken:
+        $ref: '#/definitions/String'
+        description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListJobs</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when there are no more results to return.</p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
   MountPoint:
     type: object
     properties:
@@ -1960,10 +2182,6 @@ definitions:
         $ref: '#/definitions/String'
         description: The private IPv4 address for the network interface.
     description: An object representing the elastic network interface for a multi-node parallel job node.
-  NodePropertyOverrides:
-    type: array
-    items:
-      $ref: '#/definitions/NodePropertyOverride'
   NodeOverrides:
     type: object
     properties:
@@ -1971,10 +2189,6 @@ definitions:
         $ref: '#/definitions/NodePropertyOverrides'
         description: The node property overrides for the job.
     description: Object representing any node overrides to a job definition that is used in a <a>SubmitJob</a> API operation.
-  NodeRangeProperties:
-    type: array
-    items:
-      $ref: '#/definitions/NodeRangeProperty'
   NodePropertyOverride:
     type: object
     required:
@@ -1999,6 +2213,82 @@ definitions:
         $ref: '#/definitions/ContainerProperties'
         description: The container details for the node range.
     description: An object representing the properties of the node range for a multi-node parallel job.
+  RegisterJobDefinitionRequest:
+    type: object
+    required:
+      - jobDefinitionName
+      - type
+    properties:
+      jobDefinitionName:
+        $ref: '#/definitions/String'
+        description: 'The name of the job definition to register. Up to 128 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed.'
+      type:
+        $ref: '#/definitions/JobDefinitionType'
+        description: The type of job definition.
+      parameters:
+        $ref: '#/definitions/ParametersMap'
+        description: Default parameter substitution placeholders to set in the job definition. Parameters are specified as a key-value pair mapping. Parameters in a <code>SubmitJob</code> request override any corresponding parameter defaults from the job definition.
+      containerProperties:
+        $ref: '#/definitions/ContainerProperties'
+        description: 'An object with various properties specific to single-node container-based jobs. If the job definition''s <code>type</code> parameter is <code>container</code>, then you must specify either <code>containerProperties</code> or <code>nodeProperties</code>.'
+      nodeProperties:
+        $ref: '#/definitions/NodeProperties'
+        description: 'An object with various properties specific to multi-node parallel jobs. If you specify node properties for a job, it becomes a multi-node parallel job. For more information, see <a href="http://docs.aws.amazon.com/batch/latest/userguide/multi-node-parallel-jobs.html">Multi-node Parallel Jobs</a> in the <i>AWS Batch User Guide</i>. If the job definition''s <code>type</code> parameter is <code>container</code>, then you must specify either <code>containerProperties</code> or <code>nodeProperties</code>.'
+      retryStrategy:
+        $ref: '#/definitions/RetryStrategy'
+        description: 'The retry strategy to use for failed jobs that are submitted with this job definition. Any retry strategy that is specified during a <a>SubmitJob</a> operation overrides the retry strategy defined here. If a job is terminated due to a timeout, it is not retried. '
+      timeout:
+        $ref: '#/definitions/JobTimeout'
+        description: 'The timeout configuration for jobs that are submitted with this job definition, after which AWS Batch terminates your jobs if they have not finished. If a job is terminated due to a timeout, it is not retried. The minimum value for the timeout is 60 seconds. Any timeout configuration that is specified during a <a>SubmitJob</a> operation overrides the timeout configuration defined here. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html">Job Timeouts</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
+  SubmitJobRequest:
+    type: object
+    required:
+      - jobName
+      - jobQueue
+      - jobDefinition
+    properties:
+      jobName:
+        $ref: '#/definitions/String'
+        description: 'The name of the job. The first character must be alphanumeric, and up to 128 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed. '
+      jobQueue:
+        $ref: '#/definitions/String'
+        description: 'The job queue into which the job is submitted. You can specify either the name or the Amazon Resource Name (ARN) of the queue. '
+      arrayProperties:
+        $ref: '#/definitions/ArrayProperties'
+        description: 'The array properties for the submitted job, such as the size of the array. The array size can be between 2 and 10,000. If you specify array properties for a job, it becomes an array job. For more information, see <a href="http://docs.aws.amazon.com/batch/latest/userguide/array_jobs.html">Array Jobs</a> in the <i>AWS Batch User Guide</i>.'
+      dependsOn:
+        $ref: '#/definitions/JobDependencyList'
+        description: 'A list of dependencies for the job. A job can depend upon a maximum of 20 jobs. You can specify a <code>SEQUENTIAL</code> type dependency without specifying a job ID for array jobs so that each child array job completes sequentially, starting at index 0. You can also specify an <code>N_TO_N</code> type dependency with a job ID for array jobs. In that case, each index child of this job must wait for the corresponding index child of each dependency to complete before it can begin.'
+      jobDefinition:
+        $ref: '#/definitions/String'
+        description: 'The job definition used by this job. This value can be either a <code>name:revision</code> or the Amazon Resource Name (ARN) for the job definition.'
+      parameters:
+        $ref: '#/definitions/ParametersMap'
+        description: Additional parameters passed to the job that replace parameter substitution placeholders that are set in the job definition. Parameters are specified as a key and value pair mapping. Parameters in a <code>SubmitJob</code> request override any corresponding parameter defaults from the job definition.
+      containerOverrides:
+        $ref: '#/definitions/ContainerOverrides'
+        description: A list of container overrides in JSON format that specify the name of a container in the specified job definition and the overrides it should receive. You can override the default command for a container (that is specified in the job definition or the Docker image) with a <code>command</code> override. You can also override existing environment variables (that are specified in the job definition or Docker image) on a container or add new environment variables to it with an <code>environment</code> override.
+      nodeOverrides:
+        $ref: '#/definitions/NodeOverrides'
+        description: A list of node overrides in JSON format that specify the node range to target and the container overrides for that node range.
+      retryStrategy:
+        $ref: '#/definitions/RetryStrategy'
+        description: 'The retry strategy to use for failed jobs from this <a>SubmitJob</a> operation. When a retry strategy is specified here, it overrides the retry strategy defined in the job definition.'
+      timeout:
+        $ref: '#/definitions/JobTimeout'
+        description: 'The timeout configuration for this <a>SubmitJob</a> operation. You can specify a timeout duration after which AWS Batch terminates your jobs if they have not finished. If a job is terminated due to a timeout, it is not retried. The minimum value for the timeout is 60 seconds. This configuration overrides any timeout configuration specified in the job definition. For array jobs, child jobs have the same timeout configuration as the parent job. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html">Job Timeouts</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
+  TerminateJobRequest:
+    type: object
+    required:
+      - jobId
+      - reason
+    properties:
+      jobId:
+        $ref: '#/definitions/String'
+        description: The AWS Batch job ID of the job to terminate.
+      reason:
+        $ref: '#/definitions/String'
+        description: 'A message to attach to the job that explains the reason for canceling it. This message is returned by future <a>DescribeJobs</a> operations on the job. This message is also recorded in the AWS Batch activity logs. '
   Ulimit:
     type: object
     required:
@@ -2016,6 +2306,40 @@ definitions:
         $ref: '#/definitions/Integer'
         description: The soft limit for the <code>ulimit</code> type.
     description: The <code>ulimit</code> settings to pass to the container.
+  UpdateComputeEnvironmentRequest:
+    type: object
+    required:
+      - computeEnvironment
+    properties:
+      computeEnvironment:
+        $ref: '#/definitions/String'
+        description: The name or full Amazon Resource Name (ARN) of the compute environment to update.
+      state:
+        $ref: '#/definitions/CEState'
+        description: The state of the compute environment. Compute environments in the <code>ENABLED</code> state can accept jobs from a queue and scale in or out automatically based on the workload demand of its associated queues.
+      computeResources:
+        $ref: '#/definitions/ComputeResourceUpdate'
+        description: Details of the compute resources managed by the compute environment. Required for a managed compute environment.
+      serviceRole:
+        $ref: '#/definitions/String'
+        description: '<p>The full Amazon Resource Name (ARN) of the IAM role that allows AWS Batch to make calls to other AWS services on your behalf.</p> <p>If your specified role has a path other than <code>/</code>, then you must either specify the full role ARN (this is recommended) or prefix the role name with the path.</p> <note> <p>Depending on how you created your AWS Batch service role, its ARN may contain the <code>service-role</code> path prefix. When you only specify the name of the service role, AWS Batch assumes that your ARN does not use the <code>service-role</code> path prefix. Because of this, we recommend that you specify the full ARN of your service role when you create compute environments.</p> </note>'
+  UpdateJobQueueRequest:
+    type: object
+    required:
+      - jobQueue
+    properties:
+      jobQueue:
+        $ref: '#/definitions/String'
+        description: The name or the Amazon Resource Name (ARN) of the job queue.
+      state:
+        $ref: '#/definitions/JQState'
+        description: Describes the queue's ability to accept new jobs.
+      priority:
+        $ref: '#/definitions/Integer'
+        description: 'The priority of the job queue. Job queues with a higher priority (or a higher integer value for the <code>priority</code> parameter) are evaluated first when associated with the same compute environment. Priority is determined in descending order, for example, a job queue with a priority value of <code>10</code> is given scheduling preference over a job queue with a priority value of <code>1</code>.'
+      computeEnvironmentOrder:
+        $ref: '#/definitions/ComputeEnvironmentOrders'
+        description: 'Details the set of compute environments mapped to a job queue and their order relative to each other. This is one of the parameters used by the job scheduler to determine which compute environment should execute a given job. '
   Volume:
     type: object
     properties:

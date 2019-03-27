@@ -99,7 +99,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /:
+  '/#X-Amz-Target=MarketplaceCommerceAnalytics20150701.GenerateDataSet':
     post:
       operationId: GenerateDataSet
       description: 'Given a data set type and data set publication date, asynchronously publishes the requested data set to the specified S3 bucket and notifies the specified SNS topic once the data is available. Returns a unique request identifier that can be used to correlate requests with notifications from the SNS topic. Data sets will be published in comma-separated values (CSV) format with the file name {data_set_type}_YYYY-MM-DD.csv. If a file with the same name already exists (e.g. if the same data set is requested twice), the original file will be overwritten by the new file. Requires a Role with an attached permissions policy providing Allow permissions for the following actions: s3:PutObject, s3:GetBucketLocation, sns:GetTopicAttributes, sns:Publish, iam:GetRolePolicy.'
@@ -118,6 +118,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GenerateDataSetRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - MarketplaceCommerceAnalytics20150701.GenerateDataSet
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -128,7 +134,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#StartSupportDataExport':
+  '/#X-Amz-Target=MarketplaceCommerceAnalytics20150701.StartSupportDataExport':
     post:
       operationId: StartSupportDataExport
       description: 'Given a data set type and a from date, asynchronously publishes the requested customer support data to the specified S3 bucket and notifies the specified SNS topic once the data is available. Returns a unique request identifier that can be used to correlate requests with notifications from the SNS topic. Data sets will be published in comma-separated values (CSV) format with the file name {data_set_type}_YYYY-MM-DD''T''HH-mm-ss''Z''.csv. If a file with the same name already exists (e.g. if the same data set is requested twice), the original file will be overwritten by the new file. Requires a Role with an attached permissions policy providing Allow permissions for the following actions: s3:PutObject, s3:GetBucketLocation, sns:GetTopicAttributes, sns:Publish, iam:GetRolePolicy.'
@@ -147,6 +153,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StartSupportDataExportRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - MarketplaceCommerceAnalytics20150701.StartSupportDataExport
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -241,25 +253,16 @@ definitions:
         $ref: '#/definitions/CustomerDefinedValues'
         description: '(Optional) Key-value pairs which will be returned, unmodified, in the Amazon SNS notification message and the data set metadata file.'
     description: Container for the parameters to the StartSupportDataExport operation.
-  OptionalKey:
-    type: string
-    minLength: 1
-    maxLength: 255
   OptionalValue:
     type: string
     minLength: 1
     maxLength: 255
   CustomerDefinedValues:
-    type: array
-    minItems: 1
-    maxItems: 5
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/OptionalKey'
-        value:
-          $ref: '#/definitions/OptionalValue'
+    type: object
+    minProperties: 1
+    maxProperties: 5
+    additionalProperties:
+      $ref: '#/definitions/OptionalValue'
   DataSetPublicationDate:
     type: string
     format: date-time
@@ -307,6 +310,10 @@ definitions:
   SnsTopicArn:
     type: string
     minLength: 1
+  OptionalKey:
+    type: string
+    minLength: 1
+    maxLength: 255
   SupportDataSetType:
     type: string
     enum:

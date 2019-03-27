@@ -132,7 +132,11 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateConfigurationSetRequest'
+            type: object
+            properties:
+              ConfigurationSetName:
+                description: The name that you want to give the configuration set.
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -164,11 +168,16 @@ paths:
           schema:
             $ref: '#/definitions/InternalServiceErrorException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListConfigurationSetsRequest'
+        - name: NextToken
+          in: query
+          required: false
+          description: A token returned from a previous call to the API that indicates the position in the list of results.
+          type: string
+        - name: PageSize
+          in: query
+          required: false
+          description: Used to specify the number of items that should be returned in the response.
+          type: string
   '/v1/sms-voice/configuration-sets/{ConfigurationSetName}/event-destinations':
     post:
       operationId: CreateConfigurationSetEventDestination
@@ -203,15 +212,35 @@ paths:
           schema:
             $ref: '#/definitions/AlreadyExistsException'
       parameters:
+        - name: ConfigurationSetName
+          in: path
+          required: true
+          description: ConfigurationSetName
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateConfigurationSetEventDestinationRequest'
-        - name: ConfigurationSetName
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              EventDestination:
+                description: An object that defines a single event destination.
+                type: object
+                properties:
+                  CloudWatchLogsDestination:
+                    $ref: '#/definitions/CloudWatchLogsDestination'
+                  Enabled:
+                    $ref: '#/definitions/Boolean'
+                    description: 'Indicates whether or not the event destination is enabled. If the event destination is enabled, then Amazon Pinpoint sends response data to the specified event destination.'
+                  KinesisFirehoseDestination:
+                    $ref: '#/definitions/KinesisFirehoseDestination'
+                  MatchingEventTypes:
+                    $ref: '#/definitions/EventTypes'
+                  SnsDestination:
+                    $ref: '#/definitions/SnsDestination'
+              EventDestinationName:
+                description: A name that identifies the event destination.
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -247,15 +276,11 @@ paths:
           schema:
             $ref: '#/definitions/InternalServiceErrorException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetConfigurationSetEventDestinationsRequest'
         - name: ConfigurationSetName
-          type: string
           in: path
           required: true
+          description: ConfigurationSetName
+          type: string
   '/v1/sms-voice/configuration-sets/{ConfigurationSetName}':
     delete:
       operationId: DeleteConfigurationSet
@@ -282,15 +307,11 @@ paths:
           schema:
             $ref: '#/definitions/InternalServiceErrorException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteConfigurationSetRequest'
         - name: ConfigurationSetName
-          type: string
           in: path
           required: true
+          description: ConfigurationSetName
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -327,19 +348,16 @@ paths:
           schema:
             $ref: '#/definitions/InternalServiceErrorException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteConfigurationSetEventDestinationRequest'
         - name: ConfigurationSetName
-          type: string
           in: path
           required: true
+          description: ConfigurationSetName
+          type: string
         - name: EventDestinationName
-          type: string
           in: path
           required: true
+          description: EventDestinationName
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -375,19 +393,37 @@ paths:
           schema:
             $ref: '#/definitions/InternalServiceErrorException'
       parameters:
+        - name: ConfigurationSetName
+          in: path
+          required: true
+          description: ConfigurationSetName
+          type: string
+        - name: EventDestinationName
+          in: path
+          required: true
+          description: EventDestinationName
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateConfigurationSetEventDestinationRequest'
-        - name: ConfigurationSetName
-          type: string
-          in: path
-          required: true
-        - name: EventDestinationName
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              EventDestination:
+                description: An object that defines a single event destination.
+                type: object
+                properties:
+                  CloudWatchLogsDestination:
+                    $ref: '#/definitions/CloudWatchLogsDestination'
+                  Enabled:
+                    $ref: '#/definitions/Boolean'
+                    description: 'Indicates whether or not the event destination is enabled. If the event destination is enabled, then Amazon Pinpoint sends response data to the specified event destination.'
+                  KinesisFirehoseDestination:
+                    $ref: '#/definitions/KinesisFirehoseDestination'
+                  MatchingEventTypes:
+                    $ref: '#/definitions/EventTypes'
+                  SnsDestination:
+                    $ref: '#/definitions/SnsDestination'
   /v1/sms-voice/voice/message:
     post:
       operationId: SendVoiceMessage
@@ -414,7 +450,30 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/SendVoiceMessageRequest'
+            type: object
+            properties:
+              CallerId:
+                description: The phone number that appears on recipients' devices when they receive the message.
+                type: string
+              ConfigurationSetName:
+                description: The name of the configuration set that you want to use to send the message.
+                type: string
+              Content:
+                description: An object that contains a voice message and information about the recipient that you want to send it to.
+                type: object
+                properties:
+                  CallInstructionsMessage:
+                    $ref: '#/definitions/CallInstructionsMessageType'
+                  PlainTextMessage:
+                    $ref: '#/definitions/PlainTextMessageType'
+                  SSMLMessage:
+                    $ref: '#/definitions/SSMLMessageType'
+              DestinationPhoneNumber:
+                description: The phone number that you want to send the voice message to.
+                type: string
+              OriginationPhoneNumber:
+                description: 'The phone number that Amazon Pinpoint should use to send the voice message. This isn''t necessarily the phone number that appears on recipients'' devices when they receive the message, because you can specify a CallerId parameter in the request.'
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -430,13 +489,6 @@ definitions:
     type: object
     properties: {}
     description: An empty object that indicates that the configuration set was successfully created.
-  CreateConfigurationSetRequest:
-    type: object
-    properties:
-      ConfigurationSetName:
-        $ref: '#/definitions/WordCharactersWithDelimiters'
-        description: The name that you want to give the configuration set.
-    description: A request to create a new configuration set.
   TooManyRequestsException: {}
   BadRequestException: {}
   LimitExceededException: {}
@@ -446,100 +498,6 @@ definitions:
     type: object
     properties: {}
     description: An empty object that indicates that the event destination was created successfully.
-  CreateConfigurationSetEventDestinationRequest:
-    type: object
-    properties:
-      EventDestination:
-        $ref: '#/definitions/EventDestinationDefinition'
-      EventDestinationName:
-        $ref: '#/definitions/NonEmptyString'
-        description: A name that identifies the event destination.
-    description: Create a new event destination in a configuration set.
-  NotFoundException: {}
-  DeleteConfigurationSetResponse:
-    type: object
-    properties: {}
-    description: An empty object that indicates that the configuration set was deleted successfully.
-  DeleteConfigurationSetRequest:
-    type: object
-    properties: {}
-  DeleteConfigurationSetEventDestinationResponse:
-    type: object
-    properties: {}
-    description: An empty object that indicates that the event destination was deleted successfully.
-  DeleteConfigurationSetEventDestinationRequest:
-    type: object
-    properties: {}
-  GetConfigurationSetEventDestinationsResponse:
-    type: object
-    properties:
-      EventDestinations:
-        $ref: '#/definitions/EventDestinations'
-    description: An object that contains information about an event destination.
-  GetConfigurationSetEventDestinationsRequest:
-    type: object
-    properties: {}
-  ListConfigurationSetsResponse:
-    type: object
-    properties:
-      ConfigurationSets:
-        $ref: '#/definitions/ConfigurationSets'
-        description: An object that contains a list of configuration sets for your account in the current region.
-      NextToken:
-        $ref: '#/definitions/NextTokenString'
-        description: A token returned from a previous call to ListConfigurationSets to indicate the position in the list of configuration sets.
-    description: An object that contains information about the configuration sets for your account in the current region.
-  ListConfigurationSetsRequest:
-    type: object
-    properties: {}
-  SendVoiceMessageResponse:
-    type: object
-    properties:
-      MessageId:
-        $ref: '#/definitions/String'
-        description: A unique identifier for the voice message.
-    description: An object that that contains the Message ID of a Voice message that was sent successfully.
-  SendVoiceMessageRequest:
-    type: object
-    properties:
-      CallerId:
-        $ref: '#/definitions/String'
-        description: The phone number that appears on recipients' devices when they receive the message.
-      ConfigurationSetName:
-        $ref: '#/definitions/WordCharactersWithDelimiters'
-        description: The name of the configuration set that you want to use to send the message.
-      Content:
-        $ref: '#/definitions/VoiceMessageContent'
-      DestinationPhoneNumber:
-        $ref: '#/definitions/NonEmptyString'
-        description: The phone number that you want to send the voice message to.
-      OriginationPhoneNumber:
-        $ref: '#/definitions/NonEmptyString'
-        description: 'The phone number that Amazon Pinpoint should use to send the voice message. This isn''t necessarily the phone number that appears on recipients'' devices when they receive the message, because you can specify a CallerId parameter in the request.'
-    description: SendVoiceMessageRequest
-  UpdateConfigurationSetEventDestinationResponse:
-    type: object
-    properties: {}
-    description: An empty object that indicates that the event destination was updated successfully.
-  UpdateConfigurationSetEventDestinationRequest:
-    type: object
-    properties:
-      EventDestination:
-        $ref: '#/definitions/EventDestinationDefinition'
-    description: UpdateConfigurationSetEventDestinationRequest
-  Boolean:
-    type: boolean
-  NonEmptyString:
-    type: string
-  CallInstructionsMessageType:
-    type: object
-    properties:
-      Text:
-        $ref: '#/definitions/NonEmptyString'
-        description: 'The language to use when delivering the message. For a complete list of supported languages, see the Amazon Polly Developer Guide.'
-    description: An object that defines a message that contains text formatted using Amazon Pinpoint Voice Instructions markup.
-  String:
-    type: string
   CloudWatchLogsDestination:
     type: object
     properties:
@@ -550,6 +508,103 @@ definitions:
         $ref: '#/definitions/String'
         description: The name of the Amazon CloudWatch Log Group that you want to record events in.
     description: An object that contains information about an event destination that sends data to Amazon CloudWatch Logs.
+  Boolean:
+    type: boolean
+  KinesisFirehoseDestination:
+    type: object
+    properties:
+      DeliveryStreamArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of an IAM role that can write data to an Amazon Kinesis Data Firehose stream.
+      IamRoleArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the Amazon Kinesis Data Firehose destination that you want to use in the event destination.
+    description: An object that contains information about an event destination that sends data to Amazon Kinesis Data Firehose.
+  EventTypes:
+    type: array
+    description: An array of EventDestination objects. Each EventDestination object includes ARNs and other information that define an event destination.
+    items:
+      $ref: '#/definitions/EventType'
+  SnsDestination:
+    type: object
+    properties:
+      TopicArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the Amazon SNS topic that you want to publish events to.
+    description: An object that contains information about an event destination that sends data to Amazon SNS.
+  NotFoundException: {}
+  DeleteConfigurationSetResponse:
+    type: object
+    properties: {}
+    description: An empty object that indicates that the configuration set was deleted successfully.
+  DeleteConfigurationSetEventDestinationResponse:
+    type: object
+    properties: {}
+    description: An empty object that indicates that the event destination was deleted successfully.
+  GetConfigurationSetEventDestinationsResponse:
+    type: object
+    properties:
+      EventDestinations:
+        $ref: '#/definitions/EventDestinations'
+    description: An object that contains information about an event destination.
+  ListConfigurationSetsResponse:
+    type: object
+    properties:
+      ConfigurationSets:
+        $ref: '#/definitions/ConfigurationSets'
+        description: An object that contains a list of configuration sets for your account in the current region.
+      NextToken:
+        $ref: '#/definitions/NextTokenString'
+        description: A token returned from a previous call to ListConfigurationSets to indicate the position in the list of configuration sets.
+    description: An object that contains information about the configuration sets for your account in the current region.
+  SendVoiceMessageResponse:
+    type: object
+    properties:
+      MessageId:
+        $ref: '#/definitions/String'
+        description: A unique identifier for the voice message.
+    description: An object that that contains the Message ID of a Voice message that was sent successfully.
+  CallInstructionsMessageType:
+    type: object
+    properties:
+      Text:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The language to use when delivering the message. For a complete list of supported languages, see the Amazon Polly Developer Guide.'
+    description: An object that defines a message that contains text formatted using Amazon Pinpoint Voice Instructions markup.
+  PlainTextMessageType:
+    type: object
+    properties:
+      LanguageCode:
+        $ref: '#/definitions/String'
+        description: 'The language to use when delivering the message. For a complete list of supported languages, see the Amazon Polly Developer Guide.'
+      Text:
+        $ref: '#/definitions/NonEmptyString'
+        description: The plain (not SSML-formatted) text to deliver to the recipient.
+      VoiceId:
+        $ref: '#/definitions/String'
+        description: 'The name of the voice that you want to use to deliver the message. For a complete list of supported voices, see the Amazon Polly Developer Guide.'
+    description: An object that defines a message that contains unformatted text.
+  SSMLMessageType:
+    type: object
+    properties:
+      LanguageCode:
+        $ref: '#/definitions/String'
+        description: 'The language to use when delivering the message. For a complete list of supported languages, see the Amazon Polly Developer Guide.'
+      Text:
+        $ref: '#/definitions/NonEmptyString'
+        description: The SSML-formatted text to deliver to the recipient.
+      VoiceId:
+        $ref: '#/definitions/String'
+        description: 'The name of the voice that you want to use to deliver the message. For a complete list of supported voices, see the Amazon Polly Developer Guide.'
+    description: An object that defines a message that contains SSML-formatted text.
+  UpdateConfigurationSetEventDestinationResponse:
+    type: object
+    properties: {}
+    description: An empty object that indicates that the event destination was updated successfully.
+  NonEmptyString:
+    type: string
+  String:
+    type: string
   WordCharactersWithDelimiters:
     type: string
   ConfigurationSets:
@@ -574,28 +629,28 @@ definitions:
       SnsDestination:
         $ref: '#/definitions/SnsDestination'
     description: An object that defines a single event destination.
-  KinesisFirehoseDestination:
+  CreateConfigurationSetEventDestinationRequest:
     type: object
     properties:
-      DeliveryStreamArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of an IAM role that can write data to an Amazon Kinesis Data Firehose stream.
-      IamRoleArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the Amazon Kinesis Data Firehose destination that you want to use in the event destination.
-    description: An object that contains information about an event destination that sends data to Amazon Kinesis Data Firehose.
-  EventTypes:
-    type: array
-    description: An array of EventDestination objects. Each EventDestination object includes ARNs and other information that define an event destination.
-    items:
-      $ref: '#/definitions/EventType'
-  SnsDestination:
+      EventDestination:
+        $ref: '#/definitions/EventDestinationDefinition'
+      EventDestinationName:
+        $ref: '#/definitions/NonEmptyString'
+        description: A name that identifies the event destination.
+    description: Create a new event destination in a configuration set.
+  CreateConfigurationSetRequest:
     type: object
     properties:
-      TopicArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the Amazon SNS topic that you want to publish events to.
-    description: An object that contains information about an event destination that sends data to Amazon SNS.
+      ConfigurationSetName:
+        $ref: '#/definitions/WordCharactersWithDelimiters'
+        description: The name that you want to give the configuration set.
+    description: A request to create a new configuration set.
+  DeleteConfigurationSetEventDestinationRequest:
+    type: object
+    properties: {}
+  DeleteConfigurationSetRequest:
+    type: object
+    properties: {}
   EventDestination:
     type: object
     properties:
@@ -630,34 +685,14 @@ definitions:
       - FAILED
       - NO_ANSWER
     description: The types of events that are sent to the event destination.
+  GetConfigurationSetEventDestinationsRequest:
+    type: object
+    properties: {}
+  ListConfigurationSetsRequest:
+    type: object
+    properties: {}
   NextTokenString:
     type: string
-  PlainTextMessageType:
-    type: object
-    properties:
-      LanguageCode:
-        $ref: '#/definitions/String'
-        description: 'The language to use when delivering the message. For a complete list of supported languages, see the Amazon Polly Developer Guide.'
-      Text:
-        $ref: '#/definitions/NonEmptyString'
-        description: The plain (not SSML-formatted) text to deliver to the recipient.
-      VoiceId:
-        $ref: '#/definitions/String'
-        description: 'The name of the voice that you want to use to deliver the message. For a complete list of supported voices, see the Amazon Polly Developer Guide.'
-    description: An object that defines a message that contains unformatted text.
-  SSMLMessageType:
-    type: object
-    properties:
-      LanguageCode:
-        $ref: '#/definitions/String'
-        description: 'The language to use when delivering the message. For a complete list of supported languages, see the Amazon Polly Developer Guide.'
-      Text:
-        $ref: '#/definitions/NonEmptyString'
-        description: The SSML-formatted text to deliver to the recipient.
-      VoiceId:
-        $ref: '#/definitions/String'
-        description: 'The name of the voice that you want to use to deliver the message. For a complete list of supported voices, see the Amazon Polly Developer Guide.'
-    description: An object that defines a message that contains SSML-formatted text.
   VoiceMessageContent:
     type: object
     properties:
@@ -668,3 +703,27 @@ definitions:
       SSMLMessage:
         $ref: '#/definitions/SSMLMessageType'
     description: An object that contains a voice message and information about the recipient that you want to send it to.
+  SendVoiceMessageRequest:
+    type: object
+    properties:
+      CallerId:
+        $ref: '#/definitions/String'
+        description: The phone number that appears on recipients' devices when they receive the message.
+      ConfigurationSetName:
+        $ref: '#/definitions/WordCharactersWithDelimiters'
+        description: The name of the configuration set that you want to use to send the message.
+      Content:
+        $ref: '#/definitions/VoiceMessageContent'
+      DestinationPhoneNumber:
+        $ref: '#/definitions/NonEmptyString'
+        description: The phone number that you want to send the voice message to.
+      OriginationPhoneNumber:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The phone number that Amazon Pinpoint should use to send the voice message. This isn''t necessarily the phone number that appears on recipients'' devices when they receive the message, because you can specify a CallerId parameter in the request.'
+    description: SendVoiceMessageRequest
+  UpdateConfigurationSetEventDestinationRequest:
+    type: object
+    properties:
+      EventDestination:
+        $ref: '#/definitions/EventDestinationDefinition'
+    description: UpdateConfigurationSetEventDestinationRequest

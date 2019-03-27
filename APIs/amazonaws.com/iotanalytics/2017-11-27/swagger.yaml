@@ -133,7 +133,22 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/BatchPutMessageRequest'
+            type: object
+            required:
+              - channelName
+              - messages
+            properties:
+              channelName:
+                description: The name of the channel where the messages are sent.
+                type: string
+                pattern: '^[a-zA-Z0-9_]+$'
+                minLength: 1
+                maxLength: 128
+              messages:
+                description: '<p>The list of messages to be sent. Each message has format: ''{ "messageId": "string", "payload": "string"}''.</p> <p>Note that the field names of message payloads (data) that you send to AWS IoT Analytics:</p> <ul> <li> <p>Must contain only alphanumeric characters and undescores (_); no other special characters are allowed.</p> </li> <li> <p>Must begin with an alphabetic character or single underscore (_).</p> </li> <li> <p>Cannot contain hyphens (-).</p> </li> <li> <p>In regular expression terms: "^[A-Za-z_]([A-Za-z0-9]*|[A-Za-z0-9][A-Za-z0-9_]*)$". </p> </li> <li> <p>Cannot be greater than 255 characters.</p> </li> <li> <p>Are case-insensitive. (Fields named "foo" and "FOO" in the same payload are considered duplicates.)</p> </li> </ul> <p>For example, {"temp_01": 29} or {"_temp_01": 29} are valid, but {"temp-01": 29}, {"01_temp": 29} or {"__temp_01": 29} are invalid in message payloads. </p>'
+                type: array
+                items:
+                  $ref: '#/definitions/Message'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -174,19 +189,19 @@ paths:
           schema:
             $ref: '#/definitions/ThrottlingException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/CancelPipelineReprocessingRequest'
         - name: pipelineName
-          type: string
           in: path
           required: true
+          description: The name of pipeline for which data reprocessing is canceled.
+          type: string
+          pattern: '^[a-zA-Z0-9_]+$'
+          minLength: 1
+          maxLength: 128
         - name: reprocessingId
-          type: string
           in: path
           required: true
+          description: The ID of the reprocessing task (returned by "StartPipelineReprocessing").
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -235,7 +250,33 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateChannelRequest'
+            type: object
+            required:
+              - channelName
+            properties:
+              channelName:
+                description: The name of the channel.
+                type: string
+                pattern: '^[a-zA-Z0-9_]+$'
+                minLength: 1
+                maxLength: 128
+              retentionPeriod:
+                description: 'How long, in days, message data is kept.'
+                type: object
+                properties:
+                  unlimited:
+                    $ref: '#/definitions/UnlimitedRetentionPeriod'
+                    description: 'If true, message data is kept indefinitely.'
+                  numberOfDays:
+                    $ref: '#/definitions/RetentionPeriodInDays'
+                    description: The number of days that message data is kept. The "unlimited" parameter must be false.
+              tags:
+                description: Metadata which can be used to manage the channel.
+                type: array
+                items:
+                  $ref: '#/definitions/Tag'
+                minItems: 1
+                maxItems: 50
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -271,21 +312,18 @@ paths:
           schema:
             $ref: '#/definitions/ThrottlingException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListChannelsRequest'
-        - name: maxResults
-          type: string
-          in: query
-          description: Pagination limit
-          required: false
         - name: nextToken
-          type: string
           in: query
-          description: Pagination token
           required: false
+          description: The token for the next set of results.
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: <p>The maximum number of results to return in this request.</p> <p>The default value is 100.</p>
+          type: integer
+          minimum: 1
+          maximum: 250
   /datasets:
     post:
       operationId: CreateDataset
@@ -324,7 +362,65 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateDatasetRequest'
+            type: object
+            required:
+              - datasetName
+              - actions
+            properties:
+              datasetName:
+                description: The name of the data set.
+                type: string
+                pattern: '^[a-zA-Z0-9_]+$'
+                minLength: 1
+                maxLength: 128
+              actions:
+                description: A list of actions that create the data set contents.
+                type: array
+                items:
+                  $ref: '#/definitions/DatasetAction'
+                minItems: 1
+                maxItems: 1
+              triggers:
+                description: A list of triggers. A trigger causes data set contents to be populated at a specified time interval or when another data set's contents are created. The list of triggers can be empty or contain up to five <b>DataSetTrigger</b> objects.
+                type: array
+                items:
+                  $ref: '#/definitions/DatasetTrigger'
+                minItems: 0
+                maxItems: 5
+              contentDeliveryRules:
+                description: When data set contents are created they are delivered to destinations specified here.
+                type: array
+                items:
+                  $ref: '#/definitions/DatasetContentDeliveryRule'
+                minItems: 0
+                maxItems: 20
+              retentionPeriod:
+                description: 'How long, in days, message data is kept.'
+                type: object
+                properties:
+                  unlimited:
+                    $ref: '#/definitions/UnlimitedRetentionPeriod'
+                    description: 'If true, message data is kept indefinitely.'
+                  numberOfDays:
+                    $ref: '#/definitions/RetentionPeriodInDays'
+                    description: The number of days that message data is kept. The "unlimited" parameter must be false.
+              versioningConfiguration:
+                description: '[Optional] How many versions of data set contents are kept. If not specified or set to null, only the latest version plus the latest succeeded version (if they are different) are kept for the time period specified by the "retentionPeriod" parameter. (For more information, see https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)'
+                type: object
+                properties:
+                  unlimited:
+                    $ref: '#/definitions/UnlimitedVersioning'
+                    description: 'If true, unlimited versions of data set contents will be kept.'
+                  maxVersions:
+                    $ref: '#/definitions/MaxVersions'
+                    description: How many versions of data set contents will be kept. The "unlimited" parameter must be false.
+              tags:
+                description: Metadata which can be used to manage the data set.
+                type: array
+                items:
+                  $ref: '#/definitions/Tag'
+                minItems: 1
+                maxItems: 50
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -360,21 +456,18 @@ paths:
           schema:
             $ref: '#/definitions/ThrottlingException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListDatasetsRequest'
-        - name: maxResults
-          type: string
-          in: query
-          description: Pagination limit
-          required: false
         - name: nextToken
-          type: string
           in: query
-          description: Pagination token
           required: false
+          description: The token for the next set of results.
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: <p>The maximum number of results to return in this request.</p> <p>The default value is 100.</p>
+          type: integer
+          minimum: 1
+          maximum: 250
   '/datasets/{datasetName}/content':
     post:
       operationId: CreateDatasetContent
@@ -405,15 +498,14 @@ paths:
           schema:
             $ref: '#/definitions/ThrottlingException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/CreateDatasetContentRequest'
         - name: datasetName
-          type: string
           in: path
           required: true
+          description: The name of the data set.
+          type: string
+          pattern: '^[a-zA-Z0-9_]+$'
+          minLength: 1
+          maxLength: 128
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -451,15 +543,21 @@ paths:
           schema:
             $ref: '#/definitions/ThrottlingException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteDatasetContentRequest'
         - name: datasetName
-          type: string
           in: path
           required: true
+          description: The name of the data set whose content is deleted.
+          type: string
+          pattern: '^[a-zA-Z0-9_]+$'
+          minLength: 1
+          maxLength: 128
+        - name: versionId
+          in: query
+          required: false
+          description: 'The version of the data set whose content is deleted. You can also use the strings "$LATEST" or "$LATEST_SUCCEEDED" to delete the latest or latest successfully completed data set. If not specified, "$LATEST_SUCCEEDED" is the default.'
+          type: string
+          minLength: 7
+          maxLength: 36
     get:
       operationId: GetDatasetContent
       description: Retrieves the contents of a data set as pre-signed URIs.
@@ -489,15 +587,21 @@ paths:
           schema:
             $ref: '#/definitions/ThrottlingException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetDatasetContentRequest'
         - name: datasetName
-          type: string
           in: path
           required: true
+          description: The name of the data set whose contents are retrieved.
+          type: string
+          pattern: '^[a-zA-Z0-9_]+$'
+          minLength: 1
+          maxLength: 128
+        - name: versionId
+          in: query
+          required: false
+          description: 'The version of the data set whose contents are retrieved. You can also use the strings "$LATEST" or "$LATEST_SUCCEEDED" to retrieve the contents of the latest or latest successfully completed data set. If not specified, "$LATEST_SUCCEEDED" is the default.'
+          type: string
+          minLength: 7
+          maxLength: 36
   /datastores:
     post:
       operationId: CreateDatastore
@@ -536,7 +640,33 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateDatastoreRequest'
+            type: object
+            required:
+              - datastoreName
+            properties:
+              datastoreName:
+                description: The name of the data store.
+                type: string
+                pattern: '^[a-zA-Z0-9_]+$'
+                minLength: 1
+                maxLength: 128
+              retentionPeriod:
+                description: 'How long, in days, message data is kept.'
+                type: object
+                properties:
+                  unlimited:
+                    $ref: '#/definitions/UnlimitedRetentionPeriod'
+                    description: 'If true, message data is kept indefinitely.'
+                  numberOfDays:
+                    $ref: '#/definitions/RetentionPeriodInDays'
+                    description: The number of days that message data is kept. The "unlimited" parameter must be false.
+              tags:
+                description: Metadata which can be used to manage the data store.
+                type: array
+                items:
+                  $ref: '#/definitions/Tag'
+                minItems: 1
+                maxItems: 50
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -572,21 +702,18 @@ paths:
           schema:
             $ref: '#/definitions/ThrottlingException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListDatastoresRequest'
-        - name: maxResults
-          type: string
-          in: query
-          description: Pagination limit
-          required: false
         - name: nextToken
-          type: string
           in: query
-          description: Pagination token
           required: false
+          description: The token for the next set of results.
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: <p>The maximum number of results to return in this request.</p> <p>The default value is 100.</p>
+          type: integer
+          minimum: 1
+          maximum: 250
   /pipelines:
     post:
       operationId: CreatePipeline
@@ -625,7 +752,31 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreatePipelineRequest'
+            type: object
+            required:
+              - pipelineName
+              - pipelineActivities
+            properties:
+              pipelineName:
+                description: The name of the pipeline.
+                type: string
+                pattern: '^[a-zA-Z0-9_]+$'
+                minLength: 1
+                maxLength: 128
+              pipelineActivities:
+                description: '<p>A list of "PipelineActivity" objects. Activities perform transformations on your messages, such as removing, renaming or adding message attributes; filtering messages based on attribute values; invoking your Lambda functions on messages for advanced processing; or performing mathematical transformations to normalize device data.</p> <p>The list can be 2-25 <b>PipelineActivity</b> objects and must contain both a <code>channel</code> and a <code>datastore</code> activity. Each entry in the list must contain only one activity, for example:</p> <p> <code>pipelineActivities = [ { "channel": { ... } }, { "lambda": { ... } }, ... ]</code> </p>'
+                type: array
+                items:
+                  $ref: '#/definitions/PipelineActivity'
+                minItems: 1
+                maxItems: 25
+              tags:
+                description: Metadata which can be used to manage the pipeline.
+                type: array
+                items:
+                  $ref: '#/definitions/Tag'
+                minItems: 1
+                maxItems: 50
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -661,21 +812,18 @@ paths:
           schema:
             $ref: '#/definitions/ThrottlingException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListPipelinesRequest'
-        - name: maxResults
-          type: string
-          in: query
-          description: Pagination limit
-          required: false
         - name: nextToken
-          type: string
           in: query
-          description: Pagination token
           required: false
+          description: The token for the next set of results.
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: <p>The maximum number of results to return in this request.</p> <p>The default value is 100.</p>
+          type: integer
+          minimum: 1
+          maximum: 250
   '/channels/{channelName}':
     delete:
       operationId: DeleteChannel
@@ -704,15 +852,14 @@ paths:
           schema:
             $ref: '#/definitions/ThrottlingException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteChannelRequest'
         - name: channelName
-          type: string
           in: path
           required: true
+          description: The name of the channel to delete.
+          type: string
+          pattern: '^[a-zA-Z0-9_]+$'
+          minLength: 1
+          maxLength: 128
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -752,15 +899,19 @@ paths:
           schema:
             $ref: '#/definitions/ThrottlingException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeChannelRequest'
         - name: channelName
-          type: string
           in: path
           required: true
+          description: The name of the channel whose information is retrieved.
+          type: string
+          pattern: '^[a-zA-Z0-9_]+$'
+          minLength: 1
+          maxLength: 128
+        - name: includeStatistics
+          in: query
+          required: false
+          description: 'If true, additional statistical information about the channel is included in the response.'
+          type: boolean
     put:
       operationId: UpdateChannel
       description: Updates the settings of a channel.
@@ -788,15 +939,30 @@ paths:
           schema:
             $ref: '#/definitions/ThrottlingException'
       parameters:
+        - name: channelName
+          in: path
+          required: true
+          description: The name of the channel to be updated.
+          type: string
+          pattern: '^[a-zA-Z0-9_]+$'
+          minLength: 1
+          maxLength: 128
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateChannelRequest'
-        - name: channelName
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              retentionPeriod:
+                description: 'How long, in days, message data is kept.'
+                type: object
+                properties:
+                  unlimited:
+                    $ref: '#/definitions/UnlimitedRetentionPeriod'
+                    description: 'If true, message data is kept indefinitely.'
+                  numberOfDays:
+                    $ref: '#/definitions/RetentionPeriodInDays'
+                    description: The number of days that message data is kept. The "unlimited" parameter must be false.
   '/datasets/{datasetName}':
     delete:
       operationId: DeleteDataset
@@ -825,15 +991,14 @@ paths:
           schema:
             $ref: '#/definitions/ThrottlingException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteDatasetRequest'
         - name: datasetName
-          type: string
           in: path
           required: true
+          description: The name of the data set to delete.
+          type: string
+          pattern: '^[a-zA-Z0-9_]+$'
+          minLength: 1
+          maxLength: 128
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -873,15 +1038,14 @@ paths:
           schema:
             $ref: '#/definitions/ThrottlingException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeDatasetRequest'
         - name: datasetName
-          type: string
           in: path
           required: true
+          description: The name of the data set whose information is retrieved.
+          type: string
+          pattern: '^[a-zA-Z0-9_]+$'
+          minLength: 1
+          maxLength: 128
     put:
       operationId: UpdateDataset
       description: Updates the settings of a data set.
@@ -909,15 +1073,63 @@ paths:
           schema:
             $ref: '#/definitions/ThrottlingException'
       parameters:
+        - name: datasetName
+          in: path
+          required: true
+          description: The name of the data set to update.
+          type: string
+          pattern: '^[a-zA-Z0-9_]+$'
+          minLength: 1
+          maxLength: 128
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateDatasetRequest'
-        - name: datasetName
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - actions
+            properties:
+              actions:
+                description: A list of "DatasetAction" objects.
+                type: array
+                items:
+                  $ref: '#/definitions/DatasetAction'
+                minItems: 1
+                maxItems: 1
+              triggers:
+                description: A list of "DatasetTrigger" objects. The list can be empty or can contain up to five <b>DataSetTrigger</b> objects.
+                type: array
+                items:
+                  $ref: '#/definitions/DatasetTrigger'
+                minItems: 0
+                maxItems: 5
+              contentDeliveryRules:
+                description: When data set contents are created they are delivered to destinations specified here.
+                type: array
+                items:
+                  $ref: '#/definitions/DatasetContentDeliveryRule'
+                minItems: 0
+                maxItems: 20
+              retentionPeriod:
+                description: 'How long, in days, message data is kept.'
+                type: object
+                properties:
+                  unlimited:
+                    $ref: '#/definitions/UnlimitedRetentionPeriod'
+                    description: 'If true, message data is kept indefinitely.'
+                  numberOfDays:
+                    $ref: '#/definitions/RetentionPeriodInDays'
+                    description: The number of days that message data is kept. The "unlimited" parameter must be false.
+              versioningConfiguration:
+                description: '[Optional] How many versions of data set contents are kept. If not specified or set to null, only the latest version plus the latest succeeded version (if they are different) are kept for the time period specified by the "retentionPeriod" parameter. (For more information, see https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)'
+                type: object
+                properties:
+                  unlimited:
+                    $ref: '#/definitions/UnlimitedVersioning'
+                    description: 'If true, unlimited versions of data set contents will be kept.'
+                  maxVersions:
+                    $ref: '#/definitions/MaxVersions'
+                    description: How many versions of data set contents will be kept. The "unlimited" parameter must be false.
   '/datastores/{datastoreName}':
     delete:
       operationId: DeleteDatastore
@@ -946,15 +1158,14 @@ paths:
           schema:
             $ref: '#/definitions/ThrottlingException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteDatastoreRequest'
         - name: datastoreName
-          type: string
           in: path
           required: true
+          description: The name of the data store to delete.
+          type: string
+          pattern: '^[a-zA-Z0-9_]+$'
+          minLength: 1
+          maxLength: 128
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -994,15 +1205,19 @@ paths:
           schema:
             $ref: '#/definitions/ThrottlingException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeDatastoreRequest'
         - name: datastoreName
-          type: string
           in: path
           required: true
+          description: The name of the data store
+          type: string
+          pattern: '^[a-zA-Z0-9_]+$'
+          minLength: 1
+          maxLength: 128
+        - name: includeStatistics
+          in: query
+          required: false
+          description: 'If true, additional statistical information about the datastore is included in the response.'
+          type: boolean
     put:
       operationId: UpdateDatastore
       description: Updates the settings of a data store.
@@ -1030,15 +1245,30 @@ paths:
           schema:
             $ref: '#/definitions/ThrottlingException'
       parameters:
+        - name: datastoreName
+          in: path
+          required: true
+          description: The name of the data store to be updated.
+          type: string
+          pattern: '^[a-zA-Z0-9_]+$'
+          minLength: 1
+          maxLength: 128
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateDatastoreRequest'
-        - name: datastoreName
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              retentionPeriod:
+                description: 'How long, in days, message data is kept.'
+                type: object
+                properties:
+                  unlimited:
+                    $ref: '#/definitions/UnlimitedRetentionPeriod'
+                    description: 'If true, message data is kept indefinitely.'
+                  numberOfDays:
+                    $ref: '#/definitions/RetentionPeriodInDays'
+                    description: The number of days that message data is kept. The "unlimited" parameter must be false.
   '/pipelines/{pipelineName}':
     delete:
       operationId: DeletePipeline
@@ -1067,15 +1297,14 @@ paths:
           schema:
             $ref: '#/definitions/ThrottlingException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeletePipelineRequest'
         - name: pipelineName
-          type: string
           in: path
           required: true
+          description: The name of the pipeline to delete.
+          type: string
+          pattern: '^[a-zA-Z0-9_]+$'
+          minLength: 1
+          maxLength: 128
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1115,15 +1344,14 @@ paths:
           schema:
             $ref: '#/definitions/ThrottlingException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribePipelineRequest'
         - name: pipelineName
-          type: string
           in: path
           required: true
+          description: The name of the pipeline whose information is retrieved.
+          type: string
+          pattern: '^[a-zA-Z0-9_]+$'
+          minLength: 1
+          maxLength: 128
     put:
       operationId: UpdatePipeline
       description: 'Updates the settings of a pipeline. You must specify both a <code>channel</code> and a <code>datastore</code> activity and, optionally, as many as 23 additional activities in the <code>pipelineActivities</code> array.'
@@ -1155,15 +1383,29 @@ paths:
           schema:
             $ref: '#/definitions/LimitExceededException'
       parameters:
+        - name: pipelineName
+          in: path
+          required: true
+          description: The name of the pipeline to update.
+          type: string
+          pattern: '^[a-zA-Z0-9_]+$'
+          minLength: 1
+          maxLength: 128
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdatePipelineRequest'
-        - name: pipelineName
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - pipelineActivities
+            properties:
+              pipelineActivities:
+                description: '<p>A list of "PipelineActivity" objects. Activities perform transformations on your messages, such as removing, renaming or adding message attributes; filtering messages based on attribute values; invoking your Lambda functions on messages for advanced processing; or performing mathematical transformations to normalize device data.</p> <p>The list can be 2-25 <b>PipelineActivity</b> objects and must contain both a <code>channel</code> and a <code>datastore</code> activity. Each entry in the list must contain only one activity, for example:</p> <p> <code>pipelineActivities = [ { "channel": { ... } }, { "lambda": { ... } }, ... ]</code> </p>'
+                type: array
+                items:
+                  $ref: '#/definitions/PipelineActivity'
+                minItems: 1
+                maxItems: 25
   /logging:
     get:
       operationId: DescribeLoggingOptions
@@ -1193,12 +1435,7 @@ paths:
           description: ThrottlingException
           schema:
             $ref: '#/definitions/ThrottlingException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeLoggingOptionsRequest'
+      parameters: []
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1236,7 +1473,23 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/PutLoggingOptionsRequest'
+            type: object
+            required:
+              - loggingOptions
+            properties:
+              loggingOptions:
+                description: Information about logging options.
+                type: object
+                properties:
+                  roleArn:
+                    $ref: '#/definitions/RoleArn'
+                    description: The ARN of the role that grants permission to AWS IoT Analytics to perform logging.
+                  level:
+                    $ref: '#/definitions/LoggingLevel'
+                    description: 'The logging level. Currently, only "ERROR" is supported.'
+                  enabled:
+                    $ref: '#/definitions/LoggingEnabled'
+                    description: 'If true, logging is enabled for AWS IoT Analytics.'
   '/datasets/{datasetName}/contents':
     get:
       operationId: ListDatasetContents
@@ -1267,25 +1520,38 @@ paths:
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListDatasetContentsRequest'
-        - name: maxResults
-          type: string
-          in: query
-          description: Pagination limit
-          required: false
-        - name: nextToken
-          type: string
-          in: query
-          description: Pagination token
-          required: false
         - name: datasetName
-          type: string
           in: path
           required: true
+          description: The name of the data set whose contents information you want to list.
+          type: string
+          pattern: '^[a-zA-Z0-9_]+$'
+          minLength: 1
+          maxLength: 128
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next set of results.
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to return in this request.
+          type: integer
+          minimum: 1
+          maximum: 250
+        - name: scheduledOnOrAfter
+          in: query
+          required: false
+          description: A filter to limit results to those data set contents whose creation is scheduled on or after the given time. See the field <code>triggers.schedule</code> in the CreateDataset request. (timestamp)
+          type: string
+          format: date-time
+        - name: scheduledBefore
+          in: query
+          required: false
+          description: A filter to limit results to those data set contents whose creation is scheduled before the given time. See the field <code>triggers.schedule</code> in the CreateDataset request. (timestamp)
+          type: string
+          format: date-time
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1296,7 +1562,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /tags:
+  '/tags#resourceArn':
     get:
       operationId: ListTagsForResource
       description: Lists the tags (metadata) which you have assigned to the resource.
@@ -1330,11 +1596,13 @@ paths:
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
       parameters:
-        - name: body
-          in: body
+        - name: resourceArn
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/ListTagsForResourceRequest'
+          description: The ARN of the resource whose tags you want to list.
+          type: string
+          minLength: 20
+          maxLength: 2048
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1378,49 +1646,28 @@ paths:
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
       parameters:
+        - name: resourceArn
+          in: query
+          required: true
+          description: The ARN of the resource whose tags you want to modify.
+          type: string
+          minLength: 20
+          maxLength: 2048
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/TagResourceRequest'
-    delete:
-      operationId: UntagResource
-      description: Removes the given tags (metadata) from the resource.
-      responses:
-        '204':
-          description: Success
-          schema:
-            $ref: '#/definitions/UntagResourceResponse'
-        '480':
-          description: InvalidRequestException
-          schema:
-            $ref: '#/definitions/InvalidRequestException'
-        '481':
-          description: InternalFailureException
-          schema:
-            $ref: '#/definitions/InternalFailureException'
-        '482':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '483':
-          description: ThrottlingException
-          schema:
-            $ref: '#/definitions/ThrottlingException'
-        '484':
-          description: LimitExceededException
-          schema:
-            $ref: '#/definitions/LimitExceededException'
-        '485':
-          description: ResourceNotFoundException
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/UntagResourceRequest'
+            type: object
+            required:
+              - tags
+            properties:
+              tags:
+                description: The new or modified tags for the resource.
+                type: array
+                items:
+                  $ref: '#/definitions/Tag'
+                minItems: 1
+                maxItems: 50
   /pipelineactivities/run:
     post:
       operationId: RunPipelineActivity
@@ -1451,7 +1698,52 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/RunPipelineActivityRequest'
+            type: object
+            required:
+              - pipelineActivity
+              - payloads
+            properties:
+              pipelineActivity:
+                description: An activity that performs a transformation on a message.
+                type: object
+                properties:
+                  channel:
+                    $ref: '#/definitions/ChannelActivity'
+                    description: Determines the source of the messages to be processed.
+                  lambda:
+                    $ref: '#/definitions/LambdaActivity'
+                    description: Runs a Lambda function to modify the message.
+                  datastore:
+                    $ref: '#/definitions/DatastoreActivity'
+                    description: Specifies where to store the processed message data.
+                  addAttributes:
+                    $ref: '#/definitions/AddAttributesActivity'
+                    description: Adds other attributes based on existing attributes in the message.
+                  removeAttributes:
+                    $ref: '#/definitions/RemoveAttributesActivity'
+                    description: Removes attributes from a message.
+                  selectAttributes:
+                    $ref: '#/definitions/SelectAttributesActivity'
+                    description: 'Creates a new message using only the specified attributes from the original message. '
+                  filter:
+                    $ref: '#/definitions/FilterActivity'
+                    description: Filters a message based on its attributes.
+                  math:
+                    $ref: '#/definitions/MathActivity'
+                    description: Computes an arithmetic expression using the message's attributes and adds it to the message.
+                  deviceRegistryEnrich:
+                    $ref: '#/definitions/DeviceRegistryEnrichActivity'
+                    description: Adds data from the AWS IoT device registry to your message.
+                  deviceShadowEnrich:
+                    $ref: '#/definitions/DeviceShadowEnrichActivity'
+                    description: Adds information from the AWS IoT Device Shadows service to a message.
+              payloads:
+                description: The sample message payloads on which the pipeline activity is run.
+                type: array
+                items:
+                  $ref: '#/definitions/MessagePayload'
+                minItems: 1
+                maxItems: 10
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1492,15 +1784,33 @@ paths:
           schema:
             $ref: '#/definitions/ThrottlingException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/SampleChannelDataRequest'
         - name: channelName
-          type: string
           in: path
           required: true
+          description: The name of the channel whose message samples are retrieved.
+          type: string
+          pattern: '^[a-zA-Z0-9_]+$'
+          minLength: 1
+          maxLength: 128
+        - name: maxMessages
+          in: query
+          required: false
+          description: 'The number of sample messages to be retrieved. The limit is 10, the default is also 10.'
+          type: integer
+          minimum: 1
+          maximum: 10
+        - name: startTime
+          in: query
+          required: false
+          description: The start of the time window from which sample messages are retrieved.
+          type: string
+          format: date-time
+        - name: endTime
+          in: query
+          required: false
+          description: The end of the time window from which sample messages are retrieved.
+          type: string
+          format: date-time
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1545,15 +1855,86 @@ paths:
           schema:
             $ref: '#/definitions/ThrottlingException'
       parameters:
+        - name: pipelineName
+          in: path
+          required: true
+          description: The name of the pipeline on which to start reprocessing.
+          type: string
+          pattern: '^[a-zA-Z0-9_]+$'
+          minLength: 1
+          maxLength: 128
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/StartPipelineReprocessingRequest'
-        - name: pipelineName
-          type: string
-          in: path
+            type: object
+            properties:
+              startTime:
+                description: The start time (inclusive) of raw message data that is reprocessed.
+                type: string
+                format: date-time
+              endTime:
+                description: The end time (exclusive) of raw message data that is reprocessed.
+                type: string
+                format: date-time
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/tags#resourceArn&tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Removes the given tags (metadata) from the resource.
+      responses:
+        '204':
+          description: Success
+          schema:
+            $ref: '#/definitions/UntagResourceResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '485':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: resourceArn
+          in: query
           required: true
+          description: The ARN of the resource whose tags you want to remove.
+          type: string
+          minLength: 20
+          maxLength: 2048
+        - name: tagKeys
+          in: query
+          required: true
+          description: The keys of those tags which you want to remove.
+          type: array
+          items:
+            type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1571,27 +1952,25 @@ definitions:
       batchPutMessageErrorEntries:
         $ref: '#/definitions/BatchPutMessageErrorEntries'
         description: A list of any errors encountered when sending the messages to the channel.
-  BatchPutMessageRequest:
+  Message:
     type: object
     required:
-      - channelName
-      - messages
+      - messageId
+      - payload
     properties:
-      channelName:
-        $ref: '#/definitions/ChannelName'
-        description: The name of the channel where the messages are sent.
-      messages:
-        $ref: '#/definitions/Messages'
-        description: '<p>The list of messages to be sent. Each message has format: ''{ "messageId": "string", "payload": "string"}''.</p> <p>Note that the field names of message payloads (data) that you send to AWS IoT Analytics:</p> <ul> <li> <p>Must contain only alphanumeric characters and undescores (_); no other special characters are allowed.</p> </li> <li> <p>Must begin with an alphabetic character or single underscore (_).</p> </li> <li> <p>Cannot contain hyphens (-).</p> </li> <li> <p>In regular expression terms: "^[A-Za-z_]([A-Za-z0-9]*|[A-Za-z0-9][A-Za-z0-9_]*)$". </p> </li> <li> <p>Cannot be greater than 255 characters.</p> </li> <li> <p>Are case-insensitive. (Fields named "foo" and "FOO" in the same payload are considered duplicates.)</p> </li> </ul> <p>For example, {"temp_01": 29} or {"_temp_01": 29} are valid, but {"temp-01": 29}, {"01_temp": 29} or {"__temp_01": 29} are invalid in message payloads. </p>'
+      messageId:
+        $ref: '#/definitions/MessageId'
+        description: The ID you wish to assign to the message. Each "messageId" must be unique within each batch sent.
+      payload:
+        $ref: '#/definitions/MessagePayload'
+        description: The payload of the message. This may be a JSON string or a Base64-encoded string representing binary data (in which case you must decode it by means of a pipeline activity).
+    description: Information about a message.
   ResourceNotFoundException: {}
   InvalidRequestException: {}
   InternalFailureException: {}
   ServiceUnavailableException: {}
   ThrottlingException: {}
   CancelPipelineReprocessingResponse:
-    type: object
-    properties: {}
-  CancelPipelineReprocessingRequest:
     type: object
     properties: {}
   CreateChannelResponse:
@@ -1606,20 +1985,24 @@ definitions:
       retentionPeriod:
         $ref: '#/definitions/RetentionPeriod'
         description: 'How long, in days, message data is kept for the channel.'
-  CreateChannelRequest:
+  UnlimitedRetentionPeriod:
+    type: boolean
+  RetentionPeriodInDays:
+    type: integer
+    minimum: 1
+  Tag:
     type: object
     required:
-      - channelName
+      - key
+      - value
     properties:
-      channelName:
-        $ref: '#/definitions/ChannelName'
-        description: The name of the channel.
-      retentionPeriod:
-        $ref: '#/definitions/RetentionPeriod'
-        description: 'How long, in days, message data is kept for the channel.'
-      tags:
-        $ref: '#/definitions/TagList'
-        description: Metadata which can be used to manage the channel.
+      key:
+        $ref: '#/definitions/TagKey'
+        description: The tag's key.
+      value:
+        $ref: '#/definitions/TagValue'
+        description: The tag's value.
+    description: A set of key/value pairs which are used to manage the resource.
   ResourceAlreadyExistsException: {}
   LimitExceededException: {}
   CreateDatasetResponse:
@@ -1634,42 +2017,53 @@ definitions:
       retentionPeriod:
         $ref: '#/definitions/RetentionPeriod'
         description: 'How long, in days, data set contents are kept for the data set.'
-  CreateDatasetRequest:
+  DatasetAction:
+    type: object
+    properties:
+      actionName:
+        $ref: '#/definitions/DatasetActionName'
+        description: The name of the data set action by which data set contents are automatically created.
+      queryAction:
+        $ref: '#/definitions/SqlQueryDatasetAction'
+        description: An "SqlQueryDatasetAction" object that uses an SQL query to automatically create data set contents.
+      containerAction:
+        $ref: '#/definitions/ContainerDatasetAction'
+        description: Information which allows the system to run a containerized application in order to create the data set contents. The application must be in a Docker container along with any needed support libraries.
+    description: A "DatasetAction" object that specifies how data set contents are automatically created.
+  DatasetTrigger:
+    type: object
+    properties:
+      schedule:
+        $ref: '#/definitions/Schedule'
+        description: The "Schedule" when the trigger is initiated.
+      dataset:
+        $ref: '#/definitions/TriggeringDataset'
+        description: The data set whose content creation triggers the creation of this data set's contents.
+    description: The "DatasetTrigger" that specifies when the data set is automatically updated.
+  DatasetContentDeliveryRule:
     type: object
     required:
-      - datasetName
-      - actions
+      - destination
     properties:
-      datasetName:
-        $ref: '#/definitions/DatasetName'
-        description: The name of the data set.
-      actions:
-        $ref: '#/definitions/DatasetActions'
-        description: A list of actions that create the data set contents.
-      triggers:
-        $ref: '#/definitions/DatasetTriggers'
-        description: A list of triggers. A trigger causes data set contents to be populated at a specified time interval or when another data set's contents are created. The list of triggers can be empty or contain up to five <b>DataSetTrigger</b> objects.
-      contentDeliveryRules:
-        $ref: '#/definitions/DatasetContentDeliveryRules'
-        description: When data set contents are created they are delivered to destinations specified here.
-      retentionPeriod:
-        $ref: '#/definitions/RetentionPeriod'
-        description: '[Optional] How long, in days, versions of data set contents are kept for the data set. If not specified or set to null, versions of data set contents are retained for at most 90 days. The number of versions of data set contents retained is determined by the <code>versioningConfiguration</code> parameter. (For more information, see https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)'
-      versioningConfiguration:
-        $ref: '#/definitions/VersioningConfiguration'
-        description: '[Optional] How many versions of data set contents are kept. If not specified or set to null, only the latest version plus the latest succeeded version (if they are different) are kept for the time period specified by the "retentionPeriod" parameter. (For more information, see https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)'
-      tags:
-        $ref: '#/definitions/TagList'
-        description: Metadata which can be used to manage the data set.
+      entryName:
+        $ref: '#/definitions/EntryName'
+        description: The name of the data set content delivery rules entry.
+      destination:
+        $ref: '#/definitions/DatasetContentDeliveryDestination'
+        description: The destination to which data set contents are delivered.
+    description: When data set contents are created they are delivered to destination specified here.
+  UnlimitedVersioning:
+    type: boolean
+  MaxVersions:
+    type: integer
+    minimum: 1
+    maximum: 1000
   CreateDatasetContentResponse:
     type: object
     properties:
       versionId:
         $ref: '#/definitions/DatasetContentVersion'
         description: The version ID of the data set contents which are being created.
-  CreateDatasetContentRequest:
-    type: object
-    properties: {}
   CreateDatastoreResponse:
     type: object
     properties:
@@ -1682,20 +2076,6 @@ definitions:
       retentionPeriod:
         $ref: '#/definitions/RetentionPeriod'
         description: 'How long, in days, message data is kept for the data store.'
-  CreateDatastoreRequest:
-    type: object
-    required:
-      - datastoreName
-    properties:
-      datastoreName:
-        $ref: '#/definitions/DatastoreName'
-        description: The name of the data store.
-      retentionPeriod:
-        $ref: '#/definitions/RetentionPeriod'
-        description: 'How long, in days, message data is kept for the data store.'
-      tags:
-        $ref: '#/definitions/TagList'
-        description: Metadata which can be used to manage the data store.
   CreatePipelineResponse:
     type: object
     properties:
@@ -1705,36 +2085,40 @@ definitions:
       pipelineArn:
         $ref: '#/definitions/PipelineArn'
         description: The ARN of the pipeline.
-  CreatePipelineRequest:
+  PipelineActivity:
     type: object
-    required:
-      - pipelineName
-      - pipelineActivities
     properties:
-      pipelineName:
-        $ref: '#/definitions/PipelineName'
-        description: The name of the pipeline.
-      pipelineActivities:
-        $ref: '#/definitions/PipelineActivities'
-        description: '<p>A list of "PipelineActivity" objects. Activities perform transformations on your messages, such as removing, renaming or adding message attributes; filtering messages based on attribute values; invoking your Lambda functions on messages for advanced processing; or performing mathematical transformations to normalize device data.</p> <p>The list can be 2-25 <b>PipelineActivity</b> objects and must contain both a <code>channel</code> and a <code>datastore</code> activity. Each entry in the list must contain only one activity, for example:</p> <p> <code>pipelineActivities = [ { "channel": { ... } }, { "lambda": { ... } }, ... ]</code> </p>'
-      tags:
-        $ref: '#/definitions/TagList'
-        description: Metadata which can be used to manage the pipeline.
-  DeleteChannelRequest:
-    type: object
-    properties: {}
-  DeleteDatasetRequest:
-    type: object
-    properties: {}
-  DeleteDatasetContentRequest:
-    type: object
-    properties: {}
-  DeleteDatastoreRequest:
-    type: object
-    properties: {}
-  DeletePipelineRequest:
-    type: object
-    properties: {}
+      channel:
+        $ref: '#/definitions/ChannelActivity'
+        description: Determines the source of the messages to be processed.
+      lambda:
+        $ref: '#/definitions/LambdaActivity'
+        description: Runs a Lambda function to modify the message.
+      datastore:
+        $ref: '#/definitions/DatastoreActivity'
+        description: Specifies where to store the processed message data.
+      addAttributes:
+        $ref: '#/definitions/AddAttributesActivity'
+        description: Adds other attributes based on existing attributes in the message.
+      removeAttributes:
+        $ref: '#/definitions/RemoveAttributesActivity'
+        description: Removes attributes from a message.
+      selectAttributes:
+        $ref: '#/definitions/SelectAttributesActivity'
+        description: 'Creates a new message using only the specified attributes from the original message. '
+      filter:
+        $ref: '#/definitions/FilterActivity'
+        description: Filters a message based on its attributes.
+      math:
+        $ref: '#/definitions/MathActivity'
+        description: Computes an arithmetic expression using the message's attributes and adds it to the message.
+      deviceRegistryEnrich:
+        $ref: '#/definitions/DeviceRegistryEnrichActivity'
+        description: Adds data from the AWS IoT device registry to your message.
+      deviceShadowEnrich:
+        $ref: '#/definitions/DeviceShadowEnrichActivity'
+        description: Adds information from the AWS IoT Device Shadows service to a message.
+    description: An activity that performs a transformation on a message.
   DescribeChannelResponse:
     type: object
     properties:
@@ -1744,18 +2128,12 @@ definitions:
       statistics:
         $ref: '#/definitions/ChannelStatistics'
         description: Statistics about the channel. Included if the 'includeStatistics' parameter is set to true in the request.
-  DescribeChannelRequest:
-    type: object
-    properties: {}
   DescribeDatasetResponse:
     type: object
     properties:
       dataset:
         $ref: '#/definitions/Dataset'
         description: An object that contains information about the data set.
-  DescribeDatasetRequest:
-    type: object
-    properties: {}
   DescribeDatastoreResponse:
     type: object
     properties:
@@ -1765,27 +2143,18 @@ definitions:
       statistics:
         $ref: '#/definitions/DatastoreStatistics'
         description: Additional statistical information about the data store. Included if the 'includeStatistics' parameter is set to true in the request.
-  DescribeDatastoreRequest:
-    type: object
-    properties: {}
   DescribeLoggingOptionsResponse:
     type: object
     properties:
       loggingOptions:
         $ref: '#/definitions/LoggingOptions'
         description: The current settings of the AWS IoT Analytics logging options.
-  DescribeLoggingOptionsRequest:
-    type: object
-    properties: {}
   DescribePipelineResponse:
     type: object
     properties:
       pipeline:
         $ref: '#/definitions/Pipeline'
         description: A "Pipeline" object that contains information about the pipeline.
-  DescribePipelineRequest:
-    type: object
-    properties: {}
   GetDatasetContentResponse:
     type: object
     properties:
@@ -1798,9 +2167,6 @@ definitions:
       status:
         $ref: '#/definitions/DatasetContentStatus'
         description: The status of the data set content.
-  GetDatasetContentRequest:
-    type: object
-    properties: {}
   ListChannelsResponse:
     type: object
     properties:
@@ -1810,9 +2176,6 @@ definitions:
       nextToken:
         $ref: '#/definitions/NextToken'
         description: 'The token to retrieve the next set of results, or <code>null</code> if there are no more results.'
-  ListChannelsRequest:
-    type: object
-    properties: {}
   ListDatasetContentsResponse:
     type: object
     properties:
@@ -1822,9 +2185,6 @@ definitions:
       nextToken:
         $ref: '#/definitions/NextToken'
         description: 'The token to retrieve the next set of results, or <code>null</code> if there are no more results.'
-  ListDatasetContentsRequest:
-    type: object
-    properties: {}
   ListDatasetsResponse:
     type: object
     properties:
@@ -1834,9 +2194,6 @@ definitions:
       nextToken:
         $ref: '#/definitions/NextToken'
         description: 'The token to retrieve the next set of results, or <code>null</code> if there are no more results.'
-  ListDatasetsRequest:
-    type: object
-    properties: {}
   ListDatastoresResponse:
     type: object
     properties:
@@ -1846,9 +2203,6 @@ definitions:
       nextToken:
         $ref: '#/definitions/NextToken'
         description: 'The token to retrieve the next set of results, or <code>null</code> if there are no more results.'
-  ListDatastoresRequest:
-    type: object
-    properties: {}
   ListPipelinesResponse:
     type: object
     properties:
@@ -1858,26 +2212,22 @@ definitions:
       nextToken:
         $ref: '#/definitions/NextToken'
         description: 'The token to retrieve the next set of results, or <code>null</code> if there are no more results.'
-  ListPipelinesRequest:
-    type: object
-    properties: {}
   ListTagsForResourceResponse:
     type: object
     properties:
       tags:
         $ref: '#/definitions/TagList'
         description: The tags (metadata) which you have assigned to the resource.
-  ListTagsForResourceRequest:
-    type: object
-    properties: {}
-  PutLoggingOptionsRequest:
-    type: object
-    required:
-      - loggingOptions
-    properties:
-      loggingOptions:
-        $ref: '#/definitions/LoggingOptions'
-        description: The new values of the AWS IoT Analytics logging options.
+  RoleArn:
+    type: string
+    minLength: 20
+    maxLength: 2048
+  LoggingLevel:
+    type: string
+    enum:
+      - ERROR
+  LoggingEnabled:
+    type: boolean
   RunPipelineActivityResponse:
     type: object
     properties:
@@ -1887,118 +2237,55 @@ definitions:
       logResult:
         $ref: '#/definitions/LogResult'
         description: 'In case the pipeline activity fails, the log message that is generated.'
-  RunPipelineActivityRequest:
+  ChannelActivity:
     type: object
     required:
-      - pipelineActivity
-      - payloads
+      - name
+      - channelName
     properties:
-      pipelineActivity:
-        $ref: '#/definitions/PipelineActivity'
-        description: 'The pipeline activity that is run. This must not be a ''channel'' activity or a ''datastore'' activity because these activities are used in a pipeline only to load the original message and to store the (possibly) transformed message. If a ''lambda'' activity is specified, only short-running Lambda functions (those with a timeout of less than 30 seconds or less) can be used.'
-      payloads:
-        $ref: '#/definitions/MessagePayloads'
-        description: The sample message payloads on which the pipeline activity is run.
-  SampleChannelDataResponse:
-    type: object
-    properties:
-      payloads:
-        $ref: '#/definitions/MessagePayloads'
-        description: The list of message samples. Each sample message is returned as a base64-encoded string.
-  SampleChannelDataRequest:
-    type: object
-    properties: {}
-  StartPipelineReprocessingResponse:
-    type: object
-    properties:
-      reprocessingId:
-        $ref: '#/definitions/ReprocessingId'
-        description: The ID of the pipeline reprocessing activity that was started.
-  StartPipelineReprocessingRequest:
-    type: object
-    properties:
-      startTime:
-        $ref: '#/definitions/StartTime'
-        description: The start time (inclusive) of raw message data that is reprocessed.
-      endTime:
-        $ref: '#/definitions/EndTime'
-        description: The end time (exclusive) of raw message data that is reprocessed.
-  TagResourceResponse:
-    type: object
-    properties: {}
-  TagResourceRequest:
+      name:
+        $ref: '#/definitions/ActivityName'
+        description: The name of the 'channel' activity.
+      channelName:
+        $ref: '#/definitions/ChannelName'
+        description: The name of the channel from which the messages are processed.
+      next:
+        $ref: '#/definitions/ActivityName'
+        description: The next activity in the pipeline.
+    description: The activity that determines the source of the messages to be processed.
+  LambdaActivity:
     type: object
     required:
-      - tags
+      - name
+      - lambdaName
+      - batchSize
     properties:
-      tags:
-        $ref: '#/definitions/TagList'
-        description: The new or modified tags for the resource.
-  UntagResourceResponse:
-    type: object
-    properties: {}
-  UntagResourceRequest:
-    type: object
-    properties: {}
-  UpdateChannelRequest:
-    type: object
-    properties:
-      retentionPeriod:
-        $ref: '#/definitions/RetentionPeriod'
-        description: 'How long, in days, message data is kept for the channel.'
-  UpdateDatasetRequest:
+      name:
+        $ref: '#/definitions/ActivityName'
+        description: The name of the 'lambda' activity.
+      lambdaName:
+        $ref: '#/definitions/LambdaName'
+        description: The name of the Lambda function that is run on the message.
+      batchSize:
+        $ref: '#/definitions/ActivityBatchSize'
+        description: '<p>The number of messages passed to the Lambda function for processing.</p> <p>The AWS Lambda function must be able to process all of these messages within five minutes, which is the maximum timeout duration for Lambda functions.</p>'
+      next:
+        $ref: '#/definitions/ActivityName'
+        description: The next activity in the pipeline.
+    description: An activity that runs a Lambda function to modify the message.
+  DatastoreActivity:
     type: object
     required:
-      - actions
+      - name
+      - datastoreName
     properties:
-      actions:
-        $ref: '#/definitions/DatasetActions'
-        description: A list of "DatasetAction" objects.
-      triggers:
-        $ref: '#/definitions/DatasetTriggers'
-        description: A list of "DatasetTrigger" objects. The list can be empty or can contain up to five <b>DataSetTrigger</b> objects.
-      contentDeliveryRules:
-        $ref: '#/definitions/DatasetContentDeliveryRules'
-        description: When data set contents are created they are delivered to destinations specified here.
-      retentionPeriod:
-        $ref: '#/definitions/RetentionPeriod'
-        description: 'How long, in days, data set contents are kept for the data set.'
-      versioningConfiguration:
-        $ref: '#/definitions/VersioningConfiguration'
-        description: '[Optional] How many versions of data set contents are kept. If not specified or set to null, only the latest version plus the latest succeeded version (if they are different) are kept for the time period specified by the "retentionPeriod" parameter. (For more information, see https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)'
-  UpdateDatastoreRequest:
-    type: object
-    properties:
-      retentionPeriod:
-        $ref: '#/definitions/RetentionPeriod'
-        description: 'How long, in days, message data is kept for the data store.'
-  UpdatePipelineRequest:
-    type: object
-    required:
-      - pipelineActivities
-    properties:
-      pipelineActivities:
-        $ref: '#/definitions/PipelineActivities'
-        description: '<p>A list of "PipelineActivity" objects. Activities perform transformations on your messages, such as removing, renaming or adding message attributes; filtering messages based on attribute values; invoking your Lambda functions on messages for advanced processing; or performing mathematical transformations to normalize device data.</p> <p>The list can be 2-25 <b>PipelineActivity</b> objects and must contain both a <code>channel</code> and a <code>datastore</code> activity. Each entry in the list must contain only one activity, for example:</p> <p> <code>pipelineActivities = [ { "channel": { ... } }, { "lambda": { ... } }, ... ]</code> </p>'
-  ActivityBatchSize:
-    type: integer
-    minimum: 1
-    maximum: 1000
-  ActivityName:
-    type: string
-    minLength: 1
-    maxLength: 128
-  AttributeNameMapping:
-    type: array
-    minItems: 1
-    maxItems: 50
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/AttributeName'
-        value:
-          $ref: '#/definitions/AttributeName'
+      name:
+        $ref: '#/definitions/ActivityName'
+        description: The name of the 'datastore' activity.
+      datastoreName:
+        $ref: '#/definitions/DatastoreName'
+        description: The name of the data store where processed messages are stored.
+    description: The 'datastore' activity that specifies where to store the processed data.
   AddAttributesActivity:
     type: object
     required:
@@ -2015,6 +2302,160 @@ definitions:
         $ref: '#/definitions/ActivityName'
         description: The next activity in the pipeline.
     description: An activity that adds other attributes based on existing attributes in the message.
+  RemoveAttributesActivity:
+    type: object
+    required:
+      - name
+      - attributes
+    properties:
+      name:
+        $ref: '#/definitions/ActivityName'
+        description: The name of the 'removeAttributes' activity.
+      attributes:
+        $ref: '#/definitions/AttributeNames'
+        description: A list of 1-50 attributes to remove from the message.
+      next:
+        $ref: '#/definitions/ActivityName'
+        description: The next activity in the pipeline.
+    description: An activity that removes attributes from a message.
+  SelectAttributesActivity:
+    type: object
+    required:
+      - name
+      - attributes
+    properties:
+      name:
+        $ref: '#/definitions/ActivityName'
+        description: The name of the 'selectAttributes' activity.
+      attributes:
+        $ref: '#/definitions/AttributeNames'
+        description: A list of the attributes to select from the message.
+      next:
+        $ref: '#/definitions/ActivityName'
+        description: The next activity in the pipeline.
+    description: Creates a new message using only the specified attributes from the original message.
+  FilterActivity:
+    type: object
+    required:
+      - name
+      - filter
+    properties:
+      name:
+        $ref: '#/definitions/ActivityName'
+        description: The name of the 'filter' activity.
+      filter:
+        $ref: '#/definitions/FilterExpression'
+        description: An expression that looks like a SQL WHERE clause that must return a Boolean value.
+      next:
+        $ref: '#/definitions/ActivityName'
+        description: The next activity in the pipeline.
+    description: An activity that filters a message based on its attributes.
+  MathActivity:
+    type: object
+    required:
+      - name
+      - attribute
+      - math
+    properties:
+      name:
+        $ref: '#/definitions/ActivityName'
+        description: The name of the 'math' activity.
+      attribute:
+        $ref: '#/definitions/AttributeName'
+        description: The name of the attribute that contains the result of the math operation.
+      math:
+        $ref: '#/definitions/MathExpression'
+        description: An expression that uses one or more existing attributes and must return an integer value.
+      next:
+        $ref: '#/definitions/ActivityName'
+        description: The next activity in the pipeline.
+    description: An activity that computes an arithmetic expression using the message's attributes.
+  DeviceRegistryEnrichActivity:
+    type: object
+    required:
+      - name
+      - attribute
+      - thingName
+      - roleArn
+    properties:
+      name:
+        $ref: '#/definitions/ActivityName'
+        description: The name of the 'deviceRegistryEnrich' activity.
+      attribute:
+        $ref: '#/definitions/AttributeName'
+        description: The name of the attribute that is added to the message.
+      thingName:
+        $ref: '#/definitions/AttributeName'
+        description: The name of the IoT device whose registry information is added to the message.
+      roleArn:
+        $ref: '#/definitions/RoleArn'
+        description: The ARN of the role that allows access to the device's registry information.
+      next:
+        $ref: '#/definitions/ActivityName'
+        description: The next activity in the pipeline.
+    description: An activity that adds data from the AWS IoT device registry to your message.
+  DeviceShadowEnrichActivity:
+    type: object
+    required:
+      - name
+      - attribute
+      - thingName
+      - roleArn
+    properties:
+      name:
+        $ref: '#/definitions/ActivityName'
+        description: The name of the 'deviceShadowEnrich' activity.
+      attribute:
+        $ref: '#/definitions/AttributeName'
+        description: The name of the attribute that is added to the message.
+      thingName:
+        $ref: '#/definitions/AttributeName'
+        description: The name of the IoT device whose shadow information is added to the message.
+      roleArn:
+        $ref: '#/definitions/RoleArn'
+        description: The ARN of the role that allows access to the device's shadow.
+      next:
+        $ref: '#/definitions/ActivityName'
+        description: The next activity in the pipeline.
+    description: An activity that adds information from the AWS IoT Device Shadows service to a message.
+  MessagePayload:
+    type: string
+  SampleChannelDataResponse:
+    type: object
+    properties:
+      payloads:
+        $ref: '#/definitions/MessagePayloads'
+        description: The list of message samples. Each sample message is returned as a base64-encoded string.
+  StartPipelineReprocessingResponse:
+    type: object
+    properties:
+      reprocessingId:
+        $ref: '#/definitions/ReprocessingId'
+        description: The ID of the pipeline reprocessing activity that was started.
+  TagResourceResponse:
+    type: object
+    properties: {}
+  UntagResourceResponse:
+    type: object
+    properties: {}
+  TagKey:
+    type: string
+    minLength: 1
+    maxLength: 256
+  ActivityBatchSize:
+    type: integer
+    minimum: 1
+    maximum: 1000
+  ActivityName:
+    type: string
+    minLength: 1
+    maxLength: 128
+  AttributeNameMapping:
+    type: object
+    minProperties: 1
+    maxProperties: 50
+    additionalProperties:
+      $ref: '#/definitions/AttributeName'
   AttributeName:
     type: string
     minLength: 1
@@ -2059,6 +2500,18 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Message'
+  BatchPutMessageRequest:
+    type: object
+    required:
+      - channelName
+      - messages
+    properties:
+      channelName:
+        $ref: '#/definitions/ChannelName'
+        description: The name of the channel where the messages are sent.
+      messages:
+        $ref: '#/definitions/Messages'
+        description: '<p>The list of messages to be sent. Each message has format: ''{ "messageId": "string", "payload": "string"}''.</p> <p>Note that the field names of message payloads (data) that you send to AWS IoT Analytics:</p> <ul> <li> <p>Must contain only alphanumeric characters and undescores (_); no other special characters are allowed.</p> </li> <li> <p>Must begin with an alphabetic character or single underscore (_).</p> </li> <li> <p>Cannot contain hyphens (-).</p> </li> <li> <p>In regular expression terms: "^[A-Za-z_]([A-Za-z0-9]*|[A-Za-z0-9][A-Za-z0-9_]*)$". </p> </li> <li> <p>Cannot be greater than 255 characters.</p> </li> <li> <p>Are case-insensitive. (Fields named "foo" and "FOO" in the same payload are considered duplicates.)</p> </li> </ul> <p>For example, {"temp_01": 29} or {"_temp_01": 29} are valid, but {"temp-01": 29}, {"01_temp": 29} or {"__temp_01": 29} are invalid in message payloads. </p>'
   PipelineName:
     type: string
     pattern: '^[a-zA-Z0-9_]+$'
@@ -2066,6 +2519,9 @@ definitions:
     maxLength: 128
   ReprocessingId:
     type: string
+  CancelPipelineReprocessingRequest:
+    type: object
+    properties: {}
   ChannelArn:
     type: string
   ChannelStatus:
@@ -2109,22 +2565,6 @@ definitions:
         $ref: '#/definitions/Timestamp'
         description: When the channel was last updated.
     description: 'A collection of data from an MQTT topic. Channels archive the raw, unprocessed messages before publishing the data to a pipeline.'
-  ChannelActivity:
-    type: object
-    required:
-      - name
-      - channelName
-    properties:
-      name:
-        $ref: '#/definitions/ActivityName'
-        description: The name of the 'channel' activity.
-      channelName:
-        $ref: '#/definitions/ChannelName'
-        description: The name of the channel from which the messages are processed.
-      next:
-        $ref: '#/definitions/ActivityName'
-        description: The next activity in the pipeline.
-    description: The activity that determines the source of the messages to be processed.
   EstimatedResourceSize:
     type: object
     properties:
@@ -2170,10 +2610,6 @@ definitions:
   Image:
     type: string
     maxLength: 255
-  RoleArn:
-    type: string
-    minLength: 20
-    maxLength: 2048
   ResourceConfiguration:
     type: object
     required:
@@ -2219,11 +2655,28 @@ definitions:
       $ref: '#/definitions/Tag'
     minItems: 1
     maxItems: 50
+  CreateChannelRequest:
+    type: object
+    required:
+      - channelName
+    properties:
+      channelName:
+        $ref: '#/definitions/ChannelName'
+        description: The name of the channel.
+      retentionPeriod:
+        $ref: '#/definitions/RetentionPeriod'
+        description: 'How long, in days, message data is kept for the channel.'
+      tags:
+        $ref: '#/definitions/TagList'
+        description: Metadata which can be used to manage the channel.
   DatasetName:
     type: string
     pattern: '^[a-zA-Z0-9_]+$'
     minLength: 1
     maxLength: 128
+  CreateDatasetContentRequest:
+    type: object
+    properties: {}
   DatasetContentVersion:
     type: string
     minLength: 7
@@ -2255,6 +2708,33 @@ definitions:
       maxVersions:
         $ref: '#/definitions/MaxVersions'
         description: How many versions of data set contents will be kept. The "unlimited" parameter must be false.
+  CreateDatasetRequest:
+    type: object
+    required:
+      - datasetName
+      - actions
+    properties:
+      datasetName:
+        $ref: '#/definitions/DatasetName'
+        description: The name of the data set.
+      actions:
+        $ref: '#/definitions/DatasetActions'
+        description: A list of actions that create the data set contents.
+      triggers:
+        $ref: '#/definitions/DatasetTriggers'
+        description: A list of triggers. A trigger causes data set contents to be populated at a specified time interval or when another data set's contents are created. The list of triggers can be empty or contain up to five <b>DataSetTrigger</b> objects.
+      contentDeliveryRules:
+        $ref: '#/definitions/DatasetContentDeliveryRules'
+        description: When data set contents are created they are delivered to destinations specified here.
+      retentionPeriod:
+        $ref: '#/definitions/RetentionPeriod'
+        description: '[Optional] How long, in days, versions of data set contents are kept for the data set. If not specified or set to null, versions of data set contents are retained for at most 90 days. The number of versions of data set contents retained is determined by the <code>versioningConfiguration</code> parameter. (For more information, see https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)'
+      versioningConfiguration:
+        $ref: '#/definitions/VersioningConfiguration'
+        description: '[Optional] How many versions of data set contents are kept. If not specified or set to null, only the latest version plus the latest succeeded version (if they are different) are kept for the time period specified by the "retentionPeriod" parameter. (For more information, see https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)'
+      tags:
+        $ref: '#/definitions/TagList'
+        description: Metadata which can be used to manage the data set.
   DatasetArn:
     type: string
   DatastoreName:
@@ -2262,6 +2742,20 @@ definitions:
     pattern: '^[a-zA-Z0-9_]+$'
     minLength: 1
     maxLength: 128
+  CreateDatastoreRequest:
+    type: object
+    required:
+      - datastoreName
+    properties:
+      datastoreName:
+        $ref: '#/definitions/DatastoreName'
+        description: The name of the data store.
+      retentionPeriod:
+        $ref: '#/definitions/RetentionPeriod'
+        description: 'How long, in days, message data is kept for the data store.'
+      tags:
+        $ref: '#/definitions/TagList'
+        description: Metadata which can be used to manage the data store.
   DatastoreArn:
     type: string
   PipelineActivities:
@@ -2270,6 +2764,21 @@ definitions:
       $ref: '#/definitions/PipelineActivity'
     minItems: 1
     maxItems: 25
+  CreatePipelineRequest:
+    type: object
+    required:
+      - pipelineName
+      - pipelineActivities
+    properties:
+      pipelineName:
+        $ref: '#/definitions/PipelineName'
+        description: The name of the pipeline.
+      pipelineActivities:
+        $ref: '#/definitions/PipelineActivities'
+        description: '<p>A list of "PipelineActivity" objects. Activities perform transformations on your messages, such as removing, renaming or adding message attributes; filtering messages based on attribute values; invoking your Lambda functions on messages for advanced processing; or performing mathematical transformations to normalize device data.</p> <p>The list can be 2-25 <b>PipelineActivity</b> objects and must contain both a <code>channel</code> and a <code>datastore</code> activity. Each entry in the list must contain only one activity, for example:</p> <p> <code>pipelineActivities = [ { "channel": { ... } }, { "lambda": { ... } }, ... ]</code> </p>'
+      tags:
+        $ref: '#/definitions/TagList'
+        description: Metadata which can be used to manage the pipeline.
   PipelineArn:
     type: string
   DatasetStatus:
@@ -2329,19 +2838,6 @@ definitions:
         $ref: '#/definitions/QueryFilters'
         description: Pre-filters applied to message data.
     description: The SQL query to modify the message.
-  DatasetAction:
-    type: object
-    properties:
-      actionName:
-        $ref: '#/definitions/DatasetActionName'
-        description: The name of the data set action by which data set contents are automatically created.
-      queryAction:
-        $ref: '#/definitions/SqlQueryDatasetAction'
-        description: An "SqlQueryDatasetAction" object that uses an SQL query to automatically create data set contents.
-      containerAction:
-        $ref: '#/definitions/ContainerDatasetAction'
-        description: Information which allows the system to run a containerized application in order to create the data set contents. The application must be in a Docker container along with any needed support libraries.
-    description: A "DatasetAction" object that specifies how data set contents are automatically created.
   DatasetActionSummary:
     type: object
     properties:
@@ -2385,18 +2881,6 @@ definitions:
     description: The destination to which data set contents are delivered.
   EntryName:
     type: string
-  DatasetContentDeliveryRule:
-    type: object
-    required:
-      - destination
-    properties:
-      entryName:
-        $ref: '#/definitions/EntryName'
-        description: The name of the data set content delivery rules entry.
-      destination:
-        $ref: '#/definitions/DatasetContentDeliveryDestination'
-        description: The destination to which data set contents are delivered.
-    description: When data set contents are created they are delivered to destination specified here.
   DatasetContentState:
     type: string
     enum:
@@ -2502,16 +2986,6 @@ definitions:
         $ref: '#/definitions/DatasetName'
         description: The name of the data set whose content generation triggers the new data set content generation.
     description: Information about the data set whose content generation triggers the new data set content generation.
-  DatasetTrigger:
-    type: object
-    properties:
-      schedule:
-        $ref: '#/definitions/Schedule'
-        description: The "Schedule" when the trigger is initiated.
-      dataset:
-        $ref: '#/definitions/TriggeringDataset'
-        description: The data set whose content creation triggers the creation of this data set's contents.
-    description: The "DatasetTrigger" that specifies when the data set is automatically updated.
   DatastoreStatus:
     type: string
     enum:
@@ -2540,19 +3014,6 @@ definitions:
         $ref: '#/definitions/Timestamp'
         description: The last time the data store was updated.
     description: Information about a data store.
-  DatastoreActivity:
-    type: object
-    required:
-      - name
-      - datastoreName
-    properties:
-      name:
-        $ref: '#/definitions/ActivityName'
-        description: The name of the 'datastore' activity.
-      datastoreName:
-        $ref: '#/definitions/DatastoreName'
-        description: The name of the data store where processed messages are stored.
-    description: The 'datastore' activity that specifies where to store the processed data.
   DatastoreStatistics:
     type: object
     properties:
@@ -2580,6 +3041,21 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/DatastoreSummary'
+  DeleteChannelRequest:
+    type: object
+    properties: {}
+  DeleteDatasetContentRequest:
+    type: object
+    properties: {}
+  DeleteDatasetRequest:
+    type: object
+    properties: {}
+  DeleteDatastoreRequest:
+    type: object
+    properties: {}
+  DeletePipelineRequest:
+    type: object
+    properties: {}
   OffsetSeconds:
     type: integer
   TimeExpression:
@@ -2599,6 +3075,18 @@ definitions:
     description: Used to limit data to that which has arrived since the last execution of the action.
   IncludeStatisticsFlag:
     type: boolean
+  DescribeChannelRequest:
+    type: object
+    properties: {}
+  DescribeDatasetRequest:
+    type: object
+    properties: {}
+  DescribeDatastoreRequest:
+    type: object
+    properties: {}
+  DescribeLoggingOptionsRequest:
+    type: object
+    properties: {}
   LoggingOptions:
     type: object
     required:
@@ -2616,6 +3104,9 @@ definitions:
         $ref: '#/definitions/LoggingEnabled'
         description: 'If true, logging is enabled for AWS IoT Analytics.'
     description: Information about logging options.
+  DescribePipelineRequest:
+    type: object
+    properties: {}
   Pipeline:
     type: object
     properties:
@@ -2638,54 +3129,6 @@ definitions:
         $ref: '#/definitions/Timestamp'
         description: The last time the pipeline was updated.
     description: Contains information about a pipeline.
-  DeviceRegistryEnrichActivity:
-    type: object
-    required:
-      - name
-      - attribute
-      - thingName
-      - roleArn
-    properties:
-      name:
-        $ref: '#/definitions/ActivityName'
-        description: The name of the 'deviceRegistryEnrich' activity.
-      attribute:
-        $ref: '#/definitions/AttributeName'
-        description: The name of the attribute that is added to the message.
-      thingName:
-        $ref: '#/definitions/AttributeName'
-        description: The name of the IoT device whose registry information is added to the message.
-      roleArn:
-        $ref: '#/definitions/RoleArn'
-        description: The ARN of the role that allows access to the device's registry information.
-      next:
-        $ref: '#/definitions/ActivityName'
-        description: The next activity in the pipeline.
-    description: An activity that adds data from the AWS IoT device registry to your message.
-  DeviceShadowEnrichActivity:
-    type: object
-    required:
-      - name
-      - attribute
-      - thingName
-      - roleArn
-    properties:
-      name:
-        $ref: '#/definitions/ActivityName'
-        description: The name of the 'deviceShadowEnrich' activity.
-      attribute:
-        $ref: '#/definitions/AttributeName'
-        description: The name of the attribute that is added to the message.
-      thingName:
-        $ref: '#/definitions/AttributeName'
-        description: The name of the IoT device whose shadow information is added to the message.
-      roleArn:
-        $ref: '#/definitions/RoleArn'
-        description: The ARN of the role that allows access to the device's shadow.
-      next:
-        $ref: '#/definitions/ActivityName'
-        description: The next activity in the pipeline.
-    description: An activity that adds information from the AWS IoT Device Shadows service to a message.
   DoubleValue:
     type: number
     format: double
@@ -2699,22 +3142,9 @@ definitions:
     type: string
     minLength: 1
     maxLength: 256
-  FilterActivity:
+  GetDatasetContentRequest:
     type: object
-    required:
-      - name
-      - filter
-    properties:
-      name:
-        $ref: '#/definitions/ActivityName'
-        description: The name of the 'filter' activity.
-      filter:
-        $ref: '#/definitions/FilterExpression'
-        description: An expression that looks like a SQL WHERE clause that must return a Boolean value.
-      next:
-        $ref: '#/definitions/ActivityName'
-        description: The next activity in the pipeline.
-    description: An activity that filters a message based on its attributes.
+    properties: {}
   IotEventsInputName:
     type: string
     pattern: '^[a-zA-Z][a-zA-Z0-9_]*$'
@@ -2725,32 +3155,27 @@ definitions:
     pattern: '^[a-zA-Z0-9_-]+$'
     minLength: 1
     maxLength: 64
-  LambdaActivity:
-    type: object
-    required:
-      - name
-      - lambdaName
-      - batchSize
-    properties:
-      name:
-        $ref: '#/definitions/ActivityName'
-        description: The name of the 'lambda' activity.
-      lambdaName:
-        $ref: '#/definitions/LambdaName'
-        description: The name of the Lambda function that is run on the message.
-      batchSize:
-        $ref: '#/definitions/ActivityBatchSize'
-        description: '<p>The number of messages passed to the Lambda function for processing.</p> <p>The AWS Lambda function must be able to process all of these messages within five minutes, which is the maximum timeout duration for Lambda functions.</p>'
-      next:
-        $ref: '#/definitions/ActivityName'
-        description: The next activity in the pipeline.
-    description: An activity that runs a Lambda function to modify the message.
   NextToken:
     type: string
   MaxResults:
     type: integer
     minimum: 1
     maximum: 250
+  ListChannelsRequest:
+    type: object
+    properties: {}
+  ListDatasetContentsRequest:
+    type: object
+    properties: {}
+  ListDatasetsRequest:
+    type: object
+    properties: {}
+  ListDatastoresRequest:
+    type: object
+    properties: {}
+  ListPipelinesRequest:
+    type: object
+    properties: {}
   PipelineSummaries:
     type: array
     items:
@@ -2759,61 +3184,19 @@ definitions:
     type: string
     minLength: 20
     maxLength: 2048
+  ListTagsForResourceRequest:
+    type: object
+    properties: {}
   LogResult:
     type: string
-  LoggingEnabled:
-    type: boolean
-  LoggingLevel:
-    type: string
-    enum:
-      - ERROR
   MathExpression:
     type: string
     minLength: 1
     maxLength: 256
-  MathActivity:
-    type: object
-    required:
-      - name
-      - attribute
-      - math
-    properties:
-      name:
-        $ref: '#/definitions/ActivityName'
-        description: The name of the 'math' activity.
-      attribute:
-        $ref: '#/definitions/AttributeName'
-        description: The name of the attribute that contains the result of the math operation.
-      math:
-        $ref: '#/definitions/MathExpression'
-        description: An expression that uses one or more existing attributes and must return an integer value.
-      next:
-        $ref: '#/definitions/ActivityName'
-        description: The next activity in the pipeline.
-    description: An activity that computes an arithmetic expression using the message's attributes.
   MaxMessages:
     type: integer
     minimum: 1
     maximum: 10
-  MaxVersions:
-    type: integer
-    minimum: 1
-    maximum: 1000
-  MessagePayload:
-    type: string
-  Message:
-    type: object
-    required:
-      - messageId
-      - payload
-    properties:
-      messageId:
-        $ref: '#/definitions/MessageId'
-        description: The ID you wish to assign to the message. Each "messageId" must be unique within each batch sent.
-      payload:
-        $ref: '#/definitions/MessagePayload'
-        description: The payload of the message. This may be a JSON string or a Base64-encoded string representing binary data (in which case you must decode it by means of a pipeline activity).
-    description: Information about a message.
   MessagePayloads:
     type: array
     items:
@@ -2836,72 +3219,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ReprocessingSummary'
-  PipelineActivity:
-    type: object
-    properties:
-      channel:
-        $ref: '#/definitions/ChannelActivity'
-        description: Determines the source of the messages to be processed.
-      lambda:
-        $ref: '#/definitions/LambdaActivity'
-        description: Runs a Lambda function to modify the message.
-      datastore:
-        $ref: '#/definitions/DatastoreActivity'
-        description: Specifies where to store the processed message data.
-      addAttributes:
-        $ref: '#/definitions/AddAttributesActivity'
-        description: Adds other attributes based on existing attributes in the message.
-      removeAttributes:
-        $ref: '#/definitions/RemoveAttributesActivity'
-        description: Removes attributes from a message.
-      selectAttributes:
-        $ref: '#/definitions/SelectAttributesActivity'
-        description: 'Creates a new message using only the specified attributes from the original message. '
-      filter:
-        $ref: '#/definitions/FilterActivity'
-        description: Filters a message based on its attributes.
-      math:
-        $ref: '#/definitions/MathActivity'
-        description: Computes an arithmetic expression using the message's attributes and adds it to the message.
-      deviceRegistryEnrich:
-        $ref: '#/definitions/DeviceRegistryEnrichActivity'
-        description: Adds data from the AWS IoT device registry to your message.
-      deviceShadowEnrich:
-        $ref: '#/definitions/DeviceShadowEnrichActivity'
-        description: Adds information from the AWS IoT Device Shadows service to a message.
-    description: An activity that performs a transformation on a message.
-  RemoveAttributesActivity:
-    type: object
-    required:
-      - name
-      - attributes
-    properties:
-      name:
-        $ref: '#/definitions/ActivityName'
-        description: The name of the 'removeAttributes' activity.
-      attributes:
-        $ref: '#/definitions/AttributeNames'
-        description: A list of 1-50 attributes to remove from the message.
-      next:
-        $ref: '#/definitions/ActivityName'
-        description: The next activity in the pipeline.
-    description: An activity that removes attributes from a message.
-  SelectAttributesActivity:
-    type: object
-    required:
-      - name
-      - attributes
-    properties:
-      name:
-        $ref: '#/definitions/ActivityName'
-        description: The name of the 'selectAttributes' activity.
-      attributes:
-        $ref: '#/definitions/AttributeNames'
-        description: A list of the attributes to select from the message.
-      next:
-        $ref: '#/definitions/ActivityName'
-        description: The next activity in the pipeline.
-    description: Creates a new message using only the specified attributes from the original message.
   PipelineSummary:
     type: object
     properties:
@@ -2918,6 +3235,14 @@ definitions:
         $ref: '#/definitions/Timestamp'
         description: When the pipeline was last updated.
     description: A summary of information about a pipeline.
+  PutLoggingOptionsRequest:
+    type: object
+    required:
+      - loggingOptions
+    properties:
+      loggingOptions:
+        $ref: '#/definitions/LoggingOptions'
+        description: The new values of the AWS IoT Analytics logging options.
   QueryFilter:
     type: object
     properties:
@@ -2955,51 +3280,102 @@ definitions:
     type: integer
     minimum: 1
     maximum: 50
-  UnlimitedRetentionPeriod:
-    type: boolean
-  RetentionPeriodInDays:
-    type: integer
-    minimum: 1
+  RunPipelineActivityRequest:
+    type: object
+    required:
+      - pipelineActivity
+      - payloads
+    properties:
+      pipelineActivity:
+        $ref: '#/definitions/PipelineActivity'
+        description: 'The pipeline activity that is run. This must not be a ''channel'' activity or a ''datastore'' activity because these activities are used in a pipeline only to load the original message and to store the (possibly) transformed message. If a ''lambda'' activity is specified, only short-running Lambda functions (those with a timeout of less than 30 seconds or less) can be used.'
+      payloads:
+        $ref: '#/definitions/MessagePayloads'
+        description: The sample message payloads on which the pipeline activity is run.
   StartTime:
     type: string
     format: date-time
+  SampleChannelDataRequest:
+    type: object
+    properties: {}
   ScheduleExpression:
     type: string
   SqlQuery:
     type: string
+  StartPipelineReprocessingRequest:
+    type: object
+    properties:
+      startTime:
+        $ref: '#/definitions/StartTime'
+        description: The start time (inclusive) of raw message data that is reprocessed.
+      endTime:
+        $ref: '#/definitions/EndTime'
+        description: The end time (exclusive) of raw message data that is reprocessed.
   StringValue:
     type: string
     minLength: 0
     maxLength: 1024
-  TagKey:
-    type: string
-    minLength: 1
-    maxLength: 256
   TagValue:
     type: string
     minLength: 1
     maxLength: 256
-  Tag:
-    type: object
-    required:
-      - key
-      - value
-    properties:
-      key:
-        $ref: '#/definitions/TagKey'
-        description: The tag's key.
-      value:
-        $ref: '#/definitions/TagValue'
-        description: The tag's value.
-    description: A set of key/value pairs which are used to manage the resource.
   TagKeyList:
     type: array
     items:
       $ref: '#/definitions/TagKey'
     minItems: 1
     maxItems: 50
-  UnlimitedVersioning:
-    type: boolean
+  TagResourceRequest:
+    type: object
+    required:
+      - tags
+    properties:
+      tags:
+        $ref: '#/definitions/TagList'
+        description: The new or modified tags for the resource.
+  UntagResourceRequest:
+    type: object
+    properties: {}
+  UpdateChannelRequest:
+    type: object
+    properties:
+      retentionPeriod:
+        $ref: '#/definitions/RetentionPeriod'
+        description: 'How long, in days, message data is kept for the channel.'
+  UpdateDatasetRequest:
+    type: object
+    required:
+      - actions
+    properties:
+      actions:
+        $ref: '#/definitions/DatasetActions'
+        description: A list of "DatasetAction" objects.
+      triggers:
+        $ref: '#/definitions/DatasetTriggers'
+        description: A list of "DatasetTrigger" objects. The list can be empty or can contain up to five <b>DataSetTrigger</b> objects.
+      contentDeliveryRules:
+        $ref: '#/definitions/DatasetContentDeliveryRules'
+        description: When data set contents are created they are delivered to destinations specified here.
+      retentionPeriod:
+        $ref: '#/definitions/RetentionPeriod'
+        description: 'How long, in days, data set contents are kept for the data set.'
+      versioningConfiguration:
+        $ref: '#/definitions/VersioningConfiguration'
+        description: '[Optional] How many versions of data set contents are kept. If not specified or set to null, only the latest version plus the latest succeeded version (if they are different) are kept for the time period specified by the "retentionPeriod" parameter. (For more information, see https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)'
+  UpdateDatastoreRequest:
+    type: object
+    properties:
+      retentionPeriod:
+        $ref: '#/definitions/RetentionPeriod'
+        description: 'How long, in days, message data is kept for the data store.'
+  UpdatePipelineRequest:
+    type: object
+    required:
+      - pipelineActivities
+    properties:
+      pipelineActivities:
+        $ref: '#/definitions/PipelineActivities'
+        description: '<p>A list of "PipelineActivity" objects. Activities perform transformations on your messages, such as removing, renaming or adding message attributes; filtering messages based on attribute values; invoking your Lambda functions on messages for advanced processing; or performing mathematical transformations to normalize device data.</p> <p>The list can be 2-25 <b>PipelineActivity</b> objects and must contain both a <code>channel</code> and a <code>datastore</code> activity. Each entry in the list must contain only one activity, for example:</p> <p> <code>pipelineActivities = [ { "channel": { ... } }, { "lambda": { ... } }, ... ]</code> </p>'
   VariableName:
     type: string
     minLength: 1

@@ -35,7 +35,6 @@ externalDocs:
   url: 'https://docs.aws.amazon.com/backup/'
 host: backup.amazonaws.com
 basePath: /
-x-hasEquivalentPaths: true
 schemes:
   - https
   - http
@@ -133,7 +132,28 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateBackupPlanInput'
+            type: object
+            required:
+              - BackupPlan
+            properties:
+              BackupPlan:
+                description: 'Contains an optional backup plan display name and an array of <code>BackupRule</code> objects, each of which specifies a backup rule. Each rule in a backup plan is a separate scheduled task and can back up a different selection of AWS resources.'
+                type: object
+                properties:
+                  BackupPlanName:
+                    $ref: '#/definitions/BackupPlanName'
+                    description: The display name of a backup plan.
+                  Rules:
+                    $ref: '#/definitions/BackupRulesInput'
+                    description: 'An array of <code>BackupRule</code> objects, each of which specifies a scheduled task that is used to back up a selection of resources.'
+              BackupPlanTags:
+                description: 'To help organize your resources, you can assign your own metadata to the resources that you create. Each tag is a key-value pair. The specified tags are assigned to all backups created with this plan.'
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/TagValue'
+              CreatorRequestId:
+                description: 'Identifies the request and allows failed requests to be retried without the risk of executing the operation twice. If the request includes a <code>CreatorRequestId</code> that matches an existing backup plan, that plan is returned. This parameter is optional.'
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -169,11 +189,23 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListBackupPlansInput'
+        - name: nextToken
+          in: query
+          required: false
+          description: 'The next item following a partial list of returned items. For example, if a request is made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of items to be returned.
+          type: integer
+          minimum: 1
+          maximum: 1000
+        - name: includeDeleted
+          in: query
+          required: false
+          description: A Boolean value with a default value of <code>FALSE</code> that returns deleted backup plans when set to <code>TRUE</code>.
+          type: boolean
         - name: MaxResults
           type: string
           in: query
@@ -214,15 +246,38 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
+        - name: backupPlanId
+          in: path
+          required: true
+          description: Uniquely identifies the backup plan to be associated with the selection of resources.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateBackupSelectionInput'
-        - name: backupPlanId
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - BackupSelection
+            properties:
+              BackupSelection:
+                description: Used to specify a set of resources to a backup plan.
+                type: object
+                properties:
+                  SelectionName:
+                    $ref: '#/definitions/BackupSelectionName'
+                    description: The display name of a resource selection document.
+                  IamRoleArn:
+                    $ref: '#/definitions/IAMRoleArn'
+                    description: 'The ARN of the IAM role that AWS Backup uses to authenticate when restoring the target resource; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
+                  Resources:
+                    $ref: '#/definitions/ResourceArns'
+                    description: 'An array of strings that either contain Amazon Resource Names (ARNs) or match patterns such as "<code>arn:aws:ec2:us-east-1:123456789012:volume/*</code>" of resources to assign to a backup plan.'
+                  ListOfTags:
+                    $ref: '#/definitions/ListOfTags'
+                    description: 'An array of conditions used to specify a set of resources to assign to a backup plan; for example, <code>"StringEquals": {"ec2:ResourceTag/Department": "accounting"</code>.'
+              CreatorRequestId:
+                description: A unique string that identifies the request and allows failed requests to be retried without the risk of executing the operation twice.
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -258,11 +313,23 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
+        - name: backupPlanId
+          in: path
           required: true
-          schema:
-            $ref: '#/definitions/ListBackupSelectionsInput'
+          description: Uniquely identifies a backup plan.
+          type: string
+        - name: nextToken
+          in: query
+          required: false
+          description: 'The next item following a partial list of returned items. For example, if a request is made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of items to be returned.
+          type: integer
+          minimum: 1
+          maximum: 1000
         - name: MaxResults
           type: string
           in: query
@@ -273,10 +340,6 @@ paths:
           in: query
           description: Pagination token
           required: false
-        - name: backupPlanId
-          type: string
-          in: path
-          required: true
   '/backup-vaults/{backupVaultName}':
     put:
       operationId: CreateBackupVault
@@ -307,15 +370,29 @@ paths:
           schema:
             $ref: '#/definitions/AlreadyExistsException'
       parameters:
+        - name: backupVaultName
+          in: path
+          required: true
+          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          type: string
+          pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateBackupVaultInput'
-        - name: backupVaultName
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              BackupVaultTags:
+                description: Metadata that you can assign to help organize the resources that you create. Each tag is a key-value pair.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/TagValue'
+              EncryptionKeyArn:
+                description: 'The server-side encryption key that is used to protect your backups; for example, <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.'
+                type: string
+              CreatorRequestId:
+                description: A unique string that identifies the request and allows failed requests to be retried without the risk of executing the operation twice.
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -353,15 +430,11 @@ paths:
           schema:
             $ref: '#/definitions/InvalidRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteBackupVaultInput'
         - name: backupVaultName
-          type: string
           in: path
           required: true
+          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and theAWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          type: string
     get:
       operationId: DescribeBackupVault
       description: Returns metadata about a backup vault specified by its name.
@@ -387,15 +460,11 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeBackupVaultInput'
         - name: backupVaultName
-          type: string
           in: path
           required: true
+          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          type: string
   '/backup/plans/{backupPlanId}':
     delete:
       operationId: DeleteBackupPlan
@@ -426,15 +495,11 @@ paths:
           schema:
             $ref: '#/definitions/InvalidRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteBackupPlanInput'
         - name: backupPlanId
-          type: string
           in: path
           required: true
+          description: Uniquely identifies a backup plan.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -470,15 +535,29 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
+        - name: backupPlanId
+          in: path
+          required: true
+          description: Uniquely identifies a backup plan.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateBackupPlanInput'
-        - name: backupPlanId
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - BackupPlan
+            properties:
+              BackupPlan:
+                description: 'Contains an optional backup plan display name and an array of <code>BackupRule</code> objects, each of which specifies a backup rule. Each rule in a backup plan is a separate scheduled task and can back up a different selection of AWS resources.'
+                type: object
+                properties:
+                  BackupPlanName:
+                    $ref: '#/definitions/BackupPlanName'
+                    description: The display name of a backup plan.
+                  Rules:
+                    $ref: '#/definitions/BackupRulesInput'
+                    description: 'An array of <code>BackupRule</code> objects, each of which specifies a scheduled task that is used to back up a selection of resources.'
   '/backup/plans/{backupPlanId}/selections/{selectionId}':
     delete:
       operationId: DeleteBackupSelection
@@ -503,19 +582,16 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteBackupSelectionInput'
         - name: backupPlanId
-          type: string
           in: path
           required: true
+          description: Uniquely identifies a backup plan.
+          type: string
         - name: selectionId
-          type: string
           in: path
           required: true
+          description: Uniquely identifies the body of a request to assign a set of resources to a backup plan.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -551,19 +627,16 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetBackupSelectionInput'
         - name: backupPlanId
-          type: string
           in: path
           required: true
+          description: Uniquely identifies a backup plan.
+          type: string
         - name: selectionId
-          type: string
           in: path
           required: true
+          description: Uniquely identifies the body of a request to assign a set of resources to a backup plan.
+          type: string
   '/backup-vaults/{backupVaultName}/access-policy':
     delete:
       operationId: DeleteBackupVaultAccessPolicy
@@ -588,15 +661,12 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteBackupVaultAccessPolicyInput'
         - name: backupVaultName
-          type: string
           in: path
           required: true
+          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          type: string
+          pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -632,15 +702,12 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetBackupVaultAccessPolicyInput'
         - name: backupVaultName
-          type: string
           in: path
           required: true
+          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          type: string
+          pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
     put:
       operationId: PutBackupVaultAccessPolicy
       description: Sets a resource-based policy that is used to manage access permissions on the target backup vault. Requires a backup vault name and an access policy document in JSON format.
@@ -664,15 +731,21 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
+        - name: backupVaultName
+          in: path
+          required: true
+          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          type: string
+          pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/PutBackupVaultAccessPolicyInput'
-        - name: backupVaultName
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              Policy:
+                description: The backup vault access policy document in JSON format.
+                type: string
   '/backup-vaults/{backupVaultName}/notification-configuration':
     delete:
       operationId: DeleteBackupVaultNotifications
@@ -697,15 +770,12 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteBackupVaultNotificationsInput'
         - name: backupVaultName
-          type: string
           in: path
           required: true
+          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          type: string
+          pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -741,15 +811,12 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetBackupVaultNotificationsInput'
         - name: backupVaultName
-          type: string
           in: path
           required: true
+          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          type: string
+          pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
     put:
       operationId: PutBackupVaultNotifications
       description: Turns on notifications on a backup vault for the specified topic and events.
@@ -773,15 +840,29 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
+        - name: backupVaultName
+          in: path
+          required: true
+          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          type: string
+          pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/PutBackupVaultNotificationsInput'
-        - name: backupVaultName
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - SNSTopicArn
+              - BackupVaultEvents
+            properties:
+              SNSTopicArn:
+                description: 'The Amazon Resource Name (ARN) that specifies the topic for a backup vault’s events; for example, <code>arn:aws:sns:us-west-2:111122223333:MyVaultTopic</code>.'
+                type: string
+              BackupVaultEvents:
+                description: An array of events that indicate the status of jobs to back up resources to the backup vault.
+                type: array
+                items:
+                  $ref: '#/definitions/BackupVaultEvent'
   '/backup-vaults/{backupVaultName}/recovery-points/{recoveryPointArn}':
     delete:
       operationId: DeleteRecoveryPoint
@@ -810,19 +891,17 @@ paths:
           schema:
             $ref: '#/definitions/InvalidRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteRecoveryPointInput'
         - name: backupVaultName
-          type: string
           in: path
           required: true
+          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          type: string
+          pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
         - name: recoveryPointArn
-          type: string
           in: path
           required: true
+          description: 'An Amazon Resource Name (ARN) that uniquely identifies a recovery point; for example, <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.'
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -858,19 +937,17 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeRecoveryPointInput'
         - name: backupVaultName
-          type: string
           in: path
           required: true
+          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          type: string
+          pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
         - name: recoveryPointArn
-          type: string
           in: path
           required: true
+          description: 'An Amazon Resource Name (ARN) that uniquely identifies a recovery point; for example, <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.'
+          type: string
     post:
       operationId: UpdateRecoveryPointLifecycle
       description: '<p>Sets the transition lifecycle of a recovery point.</p> <p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p>'
@@ -896,19 +973,33 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
+        - name: backupVaultName
+          in: path
+          required: true
+          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          type: string
+          pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
+        - name: recoveryPointArn
+          in: path
+          required: true
+          description: 'An Amazon Resource Name (ARN) that uniquely identifies a recovery point; for example, <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.'
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateRecoveryPointLifecycleInput'
-        - name: backupVaultName
-          type: string
-          in: path
-          required: true
-        - name: recoveryPointArn
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              Lifecycle:
+                description: Contains an array of <code>Transition</code> objects specifying how long in days before a recovery point transitions to cold storage or is deleted.
+                type: object
+                properties:
+                  MoveToColdStorageAfterDays:
+                    $ref: '#/definitions/Long'
+                    description: Specifies the number of days after creation that a recovery point is moved to cold storage.
+                  DeleteAfterDays:
+                    $ref: '#/definitions/Long'
+                    description: Specifies the number of days after creation that a recovery point is deleted. Must be greater than <code>MoveToColdStorageAfterDays</code>.
   '/backup-jobs/{backupJobId}':
     get:
       operationId: DescribeBackupJob
@@ -939,15 +1030,11 @@ paths:
           schema:
             $ref: '#/definitions/DependencyFailureException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeBackupJobInput'
         - name: backupJobId
-          type: string
           in: path
           required: true
+          description: Uniquely identifies a request to AWS Backup to back up a resource.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -985,15 +1072,11 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/StopBackupJobInput'
         - name: backupJobId
-          type: string
           in: path
           required: true
+          description: Uniquely identifies a request to AWS Backup to back up a resource.
+          type: string
   '/resources/{resourceArn}':
     get:
       operationId: DescribeProtectedResource
@@ -1020,15 +1103,11 @@ paths:
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeProtectedResourceInput'
         - name: resourceArn
-          type: string
           in: path
           required: true
+          description: An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN depends on the resource type.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1069,15 +1148,11 @@ paths:
           schema:
             $ref: '#/definitions/DependencyFailureException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeRestoreJobInput'
         - name: restoreJobId
-          type: string
           in: path
           required: true
+          description: Uniquely identifies the job that restores a recovery point.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1114,15 +1189,11 @@ paths:
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ExportBackupPlanTemplateInput'
         - name: backupPlanId
-          type: string
           in: path
           required: true
+          description: Uniquely identifies a backup plan.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1159,15 +1230,16 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetBackupPlanInput'
         - name: backupPlanId
-          type: string
           in: path
           required: true
+          description: Uniquely identifies a backup plan.
+          type: string
+        - name: versionId
+          in: query
+          required: false
+          description: 'Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most 1,024 bytes long. Version IDs cannot be edited.'
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1212,7 +1284,13 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/GetBackupPlanFromJSONInput'
+            type: object
+            required:
+              - BackupPlanTemplateJson
+            properties:
+              BackupPlanTemplateJson:
+                description: A customer-supplied backup plan document in JSON format.
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1249,15 +1327,11 @@ paths:
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetBackupPlanFromTemplateInput'
         - name: templateId
-          type: string
           in: path
           required: true
+          description: Uniquely identifies a stored backup plan template.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1294,19 +1368,17 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetRecoveryPointRestoreMetadataInput'
         - name: backupVaultName
-          type: string
           in: path
           required: true
+          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          type: string
+          pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
         - name: recoveryPointArn
-          type: string
           in: path
           required: true
+          description: 'An Amazon Resource Name (ARN) that uniquely identifies a recovery point; for example, <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.'
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1358,11 +1430,61 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListBackupJobsInput'
+        - name: nextToken
+          in: query
+          required: false
+          description: 'The next item following a partial list of returned items. For example, if a request is made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of items to be returned.
+          type: integer
+          minimum: 1
+          maximum: 1000
+        - name: resourceArn
+          in: query
+          required: false
+          description: Returns only backup jobs that match the specified resource Amazon Resource Name (ARN).
+          type: string
+        - name: state
+          in: query
+          required: false
+          description: Returns only backup jobs that are in the specified state.
+          type: string
+          enum:
+            - CREATED
+            - PENDING
+            - RUNNING
+            - ABORTING
+            - ABORTED
+            - COMPLETED
+            - FAILED
+            - EXPIRED
+        - name: backupVaultName
+          in: query
+          required: false
+          description: 'Returns only backup jobs that will be stored in the specified backup vault. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          type: string
+          pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
+        - name: createdBefore
+          in: query
+          required: false
+          description: Returns only backup jobs that were created before the specified date.
+          type: string
+          format: date-time
+        - name: createdAfter
+          in: query
+          required: false
+          description: Returns only backup jobs that were created after the specified date.
+          type: string
+          format: date-time
+        - name: resourceType
+          in: query
+          required: false
+          description: '<p>Returns only backup jobs for the specified resources:</p> <ul> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>SGW</code> for AWS Storage Gateway</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>DDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> </ul>'
+          type: string
+          pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
         - name: MaxResults
           type: string
           in: query
@@ -1409,11 +1531,18 @@ paths:
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListBackupPlanTemplatesInput'
+        - name: nextToken
+          in: query
+          required: false
+          description: 'The next item following a partial list of returned items. For example, if a request is made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of items to be returned.
+          type: integer
+          minimum: 1
+          maximum: 1000
         - name: MaxResults
           type: string
           in: query
@@ -1460,11 +1589,23 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
+        - name: backupPlanId
+          in: path
           required: true
-          schema:
-            $ref: '#/definitions/ListBackupPlanVersionsInput'
+          description: Uniquely identifies a backup plan.
+          type: string
+        - name: nextToken
+          in: query
+          required: false
+          description: 'The next item following a partial list of returned items. For example, if a request is made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of items to be returned.
+          type: integer
+          minimum: 1
+          maximum: 1000
         - name: MaxResults
           type: string
           in: query
@@ -1475,10 +1616,6 @@ paths:
           in: query
           description: Pagination token
           required: false
-        - name: backupPlanId
-          type: string
-          in: path
-          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1515,11 +1652,18 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListBackupVaultsInput'
+        - name: nextToken
+          in: query
+          required: false
+          description: 'The next item following a partial list of returned items. For example, if a request is made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of items to be returned.
+          type: integer
+          minimum: 1
+          maximum: 1000
         - name: MaxResults
           type: string
           in: query
@@ -1558,11 +1702,18 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListProtectedResourcesInput'
+        - name: nextToken
+          in: query
+          required: false
+          description: 'The next item following a partial list of returned items. For example, if a request is made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of items to be returned.
+          type: integer
+          minimum: 1
+          maximum: 1000
         - name: MaxResults
           type: string
           in: query
@@ -1609,11 +1760,52 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
+        - name: backupVaultName
+          in: path
           required: true
-          schema:
-            $ref: '#/definitions/ListRecoveryPointsByBackupVaultInput'
+          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          type: string
+          pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
+        - name: nextToken
+          in: query
+          required: false
+          description: 'The next item following a partial list of returned items. For example, if a request is made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of items to be returned.
+          type: integer
+          minimum: 1
+          maximum: 1000
+        - name: resourceArn
+          in: query
+          required: false
+          description: Returns only recovery points that match the specified resource Amazon Resource Name (ARN).
+          type: string
+        - name: resourceType
+          in: query
+          required: false
+          description: Returns only recovery points that match the specified resource type.
+          type: string
+          pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
+        - name: backupPlanId
+          in: query
+          required: false
+          description: Returns only recovery points that match the specified backup plan ID.
+          type: string
+        - name: createdBefore
+          in: query
+          required: false
+          description: Returns only recovery points that were created before the specified timestamp.
+          type: string
+          format: date-time
+        - name: createdAfter
+          in: query
+          required: false
+          description: Returns only recovery points that were created after the specified timestamp.
+          type: string
+          format: date-time
         - name: MaxResults
           type: string
           in: query
@@ -1624,10 +1816,6 @@ paths:
           in: query
           description: Pagination token
           required: false
-        - name: backupVaultName
-          type: string
-          in: path
-          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1664,11 +1852,23 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
+        - name: resourceArn
+          in: path
           required: true
-          schema:
-            $ref: '#/definitions/ListRecoveryPointsByResourceInput'
+          description: An ARN that uniquely identifies a resource. The format of the ARN depends on the resource type.
+          type: string
+        - name: nextToken
+          in: query
+          required: false
+          description: 'The next item following a partial list of returned items. For example, if a request is made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of items to be returned.
+          type: integer
+          minimum: 1
+          maximum: 1000
         - name: MaxResults
           type: string
           in: query
@@ -1679,10 +1879,6 @@ paths:
           in: query
           description: Pagination token
           required: false
-        - name: resourceArn
-          type: string
-          in: path
-          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1719,11 +1915,18 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListRestoreJobsInput'
+        - name: nextToken
+          in: query
+          required: false
+          description: 'The next item following a partial list of returned items. For example, if a request is made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of items to be returned.
+          type: integer
+          minimum: 1
+          maximum: 1000
         - name: MaxResults
           type: string
           in: query
@@ -1770,11 +1973,23 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
+        - name: resourceArn
+          in: path
           required: true
-          schema:
-            $ref: '#/definitions/ListTagsInput'
+          description: 'An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN depends on the type of resource. Valid targets for <code>ListTags</code> are recovery points, backup plans, and backup vaults.'
+          type: string
+        - name: nextToken
+          in: query
+          required: false
+          description: 'The next item following a partial list of returned items. For example, if a request is made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of items to be returned.
+          type: integer
+          minimum: 1
+          maximum: 1000
         - name: MaxResults
           type: string
           in: query
@@ -1785,10 +2000,6 @@ paths:
           in: query
           description: Pagination token
           required: false
-        - name: resourceArn
-          type: string
-          in: path
-          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1833,7 +2044,46 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/StartBackupJobInput'
+            type: object
+            required:
+              - BackupVaultName
+              - ResourceArn
+              - IamRoleArn
+            properties:
+              BackupVaultName:
+                description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+                type: string
+                pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
+              ResourceArn:
+                description: An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN depends on the resource type.
+                type: string
+              IamRoleArn:
+                description: 'Specifies the IAM role ARN used to create the target recovery point; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
+                type: string
+              IdempotencyToken:
+                description: 'A customer chosen string that can be used to distinguish between calls to <code>StartBackupJob</code>. Idempotency tokens time out after one hour. Therefore, if you call <code>StartBackupJob</code> multiple times with the same idempotency token within one hour, AWS Backup recognizes that you are requesting only one backup job and initiates only one. If you change the idempotency token for each call, AWS Backup recognizes that you are requesting to start multiple backups.'
+                type: string
+              StartWindowMinutes:
+                description: The amount of time in minutes before beginning a backup.
+                type: integer
+              CompleteWindowMinutes:
+                description: The amount of time AWS Backup attempts a backup before canceling the job and returning an error.
+                type: integer
+              Lifecycle:
+                description: Contains an array of <code>Transition</code> objects specifying how long in days before a recovery point transitions to cold storage or is deleted.
+                type: object
+                properties:
+                  MoveToColdStorageAfterDays:
+                    $ref: '#/definitions/Long'
+                    description: Specifies the number of days after creation that a recovery point is moved to cold storage.
+                  DeleteAfterDays:
+                    $ref: '#/definitions/Long'
+                    description: Specifies the number of days after creation that a recovery point is deleted. Must be greater than <code>MoveToColdStorageAfterDays</code>.
+              RecoveryPointTags:
+                description: 'To help organize your resources, you can assign your own metadata to the resources that you create. Each tag is a key-value pair.'
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/TagValue'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1874,7 +2124,30 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/StartRestoreJobInput'
+            type: object
+            required:
+              - RecoveryPointArn
+              - Metadata
+              - IamRoleArn
+            properties:
+              RecoveryPointArn:
+                description: 'An ARN that uniquely identifies a recovery point; for example, <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.'
+                type: string
+              Metadata:
+                description: A set of metadata key-value pairs. Lists the metadata that the recovery point was created with.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/MetadataValue'
+              IamRoleArn:
+                description: 'The Amazon Resource Name (ARN) of the IAM role that AWS Backup uses to create the target recovery point; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
+                type: string
+              IdempotencyToken:
+                description: 'A customer chosen string that can be used to distinguish between calls to <code>StartRestoreJob</code>. Idempotency tokens time out after one hour. Therefore, if you call <code>StartRestoreJob</code> multiple times with the same idempotency token within one hour, AWS Backup recognizes that you are requesting only one restore job and initiates only one. If you change the idempotency token for each call, AWS Backup recognizes that you are requesting to start multiple restores. '
+                type: string
+              ResourceType:
+                description: '<p>Starts a job to restore a recovery point for one of the following resources:</p> <ul> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>SGW</code> for AWS Storage Gateway</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>DDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> </ul>'
+                type: string
+                pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1913,15 +2186,24 @@ paths:
           schema:
             $ref: '#/definitions/LimitExceededException'
       parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: An ARN that uniquely identifies a resource. The format of the ARN depends on the type of the tagged resource.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/TagResourceInput'
-        - name: resourceArn
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - Tags
+            properties:
+              Tags:
+                description: 'Key-value pairs that are used to help organize your resources. You can assign your own metadata to the resources you create. '
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/TagValue'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1956,15 +2238,24 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: An ARN that uniquely identifies a resource. The format of the ARN depends on the type of the tagged resource.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UntagResourceInput'
-        - name: resourceArn
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - TagKeyList
+            properties:
+              TagKeyList:
+                description: A list of keys to identify which key-value tags to remove from a resource.
+                type: array
+                items:
+                  $ref: '#/definitions/string'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1991,20 +2282,14 @@ definitions:
       VersionId:
         $ref: '#/definitions/string'
         description: 'Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most 1024 bytes long. They cannot be edited.'
-  CreateBackupPlanInput:
-    type: object
-    required:
-      - BackupPlan
-    properties:
-      BackupPlan:
-        $ref: '#/definitions/BackupPlanInput'
-        description: Specifies the body of a backup plan. Includes a <code>BackupPlanName</code> and one or more sets of <code>Rules</code>.
-      BackupPlanTags:
-        $ref: '#/definitions/Tags'
-        description: 'To help organize your resources, you can assign your own metadata to the resources that you create. Each tag is a key-value pair. The specified tags are assigned to all backups created with this plan.'
-      CreatorRequestId:
-        $ref: '#/definitions/string'
-        description: 'Identifies the request and allows failed requests to be retried without the risk of executing the operation twice. If the request includes a <code>CreatorRequestId</code> that matches an existing backup plan, that plan is returned. This parameter is optional.'
+  BackupPlanName:
+    type: string
+  BackupRulesInput:
+    type: array
+    items:
+      $ref: '#/definitions/BackupRuleInput'
+  TagValue:
+    type: string
   LimitExceededException: {}
   AlreadyExistsException: {}
   InvalidParameterValueException: {}
@@ -2022,17 +2307,19 @@ definitions:
       CreationDate:
         $ref: '#/definitions/timestamp'
         description: 'The date and time a backup selection is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
-  CreateBackupSelectionInput:
-    type: object
-    required:
-      - BackupSelection
-    properties:
-      BackupSelection:
-        $ref: '#/definitions/BackupSelection'
-        description: '<p>Specifies the body of a request to assign a set of resources to a backup plan.</p> <p>It includes an array of resources, an optional array of patterns to exclude resources, an optional role to provide access to the AWS service the resource belongs to, and an optional array of tags used to identify a set of resources.</p>'
-      CreatorRequestId:
-        $ref: '#/definitions/string'
-        description: A unique string that identifies the request and allows failed requests to be retried without the risk of executing the operation twice.
+  BackupSelectionName:
+    type: string
+    pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
+  IAMRoleArn:
+    type: string
+  ResourceArns:
+    type: array
+    items:
+      $ref: '#/definitions/ARN'
+  ListOfTags:
+    type: array
+    items:
+      $ref: '#/definitions/Condition'
   CreateBackupVaultOutput:
     type: object
     properties:
@@ -2045,18 +2332,6 @@ definitions:
       CreationDate:
         $ref: '#/definitions/timestamp'
         description: 'The date and time a backup vault is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
-  CreateBackupVaultInput:
-    type: object
-    properties:
-      BackupVaultTags:
-        $ref: '#/definitions/Tags'
-        description: Metadata that you can assign to help organize the resources that you create. Each tag is a key-value pair.
-      EncryptionKeyArn:
-        $ref: '#/definitions/ARN'
-        description: 'The server-side encryption key that is used to protect your backups; for example, <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.'
-      CreatorRequestId:
-        $ref: '#/definitions/string'
-        description: A unique string that identifies the request and allows failed requests to be retried without the risk of executing the operation twice.
   DeleteBackupPlanOutput:
     type: object
     properties:
@@ -2072,26 +2347,8 @@ definitions:
       VersionId:
         $ref: '#/definitions/string'
         description: 'Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most 1,024 bytes long. Version Ids cannot be edited.'
-  DeleteBackupPlanInput:
-    type: object
-    properties: {}
   ResourceNotFoundException: {}
   InvalidRequestException: {}
-  DeleteBackupSelectionInput:
-    type: object
-    properties: {}
-  DeleteBackupVaultInput:
-    type: object
-    properties: {}
-  DeleteBackupVaultAccessPolicyInput:
-    type: object
-    properties: {}
-  DeleteBackupVaultNotificationsInput:
-    type: object
-    properties: {}
-  DeleteRecoveryPointInput:
-    type: object
-    properties: {}
   DescribeBackupJobOutput:
     type: object
     properties:
@@ -2146,9 +2403,6 @@ definitions:
       StartBy:
         $ref: '#/definitions/timestamp'
         description: 'Specifies the time in Unix format and Coordinated Universal Time (UTC) when a backup job must be started before it is canceled. The value is calculated by adding the start window to the scheduled time. So if the scheduled time were 6:00 PM and the start window is 2 hours, the <code>StartBy</code> time would be 8:00 PM on the date specified. The value of <code>StartBy</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
-  DescribeBackupJobInput:
-    type: object
-    properties: {}
   DependencyFailureException: {}
   DescribeBackupVaultOutput:
     type: object
@@ -2171,9 +2425,6 @@ definitions:
       NumberOfRecoveryPoints:
         $ref: '#/definitions/long'
         description: The number of recovery points that are stored in a backup vault.
-  DescribeBackupVaultInput:
-    type: object
-    properties: {}
   DescribeProtectedResourceOutput:
     type: object
     properties:
@@ -2186,9 +2437,6 @@ definitions:
       LastBackupTime:
         $ref: '#/definitions/timestamp'
         description: 'The date and time that a resource was last backed up, in Unix format and Coordinated Universal Time (UTC). The value of <code>LastBackupTime</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
-  DescribeProtectedResourceInput:
-    type: object
-    properties: {}
   DescribeRecoveryPointOutput:
     type: object
     properties:
@@ -2243,9 +2491,6 @@ definitions:
       LastRestoreTime:
         $ref: '#/definitions/timestamp'
         description: 'The date and time that a recovery point was last restored, in Unix format and Coordinated Universal Time (UTC). The value of <code>LastRestoreTime</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
-  DescribeRecoveryPointInput:
-    type: object
-    properties: {}
   DescribeRestoreJobOutput:
     type: object
     properties:
@@ -2282,18 +2527,12 @@ definitions:
       CreatedResourceArn:
         $ref: '#/definitions/ARN'
         description: An Amazon Resource Name (ARN) that uniquely identifies a resource whose recovery point is being restored. The format of the ARN depends on the resource type of the backed-up resource.
-  DescribeRestoreJobInput:
-    type: object
-    properties: {}
   ExportBackupPlanTemplateOutput:
     type: object
     properties:
       BackupPlanTemplateJson:
         $ref: '#/definitions/string'
         description: <p>The body of a backup plan template in JSON format.</p> <note> <p>This is a signed JSON document that cannot be modified before being passed to <code>GetBackupPlanFromJSON.</code> </p> </note>
-  ExportBackupPlanTemplateInput:
-    type: object
-    properties: {}
   GetBackupPlanOutput:
     type: object
     properties:
@@ -2321,32 +2560,18 @@ definitions:
       LastExecutionDate:
         $ref: '#/definitions/timestamp'
         description: 'The last time a job to back up resources was executed with this backup plan. A date and time, in Unix format and Coordinated Universal Time (UTC). The value of <code>LastExecutionDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
-  GetBackupPlanInput:
-    type: object
-    properties: {}
   GetBackupPlanFromJSONOutput:
     type: object
     properties:
       BackupPlan:
         $ref: '#/definitions/BackupPlan'
         description: Specifies the body of a backup plan. Includes a <code>BackupPlanName</code> and one or more sets of <code>Rules</code>.
-  GetBackupPlanFromJSONInput:
-    type: object
-    required:
-      - BackupPlanTemplateJson
-    properties:
-      BackupPlanTemplateJson:
-        $ref: '#/definitions/string'
-        description: A customer-supplied backup plan document in JSON format.
   GetBackupPlanFromTemplateOutput:
     type: object
     properties:
       BackupPlanDocument:
         $ref: '#/definitions/BackupPlan'
         description: 'Returns the body of a backup plan based on the target template, including the name, rules, and backup vault of the plan.'
-  GetBackupPlanFromTemplateInput:
-    type: object
-    properties: {}
   GetBackupSelectionOutput:
     type: object
     properties:
@@ -2365,9 +2590,6 @@ definitions:
       CreatorRequestId:
         $ref: '#/definitions/string'
         description: A unique string that identifies the request and allows failed requests to be retried without the risk of executing the operation twice.
-  GetBackupSelectionInput:
-    type: object
-    properties: {}
   GetBackupVaultAccessPolicyOutput:
     type: object
     properties:
@@ -2380,9 +2602,6 @@ definitions:
       Policy:
         $ref: '#/definitions/IAMPolicy'
         description: The backup vault access policy document in JSON format.
-  GetBackupVaultAccessPolicyInput:
-    type: object
-    properties: {}
   GetBackupVaultNotificationsOutput:
     type: object
     properties:
@@ -2398,9 +2617,6 @@ definitions:
       BackupVaultEvents:
         $ref: '#/definitions/BackupVaultEvents'
         description: An array of events that indicate the status of jobs to back up resources to the backup vault.
-  GetBackupVaultNotificationsInput:
-    type: object
-    properties: {}
   GetRecoveryPointRestoreMetadataOutput:
     type: object
     properties:
@@ -2413,9 +2629,6 @@ definitions:
       RestoreMetadata:
         $ref: '#/definitions/Metadata'
         description: A set of metadata key-value pairs that lists the metadata key-value pairs that are required to restore the recovery point.
-  GetRecoveryPointRestoreMetadataInput:
-    type: object
-    properties: {}
   GetSupportedResourceTypesOutput:
     type: object
     properties:
@@ -2431,9 +2644,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/string'
         description: 'The next item following a partial list of returned items. For example, if a request is made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
-  ListBackupJobsInput:
-    type: object
-    properties: {}
   ListBackupPlanTemplatesOutput:
     type: object
     properties:
@@ -2443,9 +2653,6 @@ definitions:
       BackupPlanTemplatesList:
         $ref: '#/definitions/BackupPlanTemplatesList'
         description: An array of template list items containing metadata about your saved templates.
-  ListBackupPlanTemplatesInput:
-    type: object
-    properties: {}
   ListBackupPlanVersionsOutput:
     type: object
     properties:
@@ -2455,9 +2662,6 @@ definitions:
       BackupPlanVersionsList:
         $ref: '#/definitions/BackupPlanVersionsList'
         description: An array of version list items containing metadata about your backup plans.
-  ListBackupPlanVersionsInput:
-    type: object
-    properties: {}
   ListBackupPlansOutput:
     type: object
     properties:
@@ -2467,9 +2671,6 @@ definitions:
       BackupPlansList:
         $ref: '#/definitions/BackupPlansList'
         description: An array of backup plan list items containing metadata about your saved backup plans.
-  ListBackupPlansInput:
-    type: object
-    properties: {}
   ListBackupSelectionsOutput:
     type: object
     properties:
@@ -2479,9 +2680,6 @@ definitions:
       BackupSelectionsList:
         $ref: '#/definitions/BackupSelectionsList'
         description: An array of backup selection list items containing metadata about each resource in the list.
-  ListBackupSelectionsInput:
-    type: object
-    properties: {}
   ListBackupVaultsOutput:
     type: object
     properties:
@@ -2491,9 +2689,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/string'
         description: 'The next item following a partial list of returned items. For example, if a request is made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
-  ListBackupVaultsInput:
-    type: object
-    properties: {}
   ListProtectedResourcesOutput:
     type: object
     properties:
@@ -2503,9 +2698,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/string'
         description: 'The next item following a partial list of returned items. For example, if a request is made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
-  ListProtectedResourcesInput:
-    type: object
-    properties: {}
   ListRecoveryPointsByBackupVaultOutput:
     type: object
     properties:
@@ -2515,9 +2707,6 @@ definitions:
       RecoveryPoints:
         $ref: '#/definitions/RecoveryPointByBackupVaultList'
         description: An array of objects that contain detailed information about recovery points saved in a backup vault.
-  ListRecoveryPointsByBackupVaultInput:
-    type: object
-    properties: {}
   ListRecoveryPointsByResourceOutput:
     type: object
     properties:
@@ -2527,9 +2716,6 @@ definitions:
       RecoveryPoints:
         $ref: '#/definitions/RecoveryPointByResourceList'
         description: An array of objects that contain detailed information about recovery points of the specified resource type.
-  ListRecoveryPointsByResourceInput:
-    type: object
-    properties: {}
   ListRestoreJobsOutput:
     type: object
     properties:
@@ -2539,9 +2725,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/string'
         description: 'The next item following a partial list of returned items. For example, if a request is made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
-  ListRestoreJobsInput:
-    type: object
-    properties: {}
   ListTagsOutput:
     type: object
     properties:
@@ -2551,27 +2734,16 @@ definitions:
       Tags:
         $ref: '#/definitions/Tags'
         description: 'To help organize your resources, you can assign your own metadata to the resources you create. Each tag is a key-value pair.'
-  ListTagsInput:
-    type: object
-    properties: {}
-  PutBackupVaultAccessPolicyInput:
-    type: object
-    properties:
-      Policy:
-        $ref: '#/definitions/IAMPolicy'
-        description: The backup vault access policy document in JSON format.
-  PutBackupVaultNotificationsInput:
-    type: object
-    required:
-      - SNSTopicArn
-      - BackupVaultEvents
-    properties:
-      SNSTopicArn:
-        $ref: '#/definitions/ARN'
-        description: 'The Amazon Resource Name (ARN) that specifies the topic for a backup vault’s events; for example, <code>arn:aws:sns:us-west-2:111122223333:MyVaultTopic</code>.'
-      BackupVaultEvents:
-        $ref: '#/definitions/BackupVaultEvents'
-        description: An array of events that indicate the status of jobs to back up resources to the backup vault.
+  BackupVaultEvent:
+    type: string
+    enum:
+      - BACKUP_JOB_STARTED
+      - BACKUP_JOB_COMPLETED
+      - RESTORE_JOB_STARTED
+      - RESTORE_JOB_COMPLETED
+      - RECOVERY_POINT_MODIFIED
+      - BACKUP_PLAN_CREATED
+      - BACKUP_PLAN_MODIFIED
   StartBackupJobOutput:
     type: object
     properties:
@@ -2584,84 +2756,18 @@ definitions:
       CreationDate:
         $ref: '#/definitions/timestamp'
         description: 'The date and time that a backup job is started, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
-  StartBackupJobInput:
-    type: object
-    required:
-      - BackupVaultName
-      - ResourceArn
-      - IamRoleArn
-    properties:
-      BackupVaultName:
-        $ref: '#/definitions/BackupVaultName'
-        description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
-      ResourceArn:
-        $ref: '#/definitions/ARN'
-        description: An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN depends on the resource type.
-      IamRoleArn:
-        $ref: '#/definitions/IAMRoleArn'
-        description: 'Specifies the IAM role ARN used to create the target recovery point; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
-      IdempotencyToken:
-        $ref: '#/definitions/string'
-        description: 'A customer chosen string that can be used to distinguish between calls to <code>StartBackupJob</code>. Idempotency tokens time out after one hour. Therefore, if you call <code>StartBackupJob</code> multiple times with the same idempotency token within one hour, AWS Backup recognizes that you are requesting only one backup job and initiates only one. If you change the idempotency token for each call, AWS Backup recognizes that you are requesting to start multiple backups.'
-      StartWindowMinutes:
-        $ref: '#/definitions/WindowMinutes'
-        description: The amount of time in minutes before beginning a backup.
-      CompleteWindowMinutes:
-        $ref: '#/definitions/WindowMinutes'
-        description: The amount of time AWS Backup attempts a backup before canceling the job and returning an error.
-      Lifecycle:
-        $ref: '#/definitions/Lifecycle'
-        description: '<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup will transition and expire backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p>'
-      RecoveryPointTags:
-        $ref: '#/definitions/Tags'
-        description: 'To help organize your resources, you can assign your own metadata to the resources that you create. Each tag is a key-value pair.'
+  Long:
+    type: integer
   StartRestoreJobOutput:
     type: object
     properties:
       RestoreJobId:
         $ref: '#/definitions/RestoreJobId'
         description: Uniquely identifies the job that restores a recovery point.
-  StartRestoreJobInput:
-    type: object
-    required:
-      - RecoveryPointArn
-      - Metadata
-      - IamRoleArn
-    properties:
-      RecoveryPointArn:
-        $ref: '#/definitions/ARN'
-        description: 'An ARN that uniquely identifies a recovery point; for example, <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.'
-      Metadata:
-        $ref: '#/definitions/Metadata'
-        description: A set of metadata key-value pairs. Lists the metadata that the recovery point was created with.
-      IamRoleArn:
-        $ref: '#/definitions/IAMRoleArn'
-        description: 'The Amazon Resource Name (ARN) of the IAM role that AWS Backup uses to create the target recovery point; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
-      IdempotencyToken:
-        $ref: '#/definitions/string'
-        description: 'A customer chosen string that can be used to distinguish between calls to <code>StartRestoreJob</code>. Idempotency tokens time out after one hour. Therefore, if you call <code>StartRestoreJob</code> multiple times with the same idempotency token within one hour, AWS Backup recognizes that you are requesting only one restore job and initiates only one. If you change the idempotency token for each call, AWS Backup recognizes that you are requesting to start multiple restores. '
-      ResourceType:
-        $ref: '#/definitions/ResourceType'
-        description: '<p>Starts a job to restore a recovery point for one of the following resources:</p> <ul> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>SGW</code> for AWS Storage Gateway</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>DDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> </ul>'
-  StopBackupJobInput:
-    type: object
-    properties: {}
-  TagResourceInput:
-    type: object
-    required:
-      - Tags
-    properties:
-      Tags:
-        $ref: '#/definitions/Tags'
-        description: 'Key-value pairs that are used to help organize your resources. You can assign your own metadata to the resources you create. '
-  UntagResourceInput:
-    type: object
-    required:
-      - TagKeyList
-    properties:
-      TagKeyList:
-        $ref: '#/definitions/TagKeyList'
-        description: A list of keys to identify which key-value tags to remove from a resource.
+  MetadataValue:
+    type: string
+  string:
+    type: string
   UpdateBackupPlanOutput:
     type: object
     properties:
@@ -2677,14 +2783,6 @@ definitions:
       VersionId:
         $ref: '#/definitions/string'
         description: 'Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most 1,024 bytes long. Version Ids cannot be edited.'
-  UpdateBackupPlanInput:
-    type: object
-    required:
-      - BackupPlan
-    properties:
-      BackupPlan:
-        $ref: '#/definitions/BackupPlanInput'
-        description: Specifies the body of a backup plan. Includes a <code>BackupPlanName</code> and one or more sets of <code>Rules</code>.
   UpdateRecoveryPointLifecycleOutput:
     type: object
     properties:
@@ -2700,15 +2798,7 @@ definitions:
       CalculatedLifecycle:
         $ref: '#/definitions/CalculatedLifecycle'
         description: A <code>CalculatedLifecycle</code> object containing <code>DeleteAt</code> and <code>MoveToColdStorageAt</code> timestamps.
-  UpdateRecoveryPointLifecycleInput:
-    type: object
-    properties:
-      Lifecycle:
-        $ref: '#/definitions/Lifecycle'
-        description: '<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p>'
   ARN:
-    type: string
-  string:
     type: string
   BackupVaultName:
     type: string
@@ -2727,10 +2817,6 @@ definitions:
       - COMPLETED
       - FAILED
       - EXPIRED
-  Long:
-    type: integer
-  IAMRoleArn:
-    type: string
   RecoveryPointCreator:
     type: object
     properties:
@@ -2809,8 +2895,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/BackupJob'
-  BackupPlanName:
-    type: string
   BackupRules:
     type: array
     items:
@@ -2828,10 +2912,6 @@ definitions:
         $ref: '#/definitions/BackupRules'
         description: 'An array of <code>BackupRule</code> objects, each of which specifies a scheduled task that is used to back up a selection of resources.'
     description: 'Contains an optional backup plan display name and an array of <code>BackupRule</code> objects, each of which specifies a backup rule. Each rule in a backup plan is a separate scheduled task and can back up a different selection of AWS resources.'
-  BackupRulesInput:
-    type: array
-    items:
-      $ref: '#/definitions/BackupRuleInput'
   BackupPlanInput:
     type: object
     required:
@@ -2913,14 +2993,9 @@ definitions:
         description: Specifies the number of days after creation that a recovery point is deleted. Must be greater than <code>MoveToColdStorageAfterDays</code>.
     description: Contains an array of <code>Transition</code> objects specifying how long in days before a recovery point transitions to cold storage or is deleted.
   Tags:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/TagKey'
-        value:
-          $ref: '#/definitions/TagValue'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/TagValue'
   BackupRule:
     type: object
     required:
@@ -2980,17 +3055,6 @@ definitions:
         $ref: '#/definitions/Tags'
         description: 'To help organize your resources, you can assign your own metadata to the resources that you create. Each tag is a key-value pair.'
     description: Specifies a scheduled task used to back up a selection of resources.
-  BackupSelectionName:
-    type: string
-    pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
-  ResourceArns:
-    type: array
-    items:
-      $ref: '#/definitions/ARN'
-  ListOfTags:
-    type: array
-    items:
-      $ref: '#/definitions/Condition'
   BackupSelection:
     type: object
     required:
@@ -3036,16 +3100,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/BackupSelectionsListMember'
-  BackupVaultEvent:
-    type: string
-    enum:
-      - BACKUP_JOB_STARTED
-      - BACKUP_JOB_COMPLETED
-      - RESTORE_JOB_STARTED
-      - RESTORE_JOB_COMPLETED
-      - RECOVERY_POINT_MODIFIED
-      - BACKUP_PLAN_CREATED
-      - BACKUP_PLAN_MODIFIED
   BackupVaultEvents:
     type: array
     items:
@@ -3115,6 +3169,73 @@ definitions:
         $ref: '#/definitions/ConditionValue'
         description: 'The value in a key-value pair. For example, in <code>"ec2:ResourceTag/Department": "accounting"</code>, <code>"accounting"</code> is the value.'
     description: 'Contains an array of triplets made up of a condition type (such as <code>StringEquals</code>), a key, and a value. Conditions are used to filter resources in a selection that is assigned to a backup plan.'
+  CreateBackupPlanInput:
+    type: object
+    required:
+      - BackupPlan
+    properties:
+      BackupPlan:
+        $ref: '#/definitions/BackupPlanInput'
+        description: Specifies the body of a backup plan. Includes a <code>BackupPlanName</code> and one or more sets of <code>Rules</code>.
+      BackupPlanTags:
+        $ref: '#/definitions/Tags'
+        description: 'To help organize your resources, you can assign your own metadata to the resources that you create. Each tag is a key-value pair. The specified tags are assigned to all backups created with this plan.'
+      CreatorRequestId:
+        $ref: '#/definitions/string'
+        description: 'Identifies the request and allows failed requests to be retried without the risk of executing the operation twice. If the request includes a <code>CreatorRequestId</code> that matches an existing backup plan, that plan is returned. This parameter is optional.'
+  CreateBackupSelectionInput:
+    type: object
+    required:
+      - BackupSelection
+    properties:
+      BackupSelection:
+        $ref: '#/definitions/BackupSelection'
+        description: '<p>Specifies the body of a request to assign a set of resources to a backup plan.</p> <p>It includes an array of resources, an optional array of patterns to exclude resources, an optional role to provide access to the AWS service the resource belongs to, and an optional array of tags used to identify a set of resources.</p>'
+      CreatorRequestId:
+        $ref: '#/definitions/string'
+        description: A unique string that identifies the request and allows failed requests to be retried without the risk of executing the operation twice.
+  CreateBackupVaultInput:
+    type: object
+    properties:
+      BackupVaultTags:
+        $ref: '#/definitions/Tags'
+        description: Metadata that you can assign to help organize the resources that you create. Each tag is a key-value pair.
+      EncryptionKeyArn:
+        $ref: '#/definitions/ARN'
+        description: 'The server-side encryption key that is used to protect your backups; for example, <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.'
+      CreatorRequestId:
+        $ref: '#/definitions/string'
+        description: A unique string that identifies the request and allows failed requests to be retried without the risk of executing the operation twice.
+  DeleteBackupPlanInput:
+    type: object
+    properties: {}
+  DeleteBackupSelectionInput:
+    type: object
+    properties: {}
+  DeleteBackupVaultAccessPolicyInput:
+    type: object
+    properties: {}
+  DeleteBackupVaultInput:
+    type: object
+    properties: {}
+  DeleteBackupVaultNotificationsInput:
+    type: object
+    properties: {}
+  DeleteRecoveryPointInput:
+    type: object
+    properties: {}
+  DescribeBackupJobInput:
+    type: object
+    properties: {}
+  DescribeBackupVaultInput:
+    type: object
+    properties: {}
+  DescribeProtectedResourceInput:
+    type: object
+    properties: {}
+  DescribeRecoveryPointInput:
+    type: object
+    properties: {}
   RecoveryPointStatus:
     type: string
     enum:
@@ -3132,6 +3253,9 @@ definitions:
       - DELETED
   RestoreJobId:
     type: string
+  DescribeRestoreJobInput:
+    type: object
+    properties: {}
   RestoreJobStatus:
     type: string
     enum:
@@ -3140,17 +3264,41 @@ definitions:
       - COMPLETED
       - ABORTED
       - FAILED
+  ExportBackupPlanTemplateInput:
+    type: object
+    properties: {}
+  GetBackupPlanFromJSONInput:
+    type: object
+    required:
+      - BackupPlanTemplateJson
+    properties:
+      BackupPlanTemplateJson:
+        $ref: '#/definitions/string'
+        description: A customer-supplied backup plan document in JSON format.
+  GetBackupPlanFromTemplateInput:
+    type: object
+    properties: {}
+  GetBackupPlanInput:
+    type: object
+    properties: {}
+  GetBackupSelectionInput:
+    type: object
+    properties: {}
+  GetBackupVaultAccessPolicyInput:
+    type: object
+    properties: {}
   IAMPolicy:
     type: string
+  GetBackupVaultNotificationsInput:
+    type: object
+    properties: {}
+  GetRecoveryPointRestoreMetadataInput:
+    type: object
+    properties: {}
   Metadata:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/MetadataKey'
-        value:
-          $ref: '#/definitions/MetadataValue'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/MetadataValue'
   ResourceTypes:
     type: array
     items:
@@ -3159,25 +3307,56 @@ definitions:
     type: integer
     minimum: 1
     maximum: 1000
+  ListBackupJobsInput:
+    type: object
+    properties: {}
+  ListBackupPlanTemplatesInput:
+    type: object
+    properties: {}
+  ListBackupPlanVersionsInput:
+    type: object
+    properties: {}
+  ListBackupPlansInput:
+    type: object
+    properties: {}
+  ListBackupSelectionsInput:
+    type: object
+    properties: {}
+  ListBackupVaultsInput:
+    type: object
+    properties: {}
+  ListProtectedResourcesInput:
+    type: object
+    properties: {}
   ProtectedResourcesList:
     type: array
     items:
       $ref: '#/definitions/ProtectedResource'
+  ListRecoveryPointsByBackupVaultInput:
+    type: object
+    properties: {}
   RecoveryPointByBackupVaultList:
     type: array
     items:
       $ref: '#/definitions/RecoveryPointByBackupVault'
+  ListRecoveryPointsByResourceInput:
+    type: object
+    properties: {}
   RecoveryPointByResourceList:
     type: array
     items:
       $ref: '#/definitions/RecoveryPointByResource'
+  ListRestoreJobsInput:
+    type: object
+    properties: {}
   RestoreJobsList:
     type: array
     items:
       $ref: '#/definitions/RestoreJobsListMember'
+  ListTagsInput:
+    type: object
+    properties: {}
   MetadataKey:
-    type: string
-  MetadataValue:
     type: string
   ProtectedResource:
     type: object
@@ -3192,6 +3371,24 @@ definitions:
         $ref: '#/definitions/timestamp'
         description: 'The date and time a resource was last backed up, in Unix format and Coordinated Universal Time (UTC). The value of <code>LastBackupTime</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
     description: A structure that contains information about a backed-up resource.
+  PutBackupVaultAccessPolicyInput:
+    type: object
+    properties:
+      Policy:
+        $ref: '#/definitions/IAMPolicy'
+        description: The backup vault access policy document in JSON format.
+  PutBackupVaultNotificationsInput:
+    type: object
+    required:
+      - SNSTopicArn
+      - BackupVaultEvents
+    properties:
+      SNSTopicArn:
+        $ref: '#/definitions/ARN'
+        description: 'The Amazon Resource Name (ARN) that specifies the topic for a backup vault’s events; for example, <code>arn:aws:sns:us-west-2:111122223333:MyVaultTopic</code>.'
+      BackupVaultEvents:
+        $ref: '#/definitions/BackupVaultEvents'
+        description: An array of events that indicate the status of jobs to back up resources to the backup vault.
   RecoveryPointByBackupVault:
     type: object
     properties:
@@ -3303,11 +3500,95 @@ definitions:
         $ref: '#/definitions/ARN'
         description: An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN depends on the resource type.
     description: Contains metadata about a restore job.
+  StartBackupJobInput:
+    type: object
+    required:
+      - BackupVaultName
+      - ResourceArn
+      - IamRoleArn
+    properties:
+      BackupVaultName:
+        $ref: '#/definitions/BackupVaultName'
+        description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+      ResourceArn:
+        $ref: '#/definitions/ARN'
+        description: An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN depends on the resource type.
+      IamRoleArn:
+        $ref: '#/definitions/IAMRoleArn'
+        description: 'Specifies the IAM role ARN used to create the target recovery point; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
+      IdempotencyToken:
+        $ref: '#/definitions/string'
+        description: 'A customer chosen string that can be used to distinguish between calls to <code>StartBackupJob</code>. Idempotency tokens time out after one hour. Therefore, if you call <code>StartBackupJob</code> multiple times with the same idempotency token within one hour, AWS Backup recognizes that you are requesting only one backup job and initiates only one. If you change the idempotency token for each call, AWS Backup recognizes that you are requesting to start multiple backups.'
+      StartWindowMinutes:
+        $ref: '#/definitions/WindowMinutes'
+        description: The amount of time in minutes before beginning a backup.
+      CompleteWindowMinutes:
+        $ref: '#/definitions/WindowMinutes'
+        description: The amount of time AWS Backup attempts a backup before canceling the job and returning an error.
+      Lifecycle:
+        $ref: '#/definitions/Lifecycle'
+        description: '<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup will transition and expire backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p>'
+      RecoveryPointTags:
+        $ref: '#/definitions/Tags'
+        description: 'To help organize your resources, you can assign your own metadata to the resources that you create. Each tag is a key-value pair.'
+  StartRestoreJobInput:
+    type: object
+    required:
+      - RecoveryPointArn
+      - Metadata
+      - IamRoleArn
+    properties:
+      RecoveryPointArn:
+        $ref: '#/definitions/ARN'
+        description: 'An ARN that uniquely identifies a recovery point; for example, <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.'
+      Metadata:
+        $ref: '#/definitions/Metadata'
+        description: A set of metadata key-value pairs. Lists the metadata that the recovery point was created with.
+      IamRoleArn:
+        $ref: '#/definitions/IAMRoleArn'
+        description: 'The Amazon Resource Name (ARN) of the IAM role that AWS Backup uses to create the target recovery point; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
+      IdempotencyToken:
+        $ref: '#/definitions/string'
+        description: 'A customer chosen string that can be used to distinguish between calls to <code>StartRestoreJob</code>. Idempotency tokens time out after one hour. Therefore, if you call <code>StartRestoreJob</code> multiple times with the same idempotency token within one hour, AWS Backup recognizes that you are requesting only one restore job and initiates only one. If you change the idempotency token for each call, AWS Backup recognizes that you are requesting to start multiple restores. '
+      ResourceType:
+        $ref: '#/definitions/ResourceType'
+        description: '<p>Starts a job to restore a recovery point for one of the following resources:</p> <ul> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>SGW</code> for AWS Storage Gateway</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>DDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> </ul>'
+  StopBackupJobInput:
+    type: object
+    properties: {}
   TagKey:
     type: string
   TagKeyList:
     type: array
     items:
       $ref: '#/definitions/string'
-  TagValue:
-    type: string
+  TagResourceInput:
+    type: object
+    required:
+      - Tags
+    properties:
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: 'Key-value pairs that are used to help organize your resources. You can assign your own metadata to the resources you create. '
+  UntagResourceInput:
+    type: object
+    required:
+      - TagKeyList
+    properties:
+      TagKeyList:
+        $ref: '#/definitions/TagKeyList'
+        description: A list of keys to identify which key-value tags to remove from a resource.
+  UpdateBackupPlanInput:
+    type: object
+    required:
+      - BackupPlan
+    properties:
+      BackupPlan:
+        $ref: '#/definitions/BackupPlanInput'
+        description: Specifies the body of a backup plan. Includes a <code>BackupPlanName</code> and one or more sets of <code>Rules</code>.
+  UpdateRecoveryPointLifecycleInput:
+    type: object
+    properties:
+      Lifecycle:
+        $ref: '#/definitions/Lifecycle'
+        description: '<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p>'

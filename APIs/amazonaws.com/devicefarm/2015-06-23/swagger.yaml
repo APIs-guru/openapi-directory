@@ -99,7 +99,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /:
+  '/#X-Amz-Target=DeviceFarm_20150623.CreateDevicePool':
     post:
       operationId: CreateDevicePool
       description: Creates a device pool.
@@ -130,6 +130,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateDevicePoolRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.CreateDevicePool
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -140,7 +146,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateInstanceProfile':
+  '/#X-Amz-Target=DeviceFarm_20150623.CreateInstanceProfile':
     post:
       operationId: CreateInstanceProfile
       description: Creates a profile that can be applied to one or more private fleet device instances.
@@ -171,6 +177,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateInstanceProfileRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.CreateInstanceProfile
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -181,7 +193,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateNetworkProfile':
+  '/#X-Amz-Target=DeviceFarm_20150623.CreateNetworkProfile':
     post:
       operationId: CreateNetworkProfile
       description: Creates a network profile.
@@ -212,6 +224,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateNetworkProfileRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.CreateNetworkProfile
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -222,7 +240,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateProject':
+  '/#X-Amz-Target=DeviceFarm_20150623.CreateProject':
     post:
       operationId: CreateProject
       description: Creates a new project.
@@ -253,6 +271,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateProjectRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.CreateProject
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -263,7 +287,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateRemoteAccessSession':
+  '/#X-Amz-Target=DeviceFarm_20150623.CreateRemoteAccessSession':
     post:
       operationId: CreateRemoteAccessSession
       description: Specifies and starts a remote access session.
@@ -294,6 +318,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateRemoteAccessSessionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.CreateRemoteAccessSession
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -304,7 +334,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateUpload':
+  '/#X-Amz-Target=DeviceFarm_20150623.CreateUpload':
     post:
       operationId: CreateUpload
       description: Uploads an app or test scripts.
@@ -335,6 +365,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateUploadRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.CreateUpload
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -345,7 +381,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateVPCEConfiguration':
+  '/#X-Amz-Target=DeviceFarm_20150623.CreateVPCEConfiguration':
     post:
       operationId: CreateVPCEConfiguration
       description: Creates a configuration record in Device Farm for your Amazon Virtual Private Cloud (VPC) endpoint.
@@ -372,6 +408,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateVPCEConfigurationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.CreateVPCEConfiguration
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -382,7 +424,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteDevicePool':
+  '/#X-Amz-Target=DeviceFarm_20150623.DeleteDevicePool':
     post:
       operationId: DeleteDevicePool
       description: Deletes a device pool given the pool ARN. Does not allow deletion of curated pools owned by the system.
@@ -413,6 +455,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteDevicePoolRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.DeleteDevicePool
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -423,7 +471,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteInstanceProfile':
+  '/#X-Amz-Target=DeviceFarm_20150623.DeleteInstanceProfile':
     post:
       operationId: DeleteInstanceProfile
       description: Deletes a profile that can be applied to one or more private device instances.
@@ -454,6 +502,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteInstanceProfileRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.DeleteInstanceProfile
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -464,7 +518,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteNetworkProfile':
+  '/#X-Amz-Target=DeviceFarm_20150623.DeleteNetworkProfile':
     post:
       operationId: DeleteNetworkProfile
       description: Deletes a network profile.
@@ -495,6 +549,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteNetworkProfileRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.DeleteNetworkProfile
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -505,7 +565,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteProject':
+  '/#X-Amz-Target=DeviceFarm_20150623.DeleteProject':
     post:
       operationId: DeleteProject
       description: '<p>Deletes an AWS Device Farm project, given the project ARN.</p> <p> <b>Note</b> Deleting this resource does not stop an in-progress run.</p>'
@@ -536,6 +596,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteProjectRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.DeleteProject
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -546,7 +612,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteRemoteAccessSession':
+  '/#X-Amz-Target=DeviceFarm_20150623.DeleteRemoteAccessSession':
     post:
       operationId: DeleteRemoteAccessSession
       description: Deletes a completed remote access session and its results.
@@ -577,6 +643,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteRemoteAccessSessionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.DeleteRemoteAccessSession
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -587,7 +659,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteRun':
+  '/#X-Amz-Target=DeviceFarm_20150623.DeleteRun':
     post:
       operationId: DeleteRun
       description: '<p>Deletes the run, given the run ARN.</p> <p> <b>Note</b> Deleting this resource does not stop an in-progress run.</p>'
@@ -618,6 +690,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteRunRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.DeleteRun
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -628,7 +706,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteUpload':
+  '/#X-Amz-Target=DeviceFarm_20150623.DeleteUpload':
     post:
       operationId: DeleteUpload
       description: Deletes an upload given the upload ARN.
@@ -659,6 +737,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteUploadRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.DeleteUpload
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -669,7 +753,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteVPCEConfiguration':
+  '/#X-Amz-Target=DeviceFarm_20150623.DeleteVPCEConfiguration':
     post:
       operationId: DeleteVPCEConfiguration
       description: Deletes a configuration for your Amazon Virtual Private Cloud (VPC) endpoint.
@@ -700,6 +784,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteVPCEConfigurationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.DeleteVPCEConfiguration
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -710,7 +800,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetAccountSettings':
+  '/#X-Amz-Target=DeviceFarm_20150623.GetAccountSettings':
     post:
       operationId: GetAccountSettings
       description: Returns the number of unmetered iOS and/or unmetered Android devices that have been purchased by the account.
@@ -741,6 +831,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetAccountSettingsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.GetAccountSettings
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -751,7 +847,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetDevice':
+  '/#X-Amz-Target=DeviceFarm_20150623.GetDevice':
     post:
       operationId: GetDevice
       description: Gets information about a unique device type.
@@ -782,6 +878,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetDeviceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.GetDevice
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -792,7 +894,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetDeviceInstance':
+  '/#X-Amz-Target=DeviceFarm_20150623.GetDeviceInstance':
     post:
       operationId: GetDeviceInstance
       description: Returns information about a device instance belonging to a private device fleet.
@@ -823,6 +925,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetDeviceInstanceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.GetDeviceInstance
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -833,7 +941,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetDevicePool':
+  '/#X-Amz-Target=DeviceFarm_20150623.GetDevicePool':
     post:
       operationId: GetDevicePool
       description: Gets information about a device pool.
@@ -864,6 +972,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetDevicePoolRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.GetDevicePool
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -874,7 +988,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetDevicePoolCompatibility':
+  '/#X-Amz-Target=DeviceFarm_20150623.GetDevicePoolCompatibility':
     post:
       operationId: GetDevicePoolCompatibility
       description: Gets information about compatibility with a device pool.
@@ -905,6 +1019,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetDevicePoolCompatibilityRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.GetDevicePoolCompatibility
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -915,7 +1035,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetInstanceProfile':
+  '/#X-Amz-Target=DeviceFarm_20150623.GetInstanceProfile':
     post:
       operationId: GetInstanceProfile
       description: Returns information about the specified instance profile.
@@ -946,6 +1066,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetInstanceProfileRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.GetInstanceProfile
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -956,7 +1082,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetJob':
+  '/#X-Amz-Target=DeviceFarm_20150623.GetJob':
     post:
       operationId: GetJob
       description: Gets information about a job.
@@ -987,6 +1113,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetJobRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.GetJob
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -997,7 +1129,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetNetworkProfile':
+  '/#X-Amz-Target=DeviceFarm_20150623.GetNetworkProfile':
     post:
       operationId: GetNetworkProfile
       description: Returns information about a network profile.
@@ -1028,6 +1160,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetNetworkProfileRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.GetNetworkProfile
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1038,7 +1176,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetOfferingStatus':
+  '/#X-Amz-Target=DeviceFarm_20150623.GetOfferingStatus':
     post:
       operationId: GetOfferingStatus
       description: 'Gets the current status and future status of all offerings purchased by an AWS account. The response indicates how many offerings are currently available and the offerings that will be available in the next period. The API returns a <code>NotEligible</code> error if the user is not permitted to invoke the operation. Please contact <a href="mailto:aws-devicefarm-support@amazon.com">aws-devicefarm-support@amazon.com</a> if you believe that you should be able to invoke this operation.'
@@ -1078,6 +1216,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.GetOfferingStatus
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1088,7 +1232,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetProject':
+  '/#X-Amz-Target=DeviceFarm_20150623.GetProject':
     post:
       operationId: GetProject
       description: Gets information about a project.
@@ -1119,6 +1263,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetProjectRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.GetProject
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1129,7 +1279,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetRemoteAccessSession':
+  '/#X-Amz-Target=DeviceFarm_20150623.GetRemoteAccessSession':
     post:
       operationId: GetRemoteAccessSession
       description: Returns a link to a currently running remote access session.
@@ -1160,6 +1310,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetRemoteAccessSessionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.GetRemoteAccessSession
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1170,7 +1326,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetRun':
+  '/#X-Amz-Target=DeviceFarm_20150623.GetRun':
     post:
       operationId: GetRun
       description: Gets information about a run.
@@ -1201,6 +1357,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetRunRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.GetRun
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1211,7 +1373,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetSuite':
+  '/#X-Amz-Target=DeviceFarm_20150623.GetSuite':
     post:
       operationId: GetSuite
       description: Gets information about a suite.
@@ -1242,6 +1404,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetSuiteRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.GetSuite
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1252,7 +1420,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetTest':
+  '/#X-Amz-Target=DeviceFarm_20150623.GetTest':
     post:
       operationId: GetTest
       description: Gets information about a test.
@@ -1283,6 +1451,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetTestRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.GetTest
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1293,7 +1467,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetUpload':
+  '/#X-Amz-Target=DeviceFarm_20150623.GetUpload':
     post:
       operationId: GetUpload
       description: Gets information about an upload.
@@ -1324,6 +1498,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetUploadRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.GetUpload
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1334,7 +1514,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetVPCEConfiguration':
+  '/#X-Amz-Target=DeviceFarm_20150623.GetVPCEConfiguration':
     post:
       operationId: GetVPCEConfiguration
       description: Returns information about the configuration settings for your Amazon Virtual Private Cloud (VPC) endpoint.
@@ -1361,6 +1541,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetVPCEConfigurationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.GetVPCEConfiguration
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1371,7 +1557,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#InstallToRemoteAccessSession':
+  '/#X-Amz-Target=DeviceFarm_20150623.InstallToRemoteAccessSession':
     post:
       operationId: InstallToRemoteAccessSession
       description: 'Installs an application to the device in a remote access session. For Android applications, the file must be in .apk format. For iOS applications, the file must be in .ipa format.'
@@ -1402,6 +1588,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/InstallToRemoteAccessSessionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.InstallToRemoteAccessSession
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1412,7 +1604,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListArtifacts':
+  '/#X-Amz-Target=DeviceFarm_20150623.ListArtifacts':
     post:
       operationId: ListArtifacts
       description: Gets information about artifacts.
@@ -1448,6 +1640,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.ListArtifacts
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1458,7 +1656,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListDeviceInstances':
+  '/#X-Amz-Target=DeviceFarm_20150623.ListDeviceInstances':
     post:
       operationId: ListDeviceInstances
       description: Returns information about the private device instances associated with one or more AWS accounts.
@@ -1489,6 +1687,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListDeviceInstancesRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.ListDeviceInstances
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1499,7 +1703,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListDevicePools':
+  '/#X-Amz-Target=DeviceFarm_20150623.ListDevicePools':
     post:
       operationId: ListDevicePools
       description: Gets information about device pools.
@@ -1535,6 +1739,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.ListDevicePools
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1545,7 +1755,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListDevices':
+  '/#X-Amz-Target=DeviceFarm_20150623.ListDevices':
     post:
       operationId: ListDevices
       description: Gets information about unique device types.
@@ -1581,6 +1791,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.ListDevices
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1591,7 +1807,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListInstanceProfiles':
+  '/#X-Amz-Target=DeviceFarm_20150623.ListInstanceProfiles':
     post:
       operationId: ListInstanceProfiles
       description: Returns information about all the instance profiles in an AWS account.
@@ -1622,6 +1838,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListInstanceProfilesRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.ListInstanceProfiles
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1632,7 +1854,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListJobs':
+  '/#X-Amz-Target=DeviceFarm_20150623.ListJobs':
     post:
       operationId: ListJobs
       description: Gets information about jobs for a given test run.
@@ -1668,6 +1890,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.ListJobs
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1678,7 +1906,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListNetworkProfiles':
+  '/#X-Amz-Target=DeviceFarm_20150623.ListNetworkProfiles':
     post:
       operationId: ListNetworkProfiles
       description: Returns the list of available network profiles.
@@ -1709,6 +1937,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListNetworkProfilesRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.ListNetworkProfiles
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1719,7 +1953,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListOfferingPromotions':
+  '/#X-Amz-Target=DeviceFarm_20150623.ListOfferingPromotions':
     post:
       operationId: ListOfferingPromotions
       description: 'Returns a list of offering promotions. Each offering promotion record contains the ID and description of the promotion. The API returns a <code>NotEligible</code> error if the caller is not permitted to invoke the operation. Contact <a href="mailto:aws-devicefarm-support@amazon.com">aws-devicefarm-support@amazon.com</a> if you believe that you should be able to invoke this operation.'
@@ -1754,6 +1988,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListOfferingPromotionsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.ListOfferingPromotions
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1764,7 +2004,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListOfferingTransactions':
+  '/#X-Amz-Target=DeviceFarm_20150623.ListOfferingTransactions':
     post:
       operationId: ListOfferingTransactions
       description: 'Returns a list of all historical purchases, renewals, and system renewal transactions for an AWS account. The list is paginated and ordered by a descending timestamp (most recent transactions are first). The API returns a <code>NotEligible</code> error if the user is not permitted to invoke the operation. Please contact <a href="mailto:aws-devicefarm-support@amazon.com">aws-devicefarm-support@amazon.com</a> if you believe that you should be able to invoke this operation.'
@@ -1804,6 +2044,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.ListOfferingTransactions
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1814,7 +2060,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListOfferings':
+  '/#X-Amz-Target=DeviceFarm_20150623.ListOfferings':
     post:
       operationId: ListOfferings
       description: 'Returns a list of products or offerings that the user can manage through the API. Each offering record indicates the recurring price per unit and the frequency for that offering. The API returns a <code>NotEligible</code> error if the user is not permitted to invoke the operation. Please contact <a href="mailto:aws-devicefarm-support@amazon.com">aws-devicefarm-support@amazon.com</a> if you believe that you should be able to invoke this operation.'
@@ -1854,6 +2100,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.ListOfferings
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1864,7 +2116,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListProjects':
+  '/#X-Amz-Target=DeviceFarm_20150623.ListProjects':
     post:
       operationId: ListProjects
       description: Gets information about projects.
@@ -1900,6 +2152,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.ListProjects
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1910,7 +2168,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListRemoteAccessSessions':
+  '/#X-Amz-Target=DeviceFarm_20150623.ListRemoteAccessSessions':
     post:
       operationId: ListRemoteAccessSessions
       description: Returns a list of all currently running remote access sessions.
@@ -1941,6 +2199,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListRemoteAccessSessionsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.ListRemoteAccessSessions
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1951,7 +2215,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListRuns':
+  '/#X-Amz-Target=DeviceFarm_20150623.ListRuns':
     post:
       operationId: ListRuns
       description: 'Gets information about runs, given an AWS Device Farm project ARN.'
@@ -1987,6 +2251,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.ListRuns
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1997,7 +2267,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListSamples':
+  '/#X-Amz-Target=DeviceFarm_20150623.ListSamples':
     post:
       operationId: ListSamples
       description: 'Gets information about samples, given an AWS Device Farm job ARN.'
@@ -2033,6 +2303,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.ListSamples
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2043,7 +2319,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListSuites':
+  '/#X-Amz-Target=DeviceFarm_20150623.ListSuites':
     post:
       operationId: ListSuites
       description: Gets information about test suites for a given job.
@@ -2079,6 +2355,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.ListSuites
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2089,7 +2371,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListTests':
+  '/#X-Amz-Target=DeviceFarm_20150623.ListTests':
     post:
       operationId: ListTests
       description: Gets information about tests in a given test suite.
@@ -2125,6 +2407,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.ListTests
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2135,7 +2423,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListUniqueProblems':
+  '/#X-Amz-Target=DeviceFarm_20150623.ListUniqueProblems':
     post:
       operationId: ListUniqueProblems
       description: Gets information about unique problems.
@@ -2171,6 +2459,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.ListUniqueProblems
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2181,7 +2475,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListUploads':
+  '/#X-Amz-Target=DeviceFarm_20150623.ListUploads':
     post:
       operationId: ListUploads
       description: 'Gets information about uploads, given an AWS Device Farm project ARN.'
@@ -2217,6 +2511,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.ListUploads
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2227,7 +2527,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListVPCEConfigurations':
+  '/#X-Amz-Target=DeviceFarm_20150623.ListVPCEConfigurations':
     post:
       operationId: ListVPCEConfigurations
       description: Returns information about all Amazon Virtual Private Cloud (VPC) endpoint configurations in the AWS account.
@@ -2250,6 +2550,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListVPCEConfigurationsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.ListVPCEConfigurations
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2260,7 +2566,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#PurchaseOffering':
+  '/#X-Amz-Target=DeviceFarm_20150623.PurchaseOffering':
     post:
       operationId: PurchaseOffering
       description: 'Immediately purchases offerings for an AWS account. Offerings renew with the latest total purchased quantity for an offering, unless the renewal was overridden. The API returns a <code>NotEligible</code> error if the user is not permitted to invoke the operation. Please contact <a href="mailto:aws-devicefarm-support@amazon.com">aws-devicefarm-support@amazon.com</a> if you believe that you should be able to invoke this operation.'
@@ -2295,6 +2601,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PurchaseOfferingRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.PurchaseOffering
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2305,7 +2617,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#RenewOffering':
+  '/#X-Amz-Target=DeviceFarm_20150623.RenewOffering':
     post:
       operationId: RenewOffering
       description: 'Explicitly sets the quantity of devices to renew for an offering, starting from the <code>effectiveDate</code> of the next period. The API returns a <code>NotEligible</code> error if the user is not permitted to invoke the operation. Please contact <a href="mailto:aws-devicefarm-support@amazon.com">aws-devicefarm-support@amazon.com</a> if you believe that you should be able to invoke this operation.'
@@ -2340,6 +2652,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/RenewOfferingRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.RenewOffering
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2350,7 +2668,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ScheduleRun':
+  '/#X-Amz-Target=DeviceFarm_20150623.ScheduleRun':
     post:
       operationId: ScheduleRun
       description: Schedules a run.
@@ -2385,6 +2703,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ScheduleRunRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.ScheduleRun
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2395,7 +2719,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#StopJob':
+  '/#X-Amz-Target=DeviceFarm_20150623.StopJob':
     post:
       operationId: StopJob
       description: 'Initiates a stop request for the current job. AWS Device Farm will immediately stop the job on the device where tests have not started executing, and you will not be billed for this device. On the device where tests have started executing, Setup Suite and Teardown Suite tests will run to completion before stopping execution on the device. You will be billed for Setup, Teardown, and any tests that were in progress or already completed.'
@@ -2426,6 +2750,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StopJobRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.StopJob
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2436,7 +2766,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#StopRemoteAccessSession':
+  '/#X-Amz-Target=DeviceFarm_20150623.StopRemoteAccessSession':
     post:
       operationId: StopRemoteAccessSession
       description: Ends a specified remote access session.
@@ -2467,6 +2797,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StopRemoteAccessSessionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.StopRemoteAccessSession
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2477,7 +2813,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#StopRun':
+  '/#X-Amz-Target=DeviceFarm_20150623.StopRun':
     post:
       operationId: StopRun
       description: 'Initiates a stop request for the current test run. AWS Device Farm will immediately stop the run on devices where tests have not started executing, and you will not be billed for these devices. On devices where tests have started executing, Setup Suite and Teardown Suite tests will run to completion before stopping execution on those devices. You will be billed for Setup, Teardown, and any tests that were in progress or already completed.'
@@ -2508,6 +2844,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StopRunRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.StopRun
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2518,7 +2860,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateDeviceInstance':
+  '/#X-Amz-Target=DeviceFarm_20150623.UpdateDeviceInstance':
     post:
       operationId: UpdateDeviceInstance
       description: Updates information about an existing private device instance.
@@ -2549,6 +2891,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateDeviceInstanceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.UpdateDeviceInstance
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2559,7 +2907,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateDevicePool':
+  '/#X-Amz-Target=DeviceFarm_20150623.UpdateDevicePool':
     post:
       operationId: UpdateDevicePool
       description: 'Modifies the name, description, and rules in a device pool given the attributes and the pool ARN. Rule updates are all-or-nothing, meaning they can only be updated as a whole (or not at all).'
@@ -2590,6 +2938,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateDevicePoolRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.UpdateDevicePool
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2600,7 +2954,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateInstanceProfile':
+  '/#X-Amz-Target=DeviceFarm_20150623.UpdateInstanceProfile':
     post:
       operationId: UpdateInstanceProfile
       description: Updates information about an existing private device instance profile.
@@ -2631,6 +2985,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateInstanceProfileRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.UpdateInstanceProfile
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2641,7 +3001,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateNetworkProfile':
+  '/#X-Amz-Target=DeviceFarm_20150623.UpdateNetworkProfile':
     post:
       operationId: UpdateNetworkProfile
       description: Updates the network profile with specific settings.
@@ -2672,6 +3032,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateNetworkProfileRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.UpdateNetworkProfile
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2682,7 +3048,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateProject':
+  '/#X-Amz-Target=DeviceFarm_20150623.UpdateProject':
     post:
       operationId: UpdateProject
       description: 'Modifies the specified project name, given the project ARN and a new name.'
@@ -2713,6 +3079,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateProjectRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.UpdateProject
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2723,7 +3095,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateUpload':
+  '/#X-Amz-Target=DeviceFarm_20150623.UpdateUpload':
     post:
       operationId: UpdateUpload
       description: Update an uploaded test specification (test spec).
@@ -2754,6 +3126,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateUploadRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.UpdateUpload
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2764,7 +3142,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateVPCEConfiguration':
+  '/#X-Amz-Target=DeviceFarm_20150623.UpdateVPCEConfiguration':
     post:
       operationId: UpdateVPCEConfiguration
       description: Updates information about an existing Amazon Virtual Private Cloud (VPC) endpoint configuration.
@@ -2795,6 +3173,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateVPCEConfigurationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.UpdateVPCEConfiguration
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2821,11 +3205,6 @@ definitions:
       - projectArn
       - name
       - rules
-    example:
-      name: MyDevicePool
-      description: My Android devices
-      projectArn: 'arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456'
-      rules: []
     properties:
       projectArn:
         $ref: '#/definitions/AmazonResourceName'
@@ -2937,8 +3316,6 @@ definitions:
     type: object
     required:
       - name
-    example:
-      name: MyProject
     properties:
       name:
         $ref: '#/definitions/Name'
@@ -2961,12 +3338,6 @@ definitions:
     required:
       - projectArn
       - deviceArn
-    example:
-      name: MySession
-      configuration:
-        billingMethod: METERED
-      deviceArn: 'arn:aws:devicefarm:us-west-2::device:123EXAMPLE'
-      projectArn: 'arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456'
     properties:
       projectArn:
         $ref: '#/definitions/AmazonResourceName'
@@ -3026,10 +3397,6 @@ definitions:
       - projectArn
       - name
       - type
-    example:
-      name: MyAppiumPythonUpload
-      type: APPIUM_PYTHON_TEST_PACKAGE
-      projectArn: 'arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456'
     properties:
       projectArn:
         $ref: '#/definitions/AmazonResourceName'
@@ -3078,8 +3445,6 @@ definitions:
     type: object
     required:
       - arn
-    example:
-      arn: 'arn:aws:devicefarm:us-west-2::devicepool:123-456-EXAMPLE-GUID'
     properties:
       arn:
         $ref: '#/definitions/AmazonResourceName'
@@ -3116,8 +3481,6 @@ definitions:
     type: object
     required:
       - arn
-    example:
-      arn: 'arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456'
     properties:
       arn:
         $ref: '#/definitions/AmazonResourceName'
@@ -3132,8 +3495,6 @@ definitions:
     type: object
     required:
       - arn
-    example:
-      arn: 'arn:aws:devicefarm:us-west-2:123456789101:session:EXAMPLE-GUID-123-456'
     properties:
       arn:
         $ref: '#/definitions/AmazonResourceName'
@@ -3148,8 +3509,6 @@ definitions:
     type: object
     required:
       - arn
-    example:
-      arn: 'arn:aws:devicefarm:us-west-2:123456789101:run:EXAMPLE-GUID-123-456'
     properties:
       arn:
         $ref: '#/definitions/AmazonResourceName'
@@ -3164,8 +3523,6 @@ definitions:
     type: object
     required:
       - arn
-    example:
-      arn: 'arn:aws:devicefarm:us-west-2:123456789101:upload:EXAMPLE-GUID-123-456'
     properties:
       arn:
         $ref: '#/definitions/AmazonResourceName'
@@ -3198,7 +3555,6 @@ definitions:
     description: Represents the account settings return values from the <code>GetAccountSettings</code> request.
   GetAccountSettingsRequest:
     type: object
-    example: {}
     properties: {}
     description: Represents the request sent to retrieve the account settings.
   GetDeviceResult:
@@ -3231,8 +3587,6 @@ definitions:
     type: object
     required:
       - arn
-    example:
-      arn: 'arn:aws:devicefarm:us-west-2::device:123EXAMPLE'
     properties:
       arn:
         $ref: '#/definitions/AmazonResourceName'
@@ -3265,8 +3619,6 @@ definitions:
     type: object
     required:
       - arn
-    example:
-      arn: 'arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456'
     properties:
       arn:
         $ref: '#/definitions/AmazonResourceName'
@@ -3289,10 +3641,6 @@ definitions:
     type: object
     required:
       - devicePoolArn
-    example:
-      appArn: 'arn:aws:devicefarm:us-west-2::app:123-456-EXAMPLE-GUID'
-      devicePoolArn: 'arn:aws:devicefarm:us-west-2::devicepool:123-456-EXAMPLE-GUID'
-      testType: APPIUM_PYTHON
     properties:
       devicePoolArn:
         $ref: '#/definitions/AmazonResourceName'
@@ -3337,8 +3685,6 @@ definitions:
     type: object
     required:
       - arn
-    example:
-      arn: 'arn:aws:devicefarm:us-west-2::job:123-456-EXAMPLE-GUID'
     properties:
       arn:
         $ref: '#/definitions/AmazonResourceName'
@@ -3391,8 +3737,6 @@ definitions:
     description: Returns the status result for a device offering.
   GetOfferingStatusRequest:
     type: object
-    example:
-      nextToken: RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE=
     properties:
       nextToken:
         $ref: '#/definitions/PaginationToken'
@@ -3415,8 +3759,6 @@ definitions:
     type: object
     required:
       - arn
-    example:
-      arn: 'arn:aws:devicefarm:us-west-2:123456789101:project:5e01a8c7-c861-4c0a-b1d5-12345EXAMPLE'
     properties:
       arn:
         $ref: '#/definitions/AmazonResourceName'
@@ -3435,8 +3777,6 @@ definitions:
     type: object
     required:
       - arn
-    example:
-      arn: 'arn:aws:devicefarm:us-west-2:123456789101:session:EXAMPLE-GUID-123-456'
     properties:
       arn:
         $ref: '#/definitions/AmazonResourceName'
@@ -3477,8 +3817,6 @@ definitions:
     type: object
     required:
       - arn
-    example:
-      arn: 'arn:aws:devicefarm:us-west-2:123456789101:run:5e01a8c7-c861-4c0a-b1d5-5ec6e6c6dd23/0fcac17b-6122-44d7-ae5a-12345EXAMPLE'
     properties:
       arn:
         $ref: '#/definitions/AmazonResourceName'
@@ -3497,8 +3835,6 @@ definitions:
     type: object
     required:
       - arn
-    example:
-      arn: 'arn:aws:devicefarm:us-west-2:123456789101:suite:EXAMPLE-GUID-123-456'
     properties:
       arn:
         $ref: '#/definitions/AmazonResourceName'
@@ -3517,8 +3853,6 @@ definitions:
     type: object
     required:
       - arn
-    example:
-      arn: 'arn:aws:devicefarm:us-west-2:123456789101:test:EXAMPLE-GUID-123-456'
     properties:
       arn:
         $ref: '#/definitions/AmazonResourceName'
@@ -3537,8 +3871,6 @@ definitions:
     type: object
     required:
       - arn
-    example:
-      arn: 'arn:aws:devicefarm:us-west-2:123456789101:upload:EXAMPLE-GUID-123-456'
     properties:
       arn:
         $ref: '#/definitions/AmazonResourceName'
@@ -3572,9 +3904,6 @@ definitions:
     required:
       - remoteAccessSessionArn
       - appArn
-    example:
-      appArn: 'arn:aws:devicefarm:us-west-2:123456789101:app:EXAMPLE-GUID-123-456'
-      remoteAccessSessionArn: 'arn:aws:devicefarm:us-west-2:123456789101:session:EXAMPLE-GUID-123-456'
     properties:
       remoteAccessSessionArn:
         $ref: '#/definitions/AmazonResourceName'
@@ -3598,9 +3927,6 @@ definitions:
     required:
       - arn
       - type
-    example:
-      type: SCREENSHOT
-      arn: 'arn:aws:devicefarm:us-west-2:123456789101:run:EXAMPLE-GUID-123-456'
     properties:
       arn:
         $ref: '#/definitions/AmazonResourceName'
@@ -3660,9 +3986,6 @@ definitions:
     type: object
     required:
       - arn
-    example:
-      type: PRIVATE
-      arn: 'arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456'
     properties:
       arn:
         $ref: '#/definitions/AmazonResourceName'
@@ -3687,8 +4010,6 @@ definitions:
     description: Represents the result of a list devices operation.
   ListDevicesRequest:
     type: object
-    example:
-      arn: 'arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456'
     properties:
       arn:
         $ref: '#/definitions/AmazonResourceName'
@@ -3732,8 +4053,6 @@ definitions:
     type: object
     required:
       - arn
-    example:
-      arn: 'arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456'
     properties:
       arn:
         $ref: '#/definitions/AmazonResourceName'
@@ -3850,8 +4169,6 @@ definitions:
     description: Returns the transaction log of the specified offerings.
   ListOfferingTransactionsRequest:
     type: object
-    example:
-      nextToken: RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE=
     properties:
       nextToken:
         $ref: '#/definitions/PaginationToken'
@@ -3907,8 +4224,6 @@ definitions:
     description: Represents the return values of the list of offerings.
   ListOfferingsRequest:
     type: object
-    example:
-      nextToken: RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE=
     properties:
       nextToken:
         $ref: '#/definitions/PaginationToken'
@@ -3934,9 +4249,6 @@ definitions:
     description: Represents the result of a list projects request.
   ListProjectsRequest:
     type: object
-    example:
-      arn: 'arn:aws:devicefarm:us-west-2:123456789101:project:7ad300ed-8183-41a7-bf94-12345EXAMPLE'
-      nextToken: RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE
     properties:
       arn:
         $ref: '#/definitions/AmazonResourceName'
@@ -3961,9 +4273,6 @@ definitions:
     type: object
     required:
       - arn
-    example:
-      arn: 'arn:aws:devicefarm:us-west-2:123456789101:session:EXAMPLE-GUID-123-456'
-      nextToken: RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE=
     properties:
       arn:
         $ref: '#/definitions/AmazonResourceName'
@@ -4010,9 +4319,6 @@ definitions:
     type: object
     required:
       - arn
-    example:
-      arn: 'arn:aws:devicefarm:us-west-2:123456789101:run:5e01a8c7-c861-4c0a-b1d5-5ec6e6c6dd23/0fcac17b-6122-44d7-ae5a-12345EXAMPLE'
-      nextToken: RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE
     properties:
       arn:
         $ref: '#/definitions/AmazonResourceName'
@@ -4037,9 +4343,6 @@ definitions:
     type: object
     required:
       - arn
-    example:
-      arn: 'arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456'
-      nextToken: RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE
     properties:
       arn:
         $ref: '#/definitions/AmazonResourceName'
@@ -4064,9 +4367,6 @@ definitions:
     type: object
     required:
       - arn
-    example:
-      arn: 'arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456'
-      nextToken: RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE
     properties:
       arn:
         $ref: '#/definitions/AmazonResourceName'
@@ -4091,9 +4391,6 @@ definitions:
     type: object
     required:
       - arn
-    example:
-      arn: 'arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456'
-      nextToken: RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE
     properties:
       arn:
         $ref: '#/definitions/AmazonResourceName'
@@ -4118,9 +4415,6 @@ definitions:
     type: object
     required:
       - arn
-    example:
-      arn: 'arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456'
-      nextToken: RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE
     properties:
       arn:
         $ref: '#/definitions/AmazonResourceName'
@@ -4145,9 +4439,6 @@ definitions:
     type: object
     required:
       - arn
-    example:
-      arn: 'arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456'
-      nextToken: RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE
     properties:
       arn:
         $ref: '#/definitions/AmazonResourceName'
@@ -4202,9 +4493,6 @@ definitions:
     description: 'The result of the purchase offering (e.g., success or failure).'
   PurchaseOfferingRequest:
     type: object
-    example:
-      offeringId: D68B3C05-1BA6-4360-BC69-12345EXAMPLE
-      quantity: 1
     properties:
       offeringId:
         $ref: '#/definitions/OfferingIdentifier'
@@ -4241,9 +4529,6 @@ definitions:
     description: The result of a renewal offering.
   RenewOfferingRequest:
     type: object
-    example:
-      offeringId: D68B3C05-1BA6-4360-BC69-12345EXAMPLE
-      quantity: 1
     properties:
       offeringId:
         $ref: '#/definitions/OfferingIdentifier'
@@ -4266,13 +4551,6 @@ definitions:
     required:
       - projectArn
       - test
-    example:
-      name: MyRun
-      devicePoolArn: 'arn:aws:devicefarm:us-west-2:123456789101:pool:EXAMPLE-GUID-123-456'
-      projectArn: 'arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456'
-      test:
-        type: APPIUM_JAVA_JUNIT
-        testPackageArn: 'arn:aws:devicefarm:us-west-2:123456789101:test:EXAMPLE-GUID-123-456'
     properties:
       projectArn:
         $ref: '#/definitions/AmazonResourceName'
@@ -4343,8 +4621,6 @@ definitions:
     type: object
     required:
       - arn
-    example:
-      arn: 'arn:aws:devicefarm:us-west-2:123456789101:run:EXAMPLE-GUID-123-456'
     properties:
       arn:
         $ref: '#/definitions/AmazonResourceName'
@@ -4383,14 +4659,6 @@ definitions:
     type: object
     required:
       - arn
-    example:
-      name: NewName
-      arn: 'arn:aws:devicefarm:us-west-2::devicepool:082d10e5-d7d7-48a5-ba5c-12345EXAMPLE'
-      description: NewDescription
-      rules:
-        - value: 'True'
-          attribute: REMOTE_ACCESS_ENABLED
-          operator: EQUALS
     properties:
       arn:
         $ref: '#/definitions/AmazonResourceName'
@@ -4503,9 +4771,6 @@ definitions:
     type: object
     required:
       - arn
-    example:
-      name: NewName
-      arn: 'arn:aws:devicefarm:us-west-2:123456789101:project:8f75187d-101e-4625-accc-12345EXAMPLE'
     properties:
       arn:
         $ref: '#/definitions/AmazonResourceName'
@@ -4571,14 +4836,9 @@ definitions:
     minLength: 2
     maxLength: 16
   PurchasedDevicesMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/DevicePlatform'
-        value:
-          $ref: '#/definitions/Integer'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/Integer'
   JobTimeoutMinutes:
     type: integer
   TrialMinutes:
@@ -4592,14 +4852,9 @@ definitions:
         description: The number of free trial minutes remaining in the account.
     description: Represents information about free trial device minutes for an AWS account.
   MaxSlotMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/String'
-        value:
-          $ref: '#/definitions/Integer'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/Integer'
   SkipAppResign:
     type: boolean
   AccountSettings:
@@ -5566,14 +5821,9 @@ definitions:
     minLength: 4
     maxLength: 1024
   OfferingStatusMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/OfferingIdentifier'
-        value:
-          $ref: '#/definitions/OfferingStatus'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/OfferingStatus'
   Run:
     type: object
     properties:
@@ -5807,14 +6057,9 @@ definitions:
     items:
       $ref: '#/definitions/Test'
   UniqueProblemsByExecutionResultMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/ExecutionResult'
-        value:
-          $ref: '#/definitions/UniqueProblems'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/UniqueProblems'
   Uploads:
     type: array
     items:
@@ -6053,14 +6298,9 @@ definitions:
         description: The pre-signed Amazon S3 URL that can be used with a corresponding GET request to download the sample's file.
     description: Represents a sample of performance data.
   TestParameters:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/String'
-        value:
-          $ref: '#/definitions/String'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/String'
   UniqueProblem:
     type: object
     properties:

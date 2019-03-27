@@ -99,7 +99,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /:
+  '/#X-Amz-Target=AWSPriceListService.DescribeServices':
     post:
       operationId: DescribeServices
       description: 'Returns the metadata for one service or a list of the metadata for all services. Use this without a service code to get the service codes for all services. Use it with a service code, such as <code>AmazonEC2</code>, to get information specific to that service, such as the attribute names available for that service. For example, some of the attribute names available for EC2 are <code>volumeType</code>, <code>maxIopsVolume</code>, <code>operation</code>, <code>locationType</code>, and <code>instanceCapacity10xlarge</code>.'
@@ -144,6 +144,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSPriceListService.DescribeServices
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -154,7 +160,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetAttributeValues':
+  '/#X-Amz-Target=AWSPriceListService.GetAttributeValues':
     post:
       operationId: GetAttributeValues
       description: 'Returns a list of attribute values. Attibutes are similar to the details in a Price List API offer file. For a list of available attributes, see <a href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/reading-an-offer.html#pps-defs">Offer File Definitions</a> in the <a href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-what-is.html">AWS Billing and Cost Management User Guide</a>.'
@@ -199,6 +205,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSPriceListService.GetAttributeValues
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -209,7 +221,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetProducts':
+  '/#X-Amz-Target=AWSPriceListService.GetProducts':
     post:
       operationId: GetProducts
       description: Returns a list of all products that match the filter criteria.
@@ -254,6 +266,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSPriceListService.GetProducts
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -290,10 +308,6 @@ definitions:
         description: The pagination token for the next set of retreivable results.
   DescribeServicesRequest:
     type: object
-    example:
-      FormatVersion: aws_v1
-      MaxResults: 1
-      ServiceCode: AmazonEC2
     properties:
       ServiceCode:
         $ref: '#/definitions/String'
@@ -356,10 +370,6 @@ definitions:
     required:
       - ServiceCode
       - AttributeName
-    example:
-      AttributeName: volumeType
-      MaxResults: 2
-      ServiceCode: AmazonEC2
     properties:
       ServiceCode:
         $ref: '#/definitions/String'
@@ -392,16 +402,6 @@ definitions:
         description: The pagination token that indicates the next set of results to retrieve.
   GetProductsRequest:
     type: object
-    example:
-      Filters:
-        - Field: ServiceCode
-          Type: TERM_MATCH
-          Value: AmazonEC2
-        - Field: volumeType
-          Type: TERM_MATCH
-          Value: Provisioned IOPS
-      FormatVersion: aws_v1
-      MaxResults: 1
     properties:
       ServiceCode:
         $ref: '#/definitions/String'

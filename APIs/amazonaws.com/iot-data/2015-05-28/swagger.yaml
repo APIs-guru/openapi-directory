@@ -35,7 +35,6 @@ externalDocs:
   url: 'https://docs.aws.amazon.com/iot/'
 host: data.iot.amazonaws.com
 basePath: /
-x-hasEquivalentPaths: true
 schemes:
   - https
   - http
@@ -141,15 +140,14 @@ paths:
           schema:
             $ref: '#/definitions/UnsupportedDocumentEncodingException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteThingShadowRequest'
         - name: thingName
-          type: string
           in: path
           required: true
+          description: The name of the thing.
+          type: string
+          pattern: '[a-zA-Z0-9_-]+'
+          minLength: 1
+          maxLength: 128
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -201,15 +199,14 @@ paths:
           schema:
             $ref: '#/definitions/UnsupportedDocumentEncodingException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetThingShadowRequest'
         - name: thingName
-          type: string
           in: path
           required: true
+          description: The name of the thing.
+          type: string
+          pattern: '[a-zA-Z0-9_-]+'
+          minLength: 1
+          maxLength: 128
     post:
       operationId: UpdateThingShadow
       description: '<p>Updates the thing shadow for the specified thing.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/iot/latest/developerguide/API_UpdateThingShadow.html">UpdateThingShadow</a> in the <i>AWS IoT Developer Guide</i>.</p>'
@@ -255,15 +252,25 @@ paths:
           schema:
             $ref: '#/definitions/UnsupportedDocumentEncodingException'
       parameters:
+        - name: thingName
+          in: path
+          required: true
+          description: The name of the thing.
+          type: string
+          pattern: '[a-zA-Z0-9_-]+'
+          minLength: 1
+          maxLength: 128
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateThingShadowRequest'
-        - name: thingName
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - payload
+            properties:
+              payload:
+                description: 'The state information, in JSON format.'
+                type: string
   '/topics/{topic}':
     post:
       operationId: Publish
@@ -288,15 +295,27 @@ paths:
           schema:
             $ref: '#/definitions/MethodNotAllowedException'
       parameters:
+        - name: topic
+          in: path
+          required: true
+          description: The name of the MQTT topic.
+          type: string
+        - name: qos
+          in: query
+          required: false
+          description: The Quality of Service (QoS) level.
+          type: integer
+          minimum: 0
+          maximum: 1
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/PublishRequest'
-        - name: topic
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              payload:
+                description: 'The state information, in JSON format.'
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -317,10 +336,6 @@ definitions:
         $ref: '#/definitions/JsonDocument'
         description: 'The state information, in JSON format.'
     description: The output from the DeleteThingShadow operation.
-  DeleteThingShadowRequest:
-    type: object
-    properties: {}
-    description: The input for the DeleteThingShadow operation.
   ResourceNotFoundException:
     type: object
     properties:
@@ -384,17 +399,6 @@ definitions:
         $ref: '#/definitions/JsonDocument'
         description: 'The state information, in JSON format.'
     description: The output from the GetThingShadow operation.
-  GetThingShadowRequest:
-    type: object
-    properties: {}
-    description: The input for the GetThingShadow operation.
-  PublishRequest:
-    type: object
-    properties:
-      payload:
-        $ref: '#/definitions/Payload'
-        description: 'The state information, in JSON format.'
-    description: The input for the Publish operation.
   UpdateThingShadowResponse:
     type: object
     properties:
@@ -402,15 +406,6 @@ definitions:
         $ref: '#/definitions/JsonDocument'
         description: 'The state information, in JSON format.'
     description: The output from the UpdateThingShadow operation.
-  UpdateThingShadowRequest:
-    type: object
-    required:
-      - payload
-    properties:
-      payload:
-        $ref: '#/definitions/JsonDocument'
-        description: 'The state information, in JSON format.'
-    description: The input for the UpdateThingShadow operation.
   ConflictException:
     type: object
     properties:
@@ -432,8 +427,16 @@ definitions:
     pattern: '[a-zA-Z0-9_-]+'
     minLength: 1
     maxLength: 128
+  DeleteThingShadowRequest:
+    type: object
+    properties: {}
+    description: The input for the DeleteThingShadow operation.
   JsonDocument:
     type: string
+  GetThingShadowRequest:
+    type: object
+    properties: {}
+    description: The input for the GetThingShadow operation.
   errorMessage:
     type: string
   Payload:
@@ -444,3 +447,19 @@ definitions:
     type: integer
     minimum: 0
     maximum: 1
+  PublishRequest:
+    type: object
+    properties:
+      payload:
+        $ref: '#/definitions/Payload'
+        description: 'The state information, in JSON format.'
+    description: The input for the Publish operation.
+  UpdateThingShadowRequest:
+    type: object
+    required:
+      - payload
+    properties:
+      payload:
+        $ref: '#/definitions/JsonDocument'
+        description: 'The state information, in JSON format.'
+    description: The input for the UpdateThingShadow operation.

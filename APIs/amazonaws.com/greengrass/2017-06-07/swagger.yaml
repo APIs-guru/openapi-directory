@@ -35,7 +35,6 @@ externalDocs:
   url: 'https://docs.aws.amazon.com/greengrass/'
 host: greengrass.amazonaws.com
 basePath: /
-x-hasEquivalentPaths: true
 schemes:
   - https
   - http
@@ -117,15 +116,20 @@ paths:
           schema:
             $ref: '#/definitions/InternalServerErrorException'
       parameters:
+        - name: GroupId
+          in: path
+          required: true
+          description: The ID of the Greengrass group.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/AssociateRoleToGroupRequest'
-        - name: GroupId
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              RoleArn:
+                description: The ARN of the role you wish to associate with this group.
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -153,15 +157,11 @@ paths:
           schema:
             $ref: '#/definitions/InternalServerErrorException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DisassociateRoleFromGroupRequest'
         - name: GroupId
-          type: string
           in: path
           required: true
+          description: The ID of the Greengrass group.
+          type: string
     get:
       operationId: GetAssociatedRole
       description: Retrieves the role associated with a particular group.
@@ -179,15 +179,11 @@ paths:
           schema:
             $ref: '#/definitions/InternalServerErrorException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetAssociatedRoleRequest'
         - name: GroupId
-          type: string
           in: path
           required: true
+          description: The ID of the Greengrass group.
+          type: string
   /greengrass/servicerole:
     put:
       operationId: AssociateServiceRoleToAccount
@@ -210,7 +206,11 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/AssociateServiceRoleToAccountRequest'
+            type: object
+            properties:
+              RoleArn:
+                description: The ARN of the service role you wish to associate with your account.
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -233,12 +233,7 @@ paths:
           description: InternalServerErrorException
           schema:
             $ref: '#/definitions/InternalServerErrorException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DisassociateServiceRoleFromAccountRequest'
+      parameters: []
     get:
       operationId: GetServiceRoleForAccount
       description: Retrieves the service role that is attached to your account.
@@ -251,12 +246,7 @@ paths:
           description: InternalServerErrorException
           schema:
             $ref: '#/definitions/InternalServerErrorException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetServiceRoleForAccountRequest'
+      parameters: []
   /greengrass/definition/connectors:
     post:
       operationId: CreateConnectorDefinition
@@ -271,11 +261,27 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
+        - name: X-Amzn-Client-Token
+          in: header
+          required: false
+          description: A client token used to correlate requests and responses.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateConnectorDefinitionRequest'
+            type: object
+            properties:
+              InitialVersion:
+                description: 'Information about the connector definition version, which is a container for connectors.'
+                type: object
+                properties:
+                  Connectors:
+                    $ref: '#/definitions/__listOfConnector'
+                    description: 'A list of references to connectors in this version, with their corresponding configuration settings.'
+              Name:
+                description: The name of the connector definition.
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -295,11 +301,16 @@ paths:
           schema:
             $ref: '#/definitions/ListConnectorDefinitionsResponse'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListConnectorDefinitionsRequest'
+        - name: MaxResults
+          in: query
+          required: false
+          description: The maximum number of results to be returned per request.
+          type: string
+        - name: NextToken
+          in: query
+          required: false
+          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          type: string
   '/greengrass/definition/connectors/{ConnectorDefinitionId}/versions':
     post:
       operationId: CreateConnectorDefinitionVersion
@@ -314,15 +325,27 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
+        - name: X-Amzn-Client-Token
+          in: header
+          required: false
+          description: A client token used to correlate requests and responses.
+          type: string
+        - name: ConnectorDefinitionId
+          in: path
+          required: true
+          description: The ID of the connector definition.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateConnectorDefinitionVersionRequest'
-        - name: ConnectorDefinitionId
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              Connectors:
+                description: 'A list of references to connectors in this version, with their corresponding configuration settings.'
+                type: array
+                items:
+                  $ref: '#/definitions/Connector'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -346,15 +369,21 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListConnectorDefinitionVersionsRequest'
         - name: ConnectorDefinitionId
-          type: string
           in: path
           required: true
+          description: The ID of the connector definition.
+          type: string
+        - name: MaxResults
+          in: query
+          required: false
+          description: The maximum number of results to be returned per request.
+          type: string
+        - name: NextToken
+          in: query
+          required: false
+          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          type: string
   /greengrass/definition/cores:
     post:
       operationId: CreateCoreDefinition
@@ -369,11 +398,27 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
+        - name: X-Amzn-Client-Token
+          in: header
+          required: false
+          description: A client token used to correlate requests and responses.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateCoreDefinitionRequest'
+            type: object
+            properties:
+              InitialVersion:
+                description: Information about a core definition version.
+                type: object
+                properties:
+                  Cores:
+                    $ref: '#/definitions/__listOfCore'
+                    description: A list of cores in the core definition version.
+              Name:
+                description: The name of the core definition.
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -393,11 +438,16 @@ paths:
           schema:
             $ref: '#/definitions/ListCoreDefinitionsResponse'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListCoreDefinitionsRequest'
+        - name: MaxResults
+          in: query
+          required: false
+          description: The maximum number of results to be returned per request.
+          type: string
+        - name: NextToken
+          in: query
+          required: false
+          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          type: string
   '/greengrass/definition/cores/{CoreDefinitionId}/versions':
     post:
       operationId: CreateCoreDefinitionVersion
@@ -412,15 +462,27 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
+        - name: X-Amzn-Client-Token
+          in: header
+          required: false
+          description: A client token used to correlate requests and responses.
+          type: string
+        - name: CoreDefinitionId
+          in: path
+          required: true
+          description: The ID of the core definition.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateCoreDefinitionVersionRequest'
-        - name: CoreDefinitionId
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              Cores:
+                description: A list of cores in the core definition version.
+                type: array
+                items:
+                  $ref: '#/definitions/Core'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -444,15 +506,21 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListCoreDefinitionVersionsRequest'
         - name: CoreDefinitionId
-          type: string
           in: path
           required: true
+          description: The ID of the core definition.
+          type: string
+        - name: MaxResults
+          in: query
+          required: false
+          description: The maximum number of results to be returned per request.
+          type: string
+        - name: NextToken
+          in: query
+          required: false
+          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          type: string
   '/greengrass/groups/{GroupId}/deployments':
     post:
       operationId: CreateDeployment
@@ -467,15 +535,36 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
+        - name: X-Amzn-Client-Token
+          in: header
+          required: false
+          description: A client token used to correlate requests and responses.
+          type: string
+        - name: GroupId
+          in: path
+          required: true
+          description: The ID of the Greengrass group.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateDeploymentRequest'
-        - name: GroupId
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              DeploymentId:
+                description: The ID of the deployment if you wish to redeploy a previous deployment.
+                type: string
+              DeploymentType:
+                description: 'The type of deployment. When used for ''''CreateDeployment'''', only ''''NewDeployment'''' and ''''Redeployment'''' are valid.'
+                type: string
+                enum:
+                  - NewDeployment
+                  - Redeployment
+                  - ResetDeployment
+                  - ForceResetDeployment
+              GroupVersionId:
+                description: The ID of the group version to be deployed.
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -499,15 +588,21 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListDeploymentsRequest'
         - name: GroupId
-          type: string
           in: path
           required: true
+          description: The ID of the Greengrass group.
+          type: string
+        - name: MaxResults
+          in: query
+          required: false
+          description: The maximum number of results to be returned per request.
+          type: string
+        - name: NextToken
+          in: query
+          required: false
+          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          type: string
   /greengrass/definition/devices:
     post:
       operationId: CreateDeviceDefinition
@@ -522,11 +617,27 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
+        - name: X-Amzn-Client-Token
+          in: header
+          required: false
+          description: A client token used to correlate requests and responses.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateDeviceDefinitionRequest'
+            type: object
+            properties:
+              InitialVersion:
+                description: Information about a device definition version.
+                type: object
+                properties:
+                  Devices:
+                    $ref: '#/definitions/__listOfDevice'
+                    description: A list of devices in the definition version.
+              Name:
+                description: The name of the device definition.
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -546,11 +657,16 @@ paths:
           schema:
             $ref: '#/definitions/ListDeviceDefinitionsResponse'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListDeviceDefinitionsRequest'
+        - name: MaxResults
+          in: query
+          required: false
+          description: The maximum number of results to be returned per request.
+          type: string
+        - name: NextToken
+          in: query
+          required: false
+          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          type: string
   '/greengrass/definition/devices/{DeviceDefinitionId}/versions':
     post:
       operationId: CreateDeviceDefinitionVersion
@@ -565,15 +681,27 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
+        - name: X-Amzn-Client-Token
+          in: header
+          required: false
+          description: A client token used to correlate requests and responses.
+          type: string
+        - name: DeviceDefinitionId
+          in: path
+          required: true
+          description: The ID of the device definition.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateDeviceDefinitionVersionRequest'
-        - name: DeviceDefinitionId
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              Devices:
+                description: A list of devices in the definition version.
+                type: array
+                items:
+                  $ref: '#/definitions/Device'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -597,15 +725,21 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListDeviceDefinitionVersionsRequest'
         - name: DeviceDefinitionId
-          type: string
           in: path
           required: true
+          description: The ID of the device definition.
+          type: string
+        - name: MaxResults
+          in: query
+          required: false
+          description: The maximum number of results to be returned per request.
+          type: string
+        - name: NextToken
+          in: query
+          required: false
+          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          type: string
   /greengrass/definition/functions:
     post:
       operationId: CreateFunctionDefinition
@@ -620,11 +754,30 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
+        - name: X-Amzn-Client-Token
+          in: header
+          required: false
+          description: A client token used to correlate requests and responses.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateFunctionDefinitionRequest'
+            type: object
+            properties:
+              InitialVersion:
+                description: Information about a function definition version.
+                type: object
+                properties:
+                  DefaultConfig:
+                    $ref: '#/definitions/FunctionDefaultConfig'
+                    description: The default configuration that applies to all Lambda functions in this function definition version. Individual Lambda functions can override these settings.
+                  Functions:
+                    $ref: '#/definitions/__listOfFunction'
+                    description: A list of Lambda functions in this function definition version.
+              Name:
+                description: The name of the function definition.
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -644,11 +797,16 @@ paths:
           schema:
             $ref: '#/definitions/ListFunctionDefinitionsResponse'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListFunctionDefinitionsRequest'
+        - name: MaxResults
+          in: query
+          required: false
+          description: The maximum number of results to be returned per request.
+          type: string
+        - name: NextToken
+          in: query
+          required: false
+          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          type: string
   '/greengrass/definition/functions/{FunctionDefinitionId}/versions':
     post:
       operationId: CreateFunctionDefinitionVersion
@@ -663,15 +821,33 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
+        - name: X-Amzn-Client-Token
+          in: header
+          required: false
+          description: A client token used to correlate requests and responses.
+          type: string
+        - name: FunctionDefinitionId
+          in: path
+          required: true
+          description: The ID of the Lambda function definition.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateFunctionDefinitionVersionRequest'
-        - name: FunctionDefinitionId
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              DefaultConfig:
+                description: The default configuration that applies to all Lambda functions in the group. Individual Lambda functions can override these settings.
+                type: object
+                properties:
+                  Execution:
+                    $ref: '#/definitions/FunctionDefaultExecutionConfig'
+              Functions:
+                description: A list of Lambda functions in this function definition version.
+                type: array
+                items:
+                  $ref: '#/definitions/Function'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -695,15 +871,21 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListFunctionDefinitionVersionsRequest'
         - name: FunctionDefinitionId
-          type: string
           in: path
           required: true
+          description: The ID of the Lambda function definition.
+          type: string
+        - name: MaxResults
+          in: query
+          required: false
+          description: The maximum number of results to be returned per request.
+          type: string
+        - name: NextToken
+          in: query
+          required: false
+          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          type: string
   /greengrass/groups:
     post:
       operationId: CreateGroup
@@ -718,11 +900,45 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
+        - name: X-Amzn-Client-Token
+          in: header
+          required: false
+          description: A client token used to correlate requests and responses.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateGroupRequest'
+            type: object
+            properties:
+              InitialVersion:
+                description: Information about a group version.
+                type: object
+                properties:
+                  ConnectorDefinitionVersionArn:
+                    $ref: '#/definitions/__string'
+                    description: The ARN of the connector definition version for this group.
+                  CoreDefinitionVersionArn:
+                    $ref: '#/definitions/__string'
+                    description: The ARN of the core definition version for this group.
+                  DeviceDefinitionVersionArn:
+                    $ref: '#/definitions/__string'
+                    description: The ARN of the device definition version for this group.
+                  FunctionDefinitionVersionArn:
+                    $ref: '#/definitions/__string'
+                    description: The ARN of the function definition version for this group.
+                  LoggerDefinitionVersionArn:
+                    $ref: '#/definitions/__string'
+                    description: The ARN of the logger definition version for this group.
+                  ResourceDefinitionVersionArn:
+                    $ref: '#/definitions/__string'
+                    description: The ARN of the resource definition version for this group.
+                  SubscriptionDefinitionVersionArn:
+                    $ref: '#/definitions/__string'
+                    description: The ARN of the subscription definition version for this group.
+              Name:
+                description: The name of the group.
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -742,11 +958,16 @@ paths:
           schema:
             $ref: '#/definitions/ListGroupsResponse'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListGroupsRequest'
+        - name: MaxResults
+          in: query
+          required: false
+          description: The maximum number of results to be returned per request.
+          type: string
+        - name: NextToken
+          in: query
+          required: false
+          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          type: string
   '/greengrass/groups/{GroupId}/certificateauthorities':
     post:
       operationId: CreateGroupCertificateAuthority
@@ -765,15 +986,16 @@ paths:
           schema:
             $ref: '#/definitions/InternalServerErrorException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/CreateGroupCertificateAuthorityRequest'
-        - name: GroupId
+        - name: X-Amzn-Client-Token
+          in: header
+          required: false
+          description: A client token used to correlate requests and responses.
           type: string
+        - name: GroupId
           in: path
           required: true
+          description: The ID of the Greengrass group.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -801,15 +1023,11 @@ paths:
           schema:
             $ref: '#/definitions/InternalServerErrorException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListGroupCertificateAuthoritiesRequest'
         - name: GroupId
-          type: string
           in: path
           required: true
+          description: The ID of the Greengrass group.
+          type: string
   '/greengrass/groups/{GroupId}/versions':
     post:
       operationId: CreateGroupVersion
@@ -824,15 +1042,43 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
+        - name: X-Amzn-Client-Token
+          in: header
+          required: false
+          description: A client token used to correlate requests and responses.
+          type: string
+        - name: GroupId
+          in: path
+          required: true
+          description: The ID of the Greengrass group.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateGroupVersionRequest'
-        - name: GroupId
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              ConnectorDefinitionVersionArn:
+                description: The ARN of the connector definition version for this group.
+                type: string
+              CoreDefinitionVersionArn:
+                description: The ARN of the core definition version for this group.
+                type: string
+              DeviceDefinitionVersionArn:
+                description: The ARN of the device definition version for this group.
+                type: string
+              FunctionDefinitionVersionArn:
+                description: The ARN of the function definition version for this group.
+                type: string
+              LoggerDefinitionVersionArn:
+                description: The ARN of the logger definition version for this group.
+                type: string
+              ResourceDefinitionVersionArn:
+                description: The ARN of the resource definition version for this group.
+                type: string
+              SubscriptionDefinitionVersionArn:
+                description: The ARN of the subscription definition version for this group.
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -856,15 +1102,21 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListGroupVersionsRequest'
         - name: GroupId
-          type: string
           in: path
           required: true
+          description: The ID of the Greengrass group.
+          type: string
+        - name: MaxResults
+          in: query
+          required: false
+          description: The maximum number of results to be returned per request.
+          type: string
+        - name: NextToken
+          in: query
+          required: false
+          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          type: string
   /greengrass/definition/loggers:
     post:
       operationId: CreateLoggerDefinition
@@ -879,11 +1131,27 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
+        - name: X-Amzn-Client-Token
+          in: header
+          required: false
+          description: A client token used to correlate requests and responses.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateLoggerDefinitionRequest'
+            type: object
+            properties:
+              InitialVersion:
+                description: Information about a logger definition version.
+                type: object
+                properties:
+                  Loggers:
+                    $ref: '#/definitions/__listOfLogger'
+                    description: A list of loggers.
+              Name:
+                description: The name of the logger definition.
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -903,11 +1171,16 @@ paths:
           schema:
             $ref: '#/definitions/ListLoggerDefinitionsResponse'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListLoggerDefinitionsRequest'
+        - name: MaxResults
+          in: query
+          required: false
+          description: The maximum number of results to be returned per request.
+          type: string
+        - name: NextToken
+          in: query
+          required: false
+          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          type: string
   '/greengrass/definition/loggers/{LoggerDefinitionId}/versions':
     post:
       operationId: CreateLoggerDefinitionVersion
@@ -922,15 +1195,27 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
+        - name: X-Amzn-Client-Token
+          in: header
+          required: false
+          description: A client token used to correlate requests and responses.
+          type: string
+        - name: LoggerDefinitionId
+          in: path
+          required: true
+          description: The ID of the logger definition.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateLoggerDefinitionVersionRequest'
-        - name: LoggerDefinitionId
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              Loggers:
+                description: A list of loggers.
+                type: array
+                items:
+                  $ref: '#/definitions/Logger'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -954,15 +1239,21 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListLoggerDefinitionVersionsRequest'
         - name: LoggerDefinitionId
-          type: string
           in: path
           required: true
+          description: The ID of the logger definition.
+          type: string
+        - name: MaxResults
+          in: query
+          required: false
+          description: The maximum number of results to be returned per request.
+          type: string
+        - name: NextToken
+          in: query
+          required: false
+          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          type: string
   /greengrass/definition/resources:
     post:
       operationId: CreateResourceDefinition
@@ -977,11 +1268,27 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
+        - name: X-Amzn-Client-Token
+          in: header
+          required: false
+          description: A client token used to correlate requests and responses.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateResourceDefinitionRequest'
+            type: object
+            properties:
+              InitialVersion:
+                description: Information about a resource definition version.
+                type: object
+                properties:
+                  Resources:
+                    $ref: '#/definitions/__listOfResource'
+                    description: A list of resources.
+              Name:
+                description: The name of the resource definition.
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1001,11 +1308,16 @@ paths:
           schema:
             $ref: '#/definitions/ListResourceDefinitionsResponse'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListResourceDefinitionsRequest'
+        - name: MaxResults
+          in: query
+          required: false
+          description: The maximum number of results to be returned per request.
+          type: string
+        - name: NextToken
+          in: query
+          required: false
+          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          type: string
   '/greengrass/definition/resources/{ResourceDefinitionId}/versions':
     post:
       operationId: CreateResourceDefinitionVersion
@@ -1020,15 +1332,27 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
+        - name: X-Amzn-Client-Token
+          in: header
+          required: false
+          description: A client token used to correlate requests and responses.
+          type: string
+        - name: ResourceDefinitionId
+          in: path
+          required: true
+          description: The ID of the resource definition.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateResourceDefinitionVersionRequest'
-        - name: ResourceDefinitionId
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              Resources:
+                description: A list of resources.
+                type: array
+                items:
+                  $ref: '#/definitions/Resource'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1052,15 +1376,21 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListResourceDefinitionVersionsRequest'
-        - name: ResourceDefinitionId
+        - name: MaxResults
+          in: query
+          required: false
+          description: The maximum number of results to be returned per request.
           type: string
+        - name: NextToken
+          in: query
+          required: false
+          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          type: string
+        - name: ResourceDefinitionId
           in: path
           required: true
+          description: The ID of the resource definition.
+          type: string
   /greengrass/updates:
     post:
       operationId: CreateSoftwareUpdateJob
@@ -1079,11 +1409,57 @@ paths:
           schema:
             $ref: '#/definitions/InternalServerErrorException'
       parameters:
+        - name: X-Amzn-Client-Token
+          in: header
+          required: false
+          description: A client token used to correlate requests and responses.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateSoftwareUpdateJobRequest'
+            type: object
+            properties:
+              S3UrlSignerRole:
+                description: The IAM Role that Greengrass will use to create pre-signed URLs pointing towards the update artifact.
+                type: string
+              SoftwareToUpdate:
+                description: The piece of software on the Greengrass core that will be updated.
+                type: string
+                enum:
+                  - core
+                  - ota_agent
+              UpdateAgentLogLevel:
+                description: The minimum level of log statements that should be logged by the OTA Agent during an update.
+                type: string
+                enum:
+                  - NONE
+                  - TRACE
+                  - DEBUG
+                  - VERBOSE
+                  - INFO
+                  - WARN
+                  - ERROR
+                  - FATAL
+              UpdateTargets:
+                description: The ARNs of the targets (IoT things or IoT thing groups) that this update will be applied to.
+                type: array
+                items:
+                  $ref: '#/definitions/__string'
+              UpdateTargetsArchitecture:
+                description: The architecture of the cores which are the targets of an update.
+                type: string
+                enum:
+                  - armv7l
+                  - x86_64
+                  - aarch64
+              UpdateTargetsOperatingSystem:
+                description: The operating system of the cores which are the targets of an update.
+                type: string
+                enum:
+                  - ubuntu
+                  - raspbian
+                  - amazon_linux
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1108,11 +1484,27 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
+        - name: X-Amzn-Client-Token
+          in: header
+          required: false
+          description: A client token used to correlate requests and responses.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateSubscriptionDefinitionRequest'
+            type: object
+            properties:
+              InitialVersion:
+                description: Information about a subscription definition version.
+                type: object
+                properties:
+                  Subscriptions:
+                    $ref: '#/definitions/__listOfSubscription'
+                    description: A list of subscriptions.
+              Name:
+                description: The name of the subscription definition.
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1132,11 +1524,16 @@ paths:
           schema:
             $ref: '#/definitions/ListSubscriptionDefinitionsResponse'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListSubscriptionDefinitionsRequest'
+        - name: MaxResults
+          in: query
+          required: false
+          description: The maximum number of results to be returned per request.
+          type: string
+        - name: NextToken
+          in: query
+          required: false
+          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          type: string
   '/greengrass/definition/subscriptions/{SubscriptionDefinitionId}/versions':
     post:
       operationId: CreateSubscriptionDefinitionVersion
@@ -1151,15 +1548,27 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
+        - name: X-Amzn-Client-Token
+          in: header
+          required: false
+          description: A client token used to correlate requests and responses.
+          type: string
+        - name: SubscriptionDefinitionId
+          in: path
+          required: true
+          description: The ID of the subscription definition.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateSubscriptionDefinitionVersionRequest'
-        - name: SubscriptionDefinitionId
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              Subscriptions:
+                description: A list of subscriptions.
+                type: array
+                items:
+                  $ref: '#/definitions/Subscription'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1183,15 +1592,21 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListSubscriptionDefinitionVersionsRequest'
-        - name: SubscriptionDefinitionId
+        - name: MaxResults
+          in: query
+          required: false
+          description: The maximum number of results to be returned per request.
           type: string
+        - name: NextToken
+          in: query
+          required: false
+          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          type: string
+        - name: SubscriptionDefinitionId
           in: path
           required: true
+          description: The ID of the subscription definition.
+          type: string
   '/greengrass/definition/connectors/{ConnectorDefinitionId}':
     delete:
       operationId: DeleteConnectorDefinition
@@ -1206,15 +1621,11 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteConnectorDefinitionRequest'
         - name: ConnectorDefinitionId
-          type: string
           in: path
           required: true
+          description: The ID of the connector definition.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1238,15 +1649,11 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetConnectorDefinitionRequest'
         - name: ConnectorDefinitionId
-          type: string
           in: path
           required: true
+          description: The ID of the connector definition.
+          type: string
     put:
       operationId: UpdateConnectorDefinition
       description: Updates a connector definition.
@@ -1260,15 +1667,20 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
+        - name: ConnectorDefinitionId
+          in: path
+          required: true
+          description: The ID of the connector definition.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateConnectorDefinitionRequest'
-        - name: ConnectorDefinitionId
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              Name:
+                description: The name of the definition.
+                type: string
   '/greengrass/definition/cores/{CoreDefinitionId}':
     delete:
       operationId: DeleteCoreDefinition
@@ -1283,15 +1695,11 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteCoreDefinitionRequest'
         - name: CoreDefinitionId
-          type: string
           in: path
           required: true
+          description: The ID of the core definition.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1315,15 +1723,11 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetCoreDefinitionRequest'
         - name: CoreDefinitionId
-          type: string
           in: path
           required: true
+          description: The ID of the core definition.
+          type: string
     put:
       operationId: UpdateCoreDefinition
       description: Updates a core definition.
@@ -1337,15 +1741,20 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
+        - name: CoreDefinitionId
+          in: path
+          required: true
+          description: The ID of the core definition.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateCoreDefinitionRequest'
-        - name: CoreDefinitionId
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              Name:
+                description: The name of the definition.
+                type: string
   '/greengrass/definition/devices/{DeviceDefinitionId}':
     delete:
       operationId: DeleteDeviceDefinition
@@ -1360,15 +1769,11 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteDeviceDefinitionRequest'
         - name: DeviceDefinitionId
-          type: string
           in: path
           required: true
+          description: The ID of the device definition.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1392,15 +1797,11 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetDeviceDefinitionRequest'
         - name: DeviceDefinitionId
-          type: string
           in: path
           required: true
+          description: The ID of the device definition.
+          type: string
     put:
       operationId: UpdateDeviceDefinition
       description: Updates a device definition.
@@ -1414,15 +1815,20 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
+        - name: DeviceDefinitionId
+          in: path
+          required: true
+          description: The ID of the device definition.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateDeviceDefinitionRequest'
-        - name: DeviceDefinitionId
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              Name:
+                description: The name of the definition.
+                type: string
   '/greengrass/definition/functions/{FunctionDefinitionId}':
     delete:
       operationId: DeleteFunctionDefinition
@@ -1437,15 +1843,11 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteFunctionDefinitionRequest'
         - name: FunctionDefinitionId
-          type: string
           in: path
           required: true
+          description: The ID of the Lambda function definition.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1469,15 +1871,11 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetFunctionDefinitionRequest'
         - name: FunctionDefinitionId
-          type: string
           in: path
           required: true
+          description: The ID of the Lambda function definition.
+          type: string
     put:
       operationId: UpdateFunctionDefinition
       description: Updates a Lambda function definition.
@@ -1491,15 +1889,20 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
+        - name: FunctionDefinitionId
+          in: path
+          required: true
+          description: The ID of the Lambda function definition.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateFunctionDefinitionRequest'
-        - name: FunctionDefinitionId
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              Name:
+                description: The name of the definition.
+                type: string
   '/greengrass/groups/{GroupId}':
     delete:
       operationId: DeleteGroup
@@ -1514,15 +1917,11 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteGroupRequest'
         - name: GroupId
-          type: string
           in: path
           required: true
+          description: The ID of the Greengrass group.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1546,15 +1945,11 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetGroupRequest'
         - name: GroupId
-          type: string
           in: path
           required: true
+          description: The ID of the Greengrass group.
+          type: string
     put:
       operationId: UpdateGroup
       description: Updates a group.
@@ -1568,15 +1963,20 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
+        - name: GroupId
+          in: path
+          required: true
+          description: The ID of the Greengrass group.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateGroupRequest'
-        - name: GroupId
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              Name:
+                description: The name of the definition.
+                type: string
   '/greengrass/definition/loggers/{LoggerDefinitionId}':
     delete:
       operationId: DeleteLoggerDefinition
@@ -1591,15 +1991,11 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteLoggerDefinitionRequest'
         - name: LoggerDefinitionId
-          type: string
           in: path
           required: true
+          description: The ID of the logger definition.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1623,15 +2019,11 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetLoggerDefinitionRequest'
         - name: LoggerDefinitionId
-          type: string
           in: path
           required: true
+          description: The ID of the logger definition.
+          type: string
     put:
       operationId: UpdateLoggerDefinition
       description: Updates a logger definition.
@@ -1645,15 +2037,20 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
+        - name: LoggerDefinitionId
+          in: path
+          required: true
+          description: The ID of the logger definition.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateLoggerDefinitionRequest'
-        - name: LoggerDefinitionId
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              Name:
+                description: The name of the definition.
+                type: string
   '/greengrass/definition/resources/{ResourceDefinitionId}':
     delete:
       operationId: DeleteResourceDefinition
@@ -1668,15 +2065,11 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteResourceDefinitionRequest'
         - name: ResourceDefinitionId
-          type: string
           in: path
           required: true
+          description: The ID of the resource definition.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1700,15 +2093,11 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetResourceDefinitionRequest'
         - name: ResourceDefinitionId
-          type: string
           in: path
           required: true
+          description: The ID of the resource definition.
+          type: string
     put:
       operationId: UpdateResourceDefinition
       description: Updates a resource definition.
@@ -1722,15 +2111,20 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
+        - name: ResourceDefinitionId
+          in: path
+          required: true
+          description: The ID of the resource definition.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateResourceDefinitionRequest'
-        - name: ResourceDefinitionId
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              Name:
+                description: The name of the definition.
+                type: string
   '/greengrass/definition/subscriptions/{SubscriptionDefinitionId}':
     delete:
       operationId: DeleteSubscriptionDefinition
@@ -1745,15 +2139,11 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteSubscriptionDefinitionRequest'
         - name: SubscriptionDefinitionId
-          type: string
           in: path
           required: true
+          description: The ID of the subscription definition.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1777,15 +2167,11 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetSubscriptionDefinitionRequest'
         - name: SubscriptionDefinitionId
-          type: string
           in: path
           required: true
+          description: The ID of the subscription definition.
+          type: string
     put:
       operationId: UpdateSubscriptionDefinition
       description: Updates a subscription definition.
@@ -1799,15 +2185,20 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
+        - name: SubscriptionDefinitionId
+          in: path
+          required: true
+          description: The ID of the subscription definition.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateSubscriptionDefinitionRequest'
-        - name: SubscriptionDefinitionId
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              Name:
+                description: The name of the definition.
+                type: string
   '/greengrass/bulk/deployments/{BulkDeploymentId}/status':
     get:
       operationId: GetBulkDeploymentStatus
@@ -1822,15 +2213,11 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetBulkDeploymentStatusRequest'
         - name: BulkDeploymentId
-          type: string
           in: path
           required: true
+          description: The ID of the bulk deployment.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1859,15 +2246,11 @@ paths:
           schema:
             $ref: '#/definitions/InternalServerErrorException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetConnectivityInfoRequest'
         - name: ThingName
-          type: string
           in: path
           required: true
+          description: The thing name.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1895,15 +2278,22 @@ paths:
           schema:
             $ref: '#/definitions/InternalServerErrorException'
       parameters:
+        - name: ThingName
+          in: path
+          required: true
+          description: The thing name.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateConnectivityInfoRequest'
-        - name: ThingName
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              ConnectivityInfo:
+                description: A list of connectivity info.
+                type: array
+                items:
+                  $ref: '#/definitions/ConnectivityInfo'
   '/greengrass/definition/connectors/{ConnectorDefinitionId}/versions/{ConnectorDefinitionVersionId}':
     get:
       operationId: GetConnectorDefinitionVersion
@@ -1918,19 +2308,21 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetConnectorDefinitionVersionRequest'
         - name: ConnectorDefinitionId
-          type: string
           in: path
           required: true
+          description: The ID of the connector definition.
+          type: string
         - name: ConnectorDefinitionVersionId
-          type: string
           in: path
           required: true
+          description: The ID of the connector definition version.
+          type: string
+        - name: NextToken
+          in: query
+          required: false
+          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1955,19 +2347,16 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetCoreDefinitionVersionRequest'
         - name: CoreDefinitionId
-          type: string
           in: path
           required: true
+          description: The ID of the core definition.
+          type: string
         - name: CoreDefinitionVersionId
-          type: string
           in: path
           required: true
+          description: The ID of the core definition version.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1992,19 +2381,16 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetDeploymentStatusRequest'
-        - name: GroupId
-          type: string
-          in: path
-          required: true
         - name: DeploymentId
-          type: string
           in: path
           required: true
+          description: The ID of the deployment.
+          type: string
+        - name: GroupId
+          in: path
+          required: true
+          description: The ID of the Greengrass group.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2029,19 +2415,21 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetDeviceDefinitionVersionRequest'
         - name: DeviceDefinitionId
-          type: string
           in: path
           required: true
+          description: The ID of the device definition.
+          type: string
         - name: DeviceDefinitionVersionId
-          type: string
           in: path
           required: true
+          description: The ID of the device definition version.
+          type: string
+        - name: NextToken
+          in: query
+          required: false
+          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2066,19 +2454,21 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetFunctionDefinitionVersionRequest'
         - name: FunctionDefinitionId
-          type: string
           in: path
           required: true
+          description: The ID of the Lambda function definition.
+          type: string
         - name: FunctionDefinitionVersionId
-          type: string
           in: path
           required: true
+          description: The ID of the function definition version.
+          type: string
+        - name: NextToken
+          in: query
+          required: false
+          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2107,19 +2497,16 @@ paths:
           schema:
             $ref: '#/definitions/InternalServerErrorException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetGroupCertificateAuthorityRequest'
-        - name: GroupId
-          type: string
-          in: path
-          required: true
         - name: CertificateAuthorityId
-          type: string
           in: path
           required: true
+          description: The ID of the certificate authority.
+          type: string
+        - name: GroupId
+          in: path
+          required: true
+          description: The ID of the Greengrass group.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2148,15 +2535,11 @@ paths:
           schema:
             $ref: '#/definitions/InternalServerErrorException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetGroupCertificateConfigurationRequest'
         - name: GroupId
-          type: string
           in: path
           required: true
+          description: The ID of the Greengrass group.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2184,15 +2567,20 @@ paths:
           schema:
             $ref: '#/definitions/InternalServerErrorException'
       parameters:
+        - name: GroupId
+          in: path
+          required: true
+          description: The ID of the Greengrass group.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateGroupCertificateConfigurationRequest'
-        - name: GroupId
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              CertificateExpiryInMilliseconds:
+                description: 'The amount of time remaining before the certificate expires, in milliseconds.'
+                type: string
   '/greengrass/groups/{GroupId}/versions/{GroupVersionId}':
     get:
       operationId: GetGroupVersion
@@ -2207,19 +2595,16 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetGroupVersionRequest'
         - name: GroupId
-          type: string
           in: path
           required: true
+          description: The ID of the Greengrass group.
+          type: string
         - name: GroupVersionId
-          type: string
           in: path
           required: true
+          description: The ID of the group version.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2244,19 +2629,21 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetLoggerDefinitionVersionRequest'
         - name: LoggerDefinitionId
-          type: string
           in: path
           required: true
+          description: The ID of the logger definition.
+          type: string
         - name: LoggerDefinitionVersionId
-          type: string
           in: path
           required: true
+          description: The ID of the logger definition version.
+          type: string
+        - name: NextToken
+          in: query
+          required: false
+          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2281,19 +2668,16 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetResourceDefinitionVersionRequest'
         - name: ResourceDefinitionId
-          type: string
           in: path
           required: true
+          description: The ID of the resource definition.
+          type: string
         - name: ResourceDefinitionVersionId
-          type: string
           in: path
           required: true
+          description: The ID of the resource definition version.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2318,19 +2702,21 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetSubscriptionDefinitionVersionRequest'
+        - name: NextToken
+          in: query
+          required: false
+          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          type: string
         - name: SubscriptionDefinitionId
-          type: string
           in: path
           required: true
+          description: The ID of the subscription definition.
+          type: string
         - name: SubscriptionDefinitionVersionId
-          type: string
           in: path
           required: true
+          description: The ID of the subscription definition version.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2355,15 +2741,21 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListBulkDeploymentDetailedReportsRequest'
         - name: BulkDeploymentId
-          type: string
           in: path
           required: true
+          description: The ID of the bulk deployment.
+          type: string
+        - name: MaxResults
+          in: query
+          required: false
+          description: The maximum number of results to be returned per request.
+          type: string
+        - name: NextToken
+          in: query
+          required: false
+          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2388,11 +2780,16 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListBulkDeploymentsRequest'
+        - name: MaxResults
+          in: query
+          required: false
+          description: The maximum number of results to be returned per request.
+          type: string
+        - name: NextToken
+          in: query
+          required: false
+          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2416,11 +2813,23 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
+        - name: X-Amzn-Client-Token
+          in: header
+          required: false
+          description: A client token used to correlate requests and responses.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/StartBulkDeploymentRequest'
+            type: object
+            properties:
+              ExecutionRoleArn:
+                description: 'The ARN of the execution role to associate with the bulk deployment operation. This IAM role must allow the ''''greengrass:CreateDeployment'''' action for all group versions that are listed in the input file. This IAM role must have access to the S3 bucket containing the input file.'
+                type: string
+              InputFileUri:
+                description: 'The URI of the input file contained in the S3 bucket. The execution role must have ''''getObject'''' permissions on this bucket to access the input file. The input file is a JSON-serialized, line delimited file with UTF-8 encoding that provides a list of group and version IDs and the deployment type. This file must be less than 100 MB. Currently, AWS IoT Greengrass supports only ''''NewDeployment'''' deployment types.'
+                type: string
   '/greengrass/groups/{GroupId}/deployments/$reset':
     post:
       operationId: ResetDeployments
@@ -2435,15 +2844,25 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
+        - name: X-Amzn-Client-Token
+          in: header
+          required: false
+          description: A client token used to correlate requests and responses.
+          type: string
+        - name: GroupId
+          in: path
+          required: true
+          description: The ID of the Greengrass group.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/ResetDeploymentsRequest'
-        - name: GroupId
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              Force:
+                description: 'If true, performs a best-effort only core reset.'
+                type: boolean
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2468,15 +2887,11 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/StopBulkDeploymentRequest'
         - name: BulkDeploymentId
-          type: string
           in: path
           required: true
+          description: The ID of the bulk deployment.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2494,12 +2909,6 @@ definitions:
       AssociatedAt:
         $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the role ARN was associated with the group.'
-  AssociateRoleToGroupRequest:
-    type: object
-    properties:
-      RoleArn:
-        $ref: '#/definitions/__string'
-        description: The ARN of the role you wish to associate with this group.
   BadRequestException: {}
   InternalServerErrorException: {}
   AssociateServiceRoleToAccountResponse:
@@ -2508,12 +2917,6 @@ definitions:
       AssociatedAt:
         $ref: '#/definitions/__string'
         description: The time when the service role was associated with the account.
-  AssociateServiceRoleToAccountRequest:
-    type: object
-    properties:
-      RoleArn:
-        $ref: '#/definitions/__string'
-        description: The ARN of the service role you wish to associate with your account.
   CreateConnectorDefinitionResponse:
     type: object
     properties:
@@ -2538,15 +2941,10 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
-  CreateConnectorDefinitionRequest:
-    type: object
-    properties:
-      InitialVersion:
-        $ref: '#/definitions/ConnectorDefinitionVersion'
-        description: Information about the initial version of the connector definition.
-      Name:
-        $ref: '#/definitions/__string'
-        description: The name of the connector definition.
+  __listOfConnector:
+    type: array
+    items:
+      $ref: '#/definitions/Connector'
   CreateConnectorDefinitionVersionResponse:
     type: object
     properties:
@@ -2562,12 +2960,19 @@ definitions:
       Version:
         $ref: '#/definitions/__string'
         description: The unique ID of the version.
-  CreateConnectorDefinitionVersionRequest:
+  Connector:
     type: object
     properties:
-      Connectors:
-        $ref: '#/definitions/__listOfConnector'
-        description: 'A list of references to connectors in this version, with their corresponding configuration settings.'
+      ConnectorArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the connector.
+      Id:
+        $ref: '#/definitions/__string'
+        description: 'A descriptive or arbitrary ID for the connector. This value must be unique within the connector definition version. Max length is 128 characters with pattern [a-zA-Z0-9:_-]+.'
+      Parameters:
+        $ref: '#/definitions/__mapOf__string'
+        description: The parameters or configuration that the connector uses.
+    description: 'Information about a connector. Connectors run on the Greengrass core and contain built-in integration with local infrastructure, device protocols, AWS, and other cloud services.'
   CreateCoreDefinitionResponse:
     type: object
     properties:
@@ -2592,16 +2997,10 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
-  CreateCoreDefinitionRequest:
-    type: object
-    properties:
-      InitialVersion:
-        $ref: '#/definitions/CoreDefinitionVersion'
-        description: Information about the initial version of the core definition.
-      Name:
-        $ref: '#/definitions/__string'
-        description: The name of the core definition.
-    description: Information needed to create a core definition.
+  __listOfCore:
+    type: array
+    items:
+      $ref: '#/definitions/Core'
   CreateCoreDefinitionVersionResponse:
     type: object
     properties:
@@ -2617,12 +3016,22 @@ definitions:
       Version:
         $ref: '#/definitions/__string'
         description: The unique ID of the version.
-  CreateCoreDefinitionVersionRequest:
+  Core:
     type: object
     properties:
-      Cores:
-        $ref: '#/definitions/__listOfCore'
-        description: A list of cores in the core definition version.
+      CertificateArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the certificate associated with the core.
+      Id:
+        $ref: '#/definitions/__string'
+        description: 'A descriptive or arbitrary ID for the core. This value must be unique within the core definition version. Max length is 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''.'
+      SyncShadow:
+        $ref: '#/definitions/__boolean'
+        description: 'If true, the core''s local shadow is automatically synced with the cloud.'
+      ThingArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the thing which is the core.
+    description: Information about a core.
   CreateDeploymentResponse:
     type: object
     properties:
@@ -2632,18 +3041,6 @@ definitions:
       DeploymentId:
         $ref: '#/definitions/__string'
         description: The ID of the deployment.
-  CreateDeploymentRequest:
-    type: object
-    properties:
-      DeploymentId:
-        $ref: '#/definitions/__string'
-        description: The ID of the deployment if you wish to redeploy a previous deployment.
-      DeploymentType:
-        $ref: '#/definitions/DeploymentType'
-        description: 'The type of deployment. When used for ''''CreateDeployment'''', only ''''NewDeployment'''' and ''''Redeployment'''' are valid.'
-      GroupVersionId:
-        $ref: '#/definitions/__string'
-        description: The ID of the group version to be deployed.
   CreateDeviceDefinitionResponse:
     type: object
     properties:
@@ -2668,15 +3065,10 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
-  CreateDeviceDefinitionRequest:
-    type: object
-    properties:
-      InitialVersion:
-        $ref: '#/definitions/DeviceDefinitionVersion'
-        description: Information about the initial version of the device definition.
-      Name:
-        $ref: '#/definitions/__string'
-        description: The name of the device definition.
+  __listOfDevice:
+    type: array
+    items:
+      $ref: '#/definitions/Device'
   CreateDeviceDefinitionVersionResponse:
     type: object
     properties:
@@ -2692,12 +3084,22 @@ definitions:
       Version:
         $ref: '#/definitions/__string'
         description: The unique ID of the version.
-  CreateDeviceDefinitionVersionRequest:
+  Device:
     type: object
     properties:
-      Devices:
-        $ref: '#/definitions/__listOfDevice'
-        description: A list of devices in the definition version.
+      CertificateArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the certificate associated with the device.
+      Id:
+        $ref: '#/definitions/__string'
+        description: 'A descriptive or arbitrary ID for the device. This value must be unique within the device definition version. Max length is 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''.'
+      SyncShadow:
+        $ref: '#/definitions/__boolean'
+        description: 'If true, the device''s local shadow will be automatically synced with the cloud.'
+      ThingArn:
+        $ref: '#/definitions/__string'
+        description: The thing ARN of the device.
+    description: Information about a device.
   CreateFunctionDefinitionResponse:
     type: object
     properties:
@@ -2722,15 +3124,16 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
-  CreateFunctionDefinitionRequest:
+  FunctionDefaultConfig:
     type: object
     properties:
-      InitialVersion:
-        $ref: '#/definitions/FunctionDefinitionVersion'
-        description: Information about the initial version of the function definition.
-      Name:
-        $ref: '#/definitions/__string'
-        description: The name of the function definition.
+      Execution:
+        $ref: '#/definitions/FunctionDefaultExecutionConfig'
+    description: The default configuration that applies to all Lambda functions in the group. Individual Lambda functions can override these settings.
+  __listOfFunction:
+    type: array
+    items:
+      $ref: '#/definitions/Function'
   CreateFunctionDefinitionVersionResponse:
     type: object
     properties:
@@ -2746,16 +3149,27 @@ definitions:
       Version:
         $ref: '#/definitions/__string'
         description: The unique ID of the version.
-  CreateFunctionDefinitionVersionRequest:
+  FunctionDefaultExecutionConfig:
     type: object
     properties:
-      DefaultConfig:
-        $ref: '#/definitions/FunctionDefaultConfig'
-        description: The default configuration that applies to all Lambda functions in this function definition version. Individual Lambda functions can override these settings.
-      Functions:
-        $ref: '#/definitions/__listOfFunction'
-        description: A list of Lambda functions in this function definition version.
-    description: Information needed to create a function definition version.
+      IsolationMode:
+        $ref: '#/definitions/FunctionIsolationMode'
+      RunAs:
+        $ref: '#/definitions/FunctionRunAsConfig'
+    description: 'Configuration information that specifies how a Lambda function runs. '
+  Function:
+    type: object
+    properties:
+      FunctionArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the Lambda function.
+      FunctionConfiguration:
+        $ref: '#/definitions/FunctionConfiguration'
+        description: The configuration of the Lambda function.
+      Id:
+        $ref: '#/definitions/__string'
+        description: 'A descriptive or arbitrary ID for the function. This value must be unique within the function definition version. Max length is 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''.'
+    description: Information about a Lambda function.
   CreateGroupResponse:
     type: object
     properties:
@@ -2780,24 +3194,14 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
-  CreateGroupRequest:
-    type: object
-    properties:
-      InitialVersion:
-        $ref: '#/definitions/GroupVersion'
-        description: Information about the initial version of the group.
-      Name:
-        $ref: '#/definitions/__string'
-        description: The name of the group.
+  __string:
+    type: string
   CreateGroupCertificateAuthorityResponse:
     type: object
     properties:
       GroupCertificateAuthorityArn:
         $ref: '#/definitions/__string'
         description: The ARN of the group certificate authority.
-  CreateGroupCertificateAuthorityRequest:
-    type: object
-    properties: {}
   CreateGroupVersionResponse:
     type: object
     properties:
@@ -2813,30 +3217,6 @@ definitions:
       Version:
         $ref: '#/definitions/__string'
         description: The unique ID of the version.
-  CreateGroupVersionRequest:
-    type: object
-    properties:
-      ConnectorDefinitionVersionArn:
-        $ref: '#/definitions/__string'
-        description: The ARN of the connector definition version for this group.
-      CoreDefinitionVersionArn:
-        $ref: '#/definitions/__string'
-        description: The ARN of the core definition version for this group.
-      DeviceDefinitionVersionArn:
-        $ref: '#/definitions/__string'
-        description: The ARN of the device definition version for this group.
-      FunctionDefinitionVersionArn:
-        $ref: '#/definitions/__string'
-        description: The ARN of the function definition version for this group.
-      LoggerDefinitionVersionArn:
-        $ref: '#/definitions/__string'
-        description: The ARN of the logger definition version for this group.
-      ResourceDefinitionVersionArn:
-        $ref: '#/definitions/__string'
-        description: The ARN of the resource definition version for this group.
-      SubscriptionDefinitionVersionArn:
-        $ref: '#/definitions/__string'
-        description: The ARN of the subscription definition version for this group.
   CreateLoggerDefinitionResponse:
     type: object
     properties:
@@ -2861,15 +3241,10 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
-  CreateLoggerDefinitionRequest:
-    type: object
-    properties:
-      InitialVersion:
-        $ref: '#/definitions/LoggerDefinitionVersion'
-        description: Information about the initial version of the logger definition.
-      Name:
-        $ref: '#/definitions/__string'
-        description: The name of the logger definition.
+  __listOfLogger:
+    type: array
+    items:
+      $ref: '#/definitions/Logger'
   CreateLoggerDefinitionVersionResponse:
     type: object
     properties:
@@ -2885,12 +3260,25 @@ definitions:
       Version:
         $ref: '#/definitions/__string'
         description: The unique ID of the version.
-  CreateLoggerDefinitionVersionRequest:
+  Logger:
     type: object
     properties:
-      Loggers:
-        $ref: '#/definitions/__listOfLogger'
-        description: A list of loggers.
+      Component:
+        $ref: '#/definitions/LoggerComponent'
+        description: The component that will be subject to logging.
+      Id:
+        $ref: '#/definitions/__string'
+        description: 'A descriptive or arbitrary ID for the logger. This value must be unique within the logger definition version. Max length is 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''.'
+      Level:
+        $ref: '#/definitions/LoggerLevel'
+        description: The level of the logs.
+      Space:
+        $ref: '#/definitions/__integer'
+        description: 'The amount of file space, in KB, to use if the local file system is used for logging purposes.'
+      Type:
+        $ref: '#/definitions/LoggerType'
+        description: The type of log output which will be used.
+    description: Information about a logger
   CreateResourceDefinitionResponse:
     type: object
     properties:
@@ -2915,15 +3303,10 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
-  CreateResourceDefinitionRequest:
-    type: object
-    properties:
-      InitialVersion:
-        $ref: '#/definitions/ResourceDefinitionVersion'
-        description: Information about the initial version of the resource definition.
-      Name:
-        $ref: '#/definitions/__string'
-        description: The name of the resource definition.
+  __listOfResource:
+    type: array
+    items:
+      $ref: '#/definitions/Resource'
   CreateResourceDefinitionVersionResponse:
     type: object
     properties:
@@ -2939,12 +3322,19 @@ definitions:
       Version:
         $ref: '#/definitions/__string'
         description: The unique ID of the version.
-  CreateResourceDefinitionVersionRequest:
+  Resource:
     type: object
     properties:
-      Resources:
-        $ref: '#/definitions/__listOfResource'
-        description: A list of resources.
+      Id:
+        $ref: '#/definitions/__string'
+        description: 'The resource ID, used to refer to a resource in the Lambda function configuration. Max length is 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''. This must be unique within a Greengrass group.'
+      Name:
+        $ref: '#/definitions/__string'
+        description: 'The descriptive resource name, which is displayed on the AWS IoT Greengrass console. Max length 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''. This must be unique within a Greengrass group.'
+      ResourceDataContainer:
+        $ref: '#/definitions/ResourceDataContainer'
+        description: A container of data for all resource types.
+    description: Information about a resource.
   CreateSoftwareUpdateJobResponse:
     type: object
     properties:
@@ -2954,21 +3344,6 @@ definitions:
       IotJobId:
         $ref: '#/definitions/__string'
         description: The IoT Job Id corresponding to this update.
-  CreateSoftwareUpdateJobRequest:
-    type: object
-    properties:
-      S3UrlSignerRole:
-        $ref: '#/definitions/S3UrlSignerRole'
-      SoftwareToUpdate:
-        $ref: '#/definitions/SoftwareToUpdate'
-      UpdateAgentLogLevel:
-        $ref: '#/definitions/UpdateAgentLogLevel'
-      UpdateTargets:
-        $ref: '#/definitions/UpdateTargets'
-      UpdateTargetsArchitecture:
-        $ref: '#/definitions/UpdateTargetsArchitecture'
-      UpdateTargetsOperatingSystem:
-        $ref: '#/definitions/UpdateTargetsOperatingSystem'
   CreateSubscriptionDefinitionResponse:
     type: object
     properties:
@@ -2993,15 +3368,10 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
-  CreateSubscriptionDefinitionRequest:
-    type: object
-    properties:
-      InitialVersion:
-        $ref: '#/definitions/SubscriptionDefinitionVersion'
-        description: Information about the initial version of the subscription definition.
-      Name:
-        $ref: '#/definitions/__string'
-        description: The name of the subscription definition.
+  __listOfSubscription:
+    type: array
+    items:
+      $ref: '#/definitions/Subscription'
   CreateSubscriptionDefinitionVersionResponse:
     type: object
     properties:
@@ -3017,58 +3387,44 @@ definitions:
       Version:
         $ref: '#/definitions/__string'
         description: The unique ID of the version.
-  CreateSubscriptionDefinitionVersionRequest:
+  Subscription:
     type: object
     properties:
-      Subscriptions:
-        $ref: '#/definitions/__listOfSubscription'
-        description: A list of subscriptions.
+      Id:
+        $ref: '#/definitions/__string'
+        description: 'A descriptive or arbitrary ID for the subscription. This value must be unique within the subscription definition version. Max length is 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''.'
+      Source:
+        $ref: '#/definitions/__string'
+        description: 'The source of the subscription. Can be a thing ARN, a Lambda function ARN, a connector ARN, ''cloud'' (which represents the AWS IoT cloud), or ''GGShadowService''.'
+      Subject:
+        $ref: '#/definitions/__string'
+        description: The MQTT topic used to route the message.
+      Target:
+        $ref: '#/definitions/__string'
+        description: 'Where the message is sent to. Can be a thing ARN, a Lambda function ARN, a connector ARN, ''cloud'' (which represents the AWS IoT cloud), or ''GGShadowService''.'
+    description: Information about a subscription.
   DeleteConnectorDefinitionResponse:
-    type: object
-    properties: {}
-  DeleteConnectorDefinitionRequest:
     type: object
     properties: {}
   DeleteCoreDefinitionResponse:
     type: object
     properties: {}
-  DeleteCoreDefinitionRequest:
-    type: object
-    properties: {}
   DeleteDeviceDefinitionResponse:
-    type: object
-    properties: {}
-  DeleteDeviceDefinitionRequest:
     type: object
     properties: {}
   DeleteFunctionDefinitionResponse:
     type: object
     properties: {}
-  DeleteFunctionDefinitionRequest:
-    type: object
-    properties: {}
   DeleteGroupResponse:
-    type: object
-    properties: {}
-  DeleteGroupRequest:
     type: object
     properties: {}
   DeleteLoggerDefinitionResponse:
     type: object
     properties: {}
-  DeleteLoggerDefinitionRequest:
-    type: object
-    properties: {}
   DeleteResourceDefinitionResponse:
     type: object
     properties: {}
-  DeleteResourceDefinitionRequest:
-    type: object
-    properties: {}
   DeleteSubscriptionDefinitionResponse:
-    type: object
-    properties: {}
-  DeleteSubscriptionDefinitionRequest:
     type: object
     properties: {}
   DisassociateRoleFromGroupResponse:
@@ -3077,18 +3433,12 @@ definitions:
       DisassociatedAt:
         $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the role was disassociated from the group.'
-  DisassociateRoleFromGroupRequest:
-    type: object
-    properties: {}
   DisassociateServiceRoleFromAccountResponse:
     type: object
     properties:
       DisassociatedAt:
         $ref: '#/definitions/__string'
         description: The time when the service role was disassociated from the account.
-  DisassociateServiceRoleFromAccountRequest:
-    type: object
-    properties: {}
   GetAssociatedRoleResponse:
     type: object
     properties:
@@ -3098,9 +3448,6 @@ definitions:
       RoleArn:
         $ref: '#/definitions/__string'
         description: The ARN of the role that is associated with the group.
-  GetAssociatedRoleRequest:
-    type: object
-    properties: {}
   GetBulkDeploymentStatusResponse:
     type: object
     properties:
@@ -3119,9 +3466,6 @@ definitions:
       ErrorMessage:
         $ref: '#/definitions/__string'
         description: Error message
-  GetBulkDeploymentStatusRequest:
-    type: object
-    properties: {}
   GetConnectivityInfoResponse:
     type: object
     properties:
@@ -3131,9 +3475,6 @@ definitions:
       Message:
         $ref: '#/definitions/__string'
         description: A message about the connectivity info request.
-  GetConnectivityInfoRequest:
-    type: object
-    properties: {}
   GetConnectorDefinitionResponse:
     type: object
     properties:
@@ -3158,9 +3499,6 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
-  GetConnectorDefinitionRequest:
-    type: object
-    properties: {}
   GetConnectorDefinitionVersionResponse:
     type: object
     properties:
@@ -3182,9 +3520,6 @@ definitions:
       Version:
         $ref: '#/definitions/__string'
         description: The version of the connector definition version.
-  GetConnectorDefinitionVersionRequest:
-    type: object
-    properties: {}
   GetCoreDefinitionResponse:
     type: object
     properties:
@@ -3209,9 +3544,6 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
-  GetCoreDefinitionRequest:
-    type: object
-    properties: {}
   GetCoreDefinitionVersionResponse:
     type: object
     properties:
@@ -3233,9 +3565,6 @@ definitions:
       Version:
         $ref: '#/definitions/__string'
         description: The version of the core definition version.
-  GetCoreDefinitionVersionRequest:
-    type: object
-    properties: {}
   GetDeploymentStatusResponse:
     type: object
     properties:
@@ -3254,9 +3583,6 @@ definitions:
       UpdatedAt:
         $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the deployment status was updated.'
-  GetDeploymentStatusRequest:
-    type: object
-    properties: {}
   GetDeviceDefinitionResponse:
     type: object
     properties:
@@ -3281,9 +3607,6 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
-  GetDeviceDefinitionRequest:
-    type: object
-    properties: {}
   GetDeviceDefinitionVersionResponse:
     type: object
     properties:
@@ -3305,9 +3628,6 @@ definitions:
       Version:
         $ref: '#/definitions/__string'
         description: The version of the device definition version.
-  GetDeviceDefinitionVersionRequest:
-    type: object
-    properties: {}
   GetFunctionDefinitionResponse:
     type: object
     properties:
@@ -3332,9 +3652,6 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
-  GetFunctionDefinitionRequest:
-    type: object
-    properties: {}
   GetFunctionDefinitionVersionResponse:
     type: object
     properties:
@@ -3356,9 +3673,6 @@ definitions:
       Version:
         $ref: '#/definitions/__string'
         description: The version of the function definition version.
-  GetFunctionDefinitionVersionRequest:
-    type: object
-    properties: {}
   GetGroupResponse:
     type: object
     properties:
@@ -3383,9 +3697,6 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
-  GetGroupRequest:
-    type: object
-    properties: {}
   GetGroupCertificateAuthorityResponse:
     type: object
     properties:
@@ -3398,9 +3709,6 @@ definitions:
       PemEncodedCertificate:
         $ref: '#/definitions/__string'
         description: The PEM encoded certificate for the group.
-  GetGroupCertificateAuthorityRequest:
-    type: object
-    properties: {}
   GetGroupCertificateConfigurationResponse:
     type: object
     properties:
@@ -3413,9 +3721,6 @@ definitions:
       GroupId:
         $ref: '#/definitions/__string'
         description: The ID of the group certificate configuration.
-  GetGroupCertificateConfigurationRequest:
-    type: object
-    properties: {}
   GetGroupVersionResponse:
     type: object
     properties:
@@ -3434,9 +3739,6 @@ definitions:
       Version:
         $ref: '#/definitions/__string'
         description: The unique ID for the version of the group.
-  GetGroupVersionRequest:
-    type: object
-    properties: {}
   GetLoggerDefinitionResponse:
     type: object
     properties:
@@ -3461,9 +3763,6 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
-  GetLoggerDefinitionRequest:
-    type: object
-    properties: {}
   GetLoggerDefinitionVersionResponse:
     type: object
     properties:
@@ -3482,9 +3781,6 @@ definitions:
       Version:
         $ref: '#/definitions/__string'
         description: The version of the logger definition version.
-  GetLoggerDefinitionVersionRequest:
-    type: object
-    properties: {}
   GetResourceDefinitionResponse:
     type: object
     properties:
@@ -3509,9 +3805,6 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
-  GetResourceDefinitionRequest:
-    type: object
-    properties: {}
   GetResourceDefinitionVersionResponse:
     type: object
     properties:
@@ -3530,9 +3823,6 @@ definitions:
       Version:
         $ref: '#/definitions/__string'
         description: The version of the resource definition version.
-  GetResourceDefinitionVersionRequest:
-    type: object
-    properties: {}
   GetServiceRoleForAccountResponse:
     type: object
     properties:
@@ -3542,9 +3832,6 @@ definitions:
       RoleArn:
         $ref: '#/definitions/__string'
         description: The ARN of the role which is associated with the account.
-  GetServiceRoleForAccountRequest:
-    type: object
-    properties: {}
   GetSubscriptionDefinitionResponse:
     type: object
     properties:
@@ -3569,9 +3856,6 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
-  GetSubscriptionDefinitionRequest:
-    type: object
-    properties: {}
   GetSubscriptionDefinitionVersionResponse:
     type: object
     properties:
@@ -3593,9 +3877,6 @@ definitions:
       Version:
         $ref: '#/definitions/__string'
         description: The version of the subscription definition version.
-  GetSubscriptionDefinitionVersionRequest:
-    type: object
-    properties: {}
   ListBulkDeploymentDetailedReportsResponse:
     type: object
     properties:
@@ -3605,9 +3886,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
-  ListBulkDeploymentDetailedReportsRequest:
-    type: object
-    properties: {}
   ListBulkDeploymentsResponse:
     type: object
     properties:
@@ -3617,9 +3895,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
-  ListBulkDeploymentsRequest:
-    type: object
-    properties: {}
   ListConnectorDefinitionVersionsResponse:
     type: object
     properties:
@@ -3629,9 +3904,6 @@ definitions:
       Versions:
         $ref: '#/definitions/__listOfVersionInformation'
         description: Information about a version.
-  ListConnectorDefinitionVersionsRequest:
-    type: object
-    properties: {}
   ListConnectorDefinitionsResponse:
     type: object
     properties:
@@ -3641,9 +3913,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
-  ListConnectorDefinitionsRequest:
-    type: object
-    properties: {}
   ListCoreDefinitionVersionsResponse:
     type: object
     properties:
@@ -3653,9 +3922,6 @@ definitions:
       Versions:
         $ref: '#/definitions/__listOfVersionInformation'
         description: Information about a version.
-  ListCoreDefinitionVersionsRequest:
-    type: object
-    properties: {}
   ListCoreDefinitionsResponse:
     type: object
     properties:
@@ -3665,9 +3931,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
-  ListCoreDefinitionsRequest:
-    type: object
-    properties: {}
   ListDeploymentsResponse:
     type: object
     properties:
@@ -3677,9 +3940,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
-  ListDeploymentsRequest:
-    type: object
-    properties: {}
   ListDeviceDefinitionVersionsResponse:
     type: object
     properties:
@@ -3689,9 +3949,6 @@ definitions:
       Versions:
         $ref: '#/definitions/__listOfVersionInformation'
         description: Information about a version.
-  ListDeviceDefinitionVersionsRequest:
-    type: object
-    properties: {}
   ListDeviceDefinitionsResponse:
     type: object
     properties:
@@ -3701,9 +3958,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
-  ListDeviceDefinitionsRequest:
-    type: object
-    properties: {}
   ListFunctionDefinitionVersionsResponse:
     type: object
     properties:
@@ -3713,9 +3967,6 @@ definitions:
       Versions:
         $ref: '#/definitions/__listOfVersionInformation'
         description: Information about a version.
-  ListFunctionDefinitionVersionsRequest:
-    type: object
-    properties: {}
   ListFunctionDefinitionsResponse:
     type: object
     properties:
@@ -3725,18 +3976,12 @@ definitions:
       NextToken:
         $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
-  ListFunctionDefinitionsRequest:
-    type: object
-    properties: {}
   ListGroupCertificateAuthoritiesResponse:
     type: object
     properties:
       GroupCertificateAuthorities:
         $ref: '#/definitions/__listOfGroupCertificateAuthorityProperties'
         description: A list of certificate authorities associated with the group.
-  ListGroupCertificateAuthoritiesRequest:
-    type: object
-    properties: {}
   ListGroupVersionsResponse:
     type: object
     properties:
@@ -3746,9 +3991,6 @@ definitions:
       Versions:
         $ref: '#/definitions/__listOfVersionInformation'
         description: Information about a version.
-  ListGroupVersionsRequest:
-    type: object
-    properties: {}
   ListGroupsResponse:
     type: object
     properties:
@@ -3758,9 +4000,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
-  ListGroupsRequest:
-    type: object
-    properties: {}
   ListLoggerDefinitionVersionsResponse:
     type: object
     properties:
@@ -3770,9 +4009,6 @@ definitions:
       Versions:
         $ref: '#/definitions/__listOfVersionInformation'
         description: Information about a version.
-  ListLoggerDefinitionVersionsRequest:
-    type: object
-    properties: {}
   ListLoggerDefinitionsResponse:
     type: object
     properties:
@@ -3782,9 +4018,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
-  ListLoggerDefinitionsRequest:
-    type: object
-    properties: {}
   ListResourceDefinitionVersionsResponse:
     type: object
     properties:
@@ -3794,9 +4027,6 @@ definitions:
       Versions:
         $ref: '#/definitions/__listOfVersionInformation'
         description: Information about a version.
-  ListResourceDefinitionVersionsRequest:
-    type: object
-    properties: {}
   ListResourceDefinitionsResponse:
     type: object
     properties:
@@ -3806,9 +4036,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
-  ListResourceDefinitionsRequest:
-    type: object
-    properties: {}
   ListSubscriptionDefinitionVersionsResponse:
     type: object
     properties:
@@ -3818,9 +4045,6 @@ definitions:
       Versions:
         $ref: '#/definitions/__listOfVersionInformation'
         description: Information about a version.
-  ListSubscriptionDefinitionVersionsRequest:
-    type: object
-    properties: {}
   ListSubscriptionDefinitionsResponse:
     type: object
     properties:
@@ -3830,9 +4054,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
-  ListSubscriptionDefinitionsRequest:
-    type: object
-    properties: {}
   ResetDeploymentsResponse:
     type: object
     properties:
@@ -3842,13 +4063,6 @@ definitions:
       DeploymentId:
         $ref: '#/definitions/__string'
         description: The ID of the deployment.
-  ResetDeploymentsRequest:
-    type: object
-    properties:
-      Force:
-        $ref: '#/definitions/__boolean'
-        description: 'If true, performs a best-effort only core reset.'
-    description: Information needed to reset deployments.
   StartBulkDeploymentResponse:
     type: object
     properties:
@@ -3858,19 +4072,7 @@ definitions:
       BulkDeploymentId:
         $ref: '#/definitions/__string'
         description: The ID of the bulk deployment.
-  StartBulkDeploymentRequest:
-    type: object
-    properties:
-      ExecutionRoleArn:
-        $ref: '#/definitions/__string'
-        description: 'The ARN of the execution role to associate with the bulk deployment operation. This IAM role must allow the ''''greengrass:CreateDeployment'''' action for all group versions that are listed in the input file. This IAM role must have access to the S3 bucket containing the input file.'
-      InputFileUri:
-        $ref: '#/definitions/__string'
-        description: 'The URI of the input file contained in the S3 bucket. The execution role must have ''''getObject'''' permissions on this bucket to access the input file. The input file is a JSON-serialized, line delimited file with UTF-8 encoding that provides a list of group and version IDs and the deployment type. This file must be less than 100 MB. Currently, AWS IoT Greengrass supports only ''''NewDeployment'''' deployment types.'
   StopBulkDeploymentResponse:
-    type: object
-    properties: {}
-  StopBulkDeploymentRequest:
     type: object
     properties: {}
   UpdateConnectivityInfoResponse:
@@ -3882,58 +4084,37 @@ definitions:
       Version:
         $ref: '#/definitions/__string'
         description: The new version of the connectivity info.
-  UpdateConnectivityInfoRequest:
+  ConnectivityInfo:
     type: object
     properties:
-      ConnectivityInfo:
-        $ref: '#/definitions/__listOfConnectivityInfo'
-        description: A list of connectivity info.
-    description: Connectivity information.
+      HostAddress:
+        $ref: '#/definitions/__string'
+        description: The endpoint for the Greengrass core. Can be an IP address or DNS.
+      Id:
+        $ref: '#/definitions/__string'
+        description: The ID of the connectivity information.
+      Metadata:
+        $ref: '#/definitions/__string'
+        description: Metadata for this endpoint.
+      PortNumber:
+        $ref: '#/definitions/__integer'
+        description: The port of the Greengrass core. Usually 8883.
+    description: Information about a Greengrass core's connectivity.
   UpdateConnectorDefinitionResponse:
     type: object
     properties: {}
-  UpdateConnectorDefinitionRequest:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/__string'
-        description: The name of the definition.
   UpdateCoreDefinitionResponse:
     type: object
     properties: {}
-  UpdateCoreDefinitionRequest:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/__string'
-        description: The name of the definition.
   UpdateDeviceDefinitionResponse:
     type: object
     properties: {}
-  UpdateDeviceDefinitionRequest:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/__string'
-        description: The name of the definition.
   UpdateFunctionDefinitionResponse:
     type: object
     properties: {}
-  UpdateFunctionDefinitionRequest:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/__string'
-        description: The name of the definition.
   UpdateGroupResponse:
     type: object
     properties: {}
-  UpdateGroupRequest:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/__string'
-        description: The name of the definition.
   UpdateGroupCertificateConfigurationResponse:
     type: object
     properties:
@@ -3946,41 +4127,27 @@ definitions:
       GroupId:
         $ref: '#/definitions/__string'
         description: The ID of the group certificate configuration.
-  UpdateGroupCertificateConfigurationRequest:
-    type: object
-    properties:
-      CertificateExpiryInMilliseconds:
-        $ref: '#/definitions/__string'
-        description: 'The amount of time remaining before the certificate expires, in milliseconds.'
   UpdateLoggerDefinitionResponse:
     type: object
     properties: {}
-  UpdateLoggerDefinitionRequest:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/__string'
-        description: The name of the definition.
   UpdateResourceDefinitionResponse:
     type: object
     properties: {}
-  UpdateResourceDefinitionRequest:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/__string'
-        description: The name of the definition.
   UpdateSubscriptionDefinitionResponse:
     type: object
     properties: {}
-  UpdateSubscriptionDefinitionRequest:
+  AssociateRoleToGroupRequest:
     type: object
     properties:
-      Name:
+      RoleArn:
         $ref: '#/definitions/__string'
-        description: The name of the definition.
-  __string:
-    type: string
+        description: The ARN of the role you wish to associate with this group.
+  AssociateServiceRoleToAccountRequest:
+    type: object
+    properties:
+      RoleArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the service role you wish to associate with your account.
   BulkDeployment:
     type: object
     properties:
@@ -4068,48 +4235,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/BulkDeployment'
-  ConnectivityInfo:
-    type: object
-    properties:
-      HostAddress:
-        $ref: '#/definitions/__string'
-        description: The endpoint for the Greengrass core. Can be an IP address or DNS.
-      Id:
-        $ref: '#/definitions/__string'
-        description: The ID of the connectivity information.
-      Metadata:
-        $ref: '#/definitions/__string'
-        description: Metadata for this endpoint.
-      PortNumber:
-        $ref: '#/definitions/__integer'
-        description: The port of the Greengrass core. Usually 8883.
-    description: Information about a Greengrass core's connectivity.
   __mapOf__string:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/__string'
-  Connector:
     type: object
-    properties:
-      ConnectorArn:
-        $ref: '#/definitions/__string'
-        description: The ARN of the connector.
-      Id:
-        $ref: '#/definitions/__string'
-        description: 'A descriptive or arbitrary ID for the connector. This value must be unique within the connector definition version. Max length is 128 characters with pattern [a-zA-Z0-9:_-]+.'
-      Parameters:
-        $ref: '#/definitions/__mapOf__string'
-        description: The parameters or configuration that the connector uses.
-    description: 'Information about a connector. Connectors run on the Greengrass core and contain built-in integration with local infrastructure, device protocols, AWS, and other cloud services.'
-  __listOfConnector:
-    type: array
-    items:
-      $ref: '#/definitions/Connector'
+    additionalProperties:
+      $ref: '#/definitions/__string'
   ConnectorDefinitionVersion:
     type: object
     properties:
@@ -4119,26 +4248,6 @@ definitions:
     description: 'Information about the connector definition version, which is a container for connectors.'
   __boolean:
     type: boolean
-  Core:
-    type: object
-    properties:
-      CertificateArn:
-        $ref: '#/definitions/__string'
-        description: The ARN of the certificate associated with the core.
-      Id:
-        $ref: '#/definitions/__string'
-        description: 'A descriptive or arbitrary ID for the core. This value must be unique within the core definition version. Max length is 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''.'
-      SyncShadow:
-        $ref: '#/definitions/__boolean'
-        description: 'If true, the core''s local shadow is automatically synced with the cloud.'
-      ThingArn:
-        $ref: '#/definitions/__string'
-        description: The ARN of the thing which is the core.
-    description: Information about a core.
-  __listOfCore:
-    type: array
-    items:
-      $ref: '#/definitions/Core'
   CoreDefinitionVersion:
     type: object
     properties:
@@ -4146,6 +4255,49 @@ definitions:
         $ref: '#/definitions/__listOfCore'
         description: A list of cores in the core definition version.
     description: Information about a core definition version.
+  CreateConnectorDefinitionRequest:
+    type: object
+    properties:
+      InitialVersion:
+        $ref: '#/definitions/ConnectorDefinitionVersion'
+        description: Information about the initial version of the connector definition.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the connector definition.
+  CreateConnectorDefinitionVersionRequest:
+    type: object
+    properties:
+      Connectors:
+        $ref: '#/definitions/__listOfConnector'
+        description: 'A list of references to connectors in this version, with their corresponding configuration settings.'
+  CreateCoreDefinitionRequest:
+    type: object
+    properties:
+      InitialVersion:
+        $ref: '#/definitions/CoreDefinitionVersion'
+        description: Information about the initial version of the core definition.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the core definition.
+    description: Information needed to create a core definition.
+  CreateCoreDefinitionVersionRequest:
+    type: object
+    properties:
+      Cores:
+        $ref: '#/definitions/__listOfCore'
+        description: A list of cores in the core definition version.
+  CreateDeploymentRequest:
+    type: object
+    properties:
+      DeploymentId:
+        $ref: '#/definitions/__string'
+        description: The ID of the deployment if you wish to redeploy a previous deployment.
+      DeploymentType:
+        $ref: '#/definitions/DeploymentType'
+        description: 'The type of deployment. When used for ''''CreateDeployment'''', only ''''NewDeployment'''' and ''''Redeployment'''' are valid.'
+      GroupVersionId:
+        $ref: '#/definitions/__string'
+        description: The ID of the group version to be deployed.
   DeviceDefinitionVersion:
     type: object
     properties:
@@ -4153,10 +4305,21 @@ definitions:
         $ref: '#/definitions/__listOfDevice'
         description: A list of devices in the definition version.
     description: Information about a device definition version.
-  __listOfDevice:
-    type: array
-    items:
-      $ref: '#/definitions/Device'
+  CreateDeviceDefinitionRequest:
+    type: object
+    properties:
+      InitialVersion:
+        $ref: '#/definitions/DeviceDefinitionVersion'
+        description: Information about the initial version of the device definition.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the device definition.
+  CreateDeviceDefinitionVersionRequest:
+    type: object
+    properties:
+      Devices:
+        $ref: '#/definitions/__listOfDevice'
+        description: A list of devices in the definition version.
   FunctionDefinitionVersion:
     type: object
     properties:
@@ -4167,16 +4330,28 @@ definitions:
         $ref: '#/definitions/__listOfFunction'
         description: A list of Lambda functions in this function definition version.
     description: Information about a function definition version.
-  FunctionDefaultConfig:
+  CreateFunctionDefinitionRequest:
     type: object
     properties:
-      Execution:
-        $ref: '#/definitions/FunctionDefaultExecutionConfig'
-    description: The default configuration that applies to all Lambda functions in the group. Individual Lambda functions can override these settings.
-  __listOfFunction:
-    type: array
-    items:
-      $ref: '#/definitions/Function'
+      InitialVersion:
+        $ref: '#/definitions/FunctionDefinitionVersion'
+        description: Information about the initial version of the function definition.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the function definition.
+  CreateFunctionDefinitionVersionRequest:
+    type: object
+    properties:
+      DefaultConfig:
+        $ref: '#/definitions/FunctionDefaultConfig'
+        description: The default configuration that applies to all Lambda functions in this function definition version. Individual Lambda functions can override these settings.
+      Functions:
+        $ref: '#/definitions/__listOfFunction'
+        description: A list of Lambda functions in this function definition version.
+    description: Information needed to create a function definition version.
+  CreateGroupCertificateAuthorityRequest:
+    type: object
+    properties: {}
   GroupVersion:
     type: object
     properties:
@@ -4202,6 +4377,39 @@ definitions:
         $ref: '#/definitions/__string'
         description: The ARN of the subscription definition version for this group.
     description: Information about a group version.
+  CreateGroupRequest:
+    type: object
+    properties:
+      InitialVersion:
+        $ref: '#/definitions/GroupVersion'
+        description: Information about the initial version of the group.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the group.
+  CreateGroupVersionRequest:
+    type: object
+    properties:
+      ConnectorDefinitionVersionArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the connector definition version for this group.
+      CoreDefinitionVersionArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the core definition version for this group.
+      DeviceDefinitionVersionArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the device definition version for this group.
+      FunctionDefinitionVersionArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the function definition version for this group.
+      LoggerDefinitionVersionArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the logger definition version for this group.
+      ResourceDefinitionVersionArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the resource definition version for this group.
+      SubscriptionDefinitionVersionArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the subscription definition version for this group.
   LoggerDefinitionVersion:
     type: object
     properties:
@@ -4209,10 +4417,21 @@ definitions:
         $ref: '#/definitions/__listOfLogger'
         description: A list of loggers.
     description: Information about a logger definition version.
-  __listOfLogger:
-    type: array
-    items:
-      $ref: '#/definitions/Logger'
+  CreateLoggerDefinitionRequest:
+    type: object
+    properties:
+      InitialVersion:
+        $ref: '#/definitions/LoggerDefinitionVersion'
+        description: Information about the initial version of the logger definition.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the logger definition.
+  CreateLoggerDefinitionVersionRequest:
+    type: object
+    properties:
+      Loggers:
+        $ref: '#/definitions/__listOfLogger'
+        description: A list of loggers.
   ResourceDefinitionVersion:
     type: object
     properties:
@@ -4220,10 +4439,21 @@ definitions:
         $ref: '#/definitions/__listOfResource'
         description: A list of resources.
     description: Information about a resource definition version.
-  __listOfResource:
-    type: array
-    items:
-      $ref: '#/definitions/Resource'
+  CreateResourceDefinitionRequest:
+    type: object
+    properties:
+      InitialVersion:
+        $ref: '#/definitions/ResourceDefinitionVersion'
+        description: Information about the initial version of the resource definition.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the resource definition.
+  CreateResourceDefinitionVersionRequest:
+    type: object
+    properties:
+      Resources:
+        $ref: '#/definitions/__listOfResource'
+        description: A list of resources.
   S3UrlSignerRole:
     type: string
     description: The IAM Role that Greengrass will use to create pre-signed URLs pointing towards the update artifact.
@@ -4264,6 +4494,21 @@ definitions:
       - raspbian
       - amazon_linux
     description: The operating system of the cores which are the targets of an update.
+  CreateSoftwareUpdateJobRequest:
+    type: object
+    properties:
+      S3UrlSignerRole:
+        $ref: '#/definitions/S3UrlSignerRole'
+      SoftwareToUpdate:
+        $ref: '#/definitions/SoftwareToUpdate'
+      UpdateAgentLogLevel:
+        $ref: '#/definitions/UpdateAgentLogLevel'
+      UpdateTargets:
+        $ref: '#/definitions/UpdateTargets'
+      UpdateTargetsArchitecture:
+        $ref: '#/definitions/UpdateTargetsArchitecture'
+      UpdateTargetsOperatingSystem:
+        $ref: '#/definitions/UpdateTargetsOperatingSystem'
   SubscriptionDefinitionVersion:
     type: object
     properties:
@@ -4271,10 +4516,21 @@ definitions:
         $ref: '#/definitions/__listOfSubscription'
         description: A list of subscriptions.
     description: Information about a subscription definition version.
-  __listOfSubscription:
-    type: array
-    items:
-      $ref: '#/definitions/Subscription'
+  CreateSubscriptionDefinitionRequest:
+    type: object
+    properties:
+      InitialVersion:
+        $ref: '#/definitions/SubscriptionDefinitionVersion'
+        description: Information about the initial version of the subscription definition.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the subscription definition.
+  CreateSubscriptionDefinitionVersionRequest:
+    type: object
+    properties:
+      Subscriptions:
+        $ref: '#/definitions/__listOfSubscription'
+        description: A list of subscriptions.
   DefinitionInformation:
     type: object
     properties:
@@ -4300,6 +4556,30 @@ definitions:
         $ref: '#/definitions/__string'
         description: The name of the definition.
     description: Information about a definition.
+  DeleteConnectorDefinitionRequest:
+    type: object
+    properties: {}
+  DeleteCoreDefinitionRequest:
+    type: object
+    properties: {}
+  DeleteDeviceDefinitionRequest:
+    type: object
+    properties: {}
+  DeleteFunctionDefinitionRequest:
+    type: object
+    properties: {}
+  DeleteGroupRequest:
+    type: object
+    properties: {}
+  DeleteLoggerDefinitionRequest:
+    type: object
+    properties: {}
+  DeleteResourceDefinitionRequest:
+    type: object
+    properties: {}
+  DeleteSubscriptionDefinitionRequest:
+    type: object
+    properties: {}
   Deployment:
     type: object
     properties:
@@ -4323,22 +4603,12 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Deployment'
-  Device:
+  DisassociateRoleFromGroupRequest:
     type: object
-    properties:
-      CertificateArn:
-        $ref: '#/definitions/__string'
-        description: The ARN of the certificate associated with the device.
-      Id:
-        $ref: '#/definitions/__string'
-        description: 'A descriptive or arbitrary ID for the device. This value must be unique within the device definition version. Max length is 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''.'
-      SyncShadow:
-        $ref: '#/definitions/__boolean'
-        description: 'If true, the device''s local shadow will be automatically synced with the cloud.'
-      ThingArn:
-        $ref: '#/definitions/__string'
-        description: The thing ARN of the device.
-    description: Information about a device.
+    properties: {}
+  DisassociateServiceRoleFromAccountRequest:
+    type: object
+    properties: {}
   EncodingType:
     type: string
     enum:
@@ -4379,19 +4649,6 @@ definitions:
         $ref: '#/definitions/__integer'
         description: 'The allowed function execution time, after which Lambda should terminate the function. This timeout still applies to pinned Lambda functions for each request.'
     description: The configuration of the Lambda function.
-  Function:
-    type: object
-    properties:
-      FunctionArn:
-        $ref: '#/definitions/__string'
-        description: The ARN of the Lambda function.
-      FunctionConfiguration:
-        $ref: '#/definitions/FunctionConfiguration'
-        description: The configuration of the Lambda function.
-      Id:
-        $ref: '#/definitions/__string'
-        description: 'A descriptive or arbitrary ID for the function. This value must be unique within the function definition version. Max length is 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''.'
-    description: Information about a Lambda function.
   FunctionConfigurationEnvironment:
     type: object
     properties:
@@ -4420,14 +4677,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ResourceAccessPolicy'
-  FunctionDefaultExecutionConfig:
-    type: object
-    properties:
-      IsolationMode:
-        $ref: '#/definitions/FunctionIsolationMode'
-      RunAs:
-        $ref: '#/definitions/FunctionRunAsConfig'
-    description: 'Configuration information that specifies how a Lambda function runs. '
   FunctionIsolationMode:
     type: string
     enum:
@@ -4444,10 +4693,79 @@ definitions:
         $ref: '#/definitions/__integer'
         description: The user ID whose permissions are used to run a Lambda function.
     description: 'Specifies the user and group whose permissions are used when running the Lambda function. You can specify one or both values to override the default values. We recommend that you avoid running as root unless absolutely necessary to minimize the risk of unintended changes or malicious attacks. To run as root, you must set ''''IsolationMode'''' to ''''NoContainer'''' and update config.json in ''''greengrass-root/config'''' to set ''''allowFunctionsToRunAsRoot'''' to ''''yes''''.'
+  GetAssociatedRoleRequest:
+    type: object
+    properties: {}
+  GetBulkDeploymentStatusRequest:
+    type: object
+    properties: {}
+  GetConnectivityInfoRequest:
+    type: object
+    properties: {}
   __listOfConnectivityInfo:
     type: array
     items:
       $ref: '#/definitions/ConnectivityInfo'
+  GetConnectorDefinitionRequest:
+    type: object
+    properties: {}
+  GetConnectorDefinitionVersionRequest:
+    type: object
+    properties: {}
+  GetCoreDefinitionRequest:
+    type: object
+    properties: {}
+  GetCoreDefinitionVersionRequest:
+    type: object
+    properties: {}
+  GetDeploymentStatusRequest:
+    type: object
+    properties: {}
+  GetDeviceDefinitionRequest:
+    type: object
+    properties: {}
+  GetDeviceDefinitionVersionRequest:
+    type: object
+    properties: {}
+  GetFunctionDefinitionRequest:
+    type: object
+    properties: {}
+  GetFunctionDefinitionVersionRequest:
+    type: object
+    properties: {}
+  GetGroupCertificateAuthorityRequest:
+    type: object
+    properties: {}
+  GetGroupCertificateConfigurationRequest:
+    type: object
+    properties: {}
+  GetGroupRequest:
+    type: object
+    properties: {}
+  GetGroupVersionRequest:
+    type: object
+    properties: {}
+  GetLoggerDefinitionRequest:
+    type: object
+    properties: {}
+  GetLoggerDefinitionVersionRequest:
+    type: object
+    properties: {}
+  GetResourceDefinitionRequest:
+    type: object
+    properties: {}
+  GetResourceDefinitionVersionRequest:
+    type: object
+    properties: {}
+  GetServiceRoleForAccountRequest:
+    type: object
+    properties: {}
+  GetSubscriptionDefinitionRequest:
+    type: object
+    properties: {}
+  GetSubscriptionDefinitionVersionRequest:
+    type: object
+    properties: {}
   GroupCertificateAuthorityProperties:
     type: object
     properties:
@@ -4493,22 +4811,82 @@ definitions:
         $ref: '#/definitions/__string'
         description: The name of the Linux OS group whose privileges will be added to the Lambda process. This field is optional.
     description: Group owner related settings for local resources.
+  ListBulkDeploymentDetailedReportsRequest:
+    type: object
+    properties: {}
+  ListBulkDeploymentsRequest:
+    type: object
+    properties: {}
+  ListConnectorDefinitionVersionsRequest:
+    type: object
+    properties: {}
   __listOfVersionInformation:
     type: array
     items:
       $ref: '#/definitions/VersionInformation'
+  ListConnectorDefinitionsRequest:
+    type: object
+    properties: {}
   __listOfDefinitionInformation:
     type: array
     items:
       $ref: '#/definitions/DefinitionInformation'
+  ListCoreDefinitionVersionsRequest:
+    type: object
+    properties: {}
+  ListCoreDefinitionsRequest:
+    type: object
+    properties: {}
+  ListDeploymentsRequest:
+    type: object
+    properties: {}
+  ListDeviceDefinitionVersionsRequest:
+    type: object
+    properties: {}
+  ListDeviceDefinitionsRequest:
+    type: object
+    properties: {}
+  ListFunctionDefinitionVersionsRequest:
+    type: object
+    properties: {}
+  ListFunctionDefinitionsRequest:
+    type: object
+    properties: {}
+  ListGroupCertificateAuthoritiesRequest:
+    type: object
+    properties: {}
   __listOfGroupCertificateAuthorityProperties:
     type: array
     items:
       $ref: '#/definitions/GroupCertificateAuthorityProperties'
+  ListGroupVersionsRequest:
+    type: object
+    properties: {}
+  ListGroupsRequest:
+    type: object
+    properties: {}
   __listOfGroupInformation:
     type: array
     items:
       $ref: '#/definitions/GroupInformation'
+  ListLoggerDefinitionVersionsRequest:
+    type: object
+    properties: {}
+  ListLoggerDefinitionsRequest:
+    type: object
+    properties: {}
+  ListResourceDefinitionVersionsRequest:
+    type: object
+    properties: {}
+  ListResourceDefinitionsRequest:
+    type: object
+    properties: {}
+  ListSubscriptionDefinitionVersionsRequest:
+    type: object
+    properties: {}
+  ListSubscriptionDefinitionsRequest:
+    type: object
+    properties: {}
   LocalDeviceResourceData:
     type: object
     properties:
@@ -4550,31 +4928,19 @@ definitions:
     enum:
       - FileSystem
       - AWSCloudWatch
-  Logger:
-    type: object
-    properties:
-      Component:
-        $ref: '#/definitions/LoggerComponent'
-        description: The component that will be subject to logging.
-      Id:
-        $ref: '#/definitions/__string'
-        description: 'A descriptive or arbitrary ID for the logger. This value must be unique within the logger definition version. Max length is 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''.'
-      Level:
-        $ref: '#/definitions/LoggerLevel'
-        description: The level of the logs.
-      Space:
-        $ref: '#/definitions/__integer'
-        description: 'The amount of file space, in KB, to use if the local file system is used for logging purposes.'
-      Type:
-        $ref: '#/definitions/LoggerType'
-        description: The type of log output which will be used.
-    description: Information about a logger
   Permission:
     type: string
     enum:
       - ro
       - rw
     description: The type of permission a function has to access a resource.
+  ResetDeploymentsRequest:
+    type: object
+    properties:
+      Force:
+        $ref: '#/definitions/__boolean'
+        description: 'If true, performs a best-effort only core reset.'
+    description: Information needed to reset deployments.
   ResourceDataContainer:
     type: object
     properties:
@@ -4594,19 +4960,6 @@ definitions:
         $ref: '#/definitions/SecretsManagerSecretResourceData'
         description: 'Attributes that define a secret resource, which references a secret from AWS Secrets Manager.'
     description: 'A container for resource data. The container takes only one of the following supported resource data types: ''''LocalDeviceResourceData'''', ''''LocalVolumeResourceData'''', ''''SageMakerMachineLearningModelResourceData'''', ''''S3MachineLearningModelResourceData'''', ''''SecretsManagerSecretResourceData''''.'
-  Resource:
-    type: object
-    properties:
-      Id:
-        $ref: '#/definitions/__string'
-        description: 'The resource ID, used to refer to a resource in the Lambda function configuration. Max length is 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''. This must be unique within a Greengrass group.'
-      Name:
-        $ref: '#/definitions/__string'
-        description: 'The descriptive resource name, which is displayed on the AWS IoT Greengrass console. Max length 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''. This must be unique within a Greengrass group.'
-      ResourceDataContainer:
-        $ref: '#/definitions/ResourceDataContainer'
-        description: A container of data for all resource types.
-    description: Information about a resource.
   ResourceAccessPolicy:
     type: object
     properties:
@@ -4651,22 +5004,79 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/__string'
-  Subscription:
+  StartBulkDeploymentRequest:
     type: object
     properties:
-      Id:
+      ExecutionRoleArn:
         $ref: '#/definitions/__string'
-        description: 'A descriptive or arbitrary ID for the subscription. This value must be unique within the subscription definition version. Max length is 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''.'
-      Source:
+        description: 'The ARN of the execution role to associate with the bulk deployment operation. This IAM role must allow the ''''greengrass:CreateDeployment'''' action for all group versions that are listed in the input file. This IAM role must have access to the S3 bucket containing the input file.'
+      InputFileUri:
         $ref: '#/definitions/__string'
-        description: 'The source of the subscription. Can be a thing ARN, a Lambda function ARN, a connector ARN, ''cloud'' (which represents the AWS IoT cloud), or ''GGShadowService''.'
-      Subject:
+        description: 'The URI of the input file contained in the S3 bucket. The execution role must have ''''getObject'''' permissions on this bucket to access the input file. The input file is a JSON-serialized, line delimited file with UTF-8 encoding that provides a list of group and version IDs and the deployment type. This file must be less than 100 MB. Currently, AWS IoT Greengrass supports only ''''NewDeployment'''' deployment types.'
+  StopBulkDeploymentRequest:
+    type: object
+    properties: {}
+  UpdateConnectivityInfoRequest:
+    type: object
+    properties:
+      ConnectivityInfo:
+        $ref: '#/definitions/__listOfConnectivityInfo'
+        description: A list of connectivity info.
+    description: Connectivity information.
+  UpdateConnectorDefinitionRequest:
+    type: object
+    properties:
+      Name:
         $ref: '#/definitions/__string'
-        description: The MQTT topic used to route the message.
-      Target:
+        description: The name of the definition.
+  UpdateCoreDefinitionRequest:
+    type: object
+    properties:
+      Name:
         $ref: '#/definitions/__string'
-        description: 'Where the message is sent to. Can be a thing ARN, a Lambda function ARN, a connector ARN, ''cloud'' (which represents the AWS IoT cloud), or ''GGShadowService''.'
-    description: Information about a subscription.
+        description: The name of the definition.
+  UpdateDeviceDefinitionRequest:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the definition.
+  UpdateFunctionDefinitionRequest:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the definition.
+  UpdateGroupCertificateConfigurationRequest:
+    type: object
+    properties:
+      CertificateExpiryInMilliseconds:
+        $ref: '#/definitions/__string'
+        description: 'The amount of time remaining before the certificate expires, in milliseconds.'
+  UpdateGroupRequest:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the definition.
+  UpdateLoggerDefinitionRequest:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the definition.
+  UpdateResourceDefinitionRequest:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the definition.
+  UpdateSubscriptionDefinitionRequest:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the definition.
   VersionInformation:
     type: object
     properties:

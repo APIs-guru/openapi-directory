@@ -39,8 +39,10 @@ x-hasEquivalentPaths: true
 schemes:
   - https
   - http
-consumes: []
-produces: []
+consumes:
+  - text/xml
+produces:
+  - text/xml
 parameters:
   Action:
     name: Action
@@ -97,7 +99,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /:
+  '/#Action=AddPermission':
     post:
       operationId: AddPermission
       description: 'Adds a statement to a topic''s access control policy, granting access for the specified AWS accounts to the specified actions.'
@@ -121,11 +123,36 @@ paths:
           schema:
             $ref: '#/definitions/NotFoundException'
       parameters:
-        - name: body
-          in: body
+        - name: TopicArn
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/AddPermissionInput'
+          description: The ARN of the topic whose access control policy you wish to modify.
+          type: string
+        - name: Label
+          in: query
+          required: true
+          description: A unique identifier for the new policy statement.
+          type: string
+        - name: AWSAccountId
+          in: query
+          required: true
+          description: 'The AWS account IDs of the users (principals) who will be given access to the specified actions. The users must have AWS accounts, but do not need to be signed up for this service.'
+          type: array
+          items:
+            type: string
+        - name: ActionName
+          in: query
+          required: true
+          description: '<p>The action you want to allow for the specified principal(s).</p> <p>Valid values: any Amazon SNS action name.</p>'
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - AddPermission
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -136,7 +163,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CheckIfPhoneNumberIsOptedOut':
+  '/#Action=CheckIfPhoneNumberIsOptedOut':
     post:
       operationId: CheckIfPhoneNumberIsOptedOut
       description: '<p>Accepts a phone number and indicates whether the phone holder has opted out of receiving SMS messages from your account. You cannot send SMS messages to a number that is opted out.</p> <p>To resume sending messages, you can opt in the number by using the <code>OptInPhoneNumber</code> action.</p>'
@@ -162,11 +189,17 @@ paths:
           schema:
             $ref: '#/definitions/InvalidParameterException'
       parameters:
-        - name: body
-          in: body
+        - name: phoneNumber
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/CheckIfPhoneNumberIsOptedOutInput'
+          description: The phone number for which you want to check the opt out status.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - CheckIfPhoneNumberIsOptedOut
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -177,7 +210,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ConfirmSubscription':
+  '/#Action=ConfirmSubscription':
     post:
       operationId: ConfirmSubscription
       description: 'Verifies an endpoint owner''s intent to receive messages by validating the token sent to the endpoint by an earlier <code>Subscribe</code> action. If the token is valid, the action creates a new subscription and returns its Amazon Resource Name (ARN). This call requires an AWS signature only when the <code>AuthenticateOnUnsubscribe</code> flag is set to "true".'
@@ -207,11 +240,27 @@ paths:
           schema:
             $ref: '#/definitions/AuthorizationErrorException'
       parameters:
-        - name: body
-          in: body
+        - name: TopicArn
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/ConfirmSubscriptionInput'
+          description: The ARN of the topic for which you wish to confirm a subscription.
+          type: string
+        - name: Token
+          in: query
+          required: true
+          description: Short-lived token sent to an endpoint during the <code>Subscribe</code> action.
+          type: string
+        - name: AuthenticateOnUnsubscribe
+          in: query
+          required: false
+          description: 'Disallows unauthenticated unsubscribes of the subscription. If the value of this parameter is <code>true</code> and the request has an AWS signature, then only the topic owner and the subscription owner can unsubscribe the endpoint. The unsubscribe action requires AWS authentication. '
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ConfirmSubscription
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -222,7 +271,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreatePlatformApplication':
+  '/#Action=CreatePlatformApplication':
     post:
       operationId: CreatePlatformApplication
       description: '<p>Creates a platform application object for one of the supported push notification services, such as APNS and GCM, to which devices and mobile apps may register. You must specify PlatformPrincipal and PlatformCredential attributes when using the <code>CreatePlatformApplication</code> action. The PlatformPrincipal is received from the notification service. For APNS/APNS_SANDBOX, PlatformPrincipal is "SSL certificate". For GCM, PlatformPrincipal is not applicable. For ADM, PlatformPrincipal is "client id". The PlatformCredential is also received from the notification service. For WNS, PlatformPrincipal is "Package Security Identifier". For MPNS, PlatformPrincipal is "TLS certificate". For Baidu, PlatformPrincipal is "API key".</p> <p>For APNS/APNS_SANDBOX, PlatformCredential is "private key". For GCM, PlatformCredential is "API key". For ADM, PlatformCredential is "client secret". For WNS, PlatformCredential is "secret key". For MPNS, PlatformCredential is "private key". For Baidu, PlatformCredential is "secret key". The PlatformApplicationArn that is returned when using <code>CreatePlatformApplication</code> is then used as an attribute for the <code>CreatePlatformEndpoint</code> action. For more information, see <a href="http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html">Using Amazon SNS Mobile Push Notifications</a>. For more information about obtaining the PlatformPrincipal and PlatformCredential for each of the supported push notification services, see <a href="http://docs.aws.amazon.com/sns/latest/dg/mobile-push-apns.html">Getting Started with Apple Push Notification Service</a>, <a href="http://docs.aws.amazon.com/sns/latest/dg/mobile-push-adm.html">Getting Started with Amazon Device Messaging</a>, <a href="http://docs.aws.amazon.com/sns/latest/dg/mobile-push-baidu.html">Getting Started with Baidu Cloud Push</a>, <a href="http://docs.aws.amazon.com/sns/latest/dg/mobile-push-gcm.html">Getting Started with Google Cloud Messaging for Android</a>, <a href="http://docs.aws.amazon.com/sns/latest/dg/mobile-push-mpns.html">Getting Started with MPNS</a>, or <a href="http://docs.aws.amazon.com/sns/latest/dg/mobile-push-wns.html">Getting Started with WNS</a>. </p>'
@@ -244,11 +293,40 @@ paths:
           schema:
             $ref: '#/definitions/AuthorizationErrorException'
       parameters:
-        - name: body
-          in: body
+        - name: Name
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/CreatePlatformApplicationInput'
+          description: 'Application names must be made up of only uppercase and lowercase ASCII letters, numbers, underscores, hyphens, and periods, and must be between 1 and 256 characters long.'
+          type: string
+        - name: Platform
+          in: query
+          required: true
+          description: 'The following platforms are supported: ADM (Amazon Device Messaging), APNS (Apple Push Notification Service), APNS_SANDBOX, and GCM (Google Cloud Messaging).'
+          type: string
+        - name: Attributes.0.key
+          in: query
+          type: string
+        - name: Attributes.0.value
+          in: query
+          type: string
+        - name: Attributes.1.key
+          in: query
+          type: string
+        - name: Attributes.1.value
+          in: query
+          type: string
+        - name: Attributes.2.key
+          in: query
+          type: string
+        - name: Attributes.2.value
+          in: query
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - CreatePlatformApplication
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -259,7 +337,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreatePlatformEndpoint':
+  '/#Action=CreatePlatformEndpoint':
     post:
       operationId: CreatePlatformEndpoint
       description: '<p>Creates an endpoint for a device and mobile app on one of the supported push notification services, such as GCM and APNS. <code>CreatePlatformEndpoint</code> requires the PlatformApplicationArn that is returned from <code>CreatePlatformApplication</code>. The EndpointArn that is returned when using <code>CreatePlatformEndpoint</code> can then be used by the <code>Publish</code> action to send a message to a mobile app or by the <code>Subscribe</code> action for subscription to a topic. The <code>CreatePlatformEndpoint</code> action is idempotent, so if the requester already owns an endpoint with the same device token and attributes, that endpoint''s ARN is returned without creating a new endpoint. For more information, see <a href="http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html">Using Amazon SNS Mobile Push Notifications</a>. </p> <p>When using <code>CreatePlatformEndpoint</code> with Baidu, two attributes must be provided: ChannelId and UserId. The token field must also contain the ChannelId. For more information, see <a href="http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePushBaiduEndpoint.html">Creating an Amazon SNS Endpoint for Baidu</a>. </p>'
@@ -285,11 +363,45 @@ paths:
           schema:
             $ref: '#/definitions/NotFoundException'
       parameters:
-        - name: body
-          in: body
+        - name: PlatformApplicationArn
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/CreatePlatformEndpointInput'
+          description: PlatformApplicationArn returned from CreatePlatformApplication is used to create a an endpoint.
+          type: string
+        - name: Token
+          in: query
+          required: true
+          description: 'Unique identifier created by the notification service for an app on a device. The specific name for Token will vary, depending on which notification service is being used. For example, when using APNS as the notification service, you need the device token. Alternatively, when using GCM or ADM, the device token equivalent is called the registration ID.'
+          type: string
+        - name: CustomUserData
+          in: query
+          required: false
+          description: Arbitrary user data to associate with the endpoint. Amazon SNS does not use this data. The data must be in UTF-8 format and less than 2KB.
+          type: string
+        - name: Attributes.0.key
+          in: query
+          type: string
+        - name: Attributes.0.value
+          in: query
+          type: string
+        - name: Attributes.1.key
+          in: query
+          type: string
+        - name: Attributes.1.value
+          in: query
+          type: string
+        - name: Attributes.2.key
+          in: query
+          type: string
+        - name: Attributes.2.value
+          in: query
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - CreatePlatformEndpoint
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -300,7 +412,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateTopic':
+  '/#Action=CreateTopic':
     post:
       operationId: CreateTopic
       description: 'Creates a topic to which notifications can be published. Users can create at most 100,000 topics. For more information, see <a href="http://aws.amazon.com/sns/">http://aws.amazon.com/sns</a>. This action is idempotent, so if the requester already owns a topic with the specified name, that topic''s ARN is returned without creating a new topic.'
@@ -330,11 +442,35 @@ paths:
           schema:
             $ref: '#/definitions/InvalidSecurityException'
       parameters:
-        - name: body
-          in: body
+        - name: Name
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/CreateTopicInput'
+          description: '<p>The name of the topic you want to create.</p> <p>Constraints: Topic names must be made up of only uppercase and lowercase ASCII letters, numbers, underscores, and hyphens, and must be between 1 and 256 characters long.</p>'
+          type: string
+        - name: Attributes.0.key
+          in: query
+          type: string
+        - name: Attributes.0.value
+          in: query
+          type: string
+        - name: Attributes.1.key
+          in: query
+          type: string
+        - name: Attributes.1.value
+          in: query
+          type: string
+        - name: Attributes.2.key
+          in: query
+          type: string
+        - name: Attributes.2.value
+          in: query
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - CreateTopic
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -345,7 +481,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteEndpoint':
+  '/#Action=DeleteEndpoint':
     post:
       operationId: DeleteEndpoint
       description: '<p>Deletes the endpoint for a device and mobile app from Amazon SNS. This action is idempotent. For more information, see <a href="http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html">Using Amazon SNS Mobile Push Notifications</a>. </p> <p>When you delete an endpoint that is also subscribed to a topic, then you must also unsubscribe the endpoint from the topic.</p>'
@@ -365,11 +501,17 @@ paths:
           schema:
             $ref: '#/definitions/AuthorizationErrorException'
       parameters:
-        - name: body
-          in: body
+        - name: EndpointArn
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/DeleteEndpointInput'
+          description: EndpointArn of endpoint to delete.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeleteEndpoint
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -380,7 +522,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeletePlatformApplication':
+  '/#Action=DeletePlatformApplication':
     post:
       operationId: DeletePlatformApplication
       description: 'Deletes a platform application object for one of the supported push notification services, such as APNS and GCM. For more information, see <a href="http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html">Using Amazon SNS Mobile Push Notifications</a>. '
@@ -400,11 +542,17 @@ paths:
           schema:
             $ref: '#/definitions/AuthorizationErrorException'
       parameters:
-        - name: body
-          in: body
+        - name: PlatformApplicationArn
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/DeletePlatformApplicationInput'
+          description: PlatformApplicationArn of platform application object to delete.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeletePlatformApplication
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -415,7 +563,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteTopic':
+  '/#Action=DeleteTopic':
     post:
       operationId: DeleteTopic
       description: 'Deletes a topic and all its subscriptions. Deleting a topic might prevent some messages previously sent to the topic from being delivered to subscribers. This action is idempotent, so deleting a topic that does not exist does not result in an error.'
@@ -439,11 +587,17 @@ paths:
           schema:
             $ref: '#/definitions/NotFoundException'
       parameters:
-        - name: body
-          in: body
+        - name: TopicArn
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/DeleteTopicInput'
+          description: The ARN of the topic you want to delete.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeleteTopic
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -454,7 +608,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetEndpointAttributes':
+  '/#Action=GetEndpointAttributes':
     post:
       operationId: GetEndpointAttributes
       description: 'Retrieves the endpoint attributes for a device on one of the supported push notification services, such as GCM and APNS. For more information, see <a href="http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html">Using Amazon SNS Mobile Push Notifications</a>. '
@@ -480,11 +634,17 @@ paths:
           schema:
             $ref: '#/definitions/NotFoundException'
       parameters:
-        - name: body
-          in: body
+        - name: EndpointArn
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/GetEndpointAttributesInput'
+          description: EndpointArn for GetEndpointAttributes input.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - GetEndpointAttributes
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -495,7 +655,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetPlatformApplicationAttributes':
+  '/#Action=GetPlatformApplicationAttributes':
     post:
       operationId: GetPlatformApplicationAttributes
       description: 'Retrieves the attributes of the platform application object for the supported push notification services, such as APNS and GCM. For more information, see <a href="http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html">Using Amazon SNS Mobile Push Notifications</a>. '
@@ -521,11 +681,17 @@ paths:
           schema:
             $ref: '#/definitions/NotFoundException'
       parameters:
-        - name: body
-          in: body
+        - name: PlatformApplicationArn
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/GetPlatformApplicationAttributesInput'
+          description: PlatformApplicationArn for GetPlatformApplicationAttributesInput.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - GetPlatformApplicationAttributes
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -536,7 +702,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetSMSAttributes':
+  '/#Action=GetSMSAttributes':
     post:
       operationId: GetSMSAttributes
       description: <p>Returns the settings for sending SMS messages from your account.</p> <p>These settings are set with the <code>SetSMSAttributes</code> action.</p>
@@ -562,11 +728,19 @@ paths:
           schema:
             $ref: '#/definitions/InvalidParameterException'
       parameters:
-        - name: body
-          in: body
+        - name: attributes
+          in: query
+          required: false
+          description: '<p>A list of the individual attribute names, such as <code>MonthlySpendLimit</code>, for which you want values.</p> <p>For all attribute names, see <a href="http://docs.aws.amazon.com/sns/latest/api/API_SetSMSAttributes.html">SetSMSAttributes</a>.</p> <p>If you don''t use this parameter, Amazon SNS returns all SMS attributes.</p>'
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/GetSMSAttributesInput'
+          type: string
+          enum:
+            - GetSMSAttributes
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -577,7 +751,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetSubscriptionAttributes':
+  '/#Action=GetSubscriptionAttributes':
     post:
       operationId: GetSubscriptionAttributes
       description: Returns all of the properties of a subscription.
@@ -603,11 +777,17 @@ paths:
           schema:
             $ref: '#/definitions/AuthorizationErrorException'
       parameters:
-        - name: body
-          in: body
+        - name: SubscriptionArn
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/GetSubscriptionAttributesInput'
+          description: The ARN of the subscription whose properties you want to get.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - GetSubscriptionAttributes
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -618,7 +798,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetTopicAttributes':
+  '/#Action=GetTopicAttributes':
     post:
       operationId: GetTopicAttributes
       description: Returns all of the properties of a topic. Topic properties returned might differ based on the authorization of the user.
@@ -648,11 +828,17 @@ paths:
           schema:
             $ref: '#/definitions/InvalidSecurityException'
       parameters:
-        - name: body
-          in: body
+        - name: TopicArn
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/GetTopicAttributesInput'
+          description: The ARN of the topic whose properties you want to get.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - GetTopicAttributes
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -663,7 +849,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListEndpointsByPlatformApplication':
+  '/#Action=ListEndpointsByPlatformApplication':
     post:
       operationId: ListEndpointsByPlatformApplication
       description: '<p>Lists the endpoints and endpoint attributes for devices in a supported push notification service, such as GCM and APNS. The results for <code>ListEndpointsByPlatformApplication</code> are paginated and return a limited list of endpoints, up to 100. If additional records are available after the first page results, then a NextToken string will be returned. To receive the next page, you call <code>ListEndpointsByPlatformApplication</code> again using the NextToken string received from the previous call. When there are no more records to return, NextToken will be null. For more information, see <a href="http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html">Using Amazon SNS Mobile Push Notifications</a>. </p> <p>This action is throttled at 30 transactions per second (TPS).</p>'
@@ -689,16 +875,22 @@ paths:
           schema:
             $ref: '#/definitions/NotFoundException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListEndpointsByPlatformApplicationInput'
-        - name: NextToken
-          type: string
+        - name: PlatformApplicationArn
           in: query
-          description: Pagination token
+          required: true
+          description: PlatformApplicationArn for ListEndpointsByPlatformApplicationInput action.
+          type: string
+        - name: NextToken
+          in: query
           required: false
+          description: NextToken string is used when calling ListEndpointsByPlatformApplication action to retrieve additional records that are available after the first page results.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ListEndpointsByPlatformApplication
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -709,7 +901,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListPhoneNumbersOptedOut':
+  '/#Action=ListPhoneNumbersOptedOut':
     post:
       operationId: ListPhoneNumbersOptedOut
       description: '<p>Returns a list of phone numbers that are opted out, meaning you cannot send SMS messages to them.</p> <p>The results for <code>ListPhoneNumbersOptedOut</code> are paginated, and each page returns up to 100 phone numbers. If additional phone numbers are available after the first page of results, then a <code>NextToken</code> string will be returned. To receive the next page, you call <code>ListPhoneNumbersOptedOut</code> again using the <code>NextToken</code> string received from the previous call. When there are no more records to return, <code>NextToken</code> will be null.</p>'
@@ -735,11 +927,17 @@ paths:
           schema:
             $ref: '#/definitions/InvalidParameterException'
       parameters:
-        - name: body
-          in: body
+        - name: nextToken
+          in: query
+          required: false
+          description: A <code>NextToken</code> string is used when you call the <code>ListPhoneNumbersOptedOut</code> action to retrieve additional records that are available after the first page of results.
+          type: string
+        - name: Action
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/ListPhoneNumbersOptedOutInput'
+          type: string
+          enum:
+            - ListPhoneNumbersOptedOut
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -750,7 +948,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListPlatformApplications':
+  '/#Action=ListPlatformApplications':
     post:
       operationId: ListPlatformApplications
       description: '<p>Lists the platform application objects for the supported push notification services, such as APNS and GCM. The results for <code>ListPlatformApplications</code> are paginated and return a limited list of applications, up to 100. If additional records are available after the first page results, then a NextToken string will be returned. To receive the next page, you call <code>ListPlatformApplications</code> using the NextToken string received from the previous call. When there are no more records to return, NextToken will be null. For more information, see <a href="http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html">Using Amazon SNS Mobile Push Notifications</a>. </p> <p>This action is throttled at 15 transactions per second (TPS).</p>'
@@ -772,16 +970,17 @@ paths:
           schema:
             $ref: '#/definitions/AuthorizationErrorException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListPlatformApplicationsInput'
         - name: NextToken
-          type: string
           in: query
-          description: Pagination token
           required: false
+          description: NextToken string is used when calling ListPlatformApplications action to retrieve additional records that are available after the first page results.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ListPlatformApplications
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -792,7 +991,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListSubscriptions':
+  '/#Action=ListSubscriptions':
     post:
       operationId: ListSubscriptions
       description: '<p>Returns a list of the requester''s subscriptions. Each call returns a limited list of subscriptions, up to 100. If there are more subscriptions, a <code>NextToken</code> is also returned. Use the <code>NextToken</code> parameter in a new <code>ListSubscriptions</code> call to get further results.</p> <p>This action is throttled at 30 transactions per second (TPS).</p>'
@@ -814,16 +1013,17 @@ paths:
           schema:
             $ref: '#/definitions/AuthorizationErrorException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListSubscriptionsInput'
         - name: NextToken
-          type: string
           in: query
-          description: Pagination token
           required: false
+          description: Token returned by the previous <code>ListSubscriptions</code> request.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ListSubscriptions
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -834,7 +1034,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListSubscriptionsByTopic':
+  '/#Action=ListSubscriptionsByTopic':
     post:
       operationId: ListSubscriptionsByTopic
       description: '<p>Returns a list of the subscriptions to a specific topic. Each call returns a limited list of subscriptions, up to 100. If there are more subscriptions, a <code>NextToken</code> is also returned. Use the <code>NextToken</code> parameter in a new <code>ListSubscriptionsByTopic</code> call to get further results.</p> <p>This action is throttled at 30 transactions per second (TPS).</p>'
@@ -860,16 +1060,22 @@ paths:
           schema:
             $ref: '#/definitions/AuthorizationErrorException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListSubscriptionsByTopicInput'
-        - name: NextToken
-          type: string
+        - name: TopicArn
           in: query
-          description: Pagination token
+          required: true
+          description: The ARN of the topic for which you wish to find subscriptions.
+          type: string
+        - name: NextToken
+          in: query
           required: false
+          description: Token returned by the previous <code>ListSubscriptionsByTopic</code> request.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ListSubscriptionsByTopic
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -880,7 +1086,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListTopics':
+  '/#Action=ListTopics':
     post:
       operationId: ListTopics
       description: '<p>Returns a list of the requester''s topics. Each call returns a limited list of topics, up to 100. If there are more topics, a <code>NextToken</code> is also returned. Use the <code>NextToken</code> parameter in a new <code>ListTopics</code> call to get further results.</p> <p>This action is throttled at 30 transactions per second (TPS).</p>'
@@ -902,16 +1108,17 @@ paths:
           schema:
             $ref: '#/definitions/AuthorizationErrorException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListTopicsInput'
         - name: NextToken
-          type: string
           in: query
-          description: Pagination token
           required: false
+          description: Token returned by the previous <code>ListTopics</code> request.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ListTopics
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -922,7 +1129,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#OptInPhoneNumber':
+  '/#Action=OptInPhoneNumber':
     post:
       operationId: OptInPhoneNumber
       description: '<p>Use this request to opt in a phone number that is opted out, which enables you to resume sending SMS messages to the number.</p> <p>You can opt in a phone number only once every 30 days.</p>'
@@ -948,11 +1155,17 @@ paths:
           schema:
             $ref: '#/definitions/InvalidParameterException'
       parameters:
-        - name: body
-          in: body
+        - name: phoneNumber
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/OptInPhoneNumberInput'
+          description: The phone number to opt in.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - OptInPhoneNumber
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -963,7 +1176,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Publish':
+  '/#Action=Publish':
     post:
       operationId: Publish
       description: '<p>Sends a message to an Amazon SNS topic or sends a text message (SMS message) directly to a phone number. </p> <p>If you send a message to a topic, Amazon SNS delivers the message to each endpoint that is subscribed to the topic. The format of the message depends on the notification protocol for each subscribed endpoint.</p> <p>When a <code>messageId</code> is returned, the message has been saved and Amazon SNS will attempt to deliver it shortly.</p> <p>To use the <code>Publish</code> action for sending a message to a mobile endpoint, such as an app on a Kindle device or mobile phone, you must specify the EndpointArn for the TargetArn parameter. The EndpointArn is returned when making a call with the <code>CreatePlatformEndpoint</code> action. </p> <p>For more information about formatting messages, see <a href="http://docs.aws.amazon.com/sns/latest/dg/mobile-push-send-custommessage.html">Send Custom Platform-Specific Payloads in Messages to Mobile Devices</a>. </p>'
@@ -1029,11 +1242,60 @@ paths:
           schema:
             $ref: '#/definitions/InvalidSecurityException'
       parameters:
-        - name: body
-          in: body
+        - name: TopicArn
+          in: query
+          required: false
+          description: '<p>The topic you want to publish to.</p> <p>If you don''t specify a value for the <code>TopicArn</code> parameter, you must specify a value for the <code>PhoneNumber</code> or <code>TargetArn</code> parameters.</p>'
+          type: string
+        - name: TargetArn
+          in: query
+          required: false
+          description: '<p>Either TopicArn or EndpointArn, but not both.</p> <p>If you don''t specify a value for the <code>TargetArn</code> parameter, you must specify a value for the <code>PhoneNumber</code> or <code>TopicArn</code> parameters.</p>'
+          type: string
+        - name: PhoneNumber
+          in: query
+          required: false
+          description: '<p>The phone number to which you want to deliver an SMS message. Use E.164 format.</p> <p>If you don''t specify a value for the <code>PhoneNumber</code> parameter, you must specify a value for the <code>TargetArn</code> or <code>TopicArn</code> parameters.</p>'
+          type: string
+        - name: Message
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/PublishInput'
+          description: '<p>The message you want to send.</p> <important> <p>The <code>Message</code> parameter is always a string. If you set <code>MessageStructure</code> to <code>json</code>, you must string-encode the <code>Message</code> parameter.</p> </important> <p>If you are publishing to a topic and you want to send the same message to all transport protocols, include the text of the message as a String value. If you want to send different messages for each transport protocol, set the value of the <code>MessageStructure</code> parameter to <code>json</code> and use a JSON object for the <code>Message</code> parameter. </p> <p/> <p>Constraints:</p> <ul> <li> <p>With the exception of SMS, messages must be UTF-8 encoded strings and at most 256 KB in size (262,144 bytes, not 262,144 characters).</p> </li> <li> <p>For SMS, each message can contain up to 140 characters. This character limit depends on the encoding schema. For example, an SMS message can contain 160 GSM characters, 140 ASCII characters, or 70 UCS-2 characters.</p> <p>If you publish a message that exceeds this size limit, Amazon SNS sends the message as multiple messages, each fitting within the size limit. Messages aren''t truncated mid-word but are cut off at whole-word boundaries.</p> <p>The total size limit for a single SMS <code>Publish</code> action is 1,600 characters.</p> </li> </ul> <p>JSON-specific constraints:</p> <ul> <li> <p>Keys in the JSON object that correspond to supported transport protocols must have simple JSON string values.</p> </li> <li> <p>The values will be parsed (unescaped) before they are used in outgoing messages.</p> </li> <li> <p>Outbound notifications are JSON encoded (meaning that the characters will be reescaped for sending).</p> </li> <li> <p>Values have a minimum length of 0 (the empty string, "", is allowed).</p> </li> <li> <p>Values have a maximum length bounded by the overall message size (so, including multiple protocols may limit message sizes).</p> </li> <li> <p>Non-string values will cause the key to be ignored.</p> </li> <li> <p>Keys that do not correspond to supported transport protocols are ignored.</p> </li> <li> <p>Duplicate keys are not allowed.</p> </li> <li> <p>Failure to parse or validate any key or value in the message will cause the <code>Publish</code> call to return an error (no partial delivery).</p> </li> </ul>'
+          type: string
+        - name: Subject
+          in: query
+          required: false
+          description: '<p>Optional parameter to be used as the "Subject" line when the message is delivered to email endpoints. This field will also be included, if present, in the standard JSON messages delivered to other endpoints.</p> <p>Constraints: Subjects must be ASCII text that begins with a letter, number, or punctuation mark; must not include line breaks or control characters; and must be less than 100 characters long.</p>'
+          type: string
+        - name: MessageStructure
+          in: query
+          required: false
+          description: '<p>Set <code>MessageStructure</code> to <code>json</code> if you want to send a different message for each protocol. For example, using one publish action, you can send a short message to your SMS subscribers and a longer message to your email subscribers. If you set <code>MessageStructure</code> to <code>json</code>, the value of the <code>Message</code> parameter must: </p> <ul> <li> <p>be a syntactically valid JSON object; and</p> </li> <li> <p>contain at least a top-level JSON key of "default" with a value that is a string.</p> </li> </ul> <p>You can define other top-level keys that define the message you want to send to a specific transport protocol (e.g., "http").</p> <p>For information about sending different messages for each protocol using the AWS Management Console, go to <a href="http://docs.aws.amazon.com/sns/latest/gsg/Publish.html#sns-message-formatting-by-protocol">Create Different Messages for Each Protocol</a> in the <i>Amazon Simple Notification Service Getting Started Guide</i>. </p> <p>Valid value: <code>json</code> </p>'
+          type: string
+        - name: MessageAttributes.0.key
+          in: query
+          type: string
+        - name: MessageAttributes.0.value
+          in: query
+          type: string
+        - name: MessageAttributes.1.key
+          in: query
+          type: string
+        - name: MessageAttributes.1.value
+          in: query
+          type: string
+        - name: MessageAttributes.2.key
+          in: query
+          type: string
+        - name: MessageAttributes.2.value
+          in: query
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - Publish
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1044,7 +1306,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#RemovePermission':
+  '/#Action=RemovePermission':
     post:
       operationId: RemovePermission
       description: Removes a statement from a topic's access control policy.
@@ -1068,11 +1330,22 @@ paths:
           schema:
             $ref: '#/definitions/NotFoundException'
       parameters:
-        - name: body
-          in: body
+        - name: TopicArn
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/RemovePermissionInput'
+          description: The ARN of the topic whose access control policy you wish to modify.
+          type: string
+        - name: Label
+          in: query
+          required: true
+          description: The unique label of the statement you want to remove.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - RemovePermission
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1083,7 +1356,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#SetEndpointAttributes':
+  '/#Action=SetEndpointAttributes':
     post:
       operationId: SetEndpointAttributes
       description: 'Sets the attributes for an endpoint for a device on one of the supported push notification services, such as GCM and APNS. For more information, see <a href="http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html">Using Amazon SNS Mobile Push Notifications</a>. '
@@ -1107,11 +1380,35 @@ paths:
           schema:
             $ref: '#/definitions/NotFoundException'
       parameters:
-        - name: body
-          in: body
+        - name: EndpointArn
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/SetEndpointAttributesInput'
+          description: EndpointArn used for SetEndpointAttributes action.
+          type: string
+        - name: Attributes.0.key
+          in: query
+          type: string
+        - name: Attributes.0.value
+          in: query
+          type: string
+        - name: Attributes.1.key
+          in: query
+          type: string
+        - name: Attributes.1.value
+          in: query
+          type: string
+        - name: Attributes.2.key
+          in: query
+          type: string
+        - name: Attributes.2.value
+          in: query
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - SetEndpointAttributes
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1122,7 +1419,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#SetPlatformApplicationAttributes':
+  '/#Action=SetPlatformApplicationAttributes':
     post:
       operationId: SetPlatformApplicationAttributes
       description: 'Sets the attributes of the platform application object for the supported push notification services, such as APNS and GCM. For more information, see <a href="http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html">Using Amazon SNS Mobile Push Notifications</a>. For information on configuring attributes for message delivery status, see <a href="http://docs.aws.amazon.com/sns/latest/dg/sns-msg-status.html">Using Amazon SNS Application Attributes for Message Delivery Status</a>. '
@@ -1146,11 +1443,35 @@ paths:
           schema:
             $ref: '#/definitions/NotFoundException'
       parameters:
-        - name: body
-          in: body
+        - name: PlatformApplicationArn
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/SetPlatformApplicationAttributesInput'
+          description: PlatformApplicationArn for SetPlatformApplicationAttributes action.
+          type: string
+        - name: Attributes.0.key
+          in: query
+          type: string
+        - name: Attributes.0.value
+          in: query
+          type: string
+        - name: Attributes.1.key
+          in: query
+          type: string
+        - name: Attributes.1.value
+          in: query
+          type: string
+        - name: Attributes.2.key
+          in: query
+          type: string
+        - name: Attributes.2.value
+          in: query
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - SetPlatformApplicationAttributes
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1161,7 +1482,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#SetSMSAttributes':
+  '/#Action=SetSMSAttributes':
     post:
       operationId: SetSMSAttributes
       description: '<p>Use this request to set the default settings for sending SMS messages and receiving daily SMS usage reports.</p> <p>You can override some of these settings for a single message when you use the <code>Publish</code> action with the <code>MessageAttributes.entry.N</code> parameter. For more information, see <a href="http://docs.aws.amazon.com/sns/latest/dg/sms_publish-to-phone.html">Sending an SMS Message</a> in the <i>Amazon SNS Developer Guide</i>.</p>'
@@ -1187,11 +1508,30 @@ paths:
           schema:
             $ref: '#/definitions/AuthorizationErrorException'
       parameters:
-        - name: body
-          in: body
+        - name: attributes.0.key
+          in: query
+          type: string
+        - name: attributes.0.value
+          in: query
+          type: string
+        - name: attributes.1.key
+          in: query
+          type: string
+        - name: attributes.1.value
+          in: query
+          type: string
+        - name: attributes.2.key
+          in: query
+          type: string
+        - name: attributes.2.value
+          in: query
+          type: string
+        - name: Action
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/SetSMSAttributesInput'
+          type: string
+          enum:
+            - SetSMSAttributes
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1202,7 +1542,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#SetSubscriptionAttributes':
+  '/#Action=SetSubscriptionAttributes':
     post:
       operationId: SetSubscriptionAttributes
       description: Allows a subscription owner to set an attribute of the subscription to a new value.
@@ -1230,11 +1570,27 @@ paths:
           schema:
             $ref: '#/definitions/AuthorizationErrorException'
       parameters:
-        - name: body
-          in: body
+        - name: SubscriptionArn
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/SetSubscriptionAttributesInput'
+          description: The ARN of the subscription to modify.
+          type: string
+        - name: AttributeName
+          in: query
+          required: true
+          description: '<p>A map of attributes with their corresponding values.</p> <p>The following lists the names, descriptions, and values of the special request parameters that the <code>SetTopicAttributes</code> action uses:</p> <ul> <li> <p> <code>DeliveryPolicy</code> – The policy that defines how Amazon SNS retries failed deliveries to HTTP/S endpoints.</p> </li> <li> <p> <code>FilterPolicy</code> – The simple JSON object that lets your subscriber receive only a subset of messages, rather than receiving every message published to the topic.</p> </li> <li> <p> <code>RawMessageDelivery</code> – When set to <code>true</code>, enables raw message delivery to Amazon SQS or HTTP/S endpoints. This eliminates the need for the endpoints to process JSON formatting, which is otherwise created for Amazon SNS metadata.</p> </li> </ul>'
+          type: string
+        - name: AttributeValue
+          in: query
+          required: false
+          description: The new value for the attribute in JSON format.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - SetSubscriptionAttributes
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1245,7 +1601,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#SetTopicAttributes':
+  '/#Action=SetTopicAttributes':
     post:
       operationId: SetTopicAttributes
       description: Allows a topic owner to set an attribute of the topic to a new value.
@@ -1273,11 +1629,27 @@ paths:
           schema:
             $ref: '#/definitions/InvalidSecurityException'
       parameters:
-        - name: body
-          in: body
+        - name: TopicArn
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/SetTopicAttributesInput'
+          description: The ARN of the topic to modify.
+          type: string
+        - name: AttributeName
+          in: query
+          required: true
+          description: '<p>A map of attributes with their corresponding values.</p> <p>The following lists the names, descriptions, and values of the special request parameters that the <code>SetTopicAttributes</code> action uses:</p> <ul> <li> <p> <code>DeliveryPolicy</code> – The policy that defines how Amazon SNS retries failed deliveries to HTTP/S endpoints.</p> </li> <li> <p> <code>DisplayName</code> – The display name to use for a topic with SMS subscriptions.</p> </li> <li> <p> <code>Policy</code> – The policy that defines who can access your topic. By default, only the topic owner can publish or subscribe to the topic.</p> </li> </ul>'
+          type: string
+        - name: AttributeValue
+          in: query
+          required: false
+          description: The new value for the attribute.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - SetTopicAttributes
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1288,7 +1660,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Subscribe':
+  '/#Action=Subscribe':
     post:
       operationId: Subscribe
       description: '<p>Prepares to subscribe an endpoint by sending the endpoint a confirmation message. To actually create a subscription, the endpoint owner must call the <code>ConfirmSubscription</code> action with the token from the confirmation message. Confirmation tokens are valid for three days.</p> <p>This action is throttled at 100 transactions per second (TPS).</p>'
@@ -1326,11 +1698,50 @@ paths:
           schema:
             $ref: '#/definitions/InvalidSecurityException'
       parameters:
-        - name: body
-          in: body
+        - name: TopicArn
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/SubscribeInput'
+          description: The ARN of the topic you want to subscribe to.
+          type: string
+        - name: Protocol
+          in: query
+          required: true
+          description: '<p>The protocol you want to use. Supported protocols include:</p> <ul> <li> <p> <code>http</code> – delivery of JSON-encoded message via HTTP POST</p> </li> <li> <p> <code>https</code> – delivery of JSON-encoded message via HTTPS POST</p> </li> <li> <p> <code>email</code> – delivery of message via SMTP</p> </li> <li> <p> <code>email-json</code> – delivery of JSON-encoded message via SMTP</p> </li> <li> <p> <code>sms</code> – delivery of message via SMS</p> </li> <li> <p> <code>sqs</code> – delivery of JSON-encoded message to an Amazon SQS queue</p> </li> <li> <p> <code>application</code> – delivery of JSON-encoded message to an EndpointArn for a mobile app and device.</p> </li> <li> <p> <code>lambda</code> – delivery of JSON-encoded message to an AWS Lambda function.</p> </li> </ul>'
+          type: string
+        - name: Endpoint
+          in: query
+          required: false
+          description: '<p>The endpoint that you want to receive notifications. Endpoints vary by protocol:</p> <ul> <li> <p>For the <code>http</code> protocol, the endpoint is an URL beginning with "http://"</p> </li> <li> <p>For the <code>https</code> protocol, the endpoint is a URL beginning with "https://"</p> </li> <li> <p>For the <code>email</code> protocol, the endpoint is an email address</p> </li> <li> <p>For the <code>email-json</code> protocol, the endpoint is an email address</p> </li> <li> <p>For the <code>sms</code> protocol, the endpoint is a phone number of an SMS-enabled device</p> </li> <li> <p>For the <code>sqs</code> protocol, the endpoint is the ARN of an Amazon SQS queue</p> </li> <li> <p>For the <code>application</code> protocol, the endpoint is the EndpointArn of a mobile app and device.</p> </li> <li> <p>For the <code>lambda</code> protocol, the endpoint is the ARN of an AWS Lambda function.</p> </li> </ul>'
+          type: string
+        - name: Attributes.0.key
+          in: query
+          type: string
+        - name: Attributes.0.value
+          in: query
+          type: string
+        - name: Attributes.1.key
+          in: query
+          type: string
+        - name: Attributes.1.value
+          in: query
+          type: string
+        - name: Attributes.2.key
+          in: query
+          type: string
+        - name: Attributes.2.value
+          in: query
+          type: string
+        - name: ReturnSubscriptionArn
+          in: query
+          required: false
+          description: '<p>Sets whether the response from the <code>Subscribe</code> request includes the subscription ARN, even if the subscription is not yet confirmed.</p> <p>If you set this parameter to <code>false</code>, the response includes the ARN for confirmed subscriptions, but it includes an ARN value of "pending subscription" for subscriptions that are not yet confirmed. A subscription becomes confirmed when the subscriber calls the <code>ConfirmSubscription</code> action with a confirmation token.</p> <p>If you set this parameter to <code>true</code>, the response includes the ARN in all cases, even if the subscription is not yet confirmed.</p> <p>The default value is <code>false</code>.</p>'
+          type: boolean
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - Subscribe
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1341,7 +1752,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Unsubscribe':
+  '/#Action=Unsubscribe':
     post:
       operationId: Unsubscribe
       description: '<p>Deletes a subscription. If the subscription requires authentication for deletion, only the owner of the subscription or the topic''s owner can unsubscribe, and an AWS signature is required. If the <code>Unsubscribe</code> call does not require authentication and the requester is not the subscription owner, a final cancellation message is delivered to the endpoint, so that the endpoint owner can easily resubscribe to the topic if the <code>Unsubscribe</code> request was unintended.</p> <p>This action is throttled at 100 transactions per second (TPS).</p>'
@@ -1369,11 +1780,17 @@ paths:
           schema:
             $ref: '#/definitions/InvalidSecurityException'
       parameters:
-        - name: body
-          in: body
+        - name: SubscriptionArn
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/UnsubscribeInput'
+          description: The ARN of the subscription to be deleted.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - Unsubscribe
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1385,6 +1802,211 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
+  delegate:
+    type: string
+  action:
+    type: string
+  InvalidParameterException: {}
+  InternalErrorException: {}
+  AuthorizationErrorException: {}
+  NotFoundException: {}
+  CheckIfPhoneNumberIsOptedOutResponse:
+    type: object
+    properties:
+      isOptedOut:
+        $ref: '#/definitions/boolean'
+        description: '<p>Indicates whether the phone number is opted out:</p> <ul> <li> <p> <code>true</code> – The phone number is opted out, meaning you cannot publish SMS messages to it.</p> </li> <li> <p> <code>false</code> – The phone number is opted in, meaning you can publish SMS messages to it.</p> </li> </ul>'
+    description: The response from the <code>CheckIfPhoneNumberIsOptedOut</code> action.
+  ThrottledException: {}
+  ConfirmSubscriptionResponse:
+    type: object
+    properties:
+      SubscriptionArn:
+        $ref: '#/definitions/subscriptionARN'
+        description: The ARN of the created subscription.
+    description: Response for ConfirmSubscriptions action.
+  SubscriptionLimitExceededException: {}
+  CreatePlatformApplicationResponse:
+    type: object
+    properties:
+      PlatformApplicationArn:
+        $ref: '#/definitions/String'
+        description: PlatformApplicationArn is returned.
+    description: Response from CreatePlatformApplication action.
+  String:
+    type: string
+  CreateEndpointResponse:
+    type: object
+    properties:
+      EndpointArn:
+        $ref: '#/definitions/String'
+        description: EndpointArn returned from CreateEndpoint action.
+    description: Response from CreateEndpoint action.
+  CreateTopicResponse:
+    type: object
+    properties:
+      TopicArn:
+        $ref: '#/definitions/topicARN'
+        description: The Amazon Resource Name (ARN) assigned to the created topic.
+    description: Response from CreateTopic action.
+  attributeValue:
+    type: string
+  TopicLimitExceededException: {}
+  InvalidSecurityException: {}
+  GetEndpointAttributesResponse:
+    type: object
+    properties:
+      Attributes:
+        $ref: '#/definitions/MapStringToString'
+        description: '<p>Attributes include the following:</p> <ul> <li> <p> <code>CustomUserData</code> – arbitrary user data to associate with the endpoint. Amazon SNS does not use this data. The data must be in UTF-8 format and less than 2KB.</p> </li> <li> <p> <code>Enabled</code> – flag that enables/disables delivery to the endpoint. Amazon SNS will set this to false when a notification service indicates to Amazon SNS that the endpoint is invalid. Users can set it back to true, typically after updating Token.</p> </li> <li> <p> <code>Token</code> – device token, also referred to as a registration id, for an app and mobile device. This is returned from the notification service when an app and mobile device are registered with the notification service.</p> </li> </ul>'
+    description: Response from GetEndpointAttributes of the EndpointArn.
+  GetPlatformApplicationAttributesResponse:
+    type: object
+    properties:
+      Attributes:
+        $ref: '#/definitions/MapStringToString'
+        description: '<p>Attributes include the following:</p> <ul> <li> <p> <code>EventEndpointCreated</code> – Topic ARN to which EndpointCreated event notifications should be sent.</p> </li> <li> <p> <code>EventEndpointDeleted</code> – Topic ARN to which EndpointDeleted event notifications should be sent.</p> </li> <li> <p> <code>EventEndpointUpdated</code> – Topic ARN to which EndpointUpdate event notifications should be sent.</p> </li> <li> <p> <code>EventDeliveryFailure</code> – Topic ARN to which DeliveryFailure event notifications should be sent upon Direct Publish delivery failure (permanent) to one of the application''s endpoints.</p> </li> </ul>'
+    description: Response for GetPlatformApplicationAttributes action.
+  GetSMSAttributesResponse:
+    type: object
+    properties:
+      attributes:
+        $ref: '#/definitions/MapStringToString'
+        description: The SMS attribute names and their values.
+    description: The response from the <code>GetSMSAttributes</code> request.
+  GetSubscriptionAttributesResponse:
+    type: object
+    properties:
+      Attributes:
+        $ref: '#/definitions/SubscriptionAttributesMap'
+        description: '<p>A map of the subscription''s attributes. Attributes in this map include the following:</p> <ul> <li> <p> <code>ConfirmationWasAuthenticated</code> – <code>true</code> if the subscription confirmation request was authenticated.</p> </li> <li> <p> <code>DeliveryPolicy</code> – The JSON serialization of the subscription''s delivery policy.</p> </li> <li> <p> <code>EffectiveDeliveryPolicy</code> – The JSON serialization of the effective delivery policy that takes into account the topic delivery policy and account system defaults.</p> </li> <li> <p> <code>FilterPolicy</code> – The filter policy JSON that is assigned to the subscription.</p> </li> <li> <p> <code>Owner</code> – The AWS account ID of the subscription''s owner.</p> </li> <li> <p> <code>PendingConfirmation</code> – <code>true</code> if the subscription hasn''t been confirmed. To confirm a pending subscription, call the <code>ConfirmSubscription</code> action with a confirmation token.</p> </li> <li> <p> <code>RawMessageDelivery</code> – <code>true</code> if raw message delivery is enabled for the subscription. Raw messages are free of JSON formatting and can be sent to HTTP/S and Amazon SQS endpoints.</p> </li> <li> <p> <code>SubscriptionArn</code> – The subscription''s ARN.</p> </li> <li> <p> <code>TopicArn</code> – The topic ARN that the subscription is associated with.</p> </li> </ul>'
+    description: Response for GetSubscriptionAttributes action.
+  GetTopicAttributesResponse:
+    type: object
+    properties:
+      Attributes:
+        $ref: '#/definitions/TopicAttributesMap'
+        description: '<p>A map of the topic''s attributes. Attributes in this map include the following:</p> <ul> <li> <p> <code>TopicArn</code> – the topic''s ARN</p> </li> <li> <p> <code>Owner</code> – the AWS account ID of the topic''s owner</p> </li> <li> <p> <code>Policy</code> – the JSON serialization of the topic''s access control policy</p> </li> <li> <p> <code>DisplayName</code> – the human-readable name used in the "From" field for notifications to email and email-json endpoints</p> </li> <li> <p> <code>SubscriptionsPending</code> – the number of subscriptions pending confirmation on this topic</p> </li> <li> <p> <code>SubscriptionsConfirmed</code> – the number of confirmed subscriptions on this topic</p> </li> <li> <p> <code>SubscriptionsDeleted</code> – the number of deleted subscriptions on this topic</p> </li> <li> <p> <code>DeliveryPolicy</code> – the JSON serialization of the topic''s delivery policy</p> </li> <li> <p> <code>EffectiveDeliveryPolicy</code> – the JSON serialization of the effective delivery policy that takes into account system defaults</p> </li> </ul>'
+    description: Response for GetTopicAttributes action.
+  ListEndpointsByPlatformApplicationResponse:
+    type: object
+    properties:
+      Endpoints:
+        $ref: '#/definitions/ListOfEndpoints'
+        description: Endpoints returned for ListEndpointsByPlatformApplication action.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: NextToken string is returned when calling ListEndpointsByPlatformApplication action if additional records are available after the first page results.
+    description: Response for ListEndpointsByPlatformApplication action.
+  ListPhoneNumbersOptedOutResponse:
+    type: object
+    properties:
+      phoneNumbers:
+        $ref: '#/definitions/PhoneNumberList'
+        description: 'A list of phone numbers that are opted out of receiving SMS messages. The list is paginated, and each page can contain up to 100 phone numbers.'
+      nextToken:
+        $ref: '#/definitions/string'
+        description: A <code>NextToken</code> string is returned when you call the <code>ListPhoneNumbersOptedOut</code> action if additional records are available after the first page of results.
+    description: The response from the <code>ListPhoneNumbersOptedOut</code> action.
+  ListPlatformApplicationsResponse:
+    type: object
+    properties:
+      PlatformApplications:
+        $ref: '#/definitions/ListOfPlatformApplications'
+        description: Platform applications returned when calling ListPlatformApplications action.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: NextToken string is returned when calling ListPlatformApplications action if additional records are available after the first page results.
+    description: Response for ListPlatformApplications action.
+  ListSubscriptionsResponse:
+    type: object
+    properties:
+      Subscriptions:
+        $ref: '#/definitions/SubscriptionsList'
+        description: A list of subscriptions.
+      NextToken:
+        $ref: '#/definitions/nextToken'
+        description: Token to pass along to the next <code>ListSubscriptions</code> request. This element is returned if there are more subscriptions to retrieve.
+    description: Response for ListSubscriptions action
+  ListSubscriptionsByTopicResponse:
+    type: object
+    properties:
+      Subscriptions:
+        $ref: '#/definitions/SubscriptionsList'
+        description: A list of subscriptions.
+      NextToken:
+        $ref: '#/definitions/nextToken'
+        description: Token to pass along to the next <code>ListSubscriptionsByTopic</code> request. This element is returned if there are more subscriptions to retrieve.
+    description: Response for ListSubscriptionsByTopic action.
+  ListTopicsResponse:
+    type: object
+    properties:
+      Topics:
+        $ref: '#/definitions/TopicsList'
+        description: A list of topic ARNs.
+      NextToken:
+        $ref: '#/definitions/nextToken'
+        description: Token to pass along to the next <code>ListTopics</code> request. This element is returned if there are additional topics to retrieve.
+    description: Response for ListTopics action.
+  OptInPhoneNumberResponse:
+    type: object
+    properties: {}
+    description: The response for the OptInPhoneNumber action.
+  PublishResponse:
+    type: object
+    properties:
+      MessageId:
+        $ref: '#/definitions/messageId'
+        description: '<p>Unique identifier assigned to the published message.</p> <p>Length Constraint: Maximum 100 characters</p>'
+    description: Response for Publish action.
+  MessageAttributeValue:
+    type: object
+    required:
+      - DataType
+    properties:
+      DataType:
+        $ref: '#/definitions/String'
+        description: 'Amazon SNS supports the following logical data types: String, String.Array, Number, and Binary. For more information, see <a href="http://docs.aws.amazon.com/sns/latest/dg/SNSMessageAttributes.html#SNSMessageAttributes.DataTypes">Message Attribute Data Types</a>.'
+      StringValue:
+        $ref: '#/definitions/String'
+        description: 'Strings are Unicode with UTF8 binary encoding. For a list of code values, see <a href="http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters">http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters</a>.'
+      BinaryValue:
+        $ref: '#/definitions/Binary'
+        description: 'Binary type attributes can store any binary data, for example, compressed data, encrypted data, or images.'
+    description: '<p>The user-specified message attribute value. For string data types, the value attribute has the same restrictions on the content as the message body. For more information, see <a href="http://docs.aws.amazon.com/sns/latest/api/API_Publish.html">Publish</a>.</p> <p>Name, type, and value must not be empty or null. In addition, the message body should not be empty or null. All parts of the message attribute, including name, type, and value, are included in the message size restriction, which is currently 256 KB (262,144 bytes). For more information, see <a href="http://docs.aws.amazon.com/sns/latest/dg/SNSMessageAttributes.html">Using Amazon SNS Message Attributes</a>.</p>'
+  InvalidParameterValueException: {}
+  EndpointDisabledException: {}
+  PlatformApplicationDisabledException: {}
+  KMSDisabledException: {}
+  KMSInvalidStateException: {}
+  KMSNotFoundException: {}
+  KMSOptInRequired: {}
+  KMSThrottlingException: {}
+  KMSAccessDeniedException: {}
+  SetSMSAttributesResponse:
+    type: object
+    properties: {}
+    description: The response for the SetSMSAttributes action.
+  FilterPolicyLimitExceededException: {}
+  SubscribeResponse:
+    type: object
+    properties:
+      SubscriptionArn:
+        $ref: '#/definitions/subscriptionARN'
+        description: 'The ARN of the subscription if it is confirmed, or the string "pending confirmation" if the subscription requires confirmation. However, if the API request parameter <code>ReturnSubscriptionArn</code> is true, then the value is always the subscription ARN, even if the subscription requires confirmation.'
+    description: Response for Subscribe action.
+  ActionsList:
+    type: array
+    items:
+      $ref: '#/definitions/action'
+  topicARN:
+    type: string
+  label:
+    type: string
+  DelegatesList:
+    type: array
+    items:
+      $ref: '#/definitions/delegate'
   AddPermissionInput:
     type: object
     required:
@@ -1405,17 +2027,10 @@ definitions:
       ActionName:
         $ref: '#/definitions/ActionsList'
         description: '<p>The action you want to allow for the specified principal(s).</p> <p>Valid values: any Amazon SNS action name.</p>'
-  InvalidParameterException: {}
-  InternalErrorException: {}
-  AuthorizationErrorException: {}
-  NotFoundException: {}
-  CheckIfPhoneNumberIsOptedOutResponse:
-    type: object
-    properties:
-      isOptedOut:
-        $ref: '#/definitions/boolean'
-        description: '<p>Indicates whether the phone number is opted out:</p> <ul> <li> <p> <code>true</code> – The phone number is opted out, meaning you cannot publish SMS messages to it.</p> </li> <li> <p> <code>false</code> – The phone number is opted in, meaning you can publish SMS messages to it.</p> </li> </ul>'
-    description: The response from the <code>CheckIfPhoneNumberIsOptedOut</code> action.
+  Binary:
+    type: string
+  PhoneNumber:
+    type: string
   CheckIfPhoneNumberIsOptedOutInput:
     type: object
     required:
@@ -1425,14 +2040,12 @@ definitions:
         $ref: '#/definitions/PhoneNumber'
         description: The phone number for which you want to check the opt out status.
     description: The input for the <code>CheckIfPhoneNumberIsOptedOut</code> action.
-  ThrottledException: {}
-  ConfirmSubscriptionResponse:
-    type: object
-    properties:
-      SubscriptionArn:
-        $ref: '#/definitions/subscriptionARN'
-        description: The ARN of the created subscription.
-    description: Response for ConfirmSubscriptions action.
+  boolean:
+    type: boolean
+  token:
+    type: string
+  authenticateOnUnsubscribe:
+    type: string
   ConfirmSubscriptionInput:
     type: object
     required:
@@ -1449,14 +2062,12 @@ definitions:
         $ref: '#/definitions/authenticateOnUnsubscribe'
         description: 'Disallows unauthenticated unsubscribes of the subscription. If the value of this parameter is <code>true</code> and the request has an AWS signature, then only the topic owner and the subscription owner can unsubscribe the endpoint. The unsubscribe action requires AWS authentication. '
     description: Input for ConfirmSubscription action.
-  SubscriptionLimitExceededException: {}
-  CreatePlatformApplicationResponse:
+  subscriptionARN:
+    type: string
+  MapStringToString:
     type: object
-    properties:
-      PlatformApplicationArn:
-        $ref: '#/definitions/String'
-        description: PlatformApplicationArn is returned.
-    description: Response from CreatePlatformApplication action.
+    additionalProperties:
+      $ref: '#/definitions/String'
   CreatePlatformApplicationInput:
     type: object
     required:
@@ -1474,13 +2085,6 @@ definitions:
         $ref: '#/definitions/MapStringToString'
         description: 'For a list of attributes, see <a href="http://docs.aws.amazon.com/sns/latest/api/API_SetPlatformApplicationAttributes.html">SetPlatformApplicationAttributes</a> '
     description: Input for CreatePlatformApplication action.
-  CreateEndpointResponse:
-    type: object
-    properties:
-      EndpointArn:
-        $ref: '#/definitions/String'
-        description: EndpointArn returned from CreateEndpoint action.
-    description: Response from CreateEndpoint action.
   CreatePlatformEndpointInput:
     type: object
     required:
@@ -1500,13 +2104,12 @@ definitions:
         $ref: '#/definitions/MapStringToString'
         description: 'For a list of attributes, see <a href="http://docs.aws.amazon.com/sns/latest/api/API_SetEndpointAttributes.html">SetEndpointAttributes</a>.'
     description: Input for CreatePlatformEndpoint action.
-  CreateTopicResponse:
+  topicName:
+    type: string
+  TopicAttributesMap:
     type: object
-    properties:
-      TopicArn:
-        $ref: '#/definitions/topicARN'
-        description: The Amazon Resource Name (ARN) assigned to the created topic.
-    description: Response from CreateTopic action.
+    additionalProperties:
+      $ref: '#/definitions/attributeValue'
   CreateTopicInput:
     type: object
     required:
@@ -1519,8 +2122,6 @@ definitions:
         $ref: '#/definitions/TopicAttributesMap'
         description: '<p>A map of attributes with their corresponding values.</p> <p>The following lists the names, descriptions, and values of the special request parameters that the <code>CreateTopic</code> action uses:</p> <ul> <li> <p> <code>DeliveryPolicy</code> – The policy that defines how Amazon SNS retries failed deliveries to HTTP/S endpoints.</p> </li> <li> <p> <code>DisplayName</code> – The display name to use for a topic with SMS subscriptions.</p> </li> <li> <p> <code>Policy</code> – The policy that defines who can access your topic. By default, only the topic owner can publish or subscribe to the topic.</p> </li> </ul>'
     description: Input for CreateTopic action.
-  TopicLimitExceededException: {}
-  InvalidSecurityException: {}
   DeleteEndpointInput:
     type: object
     required:
@@ -1547,13 +2148,16 @@ definitions:
       TopicArn:
         $ref: '#/definitions/topicARN'
         description: The ARN of the topic you want to delete.
-  GetEndpointAttributesResponse:
+  Endpoint:
     type: object
     properties:
+      EndpointArn:
+        $ref: '#/definitions/String'
+        description: EndpointArn for mobile app and device.
       Attributes:
         $ref: '#/definitions/MapStringToString'
-        description: '<p>Attributes include the following:</p> <ul> <li> <p> <code>CustomUserData</code> – arbitrary user data to associate with the endpoint. Amazon SNS does not use this data. The data must be in UTF-8 format and less than 2KB.</p> </li> <li> <p> <code>Enabled</code> – flag that enables/disables delivery to the endpoint. Amazon SNS will set this to false when a notification service indicates to Amazon SNS that the endpoint is invalid. Users can set it back to true, typically after updating Token.</p> </li> <li> <p> <code>Token</code> – device token, also referred to as a registration id, for an app and mobile device. This is returned from the notification service when an app and mobile device are registered with the notification service.</p> </li> </ul>'
-    description: Response from GetEndpointAttributes of the EndpointArn.
+        description: Attributes for endpoint.
+    description: Endpoint for mobile app and device.
   GetEndpointAttributesInput:
     type: object
     required:
@@ -1563,13 +2167,6 @@ definitions:
         $ref: '#/definitions/String'
         description: EndpointArn for GetEndpointAttributes input.
     description: Input for GetEndpointAttributes action.
-  GetPlatformApplicationAttributesResponse:
-    type: object
-    properties:
-      Attributes:
-        $ref: '#/definitions/MapStringToString'
-        description: '<p>Attributes include the following:</p> <ul> <li> <p> <code>EventEndpointCreated</code> – Topic ARN to which EndpointCreated event notifications should be sent.</p> </li> <li> <p> <code>EventEndpointDeleted</code> – Topic ARN to which EndpointDeleted event notifications should be sent.</p> </li> <li> <p> <code>EventEndpointUpdated</code> – Topic ARN to which EndpointUpdate event notifications should be sent.</p> </li> <li> <p> <code>EventDeliveryFailure</code> – Topic ARN to which DeliveryFailure event notifications should be sent upon Direct Publish delivery failure (permanent) to one of the application''s endpoints.</p> </li> </ul>'
-    description: Response for GetPlatformApplicationAttributes action.
   GetPlatformApplicationAttributesInput:
     type: object
     required:
@@ -1579,13 +2176,10 @@ definitions:
         $ref: '#/definitions/String'
         description: PlatformApplicationArn for GetPlatformApplicationAttributesInput.
     description: Input for GetPlatformApplicationAttributes action.
-  GetSMSAttributesResponse:
-    type: object
-    properties:
-      attributes:
-        $ref: '#/definitions/MapStringToString'
-        description: The SMS attribute names and their values.
-    description: The response from the <code>GetSMSAttributes</code> request.
+  ListString:
+    type: array
+    items:
+      $ref: '#/definitions/String'
   GetSMSAttributesInput:
     type: object
     properties:
@@ -1593,13 +2187,6 @@ definitions:
         $ref: '#/definitions/ListString'
         description: '<p>A list of the individual attribute names, such as <code>MonthlySpendLimit</code>, for which you want values.</p> <p>For all attribute names, see <a href="http://docs.aws.amazon.com/sns/latest/api/API_SetSMSAttributes.html">SetSMSAttributes</a>.</p> <p>If you don''t use this parameter, Amazon SNS returns all SMS attributes.</p>'
     description: The input for the <code>GetSMSAttributes</code> request.
-  GetSubscriptionAttributesResponse:
-    type: object
-    properties:
-      Attributes:
-        $ref: '#/definitions/SubscriptionAttributesMap'
-        description: '<p>A map of the subscription''s attributes. Attributes in this map include the following:</p> <ul> <li> <p> <code>ConfirmationWasAuthenticated</code> – <code>true</code> if the subscription confirmation request was authenticated.</p> </li> <li> <p> <code>DeliveryPolicy</code> – The JSON serialization of the subscription''s delivery policy.</p> </li> <li> <p> <code>EffectiveDeliveryPolicy</code> – The JSON serialization of the effective delivery policy that takes into account the topic delivery policy and account system defaults.</p> </li> <li> <p> <code>FilterPolicy</code> – The filter policy JSON that is assigned to the subscription.</p> </li> <li> <p> <code>Owner</code> – The AWS account ID of the subscription''s owner.</p> </li> <li> <p> <code>PendingConfirmation</code> – <code>true</code> if the subscription hasn''t been confirmed. To confirm a pending subscription, call the <code>ConfirmSubscription</code> action with a confirmation token.</p> </li> <li> <p> <code>RawMessageDelivery</code> – <code>true</code> if raw message delivery is enabled for the subscription. Raw messages are free of JSON formatting and can be sent to HTTP/S and Amazon SQS endpoints.</p> </li> <li> <p> <code>SubscriptionArn</code> – The subscription''s ARN.</p> </li> <li> <p> <code>TopicArn</code> – The topic ARN that the subscription is associated with.</p> </li> </ul>'
-    description: Response for GetSubscriptionAttributes action.
   GetSubscriptionAttributesInput:
     type: object
     required:
@@ -1609,13 +2196,10 @@ definitions:
         $ref: '#/definitions/subscriptionARN'
         description: The ARN of the subscription whose properties you want to get.
     description: Input for GetSubscriptionAttributes.
-  GetTopicAttributesResponse:
+  SubscriptionAttributesMap:
     type: object
-    properties:
-      Attributes:
-        $ref: '#/definitions/TopicAttributesMap'
-        description: '<p>A map of the topic''s attributes. Attributes in this map include the following:</p> <ul> <li> <p> <code>TopicArn</code> – the topic''s ARN</p> </li> <li> <p> <code>Owner</code> – the AWS account ID of the topic''s owner</p> </li> <li> <p> <code>Policy</code> – the JSON serialization of the topic''s access control policy</p> </li> <li> <p> <code>DisplayName</code> – the human-readable name used in the "From" field for notifications to email and email-json endpoints</p> </li> <li> <p> <code>SubscriptionsPending</code> – the number of subscriptions pending confirmation on this topic</p> </li> <li> <p> <code>SubscriptionsConfirmed</code> – the number of confirmed subscriptions on this topic</p> </li> <li> <p> <code>SubscriptionsDeleted</code> – the number of deleted subscriptions on this topic</p> </li> <li> <p> <code>DeliveryPolicy</code> – the JSON serialization of the topic''s delivery policy</p> </li> <li> <p> <code>EffectiveDeliveryPolicy</code> – the JSON serialization of the effective delivery policy that takes into account system defaults</p> </li> </ul>'
-    description: Response for GetTopicAttributes action.
+    additionalProperties:
+      $ref: '#/definitions/attributeValue'
   GetTopicAttributesInput:
     type: object
     required:
@@ -1625,16 +2209,6 @@ definitions:
         $ref: '#/definitions/topicARN'
         description: The ARN of the topic whose properties you want to get.
     description: Input for GetTopicAttributes action.
-  ListEndpointsByPlatformApplicationResponse:
-    type: object
-    properties:
-      Endpoints:
-        $ref: '#/definitions/ListOfEndpoints'
-        description: Endpoints returned for ListEndpointsByPlatformApplication action.
-      NextToken:
-        $ref: '#/definitions/String'
-        description: NextToken string is returned when calling ListEndpointsByPlatformApplication action if additional records are available after the first page results.
-    description: Response for ListEndpointsByPlatformApplication action.
   ListEndpointsByPlatformApplicationInput:
     type: object
     required:
@@ -1647,16 +2221,26 @@ definitions:
         $ref: '#/definitions/String'
         description: NextToken string is used when calling ListEndpointsByPlatformApplication action to retrieve additional records that are available after the first page results.
     description: Input for ListEndpointsByPlatformApplication action.
-  ListPhoneNumbersOptedOutResponse:
+  ListOfEndpoints:
+    type: array
+    items:
+      $ref: '#/definitions/Endpoint'
+  PlatformApplication:
     type: object
     properties:
-      phoneNumbers:
-        $ref: '#/definitions/PhoneNumberList'
-        description: 'A list of phone numbers that are opted out of receiving SMS messages. The list is paginated, and each page can contain up to 100 phone numbers.'
-      nextToken:
-        $ref: '#/definitions/string'
-        description: A <code>NextToken</code> string is returned when you call the <code>ListPhoneNumbersOptedOut</code> action if additional records are available after the first page of results.
-    description: The response from the <code>ListPhoneNumbersOptedOut</code> action.
+      PlatformApplicationArn:
+        $ref: '#/definitions/String'
+        description: PlatformApplicationArn for platform application object.
+      Attributes:
+        $ref: '#/definitions/MapStringToString'
+        description: Attributes for platform application object.
+    description: Platform application object.
+  ListOfPlatformApplications:
+    type: array
+    items:
+      $ref: '#/definitions/PlatformApplication'
+  string:
+    type: string
   ListPhoneNumbersOptedOutInput:
     type: object
     properties:
@@ -1664,16 +2248,10 @@ definitions:
         $ref: '#/definitions/string'
         description: A <code>NextToken</code> string is used when you call the <code>ListPhoneNumbersOptedOut</code> action to retrieve additional records that are available after the first page of results.
     description: The input for the <code>ListPhoneNumbersOptedOut</code> action.
-  ListPlatformApplicationsResponse:
-    type: object
-    properties:
-      PlatformApplications:
-        $ref: '#/definitions/ListOfPlatformApplications'
-        description: Platform applications returned when calling ListPlatformApplications action.
-      NextToken:
-        $ref: '#/definitions/String'
-        description: NextToken string is returned when calling ListPlatformApplications action if additional records are available after the first page results.
-    description: Response for ListPlatformApplications action.
+  PhoneNumberList:
+    type: array
+    items:
+      $ref: '#/definitions/PhoneNumber'
   ListPlatformApplicationsInput:
     type: object
     properties:
@@ -1681,33 +2259,8 @@ definitions:
         $ref: '#/definitions/String'
         description: NextToken string is used when calling ListPlatformApplications action to retrieve additional records that are available after the first page results.
     description: Input for ListPlatformApplications action.
-  ListSubscriptionsResponse:
-    type: object
-    properties:
-      Subscriptions:
-        $ref: '#/definitions/SubscriptionsList'
-        description: A list of subscriptions.
-      NextToken:
-        $ref: '#/definitions/nextToken'
-        description: Token to pass along to the next <code>ListSubscriptions</code> request. This element is returned if there are more subscriptions to retrieve.
-    description: Response for ListSubscriptions action
-  ListSubscriptionsInput:
-    type: object
-    properties:
-      NextToken:
-        $ref: '#/definitions/nextToken'
-        description: Token returned by the previous <code>ListSubscriptions</code> request.
-    description: Input for ListSubscriptions action.
-  ListSubscriptionsByTopicResponse:
-    type: object
-    properties:
-      Subscriptions:
-        $ref: '#/definitions/SubscriptionsList'
-        description: A list of subscriptions.
-      NextToken:
-        $ref: '#/definitions/nextToken'
-        description: Token to pass along to the next <code>ListSubscriptionsByTopic</code> request. This element is returned if there are more subscriptions to retrieve.
-    description: Response for ListSubscriptionsByTopic action.
+  nextToken:
+    type: string
   ListSubscriptionsByTopicInput:
     type: object
     required:
@@ -1720,26 +2273,31 @@ definitions:
         $ref: '#/definitions/nextToken'
         description: Token returned by the previous <code>ListSubscriptionsByTopic</code> request.
     description: Input for ListSubscriptionsByTopic action.
-  ListTopicsResponse:
+  SubscriptionsList:
+    type: array
+    items:
+      $ref: '#/definitions/Subscription'
+  ListSubscriptionsInput:
     type: object
     properties:
-      Topics:
-        $ref: '#/definitions/TopicsList'
-        description: A list of topic ARNs.
       NextToken:
         $ref: '#/definitions/nextToken'
-        description: Token to pass along to the next <code>ListTopics</code> request. This element is returned if there are additional topics to retrieve.
-    description: Response for ListTopics action.
+        description: Token returned by the previous <code>ListSubscriptions</code> request.
+    description: Input for ListSubscriptions action.
   ListTopicsInput:
     type: object
     properties:
       NextToken:
         $ref: '#/definitions/nextToken'
         description: Token returned by the previous <code>ListTopics</code> request.
-  OptInPhoneNumberResponse:
+  TopicsList:
+    type: array
+    items:
+      $ref: '#/definitions/Topic'
+  MessageAttributeMap:
     type: object
-    properties: {}
-    description: The response for the OptInPhoneNumber action.
+    additionalProperties:
+      $ref: '#/definitions/MessageAttributeValue'
   OptInPhoneNumberInput:
     type: object
     required:
@@ -1749,13 +2307,12 @@ definitions:
         $ref: '#/definitions/PhoneNumber'
         description: The phone number to opt in.
     description: Input for the OptInPhoneNumber action.
-  PublishResponse:
-    type: object
-    properties:
-      MessageId:
-        $ref: '#/definitions/messageId'
-        description: '<p>Unique identifier assigned to the published message.</p> <p>Length Constraint: Maximum 100 characters</p>'
-    description: Response for Publish action.
+  message:
+    type: string
+  subject:
+    type: string
+  messageStructure:
+    type: string
   PublishInput:
     type: object
     required:
@@ -1783,15 +2340,8 @@ definitions:
         $ref: '#/definitions/MessageAttributeMap'
         description: Message attributes for Publish action.
     description: Input for Publish action.
-  InvalidParameterValueException: {}
-  EndpointDisabledException: {}
-  PlatformApplicationDisabledException: {}
-  KMSDisabledException: {}
-  KMSInvalidStateException: {}
-  KMSNotFoundException: {}
-  KMSOptInRequired: {}
-  KMSThrottlingException: {}
-  KMSAccessDeniedException: {}
+  messageId:
+    type: string
   RemovePermissionInput:
     type: object
     required:
@@ -1831,10 +2381,6 @@ definitions:
         $ref: '#/definitions/MapStringToString'
         description: '<p>A map of the platform application attributes. Attributes in this map include the following:</p> <ul> <li> <p> <code>PlatformCredential</code> – The credential received from the notification service. For APNS/APNS_SANDBOX, PlatformCredential is private key. For GCM, PlatformCredential is "API key". For ADM, PlatformCredential is "client secret".</p> </li> <li> <p> <code>PlatformPrincipal</code> – The principal received from the notification service. For APNS/APNS_SANDBOX, PlatformPrincipal is SSL certificate. For GCM, PlatformPrincipal is not applicable. For ADM, PlatformPrincipal is "client id".</p> </li> <li> <p> <code>EventEndpointCreated</code> – Topic ARN to which EndpointCreated event notifications should be sent.</p> </li> <li> <p> <code>EventEndpointDeleted</code> – Topic ARN to which EndpointDeleted event notifications should be sent.</p> </li> <li> <p> <code>EventEndpointUpdated</code> – Topic ARN to which EndpointUpdate event notifications should be sent.</p> </li> <li> <p> <code>EventDeliveryFailure</code> – Topic ARN to which DeliveryFailure event notifications should be sent upon Direct Publish delivery failure (permanent) to one of the application''s endpoints.</p> </li> <li> <p> <code>SuccessFeedbackRoleArn</code> – IAM role ARN used to give Amazon SNS write access to use CloudWatch Logs on your behalf.</p> </li> <li> <p> <code>FailureFeedbackRoleArn</code> – IAM role ARN used to give Amazon SNS write access to use CloudWatch Logs on your behalf.</p> </li> <li> <p> <code>SuccessFeedbackSampleRate</code> – Sample rate percentage (0-100) of successfully delivered messages.</p> </li> </ul>'
     description: Input for SetPlatformApplicationAttributes action.
-  SetSMSAttributesResponse:
-    type: object
-    properties: {}
-    description: The response for the SetSMSAttributes action.
   SetSMSAttributesInput:
     type: object
     required:
@@ -1844,6 +2390,8 @@ definitions:
         $ref: '#/definitions/MapStringToString'
         description: '<p>The default settings for sending SMS messages from your account. You can set values for the following attribute names:</p> <p> <code>MonthlySpendLimit</code> – The maximum amount in USD that you are willing to spend each month to send SMS messages. When Amazon SNS determines that sending an SMS message would incur a cost that exceeds this limit, it stops sending SMS messages within minutes.</p> <important> <p>Amazon SNS stops sending SMS messages within minutes of the limit being crossed. During that interval, if you continue to send SMS messages, you will incur costs that exceed your limit.</p> </important> <p>By default, the spend limit is set to the maximum allowed by Amazon SNS. If you want to raise the limit, submit an <a href="https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase&amp;limitType=service-code-sns">SNS Limit Increase case</a>. For <b>New limit value</b>, enter your desired monthly spend limit. In the <b>Use Case Description</b> field, explain that you are requesting an SMS monthly spend limit increase.</p> <p> <code>DeliveryStatusIAMRole</code> – The ARN of the IAM role that allows Amazon SNS to write logs about SMS deliveries in CloudWatch Logs. For each SMS message that you send, Amazon SNS writes a log that includes the message price, the success or failure status, the reason for failure (if the message failed), the message dwell time, and other information.</p> <p> <code>DeliveryStatusSuccessSamplingRate</code> – The percentage of successful SMS deliveries for which Amazon SNS will write logs in CloudWatch Logs. The value can be an integer from 0 - 100. For example, to write logs only for failed deliveries, set this value to <code>0</code>. To write logs for 10% of your successful deliveries, set it to <code>10</code>.</p> <p> <code>DefaultSenderID</code> – A string, such as your business brand, that is displayed as the sender on the receiving device. Support for sender IDs varies by country. The sender ID can be 1 - 11 alphanumeric characters, and it must contain at least one letter.</p> <p> <code>DefaultSMSType</code> – The type of SMS message that you will send by default. You can assign the following values:</p> <ul> <li> <p> <code>Promotional</code> – (Default) Noncritical messages, such as marketing messages. Amazon SNS optimizes the message delivery to incur the lowest cost.</p> </li> <li> <p> <code>Transactional</code> – Critical messages that support customer transactions, such as one-time passcodes for multi-factor authentication. Amazon SNS optimizes the message delivery to achieve the highest reliability.</p> </li> </ul> <p> <code>UsageReportS3Bucket</code> – The name of the Amazon S3 bucket to receive daily SMS usage reports from Amazon SNS. Each day, Amazon SNS will deliver a usage report as a CSV file to the bucket. The report includes the following information for each SMS message that was successfully delivered by your account:</p> <ul> <li> <p>Time that the message was published (in UTC)</p> </li> <li> <p>Message ID</p> </li> <li> <p>Destination phone number</p> </li> <li> <p>Message type</p> </li> <li> <p>Delivery status</p> </li> <li> <p>Message price (in USD)</p> </li> <li> <p>Part number (a message is split into multiple parts if it is too long for a single message)</p> </li> <li> <p>Total number of parts</p> </li> </ul> <p>To receive the report, the bucket must have a policy that allows the Amazon SNS service principle to perform the <code>s3:PutObject</code> and <code>s3:GetBucketLocation</code> actions.</p> <p>For an example bucket policy and usage report, see <a href="http://docs.aws.amazon.com/sns/latest/dg/sms_stats.html">Monitoring SMS Activity</a> in the <i>Amazon SNS Developer Guide</i>.</p>'
     description: The input for the SetSMSAttributes action.
+  attributeName:
+    type: string
   SetSubscriptionAttributesInput:
     type: object
     required:
@@ -1860,7 +2408,6 @@ definitions:
         $ref: '#/definitions/attributeValue'
         description: The new value for the attribute in JSON format.
     description: Input for SetSubscriptionAttributes action.
-  FilterPolicyLimitExceededException: {}
   SetTopicAttributesInput:
     type: object
     required:
@@ -1877,13 +2424,10 @@ definitions:
         $ref: '#/definitions/attributeValue'
         description: The new value for the attribute.
     description: Input for SetTopicAttributes action.
-  SubscribeResponse:
-    type: object
-    properties:
-      SubscriptionArn:
-        $ref: '#/definitions/subscriptionARN'
-        description: 'The ARN of the subscription if it is confirmed, or the string "pending confirmation" if the subscription requires confirmation. However, if the API request parameter <code>ReturnSubscriptionArn</code> is true, then the value is always the subscription ARN, even if the subscription requires confirmation.'
-    description: Response for Subscribe action.
+  protocol:
+    type: string
+  endpoint:
+    type: string
   SubscribeInput:
     type: object
     required:
@@ -1906,162 +2450,6 @@ definitions:
         $ref: '#/definitions/boolean'
         description: '<p>Sets whether the response from the <code>Subscribe</code> request includes the subscription ARN, even if the subscription is not yet confirmed.</p> <p>If you set this parameter to <code>false</code>, the response includes the ARN for confirmed subscriptions, but it includes an ARN value of "pending subscription" for subscriptions that are not yet confirmed. A subscription becomes confirmed when the subscriber calls the <code>ConfirmSubscription</code> action with a confirmation token.</p> <p>If you set this parameter to <code>true</code>, the response includes the ARN in all cases, even if the subscription is not yet confirmed.</p> <p>The default value is <code>false</code>.</p>'
     description: Input for Subscribe action.
-  UnsubscribeInput:
-    type: object
-    required:
-      - SubscriptionArn
-    properties:
-      SubscriptionArn:
-        $ref: '#/definitions/subscriptionARN'
-        description: The ARN of the subscription to be deleted.
-    description: Input for Unsubscribe action.
-  action:
-    type: string
-  ActionsList:
-    type: array
-    items:
-      $ref: '#/definitions/action'
-  topicARN:
-    type: string
-  label:
-    type: string
-  DelegatesList:
-    type: array
-    items:
-      $ref: '#/definitions/delegate'
-  Binary:
-    type: string
-  PhoneNumber:
-    type: string
-  boolean:
-    type: boolean
-  token:
-    type: string
-  authenticateOnUnsubscribe:
-    type: string
-  subscriptionARN:
-    type: string
-  String:
-    type: string
-  MapStringToString:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/String'
-        value:
-          $ref: '#/definitions/String'
-  topicName:
-    type: string
-  TopicAttributesMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/attributeName'
-        value:
-          $ref: '#/definitions/attributeValue'
-  delegate:
-    type: string
-  Endpoint:
-    type: object
-    properties:
-      EndpointArn:
-        $ref: '#/definitions/String'
-        description: EndpointArn for mobile app and device.
-      Attributes:
-        $ref: '#/definitions/MapStringToString'
-        description: Attributes for endpoint.
-    description: Endpoint for mobile app and device.
-  ListString:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  SubscriptionAttributesMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/attributeName'
-        value:
-          $ref: '#/definitions/attributeValue'
-  ListOfEndpoints:
-    type: array
-    items:
-      $ref: '#/definitions/Endpoint'
-  PlatformApplication:
-    type: object
-    properties:
-      PlatformApplicationArn:
-        $ref: '#/definitions/String'
-        description: PlatformApplicationArn for platform application object.
-      Attributes:
-        $ref: '#/definitions/MapStringToString'
-        description: Attributes for platform application object.
-    description: Platform application object.
-  ListOfPlatformApplications:
-    type: array
-    items:
-      $ref: '#/definitions/PlatformApplication'
-  string:
-    type: string
-  PhoneNumberList:
-    type: array
-    items:
-      $ref: '#/definitions/PhoneNumber'
-  nextToken:
-    type: string
-  SubscriptionsList:
-    type: array
-    items:
-      $ref: '#/definitions/Subscription'
-  TopicsList:
-    type: array
-    items:
-      $ref: '#/definitions/Topic'
-  MessageAttributeValue:
-    type: object
-    required:
-      - DataType
-    properties:
-      DataType:
-        $ref: '#/definitions/String'
-        description: 'Amazon SNS supports the following logical data types: String, String.Array, Number, and Binary. For more information, see <a href="http://docs.aws.amazon.com/sns/latest/dg/SNSMessageAttributes.html#SNSMessageAttributes.DataTypes">Message Attribute Data Types</a>.'
-      StringValue:
-        $ref: '#/definitions/String'
-        description: 'Strings are Unicode with UTF8 binary encoding. For a list of code values, see <a href="http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters">http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters</a>.'
-      BinaryValue:
-        $ref: '#/definitions/Binary'
-        description: 'Binary type attributes can store any binary data, for example, compressed data, encrypted data, or images.'
-    description: '<p>The user-specified message attribute value. For string data types, the value attribute has the same restrictions on the content as the message body. For more information, see <a href="http://docs.aws.amazon.com/sns/latest/api/API_Publish.html">Publish</a>.</p> <p>Name, type, and value must not be empty or null. In addition, the message body should not be empty or null. All parts of the message attribute, including name, type, and value, are included in the message size restriction, which is currently 256 KB (262,144 bytes). For more information, see <a href="http://docs.aws.amazon.com/sns/latest/dg/SNSMessageAttributes.html">Using Amazon SNS Message Attributes</a>.</p>'
-  MessageAttributeMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/String'
-        value:
-          $ref: '#/definitions/MessageAttributeValue'
-  message:
-    type: string
-  subject:
-    type: string
-  messageStructure:
-    type: string
-  messageId:
-    type: string
-  attributeName:
-    type: string
-  attributeValue:
-    type: string
-  protocol:
-    type: string
-  endpoint:
-    type: string
   account:
     type: string
   Subscription:
@@ -2090,3 +2478,12 @@ definitions:
         $ref: '#/definitions/topicARN'
         description: The topic's ARN.
     description: 'A wrapper type for the topic''s Amazon Resource Name (ARN). To retrieve a topic''s attributes, use <code>GetTopicAttributes</code>.'
+  UnsubscribeInput:
+    type: object
+    required:
+      - SubscriptionArn
+    properties:
+      SubscriptionArn:
+        $ref: '#/definitions/subscriptionARN'
+        description: The ARN of the subscription to be deleted.
+    description: Input for Unsubscribe action.

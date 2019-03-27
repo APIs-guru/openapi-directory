@@ -122,15 +122,23 @@ paths:
           schema:
             $ref: '#/definitions/ForbiddenException'
       parameters:
+        - name: connectionId
+          in: path
+          required: true
+          description: The identifier of the connection that a specific client is using.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/PostToConnectionRequest'
-        - name: connectionId
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - Data
+            properties:
+              Data:
+                description: The data to be sent to the client specified by its connection id.
+                type: string
+                maxLength: 131072
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -142,14 +150,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  PostToConnectionRequest:
-    type: object
-    required:
-      - Data
-    properties:
-      Data:
-        $ref: '#/definitions/Data'
-        description: The data to be sent to the client specified by its connection id.
   GoneException: {}
   LimitExceededException: {}
   PayloadTooLargeException: {}
@@ -160,3 +160,11 @@ definitions:
     maxLength: 131072
   __string:
     type: string
+  PostToConnectionRequest:
+    type: object
+    required:
+      - Data
+    properties:
+      Data:
+        $ref: '#/definitions/Data'
+        description: The data to be sent to the client specified by its connection id.

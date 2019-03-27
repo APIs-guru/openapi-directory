@@ -137,7 +137,23 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateChannelRequest'
+            type: object
+            required:
+              - id
+            properties:
+              description:
+                description: A short text description of the Channel.
+                type: string
+              id:
+                description: |
+                  The ID of the Channel. The ID must be unique within the region and it
+                  cannot be changed after a Channel is created.
+                type: string
+              tags:
+                description: A collection of tags associated with a resource
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/__string'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -181,11 +197,18 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListChannelsRequest'
+        - name: maxResults
+          in: query
+          required: false
+          description: Upper bound on number of records to return.
+          type: integer
+          minimum: 1
+          maximum: 1000
+        - name: nextToken
+          in: query
+          required: false
+          description: A token used to resume pagination from the end of a previous request.
+          type: string
         - name: MaxResults
           type: string
           in: query
@@ -234,7 +257,170 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateOriginEndpointRequest'
+            type: object
+            required:
+              - channelId
+              - id
+            properties:
+              channelId:
+                description: |
+                  The ID of the Channel that the OriginEndpoint will be associated with.
+                  This cannot be changed after the OriginEndpoint is created.
+                type: string
+              cmafPackage:
+                description: A Common Media Application Format (CMAF) packaging configuration.
+                type: object
+                properties:
+                  Encryption:
+                    $ref: '#/definitions/CmafEncryption'
+                  HlsManifests:
+                    description: A list of HLS manifest configurations
+                    $ref: '#/definitions/__listOfHlsManifestCreateOrUpdateParameters'
+                  SegmentDurationSeconds:
+                    description: |
+                      Duration (in seconds) of each segment. Actual segments will be
+                      rounded to the nearest multiple of the source segment duration.
+                    $ref: '#/definitions/__integer'
+                  SegmentPrefix:
+                    description: 'An optional custom string that is prepended to the name of each segment. If not specified, it defaults to the ChannelId.'
+                    $ref: '#/definitions/__string'
+                  StreamSelection:
+                    $ref: '#/definitions/StreamSelection'
+              dashPackage:
+                description: A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
+                type: object
+                properties:
+                  Encryption:
+                    $ref: '#/definitions/DashEncryption'
+                  ManifestLayout:
+                    description: 'Determines the position of some tags in the Media Presentation Description (MPD).  When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation.  When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.'
+                    $ref: '#/definitions/ManifestLayout'
+                  ManifestWindowSeconds:
+                    description: Time window (in seconds) contained in each manifest.
+                    $ref: '#/definitions/__integer'
+                  MinBufferTimeSeconds:
+                    description: Minimum duration (in seconds) that a player will buffer media before starting the presentation.
+                    $ref: '#/definitions/__integer'
+                  MinUpdatePeriodSeconds:
+                    description: Minimum duration (in seconds) between potential changes to the Dynamic Adaptive Streaming over HTTP (DASH) Media Presentation Description (MPD).
+                    $ref: '#/definitions/__integer'
+                  PeriodTriggers:
+                    description: |
+                      A list of triggers that controls when the outgoing Dynamic Adaptive Streaming over HTTP (DASH)
+                      Media Presentation Description (MPD) will be partitioned into multiple periods. If empty, the content will not
+                      be partitioned into more than one period. If the list contains "ADS", new periods will be created where
+                      the Channel source contains SCTE-35 ad markers.
+                    $ref: '#/definitions/__listOf__PeriodTriggersElement'
+                  Profile:
+                    description: 'The Dynamic Adaptive Streaming over HTTP (DASH) profile type.  When set to "HBBTV_1_5", HbbTV 1.5 compliant output is enabled.'
+                    $ref: '#/definitions/Profile'
+                  SegmentDurationSeconds:
+                    description: |
+                      Duration (in seconds) of each segment. Actual segments will be
+                      rounded to the nearest multiple of the source segment duration.
+                    $ref: '#/definitions/__integer'
+                  SegmentTemplateFormat:
+                    description: 'Determines the type of SegmentTimeline included in the Media Presentation Description (MPD).  When set to NUMBER_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Number$ media URLs.  When set to TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Time$ media URLs.'
+                    $ref: '#/definitions/SegmentTemplateFormat'
+                  StreamSelection:
+                    $ref: '#/definitions/StreamSelection'
+                  SuggestedPresentationDelaySeconds:
+                    description: Duration (in seconds) to delay live content before presentation.
+                    $ref: '#/definitions/__integer'
+              description:
+                description: A short text description of the OriginEndpoint.
+                type: string
+              hlsPackage:
+                description: An HTTP Live Streaming (HLS) packaging configuration.
+                type: object
+                properties:
+                  AdMarkers:
+                    description: |
+                      This setting controls how ad markers are included in the packaged OriginEndpoint.
+                      "NONE" will omit all SCTE-35 ad markers from the output.
+                      "PASSTHROUGH" causes the manifest to contain a copy of the SCTE-35 ad
+                      markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest.
+                      "SCTE35_ENHANCED" generates ad markers and blackout tags based on SCTE-35
+                      messages in the input source.
+                    $ref: '#/definitions/AdMarkers'
+                  Encryption:
+                    $ref: '#/definitions/HlsEncryption'
+                  IncludeIframeOnlyStream:
+                    description: 'When enabled, an I-Frame only stream will be included in the output.'
+                    $ref: '#/definitions/__boolean'
+                  PlaylistType:
+                    description: |
+                      The HTTP Live Streaming (HLS) playlist type.
+                      When either "EVENT" or "VOD" is specified, a corresponding EXT-X-PLAYLIST-TYPE
+                      entry will be included in the media playlist.
+                    $ref: '#/definitions/PlaylistType'
+                  PlaylistWindowSeconds:
+                    description: Time window (in seconds) contained in each parent manifest.
+                    $ref: '#/definitions/__integer'
+                  ProgramDateTimeIntervalSeconds:
+                    description: |
+                      The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag
+                      inserted into manifests. Additionally, when an interval is specified
+                      ID3Timed Metadata messages will be generated every 5 seconds using the
+                      ingest time of the content.
+                      If the interval is not specified, or set to 0, then
+                      no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no
+                      ID3Timed Metadata messages will be generated. Note that irrespective
+                      of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input,
+                      it will be passed through to HLS output.
+                    $ref: '#/definitions/__integer'
+                  SegmentDurationSeconds:
+                    description: |
+                      Duration (in seconds) of each fragment. Actual fragments will be
+                      rounded to the nearest multiple of the source fragment duration.
+                    $ref: '#/definitions/__integer'
+                  StreamSelection:
+                    $ref: '#/definitions/StreamSelection'
+                  UseAudioRenditionGroup:
+                    description: 'When enabled, audio streams will be placed in rendition groups in the output.'
+                    $ref: '#/definitions/__boolean'
+              id:
+                description: |
+                  The ID of the OriginEndpoint.  The ID must be unique within the region
+                  and it cannot be changed after the OriginEndpoint is created.
+                type: string
+              manifestName:
+                description: A short string that will be used as the filename of the OriginEndpoint URL (defaults to "index").
+                type: string
+              mssPackage:
+                description: A Microsoft Smooth Streaming (MSS) packaging configuration.
+                type: object
+                properties:
+                  Encryption:
+                    $ref: '#/definitions/MssEncryption'
+                  ManifestWindowSeconds:
+                    description: The time window (in seconds) contained in each manifest.
+                    $ref: '#/definitions/__integer'
+                  SegmentDurationSeconds:
+                    description: The duration (in seconds) of each segment.
+                    $ref: '#/definitions/__integer'
+                  StreamSelection:
+                    $ref: '#/definitions/StreamSelection'
+              startoverWindowSeconds:
+                description: |
+                  Maximum duration (seconds) of content to retain for startover playback.
+                  If not specified, startover playback will be disabled for the OriginEndpoint.
+                type: integer
+              tags:
+                description: A collection of tags associated with a resource
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/__string'
+              timeDelaySeconds:
+                description: |
+                  Amount of delay (seconds) to enforce on the playback of live content.
+                  If not specified, there will be no time delay in effect for the OriginEndpoint.
+                type: integer
+              whitelist:
+                description: A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
+                type: array
+                items:
+                  $ref: '#/definitions/__string'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -278,11 +464,23 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListOriginEndpointsRequest'
+        - name: channelId
+          in: query
+          required: false
+          description: 'When specified, the request will return only OriginEndpoints associated with the given Channel ID.'
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The upper bound on the number of records to return.
+          type: integer
+          minimum: 1
+          maximum: 1000
+        - name: nextToken
+          in: query
+          required: false
+          description: A token used to resume pagination from the end of a previous request.
+          type: string
         - name: MaxResults
           type: string
           in: query
@@ -327,15 +525,11 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteChannelRequest'
         - name: id
-          type: string
           in: path
           required: true
+          description: The ID of the Channel to delete.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -379,15 +573,11 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeChannelRequest'
         - name: id
-          type: string
           in: path
           required: true
+          description: The ID of a Channel.
+          type: string
     put:
       operationId: UpdateChannel
       description: Updates an existing Channel.
@@ -421,15 +611,20 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the Channel to update.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateChannelRequest'
-        - name: id
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              description:
+                description: A short text description of the Channel.
+                type: string
   '/origin_endpoints/{id}':
     delete:
       operationId: DeleteOriginEndpoint
@@ -464,15 +659,11 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteOriginEndpointRequest'
         - name: id
-          type: string
           in: path
           required: true
+          description: The ID of the OriginEndpoint to delete.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -516,15 +707,11 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeOriginEndpointRequest'
         - name: id
-          type: string
           in: path
           required: true
+          description: The ID of the OriginEndpoint.
+          type: string
     put:
       operationId: UpdateOriginEndpoint
       description: Updates an existing OriginEndpoint.
@@ -558,15 +745,161 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the OriginEndpoint to update.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateOriginEndpointRequest'
-        - name: id
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              cmafPackage:
+                description: A Common Media Application Format (CMAF) packaging configuration.
+                type: object
+                properties:
+                  Encryption:
+                    $ref: '#/definitions/CmafEncryption'
+                  HlsManifests:
+                    description: A list of HLS manifest configurations
+                    $ref: '#/definitions/__listOfHlsManifestCreateOrUpdateParameters'
+                  SegmentDurationSeconds:
+                    description: |
+                      Duration (in seconds) of each segment. Actual segments will be
+                      rounded to the nearest multiple of the source segment duration.
+                    $ref: '#/definitions/__integer'
+                  SegmentPrefix:
+                    description: 'An optional custom string that is prepended to the name of each segment. If not specified, it defaults to the ChannelId.'
+                    $ref: '#/definitions/__string'
+                  StreamSelection:
+                    $ref: '#/definitions/StreamSelection'
+              dashPackage:
+                description: A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
+                type: object
+                properties:
+                  Encryption:
+                    $ref: '#/definitions/DashEncryption'
+                  ManifestLayout:
+                    description: 'Determines the position of some tags in the Media Presentation Description (MPD).  When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation.  When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.'
+                    $ref: '#/definitions/ManifestLayout'
+                  ManifestWindowSeconds:
+                    description: Time window (in seconds) contained in each manifest.
+                    $ref: '#/definitions/__integer'
+                  MinBufferTimeSeconds:
+                    description: Minimum duration (in seconds) that a player will buffer media before starting the presentation.
+                    $ref: '#/definitions/__integer'
+                  MinUpdatePeriodSeconds:
+                    description: Minimum duration (in seconds) between potential changes to the Dynamic Adaptive Streaming over HTTP (DASH) Media Presentation Description (MPD).
+                    $ref: '#/definitions/__integer'
+                  PeriodTriggers:
+                    description: |
+                      A list of triggers that controls when the outgoing Dynamic Adaptive Streaming over HTTP (DASH)
+                      Media Presentation Description (MPD) will be partitioned into multiple periods. If empty, the content will not
+                      be partitioned into more than one period. If the list contains "ADS", new periods will be created where
+                      the Channel source contains SCTE-35 ad markers.
+                    $ref: '#/definitions/__listOf__PeriodTriggersElement'
+                  Profile:
+                    description: 'The Dynamic Adaptive Streaming over HTTP (DASH) profile type.  When set to "HBBTV_1_5", HbbTV 1.5 compliant output is enabled.'
+                    $ref: '#/definitions/Profile'
+                  SegmentDurationSeconds:
+                    description: |
+                      Duration (in seconds) of each segment. Actual segments will be
+                      rounded to the nearest multiple of the source segment duration.
+                    $ref: '#/definitions/__integer'
+                  SegmentTemplateFormat:
+                    description: 'Determines the type of SegmentTimeline included in the Media Presentation Description (MPD).  When set to NUMBER_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Number$ media URLs.  When set to TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Time$ media URLs.'
+                    $ref: '#/definitions/SegmentTemplateFormat'
+                  StreamSelection:
+                    $ref: '#/definitions/StreamSelection'
+                  SuggestedPresentationDelaySeconds:
+                    description: Duration (in seconds) to delay live content before presentation.
+                    $ref: '#/definitions/__integer'
+              description:
+                description: A short text description of the OriginEndpoint.
+                type: string
+              hlsPackage:
+                description: An HTTP Live Streaming (HLS) packaging configuration.
+                type: object
+                properties:
+                  AdMarkers:
+                    description: |
+                      This setting controls how ad markers are included in the packaged OriginEndpoint.
+                      "NONE" will omit all SCTE-35 ad markers from the output.
+                      "PASSTHROUGH" causes the manifest to contain a copy of the SCTE-35 ad
+                      markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest.
+                      "SCTE35_ENHANCED" generates ad markers and blackout tags based on SCTE-35
+                      messages in the input source.
+                    $ref: '#/definitions/AdMarkers'
+                  Encryption:
+                    $ref: '#/definitions/HlsEncryption'
+                  IncludeIframeOnlyStream:
+                    description: 'When enabled, an I-Frame only stream will be included in the output.'
+                    $ref: '#/definitions/__boolean'
+                  PlaylistType:
+                    description: |
+                      The HTTP Live Streaming (HLS) playlist type.
+                      When either "EVENT" or "VOD" is specified, a corresponding EXT-X-PLAYLIST-TYPE
+                      entry will be included in the media playlist.
+                    $ref: '#/definitions/PlaylistType'
+                  PlaylistWindowSeconds:
+                    description: Time window (in seconds) contained in each parent manifest.
+                    $ref: '#/definitions/__integer'
+                  ProgramDateTimeIntervalSeconds:
+                    description: |
+                      The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag
+                      inserted into manifests. Additionally, when an interval is specified
+                      ID3Timed Metadata messages will be generated every 5 seconds using the
+                      ingest time of the content.
+                      If the interval is not specified, or set to 0, then
+                      no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no
+                      ID3Timed Metadata messages will be generated. Note that irrespective
+                      of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input,
+                      it will be passed through to HLS output.
+                    $ref: '#/definitions/__integer'
+                  SegmentDurationSeconds:
+                    description: |
+                      Duration (in seconds) of each fragment. Actual fragments will be
+                      rounded to the nearest multiple of the source fragment duration.
+                    $ref: '#/definitions/__integer'
+                  StreamSelection:
+                    $ref: '#/definitions/StreamSelection'
+                  UseAudioRenditionGroup:
+                    description: 'When enabled, audio streams will be placed in rendition groups in the output.'
+                    $ref: '#/definitions/__boolean'
+              manifestName:
+                description: A short string that will be appended to the end of the Endpoint URL.
+                type: string
+              mssPackage:
+                description: A Microsoft Smooth Streaming (MSS) packaging configuration.
+                type: object
+                properties:
+                  Encryption:
+                    $ref: '#/definitions/MssEncryption'
+                  ManifestWindowSeconds:
+                    description: The time window (in seconds) contained in each manifest.
+                    $ref: '#/definitions/__integer'
+                  SegmentDurationSeconds:
+                    description: The duration (in seconds) of each segment.
+                    $ref: '#/definitions/__integer'
+                  StreamSelection:
+                    $ref: '#/definitions/StreamSelection'
+              startoverWindowSeconds:
+                description: |
+                  Maximum duration (in seconds) of content to retain for startover playback.
+                  If not specified, startover playback will be disabled for the OriginEndpoint.
+                type: integer
+              timeDelaySeconds:
+                description: |
+                  Amount of delay (in seconds) to enforce on the playback of live content.
+                  If not specified, there will be no time delay in effect for the OriginEndpoint.
+                type: integer
+              whitelist:
+                description: A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
+                type: array
+                items:
+                  $ref: '#/definitions/__string'
   '/tags/{resource-arn}':
     get:
       operationId: ListTagsForResource
@@ -577,15 +910,11 @@ paths:
           schema:
             $ref: '#/definitions/ListTagsForResourceResponse'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListTagsForResourceRequest'
         - name: resource-arn
-          type: string
           in: path
           required: true
+          description: ''
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -603,33 +932,27 @@ paths:
         '204':
           description: Success
       parameters:
+        - name: resource-arn
+          in: path
+          required: true
+          description: ''
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/TagResourceRequest'
-        - name: resource-arn
-          type: string
-          in: path
-          required: true
-    delete:
-      operationId: UntagResource
-      description: ''
-      responses:
-        '204':
-          description: Success
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/UntagResourceRequest'
-        - name: resource-arn
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - tags
+            properties:
+              tags:
+                description: ''
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/__string'
   '/channels/{id}/credentials':
     put:
+      deprecated: true
       operationId: RotateChannelCredentials
       description: Changes the Channel's first IngestEndpoint's username and password. WARNING - This API is deprecated. Please use RotateIngestEndpointCredentials instead
       responses:
@@ -662,15 +985,11 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/RotateChannelCredentialsRequest'
         - name: id
-          type: string
           in: path
           required: true
+          description: The ID of the channel to update.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -715,19 +1034,46 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/RotateIngestEndpointCredentialsRequest'
         - name: id
-          type: string
           in: path
           required: true
+          description: The ID of the channel the IngestEndpoint is on.
+          type: string
         - name: ingest_endpoint_id
-          type: string
           in: path
           required: true
+          description: The id of the IngestEndpoint whose credentials should be rotated
+          type: string
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/tags/{resource-arn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: ''
+      responses:
+        '204':
+          description: Success
+      parameters:
+        - name: resource-arn
+          in: path
+          required: true
+          description: ''
+          type: string
+        - name: tagKeys
+          in: query
+          required: true
+          description: The key(s) of tag to be deleted
+          type: array
+          items:
+            type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -755,22 +1101,8 @@ definitions:
         $ref: '#/definitions/__string'
       Tags:
         $ref: '#/definitions/Tags'
-  CreateChannelRequest:
-    required:
-      - Id
-    type: object
-    properties:
-      Description:
-        description: A short text description of the Channel.
-        $ref: '#/definitions/__string'
-      Id:
-        description: |
-          The ID of the Channel. The ID must be unique within the region and it
-          cannot be changed after a Channel is created.
-        $ref: '#/definitions/__string'
-      Tags:
-        $ref: '#/definitions/Tags'
-    description: A new Channel configuration.
+  __string:
+    type: string
   UnprocessableEntityException: {}
   InternalServerErrorException: {}
   ForbiddenException: {}
@@ -821,62 +1153,114 @@ definitions:
       Whitelist:
         description: A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
         $ref: '#/definitions/__listOf__string'
-  CreateOriginEndpointRequest:
+  CmafEncryption:
     required:
-      - ChannelId
-      - Id
+      - SpekeKeyProvider
     type: object
     properties:
-      ChannelId:
-        description: |
-          The ID of the Channel that the OriginEndpoint will be associated with.
-          This cannot be changed after the OriginEndpoint is created.
-        $ref: '#/definitions/__string'
-      CmafPackage:
-        $ref: '#/definitions/CmafPackageCreateOrUpdateParameters'
-      DashPackage:
-        $ref: '#/definitions/DashPackage'
-      Description:
-        description: A short text description of the OriginEndpoint.
-        $ref: '#/definitions/__string'
-      HlsPackage:
-        $ref: '#/definitions/HlsPackage'
-      Id:
-        description: |
-          The ID of the OriginEndpoint.  The ID must be unique within the region
-          and it cannot be changed after the OriginEndpoint is created.
-        $ref: '#/definitions/__string'
-      ManifestName:
-        description: A short string that will be used as the filename of the OriginEndpoint URL (defaults to "index").
-        $ref: '#/definitions/__string'
-      MssPackage:
-        $ref: '#/definitions/MssPackage'
-      StartoverWindowSeconds:
-        description: |
-          Maximum duration (seconds) of content to retain for startover playback.
-          If not specified, startover playback will be disabled for the OriginEndpoint.
+      KeyRotationIntervalSeconds:
+        description: Time (in seconds) between each encryption key rotation.
         $ref: '#/definitions/__integer'
-      Tags:
-        $ref: '#/definitions/Tags'
-      TimeDelaySeconds:
-        description: |
-          Amount of delay (seconds) to enforce on the playback of live content.
-          If not specified, there will be no time delay in effect for the OriginEndpoint.
+      SpekeKeyProvider:
+        $ref: '#/definitions/SpekeKeyProvider'
+    description: A Common Media Application Format (CMAF) encryption configuration.
+  __listOfHlsManifestCreateOrUpdateParameters:
+    type: array
+    items:
+      $ref: '#/definitions/HlsManifestCreateOrUpdateParameters'
+  __integer:
+    type: integer
+  StreamSelection:
+    type: object
+    properties:
+      MaxVideoBitsPerSecond:
+        description: The maximum video bitrate (bps) to include in output.
         $ref: '#/definitions/__integer'
-      Whitelist:
-        description: A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
-        $ref: '#/definitions/__listOf__string'
-    description: Configuration parameters used to create a new OriginEndpoint.
+      MinVideoBitsPerSecond:
+        description: The minimum video bitrate (bps) to include in output.
+        $ref: '#/definitions/__integer'
+      StreamOrder:
+        description: A directive that determines the order of streams in the output.
+        $ref: '#/definitions/StreamOrder'
+    description: A StreamSelection configuration.
+  DashEncryption:
+    required:
+      - SpekeKeyProvider
+    type: object
+    properties:
+      KeyRotationIntervalSeconds:
+        description: Time (in seconds) between each encryption key rotation.
+        $ref: '#/definitions/__integer'
+      SpekeKeyProvider:
+        $ref: '#/definitions/SpekeKeyProvider'
+    description: A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.
+  ManifestLayout:
+    enum:
+      - FULL
+      - COMPACT
+    type: string
+  __listOf__PeriodTriggersElement:
+    type: array
+    items:
+      $ref: '#/definitions/__PeriodTriggersElement'
+  Profile:
+    enum:
+      - NONE
+      - HBBTV_1_5
+    type: string
+  SegmentTemplateFormat:
+    enum:
+      - NUMBER_WITH_TIMELINE
+      - TIME_WITH_TIMELINE
+    type: string
+  AdMarkers:
+    enum:
+      - NONE
+      - SCTE35_ENHANCED
+      - PASSTHROUGH
+    type: string
+  HlsEncryption:
+    required:
+      - SpekeKeyProvider
+    type: object
+    properties:
+      ConstantInitializationVector:
+        description: |
+          A constant initialization vector for encryption (optional).
+          When not specified the initialization vector will be periodically rotated.
+        $ref: '#/definitions/__string'
+      EncryptionMethod:
+        description: The encryption method to use.
+        $ref: '#/definitions/EncryptionMethod'
+      KeyRotationIntervalSeconds:
+        description: Interval (in seconds) between each encryption key rotation.
+        $ref: '#/definitions/__integer'
+      RepeatExtXKey:
+        description: 'When enabled, the EXT-X-KEY tag will be repeated in output manifests.'
+        $ref: '#/definitions/__boolean'
+      SpekeKeyProvider:
+        $ref: '#/definitions/SpekeKeyProvider'
+    description: An HTTP Live Streaming (HLS) encryption configuration.
+  __boolean:
+    type: boolean
+  PlaylistType:
+    enum:
+      - NONE
+      - EVENT
+      - VOD
+    type: string
+  MssEncryption:
+    required:
+      - SpekeKeyProvider
+    type: object
+    properties:
+      SpekeKeyProvider:
+        $ref: '#/definitions/SpekeKeyProvider'
+    description: A Microsoft Smooth Streaming (MSS) encryption configuration.
   DeleteChannelResponse:
     type: object
     properties: {}
-  DeleteChannelRequest:
-    type: object
-    properties: {}
   DeleteOriginEndpointResponse:
-    type: object
-    properties: {}
-  DeleteOriginEndpointRequest:
     type: object
     properties: {}
   DescribeChannelResponse:
@@ -895,9 +1279,6 @@ definitions:
         $ref: '#/definitions/__string'
       Tags:
         $ref: '#/definitions/Tags'
-  DescribeChannelRequest:
-    type: object
-    properties: {}
   DescribeOriginEndpointResponse:
     type: object
     properties:
@@ -942,9 +1323,6 @@ definitions:
       Whitelist:
         description: A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
         $ref: '#/definitions/__listOf__string'
-  DescribeOriginEndpointRequest:
-    type: object
-    properties: {}
   ListChannelsResponse:
     type: object
     properties:
@@ -954,9 +1332,6 @@ definitions:
       NextToken:
         description: A token that can be used to resume pagination from the end of the collection.
         $ref: '#/definitions/__string'
-  ListChannelsRequest:
-    type: object
-    properties: {}
   ListOriginEndpointsResponse:
     type: object
     properties:
@@ -966,17 +1341,11 @@ definitions:
       OriginEndpoints:
         description: A list of OriginEndpoint records.
         $ref: '#/definitions/__listOfOriginEndpoint'
-  ListOriginEndpointsRequest:
-    type: object
-    properties: {}
   ListTagsForResourceResponse:
     type: object
     properties:
       Tags:
         $ref: '#/definitions/__mapOf__string'
-  ListTagsForResourceRequest:
-    type: object
-    properties: {}
   RotateChannelCredentialsResponse:
     type: object
     properties:
@@ -993,9 +1362,6 @@ definitions:
         $ref: '#/definitions/__string'
       Tags:
         $ref: '#/definitions/Tags'
-  RotateChannelCredentialsRequest:
-    type: object
-    properties: {}
   RotateIngestEndpointCredentialsResponse:
     type: object
     properties:
@@ -1012,19 +1378,6 @@ definitions:
         $ref: '#/definitions/__string'
       Tags:
         $ref: '#/definitions/Tags'
-  RotateIngestEndpointCredentialsRequest:
-    type: object
-    properties: {}
-  TagResourceRequest:
-    required:
-      - Tags
-    type: object
-    properties:
-      Tags:
-        $ref: '#/definitions/__mapOf__string'
-  UntagResourceRequest:
-    type: object
-    properties: {}
   UpdateChannelResponse:
     type: object
     properties:
@@ -1041,13 +1394,6 @@ definitions:
         $ref: '#/definitions/__string'
       Tags:
         $ref: '#/definitions/Tags'
-  UpdateChannelRequest:
-    type: object
-    properties:
-      Description:
-        description: A short text description of the Channel.
-        $ref: '#/definitions/__string'
-    description: Configuration parameters used to update the Channel.
   UpdateOriginEndpointResponse:
     type: object
     properties:
@@ -1092,45 +1438,6 @@ definitions:
       Whitelist:
         description: A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
         $ref: '#/definitions/__listOf__string'
-  UpdateOriginEndpointRequest:
-    type: object
-    properties:
-      CmafPackage:
-        $ref: '#/definitions/CmafPackageCreateOrUpdateParameters'
-      DashPackage:
-        $ref: '#/definitions/DashPackage'
-      Description:
-        description: A short text description of the OriginEndpoint.
-        $ref: '#/definitions/__string'
-      HlsPackage:
-        $ref: '#/definitions/HlsPackage'
-      ManifestName:
-        description: A short string that will be appended to the end of the Endpoint URL.
-        $ref: '#/definitions/__string'
-      MssPackage:
-        $ref: '#/definitions/MssPackage'
-      StartoverWindowSeconds:
-        description: |
-          Maximum duration (in seconds) of content to retain for startover playback.
-          If not specified, startover playback will be disabled for the OriginEndpoint.
-        $ref: '#/definitions/__integer'
-      TimeDelaySeconds:
-        description: |
-          Amount of delay (in seconds) to enforce on the playback of live content.
-          If not specified, there will be no time delay in effect for the OriginEndpoint.
-        $ref: '#/definitions/__integer'
-      Whitelist:
-        description: A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
-        $ref: '#/definitions/__listOf__string'
-    description: Configuration parameters used to update an existing OriginEndpoint.
-  AdMarkers:
-    enum:
-      - NONE
-      - SCTE35_ENHANCED
-      - PASSTHROUGH
-    type: string
-  __string:
-    type: string
   HlsIngest:
     type: object
     properties:
@@ -1139,15 +1446,10 @@ definitions:
         $ref: '#/definitions/__listOfIngestEndpoint'
     description: An HTTP Live Streaming (HLS) ingest resource configuration.
   Tags:
-    type: array
+    type: object
     description: A collection of tags associated with a resource
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/__string'
+    additionalProperties:
+      $ref: '#/definitions/__string'
   Channel:
     type: object
     properties:
@@ -1165,8 +1467,6 @@ definitions:
       Tags:
         $ref: '#/definitions/Tags'
     description: A Channel resource configuration.
-  __integer:
-    type: integer
   SpekeKeyProvider:
     required:
       - Url
@@ -1196,34 +1496,10 @@ definitions:
         description: The URL of the external key provider service.
         $ref: '#/definitions/__string'
     description: A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.
-  CmafEncryption:
-    required:
-      - SpekeKeyProvider
-    type: object
-    properties:
-      KeyRotationIntervalSeconds:
-        description: Time (in seconds) between each encryption key rotation.
-        $ref: '#/definitions/__integer'
-      SpekeKeyProvider:
-        $ref: '#/definitions/SpekeKeyProvider'
-    description: A Common Media Application Format (CMAF) encryption configuration.
   __listOfHlsManifest:
     type: array
     items:
       $ref: '#/definitions/HlsManifest'
-  StreamSelection:
-    type: object
-    properties:
-      MaxVideoBitsPerSecond:
-        description: The maximum video bitrate (bps) to include in output.
-        $ref: '#/definitions/__integer'
-      MinVideoBitsPerSecond:
-        description: The minimum video bitrate (bps) to include in output.
-        $ref: '#/definitions/__integer'
-      StreamOrder:
-        description: A directive that determines the order of streams in the output.
-        $ref: '#/definitions/StreamOrder'
-    description: A StreamSelection configuration.
   CmafPackage:
     type: object
     properties:
@@ -1243,10 +1519,6 @@ definitions:
       StreamSelection:
         $ref: '#/definitions/StreamSelection'
     description: A Common Media Application Format (CMAF) packaging configuration.
-  __listOfHlsManifestCreateOrUpdateParameters:
-    type: array
-    items:
-      $ref: '#/definitions/HlsManifestCreateOrUpdateParameters'
   CmafPackageCreateOrUpdateParameters:
     type: object
     properties:
@@ -1266,6 +1538,22 @@ definitions:
       StreamSelection:
         $ref: '#/definitions/StreamSelection'
     description: A Common Media Application Format (CMAF) packaging configuration.
+  CreateChannelRequest:
+    required:
+      - Id
+    type: object
+    properties:
+      Description:
+        description: A short text description of the Channel.
+        $ref: '#/definitions/__string'
+      Id:
+        description: |
+          The ID of the Channel. The ID must be unique within the region and it
+          cannot be changed after a Channel is created.
+        $ref: '#/definitions/__string'
+      Tags:
+        $ref: '#/definitions/Tags'
+    description: A new Channel configuration.
   DashPackage:
     type: object
     properties:
@@ -1374,75 +1662,73 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/__string'
-  DashEncryption:
+  CreateOriginEndpointRequest:
     required:
-      - SpekeKeyProvider
+      - ChannelId
+      - Id
     type: object
     properties:
-      KeyRotationIntervalSeconds:
-        description: Time (in seconds) between each encryption key rotation.
+      ChannelId:
+        description: |
+          The ID of the Channel that the OriginEndpoint will be associated with.
+          This cannot be changed after the OriginEndpoint is created.
+        $ref: '#/definitions/__string'
+      CmafPackage:
+        $ref: '#/definitions/CmafPackageCreateOrUpdateParameters'
+      DashPackage:
+        $ref: '#/definitions/DashPackage'
+      Description:
+        description: A short text description of the OriginEndpoint.
+        $ref: '#/definitions/__string'
+      HlsPackage:
+        $ref: '#/definitions/HlsPackage'
+      Id:
+        description: |
+          The ID of the OriginEndpoint.  The ID must be unique within the region
+          and it cannot be changed after the OriginEndpoint is created.
+        $ref: '#/definitions/__string'
+      ManifestName:
+        description: A short string that will be used as the filename of the OriginEndpoint URL (defaults to "index").
+        $ref: '#/definitions/__string'
+      MssPackage:
+        $ref: '#/definitions/MssPackage'
+      StartoverWindowSeconds:
+        description: |
+          Maximum duration (seconds) of content to retain for startover playback.
+          If not specified, startover playback will be disabled for the OriginEndpoint.
         $ref: '#/definitions/__integer'
-      SpekeKeyProvider:
-        $ref: '#/definitions/SpekeKeyProvider'
-    description: A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.
-  ManifestLayout:
-    enum:
-      - FULL
-      - COMPACT
-    type: string
-  __listOf__PeriodTriggersElement:
-    type: array
-    items:
-      $ref: '#/definitions/__PeriodTriggersElement'
-  Profile:
-    enum:
-      - NONE
-      - HBBTV_1_5
-    type: string
-  SegmentTemplateFormat:
-    enum:
-      - NUMBER_WITH_TIMELINE
-      - TIME_WITH_TIMELINE
-    type: string
+      Tags:
+        $ref: '#/definitions/Tags'
+      TimeDelaySeconds:
+        description: |
+          Amount of delay (seconds) to enforce on the playback of live content.
+          If not specified, there will be no time delay in effect for the OriginEndpoint.
+        $ref: '#/definitions/__integer'
+      Whitelist:
+        description: A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
+        $ref: '#/definitions/__listOf__string'
+    description: Configuration parameters used to create a new OriginEndpoint.
+  DeleteChannelRequest:
+    type: object
+    properties: {}
+  DeleteOriginEndpointRequest:
+    type: object
+    properties: {}
+  DescribeChannelRequest:
+    type: object
+    properties: {}
+  DescribeOriginEndpointRequest:
+    type: object
+    properties: {}
   EncryptionMethod:
     enum:
       - AES_128
       - SAMPLE_AES
     type: string
-  __boolean:
-    type: boolean
-  HlsEncryption:
-    required:
-      - SpekeKeyProvider
-    type: object
-    properties:
-      ConstantInitializationVector:
-        description: |
-          A constant initialization vector for encryption (optional).
-          When not specified the initialization vector will be periodically rotated.
-        $ref: '#/definitions/__string'
-      EncryptionMethod:
-        description: The encryption method to use.
-        $ref: '#/definitions/EncryptionMethod'
-      KeyRotationIntervalSeconds:
-        description: Interval (in seconds) between each encryption key rotation.
-        $ref: '#/definitions/__integer'
-      RepeatExtXKey:
-        description: 'When enabled, the EXT-X-KEY tag will be repeated in output manifests.'
-        $ref: '#/definitions/__boolean'
-      SpekeKeyProvider:
-        $ref: '#/definitions/SpekeKeyProvider'
-    description: An HTTP Live Streaming (HLS) encryption configuration.
   __listOfIngestEndpoint:
     type: array
     items:
       $ref: '#/definitions/IngestEndpoint'
-  PlaylistType:
-    enum:
-      - NONE
-      - EVENT
-      - VOD
-    type: string
   HlsManifest:
     required:
       - Id
@@ -1556,31 +1842,27 @@ definitions:
     type: integer
     minimum: 1
     maximum: 1000
+  ListChannelsRequest:
+    type: object
+    properties: {}
   __listOfChannel:
     type: array
     items:
       $ref: '#/definitions/Channel'
+  ListOriginEndpointsRequest:
+    type: object
+    properties: {}
   __listOfOriginEndpoint:
     type: array
     items:
       $ref: '#/definitions/OriginEndpoint'
-  __mapOf__string:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/__string'
-  MssEncryption:
-    required:
-      - SpekeKeyProvider
+  ListTagsForResourceRequest:
     type: object
-    properties:
-      SpekeKeyProvider:
-        $ref: '#/definitions/SpekeKeyProvider'
-    description: A Microsoft Smooth Streaming (MSS) encryption configuration.
+    properties: {}
+  __mapOf__string:
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/__string'
   OriginEndpoint:
     type: object
     properties:
@@ -1626,12 +1908,66 @@ definitions:
         description: A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
         $ref: '#/definitions/__listOf__string'
     description: An OriginEndpoint resource configuration.
+  RotateChannelCredentialsRequest:
+    type: object
+    properties: {}
+  RotateIngestEndpointCredentialsRequest:
+    type: object
+    properties: {}
   StreamOrder:
     enum:
       - ORIGINAL
       - VIDEO_BITRATE_ASCENDING
       - VIDEO_BITRATE_DESCENDING
     type: string
+  TagResourceRequest:
+    required:
+      - Tags
+    type: object
+    properties:
+      Tags:
+        $ref: '#/definitions/__mapOf__string'
+  UntagResourceRequest:
+    type: object
+    properties: {}
+  UpdateChannelRequest:
+    type: object
+    properties:
+      Description:
+        description: A short text description of the Channel.
+        $ref: '#/definitions/__string'
+    description: Configuration parameters used to update the Channel.
+  UpdateOriginEndpointRequest:
+    type: object
+    properties:
+      CmafPackage:
+        $ref: '#/definitions/CmafPackageCreateOrUpdateParameters'
+      DashPackage:
+        $ref: '#/definitions/DashPackage'
+      Description:
+        description: A short text description of the OriginEndpoint.
+        $ref: '#/definitions/__string'
+      HlsPackage:
+        $ref: '#/definitions/HlsPackage'
+      ManifestName:
+        description: A short string that will be appended to the end of the Endpoint URL.
+        $ref: '#/definitions/__string'
+      MssPackage:
+        $ref: '#/definitions/MssPackage'
+      StartoverWindowSeconds:
+        description: |
+          Maximum duration (in seconds) of content to retain for startover playback.
+          If not specified, startover playback will be disabled for the OriginEndpoint.
+        $ref: '#/definitions/__integer'
+      TimeDelaySeconds:
+        description: |
+          Amount of delay (in seconds) to enforce on the playback of live content.
+          If not specified, there will be no time delay in effect for the OriginEndpoint.
+        $ref: '#/definitions/__integer'
+      Whitelist:
+        description: A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
+        $ref: '#/definitions/__listOf__string'
+    description: Configuration parameters used to update an existing OriginEndpoint.
   __PeriodTriggersElement:
     enum:
       - ADS

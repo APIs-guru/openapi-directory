@@ -132,7 +132,44 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateConfigurationSetRequest'
+            type: object
+            required:
+              - TrackingOptions
+            properties:
+              ConfigurationSetName:
+                description: '<p>The name of a configuration set.</p> <p>In Amazon Pinpoint, <i>configuration sets</i> are groups of rules that you can apply to the emails you send. You apply a configuration set to an email by including a reference to the configuration set in the headers of the email. When you apply a configuration set to an email, all of the rules in that configuration set are applied to the email.</p>'
+                type: string
+              TrackingOptions:
+                description: '<p>An object that defines the tracking options for a configuration set. When you use Amazon Pinpoint to send an email, it contains an invisible image that''s used to track when recipients open your email. If your email contains links, those links are changed slightly in order to track when recipients click them.</p> <p>These images and links include references to a domain operated by AWS. You can optionally configure Amazon Pinpoint to use a domain that you operate for these images and links.</p>'
+                type: object
+                properties:
+                  CustomRedirectDomain:
+                    $ref: '#/definitions/CustomRedirectDomain'
+                    description: The domain that you want to use for tracking open and click events.
+              DeliveryOptions:
+                description: Used to associate a configuration set with a dedicated IP pool.
+                type: object
+                properties:
+                  SendingPoolName:
+                    $ref: '#/definitions/PoolName'
+                    description: The name of the dedicated IP pool that you want to associate with the configuration set.
+              ReputationOptions:
+                description: 'Enable or disable collection of reputation metrics for emails that you send using this configuration set in the current AWS Region. '
+                type: object
+                properties:
+                  ReputationMetricsEnabled:
+                    $ref: '#/definitions/Enabled'
+                    description: 'If <code>true</code>, tracking of reputation metrics is enabled for the configuration set. If <code>false</code>, tracking of reputation metrics is disabled for the configuration set.'
+                  LastFreshStart:
+                    $ref: '#/definitions/LastFreshStart'
+                    description: 'The date and time (in Unix time) when the reputation metrics were last given a fresh start. When your account is given a fresh start, your reputation metrics are calculated starting from the date of the fresh start.'
+              SendingOptions:
+                description: Used to enable or disable email sending for messages that use this configuration set in the current AWS Region.
+                type: object
+                properties:
+                  SendingEnabled:
+                    $ref: '#/definitions/Enabled'
+                    description: 'If <code>true</code>, email sending is enabled for the configuration set. If <code>false</code>, email sending is disabled for the configuration set.'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -164,7 +201,14 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/ListConfigurationSetsRequest'
+            type: object
+            properties:
+              NextToken:
+                description: A token returned from a previous call to <code>ListConfigurationSets</code> to indicate the position in the list of configuration sets.
+                type: string
+              PageSize:
+                description: 'The number of results to show in a single call to <code>ListConfigurationSets</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.'
+                type: integer
         - name: PageSize
           type: string
           in: query
@@ -205,15 +249,45 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
+        - name: ConfigurationSetName
+          in: path
+          required: true
+          description: '<p>The name of a configuration set.</p> <p>In Amazon Pinpoint, <i>configuration sets</i> are groups of rules that you can apply to the emails you send. You apply a configuration set to an email by including a reference to the configuration set in the headers of the email. When you apply a configuration set to an email, all of the rules in that configuration set are applied to the email.</p>'
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateConfigurationSetEventDestinationRequest'
-        - name: ConfigurationSetName
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - EventDestinationName
+              - EventDestination
+            properties:
+              EventDestinationName:
+                description: '<p>The name of an event destination.</p> <p>In Amazon Pinpoint, <i>events</i> include message sends, deliveries, opens, clicks, bounces, and complaints. <i>Event destinations</i> are places that you can send information about these events to. For example, you can send event data to Amazon SNS to receive notifications when you receive bounces or complaints, or you can use Amazon Kinesis Data Firehose to stream data to Amazon S3 for long-term storage.</p>'
+                type: string
+              EventDestination:
+                description: 'An object that defines the event destination. Specifically, it defines which services receive events from emails sent using the configuration set that the event destination is associated with. Also defines the types of events that are sent to the event destination.'
+                type: object
+                properties:
+                  Enabled:
+                    $ref: '#/definitions/Enabled'
+                    description: '<p>If <code>true</code>, the event destination is enabled. When the event destination is enabled, the specified event types are sent to the destinations in this <code>EventDestinationDefinition</code>.</p> <p>If <code>false</code>, the event destination is disabled. When the event destination is disabled, events aren''t sent to the specified destinations.</p>'
+                  MatchingEventTypes:
+                    $ref: '#/definitions/EventTypes'
+                    description: An array that specifies which events Amazon Pinpoint should send to the destinations in this <code>EventDestinationDefinition</code>.
+                  KinesisFirehoseDestination:
+                    $ref: '#/definitions/KinesisFirehoseDestination'
+                    description: 'An object that defines an Amazon Kinesis Data Firehose destination for email events. You can use Amazon Kinesis Data Firehose to stream data to other services, such as Amazon S3 and Amazon Redshift.'
+                  CloudWatchDestination:
+                    $ref: '#/definitions/CloudWatchDestination'
+                    description: An object that defines an Amazon CloudWatch destination for email events. You can use Amazon CloudWatch to monitor and gain insights on your email sending metrics.
+                  SnsDestination:
+                    $ref: '#/definitions/SnsDestination'
+                    description: An object that defines an Amazon SNS destination for email events. You can use Amazon SNS to send notification when certain email events occur.
+                  PinpointDestination:
+                    $ref: '#/definitions/PinpointDestination'
+                    description: An object that defines a Amazon Pinpoint destination for email events. You can use Amazon Pinpoint events to create attributes in Amazon Pinpoint projects. You can use these attributes to create segments for your campaigns.
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -245,15 +319,11 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetConfigurationSetEventDestinationsRequest'
         - name: ConfigurationSetName
-          type: string
           in: path
           required: true
+          description: '<p>The name of a configuration set.</p> <p>In Amazon Pinpoint, <i>configuration sets</i> are groups of rules that you can apply to the emails you send. You apply a configuration set to an email by including a reference to the configuration set in the headers of the email. When you apply a configuration set to an email, all of the rules in that configuration set are applied to the email.</p>'
+          type: string
   /v1/email/dedicated-ip-pools:
     post:
       operationId: CreateDedicatedIpPool
@@ -284,7 +354,13 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateDedicatedIpPoolRequest'
+            type: object
+            required:
+              - PoolName
+            properties:
+              PoolName:
+                description: The name of a dedicated IP pool.
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -316,7 +392,14 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/ListDedicatedIpPoolsRequest'
+            type: object
+            properties:
+              NextToken:
+                description: A token returned from a previous call to <code>ListDedicatedIpPools</code> to indicate the position in the list of dedicated IP pools.
+                type: string
+              PageSize:
+                description: 'The number of results to show in a single call to <code>ListDedicatedIpPools</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.'
+                type: integer
         - name: PageSize
           type: string
           in: query
@@ -373,7 +456,27 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateDeliverabilityTestReportRequest'
+            type: object
+            required:
+              - FromEmailAddress
+              - Content
+            properties:
+              ReportName:
+                description: A name that helps you identify a report generated by the Deliverability dashboard.
+                type: string
+              FromEmailAddress:
+                description: The email address that the predictive inbox placement test email was sent from.
+                type: string
+              Content:
+                description: 'An object that defines the entire content of the email, including the message headers and the body content. You can create a simple email message, in which you specify the subject and the text and HTML versions of the message body. You can also create raw messages, in which you specify a complete MIME-formatted message. Raw messages can include attachments and custom headers.'
+                type: object
+                properties:
+                  Simple:
+                    $ref: '#/definitions/Message'
+                    description: The simple email message. The message consists of a subject and a message body.
+                  Raw:
+                    $ref: '#/definitions/RawMessage'
+                    description: '<p>The raw email message. The message has to meet the following criteria:</p> <ul> <li> <p>The message has to contain a header and a body, separated by one blank line.</p> </li> <li> <p>All of the required header fields must be present in the message.</p> </li> <li> <p>Each part of a multipart MIME message must be formatted properly.</p> </li> <li> <p>If you include attachments, they must be in a file format that Amazon Pinpoint supports. </p> </li> <li> <p>The entire message must be Base64 encoded.</p> </li> <li> <p>If any of the MIME parts in your message contain content that is outside of the 7-bit ASCII character range, you should encode that content to ensure that recipients'' email clients render the message properly.</p> </li> <li> <p>The length of any single line of text in the message can''t exceed 1,000 characters. This restriction is defined in <a href="https://tools.ietf.org/html/rfc5321">RFC 5321</a>.</p> </li> </ul>'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -410,7 +513,13 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateEmailIdentityRequest'
+            type: object
+            required:
+              - EmailIdentity
+            properties:
+              EmailIdentity:
+                description: The email address or domain that you want to verify.
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -442,7 +551,14 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/ListEmailIdentitiesRequest'
+            type: object
+            properties:
+              NextToken:
+                description: A token returned from a previous call to <code>ListEmailIdentities</code> to indicate the position in the list of identities.
+                type: string
+              PageSize:
+                description: '<p>The number of results to show in a single call to <code>ListEmailIdentities</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.</p> <p>The value you specify has to be at least 0, and can be no more than 1000.</p>'
+                type: integer
         - name: PageSize
           type: string
           in: query
@@ -475,15 +591,11 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteConfigurationSetRequest'
         - name: ConfigurationSetName
-          type: string
           in: path
           required: true
+          description: '<p>The name of a configuration set.</p> <p>In Amazon Pinpoint, <i>configuration sets</i> are groups of rules that you can apply to the emails you send. You apply a configuration set to an email by including a reference to the configuration set in the headers of the email. When you apply a configuration set to an email, all of the rules in that configuration set are applied to the email.</p>'
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -515,15 +627,11 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetConfigurationSetRequest'
         - name: ConfigurationSetName
-          type: string
           in: path
           required: true
+          description: '<p>The name of a configuration set.</p> <p>In Amazon Pinpoint, <i>configuration sets</i> are groups of rules that you can apply to the emails you send. You apply a configuration set to an email by including a reference to the configuration set in the headers of the email. When you apply a configuration set to an email, all of the rules in that configuration set are applied to the email.</p>'
+          type: string
   '/v1/email/configuration-sets/{ConfigurationSetName}/event-destinations/{EventDestinationName}':
     delete:
       operationId: DeleteConfigurationSetEventDestination
@@ -546,19 +654,16 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteConfigurationSetEventDestinationRequest'
         - name: ConfigurationSetName
-          type: string
           in: path
           required: true
+          description: '<p>The name of a configuration set.</p> <p>In Amazon Pinpoint, <i>configuration sets</i> are groups of rules that you can apply to the emails you send. You apply a configuration set to an email by including a reference to the configuration set in the headers of the email. When you apply a configuration set to an email, all of the rules in that configuration set are applied to the email.</p>'
+          type: string
         - name: EventDestinationName
-          type: string
           in: path
           required: true
+          description: '<p>The name of an event destination.</p> <p>In Amazon Pinpoint, <i>events</i> include message sends, deliveries, opens, clicks, bounces, and complaints. <i>Event destinations</i> are places that you can send information about these events to. For example, you can send event data to Amazon SNS to receive notifications when you receive bounces or complaints, or you can use Amazon Kinesis Data Firehose to stream data to Amazon S3 for long-term storage.</p>'
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -590,19 +695,46 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
+        - name: ConfigurationSetName
+          in: path
+          required: true
+          description: '<p>The name of a configuration set.</p> <p>In Amazon Pinpoint, <i>configuration sets</i> are groups of rules that you can apply to the emails you send. You apply a configuration set to an email by including a reference to the configuration set in the headers of the email. When you apply a configuration set to an email, all of the rules in that configuration set are applied to the email.</p>'
+          type: string
+        - name: EventDestinationName
+          in: path
+          required: true
+          description: '<p>The name of an event destination.</p> <p>In Amazon Pinpoint, <i>events</i> include message sends, deliveries, opens, clicks, bounces, and complaints. <i>Event destinations</i> are places that you can send information about these events to. For example, you can send event data to Amazon SNS to receive notifications when you receive bounces or complaints, or you can use Amazon Kinesis Data Firehose to stream data to Amazon S3 for long-term storage.</p>'
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateConfigurationSetEventDestinationRequest'
-        - name: ConfigurationSetName
-          type: string
-          in: path
-          required: true
-        - name: EventDestinationName
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - EventDestination
+            properties:
+              EventDestination:
+                description: 'An object that defines the event destination. Specifically, it defines which services receive events from emails sent using the configuration set that the event destination is associated with. Also defines the types of events that are sent to the event destination.'
+                type: object
+                properties:
+                  Enabled:
+                    $ref: '#/definitions/Enabled'
+                    description: '<p>If <code>true</code>, the event destination is enabled. When the event destination is enabled, the specified event types are sent to the destinations in this <code>EventDestinationDefinition</code>.</p> <p>If <code>false</code>, the event destination is disabled. When the event destination is disabled, events aren''t sent to the specified destinations.</p>'
+                  MatchingEventTypes:
+                    $ref: '#/definitions/EventTypes'
+                    description: An array that specifies which events Amazon Pinpoint should send to the destinations in this <code>EventDestinationDefinition</code>.
+                  KinesisFirehoseDestination:
+                    $ref: '#/definitions/KinesisFirehoseDestination'
+                    description: 'An object that defines an Amazon Kinesis Data Firehose destination for email events. You can use Amazon Kinesis Data Firehose to stream data to other services, such as Amazon S3 and Amazon Redshift.'
+                  CloudWatchDestination:
+                    $ref: '#/definitions/CloudWatchDestination'
+                    description: An object that defines an Amazon CloudWatch destination for email events. You can use Amazon CloudWatch to monitor and gain insights on your email sending metrics.
+                  SnsDestination:
+                    $ref: '#/definitions/SnsDestination'
+                    description: An object that defines an Amazon SNS destination for email events. You can use Amazon SNS to send notification when certain email events occur.
+                  PinpointDestination:
+                    $ref: '#/definitions/PinpointDestination'
+                    description: An object that defines a Amazon Pinpoint destination for email events. You can use Amazon Pinpoint events to create attributes in Amazon Pinpoint projects. You can use these attributes to create segments for your campaigns.
   '/v1/email/dedicated-ip-pools/{PoolName}':
     delete:
       operationId: DeleteDedicatedIpPool
@@ -625,15 +757,11 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteDedicatedIpPoolRequest'
         - name: PoolName
-          type: string
           in: path
           required: true
+          description: The name of a dedicated IP pool.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -666,15 +794,11 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteEmailIdentityRequest'
         - name: EmailIdentity
-          type: string
           in: path
           required: true
+          description: 'The identity (that is, the email address or domain) that you want to delete from your Amazon Pinpoint account.'
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -706,15 +830,11 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetEmailIdentityRequest'
         - name: EmailIdentity
-          type: string
           in: path
           required: true
+          description: The email identity that you want to retrieve details for.
+          type: string
   /v1/email/account:
     get:
       operationId: GetAccount
@@ -732,12 +852,7 @@ paths:
           description: BadRequestException
           schema:
             $ref: '#/definitions/BadRequestException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetAccountRequest'
+      parameters: []
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -774,7 +889,15 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/GetBlacklistReportsRequest'
+            type: object
+            required:
+              - BlacklistItemNames
+            properties:
+              BlacklistItemNames:
+                description: A list of IP addresses that you want to retrieve blacklist information about. You can only specify the dedicated IP addresses that you use to send email using Amazon Pinpoint or Amazon SES.
+                type: array
+                items:
+                  $ref: '#/definitions/BlacklistItemName'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -807,15 +930,11 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetDedicatedIpRequest'
         - name: IP
-          type: string
           in: path
           required: true
+          description: A dedicated IP address that is associated with your Amazon Pinpoint account.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -852,7 +971,17 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/GetDedicatedIpsRequest'
+            type: object
+            properties:
+              PoolName:
+                description: The name of a dedicated IP pool.
+                type: string
+              NextToken:
+                description: A token returned from a previous call to <code>GetDedicatedIps</code> to indicate the position of the dedicated IP pool in the list of IP pools.
+                type: string
+              PageSize:
+                description: 'The number of results to show in a single call to <code>GetDedicatedIpsRequest</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.'
+                type: integer
         - name: PageSize
           type: string
           in: query
@@ -894,12 +1023,7 @@ paths:
           description: BadRequestException
           schema:
             $ref: '#/definitions/BadRequestException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetDeliverabilityDashboardOptionsRequest'
+      parameters: []
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -943,7 +1067,13 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/PutDeliverabilityDashboardOptionRequest'
+            type: object
+            required:
+              - DashboardEnabled
+            properties:
+              DashboardEnabled:
+                description: 'Indicates whether the Deliverability dashboard is enabled. If the value is <code>true</code>, then the dashboard is enabled.'
+                type: boolean
   '/v1/email/deliverability-dashboard/test-reports/{ReportId}':
     get:
       operationId: GetDeliverabilityTestReport
@@ -966,15 +1096,11 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetDeliverabilityTestReportRequest'
         - name: ReportId
-          type: string
           in: path
           required: true
+          description: A unique string that identifies a Deliverability dashboard report.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1007,15 +1133,28 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
+        - name: Domain
+          in: path
+          required: true
+          description: The domain that you want to obtain deliverability metrics for.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/GetDomainStatisticsReportRequest'
-        - name: Domain
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - StartDate
+              - EndDate
+            properties:
+              StartDate:
+                description: The first day (in Unix time) that you want to obtain domain deliverability metrics for.
+                type: string
+                format: date-time
+              EndDate:
+                description: The last day (in Unix time) that you want to obtain domain deliverability metrics for. The <code>EndDate</code> that you specify has to be less than or equal to 30 days after the <code>StartDate</code>.
+                type: string
+                format: date-time
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1052,7 +1191,14 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/ListDeliverabilityTestReportsRequest'
+            type: object
+            properties:
+              NextToken:
+                description: A token returned from a previous call to <code>ListDeliverabilityTestReports</code> to indicate the position in the list of predictive inbox placement tests.
+                type: string
+              PageSize:
+                description: '<p>The number of results to show in a single call to <code>ListDeliverabilityTestReports</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.</p> <p>The value you specify has to be at least 0, and can be no more than 1000.</p>'
+                type: integer
         - name: PageSize
           type: string
           in: query
@@ -1095,7 +1241,11 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/PutAccountDedicatedIpWarmupAttributesRequest'
+            type: object
+            properties:
+              AutoWarmupEnabled:
+                description: 'Enables or disables the automatic warm-up feature for dedicated IP addresses that are associated with your Amazon Pinpoint account in the current AWS Region. Set to <code>true</code> to enable the automatic warm-up feature, or set to <code>false</code> to disable it.'
+                type: boolean
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1128,7 +1278,11 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/PutAccountSendingAttributesRequest'
+            type: object
+            properties:
+              SendingEnabled:
+                description: '<p>Enables or disables your account''s ability to send email. Set to <code>true</code> to enable email sending, or set to <code>false</code> to disable email sending.</p> <note> <p>If AWS paused your account''s ability to send email, you can''t use this operation to resume your account''s ability to send email.</p> </note>'
+                type: boolean
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1161,15 +1315,20 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
+        - name: ConfigurationSetName
+          in: path
+          required: true
+          description: '<p>The name of a configuration set.</p> <p>In Amazon Pinpoint, <i>configuration sets</i> are groups of rules that you can apply to the emails you send. You apply a configuration set to an email by including a reference to the configuration set in the headers of the email. When you apply a configuration set to an email, all of the rules in that configuration set are applied to the email.</p>'
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/PutConfigurationSetDeliveryOptionsRequest'
-        - name: ConfigurationSetName
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              SendingPoolName:
+                description: The name of the dedicated IP pool that you want to associate with the configuration set.
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1202,15 +1361,20 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
+        - name: ConfigurationSetName
+          in: path
+          required: true
+          description: '<p>The name of a configuration set.</p> <p>In Amazon Pinpoint, <i>configuration sets</i> are groups of rules that you can apply to the emails you send. You apply a configuration set to an email by including a reference to the configuration set in the headers of the email. When you apply a configuration set to an email, all of the rules in that configuration set are applied to the email.</p>'
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/PutConfigurationSetReputationOptionsRequest'
-        - name: ConfigurationSetName
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              ReputationMetricsEnabled:
+                description: 'If <code>true</code>, tracking of reputation metrics is enabled for the configuration set. If <code>false</code>, tracking of reputation metrics is disabled for the configuration set.'
+                type: boolean
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1243,15 +1407,20 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
+        - name: ConfigurationSetName
+          in: path
+          required: true
+          description: '<p>The name of a configuration set.</p> <p>In Amazon Pinpoint, <i>configuration sets</i> are groups of rules that you can apply to the emails you send. You apply a configuration set to an email by including a reference to the configuration set in the headers of the email. When you apply a configuration set to an email, all of the rules in that configuration set are applied to the email.</p>'
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/PutConfigurationSetSendingOptionsRequest'
-        - name: ConfigurationSetName
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              SendingEnabled:
+                description: 'If <code>true</code>, email sending is enabled for the configuration set. If <code>false</code>, email sending is disabled for the configuration set.'
+                type: boolean
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1284,15 +1453,20 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
+        - name: ConfigurationSetName
+          in: path
+          required: true
+          description: '<p>The name of a configuration set.</p> <p>In Amazon Pinpoint, <i>configuration sets</i> are groups of rules that you can apply to the emails you send. You apply a configuration set to an email by including a reference to the configuration set in the headers of the email. When you apply a configuration set to an email, all of the rules in that configuration set are applied to the email.</p>'
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/PutConfigurationSetTrackingOptionsRequest'
-        - name: ConfigurationSetName
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              CustomRedirectDomain:
+                description: The domain that you want to use for tracking open and click events.
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1325,15 +1499,22 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
+        - name: IP
+          in: path
+          required: true
+          description: A dedicated IP address that is associated with your Amazon Pinpoint account.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/PutDedicatedIpInPoolRequest'
-        - name: IP
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - DestinationPoolName
+            properties:
+              DestinationPoolName:
+                description: The name of a dedicated IP pool.
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1366,15 +1547,22 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
+        - name: IP
+          in: path
+          required: true
+          description: A dedicated IP address that is associated with your Amazon Pinpoint account.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/PutDedicatedIpWarmupAttributesRequest'
-        - name: IP
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - WarmupPercentage
+            properties:
+              WarmupPercentage:
+                description: The warm-up percentage that you want to associate with the dedicated IP address.
+                type: integer
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1407,15 +1595,20 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
+        - name: EmailIdentity
+          in: path
+          required: true
+          description: The email identity that you want to change the DKIM settings for.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/PutEmailIdentityDkimAttributesRequest'
-        - name: EmailIdentity
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              SigningEnabled:
+                description: '<p>Sets the DKIM signing configuration for the identity.</p> <p>When you set this value <code>true</code>, then the messages that Amazon Pinpoint sends from the identity are DKIM-signed. When you set this value to <code>false</code>, then the messages that Amazon Pinpoint sends from the identity aren''t DKIM-signed.</p>'
+                type: boolean
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1448,15 +1641,20 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
+        - name: EmailIdentity
+          in: path
+          required: true
+          description: The email identity that you want to configure bounce and complaint feedback forwarding for.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/PutEmailIdentityFeedbackAttributesRequest'
-        - name: EmailIdentity
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              EmailForwardingEnabled:
+                description: '<p>Sets the feedback forwarding configuration for the identity.</p> <p>If the value is <code>true</code>, Amazon Pinpoint sends you email notifications when bounce or complaint events occur. Amazon Pinpoint sends this notification to the address that you specified in the Return-Path header of the original email.</p> <p>When you set this value to <code>false</code>, Amazon Pinpoint sends notifications through other mechanisms, such as by notifying an Amazon SNS topic or another event destination. You''re required to have a method of tracking bounces and complaints. If you haven''t set up another mechanism for receiving bounce or complaint notifications, Amazon Pinpoint sends an email notification when these events occur (even if this setting is disabled).</p>'
+                type: boolean
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1489,15 +1687,26 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
+        - name: EmailIdentity
+          in: path
+          required: true
+          description: The verified email identity that you want to set up the custom MAIL FROM domain for.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/PutEmailIdentityMailFromAttributesRequest'
-        - name: EmailIdentity
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              MailFromDomain:
+                description: The domain that you want to use as a MAIL FROM domain.
+                type: string
+              BehaviorOnMxFailure:
+                description: '<p>The action that you want Amazon Pinpoint to take if it can''t read the required MX record for a custom MAIL FROM domain. When you set this value to <code>UseDefaultValue</code>, Amazon Pinpoint uses <i>amazonses.com</i> as the MAIL FROM domain. When you set this value to <code>RejectMessage</code>, Amazon Pinpoint returns a <code>MailFromDomainNotVerified</code> error, and doesn''t attempt to deliver the email.</p> <p>These behaviors are taken when the custom MAIL FROM domain configuration is in the <code>Pending</code>, <code>Failed</code>, and <code>TemporaryFailure</code> states.</p>'
+                type: string
+                enum:
+                  - USE_DEFAULT_VALUE
+                  - REJECT_MESSAGE
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1554,7 +1763,53 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/SendEmailRequest'
+            type: object
+            required:
+              - Destination
+              - Content
+            properties:
+              FromEmailAddress:
+                description: 'The email address that you want to use as the "From" address for the email. The address that you specify has to be verified. '
+                type: string
+              Destination:
+                description: An object that describes the recipients for an email.
+                type: object
+                properties:
+                  ToAddresses:
+                    $ref: '#/definitions/EmailAddressList'
+                    description: An array that contains the email addresses of the "To" recipients for the email.
+                  CcAddresses:
+                    $ref: '#/definitions/EmailAddressList'
+                    description: An array that contains the email addresses of the "CC" (carbon copy) recipients for the email.
+                  BccAddresses:
+                    $ref: '#/definitions/EmailAddressList'
+                    description: An array that contains the email addresses of the "BCC" (blind carbon copy) recipients for the email.
+              ReplyToAddresses:
+                description: 'The "Reply-to" email addresses for the message. When the recipient replies to the message, each Reply-to address receives the reply.'
+                type: array
+                items:
+                  $ref: '#/definitions/EmailAddress'
+              FeedbackForwardingEmailAddress:
+                description: The address that Amazon Pinpoint should send bounce and complaint notifications to.
+                type: string
+              Content:
+                description: 'An object that defines the entire content of the email, including the message headers and the body content. You can create a simple email message, in which you specify the subject and the text and HTML versions of the message body. You can also create raw messages, in which you specify a complete MIME-formatted message. Raw messages can include attachments and custom headers.'
+                type: object
+                properties:
+                  Simple:
+                    $ref: '#/definitions/Message'
+                    description: The simple email message. The message consists of a subject and a message body.
+                  Raw:
+                    $ref: '#/definitions/RawMessage'
+                    description: '<p>The raw email message. The message has to meet the following criteria:</p> <ul> <li> <p>The message has to contain a header and a body, separated by one blank line.</p> </li> <li> <p>All of the required header fields must be present in the message.</p> </li> <li> <p>Each part of a multipart MIME message must be formatted properly.</p> </li> <li> <p>If you include attachments, they must be in a file format that Amazon Pinpoint supports. </p> </li> <li> <p>The entire message must be Base64 encoded.</p> </li> <li> <p>If any of the MIME parts in your message contain content that is outside of the 7-bit ASCII character range, you should encode that content to ensure that recipients'' email clients render the message properly.</p> </li> <li> <p>The length of any single line of text in the message can''t exceed 1,000 characters. This restriction is defined in <a href="https://tools.ietf.org/html/rfc5321">RFC 5321</a>.</p> </li> </ul>'
+              EmailTags:
+                description: A list of message tags.
+                type: array
+                items:
+                  $ref: '#/definitions/MessageTag'
+              ConfigurationSetName:
+                description: '<p>The name of a configuration set.</p> <p>In Amazon Pinpoint, <i>configuration sets</i> are groups of rules that you can apply to the emails you send. You apply a configuration set to an email by including a reference to the configuration set in the headers of the email. When you apply a configuration set to an email, all of the rules in that configuration set are applied to the email.</p>'
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1570,25 +1825,18 @@ definitions:
     type: object
     properties: {}
     description: 'An HTTP 200 response if the request succeeds, or an error message if the request fails.'
-  CreateConfigurationSetRequest:
-    type: object
-    properties:
-      ConfigurationSetName:
-        $ref: '#/definitions/ConfigurationSetName'
-        description: The name of the configuration set.
-      TrackingOptions:
-        $ref: '#/definitions/TrackingOptions'
-        description: An object that defines the open and click tracking options for emails that you send using the configuration set.
-      DeliveryOptions:
-        $ref: '#/definitions/DeliveryOptions'
-        description: An object that defines the dedicated IP pool that is used to send emails that you send using the configuration set.
-      ReputationOptions:
-        $ref: '#/definitions/ReputationOptions'
-        description: An object that defines whether or not Amazon Pinpoint collects reputation metrics for the emails that you send that use the configuration set.
-      SendingOptions:
-        $ref: '#/definitions/SendingOptions'
-        description: An object that defines whether or not Amazon Pinpoint can send email that you send using the configuration set.
-    description: A request to create a configuration set.
+  CustomRedirectDomain:
+    type: string
+    description: The domain that you want to use for tracking open and click events.
+  PoolName:
+    type: string
+    description: The name of a dedicated IP pool.
+  Enabled:
+    type: boolean
+  LastFreshStart:
+    type: string
+    description: 'The date and time (in Unix time) when the reputation metrics were last given a fresh start. When your account is given a fresh start, your reputation metrics are calculated starting from the date of the fresh start.'
+    format: date-time
   AlreadyExistsException: {}
   NotFoundException: {}
   TooManyRequestsException: {}
@@ -1598,32 +1846,52 @@ definitions:
     type: object
     properties: {}
     description: 'An HTTP 200 response if the request succeeds, or an error message if the request fails.'
-  CreateConfigurationSetEventDestinationRequest:
+  EventTypes:
+    type: array
+    items:
+      $ref: '#/definitions/EventType'
+  KinesisFirehoseDestination:
     type: object
     required:
-      - EventDestinationName
-      - EventDestination
+      - IamRoleArn
+      - DeliveryStreamArn
     properties:
-      EventDestinationName:
-        $ref: '#/definitions/EventDestinationName'
-        description: A name that identifies the event destination within the configuration set.
-      EventDestination:
-        $ref: '#/definitions/EventDestinationDefinition'
-        description: An object that defines the event destination.
-    description: A request to add an event destination to a configuration set.
+      IamRoleArn:
+        $ref: '#/definitions/AmazonResourceName'
+        description: The Amazon Resource Name (ARN) of the IAM role that Amazon Pinpoint uses when sending email events to the Amazon Kinesis Data Firehose stream.
+      DeliveryStreamArn:
+        $ref: '#/definitions/AmazonResourceName'
+        description: The Amazon Resource Name (ARN) of the Amazon Kinesis Data Firehose stream that Amazon Pinpoint sends email events to.
+    description: 'An object that defines an Amazon Kinesis Data Firehose destination for email events. You can use Amazon Kinesis Data Firehose to stream data to other services, such as Amazon S3 and Amazon Redshift.'
+  CloudWatchDestination:
+    type: object
+    required:
+      - DimensionConfigurations
+    properties:
+      DimensionConfigurations:
+        $ref: '#/definitions/CloudWatchDimensionConfigurations'
+        description: An array of objects that define the dimensions to use when you send email events to Amazon CloudWatch.
+    description: An object that defines an Amazon CloudWatch destination for email events. You can use Amazon CloudWatch to monitor and gain insights on your email sending metrics.
+  SnsDestination:
+    type: object
+    required:
+      - TopicArn
+    properties:
+      TopicArn:
+        $ref: '#/definitions/AmazonResourceName'
+        description: 'The Amazon Resource Name (ARN) of the Amazon SNS topic that you want to publish email events to. For more information about Amazon SNS topics, see the <a href="http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html">Amazon SNS Developer Guide</a>.'
+    description: An object that defines an Amazon SNS destination for email events. You can use Amazon SNS to send notification when certain email events occur.
+  PinpointDestination:
+    type: object
+    properties:
+      ApplicationArn:
+        $ref: '#/definitions/AmazonResourceName'
+        description: The Amazon Resource Name (ARN) of the Amazon Pinpoint project that you want to send email events to.
+    description: An object that defines a Amazon Pinpoint destination for email events. You can use Amazon Pinpoint events to create attributes in Amazon Pinpoint projects. You can use these attributes to create segments for your campaigns.
   CreateDedicatedIpPoolResponse:
     type: object
     properties: {}
     description: 'An HTTP 200 response if the request succeeds, or an error message if the request fails.'
-  CreateDedicatedIpPoolRequest:
-    type: object
-    required:
-      - PoolName
-    properties:
-      PoolName:
-        $ref: '#/definitions/PoolName'
-        description: The name of the dedicated IP pool.
-    description: A request to create a new dedicated IP pool.
   CreateDeliverabilityTestReportResponse:
     type: object
     required:
@@ -1637,22 +1905,28 @@ definitions:
         $ref: '#/definitions/DeliverabilityTestStatus'
         description: 'The status of the predictive inbox placement test. If the status is <code>IN_PROGRESS</code>, then the predictive inbox placement test is currently running. Predictive inbox placement tests are usually complete within 24 hours of creating the test. If the status is <code>COMPLETE</code>, then the test is finished, and you can use the <code>GetDeliverabilityTestReport</code> to view the results of the test.'
     description: Information about the predictive inbox placement test that you created.
-  CreateDeliverabilityTestReportRequest:
+  Message:
     type: object
     required:
-      - FromEmailAddress
-      - Content
+      - Subject
+      - Body
     properties:
-      ReportName:
-        $ref: '#/definitions/ReportName'
-        description: A unique name that helps you to identify the predictive inbox placement test when you retrieve the results.
-      FromEmailAddress:
-        $ref: '#/definitions/EmailAddress'
-        description: The email address that the predictive inbox placement test email was sent from.
-      Content:
-        $ref: '#/definitions/EmailContent'
-        description: The HTML body of the message that you sent when you performed the predictive inbox placement test.
-    description: 'A request to perform a predictive inbox placement test. Predictive inbox placement tests can help you predict how your messages will be handled by various email providers around the world. When you perform a predictive inbox placement test, you provide a sample message that contains the content that you plan to send to your customers. Amazon Pinpoint then sends that message to special email addresses spread across several major email providers. After about 24 hours, the test is complete, and you can use the <code>GetDeliverabilityTestReport</code> operation to view the results of the test.'
+      Subject:
+        $ref: '#/definitions/Content'
+        description: 'The subject line of the email. The subject line can only contain 7-bit ASCII characters. However, you can specify non-ASCII characters in the subject line by using encoded-word syntax, as described in <a href="https://tools.ietf.org/html/rfc2047">RFC 2047</a>.'
+      Body:
+        $ref: '#/definitions/Body'
+        description: 'The body of the message. You can specify an HTML version of the message, a text-only version of the message, or both.'
+    description: Represents the email message that you're sending. The <code>Message</code> object consists of a subject line and a message body.
+  RawMessage:
+    type: object
+    required:
+      - Data
+    properties:
+      Data:
+        $ref: '#/definitions/RawMessageData'
+        description: '<p>The raw email message. The message has to meet the following criteria:</p> <ul> <li> <p>The message has to contain a header and a body, separated by one blank line.</p> </li> <li> <p>All of the required header fields must be present in the message.</p> </li> <li> <p>Each part of a multipart MIME message must be formatted properly.</p> </li> <li> <p>Attachments must be in a file format that Amazon Pinpoint supports. </p> </li> <li> <p>The entire message must be Base64 encoded.</p> </li> <li> <p>If any of the MIME parts in your message contain content that is outside of the 7-bit ASCII character range, you should encode that content to ensure that recipients'' email clients render the message properly.</p> </li> <li> <p>The length of any single line of text in the message can''t exceed 1,000 characters. This restriction is defined in <a href="https://tools.ietf.org/html/rfc5321">RFC 5321</a>.</p> </li> </ul>'
+    description: The raw email message.
   AccountSuspendedException: {}
   SendingPausedException: {}
   MessageRejected: {}
@@ -1670,47 +1944,22 @@ definitions:
         $ref: '#/definitions/DkimAttributes'
         description: An object that contains information about the DKIM attributes for the identity. This object includes the tokens that you use to create the CNAME records that are required to complete the DKIM verification process.
     description: '<p>If the email identity is a domain, this object contains tokens that you can use to create a set of CNAME records. To sucessfully verify your domain, you have to add these records to the DNS configuration for your domain.</p> <p>If the email identity is an email address, this object is empty. </p>'
-  CreateEmailIdentityRequest:
-    type: object
-    required:
-      - EmailIdentity
-    properties:
-      EmailIdentity:
-        $ref: '#/definitions/Identity'
-        description: The email address or domain that you want to verify.
-    description: A request to begin the verification process for an email identity (an email address or domain).
   DeleteConfigurationSetResponse:
     type: object
     properties: {}
     description: 'An HTTP 200 response if the request succeeds, or an error message if the request fails.'
-  DeleteConfigurationSetRequest:
-    type: object
-    properties: {}
-    description: A request to delete a configuration set.
   DeleteConfigurationSetEventDestinationResponse:
     type: object
     properties: {}
     description: 'An HTTP 200 response if the request succeeds, or an error message if the request fails.'
-  DeleteConfigurationSetEventDestinationRequest:
-    type: object
-    properties: {}
-    description: A request to delete an event destination from a configuration set.
   DeleteDedicatedIpPoolResponse:
     type: object
     properties: {}
     description: 'An HTTP 200 response if the request succeeds, or an error message if the request fails.'
-  DeleteDedicatedIpPoolRequest:
-    type: object
-    properties: {}
-    description: A request to delete a dedicated IP pool.
   DeleteEmailIdentityResponse:
     type: object
     properties: {}
     description: 'An HTTP 200 response if the request succeeds, or an error message if the request fails.'
-  DeleteEmailIdentityRequest:
-    type: object
-    properties: {}
-    description: 'A request to delete an existing email identity. When you delete an identity, you lose the ability to use Amazon Pinpoint to send email from that identity. You can restore your ability to send email by completing the verification process for the identity again.'
   GetAccountResponse:
     type: object
     properties:
@@ -1730,10 +1979,6 @@ definitions:
         $ref: '#/definitions/Enabled'
         description: '<p>Indicates whether or not your account has production access in the current AWS Region.</p> <p>If the value is <code>false</code>, then your account is in the <i>sandbox</i>. When your account is in the sandbox, you can only send email to verified identities. Additionally, the maximum number of emails you can send in a 24-hour period (your sending quota) is 200, and the maximum number of emails you can send per second (your maximum sending rate) is 1.</p> <p>If the value is <code>true</code>, then your account has production access. When your account has production access, you can send email to any address. The sending quota and maximum sending rate for your account vary based on your specific use case.</p>'
     description: A list of details about the email-sending capabilities of your Amazon Pinpoint account in the current AWS Region.
-  GetAccountRequest:
-    type: object
-    properties: {}
-    description: A request to obtain information about the email-sending capabilities of your Amazon Pinpoint account.
   GetBlacklistReportsResponse:
     type: object
     required:
@@ -1743,15 +1988,9 @@ definitions:
         $ref: '#/definitions/BlacklistReport'
         description: An object that contains information about a blacklist that one of your dedicated IP addresses appears on.
     description: An object that contains information about blacklist events.
-  GetBlacklistReportsRequest:
-    type: object
-    required:
-      - BlacklistItemNames
-    properties:
-      BlacklistItemNames:
-        $ref: '#/definitions/BlacklistItemNames'
-        description: A list of IP addresses that you want to retrieve blacklist information about. You can only specify the dedicated IP addresses that you use to send email using Amazon Pinpoint or Amazon SES.
-    description: A request to retrieve a list of the blacklists that your dedicated IP addresses appear on.
+  BlacklistItemName:
+    type: string
+    description: An IP address that you want to obtain blacklist information for.
   GetConfigurationSetResponse:
     type: object
     properties:
@@ -1771,10 +2010,6 @@ definitions:
         $ref: '#/definitions/SendingOptions'
         description: An object that defines whether or not Amazon Pinpoint can send email that you send using the configuration set.
     description: Information about a configuration set.
-  GetConfigurationSetRequest:
-    type: object
-    properties: {}
-    description: A request to obtain information about a configuration set.
   GetConfigurationSetEventDestinationsResponse:
     type: object
     properties:
@@ -1782,10 +2017,6 @@ definitions:
         $ref: '#/definitions/EventDestinations'
         description: An array that includes all of the events destinations that have been configured for the configuration set.
     description: Information about an event destination for a configuration set.
-  GetConfigurationSetEventDestinationsRequest:
-    type: object
-    properties: {}
-    description: A request to obtain information about the event destinations for a configuration set.
   GetDedicatedIpResponse:
     type: object
     properties:
@@ -1793,10 +2024,6 @@ definitions:
         $ref: '#/definitions/DedicatedIp'
         description: An object that contains information about a dedicated IP address.
     description: Information about a dedicated IP address.
-  GetDedicatedIpRequest:
-    type: object
-    properties: {}
-    description: A request to obtain more information about a dedicated IP address.
   GetDedicatedIpsResponse:
     type: object
     properties:
@@ -1807,19 +2034,6 @@ definitions:
         $ref: '#/definitions/NextToken'
         description: 'A token that indicates that there are additional dedicated IP addresses to list. To view additional addresses, issue another request to <code>GetDedicatedIps</code>, passing this token in the <code>NextToken</code> parameter.'
     description: Information about the dedicated IP addresses that are associated with your Amazon Pinpoint account.
-  GetDedicatedIpsRequest:
-    type: object
-    properties:
-      PoolName:
-        $ref: '#/definitions/PoolName'
-        description: The name of the IP pool that the dedicated IP address is associated with.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: A token returned from a previous call to <code>GetDedicatedIps</code> to indicate the position of the dedicated IP pool in the list of IP pools.
-      PageSize:
-        $ref: '#/definitions/MaxItems'
-        description: 'The number of results to show in a single call to <code>GetDedicatedIpsRequest</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.'
-    description: A request to obtain more information about dedicated IP pools.
   GetDeliverabilityDashboardOptionsResponse:
     type: object
     required:
@@ -1829,10 +2043,6 @@ definitions:
         $ref: '#/definitions/Enabled'
         description: 'Indicates whether the Deliverability dashboard is enabled. If the value is <code>true</code>, then the dashboard is enabled.'
     description: An object that shows the status of the Deliverability dashboard for your Amazon Pinpoint account.
-  GetDeliverabilityDashboardOptionsRequest:
-    type: object
-    properties: {}
-    description: '<p>A request to retrieve the status of the Deliverability dashboard for your account. When the Deliverability dashboard is enabled, you gain access to reputation metrics for the domains that you use to send email using Amazon Pinpoint. You also gain the ability to perform predictive inbox placement tests.</p> <p>When you use the Deliverability dashboard, you pay a monthly charge of USD$1,250.00, in addition to any other fees that you accrue by using Amazon Pinpoint. If you enable the Deliverability dashboard after the first day of a calendar month, AWS prorates the monthly charge based on how many days have elapsed in the current calendar month.</p>'
   GetDeliverabilityTestReportResponse:
     type: object
     required:
@@ -1853,10 +2063,6 @@ definitions:
         $ref: '#/definitions/MessageContent'
         description: An object that contains the message that you sent when you performed this predictive inbox placement test.
     description: The results of the predictive inbox placement test.
-  GetDeliverabilityTestReportRequest:
-    type: object
-    properties: {}
-    description: A request to retrieve the results of a predictive inbox placement test.
   GetDomainStatisticsReportResponse:
     type: object
     required:
@@ -1870,19 +2076,6 @@ definitions:
         $ref: '#/definitions/DailyVolumes'
         description: 'An object that contains deliverability metrics for the domain that you specified. This object contains data for each day, starting on the <code>StartDate</code> and ending on the <code>EndDate</code>.'
     description: An object that includes statistics that are related to the domain that you specified.
-  GetDomainStatisticsReportRequest:
-    type: object
-    required:
-      - StartDate
-      - EndDate
-    properties:
-      StartDate:
-        $ref: '#/definitions/Timestamp'
-        description: The first day (in Unix time) that you want to obtain domain deliverability metrics for.
-      EndDate:
-        $ref: '#/definitions/Timestamp'
-        description: The last day (in Unix time) that you want to obtain domain deliverability metrics for. The <code>EndDate</code> that you specify has to be less than or equal to 30 days after the <code>StartDate</code>.
-    description: A request to obtain deliverability metrics for a domain.
   GetEmailIdentityResponse:
     type: object
     properties:
@@ -1902,10 +2095,6 @@ definitions:
         $ref: '#/definitions/MailFromAttributes'
         description: An object that contains information about the Mail-From attributes for the email identity.
     description: Details about an email identity.
-  GetEmailIdentityRequest:
-    type: object
-    properties: {}
-    description: A request to return details about an email identity.
   ListConfigurationSetsResponse:
     type: object
     properties:
@@ -1916,16 +2105,6 @@ definitions:
         $ref: '#/definitions/NextToken'
         description: 'A token that indicates that there are additional configuration sets to list. To view additional configuration sets, issue another request to <code>ListConfigurationSets</code>, and pass this token in the <code>NextToken</code> parameter.'
     description: A list of configuration sets in your Amazon Pinpoint account in the current AWS Region.
-  ListConfigurationSetsRequest:
-    type: object
-    properties:
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: A token returned from a previous call to <code>ListConfigurationSets</code> to indicate the position in the list of configuration sets.
-      PageSize:
-        $ref: '#/definitions/MaxItems'
-        description: 'The number of results to show in a single call to <code>ListConfigurationSets</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.'
-    description: A request to obtain a list of configuration sets for your Amazon Pinpoint account in the current AWS Region.
   ListDedicatedIpPoolsResponse:
     type: object
     properties:
@@ -1936,16 +2115,6 @@ definitions:
         $ref: '#/definitions/NextToken'
         description: 'A token that indicates that there are additional IP pools to list. To view additional IP pools, issue another request to <code>ListDedicatedIpPools</code>, passing this token in the <code>NextToken</code> parameter.'
     description: A list of dedicated IP pools.
-  ListDedicatedIpPoolsRequest:
-    type: object
-    properties:
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: A token returned from a previous call to <code>ListDedicatedIpPools</code> to indicate the position in the list of dedicated IP pools.
-      PageSize:
-        $ref: '#/definitions/MaxItems'
-        description: 'The number of results to show in a single call to <code>ListDedicatedIpPools</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.'
-    description: A request to obtain a list of dedicated IP pools.
   ListDeliverabilityTestReportsResponse:
     type: object
     required:
@@ -1958,16 +2127,6 @@ definitions:
         $ref: '#/definitions/NextToken'
         description: 'A token that indicates that there are additional predictive inbox placement tests to list. To view additional predictive inbox placement tests, issue another request to <code>ListDeliverabilityTestReports</code>, and pass this token in the <code>NextToken</code> parameter.'
     description: 'A list of the predictive inbox placement test reports that are available for your account, regardless of whether or not those tests are complete.'
-  ListDeliverabilityTestReportsRequest:
-    type: object
-    properties:
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: A token returned from a previous call to <code>ListDeliverabilityTestReports</code> to indicate the position in the list of predictive inbox placement tests.
-      PageSize:
-        $ref: '#/definitions/MaxItems'
-        description: '<p>The number of results to show in a single call to <code>ListDeliverabilityTestReports</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.</p> <p>The value you specify has to be at least 0, and can be no more than 1000.</p>'
-    description: A request to list all of the predictive inbox placement tests that you've performed.
   ListEmailIdentitiesResponse:
     type: object
     properties:
@@ -1978,157 +2137,54 @@ definitions:
         $ref: '#/definitions/NextToken'
         description: 'A token that indicates that there are additional configuration sets to list. To view additional configuration sets, issue another request to <code>ListEmailIdentities</code>, and pass this token in the <code>NextToken</code> parameter.'
     description: 'A list of all of the identities that you''ve attempted to verify for use with Amazon Pinpoint, regardless of whether or not those identities were successfully verified.'
-  ListEmailIdentitiesRequest:
-    type: object
-    properties:
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: A token returned from a previous call to <code>ListEmailIdentities</code> to indicate the position in the list of identities.
-      PageSize:
-        $ref: '#/definitions/MaxItems'
-        description: '<p>The number of results to show in a single call to <code>ListEmailIdentities</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.</p> <p>The value you specify has to be at least 0, and can be no more than 1000.</p>'
-    description: 'A request to list all of the email identities associated with your Amazon Pinpoint account. This list includes identities that you''ve already verified, identities that are unverified, and identities that were verified in the past, but are no longer verified.'
   PutAccountDedicatedIpWarmupAttributesResponse:
     type: object
     properties: {}
     description: 'An HTTP 200 response if the request succeeds, or an error message if the request fails.'
-  PutAccountDedicatedIpWarmupAttributesRequest:
-    type: object
-    properties:
-      AutoWarmupEnabled:
-        $ref: '#/definitions/Enabled'
-        description: 'Enables or disables the automatic warm-up feature for dedicated IP addresses that are associated with your Amazon Pinpoint account in the current AWS Region. Set to <code>true</code> to enable the automatic warm-up feature, or set to <code>false</code> to disable it.'
-    description: A request to enable or disable the automatic IP address warm-up feature.
   PutAccountSendingAttributesResponse:
     type: object
     properties: {}
     description: 'An HTTP 200 response if the request succeeds, or an error message if the request fails.'
-  PutAccountSendingAttributesRequest:
-    type: object
-    properties:
-      SendingEnabled:
-        $ref: '#/definitions/Enabled'
-        description: '<p>Enables or disables your account''s ability to send email. Set to <code>true</code> to enable email sending, or set to <code>false</code> to disable email sending.</p> <note> <p>If AWS paused your account''s ability to send email, you can''t use this operation to resume your account''s ability to send email.</p> </note>'
-    description: A request to change the ability of your account to send email.
   PutConfigurationSetDeliveryOptionsResponse:
     type: object
     properties: {}
     description: 'An HTTP 200 response if the request succeeds, or an error message if the request fails.'
-  PutConfigurationSetDeliveryOptionsRequest:
-    type: object
-    properties:
-      SendingPoolName:
-        $ref: '#/definitions/SendingPoolName'
-        description: The name of the dedicated IP pool that you want to associate with the configuration set.
-    description: A request to associate a configuration set with a dedicated IP pool.
   PutConfigurationSetReputationOptionsResponse:
     type: object
     properties: {}
     description: 'An HTTP 200 response if the request succeeds, or an error message if the request fails.'
-  PutConfigurationSetReputationOptionsRequest:
-    type: object
-    properties:
-      ReputationMetricsEnabled:
-        $ref: '#/definitions/Enabled'
-        description: 'If <code>true</code>, tracking of reputation metrics is enabled for the configuration set. If <code>false</code>, tracking of reputation metrics is disabled for the configuration set.'
-    description: A request to enable or disable tracking of reputation metrics for a configuration set.
   PutConfigurationSetSendingOptionsResponse:
     type: object
     properties: {}
     description: 'An HTTP 200 response if the request succeeds, or an error message if the request fails.'
-  PutConfigurationSetSendingOptionsRequest:
-    type: object
-    properties:
-      SendingEnabled:
-        $ref: '#/definitions/Enabled'
-        description: 'If <code>true</code>, email sending is enabled for the configuration set. If <code>false</code>, email sending is disabled for the configuration set.'
-    description: A request to enable or disable the ability of Amazon Pinpoint to send emails that use a specific configuration set.
   PutConfigurationSetTrackingOptionsResponse:
     type: object
     properties: {}
     description: 'An HTTP 200 response if the request succeeds, or an error message if the request fails.'
-  PutConfigurationSetTrackingOptionsRequest:
-    type: object
-    properties:
-      CustomRedirectDomain:
-        $ref: '#/definitions/CustomRedirectDomain'
-        description: The domain that you want to use to track open and click events.
-    description: A request to add a custom domain for tracking open and click events to a configuration set.
   PutDedicatedIpInPoolResponse:
     type: object
     properties: {}
     description: 'An HTTP 200 response if the request succeeds, or an error message if the request fails.'
-  PutDedicatedIpInPoolRequest:
-    type: object
-    required:
-      - DestinationPoolName
-    properties:
-      DestinationPoolName:
-        $ref: '#/definitions/PoolName'
-        description: The name of the IP pool that you want to add the dedicated IP address to. You have to specify an IP pool that already exists.
-    description: A request to move a dedicated IP address to a dedicated IP pool.
   PutDedicatedIpWarmupAttributesResponse:
     type: object
     properties: {}
     description: 'An HTTP 200 response if the request succeeds, or an error message if the request fails.'
-  PutDedicatedIpWarmupAttributesRequest:
-    type: object
-    required:
-      - WarmupPercentage
-    properties:
-      WarmupPercentage:
-        $ref: '#/definitions/Percentage100Wrapper'
-        description: The warm-up percentage that you want to associate with the dedicated IP address.
-    description: A request to change the warm-up attributes for a dedicated IP address. This operation is useful when you want to resume the warm-up process for an existing IP address.
   PutDeliverabilityDashboardOptionResponse:
     type: object
     properties: {}
     description: A response that indicates whether the Deliverability dashboard is enabled for your Amazon Pinpoint account.
-  PutDeliverabilityDashboardOptionRequest:
-    type: object
-    required:
-      - DashboardEnabled
-    properties:
-      DashboardEnabled:
-        $ref: '#/definitions/Enabled'
-        description: 'Indicates whether the Deliverability dashboard is enabled. If the value is <code>true</code>, then the dashboard is enabled.'
-    description: '<p>A request to enable or disable the Deliverability dashboard. When you enable the Deliverability dashboard, you gain access to reputation metrics for the domains that you use to send email using Amazon Pinpoint. You also gain the ability to perform predictive inbox placement tests.</p> <p>When you use the Deliverability dashboard, you pay a monthly charge of USD$1,250.00, in addition to any other fees that you accrue by using Amazon Pinpoint. If you enable the Deliverability dashboard after the first day of a calendar month, we prorate the monthly charge based on how many days have elapsed in the current calendar month.</p>'
   PutEmailIdentityDkimAttributesResponse:
     type: object
     properties: {}
     description: 'An HTTP 200 response if the request succeeds, or an error message if the request fails.'
-  PutEmailIdentityDkimAttributesRequest:
-    type: object
-    properties:
-      SigningEnabled:
-        $ref: '#/definitions/Enabled'
-        description: '<p>Sets the DKIM signing configuration for the identity.</p> <p>When you set this value <code>true</code>, then the messages that Amazon Pinpoint sends from the identity are DKIM-signed. When you set this value to <code>false</code>, then the messages that Amazon Pinpoint sends from the identity aren''t DKIM-signed.</p>'
-    description: A request to enable or disable DKIM signing of email that you send from an email identity.
   PutEmailIdentityFeedbackAttributesResponse:
     type: object
     properties: {}
     description: 'An HTTP 200 response if the request succeeds, or an error message if the request fails.'
-  PutEmailIdentityFeedbackAttributesRequest:
-    type: object
-    properties:
-      EmailForwardingEnabled:
-        $ref: '#/definitions/Enabled'
-        description: '<p>Sets the feedback forwarding configuration for the identity.</p> <p>If the value is <code>true</code>, Amazon Pinpoint sends you email notifications when bounce or complaint events occur. Amazon Pinpoint sends this notification to the address that you specified in the Return-Path header of the original email.</p> <p>When you set this value to <code>false</code>, Amazon Pinpoint sends notifications through other mechanisms, such as by notifying an Amazon SNS topic or another event destination. You''re required to have a method of tracking bounces and complaints. If you haven''t set up another mechanism for receiving bounce or complaint notifications, Amazon Pinpoint sends an email notification when these events occur (even if this setting is disabled).</p>'
-    description: A request to set the attributes that control how bounce and complaint events are processed.
   PutEmailIdentityMailFromAttributesResponse:
     type: object
     properties: {}
     description: 'An HTTP 200 response if the request succeeds, or an error message if the request fails.'
-  PutEmailIdentityMailFromAttributesRequest:
-    type: object
-    properties:
-      MailFromDomain:
-        $ref: '#/definitions/MailFromDomainName'
-        description: '<p> The custom MAIL FROM domain that you want the verified identity to use. The MAIL FROM domain must meet the following criteria:</p> <ul> <li> <p>It has to be a subdomain of the verified identity.</p> </li> <li> <p>It can''t be used to receive email.</p> </li> <li> <p>It can''t be used in a "From" address if the MAIL FROM domain is a destination for feedback forwarding emails.</p> </li> </ul>'
-      BehaviorOnMxFailure:
-        $ref: '#/definitions/BehaviorOnMxFailure'
-        description: '<p>The action that you want Amazon Pinpoint to take if it can''t read the required MX record when you send an email. When you set this value to <code>UseDefaultValue</code>, Amazon Pinpoint uses <i>amazonses.com</i> as the MAIL FROM domain. When you set this value to <code>RejectMessage</code>, Amazon Pinpoint returns a <code>MailFromDomainNotVerified</code> error, and doesn''t attempt to deliver the email.</p> <p>These behaviors are taken when the custom MAIL FROM domain configuration is in the <code>Pending</code>, <code>Failed</code>, and <code>TemporaryFailure</code> states.</p>'
-    description: A request to configure the custom MAIL FROM domain for a verified identity.
   SendEmailResponse:
     type: object
     properties:
@@ -2136,47 +2192,29 @@ definitions:
         $ref: '#/definitions/OutboundMessageId'
         description: '<p>A unique identifier for the message that is generated when Amazon Pinpoint accepts the message.</p> <note> <p>It is possible for Amazon Pinpoint to accept a message without sending it. This can happen when the message you''re trying to send has an attachment doesn''t pass a virus check, or when you send a templated email that contains invalid personalization content, for example.</p> </note>'
     description: A unique message ID that you receive when Amazon Pinpoint accepts an email for sending.
-  SendEmailRequest:
+  EmailAddressList:
+    type: array
+    items:
+      $ref: '#/definitions/EmailAddress'
+  EmailAddress:
+    type: string
+  MessageTag:
     type: object
     required:
-      - Destination
-      - Content
+      - Name
+      - Value
     properties:
-      FromEmailAddress:
-        $ref: '#/definitions/EmailAddress'
-        description: 'The email address that you want to use as the "From" address for the email. The address that you specify has to be verified. '
-      Destination:
-        $ref: '#/definitions/Destination'
-        description: An object that contains the recipients of the email message.
-      ReplyToAddresses:
-        $ref: '#/definitions/EmailAddressList'
-        description: 'The "Reply-to" email addresses for the message. When the recipient replies to the message, each Reply-to address receives the reply.'
-      FeedbackForwardingEmailAddress:
-        $ref: '#/definitions/EmailAddress'
-        description: The address that Amazon Pinpoint should send bounce and complaint notifications to.
-      Content:
-        $ref: '#/definitions/EmailContent'
-        description: An object that contains the body of the message. You can send either a Simple message or a Raw message.
-      EmailTags:
-        $ref: '#/definitions/MessageTagList'
-        description: 'A list of tags, in the form of name/value pairs, to apply to an email that you send using the <code>SendEmail</code> operation. Tags correspond to characteristics of the email that you define, so that you can publish email sending events. '
-      ConfigurationSetName:
-        $ref: '#/definitions/ConfigurationSetName'
-        description: The name of the configuration set that you want to use when sending the email.
-    description: A request to send an email message.
+      Name:
+        $ref: '#/definitions/MessageTagName'
+        description: '<p>The name of the message tag. The message tag name has to meet the following criteria:</p> <ul> <li> <p>It can only contain ASCII letters (a–z, A–Z), numbers (0–9), underscores (_), or dashes (-).</p> </li> <li> <p>It can contain no more than 256 characters.</p> </li> </ul>'
+      Value:
+        $ref: '#/definitions/MessageTagValue'
+        description: '<p>The value of the message tag. The message tag value has to meet the following criteria:</p> <ul> <li> <p>It can only contain ASCII letters (a–z, A–Z), numbers (0–9), underscores (_), or dashes (-).</p> </li> <li> <p>It can contain no more than 256 characters.</p> </li> </ul>'
+    description: 'Contains the name and value of a tag that you apply to an email. You can use message tags when you publish email sending events. '
   UpdateConfigurationSetEventDestinationResponse:
     type: object
     properties: {}
     description: 'An HTTP 200 response if the request succeeds, or an error message if the request fails.'
-  UpdateConfigurationSetEventDestinationRequest:
-    type: object
-    required:
-      - EventDestination
-    properties:
-      EventDestination:
-        $ref: '#/definitions/EventDestinationDefinition'
-        description: An object that defines the event destination.
-    description: A request to change the settings for an event destination for a configuration set.
   AmazonResourceName:
     type: string
   BehaviorOnMxFailure:
@@ -2211,22 +2249,14 @@ definitions:
   BlacklistingDescription:
     type: string
     description: A description of the blacklisting event.
-  BlacklistItemName:
-    type: string
-    description: An IP address that you want to obtain blacklist information for.
   BlacklistItemNames:
     type: array
     items:
       $ref: '#/definitions/BlacklistItemName'
   BlacklistReport:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/BlacklistItemName'
-        value:
-          $ref: '#/definitions/BlacklistEntries'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/BlacklistEntries'
   Content:
     type: object
     required:
@@ -2255,15 +2285,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/CloudWatchDimensionConfiguration'
-  CloudWatchDestination:
-    type: object
-    required:
-      - DimensionConfigurations
-    properties:
-      DimensionConfigurations:
-        $ref: '#/definitions/CloudWatchDimensionConfigurations'
-        description: An array of objects that define the dimensions to use when you send email events to Amazon CloudWatch.
-    description: An object that defines an Amazon CloudWatch destination for email events. You can use Amazon CloudWatch to monitor and gain insights on your email sending metrics.
   DimensionName:
     type: string
     description: '<p>The name of an Amazon CloudWatch dimension associated with an email sending metric. The name has to meet the following criteria:</p> <ul> <li> <p>It can only contain ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).</p> </li> <li> <p>It can contain no more than 256 characters.</p> </li> </ul>'
@@ -2328,6 +2349,19 @@ definitions:
         $ref: '#/definitions/PinpointDestination'
         description: An object that defines a Amazon Pinpoint destination for email events. You can use Amazon Pinpoint events to create attributes in Amazon Pinpoint projects. You can use these attributes to create segments for your campaigns.
     description: 'An object that defines the event destination. Specifically, it defines which services receive events from emails sent using the configuration set that the event destination is associated with. Also defines the types of events that are sent to the event destination.'
+  CreateConfigurationSetEventDestinationRequest:
+    type: object
+    required:
+      - EventDestinationName
+      - EventDestination
+    properties:
+      EventDestinationName:
+        $ref: '#/definitions/EventDestinationName'
+        description: A name that identifies the event destination within the configuration set.
+      EventDestination:
+        $ref: '#/definitions/EventDestinationDefinition'
+        description: An object that defines the event destination.
+    description: A request to add an event destination to a configuration set.
   TrackingOptions:
     type: object
     required:
@@ -2361,14 +2395,37 @@ definitions:
         $ref: '#/definitions/Enabled'
         description: 'If <code>true</code>, email sending is enabled for the configuration set. If <code>false</code>, email sending is disabled for the configuration set.'
     description: Used to enable or disable email sending for messages that use this configuration set in the current AWS Region.
-  PoolName:
-    type: string
-    description: The name of a dedicated IP pool.
+  CreateConfigurationSetRequest:
+    type: object
+    properties:
+      ConfigurationSetName:
+        $ref: '#/definitions/ConfigurationSetName'
+        description: The name of the configuration set.
+      TrackingOptions:
+        $ref: '#/definitions/TrackingOptions'
+        description: An object that defines the open and click tracking options for emails that you send using the configuration set.
+      DeliveryOptions:
+        $ref: '#/definitions/DeliveryOptions'
+        description: An object that defines the dedicated IP pool that is used to send emails that you send using the configuration set.
+      ReputationOptions:
+        $ref: '#/definitions/ReputationOptions'
+        description: An object that defines whether or not Amazon Pinpoint collects reputation metrics for the emails that you send that use the configuration set.
+      SendingOptions:
+        $ref: '#/definitions/SendingOptions'
+        description: An object that defines whether or not Amazon Pinpoint can send email that you send using the configuration set.
+    description: A request to create a configuration set.
+  CreateDedicatedIpPoolRequest:
+    type: object
+    required:
+      - PoolName
+    properties:
+      PoolName:
+        $ref: '#/definitions/PoolName'
+        description: The name of the dedicated IP pool.
+    description: A request to create a new dedicated IP pool.
   ReportName:
     type: string
     description: A name that helps you identify a report generated by the Deliverability dashboard.
-  EmailAddress:
-    type: string
   EmailContent:
     type: object
     properties:
@@ -2379,6 +2436,22 @@ definitions:
         $ref: '#/definitions/RawMessage'
         description: '<p>The raw email message. The message has to meet the following criteria:</p> <ul> <li> <p>The message has to contain a header and a body, separated by one blank line.</p> </li> <li> <p>All of the required header fields must be present in the message.</p> </li> <li> <p>Each part of a multipart MIME message must be formatted properly.</p> </li> <li> <p>If you include attachments, they must be in a file format that Amazon Pinpoint supports. </p> </li> <li> <p>The entire message must be Base64 encoded.</p> </li> <li> <p>If any of the MIME parts in your message contain content that is outside of the 7-bit ASCII character range, you should encode that content to ensure that recipients'' email clients render the message properly.</p> </li> <li> <p>The length of any single line of text in the message can''t exceed 1,000 characters. This restriction is defined in <a href="https://tools.ietf.org/html/rfc5321">RFC 5321</a>.</p> </li> </ul>'
     description: 'An object that defines the entire content of the email, including the message headers and the body content. You can create a simple email message, in which you specify the subject and the text and HTML versions of the message body. You can also create raw messages, in which you specify a complete MIME-formatted message. Raw messages can include attachments and custom headers.'
+  CreateDeliverabilityTestReportRequest:
+    type: object
+    required:
+      - FromEmailAddress
+      - Content
+    properties:
+      ReportName:
+        $ref: '#/definitions/ReportName'
+        description: A unique name that helps you to identify the predictive inbox placement test when you retrieve the results.
+      FromEmailAddress:
+        $ref: '#/definitions/EmailAddress'
+        description: The email address that the predictive inbox placement test email was sent from.
+      Content:
+        $ref: '#/definitions/EmailContent'
+        description: The HTML body of the message that you sent when you performed the predictive inbox placement test.
+    description: 'A request to perform a predictive inbox placement test. Predictive inbox placement tests can help you predict how your messages will be handled by various email providers around the world. When you perform a predictive inbox placement test, you provide a sample message that contains the content that you plan to send to your customers. Amazon Pinpoint then sends that message to special email addresses spread across several major email providers. After about 24 hours, the test is complete, and you can use the <code>GetDeliverabilityTestReport</code> operation to view the results of the test.'
   ReportId:
     type: string
     description: A unique string that identifies a Deliverability dashboard report.
@@ -2390,6 +2463,15 @@ definitions:
     description: 'The status of a predictive inbox placement test. If the status is <code>IN_PROGRESS</code>, then the predictive inbox placement test is currently running. Predictive inbox placement tests are usually complete within 24 hours of creating the test. If the status is <code>COMPLETE</code>, then the test is finished, and you can use the <code>GetDeliverabilityTestReport</code> operation to view the results of the test.'
   Identity:
     type: string
+  CreateEmailIdentityRequest:
+    type: object
+    required:
+      - EmailIdentity
+    properties:
+      EmailIdentity:
+        $ref: '#/definitions/Identity'
+        description: The email address or domain that you want to verify.
+    description: A request to begin the verification process for an email identity (an email address or domain).
   IdentityType:
     type: string
     enum:
@@ -2397,8 +2479,6 @@ definitions:
       - DOMAIN
       - MANAGED_DOMAIN
     description: '<p>The email identity type. The identity type can be one of the following:</p> <ul> <li> <p> <code>EMAIL_ADDRESS</code> – The identity is an email address.</p> </li> <li> <p> <code>DOMAIN</code> – The identity is a domain.</p> </li> </ul>'
-  Enabled:
-    type: boolean
   DkimAttributes:
     type: object
     properties:
@@ -2412,9 +2492,6 @@ definitions:
         $ref: '#/definitions/DnsTokenList'
         description: 'A set of unique strings that you use to create a set of CNAME records that you add to the DNS configuration for your domain. When Amazon Pinpoint detects these records in the DNS configuration for your domain, the DKIM authentication process is complete. Amazon Pinpoint usually detects these records within about 72 hours of adding them to the DNS configuration for your domain.'
     description: An object that contains information about the DKIM configuration for an email identity.
-  CustomRedirectDomain:
-    type: string
-    description: The domain that you want to use for tracking open and click events.
   VolumeStatistics:
     type: object
     properties:
@@ -2488,6 +2565,22 @@ definitions:
     description: A list of dedicated IP addresses that are associated with your Amazon Pinpoint account.
     items:
       $ref: '#/definitions/DedicatedIp'
+  DeleteConfigurationSetEventDestinationRequest:
+    type: object
+    properties: {}
+    description: A request to delete an event destination from a configuration set.
+  DeleteConfigurationSetRequest:
+    type: object
+    properties: {}
+    description: A request to delete a configuration set.
+  DeleteDedicatedIpPoolRequest:
+    type: object
+    properties: {}
+    description: A request to delete a dedicated IP pool.
+  DeleteEmailIdentityRequest:
+    type: object
+    properties: {}
+    description: 'A request to delete an existing email identity. When you delete an identity, you lose the ability to use Amazon Pinpoint to send email from that identity. You can restore your ability to send email by completing the verification process for the identity again.'
   DeliverabilityTestSubject:
     type: string
     description: The subject line for an email that you submitted in a predictive inbox placement test.
@@ -2517,10 +2610,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/DeliverabilityTestReport'
-  EmailAddressList:
-    type: array
-    items:
-      $ref: '#/definitions/EmailAddress'
   Destination:
     type: object
     properties:
@@ -2578,61 +2667,6 @@ definitions:
         $ref: '#/definitions/Percentage'
         description: The percentage of messages that were sent from the selected domain to the specified email provider that arrived in recipients' spam or junk mail folders.
     description: An object that contains inbox placement data for email sent from one of your email domains to a specific email provider.
-  Message:
-    type: object
-    required:
-      - Subject
-      - Body
-    properties:
-      Subject:
-        $ref: '#/definitions/Content'
-        description: 'The subject line of the email. The subject line can only contain 7-bit ASCII characters. However, you can specify non-ASCII characters in the subject line by using encoded-word syntax, as described in <a href="https://tools.ietf.org/html/rfc2047">RFC 2047</a>.'
-      Body:
-        $ref: '#/definitions/Body'
-        description: 'The body of the message. You can specify an HTML version of the message, a text-only version of the message, or both.'
-    description: Represents the email message that you're sending. The <code>Message</code> object consists of a subject line and a message body.
-  RawMessage:
-    type: object
-    required:
-      - Data
-    properties:
-      Data:
-        $ref: '#/definitions/RawMessageData'
-        description: '<p>The raw email message. The message has to meet the following criteria:</p> <ul> <li> <p>The message has to contain a header and a body, separated by one blank line.</p> </li> <li> <p>All of the required header fields must be present in the message.</p> </li> <li> <p>Each part of a multipart MIME message must be formatted properly.</p> </li> <li> <p>Attachments must be in a file format that Amazon Pinpoint supports. </p> </li> <li> <p>The entire message must be Base64 encoded.</p> </li> <li> <p>If any of the MIME parts in your message contain content that is outside of the 7-bit ASCII character range, you should encode that content to ensure that recipients'' email clients render the message properly.</p> </li> <li> <p>The length of any single line of text in the message can''t exceed 1,000 characters. This restriction is defined in <a href="https://tools.ietf.org/html/rfc5321">RFC 5321</a>.</p> </li> </ul>'
-    description: The raw email message.
-  EventTypes:
-    type: array
-    items:
-      $ref: '#/definitions/EventType'
-  KinesisFirehoseDestination:
-    type: object
-    required:
-      - IamRoleArn
-      - DeliveryStreamArn
-    properties:
-      IamRoleArn:
-        $ref: '#/definitions/AmazonResourceName'
-        description: The Amazon Resource Name (ARN) of the IAM role that Amazon Pinpoint uses when sending email events to the Amazon Kinesis Data Firehose stream.
-      DeliveryStreamArn:
-        $ref: '#/definitions/AmazonResourceName'
-        description: The Amazon Resource Name (ARN) of the Amazon Kinesis Data Firehose stream that Amazon Pinpoint sends email events to.
-    description: 'An object that defines an Amazon Kinesis Data Firehose destination for email events. You can use Amazon Kinesis Data Firehose to stream data to other services, such as Amazon S3 and Amazon Redshift.'
-  SnsDestination:
-    type: object
-    required:
-      - TopicArn
-    properties:
-      TopicArn:
-        $ref: '#/definitions/AmazonResourceName'
-        description: 'The Amazon Resource Name (ARN) of the Amazon SNS topic that you want to publish email events to. For more information about Amazon SNS topics, see the <a href="http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html">Amazon SNS Developer Guide</a>.'
-    description: An object that defines an Amazon SNS destination for email events. You can use Amazon SNS to send notification when certain email events occur.
-  PinpointDestination:
-    type: object
-    properties:
-      ApplicationArn:
-        $ref: '#/definitions/AmazonResourceName'
-        description: The Amazon Resource Name (ARN) of the Amazon Pinpoint project that you want to send email events to.
-    description: An object that defines a Amazon Pinpoint destination for email events. You can use Amazon Pinpoint events to create attributes in Amazon Pinpoint projects. You can use these attributes to create segments for your campaigns.
   EventDestination:
     type: object
     required:
@@ -2679,6 +2713,10 @@ definitions:
     description: 'An email sending event type. For example, email sends, opens, and bounces are all email events.'
   GeneralEnforcementStatus:
     type: string
+  GetAccountRequest:
+    type: object
+    properties: {}
+    description: A request to obtain information about the email-sending capabilities of your Amazon Pinpoint account.
   SendQuota:
     type: object
     properties:
@@ -2692,10 +2730,52 @@ definitions:
         $ref: '#/definitions/SentLast24Hours'
         description: The number of emails sent from your Amazon Pinpoint account in the current AWS Region over the past 24 hours.
     description: An object that contains information about the per-day and per-second sending limits for your Amazon Pinpoint account in the current AWS Region.
+  GetBlacklistReportsRequest:
+    type: object
+    required:
+      - BlacklistItemNames
+    properties:
+      BlacklistItemNames:
+        $ref: '#/definitions/BlacklistItemNames'
+        description: A list of IP addresses that you want to retrieve blacklist information about. You can only specify the dedicated IP addresses that you use to send email using Amazon Pinpoint or Amazon SES.
+    description: A request to retrieve a list of the blacklists that your dedicated IP addresses appear on.
+  GetConfigurationSetEventDestinationsRequest:
+    type: object
+    properties: {}
+    description: A request to obtain information about the event destinations for a configuration set.
+  GetConfigurationSetRequest:
+    type: object
+    properties: {}
+    description: A request to obtain information about a configuration set.
+  GetDedicatedIpRequest:
+    type: object
+    properties: {}
+    description: A request to obtain more information about a dedicated IP address.
   NextToken:
     type: string
   MaxItems:
     type: integer
+  GetDedicatedIpsRequest:
+    type: object
+    properties:
+      PoolName:
+        $ref: '#/definitions/PoolName'
+        description: The name of the IP pool that the dedicated IP address is associated with.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: A token returned from a previous call to <code>GetDedicatedIps</code> to indicate the position of the dedicated IP pool in the list of IP pools.
+      PageSize:
+        $ref: '#/definitions/MaxItems'
+        description: 'The number of results to show in a single call to <code>GetDedicatedIpsRequest</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.'
+    description: A request to obtain more information about dedicated IP pools.
+  GetDeliverabilityDashboardOptionsRequest:
+    type: object
+    properties: {}
+    description: '<p>A request to retrieve the status of the Deliverability dashboard for your account. When the Deliverability dashboard is enabled, you gain access to reputation metrics for the domains that you use to send email using Amazon Pinpoint. You also gain the ability to perform predictive inbox placement tests.</p> <p>When you use the Deliverability dashboard, you pay a monthly charge of USD$1,250.00, in addition to any other fees that you accrue by using Amazon Pinpoint. If you enable the Deliverability dashboard after the first day of a calendar month, AWS prorates the monthly charge based on how many days have elapsed in the current calendar month.</p>'
+  GetDeliverabilityTestReportRequest:
+    type: object
+    properties: {}
+    description: A request to retrieve the results of a predictive inbox placement test.
   PlacementStatistics:
     type: object
     properties:
@@ -2722,6 +2802,19 @@ definitions:
   MessageContent:
     type: string
     description: The body of an email message.
+  GetDomainStatisticsReportRequest:
+    type: object
+    required:
+      - StartDate
+      - EndDate
+    properties:
+      StartDate:
+        $ref: '#/definitions/Timestamp'
+        description: The first day (in Unix time) that you want to obtain domain deliverability metrics for.
+      EndDate:
+        $ref: '#/definitions/Timestamp'
+        description: The last day (in Unix time) that you want to obtain domain deliverability metrics for. The <code>EndDate</code> that you specify has to be less than or equal to 30 days after the <code>StartDate</code>.
+    description: A request to obtain deliverability metrics for a domain.
   OverallVolume:
     type: object
     properties:
@@ -2735,6 +2828,10 @@ definitions:
         $ref: '#/definitions/DomainIspPlacements'
         description: An object that contains inbox and junk mail placement metrics for individual email providers.
     description: An object that contains information about email that was sent from the selected domain.
+  GetEmailIdentityRequest:
+    type: object
+    properties: {}
+    description: A request to return details about an email identity.
   MailFromAttributes:
     type: object
     required:
@@ -2779,15 +2876,51 @@ definitions:
         $ref: '#/definitions/PlacementStatistics'
         description: An object that contains inbox placement metrics for a specific email provider.
     description: An object that describes how email sent during the predictive inbox placement test was handled by a certain email provider.
-  LastFreshStart:
-    type: string
-    description: 'The date and time (in Unix time) when the reputation metrics were last given a fresh start. When your account is given a fresh start, your reputation metrics are calculated starting from the date of the fresh start.'
-    format: date-time
+  ListConfigurationSetsRequest:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: A token returned from a previous call to <code>ListConfigurationSets</code> to indicate the position in the list of configuration sets.
+      PageSize:
+        $ref: '#/definitions/MaxItems'
+        description: 'The number of results to show in a single call to <code>ListConfigurationSets</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.'
+    description: A request to obtain a list of configuration sets for your Amazon Pinpoint account in the current AWS Region.
+  ListDedicatedIpPoolsRequest:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: A token returned from a previous call to <code>ListDedicatedIpPools</code> to indicate the position in the list of dedicated IP pools.
+      PageSize:
+        $ref: '#/definitions/MaxItems'
+        description: 'The number of results to show in a single call to <code>ListDedicatedIpPools</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.'
+    description: A request to obtain a list of dedicated IP pools.
   ListOfDedicatedIpPools:
     type: array
     description: A list of dedicated IP pools that are associated with your Amazon Pinpoint account.
     items:
       $ref: '#/definitions/PoolName'
+  ListDeliverabilityTestReportsRequest:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: A token returned from a previous call to <code>ListDeliverabilityTestReports</code> to indicate the position in the list of predictive inbox placement tests.
+      PageSize:
+        $ref: '#/definitions/MaxItems'
+        description: '<p>The number of results to show in a single call to <code>ListDeliverabilityTestReports</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.</p> <p>The value you specify has to be at least 0, and can be no more than 1000.</p>'
+    description: A request to list all of the predictive inbox placement tests that you've performed.
+  ListEmailIdentitiesRequest:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: A token returned from a previous call to <code>ListEmailIdentities</code> to indicate the position in the list of identities.
+      PageSize:
+        $ref: '#/definitions/MaxItems'
+        description: '<p>The number of results to show in a single call to <code>ListEmailIdentities</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.</p> <p>The value you specify has to be at least 0, and can be no more than 1000.</p>'
+    description: 'A request to list all of the email identities associated with your Amazon Pinpoint account. This list includes identities that you''ve already verified, identities that are unverified, and identities that were verified in the past, but are no longer verified.'
   MailFromDomainName:
     type: string
     description: The domain that you want to use as a MAIL FROM domain.
@@ -2811,19 +2944,6 @@ definitions:
   MessageTagValue:
     type: string
     description: '<p>The value of the message tag. The message tag value has to meet the following criteria:</p> <ul> <li> <p>It can only contain ASCII letters (a–z, A–Z), numbers (0–9), underscores (_), or dashes (-).</p> </li> <li> <p>It can contain no more than 256 characters.</p> </li> </ul>'
-  MessageTag:
-    type: object
-    required:
-      - Name
-      - Value
-    properties:
-      Name:
-        $ref: '#/definitions/MessageTagName'
-        description: '<p>The name of the message tag. The message tag name has to meet the following criteria:</p> <ul> <li> <p>It can only contain ASCII letters (a–z, A–Z), numbers (0–9), underscores (_), or dashes (-).</p> </li> <li> <p>It can contain no more than 256 characters.</p> </li> </ul>'
-      Value:
-        $ref: '#/definitions/MessageTagValue'
-        description: '<p>The value of the message tag. The message tag value has to meet the following criteria:</p> <ul> <li> <p>It can only contain ASCII letters (a–z, A–Z), numbers (0–9), underscores (_), or dashes (-).</p> </li> <li> <p>It can contain no more than 256 characters.</p> </li> </ul>'
-    description: 'Contains the name and value of a tag that you apply to an email. You can use message tags when you publish email sending events. '
   MessageTagList:
     type: array
     description: A list of message tags.
@@ -2831,12 +2951,142 @@ definitions:
       $ref: '#/definitions/MessageTag'
   OutboundMessageId:
     type: string
+  PutAccountDedicatedIpWarmupAttributesRequest:
+    type: object
+    properties:
+      AutoWarmupEnabled:
+        $ref: '#/definitions/Enabled'
+        description: 'Enables or disables the automatic warm-up feature for dedicated IP addresses that are associated with your Amazon Pinpoint account in the current AWS Region. Set to <code>true</code> to enable the automatic warm-up feature, or set to <code>false</code> to disable it.'
+    description: A request to enable or disable the automatic IP address warm-up feature.
+  PutAccountSendingAttributesRequest:
+    type: object
+    properties:
+      SendingEnabled:
+        $ref: '#/definitions/Enabled'
+        description: '<p>Enables or disables your account''s ability to send email. Set to <code>true</code> to enable email sending, or set to <code>false</code> to disable email sending.</p> <note> <p>If AWS paused your account''s ability to send email, you can''t use this operation to resume your account''s ability to send email.</p> </note>'
+    description: A request to change the ability of your account to send email.
   SendingPoolName:
     type: string
     description: The name of the dedicated IP pool that you want to associate with the configuration set.
+  PutConfigurationSetDeliveryOptionsRequest:
+    type: object
+    properties:
+      SendingPoolName:
+        $ref: '#/definitions/SendingPoolName'
+        description: The name of the dedicated IP pool that you want to associate with the configuration set.
+    description: A request to associate a configuration set with a dedicated IP pool.
+  PutConfigurationSetReputationOptionsRequest:
+    type: object
+    properties:
+      ReputationMetricsEnabled:
+        $ref: '#/definitions/Enabled'
+        description: 'If <code>true</code>, tracking of reputation metrics is enabled for the configuration set. If <code>false</code>, tracking of reputation metrics is disabled for the configuration set.'
+    description: A request to enable or disable tracking of reputation metrics for a configuration set.
+  PutConfigurationSetSendingOptionsRequest:
+    type: object
+    properties:
+      SendingEnabled:
+        $ref: '#/definitions/Enabled'
+        description: 'If <code>true</code>, email sending is enabled for the configuration set. If <code>false</code>, email sending is disabled for the configuration set.'
+    description: A request to enable or disable the ability of Amazon Pinpoint to send emails that use a specific configuration set.
+  PutConfigurationSetTrackingOptionsRequest:
+    type: object
+    properties:
+      CustomRedirectDomain:
+        $ref: '#/definitions/CustomRedirectDomain'
+        description: The domain that you want to use to track open and click events.
+    description: A request to add a custom domain for tracking open and click events to a configuration set.
+  PutDedicatedIpInPoolRequest:
+    type: object
+    required:
+      - DestinationPoolName
+    properties:
+      DestinationPoolName:
+        $ref: '#/definitions/PoolName'
+        description: The name of the IP pool that you want to add the dedicated IP address to. You have to specify an IP pool that already exists.
+    description: A request to move a dedicated IP address to a dedicated IP pool.
+  PutDedicatedIpWarmupAttributesRequest:
+    type: object
+    required:
+      - WarmupPercentage
+    properties:
+      WarmupPercentage:
+        $ref: '#/definitions/Percentage100Wrapper'
+        description: The warm-up percentage that you want to associate with the dedicated IP address.
+    description: A request to change the warm-up attributes for a dedicated IP address. This operation is useful when you want to resume the warm-up process for an existing IP address.
+  PutDeliverabilityDashboardOptionRequest:
+    type: object
+    required:
+      - DashboardEnabled
+    properties:
+      DashboardEnabled:
+        $ref: '#/definitions/Enabled'
+        description: 'Indicates whether the Deliverability dashboard is enabled. If the value is <code>true</code>, then the dashboard is enabled.'
+    description: '<p>A request to enable or disable the Deliverability dashboard. When you enable the Deliverability dashboard, you gain access to reputation metrics for the domains that you use to send email using Amazon Pinpoint. You also gain the ability to perform predictive inbox placement tests.</p> <p>When you use the Deliverability dashboard, you pay a monthly charge of USD$1,250.00, in addition to any other fees that you accrue by using Amazon Pinpoint. If you enable the Deliverability dashboard after the first day of a calendar month, we prorate the monthly charge based on how many days have elapsed in the current calendar month.</p>'
+  PutEmailIdentityDkimAttributesRequest:
+    type: object
+    properties:
+      SigningEnabled:
+        $ref: '#/definitions/Enabled'
+        description: '<p>Sets the DKIM signing configuration for the identity.</p> <p>When you set this value <code>true</code>, then the messages that Amazon Pinpoint sends from the identity are DKIM-signed. When you set this value to <code>false</code>, then the messages that Amazon Pinpoint sends from the identity aren''t DKIM-signed.</p>'
+    description: A request to enable or disable DKIM signing of email that you send from an email identity.
+  PutEmailIdentityFeedbackAttributesRequest:
+    type: object
+    properties:
+      EmailForwardingEnabled:
+        $ref: '#/definitions/Enabled'
+        description: '<p>Sets the feedback forwarding configuration for the identity.</p> <p>If the value is <code>true</code>, Amazon Pinpoint sends you email notifications when bounce or complaint events occur. Amazon Pinpoint sends this notification to the address that you specified in the Return-Path header of the original email.</p> <p>When you set this value to <code>false</code>, Amazon Pinpoint sends notifications through other mechanisms, such as by notifying an Amazon SNS topic or another event destination. You''re required to have a method of tracking bounces and complaints. If you haven''t set up another mechanism for receiving bounce or complaint notifications, Amazon Pinpoint sends an email notification when these events occur (even if this setting is disabled).</p>'
+    description: A request to set the attributes that control how bounce and complaint events are processed.
+  PutEmailIdentityMailFromAttributesRequest:
+    type: object
+    properties:
+      MailFromDomain:
+        $ref: '#/definitions/MailFromDomainName'
+        description: '<p> The custom MAIL FROM domain that you want the verified identity to use. The MAIL FROM domain must meet the following criteria:</p> <ul> <li> <p>It has to be a subdomain of the verified identity.</p> </li> <li> <p>It can''t be used to receive email.</p> </li> <li> <p>It can''t be used in a "From" address if the MAIL FROM domain is a destination for feedback forwarding emails.</p> </li> </ul>'
+      BehaviorOnMxFailure:
+        $ref: '#/definitions/BehaviorOnMxFailure'
+        description: '<p>The action that you want Amazon Pinpoint to take if it can''t read the required MX record when you send an email. When you set this value to <code>UseDefaultValue</code>, Amazon Pinpoint uses <i>amazonses.com</i> as the MAIL FROM domain. When you set this value to <code>RejectMessage</code>, Amazon Pinpoint returns a <code>MailFromDomainNotVerified</code> error, and doesn''t attempt to deliver the email.</p> <p>These behaviors are taken when the custom MAIL FROM domain configuration is in the <code>Pending</code>, <code>Failed</code>, and <code>TemporaryFailure</code> states.</p>'
+    description: A request to configure the custom MAIL FROM domain for a verified identity.
   RawMessageData:
     type: string
     description: '<p>The raw email message. The message has to meet the following criteria:</p> <ul> <li> <p>The message has to contain a header and a body, separated by one blank line.</p> </li> <li> <p>All of the required header fields must be present in the message.</p> </li> <li> <p>Each part of a multipart MIME message must be formatted properly.</p> </li> <li> <p>Attachments must be in a file format that Amazon Pinpoint supports. </p> </li> <li> <p>The entire message must be Base64 encoded.</p> </li> <li> <p>If any of the MIME parts in your message contain content that is outside of the 7-bit ASCII character range, you should encode that content to ensure that recipients'' email clients render the message properly.</p> </li> <li> <p>The length of any single line of text in the message can''t exceed 1,000 characters. This restriction is defined in <a href="https://tools.ietf.org/html/rfc5321">RFC 5321</a>.</p> </li> </ul>'
+  SendEmailRequest:
+    type: object
+    required:
+      - Destination
+      - Content
+    properties:
+      FromEmailAddress:
+        $ref: '#/definitions/EmailAddress'
+        description: 'The email address that you want to use as the "From" address for the email. The address that you specify has to be verified. '
+      Destination:
+        $ref: '#/definitions/Destination'
+        description: An object that contains the recipients of the email message.
+      ReplyToAddresses:
+        $ref: '#/definitions/EmailAddressList'
+        description: 'The "Reply-to" email addresses for the message. When the recipient replies to the message, each Reply-to address receives the reply.'
+      FeedbackForwardingEmailAddress:
+        $ref: '#/definitions/EmailAddress'
+        description: The address that Amazon Pinpoint should send bounce and complaint notifications to.
+      Content:
+        $ref: '#/definitions/EmailContent'
+        description: An object that contains the body of the message. You can send either a Simple message or a Raw message.
+      EmailTags:
+        $ref: '#/definitions/MessageTagList'
+        description: 'A list of tags, in the form of name/value pairs, to apply to an email that you send using the <code>SendEmail</code> operation. Tags correspond to characteristics of the email that you define, so that you can publish email sending events. '
+      ConfigurationSetName:
+        $ref: '#/definitions/ConfigurationSetName'
+        description: The name of the configuration set that you want to use when sending the email.
+    description: A request to send an email message.
   SentLast24Hours:
     type: number
     format: double
+  UpdateConfigurationSetEventDestinationRequest:
+    type: object
+    required:
+      - EventDestination
+    properties:
+      EventDestination:
+        $ref: '#/definitions/EventDestinationDefinition'
+        description: An object that defines the event destination.
+    description: A request to change the settings for an event destination for a configuration set.

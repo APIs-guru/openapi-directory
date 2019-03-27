@@ -99,7 +99,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /:
+  '/#X-Amz-Target=AWS242ServiceCatalogService.AcceptPortfolioShare':
     post:
       operationId: AcceptPortfolioShare
       description: Accepts an offer to share the specified portfolio.
@@ -126,6 +126,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AcceptPortfolioShareInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.AcceptPortfolioShare
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -136,7 +142,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AssociatePrincipalWithPortfolio':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.AssociatePrincipalWithPortfolio':
     post:
       operationId: AssociatePrincipalWithPortfolio
       description: Associates the specified principal ARN with the specified portfolio.
@@ -163,6 +169,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AssociatePrincipalWithPortfolioInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.AssociatePrincipalWithPortfolio
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -173,7 +185,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AssociateProductWithPortfolio':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.AssociateProductWithPortfolio':
     post:
       operationId: AssociateProductWithPortfolio
       description: Associates the specified product with the specified portfolio.
@@ -200,6 +212,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AssociateProductWithPortfolioInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.AssociateProductWithPortfolio
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -210,7 +228,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AssociateServiceActionWithProvisioningArtifact':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.AssociateServiceActionWithProvisioningArtifact':
     post:
       operationId: AssociateServiceActionWithProvisioningArtifact
       description: Associates a self-service action with a provisioning artifact.
@@ -237,6 +255,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AssociateServiceActionWithProvisioningArtifactInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.AssociateServiceActionWithProvisioningArtifact
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -247,7 +271,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AssociateTagOptionWithResource':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.AssociateTagOptionWithResource':
     post:
       operationId: AssociateTagOptionWithResource
       description: Associate the specified TagOption with the specified portfolio or product.
@@ -286,6 +310,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AssociateTagOptionWithResourceInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.AssociateTagOptionWithResource
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -296,7 +326,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#BatchAssociateServiceActionWithProvisioningArtifact':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.BatchAssociateServiceActionWithProvisioningArtifact':
     post:
       operationId: BatchAssociateServiceActionWithProvisioningArtifact
       description: Associates multiple self-service actions with provisioning artifacts.
@@ -315,6 +345,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/BatchAssociateServiceActionWithProvisioningArtifactInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.BatchAssociateServiceActionWithProvisioningArtifact
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -325,7 +361,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#BatchDisassociateServiceActionFromProvisioningArtifact':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.BatchDisassociateServiceActionFromProvisioningArtifact':
     post:
       operationId: BatchDisassociateServiceActionFromProvisioningArtifact
       description: Disassociates a batch of self-service actions from the specified provisioning artifact.
@@ -344,6 +380,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/BatchDisassociateServiceActionFromProvisioningArtifactInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.BatchDisassociateServiceActionFromProvisioningArtifact
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -354,7 +396,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CopyProduct':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.CopyProduct':
     post:
       operationId: CopyProduct
       description: '<p>Copies the specified source product to the specified target product or a new product.</p> <p>You can copy a product to the same account or another account. You can copy a product to the same region or another region.</p> <p>This operation is performed asynchronously. To track the progress of the operation, use <a>DescribeCopyProductStatus</a>.</p>'
@@ -377,6 +419,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CopyProductInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.CopyProduct
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -387,7 +435,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateConstraint':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.CreateConstraint':
     post:
       operationId: CreateConstraint
       description: Creates a constraint.
@@ -418,6 +466,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateConstraintInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.CreateConstraint
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -428,7 +482,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreatePortfolio':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.CreatePortfolio':
     post:
       operationId: CreatePortfolio
       description: Creates a portfolio.
@@ -455,6 +509,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreatePortfolioInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.CreatePortfolio
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -465,7 +525,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreatePortfolioShare':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.CreatePortfolioShare':
     post:
       operationId: CreatePortfolioShare
       description: Shares the specified portfolio with the specified account or organization node. Shares to an organization node can only be created by the master account of an Organization. AWSOrganizationsAccess must be enabled in order to create a portfolio share to an organization node.
@@ -496,6 +556,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreatePortfolioShareInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.CreatePortfolioShare
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -506,7 +572,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateProduct':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.CreateProduct':
     post:
       operationId: CreateProduct
       description: Creates a product.
@@ -533,6 +599,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateProductInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.CreateProduct
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -543,7 +615,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateProvisionedProductPlan':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.CreateProvisionedProductPlan':
     post:
       operationId: CreateProvisionedProductPlan
       description: '<p>Creates a plan. A plan includes the list of resources to be created (when provisioning a new product) or modified (when updating a provisioned product) when the plan is executed.</p> <p>You can create one plan per provisioned product. To create a plan for an existing provisioned product, the product status must be AVAILBLE or TAINTED.</p> <p>To view the resource changes in the change set, use <a>DescribeProvisionedProductPlan</a>. To create or modify the provisioned product, use <a>ExecuteProvisionedProductPlan</a>.</p>'
@@ -570,6 +642,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateProvisionedProductPlanInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.CreateProvisionedProductPlan
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -580,7 +658,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateProvisioningArtifact':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.CreateProvisioningArtifact':
     post:
       operationId: CreateProvisioningArtifact
       description: <p>Creates a provisioning artifact (also known as a version) for the specified product.</p> <p>You cannot create a provisioning artifact for a product that was shared with you.</p>
@@ -607,6 +685,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateProvisioningArtifactInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.CreateProvisioningArtifact
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -617,7 +701,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateServiceAction':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.CreateServiceAction':
     post:
       operationId: CreateServiceAction
       description: Creates a self-service action.
@@ -640,6 +724,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateServiceActionInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.CreateServiceAction
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -650,7 +740,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateTagOption':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.CreateTagOption':
     post:
       operationId: CreateTagOption
       description: Creates a TagOption.
@@ -677,6 +767,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateTagOptionInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.CreateTagOption
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -687,7 +783,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteConstraint':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.DeleteConstraint':
     post:
       operationId: DeleteConstraint
       description: Deletes the specified constraint.
@@ -710,6 +806,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteConstraintInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.DeleteConstraint
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -720,7 +822,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeletePortfolio':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.DeletePortfolio':
     post:
       operationId: DeletePortfolio
       description: '<p>Deletes the specified portfolio.</p> <p>You cannot delete a portfolio if it was shared with you or if it has associated products, users, constraints, or shared accounts.</p>'
@@ -751,6 +853,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeletePortfolioInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.DeletePortfolio
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -761,7 +869,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeletePortfolioShare':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.DeletePortfolioShare':
     post:
       operationId: DeletePortfolioShare
       description: Stops sharing the specified portfolio with the specified account or organization node. Shares to an organization node can only be deleted by the master account of an Organization.
@@ -788,6 +896,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeletePortfolioShareInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.DeletePortfolioShare
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -798,7 +912,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteProduct':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.DeleteProduct':
     post:
       operationId: DeleteProduct
       description: <p>Deletes the specified product.</p> <p>You cannot delete a product if it was shared with you or is associated with a portfolio.</p>
@@ -829,6 +943,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteProductInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.DeleteProduct
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -839,7 +959,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteProvisionedProductPlan':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.DeleteProvisionedProductPlan':
     post:
       operationId: DeleteProvisionedProductPlan
       description: Deletes the specified plan.
@@ -862,6 +982,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteProvisionedProductPlanInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.DeleteProvisionedProductPlan
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -872,7 +998,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteProvisioningArtifact':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.DeleteProvisioningArtifact':
     post:
       operationId: DeleteProvisioningArtifact
       description: '<p>Deletes the specified provisioning artifact (also known as a version) for the specified product.</p> <p>You cannot delete a provisioning artifact associated with a product that was shared with you. You cannot delete the last provisioning artifact for a product, because a product must have at least one provisioning artifact.</p>'
@@ -899,6 +1025,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteProvisioningArtifactInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.DeleteProvisioningArtifact
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -909,7 +1041,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteServiceAction':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.DeleteServiceAction':
     post:
       operationId: DeleteServiceAction
       description: Deletes a self-service action.
@@ -932,6 +1064,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteServiceActionInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.DeleteServiceAction
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -942,7 +1080,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteTagOption':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.DeleteTagOption':
     post:
       operationId: DeleteTagOption
       description: <p>Deletes the specified TagOption.</p> <p>You cannot delete a TagOption if it is associated with a product or portfolio.</p>
@@ -969,6 +1107,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteTagOptionInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.DeleteTagOption
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -979,7 +1123,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeConstraint':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.DescribeConstraint':
     post:
       operationId: DescribeConstraint
       description: Gets information about the specified constraint.
@@ -998,6 +1142,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeConstraintInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.DescribeConstraint
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1008,7 +1158,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeCopyProductStatus':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.DescribeCopyProductStatus':
     post:
       operationId: DescribeCopyProductStatus
       description: Gets the status of the specified copy product operation.
@@ -1027,6 +1177,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeCopyProductStatusInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.DescribeCopyProductStatus
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1037,7 +1193,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribePortfolio':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.DescribePortfolio':
     post:
       operationId: DescribePortfolio
       description: Gets information about the specified portfolio.
@@ -1056,6 +1212,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribePortfolioInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.DescribePortfolio
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1066,7 +1228,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribePortfolioShareStatus':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.DescribePortfolioShareStatus':
     post:
       operationId: DescribePortfolioShareStatus
       description: Gets the status of the specified portfolio share operation. This API can only be called by the master account in the organization.
@@ -1093,6 +1255,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribePortfolioShareStatusInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.DescribePortfolioShareStatus
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1103,7 +1271,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeProduct':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.DescribeProduct':
     post:
       operationId: DescribeProduct
       description: Gets information about the specified product.
@@ -1126,6 +1294,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeProductInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.DescribeProduct
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1136,7 +1310,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeProductAsAdmin':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.DescribeProductAsAdmin':
     post:
       operationId: DescribeProductAsAdmin
       description: Gets information about the specified product. This operation is run with administrator access.
@@ -1155,6 +1329,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeProductAsAdminInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.DescribeProductAsAdmin
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1165,7 +1345,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeProductView':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.DescribeProductView':
     post:
       operationId: DescribeProductView
       description: Gets information about the specified product.
@@ -1188,6 +1368,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeProductViewInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.DescribeProductView
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1198,7 +1384,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeProvisionedProduct':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.DescribeProvisionedProduct':
     post:
       operationId: DescribeProvisionedProduct
       description: Gets information about the specified provisioned product.
@@ -1217,6 +1403,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeProvisionedProductInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.DescribeProvisionedProduct
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1227,7 +1419,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeProvisionedProductPlan':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.DescribeProvisionedProductPlan':
     post:
       operationId: DescribeProvisionedProductPlan
       description: Gets information about the resource changes for the specified plan.
@@ -1250,6 +1442,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeProvisionedProductPlanInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.DescribeProvisionedProductPlan
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1260,7 +1458,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeProvisioningArtifact':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.DescribeProvisioningArtifact':
     post:
       operationId: DescribeProvisioningArtifact
       description: Gets information about the specified provisioning artifact (also known as a version) for the specified product.
@@ -1279,6 +1477,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeProvisioningArtifactInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.DescribeProvisioningArtifact
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1289,7 +1493,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeProvisioningParameters':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.DescribeProvisioningParameters':
     post:
       operationId: DescribeProvisioningParameters
       description: '<p>Gets information about the configuration required to provision the specified product using the specified provisioning artifact.</p> <p>If the output contains a TagOption key with an empty list of values, there is a TagOption conflict for that key. The end user cannot take action to fix the conflict, and launch is not blocked. In subsequent calls to <a>ProvisionProduct</a>, do not include conflicted TagOption keys as tags, or this causes the error "Parameter validation failed: Missing required parameter in Tags[<i>N</i>]:<i>Value</i>". Tag the provisioned product with the value <code>sc-tagoption-conflict-portfolioId-productId</code>.</p>'
@@ -1312,6 +1516,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeProvisioningParametersInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.DescribeProvisioningParameters
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1322,7 +1532,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeRecord':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.DescribeRecord':
     post:
       operationId: DescribeRecord
       description: '<p>Gets information about the specified request operation.</p> <p>Use this operation after calling a request operation (for example, <a>ProvisionProduct</a>, <a>TerminateProvisionedProduct</a>, or <a>UpdateProvisionedProduct</a>). </p>'
@@ -1341,6 +1551,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeRecordInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.DescribeRecord
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1351,7 +1567,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeServiceAction':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.DescribeServiceAction':
     post:
       operationId: DescribeServiceAction
       description: Describes a self-service action.
@@ -1370,6 +1586,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeServiceActionInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.DescribeServiceAction
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1380,7 +1602,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeTagOption':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.DescribeTagOption':
     post:
       operationId: DescribeTagOption
       description: Gets information about the specified TagOption.
@@ -1403,6 +1625,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeTagOptionInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.DescribeTagOption
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1413,7 +1641,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DisableAWSOrganizationsAccess':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.DisableAWSOrganizationsAccess':
     post:
       operationId: DisableAWSOrganizationsAccess
       description: Disable portfolio sharing through AWS Organizations feature. This feature will not delete your current shares but it will prevent you from creating new shares throughout your organization. Current shares will not be in sync with your organization structure if it changes after calling this API. This API can only be called by the master account in the organization.
@@ -1440,6 +1668,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DisableAWSOrganizationsAccessInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.DisableAWSOrganizationsAccess
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1450,7 +1684,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DisassociatePrincipalFromPortfolio':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.DisassociatePrincipalFromPortfolio':
     post:
       operationId: DisassociatePrincipalFromPortfolio
       description: Disassociates a previously associated principal ARN from a specified portfolio.
@@ -1473,6 +1707,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DisassociatePrincipalFromPortfolioInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.DisassociatePrincipalFromPortfolio
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1483,7 +1723,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DisassociateProductFromPortfolio':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.DisassociateProductFromPortfolio':
     post:
       operationId: DisassociateProductFromPortfolio
       description: 'Disassociates the specified product from the specified portfolio. '
@@ -1510,6 +1750,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DisassociateProductFromPortfolioInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.DisassociateProductFromPortfolio
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1520,7 +1766,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DisassociateServiceActionFromProvisioningArtifact':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.DisassociateServiceActionFromProvisioningArtifact':
     post:
       operationId: DisassociateServiceActionFromProvisioningArtifact
       description: Disassociates the specified self-service action association from the specified provisioning artifact.
@@ -1539,6 +1785,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DisassociateServiceActionFromProvisioningArtifactInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.DisassociateServiceActionFromProvisioningArtifact
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1549,7 +1801,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DisassociateTagOptionFromResource':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.DisassociateTagOptionFromResource':
     post:
       operationId: DisassociateTagOptionFromResource
       description: Disassociates the specified TagOption from the specified resource.
@@ -1572,6 +1824,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DisassociateTagOptionFromResourceInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.DisassociateTagOptionFromResource
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1582,7 +1840,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#EnableAWSOrganizationsAccess':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.EnableAWSOrganizationsAccess':
     post:
       operationId: EnableAWSOrganizationsAccess
       description: '<p>Enable portfolio sharing feature through AWS Organizations. This API will allow Service Catalog to receive updates on your organization in order to sync your shares with the current structure. This API can only be called by the master account in the organization.</p> <p>By calling this API Service Catalog will make a call to organizations:EnableAWSServiceAccess on your behalf so that your shares can be in sync with any changes in your AWS Organizations structure.</p>'
@@ -1609,6 +1867,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/EnableAWSOrganizationsAccessInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.EnableAWSOrganizationsAccess
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1619,7 +1883,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ExecuteProvisionedProductPlan':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.ExecuteProvisionedProductPlan':
     post:
       operationId: ExecuteProvisionedProductPlan
       description: Provisions or modifies a product based on the resource changes for the specified plan.
@@ -1646,6 +1910,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ExecuteProvisionedProductPlanInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.ExecuteProvisionedProductPlan
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1656,7 +1926,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ExecuteProvisionedProductServiceAction':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.ExecuteProvisionedProductServiceAction':
     post:
       operationId: ExecuteProvisionedProductServiceAction
       description: Executes a self-service action against a provisioned product.
@@ -1683,6 +1953,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ExecuteProvisionedProductServiceActionInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.ExecuteProvisionedProductServiceAction
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1693,7 +1969,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetAWSOrganizationsAccessStatus':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.GetAWSOrganizationsAccessStatus':
     post:
       operationId: GetAWSOrganizationsAccessStatus
       description: Get the Access Status for AWS Organization portfolio share feature. This API can only be called by the master account in the organization.
@@ -1716,6 +1992,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetAWSOrganizationsAccessStatusInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.GetAWSOrganizationsAccessStatus
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1726,7 +2008,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListAcceptedPortfolioShares':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.ListAcceptedPortfolioShares':
     post:
       operationId: ListAcceptedPortfolioShares
       description: Lists all portfolios for which sharing was accepted by this account.
@@ -1759,6 +2041,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.ListAcceptedPortfolioShares
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1769,7 +2057,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListConstraintsForPortfolio':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.ListConstraintsForPortfolio':
     post:
       operationId: ListConstraintsForPortfolio
       description: Lists the constraints for the specified portfolio and product.
@@ -1802,6 +2090,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.ListConstraintsForPortfolio
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1812,7 +2106,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListLaunchPaths':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.ListLaunchPaths':
     post:
       operationId: ListLaunchPaths
       description: 'Lists the paths to the specified product. A path is how the user has access to a specified product, and is necessary when provisioning a product. A path also determines the constraints put on the product.'
@@ -1845,6 +2139,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.ListLaunchPaths
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1855,7 +2155,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListOrganizationPortfolioAccess':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.ListOrganizationPortfolioAccess':
     post:
       operationId: ListOrganizationPortfolioAccess
       description: Lists the organization nodes that have access to the specified portfolio. This API can only be called by the master account in the organization.
@@ -1892,6 +2192,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.ListOrganizationPortfolioAccess
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1902,7 +2208,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListPortfolioAccess':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.ListPortfolioAccess':
     post:
       operationId: ListPortfolioAccess
       description: Lists the account IDs that have access to the specified portfolio.
@@ -1921,6 +2227,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListPortfolioAccessInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.ListPortfolioAccess
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1931,7 +2243,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListPortfolios':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.ListPortfolios':
     post:
       operationId: ListPortfolios
       description: Lists all portfolios in the catalog.
@@ -1960,6 +2272,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.ListPortfolios
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1970,7 +2288,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListPortfoliosForProduct':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.ListPortfoliosForProduct':
     post:
       operationId: ListPortfoliosForProduct
       description: Lists all portfolios that the specified product is associated with.
@@ -2003,6 +2321,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.ListPortfoliosForProduct
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2013,7 +2337,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListPrincipalsForPortfolio':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.ListPrincipalsForPortfolio':
     post:
       operationId: ListPrincipalsForPortfolio
       description: Lists all principal ARNs associated with the specified portfolio.
@@ -2046,6 +2370,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.ListPrincipalsForPortfolio
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2056,7 +2386,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListProvisionedProductPlans':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.ListProvisionedProductPlans':
     post:
       operationId: ListProvisionedProductPlans
       description: Lists the plans for the specified provisioned product or all plans to which the user has access.
@@ -2079,6 +2409,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListProvisionedProductPlansInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.ListProvisionedProductPlans
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2089,7 +2425,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListProvisioningArtifacts':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.ListProvisioningArtifacts':
     post:
       operationId: ListProvisioningArtifacts
       description: Lists all provisioning artifacts (also known as versions) for the specified product.
@@ -2112,6 +2448,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListProvisioningArtifactsInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.ListProvisioningArtifacts
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2122,7 +2464,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListProvisioningArtifactsForServiceAction':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.ListProvisioningArtifactsForServiceAction':
     post:
       operationId: ListProvisioningArtifactsForServiceAction
       description: Lists all provisioning artifacts (also known as versions) for the specified self-service action.
@@ -2155,6 +2497,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.ListProvisioningArtifactsForServiceAction
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2165,7 +2513,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListRecordHistory':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.ListRecordHistory':
     post:
       operationId: ListRecordHistory
       description: Lists the specified requests or all performed requests.
@@ -2184,6 +2532,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListRecordHistoryInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.ListRecordHistory
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2194,7 +2548,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListResourcesForTagOption':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.ListResourcesForTagOption':
     post:
       operationId: ListResourcesForTagOption
       description: Lists the resources associated with the specified TagOption.
@@ -2231,6 +2585,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.ListResourcesForTagOption
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2241,7 +2601,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListServiceActions':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.ListServiceActions':
     post:
       operationId: ListServiceActions
       description: Lists all self-service actions.
@@ -2270,6 +2630,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.ListServiceActions
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2280,7 +2646,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListServiceActionsForProvisioningArtifact':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.ListServiceActionsForProvisioningArtifact':
     post:
       operationId: ListServiceActionsForProvisioningArtifact
       description: Returns a paginated list of self-service actions associated with the specified Product ID and Provisioning Artifact ID.
@@ -2313,6 +2679,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.ListServiceActionsForProvisioningArtifact
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2323,7 +2695,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListTagOptions':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.ListTagOptions':
     post:
       operationId: ListTagOptions
       description: Lists the specified TagOptions or all TagOptions.
@@ -2356,6 +2728,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.ListTagOptions
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2366,7 +2744,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ProvisionProduct':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.ProvisionProduct':
     post:
       operationId: ProvisionProduct
       description: '<p>Provisions the specified product.</p> <p>A provisioned product is a resourced instance of a product. For example, provisioning a product based on a CloudFormation template launches a CloudFormation stack and its underlying resources. You can check the status of this request using <a>DescribeRecord</a>.</p> <p>If the request contains a tag key with an empty list of values, there is a tag conflict for that key. Do not include conflicted keys as tags, or this causes the error "Parameter validation failed: Missing required parameter in Tags[<i>N</i>]:<i>Value</i>".</p>'
@@ -2393,6 +2771,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ProvisionProductInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.ProvisionProduct
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2403,7 +2787,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#RejectPortfolioShare':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.RejectPortfolioShare':
     post:
       operationId: RejectPortfolioShare
       description: Rejects an offer to share the specified portfolio.
@@ -2422,6 +2806,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/RejectPortfolioShareInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.RejectPortfolioShare
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2432,7 +2822,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ScanProvisionedProducts':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.ScanProvisionedProducts':
     post:
       operationId: ScanProvisionedProducts
       description: '<p>Lists the provisioned products that are available (not terminated).</p> <p>To use additional filtering, see <a>SearchProvisionedProducts</a>.</p>'
@@ -2451,6 +2841,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ScanProvisionedProductsInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.ScanProvisionedProducts
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2461,7 +2857,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#SearchProducts':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.SearchProducts':
     post:
       operationId: SearchProducts
       description: Gets information about the products to which the caller has access.
@@ -2490,6 +2886,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.SearchProducts
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2500,7 +2902,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#SearchProductsAsAdmin':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.SearchProductsAsAdmin':
     post:
       operationId: SearchProductsAsAdmin
       description: Gets information about the products for the specified portfolio or all products.
@@ -2533,6 +2935,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.SearchProductsAsAdmin
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2543,7 +2951,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#SearchProvisionedProducts':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.SearchProvisionedProducts':
     post:
       operationId: SearchProvisionedProducts
       description: Gets information about the provisioned products that meet the specified criteria.
@@ -2572,6 +2980,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.SearchProvisionedProducts
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2582,7 +2996,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#TerminateProvisionedProduct':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.TerminateProvisionedProduct':
     post:
       operationId: TerminateProvisionedProduct
       description: <p>Terminates the specified provisioned product.</p> <p>This operation does not delete any records associated with the provisioned product.</p> <p>You can check the status of this request using <a>DescribeRecord</a>.</p>
@@ -2601,6 +3015,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/TerminateProvisionedProductInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.TerminateProvisionedProduct
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2611,7 +3031,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateConstraint':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.UpdateConstraint':
     post:
       operationId: UpdateConstraint
       description: Updates the specified constraint.
@@ -2634,6 +3054,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateConstraintInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.UpdateConstraint
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2644,7 +3070,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdatePortfolio':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.UpdatePortfolio':
     post:
       operationId: UpdatePortfolio
       description: <p>Updates the specified portfolio.</p> <p>You cannot update a product that was shared with you.</p>
@@ -2675,6 +3101,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdatePortfolioInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.UpdatePortfolio
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2685,7 +3117,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateProduct':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.UpdateProduct':
     post:
       operationId: UpdateProduct
       description: Updates the specified product.
@@ -2712,6 +3144,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateProductInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.UpdateProduct
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2722,7 +3160,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateProvisionedProduct':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.UpdateProvisionedProduct':
     post:
       operationId: UpdateProvisionedProduct
       description: '<p>Requests updates to the configuration of the specified provisioned product.</p> <p>If there are tags associated with the object, they cannot be updated or added. Depending on the specific updates requested, this operation can update with no interruption, with some interruption, or replace the provisioned product entirely.</p> <p>You can check the status of this request using <a>DescribeRecord</a>.</p>'
@@ -2745,6 +3183,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateProvisionedProductInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.UpdateProvisionedProduct
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2755,7 +3199,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateProvisioningArtifact':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.UpdateProvisioningArtifact':
     post:
       operationId: UpdateProvisioningArtifact
       description: <p>Updates the specified provisioning artifact (also known as a version) for the specified product.</p> <p>You cannot update a provisioning artifact for a product that was shared with you.</p>
@@ -2778,6 +3222,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateProvisioningArtifactInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.UpdateProvisioningArtifact
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2788,7 +3238,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateServiceAction':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.UpdateServiceAction':
     post:
       operationId: UpdateServiceAction
       description: Updates a self-service action.
@@ -2811,6 +3261,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateServiceActionInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.UpdateServiceAction
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2821,7 +3277,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateTagOption':
+  '/#X-Amz-Target=AWS242ServiceCatalogService.UpdateTagOption':
     post:
       operationId: UpdateTagOption
       description: Updates the specified TagOption.
@@ -2852,6 +3308,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateTagOptionInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.UpdateTagOption
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -5125,16 +5587,11 @@ definitions:
     items:
       $ref: '#/definitions/UpdateProvisioningParameter'
   ProvisioningArtifactInfo:
-    type: array
-    minItems: 1
-    maxItems: 100
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/ProvisioningArtifactInfoKey'
-        value:
-          $ref: '#/definitions/ProvisioningArtifactInfoValue'
+    type: object
+    minProperties: 1
+    maxProperties: 100
+    additionalProperties:
+      $ref: '#/definitions/ProvisioningArtifactInfoValue'
   ServiceActionName:
     type: string
     pattern: '^[a-zA-Z0-9_\-.]*'
@@ -5145,16 +5602,11 @@ definitions:
     enum:
       - SSM_AUTOMATION
   ServiceActionDefinitionMap:
-    type: array
-    minItems: 1
-    maxItems: 100
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/ServiceActionDefinitionKey'
-        value:
-          $ref: '#/definitions/ServiceActionDefinitionValue'
+    type: object
+    minProperties: 1
+    maxProperties: 100
+    additionalProperties:
+      $ref: '#/definitions/ServiceActionDefinitionValue'
   ServiceActionDescription:
     type: string
     maxLength: 1024
@@ -5670,14 +6122,9 @@ definitions:
     items:
       $ref: '#/definitions/ProductViewAggregationValue'
   ProductViewAggregations:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/ProductViewAggregationType'
-        value:
-          $ref: '#/definitions/ProductViewAggregationValues'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/ProductViewAggregationValues'
   ProductViewDetails:
     type: array
     items:
@@ -5698,14 +6145,9 @@ definitions:
     items:
       $ref: '#/definitions/ProductViewFilterValue'
   ProductViewFilters:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/ProductViewFilterBy'
-        value:
-          $ref: '#/definitions/ProductViewFilterValues'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/ProductViewFilterValues'
   ProductViewSortBy:
     type: string
     enum:
@@ -5824,23 +6266,14 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ProvisionedProductDetail'
-  ProvisionedProductViewFilterBy:
-    type: string
-    enum:
-      - SearchQuery
   ProvisionedProductViewFilterValues:
     type: array
     items:
       $ref: '#/definitions/ProvisionedProductViewFilterValue'
   ProvisionedProductFilters:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/ProvisionedProductViewFilterBy'
-        value:
-          $ref: '#/definitions/ProvisionedProductViewFilterValues'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/ProvisionedProductViewFilterValues'
   ProvisionedProductPlanStatus:
     type: string
     enum:
@@ -5878,6 +6311,10 @@ definitions:
         $ref: '#/definitions/Id'
         description: The identifier of the provisioning artifact.
     description: Summary information about a plan.
+  ProvisionedProductViewFilterBy:
+    type: string
+    enum:
+      - SearchQuery
   ProvisionedProductViewFilterValue:
     type: string
   ProvisioningArtifactName:
@@ -5911,9 +6348,9 @@ definitions:
       - CLOUD_FORMATION_TEMPLATE
       - MARKETPLACE_AMI
       - MARKETPLACE_CAR
-  ProvisioningArtifactInfoKey:
-    type: string
   ProvisioningArtifactInfoValue:
+    type: string
+  ProvisioningArtifactInfoKey:
     type: string
   ProvisioningArtifactParameter:
     type: object
@@ -6257,14 +6694,9 @@ definitions:
         description: Error type that happened when processing the operation.
     description: Errors that occurred during the portfolio share operation.
   SourceProvisioningArtifactPropertiesMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/ProvisioningArtifactPropertyName'
-        value:
-          $ref: '#/definitions/ProvisioningArtifactPropertyValue'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/ProvisioningArtifactPropertyValue'
   StackSetOperationType:
     type: string
     enum:

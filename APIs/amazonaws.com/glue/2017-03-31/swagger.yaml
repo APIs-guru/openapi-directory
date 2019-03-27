@@ -99,7 +99,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /:
+  '/#X-Amz-Target=AWSGlue.BatchCreatePartition':
     post:
       operationId: BatchCreatePartition
       description: Creates one or more partitions in a batch operation.
@@ -142,6 +142,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/BatchCreatePartitionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.BatchCreatePartition
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -152,7 +158,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#BatchDeleteConnection':
+  '/#X-Amz-Target=AWSGlue.BatchDeleteConnection':
     post:
       operationId: BatchDeleteConnection
       description: Deletes a list of connection definitions from the Data Catalog.
@@ -175,6 +181,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/BatchDeleteConnectionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.BatchDeleteConnection
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -185,7 +197,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#BatchDeletePartition':
+  '/#X-Amz-Target=AWSGlue.BatchDeletePartition':
     post:
       operationId: BatchDeletePartition
       description: Deletes one or more partitions in a batch operation.
@@ -216,6 +228,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/BatchDeletePartitionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.BatchDeletePartition
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -226,7 +244,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#BatchDeleteTable':
+  '/#X-Amz-Target=AWSGlue.BatchDeleteTable':
     post:
       operationId: BatchDeleteTable
       description: '<p>Deletes multiple tables at once.</p> <note> <p>After completing this operation, you will no longer have access to the table versions and partitions that belong to the deleted table. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service.</p> <p>To ensure immediate deletion of all related resources, before calling <code>BatchDeleteTable</code>, use <code>DeleteTableVersion</code> or <code>BatchDeleteTableVersion</code>, and <code>DeletePartition</code> or <code>BatchDeletePartition</code>, to delete any resources that belong to the table.</p> </note>'
@@ -257,6 +275,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/BatchDeleteTableRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.BatchDeleteTable
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -267,7 +291,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#BatchDeleteTableVersion':
+  '/#X-Amz-Target=AWSGlue.BatchDeleteTableVersion':
     post:
       operationId: BatchDeleteTableVersion
       description: Deletes a specified batch of versions of a table.
@@ -298,6 +322,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/BatchDeleteTableVersionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.BatchDeleteTableVersion
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -308,7 +338,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#BatchGetCrawlers':
+  '/#X-Amz-Target=AWSGlue.BatchGetCrawlers':
     post:
       operationId: BatchGetCrawlers
       description: 'Returns a list of resource metadata for a given list of crawler names. After calling the <code>ListCrawlers</code> operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.'
@@ -331,6 +361,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/BatchGetCrawlersRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.BatchGetCrawlers
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -341,7 +377,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#BatchGetDevEndpoints':
+  '/#X-Amz-Target=AWSGlue.BatchGetDevEndpoints':
     post:
       operationId: BatchGetDevEndpoints
       description: 'Returns a list of resource metadata for a given list of DevEndpoint names. After calling the <code>ListDevEndpoints</code> operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.'
@@ -372,6 +408,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/BatchGetDevEndpointsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.BatchGetDevEndpoints
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -382,7 +424,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#BatchGetJobs':
+  '/#X-Amz-Target=AWSGlue.BatchGetJobs':
     post:
       operationId: BatchGetJobs
       description: 'Returns a list of resource metadata for a given list of job names. After calling the <code>ListJobs</code> operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags. '
@@ -409,6 +451,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/BatchGetJobsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.BatchGetJobs
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -419,7 +467,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#BatchGetPartition':
+  '/#X-Amz-Target=AWSGlue.BatchGetPartition':
     post:
       operationId: BatchGetPartition
       description: Retrieves partitions in a batch request.
@@ -454,6 +502,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/BatchGetPartitionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.BatchGetPartition
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -464,7 +518,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#BatchGetTriggers':
+  '/#X-Amz-Target=AWSGlue.BatchGetTriggers':
     post:
       operationId: BatchGetTriggers
       description: 'Returns a list of resource metadata for a given list of trigger names. After calling the <code>ListTriggers</code> operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.'
@@ -491,6 +545,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/BatchGetTriggersRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.BatchGetTriggers
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -501,7 +561,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#BatchStopJobRun':
+  '/#X-Amz-Target=AWSGlue.BatchStopJobRun':
     post:
       operationId: BatchStopJobRun
       description: Stops one or more job runs for a specified job definition.
@@ -528,6 +588,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/BatchStopJobRunRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.BatchStopJobRun
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -538,7 +604,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateClassifier':
+  '/#X-Amz-Target=AWSGlue.CreateClassifier':
     post:
       operationId: CreateClassifier
       description: 'Creates a classifier in the user''s account. This may be a <code>GrokClassifier</code>, an <code>XMLClassifier</code>, a <code>JsonClassifier</code>, or a <code>CsvClassifier</code>, depending on which field of the request is present.'
@@ -565,6 +631,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateClassifierRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.CreateClassifier
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -575,7 +647,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateConnection':
+  '/#X-Amz-Target=AWSGlue.CreateConnection':
     post:
       operationId: CreateConnection
       description: Creates a connection definition in the Data Catalog.
@@ -610,6 +682,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateConnectionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.CreateConnection
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -620,7 +698,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateCrawler':
+  '/#X-Amz-Target=AWSGlue.CreateCrawler':
     post:
       operationId: CreateCrawler
       description: 'Creates a new crawler with specified targets, role, configuration, and optional schedule. At least one crawl target must be specified, in the <i>s3Targets</i> field, the <i>jdbcTargets</i> field, or the <i>DynamoDBTargets</i> field.'
@@ -651,6 +729,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateCrawlerRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.CreateCrawler
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -661,7 +745,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateDatabase':
+  '/#X-Amz-Target=AWSGlue.CreateDatabase':
     post:
       operationId: CreateDatabase
       description: Creates a new database in a Data Catalog.
@@ -700,6 +784,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateDatabaseRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.CreateDatabase
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -710,7 +800,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateDevEndpoint':
+  '/#X-Amz-Target=AWSGlue.CreateDevEndpoint':
     post:
       operationId: CreateDevEndpoint
       description: Creates a new DevEndpoint.
@@ -757,6 +847,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateDevEndpointRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.CreateDevEndpoint
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -767,7 +863,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateJob':
+  '/#X-Amz-Target=AWSGlue.CreateJob':
     post:
       operationId: CreateJob
       description: Creates a new job definition.
@@ -810,6 +906,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateJobRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.CreateJob
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -820,7 +922,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreatePartition':
+  '/#X-Amz-Target=AWSGlue.CreatePartition':
     post:
       operationId: CreatePartition
       description: Creates a new partition.
@@ -863,6 +965,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreatePartitionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.CreatePartition
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -873,7 +981,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateScript':
+  '/#X-Amz-Target=AWSGlue.CreateScript':
     post:
       operationId: CreateScript
       description: Transforms a directed acyclic graph (DAG) into code.
@@ -900,6 +1008,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateScriptRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.CreateScript
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -910,7 +1024,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateSecurityConfiguration':
+  '/#X-Amz-Target=AWSGlue.CreateSecurityConfiguration':
     post:
       operationId: CreateSecurityConfiguration
       description: Creates a new security configuration.
@@ -945,6 +1059,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateSecurityConfigurationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.CreateSecurityConfiguration
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -955,7 +1075,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateTable':
+  '/#X-Amz-Target=AWSGlue.CreateTable':
     post:
       operationId: CreateTable
       description: Creates a new table definition in the Data Catalog.
@@ -998,6 +1118,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateTableRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.CreateTable
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1008,7 +1134,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateTrigger':
+  '/#X-Amz-Target=AWSGlue.CreateTrigger':
     post:
       operationId: CreateTrigger
       description: Creates a new trigger.
@@ -1051,6 +1177,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateTriggerRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.CreateTrigger
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1061,7 +1193,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateUserDefinedFunction':
+  '/#X-Amz-Target=AWSGlue.CreateUserDefinedFunction':
     post:
       operationId: CreateUserDefinedFunction
       description: Creates a new function definition in the Data Catalog.
@@ -1104,6 +1236,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateUserDefinedFunctionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.CreateUserDefinedFunction
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1114,7 +1252,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteClassifier':
+  '/#X-Amz-Target=AWSGlue.DeleteClassifier':
     post:
       operationId: DeleteClassifier
       description: Removes a classifier from the Data Catalog.
@@ -1137,6 +1275,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteClassifierRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.DeleteClassifier
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1147,7 +1291,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteConnection':
+  '/#X-Amz-Target=AWSGlue.DeleteConnection':
     post:
       operationId: DeleteConnection
       description: Deletes a connection from the Data Catalog.
@@ -1170,6 +1314,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteConnectionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.DeleteConnection
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1180,7 +1330,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteCrawler':
+  '/#X-Amz-Target=AWSGlue.DeleteCrawler':
     post:
       operationId: DeleteCrawler
       description: 'Removes a specified crawler from the Data Catalog, unless the crawler state is <code>RUNNING</code>.'
@@ -1211,6 +1361,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteCrawlerRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.DeleteCrawler
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1221,7 +1377,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteDatabase':
+  '/#X-Amz-Target=AWSGlue.DeleteDatabase':
     post:
       operationId: DeleteDatabase
       description: '<p>Removes a specified Database from a Data Catalog.</p> <note> <p>After completing this operation, you will no longer have access to the tables (and all table versions and partitions that might belong to the tables) and the user-defined functions in the deleted database. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service.</p> <p>To ensure immediate deletion of all related resources, before calling <code>DeleteDatabase</code>, use <code>DeleteTableVersion</code> or <code>BatchDeleteTableVersion</code>, <code>DeletePartition</code> or <code>BatchDeletePartition</code>, <code>DeleteUserDefinedFunction</code>, and <code>DeleteTable</code> or <code>BatchDeleteTable</code>, to delete any resources that belong to the database.</p> </note>'
@@ -1252,6 +1408,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteDatabaseRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.DeleteDatabase
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1262,7 +1424,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteDevEndpoint':
+  '/#X-Amz-Target=AWSGlue.DeleteDevEndpoint':
     post:
       operationId: DeleteDevEndpoint
       description: Deletes a specified DevEndpoint.
@@ -1293,6 +1455,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteDevEndpointRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.DeleteDevEndpoint
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1303,7 +1471,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteJob':
+  '/#X-Amz-Target=AWSGlue.DeleteJob':
     post:
       operationId: DeleteJob
       description: 'Deletes a specified job definition. If the job definition is not found, no exception is thrown.'
@@ -1330,6 +1498,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteJobRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.DeleteJob
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1340,7 +1514,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeletePartition':
+  '/#X-Amz-Target=AWSGlue.DeletePartition':
     post:
       operationId: DeletePartition
       description: Deletes a specified partition.
@@ -1371,6 +1545,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeletePartitionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.DeletePartition
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1381,7 +1561,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteResourcePolicy':
+  '/#X-Amz-Target=AWSGlue.DeleteResourcePolicy':
     post:
       operationId: DeleteResourcePolicy
       description: Deletes a specified policy.
@@ -1416,6 +1596,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteResourcePolicyRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.DeleteResourcePolicy
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1426,7 +1612,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteSecurityConfiguration':
+  '/#X-Amz-Target=AWSGlue.DeleteSecurityConfiguration':
     post:
       operationId: DeleteSecurityConfiguration
       description: Deletes a specified security configuration.
@@ -1457,6 +1643,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteSecurityConfigurationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.DeleteSecurityConfiguration
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1467,7 +1659,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteTable':
+  '/#X-Amz-Target=AWSGlue.DeleteTable':
     post:
       operationId: DeleteTable
       description: '<p>Removes a table definition from the Data Catalog.</p> <note> <p>After completing this operation, you will no longer have access to the table versions and partitions that belong to the deleted table. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service.</p> <p>To ensure immediate deletion of all related resources, before calling <code>DeleteTable</code>, use <code>DeleteTableVersion</code> or <code>BatchDeleteTableVersion</code>, and <code>DeletePartition</code> or <code>BatchDeletePartition</code>, to delete any resources that belong to the table.</p> </note>'
@@ -1498,6 +1690,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteTableRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.DeleteTable
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1508,7 +1706,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteTableVersion':
+  '/#X-Amz-Target=AWSGlue.DeleteTableVersion':
     post:
       operationId: DeleteTableVersion
       description: Deletes a specified version of a table.
@@ -1539,6 +1737,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteTableVersionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.DeleteTableVersion
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1549,7 +1753,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteTrigger':
+  '/#X-Amz-Target=AWSGlue.DeleteTrigger':
     post:
       operationId: DeleteTrigger
       description: 'Deletes a specified trigger. If the trigger is not found, no exception is thrown.'
@@ -1580,6 +1784,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteTriggerRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.DeleteTrigger
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1590,7 +1800,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteUserDefinedFunction':
+  '/#X-Amz-Target=AWSGlue.DeleteUserDefinedFunction':
     post:
       operationId: DeleteUserDefinedFunction
       description: Deletes an existing function definition from the Data Catalog.
@@ -1621,6 +1831,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteUserDefinedFunctionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.DeleteUserDefinedFunction
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1631,7 +1847,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetCatalogImportStatus':
+  '/#X-Amz-Target=AWSGlue.GetCatalogImportStatus':
     post:
       operationId: GetCatalogImportStatus
       description: Retrieves the status of a migration operation.
@@ -1654,6 +1870,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetCatalogImportStatusRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.GetCatalogImportStatus
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1664,7 +1886,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetClassifier':
+  '/#X-Amz-Target=AWSGlue.GetClassifier':
     post:
       operationId: GetClassifier
       description: Retrieve a classifier by name.
@@ -1687,6 +1909,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetClassifierRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.GetClassifier
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1697,7 +1925,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetClassifiers':
+  '/#X-Amz-Target=AWSGlue.GetClassifiers':
     post:
       operationId: GetClassifiers
       description: Lists all classifier objects in the Data Catalog.
@@ -1726,6 +1954,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.GetClassifiers
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1736,7 +1970,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetConnection':
+  '/#X-Amz-Target=AWSGlue.GetConnection':
     post:
       operationId: GetConnection
       description: Retrieves a connection definition from the Data Catalog.
@@ -1767,6 +2001,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetConnectionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.GetConnection
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1777,7 +2017,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetConnections':
+  '/#X-Amz-Target=AWSGlue.GetConnections':
     post:
       operationId: GetConnections
       description: Retrieves a list of connection definitions from the Data Catalog.
@@ -1818,6 +2058,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.GetConnections
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1828,7 +2074,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetCrawler':
+  '/#X-Amz-Target=AWSGlue.GetCrawler':
     post:
       operationId: GetCrawler
       description: Retrieves metadata for a specified crawler.
@@ -1851,6 +2097,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetCrawlerRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.GetCrawler
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1861,7 +2113,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetCrawlerMetrics':
+  '/#X-Amz-Target=AWSGlue.GetCrawlerMetrics':
     post:
       operationId: GetCrawlerMetrics
       description: Retrieves metrics about specified crawlers.
@@ -1890,6 +2142,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.GetCrawlerMetrics
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1900,7 +2158,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetCrawlers':
+  '/#X-Amz-Target=AWSGlue.GetCrawlers':
     post:
       operationId: GetCrawlers
       description: Retrieves metadata for all crawlers defined in the customer account.
@@ -1929,6 +2187,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.GetCrawlers
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1939,7 +2203,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetDataCatalogEncryptionSettings':
+  '/#X-Amz-Target=AWSGlue.GetDataCatalogEncryptionSettings':
     post:
       operationId: GetDataCatalogEncryptionSettings
       description: Retrieves the security configuration for a specified catalog.
@@ -1966,6 +2230,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetDataCatalogEncryptionSettingsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.GetDataCatalogEncryptionSettings
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1976,7 +2246,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetDatabase':
+  '/#X-Amz-Target=AWSGlue.GetDatabase':
     post:
       operationId: GetDatabase
       description: Retrieves the definition of a specified database.
@@ -2011,6 +2281,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetDatabaseRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.GetDatabase
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2021,7 +2297,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetDatabases':
+  '/#X-Amz-Target=AWSGlue.GetDatabases':
     post:
       operationId: GetDatabases
       description: Retrieves all Databases defined in a given Data Catalog.
@@ -2062,6 +2338,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.GetDatabases
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2072,7 +2354,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetDataflowGraph':
+  '/#X-Amz-Target=AWSGlue.GetDataflowGraph':
     post:
       operationId: GetDataflowGraph
       description: 'Transforms a Python script into a directed acyclic graph (DAG). '
@@ -2099,6 +2381,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetDataflowGraphRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.GetDataflowGraph
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2109,7 +2397,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetDevEndpoint':
+  '/#X-Amz-Target=AWSGlue.GetDevEndpoint':
     post:
       operationId: GetDevEndpoint
       description: '<p>Retrieves information about a specified DevEndpoint.</p> <note> <p>When you create a development endpoint in a virtual private cloud (VPC), AWS Glue returns only a private IP address, and the public IP address field is not populated. When you create a non-VPC development endpoint, AWS Glue returns only a public IP address.</p> </note>'
@@ -2140,6 +2428,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetDevEndpointRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.GetDevEndpoint
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2150,7 +2444,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetDevEndpoints':
+  '/#X-Amz-Target=AWSGlue.GetDevEndpoints':
     post:
       operationId: GetDevEndpoints
       description: '<p>Retrieves all the DevEndpoints in this AWS account.</p> <note> <p>When you create a development endpoint in a virtual private cloud (VPC), AWS Glue returns only a private IP address and the public IP address field is not populated. When you create a non-VPC development endpoint, AWS Glue returns only a public IP address.</p> </note>'
@@ -2191,6 +2485,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.GetDevEndpoints
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2201,7 +2501,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetJob':
+  '/#X-Amz-Target=AWSGlue.GetJob':
     post:
       operationId: GetJob
       description: Retrieves an existing job definition.
@@ -2232,6 +2532,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetJobRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.GetJob
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2242,7 +2548,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetJobRun':
+  '/#X-Amz-Target=AWSGlue.GetJobRun':
     post:
       operationId: GetJobRun
       description: Retrieves the metadata for a given job run.
@@ -2273,6 +2579,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetJobRunRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.GetJobRun
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2283,7 +2595,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetJobRuns':
+  '/#X-Amz-Target=AWSGlue.GetJobRuns':
     post:
       operationId: GetJobRuns
       description: Retrieves metadata for all runs of a given job definition.
@@ -2324,6 +2636,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.GetJobRuns
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2334,7 +2652,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetJobs':
+  '/#X-Amz-Target=AWSGlue.GetJobs':
     post:
       operationId: GetJobs
       description: Retrieves all current job definitions.
@@ -2375,6 +2693,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.GetJobs
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2385,7 +2709,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetMapping':
+  '/#X-Amz-Target=AWSGlue.GetMapping':
     post:
       operationId: GetMapping
       description: Creates mappings.
@@ -2416,6 +2740,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetMappingRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.GetMapping
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2426,7 +2756,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetPartition':
+  '/#X-Amz-Target=AWSGlue.GetPartition':
     post:
       operationId: GetPartition
       description: Retrieves information about a specified partition.
@@ -2461,6 +2791,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetPartitionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.GetPartition
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2471,7 +2807,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetPartitions':
+  '/#X-Amz-Target=AWSGlue.GetPartitions':
     post:
       operationId: GetPartitions
       description: Retrieves information about the partitions in a table.
@@ -2516,6 +2852,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.GetPartitions
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2526,7 +2868,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetPlan':
+  '/#X-Amz-Target=AWSGlue.GetPlan':
     post:
       operationId: GetPlan
       description: Gets code to perform a specified mapping.
@@ -2553,6 +2895,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetPlanRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.GetPlan
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2563,7 +2911,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetResourcePolicy':
+  '/#X-Amz-Target=AWSGlue.GetResourcePolicy':
     post:
       operationId: GetResourcePolicy
       description: Retrieves a specified resource policy.
@@ -2594,6 +2942,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetResourcePolicyRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.GetResourcePolicy
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2604,7 +2958,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetSecurityConfiguration':
+  '/#X-Amz-Target=AWSGlue.GetSecurityConfiguration':
     post:
       operationId: GetSecurityConfiguration
       description: Retrieves a specified security configuration.
@@ -2635,6 +2989,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetSecurityConfigurationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.GetSecurityConfiguration
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2645,7 +3005,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetSecurityConfigurations':
+  '/#X-Amz-Target=AWSGlue.GetSecurityConfigurations':
     post:
       operationId: GetSecurityConfigurations
       description: Retrieves a list of all security configurations.
@@ -2686,6 +3046,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.GetSecurityConfigurations
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2696,7 +3062,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetTable':
+  '/#X-Amz-Target=AWSGlue.GetTable':
     post:
       operationId: GetTable
       description: Retrieves the <code>Table</code> definition in a Data Catalog for a specified table.
@@ -2731,6 +3097,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetTableRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.GetTable
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2741,7 +3113,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetTableVersion':
+  '/#X-Amz-Target=AWSGlue.GetTableVersion':
     post:
       operationId: GetTableVersion
       description: Retrieves a specified version of a table.
@@ -2776,6 +3148,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetTableVersionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.GetTableVersion
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2786,7 +3164,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetTableVersions':
+  '/#X-Amz-Target=AWSGlue.GetTableVersions':
     post:
       operationId: GetTableVersions
       description: Retrieves a list of strings that identify available versions of a specified table.
@@ -2831,6 +3209,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.GetTableVersions
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2841,7 +3225,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetTables':
+  '/#X-Amz-Target=AWSGlue.GetTables':
     post:
       operationId: GetTables
       description: Retrieves the definitions of some or all of the tables in a given <code>Database</code>.
@@ -2886,6 +3270,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.GetTables
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2896,7 +3286,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetTags':
+  '/#X-Amz-Target=AWSGlue.GetTags':
     post:
       operationId: GetTags
       description: Retrieves a list of tags associated with a resource.
@@ -2927,6 +3317,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetTagsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.GetTags
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2937,7 +3333,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetTrigger':
+  '/#X-Amz-Target=AWSGlue.GetTrigger':
     post:
       operationId: GetTrigger
       description: Retrieves the definition of a trigger.
@@ -2968,6 +3364,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetTriggerRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.GetTrigger
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2978,7 +3380,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetTriggers':
+  '/#X-Amz-Target=AWSGlue.GetTriggers':
     post:
       operationId: GetTriggers
       description: Gets all the triggers associated with a job.
@@ -3019,6 +3421,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.GetTriggers
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3029,7 +3437,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetUserDefinedFunction':
+  '/#X-Amz-Target=AWSGlue.GetUserDefinedFunction':
     post:
       operationId: GetUserDefinedFunction
       description: Retrieves a specified function definition from the Data Catalog.
@@ -3064,6 +3472,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetUserDefinedFunctionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.GetUserDefinedFunction
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3074,7 +3488,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetUserDefinedFunctions':
+  '/#X-Amz-Target=AWSGlue.GetUserDefinedFunctions':
     post:
       operationId: GetUserDefinedFunctions
       description: Retrieves a multiple function definitions from the Data Catalog.
@@ -3119,6 +3533,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.GetUserDefinedFunctions
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3129,7 +3549,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ImportCatalogToGlue':
+  '/#X-Amz-Target=AWSGlue.ImportCatalogToGlue':
     post:
       operationId: ImportCatalogToGlue
       description: Imports an existing Athena Data Catalog to AWS Glue
@@ -3152,6 +3572,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ImportCatalogToGlueRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.ImportCatalogToGlue
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3162,7 +3588,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListCrawlers':
+  '/#X-Amz-Target=AWSGlue.ListCrawlers':
     post:
       operationId: ListCrawlers
       description: '<p>Retrieves the names of all crawler resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names.</p> <p>This operation takes the optional <code>Tags</code> field which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag will be retrieved.</p>'
@@ -3191,6 +3617,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.ListCrawlers
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3201,7 +3633,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListDevEndpoints':
+  '/#X-Amz-Target=AWSGlue.ListDevEndpoints':
     post:
       operationId: ListDevEndpoints
       description: '<p>Retrieves the names of all DevEndpoint resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names.</p> <p>This operation takes the optional <code>Tags</code> field which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag will be retrieved.</p>'
@@ -3242,6 +3674,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.ListDevEndpoints
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3252,7 +3690,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListJobs':
+  '/#X-Amz-Target=AWSGlue.ListJobs':
     post:
       operationId: ListJobs
       description: '<p>Retrieves the names of all job resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names.</p> <p>This operation takes the optional <code>Tags</code> field which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag will be retrieved.</p>'
@@ -3293,6 +3731,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.ListJobs
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3303,7 +3747,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListTriggers':
+  '/#X-Amz-Target=AWSGlue.ListTriggers':
     post:
       operationId: ListTriggers
       description: '<p>Retrieves the names of all trigger resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names.</p> <p>This operation takes the optional <code>Tags</code> field which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag will be retrieved.</p>'
@@ -3344,6 +3788,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.ListTriggers
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3354,7 +3804,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#PutDataCatalogEncryptionSettings':
+  '/#X-Amz-Target=AWSGlue.PutDataCatalogEncryptionSettings':
     post:
       operationId: PutDataCatalogEncryptionSettings
       description: 'Sets the security configuration for a specified catalog. After the configuration has been set, the specified encryption is applied to every catalog write thereafter.'
@@ -3381,6 +3831,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutDataCatalogEncryptionSettingsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.PutDataCatalogEncryptionSettings
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3391,7 +3847,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#PutResourcePolicy':
+  '/#X-Amz-Target=AWSGlue.PutResourcePolicy':
     post:
       operationId: PutResourcePolicy
       description: Sets the Data Catalog resource policy for access control.
@@ -3426,6 +3882,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutResourcePolicyRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.PutResourcePolicy
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3436,7 +3898,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ResetJobBookmark':
+  '/#X-Amz-Target=AWSGlue.ResetJobBookmark':
     post:
       operationId: ResetJobBookmark
       description: Resets a bookmark entry.
@@ -3467,6 +3929,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ResetJobBookmarkRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.ResetJobBookmark
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3477,7 +3945,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#StartCrawler':
+  '/#X-Amz-Target=AWSGlue.StartCrawler':
     post:
       operationId: StartCrawler
       description: 'Starts a crawl using the specified crawler, regardless of what is scheduled. If the crawler is already running, returns a <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-exceptions.html#aws-glue-api-exceptions-CrawlerRunningException">CrawlerRunningException</a>.'
@@ -3504,6 +3972,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StartCrawlerRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.StartCrawler
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3514,7 +3988,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#StartCrawlerSchedule':
+  '/#X-Amz-Target=AWSGlue.StartCrawlerSchedule':
     post:
       operationId: StartCrawlerSchedule
       description: 'Changes the schedule state of the specified crawler to <code>SCHEDULED</code>, unless the crawler is already running or the schedule state is already <code>SCHEDULED</code>.'
@@ -3549,6 +4023,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StartCrawlerScheduleRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.StartCrawlerSchedule
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3559,7 +4039,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#StartJobRun':
+  '/#X-Amz-Target=AWSGlue.StartJobRun':
     post:
       operationId: StartJobRun
       description: Starts a job run using a job definition.
@@ -3598,6 +4078,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StartJobRunRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.StartJobRun
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3608,7 +4094,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#StartTrigger':
+  '/#X-Amz-Target=AWSGlue.StartTrigger':
     post:
       operationId: StartTrigger
       description: 'Starts an existing trigger. See <a href="http://docs.aws.amazon.com/glue/latest/dg/trigger-job.html">Triggering Jobs</a> for information about how different types of trigger are started.'
@@ -3647,6 +4133,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StartTriggerRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.StartTrigger
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3657,7 +4149,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#StopCrawler':
+  '/#X-Amz-Target=AWSGlue.StopCrawler':
     post:
       operationId: StopCrawler
       description: 'If the specified crawler is running, stops the crawl.'
@@ -3688,6 +4180,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StopCrawlerRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.StopCrawler
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3698,7 +4196,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#StopCrawlerSchedule':
+  '/#X-Amz-Target=AWSGlue.StopCrawlerSchedule':
     post:
       operationId: StopCrawlerSchedule
       description: 'Sets the schedule state of the specified crawler to <code>NOT_SCHEDULED</code>, but does not stop the crawler if it is already running.'
@@ -3729,6 +4227,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StopCrawlerScheduleRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.StopCrawlerSchedule
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3739,7 +4243,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#StopTrigger':
+  '/#X-Amz-Target=AWSGlue.StopTrigger':
     post:
       operationId: StopTrigger
       description: Stops a specified trigger.
@@ -3774,6 +4278,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StopTriggerRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.StopTrigger
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3784,7 +4294,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#TagResource':
+  '/#X-Amz-Target=AWSGlue.TagResource':
     post:
       operationId: TagResource
       description: 'Adds tags to a resource. A tag is a label you can assign to an AWS resource. In AWS Glue, you can tag only certain resources. For information about what resources you can tag, see <a href="http://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html">AWS Tags in AWS Glue</a>.'
@@ -3815,6 +4325,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/TagResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.TagResource
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3825,7 +4341,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UntagResource':
+  '/#X-Amz-Target=AWSGlue.UntagResource':
     post:
       operationId: UntagResource
       description: Removes tags from a resource.
@@ -3856,6 +4372,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UntagResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.UntagResource
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3866,7 +4388,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateClassifier':
+  '/#X-Amz-Target=AWSGlue.UpdateClassifier':
     post:
       operationId: UpdateClassifier
       description: 'Modifies an existing classifier (a <code>GrokClassifier</code>, an <code>XMLClassifier</code>, a <code>JsonClassifier</code>, or a <code>CsvClassifier</code>, depending on which field is present).'
@@ -3897,6 +4419,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateClassifierRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.UpdateClassifier
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3907,7 +4435,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateConnection':
+  '/#X-Amz-Target=AWSGlue.UpdateConnection':
     post:
       operationId: UpdateConnection
       description: Updates a connection definition in the Data Catalog.
@@ -3942,6 +4470,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateConnectionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.UpdateConnection
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3952,7 +4486,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateCrawler':
+  '/#X-Amz-Target=AWSGlue.UpdateCrawler':
     post:
       operationId: UpdateCrawler
       description: 'Updates a crawler. If a crawler is running, you must stop it using <code>StopCrawler</code> before updating it.'
@@ -3987,6 +4521,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateCrawlerRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.UpdateCrawler
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3997,7 +4537,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateCrawlerSchedule':
+  '/#X-Amz-Target=AWSGlue.UpdateCrawlerSchedule':
     post:
       operationId: UpdateCrawlerSchedule
       description: 'Updates the schedule of a crawler using a <code>cron</code> expression. '
@@ -4032,6 +4572,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateCrawlerScheduleRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.UpdateCrawlerSchedule
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -4042,7 +4588,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateDatabase':
+  '/#X-Amz-Target=AWSGlue.UpdateDatabase':
     post:
       operationId: UpdateDatabase
       description: Updates an existing database definition in a Data Catalog.
@@ -4077,6 +4623,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateDatabaseRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.UpdateDatabase
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -4087,7 +4639,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateDevEndpoint':
+  '/#X-Amz-Target=AWSGlue.UpdateDevEndpoint':
     post:
       operationId: UpdateDevEndpoint
       description: Updates a specified DevEndpoint.
@@ -4122,6 +4674,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateDevEndpointRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.UpdateDevEndpoint
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -4132,7 +4690,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateJob':
+  '/#X-Amz-Target=AWSGlue.UpdateJob':
     post:
       operationId: UpdateJob
       description: Updates an existing job definition.
@@ -4167,6 +4725,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateJobRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.UpdateJob
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -4177,7 +4741,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdatePartition':
+  '/#X-Amz-Target=AWSGlue.UpdatePartition':
     post:
       operationId: UpdatePartition
       description: Updates a partition.
@@ -4212,6 +4776,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdatePartitionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.UpdatePartition
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -4222,7 +4792,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateTable':
+  '/#X-Amz-Target=AWSGlue.UpdateTable':
     post:
       operationId: UpdateTable
       description: Updates a metadata table in the Data Catalog.
@@ -4265,6 +4835,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateTableRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.UpdateTable
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -4275,7 +4851,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateTrigger':
+  '/#X-Amz-Target=AWSGlue.UpdateTrigger':
     post:
       operationId: UpdateTrigger
       description: Updates a trigger definition.
@@ -4310,6 +4886,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateTriggerRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.UpdateTrigger
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -4320,7 +4902,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateUserDefinedFunction':
+  '/#X-Amz-Target=AWSGlue.UpdateUserDefinedFunction':
     post:
       operationId: UpdateUserDefinedFunction
       description: Updates an existing function definition in the Data Catalog.
@@ -4355,6 +4937,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateUserDefinedFunctionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.UpdateUserDefinedFunction
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -6409,14 +6997,9 @@ definitions:
     maxLength: 255
     x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
   GenericMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/GenericString'
-        value:
-          $ref: '#/definitions/GenericString'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/GenericString'
   Timeout:
     type: integer
     minimum: 1
@@ -6478,14 +7061,9 @@ definitions:
     items:
       $ref: '#/definitions/NameString'
   ErrorByName:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/NameString'
-        value:
-          $ref: '#/definitions/ErrorDetail'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/ErrorDetail'
   BatchDeletePartitionValueList:
     type: array
     items:
@@ -6987,16 +7565,11 @@ definitions:
     minItems: 0
     maxItems: 10
   ConnectionProperties:
-    type: array
-    minItems: 0
-    maxItems: 100
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/ConnectionPropertyKey'
-        value:
-          $ref: '#/definitions/ValueString'
+    type: object
+    minProperties: 0
+    maxProperties: 100
+    additionalProperties:
+      $ref: '#/definitions/ValueString'
   PhysicalConnectionRequirements:
     type: object
     properties:
@@ -7376,16 +7949,11 @@ definitions:
   CronExpression:
     type: string
   TagsMap:
-    type: array
-    minItems: 0
-    maxItems: 50
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/TagKey'
-        value:
-          $ref: '#/definitions/TagValue'
+    type: object
+    minProperties: 0
+    maxProperties: 50
+    additionalProperties:
+      $ref: '#/definitions/TagValue'
   CsvColumnDelimiter:
     type: string
     pattern: '[^\r\n]'
@@ -7439,16 +8007,11 @@ definitions:
   IntegerValue:
     type: integer
   MapValue:
-    type: array
-    minItems: 0
-    maxItems: 100
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/GenericString'
-        value:
-          $ref: '#/definitions/GenericString'
+    type: object
+    minProperties: 0
+    maxProperties: 100
+    additionalProperties:
+      $ref: '#/definitions/GenericString'
   TimestampValue:
     type: string
     format: date-time
@@ -7646,14 +8209,9 @@ definitions:
     maxLength: 1024
     x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
   ParametersMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/KeyString'
-        value:
-          $ref: '#/definitions/ParametersMapValue'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/ParametersMapValue'
   Database:
     type: object
     required:
@@ -8302,14 +8860,9 @@ definitions:
     maxLength: 255
     x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
   LocationMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/ColumnValuesString'
-        value:
-          $ref: '#/definitions/ColumnValuesString'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/ColumnValuesString'
   LocationString:
     type: string
     maxLength: 2056

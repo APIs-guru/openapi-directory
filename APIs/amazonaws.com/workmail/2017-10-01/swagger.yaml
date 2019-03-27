@@ -99,7 +99,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /:
+  '/#X-Amz-Target=WorkMailService.AssociateDelegateToResource':
     post:
       operationId: AssociateDelegateToResource
       description: Adds a member (user or group) to the resource's set of delegates.
@@ -134,6 +134,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AssociateDelegateToResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkMailService.AssociateDelegateToResource
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -144,7 +150,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AssociateMemberToGroup':
+  '/#X-Amz-Target=WorkMailService.AssociateMemberToGroup':
     post:
       operationId: AssociateMemberToGroup
       description: Adds a member (user or group) to the group's set.
@@ -191,6 +197,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AssociateMemberToGroupRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkMailService.AssociateMemberToGroup
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -201,7 +213,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateAlias':
+  '/#X-Amz-Target=WorkMailService.CreateAlias':
     post:
       operationId: CreateAlias
       description: Adds an alias to the set of a given member (user or group) of Amazon WorkMail.
@@ -248,6 +260,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateAliasRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkMailService.CreateAlias
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -258,7 +276,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateGroup':
+  '/#X-Amz-Target=WorkMailService.CreateGroup':
     post:
       operationId: CreateGroup
       description: Creates a group that can be used in Amazon WorkMail by calling the <a>RegisterToWorkMail</a> operation.
@@ -305,6 +323,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateGroupRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkMailService.CreateGroup
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -315,7 +339,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateResource':
+  '/#X-Amz-Target=WorkMailService.CreateResource':
     post:
       operationId: CreateResource
       description: 'Creates a new Amazon WorkMail resource. '
@@ -358,6 +382,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkMailService.CreateResource
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -368,7 +398,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateUser':
+  '/#X-Amz-Target=WorkMailService.CreateUser':
     post:
       operationId: CreateUser
       description: Creates a user who can be used in Amazon WorkMail by calling the <a>RegisterToWorkMail</a> operation.
@@ -419,6 +449,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateUserRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkMailService.CreateUser
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -429,7 +465,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteAlias':
+  '/#X-Amz-Target=WorkMailService.DeleteAlias':
     post:
       operationId: DeleteAlias
       description: Remove one or more specified aliases from a set of aliases for a given user.
@@ -464,6 +500,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteAliasRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkMailService.DeleteAlias
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -474,7 +516,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteGroup':
+  '/#X-Amz-Target=WorkMailService.DeleteGroup':
     post:
       operationId: DeleteGroup
       description: Deletes a group from Amazon WorkMail.
@@ -517,6 +559,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteGroupRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkMailService.DeleteGroup
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -527,7 +575,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteMailboxPermissions':
+  '/#X-Amz-Target=WorkMailService.DeleteMailboxPermissions':
     post:
       operationId: DeleteMailboxPermissions
       description: Deletes permissions granted to a member (user or group).
@@ -562,6 +610,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteMailboxPermissionsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkMailService.DeleteMailboxPermissions
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -572,7 +626,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteResource':
+  '/#X-Amz-Target=WorkMailService.DeleteResource':
     post:
       operationId: DeleteResource
       description: 'Deletes the specified resource. '
@@ -603,6 +657,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkMailService.DeleteResource
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -613,7 +673,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteUser':
+  '/#X-Amz-Target=WorkMailService.DeleteUser':
     post:
       operationId: DeleteUser
       description: '<p>Deletes a user from Amazon WorkMail and all subsequent systems. Before you can delete a user, the user state must be <code>DISABLED</code>. Use the <a>DescribeUser</a> action to confirm the user state.</p> <p>Deleting a user is permanent and cannot be undone. WorkMail archives user mailboxes for 30 days before they are permanently removed.</p>'
@@ -656,6 +716,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteUserRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkMailService.DeleteUser
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -666,7 +732,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeregisterFromWorkMail':
+  '/#X-Amz-Target=WorkMailService.DeregisterFromWorkMail':
     post:
       operationId: DeregisterFromWorkMail
       description: 'Mark a user, group, or resource as no longer used in Amazon WorkMail. This action disassociates the mailbox and schedules it for clean-up. WorkMail keeps mailboxes for 30 days before they are permanently removed. The functionality in the console is <i>Disable</i>.'
@@ -701,6 +767,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeregisterFromWorkMailRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkMailService.DeregisterFromWorkMail
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -711,7 +783,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeGroup':
+  '/#X-Amz-Target=WorkMailService.DescribeGroup':
     post:
       operationId: DescribeGroup
       description: Returns the data available for the group.
@@ -742,6 +814,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeGroupRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkMailService.DescribeGroup
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -752,7 +830,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeOrganization':
+  '/#X-Amz-Target=WorkMailService.DescribeOrganization':
     post:
       operationId: DescribeOrganization
       description: Provides more information regarding a given organization based on its identifier.
@@ -775,6 +853,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeOrganizationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkMailService.DescribeOrganization
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -785,7 +869,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeResource':
+  '/#X-Amz-Target=WorkMailService.DescribeResource':
     post:
       operationId: DescribeResource
       description: Returns the data available for the resource.
@@ -816,6 +900,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkMailService.DescribeResource
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -826,7 +916,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeUser':
+  '/#X-Amz-Target=WorkMailService.DescribeUser':
     post:
       operationId: DescribeUser
       description: Provides information regarding the user.
@@ -857,6 +947,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeUserRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkMailService.DescribeUser
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -867,7 +963,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DisassociateDelegateFromResource':
+  '/#X-Amz-Target=WorkMailService.DisassociateDelegateFromResource':
     post:
       operationId: DisassociateDelegateFromResource
       description: Removes a member from the resource's set of delegates.
@@ -902,6 +998,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DisassociateDelegateFromResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkMailService.DisassociateDelegateFromResource
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -912,7 +1014,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DisassociateMemberFromGroup':
+  '/#X-Amz-Target=WorkMailService.DisassociateMemberFromGroup':
     post:
       operationId: DisassociateMemberFromGroup
       description: Removes a member from a group.
@@ -959,6 +1061,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DisassociateMemberFromGroupRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkMailService.DisassociateMemberFromGroup
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -969,7 +1077,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListAliases':
+  '/#X-Amz-Target=WorkMailService.ListAliases':
     post:
       operationId: ListAliases
       description: Creates a paginated call to list the aliases associated with a given entity.
@@ -1014,6 +1122,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkMailService.ListAliases
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1024,7 +1138,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListGroupMembers':
+  '/#X-Amz-Target=WorkMailService.ListGroupMembers':
     post:
       operationId: ListGroupMembers
       description: Returns an overview of the members of a group. Users and groups can be members of a group.
@@ -1069,6 +1183,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkMailService.ListGroupMembers
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1079,7 +1199,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListGroups':
+  '/#X-Amz-Target=WorkMailService.ListGroups':
     post:
       operationId: ListGroups
       description: Returns summaries of the organization's groups.
@@ -1120,6 +1240,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkMailService.ListGroups
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1130,7 +1256,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListMailboxPermissions':
+  '/#X-Amz-Target=WorkMailService.ListMailboxPermissions':
     post:
       operationId: ListMailboxPermissions
       description: 'Lists the mailbox permissions associated with a user, group, or resource mailbox.'
@@ -1171,6 +1297,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkMailService.ListMailboxPermissions
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1181,7 +1313,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListOrganizations':
+  '/#X-Amz-Target=WorkMailService.ListOrganizations':
     post:
       operationId: ListOrganizations
       description: Returns summaries of the customer's non-deleted organizations.
@@ -1210,6 +1342,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkMailService.ListOrganizations
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1220,7 +1358,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListResourceDelegates':
+  '/#X-Amz-Target=WorkMailService.ListResourceDelegates':
     post:
       operationId: ListResourceDelegates
       description: Lists the delegates associated with a resource. Users and groups can be resource delegates and answer requests on behalf of the resource.
@@ -1255,6 +1393,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListResourceDelegatesRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkMailService.ListResourceDelegates
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1265,7 +1409,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListResources':
+  '/#X-Amz-Target=WorkMailService.ListResources':
     post:
       operationId: ListResources
       description: Returns summaries of the organization's resources.
@@ -1302,6 +1446,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkMailService.ListResources
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1312,7 +1462,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListUsers':
+  '/#X-Amz-Target=WorkMailService.ListUsers':
     post:
       operationId: ListUsers
       description: Returns summaries of the organization's users.
@@ -1349,6 +1499,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkMailService.ListUsers
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1359,7 +1515,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#PutMailboxPermissions':
+  '/#X-Amz-Target=WorkMailService.PutMailboxPermissions':
     post:
       operationId: PutMailboxPermissions
       description: 'Sets permissions for a user, group, or resource. This replaces any pre-existing permissions.'
@@ -1394,6 +1550,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutMailboxPermissionsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkMailService.PutMailboxPermissions
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1404,7 +1566,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#RegisterToWorkMail':
+  '/#X-Amz-Target=WorkMailService.RegisterToWorkMail':
     post:
       operationId: RegisterToWorkMail
       description: '<p>Registers an existing and disabled user, group, or resource for Amazon WorkMail use by associating a mailbox and calendaring capabilities. It performs no change if the user, group, or resource is enabled and fails if the user, group, or resource is deleted. This operation results in the accumulation of costs. For more information, see <a href="https://aws.amazon.com//workmail/pricing">Pricing</a>. The equivalent console functionality for this operation is <i>Enable</i>. </p> <p>Users can either be created by calling the <a>CreateUser</a> API operation or they can be synchronized from your directory. For more information, see <a>DeregisterFromWorkMail</a>.</p>'
@@ -1463,6 +1625,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/RegisterToWorkMailRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkMailService.RegisterToWorkMail
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1473,7 +1641,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ResetPassword':
+  '/#X-Amz-Target=WorkMailService.ResetPassword':
     post:
       operationId: ResetPassword
       description: Allows the administrator to reset the password for a user.
@@ -1524,6 +1692,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ResetPasswordRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkMailService.ResetPassword
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1534,7 +1708,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdatePrimaryEmailAddress':
+  '/#X-Amz-Target=WorkMailService.UpdatePrimaryEmailAddress':
     post:
       operationId: UpdatePrimaryEmailAddress
       description: 'Updates the primary email for a user, group, or resource. The current email is moved into the list of aliases (or swapped between an existing alias and the current primary email), and the email provided in the input is promoted as the primary.'
@@ -1597,6 +1771,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdatePrimaryEmailAddressRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkMailService.UpdatePrimaryEmailAddress
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1607,7 +1787,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateResource':
+  '/#X-Amz-Target=WorkMailService.UpdateResource':
     post:
       operationId: UpdateResource
       description: 'Updates data for the resource. To have the latest information, it must be preceded by a <a>DescribeResource</a> call. The dataset in the request should be the one expected when performing another <code>DescribeResource</code> call.'
@@ -1662,6 +1842,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkMailService.UpdateResource
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'

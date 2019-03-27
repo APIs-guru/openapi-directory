@@ -99,7 +99,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /:
+  '/#X-Amz-Target=AWSIESnowballJobManagementService.CancelCluster':
     post:
       operationId: CancelCluster
       description: Cancels a cluster job. You can only cancel a cluster job while it's in the <code>AwaitingQuorum</code> status. You'll have at least an hour after creating a cluster job to cancel it.
@@ -126,6 +126,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CancelClusterRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSIESnowballJobManagementService.CancelCluster
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -136,7 +142,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CancelJob':
+  '/#X-Amz-Target=AWSIESnowballJobManagementService.CancelJob':
     post:
       operationId: CancelJob
       description: Cancels the specified job. You can only cancel a job before its <code>JobState</code> value changes to <code>PreparingAppliance</code>. Requesting the <code>ListJobs</code> or <code>DescribeJob</code> action returns a job's <code>JobState</code> as part of the response element data returned.
@@ -163,6 +169,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CancelJobRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSIESnowballJobManagementService.CancelJob
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -173,7 +185,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateAddress':
+  '/#X-Amz-Target=AWSIESnowballJobManagementService.CreateAddress':
     post:
       operationId: CreateAddress
       description: 'Creates an address for a Snowball to be shipped to. In most regions, addresses are validated at the time of creation. The address you provide must be located within the serviceable area of your region. If the address is invalid or unsupported, then an exception is thrown.'
@@ -196,6 +208,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateAddressRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSIESnowballJobManagementService.CreateAddress
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -206,7 +224,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateCluster':
+  '/#X-Amz-Target=AWSIESnowballJobManagementService.CreateCluster':
     post:
       operationId: CreateCluster
       description: Creates an empty cluster. Each cluster supports five nodes. You use the <a>CreateJob</a> action separately to create the jobs for each of these nodes. The cluster does not ship until these five node jobs have been created.
@@ -237,6 +255,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateClusterRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSIESnowballJobManagementService.CreateCluster
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -247,7 +271,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateJob':
+  '/#X-Amz-Target=AWSIESnowballJobManagementService.CreateJob':
     post:
       operationId: CreateJob
       description: 'Creates a job to import or export data between Amazon S3 and your on-premises data center. Your AWS account must have the right trust policies and permissions in place to create a job for Snowball. If you''re creating a job for a node in a cluster, you only need to provide the <code>clusterId</code> value; the other job attributes are inherited from the cluster. '
@@ -282,6 +306,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateJobRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSIESnowballJobManagementService.CreateJob
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -292,7 +322,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeAddress':
+  '/#X-Amz-Target=AWSIESnowballJobManagementService.DescribeAddress':
     post:
       operationId: DescribeAddress
       description: Takes an <code>AddressId</code> and returns specific details about that address in the form of an <code>Address</code> object.
@@ -311,6 +341,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeAddressRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSIESnowballJobManagementService.DescribeAddress
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -321,7 +357,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeAddresses':
+  '/#X-Amz-Target=AWSIESnowballJobManagementService.DescribeAddresses':
     post:
       operationId: DescribeAddresses
       description: Returns a specified number of <code>ADDRESS</code> objects. Calling this API in one of the US regions will return addresses from the list of all addresses associated with this account in all US regions.
@@ -354,6 +390,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSIESnowballJobManagementService.DescribeAddresses
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -364,7 +406,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeCluster':
+  '/#X-Amz-Target=AWSIESnowballJobManagementService.DescribeCluster':
     post:
       operationId: DescribeCluster
       description: 'Returns information about a specific cluster including shipping information, cluster status, and other important metadata.'
@@ -383,6 +425,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeClusterRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSIESnowballJobManagementService.DescribeCluster
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -393,7 +441,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeJob':
+  '/#X-Amz-Target=AWSIESnowballJobManagementService.DescribeJob':
     post:
       operationId: DescribeJob
       description: 'Returns information about a specific job including shipping information, job status, and other important metadata. '
@@ -412,6 +460,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeJobRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSIESnowballJobManagementService.DescribeJob
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -422,7 +476,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetJobManifest':
+  '/#X-Amz-Target=AWSIESnowballJobManagementService.GetJobManifest':
     post:
       operationId: GetJobManifest
       description: '<p>Returns a link to an Amazon S3 presigned URL for the manifest file associated with the specified <code>JobId</code> value. You can access the manifest file for up to 60 minutes after this request has been made. To access the manifest file after 60 minutes have passed, you''ll have to make another call to the <code>GetJobManifest</code> action.</p> <p>The manifest is an encrypted file that you can download after your job enters the <code>WithCustomer</code> status. The manifest is decrypted by using the <code>UnlockCode</code> code value, when you pass both values to the Snowball through the Snowball client when the client is started for the first time.</p> <p>As a best practice, we recommend that you don''t save a copy of an <code>UnlockCode</code> value in the same location as the manifest file for that job. Saving these separately helps prevent unauthorized parties from gaining access to the Snowball associated with that job.</p> <p>The credentials of a given job, including its manifest file and unlock code, expire 90 days after the job is created.</p>'
@@ -445,6 +499,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetJobManifestRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSIESnowballJobManagementService.GetJobManifest
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -455,7 +515,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetJobUnlockCode':
+  '/#X-Amz-Target=AWSIESnowballJobManagementService.GetJobUnlockCode':
     post:
       operationId: GetJobUnlockCode
       description: '<p>Returns the <code>UnlockCode</code> code value for the specified job. A particular <code>UnlockCode</code> value can be accessed for up to 90 days after the associated job has been created.</p> <p>The <code>UnlockCode</code> value is a 29-character code with 25 alphanumeric characters and 4 hyphens. This code is used to decrypt the manifest file when it is passed along with the manifest to the Snowball through the Snowball client when the client is started for the first time.</p> <p>As a best practice, we recommend that you don''t save a copy of the <code>UnlockCode</code> in the same location as the manifest file for that job. Saving these separately helps prevent unauthorized parties from gaining access to the Snowball associated with that job.</p>'
@@ -478,6 +538,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetJobUnlockCodeRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSIESnowballJobManagementService.GetJobUnlockCode
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -488,7 +554,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetSnowballUsage':
+  '/#X-Amz-Target=AWSIESnowballJobManagementService.GetSnowballUsage':
     post:
       operationId: GetSnowballUsage
       description: '<p>Returns information about the Snowball service limit for your account, and also the number of Snowballs your account has in use.</p> <p>The default service limit for the number of Snowballs that you can have at one time is 1. If you want to increase your service limit, contact AWS Support.</p>'
@@ -503,6 +569,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetSnowballUsageRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSIESnowballJobManagementService.GetSnowballUsage
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -513,7 +585,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListClusterJobs':
+  '/#X-Amz-Target=AWSIESnowballJobManagementService.ListClusterJobs':
     post:
       operationId: ListClusterJobs
       description: 'Returns an array of <code>JobListEntry</code> objects of the specified length. Each <code>JobListEntry</code> object is for a job in the specified cluster and contains a job''s state, a job''s ID, and other information.'
@@ -536,6 +608,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListClusterJobsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSIESnowballJobManagementService.ListClusterJobs
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -546,7 +624,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListClusters':
+  '/#X-Amz-Target=AWSIESnowballJobManagementService.ListClusters':
     post:
       operationId: ListClusters
       description: 'Returns an array of <code>ClusterListEntry</code> objects of the specified length. Each <code>ClusterListEntry</code> object contains a cluster''s state, a cluster''s ID, and other important status information.'
@@ -565,6 +643,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListClustersRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSIESnowballJobManagementService.ListClusters
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -575,7 +659,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListCompatibleImages':
+  '/#X-Amz-Target=AWSIESnowballJobManagementService.ListCompatibleImages':
     post:
       operationId: ListCompatibleImages
       description: 'This action returns a list of the different Amazon EC2 Amazon Machine Images (AMIs) that are owned by your AWS account that would be supported for use on <code>EDGE</code>, <code>EDGE_C</code>, and <code>EDGE_CG</code> devices. For more information on compatible AMIs, see <a href="http://docs.aws.amazon.com/snowball/latest/developer-guide/using-ec2.html">Using Amazon EC2 Compute Instances</a> in the <i>AWS Snowball Developer Guide</i>.'
@@ -598,6 +682,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListCompatibleImagesRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSIESnowballJobManagementService.ListCompatibleImages
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -608,7 +698,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListJobs':
+  '/#X-Amz-Target=AWSIESnowballJobManagementService.ListJobs':
     post:
       operationId: ListJobs
       description: 'Returns an array of <code>JobListEntry</code> objects of the specified length. Each <code>JobListEntry</code> object contains a job''s state, a job''s ID, and a value that indicates whether the job is a job part, in the case of export jobs. Calling this API action in one of the US regions will return jobs from the list of all jobs associated with this account in all US regions.'
@@ -637,6 +727,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSIESnowballJobManagementService.ListJobs
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -647,7 +743,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateCluster':
+  '/#X-Amz-Target=AWSIESnowballJobManagementService.UpdateCluster':
     post:
       operationId: UpdateCluster
       description: 'While a cluster''s <code>ClusterState</code> value is in the <code>AwaitingQuorum</code> state, you can update some of the information associated with a cluster. Once the cluster changes to a different job state, usually 60 minutes after the cluster being created, this action is no longer available.'
@@ -682,6 +778,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateClusterRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSIESnowballJobManagementService.UpdateCluster
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -692,7 +794,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateJob':
+  '/#X-Amz-Target=AWSIESnowballJobManagementService.UpdateJob':
     post:
       operationId: UpdateJob
       description: 'While a job''s <code>JobState</code> value is <code>New</code>, you can update some of the information associated with a job. Once the job changes to a different job state, usually within 60 minutes of the job being created, this action is no longer available.'
@@ -731,6 +833,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateJobRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSIESnowballJobManagementService.UpdateJob
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -749,8 +857,6 @@ definitions:
     type: object
     required:
       - ClusterId
-    example:
-      ClusterId: CID123e4567-e89b-12d3-a456-426655440000
     properties:
       ClusterId:
         $ref: '#/definitions/ClusterId'
@@ -765,8 +871,6 @@ definitions:
     type: object
     required:
       - JobId
-    example:
-      JobId: JID123e4567-e89b-12d3-a456-426655440000
     properties:
       JobId:
         $ref: '#/definitions/JobId'
@@ -783,16 +887,6 @@ definitions:
     type: object
     required:
       - Address
-    example:
-      Address:
-        City: Seattle
-        Company: My Company's Name
-        Country: USA
-        Name: My Name
-        PhoneNumber: 425-555-5555
-        PostalCode: '98101'
-        StateOrProvince: WA
-        Street1: 123 Main Street
     properties:
       Address:
         $ref: '#/definitions/Address'
@@ -815,21 +909,6 @@ definitions:
       - AddressId
       - RoleARN
       - ShippingOption
-    example:
-      AddressId: ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b
-      Description: MyCluster
-      JobType: LOCAL_USE
-      KmsKeyARN: 'arn:aws:kms:us-east-1:123456789012:key/abcd1234-12ab-34cd-56ef-123456123456'
-      Notification:
-        JobStatesToNotify: []
-        NotifyAll: false
-      Resources:
-        S3Resources:
-          - BucketArn: 'arn:aws:s3:::MyBucket'
-            KeyRange: {}
-      RoleARN: 'arn:aws:iam::123456789012:role/snowball-import-S3-role'
-      ShippingOption: SECOND_DAY
-      SnowballType: EDGE
     properties:
       JobType:
         $ref: '#/definitions/JobType'
@@ -873,22 +952,6 @@ definitions:
         description: 'The automatically generated ID for a job, for example <code>JID123e4567-e89b-12d3-a456-426655440000</code>.'
   CreateJobRequest:
     type: object
-    example:
-      AddressId: ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b
-      Description: My Job
-      JobType: IMPORT
-      KmsKeyARN: 'arn:aws:kms:us-east-1:123456789012:key/abcd1234-12ab-34cd-56ef-123456123456'
-      Notification:
-        JobStatesToNotify: []
-        NotifyAll: false
-      Resources:
-        S3Resources:
-          - BucketArn: 'arn:aws:s3:::MyBucket'
-            KeyRange: {}
-      RoleARN: 'arn:aws:iam::123456789012:role/snowball-import-S3-role'
-      ShippingOption: SECOND_DAY
-      SnowballCapacityPreference: T80
-      SnowballType: STANDARD
     properties:
       JobType:
         $ref: '#/definitions/JobType'
@@ -948,8 +1011,6 @@ definitions:
     type: object
     required:
       - AddressId
-    example:
-      AddressId: ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b
     properties:
       AddressId:
         $ref: '#/definitions/AddressId'
@@ -976,7 +1037,6 @@ definitions:
         description: 'HTTP requests are stateless. If you use the automatically generated <code>NextToken</code> value in your next <code>DescribeAddresses</code> call, your list of returned addresses will start from this point in the array.'
   DescribeAddressesRequest:
     type: object
-    example: {}
     properties:
       MaxResults:
         $ref: '#/definitions/ListLimit'
@@ -1013,8 +1073,6 @@ definitions:
     type: object
     required:
       - ClusterId
-    example:
-      ClusterId: CID123e4567-e89b-12d3-a456-426655440000
     properties:
       ClusterId:
         $ref: '#/definitions/ClusterId'
@@ -1053,8 +1111,6 @@ definitions:
     type: object
     required:
       - JobId
-    example:
-      JobId: JID123e4567-e89b-12d3-a456-426655440000
     properties:
       JobId:
         $ref: '#/definitions/JobId'
@@ -1071,8 +1127,6 @@ definitions:
     type: object
     required:
       - JobId
-    example:
-      JobId: JID123e4567-e89b-12d3-a456-426655440000
     properties:
       JobId:
         $ref: '#/definitions/JobId'
@@ -1089,8 +1143,6 @@ definitions:
     type: object
     required:
       - JobId
-    example:
-      JobId: JID123e4567-e89b-12d3-a456-426655440000
     properties:
       JobId:
         $ref: '#/definitions/JobId'
@@ -1109,7 +1161,6 @@ definitions:
         description: The number of Snowballs that this account is currently using.
   GetSnowballUsageRequest:
     type: object
-    example: {}
     properties: {}
   ListClusterJobsResult:
     type: object
@@ -1161,8 +1212,6 @@ definitions:
     type: object
     required:
       - ClusterId
-    example:
-      ClusterId: CID123e4567-e89b-12d3-a456-426655440000
     properties:
       ClusterId:
         $ref: '#/definitions/ClusterId'
@@ -1190,7 +1239,6 @@ definitions:
         description: 'HTTP requests are stateless. If you use the automatically generated <code>NextToken</code> value in your next <code>ClusterListEntry</code> call, your list of returned clusters will start from this point in the array.'
   ListClustersRequest:
     type: object
-    example: {}
     properties:
       MaxResults:
         $ref: '#/definitions/ListLimit'
@@ -1236,7 +1284,6 @@ definitions:
         description: 'HTTP requests are stateless. If you use this automatically generated <code>NextToken</code> value in your next <code>ListJobs</code> call, your returned <code>JobListEntry</code> objects will start from this point in the array.'
   ListJobsRequest:
     type: object
-    example: {}
     properties:
       MaxResults:
         $ref: '#/definitions/ListLimit'
@@ -1251,10 +1298,6 @@ definitions:
     type: object
     required:
       - ClusterId
-    example:
-      AddressId: ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b
-      ClusterId: CID123e4567-e89b-12d3-a456-426655440000
-      Description: Updated the address to send this to image processing - RJ
     properties:
       ClusterId:
         $ref: '#/definitions/ClusterId'
@@ -1287,12 +1330,6 @@ definitions:
     type: object
     required:
       - JobId
-    example:
-      AddressId: ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b
-      Description: 'Upgraded to Edge, shipped to Finance Dept, and requested faster shipping speed - TS.'
-      JobId: JID123e4567-e89b-12d3-a456-426655440000
-      ShippingOption: NEXT_DAY
-      SnowballCapacityPreference: T100
     properties:
       JobId:
         $ref: '#/definitions/JobId'

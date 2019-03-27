@@ -99,7 +99,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /:
+  '/#X-Amz-Target=AWSPoseidonService_V2015_11_01.AssociateConfigurationItemsToApplication':
     post:
       operationId: AssociateConfigurationItemsToApplication
       description: Associates one or more configuration items with an application.
@@ -130,6 +130,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AssociateConfigurationItemsToApplicationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSPoseidonService_V2015_11_01.AssociateConfigurationItemsToApplication
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -140,7 +146,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#BatchDeleteImportData':
+  '/#X-Amz-Target=AWSPoseidonService_V2015_11_01.BatchDeleteImportData':
     post:
       operationId: BatchDeleteImportData
       description: '<p>Deletes one or more import tasks, each identified by their import ID. Each import task has a number of records that can identify servers or applications. </p> <p>AWS Application Discovery Service has built-in matching logic that will identify when discovered servers match existing entries that you''ve previously discovered, the information for the already-existing discovered server is updated. When you delete an import task that contains records that were used to match, the information in those matched records that comes from the deleted records will also be deleted.</p>'
@@ -167,6 +173,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/BatchDeleteImportDataRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSPoseidonService_V2015_11_01.BatchDeleteImportData
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -177,7 +189,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateApplication':
+  '/#X-Amz-Target=AWSPoseidonService_V2015_11_01.CreateApplication':
     post:
       operationId: CreateApplication
       description: Creates an application with the given name and description.
@@ -208,6 +220,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateApplicationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSPoseidonService_V2015_11_01.CreateApplication
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -218,7 +236,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateTags':
+  '/#X-Amz-Target=AWSPoseidonService_V2015_11_01.CreateTags':
     post:
       operationId: CreateTags
       description: Creates one or more tags for configuration items. Tags are metadata that help you categorize IT assets. This API accepts a list of multiple configuration items.
@@ -253,6 +271,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateTagsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSPoseidonService_V2015_11_01.CreateTags
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -263,7 +287,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteApplications':
+  '/#X-Amz-Target=AWSPoseidonService_V2015_11_01.DeleteApplications':
     post:
       operationId: DeleteApplications
       description: Deletes a list of applications and their associations with configuration items.
@@ -294,6 +318,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteApplicationsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSPoseidonService_V2015_11_01.DeleteApplications
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -304,7 +334,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteTags':
+  '/#X-Amz-Target=AWSPoseidonService_V2015_11_01.DeleteTags':
     post:
       operationId: DeleteTags
       description: Deletes the association between configuration items and one or more tags. This API accepts a list of multiple configuration items.
@@ -339,6 +369,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteTagsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSPoseidonService_V2015_11_01.DeleteTags
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -349,7 +385,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeAgents':
+  '/#X-Amz-Target=AWSPoseidonService_V2015_11_01.DescribeAgents':
     post:
       operationId: DescribeAgents
       description: Lists agents or connectors as specified by ID or other filters. All agents/connectors associated with your user account can be listed if you call <code>DescribeAgents</code> as is without passing any parameters.
@@ -380,6 +416,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeAgentsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSPoseidonService_V2015_11_01.DescribeAgents
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -390,7 +432,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeConfigurations':
+  '/#X-Amz-Target=AWSPoseidonService_V2015_11_01.DescribeConfigurations':
     post:
       operationId: DescribeConfigurations
       description: '<p>Retrieves attributes for a list of configuration item IDs.</p> <note> <p>All of the supplied IDs must be for the same asset type from one of the following:</p> <ul> <li> <p>server</p> </li> <li> <p>application</p> </li> <li> <p>process</p> </li> <li> <p>connection</p> </li> </ul> <p>Output fields are specific to the asset type specified. For example, the output for a <i>server</i> configuration item includes a list of attributes about the server, such as host name, operating system, number of network cards, etc.</p> <p>For a complete list of outputs for each asset type, see <a href="http://docs.aws.amazon.com/application-discovery/latest/APIReference/discovery-api-queries.html#DescribeConfigurations">Using the DescribeConfigurations Action</a>.</p> </note>'
@@ -421,6 +463,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeConfigurationsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSPoseidonService_V2015_11_01.DescribeConfigurations
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -431,7 +479,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeContinuousExports':
+  '/#X-Amz-Target=AWSPoseidonService_V2015_11_01.DescribeContinuousExports':
     post:
       operationId: DescribeContinuousExports
       description: Lists exports as specified by ID. All continuous exports associated with your user account can be listed if you call <code>DescribeContinuousExports</code> as is without passing any parameters.
@@ -480,6 +528,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSPoseidonService_V2015_11_01.DescribeContinuousExports
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -490,8 +544,9 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeExportConfigurations':
+  '/#X-Amz-Target=AWSPoseidonService_V2015_11_01.DescribeExportConfigurations':
     post:
+      deprecated: true
       operationId: DescribeExportConfigurations
       description: ' <code>DescribeExportConfigurations</code> is deprecated. Use <a href="https://docs.aws.amazon.com/application-discovery/latest/APIReference/API_DescribeExportTasks.html">DescribeImportTasks</a>, instead.'
       responses:
@@ -525,6 +580,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeExportConfigurationsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSPoseidonService_V2015_11_01.DescribeExportConfigurations
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -535,7 +596,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeExportTasks':
+  '/#X-Amz-Target=AWSPoseidonService_V2015_11_01.DescribeExportTasks':
     post:
       operationId: DescribeExportTasks
       description: Retrieve status of one or more export tasks. You can retrieve the status of up to 100 export tasks.
@@ -566,6 +627,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeExportTasksRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSPoseidonService_V2015_11_01.DescribeExportTasks
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -576,7 +643,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeImportTasks':
+  '/#X-Amz-Target=AWSPoseidonService_V2015_11_01.DescribeImportTasks':
     post:
       operationId: DescribeImportTasks
       description: 'Returns an array of import tasks for your account, including status information, times, IDs, the Amazon S3 Object URL for the import file, and more.'
@@ -613,6 +680,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSPoseidonService_V2015_11_01.DescribeImportTasks
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -623,7 +696,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeTags':
+  '/#X-Amz-Target=AWSPoseidonService_V2015_11_01.DescribeTags':
     post:
       operationId: DescribeTags
       description: '<p>Retrieves a list of configuration items that have tags as specified by the key-value pairs, name and value, passed to the optional parameter <code>filters</code>.</p> <p>There are three valid tag filter names:</p> <ul> <li> <p>tagKey</p> </li> <li> <p>tagValue</p> </li> <li> <p>configurationId</p> </li> </ul> <p>Also, all configuration items associated with your user account that have tags can be listed if you call <code>DescribeTags</code> as is without passing any parameters.</p>'
@@ -658,6 +731,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeTagsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSPoseidonService_V2015_11_01.DescribeTags
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -668,7 +747,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DisassociateConfigurationItemsFromApplication':
+  '/#X-Amz-Target=AWSPoseidonService_V2015_11_01.DisassociateConfigurationItemsFromApplication':
     post:
       operationId: DisassociateConfigurationItemsFromApplication
       description: Disassociates one or more configuration items from an application.
@@ -699,6 +778,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DisassociateConfigurationItemsFromApplicationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSPoseidonService_V2015_11_01.DisassociateConfigurationItemsFromApplication
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -709,8 +794,9 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ExportConfigurations':
+  '/#X-Amz-Target=AWSPoseidonService_V2015_11_01.ExportConfigurations':
     post:
+      deprecated: true
       operationId: ExportConfigurations
       description: '<p>Deprecated. Use <code>StartExportTask</code> instead.</p> <p>Exports all discovered configuration data to an Amazon S3 bucket or an application that enables you to view and evaluate the data. Data includes tags and tag associations, processes, connections, servers, and system performance. This API returns an export ID that you can query using the <i>DescribeExportConfigurations</i> API. The system imposes a limit of two configuration exports in six hours.</p>'
       responses:
@@ -738,6 +824,13 @@ paths:
           description: OperationNotPermittedException
           schema:
             $ref: '#/definitions/OperationNotPermittedException'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSPoseidonService_V2015_11_01.ExportConfigurations
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -748,7 +841,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetDiscoverySummary':
+  '/#X-Amz-Target=AWSPoseidonService_V2015_11_01.GetDiscoverySummary':
     post:
       operationId: GetDiscoverySummary
       description: <p>Retrieves a short summary of discovered assets.</p> <p>This API operation takes no request parameters and is called as is at the command prompt as shown in the example.</p>
@@ -779,6 +872,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetDiscoverySummaryRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSPoseidonService_V2015_11_01.GetDiscoverySummary
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -789,7 +888,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListConfigurations':
+  '/#X-Amz-Target=AWSPoseidonService_V2015_11_01.ListConfigurations':
     post:
       operationId: ListConfigurations
       description: Retrieves a list of configuration items as specified by the value passed to the required paramater <code>configurationType</code>. Optional filtering may be applied to refine search results.
@@ -824,6 +923,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListConfigurationsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSPoseidonService_V2015_11_01.ListConfigurations
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -834,7 +939,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListServerNeighbors':
+  '/#X-Amz-Target=AWSPoseidonService_V2015_11_01.ListServerNeighbors':
     post:
       operationId: ListServerNeighbors
       description: Retrieves a list of servers that are one network hop away from a specified server.
@@ -865,6 +970,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListServerNeighborsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSPoseidonService_V2015_11_01.ListServerNeighbors
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -875,7 +986,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#StartContinuousExport':
+  '/#X-Amz-Target=AWSPoseidonService_V2015_11_01.StartContinuousExport':
     post:
       operationId: StartContinuousExport
       description: Start the continuous flow of agent's discovered data into Amazon Athena.
@@ -918,6 +1029,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StartContinuousExportRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSPoseidonService_V2015_11_01.StartContinuousExport
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -928,7 +1045,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#StartDataCollectionByAgentIds':
+  '/#X-Amz-Target=AWSPoseidonService_V2015_11_01.StartDataCollectionByAgentIds':
     post:
       operationId: StartDataCollectionByAgentIds
       description: Instructs the specified agents or connectors to start collecting data.
@@ -959,6 +1076,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StartDataCollectionByAgentIdsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSPoseidonService_V2015_11_01.StartDataCollectionByAgentIds
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -969,7 +1092,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#StartExportTask':
+  '/#X-Amz-Target=AWSPoseidonService_V2015_11_01.StartExportTask':
     post:
       operationId: StartExportTask
       description: '<p> Begins the export of discovered data to an S3 bucket.</p> <p> If you specify <code>agentIds</code> in a filter, the task exports up to 72 hours of detailed data collected by the identified Application Discovery Agent, including network, process, and performance details. A time range for exported agent data may be set by using <code>startTime</code> and <code>endTime</code>. Export of detailed agent data is limited to five concurrently running exports. </p> <p> If you do not include an <code>agentIds</code> filter, summary data is exported that includes both AWS Agentless Discovery Connector data and summary data from AWS Discovery Agents. Export of summary data is limited to two exports per day. </p>'
@@ -1004,6 +1127,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StartExportTaskRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSPoseidonService_V2015_11_01.StartExportTask
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1014,7 +1143,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#StartImportTask':
+  '/#X-Amz-Target=AWSPoseidonService_V2015_11_01.StartImportTask':
     post:
       operationId: StartImportTask
       description: '<p>Starts an import task, which allows you to import details of your on-premises environment directly into AWS without having to use the Application Discovery Service (ADS) tools such as the Discovery Connector or Discovery Agent. This gives you the option to perform migration assessment and planning directly from your imported data, including the ability to group your devices as applications and track their migration status.</p> <p>To start an import request, do this:</p> <ol> <li> <p>Download the specially formatted comma separated value (CSV) import template, which you can find here: <a href="https://s3-us-west-2.amazonaws.com/templates-7cffcf56-bd96-4b1c-b45b-a5b42f282e46/import_template.csv">https://s3-us-west-2.amazonaws.com/templates-7cffcf56-bd96-4b1c-b45b-a5b42f282e46/import_template.csv</a>.</p> </li> <li> <p>Fill out the template with your server and application data.</p> </li> <li> <p>Upload your import file to an Amazon S3 bucket, and make a note of it''s Object URL. Your import file must be in the CSV format.</p> </li> <li> <p>Use the console or the <code>StartImportTask</code> command with the AWS CLI or one of the AWS SDKs to import the records from your file.</p> </li> </ol> <p>For more information, including step-by-step procedures, see <a href="https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-import.html">Migration Hub Import</a> in the <i>AWS Application Discovery Service User Guide</i>.</p> <note> <p>There are limits to the number of import tasks you can create (and delete) in an AWS account. For more information, see <a href="https://docs.aws.amazon.com/application-discovery/latest/userguide/ads_service_limits.html">AWS Application Discovery Service Limits</a> in the <i>AWS Application Discovery Service User Guide</i>.</p> </note>'
@@ -1045,6 +1174,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StartImportTaskRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSPoseidonService_V2015_11_01.StartImportTask
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1055,7 +1190,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#StopContinuousExport':
+  '/#X-Amz-Target=AWSPoseidonService_V2015_11_01.StopContinuousExport':
     post:
       operationId: StopContinuousExport
       description: Stop the continuous flow of agent's discovered data into Amazon Athena.
@@ -1098,6 +1233,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StopContinuousExportRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSPoseidonService_V2015_11_01.StopContinuousExport
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1108,7 +1249,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#StopDataCollectionByAgentIds':
+  '/#X-Amz-Target=AWSPoseidonService_V2015_11_01.StopDataCollectionByAgentIds':
     post:
       operationId: StopDataCollectionByAgentIds
       description: Instructs the specified agents or connectors to stop collecting data.
@@ -1139,6 +1280,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StopDataCollectionByAgentIdsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSPoseidonService_V2015_11_01.StopDataCollectionByAgentIds
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1149,7 +1296,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateApplication':
+  '/#X-Amz-Target=AWSPoseidonService_V2015_11_01.UpdateApplication':
     post:
       operationId: UpdateApplication
       description: Updates metadata about an application.
@@ -1180,6 +1327,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateApplicationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSPoseidonService_V2015_11_01.UpdateApplication
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1803,14 +1956,9 @@ definitions:
   Condition:
     type: string
   Configuration:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/String'
-        value:
-          $ref: '#/definitions/String'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/String'
   ConfigurationId:
     type: string
   ConfigurationItemType:
@@ -1879,14 +2027,9 @@ definitions:
     enum:
       - AGENT
   SchemaStorageConfig:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/DatabaseName'
-        value:
-          $ref: '#/definitions/String'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/String'
   ContinuousExportDescription:
     type: object
     properties:
@@ -2006,14 +2149,9 @@ definitions:
   NextToken:
     type: string
   DescribeConfigurationsAttribute:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/String'
-        value:
-          $ref: '#/definitions/String'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/String'
   DescribeConfigurationsAttributes:
     type: array
     items:

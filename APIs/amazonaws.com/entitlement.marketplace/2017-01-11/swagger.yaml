@@ -98,7 +98,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /:
+  '/#X-Amz-Target=AWSMPEntitlementService.GetEntitlements':
     post:
       operationId: GetEntitlements
       description: GetEntitlements retrieves entitlement values for a given product. The results can be filtered based on customer identifier or product dimensions.
@@ -125,6 +125,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetEntitlementsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSMPEntitlementService.GetEntitlements
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -256,11 +262,6 @@ definitions:
       - CUSTOMER_IDENTIFIER
       - DIMENSION
   GetEntitlementFilters:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/GetEntitlementFilterName'
-        value:
-          $ref: '#/definitions/FilterValueList'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/FilterValueList'

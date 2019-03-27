@@ -99,7 +99,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /:
+  '/#X-Amz-Target=DirectoryService_20150416.AcceptSharedDirectory':
     post:
       operationId: AcceptSharedDirectory
       description: Accepts a directory sharing request that was sent from the directory owner account.
@@ -134,6 +134,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AcceptSharedDirectoryRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.AcceptSharedDirectory
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -144,7 +150,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AddIpRoutes':
+  '/#X-Amz-Target=DirectoryService_20150416.AddIpRoutes':
     post:
       operationId: AddIpRoutes
       description: '<p>If the DNS server for your on-premises domain uses a publicly addressable IP address, you must add a CIDR address block to correctly route traffic to and from your Microsoft AD on Amazon Web Services. <i>AddIpRoutes</i> adds this address block. You can also use <i>AddIpRoutes</i> to facilitate routing traffic that uses public IP ranges from your Microsoft AD on AWS to a peer VPC. </p> <p>Before you call <i>AddIpRoutes</i>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <i>AddIpRoutes</i> operation, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>'
@@ -187,6 +193,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AddIpRoutesRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.AddIpRoutes
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -197,7 +209,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AddTagsToResource':
+  '/#X-Amz-Target=DirectoryService_20150416.AddTagsToResource':
     post:
       operationId: AddTagsToResource
       description: Adds or overwrites one or more tags for the specified directory. Each directory can have a maximum of 50 tags. Each tag consists of a key and optional value. Tag keys must be unique to each resource.
@@ -232,6 +244,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AddTagsToResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.AddTagsToResource
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -242,7 +260,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CancelSchemaExtension':
+  '/#X-Amz-Target=DirectoryService_20150416.CancelSchemaExtension':
     post:
       operationId: CancelSchemaExtension
       description: 'Cancels an in-progress schema extension to a Microsoft AD directory. Once a schema extension has started replicating to all domain controllers, the task can no longer be canceled. A schema extension can be canceled during any of the following states; <code>Initializing</code>, <code>CreatingSnapshot</code>, and <code>UpdatingSchema</code>.'
@@ -269,6 +287,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CancelSchemaExtensionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.CancelSchemaExtension
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -279,7 +303,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ConnectDirectory':
+  '/#X-Amz-Target=DirectoryService_20150416.ConnectDirectory':
     post:
       operationId: ConnectDirectory
       description: '<p>Creates an AD Connector to connect to an on-premises directory.</p> <p>Before you call <code>ConnectDirectory</code>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <code>ConnectDirectory</code> operation, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>'
@@ -310,6 +334,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ConnectDirectoryRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.ConnectDirectory
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -320,7 +350,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateAlias':
+  '/#X-Amz-Target=DirectoryService_20150416.CreateAlias':
     post:
       operationId: CreateAlias
       description: '<p>Creates an alias for a directory and assigns the alias to the directory. The alias is used to construct the access URL for the directory, such as <code>http://&lt;alias&gt;.awsapps.com</code>.</p> <important> <p>After an alias has been created, it cannot be deleted or reused, so this operation should only be used when absolutely necessary.</p> </important>'
@@ -355,6 +385,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateAliasRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.CreateAlias
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -365,7 +401,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateComputer':
+  '/#X-Amz-Target=DirectoryService_20150416.CreateComputer':
     post:
       operationId: CreateComputer
       description: 'Creates a computer account in the specified directory, and joins the computer to the directory.'
@@ -412,6 +448,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateComputerRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.CreateComputer
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -422,7 +464,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateConditionalForwarder':
+  '/#X-Amz-Target=DirectoryService_20150416.CreateConditionalForwarder':
     post:
       operationId: CreateConditionalForwarder
       description: Creates a conditional forwarder associated with your AWS directory. Conditional forwarders are required in order to set up a trust relationship with another domain. The conditional forwarder points to the trusted domain.
@@ -465,6 +507,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateConditionalForwarderRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.CreateConditionalForwarder
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -475,7 +523,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateDirectory':
+  '/#X-Amz-Target=DirectoryService_20150416.CreateDirectory':
     post:
       operationId: CreateDirectory
       description: '<p>Creates a Simple AD directory.</p> <p>Before you call <code>CreateDirectory</code>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <code>CreateDirectory</code> operation, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>'
@@ -506,6 +554,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateDirectoryRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.CreateDirectory
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -516,7 +570,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateLogSubscription':
+  '/#X-Amz-Target=DirectoryService_20150416.CreateLogSubscription':
     post:
       operationId: CreateLogSubscription
       description: Creates a subscription to forward real time Directory Service domain controller security logs to the specified CloudWatch log group in your AWS account.
@@ -555,6 +609,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateLogSubscriptionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.CreateLogSubscription
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -565,7 +625,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateMicrosoftAD':
+  '/#X-Amz-Target=DirectoryService_20150416.CreateMicrosoftAD':
     post:
       operationId: CreateMicrosoftAD
       description: '<p>Creates an AWS Managed Microsoft AD directory.</p> <p>Before you call <i>CreateMicrosoftAD</i>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <i>CreateMicrosoftAD</i> operation, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>'
@@ -600,6 +660,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateMicrosoftADRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.CreateMicrosoftAD
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -610,7 +676,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateSnapshot':
+  '/#X-Amz-Target=DirectoryService_20150416.CreateSnapshot':
     post:
       operationId: CreateSnapshot
       description: <p>Creates a snapshot of a Simple AD or Microsoft AD directory in the AWS cloud.</p> <note> <p>You cannot take snapshots of AD Connector directories.</p> </note>
@@ -645,6 +711,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateSnapshotRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.CreateSnapshot
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -655,7 +727,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateTrust':
+  '/#X-Amz-Target=DirectoryService_20150416.CreateTrust':
     post:
       operationId: CreateTrust
       description: '<p>AWS Directory Service for Microsoft Active Directory allows you to configure trust relationships. For example, you can establish a trust between your AWS Managed Microsoft AD directory, and your existing on-premises Microsoft Active Directory. This would allow you to provide users and groups access to resources in either domain, with a single set of credentials.</p> <p>This action initiates the creation of the AWS side of a trust relationship between an AWS Managed Microsoft AD directory and an external domain. You can create either a forest trust or an external trust.</p>'
@@ -694,6 +766,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateTrustRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.CreateTrust
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -704,7 +782,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteConditionalForwarder':
+  '/#X-Amz-Target=DirectoryService_20150416.DeleteConditionalForwarder':
     post:
       operationId: DeleteConditionalForwarder
       description: Deletes a conditional forwarder that has been set up for your AWS directory.
@@ -743,6 +821,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteConditionalForwarderRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.DeleteConditionalForwarder
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -753,7 +837,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteDirectory':
+  '/#X-Amz-Target=DirectoryService_20150416.DeleteDirectory':
     post:
       operationId: DeleteDirectory
       description: '<p>Deletes an AWS Directory Service directory.</p> <p>Before you call <code>DeleteDirectory</code>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <code>DeleteDirectory</code> operation, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>'
@@ -780,6 +864,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteDirectoryRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.DeleteDirectory
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -790,7 +880,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteLogSubscription':
+  '/#X-Amz-Target=DirectoryService_20150416.DeleteLogSubscription':
     post:
       operationId: DeleteLogSubscription
       description: Deletes the specified log subscription.
@@ -821,6 +911,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteLogSubscriptionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.DeleteLogSubscription
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -831,7 +927,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteSnapshot':
+  '/#X-Amz-Target=DirectoryService_20150416.DeleteSnapshot':
     post:
       operationId: DeleteSnapshot
       description: Deletes a directory snapshot.
@@ -862,6 +958,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteSnapshotRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.DeleteSnapshot
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -872,7 +974,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteTrust':
+  '/#X-Amz-Target=DirectoryService_20150416.DeleteTrust':
     post:
       operationId: DeleteTrust
       description: Deletes an existing trust relationship between your AWS Managed Microsoft AD directory and an external domain.
@@ -907,6 +1009,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteTrustRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.DeleteTrust
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -917,7 +1025,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeregisterEventTopic':
+  '/#X-Amz-Target=DirectoryService_20150416.DeregisterEventTopic':
     post:
       operationId: DeregisterEventTopic
       description: Removes the specified directory as a publisher to the specified SNS topic.
@@ -948,6 +1056,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeregisterEventTopicRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.DeregisterEventTopic
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -958,7 +1072,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeConditionalForwarders':
+  '/#X-Amz-Target=DirectoryService_20150416.DescribeConditionalForwarders':
     post:
       operationId: DescribeConditionalForwarders
       description: '<p>Obtains information about the conditional forwarders for this account.</p> <p>If no input parameters are provided for RemoteDomainNames, this request describes all conditional forwarders for the specified directory ID.</p>'
@@ -997,6 +1111,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeConditionalForwardersRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.DescribeConditionalForwarders
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1007,7 +1127,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeDirectories':
+  '/#X-Amz-Target=DirectoryService_20150416.DescribeDirectories':
     post:
       operationId: DescribeDirectories
       description: '<p>Obtains information about the directories that belong to this account.</p> <p>You can retrieve information about specific directories by passing the directory identifiers in the <code>DirectoryIds</code> parameter. Otherwise, all directories that belong to the current account are returned.</p> <p>This operation supports pagination with the use of the <code>NextToken</code> request and response parameters. If more results are available, the <code>DescribeDirectoriesResult.NextToken</code> member contains a token that you pass in the next call to <a>DescribeDirectories</a> to retrieve the next set of items.</p> <p>You can also specify a maximum number of return results with the <code>Limit</code> parameter.</p>'
@@ -1042,6 +1162,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeDirectoriesRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.DescribeDirectories
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1052,7 +1178,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeDomainControllers':
+  '/#X-Amz-Target=DirectoryService_20150416.DescribeDomainControllers':
     post:
       operationId: DescribeDomainControllers
       description: Provides information about any domain controllers in your directory.
@@ -1101,6 +1227,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.DescribeDomainControllers
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1111,7 +1243,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeEventTopics':
+  '/#X-Amz-Target=DirectoryService_20150416.DescribeEventTopics':
     post:
       operationId: DescribeEventTopics
       description: '<p>Obtains information about which SNS topics receive status messages from the specified directory.</p> <p>If no input parameters are provided, such as DirectoryId or TopicName, this request describes all of the associations in the account.</p>'
@@ -1142,6 +1274,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeEventTopicsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.DescribeEventTopics
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1152,7 +1290,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeSharedDirectories':
+  '/#X-Amz-Target=DirectoryService_20150416.DescribeSharedDirectories':
     post:
       operationId: DescribeSharedDirectories
       description: 'Returns the shared directories in your account. '
@@ -1191,6 +1329,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeSharedDirectoriesRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.DescribeSharedDirectories
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1201,7 +1345,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeSnapshots':
+  '/#X-Amz-Target=DirectoryService_20150416.DescribeSnapshots':
     post:
       operationId: DescribeSnapshots
       description: '<p>Obtains information about the directory snapshots that belong to this account.</p> <p>This operation supports pagination with the use of the <i>NextToken</i> request and response parameters. If more results are available, the <i>DescribeSnapshots.NextToken</i> member contains a token that you pass in the next call to <a>DescribeSnapshots</a> to retrieve the next set of items.</p> <p>You can also specify a maximum number of return results with the <i>Limit</i> parameter.</p>'
@@ -1236,6 +1380,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeSnapshotsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.DescribeSnapshots
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1246,7 +1396,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeTrusts':
+  '/#X-Amz-Target=DirectoryService_20150416.DescribeTrusts':
     post:
       operationId: DescribeTrusts
       description: '<p>Obtains information about the trust relationships for this account.</p> <p>If no input parameters are provided, such as DirectoryId or TrustIds, this request describes all the trust relationships belonging to the account.</p>'
@@ -1285,6 +1435,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeTrustsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.DescribeTrusts
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1295,7 +1451,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DisableRadius':
+  '/#X-Amz-Target=DirectoryService_20150416.DisableRadius':
     post:
       operationId: DisableRadius
       description: Disables multi-factor authentication (MFA) with the Remote Authentication Dial In User Service (RADIUS) server for an AD Connector or Microsoft AD directory.
@@ -1322,6 +1478,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DisableRadiusRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.DisableRadius
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1332,7 +1494,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DisableSso':
+  '/#X-Amz-Target=DirectoryService_20150416.DisableSso':
     post:
       operationId: DisableSso
       description: Disables single-sign on for a directory.
@@ -1367,6 +1529,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DisableSsoRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.DisableSso
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1377,7 +1545,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#EnableRadius':
+  '/#X-Amz-Target=DirectoryService_20150416.EnableRadius':
     post:
       operationId: EnableRadius
       description: Enables multi-factor authentication (MFA) with the Remote Authentication Dial In User Service (RADIUS) server for an AD Connector or Microsoft AD directory.
@@ -1412,6 +1580,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/EnableRadiusRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.EnableRadius
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1422,7 +1596,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#EnableSso':
+  '/#X-Amz-Target=DirectoryService_20150416.EnableSso':
     post:
       operationId: EnableSso
       description: Enables single sign-on for a directory.
@@ -1457,6 +1631,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/EnableSsoRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.EnableSso
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1467,7 +1647,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetDirectoryLimits':
+  '/#X-Amz-Target=DirectoryService_20150416.GetDirectoryLimits':
     post:
       operationId: GetDirectoryLimits
       description: Obtains directory limit information for the current region.
@@ -1494,6 +1674,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetDirectoryLimitsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.GetDirectoryLimits
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1504,7 +1690,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetSnapshotLimits':
+  '/#X-Amz-Target=DirectoryService_20150416.GetSnapshotLimits':
     post:
       operationId: GetSnapshotLimits
       description: Obtains the manual snapshot limits for a directory.
@@ -1531,6 +1717,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetSnapshotLimitsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.GetSnapshotLimits
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1541,7 +1733,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListIpRoutes':
+  '/#X-Amz-Target=DirectoryService_20150416.ListIpRoutes':
     post:
       operationId: ListIpRoutes
       description: Lists the address blocks that you have added to a directory.
@@ -1576,6 +1768,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListIpRoutesRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.ListIpRoutes
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1586,7 +1784,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListLogSubscriptions':
+  '/#X-Amz-Target=DirectoryService_20150416.ListLogSubscriptions':
     post:
       operationId: ListLogSubscriptions
       description: Lists the active log subscriptions for the AWS account.
@@ -1617,6 +1815,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListLogSubscriptionsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.ListLogSubscriptions
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1627,7 +1831,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListSchemaExtensions':
+  '/#X-Amz-Target=DirectoryService_20150416.ListSchemaExtensions':
     post:
       operationId: ListSchemaExtensions
       description: Lists all schema extensions applied to a Microsoft AD Directory.
@@ -1658,6 +1862,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListSchemaExtensionsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.ListSchemaExtensions
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1668,7 +1878,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListTagsForResource':
+  '/#X-Amz-Target=DirectoryService_20150416.ListTagsForResource':
     post:
       operationId: ListTagsForResource
       description: Lists all tags on a directory.
@@ -1703,6 +1913,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListTagsForResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.ListTagsForResource
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1713,7 +1929,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#RegisterEventTopic':
+  '/#X-Amz-Target=DirectoryService_20150416.RegisterEventTopic':
     post:
       operationId: RegisterEventTopic
       description: Associates a directory with an SNS topic. This establishes the directory as a publisher to the specified SNS topic. You can then receive email or text (SMS) messages when the status of your directory changes. You get notified if your directory goes from an Active status to an Impaired or Inoperable status. You also receive a notification when the directory returns to an Active status.
@@ -1744,6 +1960,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/RegisterEventTopicRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.RegisterEventTopic
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1754,7 +1976,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#RejectSharedDirectory':
+  '/#X-Amz-Target=DirectoryService_20150416.RejectSharedDirectory':
     post:
       operationId: RejectSharedDirectory
       description: Rejects a directory sharing request that was sent from the directory owner account.
@@ -1789,6 +2011,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/RejectSharedDirectoryRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.RejectSharedDirectory
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1799,7 +2027,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#RemoveIpRoutes':
+  '/#X-Amz-Target=DirectoryService_20150416.RemoveIpRoutes':
     post:
       operationId: RemoveIpRoutes
       description: Removes IP address blocks from a directory.
@@ -1834,6 +2062,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/RemoveIpRoutesRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.RemoveIpRoutes
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1844,7 +2078,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#RemoveTagsFromResource':
+  '/#X-Amz-Target=DirectoryService_20150416.RemoveTagsFromResource':
     post:
       operationId: RemoveTagsFromResource
       description: Removes tags from a directory.
@@ -1875,6 +2109,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/RemoveTagsFromResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.RemoveTagsFromResource
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1885,7 +2125,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ResetUserPassword':
+  '/#X-Amz-Target=DirectoryService_20150416.ResetUserPassword':
     post:
       operationId: ResetUserPassword
       description: Resets the password for any user in your AWS Managed Microsoft AD or Simple AD directory.
@@ -1928,6 +2168,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ResetUserPasswordRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.ResetUserPassword
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1938,7 +2184,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#RestoreFromSnapshot':
+  '/#X-Amz-Target=DirectoryService_20150416.RestoreFromSnapshot':
     post:
       operationId: RestoreFromSnapshot
       description: '<p>Restores a directory using an existing directory snapshot.</p> <p>When you restore a directory from a snapshot, any changes made to the directory after the snapshot date are overwritten.</p> <p>This action returns as soon as the restore operation is initiated. You can monitor the progress of the restore operation by calling the <a>DescribeDirectories</a> operation with the directory identifier. When the <b>DirectoryDescription.Stage</b> value changes to <code>Active</code>, the restore operation is complete.</p>'
@@ -1969,6 +2215,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/RestoreFromSnapshotRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.RestoreFromSnapshot
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1979,7 +2231,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ShareDirectory':
+  '/#X-Amz-Target=DirectoryService_20150416.ShareDirectory':
     post:
       operationId: ShareDirectory
       description: '<p>Shares a specified directory (<code>DirectoryId</code>) in your AWS account (directory owner) with another AWS account (directory consumer). With this operation you can use your directory from any AWS account and from any Amazon VPC within an AWS Region.</p> <p>When you share your AWS Managed Microsoft AD directory, AWS Directory Service creates a shared directory in the directory consumer account. This shared directory contains the metadata to provide access to the directory within the directory owner account. The shared directory is visible in all VPCs in the directory consumer account.</p> <p>The <code>ShareMethod</code> parameter determines whether the specified directory can be shared between AWS accounts inside the same AWS organization (<code>ORGANIZATIONS</code>). It also determines whether you can share the directory with any other AWS account either inside or outside of the organization (<code>HANDSHAKE</code>).</p> <p>The <code>ShareNotes</code> parameter is only used when <code>HANDSHAKE</code> is called, which sends a directory sharing request to the directory consumer. </p>'
@@ -2034,6 +2286,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ShareDirectoryRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.ShareDirectory
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2044,7 +2302,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#StartSchemaExtension':
+  '/#X-Amz-Target=DirectoryService_20150416.StartSchemaExtension':
     post:
       operationId: StartSchemaExtension
       description: Applies a schema extension to a Microsoft AD directory.
@@ -2083,6 +2341,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StartSchemaExtensionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.StartSchemaExtension
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2093,7 +2357,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UnshareDirectory':
+  '/#X-Amz-Target=DirectoryService_20150416.UnshareDirectory':
     post:
       operationId: UnshareDirectory
       description: 'Stops the directory sharing between the directory owner and consumer accounts. '
@@ -2128,6 +2392,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UnshareDirectoryRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.UnshareDirectory
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2138,7 +2408,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateConditionalForwarder':
+  '/#X-Amz-Target=DirectoryService_20150416.UpdateConditionalForwarder':
     post:
       operationId: UpdateConditionalForwarder
       description: Updates a conditional forwarder that has been set up for your AWS directory.
@@ -2177,6 +2447,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateConditionalForwarderRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.UpdateConditionalForwarder
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2187,7 +2463,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateNumberOfDomainControllers':
+  '/#X-Amz-Target=DirectoryService_20150416.UpdateNumberOfDomainControllers':
     post:
       operationId: UpdateNumberOfDomainControllers
       description: 'Adds or removes domain controllers to or from the directory. Based on the difference between current value and new value (provided through this API call), domain controllers will be added or removed. It may take up to 45 minutes for any new domain controllers to become fully active once the requested number of domain controllers is updated. During this time, you cannot make another update request.'
@@ -2230,6 +2506,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateNumberOfDomainControllersRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.UpdateNumberOfDomainControllers
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2240,7 +2522,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateRadius':
+  '/#X-Amz-Target=DirectoryService_20150416.UpdateRadius':
     post:
       operationId: UpdateRadius
       description: Updates the Remote Authentication Dial In User Service (RADIUS) server information for an AD Connector or Microsoft AD directory.
@@ -2271,6 +2553,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateRadiusRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.UpdateRadius
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2281,7 +2569,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateTrust':
+  '/#X-Amz-Target=DirectoryService_20150416.UpdateTrust':
     post:
       operationId: UpdateTrust
       description: Updates the trust that has been set up between your AWS Managed Microsoft AD directory and an on-premises Active Directory.
@@ -2312,6 +2600,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateTrustRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.UpdateTrust
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2322,7 +2616,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#VerifyTrust':
+  '/#X-Amz-Target=DirectoryService_20150416.VerifyTrust':
     post:
       operationId: VerifyTrust
       description: <p>AWS Directory Service for Microsoft Active Directory allows you to configure and verify trust relationships.</p> <p>This action verifies a trust relationship between your AWS Managed Microsoft AD directory and an external domain.</p>
@@ -2357,6 +2651,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/VerifyTrustRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DirectoryService_20150416.VerifyTrust
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'

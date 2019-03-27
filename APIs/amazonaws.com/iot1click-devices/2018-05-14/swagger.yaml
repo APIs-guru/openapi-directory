@@ -123,15 +123,11 @@ paths:
           schema:
             $ref: '#/definitions/ForbiddenException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ClaimDevicesByClaimCodeRequest'
         - name: claimCode
-          type: string
           in: path
           required: true
+          description: 'The claim code, starting with "C-", as provided by the device manufacturer.'
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -166,15 +162,11 @@ paths:
           schema:
             $ref: '#/definitions/InternalFailureException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeDeviceRequest'
         - name: deviceId
-          type: string
           in: path
           required: true
+          description: The unique identifier of the device.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -220,15 +212,22 @@ paths:
           schema:
             $ref: '#/definitions/ResourceConflictException'
       parameters:
+        - name: deviceId
+          in: path
+          required: true
+          description: The unique identifier of the device.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/FinalizeDeviceClaimRequest'
-        - name: deviceId
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              tags:
+                description: The tags to be assigned to the AWS IoT 1-Click device.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/__string'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -263,15 +262,11 @@ paths:
           schema:
             $ref: '#/definitions/InternalFailureException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetDeviceMethodsRequest'
         - name: deviceId
-          type: string
           in: path
           required: true
+          description: The unique identifier of the device.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -317,15 +312,30 @@ paths:
           schema:
             $ref: '#/definitions/ResourceConflictException'
       parameters:
+        - name: deviceId
+          in: path
+          required: true
+          description: The unique identifier of the device.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/InvokeDeviceMethodRequest'
-        - name: deviceId
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              deviceMethod:
+                description: The device method to invoke.
+                type: object
+                properties:
+                  DeviceType:
+                    $ref: '#/definitions/__string'
+                    description: 'The type of the device, such as "button".'
+                  MethodName:
+                    $ref: '#/definitions/__string'
+                    description: The name of the method applicable to the deviceType.
+              deviceMethodParameters:
+                description: A JSON encoded string containing the device method request parameters.
+                type: string
   '/devices/{deviceId}/initiate-claim':
     put:
       operationId: InitiateDeviceClaim
@@ -357,15 +367,11 @@ paths:
           schema:
             $ref: '#/definitions/ResourceConflictException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/InitiateDeviceClaimRequest'
         - name: deviceId
-          type: string
           in: path
           required: true
+          description: The unique identifier of the device.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -376,7 +382,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/devices/{deviceId}/events':
+  '/devices/{deviceId}/events#fromTimeStamp&toTimeStamp':
     get:
       operationId: ListDeviceEvents
       description: |-
@@ -404,15 +410,43 @@ paths:
           schema:
             $ref: '#/definitions/InternalFailureException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListDeviceEventsRequest'
         - name: deviceId
-          type: string
           in: path
           required: true
+          description: The unique identifier of the device.
+          type: string
+        - name: fromTimeStamp
+          in: query
+          required: true
+          description: |-
+            The start date for the device event query, in ISO8061 format. For example,
+             2018-03-28T15:45:12.880Z
+             
+          type: string
+          format: date-time
+        - name: maxResults
+          in: query
+          required: false
+          description: |-
+            The maximum number of results to return per request. If not set, a default value
+             of 100 is used.
+          type: integer
+          minimum: 1
+          maximum: 250
+        - name: nextToken
+          in: query
+          required: false
+          description: The token to retrieve the next set of results.
+          type: string
+        - name: toTimeStamp
+          in: query
+          required: true
+          description: |-
+            The end date for the device event query, in ISO8061 format. For example,
+             2018-03-28T15:45:12.880Z
+             
+          type: string
+          format: date-time
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -445,11 +479,25 @@ paths:
           schema:
             $ref: '#/definitions/InternalFailureException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListDevicesRequest'
+        - name: deviceType
+          in: query
+          required: false
+          description: 'The type of the device, such as "button".'
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: |-
+            The maximum number of results to return per request. If not set, a default value
+             of 100 is used.
+          type: integer
+          minimum: 1
+          maximum: 250
+        - name: nextToken
+          in: query
+          required: false
+          description: The token to retrieve the next set of results.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -478,15 +526,11 @@ paths:
           schema:
             $ref: '#/definitions/InternalFailureException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListTagsForResourceRequest'
         - name: resource-arn
-          type: string
           in: path
           required: true
+          description: The AWS IoT 1-Click resource with tags to be listed. This value is an Amazon Resource Name (ARN).
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -516,43 +560,24 @@ paths:
           schema:
             $ref: '#/definitions/InternalFailureException'
       parameters:
+        - name: resource-arn
+          in: path
+          required: true
+          description: Identifies the AWS IoT 1-Click resource to which tags should be added. This value is an Amazon Resource Name (ARN).
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/TagResourceRequest'
-        - name: resource-arn
-          type: string
-          in: path
-          required: true
-    delete:
-      operationId: UntagResource
-      description: Removes the association of tags from an AWS IoT 1-Click resource.
-      responses:
-        '204':
-          description: Success
-        '480':
-          description: ResourceNotFoundException
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
-        '481':
-          description: InvalidRequestException
-          schema:
-            $ref: '#/definitions/InvalidRequestException'
-        '482':
-          description: InternalFailureException
-          schema:
-            $ref: '#/definitions/InternalFailureException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/UntagResourceRequest'
-        - name: resource-arn
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - tags
+            properties:
+              tags:
+                description: The tags to be assigned to the AWS IoT 1-Click resource.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/__string'
   '/devices/{deviceId}/unclaim':
     put:
       operationId: UnclaimDevice
@@ -575,15 +600,53 @@ paths:
           schema:
             $ref: '#/definitions/InternalFailureException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/UnclaimDeviceRequest'
         - name: deviceId
-          type: string
           in: path
           required: true
+          description: The unique identifier of the device.
+          type: string
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/tags/{resource-arn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Removes the association of tags from an AWS IoT 1-Click resource.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: resource-arn
+          in: path
+          required: true
+          description: The AWS IoT 1-Click resource the tags will be removed from. This value is an Amazon Resource Name (ARN).
+          type: string
+        - name: tagKeys
+          in: query
+          required: true
+          description: A list of tag keys. Existing tags of the resource whose keys are members of this list will be removed from the AWS IoT 1-Click resource.
+          type: array
+          items:
+            type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -618,15 +681,22 @@ paths:
           schema:
             $ref: '#/definitions/InternalFailureException'
       parameters:
+        - name: deviceId
+          in: path
+          required: true
+          description: The unique identifier of the device.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateDeviceStateRequest'
-        - name: deviceId
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              enabled:
+                description: |-
+                  If true, the device is enabled. If false, the device is
+                   disabled.
+                type: boolean
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -649,9 +719,6 @@ definitions:
         description: |-
           The total number of devices associated with the claim code that has been processed
            in the claim request.
-  ClaimDevicesByClaimCodeRequest:
-    type: object
-    properties: {}
   InvalidRequestException: {}
   InternalFailureException: {}
   ForbiddenException: {}
@@ -661,9 +728,6 @@ definitions:
       DeviceDescription:
         $ref: '#/definitions/DeviceDescription'
         description: Device details.
-  DescribeDeviceRequest:
-    type: object
-    properties: {}
   ResourceNotFoundException: {}
   FinalizeDeviceClaimResponse:
     type: object
@@ -671,12 +735,8 @@ definitions:
       State:
         $ref: '#/definitions/__string'
         description: The device's final claim state.
-  FinalizeDeviceClaimRequest:
-    type: object
-    properties:
-      Tags:
-        $ref: '#/definitions/__mapOf__string'
-        description: The tags to be assigned to the AWS IoT 1-Click device.
+  __string:
+    type: string
   PreconditionFailedException: {}
   ResourceConflictException: {}
   GetDeviceMethodsResponse:
@@ -685,33 +745,18 @@ definitions:
       DeviceMethods:
         $ref: '#/definitions/__listOfDeviceMethod'
         description: List of available device APIs.
-  GetDeviceMethodsRequest:
-    type: object
-    properties: {}
   InitiateDeviceClaimResponse:
     type: object
     properties:
       State:
         $ref: '#/definitions/__string'
         description: The device's final claim state.
-  InitiateDeviceClaimRequest:
-    type: object
-    properties: {}
   InvokeDeviceMethodResponse:
     type: object
     properties:
       DeviceMethodResponse:
         $ref: '#/definitions/__string'
         description: A JSON encoded string containing the device method response.
-  InvokeDeviceMethodRequest:
-    type: object
-    properties:
-      DeviceMethod:
-        $ref: '#/definitions/DeviceMethod'
-        description: The device method to invoke.
-      DeviceMethodParameters:
-        $ref: '#/definitions/__string'
-        description: A JSON encoded string containing the device method request parameters.
   RangeNotSatisfiableException: {}
   ListDeviceEventsResponse:
     type: object
@@ -724,9 +769,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/__string'
         description: The token to retrieve the next set of results.
-  ListDeviceEventsRequest:
-    type: object
-    properties: {}
   ListDevicesResponse:
     type: object
     properties:
@@ -736,60 +778,36 @@ definitions:
       NextToken:
         $ref: '#/definitions/__string'
         description: The token to retrieve the next set of results.
-  ListDevicesRequest:
-    type: object
-    properties: {}
   ListTagsForResourceResponse:
     type: object
     properties:
       Tags:
         $ref: '#/definitions/__mapOf__string'
         description: The tags currently associated with the AWS IoT 1-Click resource.
-  ListTagsForResourceRequest:
-    type: object
-    properties: {}
-  TagResourceRequest:
-    type: object
-    required:
-      - Tags
-    properties:
-      Tags:
-        $ref: '#/definitions/__mapOf__string'
-        description: The tags to be assigned to the AWS IoT 1-Click resource.
   UnclaimDeviceResponse:
     type: object
     properties:
       State:
         $ref: '#/definitions/__string'
         description: The device's final claim state.
-  UnclaimDeviceRequest:
-    type: object
-    properties: {}
-  UntagResourceRequest:
-    type: object
-    properties: {}
   UpdateDeviceStateResponse:
     type: object
     properties: {}
-  UpdateDeviceStateRequest:
-    type: object
-    properties:
-      Enabled:
-        $ref: '#/definitions/__boolean'
-        description: |-
-          If true, the device is enabled. If false, the device is
-           disabled.
   Attributes:
     type: object
     properties: {}
-  __string:
-    type: string
+  ClaimDevicesByClaimCodeRequest:
+    type: object
+    properties: {}
   __stringMin12Max40:
     type: string
     minLength: 12
     maxLength: 40
   __integer:
     type: integer
+  DescribeDeviceRequest:
+    type: object
+    properties: {}
   DeviceDescription:
     type: object
     properties:
@@ -831,31 +849,21 @@ definitions:
         $ref: '#/definitions/__string'
         description: 'The device type, such as "button".'
   DeviceAttributes:
-    type: array
+    type: object
     description: |-
 
        DeviceAttributes is a string-to-string map specified by the user.
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/__string'
+    additionalProperties:
+      $ref: '#/definitions/__string'
   __boolean:
     type: boolean
   __doubleMin0Max100:
     type: number
     format: double
   __mapOf__string:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/__string'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/__string'
   DeviceEvent:
     type: object
     properties:
@@ -874,10 +882,31 @@ definitions:
       MethodName:
         $ref: '#/definitions/__string'
         description: The name of the method applicable to the deviceType.
+  FinalizeDeviceClaimRequest:
+    type: object
+    properties:
+      Tags:
+        $ref: '#/definitions/__mapOf__string'
+        description: The tags to be assigned to the AWS IoT 1-Click device.
+  GetDeviceMethodsRequest:
+    type: object
+    properties: {}
   __listOfDeviceMethod:
     type: array
     items:
       $ref: '#/definitions/DeviceMethod'
+  InitiateDeviceClaimRequest:
+    type: object
+    properties: {}
+  InvokeDeviceMethodRequest:
+    type: object
+    properties:
+      DeviceMethod:
+        $ref: '#/definitions/DeviceMethod'
+        description: The device method to invoke.
+      DeviceMethodParameters:
+        $ref: '#/definitions/__string'
+        description: A JSON encoded string containing the device method request parameters.
   __timestampIso8601:
     type: string
     format: date-time
@@ -885,15 +914,46 @@ definitions:
     type: integer
     minimum: 1
     maximum: 250
+  ListDeviceEventsRequest:
+    type: object
+    properties: {}
   __listOfDeviceEvent:
     type: array
     items:
       $ref: '#/definitions/DeviceEvent'
+  ListDevicesRequest:
+    type: object
+    properties: {}
   __listOfDeviceDescription:
     type: array
     items:
       $ref: '#/definitions/DeviceDescription'
+  ListTagsForResourceRequest:
+    type: object
+    properties: {}
+  TagResourceRequest:
+    type: object
+    required:
+      - Tags
+    properties:
+      Tags:
+        $ref: '#/definitions/__mapOf__string'
+        description: The tags to be assigned to the AWS IoT 1-Click resource.
+  UnclaimDeviceRequest:
+    type: object
+    properties: {}
   __listOf__string:
     type: array
     items:
       $ref: '#/definitions/__string'
+  UntagResourceRequest:
+    type: object
+    properties: {}
+  UpdateDeviceStateRequest:
+    type: object
+    properties:
+      Enabled:
+        $ref: '#/definitions/__boolean'
+        description: |-
+          If true, the device is enabled. If false, the device is
+           disabled.

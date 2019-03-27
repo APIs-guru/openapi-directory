@@ -99,7 +99,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /:
+  '/#X-Amz-Target=Route53Domains_v20140515.CheckDomainAvailability':
     post:
       operationId: CheckDomainAvailability
       description: 'This operation checks the availability of one domain name. Note that if the availability status of a domain is pending, you must submit another request to determine the availability of the domain name.'
@@ -122,6 +122,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CheckDomainAvailabilityRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Domains_v20140515.CheckDomainAvailability
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -132,7 +138,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CheckDomainTransferability':
+  '/#X-Amz-Target=Route53Domains_v20140515.CheckDomainTransferability':
     post:
       operationId: CheckDomainTransferability
       description: 'Checks whether a domain name can be transferred to Amazon Route 53. '
@@ -155,6 +161,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CheckDomainTransferabilityRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Domains_v20140515.CheckDomainTransferability
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -165,7 +177,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteTagsForDomain':
+  '/#X-Amz-Target=Route53Domains_v20140515.DeleteTagsForDomain':
     post:
       operationId: DeleteTagsForDomain
       description: <p>This operation deletes the specified tags for a domain.</p> <p>All tag operations are eventually consistent; subsequent operations might not immediately represent all issued operations.</p>
@@ -192,6 +204,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteTagsForDomainRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Domains_v20140515.DeleteTagsForDomain
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -202,7 +220,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DisableDomainAutoRenew':
+  '/#X-Amz-Target=Route53Domains_v20140515.DisableDomainAutoRenew':
     post:
       operationId: DisableDomainAutoRenew
       description: This operation disables automatic renewal of domain registration for the specified domain.
@@ -225,6 +243,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DisableDomainAutoRenewRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Domains_v20140515.DisableDomainAutoRenew
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -235,7 +259,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DisableDomainTransferLock':
+  '/#X-Amz-Target=Route53Domains_v20140515.DisableDomainTransferLock':
     post:
       operationId: DisableDomainTransferLock
       description: 'This operation removes the transfer lock on the domain (specifically the <code>clientTransferProhibited</code> status) to allow domain transfers. We recommend you refrain from performing this action unless you intend to transfer the domain to a different registrar. Successful submission returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant will be notified by email.'
@@ -270,6 +294,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DisableDomainTransferLockRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Domains_v20140515.DisableDomainTransferLock
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -280,7 +310,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#EnableDomainAutoRenew':
+  '/#X-Amz-Target=Route53Domains_v20140515.EnableDomainAutoRenew':
     post:
       operationId: EnableDomainAutoRenew
       description: '<p>This operation configures Amazon Route 53 to automatically renew the specified domain before the domain registration expires. The cost of renewing your domain registration is billed to your AWS account.</p> <p>The period during which you can renew a domain name varies by TLD. For a list of TLDs and their renewal policies, see <a href="http://wiki.gandi.net/en/domains/renew#renewal_restoration_and_deletion_times">"Renewal, restoration, and deletion times"</a> on the website for our registrar associate, Gandi. Amazon Route 53 requires that you renew before the end of the renewal period that is listed on the Gandi website so we can complete processing before the deadline.</p>'
@@ -307,6 +337,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/EnableDomainAutoRenewRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Domains_v20140515.EnableDomainAutoRenew
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -317,7 +353,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#EnableDomainTransferLock':
+  '/#X-Amz-Target=Route53Domains_v20140515.EnableDomainTransferLock':
     post:
       operationId: EnableDomainTransferLock
       description: 'This operation sets the transfer lock on the domain (specifically the <code>clientTransferProhibited</code> status) to prevent domain transfers. Successful submission returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant will be notified by email.'
@@ -352,6 +388,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/EnableDomainTransferLockRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Domains_v20140515.EnableDomainTransferLock
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -362,7 +404,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetContactReachabilityStatus':
+  '/#X-Amz-Target=Route53Domains_v20140515.GetContactReachabilityStatus':
     post:
       operationId: GetContactReachabilityStatus
       description: '<p>For operations that require confirmation that the email address for the registrant contact is valid, such as registering a new domain, this operation returns information about whether the registrant contact has responded.</p> <p>If you want us to resend the email, use the <code>ResendContactReachabilityEmail</code> operation.</p>'
@@ -389,6 +431,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetContactReachabilityStatusRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Domains_v20140515.GetContactReachabilityStatus
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -399,7 +447,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetDomainDetail':
+  '/#X-Amz-Target=Route53Domains_v20140515.GetDomainDetail':
     post:
       operationId: GetDomainDetail
       description: This operation returns detailed information about a specified domain that is associated with the current AWS account. Contact information for the domain is also returned as part of the output.
@@ -422,6 +470,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetDomainDetailRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Domains_v20140515.GetDomainDetail
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -432,7 +486,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetDomainSuggestions':
+  '/#X-Amz-Target=Route53Domains_v20140515.GetDomainSuggestions':
     post:
       operationId: GetDomainSuggestions
       description: 'The GetDomainSuggestions operation returns a list of suggested domain names given a string, which can either be a domain name or simply a word or phrase (without spaces).'
@@ -455,6 +509,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetDomainSuggestionsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Domains_v20140515.GetDomainSuggestions
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -465,7 +525,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetOperationDetail':
+  '/#X-Amz-Target=Route53Domains_v20140515.GetOperationDetail':
     post:
       operationId: GetOperationDetail
       description: This operation returns the current status of an operation that is not completed.
@@ -484,6 +544,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetOperationDetailRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Domains_v20140515.GetOperationDetail
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -494,7 +560,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListDomains':
+  '/#X-Amz-Target=Route53Domains_v20140515.ListDomains':
     post:
       operationId: ListDomains
       description: This operation returns all the domain names registered with Amazon Route 53 for the current AWS account.
@@ -523,6 +589,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Domains_v20140515.ListDomains
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -533,7 +605,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListOperations':
+  '/#X-Amz-Target=Route53Domains_v20140515.ListOperations':
     post:
       operationId: ListOperations
       description: This operation returns the operation IDs of operations that are not yet complete.
@@ -562,6 +634,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Domains_v20140515.ListOperations
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -572,7 +650,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListTagsForDomain':
+  '/#X-Amz-Target=Route53Domains_v20140515.ListTagsForDomain':
     post:
       operationId: ListTagsForDomain
       description: <p>This operation returns all of the tags that are associated with the specified domain.</p> <p>All tag operations are eventually consistent; subsequent operations might not immediately represent all issued operations.</p>
@@ -599,6 +677,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListTagsForDomainRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Domains_v20140515.ListTagsForDomain
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -609,7 +693,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#RegisterDomain':
+  '/#X-Amz-Target=Route53Domains_v20140515.RegisterDomain':
     post:
       operationId: RegisterDomain
       description: '<p>This operation registers a domain. Domains are registered either by Amazon Registrar (for .com, .net, and .org domains) or by our registrar associate, Gandi (for all other domains). For some top-level domains (TLDs), this operation requires extra parameters.</p> <p>When you register a domain, Amazon Route 53 does the following:</p> <ul> <li> <p>Creates a Amazon Route 53 hosted zone that has the same name as the domain. Amazon Route 53 assigns four name servers to your hosted zone and automatically updates your domain registration with the names of these name servers.</p> </li> <li> <p>Enables autorenew, so your domain registration will renew automatically each year. We''ll notify you in advance of the renewal date so you can choose whether to renew the registration.</p> </li> <li> <p>Optionally enables privacy protection, so WHOIS queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) or for our registrar associate, Gandi (for all other TLDs). If you don''t enable privacy protection, WHOIS queries return the information that you entered for the registrant, admin, and tech contacts.</p> </li> <li> <p>If registration is successful, returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant is notified by email.</p> </li> <li> <p>Charges your AWS account an amount based on the top-level domain. For more information, see <a href="http://aws.amazon.com/route53/pricing/">Amazon Route 53 Pricing</a>.</p> </li> </ul>'
@@ -648,6 +732,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/RegisterDomainRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Domains_v20140515.RegisterDomain
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -658,7 +748,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#RenewDomain':
+  '/#X-Amz-Target=Route53Domains_v20140515.RenewDomain':
     post:
       operationId: RenewDomain
       description: '<p>This operation renews a domain for the specified number of years. The cost of renewing your domain is billed to your AWS account.</p> <p>We recommend that you renew your domain several weeks before the expiration date. Some TLD registries delete domains before the expiration date if you haven''t renewed far enough in advance. For more information about renewing domain registration, see <a href="http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-renew.html">Renewing Registration for a Domain</a> in the Amazon Route 53 Developer Guide.</p>'
@@ -693,6 +783,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/RenewDomainRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Domains_v20140515.RenewDomain
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -703,7 +799,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ResendContactReachabilityEmail':
+  '/#X-Amz-Target=Route53Domains_v20140515.ResendContactReachabilityEmail':
     post:
       operationId: ResendContactReachabilityEmail
       description: 'For operations that require confirmation that the email address for the registrant contact is valid, such as registering a new domain, this operation resends the confirmation email to the current email address for the registrant contact.'
@@ -730,6 +826,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ResendContactReachabilityEmailRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Domains_v20140515.ResendContactReachabilityEmail
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -740,7 +842,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#RetrieveDomainAuthCode':
+  '/#X-Amz-Target=Route53Domains_v20140515.RetrieveDomainAuthCode':
     post:
       operationId: RetrieveDomainAuthCode
       description: 'This operation returns the AuthCode for the domain. To transfer a domain to another registrar, you provide this value to the new registrar.'
@@ -763,6 +865,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/RetrieveDomainAuthCodeRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Domains_v20140515.RetrieveDomainAuthCode
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -773,7 +881,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#TransferDomain':
+  '/#X-Amz-Target=Route53Domains_v20140515.TransferDomain':
     post:
       operationId: TransferDomain
       description: '<p>This operation transfers a domain from another registrar to Amazon Route 53. When the transfer is complete, the domain is registered either with Amazon Registrar (for .com, .net, and .org domains) or with our registrar associate, Gandi (for all other TLDs).</p> <p>For transfer requirements, a detailed procedure, and information about viewing the status of a domain transfer, see <a href="http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-transfer-to-route-53.html">Transferring Registration for a Domain to Amazon Route 53</a> in the <i>Amazon Route 53 Developer Guide</i>.</p> <p>If the registrar for your domain is also the DNS service provider for the domain, we highly recommend that you consider transferring your DNS service to Amazon Route 53 or to another DNS service provider before you transfer your registration. Some registrars provide free DNS service when you purchase a domain registration. When you transfer the registration, the previous registrar will not renew your domain registration and could end your DNS service at any time.</p> <important> <p>If the registrar for your domain is also the DNS service provider for the domain and you don''t transfer DNS service to another provider, your website, email, and the web applications associated with the domain might become unavailable.</p> </important> <p>If the transfer is successful, this method returns an operation ID that you can use to track the progress and completion of the action. If the transfer doesn''t complete successfully, the domain registrant will be notified by email.</p>'
@@ -812,6 +920,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/TransferDomainRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Domains_v20140515.TransferDomain
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -822,7 +936,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateDomainContact':
+  '/#X-Amz-Target=Route53Domains_v20140515.UpdateDomainContact':
     post:
       operationId: UpdateDomainContact
       description: '<p>This operation updates the contact information for a particular domain. You must specify information for at least one contact: registrant, administrator, or technical.</p> <p>If the update is successful, this method returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant will be notified by email.</p>'
@@ -857,6 +971,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateDomainContactRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Domains_v20140515.UpdateDomainContact
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -867,7 +987,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateDomainContactPrivacy':
+  '/#X-Amz-Target=Route53Domains_v20140515.UpdateDomainContactPrivacy':
     post:
       operationId: UpdateDomainContactPrivacy
       description: '<p>This operation updates the specified domain contact''s privacy setting. When privacy protection is enabled, contact information such as email address is replaced either with contact information for Amazon Registrar (for .com, .net, and .org domains) or with contact information for our registrar associate, Gandi.</p> <p>This operation affects only the contact information for the specified contact type (registrant, administrator, or tech). If the request succeeds, Amazon Route 53 returns an operation ID that you can use with <a>GetOperationDetail</a> to track the progress and completion of the action. If the request doesn''t complete successfully, the domain registrant will be notified by email.</p>'
@@ -902,6 +1022,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateDomainContactPrivacyRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Domains_v20140515.UpdateDomainContactPrivacy
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -912,7 +1038,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateDomainNameservers':
+  '/#X-Amz-Target=Route53Domains_v20140515.UpdateDomainNameservers':
     post:
       operationId: UpdateDomainNameservers
       description: '<p>This operation replaces the current set of name servers for the domain with the specified set of name servers. If you use Amazon Route 53 as your DNS service, specify the four name servers in the delegation set for the hosted zone for the domain.</p> <p>If successful, this operation returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant will be notified by email.</p>'
@@ -947,6 +1073,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateDomainNameserversRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Domains_v20140515.UpdateDomainNameservers
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -957,7 +1089,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateTagsForDomain':
+  '/#X-Amz-Target=Route53Domains_v20140515.UpdateTagsForDomain':
     post:
       operationId: UpdateTagsForDomain
       description: <p>This operation adds or updates tags for a specified domain.</p> <p>All tag operations are eventually consistent; subsequent operations might not immediately represent all issued operations.</p>
@@ -984,6 +1116,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateTagsForDomainRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Domains_v20140515.UpdateTagsForDomain
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -994,7 +1132,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ViewBilling':
+  '/#X-Amz-Target=Route53Domains_v20140515.ViewBilling':
     post:
       operationId: ViewBilling
       description: Returns all the domain-related billing records for the current AWS account for a specified period
@@ -1013,6 +1151,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ViewBillingRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Domains_v20140515.ViewBilling
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'

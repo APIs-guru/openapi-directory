@@ -51,7 +51,6 @@ externalDocs:
   url: 'https://docs.aws.amazon.com/appmesh/'
 host: appmesh.amazonaws.com
 basePath: /
-x-hasEquivalentPaths: true
 schemes:
   - https
   - http
@@ -166,7 +165,20 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateMeshInput'
+            type: object
+            required:
+              - meshName
+            properties:
+              clientToken:
+                description: |-
+                  Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+                  request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+                type: string
+              meshName:
+                description: The name to use for the service mesh.
+                type: string
+                minLength: 1
+                maxLength: 255
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -210,21 +222,34 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListMeshesInput'
         - name: limit
-          type: string
           in: query
-          description: Pagination limit
           required: false
+          description: |-
+            The maximum number of results returned by <code>ListMeshes</code> in paginated output.
+                     When you use this parameter, <code>ListMeshes</code> returns only <code>limit</code>
+                     results in a single page along with a <code>nextToken</code> response element. You can see the
+                     remaining results of the initial request by sending another
+                        <code>ListMeshes</code> request with the returned <code>nextToken</code> value. This
+                     value can be between 1 and 100. If you don't use this parameter,
+                     <code>ListMeshes</code> returns up to 100 results and a
+                        <code>nextToken</code> value if applicable.
+          type: integer
+          minimum: 1
+          maximum: 100
         - name: nextToken
-          type: string
           in: query
-          description: Pagination token
           required: false
+          description: |-
+            <p>The <code>nextToken</code> value returned from a previous paginated
+                     <code>ListMeshes</code> request where <code>limit</code> was used and the
+                     results exceeded the value of that parameter. Pagination continues from the end of the
+                     previous results that returned the <code>nextToken</code> value.</p>
+                     <note>
+                        <p>This token should be treated as an opaque identifier that is only used to
+                            retrieve the next items in a list and not for other programmatic purposes.</p>
+                    </note>
+          type: string
   '/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes':
     put:
       operationId: CreateRoute
@@ -275,19 +300,46 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: meshName
+          in: path
+          required: true
+          description: The name of the service mesh in which to create the route.
+          type: string
+          minLength: 1
+          maxLength: 255
+        - name: virtualRouterName
+          in: path
+          required: true
+          description: The name of the virtual router in which to create the route.
+          type: string
+          minLength: 1
+          maxLength: 255
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateRouteInput'
-        - name: meshName
-          type: string
-          in: path
-          required: true
-        - name: virtualRouterName
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - routeName
+              - spec
+            properties:
+              clientToken:
+                description: |-
+                  Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+                  request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+                type: string
+              routeName:
+                description: The name to use for the route.
+                type: string
+                minLength: 1
+                maxLength: 255
+              spec:
+                description: An object representing the specification of a route.
+                type: object
+                properties:
+                  httpRoute:
+                    $ref: '#/definitions/HttpRoute'
+                    description: The HTTP routing information for the route.
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -331,29 +383,44 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListRoutesInput'
         - name: limit
-          type: string
           in: query
-          description: Pagination limit
           required: false
-        - name: nextToken
-          type: string
-          in: query
-          description: Pagination token
-          required: false
+          description: |-
+            The maximum number of results returned by <code>ListRoutes</code> in paginated output.
+                     When you use this parameter, <code>ListRoutes</code> returns only <code>limit</code>
+                     results in a single page along with a <code>nextToken</code> response element. You can see the
+                     remaining results of the initial request by sending another
+                        <code>ListRoutes</code> request with the returned <code>nextToken</code> value. This
+                     value can be between 1 and 100. If you don't use this parameter,
+                     <code>ListRoutes</code> returns up to 100 results and a
+                        <code>nextToken</code> value if applicable.
+          type: integer
+          minimum: 1
+          maximum: 100
         - name: meshName
-          type: string
           in: path
           required: true
+          description: The name of the service mesh in which to list routes.
+          type: string
+          minLength: 1
+          maxLength: 255
+        - name: nextToken
+          in: query
+          required: false
+          description: |-
+            The <code>nextToken</code> value returned from a previous paginated
+                     <code>ListRoutes</code> request where <code>limit</code> was used and the
+                     results exceeded the value of that parameter. Pagination continues from the end of the
+                     previous results that returned the <code>nextToken</code> value.
+          type: string
         - name: virtualRouterName
-          type: string
           in: path
           required: true
+          description: The name of the virtual router to list routes in.
+          type: string
+          minLength: 1
+          maxLength: 255
   '/v20190125/meshes/{meshName}/virtualNodes':
     put:
       operationId: CreateVirtualNode
@@ -415,15 +482,45 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: meshName
+          in: path
+          required: true
+          description: The name of the service mesh in which to create the virtual node.
+          type: string
+          minLength: 1
+          maxLength: 255
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateVirtualNodeInput'
-        - name: meshName
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - spec
+              - virtualNodeName
+            properties:
+              clientToken:
+                description: |-
+                  Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+                  request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+                type: string
+              spec:
+                description: An object representing the specification of a virtual node.
+                type: object
+                properties:
+                  backends:
+                    $ref: '#/definitions/Backends'
+                    description: The backends that the virtual node is expected to send outbound traffic to.
+                  listeners:
+                    $ref: '#/definitions/Listeners'
+                    description: The listeners that the virtual node is expected to receive inbound traffic from. Currently only one listener is supported per virtual node.
+                  serviceDiscovery:
+                    $ref: '#/definitions/ServiceDiscovery'
+                    description: The service discovery information for the virtual node.
+              virtualNodeName:
+                description: The name to use for the virtual node.
+                type: string
+                minLength: 1
+                maxLength: 255
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -467,25 +564,37 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListVirtualNodesInput'
         - name: limit
-          type: string
           in: query
-          description: Pagination limit
           required: false
-        - name: nextToken
-          type: string
-          in: query
-          description: Pagination token
-          required: false
+          description: |-
+            The maximum number of results returned by <code>ListVirtualNodes</code> in paginated
+                     output. When you use this parameter, <code>ListVirtualNodes</code> returns only
+                        <code>limit</code> results in a single page along with a <code>nextToken</code> response
+                     element. You can see the remaining results of the initial request by sending another
+                        <code>ListVirtualNodes</code> request with the returned <code>nextToken</code> value.
+                     This value can be between 1 and 100. If you don't use this parameter,
+                     <code>ListVirtualNodes</code> returns up to 100 results and a
+                        <code>nextToken</code> value if applicable.
+          type: integer
+          minimum: 1
+          maximum: 100
         - name: meshName
-          type: string
           in: path
           required: true
+          description: The name of the service mesh to list virtual nodes in.
+          type: string
+          minLength: 1
+          maxLength: 255
+        - name: nextToken
+          in: query
+          required: false
+          description: |-
+            The <code>nextToken</code> value returned from a previous paginated
+                     <code>ListVirtualNodes</code> request where <code>limit</code> was used and the
+                     results exceeded the value of that parameter. Pagination continues from the end of the
+                     previous results that returned the <code>nextToken</code> value.
+          type: string
   '/v20190125/meshes/{meshName}/virtualRouters':
     put:
       operationId: CreateVirtualRouter
@@ -534,15 +643,39 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: meshName
+          in: path
+          required: true
+          description: The name of the service mesh to create the virtual router in.
+          type: string
+          minLength: 1
+          maxLength: 255
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateVirtualRouterInput'
-        - name: meshName
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - spec
+              - virtualRouterName
+            properties:
+              clientToken:
+                description: |-
+                  Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+                  request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+                type: string
+              spec:
+                description: An object representing the specification of a virtual router.
+                type: object
+                properties:
+                  listeners:
+                    $ref: '#/definitions/VirtualRouterListeners'
+                    description: The listeners that the virtual router is expected to receive inbound traffic from. Currently only one listener is supported per virtual router.
+              virtualRouterName:
+                description: The name to use for the virtual router.
+                type: string
+                minLength: 1
+                maxLength: 255
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -586,25 +719,37 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListVirtualRoutersInput'
         - name: limit
-          type: string
           in: query
-          description: Pagination limit
           required: false
-        - name: nextToken
-          type: string
-          in: query
-          description: Pagination token
-          required: false
+          description: |-
+            The maximum number of results returned by <code>ListVirtualRouters</code> in paginated
+                     output. When you use this parameter, <code>ListVirtualRouters</code> returns only
+                        <code>limit</code> results in a single page along with a <code>nextToken</code> response
+                     element. You can see the remaining results of the initial request  by sending another
+                        <code>ListVirtualRouters</code> request with the returned <code>nextToken</code> value.
+                     This value can be between 1 and 100. If you don't use this parameter, 
+                     <code>ListVirtualRouters</code> returns up to 100 results and
+                     a <code>nextToken</code> value if applicable.
+          type: integer
+          minimum: 1
+          maximum: 100
         - name: meshName
-          type: string
           in: path
           required: true
+          description: The name of the service mesh to list virtual routers in.
+          type: string
+          minLength: 1
+          maxLength: 255
+        - name: nextToken
+          in: query
+          required: false
+          description: |-
+            The <code>nextToken</code> value returned from a previous paginated
+                     <code>ListVirtualRouters</code> request where <code>limit</code> was used and the
+                     results exceeded the value of that parameter. Pagination continues from the end of the
+                     previous results that returned the <code>nextToken</code> value.
+          type: string
   '/v20190125/meshes/{meshName}/virtualServices':
     put:
       operationId: CreateVirtualService
@@ -653,15 +798,39 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: meshName
+          in: path
+          required: true
+          description: The name of the service mesh in which to create the virtual service.
+          type: string
+          minLength: 1
+          maxLength: 255
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateVirtualServiceInput'
-        - name: meshName
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - spec
+              - virtualServiceName
+            properties:
+              clientToken:
+                description: |-
+                  Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+                  request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+                type: string
+              spec:
+                description: An object representing the specification of a virtual service.
+                type: object
+                properties:
+                  provider:
+                    $ref: '#/definitions/VirtualServiceProvider'
+                    description: |-
+                      The App Mesh object that is acting as the provider for a virtual service. You can specify
+                               a single virtual node or virtual router.
+              virtualServiceName:
+                description: The name to use for the virtual service.
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -705,25 +874,37 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListVirtualServicesInput'
         - name: limit
-          type: string
           in: query
-          description: Pagination limit
           required: false
-        - name: nextToken
-          type: string
-          in: query
-          description: Pagination token
-          required: false
+          description: |-
+            The maximum number of results returned by <code>ListVirtualServices</code> in paginated
+                     output. When you use this parameter, <code>ListVirtualServices</code> returns only
+                        <code>limit</code> results in a single page along with a <code>nextToken</code> response
+                     element. You can see the remaining results of the initial request by sending another
+                        <code>ListVirtualServices</code> request with the returned <code>nextToken</code> value.
+                     This value can be between 1 and 100. If you don't use this parameter,
+                     <code>ListVirtualServices</code> returns up to 100 results and
+                     a <code>nextToken</code> value if applicable.
+          type: integer
+          minimum: 1
+          maximum: 100
         - name: meshName
-          type: string
           in: path
           required: true
+          description: The name of the service mesh to list virtual services in.
+          type: string
+          minLength: 1
+          maxLength: 255
+        - name: nextToken
+          in: query
+          required: false
+          description: |-
+            The <code>nextToken</code> value returned from a previous paginated
+                        <code>ListVirtualServices</code> request where <code>limit</code> was used and the
+                     results exceeded the value of that parameter. Pagination continues from the end of the
+                     previous results that returned the <code>nextToken</code> value.
+          type: string
   '/v20190125/meshes/{meshName}':
     delete:
       operationId: DeleteMesh
@@ -765,15 +946,13 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteMeshInput'
         - name: meshName
-          type: string
           in: path
           required: true
+          description: The name of the service mesh to delete.
+          type: string
+          minLength: 1
+          maxLength: 255
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -817,15 +996,13 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeMeshInput'
         - name: meshName
-          type: string
           in: path
           required: true
+          description: The name of the service mesh to describe.
+          type: string
+          minLength: 1
+          maxLength: 255
   '/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes/{routeName}':
     delete:
       operationId: DeleteRoute
@@ -864,23 +1041,27 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteRouteInput'
         - name: meshName
-          type: string
           in: path
           required: true
-        - name: virtualRouterName
+          description: The name of the service mesh to delete the route in.
           type: string
-          in: path
-          required: true
+          minLength: 1
+          maxLength: 255
         - name: routeName
-          type: string
           in: path
           required: true
+          description: The name of the route to delete.
+          type: string
+          minLength: 1
+          maxLength: 255
+        - name: virtualRouterName
+          in: path
+          required: true
+          description: The name of the virtual router to delete the route in.
+          type: string
+          minLength: 1
+          maxLength: 255
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -924,23 +1105,27 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeRouteInput'
         - name: meshName
-          type: string
           in: path
           required: true
-        - name: virtualRouterName
+          description: The name of the service mesh that the route resides in.
           type: string
-          in: path
-          required: true
+          minLength: 1
+          maxLength: 255
         - name: routeName
-          type: string
           in: path
           required: true
+          description: The name of the route to describe.
+          type: string
+          minLength: 1
+          maxLength: 255
+        - name: virtualRouterName
+          in: path
+          required: true
+          description: The name of the virtual router that the route is associated with.
+          type: string
+          minLength: 1
+          maxLength: 255
     put:
       operationId: UpdateRoute
       description: Updates an existing route for a specified service mesh and virtual router.
@@ -982,23 +1167,47 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: meshName
+          in: path
+          required: true
+          description: The name of the service mesh that the route resides in.
+          type: string
+          minLength: 1
+          maxLength: 255
+        - name: routeName
+          in: path
+          required: true
+          description: The name of the route to update.
+          type: string
+          minLength: 1
+          maxLength: 255
+        - name: virtualRouterName
+          in: path
+          required: true
+          description: The name of the virtual router that the route is associated with.
+          type: string
+          minLength: 1
+          maxLength: 255
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateRouteInput'
-        - name: meshName
-          type: string
-          in: path
-          required: true
-        - name: virtualRouterName
-          type: string
-          in: path
-          required: true
-        - name: routeName
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - spec
+            properties:
+              clientToken:
+                description: |-
+                  Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+                  request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+                type: string
+              spec:
+                description: An object representing the specification of a route.
+                type: object
+                properties:
+                  httpRoute:
+                    $ref: '#/definitions/HttpRoute'
+                    description: The HTTP routing information for the route.
   '/v20190125/meshes/{meshName}/virtualNodes/{virtualNodeName}':
     delete:
       operationId: DeleteVirtualNode
@@ -1040,19 +1249,20 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteVirtualNodeInput'
         - name: meshName
-          type: string
           in: path
           required: true
+          description: The name of the service mesh to delete the virtual node in.
+          type: string
+          minLength: 1
+          maxLength: 255
         - name: virtualNodeName
-          type: string
           in: path
           required: true
+          description: The name of the virtual node to delete.
+          type: string
+          minLength: 1
+          maxLength: 255
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1096,19 +1306,20 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeVirtualNodeInput'
         - name: meshName
-          type: string
           in: path
           required: true
+          description: The name of the service mesh that the virtual node resides in.
+          type: string
+          minLength: 1
+          maxLength: 255
         - name: virtualNodeName
-          type: string
           in: path
           required: true
+          description: The name of the virtual node to describe.
+          type: string
+          minLength: 1
+          maxLength: 255
     put:
       operationId: UpdateVirtualNode
       description: Updates an existing virtual node in a specified service mesh.
@@ -1150,19 +1361,46 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: meshName
+          in: path
+          required: true
+          description: The name of the service mesh that the virtual node resides in.
+          type: string
+          minLength: 1
+          maxLength: 255
+        - name: virtualNodeName
+          in: path
+          required: true
+          description: The name of the virtual node to update.
+          type: string
+          minLength: 1
+          maxLength: 255
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateVirtualNodeInput'
-        - name: meshName
-          type: string
-          in: path
-          required: true
-        - name: virtualNodeName
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - spec
+            properties:
+              clientToken:
+                description: |-
+                  Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+                  request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+                type: string
+              spec:
+                description: An object representing the specification of a virtual node.
+                type: object
+                properties:
+                  backends:
+                    $ref: '#/definitions/Backends'
+                    description: The backends that the virtual node is expected to send outbound traffic to.
+                  listeners:
+                    $ref: '#/definitions/Listeners'
+                    description: The listeners that the virtual node is expected to receive inbound traffic from. Currently only one listener is supported per virtual node.
+                  serviceDiscovery:
+                    $ref: '#/definitions/ServiceDiscovery'
+                    description: The service discovery information for the virtual node.
   '/v20190125/meshes/{meshName}/virtualRouters/{virtualRouterName}':
     delete:
       operationId: DeleteVirtualRouter
@@ -1204,19 +1442,20 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteVirtualRouterInput'
         - name: meshName
-          type: string
           in: path
           required: true
+          description: The name of the service mesh to delete the virtual router in.
+          type: string
+          minLength: 1
+          maxLength: 255
         - name: virtualRouterName
-          type: string
           in: path
           required: true
+          description: The name of the virtual router to delete.
+          type: string
+          minLength: 1
+          maxLength: 255
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1260,19 +1499,20 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeVirtualRouterInput'
         - name: meshName
-          type: string
           in: path
           required: true
+          description: The name of the service mesh that the virtual router resides in.
+          type: string
+          minLength: 1
+          maxLength: 255
         - name: virtualRouterName
-          type: string
           in: path
           required: true
+          description: The name of the virtual router to describe.
+          type: string
+          minLength: 1
+          maxLength: 255
     put:
       operationId: UpdateVirtualRouter
       description: Updates an existing virtual router in a specified service mesh.
@@ -1314,19 +1554,40 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: meshName
+          in: path
+          required: true
+          description: The name of the service mesh that the virtual router resides in.
+          type: string
+          minLength: 1
+          maxLength: 255
+        - name: virtualRouterName
+          in: path
+          required: true
+          description: The name of the virtual router to update.
+          type: string
+          minLength: 1
+          maxLength: 255
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateVirtualRouterInput'
-        - name: meshName
-          type: string
-          in: path
-          required: true
-        - name: virtualRouterName
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - spec
+            properties:
+              clientToken:
+                description: |-
+                  Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+                  request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+                type: string
+              spec:
+                description: An object representing the specification of a virtual router.
+                type: object
+                properties:
+                  listeners:
+                    $ref: '#/definitions/VirtualRouterListeners'
+                    description: The listeners that the virtual router is expected to receive inbound traffic from. Currently only one listener is supported per virtual router.
   '/v20190125/meshes/{meshName}/virtualServices/{virtualServiceName}':
     delete:
       operationId: DeleteVirtualService
@@ -1361,19 +1622,18 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteVirtualServiceInput'
         - name: meshName
-          type: string
           in: path
           required: true
+          description: The name of the service mesh to delete the virtual service in.
+          type: string
+          minLength: 1
+          maxLength: 255
         - name: virtualServiceName
-          type: string
           in: path
           required: true
+          description: The name of the virtual service to delete.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1417,19 +1677,18 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeVirtualServiceInput'
         - name: meshName
-          type: string
           in: path
           required: true
+          description: The name of the service mesh that the virtual service resides in.
+          type: string
+          minLength: 1
+          maxLength: 255
         - name: virtualServiceName
-          type: string
           in: path
           required: true
+          description: The name of the virtual service to describe.
+          type: string
     put:
       operationId: UpdateVirtualService
       description: Updates an existing virtual service in a specified service mesh.
@@ -1471,19 +1730,40 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: meshName
+          in: path
+          required: true
+          description: The name of the service mesh that the virtual service resides in.
+          type: string
+          minLength: 1
+          maxLength: 255
+        - name: virtualServiceName
+          in: path
+          required: true
+          description: The name of the virtual service to update.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateVirtualServiceInput'
-        - name: meshName
-          type: string
-          in: path
-          required: true
-        - name: virtualServiceName
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - spec
+            properties:
+              clientToken:
+                description: |-
+                  Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+                  request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+                type: string
+              spec:
+                description: An object representing the specification of a virtual service.
+                type: object
+                properties:
+                  provider:
+                    $ref: '#/definitions/VirtualServiceProvider'
+                    description: |-
+                      The App Mesh object that is acting as the provider for a virtual service. You can specify
+                               a single virtual node or virtual router.
 definitions:
   CreateMeshOutput:
     type: object
@@ -1493,20 +1773,6 @@ definitions:
       mesh:
         $ref: '#/definitions/MeshData'
         description: The full description of your service mesh following the create call.
-    description: ''
-  CreateMeshInput:
-    type: object
-    required:
-      - meshName
-    properties:
-      clientToken:
-        $ref: '#/definitions/String'
-        description: |-
-          Unique, case-sensitive identifier that you provide to ensure the idempotency of the
-          request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
-      meshName:
-        $ref: '#/definitions/ResourceName'
-        description: The name to use for the service mesh.
     description: ''
   BadRequestException: {}
   ConflictException: {}
@@ -1525,24 +1791,19 @@ definitions:
         $ref: '#/definitions/RouteData'
         description: The full description of your mesh following the create call.
     description: ''
-  CreateRouteInput:
+  HttpRoute:
     type: object
     required:
-      - routeName
-      - spec
+      - action
+      - match
     properties:
-      clientToken:
-        $ref: '#/definitions/String'
-        description: |-
-          Unique, case-sensitive identifier that you provide to ensure the idempotency of the
-          request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
-      routeName:
-        $ref: '#/definitions/ResourceName'
-        description: The name to use for the route.
-      spec:
-        $ref: '#/definitions/RouteSpec'
-        description: The route specification to apply.
-    description: ''
+      action:
+        $ref: '#/definitions/HttpRouteAction'
+        description: The action to take if a match is determined.
+      match:
+        $ref: '#/definitions/HttpRouteMatch'
+        description: The criteria for determining an HTTP request match.
+    description: An object representing the HTTP routing specification for a route.
   CreateVirtualNodeOutput:
     type: object
     required:
@@ -1552,24 +1813,21 @@ definitions:
         $ref: '#/definitions/VirtualNodeData'
         description: The full description of your virtual node following the create call.
     description: ''
-  CreateVirtualNodeInput:
+  Backends:
+    type: array
+    items:
+      $ref: '#/definitions/Backend'
+  Listeners:
+    type: array
+    items:
+      $ref: '#/definitions/Listener'
+  ServiceDiscovery:
     type: object
-    required:
-      - spec
-      - virtualNodeName
     properties:
-      clientToken:
-        $ref: '#/definitions/String'
-        description: |-
-          Unique, case-sensitive identifier that you provide to ensure the idempotency of the
-          request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
-      spec:
-        $ref: '#/definitions/VirtualNodeSpec'
-        description: The virtual node specification to apply.
-      virtualNodeName:
-        $ref: '#/definitions/ResourceName'
-        description: The name to use for the virtual node.
-    description: ''
+      dns:
+        $ref: '#/definitions/DnsServiceDiscovery'
+        description: Specifies the DNS information for the virtual node.
+    description: An object representing the service discovery information for a virtual node.
   CreateVirtualRouterOutput:
     type: object
     required:
@@ -1579,24 +1837,10 @@ definitions:
         $ref: '#/definitions/VirtualRouterData'
         description: The full description of your virtual router following the create call.
     description: ''
-  CreateVirtualRouterInput:
-    type: object
-    required:
-      - spec
-      - virtualRouterName
-    properties:
-      clientToken:
-        $ref: '#/definitions/String'
-        description: |-
-          Unique, case-sensitive identifier that you provide to ensure the idempotency of the
-          request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
-      spec:
-        $ref: '#/definitions/VirtualRouterSpec'
-        description: The virtual router specification to apply.
-      virtualRouterName:
-        $ref: '#/definitions/ResourceName'
-        description: The name to use for the virtual router.
-    description: ''
+  VirtualRouterListeners:
+    type: array
+    items:
+      $ref: '#/definitions/VirtualRouterListener'
   CreateVirtualServiceOutput:
     type: object
     required:
@@ -1606,24 +1850,16 @@ definitions:
         $ref: '#/definitions/VirtualServiceData'
         description: The full description of your virtual service following the create call.
     description: ''
-  CreateVirtualServiceInput:
+  VirtualServiceProvider:
     type: object
-    required:
-      - spec
-      - virtualServiceName
     properties:
-      clientToken:
-        $ref: '#/definitions/String'
-        description: |-
-          Unique, case-sensitive identifier that you provide to ensure the idempotency of the
-          request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
-      spec:
-        $ref: '#/definitions/VirtualServiceSpec'
-        description: The virtual service specification to apply.
-      virtualServiceName:
-        $ref: '#/definitions/ServiceName'
-        description: The name to use for the virtual service.
-    description: ''
+      virtualNode:
+        $ref: '#/definitions/VirtualNodeServiceProvider'
+        description: The virtual node associated with a virtual service.
+      virtualRouter:
+        $ref: '#/definitions/VirtualRouterServiceProvider'
+        description: The virtual router associated with a virtual service.
+    description: An object representing the provider for a virtual service.
   DeleteMeshOutput:
     type: object
     required:
@@ -1632,10 +1868,6 @@ definitions:
       mesh:
         $ref: '#/definitions/MeshData'
         description: The service mesh that was deleted.
-    description: ''
-  DeleteMeshInput:
-    type: object
-    properties: {}
     description: ''
   ResourceInUseException: {}
   DeleteRouteOutput:
@@ -1647,10 +1879,6 @@ definitions:
         $ref: '#/definitions/RouteData'
         description: The route that was deleted.
     description: ''
-  DeleteRouteInput:
-    type: object
-    properties: {}
-    description: ''
   DeleteVirtualNodeOutput:
     type: object
     required:
@@ -1659,10 +1887,6 @@ definitions:
       virtualNode:
         $ref: '#/definitions/VirtualNodeData'
         description: The virtual node that was deleted.
-    description: ''
-  DeleteVirtualNodeInput:
-    type: object
-    properties: {}
     description: ''
   DeleteVirtualRouterOutput:
     type: object
@@ -1673,10 +1897,6 @@ definitions:
         $ref: '#/definitions/VirtualRouterData'
         description: The virtual router that was deleted.
     description: ''
-  DeleteVirtualRouterInput:
-    type: object
-    properties: {}
-    description: ''
   DeleteVirtualServiceOutput:
     type: object
     required:
@@ -1685,10 +1905,6 @@ definitions:
       virtualService:
         $ref: '#/definitions/VirtualServiceData'
         description: The virtual service that was deleted.
-    description: ''
-  DeleteVirtualServiceInput:
-    type: object
-    properties: {}
     description: ''
   DescribeMeshOutput:
     type: object
@@ -1699,10 +1915,6 @@ definitions:
         $ref: '#/definitions/MeshData'
         description: The full description of your service mesh.
     description: ''
-  DescribeMeshInput:
-    type: object
-    properties: {}
-    description: ''
   DescribeRouteOutput:
     type: object
     required:
@@ -1711,10 +1923,6 @@ definitions:
       route:
         $ref: '#/definitions/RouteData'
         description: The full description of your route.
-    description: ''
-  DescribeRouteInput:
-    type: object
-    properties: {}
     description: ''
   DescribeVirtualNodeOutput:
     type: object
@@ -1725,10 +1933,6 @@ definitions:
         $ref: '#/definitions/VirtualNodeData'
         description: The full description of your virtual node.
     description: ''
-  DescribeVirtualNodeInput:
-    type: object
-    properties: {}
-    description: ''
   DescribeVirtualRouterOutput:
     type: object
     required:
@@ -1738,10 +1942,6 @@ definitions:
         $ref: '#/definitions/VirtualRouterData'
         description: The full description of your virtual router.
     description: ''
-  DescribeVirtualRouterInput:
-    type: object
-    properties: {}
-    description: ''
   DescribeVirtualServiceOutput:
     type: object
     required:
@@ -1750,10 +1950,6 @@ definitions:
       virtualService:
         $ref: '#/definitions/VirtualServiceData'
         description: The full description of your virtual service.
-    description: ''
-  DescribeVirtualServiceInput:
-    type: object
-    properties: {}
     description: ''
   ListMeshesOutput:
     type: object
@@ -1772,10 +1968,6 @@ definitions:
                    results. This value is <code>null</code> when there are no more results to
                    return.
     description: ''
-  ListMeshesInput:
-    type: object
-    properties: {}
-    description: ''
   ListRoutesOutput:
     type: object
     required:
@@ -1792,10 +1984,6 @@ definitions:
       routes:
         $ref: '#/definitions/RouteList'
         description: The list of existing routes for the specified service mesh and virtual router.
-    description: ''
-  ListRoutesInput:
-    type: object
-    properties: {}
     description: ''
   ListVirtualNodesOutput:
     type: object
@@ -1814,10 +2002,6 @@ definitions:
         $ref: '#/definitions/VirtualNodeList'
         description: The list of existing virtual nodes for the specified service mesh.
     description: ''
-  ListVirtualNodesInput:
-    type: object
-    properties: {}
-    description: ''
   ListVirtualRoutersOutput:
     type: object
     required:
@@ -1835,10 +2019,6 @@ definitions:
         $ref: '#/definitions/VirtualRouterList'
         description: The list of existing virtual routers for the specified service mesh.
     description: ''
-  ListVirtualRoutersInput:
-    type: object
-    properties: {}
-    description: ''
   ListVirtualServicesOutput:
     type: object
     required:
@@ -1855,10 +2035,6 @@ definitions:
         $ref: '#/definitions/VirtualServiceList'
         description: The list of existing virtual services for the specified service mesh.
     description: ''
-  ListVirtualServicesInput:
-    type: object
-    properties: {}
-    description: ''
   UpdateRouteOutput:
     type: object
     required:
@@ -1867,20 +2043,6 @@ definitions:
       route:
         $ref: '#/definitions/RouteData'
         description: A full description of the route that was updated.
-    description: ''
-  UpdateRouteInput:
-    type: object
-    required:
-      - spec
-    properties:
-      clientToken:
-        $ref: '#/definitions/String'
-        description: |-
-          Unique, case-sensitive identifier that you provide to ensure the idempotency of the
-          request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
-      spec:
-        $ref: '#/definitions/RouteSpec'
-        description: The new route specification to apply. This overwrites the existing data.
     description: ''
   UpdateVirtualNodeOutput:
     type: object
@@ -1891,20 +2053,6 @@ definitions:
         $ref: '#/definitions/VirtualNodeData'
         description: A full description of the virtual node that was updated.
     description: ''
-  UpdateVirtualNodeInput:
-    type: object
-    required:
-      - spec
-    properties:
-      clientToken:
-        $ref: '#/definitions/String'
-        description: |-
-          Unique, case-sensitive identifier that you provide to ensure the idempotency of the
-          request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
-      spec:
-        $ref: '#/definitions/VirtualNodeSpec'
-        description: The new virtual node specification to apply. This overwrites the existing data.
-    description: ''
   UpdateVirtualRouterOutput:
     type: object
     required:
@@ -1914,20 +2062,6 @@ definitions:
         $ref: '#/definitions/VirtualRouterData'
         description: A full description of the virtual router that was updated.
     description: ''
-  UpdateVirtualRouterInput:
-    type: object
-    required:
-      - spec
-    properties:
-      clientToken:
-        $ref: '#/definitions/String'
-        description: |-
-          Unique, case-sensitive identifier that you provide to ensure the idempotency of the
-          request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
-      spec:
-        $ref: '#/definitions/VirtualRouterSpec'
-        description: The new virtual router specification to apply. This overwrites the existing data.
-    description: ''
   UpdateVirtualServiceOutput:
     type: object
     required:
@@ -1936,22 +2070,6 @@ definitions:
       virtualService:
         $ref: '#/definitions/VirtualServiceData'
         description: A full description of the virtual service that was updated.
-    description: ''
-  UpdateVirtualServiceInput:
-    type: object
-    required:
-      - spec
-    properties:
-      clientToken:
-        $ref: '#/definitions/String'
-        description: |-
-          Unique, case-sensitive identifier that you provide to ensure the idempotency of the
-          request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
-      spec:
-        $ref: '#/definitions/VirtualServiceSpec'
-        description: |-
-          The new virtual service specification to apply. This overwrites the existing
-                   data.
     description: ''
   PortMapping:
     type: object
@@ -1993,6 +2111,24 @@ definitions:
         $ref: '#/definitions/ServiceDiscovery'
         description: The service discovery information for the virtual node.
     description: An object representing the specification of a virtual node.
+  UpdateVirtualNodeInput:
+    type: object
+    required:
+      - spec
+    properties:
+      clientToken:
+        $ref: '#/definitions/String'
+        description: |-
+          Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+          request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+      spec:
+        $ref: '#/definitions/VirtualNodeSpec'
+        description: The new virtual node specification to apply. This overwrites the existing data.
+    description: ''
+  DeleteMeshInput:
+    type: object
+    properties: {}
+    description: ''
   VirtualServiceSpec:
     type: object
     properties:
@@ -2004,6 +2140,24 @@ definitions:
     description: An object representing the specification of a virtual service.
   ServiceName:
     type: string
+  CreateVirtualServiceInput:
+    type: object
+    required:
+      - spec
+      - virtualServiceName
+    properties:
+      clientToken:
+        $ref: '#/definitions/String'
+        description: |-
+          Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+          request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+      spec:
+        $ref: '#/definitions/VirtualServiceSpec'
+        description: The virtual service specification to apply.
+      virtualServiceName:
+        $ref: '#/definitions/ServiceName'
+        description: The name to use for the virtual service.
+    description: ''
   VirtualRouterStatusCode:
     type: string
     enum:
@@ -2019,6 +2173,20 @@ definitions:
         $ref: '#/definitions/VirtualRouterListeners'
         description: The listeners that the virtual router is expected to receive inbound traffic from. Currently only one listener is supported per virtual router.
     description: An object representing the specification of a virtual router.
+  UpdateVirtualRouterInput:
+    type: object
+    required:
+      - spec
+    properties:
+      clientToken:
+        $ref: '#/definitions/String'
+        description: |-
+          Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+          request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+      spec:
+        $ref: '#/definitions/VirtualRouterSpec'
+        description: The new virtual router specification to apply. This overwrites the existing data.
+    description: ''
   VirtualNodeData:
     type: object
     required:
@@ -2088,10 +2256,18 @@ definitions:
         $ref: '#/definitions/MeshStatus'
         description: The status of the service mesh.
     description: An object representing a service mesh returned by a describe operation.
+  DeleteVirtualRouterInput:
+    type: object
+    properties: {}
+    description: ''
   VirtualRouterList:
     type: array
     items:
       $ref: '#/definitions/VirtualRouterRef'
+  DescribeRouteInput:
+    type: object
+    properties: {}
+    description: ''
   RouteData:
     type: object
     required:
@@ -2177,10 +2353,6 @@ definitions:
         $ref: '#/definitions/PortMapping'
         description: The port mapping information for the listener.
     description: An object representing a listener for a virtual node.
-  Listeners:
-    type: array
-    items:
-      $ref: '#/definitions/Listener'
   Backend:
     type: object
     properties:
@@ -2190,10 +2362,6 @@ definitions:
     description: |-
       An object representing the backends that a virtual node is expected to send outbound
                traffic to. 
-  Backends:
-    type: array
-    items:
-      $ref: '#/definitions/Backend'
   PortProtocol:
     type: string
     enum:
@@ -2218,6 +2386,22 @@ definitions:
       - ACTIVE
       - DELETED
       - INACTIVE
+  UpdateVirtualServiceInput:
+    type: object
+    required:
+      - spec
+    properties:
+      clientToken:
+        $ref: '#/definitions/String'
+        description: |-
+          Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+          request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+      spec:
+        $ref: '#/definitions/VirtualServiceSpec'
+        description: |-
+          The new virtual service specification to apply. This overwrites the existing
+                   data.
+    description: ''
   HealthCheckThreshold:
     type: integer
     minimum: 2
@@ -2247,6 +2431,10 @@ definitions:
     type: integer
     minimum: 1
     maximum: 100
+  ListRoutesInput:
+    type: object
+    properties: {}
+    description: ''
   HealthCheckIntervalMillis:
     type: integer
     minimum: 5000
@@ -2397,6 +2585,20 @@ definitions:
         $ref: '#/definitions/ResourceName'
         description: The name of the virtual node.
     description: An object representing a virtual node returned by a list operation.
+  CreateMeshInput:
+    type: object
+    required:
+      - meshName
+    properties:
+      clientToken:
+        $ref: '#/definitions/String'
+        description: |-
+          Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+          request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+      meshName:
+        $ref: '#/definitions/ResourceName'
+        description: The name to use for the service mesh.
+    description: ''
   Hostname:
     type: string
   DnsServiceDiscovery:
@@ -2410,20 +2612,18 @@ definitions:
     description: |-
       An object representing the DNS service discovery information for your virtual
                node.
+  DescribeVirtualServiceInput:
+    type: object
+    properties: {}
+    description: ''
   ListVirtualServicesLimit:
     type: integer
     minimum: 1
     maximum: 100
-  VirtualServiceProvider:
+  DeleteRouteInput:
     type: object
-    properties:
-      virtualNode:
-        $ref: '#/definitions/VirtualNodeServiceProvider'
-        description: The virtual node associated with a virtual service.
-      virtualRouter:
-        $ref: '#/definitions/VirtualRouterServiceProvider'
-        description: The virtual router associated with a virtual service.
-    description: An object representing the provider for a virtual service.
+    properties: {}
+    description: ''
   ListVirtualRoutersLimit:
     type: integer
     minimum: 1
@@ -2432,10 +2632,18 @@ definitions:
     type: integer
     minimum: 1
     maximum: 100
+  ListMeshesInput:
+    type: object
+    properties: {}
+    description: ''
   VirtualNodeList:
     type: array
     items:
       $ref: '#/definitions/VirtualNodeRef'
+  ListVirtualRoutersInput:
+    type: object
+    properties: {}
+    description: ''
   VirtualRouterStatus:
     type: object
     required:
@@ -2445,27 +2653,42 @@ definitions:
         $ref: '#/definitions/VirtualRouterStatusCode'
         description: The current status of the virtual router.
     description: 'An object representing the status of a virtual router. '
+  ListVirtualServicesInput:
+    type: object
+    properties: {}
+    description: ''
+  CreateVirtualRouterInput:
+    type: object
+    required:
+      - spec
+      - virtualRouterName
+    properties:
+      clientToken:
+        $ref: '#/definitions/String'
+        description: |-
+          Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+          request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+      spec:
+        $ref: '#/definitions/VirtualRouterSpec'
+        description: The virtual router specification to apply.
+      virtualRouterName:
+        $ref: '#/definitions/ResourceName'
+        description: The name to use for the virtual router.
+    description: ''
   ListVirtualNodesLimit:
     type: integer
     minimum: 1
     maximum: 100
+  ListVirtualNodesInput:
+    type: object
+    properties: {}
+    description: ''
   VirtualServiceStatusCode:
     type: string
     enum:
       - ACTIVE
       - DELETED
       - INACTIVE
-  VirtualRouterListeners:
-    type: array
-    items:
-      $ref: '#/definitions/VirtualRouterListener'
-  ServiceDiscovery:
-    type: object
-    properties:
-      dns:
-        $ref: '#/definitions/DnsServiceDiscovery'
-        description: Specifies the DNS information for the virtual node.
-    description: An object representing the service discovery information for a virtual node.
   MeshList:
     type: array
     items:
@@ -2530,6 +2753,10 @@ definitions:
                targets according to their relative weight. For example, a weighted target with a relative
                weight of 50 receives five times as much traffic as one with a relative weight of
                10.
+  DescribeVirtualNodeInput:
+    type: object
+    properties: {}
+    description: ''
   RouteStatusCode:
     type: string
     enum:
@@ -2566,6 +2793,10 @@ definitions:
         $ref: '#/definitions/ResourceName'
         description: The virtual router that the route is associated with.
     description: An object representing a route returned by a list operation.
+  DeleteVirtualNodeInput:
+    type: object
+    properties: {}
+    description: ''
   RouteSpec:
     type: object
     properties:
@@ -2582,6 +2813,28 @@ definitions:
         $ref: '#/definitions/ResourceName'
         description: The name of the virtual node that is acting as a service provider.
     description: An object representing a virtual node service provider.
+  DescribeVirtualRouterInput:
+    type: object
+    properties: {}
+    description: ''
+  CreateRouteInput:
+    type: object
+    required:
+      - routeName
+      - spec
+    properties:
+      clientToken:
+        $ref: '#/definitions/String'
+        description: |-
+          Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+          request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+      routeName:
+        $ref: '#/definitions/ResourceName'
+        description: The name to use for the route.
+      spec:
+        $ref: '#/definitions/RouteSpec'
+        description: The route specification to apply.
+    description: ''
   VirtualRouterServiceProvider:
     type: object
     required:
@@ -2591,16 +2844,43 @@ definitions:
         $ref: '#/definitions/ResourceName'
         description: The name of the virtual router that is acting as a service provider.
     description: An object representing a virtual node service provider.
-  HttpRoute:
+  UpdateRouteInput:
     type: object
     required:
-      - action
-      - match
+      - spec
     properties:
-      action:
-        $ref: '#/definitions/HttpRouteAction'
-        description: The action to take if a match is determined.
-      match:
-        $ref: '#/definitions/HttpRouteMatch'
-        description: The criteria for determining an HTTP request match.
-    description: An object representing the HTTP routing specification for a route.
+      clientToken:
+        $ref: '#/definitions/String'
+        description: |-
+          Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+          request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+      spec:
+        $ref: '#/definitions/RouteSpec'
+        description: The new route specification to apply. This overwrites the existing data.
+    description: ''
+  CreateVirtualNodeInput:
+    type: object
+    required:
+      - spec
+      - virtualNodeName
+    properties:
+      clientToken:
+        $ref: '#/definitions/String'
+        description: |-
+          Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+          request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+      spec:
+        $ref: '#/definitions/VirtualNodeSpec'
+        description: The virtual node specification to apply.
+      virtualNodeName:
+        $ref: '#/definitions/ResourceName'
+        description: The name to use for the virtual node.
+    description: ''
+  DescribeMeshInput:
+    type: object
+    properties: {}
+    description: ''
+  DeleteVirtualServiceInput:
+    type: object
+    properties: {}
+    description: ''

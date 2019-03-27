@@ -99,7 +99,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /:
+  '/#X-Amz-Target=CodeBuild_20161006.BatchDeleteBuilds':
     post:
       operationId: BatchDeleteBuilds
       description: Deletes one or more builds.
@@ -118,6 +118,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/BatchDeleteBuildsInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeBuild_20161006.BatchDeleteBuilds
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -128,7 +134,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#BatchGetBuilds':
+  '/#X-Amz-Target=CodeBuild_20161006.BatchGetBuilds':
     post:
       operationId: BatchGetBuilds
       description: Gets information about builds.
@@ -147,6 +153,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/BatchGetBuildsInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeBuild_20161006.BatchGetBuilds
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -157,7 +169,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#BatchGetProjects':
+  '/#X-Amz-Target=CodeBuild_20161006.BatchGetProjects':
     post:
       operationId: BatchGetProjects
       description: Gets information about build projects.
@@ -176,6 +188,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/BatchGetProjectsInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeBuild_20161006.BatchGetProjects
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -186,7 +204,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateProject':
+  '/#X-Amz-Target=CodeBuild_20161006.CreateProject':
     post:
       operationId: CreateProject
       description: Creates a build project.
@@ -213,6 +231,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateProjectInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeBuild_20161006.CreateProject
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -223,7 +247,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateWebhook':
+  '/#X-Amz-Target=CodeBuild_20161006.CreateWebhook':
     post:
       operationId: CreateWebhook
       description: '<p>For an existing AWS CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, enables AWS CodeBuild to start rebuilding the source code every time a code change is pushed to the repository.</p> <important> <p>If you enable webhooks for an AWS CodeBuild project, and the project is used as a build step in AWS CodePipeline, then two identical builds are created for each commit. One build is triggered through webhooks, and one through AWS CodePipeline. Because billing is on a per-build basis, you are billed for both builds. Therefore, if you are using AWS CodePipeline, we recommend that you disable webhooks in AWS CodeBuild. In the AWS CodeBuild console, clear the Webhook box. For more information, see step 5 in <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/change-project.html#change-project-console">Change a Build Project''s Settings</a>.</p> </important>'
@@ -254,6 +278,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateWebhookInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeBuild_20161006.CreateWebhook
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -264,7 +294,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteProject':
+  '/#X-Amz-Target=CodeBuild_20161006.DeleteProject':
     post:
       operationId: DeleteProject
       description: Deletes a build project.
@@ -283,6 +313,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteProjectInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeBuild_20161006.DeleteProject
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -293,7 +329,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteSourceCredentials':
+  '/#X-Amz-Target=CodeBuild_20161006.DeleteSourceCredentials':
     post:
       operationId: DeleteSourceCredentials
       description: ' Deletes a set of GitHub, GitHub Enterprise, or Bitbucket source credentials. '
@@ -316,6 +352,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteSourceCredentialsInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeBuild_20161006.DeleteSourceCredentials
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -326,7 +368,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteWebhook':
+  '/#X-Amz-Target=CodeBuild_20161006.DeleteWebhook':
     post:
       operationId: DeleteWebhook
       description: 'For an existing AWS CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, stops AWS CodeBuild from rebuilding the source code every time a code change is pushed to the repository.'
@@ -353,6 +395,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteWebhookInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeBuild_20161006.DeleteWebhook
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -363,7 +411,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ImportSourceCredentials':
+  '/#X-Amz-Target=CodeBuild_20161006.ImportSourceCredentials':
     post:
       operationId: ImportSourceCredentials
       description: ' Imports the source repository credentials for an AWS CodeBuild project that has its source code stored in a GitHub, GitHub Enterprise, or Bitbucket repository. '
@@ -386,6 +434,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ImportSourceCredentialsInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeBuild_20161006.ImportSourceCredentials
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -396,7 +450,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#InvalidateProjectCache':
+  '/#X-Amz-Target=CodeBuild_20161006.InvalidateProjectCache':
     post:
       operationId: InvalidateProjectCache
       description: Resets the cache for a project.
@@ -419,6 +473,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/InvalidateProjectCacheInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeBuild_20161006.InvalidateProjectCache
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -429,7 +489,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListBuilds':
+  '/#X-Amz-Target=CodeBuild_20161006.ListBuilds':
     post:
       operationId: ListBuilds
       description: 'Gets a list of build IDs, with each build ID representing a single build.'
@@ -448,6 +508,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListBuildsInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeBuild_20161006.ListBuilds
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -458,7 +524,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListBuildsForProject':
+  '/#X-Amz-Target=CodeBuild_20161006.ListBuildsForProject':
     post:
       operationId: ListBuildsForProject
       description: 'Gets a list of build IDs for the specified build project, with each build ID representing a single build.'
@@ -481,6 +547,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListBuildsForProjectInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeBuild_20161006.ListBuildsForProject
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -491,7 +563,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListCuratedEnvironmentImages':
+  '/#X-Amz-Target=CodeBuild_20161006.ListCuratedEnvironmentImages':
     post:
       operationId: ListCuratedEnvironmentImages
       description: Gets information about Docker images that are managed by AWS CodeBuild.
@@ -506,6 +578,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListCuratedEnvironmentImagesInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeBuild_20161006.ListCuratedEnvironmentImages
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -516,7 +594,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListProjects':
+  '/#X-Amz-Target=CodeBuild_20161006.ListProjects':
     post:
       operationId: ListProjects
       description: 'Gets a list of build project names, with each build project name representing a single build project.'
@@ -535,6 +613,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListProjectsInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeBuild_20161006.ListProjects
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -545,7 +629,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListSourceCredentials':
+  '/#X-Amz-Target=CodeBuild_20161006.ListSourceCredentials':
     post:
       operationId: ListSourceCredentials
       description: ' Returns a list of <code>SourceCredentialsInfo</code> objects. '
@@ -560,6 +644,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListSourceCredentialsInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeBuild_20161006.ListSourceCredentials
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -570,7 +660,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#StartBuild':
+  '/#X-Amz-Target=CodeBuild_20161006.StartBuild':
     post:
       operationId: StartBuild
       description: Starts running a build.
@@ -597,6 +687,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StartBuildInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeBuild_20161006.StartBuild
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -607,7 +703,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#StopBuild':
+  '/#X-Amz-Target=CodeBuild_20161006.StopBuild':
     post:
       operationId: StopBuild
       description: Attempts to stop running a build.
@@ -630,6 +726,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StopBuildInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeBuild_20161006.StopBuild
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -640,7 +742,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateProject':
+  '/#X-Amz-Target=CodeBuild_20161006.UpdateProject':
     post:
       operationId: UpdateProject
       description: Changes the settings of a build project.
@@ -663,6 +765,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateProjectInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeBuild_20161006.UpdateProject
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -673,7 +781,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateWebhook':
+  '/#X-Amz-Target=CodeBuild_20161006.UpdateWebhook':
     post:
       operationId: UpdateWebhook
       description: '<p> Updates the webhook associated with an AWS CodeBuild build project. </p> <note> <p> If you use Bitbucket for your repository, <code>rotateSecret</code> is ignored. </p> </note>'
@@ -700,6 +808,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateWebhookInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeBuild_20161006.UpdateWebhook
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -907,10 +1021,6 @@ definitions:
     type: object
     required:
       - ids
-    example:
-      ids:
-        - 'codebuild-demo-project:9b0ac37f-d19e-4254-9079-f47e9a389eEX'
-        - 'codebuild-demo-project:b79a46f7-1473-4636-a23f-da9c45c208EX'
     properties:
       ids:
         $ref: '#/definitions/BuildIds'

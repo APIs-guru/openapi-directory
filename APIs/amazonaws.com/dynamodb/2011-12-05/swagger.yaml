@@ -99,7 +99,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /:
+  '/#X-Amz-Target=DynamoDB_20111205.BatchGetItem':
     post:
       operationId: BatchGetItem
       description: '<p>Retrieves the attributes for multiple items from multiple tables using their primary keys.</p> <p>The maximum number of item attributes that can be retrieved for a single operation is 100. Also, the number of items retrieved is constrained by a 1 MB the size limit. If the response size limit is exceeded or a partial result is returned due to an internal processing failure, Amazon DynamoDB returns an <code>UnprocessedKeys</code> value so you can retry the operation starting with the next item to get.</p> <p>Amazon DynamoDB automatically adjusts the number of items returned per page to enforce this limit. For example, even if you ask to retrieve 100 items, but each individual item is 50k in size, the system returns 20 items and an appropriate <code>UnprocessedKeys</code> value so you can get the next page of results. If necessary, your application needs its own logic to assemble the pages of results into one set.</p>'
@@ -131,6 +131,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DynamoDB_20111205.BatchGetItem
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -141,7 +147,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#BatchWriteItem':
+  '/#X-Amz-Target=DynamoDB_20111205.BatchWriteItem':
     post:
       operationId: BatchWriteItem
       description: <p>Allows to execute a batch of Put and/or Delete Requests for many tables in a single call. A total of 25 requests are allowed.</p> <p>There are no transaction guarantees provided by this API. It does not allow conditional puts nor does it support return values.</p>
@@ -172,6 +178,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/BatchWriteItemInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DynamoDB_20111205.BatchWriteItem
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -182,7 +194,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateTable':
+  '/#X-Amz-Target=DynamoDB_20111205.CreateTable':
     post:
       operationId: CreateTable
       description: '<p>Adds a new table to your account.</p> <p>The table name must be unique among those associated with the AWS Account issuing the request, and the AWS Region that receives the request (e.g. <code>us-east-1</code>).</p> <p>The <code>CreateTable</code> operation triggers an asynchronous workflow to begin creating the table. Amazon DynamoDB immediately returns the state of the table (<code>CREATING</code>) until the table is in the <code>ACTIVE</code> state. Once the table is in the <code>ACTIVE</code> state, you can perform data plane operations.</p>'
@@ -209,6 +221,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateTableInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DynamoDB_20111205.CreateTable
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -219,7 +237,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteItem':
+  '/#X-Amz-Target=DynamoDB_20111205.DeleteItem':
     post:
       operationId: DeleteItem
       description: '<p>Deletes a single item in a table by primary key.</p> <p>You can perform a conditional delete operation that deletes the item if it exists, or if it has an expected attribute value.</p>'
@@ -254,6 +272,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteItemInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DynamoDB_20111205.DeleteItem
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -264,7 +288,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteTable':
+  '/#X-Amz-Target=DynamoDB_20111205.DeleteTable':
     post:
       operationId: DeleteTable
       description: '<p>Deletes a table and all of its items.</p> <p>If the table is in the <code>ACTIVE</code> state, you can delete it. If a table is in <code>CREATING</code> or <code>UPDATING</code> states then Amazon DynamoDB returns a <code>ResourceInUseException</code>. If the specified table does not exist, Amazon DynamoDB returns a <code>ResourceNotFoundException</code>.</p>'
@@ -295,6 +319,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteTableInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DynamoDB_20111205.DeleteTable
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -305,7 +335,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeTable':
+  '/#X-Amz-Target=DynamoDB_20111205.DescribeTable':
     post:
       operationId: DescribeTable
       description: '<p>Retrieves information about the table, including the current status of the table, the primary key schema and when the table was created.</p> <p>If the table does not exist, Amazon DynamoDB returns a <code>ResourceNotFoundException</code>.</p>'
@@ -328,6 +358,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeTableInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DynamoDB_20111205.DescribeTable
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -338,7 +374,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetItem':
+  '/#X-Amz-Target=DynamoDB_20111205.GetItem':
     post:
       operationId: GetItem
       description: '<p>Retrieves a set of Attributes for an item that matches the primary key.</p> <p>The <code>GetItem</code> operation provides an eventually-consistent read by default. If eventually-consistent reads are not acceptable for your application, use <code>ConsistentRead</code>. Although this operation might take longer than a standard read, it always returns the last updated value.</p>'
@@ -365,6 +401,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetItemInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DynamoDB_20111205.GetItem
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -375,7 +417,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListTables':
+  '/#X-Amz-Target=DynamoDB_20111205.ListTables':
     post:
       operationId: ListTables
       description: Retrieves a paginated list of table names created by the AWS Account of the caller in the AWS Region (e.g. <code>us-east-1</code>).
@@ -404,6 +446,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DynamoDB_20111205.ListTables
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -414,7 +462,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#PutItem':
+  '/#X-Amz-Target=DynamoDB_20111205.PutItem':
     post:
       operationId: PutItem
       description: '<p>Creates a new item, or replaces an old item with a new item (including all the attributes).</p> <p>If an item already exists in the specified table with the same primary key, the new item completely replaces the existing item. You can perform a conditional put (insert a new item if one with the specified primary key doesn''t exist), or replace an existing item if it has certain attribute values.</p>'
@@ -449,6 +497,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutItemInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DynamoDB_20111205.PutItem
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -459,7 +513,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Query':
+  '/#X-Amz-Target=DynamoDB_20111205.Query':
     post:
       operationId: Query
       description: '<p>Gets the values of one or more items and its attributes by primary key (composite primary key, only).</p> <p>Narrow the scope of the query using comparison operators on the <code>RangeKeyValue</code> of the composite key. Use the <code>ScanIndexForward</code> parameter to get results in forward or reverse order by range key.</p>'
@@ -496,6 +550,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DynamoDB_20111205.Query
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -506,7 +566,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Scan':
+  '/#X-Amz-Target=DynamoDB_20111205.Scan':
     post:
       operationId: Scan
       description: <p>Retrieves one or more items and its attributes by performing a full scan of a table.</p> <p>Provide a <code>ScanFilter</code> to get more specific results.</p>
@@ -543,6 +603,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DynamoDB_20111205.Scan
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -553,7 +619,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateItem':
+  '/#X-Amz-Target=DynamoDB_20111205.UpdateItem':
     post:
       operationId: UpdateItem
       description: '<p>Edits an existing item''s attributes.</p> <p>You can perform a conditional update (insert a new attribute name-value pair if it doesn''t exist, or replace an existing name-value pair if it has certain expected attribute values).</p>'
@@ -588,6 +654,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateItemInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DynamoDB_20111205.UpdateItem
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -598,7 +670,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateTable':
+  '/#X-Amz-Target=DynamoDB_20111205.UpdateTable':
     post:
       operationId: UpdateTable
       description: <p>Updates the provisioned throughput for the given table.</p> <p>Setting the throughput for a table helps you manage performance and is part of the Provisioned Throughput feature of Amazon DynamoDB.</p>
@@ -629,6 +701,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateTableInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DynamoDB_20111205.UpdateTable
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -940,9 +1018,6 @@ definitions:
       - PUT
       - DELETE
     description: 'The type of action for an item update operation. Only use the add action for numbers or sets; the specified value is added to the existing value. If a set of values is specified, the values are added to the existing set. Adds the specified attribute. If the attribute exists, it is replaced by the new value. If no value is specified, this removes the attribute and its value. If a set of values is specified, then the values in the specified set are removed from the old set.'
-  AttributeName:
-    type: string
-    maxLength: 65535
   AttributeValue:
     type: object
     properties:
@@ -966,14 +1041,12 @@ definitions:
         description: A set of binary attributes.
     description: 'AttributeValue can be <code>String</code>, <code>Number</code>, <code>Binary</code>, <code>StringSet</code>, <code>NumberSet</code>, <code>BinarySet</code>.'
   AttributeMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/AttributeName'
-        value:
-          $ref: '#/definitions/AttributeValue'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/AttributeValue'
+  AttributeName:
+    type: string
+    maxLength: 65535
   AttributeNameList:
     type: array
     description: 'List of <code>Attribute</code> names. If attribute names are not specified then all attributes will be returned. If some attributes are not found, they will not appear in the result.'
@@ -989,15 +1062,10 @@ definitions:
         $ref: '#/definitions/AttributeAction'
     description: 'Specifies the attribute to update and how to perform the update. Possible values: <code>PUT</code> (default), <code>ADD</code> or <code>DELETE</code>.'
   AttributeUpdates:
-    type: array
+    type: object
     description: 'Map of attribute name to the new value and action for the update. The attribute names specify the attributes to modify, and cannot contain any primary key attributes.'
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/AttributeName'
-        value:
-          $ref: '#/definitions/AttributeValueUpdate'
+    additionalProperties:
+      $ref: '#/definitions/AttributeValueUpdate'
   StringAttributeValue:
     type: string
   NumberAttributeValue:
@@ -1022,32 +1090,17 @@ definitions:
     items:
       $ref: '#/definitions/AttributeValue'
   BatchGetRequestMap:
-    type: array
+    type: object
     description: 'A map of the table name and corresponding items to get by primary key. While requesting items, each table name can be invoked only once per operation.'
-    minItems: 1
-    maxItems: 100
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/TableName'
-        value:
-          $ref: '#/definitions/KeysAndAttributes'
+    minProperties: 1
+    maxProperties: 100
+    additionalProperties:
+      $ref: '#/definitions/KeysAndAttributes'
   BatchGetResponseMap:
-    type: array
+    type: object
     description: Table names and the respective item attributes from the tables.
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/TableName'
-        value:
-          $ref: '#/definitions/BatchResponse'
-  TableName:
-    type: string
-    pattern: '[a-zA-Z0-9_.-]+'
-    minLength: 3
-    maxLength: 255
+    additionalProperties:
+      $ref: '#/definitions/BatchResponse'
   KeysAndAttributes:
     type: object
     required:
@@ -1076,26 +1129,16 @@ definitions:
     description: 'The number of Capacity Units of the provisioned throughput of the table consumed during the operation. <code>GetItem</code>, <code>BatchGetItem</code>, <code>BatchWriteItem</code>, <code>Query</code>, and <code>Scan</code> operations consume <code>ReadCapacityUnits</code>, while <code>PutItem</code>, <code>UpdateItem</code>, and <code>DeleteItem</code> operations consume <code>WriteCapacityUnits</code>.'
     format: double
   BatchWriteItemRequestMap:
-    type: array
+    type: object
     description: '<p>A map of table name to list-of-write-requests.</p> <p>Key: The table name corresponding to the list of requests</p> <p>Value: Essentially a list of request items. Each request item could contain either a <code>PutRequest</code> or <code>DeleteRequest</code>. Never both.</p>'
-    minItems: 1
-    maxItems: 25
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/TableName'
-        value:
-          $ref: '#/definitions/WriteRequests'
+    minProperties: 1
+    maxProperties: 25
+    additionalProperties:
+      $ref: '#/definitions/WriteRequests'
   BatchWriteResponseMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/TableName'
-        value:
-          $ref: '#/definitions/BatchWriteResponse'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/BatchWriteResponse'
   WriteRequests:
     type: array
     items:
@@ -1138,6 +1181,11 @@ definitions:
   ConsistentRead:
     type: boolean
     description: 'If set to <code>true</code>, then a consistent read is issued. Otherwise eventually-consistent is used.'
+  TableName:
+    type: string
+    pattern: '[a-zA-Z0-9_.-]+'
+    minLength: 3
+    maxLength: 255
   KeySchema:
     type: object
     required:
@@ -1197,15 +1245,10 @@ definitions:
         description: 'A range key element is treated as a secondary key (used in conjunction with the primary key), and can be a string or a number, and is only used for hash-and-range primary keys. The value can be <code>String</code>, <code>Number</code>, <code>StringSet</code>, <code>NumberSet</code>.'
     description: The primary key that uniquely identifies each item in a table. A primary key can be a one attribute (hash) primary key or a two attribute (hash-and-range) primary key.
   ExpectedAttributeMap:
-    type: array
+    type: object
     description: 'Designates an attribute for a conditional modification. The <code>Expected</code> parameter allows you to provide an attribute name, and whether or not Amazon DynamoDB should check to see if the attribute has a particular value before modifying it.'
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/AttributeName'
-        value:
-          $ref: '#/definitions/ExpectedAttributeValue'
+    additionalProperties:
+      $ref: '#/definitions/ExpectedAttributeValue'
   ReturnValue:
     type: string
     enum:
@@ -1234,17 +1277,10 @@ definitions:
         $ref: '#/definitions/BooleanObject'
         description: Specify whether or not a value already exists for the attribute name-value pair.
     description: 'Allows you to provide an attribute name, and whether or not Amazon DynamoDB should check to see if the attribute value already exists; or if the attribute value exists and has a particular value before changing it.'
-  String:
-    type: string
   FilterConditionMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/String'
-        value:
-          $ref: '#/definitions/Condition'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/Condition'
   Integer:
     type: integer
   KeyList:
@@ -1307,15 +1343,10 @@ definitions:
       WriteCapacityUnits:
         $ref: '#/definitions/PositiveLongObject'
   PutItemInputAttributeMap:
-    type: array
+    type: object
     description: 'A map of the attributes for the item, and must include the primary key values that define the item. Other attribute name-value pairs can be provided for the item.'
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/AttributeName'
-        value:
-          $ref: '#/definitions/AttributeValue'
+    additionalProperties:
+      $ref: '#/definitions/AttributeValue'
   PutRequest:
     type: object
     required:
@@ -1325,6 +1356,8 @@ definitions:
         $ref: '#/definitions/PutItemInputAttributeMap'
         description: The item to put
     description: A container for a Put BatchWrite request
+  String:
+    type: string
   TableStatus:
     type: string
     enum:

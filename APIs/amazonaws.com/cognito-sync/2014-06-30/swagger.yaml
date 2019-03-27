@@ -35,7 +35,6 @@ externalDocs:
   url: 'https://docs.aws.amazon.com/cognito-sync/'
 host: cognito-sync.amazonaws.com
 basePath: /
-x-hasEquivalentPaths: true
 schemes:
   - https
   - http
@@ -129,15 +128,14 @@ paths:
           schema:
             $ref: '#/definitions/InternalErrorException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/BulkPublishRequest'
         - name: IdentityPoolId
-          type: string
           in: path
           required: true
+          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -188,23 +186,30 @@ paths:
           schema:
             $ref: '#/definitions/InternalErrorException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteDatasetRequest'
         - name: IdentityPoolId
-          type: string
           in: path
           required: true
+          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
         - name: IdentityId
-          type: string
           in: path
           required: true
+          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
         - name: DatasetName
-          type: string
           in: path
           required: true
+          description: 'A string of up to 128 characters. Allowed characters are a-z, A-Z, 0-9, ''_'' (underscore), ''-'' (dash), and ''.'' (dot).'
+          type: string
+          pattern: '[a-zA-Z0-9_.:-]+'
+          minLength: 1
+          maxLength: 128
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -249,23 +254,30 @@ paths:
           schema:
             $ref: '#/definitions/InternalErrorException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeDatasetRequest'
         - name: IdentityPoolId
-          type: string
           in: path
           required: true
+          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
         - name: IdentityId
-          type: string
           in: path
           required: true
+          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
         - name: DatasetName
-          type: string
           in: path
           required: true
+          description: 'A string of up to 128 characters. Allowed characters are a-z, A-Z, 0-9, ''_'' (underscore), ''-'' (dash), and ''.'' (dot).'
+          type: string
+          pattern: '[a-zA-Z0-9_.:-]+'
+          minLength: 1
+          maxLength: 128
     post:
       operationId: UpdateRecords
       description: '<p>Posts updates to records and adds and deletes records for a dataset and user.</p> <p>The sync count in the record patch is your last known sync count for that record. The server will reject an UpdateRecords request with a ResourceConflictException if you try to patch a record with a new value but a stale sync count.</p> <p>For example, if the sync count on the server is 5 for a key called highScore and you try and submit a new highScore with sync count of 4, the request will be rejected. To obtain the current sync count for a record, call ListRecords. On a successful update of the record, the response returns the new sync count for that record. You should present that sync count the next time you try to update that same record. When the record does not exist, specify the sync count as 0.</p> <p>This API can be called with temporary user credentials provided by Cognito Identity or with developer credentials.</p>'
@@ -305,23 +317,56 @@ paths:
           schema:
             $ref: '#/definitions/InternalErrorException'
       parameters:
+        - name: IdentityPoolId
+          in: path
+          required: true
+          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
+        - name: IdentityId
+          in: path
+          required: true
+          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
+        - name: DatasetName
+          in: path
+          required: true
+          description: 'A string of up to 128 characters. Allowed characters are a-z, A-Z, 0-9, ''_'' (underscore), ''-'' (dash), and ''.'' (dot).'
+          type: string
+          pattern: '[a-zA-Z0-9_.:-]+'
+          minLength: 1
+          maxLength: 128
+        - name: x-amz-Client-Context
+          in: header
+          required: false
+          description: Intended to supply a device ID that will populate the lastModifiedBy field referenced in other methods. The ClientContext field is not yet implemented.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateRecordsRequest'
-        - name: IdentityPoolId
-          type: string
-          in: path
-          required: true
-        - name: IdentityId
-          type: string
-          in: path
-          required: true
-        - name: DatasetName
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - SyncSessionToken
+            properties:
+              DeviceId:
+                description: The unique ID generated for this device by Cognito.
+                type: string
+                minLength: 1
+                maxLength: 256
+              RecordPatches:
+                description: A list of patch operations.
+                type: array
+                items:
+                  $ref: '#/definitions/RecordPatch'
+              SyncSessionToken:
+                description: The SyncSessionToken returned by a previous call to ListRecords for this dataset and identity.
+                type: string
   '/identitypools/{IdentityPoolId}':
     get:
       operationId: DescribeIdentityPoolUsage
@@ -357,15 +402,14 @@ paths:
           schema:
             $ref: '#/definitions/InternalErrorException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeIdentityPoolUsageRequest'
         - name: IdentityPoolId
-          type: string
           in: path
           required: true
+          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -411,19 +455,22 @@ paths:
           schema:
             $ref: '#/definitions/InternalErrorException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeIdentityUsageRequest'
         - name: IdentityPoolId
-          type: string
           in: path
           required: true
+          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
         - name: IdentityId
-          type: string
           in: path
           required: true
+          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -464,15 +511,14 @@ paths:
           schema:
             $ref: '#/definitions/InternalErrorException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetBulkPublishDetailsRequest'
         - name: IdentityPoolId
-          type: string
           in: path
           required: true
+          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -518,15 +564,14 @@ paths:
           schema:
             $ref: '#/definitions/InternalErrorException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetCognitoEventsRequest'
         - name: IdentityPoolId
-          type: string
           in: path
           required: true
+          description: The Cognito Identity Pool ID for the request
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -569,15 +614,28 @@ paths:
           schema:
             $ref: '#/definitions/InternalErrorException'
       parameters:
+        - name: IdentityPoolId
+          in: path
+          required: true
+          description: The Cognito Identity Pool to use when configuring Cognito Events
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/SetCognitoEventsRequest'
-        - name: IdentityPoolId
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - Events
+            properties:
+              Events:
+                description: The events to configure
+                type: object
+                maxProperties: 1
+                additionalProperties:
+                  $ref: '#/definitions/LambdaFunctionArn'
   '/identitypools/{IdentityPoolId}/configuration':
     get:
       operationId: GetIdentityPoolConfiguration
@@ -613,15 +671,14 @@ paths:
           schema:
             $ref: '#/definitions/InternalErrorException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetIdentityPoolConfigurationRequest'
         - name: IdentityPoolId
-          type: string
           in: path
           required: true
+          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. This is the ID of the pool for which to return a configuration.'
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -666,15 +723,43 @@ paths:
           schema:
             $ref: '#/definitions/InternalErrorException'
       parameters:
+        - name: IdentityPoolId
+          in: path
+          required: true
+          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. This is the ID of the pool to modify.'
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/SetIdentityPoolConfigurationRequest'
-        - name: IdentityPoolId
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              PushSync:
+                description: Configuration options to be applied to the identity pool.
+                type: object
+                properties:
+                  ApplicationArns:
+                    $ref: '#/definitions/ApplicationArnList'
+                    description: List of SNS platform application ARNs that could be used by clients.
+                  RoleArn:
+                    $ref: '#/definitions/AssumeRoleArn'
+                    description: A role configured to allow Cognito to call SNS on behalf of the developer.
+              CognitoStreams:
+                description: Configuration options for configure Cognito streams.
+                type: object
+                properties:
+                  StreamName:
+                    $ref: '#/definitions/StreamName'
+                    description: The name of the Cognito stream to receive updates. This stream must be in the developers account and in the same region as the identity pool.
+                  RoleArn:
+                    $ref: '#/definitions/AssumeRoleArn'
+                    description: The ARN of the role Amazon Cognito can assume in order to publish to the stream. This role must grant access to Amazon Cognito (cognito-sync) to invoke PutRecord on your Cognito stream.
+                  StreamingStatus:
+                    $ref: '#/definitions/StreamingStatus'
+                    description: 'Status of the Cognito streams. Valid values are: <p>ENABLED - Streaming of updates to identity pool is enabled.</p> <p>DISABLED - Streaming of updates to identity pool is disabled. Bulk publish will also fail if StreamingStatus is DISABLED.</p>'
   '/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets':
     get:
       operationId: ListDatasets
@@ -705,19 +790,32 @@ paths:
           schema:
             $ref: '#/definitions/InternalErrorException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListDatasetsRequest'
         - name: IdentityPoolId
-          type: string
           in: path
           required: true
+          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
         - name: IdentityId
-          type: string
           in: path
           required: true
+          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
+        - name: nextToken
+          in: query
+          required: false
+          description: A pagination token for obtaining the next page of results.
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to be returned.
+          type: integer
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -758,11 +856,16 @@ paths:
           schema:
             $ref: '#/definitions/InternalErrorException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListIdentityPoolUsageRequest'
+        - name: nextToken
+          in: query
+          required: false
+          description: A pagination token for obtaining the next page of results.
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to be returned.
+          type: integer
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -803,23 +906,50 @@ paths:
           schema:
             $ref: '#/definitions/InternalErrorException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListRecordsRequest'
         - name: IdentityPoolId
-          type: string
           in: path
           required: true
+          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
         - name: IdentityId
-          type: string
           in: path
           required: true
+          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
         - name: DatasetName
-          type: string
           in: path
           required: true
+          description: 'A string of up to 128 characters. Allowed characters are a-z, A-Z, 0-9, ''_'' (underscore), ''-'' (dash), and ''.'' (dot).'
+          type: string
+          pattern: '[a-zA-Z0-9_.:-]+'
+          minLength: 1
+          maxLength: 128
+        - name: lastSyncCount
+          in: query
+          required: false
+          description: The last server sync count for this record.
+          type: integer
+        - name: nextToken
+          in: query
+          required: false
+          description: A pagination token for obtaining the next page of results.
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to be returned.
+          type: integer
+        - name: syncSessionToken
+          in: query
+          required: false
+          description: 'A token containing a session ID, identity ID, and expiration.'
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -865,19 +995,42 @@ paths:
           schema:
             $ref: '#/definitions/InternalErrorException'
       parameters:
+        - name: IdentityPoolId
+          in: path
+          required: true
+          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. Here, the ID of the pool that the identity belongs to.'
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
+        - name: IdentityId
+          in: path
+          required: true
+          description: The unique ID for this identity.
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/RegisterDeviceRequest'
-        - name: IdentityPoolId
-          type: string
-          in: path
-          required: true
-        - name: IdentityId
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - Platform
+              - Token
+            properties:
+              Platform:
+                description: 'The SNS platform type (e.g. GCM, SDM, APNS, APNS_SANDBOX).'
+                type: string
+                enum:
+                  - APNS
+                  - APNS_SANDBOX
+                  - GCM
+                  - ADM
+              Token:
+                description: The push token.
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -923,27 +1076,37 @@ paths:
           schema:
             $ref: '#/definitions/InternalErrorException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/SubscribeToDatasetRequest'
         - name: IdentityPoolId
-          type: string
           in: path
           required: true
+          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. The ID of the pool to which the identity belongs.'
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
         - name: IdentityId
-          type: string
           in: path
           required: true
+          description: Unique ID for this identity.
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
         - name: DatasetName
-          type: string
           in: path
           required: true
+          description: The name of the dataset to subcribe to.
+          type: string
+          pattern: '[a-zA-Z0-9_.:-]+'
+          minLength: 1
+          maxLength: 128
         - name: DeviceId
-          type: string
           in: path
           required: true
+          description: The unique ID generated for this device by Cognito.
+          type: string
+          minLength: 1
+          maxLength: 256
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -988,27 +1151,37 @@ paths:
           schema:
             $ref: '#/definitions/InternalErrorException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/UnsubscribeFromDatasetRequest'
         - name: IdentityPoolId
-          type: string
           in: path
           required: true
+          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. The ID of the pool to which this identity belongs.'
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
         - name: IdentityId
-          type: string
           in: path
           required: true
+          description: Unique ID for this identity.
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
         - name: DatasetName
-          type: string
           in: path
           required: true
+          description: The name of the dataset from which to unsubcribe.
+          type: string
+          pattern: '[a-zA-Z0-9_.:-]+'
+          minLength: 1
+          maxLength: 128
         - name: DeviceId
-          type: string
           in: path
           required: true
+          description: The unique ID generated for this device by Cognito.
+          type: string
+          minLength: 1
+          maxLength: 256
 definitions:
   BulkPublishResponse:
     type: object
@@ -1017,10 +1190,6 @@ definitions:
         $ref: '#/definitions/IdentityPoolId'
         description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
     description: The output for the BulkPublish operation.
-  BulkPublishRequest:
-    type: object
-    properties: {}
-    description: The input for the BulkPublish operation.
   NotAuthorizedException:
     type: object
     required:
@@ -1082,10 +1251,6 @@ definitions:
         $ref: '#/definitions/Dataset'
         description: 'A collection of data for an identity pool. An identity pool can have multiple datasets. A dataset is per identity and can be general or associated with a particular entity in an application (like a saved game). Datasets are automatically created if they don''t exist. Data is synced by dataset, and a dataset can hold up to 1MB of key-value pairs.'
     description: Response to a successful DeleteDataset request.
-  DeleteDatasetRequest:
-    type: object
-    properties: {}
-    description: A request to delete the specific dataset.
   TooManyRequestsException:
     type: object
     required:
@@ -1111,10 +1276,6 @@ definitions:
         $ref: '#/definitions/Dataset'
         description: 'Meta data for a collection of data for an identity. An identity can have multiple datasets. A dataset can be general or associated with a particular entity in an application (like a saved game). Datasets are automatically created if they don''t exist. Data is synced by dataset, and a dataset can hold up to 1MB of key-value pairs.'
     description: Response to a successful DescribeDataset request.
-  DescribeDatasetRequest:
-    type: object
-    properties: {}
-    description: 'A request for meta data about a dataset (creation date, number of records, size) by owner and dataset name.'
   DescribeIdentityPoolUsageResponse:
     type: object
     properties:
@@ -1122,10 +1283,6 @@ definitions:
         $ref: '#/definitions/IdentityPoolUsage'
         description: Information about the usage of the identity pool.
     description: Response to a successful DescribeIdentityPoolUsage request.
-  DescribeIdentityPoolUsageRequest:
-    type: object
-    properties: {}
-    description: A request for usage information about the identity pool.
   DescribeIdentityUsageResponse:
     type: object
     properties:
@@ -1133,10 +1290,6 @@ definitions:
         $ref: '#/definitions/IdentityUsage'
         description: Usage information for the identity.
     description: The response to a successful DescribeIdentityUsage request.
-  DescribeIdentityUsageRequest:
-    type: object
-    properties: {}
-    description: A request for information about the usage of an identity pool.
   GetBulkPublishDetailsResponse:
     type: object
     properties:
@@ -1156,10 +1309,6 @@ definitions:
         $ref: '#/definitions/String'
         description: If BulkPublishStatus is FAILED this field will contain the error message that caused the bulk publish to fail.
     description: The output for the GetBulkPublishDetails operation.
-  GetBulkPublishDetailsRequest:
-    type: object
-    properties: {}
-    description: The input for the GetBulkPublishDetails operation.
   GetCognitoEventsResponse:
     type: object
     properties:
@@ -1167,10 +1316,6 @@ definitions:
         $ref: '#/definitions/Events'
         description: The Cognito Events returned from the GetCognitoEvents request
     description: The response from the GetCognitoEvents request
-  GetCognitoEventsRequest:
-    type: object
-    properties: {}
-    description: A request for a list of the configured Cognito Events
   GetIdentityPoolConfigurationResponse:
     type: object
     properties:
@@ -1184,10 +1329,6 @@ definitions:
         $ref: '#/definitions/CognitoStreams'
         description: Options to apply to this identity pool for Amazon Cognito streams.
     description: The output for the GetIdentityPoolConfiguration operation.
-  GetIdentityPoolConfigurationRequest:
-    type: object
-    properties: {}
-    description: The input for the GetIdentityPoolConfiguration operation.
   ListDatasetsResponse:
     type: object
     properties:
@@ -1201,10 +1342,6 @@ definitions:
         $ref: '#/definitions/String'
         description: A pagination token for obtaining the next page of results.
     description: Returned for a successful ListDatasets request.
-  ListDatasetsRequest:
-    type: object
-    properties: {}
-    description: Request for a list of datasets for an identity.
   ListIdentityPoolUsageResponse:
     type: object
     properties:
@@ -1221,10 +1358,6 @@ definitions:
         $ref: '#/definitions/String'
         description: A pagination token for obtaining the next page of results.
     description: Returned for a successful ListIdentityPoolUsage request.
-  ListIdentityPoolUsageRequest:
-    type: object
-    properties: {}
-    description: A request for usage information on an identity pool.
   ListRecordsResponse:
     type: object
     properties:
@@ -1256,10 +1389,6 @@ definitions:
         $ref: '#/definitions/String'
         description: 'A token containing a session ID, identity ID, and expiration.'
     description: Returned for a successful ListRecordsRequest.
-  ListRecordsRequest:
-    type: object
-    properties: {}
-    description: A request for a list of records.
   RegisterDeviceResponse:
     type: object
     properties:
@@ -1267,19 +1396,6 @@ definitions:
         $ref: '#/definitions/DeviceId'
         description: The unique ID generated for this device by Cognito.
     description: Response to a RegisterDevice request.
-  RegisterDeviceRequest:
-    type: object
-    required:
-      - Platform
-      - Token
-    properties:
-      Platform:
-        $ref: '#/definitions/Platform'
-        description: 'The SNS platform type (e.g. GCM, SDM, APNS, APNS_SANDBOX).'
-      Token:
-        $ref: '#/definitions/PushToken'
-        description: The push token.
-    description: A request to RegisterDevice.
   InvalidConfigurationException:
     type: object
     required:
@@ -1288,15 +1404,8 @@ definitions:
       message:
         $ref: '#/definitions/ExceptionMessage'
         description: Message returned by InvalidConfigurationException.
-  SetCognitoEventsRequest:
-    type: object
-    required:
-      - Events
-    properties:
-      Events:
-        $ref: '#/definitions/Events'
-        description: The events to configure
-    description: <p>A request to configure Cognito Events"</p>"
+  LambdaFunctionArn:
+    type: string
   SetIdentityPoolConfigurationResponse:
     type: object
     properties:
@@ -1310,16 +1419,24 @@ definitions:
         $ref: '#/definitions/CognitoStreams'
         description: Options to apply to this identity pool for Amazon Cognito streams.
     description: The output for the SetIdentityPoolConfiguration operation
-  SetIdentityPoolConfigurationRequest:
-    type: object
-    properties:
-      PushSync:
-        $ref: '#/definitions/PushSync'
-        description: Options to apply to this identity pool for push synchronization.
-      CognitoStreams:
-        $ref: '#/definitions/CognitoStreams'
-        description: Options to apply to this identity pool for Amazon Cognito streams.
-    description: The input for the SetIdentityPoolConfiguration operation.
+  ApplicationArnList:
+    type: array
+    items:
+      $ref: '#/definitions/ApplicationArn'
+  AssumeRoleArn:
+    type: string
+    pattern: 'arn:aws:iam::\d+:role/.*'
+    minLength: 20
+    maxLength: 2048
+  StreamName:
+    type: string
+    minLength: 1
+    maxLength: 128
+  StreamingStatus:
+    type: string
+    enum:
+      - ENABLED
+      - DISABLED
   ConcurrentModificationException:
     type: object
     required:
@@ -1333,18 +1450,10 @@ definitions:
     type: object
     properties: {}
     description: Response to a SubscribeToDataset request.
-  SubscribeToDatasetRequest:
-    type: object
-    properties: {}
-    description: A request to SubscribeToDatasetRequest.
   UnsubscribeFromDatasetResponse:
     type: object
     properties: {}
     description: Response to an UnsubscribeFromDataset request.
-  UnsubscribeFromDatasetRequest:
-    type: object
-    properties: {}
-    description: A request to UnsubscribeFromDataset.
   UpdateRecordsResponse:
     type: object
     properties:
@@ -1352,21 +1461,29 @@ definitions:
         $ref: '#/definitions/RecordList'
         description: A list of records that have been updated.
     description: Returned for a successful UpdateRecordsRequest.
-  UpdateRecordsRequest:
+  RecordPatch:
     type: object
     required:
-      - SyncSessionToken
+      - Op
+      - Key
+      - SyncCount
     properties:
-      DeviceId:
-        $ref: '#/definitions/DeviceId'
-        description: The unique ID generated for this device by Cognito.
-      RecordPatches:
-        $ref: '#/definitions/RecordPatchList'
-        description: A list of patch operations.
-      SyncSessionToken:
-        $ref: '#/definitions/SyncSessionToken'
-        description: The SyncSessionToken returned by a previous call to ListRecords for this dataset and identity.
-    description: A request to post updates to records or add and delete records for a dataset and user.
+      Op:
+        $ref: '#/definitions/Operation'
+        description: 'An operation, either replace or remove.'
+      Key:
+        $ref: '#/definitions/RecordKey'
+        description: The key associated with the record patch.
+      Value:
+        $ref: '#/definitions/RecordValue'
+        description: The value associated with the record patch.
+      SyncCount:
+        $ref: '#/definitions/Long'
+        description: Last known server sync count for this record. Set to 0 if unknown.
+      DeviceLastModifiedDate:
+        $ref: '#/definitions/Date'
+        description: The last modified date of the client device.
+    description: An update operation for a record.
   LimitExceededException:
     type: object
     required:
@@ -1399,15 +1516,6 @@ definitions:
   ApplicationArn:
     type: string
     pattern: 'arn:aws:sns:[-0-9a-z]+:\d+:app/[A-Z_]+/[a-zA-Z0-9_.-]+'
-  ApplicationArnList:
-    type: array
-    items:
-      $ref: '#/definitions/ApplicationArn'
-  AssumeRoleArn:
-    type: string
-    pattern: 'arn:aws:iam::\d+:role/.*'
-    minLength: 20
-    maxLength: 2048
   Boolean:
     type: boolean
   IdentityPoolId:
@@ -1415,6 +1523,10 @@ definitions:
     pattern: '[\w-]+:[0-9a-f-]+'
     minLength: 1
     maxLength: 55
+  BulkPublishRequest:
+    type: object
+    properties: {}
+    description: The input for the BulkPublish operation.
   BulkPublishStatus:
     type: string
     enum:
@@ -1426,15 +1538,6 @@ definitions:
     type: string
   CognitoEventType:
     type: string
-  StreamName:
-    type: string
-    minLength: 1
-    maxLength: 128
-  StreamingStatus:
-    type: string
-    enum:
-      - ENABLED
-      - DISABLED
   CognitoStreams:
     type: object
     properties:
@@ -1494,6 +1597,18 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Dataset'
+  DeleteDatasetRequest:
+    type: object
+    properties: {}
+    description: A request to delete the specific dataset.
+  DescribeDatasetRequest:
+    type: object
+    properties: {}
+    description: 'A request for meta data about a dataset (creation date, number of records, size) by owner and dataset name.'
+  DescribeIdentityPoolUsageRequest:
+    type: object
+    properties: {}
+    description: A request for usage information about the identity pool.
   IdentityPoolUsage:
     type: object
     properties:
@@ -1510,6 +1625,10 @@ definitions:
         $ref: '#/definitions/Date'
         description: Date on which the identity pool was last modified.
     description: Usage information for the identity pool.
+  DescribeIdentityUsageRequest:
+    type: object
+    properties: {}
+    description: A request for information about the usage of an identity pool.
   IdentityUsage:
     type: object
     properties:
@@ -1533,18 +1652,23 @@ definitions:
     type: string
     minLength: 1
     maxLength: 256
-  LambdaFunctionArn:
-    type: string
   Events:
-    type: array
-    maxItems: 1
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/CognitoEventType'
-        value:
-          $ref: '#/definitions/LambdaFunctionArn'
+    type: object
+    maxProperties: 1
+    additionalProperties:
+      $ref: '#/definitions/LambdaFunctionArn'
+  GetBulkPublishDetailsRequest:
+    type: object
+    properties: {}
+    description: The input for the GetBulkPublishDetails operation.
+  GetCognitoEventsRequest:
+    type: object
+    properties: {}
+    description: A request for a list of the configured Cognito Events
+  GetIdentityPoolConfigurationRequest:
+    type: object
+    properties: {}
+    description: The input for the GetIdentityPoolConfiguration operation.
   PushSync:
     type: object
     properties:
@@ -1563,8 +1687,20 @@ definitions:
     type: integer
   IntegerString:
     type: integer
+  ListDatasetsRequest:
+    type: object
+    properties: {}
+    description: Request for a list of datasets for an identity.
+  ListIdentityPoolUsageRequest:
+    type: object
+    properties: {}
+    description: A request for usage information on an identity pool.
   SyncSessionToken:
     type: string
+  ListRecordsRequest:
+    type: object
+    properties: {}
+    description: A request for a list of records.
   RecordList:
     type: array
     items:
@@ -1616,30 +1752,62 @@ definitions:
         $ref: '#/definitions/Date'
         description: The last modified date of the client device.
     description: The basic data structure of a dataset.
-  RecordPatch:
-    type: object
-    required:
-      - Op
-      - Key
-      - SyncCount
-    properties:
-      Op:
-        $ref: '#/definitions/Operation'
-        description: 'An operation, either replace or remove.'
-      Key:
-        $ref: '#/definitions/RecordKey'
-        description: The key associated with the record patch.
-      Value:
-        $ref: '#/definitions/RecordValue'
-        description: The value associated with the record patch.
-      SyncCount:
-        $ref: '#/definitions/Long'
-        description: Last known server sync count for this record. Set to 0 if unknown.
-      DeviceLastModifiedDate:
-        $ref: '#/definitions/Date'
-        description: The last modified date of the client device.
-    description: An update operation for a record.
   RecordPatchList:
     type: array
     items:
       $ref: '#/definitions/RecordPatch'
+  RegisterDeviceRequest:
+    type: object
+    required:
+      - Platform
+      - Token
+    properties:
+      Platform:
+        $ref: '#/definitions/Platform'
+        description: 'The SNS platform type (e.g. GCM, SDM, APNS, APNS_SANDBOX).'
+      Token:
+        $ref: '#/definitions/PushToken'
+        description: The push token.
+    description: A request to RegisterDevice.
+  SetCognitoEventsRequest:
+    type: object
+    required:
+      - Events
+    properties:
+      Events:
+        $ref: '#/definitions/Events'
+        description: The events to configure
+    description: <p>A request to configure Cognito Events"</p>"
+  SetIdentityPoolConfigurationRequest:
+    type: object
+    properties:
+      PushSync:
+        $ref: '#/definitions/PushSync'
+        description: Options to apply to this identity pool for push synchronization.
+      CognitoStreams:
+        $ref: '#/definitions/CognitoStreams'
+        description: Options to apply to this identity pool for Amazon Cognito streams.
+    description: The input for the SetIdentityPoolConfiguration operation.
+  SubscribeToDatasetRequest:
+    type: object
+    properties: {}
+    description: A request to SubscribeToDatasetRequest.
+  UnsubscribeFromDatasetRequest:
+    type: object
+    properties: {}
+    description: A request to UnsubscribeFromDataset.
+  UpdateRecordsRequest:
+    type: object
+    required:
+      - SyncSessionToken
+    properties:
+      DeviceId:
+        $ref: '#/definitions/DeviceId'
+        description: The unique ID generated for this device by Cognito.
+      RecordPatches:
+        $ref: '#/definitions/RecordPatchList'
+        description: A list of patch operations.
+      SyncSessionToken:
+        $ref: '#/definitions/SyncSessionToken'
+        description: The SyncSessionToken returned by a previous call to ListRecords for this dataset and identity.
+    description: A request to post updates to records or add and delete records for a dataset and user.

@@ -133,7 +133,90 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateBrokerRequest'
+            type: object
+            properties:
+              autoMinorVersionUpgrade:
+                description: 'Required. Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.'
+                type: boolean
+              brokerName:
+                description: 'Required. The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.'
+                type: string
+              configuration:
+                description: A list of information about the configuration.
+                type: object
+                properties:
+                  Id:
+                    $ref: '#/definitions/__string'
+                    description: Required. The unique ID that Amazon MQ generates for the configuration.
+                  Revision:
+                    $ref: '#/definitions/__integer'
+                    description: The revision number of the configuration.
+              creatorRequestId:
+                description: 'The unique ID that the requester receives for the created broker. Amazon MQ passes your ID with the API action. Note: We recommend using a Universally Unique Identifier (UUID) for the creatorRequestId. You may omit the creatorRequestId if your application doesn''t require idempotency.'
+                type: string
+              deploymentMode:
+                description: The deployment mode of the broker.
+                type: string
+                enum:
+                  - SINGLE_INSTANCE
+                  - ACTIVE_STANDBY_MULTI_AZ
+              engineType:
+                description: 'The type of broker engine. Note: Currently, Amazon MQ supports only ActiveMQ.'
+                type: string
+                enum:
+                  - ACTIVEMQ
+              engineVersion:
+                description: 'Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
+                type: string
+              hostInstanceType:
+                description: Required. The broker's instance type.
+                type: string
+              logs:
+                description: The list of information about logs to be enabled for the specified broker.
+                type: object
+                properties:
+                  Audit:
+                    $ref: '#/definitions/__boolean'
+                    description: Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged.
+                  General:
+                    $ref: '#/definitions/__boolean'
+                    description: Enables general logging.
+              maintenanceWindowStartTime:
+                description: The scheduled time period relative to UTC during which Amazon MQ begins to apply pending updates or patches to the broker.
+                type: object
+                properties:
+                  DayOfWeek:
+                    $ref: '#/definitions/DayOfWeek'
+                    description: Required. The day of the week.
+                  TimeOfDay:
+                    $ref: '#/definitions/__string'
+                    description: 'Required. The time, in 24-hour format.'
+                  TimeZone:
+                    $ref: '#/definitions/__string'
+                    description: 'The time zone, UTC by default, in either the Country/City format, or the UTC offset format.'
+              publiclyAccessible:
+                description: Required. Enables connections from applications outside of the VPC that hosts the broker's subnets.
+                type: boolean
+              securityGroups:
+                description: 'The list of rules (1 minimum, 125 maximum) that authorize connections to brokers.'
+                type: array
+                items:
+                  $ref: '#/definitions/__string'
+              subnetIds:
+                description: 'The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.'
+                type: array
+                items:
+                  $ref: '#/definitions/__string'
+              tags:
+                description: Create tags when creating the broker.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/__string'
+              users:
+                description: 'Required. The list of ActiveMQ users (persons or applications) who can access queues and topics. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+                type: array
+                items:
+                  $ref: '#/definitions/User'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -165,11 +248,18 @@ paths:
           schema:
             $ref: '#/definitions/ForbiddenException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListBrokersRequest'
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of brokers that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
+          type: integer
+          minimum: 1
+          maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: 'The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.'
+          type: string
   /v1/configurations:
     post:
       operationId: CreateConfiguration
@@ -200,7 +290,24 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateConfigurationRequest'
+            type: object
+            properties:
+              engineType:
+                description: 'The type of broker engine. Note: Currently, Amazon MQ supports only ActiveMQ.'
+                type: string
+                enum:
+                  - ACTIVEMQ
+              engineVersion:
+                description: 'Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
+                type: string
+              name:
+                description: 'Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.'
+                type: string
+              tags:
+                description: Create tags when creating the configuration.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/__string'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -232,11 +339,18 @@ paths:
           schema:
             $ref: '#/definitions/ForbiddenException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListConfigurationsRequest'
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of configurations that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
+          type: integer
+          minimum: 1
+          maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: 'The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.'
+          type: string
   '/v1/tags/{resource-arn}':
     post:
       operationId: CreateTags
@@ -261,15 +375,22 @@ paths:
           schema:
             $ref: '#/definitions/ForbiddenException'
       parameters:
+        - name: resource-arn
+          in: path
+          required: true
+          description: the Amazon Resource Name (ARN)
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateTagsRequest'
-        - name: resource-arn
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              tags:
+                description: The key-value pair for the resource tag.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/__string'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -280,38 +401,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-    delete:
-      operationId: DeleteTags
-      description: Remove a tag from a resource.
-      responses:
-        '204':
-          description: Success
-        '480':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '481':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '482':
-          description: InternalServerErrorException
-          schema:
-            $ref: '#/definitions/InternalServerErrorException'
-        '483':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteTagsRequest'
-        - name: resource-arn
-          type: string
-          in: path
-          required: true
     get:
       operationId: ListTags
       description: Lists tags for a resource.
@@ -337,15 +426,11 @@ paths:
           schema:
             $ref: '#/definitions/ForbiddenException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListTagsRequest'
         - name: resource-arn
-          type: string
           in: path
           required: true
+          description: the Amazon Resource Name (ARN)
+          type: string
   '/v1/brokers/{broker-id}/users/{username}':
     post:
       operationId: CreateUser
@@ -376,19 +461,33 @@ paths:
           schema:
             $ref: '#/definitions/ForbiddenException'
       parameters:
+        - name: broker-id
+          in: path
+          required: true
+          description: The unique ID that Amazon MQ generates for the broker.
+          type: string
+        - name: username
+          in: path
+          required: true
+          description: 'The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateUserRequest'
-        - name: broker-id
-          type: string
-          in: path
-          required: true
-        - name: username
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              consoleAccess:
+                description: Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
+                type: boolean
+              groups:
+                description: 'The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+                type: array
+                items:
+                  $ref: '#/definitions/__string'
+              password:
+                description: 'Required. The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.'
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -424,19 +523,16 @@ paths:
           schema:
             $ref: '#/definitions/ForbiddenException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteUserRequest'
         - name: broker-id
-          type: string
           in: path
           required: true
+          description: The unique ID that Amazon MQ generates for the broker.
+          type: string
         - name: username
-          type: string
           in: path
           required: true
+          description: 'The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+          type: string
     get:
       operationId: DescribeUser
       description: Returns information about an ActiveMQ user.
@@ -462,19 +558,16 @@ paths:
           schema:
             $ref: '#/definitions/ForbiddenException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeUserRequest'
         - name: broker-id
-          type: string
           in: path
           required: true
+          description: The unique ID that Amazon MQ generates for the broker.
+          type: string
         - name: username
-          type: string
           in: path
           required: true
+          description: 'The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+          type: string
     put:
       operationId: UpdateUser
       description: Updates the information for an ActiveMQ user.
@@ -504,19 +597,33 @@ paths:
           schema:
             $ref: '#/definitions/ForbiddenException'
       parameters:
+        - name: broker-id
+          in: path
+          required: true
+          description: The unique ID that Amazon MQ generates for the broker.
+          type: string
+        - name: username
+          in: path
+          required: true
+          description: 'Required. The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateUserRequest'
-        - name: broker-id
-          type: string
-          in: path
-          required: true
-        - name: username
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              consoleAccess:
+                description: Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
+                type: boolean
+              groups:
+                description: 'The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+                type: array
+                items:
+                  $ref: '#/definitions/__string'
+              password:
+                description: 'The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.'
+                type: string
   '/v1/brokers/{broker-id}':
     delete:
       operationId: DeleteBroker
@@ -543,15 +650,11 @@ paths:
           schema:
             $ref: '#/definitions/ForbiddenException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteBrokerRequest'
         - name: broker-id
-          type: string
           in: path
           required: true
+          description: 'The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.'
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -587,15 +690,11 @@ paths:
           schema:
             $ref: '#/definitions/ForbiddenException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeBrokerRequest'
         - name: broker-id
-          type: string
           in: path
           required: true
+          description: 'The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.'
+          type: string
     put:
       operationId: UpdateBroker
       description: Adds a pending configuration change to a broker.
@@ -625,15 +724,89 @@ paths:
           schema:
             $ref: '#/definitions/ForbiddenException'
       parameters:
+        - name: broker-id
+          in: path
+          required: true
+          description: 'The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.'
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateBrokerRequest'
-        - name: broker-id
-          type: string
+            type: object
+            properties:
+              autoMinorVersionUpgrade:
+                description: 'Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.'
+                type: boolean
+              configuration:
+                description: A list of information about the configuration.
+                type: object
+                properties:
+                  Id:
+                    $ref: '#/definitions/__string'
+                    description: Required. The unique ID that Amazon MQ generates for the configuration.
+                  Revision:
+                    $ref: '#/definitions/__integer'
+                    description: The revision number of the configuration.
+              engineVersion:
+                description: 'The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
+                type: string
+              logs:
+                description: The list of information about logs to be enabled for the specified broker.
+                type: object
+                properties:
+                  Audit:
+                    $ref: '#/definitions/__boolean'
+                    description: Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged.
+                  General:
+                    $ref: '#/definitions/__boolean'
+                    description: Enables general logging.
+  '/v1/tags/{resource-arn}#tagKeys':
+    delete:
+      operationId: DeleteTags
+      description: Remove a tag from a resource.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+      parameters:
+        - name: resource-arn
           in: path
           required: true
+          description: the Amazon Resource Name (ARN)
+          type: string
+        - name: tagKeys
+          in: query
+          required: true
+          description: An array of tag keys to delete
+          type: array
+          items:
+            type: string
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/v1/configurations/{configuration-id}':
     get:
       operationId: DescribeConfiguration
@@ -660,15 +833,11 @@ paths:
           schema:
             $ref: '#/definitions/ForbiddenException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeConfigurationRequest'
         - name: configuration-id
-          type: string
           in: path
           required: true
+          description: The unique ID that Amazon MQ generates for the configuration.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -708,15 +877,23 @@ paths:
           schema:
             $ref: '#/definitions/ForbiddenException'
       parameters:
+        - name: configuration-id
+          in: path
+          required: true
+          description: The unique ID that Amazon MQ generates for the configuration.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateConfigurationRequest'
-        - name: configuration-id
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              data:
+                description: Required. The base64-encoded XML configuration.
+                type: string
+              description:
+                description: The description of the configuration.
+                type: string
   '/v1/configurations/{configuration-id}/revisions/{configuration-revision}':
     get:
       operationId: DescribeConfigurationRevision
@@ -743,19 +920,16 @@ paths:
           schema:
             $ref: '#/definitions/ForbiddenException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeConfigurationRevisionRequest'
         - name: configuration-id
-          type: string
           in: path
           required: true
+          description: The unique ID that Amazon MQ generates for the configuration.
+          type: string
         - name: configuration-revision
-          type: string
           in: path
           required: true
+          description: The revision of the configuration.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -792,15 +966,23 @@ paths:
           schema:
             $ref: '#/definitions/ForbiddenException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListConfigurationRevisionsRequest'
         - name: configuration-id
-          type: string
           in: path
           required: true
+          description: The unique ID that Amazon MQ generates for the configuration.
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of configurations that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
+          type: integer
+          minimum: 1
+          maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: 'The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.'
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -837,15 +1019,23 @@ paths:
           schema:
             $ref: '#/definitions/ForbiddenException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListUsersRequest'
         - name: broker-id
-          type: string
           in: path
           required: true
+          description: The unique ID that Amazon MQ generates for the broker.
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of ActiveMQ users that can be returned per page (20 by default). This value must be an integer from 5 to 100.
+          type: integer
+          minimum: 1
+          maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: 'The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.'
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -882,15 +1072,11 @@ paths:
           schema:
             $ref: '#/definitions/ForbiddenException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/RebootBrokerRequest'
         - name: broker-id
-          type: string
           in: path
           required: true
+          description: The unique ID that Amazon MQ generates for the broker.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -911,55 +1097,38 @@ definitions:
       BrokerId:
         $ref: '#/definitions/__string'
         description: The unique ID that Amazon MQ generates for the broker.
-  CreateBrokerRequest:
+  __string:
+    type: string
+  __integer:
+    type: integer
+  __boolean:
+    type: boolean
+  DayOfWeek:
+    type: string
+    enum:
+      - MONDAY
+      - TUESDAY
+      - WEDNESDAY
+      - THURSDAY
+      - FRIDAY
+      - SATURDAY
+      - SUNDAY
+  User:
     type: object
     properties:
-      AutoMinorVersionUpgrade:
+      ConsoleAccess:
         $ref: '#/definitions/__boolean'
-        description: 'Required. Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.'
-      BrokerName:
-        $ref: '#/definitions/__string'
-        description: 'Required. The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.'
-      Configuration:
-        $ref: '#/definitions/ConfigurationId'
-        description: A list of information about the configuration.
-      CreatorRequestId:
-        $ref: '#/definitions/__string'
-        description: 'The unique ID that the requester receives for the created broker. Amazon MQ passes your ID with the API action. Note: We recommend using a Universally Unique Identifier (UUID) for the creatorRequestId. You may omit the creatorRequestId if your application doesn''t require idempotency.'
-      DeploymentMode:
-        $ref: '#/definitions/DeploymentMode'
-        description: Required. The deployment mode of the broker.
-      EngineType:
-        $ref: '#/definitions/EngineType'
-        description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.'
-      EngineVersion:
-        $ref: '#/definitions/__string'
-        description: 'Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
-      HostInstanceType:
-        $ref: '#/definitions/__string'
-        description: Required. The broker's instance type.
-      Logs:
-        $ref: '#/definitions/Logs'
-        description: Enables Amazon CloudWatch logging for brokers.
-      MaintenanceWindowStartTime:
-        $ref: '#/definitions/WeeklyStartTime'
-        description: The parameters that determine the WeeklyStartTime.
-      PubliclyAccessible:
-        $ref: '#/definitions/__boolean'
-        description: Required. Enables connections from applications outside of the VPC that hosts the broker's subnets.
-      SecurityGroups:
+        description: Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
+      Groups:
         $ref: '#/definitions/__listOf__string'
-        description: 'The list of rules (1 minimum, 125 maximum) that authorize connections to brokers.'
-      SubnetIds:
-        $ref: '#/definitions/__listOf__string'
-        description: 'The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.'
-      Tags:
-        $ref: '#/definitions/__mapOf__string'
-        description: Create tags when creating the broker.
-      Users:
-        $ref: '#/definitions/__listOfUser'
-        description: 'Required. The list of ActiveMQ users (persons or applications) who can access queues and topics. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
-    description: Creates a broker using the specified properties.
+        description: 'The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+      Password:
+        $ref: '#/definitions/__string'
+        description: 'Required. The password of the ActiveMQ user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.'
+      Username:
+        $ref: '#/definitions/__string'
+        description: 'Required. The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+    description: An ActiveMQ user associated with the broker.
   BadRequestException: {}
   UnauthorizedException: {}
   InternalServerErrorException: {}
@@ -983,62 +1152,17 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: 'Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.'
-  CreateConfigurationRequest:
-    type: object
-    properties:
-      EngineType:
-        $ref: '#/definitions/EngineType'
-        description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.'
-      EngineVersion:
-        $ref: '#/definitions/__string'
-        description: 'Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
-      Name:
-        $ref: '#/definitions/__string'
-        description: 'Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.'
-      Tags:
-        $ref: '#/definitions/__mapOf__string'
-        description: Create tags when creating the configuration.
-    description: Creates a new configuration for the specified configuration name. Amazon MQ uses the default configuration (the engine type and version).
-  CreateTagsRequest:
-    type: object
-    properties:
-      Tags:
-        $ref: '#/definitions/__mapOf__string'
-        description: The key-value pair for the resource tag.
-    description: A map of the key-value pairs for the resource tag.
   NotFoundException: {}
   CreateUserResponse:
     type: object
     properties: {}
-  CreateUserRequest:
-    type: object
-    properties:
-      ConsoleAccess:
-        $ref: '#/definitions/__boolean'
-        description: Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
-      Groups:
-        $ref: '#/definitions/__listOf__string'
-        description: 'The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
-      Password:
-        $ref: '#/definitions/__string'
-        description: 'Required. The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.'
-    description: Creates a new ActiveMQ user.
   DeleteBrokerResponse:
     type: object
     properties:
       BrokerId:
         $ref: '#/definitions/__string'
         description: The unique ID that Amazon MQ generates for the broker.
-  DeleteBrokerRequest:
-    type: object
-    properties: {}
-  DeleteTagsRequest:
-    type: object
-    properties: {}
   DeleteUserResponse:
-    type: object
-    properties: {}
-  DeleteUserRequest:
     type: object
     properties: {}
   DescribeBrokerResponse:
@@ -1104,9 +1228,6 @@ definitions:
       Users:
         $ref: '#/definitions/__listOfUserSummary'
         description: The list of all ActiveMQ usernames for the specified broker.
-  DescribeBrokerRequest:
-    type: object
-    properties: {}
   DescribeConfigurationResponse:
     type: object
     properties:
@@ -1137,9 +1258,6 @@ definitions:
       Tags:
         $ref: '#/definitions/__mapOf__string'
         description: The list of all tags associated with this configuration.
-  DescribeConfigurationRequest:
-    type: object
-    properties: {}
   DescribeConfigurationRevisionResponse:
     type: object
     properties:
@@ -1155,9 +1273,6 @@ definitions:
       Description:
         $ref: '#/definitions/__string'
         description: The description of the configuration.
-  DescribeConfigurationRevisionRequest:
-    type: object
-    properties: {}
   DescribeUserResponse:
     type: object
     properties:
@@ -1176,9 +1291,6 @@ definitions:
       Username:
         $ref: '#/definitions/__string'
         description: 'Required. The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
-  DescribeUserRequest:
-    type: object
-    properties: {}
   ListBrokersResponse:
     type: object
     properties:
@@ -1188,9 +1300,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/__string'
         description: 'The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.'
-  ListBrokersRequest:
-    type: object
-    properties: {}
   ListConfigurationRevisionsResponse:
     type: object
     properties:
@@ -1206,9 +1315,6 @@ definitions:
       Revisions:
         $ref: '#/definitions/__listOfConfigurationRevision'
         description: The list of all revisions for the specified configuration.
-  ListConfigurationRevisionsRequest:
-    type: object
-    properties: {}
   ListConfigurationsResponse:
     type: object
     properties:
@@ -1221,18 +1327,12 @@ definitions:
       NextToken:
         $ref: '#/definitions/__string'
         description: 'The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.'
-  ListConfigurationsRequest:
-    type: object
-    properties: {}
   ListTagsResponse:
     type: object
     properties:
       Tags:
         $ref: '#/definitions/__mapOf__string'
         description: The key-value pair for the resource tag.
-  ListTagsRequest:
-    type: object
-    properties: {}
   ListUsersResponse:
     type: object
     properties:
@@ -1248,13 +1348,7 @@ definitions:
       Users:
         $ref: '#/definitions/__listOfUserSummary'
         description: Required. The list of all ActiveMQ usernames for the specified broker.
-  ListUsersRequest:
-    type: object
-    properties: {}
   RebootBrokerResponse:
-    type: object
-    properties: {}
-  RebootBrokerRequest:
     type: object
     properties: {}
   UpdateBrokerResponse:
@@ -1275,22 +1369,6 @@ definitions:
       Logs:
         $ref: '#/definitions/Logs'
         description: The list of information about logs to be enabled for the specified broker.
-  UpdateBrokerRequest:
-    type: object
-    properties:
-      AutoMinorVersionUpgrade:
-        $ref: '#/definitions/__boolean'
-        description: 'Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.'
-      Configuration:
-        $ref: '#/definitions/ConfigurationId'
-        description: A list of information about the configuration.
-      EngineVersion:
-        $ref: '#/definitions/__string'
-        description: 'The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
-      Logs:
-        $ref: '#/definitions/Logs'
-        description: Enables Amazon CloudWatch logging for brokers.
-    description: Updates the broker using the specified properties.
   UpdateConfigurationResponse:
     type: object
     properties:
@@ -1312,34 +1390,9 @@ definitions:
       Warnings:
         $ref: '#/definitions/__listOfSanitizationWarning'
         description: The list of the first 20 warnings about the configuration XML elements or attributes that were sanitized.
-  UpdateConfigurationRequest:
-    type: object
-    properties:
-      Data:
-        $ref: '#/definitions/__string'
-        description: Required. The base64-encoded XML configuration.
-      Description:
-        $ref: '#/definitions/__string'
-        description: The description of the configuration.
-    description: Updates the specified configuration.
   UpdateUserResponse:
     type: object
     properties: {}
-  UpdateUserRequest:
-    type: object
-    properties:
-      ConsoleAccess:
-        $ref: '#/definitions/__boolean'
-        description: Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
-      Groups:
-        $ref: '#/definitions/__listOf__string'
-        description: 'The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
-      Password:
-        $ref: '#/definitions/__string'
-        description: 'The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.'
-    description: Updates the information for an ActiveMQ user.
-  __string:
-    type: string
   __listOf__string:
     type: array
     items:
@@ -1426,14 +1479,9 @@ definitions:
         description: Required. The revision number of the configuration.
     description: Returns information about the specified configuration revision.
   __mapOf__string:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/__string'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/__string'
   Configuration:
     type: object
     properties:
@@ -1465,8 +1513,6 @@ definitions:
         $ref: '#/definitions/__mapOf__string'
         description: The list of all tags associated with this configuration.
     description: Returns information about all configurations.
-  __integer:
-    type: integer
   ConfigurationId:
     type: object
     properties:
@@ -1494,8 +1540,6 @@ definitions:
         $ref: '#/definitions/ConfigurationId'
         description: The pending configuration of the broker.
     description: Broker configuration information
-  __boolean:
-    type: boolean
   Logs:
     type: object
     properties:
@@ -1523,16 +1567,103 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/User'
-  DayOfWeek:
-    type: string
-    enum:
-      - MONDAY
-      - TUESDAY
-      - WEDNESDAY
-      - THURSDAY
-      - FRIDAY
-      - SATURDAY
-      - SUNDAY
+  CreateBrokerRequest:
+    type: object
+    properties:
+      AutoMinorVersionUpgrade:
+        $ref: '#/definitions/__boolean'
+        description: 'Required. Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.'
+      BrokerName:
+        $ref: '#/definitions/__string'
+        description: 'Required. The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.'
+      Configuration:
+        $ref: '#/definitions/ConfigurationId'
+        description: A list of information about the configuration.
+      CreatorRequestId:
+        $ref: '#/definitions/__string'
+        description: 'The unique ID that the requester receives for the created broker. Amazon MQ passes your ID with the API action. Note: We recommend using a Universally Unique Identifier (UUID) for the creatorRequestId. You may omit the creatorRequestId if your application doesn''t require idempotency.'
+      DeploymentMode:
+        $ref: '#/definitions/DeploymentMode'
+        description: Required. The deployment mode of the broker.
+      EngineType:
+        $ref: '#/definitions/EngineType'
+        description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.'
+      EngineVersion:
+        $ref: '#/definitions/__string'
+        description: 'Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
+      HostInstanceType:
+        $ref: '#/definitions/__string'
+        description: Required. The broker's instance type.
+      Logs:
+        $ref: '#/definitions/Logs'
+        description: Enables Amazon CloudWatch logging for brokers.
+      MaintenanceWindowStartTime:
+        $ref: '#/definitions/WeeklyStartTime'
+        description: The parameters that determine the WeeklyStartTime.
+      PubliclyAccessible:
+        $ref: '#/definitions/__boolean'
+        description: Required. Enables connections from applications outside of the VPC that hosts the broker's subnets.
+      SecurityGroups:
+        $ref: '#/definitions/__listOf__string'
+        description: 'The list of rules (1 minimum, 125 maximum) that authorize connections to brokers.'
+      SubnetIds:
+        $ref: '#/definitions/__listOf__string'
+        description: 'The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.'
+      Tags:
+        $ref: '#/definitions/__mapOf__string'
+        description: Create tags when creating the broker.
+      Users:
+        $ref: '#/definitions/__listOfUser'
+        description: 'Required. The list of ActiveMQ users (persons or applications) who can access queues and topics. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+    description: Creates a broker using the specified properties.
+  CreateConfigurationRequest:
+    type: object
+    properties:
+      EngineType:
+        $ref: '#/definitions/EngineType'
+        description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.'
+      EngineVersion:
+        $ref: '#/definitions/__string'
+        description: 'Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
+      Name:
+        $ref: '#/definitions/__string'
+        description: 'Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.'
+      Tags:
+        $ref: '#/definitions/__mapOf__string'
+        description: Create tags when creating the configuration.
+    description: Creates a new configuration for the specified configuration name. Amazon MQ uses the default configuration (the engine type and version).
+  CreateTagsRequest:
+    type: object
+    properties:
+      Tags:
+        $ref: '#/definitions/__mapOf__string'
+        description: The key-value pair for the resource tag.
+    description: A map of the key-value pairs for the resource tag.
+  CreateUserRequest:
+    type: object
+    properties:
+      ConsoleAccess:
+        $ref: '#/definitions/__boolean'
+        description: Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
+      Groups:
+        $ref: '#/definitions/__listOf__string'
+        description: 'The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+      Password:
+        $ref: '#/definitions/__string'
+        description: 'Required. The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.'
+    description: Creates a new ActiveMQ user.
+  DeleteBrokerRequest:
+    type: object
+    properties: {}
+  DeleteTagsRequest:
+    type: object
+    properties: {}
+  DeleteUserRequest:
+    type: object
+    properties: {}
+  DescribeBrokerRequest:
+    type: object
+    properties: {}
   __listOfBrokerInstance:
     type: array
     items:
@@ -1560,6 +1691,15 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/UserSummary'
+  DescribeConfigurationRequest:
+    type: object
+    properties: {}
+  DescribeConfigurationRevisionRequest:
+    type: object
+    properties: {}
+  DescribeUserRequest:
+    type: object
+    properties: {}
   UserPendingChanges:
     type: object
     properties:
@@ -1577,18 +1717,33 @@ definitions:
     type: integer
     minimum: 1
     maximum: 100
+  ListBrokersRequest:
+    type: object
+    properties: {}
   __listOfBrokerSummary:
     type: array
     items:
       $ref: '#/definitions/BrokerSummary'
+  ListConfigurationRevisionsRequest:
+    type: object
+    properties: {}
   __listOfConfigurationRevision:
     type: array
     items:
       $ref: '#/definitions/ConfigurationRevision'
+  ListConfigurationsRequest:
+    type: object
+    properties: {}
   __listOfConfiguration:
     type: array
     items:
       $ref: '#/definitions/Configuration'
+  ListTagsRequest:
+    type: object
+    properties: {}
+  ListUsersRequest:
+    type: object
+    properties: {}
   __integerMin5Max100:
     type: integer
     minimum: 5
@@ -1603,6 +1758,9 @@ definitions:
         $ref: '#/definitions/__boolean'
         description: Enables general logging.
     description: The list of information about logs to be enabled for the specified broker.
+  RebootBrokerRequest:
+    type: object
+    properties: {}
   SanitizationWarningReason:
     type: string
     enum:
@@ -1623,11 +1781,37 @@ definitions:
         $ref: '#/definitions/SanitizationWarningReason'
         description: Required. The reason for which the XML elements or attributes were sanitized.
     description: Returns information about the XML element or attribute that was sanitized in the configuration.
+  UpdateBrokerRequest:
+    type: object
+    properties:
+      AutoMinorVersionUpgrade:
+        $ref: '#/definitions/__boolean'
+        description: 'Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.'
+      Configuration:
+        $ref: '#/definitions/ConfigurationId'
+        description: A list of information about the configuration.
+      EngineVersion:
+        $ref: '#/definitions/__string'
+        description: 'The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
+      Logs:
+        $ref: '#/definitions/Logs'
+        description: Enables Amazon CloudWatch logging for brokers.
+    description: Updates the broker using the specified properties.
+  UpdateConfigurationRequest:
+    type: object
+    properties:
+      Data:
+        $ref: '#/definitions/__string'
+        description: Required. The base64-encoded XML configuration.
+      Description:
+        $ref: '#/definitions/__string'
+        description: The description of the configuration.
+    description: Updates the specified configuration.
   __listOfSanitizationWarning:
     type: array
     items:
       $ref: '#/definitions/SanitizationWarning'
-  User:
+  UpdateUserRequest:
     type: object
     properties:
       ConsoleAccess:
@@ -1638,11 +1822,8 @@ definitions:
         description: 'The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
       Password:
         $ref: '#/definitions/__string'
-        description: 'Required. The password of the ActiveMQ user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.'
-      Username:
-        $ref: '#/definitions/__string'
-        description: 'Required. The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
-    description: An ActiveMQ user associated with the broker.
+        description: 'The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.'
+    description: Updates the information for an ActiveMQ user.
   UserSummary:
     type: object
     properties:

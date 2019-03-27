@@ -99,7 +99,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /:
+  '/#X-Amz-Target=Route53Resolver.AssociateResolverEndpointIpAddress':
     post:
       operationId: AssociateResolverEndpointIpAddress
       description: '<p>Adds IP addresses to an inbound or an outbound resolver endpoint. If you want to adding more than one IP address, submit one <code>AssociateResolverEndpointIpAddress</code> request for each IP address.</p> <p>To remove an IP address from an endpoint, see <a>DisassociateResolverEndpointIpAddress</a>.</p>'
@@ -142,6 +142,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AssociateResolverEndpointIpAddressRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Resolver.AssociateResolverEndpointIpAddress
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -152,7 +158,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AssociateResolverRule':
+  '/#X-Amz-Target=Route53Resolver.AssociateResolverRule':
     post:
       operationId: AssociateResolverRule
       description: 'Associates a resolver rule with a VPC. When you associate a rule with a VPC, Resolver forwards all DNS queries for the domain name that is specified in the rule and that originate in the VPC. The queries are forwarded to the IP addresses for the DNS resolvers that are specified in the rule. For more information about rules, see <a>CreateResolverRule</a>. '
@@ -195,6 +201,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AssociateResolverRuleRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Resolver.AssociateResolverRule
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -205,7 +217,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateResolverEndpoint':
+  '/#X-Amz-Target=Route53Resolver.CreateResolverEndpoint':
     post:
       operationId: CreateResolverEndpoint
       description: '<p>Creates a resolver endpoint. There are two types of resolver endpoints, inbound and outbound:</p> <ul> <li> <p>An <i>inbound resolver endpoint</i> forwards DNS queries to the DNS service for a VPC from your network or another VPC.</p> </li> <li> <p>An <i>outbound resolver endpoint</i> forwards DNS queries from the DNS service for a VPC to your network or another VPC.</p> </li> </ul>'
@@ -248,6 +260,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateResolverEndpointRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Resolver.CreateResolverEndpoint
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -258,7 +276,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateResolverRule':
+  '/#X-Amz-Target=Route53Resolver.CreateResolverRule':
     post:
       operationId: CreateResolverRule
       description: 'For DNS queries that originate in your VPCs, specifies which resolver endpoint the queries pass through, one domain name that you want to forward to your network, and the IP addresses of the DNS resolvers in your network.'
@@ -305,6 +323,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateResolverRuleRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Resolver.CreateResolverRule
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -315,7 +339,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteResolverEndpoint':
+  '/#X-Amz-Target=Route53Resolver.DeleteResolverEndpoint':
     post:
       operationId: DeleteResolverEndpoint
       description: '<p>Deletes a resolver endpoint. The effect of deleting a resolver endpoint depends on whether it''s an inbound or an outbound resolver endpoint:</p> <ul> <li> <p> <b>Inbound</b>: DNS queries from your network or another VPC are no longer routed to the DNS service for the specified VPC.</p> </li> <li> <p> <b>Outbound</b>: DNS queries from a VPC are no longer routed to your network or to another VPC.</p> </li> </ul>'
@@ -350,6 +374,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteResolverEndpointRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Resolver.DeleteResolverEndpoint
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -360,7 +390,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteResolverRule':
+  '/#X-Amz-Target=Route53Resolver.DeleteResolverRule':
     post:
       operationId: DeleteResolverRule
       description: 'Deletes a resolver rule. Before you can delete a resolver rule, you must disassociate it from all the VPCs that you associated the resolver rule with. For more infomation, see <a>DisassociateResolverRule</a>.'
@@ -395,6 +425,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteResolverRuleRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Resolver.DeleteResolverRule
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -405,7 +441,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DisassociateResolverEndpointIpAddress':
+  '/#X-Amz-Target=Route53Resolver.DisassociateResolverEndpointIpAddress':
     post:
       operationId: DisassociateResolverEndpointIpAddress
       description: '<p>Removes IP addresses from an inbound or an outbound resolver endpoint. If you want to remove more than one IP address, submit one <code>DisassociateResolverEndpointIpAddress</code> request for each IP address.</p> <p>To add an IP address to an endpoint, see <a>AssociateResolverEndpointIpAddress</a>.</p>'
@@ -444,6 +480,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DisassociateResolverEndpointIpAddressRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Resolver.DisassociateResolverEndpointIpAddress
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -454,7 +496,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DisassociateResolverRule':
+  '/#X-Amz-Target=Route53Resolver.DisassociateResolverRule':
     post:
       operationId: DisassociateResolverRule
       description: '<p>Removes the association between a specified resolver rule and a specified VPC.</p> <important> <p>If you disassociate a resolver rule from a VPC, Resolver stops forwarding DNS queries for the domain name that you specified in the resolver rule. </p> </important>'
@@ -485,6 +527,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DisassociateResolverRuleRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Resolver.DisassociateResolverRule
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -495,7 +543,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetResolverEndpoint':
+  '/#X-Amz-Target=Route53Resolver.GetResolverEndpoint':
     post:
       operationId: GetResolverEndpoint
       description: 'Gets information about a specified resolver endpoint, such as whether it''s an inbound or an outbound resolver endpoint, and the current status of the endpoint.'
@@ -526,6 +574,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetResolverEndpointRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Resolver.GetResolverEndpoint
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -536,7 +590,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetResolverRule':
+  '/#X-Amz-Target=Route53Resolver.GetResolverRule':
     post:
       operationId: GetResolverRule
       description: 'Gets information about a specified resolver rule, such as the domain name that the rule forwards DNS queries for and the ID of the outbound resolver endpoint that the rule is associated with.'
@@ -567,6 +621,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetResolverRuleRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Resolver.GetResolverRule
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -577,7 +637,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetResolverRuleAssociation':
+  '/#X-Amz-Target=Route53Resolver.GetResolverRuleAssociation':
     post:
       operationId: GetResolverRuleAssociation
       description: 'Gets information about an association between a specified resolver rule and a VPC. You associate a resolver rule and a VPC using <a>AssociateResolverRule</a>. '
@@ -608,6 +668,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetResolverRuleAssociationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Resolver.GetResolverRuleAssociation
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -618,7 +684,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetResolverRulePolicy':
+  '/#X-Amz-Target=Route53Resolver.GetResolverRulePolicy':
     post:
       operationId: GetResolverRulePolicy
       description: 'Gets information about a resolver rule policy. A resolver rule policy specifies the Resolver operations and resources that you want to allow another AWS account to be able to use. '
@@ -645,6 +711,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetResolverRulePolicyRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Resolver.GetResolverRulePolicy
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -655,7 +727,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListResolverEndpointIpAddresses':
+  '/#X-Amz-Target=Route53Resolver.ListResolverEndpointIpAddresses':
     post:
       operationId: ListResolverEndpointIpAddresses
       description: Gets the IP addresses for a specified resolver endpoint.
@@ -700,6 +772,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Resolver.ListResolverEndpointIpAddresses
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -710,7 +788,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListResolverEndpoints':
+  '/#X-Amz-Target=Route53Resolver.ListResolverEndpoints':
     post:
       operationId: ListResolverEndpoints
       description: Lists all the resolver endpoints that were created using the current AWS account.
@@ -755,6 +833,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Resolver.ListResolverEndpoints
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -765,7 +849,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListResolverRuleAssociations':
+  '/#X-Amz-Target=Route53Resolver.ListResolverRuleAssociations':
     post:
       operationId: ListResolverRuleAssociations
       description: Lists the associations that were created between resolver rules and VPCs using the current AWS account.
@@ -810,6 +894,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Resolver.ListResolverRuleAssociations
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -820,7 +910,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListResolverRules':
+  '/#X-Amz-Target=Route53Resolver.ListResolverRules':
     post:
       operationId: ListResolverRules
       description: Lists the resolver rules that were created using the current AWS account.
@@ -865,6 +955,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Resolver.ListResolverRules
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -875,7 +971,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListTagsForResource':
+  '/#X-Amz-Target=Route53Resolver.ListTagsForResource':
     post:
       operationId: ListTagsForResource
       description: Lists the tags that you associated with the specified resource.
@@ -914,6 +1010,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListTagsForResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Resolver.ListTagsForResource
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -924,7 +1026,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#PutResolverRulePolicy':
+  '/#X-Amz-Target=Route53Resolver.PutResolverRulePolicy':
     post:
       operationId: PutResolverRulePolicy
       description: Specifies the Resolver operations and resources that you want to allow another AWS account to be able to use.
@@ -955,6 +1057,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutResolverRulePolicyRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Resolver.PutResolverRulePolicy
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -965,7 +1073,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#TagResource':
+  '/#X-Amz-Target=Route53Resolver.TagResource':
     post:
       operationId: TagResource
       description: Adds one or more tags to a specified resource.
@@ -1004,6 +1112,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/TagResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Resolver.TagResource
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1014,7 +1128,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UntagResource':
+  '/#X-Amz-Target=Route53Resolver.UntagResource':
     post:
       operationId: UntagResource
       description: Removes one or more tags from a specified resource.
@@ -1045,6 +1159,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UntagResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Resolver.UntagResource
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1055,7 +1175,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateResolverEndpoint':
+  '/#X-Amz-Target=Route53Resolver.UpdateResolverEndpoint':
     post:
       operationId: UpdateResolverEndpoint
       description: 'Updates the name of an inbound or an outbound resolver endpoint. '
@@ -1090,6 +1210,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateResolverEndpointRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Resolver.UpdateResolverEndpoint
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1100,7 +1226,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateResolverRule':
+  '/#X-Amz-Target=Route53Resolver.UpdateResolverRule':
     post:
       operationId: UpdateResolverRule
       description: 'Updates settings for a specified resolver rule. <code>ResolverRuleId</code> is required, and all other parameters are optional. If you don''t specify a parameter, it retains its current value.'
@@ -1143,6 +1269,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateResolverRuleRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Route53Resolver.UpdateResolverRule
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'

@@ -125,23 +125,43 @@ paths:
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
       parameters:
+        - name: projectName
+          in: path
+          required: true
+          description: The name of the project containing the placement in which to associate the device.
+          type: string
+          pattern: '^[0-9A-Za-z_-]+$'
+          minLength: 1
+          maxLength: 128
+        - name: placementName
+          in: path
+          required: true
+          description: The name of the placement in which to associate the device.
+          type: string
+          pattern: '^[a-zA-Z0-9_-]+$'
+          minLength: 1
+          maxLength: 128
+        - name: deviceTemplateName
+          in: path
+          required: true
+          description: The device template name to associate with the device ID.
+          type: string
+          pattern: '^[a-zA-Z0-9_-]+$'
+          minLength: 1
+          maxLength: 128
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/AssociateDeviceWithPlacementRequest'
-        - name: projectName
-          type: string
-          in: path
-          required: true
-        - name: placementName
-          type: string
-          in: path
-          required: true
-        - name: deviceTemplateName
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - deviceId
+            properties:
+              deviceId:
+                description: The ID of the physical device to be associated with the given placement in the project. Note that a mandatory 4 character prefix is required for all <code>deviceId</code> values.
+                type: string
+                minLength: 1
+                maxLength: 32
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -177,23 +197,30 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DisassociateDeviceFromPlacementRequest'
         - name: projectName
-          type: string
           in: path
           required: true
+          description: The name of the project that contains the placement.
+          type: string
+          pattern: '^[0-9A-Za-z_-]+$'
+          minLength: 1
+          maxLength: 128
         - name: placementName
-          type: string
           in: path
           required: true
+          description: The name of the placement that the device should be removed from.
+          type: string
+          pattern: '^[a-zA-Z0-9_-]+$'
+          minLength: 1
+          maxLength: 128
         - name: deviceTemplateName
-          type: string
           in: path
           required: true
+          description: The device ID that should be removed from the placement.
+          type: string
+          pattern: '^[a-zA-Z0-9_-]+$'
+          minLength: 1
+          maxLength: 128
   '/projects/{projectName}/placements':
     post:
       operationId: CreatePlacement
@@ -220,15 +247,33 @@ paths:
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
       parameters:
+        - name: projectName
+          in: path
+          required: true
+          description: The name of the project in which to create the placement.
+          type: string
+          pattern: '^[0-9A-Za-z_-]+$'
+          minLength: 1
+          maxLength: 128
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreatePlacementRequest'
-        - name: projectName
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - placementName
+            properties:
+              placementName:
+                description: The name of the placement to be created.
+                type: string
+                pattern: '^[a-zA-Z0-9_-]+$'
+                minLength: 1
+                maxLength: 128
+              attributes:
+                description: Optional user-defined key/value pairs providing contextual data (such as location or function) for the placement.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/AttributeValue'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -260,15 +305,28 @@ paths:
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListPlacementsRequest'
         - name: projectName
-          type: string
           in: path
           required: true
+          description: The project containing the placements to be listed.
+          type: string
+          pattern: '^[0-9A-Za-z_-]+$'
+          minLength: 1
+          maxLength: 128
+        - name: nextToken
+          in: query
+          required: false
+          description: The token to retrieve the next set of results.
+          type: string
+          minLength: 1
+          maxLength: 1024
+        - name: maxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to return per request. If not set, a default value of 100 is used.'
+          type: integer
+          minimum: 1
+          maximum: 250
   /projects:
     post:
       operationId: CreateProject
@@ -295,7 +353,38 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateProjectRequest'
+            type: object
+            required:
+              - projectName
+            properties:
+              projectName:
+                description: The name of the project to create.
+                type: string
+                pattern: '^[0-9A-Za-z_-]+$'
+                minLength: 1
+                maxLength: 128
+              description:
+                description: An optional description for the project.
+                type: string
+                minLength: 0
+                maxLength: 500
+              placementTemplate:
+                description: An object defining the template for a placement.
+                type: object
+                properties:
+                  defaultAttributes:
+                    $ref: '#/definitions/DefaultPlacementAttributeMap'
+                    description: The default attributes (key/value pairs) to be applied to all placements using this template.
+                  deviceTemplates:
+                    $ref: '#/definitions/DeviceTemplateMap'
+                    description: An object specifying the <a>DeviceTemplate</a> for all placements using this (<a>PlacementTemplate</a>) template.
+              tags:
+                description: 'Optional tags (metadata key/value pairs) to be associated with the project. For example, <code>{ {"key1": "value1", "key2": "value2"} }</code>. For more information, see <a href="https://aws.amazon.com/answers/account-management/aws-tagging-strategies/">AWS Tagging Strategies</a>.'
+                type: object
+                minProperties: 1
+                maxProperties: 50
+                additionalProperties:
+                  $ref: '#/definitions/TagValue'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -323,11 +412,20 @@ paths:
           schema:
             $ref: '#/definitions/InvalidRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListProjectsRequest'
+        - name: nextToken
+          in: query
+          required: false
+          description: The token to retrieve the next set of results.
+          type: string
+          minLength: 1
+          maxLength: 1024
+        - name: maxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to return per request. If not set, a default value of 100 is used.'
+          type: integer
+          minimum: 1
+          maximum: 250
   '/projects/{projectName}/placements/{placementName}':
     delete:
       operationId: DeletePlacement
@@ -354,19 +452,22 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeletePlacementRequest'
-        - name: projectName
-          type: string
-          in: path
-          required: true
         - name: placementName
-          type: string
           in: path
           required: true
+          description: The name of the empty placement to delete.
+          type: string
+          pattern: '^[a-zA-Z0-9_-]+$'
+          minLength: 1
+          maxLength: 128
+        - name: projectName
+          in: path
+          required: true
+          description: The project containing the empty placement to delete.
+          type: string
+          pattern: '^[0-9A-Za-z_-]+$'
+          minLength: 1
+          maxLength: 128
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -398,19 +499,22 @@ paths:
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribePlacementRequest'
-        - name: projectName
-          type: string
-          in: path
-          required: true
         - name: placementName
-          type: string
           in: path
           required: true
+          description: The name of the placement within a project.
+          type: string
+          pattern: '^[a-zA-Z0-9_-]+$'
+          minLength: 1
+          maxLength: 128
+        - name: projectName
+          in: path
+          required: true
+          description: The project containing the placement to be described.
+          type: string
+          pattern: '^[0-9A-Za-z_-]+$'
+          minLength: 1
+          maxLength: 128
     put:
       operationId: UpdatePlacement
       description: 'Updates a placement with the given attributes. To clear an attribute, pass an empty value (i.e., "").'
@@ -436,19 +540,33 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: placementName
+          in: path
+          required: true
+          description: The name of the placement to update.
+          type: string
+          pattern: '^[a-zA-Z0-9_-]+$'
+          minLength: 1
+          maxLength: 128
+        - name: projectName
+          in: path
+          required: true
+          description: The name of the project containing the placement to be updated.
+          type: string
+          pattern: '^[0-9A-Za-z_-]+$'
+          minLength: 1
+          maxLength: 128
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdatePlacementRequest'
-        - name: projectName
-          type: string
-          in: path
-          required: true
-        - name: placementName
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              attributes:
+                description: The user-defined object of attributes used to update the placement. The maximum number of key/value pairs is 50.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/AttributeValue'
   '/projects/{projectName}':
     delete:
       operationId: DeleteProject
@@ -475,15 +593,14 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteProjectRequest'
         - name: projectName
-          type: string
           in: path
           required: true
+          description: The name of the empty project to delete.
+          type: string
+          pattern: '^[0-9A-Za-z_-]+$'
+          minLength: 1
+          maxLength: 128
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -515,15 +632,14 @@ paths:
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeProjectRequest'
         - name: projectName
-          type: string
           in: path
           required: true
+          description: The name of the project to be described.
+          type: string
+          pattern: '^[0-9A-Za-z_-]+$'
+          minLength: 1
+          maxLength: 128
     put:
       operationId: UpdateProject
       description: 'Updates a project associated with your AWS account and region. With the exception of device template names, you can pass just the values that need to be updated because the update request will change only the values that are provided. To clear a value, pass the empty string (i.e., <code>""</code>).'
@@ -549,15 +665,35 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: projectName
+          in: path
+          required: true
+          description: The name of the project to be updated.
+          type: string
+          pattern: '^[0-9A-Za-z_-]+$'
+          minLength: 1
+          maxLength: 128
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateProjectRequest'
-        - name: projectName
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              description:
+                description: An optional user-defined description for the project.
+                type: string
+                minLength: 0
+                maxLength: 500
+              placementTemplate:
+                description: An object defining the template for a placement.
+                type: object
+                properties:
+                  defaultAttributes:
+                    $ref: '#/definitions/DefaultPlacementAttributeMap'
+                    description: The default attributes (key/value pairs) to be applied to all placements using this template.
+                  deviceTemplates:
+                    $ref: '#/definitions/DeviceTemplateMap'
+                    description: An object specifying the <a>DeviceTemplate</a> for all placements using this (<a>PlacementTemplate</a>) template.
   '/projects/{projectName}/placements/{placementName}/devices':
     get:
       operationId: GetDevicesInPlacement
@@ -580,19 +716,22 @@ paths:
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetDevicesInPlacementRequest'
         - name: projectName
-          type: string
           in: path
           required: true
+          description: The name of the project containing the placement.
+          type: string
+          pattern: '^[0-9A-Za-z_-]+$'
+          minLength: 1
+          maxLength: 128
         - name: placementName
-          type: string
           in: path
           required: true
+          description: The name of the placement to get the devices from.
+          type: string
+          pattern: '^[a-zA-Z0-9_-]+$'
+          minLength: 1
+          maxLength: 128
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -625,15 +764,12 @@ paths:
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListTagsForResourceRequest'
         - name: resourceArn
-          type: string
           in: path
           required: true
+          description: The ARN of the resource whose tags you want to list.
+          type: string
+          pattern: '^arn:aws:iot1click:[A-Za-z0-9_/.-]{0,63}:\d+:projects/[0-9A-Za-z_-]{1,128}$'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -665,15 +801,28 @@ paths:
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
       parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The ARN of the resouce for which tag(s) should be added or modified.
+          type: string
+          pattern: '^arn:aws:iot1click:[A-Za-z0-9_/.-]{0,63}:\d+:projects/[0-9A-Za-z_-]{1,128}$'
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/TagResourceRequest'
-        - name: resourceArn
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - tags
+            properties:
+              tags:
+                description: 'The new or modifying tag(s) for the resource. See <a href="https://docs.aws.amazon.com/iot-1-click/latest/developerguide/1click-appendix.html#1click-limits">AWS IoT 1-Click Service Limits</a> for the maximum number of tags allowed per resource.'
+                type: object
+                minProperties: 1
+                maxProperties: 50
+                additionalProperties:
+                  $ref: '#/definitions/TagValue'
+  '/tags/{resourceArn}#tagKeys':
     delete:
       operationId: UntagResource
       description: Removes one or more tags (metadata key/value pairs) from a resource.
@@ -695,27 +844,33 @@ paths:
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/UntagResourceRequest'
         - name: resourceArn
-          type: string
           in: path
           required: true
+          description: The ARN of the resource whose tag you want to remove.
+          type: string
+          pattern: '^arn:aws:iot1click:[A-Za-z0-9_/.-]{0,63}:\d+:projects/[0-9A-Za-z_-]{1,128}$'
+        - name: tagKeys
+          in: query
+          required: true
+          description: The keys of those tags which you want to remove.
+          type: array
+          items:
+            type: string
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
   AssociateDeviceWithPlacementResponse:
     type: object
     properties: {}
-  AssociateDeviceWithPlacementRequest:
-    type: object
-    required:
-      - deviceId
-    properties:
-      deviceId:
-        $ref: '#/definitions/DeviceId'
-        description: The ID of the physical device to be associated with the given placement in the project. Note that a mandatory 4 character prefix is required for all <code>deviceId</code> values.
   InternalFailureException: {}
   InvalidRequestException: {}
   ResourceConflictException: {}
@@ -723,48 +878,28 @@ definitions:
   CreatePlacementResponse:
     type: object
     properties: {}
-  CreatePlacementRequest:
-    type: object
-    required:
-      - placementName
-    properties:
-      placementName:
-        $ref: '#/definitions/PlacementName'
-        description: The name of the placement to be created.
-      attributes:
-        $ref: '#/definitions/PlacementAttributeMap'
-        description: Optional user-defined key/value pairs providing contextual data (such as location or function) for the placement.
+  AttributeValue:
+    type: string
+    maxLength: 800
   CreateProjectResponse:
     type: object
     properties: {}
-  CreateProjectRequest:
+  DefaultPlacementAttributeMap:
     type: object
-    required:
-      - projectName
-    properties:
-      projectName:
-        $ref: '#/definitions/ProjectName'
-        description: The name of the project to create.
-      description:
-        $ref: '#/definitions/Description'
-        description: An optional description for the project.
-      placementTemplate:
-        $ref: '#/definitions/PlacementTemplate'
-        description: 'The schema defining the placement to be created. A placement template defines placement default attributes and device templates. You cannot add or remove device templates after the project has been created. However, you can update <code>callbackOverrides</code> for the device templates using the <code>UpdateProject</code> API.'
-      tags:
-        $ref: '#/definitions/TagMap'
-        description: 'Optional tags (metadata key/value pairs) to be associated with the project. For example, <code>{ {"key1": "value1", "key2": "value2"} }</code>. For more information, see <a href="https://aws.amazon.com/answers/account-management/aws-tagging-strategies/">AWS Tagging Strategies</a>.'
+    additionalProperties:
+      $ref: '#/definitions/AttributeDefaultValue'
+  DeviceTemplateMap:
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/DeviceTemplate'
+  TagValue:
+    type: string
+    maxLength: 256
   DeletePlacementResponse:
-    type: object
-    properties: {}
-  DeletePlacementRequest:
     type: object
     properties: {}
   TooManyRequestsException: {}
   DeleteProjectResponse:
-    type: object
-    properties: {}
-  DeleteProjectRequest:
     type: object
     properties: {}
   DescribePlacementResponse:
@@ -775,9 +910,6 @@ definitions:
       placement:
         $ref: '#/definitions/PlacementDescription'
         description: An object describing the placement.
-  DescribePlacementRequest:
-    type: object
-    properties: {}
   DescribeProjectResponse:
     type: object
     required:
@@ -786,13 +918,7 @@ definitions:
       project:
         $ref: '#/definitions/ProjectDescription'
         description: An object describing the project.
-  DescribeProjectRequest:
-    type: object
-    properties: {}
   DisassociateDeviceFromPlacementResponse:
-    type: object
-    properties: {}
-  DisassociateDeviceFromPlacementRequest:
     type: object
     properties: {}
   GetDevicesInPlacementResponse:
@@ -803,9 +929,6 @@ definitions:
       devices:
         $ref: '#/definitions/DeviceMap'
         description: An object containing the devices (zero or more) within the placement.
-  GetDevicesInPlacementRequest:
-    type: object
-    properties: {}
   ListPlacementsResponse:
     type: object
     required:
@@ -817,9 +940,6 @@ definitions:
       nextToken:
         $ref: '#/definitions/NextToken'
         description: The token used to retrieve the next set of results - will be effectively empty if there are no further results.
-  ListPlacementsRequest:
-    type: object
-    properties: {}
   ListProjectsResponse:
     type: object
     required:
@@ -831,56 +951,29 @@ definitions:
       nextToken:
         $ref: '#/definitions/NextToken'
         description: The token used to retrieve the next set of results - will be effectively empty if there are no further results.
-  ListProjectsRequest:
-    type: object
-    properties: {}
   ListTagsForResourceResponse:
     type: object
     properties:
       tags:
         $ref: '#/definitions/TagMap'
         description: The tags (metadata key/value pairs) which you have assigned to the resource.
-  ListTagsForResourceRequest:
-    type: object
-    properties: {}
   TagResourceResponse:
     type: object
     properties: {}
-  TagResourceRequest:
-    type: object
-    required:
-      - tags
-    properties:
-      tags:
-        $ref: '#/definitions/TagMap'
-        description: 'The new or modifying tag(s) for the resource. See <a href="https://docs.aws.amazon.com/iot-1-click/latest/developerguide/1click-appendix.html#1click-limits">AWS IoT 1-Click Service Limits</a> for the maximum number of tags allowed per resource.'
   UntagResourceResponse:
     type: object
     properties: {}
-  UntagResourceRequest:
-    type: object
-    properties: {}
+  TagKey:
+    type: string
+    pattern: '^(?!aws:)[a-zA-Z+-=._:/]+$'
+    minLength: 1
+    maxLength: 128
   UpdatePlacementResponse:
     type: object
     properties: {}
-  UpdatePlacementRequest:
-    type: object
-    properties:
-      attributes:
-        $ref: '#/definitions/PlacementAttributeMap'
-        description: The user-defined object of attributes used to update the placement. The maximum number of key/value pairs is 50.
   UpdateProjectResponse:
     type: object
     properties: {}
-  UpdateProjectRequest:
-    type: object
-    properties:
-      description:
-        $ref: '#/definitions/Description'
-        description: An optional user-defined description for the project.
-      placementTemplate:
-        $ref: '#/definitions/PlacementTemplate'
-        description: 'An object defining the project update. Once a project has been created, you cannot add device template names to the project. However, for a given <code>placementTemplate</code>, you can update the associated <code>callbackOverrides</code> for the device definition using this API.'
   ProjectName:
     type: string
     pattern: '^[0-9A-Za-z_-]+$'
@@ -900,6 +993,14 @@ definitions:
     pattern: '^[a-zA-Z0-9_-]+$'
     minLength: 1
     maxLength: 128
+  AssociateDeviceWithPlacementRequest:
+    type: object
+    required:
+      - deviceId
+    properties:
+      deviceId:
+        $ref: '#/definitions/DeviceId'
+        description: The ID of the physical device to be associated with the given placement in the project. Note that a mandatory 4 character prefix is required for all <code>deviceId</code> values.
   AttributeDefaultValue:
     type: string
     maxLength: 800
@@ -907,18 +1008,21 @@ definitions:
     type: string
     minLength: 1
     maxLength: 128
-  AttributeValue:
-    type: string
-    maxLength: 800
   PlacementAttributeMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/AttributeName'
-        value:
-          $ref: '#/definitions/AttributeValue'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/AttributeValue'
+  CreatePlacementRequest:
+    type: object
+    required:
+      - placementName
+    properties:
+      placementName:
+        $ref: '#/definitions/PlacementName'
+        description: The name of the placement to be created.
+      attributes:
+        $ref: '#/definitions/PlacementAttributeMap'
+        description: Optional user-defined key/value pairs providing contextual data (such as location or function) for the placement.
   Description:
     type: string
     minLength: 0
@@ -934,25 +1038,37 @@ definitions:
         description: An object specifying the <a>DeviceTemplate</a> for all placements using this (<a>PlacementTemplate</a>) template.
     description: An object defining the template for a placement.
   TagMap:
-    type: array
-    minItems: 1
-    maxItems: 50
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/TagKey'
-        value:
-          $ref: '#/definitions/TagValue'
-  DefaultPlacementAttributeMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/AttributeName'
-        value:
-          $ref: '#/definitions/AttributeDefaultValue'
+    type: object
+    minProperties: 1
+    maxProperties: 50
+    additionalProperties:
+      $ref: '#/definitions/TagValue'
+  CreateProjectRequest:
+    type: object
+    required:
+      - projectName
+    properties:
+      projectName:
+        $ref: '#/definitions/ProjectName'
+        description: The name of the project to create.
+      description:
+        $ref: '#/definitions/Description'
+        description: An optional description for the project.
+      placementTemplate:
+        $ref: '#/definitions/PlacementTemplate'
+        description: 'The schema defining the placement to be created. A placement template defines placement default attributes and device templates. You cannot add or remove device templates after the project has been created. However, you can update <code>callbackOverrides</code> for the device templates using the <code>UpdateProject</code> API.'
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: 'Optional tags (metadata key/value pairs) to be associated with the project. For example, <code>{ {"key1": "value1", "key2": "value2"} }</code>. For more information, see <a href="https://aws.amazon.com/answers/account-management/aws-tagging-strategies/">AWS Tagging Strategies</a>.'
+  DeletePlacementRequest:
+    type: object
+    properties: {}
+  DeleteProjectRequest:
+    type: object
+    properties: {}
+  DescribePlacementRequest:
+    type: object
+    properties: {}
   PlacementDescription:
     type: object
     required:
@@ -978,6 +1094,9 @@ definitions:
         $ref: '#/definitions/Time'
         description: 'The date when the placement was last updated, in UNIX epoch time format. If the placement was not updated, then <code>createdDate</code> and <code>updatedDate</code> are the same.'
     description: An object describing a project's placement.
+  DescribeProjectRequest:
+    type: object
+    properties: {}
   ProjectDescription:
     type: object
     required:
@@ -1015,23 +1134,13 @@ definitions:
     type: string
     maxLength: 200
   DeviceCallbackOverrideMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/DeviceCallbackKey'
-        value:
-          $ref: '#/definitions/DeviceCallbackValue'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/DeviceCallbackValue'
   DeviceMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/DeviceTemplateName'
-        value:
-          $ref: '#/definitions/DeviceId'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/DeviceId'
   DeviceType:
     type: string
     maxLength: 128
@@ -1045,15 +1154,12 @@ definitions:
         $ref: '#/definitions/DeviceCallbackOverrideMap'
         description: An optional Lambda function to invoke instead of the default Lambda function provided by the placement template.
     description: An object representing a device for a placement template (see <a>PlacementTemplate</a>).
-  DeviceTemplateMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/DeviceTemplateName'
-        value:
-          $ref: '#/definitions/DeviceTemplate'
+  DisassociateDeviceFromPlacementRequest:
+    type: object
+    properties: {}
+  GetDevicesInPlacementRequest:
+    type: object
+    properties: {}
   NextToken:
     type: string
     minLength: 1
@@ -1062,10 +1168,16 @@ definitions:
     type: integer
     minimum: 1
     maximum: 250
+  ListPlacementsRequest:
+    type: object
+    properties: {}
   PlacementSummaryList:
     type: array
     items:
       $ref: '#/definitions/PlacementSummary'
+  ListProjectsRequest:
+    type: object
+    properties: {}
   ProjectSummaryList:
     type: array
     items:
@@ -1073,6 +1185,9 @@ definitions:
   ProjectArn:
     type: string
     pattern: '^arn:aws:iot1click:[A-Za-z0-9_/.-]{0,63}:\d+:projects/[0-9A-Za-z_-]{1,128}$'
+  ListTagsForResourceRequest:
+    type: object
+    properties: {}
   Time:
     type: string
     format: date-time
@@ -1120,17 +1235,35 @@ definitions:
         $ref: '#/definitions/TagMap'
         description: The tags (metadata key/value pairs) associated with the project.
     description: An object providing summary information for a particular project for an associated AWS account and region.
-  TagKey:
-    type: string
-    pattern: '^(?!aws:)[a-zA-Z+-=._:/]+$'
-    minLength: 1
-    maxLength: 128
   TagKeyList:
     type: array
     items:
       $ref: '#/definitions/TagKey'
     minItems: 1
     maxItems: 50
-  TagValue:
-    type: string
-    maxLength: 256
+  TagResourceRequest:
+    type: object
+    required:
+      - tags
+    properties:
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: 'The new or modifying tag(s) for the resource. See <a href="https://docs.aws.amazon.com/iot-1-click/latest/developerguide/1click-appendix.html#1click-limits">AWS IoT 1-Click Service Limits</a> for the maximum number of tags allowed per resource.'
+  UntagResourceRequest:
+    type: object
+    properties: {}
+  UpdatePlacementRequest:
+    type: object
+    properties:
+      attributes:
+        $ref: '#/definitions/PlacementAttributeMap'
+        description: The user-defined object of attributes used to update the placement. The maximum number of key/value pairs is 50.
+  UpdateProjectRequest:
+    type: object
+    properties:
+      description:
+        $ref: '#/definitions/Description'
+        description: An optional user-defined description for the project.
+      placementTemplate:
+        $ref: '#/definitions/PlacementTemplate'
+        description: 'An object defining the project update. Once a project has been created, you cannot add device template names to the project. However, for a given <code>placementTemplate</code>, you can update the associated <code>callbackOverrides</code> for the device definition using this API.'

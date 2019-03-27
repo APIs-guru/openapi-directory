@@ -99,7 +99,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /:
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.AddCustomAttributes':
     post:
       operationId: AddCustomAttributes
       description: Adds additional user attributes to the user pool schema.
@@ -138,6 +138,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AddCustomAttributesRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.AddCustomAttributes
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -148,7 +154,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AdminAddUserToGroup':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.AdminAddUserToGroup':
     post:
       operationId: AdminAddUserToGroup
       description: <p>Adds the specified user to the specified group.</p> <p>Requires developer credentials.</p>
@@ -185,6 +191,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AdminAddUserToGroupRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.AdminAddUserToGroup
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -195,7 +207,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AdminConfirmSignUp':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.AdminConfirmSignUp':
     post:
       operationId: AdminConfirmSignUp
       description: <p>Confirms user registration as an admin without using a confirmation code. Works on any user.</p> <p>Requires developer credentials.</p>
@@ -254,6 +266,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AdminConfirmSignUpRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.AdminConfirmSignUp
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -264,7 +282,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AdminCreateUser':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.AdminCreateUser':
     post:
       operationId: AdminCreateUser
       description: '<p>Creates a new user in the specified user pool.</p> <p>If <code>MessageAction</code> is not set, the default is to send a welcome message via email or phone (SMS).</p> <note> <p>This message is based on a template that you configured in your call to or . This template includes your custom sign-up instructions and placeholders for user name and temporary password.</p> </note> <p>Alternatively, you can call AdminCreateUser with “SUPPRESS” for the <code>MessageAction</code> parameter, and Amazon Cognito will not send any email. </p> <p>In either case, the user will be in the <code>FORCE_CHANGE_PASSWORD</code> state until they sign in and change their password.</p> <p>AdminCreateUser requires developer credentials.</p>'
@@ -343,6 +361,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AdminCreateUserRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.AdminCreateUser
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -353,7 +377,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AdminDeleteUser':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.AdminDeleteUser':
     post:
       operationId: AdminDeleteUser
       description: <p>Deletes a user as an administrator. Works on any user.</p> <p>Requires developer credentials.</p>
@@ -390,6 +414,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AdminDeleteUserRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.AdminDeleteUser
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -400,7 +430,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AdminDeleteUserAttributes':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.AdminDeleteUserAttributes':
     post:
       operationId: AdminDeleteUserAttributes
       description: <p>Deletes the user attributes in a user pool as an administrator. Works on any user.</p> <p>Requires developer credentials.</p>
@@ -439,6 +469,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AdminDeleteUserAttributesRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.AdminDeleteUserAttributes
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -449,7 +485,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AdminDisableProviderForUser':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.AdminDisableProviderForUser':
     post:
       operationId: AdminDisableProviderForUser
       description: '<p>Disables the user from signing in with the specified external (SAML or social) identity provider. If the user to disable is a Cognito User Pools native username + password user, they are not permitted to use their password to sign-in. If the user to disable is a linked external IdP user, any link between that user and an existing user is removed. The next time the external user (no longer attached to the previously linked <code>DestinationUser</code>) signs in, they must create a new user account. See .</p> <p>This action is enabled only for admin access and requires developer credentials.</p> <p>The <code>ProviderName</code> must match the value specified when creating an IdP for the pool. </p> <p>To disable a native username + password user, the <code>ProviderName</code> value must be <code>Cognito</code> and the <code>ProviderAttributeName</code> must be <code>Cognito_Subject</code>, with the <code>ProviderAttributeValue</code> being the name that is used in the user pool for the user.</p> <p>The <code>ProviderAttributeName</code> must always be <code>Cognito_Subject</code> for social identity providers. The <code>ProviderAttributeValue</code> must always be the exact subject that was used when the user was originally linked as a source user.</p> <p>For de-linking a SAML identity, there are two scenarios. If the linked identity has not yet been used to sign-in, the <code>ProviderAttributeName</code> and <code>ProviderAttributeValue</code> must be the same values that were used for the <code>SourceUser</code> when the identities were originally linked in the call. (If the linking was done with <code>ProviderAttributeName</code> set to <code>Cognito_Subject</code>, the same applies here). However, if the user has already signed in, the <code>ProviderAttributeName</code> must be <code>Cognito_Subject</code> and <code>ProviderAttributeValue</code> must be the subject of the SAML assertion.</p>'
@@ -492,6 +528,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AdminDisableProviderForUserRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.AdminDisableProviderForUser
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -502,7 +544,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AdminDisableUser':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.AdminDisableUser':
     post:
       operationId: AdminDisableUser
       description: <p>Disables the specified user as an administrator. Works on any user.</p> <p>Requires developer credentials.</p>
@@ -541,6 +583,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AdminDisableUserRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.AdminDisableUser
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -551,7 +599,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AdminEnableUser':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.AdminEnableUser':
     post:
       operationId: AdminEnableUser
       description: <p>Enables the specified user as an administrator. Works on any user.</p> <p>Requires developer credentials.</p>
@@ -590,6 +638,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AdminEnableUserRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.AdminEnableUser
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -600,7 +654,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AdminForgetDevice':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.AdminForgetDevice':
     post:
       operationId: AdminForgetDevice
       description: '<p>Forgets the device, as an administrator.</p> <p>Requires developer credentials.</p>'
@@ -641,6 +695,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AdminForgetDeviceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.AdminForgetDevice
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -651,7 +711,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AdminGetDevice':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.AdminGetDevice':
     post:
       operationId: AdminGetDevice
       description: '<p>Gets the device, as an administrator.</p> <p>Requires developer credentials.</p>'
@@ -690,6 +750,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AdminGetDeviceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.AdminGetDevice
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -700,7 +766,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AdminGetUser':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.AdminGetUser':
     post:
       operationId: AdminGetUser
       description: <p>Gets the specified user by user name in a user pool as an administrator. Works on any user.</p> <p>Requires developer credentials.</p>
@@ -739,6 +805,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AdminGetUserRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.AdminGetUser
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -749,7 +821,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AdminInitiateAuth':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.AdminInitiateAuth':
     post:
       operationId: AdminInitiateAuth
       description: '<p>Initiates the authentication flow, as an administrator.</p> <p>Requires developer credentials.</p>'
@@ -824,6 +896,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AdminInitiateAuthRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.AdminInitiateAuth
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -834,7 +912,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AdminLinkProviderForUser':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.AdminLinkProviderForUser':
     post:
       operationId: AdminLinkProviderForUser
       description: '<p>Links an existing user account in a user pool (<code>DestinationUser</code>) to an identity from an external identity provider (<code>SourceUser</code>) based on a specified attribute name and value from the external identity provider. This allows you to create a link from the existing user account to an external federated user identity that has not yet been used to sign in, so that the federated user identity can be used to sign in as the existing user account. </p> <p> For example, if there is an existing user with a username and password, this API links that user to a federated user identity, so that when the federated user identity is used, the user signs in as the existing user account. </p> <important> <p>Because this API allows a user with an external federated identity to sign in as an existing user in the user pool, it is critical that it only be used with external identity providers and provider attributes that have been trusted by the application owner.</p> </important> <p>See also .</p> <p>This action is enabled only for admin access and requires developer credentials.</p>'
@@ -877,6 +955,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AdminLinkProviderForUserRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.AdminLinkProviderForUser
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -887,7 +971,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AdminListDevices':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.AdminListDevices':
     post:
       operationId: AdminListDevices
       description: '<p>Lists devices, as an administrator.</p> <p>Requires developer credentials.</p>'
@@ -926,6 +1010,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AdminListDevicesRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.AdminListDevices
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -936,7 +1026,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AdminListGroupsForUser':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.AdminListGroupsForUser':
     post:
       operationId: AdminListGroupsForUser
       description: <p>Lists the groups that the user belongs to.</p> <p>Requires developer credentials.</p>
@@ -975,6 +1065,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AdminListGroupsForUserRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.AdminListGroupsForUser
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -985,7 +1081,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AdminListUserAuthEvents':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.AdminListUserAuthEvents':
     post:
       operationId: AdminListUserAuthEvents
       description: Lists a history of user activity and any risks detected as part of Amazon Cognito advanced security.
@@ -1028,6 +1124,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AdminListUserAuthEventsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.AdminListUserAuthEvents
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1038,7 +1140,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AdminRemoveUserFromGroup':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.AdminRemoveUserFromGroup':
     post:
       operationId: AdminRemoveUserFromGroup
       description: <p>Removes the specified user from the specified group.</p> <p>Requires developer credentials.</p>
@@ -1075,6 +1177,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AdminRemoveUserFromGroupRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.AdminRemoveUserFromGroup
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1085,7 +1193,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AdminResetUserPassword':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.AdminResetUserPassword':
     post:
       operationId: AdminResetUserPassword
       description: '<p>Resets the specified user''s password in a user pool as an administrator. Works on any user.</p> <p>When a developer calls this API, the current password is invalidated, so it must be changed. If a user tries to sign in after the API is called, the app will get a PasswordResetRequiredException exception back and should direct the user down the flow to reset the password, which is the same as the forgot password flow. In addition, if the user pool has phone verification selected and a verified phone number exists for the user, or if email verification is selected and a verified email exists for the user, calling this API will also result in sending a message to the end user with the code to change their password.</p> <p>Requires developer credentials.</p>'
@@ -1152,6 +1260,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AdminResetUserPasswordRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.AdminResetUserPassword
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1162,7 +1276,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AdminRespondToAuthChallenge':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.AdminRespondToAuthChallenge':
     post:
       operationId: AdminRespondToAuthChallenge
       description: '<p>Responds to an authentication challenge, as an administrator.</p> <p>Requires developer credentials.</p>'
@@ -1257,6 +1371,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AdminRespondToAuthChallengeRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.AdminRespondToAuthChallenge
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1267,7 +1387,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AdminSetUserMFAPreference':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.AdminSetUserMFAPreference':
     post:
       operationId: AdminSetUserMFAPreference
       description: Sets the user's multi-factor authentication (MFA) preference.
@@ -1310,6 +1430,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AdminSetUserMFAPreferenceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.AdminSetUserMFAPreference
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1320,7 +1446,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AdminSetUserSettings':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.AdminSetUserSettings':
     post:
       operationId: AdminSetUserSettings
       description: <p>Sets all the user settings for a specified user name. Works on any user.</p> <p>Requires developer credentials.</p>
@@ -1355,6 +1481,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AdminSetUserSettingsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.AdminSetUserSettings
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1365,7 +1497,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AdminUpdateAuthEventFeedback':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.AdminUpdateAuthEventFeedback':
     post:
       operationId: AdminUpdateAuthEventFeedback
       description: Provides feedback for an authentication event as to whether it was from a valid user. This feedback is used for improving the risk evaluation decision for the user pool as part of Amazon Cognito advanced security.
@@ -1408,6 +1540,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AdminUpdateAuthEventFeedbackRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.AdminUpdateAuthEventFeedback
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1418,7 +1556,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AdminUpdateDeviceStatus':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.AdminUpdateDeviceStatus':
     post:
       operationId: AdminUpdateDeviceStatus
       description: <p>Updates the device status as an administrator.</p> <p>Requires developer credentials.</p>
@@ -1461,6 +1599,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AdminUpdateDeviceStatusRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.AdminUpdateDeviceStatus
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1471,7 +1615,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AdminUpdateUserAttributes':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.AdminUpdateUserAttributes':
     post:
       operationId: AdminUpdateUserAttributes
       description: '<p>Updates the specified user''s attributes, including developer attributes, as an administrator. Works on any user.</p> <p>For custom attributes, you must prepend the <code>custom:</code> prefix to the attribute name.</p> <p>In addition to updating user attributes, this API can also be used to mark phone and email as verified.</p> <p>Requires developer credentials.</p>'
@@ -1526,6 +1670,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AdminUpdateUserAttributesRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.AdminUpdateUserAttributes
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1536,7 +1686,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AdminUserGlobalSignOut':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.AdminUserGlobalSignOut':
     post:
       operationId: AdminUserGlobalSignOut
       description: '<p>Signs out users from all devices, as an administrator.</p> <p>Requires developer credentials.</p>'
@@ -1575,6 +1725,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AdminUserGlobalSignOutRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.AdminUserGlobalSignOut
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1585,7 +1741,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AssociateSoftwareToken':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.AssociateSoftwareToken':
     post:
       operationId: AssociateSoftwareToken
       description: 'Returns a unique generated shared secret key code for the user account. The request takes an access token or a session string, but not both.'
@@ -1620,6 +1776,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AssociateSoftwareTokenRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.AssociateSoftwareToken
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1630,7 +1792,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ChangePassword':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.ChangePassword':
     post:
       operationId: ChangePassword
       description: Changes the password for a specified user in a user pool.
@@ -1685,6 +1847,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ChangePasswordRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.ChangePassword
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1695,7 +1863,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ConfirmDevice':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.ConfirmDevice':
     post:
       operationId: ConfirmDevice
       description: Confirms tracking of the device. This API call is the call that begins device tracking.
@@ -1758,6 +1926,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ConfirmDeviceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.ConfirmDevice
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1768,7 +1942,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ConfirmForgotPassword':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.ConfirmForgotPassword':
     post:
       operationId: ConfirmForgotPassword
       description: Allows a user to enter a confirmation code to reset a forgotten password.
@@ -1843,6 +2017,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ConfirmForgotPasswordRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.ConfirmForgotPassword
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1853,7 +2033,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ConfirmSignUp':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.ConfirmSignUp':
     post:
       operationId: ConfirmSignUp
       description: Confirms registration of a user and handles the existing alias from a previous user.
@@ -1924,6 +2104,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ConfirmSignUpRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.ConfirmSignUp
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1934,7 +2120,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateGroup':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.CreateGroup':
     post:
       operationId: CreateGroup
       description: <p>Creates a new group in the specified user pool.</p> <p>Requires developer credentials.</p>
@@ -1977,6 +2163,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateGroupRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.CreateGroup
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1987,7 +2179,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateIdentityProvider':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.CreateIdentityProvider':
     post:
       operationId: CreateIdentityProvider
       description: Creates an identity provider for a user pool.
@@ -2030,6 +2222,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateIdentityProviderRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.CreateIdentityProvider
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2040,7 +2238,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateResourceServer':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.CreateResourceServer':
     post:
       operationId: CreateResourceServer
       description: Creates a new OAuth2.0 resource server and defines custom scopes in it.
@@ -2079,6 +2277,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateResourceServerRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.CreateResourceServer
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2089,7 +2293,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateUserImportJob':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.CreateUserImportJob':
     post:
       operationId: CreateUserImportJob
       description: Creates the user import job.
@@ -2132,6 +2336,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateUserImportJobRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.CreateUserImportJob
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2142,7 +2352,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateUserPool':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.CreateUserPool':
     post:
       operationId: CreateUserPool
       description: Creates a new Amazon Cognito user pool and sets the password policy for the pool.
@@ -2193,6 +2403,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateUserPoolRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.CreateUserPool
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2203,7 +2419,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateUserPoolClient':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.CreateUserPoolClient':
     post:
       operationId: CreateUserPoolClient
       description: Creates the user pool client.
@@ -2250,6 +2466,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateUserPoolClientRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.CreateUserPoolClient
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2260,7 +2482,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateUserPoolDomain':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.CreateUserPoolDomain':
     post:
       operationId: CreateUserPoolDomain
       description: Creates a new domain for a user pool.
@@ -2295,6 +2517,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateUserPoolDomainRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.CreateUserPoolDomain
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2305,7 +2533,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteGroup':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.DeleteGroup':
     post:
       operationId: DeleteGroup
       description: <p>Deletes a group. Currently only groups with no members can be deleted.</p> <p>Requires developer credentials.</p>
@@ -2338,6 +2566,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteGroupRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.DeleteGroup
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2348,7 +2582,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteIdentityProvider':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.DeleteIdentityProvider':
     post:
       operationId: DeleteIdentityProvider
       description: Deletes an identity provider for a user pool.
@@ -2385,6 +2619,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteIdentityProviderRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.DeleteIdentityProvider
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2395,7 +2635,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteResourceServer':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.DeleteResourceServer':
     post:
       operationId: DeleteResourceServer
       description: Deletes a resource server.
@@ -2428,6 +2668,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteResourceServerRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.DeleteResourceServer
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2438,7 +2684,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteUser':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.DeleteUser':
     post:
       operationId: DeleteUser
       description: Allows a user to delete himself or herself.
@@ -2483,6 +2729,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteUserRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.DeleteUser
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2493,7 +2745,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteUserAttributes':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.DeleteUserAttributes':
     post:
       operationId: DeleteUserAttributes
       description: Deletes the attributes for a user.
@@ -2540,6 +2792,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteUserAttributesRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.DeleteUserAttributes
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2550,7 +2808,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteUserPool':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.DeleteUserPool':
     post:
       operationId: DeleteUserPool
       description: Deletes the specified Amazon Cognito user pool.
@@ -2587,6 +2845,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteUserPoolRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.DeleteUserPool
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2597,7 +2861,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteUserPoolClient':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.DeleteUserPoolClient':
     post:
       operationId: DeleteUserPoolClient
       description: Allows the developer to delete the user pool client.
@@ -2630,6 +2894,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteUserPoolClientRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.DeleteUserPoolClient
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2640,7 +2910,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteUserPoolDomain':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.DeleteUserPoolDomain':
     post:
       operationId: DeleteUserPoolDomain
       description: Deletes a domain for a user pool.
@@ -2671,6 +2941,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteUserPoolDomainRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.DeleteUserPoolDomain
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2681,7 +2957,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeIdentityProvider':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.DescribeIdentityProvider':
     post:
       operationId: DescribeIdentityProvider
       description: Gets information about a specific identity provider.
@@ -2716,6 +2992,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeIdentityProviderRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.DescribeIdentityProvider
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2726,7 +3008,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeResourceServer':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.DescribeResourceServer':
     post:
       operationId: DescribeResourceServer
       description: Describes a resource server.
@@ -2761,6 +3043,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeResourceServerRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.DescribeResourceServer
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2771,7 +3059,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeRiskConfiguration':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.DescribeRiskConfiguration':
     post:
       operationId: DescribeRiskConfiguration
       description: Describes the risk configuration.
@@ -2810,6 +3098,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeRiskConfigurationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.DescribeRiskConfiguration
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2820,7 +3114,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeUserImportJob':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.DescribeUserImportJob':
     post:
       operationId: DescribeUserImportJob
       description: Describes the user import job.
@@ -2855,6 +3149,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeUserImportJobRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.DescribeUserImportJob
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2865,7 +3165,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeUserPool':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.DescribeUserPool':
     post:
       operationId: DescribeUserPool
       description: Returns the configuration information and metadata of the specified user pool.
@@ -2904,6 +3204,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeUserPoolRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.DescribeUserPool
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2914,7 +3220,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeUserPoolClient':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.DescribeUserPoolClient':
     post:
       operationId: DescribeUserPoolClient
       description: Client method for returning the configuration information and metadata of the specified user pool app client.
@@ -2949,6 +3255,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeUserPoolClientRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.DescribeUserPoolClient
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2959,7 +3271,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeUserPoolDomain':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.DescribeUserPoolDomain':
     post:
       operationId: DescribeUserPoolDomain
       description: Gets information about a domain.
@@ -2990,6 +3302,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeUserPoolDomainRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.DescribeUserPoolDomain
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3000,7 +3318,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ForgetDevice':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.ForgetDevice':
     post:
       operationId: ForgetDevice
       description: Forgets the specified device.
@@ -3049,6 +3367,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ForgetDeviceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.ForgetDevice
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3059,7 +3383,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ForgotPassword':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.ForgotPassword':
     post:
       operationId: ForgotPassword
       description: 'Calling this API causes a message to be sent to the end user with a confirmation code that is required to change the user''s password. For the <code>Username</code> parameter, you can use the username or user alias. If a verified phone number exists for the user, the confirmation code is sent to the phone number. Otherwise, if a verified email exists, the confirmation code is sent to the email. If neither a verified phone number nor a verified email exists, <code>InvalidParameterException</code> is thrown. To use the confirmation code for resetting the password, call .'
@@ -3134,6 +3458,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ForgotPasswordRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.ForgotPassword
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3144,7 +3474,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetCSVHeader':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.GetCSVHeader':
     post:
       operationId: GetCSVHeader
       description: Gets the header information for the .csv file to be used as input for the user import job.
@@ -3179,6 +3509,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetCSVHeaderRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.GetCSVHeader
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3189,7 +3525,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetDevice':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.GetDevice':
     post:
       operationId: GetDevice
       description: Gets the device.
@@ -3240,6 +3576,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetDeviceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.GetDevice
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3250,7 +3592,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetGroup':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.GetGroup':
     post:
       operationId: GetGroup
       description: <p>Gets a group.</p> <p>Requires developer credentials.</p>
@@ -3285,6 +3627,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetGroupRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.GetGroup
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3295,7 +3643,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetIdentityProviderByIdentifier':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.GetIdentityProviderByIdentifier':
     post:
       operationId: GetIdentityProviderByIdentifier
       description: Gets the specified identity provider.
@@ -3330,6 +3678,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetIdentityProviderByIdentifierRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.GetIdentityProviderByIdentifier
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3340,7 +3694,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetSigningCertificate':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.GetSigningCertificate':
     post:
       operationId: GetSigningCertificate
       description: 'This method takes a user pool ID, and returns the signing certificate.'
@@ -3363,6 +3717,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetSigningCertificateRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.GetSigningCertificate
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3373,7 +3733,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetUICustomization':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.GetUICustomization':
     post:
       operationId: GetUICustomization
       description: 'Gets the UI Customization information for a particular app client''s app UI, if there is something set. If nothing is set for the particular client, but there is an existing pool level customization (app <code>clientId</code> will be <code>ALL</code>), then that is returned. If nothing is present, then an empty shape is returned.'
@@ -3408,6 +3768,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetUICustomizationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.GetUICustomization
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3418,7 +3784,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetUser':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.GetUser':
     post:
       operationId: GetUser
       description: Gets the user attributes and metadata for a user.
@@ -3465,6 +3831,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetUserRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.GetUser
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3475,7 +3847,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetUserAttributeVerificationCode':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.GetUserAttributeVerificationCode':
     post:
       operationId: GetUserAttributeVerificationCode
       description: Gets the user attribute verification code for the specified attribute name.
@@ -3554,6 +3926,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetUserAttributeVerificationCodeRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.GetUserAttributeVerificationCode
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3564,7 +3942,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetUserPoolMfaConfig':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.GetUserPoolMfaConfig':
     post:
       operationId: GetUserPoolMfaConfig
       description: Gets the user pool multi-factor authentication (MFA) configuration.
@@ -3599,6 +3977,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetUserPoolMfaConfigRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.GetUserPoolMfaConfig
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3609,7 +3993,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GlobalSignOut':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.GlobalSignOut':
     post:
       operationId: GlobalSignOut
       description: Signs out users from all devices.
@@ -3652,6 +4036,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GlobalSignOutRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.GlobalSignOut
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3662,7 +4052,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#InitiateAuth':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.InitiateAuth':
     post:
       operationId: InitiateAuth
       description: Initiates the authentication flow.
@@ -3725,6 +4115,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/InitiateAuthRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.InitiateAuth
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3735,7 +4131,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListDevices':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.ListDevices':
     post:
       operationId: ListDevices
       description: Lists the devices.
@@ -3786,6 +4182,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListDevicesRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.ListDevices
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3796,7 +4198,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListGroups':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.ListGroups':
     post:
       operationId: ListGroups
       description: <p>Lists the groups associated with a user pool.</p> <p>Requires developer credentials.</p>
@@ -3831,6 +4233,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListGroupsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.ListGroups
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3841,7 +4249,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListIdentityProviders':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.ListIdentityProviders':
     post:
       operationId: ListIdentityProviders
       description: Lists information about all identity providers for a user pool.
@@ -3876,6 +4284,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListIdentityProvidersRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.ListIdentityProviders
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3886,7 +4300,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListResourceServers':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.ListResourceServers':
     post:
       operationId: ListResourceServers
       description: Lists the resource servers for a user pool.
@@ -3921,6 +4335,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListResourceServersRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.ListResourceServers
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3931,7 +4351,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListTagsForResource':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.ListTagsForResource':
     post:
       operationId: ListTagsForResource
       description: '<p>Lists the tags that are assigned to an Amazon Cognito user pool.</p> <p>A tag is a label that you can apply to user pools to categorize and manage them in different ways, such as by purpose, owner, environment, or other criteria.</p> <p>You can use this action up to 10 times per second, per account.</p>'
@@ -3966,6 +4386,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListTagsForResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.ListTagsForResource
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3976,7 +4402,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListUserImportJobs':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.ListUserImportJobs':
     post:
       operationId: ListUserImportJobs
       description: Lists the user import jobs.
@@ -4011,6 +4437,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListUserImportJobsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.ListUserImportJobs
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -4021,7 +4453,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListUserPoolClients':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.ListUserPoolClients':
     post:
       operationId: ListUserPoolClients
       description: Lists the clients that have been created for the specified user pool.
@@ -4056,6 +4488,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListUserPoolClientsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.ListUserPoolClients
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -4066,7 +4504,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListUserPools':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.ListUserPools':
     post:
       operationId: ListUserPools
       description: Lists the user pools associated with an AWS account.
@@ -4097,6 +4535,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListUserPoolsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.ListUserPools
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -4107,7 +4551,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListUsers':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.ListUsers':
     post:
       operationId: ListUsers
       description: Lists the users in the Amazon Cognito user pool.
@@ -4142,6 +4586,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListUsersRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.ListUsers
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -4152,7 +4602,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListUsersInGroup':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.ListUsersInGroup':
     post:
       operationId: ListUsersInGroup
       description: <p>Lists the users in the specified group.</p> <p>Requires developer credentials.</p>
@@ -4187,6 +4637,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListUsersInGroupRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.ListUsersInGroup
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -4197,7 +4653,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ResendConfirmationCode':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.ResendConfirmationCode':
     post:
       operationId: ResendConfirmationCode
       description: Resends the confirmation (for confirmation of registration) to a specific user in the user pool.
@@ -4268,6 +4724,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ResendConfirmationCodeRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.ResendConfirmationCode
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -4278,7 +4740,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#RespondToAuthChallenge':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.RespondToAuthChallenge':
     post:
       operationId: RespondToAuthChallenge
       description: Responds to the authentication challenge.
@@ -4373,6 +4835,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/RespondToAuthChallengeRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.RespondToAuthChallenge
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -4383,7 +4851,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#SetRiskConfiguration':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.SetRiskConfiguration':
     post:
       operationId: SetRiskConfiguration
       description: '<p>Configures actions on detected risks. To delete the risk configuration for <code>UserPoolId</code> or <code>ClientId</code>, pass null values for all four configuration types.</p> <p>To enable Amazon Cognito advanced security features, update the user pool to include the <code>UserPoolAddOns</code> key<code>AdvancedSecurityMode</code>.</p> <p>See .</p>'
@@ -4430,6 +4898,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/SetRiskConfigurationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.SetRiskConfiguration
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -4440,7 +4914,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#SetUICustomization':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.SetUICustomization':
     post:
       operationId: SetUICustomization
       description: '<p>Sets the UI customization information for a user pool''s built-in app UI.</p> <p>You can specify app UI customization settings for a single client (with a specific <code>clientId</code>) or for all clients (by setting the <code>clientId</code> to <code>ALL</code>). If you specify <code>ALL</code>, the default configuration will be used for every client that has no UI customization set previously. If you specify UI customization settings for a particular client, it will no longer fall back to the <code>ALL</code> configuration. </p> <note> <p>To use this API, your user pool must have a domain associated with it. Otherwise, there is no place to host the app''s pages, and the service will throw an error.</p> </note>'
@@ -4475,6 +4949,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/SetUICustomizationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.SetUICustomization
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -4485,7 +4965,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#SetUserMFAPreference':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.SetUserMFAPreference':
     post:
       operationId: SetUserMFAPreference
       description: Set the user's multi-factor authentication (MFA) method preference.
@@ -4528,6 +5008,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/SetUserMFAPreferenceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.SetUserMFAPreference
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -4538,7 +5024,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#SetUserPoolMfaConfig':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.SetUserPoolMfaConfig':
     post:
       operationId: SetUserPoolMfaConfig
       description: Set the user pool MFA configuration.
@@ -4581,6 +5067,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/SetUserPoolMfaConfigRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.SetUserPoolMfaConfig
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -4591,7 +5083,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#SetUserSettings':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.SetUserSettings':
     post:
       operationId: SetUserSettings
       description: 'Sets the user settings like multi-factor authentication (MFA). If MFA is to be removed for a particular attribute pass the attribute with code delivery as null. If null list is passed, all MFA options are removed.'
@@ -4634,6 +5126,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/SetUserSettingsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.SetUserSettings
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -4644,7 +5142,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#SignUp':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.SignUp':
     post:
       operationId: SignUp
       description: 'Registers the user in the specified user pool and creates a user name, password, and user attributes.'
@@ -4715,6 +5213,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/SignUpRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.SignUp
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -4725,7 +5229,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#StartUserImportJob':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.StartUserImportJob':
     post:
       operationId: StartUserImportJob
       description: Starts the user import.
@@ -4764,6 +5268,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StartUserImportJobRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.StartUserImportJob
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -4774,7 +5284,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#StopUserImportJob':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.StopUserImportJob':
     post:
       operationId: StopUserImportJob
       description: Stops the user import job.
@@ -4813,6 +5323,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StopUserImportJobRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.StopUserImportJob
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -4823,7 +5339,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#TagResource':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.TagResource':
     post:
       operationId: TagResource
       description: '<p>Assigns a set of tags to an Amazon Cognito user pool. A tag is a label that you can use to categorize and manage user pools in different ways, such as by purpose, owner, environment, or other criteria.</p> <p>Each tag consists of a key and value, both of which you define. A key is a general category for more specific values. For example, if you have two versions of a user pool, one for testing and another for production, you might assign an <code>Environment</code> tag key to both user pools. The value of this key might be <code>Test</code> for one user pool and <code>Production</code> for the other.</p> <p>Tags are useful for cost tracking and access control. You can activate your tags so that they appear on the Billing and Cost Management console, where you can track the costs associated with your user pools. In an IAM policy, you can constrain permissions for user pools based on specific tags or tag values.</p> <p>You can use this action up to 5 times per second, per account. A user pool can have as many as 50 tags.</p>'
@@ -4858,6 +5374,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/TagResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.TagResource
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -4868,7 +5390,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UntagResource':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.UntagResource':
     post:
       operationId: UntagResource
       description: 'Removes the specified tags from an Amazon Cognito user pool. You can use this action up to 5 times per second, per account'
@@ -4903,6 +5425,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UntagResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.UntagResource
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -4913,7 +5441,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateAuthEventFeedback':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.UpdateAuthEventFeedback':
     post:
       operationId: UpdateAuthEventFeedback
       description: Provides the feedback for an authentication event whether it was from a valid user or not. This feedback is used for improving the risk evaluation decision for the user pool as part of Amazon Cognito advanced security.
@@ -4956,6 +5484,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateAuthEventFeedbackRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.UpdateAuthEventFeedback
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -4966,7 +5500,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateDeviceStatus':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.UpdateDeviceStatus':
     post:
       operationId: UpdateDeviceStatus
       description: Updates the device status.
@@ -5017,6 +5551,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateDeviceStatusRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.UpdateDeviceStatus
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -5027,7 +5567,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateGroup':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.UpdateGroup':
     post:
       operationId: UpdateGroup
       description: <p>Updates the specified group with the specified attributes.</p> <p>Requires developer credentials.</p>
@@ -5062,6 +5602,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateGroupRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.UpdateGroup
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -5072,7 +5618,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateIdentityProvider':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.UpdateIdentityProvider':
     post:
       operationId: UpdateIdentityProvider
       description: Updates identity provider information for a user pool.
@@ -5111,6 +5657,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateIdentityProviderRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.UpdateIdentityProvider
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -5121,7 +5673,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateResourceServer':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.UpdateResourceServer':
     post:
       operationId: UpdateResourceServer
       description: Updates the name and scopes of resource server. All other fields are read-only.
@@ -5156,6 +5708,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateResourceServerRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.UpdateResourceServer
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -5166,7 +5724,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateUserAttributes':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.UpdateUserAttributes':
     post:
       operationId: UpdateUserAttributes
       description: Allows a user to update a specific attribute (one at a time).
@@ -5253,6 +5811,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateUserAttributesRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.UpdateUserAttributes
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -5263,7 +5827,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateUserPool':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.UpdateUserPool':
     post:
       operationId: UpdateUserPool
       description: 'Updates the specified user pool with the specified attributes. If you don''t provide a value for an attribute, it will be set to the default value. You can get a list of the current user pool settings with .'
@@ -5322,6 +5886,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateUserPoolRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.UpdateUserPool
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -5332,7 +5902,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateUserPoolClient':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.UpdateUserPoolClient':
     post:
       operationId: UpdateUserPoolClient
       description: 'Updates the specified user pool app client with the specified attributes. If you don''t provide a value for an attribute, it will be set to the default value. You can get a list of the current user pool app client settings with .'
@@ -5379,6 +5949,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateUserPoolClientRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.UpdateUserPoolClient
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -5389,7 +5965,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateUserPoolDomain':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.UpdateUserPoolDomain':
     post:
       operationId: UpdateUserPoolDomain
       description: '<p>Updates the Secure Sockets Layer (SSL) certificate for the custom domain for your user pool.</p> <p>You can use this operation to provide the Amazon Resource Name (ARN) of a new certificate to Amazon Cognito. You cannot use it to change the domain for a user pool.</p> <p>A custom domain is used to host the Amazon Cognito hosted UI, which provides sign-up and sign-in pages for your application. When you set up a custom domain, you provide a certificate that you manage with AWS Certificate Manager (ACM). When necessary, you can use this operation to change the certificate that you applied to your custom domain.</p> <p>Usually, this is unnecessary following routine certificate renewal with ACM. When you renew your existing certificate in ACM, the ARN for your certificate remains the same, and your custom domain uses the new certificate automatically.</p> <p>However, if you replace your existing certificate with a new one, ACM gives the new certificate a new ARN. To apply the new certificate to your custom domain, you must provide this ARN to Amazon Cognito.</p> <p>When you add your new certificate in ACM, you must choose US East (N. Virginia) as the AWS Region.</p> <p>After you submit your request, Amazon Cognito requires up to 1 hour to distribute your new certificate to your custom domain.</p> <p>For more information about adding a custom domain to your user pool, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-add-custom-domain.html">Using Your Own Domain for the Hosted UI</a>.</p>'
@@ -5424,6 +6000,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateUserPoolDomainRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.UpdateUserPoolDomain
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -5434,7 +6016,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#VerifySoftwareToken':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.VerifySoftwareToken':
     post:
       operationId: VerifySoftwareToken
       description: 'Use this API to register a user''s entered TOTP code and mark the user''s software token MFA status as "verified" if successful. The request takes an access token or a session string, but not both.'
@@ -5501,6 +6083,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/VerifySoftwareTokenRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.VerifySoftwareToken
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -5511,7 +6099,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#VerifyUserAttribute':
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.VerifyUserAttribute':
     post:
       operationId: VerifyUserAttribute
       description: Verifies the specified user attributes in the user pool.
@@ -5570,6 +6158,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/VerifyUserAttributeRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.VerifyUserAttribute
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -8267,23 +8861,13 @@ definitions:
       - ADMIN_NO_SRP_AUTH
       - USER_PASSWORD_AUTH
   AuthParametersType:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/StringType'
-        value:
-          $ref: '#/definitions/StringType'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/StringType'
   ClientMetadataType:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/StringType'
-        value:
-          $ref: '#/definitions/StringType'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/StringType'
   AnalyticsMetadataType:
     type: object
     properties:
@@ -8333,14 +8917,9 @@ definitions:
     minLength: 20
     maxLength: 2048
   ChallengeParametersType:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/StringType'
-        value:
-          $ref: '#/definitions/StringType'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/StringType'
   AuthenticationResultType:
     type: object
     properties:
@@ -8388,14 +8967,9 @@ definitions:
     items:
       $ref: '#/definitions/AuthEventType'
   ChallengeResponsesType:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/StringType'
-        value:
-          $ref: '#/definitions/StringType'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/StringType'
   SMSMfaSettingsType:
     type: object
     properties:
@@ -8508,14 +9082,9 @@ definitions:
     minLength: 1
     maxLength: 32
   AttributeMappingType:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/AttributeMappingKeyType'
-        value:
-          $ref: '#/definitions/StringType'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/StringType'
   AttributeNameType:
     type: string
     pattern: '[\p{L}\p{M}\p{S}\p{N}\p{P}]+'
@@ -8822,14 +9391,9 @@ definitions:
       - LoginWithAmazon
       - OIDC
   ProviderDetailsType:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/StringType'
-        value:
-          $ref: '#/definitions/StringType'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/StringType'
   IdpIdentifiersListType:
     type: array
     items:
@@ -9176,14 +9740,9 @@ definitions:
         description: The external ID.
     description: The SMS configuration type.
   UserPoolTagsType:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/TagKeysType'
-        value:
-          $ref: '#/definitions/TagValueType'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/TagValueType'
   SchemaAttributesListType:
     type: array
     items:

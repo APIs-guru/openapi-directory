@@ -99,7 +99,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /:
+  '/#X-Amz-Target=AWSHealth_20160804.DescribeAffectedEntities':
     post:
       operationId: DescribeAffectedEntities
       description: '<p>Returns a list of entities that have been affected by the specified events, based on the specified filter criteria. Entities can refer to individual customer resources, groups of customer resources, or any other construct, depending on the AWS service. Events that have impact beyond that of the affected entities, or where the extent of impact is unknown, include at least one entity indicating this.</p> <p>At least one event ARN is required. Results are sorted by the <code>lastUpdatedTime</code> of the entity, starting with the most recent.</p>'
@@ -132,6 +132,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSHealth_20160804.DescribeAffectedEntities
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -142,7 +148,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeEntityAggregates':
+  '/#X-Amz-Target=AWSHealth_20160804.DescribeEntityAggregates':
     post:
       operationId: DescribeEntityAggregates
       description: 'Returns the number of entities that are affected by each of the specified events. If no events are specified, the counts of all affected entities are returned.'
@@ -157,6 +163,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeEntityAggregatesRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSHealth_20160804.DescribeEntityAggregates
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -167,7 +179,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeEventAggregates':
+  '/#X-Amz-Target=AWSHealth_20160804.DescribeEventAggregates':
     post:
       operationId: DescribeEventAggregates
       description: 'Returns the number of events of each event type (issue, scheduled change, and account notification). If no filter is specified, the counts of all events in each category are returned.'
@@ -196,6 +208,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSHealth_20160804.DescribeEventAggregates
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -206,7 +224,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeEventDetails':
+  '/#X-Amz-Target=AWSHealth_20160804.DescribeEventDetails':
     post:
       operationId: DescribeEventDetails
       description: '<p>Returns detailed information about one or more specified events. Information includes standard event data (region, service, etc., as returned by <a>DescribeEvents</a>), a detailed event description, and possible additional metadata that depends upon the nature of the event. Affected entities are not included; to retrieve those, use the <a>DescribeAffectedEntities</a> operation.</p> <p>If a specified event cannot be retrieved, an error message is returned for that event.</p>'
@@ -225,6 +243,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeEventDetailsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSHealth_20160804.DescribeEventDetails
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -235,7 +259,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeEventTypes':
+  '/#X-Amz-Target=AWSHealth_20160804.DescribeEventTypes':
     post:
       operationId: DescribeEventTypes
       description: 'Returns the event types that meet the specified filter criteria. If no filter criteria are specified, all event types are returned, in no particular order.'
@@ -268,6 +292,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSHealth_20160804.DescribeEventTypes
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -278,7 +308,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeEvents':
+  '/#X-Amz-Target=AWSHealth_20160804.DescribeEvents':
     post:
       operationId: DescribeEvents
       description: '<p>Returns information about events that meet the specified filter criteria. Events are returned in a summary form and do not include the detailed description, any additional metadata that depends on the event type, or any affected resources. To retrieve that information, use the <a>DescribeEventDetails</a> and <a>DescribeAffectedEntities</a> operations.</p> <p>If no filter criteria are specified, all events are returned. Results are sorted by <code>lastModifiedTime</code>, starting with the most recent.</p>'
@@ -311,6 +341,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSHealth_20160804.DescribeEvents
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -482,15 +518,10 @@ definitions:
       - UNIMPAIRED
       - UNKNOWN
   tagSet:
-    type: array
-    maxItems: 50
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/tagKey'
-        value:
-          $ref: '#/definitions/tagValue'
+    type: object
+    maxProperties: 50
+    additionalProperties:
+      $ref: '#/definitions/tagValue'
   AffectedEntity:
     type: object
     properties:
@@ -814,14 +845,9 @@ definitions:
         description: The most recent description of the event.
     description: The detailed description of the event. Included in the information returned by the <a>DescribeEventDetails</a> operation.
   eventMetadata:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/metadataKey'
-        value:
-          $ref: '#/definitions/metadataValue'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/metadataValue'
   string:
     type: string
   eventTypeList:
@@ -883,8 +909,6 @@ definitions:
       $ref: '#/definitions/eventTypeCode'
     minItems: 1
     maxItems: 10
-  metadataKey:
-    type: string
   metadataValue:
     type: string
     maxLength: 10240
@@ -892,6 +916,8 @@ definitions:
     type: string
     minLength: 3
     maxLength: 100
+  metadataKey:
+    type: string
   tagKey:
     type: string
     maxLength: 127

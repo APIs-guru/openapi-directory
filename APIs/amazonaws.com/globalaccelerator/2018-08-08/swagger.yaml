@@ -99,7 +99,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /:
+  '/#X-Amz-Target=GlobalAccelerator_V20180706.CreateAccelerator':
     post:
       operationId: CreateAccelerator
       description: 'Create an accelerator. An accelerator includes one or more listeners that process inbound connections and direct traffic to one or more endpoint groups, each of which includes endpoints, such as Network Load Balancers. To see an AWS CLI example of creating an accelerator, scroll down to <b>Example</b>.'
@@ -126,6 +126,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateAcceleratorRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - GlobalAccelerator_V20180706.CreateAccelerator
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -136,7 +142,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateEndpointGroup':
+  '/#X-Amz-Target=GlobalAccelerator_V20180706.CreateEndpointGroup':
     post:
       operationId: CreateEndpointGroup
       description: 'Create an endpoint group for the specified listener. An endpoint group is a collection of endpoints in one AWS Region. To see an AWS CLI example of creating an endpoint group, scroll down to <b>Example</b>.'
@@ -175,6 +181,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateEndpointGroupRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - GlobalAccelerator_V20180706.CreateEndpointGroup
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -185,7 +197,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateListener':
+  '/#X-Amz-Target=GlobalAccelerator_V20180706.CreateListener':
     post:
       operationId: CreateListener
       description: 'Create a listener to process inbound connections from clients to an accelerator. Connections arrive to assigned static IP addresses on a port, port range, or list of port ranges that you specify. To see an AWS CLI example of creating a listener, scroll down to <b>Example</b>.'
@@ -220,6 +232,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateListenerRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - GlobalAccelerator_V20180706.CreateListener
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -230,7 +248,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteAccelerator':
+  '/#X-Amz-Target=GlobalAccelerator_V20180706.DeleteAccelerator':
     post:
       operationId: DeleteAccelerator
       description: 'Delete an accelerator. Note: before you can delete an accelerator, you must disable it and remove all dependent resources (listeners and endpoint groups).'
@@ -263,6 +281,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteAcceleratorRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - GlobalAccelerator_V20180706.DeleteAccelerator
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -273,7 +297,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteEndpointGroup':
+  '/#X-Amz-Target=GlobalAccelerator_V20180706.DeleteEndpointGroup':
     post:
       operationId: DeleteEndpointGroup
       description: Delete an endpoint group from a listener.
@@ -294,6 +318,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteEndpointGroupRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - GlobalAccelerator_V20180706.DeleteEndpointGroup
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -304,7 +334,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteListener':
+  '/#X-Amz-Target=GlobalAccelerator_V20180706.DeleteListener':
     post:
       operationId: DeleteListener
       description: Delete a listener from an accelerator.
@@ -329,6 +359,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteListenerRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - GlobalAccelerator_V20180706.DeleteListener
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -339,7 +375,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeAccelerator':
+  '/#X-Amz-Target=GlobalAccelerator_V20180706.DescribeAccelerator':
     post:
       operationId: DescribeAccelerator
       description: 'Describe an accelerator. To see an AWS CLI example of describing an accelerator, scroll down to <b>Example</b>.'
@@ -366,6 +402,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeAcceleratorRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - GlobalAccelerator_V20180706.DescribeAccelerator
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -376,7 +418,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeAcceleratorAttributes':
+  '/#X-Amz-Target=GlobalAccelerator_V20180706.DescribeAcceleratorAttributes':
     post:
       operationId: DescribeAcceleratorAttributes
       description: Describe the attributes of an accelerator.
@@ -403,6 +445,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeAcceleratorAttributesRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - GlobalAccelerator_V20180706.DescribeAcceleratorAttributes
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -413,7 +461,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeEndpointGroup':
+  '/#X-Amz-Target=GlobalAccelerator_V20180706.DescribeEndpointGroup':
     post:
       operationId: DescribeEndpointGroup
       description: Describe an endpoint group.
@@ -436,6 +484,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeEndpointGroupRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - GlobalAccelerator_V20180706.DescribeEndpointGroup
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -446,7 +500,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeListener':
+  '/#X-Amz-Target=GlobalAccelerator_V20180706.DescribeListener':
     post:
       operationId: DescribeListener
       description: Describe a listener.
@@ -473,6 +527,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeListenerRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - GlobalAccelerator_V20180706.DescribeListener
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -483,7 +543,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListAccelerators':
+  '/#X-Amz-Target=GlobalAccelerator_V20180706.ListAccelerators':
     post:
       operationId: ListAccelerators
       description: List the accelerators for an AWS account.
@@ -506,6 +566,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListAcceleratorsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - GlobalAccelerator_V20180706.ListAccelerators
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -516,7 +582,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListEndpointGroups':
+  '/#X-Amz-Target=GlobalAccelerator_V20180706.ListEndpointGroups':
     post:
       operationId: ListEndpointGroups
       description: List the endpoint groups that are associated with a listener.
@@ -547,6 +613,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListEndpointGroupsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - GlobalAccelerator_V20180706.ListEndpointGroups
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -557,7 +629,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListListeners':
+  '/#X-Amz-Target=GlobalAccelerator_V20180706.ListListeners':
     post:
       operationId: ListListeners
       description: List the listeners for an accelerator.
@@ -584,6 +656,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListListenersRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - GlobalAccelerator_V20180706.ListListeners
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -594,7 +672,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateAccelerator':
+  '/#X-Amz-Target=GlobalAccelerator_V20180706.UpdateAccelerator':
     post:
       operationId: UpdateAccelerator
       description: Update an accelerator.
@@ -621,6 +699,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateAcceleratorRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - GlobalAccelerator_V20180706.UpdateAccelerator
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -631,7 +715,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateAcceleratorAttributes':
+  '/#X-Amz-Target=GlobalAccelerator_V20180706.UpdateAcceleratorAttributes':
     post:
       operationId: UpdateAcceleratorAttributes
       description: 'Update the attributes for an accelerator. To see an AWS CLI example of updating an accelerator to enable flow logs, scroll down to <b>Example</b>.'
@@ -658,6 +742,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateAcceleratorAttributesRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - GlobalAccelerator_V20180706.UpdateAcceleratorAttributes
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -668,7 +758,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateEndpointGroup':
+  '/#X-Amz-Target=GlobalAccelerator_V20180706.UpdateEndpointGroup':
     post:
       operationId: UpdateEndpointGroup
       description: 'Update an endpoint group. To see an AWS CLI example of updating an endpoint group, scroll down to <b>Example</b>.'
@@ -699,6 +789,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateEndpointGroupRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - GlobalAccelerator_V20180706.UpdateEndpointGroup
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -709,7 +805,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateListener':
+  '/#X-Amz-Target=GlobalAccelerator_V20180706.UpdateListener':
     post:
       operationId: UpdateListener
       description: Update a listener.
@@ -744,6 +840,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateListenerRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - GlobalAccelerator_V20180706.UpdateListener
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'

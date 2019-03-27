@@ -123,23 +123,21 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/AbortMultipartUploadInput'
         - name: accountId
-          type: string
           in: path
           required: true
+          description: 'The <code>AccountId</code> value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single ''<code>-</code>'' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens (''-'') in the ID.'
+          type: string
         - name: vaultName
-          type: string
           in: path
           required: true
+          description: The name of the vault.
+          type: string
         - name: uploadId
-          type: string
           in: path
           required: true
+          description: The upload ID of the multipart upload to delete.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -175,23 +173,31 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/CompleteMultipartUploadInput'
         - name: accountId
-          type: string
           in: path
           required: true
+          description: 'The <code>AccountId</code> value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single ''<code>-</code>'' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens (''-'') in the ID.'
+          type: string
         - name: vaultName
-          type: string
           in: path
           required: true
+          description: The name of the vault.
+          type: string
         - name: uploadId
-          type: string
           in: path
           required: true
+          description: The upload ID of the multipart upload.
+          type: string
+        - name: x-amz-archive-size
+          in: header
+          required: false
+          description: 'The total size, in bytes, of the entire archive. This value should be the sum of all the sizes of the individual parts that you uploaded.'
+          type: string
+        - name: x-amz-sha256-tree-hash
+          in: header
+          required: false
+          description: 'The SHA256 tree hash of the entire archive. It is the tree hash of SHA256 tree hash of the individual parts. If the value you specify in the request does not match the SHA256 tree hash of the final assembled archive as computed by Amazon Glacier, Amazon Glacier returns an error and the request fails.'
+          type: string
     get:
       operationId: ListParts
       description: '<p>This operation lists the parts of an archive that have been uploaded in a specific multipart upload. You can make this request at any time during an in-progress multipart upload before you complete the upload (see <a>CompleteMultipartUpload</a>. List Parts returns an error for completed uploads. The list returned in the List Parts response is sorted by part range. </p> <p>The List Parts operation supports pagination. By default, this operation returns up to 50 uploaded parts in the response. You should always check the response for a <code>marker</code> at which to continue the list; if there are no more items the <code>marker</code> is <code>null</code>. To return a list of parts that begins at a specific part, set the <code>marker</code> request parameter to the value you obtained from a previous List Parts request. You can also limit the number of parts returned in the response by specifying the <code>limit</code> parameter in the request. </p> <p>An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don''t have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html">Access Control Using AWS Identity and Access Management (IAM)</a>.</p> <p>For conceptual information and the underlying REST API, see <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html">Working with Archives in Amazon Glacier</a> and <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-list-parts.html">List Parts</a> in the <i>Amazon Glacier Developer Guide</i>.</p>'
@@ -217,33 +223,94 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: 'The <code>AccountId</code> value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single ''<code>-</code>'' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens (''-'') in the ID. '
+          type: string
+        - name: vaultName
+          in: path
+          required: true
+          description: The name of the vault.
+          type: string
+        - name: uploadId
+          in: path
+          required: true
+          description: The upload ID of the multipart upload.
+          type: string
+        - name: marker
+          in: query
+          required: false
+          description: An opaque string used for pagination. This value specifies the part at which the listing of parts should begin. Get the marker value from the response of a previous List Parts response. You need only include the marker if you are continuing the pagination of results started in a previous List Parts request.
+          type: string
+        - name: limit
+          in: query
+          required: false
+          description: 'The maximum number of parts to be returned. The default limit is 50. The number of parts returned might be fewer than the specified limit, but the number of returned parts never exceeds the limit.'
+          type: string
+    put:
+      operationId: UploadMultipartPart
+      description: '<p>This operation uploads a part of an archive. You can upload archive parts in any order. You can also upload them in parallel. You can upload up to 10,000 parts for a multipart upload.</p> <p>Amazon Glacier rejects your upload part request if any of the following conditions is true:</p> <ul> <li> <p> <b>SHA256 tree hash does not match</b>To ensure that part data is not corrupted in transmission, you compute a SHA256 tree hash of the part and include it in your request. Upon receiving the part data, Amazon Glacier also computes a SHA256 tree hash. If these hash values don''t match, the operation fails. For information about computing a SHA256 tree hash, see <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/checksum-calculations.html">Computing Checksums</a>.</p> </li> <li> <p> <b>Part size does not match</b>The size of each part except the last must match the size specified in the corresponding <a>InitiateMultipartUpload</a> request. The size of the last part must be the same size as, or smaller than, the specified size.</p> <note> <p>If you upload a part whose size is smaller than the part size you specified in your initiate multipart upload request and that part is not the last part, then the upload part request will succeed. However, the subsequent Complete Multipart Upload request will fail.</p> </note> </li> <li> <p> <b>Range does not align</b>The byte range value in the request does not align with the part size specified in the corresponding initiate request. For example, if you specify a part size of 4194304 bytes (4 MB), then 0 to 4194303 bytes (4 MB - 1) and 4194304 (4 MB) to 8388607 (8 MB - 1) are valid part ranges. However, if you set a range value of 2 MB to 6 MB, the range does not align with the part size and the upload will fail. </p> </li> </ul> <p>This operation is idempotent. If you upload the same part multiple times, the data included in the most recent request overwrites the previously uploaded data.</p> <p>An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don''t have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html">Access Control Using AWS Identity and Access Management (IAM)</a>.</p> <p> For conceptual information and underlying REST API, see <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/uploading-archive-mpu.html">Uploading Large Archives in Parts (Multipart Upload)</a> and <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/api-upload-part.html">Upload Part </a> in the <i>Amazon Glacier Developer Guide</i>.</p>'
+      responses:
+        '204':
+          description: Success
+          schema:
+            $ref: '#/definitions/UploadMultipartPartOutput'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '482':
+          description: MissingParameterValueException
+          schema:
+            $ref: '#/definitions/MissingParameterValueException'
+        '483':
+          description: RequestTimeoutException
+          schema:
+            $ref: '#/definitions/RequestTimeoutException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: 'The <code>AccountId</code> value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single ''<code>-</code>'' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens (''-'') in the ID. '
+          type: string
+        - name: vaultName
+          in: path
+          required: true
+          description: The name of the vault.
+          type: string
+        - name: uploadId
+          in: path
+          required: true
+          description: The upload ID of the multipart upload.
+          type: string
+        - name: x-amz-sha256-tree-hash
+          in: header
+          required: false
+          description: The SHA256 tree hash of the data being uploaded.
+          type: string
+        - name: Content-Range
+          in: header
+          required: false
+          description: 'Identifies the range of bytes in the assembled archive that will be uploaded in this part. Amazon Glacier uses this information to assemble the archive in the proper sequence. The format of this header follows RFC 2616. An example header is Content-Range:bytes 0-4194303/*.'
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/ListPartsInput'
-        - name: limit
-          type: string
-          in: query
-          description: Pagination limit
-          required: false
-        - name: marker
-          type: string
-          in: query
-          description: Pagination token
-          required: false
-        - name: accountId
-          type: string
-          in: path
-          required: true
-        - name: vaultName
-          type: string
-          in: path
-          required: true
-        - name: uploadId
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              body:
+                description: The data to upload.
+                type: string
   '/{accountId}/vaults/{vaultName}/lock-policy':
     delete:
       operationId: AbortVaultLock
@@ -268,19 +335,16 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/AbortVaultLockInput'
         - name: accountId
-          type: string
           in: path
           required: true
+          description: 'The <code>AccountId</code> value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single ''<code>-</code>'' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens (''-'') in the ID.'
+          type: string
         - name: vaultName
-          type: string
           in: path
           required: true
+          description: The name of the vault.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -316,19 +380,16 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetVaultLockInput'
         - name: accountId
-          type: string
           in: path
           required: true
+          description: 'The <code>AccountId</code> value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single ''<code>-</code>'' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens (''-'') in the ID.'
+          type: string
         - name: vaultName
-          type: string
           in: path
           required: true
+          description: The name of the vault.
+          type: string
     post:
       operationId: InitiateVaultLock
       description: '<p>This operation initiates the vault locking process by doing the following:</p> <ul> <li> <p>Installing a vault lock policy on the specified vault.</p> </li> <li> <p>Setting the lock state of vault lock to <code>InProgress</code>.</p> </li> <li> <p>Returning a lock ID, which is used to complete the vault locking process.</p> </li> </ul> <p>You can set one vault lock policy for each vault and this policy can be up to 20 KB in size. For more information about vault lock policies, see <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock-policy.html">Amazon Glacier Access Control with Vault Lock Policies</a>. </p> <p>You must complete the vault locking process within 24 hours after the vault lock enters the <code>InProgress</code> state. After the 24 hour window ends, the lock ID expires, the vault automatically exits the <code>InProgress</code> state, and the vault lock policy is removed from the vault. You call <a>CompleteVaultLock</a> to complete the vault locking process by setting the state of the vault lock to <code>Locked</code>. </p> <p>After a vault lock is in the <code>Locked</code> state, you cannot initiate a new vault lock for the vault.</p> <p>You can abort the vault locking process by calling <a>AbortVaultLock</a>. You can get the state of the vault lock by calling <a>GetVaultLock</a>. For more information about the vault locking process, <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock.html">Amazon Glacier Vault Lock</a>.</p> <p>If this operation is called when the vault lock is in the <code>InProgress</code> state, the operation returns an <code>AccessDeniedException</code> error. When the vault lock is in the <code>InProgress</code> state you must call <a>AbortVaultLock</a> before you can initiate a new vault lock policy. </p>'
@@ -354,20 +415,30 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: 'The <code>AccountId</code> value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single ''<code>-</code>'' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens (''-'') in the ID.'
+          type: string
+        - name: vaultName
+          in: path
+          required: true
+          description: The name of the vault.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/InitiateVaultLockInput'
-        - name: accountId
-          type: string
-          in: path
-          required: true
-        - name: vaultName
-          type: string
-          in: path
-          required: true
-  '/{accountId}/vaults/{vaultName}/tags':
+            type: object
+            properties:
+              policy:
+                description: Contains the vault lock policy.
+                type: object
+                properties:
+                  Policy:
+                    $ref: '#/definitions/string'
+                    description: The vault lock policy.
+  '/{accountId}/vaults/{vaultName}/tags#operation=add':
     post:
       operationId: AddTagsToVault
       description: 'This operation adds the specified tags to a vault. Each tag is composed of a key and a value. Each vault can have up to 10 tags. If your request would cause the tag limit for the vault to be exceeded, the operation throws the <code>LimitExceededException</code> error. If a tag already exists on the vault under a specified key, the existing key value will be overwritten. For more information about tags, see <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/tagging.html">Tagging Amazon Glacier Resources</a>. '
@@ -395,25 +466,33 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: 'The <code>AccountId</code> value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single ''<code>-</code>'' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens (''-'') in the ID.'
+          type: string
+        - name: vaultName
+          in: path
+          required: true
+          description: The name of the vault.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/AddTagsToVaultInput'
+            type: object
+            properties:
+              Tags:
+                description: The tags to add to the vault. Each tag is composed of a key and a value. The value can be an empty string.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/TagValue'
         - name: operation
           in: query
           required: true
           type: string
           enum:
             - add
-        - name: accountId
-          type: string
-          in: path
-          required: true
-        - name: vaultName
-          type: string
-          in: path
-          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -424,44 +503,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-    get:
-      operationId: ListTagsForVault
-      description: 'This operation lists all the tags attached to a vault. The operation returns an empty map if there are no tags. For more information about tags, see <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/tagging.html">Tagging Amazon Glacier Resources</a>.'
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/ListTagsForVaultOutput'
-        '480':
-          description: InvalidParameterValueException
-          schema:
-            $ref: '#/definitions/InvalidParameterValueException'
-        '481':
-          description: MissingParameterValueException
-          schema:
-            $ref: '#/definitions/MissingParameterValueException'
-        '482':
-          description: ResourceNotFoundException
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
-        '483':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListTagsForVaultInput'
-        - name: accountId
-          type: string
-          in: path
-          required: true
-        - name: vaultName
-          type: string
-          in: path
-          required: true
   '/{accountId}/vaults/{vaultName}/lock-policy/{lockId}':
     post:
       operationId: CompleteVaultLock
@@ -486,23 +527,21 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/CompleteVaultLockInput'
         - name: accountId
-          type: string
           in: path
           required: true
+          description: 'The <code>AccountId</code> value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single ''<code>-</code>'' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens (''-'') in the ID.'
+          type: string
         - name: vaultName
-          type: string
           in: path
           required: true
+          description: The name of the vault.
+          type: string
         - name: lockId
-          type: string
           in: path
           required: true
+          description: The <code>lockId</code> value is the lock ID obtained from a <a>InitiateVaultLock</a> request.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -539,19 +578,16 @@ paths:
           schema:
             $ref: '#/definitions/LimitExceededException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/CreateVaultInput'
         - name: accountId
-          type: string
           in: path
           required: true
+          description: 'The <code>AccountId</code> value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single ''<code>-</code>'' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens (''-'') in the ID.'
+          type: string
         - name: vaultName
-          type: string
           in: path
           required: true
+          description: The name of the vault.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -585,19 +621,16 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteVaultInput'
         - name: accountId
-          type: string
           in: path
           required: true
+          description: 'The <code>AccountId</code> value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single ''<code>-</code>'' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens (''-'') in the ID.'
+          type: string
         - name: vaultName
-          type: string
           in: path
           required: true
+          description: The name of the vault.
+          type: string
     get:
       operationId: DescribeVault
       description: '<p>This operation returns information about a vault, including the vault''s Amazon Resource Name (ARN), the date the vault was created, the number of archives it contains, and the total size of all the archives in the vault. The number of archives and their total size are as of the last inventory generation. This means that if you add or remove an archive from a vault, and then immediately use Describe Vault, the change in contents will not be immediately reflected. If you want to retrieve the latest inventory of the vault, use <a>InitiateJob</a>. Amazon Glacier generates vault inventories approximately daily. For more information, see <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-inventory.html">Downloading a Vault Inventory in Amazon Glacier</a>. </p> <p>An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don''t have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html">Access Control Using AWS Identity and Access Management (IAM)</a>.</p> <p>For conceptual information and underlying REST API, see <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/retrieving-vault-info.html">Retrieving Vault Metadata in Amazon Glacier</a> and <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-get.html">Describe Vault </a> in the <i>Amazon Glacier Developer Guide</i>. </p>'
@@ -623,19 +656,16 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeVaultInput'
         - name: accountId
-          type: string
           in: path
           required: true
+          description: 'The <code>AccountId</code> value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single ''<code>-</code>'' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens (''-'') in the ID. '
+          type: string
         - name: vaultName
-          type: string
           in: path
           required: true
+          description: The name of the vault.
+          type: string
   '/{accountId}/vaults/{vaultName}/archives/{archiveId}':
     delete:
       operationId: DeleteArchive
@@ -660,23 +690,21 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteArchiveInput'
         - name: accountId
-          type: string
           in: path
           required: true
+          description: 'The <code>AccountId</code> value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single ''<code>-</code>'' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens (''-'') in the ID.'
+          type: string
         - name: vaultName
-          type: string
           in: path
           required: true
+          description: The name of the vault.
+          type: string
         - name: archiveId
-          type: string
           in: path
           required: true
+          description: The ID of the archive to delete.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -711,19 +739,16 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteVaultAccessPolicyInput'
         - name: accountId
-          type: string
           in: path
           required: true
+          description: 'The <code>AccountId</code> value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single ''<code>-</code>'' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens (''-'') in the ID. '
+          type: string
         - name: vaultName
-          type: string
           in: path
           required: true
+          description: The name of the vault.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -759,19 +784,62 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: 'The <code>AccountId</code> value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single ''<code>-</code>'' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens (''-'') in the ID.'
+          type: string
+        - name: vaultName
+          in: path
+          required: true
+          description: The name of the vault.
+          type: string
+    put:
+      operationId: SetVaultAccessPolicy
+      description: 'This operation configures an access policy for a vault and will overwrite an existing policy. To configure a vault access policy, send a PUT request to the <code>access-policy</code> subresource of the vault. An access policy is specific to a vault and is also called a vault subresource. You can set one access policy per vault and the policy can be up to 20 KB in size. For more information about vault access policies, see <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-access-policy.html">Amazon Glacier Access Control with Vault Access Policies</a>. '
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '482':
+          description: MissingParameterValueException
+          schema:
+            $ref: '#/definitions/MissingParameterValueException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: 'The <code>AccountId</code> value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single ''<code>-</code>'' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens (''-'') in the ID.'
+          type: string
+        - name: vaultName
+          in: path
+          required: true
+          description: The name of the vault.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/GetVaultAccessPolicyInput'
-        - name: accountId
-          type: string
-          in: path
-          required: true
-        - name: vaultName
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              policy:
+                description: Contains the vault access policy.
+                type: object
+                properties:
+                  Policy:
+                    $ref: '#/definitions/string'
+                    description: The vault access policy.
   '/{accountId}/vaults/{vaultName}/notification-configuration':
     delete:
       operationId: DeleteVaultNotifications
@@ -796,19 +864,16 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteVaultNotificationsInput'
         - name: accountId
-          type: string
           in: path
           required: true
+          description: 'The <code>AccountId</code> value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single ''<code>-</code>'' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens (''-'') in the ID. '
+          type: string
         - name: vaultName
-          type: string
           in: path
           required: true
+          description: The name of the vault.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -844,19 +909,65 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: 'The <code>AccountId</code> value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single ''<code>-</code>'' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens (''-'') in the ID.'
+          type: string
+        - name: vaultName
+          in: path
+          required: true
+          description: The name of the vault.
+          type: string
+    put:
+      operationId: SetVaultNotifications
+      description: '<p>This operation configures notifications that will be sent when specific events happen to a vault. By default, you don''t get any notifications.</p> <p>To configure vault notifications, send a PUT request to the <code>notification-configuration</code> subresource of the vault. The request should include a JSON document that provides an Amazon SNS topic and specific events for which you want Amazon Glacier to send notifications to the topic.</p> <p>Amazon SNS topics must grant permission to the vault to be allowed to publish notifications to the topic. You can configure a vault to publish a notification for the following vault events:</p> <ul> <li> <p> <b>ArchiveRetrievalCompleted</b> This event occurs when a job that was initiated for an archive retrieval is completed (<a>InitiateJob</a>). The status of the completed job can be "Succeeded" or "Failed". The notification sent to the SNS topic is the same output as returned from <a>DescribeJob</a>. </p> </li> <li> <p> <b>InventoryRetrievalCompleted</b> This event occurs when a job that was initiated for an inventory retrieval is completed (<a>InitiateJob</a>). The status of the completed job can be "Succeeded" or "Failed". The notification sent to the SNS topic is the same output as returned from <a>DescribeJob</a>. </p> </li> </ul> <p>An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don''t have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html">Access Control Using AWS Identity and Access Management (IAM)</a>.</p> <p>For conceptual information and underlying REST API, see <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/configuring-notifications.html">Configuring Vault Notifications in Amazon Glacier</a> and <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-notifications-put.html">Set Vault Notification Configuration </a> in the <i>Amazon Glacier Developer Guide</i>. </p>'
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '482':
+          description: MissingParameterValueException
+          schema:
+            $ref: '#/definitions/MissingParameterValueException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: 'The <code>AccountId</code> value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single ''<code>-</code>'' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens (''-'') in the ID.'
+          type: string
+        - name: vaultName
+          in: path
+          required: true
+          description: The name of the vault.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/GetVaultNotificationsInput'
-        - name: accountId
-          type: string
-          in: path
-          required: true
-        - name: vaultName
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              vaultNotificationConfig:
+                description: Represents a vault's notification configuration.
+                type: object
+                properties:
+                  SNSTopic:
+                    $ref: '#/definitions/string'
+                    description: The Amazon Simple Notification Service (Amazon SNS) topic Amazon Resource Name (ARN).
+                  Events:
+                    $ref: '#/definitions/NotificationEventList'
+                    description: A list of one or more events for which Amazon Glacier will send a notification to the specified Amazon SNS topic.
   '/{accountId}/vaults/{vaultName}/jobs/{jobId}':
     get:
       operationId: DescribeJob
@@ -883,23 +994,21 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeJobInput'
         - name: accountId
-          type: string
           in: path
           required: true
+          description: 'The <code>AccountId</code> value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single ''<code>-</code>'' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens (''-'') in the ID. '
+          type: string
         - name: vaultName
-          type: string
           in: path
           required: true
+          description: The name of the vault.
+          type: string
         - name: jobId
-          type: string
           in: path
           required: true
+          description: The ID of the job to describe.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -932,15 +1041,11 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetDataRetrievalPolicyInput'
         - name: accountId
-          type: string
           in: path
           required: true
+          description: 'The <code>AccountId</code> value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single ''<code>-</code>'' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens (''-'') in the ID. '
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -951,6 +1056,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: SetDataRetrievalPolicy
+      description: '<p>This operation sets and then enacts a data retrieval policy in the region specified in the PUT request. You can set one policy per region for an AWS account. The policy is enacted within a few minutes of a successful PUT operation.</p> <p>The set policy operation does not affect retrieval jobs that were in progress before the policy was enacted. For more information about data retrieval policies, see <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/data-retrieval-policy.html">Amazon Glacier Data Retrieval Policies</a>. </p>'
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '481':
+          description: MissingParameterValueException
+          schema:
+            $ref: '#/definitions/MissingParameterValueException'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: 'The <code>AccountId</code> value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single ''<code>-</code>'' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens (''-'') in the ID.'
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              Policy:
+                description: Data retrieval policy.
+                type: object
+                properties:
+                  Rules:
+                    $ref: '#/definitions/DataRetrievalRulesList'
+                    description: 'The policy rule. Although this is a list type, currently there must be only one rule, which contains a Strategy field and optionally a BytesPerHour field.'
   '/{accountId}/vaults/{vaultName}/jobs/{jobId}/output':
     get:
       operationId: GetJobOutput
@@ -977,23 +1119,26 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetJobOutputInput'
         - name: accountId
-          type: string
           in: path
           required: true
+          description: 'The <code>AccountId</code> value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single ''<code>-</code>'' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens (''-'') in the ID.'
+          type: string
         - name: vaultName
-          type: string
           in: path
           required: true
+          description: The name of the vault.
+          type: string
         - name: jobId
-          type: string
           in: path
           required: true
+          description: The job ID whose data is downloaded.
+          type: string
+        - name: Range
+          in: header
+          required: false
+          description: '<p>The range of bytes to retrieve from the output. For example, if you want to download the first 1,048,576 bytes, specify the range as <code>bytes=0-1048575</code>. By default, this operation downloads the entire output.</p> <p>If the job output is large, then you can use a range to retrieve a portion of the output. This allows you to download the entire output in smaller chunks of bytes. For example, suppose you have 1 GB of job output you want to download and you decide to download 128 MB chunks of data at a time, which is a total of eight Get Job Output requests. You use the following process to download the job output:</p> <ol> <li> <p>Download a 128 MB chunk of output by specifying the appropriate byte range. Verify that all 128 MB of data was received.</p> </li> <li> <p>Along with the data, the response includes a SHA256 tree hash of the payload. You compute the checksum of the payload on the client and compare it with the checksum you received in the response to ensure you received all the expected data.</p> </li> <li> <p>Repeat steps 1 and 2 for all the eight 128 MB chunks of output data, each time specifying the appropriate byte range.</p> </li> <li> <p>After downloading all the parts of the job output, you have a list of eight checksum values. Compute the tree hash of these values to find the checksum of the entire output. Using the <a>DescribeJob</a> API, obtain job information of the job that provided you the output. The response includes the checksum of the entire archive stored in Amazon Glacier. You compare this value with the checksum you computed to ensure you have downloaded the entire archive content with no errors.</p> <p/> </li> </ol>'
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1038,19 +1183,56 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: 'The <code>AccountId</code> value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single ''<code>-</code>'' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens (''-'') in the ID.'
+          type: string
+        - name: vaultName
+          in: path
+          required: true
+          description: The name of the vault.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/InitiateJobInput'
-        - name: accountId
-          type: string
-          in: path
-          required: true
-        - name: vaultName
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              jobParameters:
+                description: Provides options for defining a job.
+                type: object
+                properties:
+                  Format:
+                    $ref: '#/definitions/string'
+                    description: 'When initiating a job to retrieve a vault inventory, you can optionally add this parameter to your request to specify the output format. If you are initiating an inventory job and do not specify a Format field, JSON is the default format. Valid values are "CSV" and "JSON".'
+                  Type:
+                    $ref: '#/definitions/string'
+                    description: 'The job type. You can initiate a job to perform a select query on an archive, retrieve an archive, or get an inventory of a vault. Valid values are "select", "archive-retrieval" and "inventory-retrieval".'
+                  ArchiveId:
+                    $ref: '#/definitions/string'
+                    description: 'The ID of the archive that you want to retrieve. This field is required only if <code>Type</code> is set to <code>select</code> or <code>archive-retrieval</code>code&gt;. An error occurs if you specify this request parameter for an inventory retrieval job request. '
+                  Description:
+                    $ref: '#/definitions/string'
+                    description: 'The optional description for the job. The description must be less than or equal to 1,024 bytes. The allowable characters are 7-bit ASCII without control codes-specifically, ASCII values 32-126 decimal or 0x20-0x7E hexadecimal.'
+                  SNSTopic:
+                    $ref: '#/definitions/string'
+                    description: The Amazon SNS topic ARN to which Amazon Glacier sends a notification when the job is completed and the output is ready for you to download. The specified topic publishes the notification to its subscribers. The SNS topic must exist.
+                  RetrievalByteRange:
+                    $ref: '#/definitions/string'
+                    description: '<p>The byte range to retrieve for an archive retrieval. in the form "<i>StartByteValue</i>-<i>EndByteValue</i>" If not specified, the whole archive is retrieved. If specified, the byte range must be megabyte (1024*1024) aligned which means that <i>StartByteValue</i> must be divisible by 1 MB and <i>EndByteValue</i> plus 1 must be divisible by 1 MB or be the end of the archive specified as the archive byte size value minus 1. If RetrievalByteRange is not megabyte aligned, this operation returns a 400 response. </p> <p>An error occurs if you specify this field for an inventory retrieval job request.</p>'
+                  Tier:
+                    $ref: '#/definitions/string'
+                    description: 'The tier to use for a select or an archive retrieval job. Valid values are <code>Expedited</code>, <code>Standard</code>, or <code>Bulk</code>. <code>Standard</code> is the default.'
+                  InventoryRetrievalParameters:
+                    $ref: '#/definitions/InventoryRetrievalJobInput'
+                    description: Input parameters used for range inventory retrieval.
+                  SelectParameters:
+                    $ref: '#/definitions/SelectParameters'
+                    description: Contains the parameters that define a job.
+                  OutputLocation:
+                    $ref: '#/definitions/OutputLocation'
+                    description: Contains information about the location where the select job results are stored.
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1086,29 +1268,36 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListJobsInput'
-        - name: limit
-          type: string
-          in: query
-          description: Pagination limit
-          required: false
-        - name: marker
-          type: string
-          in: query
-          description: Pagination token
-          required: false
         - name: accountId
-          type: string
           in: path
           required: true
+          description: 'The <code>AccountId</code> value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single ''<code>-</code>'' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens (''-'') in the ID. '
+          type: string
         - name: vaultName
-          type: string
           in: path
           required: true
+          description: The name of the vault.
+          type: string
+        - name: limit
+          in: query
+          required: false
+          description: 'The maximum number of jobs to be returned. The default limit is 50. The number of jobs returned might be fewer than the specified limit, but the number of returned jobs never exceeds the limit.'
+          type: string
+        - name: marker
+          in: query
+          required: false
+          description: An opaque string used for pagination. This value specifies the job at which the listing of jobs should begin. Get the marker value from a previous List Jobs response. You only need to include the marker if you are continuing the pagination of results started in a previous List Jobs request.
+          type: string
+        - name: statuscode
+          in: query
+          required: false
+          description: 'The type of job status to return. You can specify the following values: <code>InProgress</code>, <code>Succeeded</code>, or <code>Failed</code>.'
+          type: string
+        - name: completed
+          in: query
+          required: false
+          description: The state of the jobs to return. You can specify <code>true</code> or <code>false</code>.
+          type: string
   '/{accountId}/vaults/{vaultName}/multipart-uploads':
     post:
       operationId: InitiateMultipartUpload
@@ -1135,19 +1324,26 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/InitiateMultipartUploadInput'
         - name: accountId
-          type: string
           in: path
           required: true
+          description: 'The <code>AccountId</code> value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single ''<code>-</code>'' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens (''-'') in the ID. '
+          type: string
         - name: vaultName
-          type: string
           in: path
           required: true
+          description: The name of the vault.
+          type: string
+        - name: x-amz-archive-description
+          in: header
+          required: false
+          description: '<p>The archive description that you are uploading in parts.</p> <p>The part size must be a megabyte (1024 KB) multiplied by a power of 2, for example 1048576 (1 MB), 2097152 (2 MB), 4194304 (4 MB), 8388608 (8 MB), and so on. The minimum allowable part size is 1 MB, and the maximum is 4 GB (4096 MB).</p>'
+          type: string
+        - name: x-amz-part-size
+          in: header
+          required: false
+          description: 'The size of each part except the last, in bytes. The last part can be smaller than this part size.'
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1183,29 +1379,26 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListMultipartUploadsInput'
-        - name: limit
-          type: string
-          in: query
-          description: Pagination limit
-          required: false
-        - name: marker
-          type: string
-          in: query
-          description: Pagination token
-          required: false
         - name: accountId
-          type: string
           in: path
           required: true
+          description: 'The <code>AccountId</code> value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single ''<code>-</code>'' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens (''-'') in the ID. '
+          type: string
         - name: vaultName
-          type: string
           in: path
           required: true
+          description: The name of the vault.
+          type: string
+        - name: marker
+          in: query
+          required: false
+          description: An opaque string used for pagination. This value specifies the upload at which the listing of uploads should begin. Get the marker value from a previous List Uploads response. You need only include the marker if you are continuing the pagination of results started in a previous List Uploads request.
+          type: string
+        - name: limit
+          in: query
+          required: false
+          description: 'Specifies the maximum number of uploads returned in the response body. If this value is not specified, the List Uploads operation returns up to 50 uploads.'
+          type: string
   '/{accountId}/provisioned-capacity':
     get:
       operationId: ListProvisionedCapacity
@@ -1228,15 +1421,11 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListProvisionedCapacityInput'
         - name: accountId
-          type: string
           in: path
           required: true
+          description: 'The AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single ''-'' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, don''t include any hyphens (''-'') in the ID. '
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1272,15 +1461,57 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/PurchaseProvisionedCapacityInput'
         - name: accountId
-          type: string
           in: path
           required: true
+          description: 'The AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single ''-'' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, don''t include any hyphens (''-'') in the ID. '
+          type: string
+  '/{accountId}/vaults/{vaultName}/tags':
+    get:
+      operationId: ListTagsForVault
+      description: 'This operation lists all the tags attached to a vault. The operation returns an empty map if there are no tags. For more information about tags, see <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/tagging.html">Tagging Amazon Glacier Resources</a>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsForVaultOutput'
+        '480':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '481':
+          description: MissingParameterValueException
+          schema:
+            $ref: '#/definitions/MissingParameterValueException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: 'The <code>AccountId</code> value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single ''<code>-</code>'' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens (''-'') in the ID.'
+          type: string
+        - name: vaultName
+          in: path
+          required: true
+          description: The name of the vault.
+          type: string
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/{accountId}/vaults':
     get:
       operationId: ListVaults
@@ -1307,25 +1538,21 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListVaultsInput'
-        - name: limit
-          type: string
-          in: query
-          description: Pagination limit
-          required: false
-        - name: marker
-          type: string
-          in: query
-          description: Pagination token
-          required: false
         - name: accountId
-          type: string
           in: path
           required: true
+          description: 'The <code>AccountId</code> value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single ''<code>-</code>'' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens (''-'') in the ID.'
+          type: string
+        - name: marker
+          in: query
+          required: false
+          description: A string used for pagination. The marker specifies the vault ARN after which the listing of vaults should begin.
+          type: string
+        - name: limit
+          in: query
+          required: false
+          description: 'The maximum number of vaults to be returned. The default limit is 10. The number of vaults returned might be fewer than the specified limit, but the number of returned vaults never exceeds the limit.'
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1336,7 +1563,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/{accountId}/vaults/{vaultName}/tags#RemoveTagsFromVault':
+  '/{accountId}/vaults/{vaultName}/tags#operation=remove':
     post:
       operationId: RemoveTagsFromVault
       description: 'This operation removes one or more tags from the set of tags attached to a vault. For more information about tags, see <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/tagging.html">Tagging Amazon Glacier Resources</a>. This operation is idempotent. The operation will be successful, even if there are no tags attached to the vault. '
@@ -1360,25 +1587,33 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: 'The <code>AccountId</code> value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single ''<code>-</code>'' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens (''-'') in the ID.'
+          type: string
+        - name: vaultName
+          in: path
+          required: true
+          description: The name of the vault.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/RemoveTagsFromVaultInput'
+            type: object
+            properties:
+              TagKeys:
+                description: A list of tag keys. Each corresponding tag is removed from the vault.
+                type: array
+                items:
+                  $ref: '#/definitions/string'
         - name: operation
           in: query
           required: true
           type: string
           enum:
             - remove
-        - name: accountId
-          type: string
-          in: path
-          required: true
-        - name: vaultName
-          type: string
-          in: path
-          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1389,140 +1624,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/{accountId}/policies/data-retrieval#SetDataRetrievalPolicy':
-    put:
-      operationId: SetDataRetrievalPolicy
-      description: '<p>This operation sets and then enacts a data retrieval policy in the region specified in the PUT request. You can set one policy per region for an AWS account. The policy is enacted within a few minutes of a successful PUT operation.</p> <p>The set policy operation does not affect retrieval jobs that were in progress before the policy was enacted. For more information about data retrieval policies, see <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/data-retrieval-policy.html">Amazon Glacier Data Retrieval Policies</a>. </p>'
-      responses:
-        '204':
-          description: Success
-        '480':
-          description: InvalidParameterValueException
-          schema:
-            $ref: '#/definitions/InvalidParameterValueException'
-        '481':
-          description: MissingParameterValueException
-          schema:
-            $ref: '#/definitions/MissingParameterValueException'
-        '482':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/SetDataRetrievalPolicyInput'
-        - name: accountId
-          type: string
-          in: path
-          required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/{accountId}/vaults/{vaultName}/access-policy#SetVaultAccessPolicy':
-    put:
-      operationId: SetVaultAccessPolicy
-      description: 'This operation configures an access policy for a vault and will overwrite an existing policy. To configure a vault access policy, send a PUT request to the <code>access-policy</code> subresource of the vault. An access policy is specific to a vault and is also called a vault subresource. You can set one access policy per vault and the policy can be up to 20 KB in size. For more information about vault access policies, see <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-access-policy.html">Amazon Glacier Access Control with Vault Access Policies</a>. '
-      responses:
-        '204':
-          description: Success
-        '480':
-          description: ResourceNotFoundException
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
-        '481':
-          description: InvalidParameterValueException
-          schema:
-            $ref: '#/definitions/InvalidParameterValueException'
-        '482':
-          description: MissingParameterValueException
-          schema:
-            $ref: '#/definitions/MissingParameterValueException'
-        '483':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/SetVaultAccessPolicyInput'
-        - name: accountId
-          type: string
-          in: path
-          required: true
-        - name: vaultName
-          type: string
-          in: path
-          required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/{accountId}/vaults/{vaultName}/notification-configuration#SetVaultNotifications':
-    put:
-      operationId: SetVaultNotifications
-      description: '<p>This operation configures notifications that will be sent when specific events happen to a vault. By default, you don''t get any notifications.</p> <p>To configure vault notifications, send a PUT request to the <code>notification-configuration</code> subresource of the vault. The request should include a JSON document that provides an Amazon SNS topic and specific events for which you want Amazon Glacier to send notifications to the topic.</p> <p>Amazon SNS topics must grant permission to the vault to be allowed to publish notifications to the topic. You can configure a vault to publish a notification for the following vault events:</p> <ul> <li> <p> <b>ArchiveRetrievalCompleted</b> This event occurs when a job that was initiated for an archive retrieval is completed (<a>InitiateJob</a>). The status of the completed job can be "Succeeded" or "Failed". The notification sent to the SNS topic is the same output as returned from <a>DescribeJob</a>. </p> </li> <li> <p> <b>InventoryRetrievalCompleted</b> This event occurs when a job that was initiated for an inventory retrieval is completed (<a>InitiateJob</a>). The status of the completed job can be "Succeeded" or "Failed". The notification sent to the SNS topic is the same output as returned from <a>DescribeJob</a>. </p> </li> </ul> <p>An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don''t have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html">Access Control Using AWS Identity and Access Management (IAM)</a>.</p> <p>For conceptual information and underlying REST API, see <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/configuring-notifications.html">Configuring Vault Notifications in Amazon Glacier</a> and <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-notifications-put.html">Set Vault Notification Configuration </a> in the <i>Amazon Glacier Developer Guide</i>. </p>'
-      responses:
-        '204':
-          description: Success
-        '480':
-          description: ResourceNotFoundException
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
-        '481':
-          description: InvalidParameterValueException
-          schema:
-            $ref: '#/definitions/InvalidParameterValueException'
-        '482':
-          description: MissingParameterValueException
-          schema:
-            $ref: '#/definitions/MissingParameterValueException'
-        '483':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/SetVaultNotificationsInput'
-        - name: accountId
-          type: string
-          in: path
-          required: true
-        - name: vaultName
-          type: string
-          in: path
-          required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/{accountId}/vaults/{vaultName}/archives#UploadArchive':
+  '/{accountId}/vaults/{vaultName}/archives':
     post:
       operationId: UploadArchive
       description: '<p>This operation adds an archive to a vault. This is a synchronous operation, and for a successful upload, your data is durably persisted. Amazon Glacier returns the archive ID in the <code>x-amz-archive-id</code> header of the response. </p> <p>You must use the archive ID to access your data in Amazon Glacier. After you upload an archive, you should save the archive ID returned so that you can retrieve or delete the archive later. Besides saving the archive ID, you can also index it and give it a friendly name to allow for better searching. You can also use the optional archive description field to specify how the archive is referred to in an external index of archives, such as you might create in Amazon DynamoDB. You can also get the vault inventory to obtain a list of archive IDs in a vault. For more information, see <a>InitiateJob</a>. </p> <p>You must provide a SHA256 tree hash of the data you are uploading. For information about computing a SHA256 tree hash, see <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/checksum-calculations.html">Computing Checksums</a>. </p> <p>You can optionally specify an archive description of up to 1,024 printable ASCII characters. You can get the archive description when you either retrieve the archive or get the vault inventory. For more information, see <a>InitiateJob</a>. Amazon Glacier does not interpret the description in any way. An archive description does not need to be unique. You cannot use the description to retrieve or sort the archive list. </p> <p>Archives are immutable. After you upload an archive, you cannot edit the archive or its description.</p> <p>An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don''t have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html">Access Control Using AWS Identity and Access Management (IAM)</a>.</p> <p> For conceptual information and underlying REST API, see <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/uploading-an-archive.html">Uploading an Archive in Amazon Glacier</a> and <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/api-archive-post.html">Upload Archive</a> in the <i>Amazon Glacier Developer Guide</i>. </p>'
@@ -1552,76 +1654,35 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
+        - name: vaultName
+          in: path
+          required: true
+          description: The name of the vault.
+          type: string
+        - name: accountId
+          in: path
+          required: true
+          description: 'The <code>AccountId</code> value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single ''<code>-</code>'' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens (''-'') in the ID. '
+          type: string
+        - name: x-amz-archive-description
+          in: header
+          required: false
+          description: The optional description of the archive you are uploading.
+          type: string
+        - name: x-amz-sha256-tree-hash
+          in: header
+          required: false
+          description: The SHA256 tree hash of the data being uploaded.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UploadArchiveInput'
-        - name: accountId
-          type: string
-          in: path
-          required: true
-        - name: vaultName
-          type: string
-          in: path
-          required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/{accountId}/vaults/{vaultName}/multipart-uploads/{uploadId}#UploadMultipartPart':
-    put:
-      operationId: UploadMultipartPart
-      description: '<p>This operation uploads a part of an archive. You can upload archive parts in any order. You can also upload them in parallel. You can upload up to 10,000 parts for a multipart upload.</p> <p>Amazon Glacier rejects your upload part request if any of the following conditions is true:</p> <ul> <li> <p> <b>SHA256 tree hash does not match</b>To ensure that part data is not corrupted in transmission, you compute a SHA256 tree hash of the part and include it in your request. Upon receiving the part data, Amazon Glacier also computes a SHA256 tree hash. If these hash values don''t match, the operation fails. For information about computing a SHA256 tree hash, see <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/checksum-calculations.html">Computing Checksums</a>.</p> </li> <li> <p> <b>Part size does not match</b>The size of each part except the last must match the size specified in the corresponding <a>InitiateMultipartUpload</a> request. The size of the last part must be the same size as, or smaller than, the specified size.</p> <note> <p>If you upload a part whose size is smaller than the part size you specified in your initiate multipart upload request and that part is not the last part, then the upload part request will succeed. However, the subsequent Complete Multipart Upload request will fail.</p> </note> </li> <li> <p> <b>Range does not align</b>The byte range value in the request does not align with the part size specified in the corresponding initiate request. For example, if you specify a part size of 4194304 bytes (4 MB), then 0 to 4194303 bytes (4 MB - 1) and 4194304 (4 MB) to 8388607 (8 MB - 1) are valid part ranges. However, if you set a range value of 2 MB to 6 MB, the range does not align with the part size and the upload will fail. </p> </li> </ul> <p>This operation is idempotent. If you upload the same part multiple times, the data included in the most recent request overwrites the previously uploaded data.</p> <p>An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don''t have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html">Access Control Using AWS Identity and Access Management (IAM)</a>.</p> <p> For conceptual information and underlying REST API, see <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/uploading-archive-mpu.html">Uploading Large Archives in Parts (Multipart Upload)</a> and <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/api-upload-part.html">Upload Part </a> in the <i>Amazon Glacier Developer Guide</i>.</p>'
-      responses:
-        '204':
-          description: Success
-          schema:
-            $ref: '#/definitions/UploadMultipartPartOutput'
-        '480':
-          description: ResourceNotFoundException
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
-        '481':
-          description: InvalidParameterValueException
-          schema:
-            $ref: '#/definitions/InvalidParameterValueException'
-        '482':
-          description: MissingParameterValueException
-          schema:
-            $ref: '#/definitions/MissingParameterValueException'
-        '483':
-          description: RequestTimeoutException
-          schema:
-            $ref: '#/definitions/RequestTimeoutException'
-        '484':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/UploadMultipartPartInput'
-        - name: accountId
-          type: string
-          in: path
-          required: true
-        - name: vaultName
-          type: string
-          in: path
-          required: true
-        - name: uploadId
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              body:
+                description: The data to upload.
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1633,14 +1694,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  AbortMultipartUploadInput:
-    type: object
-    example:
-      accountId: '-'
-      uploadId: 19gaRezEXAMPLES6Ry5YYdqthHOC_kGRCT03L9yetr220UmPtBYKk-OssZtLqyFu7sY1_lR7vgFuJV6NtcV5zpsJ
-      vaultName: my-vault
-    properties: {}
-    description: '<p>Provides options to abort a multipart upload identified by the upload ID.</p> <p>For information about the underlying REST API, see <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-abort-upload.html">Abort Multipart Upload</a>. For conceptual information, see <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html">Working with Archives in Amazon Glacier</a>.</p>'
   ResourceNotFoundException:
     type: object
     properties:
@@ -1693,26 +1746,8 @@ definitions:
         $ref: '#/definitions/string'
         description: Returned if the service cannot complete the request.
     description: Returned if the service cannot complete the request.
-  AbortVaultLockInput:
-    type: object
-    example:
-      accountId: '-'
-      vaultName: examplevault
-    properties: {}
-    description: The input values for <code>AbortVaultLock</code>.
-  AddTagsToVaultInput:
-    type: object
-    example:
-      Tags:
-        examplekey1: examplevalue1
-        examplekey2: examplevalue2
-      accountId: '-'
-      vaultName: my-vault
-    properties:
-      Tags:
-        $ref: '#/definitions/TagMap'
-        description: The tags to add to the vault. Each tag is composed of a key and a value. The value can be an empty string.
-    description: The input values for <code>AddTagsToVault</code>.
+  TagValue:
+    type: string
   LimitExceededException:
     type: object
     properties:
@@ -1734,66 +1769,12 @@ definitions:
       location: /0123456789012/vaults/my-vault/archives/kKB7ymWJVpPSwhGP6ycSOAekp9ZYe_--zM_mw6k76ZFGEIWQX-ybtRDvc2VkPSDtfKmQrj0IRQLSGsNuDp-AJVlu2ccmDSyDUmZwKbwbpAdGATGDiB3hHO0bjbGehXTcApVud_wyDw
     properties: {}
     description: '<p>Contains the Amazon Glacier response to your request.</p> <p>For information about the underlying REST API, see <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/api-archive-post.html">Upload Archive</a>. For conceptual information, see <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html">Working with Archives in Amazon Glacier</a>.</p>'
-  CompleteMultipartUploadInput:
-    type: object
-    example:
-      accountId: '-'
-      archiveSize: '3145728'
-      checksum: 9628195fcdbcbbe76cdde456d4646fa7de5f219fb39823836d81f0cc0e18aa67
-      uploadId: 19gaRezEXAMPLES6Ry5YYdqthHOC_kGRCT03L9yetr220UmPtBYKk-OssZtLqyFu7sY1_lR7vgFuJV6NtcV5zpsJ
-      vaultName: my-vault
-    properties: {}
-    description: 'Provides options to complete a multipart upload operation. This informs Amazon Glacier that all the archive parts have been uploaded and Amazon Glacier can now assemble the archive from the uploaded parts. After assembling and saving the archive to the vault, Amazon Glacier returns the URI path of the newly created archive resource.'
-  CompleteVaultLockInput:
-    type: object
-    example:
-      accountId: '-'
-      lockId: AE863rKkWZU53SLW5be4DUcW
-      vaultName: example-vault
-    properties: {}
-    description: The input values for <code>CompleteVaultLock</code>.
   CreateVaultOutput:
     type: object
     example:
       location: /111122223333/vaults/my-vault
     properties: {}
     description: Contains the Amazon Glacier response to your request.
-  CreateVaultInput:
-    type: object
-    example:
-      accountId: '-'
-      vaultName: my-vault
-    properties: {}
-    description: Provides options to create a vault.
-  DeleteArchiveInput:
-    type: object
-    example:
-      accountId: '-'
-      archiveId: NkbByEejwEggmBz2fTHgJrg0XBoDfjP4q6iu87-TjhqG6eGoOY9Z8i1_AUyUsuhPAdTqLHy8pTl5nfCFJmDl2yEZONi5L26Omw12vcs01MNGntHEQL8MBfGlqrEXAMPLEArchiveId
-      vaultName: examplevault
-    properties: {}
-    description: Provides options for deleting an archive from an Amazon Glacier vault.
-  DeleteVaultInput:
-    type: object
-    example:
-      accountId: '-'
-      vaultName: my-vault
-    properties: {}
-    description: Provides options for deleting a vault from Amazon Glacier.
-  DeleteVaultAccessPolicyInput:
-    type: object
-    example:
-      accountId: '-'
-      vaultName: examplevault
-    properties: {}
-    description: DeleteVaultAccessPolicy input.
-  DeleteVaultNotificationsInput:
-    type: object
-    example:
-      accountId: '-'
-      vaultName: examplevault
-    properties: {}
-    description: Provides options for deleting a vault notification configuration from an Amazon Glacier vault.
   GlacierJobDescription:
     type: object
     example:
@@ -1870,14 +1851,6 @@ definitions:
         $ref: '#/definitions/OutputLocation'
         description: Contains the location where the data from the select job is stored.
     description: Contains the description of an Amazon Glacier job.
-  DescribeJobInput:
-    type: object
-    example:
-      accountId: '-'
-      jobId: zbxcm3Z_3z5UkoroF7SuZKrxgGoDc3RloGduS7Eg-RO47Yc6FxsdGBgf_Q2DK5Ejh18CnTS5XW4_XqlNHS61dsO4Cn
-      vaultName: my-vault
-    properties: {}
-    description: Provides options for retrieving a job description.
   DescribeVaultOutput:
     type: object
     example:
@@ -1906,13 +1879,6 @@ definitions:
         $ref: '#/definitions/long'
         description: 'Total size, in bytes, of the archives in the vault as of the last inventory date. This field will return null if an inventory has not yet run on the vault, for example if you just created the vault.'
     description: Contains the Amazon Glacier response to your request.
-  DescribeVaultInput:
-    type: object
-    example:
-      accountId: '-'
-      vaultName: my-vault
-    properties: {}
-    description: Provides options for retrieving metadata for a specific vault in Amazon Glacier.
   GetDataRetrievalPolicyOutput:
     type: object
     example:
@@ -1925,12 +1891,6 @@ definitions:
         $ref: '#/definitions/DataRetrievalPolicy'
         description: Contains the returned data retrieval policy in JSON format.
     description: Contains the Amazon Glacier response to the <code>GetDataRetrievalPolicy</code> request.
-  GetDataRetrievalPolicyInput:
-    type: object
-    example:
-      accountId: '-'
-    properties: {}
-    description: Input for GetDataRetrievalPolicy.
   GetJobOutputOutput:
     type: object
     example:
@@ -1946,15 +1906,6 @@ definitions:
         $ref: '#/definitions/httpstatus'
         description: The HTTP response code for a job output request. The value depends on whether a range was specified in the request.
     description: Contains the Amazon Glacier response to your request.
-  GetJobOutputInput:
-    type: object
-    example:
-      accountId: '-'
-      jobId: zbxcm3Z_3z5UkoroF7SuZKrxgGoDc3RloGduS7Eg-RO47Yc6FxsdGBgf_Q2DK5Ejh18CnTS5XW4_XqlNHS61dsO4CnMW
-      range: ''
-      vaultName: my-vaul
-    properties: {}
-    description: Provides options for downloading output of an Amazon Glacier job.
   GetVaultAccessPolicyOutput:
     type: object
     example:
@@ -1965,13 +1916,6 @@ definitions:
         $ref: '#/definitions/VaultAccessPolicy'
         description: Contains the returned vault access policy as a JSON string.
     description: Output for GetVaultAccessPolicy.
-  GetVaultAccessPolicyInput:
-    type: object
-    example:
-      accountId: '-'
-      vaultName: example-vault
-    properties: {}
-    description: Input for GetVaultAccessPolicy.
   GetVaultLockOutput:
     type: object
     example:
@@ -1993,13 +1937,6 @@ definitions:
         $ref: '#/definitions/string'
         description: The UTC date and time at which the vault lock was put into the <code>InProgress</code> state.
     description: Contains the Amazon Glacier response to your request.
-  GetVaultLockInput:
-    type: object
-    example:
-      accountId: '-'
-      vaultName: examplevault
-    properties: {}
-    description: The input values for <code>GetVaultLock</code>.
   GetVaultNotificationsOutput:
     type: object
     example:
@@ -2013,13 +1950,6 @@ definitions:
         $ref: '#/definitions/VaultNotificationConfig'
         description: Returns the notification configuration set on the vault.
     description: Contains the Amazon Glacier response to your request.
-  GetVaultNotificationsInput:
-    type: object
-    example:
-      accountId: '-'
-      vaultName: my-vault
-    properties: {}
-    description: Provides options for retrieving the notification configuration set on an Amazon Glacier vault.
   InitiateJobOutput:
     type: object
     example:
@@ -2027,21 +1957,47 @@ definitions:
       location: /111122223333/vaults/examplevault/jobs/HkF9p6o7yjhFx-K3CGl6fuSm6VzW9T7esGQfco8nUXVYwS0jlb5gq1JZ55yHgt5vP54ZShjoQzQVVh7vEXAMPLEjobID
     properties: {}
     description: Contains the Amazon Glacier response to your request.
-  InitiateJobInput:
+  string:
+    type: string
+  InventoryRetrievalJobInput:
     type: object
-    example:
-      accountId: '-'
-      jobParameters:
-        Description: My inventory job
-        Format: CSV
-        SNSTopic: 'arn:aws:sns:us-west-2:111111111111:Glacier-InventoryRetrieval-topic-Example'
-        Type: inventory-retrieval
-      vaultName: examplevault
     properties:
-      jobParameters:
-        $ref: '#/definitions/JobParameters'
-        description: Provides options for specifying job information.
-    description: Provides options for initiating an Amazon Glacier job.
+      StartDate:
+        $ref: '#/definitions/string'
+        description: 'The start of the date range in UTC for vault inventory retrieval that includes archives created on or after this date. This value should be a string in the ISO 8601 date format, for example <code>2013-03-20T17:03:43Z</code>.'
+      EndDate:
+        $ref: '#/definitions/string'
+        description: 'The end of the date range in UTC for vault inventory retrieval that includes archives created before this date. This value should be a string in the ISO 8601 date format, for example <code>2013-03-20T17:03:43Z</code>.'
+      Limit:
+        $ref: '#/definitions/string'
+        description: Specifies the maximum number of inventory items returned per vault inventory retrieval request. Valid values are greater than or equal to 1.
+      Marker:
+        $ref: '#/definitions/string'
+        description: 'An opaque string that represents where to continue pagination of the vault inventory retrieval results. You use the marker in a new <b>InitiateJob</b> request to obtain additional inventory items. If there are no more inventory items, this value is <code>null</code>.'
+    description: Provides options for specifying a range inventory retrieval job.
+  SelectParameters:
+    type: object
+    properties:
+      InputSerialization:
+        $ref: '#/definitions/InputSerialization'
+        description: Describes the serialization format of the object.
+      ExpressionType:
+        $ref: '#/definitions/ExpressionType'
+        description: 'The type of the provided expression, for example <code>SQL</code>.'
+      Expression:
+        $ref: '#/definitions/string'
+        description: The expression that is used to select the object.
+      OutputSerialization:
+        $ref: '#/definitions/OutputSerialization'
+        description: Describes how the results of the select job are serialized.
+    description: Contains information about the parameters used for a select.
+  OutputLocation:
+    type: object
+    properties:
+      S3:
+        $ref: '#/definitions/S3Location'
+        description: Describes an S3 location that will receive the results of the job request.
+    description: Contains information about the location where the select job results are stored.
   PolicyEnforcedException:
     type: object
     properties:
@@ -2072,32 +2028,12 @@ definitions:
       uploadId: 19gaRezEXAMPLES6Ry5YYdqthHOC_kGRCT03L9yetr220UmPtBYKk-OssZtLqyFu7sY1_lR7vgFuJV6NtcV5zpsJ
     properties: {}
     description: The Amazon Glacier response to your request.
-  InitiateMultipartUploadInput:
-    type: object
-    example:
-      accountId: '-'
-      partSize: '1048576'
-      vaultName: my-vault
-    properties: {}
-    description: Provides options for initiating a multipart upload to an Amazon Glacier vault.
   InitiateVaultLockOutput:
     type: object
     example:
       lockId: AE863rKkWZU53SLW5be4DUcW
     properties: {}
     description: Contains the Amazon Glacier response to your request.
-  InitiateVaultLockInput:
-    type: object
-    example:
-      accountId: '-'
-      policy:
-        Policy: '{"Version":"2012-10-17","Statement":[{"Sid":"Define-vault-lock","Effect":"Deny","Principal":{"AWS":"arn:aws:iam::999999999999:root"},"Action":"glacier:DeleteArchive","Resource":"arn:aws:glacier:us-west-2:999999999999:vaults/examplevault","Condition":{"NumericLessThanEquals":{"glacier:ArchiveAgeinDays":"365"}}}]}'
-      vaultName: my-vault
-    properties:
-      policy:
-        $ref: '#/definitions/VaultLockPolicy'
-        description: 'The vault lock policy as a JSON string, which uses "\" as an escape character.'
-    description: The input values for <code>InitiateVaultLock</code>.
   ListJobsOutput:
     type: object
     example:
@@ -2131,13 +2067,6 @@ definitions:
         $ref: '#/definitions/string'
         description: ' An opaque string used for pagination that specifies the job at which the listing of jobs should begin. You get the <code>marker</code> value from a previous List Jobs response. You only need to include the marker if you are continuing the pagination of the results started in a previous List Jobs request. '
     description: Contains the Amazon Glacier response to your request.
-  ListJobsInput:
-    type: object
-    example:
-      accountId: '-'
-      vaultName: my-vault
-    properties: {}
-    description: Provides options for retrieving a job list for an Amazon Glacier vault.
   ListMultipartUploadsOutput:
     type: object
     example:
@@ -2166,13 +2095,6 @@ definitions:
         $ref: '#/definitions/string'
         description: 'An opaque string that represents where to continue pagination of the results. You use the marker in a new List Multipart Uploads request to obtain more uploads in the list. If there are no more uploads, this value is <code>null</code>.'
     description: Contains the Amazon Glacier response to your request.
-  ListMultipartUploadsInput:
-    type: object
-    example:
-      accountId: '-'
-      vaultName: examplevault
-    properties: {}
-    description: Provides options for retrieving list of in-progress multipart uploads for an Amazon Glacier vault.
   ListPartsOutput:
     type: object
     example:
@@ -2210,14 +2132,6 @@ definitions:
         $ref: '#/definitions/string'
         description: 'An opaque string that represents where to continue pagination of the results. You use the marker in a new List Parts request to obtain more jobs in the list. If there are no more parts, this value is <code>null</code>.'
     description: Contains the Amazon Glacier response to your request.
-  ListPartsInput:
-    type: object
-    example:
-      accountId: '-'
-      uploadId: OW2fM5iVylEpFEMM9_HpKowRapC3vn5sSL39_396UW9zLFUWVrnRHaPjUJddQ5OxSHVXjYtrN47NBZ-khxOjyEXAMPLE
-      vaultName: examplevault
-    properties: {}
-    description: Provides options for retrieving a list of parts of an archive that have been uploaded in a specific multipart upload.
   ListProvisionedCapacityOutput:
     type: object
     example:
@@ -2232,11 +2146,6 @@ definitions:
       ProvisionedCapacityList:
         $ref: '#/definitions/ProvisionedCapacityList'
         description: The response body contains the following JSON fields.
-  ListProvisionedCapacityInput:
-    type: object
-    example:
-      accountId: '-'
-    properties: {}
   ListTagsForVaultOutput:
     type: object
     example:
@@ -2248,13 +2157,6 @@ definitions:
         $ref: '#/definitions/TagMap'
         description: The tags attached to the vault. Each tag is composed of a key and a value.
     description: Contains the Amazon Glacier response to your request.
-  ListTagsForVaultInput:
-    type: object
-    example:
-      accountId: '-'
-      vaultName: examplevault
-    properties: {}
-    description: The input value for <code>ListTagsForVaultInput</code>.
   ListVaultsOutput:
     type: object
     example:
@@ -2273,90 +2175,19 @@ definitions:
         $ref: '#/definitions/string'
         description: The vault ARN at which to continue pagination of the results. You use the marker in another List Vaults request to obtain more vaults in the list.
     description: Contains the Amazon Glacier response to your request.
-  ListVaultsInput:
-    type: object
-    example:
-      accountId: '-'
-      limit: ''
-      marker: ''
-    properties: {}
-    description: Provides options to retrieve the vault list owned by the calling user's account. The list provides metadata information for each vault.
   PurchaseProvisionedCapacityOutput:
     type: object
     example:
       capacityId: zSaq7NzHFQDANTfQkDen4V7z
     properties: {}
-  PurchaseProvisionedCapacityInput:
-    type: object
-    example:
-      accountId: '-'
-    properties: {}
-  RemoveTagsFromVaultInput:
-    type: object
-    example:
-      TagKeys:
-        - examplekey1
-        - examplekey2
-      accountId: '-'
-      vaultName: examplevault
-    properties:
-      TagKeys:
-        $ref: '#/definitions/TagKeyList'
-        description: A list of tag keys. Each corresponding tag is removed from the vault.
-    description: The input value for <code>RemoveTagsFromVaultInput</code>.
-  SetDataRetrievalPolicyInput:
-    type: object
-    example:
-      Policy:
-        Rules:
-          - BytesPerHour: 10737418240
-            Strategy: BytesPerHour
-      accountId: '-'
-    properties:
-      Policy:
-        $ref: '#/definitions/DataRetrievalPolicy'
-        description: The data retrieval policy in JSON format.
-    description: SetDataRetrievalPolicy input.
-  SetVaultAccessPolicyInput:
-    type: object
-    example:
-      accountId: '-'
-      policy:
-        Policy: '{"Version":"2012-10-17","Statement":[{"Sid":"Define-owner-access-rights","Effect":"Allow","Principal":{"AWS":"arn:aws:iam::999999999999:root"},"Action":"glacier:DeleteArchive","Resource":"arn:aws:glacier:us-west-2:999999999999:vaults/examplevault"}]}'
-      vaultName: examplevault
-    properties:
-      policy:
-        $ref: '#/definitions/VaultAccessPolicy'
-        description: The vault access policy as a JSON string.
-    description: SetVaultAccessPolicy input.
-  SetVaultNotificationsInput:
-    type: object
-    example:
-      accountId: '-'
-      vaultName: examplevault
-      vaultNotificationConfig:
-        Events:
-          - ArchiveRetrievalCompleted
-          - InventoryRetrievalCompleted
-        SNSTopic: 'arn:aws:sns:us-west-2:012345678901:mytopic'
-    properties:
-      vaultNotificationConfig:
-        $ref: '#/definitions/VaultNotificationConfig'
-        description: Provides options for specifying notification configuration.
-    description: Provides options to configure notifications that will be sent when specific events happen to a vault.
-  UploadArchiveInput:
-    type: object
-    example:
-      accountId: '-'
-      archiveDescription: ''
-      body: example-data-to-upload
-      checksum: ''
-      vaultName: my-vault
-    properties:
-      body:
-        $ref: '#/definitions/Stream'
-        description: The data to upload.
-    description: Provides options to add an archive to a vault.
+  DataRetrievalRulesList:
+    type: array
+    items:
+      $ref: '#/definitions/DataRetrievalRule'
+  NotificationEventList:
+    type: array
+    items:
+      $ref: '#/definitions/string'
   RequestTimeoutException:
     type: object
     properties:
@@ -2376,22 +2207,14 @@ definitions:
       checksum: c06f7cd4baacb087002a99a5f48bf953
     properties: {}
     description: Contains the Amazon Glacier response to your request.
-  UploadMultipartPartInput:
+  AbortMultipartUploadInput:
     type: object
-    example:
-      accountId: '-'
-      body: part1
-      checksum: c06f7cd4baacb087002a99a5f48bf953
-      range: bytes 0-1048575/*
-      uploadId: 19gaRezEXAMPLES6Ry5YYdqthHOC_kGRCT03L9yetr220UmPtBYKk-OssZtLqyFu7sY1_lR7vgFuJV6NtcV5zpsJ
-      vaultName: examplevault
-    properties:
-      body:
-        $ref: '#/definitions/Stream'
-        description: The data to upload.
-    description: Provides options to upload a part of an archive in a multipart upload operation.
-  string:
-    type: string
+    properties: {}
+    description: '<p>Provides options to abort a multipart upload identified by the upload ID.</p> <p>For information about the underlying REST API, see <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-abort-upload.html">Abort Multipart Upload</a>. For conceptual information, see <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html">Working with Archives in Amazon Glacier</a>.</p>'
+  AbortVaultLockInput:
+    type: object
+    properties: {}
+    description: The input values for <code>AbortVaultLock</code>.
   Grant:
     type: object
     properties:
@@ -2413,14 +2236,16 @@ definitions:
       - InventoryRetrieval
       - Select
   TagMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/TagKey'
-        value:
-          $ref: '#/definitions/TagValue'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/TagValue'
+  AddTagsToVaultInput:
+    type: object
+    properties:
+      Tags:
+        $ref: '#/definitions/TagMap'
+        description: The tags to add to the vault. Each tag is composed of a key and a value. The value can be an empty string.
+    description: The input values for <code>AddTagsToVault</code>.
   FileHeaderInfo:
     type: string
     enum:
@@ -2483,10 +2308,18 @@ definitions:
       - authenticated-read
       - bucket-owner-read
       - bucket-owner-full-control
-  DataRetrievalRulesList:
-    type: array
-    items:
-      $ref: '#/definitions/DataRetrievalRule'
+  CompleteMultipartUploadInput:
+    type: object
+    properties: {}
+    description: 'Provides options to complete a multipart upload operation. This informs Amazon Glacier that all the archive parts have been uploaded and Amazon Glacier can now assemble the archive from the uploaded parts. After assembling and saving the archive to the vault, Amazon Glacier returns the URI path of the newly created archive resource.'
+  CompleteVaultLockInput:
+    type: object
+    properties: {}
+    description: The input values for <code>CompleteVaultLock</code>.
+  CreateVaultInput:
+    type: object
+    properties: {}
+    description: Provides options to create a vault.
   DataRetrievalPolicy:
     type: object
     properties:
@@ -2508,6 +2341,30 @@ definitions:
     description: Data retrieval policy rule.
   DateTime:
     type: string
+  DeleteArchiveInput:
+    type: object
+    properties: {}
+    description: Provides options for deleting an archive from an Amazon Glacier vault.
+  DeleteVaultAccessPolicyInput:
+    type: object
+    properties: {}
+    description: DeleteVaultAccessPolicy input.
+  DeleteVaultInput:
+    type: object
+    properties: {}
+    description: Provides options for deleting a vault from Amazon Glacier.
+  DeleteVaultNotificationsInput:
+    type: object
+    properties: {}
+    description: Provides options for deleting a vault notification configuration from an Amazon Glacier vault.
+  DescribeJobInput:
+    type: object
+    properties: {}
+    description: Provides options for retrieving a job description.
+  DescribeVaultInput:
+    type: object
+    properties: {}
+    description: Provides options for retrieving metadata for a specific vault in Amazon Glacier.
   long:
     type: integer
   EncryptionType:
@@ -2532,10 +2389,22 @@ definitions:
     type: string
     enum:
       - SQL
+  GetDataRetrievalPolicyInput:
+    type: object
+    properties: {}
+    description: Input for GetDataRetrievalPolicy.
+  GetJobOutputInput:
+    type: object
+    properties: {}
+    description: Provides options for downloading output of an Amazon Glacier job.
   Stream:
     type: string
   httpstatus:
     type: integer
+  GetVaultAccessPolicyInput:
+    type: object
+    properties: {}
+    description: Input for GetVaultAccessPolicy.
   VaultAccessPolicy:
     type: object
     properties:
@@ -2543,6 +2412,14 @@ definitions:
         $ref: '#/definitions/string'
         description: The vault access policy.
     description: Contains the vault access policy.
+  GetVaultLockInput:
+    type: object
+    properties: {}
+    description: The input values for <code>GetVaultLock</code>.
+  GetVaultNotificationsInput:
+    type: object
+    properties: {}
+    description: Provides options for retrieving the notification configuration set on an Amazon Glacier vault.
   VaultNotificationConfig:
     type: object
     properties:
@@ -2582,29 +2459,6 @@ definitions:
         $ref: '#/definitions/string'
         description: 'An opaque string that represents where to continue pagination of the vault inventory retrieval results. You use the marker in a new <b>InitiateJob</b> request to obtain additional inventory items. If there are no more inventory items, this value is <code>null</code>. For more information, see <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/api-initiate-job-post.html#api-initiate-job-post-vault-inventory-list-filtering"> Range Inventory Retrieval</a>.'
     description: Describes the options for a range inventory retrieval job.
-  SelectParameters:
-    type: object
-    properties:
-      InputSerialization:
-        $ref: '#/definitions/InputSerialization'
-        description: Describes the serialization format of the object.
-      ExpressionType:
-        $ref: '#/definitions/ExpressionType'
-        description: 'The type of the provided expression, for example <code>SQL</code>.'
-      Expression:
-        $ref: '#/definitions/string'
-        description: The expression that is used to select the object.
-      OutputSerialization:
-        $ref: '#/definitions/OutputSerialization'
-        description: Describes how the results of the select job are serialized.
-    description: Contains information about the parameters used for a select.
-  OutputLocation:
-    type: object
-    properties:
-      S3:
-        $ref: '#/definitions/S3Location'
-        description: Describes an S3 location that will receive the results of the job request.
-    description: Contains information about the location where the select job results are stored.
   Grantee:
     type: object
     required:
@@ -2674,6 +2528,17 @@ definitions:
         $ref: '#/definitions/OutputLocation'
         description: Contains information about the location where the select job results are stored.
     description: Provides options for defining a job.
+  InitiateJobInput:
+    type: object
+    properties:
+      jobParameters:
+        $ref: '#/definitions/JobParameters'
+        description: Provides options for specifying job information.
+    description: Provides options for initiating an Amazon Glacier job.
+  InitiateMultipartUploadInput:
+    type: object
+    properties: {}
+    description: Provides options for initiating a multipart upload to an Amazon Glacier vault.
   VaultLockPolicy:
     type: object
     properties:
@@ -2681,6 +2546,13 @@ definitions:
         $ref: '#/definitions/string'
         description: The vault lock policy.
     description: Contains the vault lock policy.
+  InitiateVaultLockInput:
+    type: object
+    properties:
+      policy:
+        $ref: '#/definitions/VaultLockPolicy'
+        description: 'The vault lock policy as a JSON string, which uses "\" as an escape character.'
+    description: The input values for <code>InitiateVaultLock</code>.
   InputSerialization:
     type: object
     properties:
@@ -2688,46 +2560,49 @@ definitions:
         $ref: '#/definitions/CSVInput'
         description: Describes the serialization of a CSV-encoded object.
     description: Describes how the archive is serialized.
-  InventoryRetrievalJobInput:
-    type: object
-    properties:
-      StartDate:
-        $ref: '#/definitions/string'
-        description: 'The start of the date range in UTC for vault inventory retrieval that includes archives created on or after this date. This value should be a string in the ISO 8601 date format, for example <code>2013-03-20T17:03:43Z</code>.'
-      EndDate:
-        $ref: '#/definitions/string'
-        description: 'The end of the date range in UTC for vault inventory retrieval that includes archives created before this date. This value should be a string in the ISO 8601 date format, for example <code>2013-03-20T17:03:43Z</code>.'
-      Limit:
-        $ref: '#/definitions/string'
-        description: Specifies the maximum number of inventory items returned per vault inventory retrieval request. Valid values are greater than or equal to 1.
-      Marker:
-        $ref: '#/definitions/string'
-        description: 'An opaque string that represents where to continue pagination of the vault inventory retrieval results. You use the marker in a new <b>InitiateJob</b> request to obtain additional inventory items. If there are no more inventory items, this value is <code>null</code>.'
-    description: Provides options for specifying a range inventory retrieval job.
   JobList:
     type: array
     items:
       $ref: '#/definitions/GlacierJobDescription'
+  ListJobsInput:
+    type: object
+    properties: {}
+    description: Provides options for retrieving a job list for an Amazon Glacier vault.
+  ListMultipartUploadsInput:
+    type: object
+    properties: {}
+    description: Provides options for retrieving list of in-progress multipart uploads for an Amazon Glacier vault.
   UploadsList:
     type: array
     items:
       $ref: '#/definitions/UploadListElement'
+  ListPartsInput:
+    type: object
+    properties: {}
+    description: Provides options for retrieving a list of parts of an archive that have been uploaded in a specific multipart upload.
   PartList:
     type: array
     items:
       $ref: '#/definitions/PartListElement'
+  ListProvisionedCapacityInput:
+    type: object
+    properties: {}
   ProvisionedCapacityList:
     type: array
     items:
       $ref: '#/definitions/ProvisionedCapacityDescription'
+  ListTagsForVaultInput:
+    type: object
+    properties: {}
+    description: The input value for <code>ListTagsForVaultInput</code>.
+  ListVaultsInput:
+    type: object
+    properties: {}
+    description: Provides options to retrieve the vault list owned by the calling user's account. The list provides metadata information for each vault.
   VaultList:
     type: array
     items:
       $ref: '#/definitions/DescribeVaultOutput'
-  NotificationEventList:
-    type: array
-    items:
-      $ref: '#/definitions/string'
   S3Location:
     type: object
     properties:
@@ -2786,29 +2661,60 @@ definitions:
         $ref: '#/definitions/string'
         description: 'The date that the provisioned capacity unit expires, in Universal Coordinated Time (UTC).'
     description: The definition for a provisioned capacity unit.
+  PurchaseProvisionedCapacityInput:
+    type: object
+    properties: {}
   TagKeyList:
     type: array
     items:
       $ref: '#/definitions/string'
+  RemoveTagsFromVaultInput:
+    type: object
+    properties:
+      TagKeys:
+        $ref: '#/definitions/TagKeyList'
+        description: A list of tag keys. Each corresponding tag is removed from the vault.
+    description: The input value for <code>RemoveTagsFromVaultInput</code>.
   hashmap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/string'
-        value:
-          $ref: '#/definitions/string'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/string'
   StorageClass:
     type: string
     enum:
       - STANDARD
       - REDUCED_REDUNDANCY
       - STANDARD_IA
+  SetDataRetrievalPolicyInput:
+    type: object
+    properties:
+      Policy:
+        $ref: '#/definitions/DataRetrievalPolicy'
+        description: The data retrieval policy in JSON format.
+    description: SetDataRetrievalPolicy input.
+  SetVaultAccessPolicyInput:
+    type: object
+    properties:
+      policy:
+        $ref: '#/definitions/VaultAccessPolicy'
+        description: The vault access policy as a JSON string.
+    description: SetVaultAccessPolicy input.
+  SetVaultNotificationsInput:
+    type: object
+    properties:
+      vaultNotificationConfig:
+        $ref: '#/definitions/VaultNotificationConfig'
+        description: Provides options for specifying notification configuration.
+    description: Provides options to configure notifications that will be sent when specific events happen to a vault.
   TagKey:
     type: string
-  TagValue:
-    type: string
+  UploadArchiveInput:
+    type: object
+    properties:
+      body:
+        $ref: '#/definitions/Stream'
+        description: The data to upload.
+    description: Provides options to add an archive to a vault.
   UploadListElement:
     type: object
     properties:
@@ -2828,3 +2734,10 @@ definitions:
         $ref: '#/definitions/string'
         description: The UTC time at which the multipart upload was initiated.
     description: A list of in-progress multipart uploads for a vault.
+  UploadMultipartPartInput:
+    type: object
+    properties:
+      body:
+        $ref: '#/definitions/Stream'
+        description: The data to upload.
+    description: Provides options to upload a part of an archive in a multipart upload operation.

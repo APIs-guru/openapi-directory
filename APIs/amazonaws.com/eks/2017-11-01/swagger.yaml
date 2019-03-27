@@ -140,7 +140,43 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateClusterRequest'
+            type: object
+            required:
+              - name
+              - roleArn
+              - resourcesVpcConfig
+            properties:
+              name:
+                description: The unique name to give to your cluster.
+                type: string
+                pattern: '^[0-9A-Za-z][A-Za-z0-9\-_]*'
+                minLength: 1
+                maxLength: 100
+              version:
+                description: 'The desired Kubernetes version for your cluster. If you do not specify a value here, the latest version available in Amazon EKS is used.'
+                type: string
+              roleArn:
+                description: 'The Amazon Resource Name (ARN) of the IAM role that provides permissions for Amazon EKS to make calls to other AWS API operations on your behalf. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html">Amazon EKS Service IAM Role</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
+                type: string
+              resourcesVpcConfig:
+                description: An object representing an Amazon EKS cluster VPC configuration request.
+                type: object
+                properties:
+                  subnetIds:
+                    $ref: '#/definitions/StringList'
+                    description: Specify subnets for your Amazon EKS worker nodes. Amazon EKS creates cross-account elastic network interfaces in these subnets to allow communication between your worker nodes and the Kubernetes control plane.
+                  securityGroupIds:
+                    $ref: '#/definitions/StringList'
+                    description: 'Specify one or more security groups for the cross-account elastic network interfaces that Amazon EKS creates to use to allow communication between your worker nodes and the Kubernetes control plane. If you do not specify a security group, the default security group for your VPC is used.'
+                  endpointPublicAccess:
+                    $ref: '#/definitions/BoxedBoolean'
+                    description: 'Set this value to <code>false</code> to disable public access for your cluster''s Kubernetes API server endpoint. If you disable public access, your cluster''s Kubernetes API server can only receive requests from within the cluster VPC. The default value for this parameter is <code>true</code>, which enables public access for your Kubernetes API server. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon EKS Cluster Endpoint Access Control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
+                  endpointPrivateAccess:
+                    $ref: '#/definitions/BoxedBoolean'
+                    description: 'Set this value to <code>true</code> to enable private access for your cluster''s Kubernetes API server endpoint. If you enable private access, Kubernetes API requests from within your cluster''s VPC will use the private VPC endpoint. The default value for this parameter is <code>false</code>, which disables private access for your Kubernetes API server. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon EKS Cluster Endpoint Access Control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
+              clientRequestToken:
+                description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -176,11 +212,18 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListClustersRequest'
+        - name: maxResults
+          in: query
+          required: false
+          description: 'The maximum number of cluster results returned by <code>ListClusters</code> in paginated output. When this parameter is used, <code>ListClusters</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListClusters</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListClusters</code> returns up to 100 results and a <code>nextToken</code> value if applicable.'
+          type: integer
+          minimum: 1
+          maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListClusters</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value.</p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+          type: string
   '/clusters/{name}':
     delete:
       operationId: DeleteCluster
@@ -211,15 +254,11 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteClusterRequest'
         - name: name
-          type: string
           in: path
           required: true
+          description: The name of the cluster to delete.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -255,15 +294,11 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeClusterRequest'
         - name: name
-          type: string
           in: path
           required: true
+          description: The name of the cluster to describe.
+          type: string
   '/clusters/{name}/updates/{updateId}':
     get:
       operationId: DescribeUpdate
@@ -290,19 +325,16 @@ paths:
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeUpdateRequest'
         - name: name
-          type: string
           in: path
           required: true
+          description: The name of the Amazon EKS cluster to update.
+          type: string
         - name: updateId
-          type: string
           in: path
           required: true
+          description: The ID of the update to describe.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -339,15 +371,23 @@ paths:
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListUpdatesRequest'
         - name: name
-          type: string
           in: path
           required: true
+          description: The name of the Amazon EKS cluster for which to list updates.
+          type: string
+        - name: nextToken
+          in: query
+          required: false
+          description: The <code>nextToken</code> value returned from a previous paginated <code>ListUpdates</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value.
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: 'The maximum number of update results returned by <code>ListUpdates</code> in paginated output. When this parameter is used, <code>ListUpdates</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListUpdates</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListUpdates</code> returns up to 100 results and a <code>nextToken</code> value if applicable.'
+          type: integer
+          minimum: 1
+          maximum: 100
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -391,15 +431,25 @@ paths:
           schema:
             $ref: '#/definitions/InvalidRequestException'
       parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the Amazon EKS cluster to update.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateClusterVersionRequest'
-        - name: name
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - version
+            properties:
+              version:
+                description: The desired Kubernetes version following a successful update.
+                type: string
+              clientRequestToken:
+                description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+                type: string
   '/clusters/{name}/update-config':
     post:
       operationId: UpdateClusterConfig
@@ -434,15 +484,36 @@ paths:
           schema:
             $ref: '#/definitions/InvalidRequestException'
       parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the Amazon EKS cluster to update.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateClusterConfigRequest'
-        - name: name
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              resourcesVpcConfig:
+                description: An object representing an Amazon EKS cluster VPC configuration request.
+                type: object
+                properties:
+                  subnetIds:
+                    $ref: '#/definitions/StringList'
+                    description: Specify subnets for your Amazon EKS worker nodes. Amazon EKS creates cross-account elastic network interfaces in these subnets to allow communication between your worker nodes and the Kubernetes control plane.
+                  securityGroupIds:
+                    $ref: '#/definitions/StringList'
+                    description: 'Specify one or more security groups for the cross-account elastic network interfaces that Amazon EKS creates to use to allow communication between your worker nodes and the Kubernetes control plane. If you do not specify a security group, the default security group for your VPC is used.'
+                  endpointPublicAccess:
+                    $ref: '#/definitions/BoxedBoolean'
+                    description: 'Set this value to <code>false</code> to disable public access for your cluster''s Kubernetes API server endpoint. If you disable public access, your cluster''s Kubernetes API server can only receive requests from within the cluster VPC. The default value for this parameter is <code>true</code>, which enables public access for your Kubernetes API server. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon EKS Cluster Endpoint Access Control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
+                  endpointPrivateAccess:
+                    $ref: '#/definitions/BoxedBoolean'
+                    description: 'Set this value to <code>true</code> to enable private access for your cluster''s Kubernetes API server endpoint. If you enable private access, Kubernetes API requests from within your cluster''s VPC will use the private VPC endpoint. The default value for this parameter is <code>false</code>, which disables private access for your Kubernetes API server. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon EKS Cluster Endpoint Access Control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
+              clientRequestToken:
+                description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -461,39 +532,12 @@ definitions:
       cluster:
         $ref: '#/definitions/Cluster'
         description: The full description of your new cluster.
-  CreateClusterRequest:
-    type: object
-    required:
-      - name
-      - roleArn
-      - resourcesVpcConfig
-    example:
-      version: '1.10'
-      name: prod
-      clientRequestToken: 1d2129a1-3d38-460a-9756-e5b91fddb951
-      resourcesVpcConfig:
-        securityGroupIds:
-          - sg-6979fe18
-        subnetIds:
-          - subnet-6782e71e
-          - subnet-e7e761ac
-      roleArn: 'arn:aws:iam::012345678910:role/eks-service-role-AWSServiceRoleForAmazonEKS-J7ONKE3BQ4PI'
-    properties:
-      name:
-        $ref: '#/definitions/ClusterName'
-        description: The unique name to give to your cluster.
-      version:
-        $ref: '#/definitions/String'
-        description: 'The desired Kubernetes version for your cluster. If you do not specify a value here, the latest version available in Amazon EKS is used.'
-      roleArn:
-        $ref: '#/definitions/String'
-        description: 'The Amazon Resource Name (ARN) of the IAM role that provides permissions for Amazon EKS to make calls to other AWS API operations on your behalf. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html">Amazon EKS Service IAM Role</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
-      resourcesVpcConfig:
-        $ref: '#/definitions/VpcConfigRequest'
-        description: 'The VPC configuration used by the cluster control plane. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html">Cluster VPC Considerations</a> and <a href="https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html">Cluster Security Group Considerations</a> in the <i>Amazon EKS User Guide</i>. You must specify at least two subnets. You may specify up to five security groups, but we recommend that you use a dedicated security group for your cluster control plane.'
-      clientRequestToken:
-        $ref: '#/definitions/String'
-        description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+  StringList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  BoxedBoolean:
+    type: boolean
   ResourceInUseException: {}
   ResourceLimitExceededException: {}
   InvalidParameterException: {}
@@ -508,11 +552,6 @@ definitions:
       cluster:
         $ref: '#/definitions/Cluster'
         description: The full description of the cluster to delete.
-  DeleteClusterRequest:
-    type: object
-    example:
-      name: devel
-    properties: {}
   ResourceNotFoundException: {}
   DescribeClusterResponse:
     type: object
@@ -538,20 +577,12 @@ definitions:
       cluster:
         $ref: '#/definitions/Cluster'
         description: The full description of your specified cluster.
-  DescribeClusterRequest:
-    type: object
-    example:
-      name: devel
-    properties: {}
   DescribeUpdateResponse:
     type: object
     properties:
       update:
         $ref: '#/definitions/Update'
         description: The full description of the specified update.
-  DescribeUpdateRequest:
-    type: object
-    properties: {}
   ListClustersResponse:
     type: object
     example:
@@ -565,10 +596,6 @@ definitions:
       nextToken:
         $ref: '#/definitions/String'
         description: 'The <code>nextToken</code> value to include in a future <code>ListClusters</code> request. When the results of a <code>ListClusters</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
-  ListClustersRequest:
-    type: object
-    example: {}
-    properties: {}
   ListUpdatesResponse:
     type: object
     properties:
@@ -578,22 +605,11 @@ definitions:
       nextToken:
         $ref: '#/definitions/String'
         description: 'The <code>nextToken</code> value to include in a future <code>ListUpdates</code> request. When the results of a <code>ListUpdates</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
-  ListUpdatesRequest:
-    type: object
-    properties: {}
   UpdateClusterConfigResponse:
     type: object
     properties:
       update:
         $ref: '#/definitions/Update'
-  UpdateClusterConfigRequest:
-    type: object
-    properties:
-      resourcesVpcConfig:
-        $ref: '#/definitions/VpcConfigRequest'
-      clientRequestToken:
-        $ref: '#/definitions/String'
-        description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
   InvalidRequestException: {}
   UpdateClusterVersionResponse:
     type: object
@@ -601,20 +617,7 @@ definitions:
       update:
         $ref: '#/definitions/Update'
         description: The full description of the specified update
-  UpdateClusterVersionRequest:
-    type: object
-    required:
-      - version
-    properties:
-      version:
-        $ref: '#/definitions/String'
-        description: The desired Kubernetes version following a successful update.
-      clientRequestToken:
-        $ref: '#/definitions/String'
-        description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
   Boolean:
-    type: boolean
-  BoxedBoolean:
     type: boolean
   String:
     type: string
@@ -712,6 +715,37 @@ definitions:
         $ref: '#/definitions/BoxedBoolean'
         description: 'Set this value to <code>true</code> to enable private access for your cluster''s Kubernetes API server endpoint. If you enable private access, Kubernetes API requests from within your cluster''s VPC will use the private VPC endpoint. The default value for this parameter is <code>false</code>, which disables private access for your Kubernetes API server. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon EKS Cluster Endpoint Access Control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
     description: An object representing an Amazon EKS cluster VPC configuration request.
+  CreateClusterRequest:
+    type: object
+    required:
+      - name
+      - roleArn
+      - resourcesVpcConfig
+    properties:
+      name:
+        $ref: '#/definitions/ClusterName'
+        description: The unique name to give to your cluster.
+      version:
+        $ref: '#/definitions/String'
+        description: 'The desired Kubernetes version for your cluster. If you do not specify a value here, the latest version available in Amazon EKS is used.'
+      roleArn:
+        $ref: '#/definitions/String'
+        description: 'The Amazon Resource Name (ARN) of the IAM role that provides permissions for Amazon EKS to make calls to other AWS API operations on your behalf. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html">Amazon EKS Service IAM Role</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
+      resourcesVpcConfig:
+        $ref: '#/definitions/VpcConfigRequest'
+        description: 'The VPC configuration used by the cluster control plane. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html">Cluster VPC Considerations</a> and <a href="https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html">Cluster Security Group Considerations</a> in the <i>Amazon EKS User Guide</i>. You must specify at least two subnets. You may specify up to five security groups, but we recommend that you use a dedicated security group for your cluster control plane.'
+      clientRequestToken:
+        $ref: '#/definitions/String'
+        description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+  DeleteClusterRequest:
+    type: object
+    properties: {}
+  DescribeClusterRequest:
+    type: object
+    properties: {}
+  DescribeUpdateRequest:
+    type: object
+    properties: {}
   Update:
     type: object
     properties:
@@ -745,10 +779,6 @@ definitions:
       - OperationNotPermitted
       - VpcIdNotFound
       - Unknown
-  StringList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
   ErrorDetail:
     type: object
     properties:
@@ -770,10 +800,16 @@ definitions:
     type: integer
     minimum: 1
     maximum: 100
+  ListClustersRequest:
+    type: object
+    properties: {}
   ListUpdatesRequestMaxResults:
     type: integer
     minimum: 1
     maximum: 100
+  ListUpdatesRequest:
+    type: object
+    properties: {}
   UpdateStatus:
     type: string
     enum:
@@ -790,6 +826,25 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/UpdateParam'
+  UpdateClusterConfigRequest:
+    type: object
+    properties:
+      resourcesVpcConfig:
+        $ref: '#/definitions/VpcConfigRequest'
+      clientRequestToken:
+        $ref: '#/definitions/String'
+        description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+  UpdateClusterVersionRequest:
+    type: object
+    required:
+      - version
+    properties:
+      version:
+        $ref: '#/definitions/String'
+        description: The desired Kubernetes version following a successful update.
+      clientRequestToken:
+        $ref: '#/definitions/String'
+        description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
   UpdateParamType:
     type: string
     enum:

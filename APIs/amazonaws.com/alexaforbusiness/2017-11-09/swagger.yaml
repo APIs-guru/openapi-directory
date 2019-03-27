@@ -99,7 +99,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /:
+  '/#X-Amz-Target=AlexaForBusiness.ApproveSkill':
     post:
       operationId: ApproveSkill
       description: 'Associates a skill with the organization under the customer''s AWS account. If a skill is private, the user implicitly accepts access to this skill during enablement.'
@@ -126,6 +126,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ApproveSkillRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.ApproveSkill
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -136,7 +142,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AssociateContactWithAddressBook':
+  '/#X-Amz-Target=AlexaForBusiness.AssociateContactWithAddressBook':
     post:
       operationId: AssociateContactWithAddressBook
       description: Associates a contact with a given address book.
@@ -155,6 +161,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AssociateContactWithAddressBookRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.AssociateContactWithAddressBook
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -165,7 +177,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AssociateDeviceWithRoom':
+  '/#X-Amz-Target=AlexaForBusiness.AssociateDeviceWithRoom':
     post:
       operationId: AssociateDeviceWithRoom
       description: 'Associates a device with a given room. This applies all the settings from the room profile to the device, and all the skills in any skill groups added to that room. This operation requires the device to be online, or else a manual sync is required. '
@@ -192,6 +204,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AssociateDeviceWithRoomRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.AssociateDeviceWithRoom
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -202,7 +220,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AssociateSkillGroupWithRoom':
+  '/#X-Amz-Target=AlexaForBusiness.AssociateSkillGroupWithRoom':
     post:
       operationId: AssociateSkillGroupWithRoom
       description: Associates a skill group with a given room. This enables all skills in the associated skill group on all devices in the room.
@@ -221,6 +239,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AssociateSkillGroupWithRoomRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.AssociateSkillGroupWithRoom
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -231,7 +255,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AssociateSkillWithSkillGroup':
+  '/#X-Amz-Target=AlexaForBusiness.AssociateSkillWithSkillGroup':
     post:
       operationId: AssociateSkillWithSkillGroup
       description: Associates a skill with a skill group.
@@ -258,6 +282,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AssociateSkillWithSkillGroupRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.AssociateSkillWithSkillGroup
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -268,7 +298,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AssociateSkillWithUsers':
+  '/#X-Amz-Target=AlexaForBusiness.AssociateSkillWithUsers':
     post:
       operationId: AssociateSkillWithUsers
       description: Makes a private skill available for enrolled users to enable on their devices.
@@ -291,6 +321,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AssociateSkillWithUsersRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.AssociateSkillWithUsers
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -301,7 +337,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateAddressBook':
+  '/#X-Amz-Target=AlexaForBusiness.CreateAddressBook':
     post:
       operationId: CreateAddressBook
       description: Creates an address book with the specified details.
@@ -324,6 +360,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateAddressBookRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.CreateAddressBook
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -334,7 +376,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateBusinessReportSchedule':
+  '/#X-Amz-Target=AlexaForBusiness.CreateBusinessReportSchedule':
     post:
       operationId: CreateBusinessReportSchedule
       description: Creates a recurring schedule for usage reports to deliver to the specified S3 location with a specified daily or weekly interval.
@@ -353,6 +395,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateBusinessReportScheduleRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.CreateBusinessReportSchedule
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -363,7 +411,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateConferenceProvider':
+  '/#X-Amz-Target=AlexaForBusiness.CreateConferenceProvider':
     post:
       operationId: CreateConferenceProvider
       description: Adds a new conference provider under the user's AWS account.
@@ -382,6 +430,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateConferenceProviderRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.CreateConferenceProvider
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -392,7 +446,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateContact':
+  '/#X-Amz-Target=AlexaForBusiness.CreateContact':
     post:
       operationId: CreateContact
       description: Creates a contact with the specified details.
@@ -415,6 +469,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateContactRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.CreateContact
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -425,7 +485,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateProfile':
+  '/#X-Amz-Target=AlexaForBusiness.CreateProfile':
     post:
       operationId: CreateProfile
       description: Creates a new room profile with the specified details.
@@ -452,6 +512,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateProfileRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.CreateProfile
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -462,7 +528,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateRoom':
+  '/#X-Amz-Target=AlexaForBusiness.CreateRoom':
     post:
       operationId: CreateRoom
       description: Creates a room with the specified details.
@@ -485,6 +551,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateRoomRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.CreateRoom
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -495,7 +567,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateSkillGroup':
+  '/#X-Amz-Target=AlexaForBusiness.CreateSkillGroup':
     post:
       operationId: CreateSkillGroup
       description: Creates a skill group with a specified name and description.
@@ -522,6 +594,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateSkillGroupRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.CreateSkillGroup
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -532,7 +610,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateUser':
+  '/#X-Amz-Target=AlexaForBusiness.CreateUser':
     post:
       operationId: CreateUser
       description: Creates a user.
@@ -559,6 +637,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateUserRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.CreateUser
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -569,7 +653,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteAddressBook':
+  '/#X-Amz-Target=AlexaForBusiness.DeleteAddressBook':
     post:
       operationId: DeleteAddressBook
       description: Deletes an address book by the address book ARN.
@@ -592,6 +676,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteAddressBookRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.DeleteAddressBook
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -602,7 +692,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteBusinessReportSchedule':
+  '/#X-Amz-Target=AlexaForBusiness.DeleteBusinessReportSchedule':
     post:
       operationId: DeleteBusinessReportSchedule
       description: Deletes the recurring report delivery schedule with the specified schedule ARN.
@@ -625,6 +715,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteBusinessReportScheduleRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.DeleteBusinessReportSchedule
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -635,7 +731,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteConferenceProvider':
+  '/#X-Amz-Target=AlexaForBusiness.DeleteConferenceProvider':
     post:
       operationId: DeleteConferenceProvider
       description: Deletes a conference provider.
@@ -654,6 +750,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteConferenceProviderRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.DeleteConferenceProvider
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -664,7 +766,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteContact':
+  '/#X-Amz-Target=AlexaForBusiness.DeleteContact':
     post:
       operationId: DeleteContact
       description: Deletes a contact by the contact ARN.
@@ -687,6 +789,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteContactRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.DeleteContact
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -697,7 +805,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteDevice':
+  '/#X-Amz-Target=AlexaForBusiness.DeleteDevice':
     post:
       operationId: DeleteDevice
       description: Removes a device from Alexa For Business.
@@ -724,6 +832,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteDeviceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.DeleteDevice
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -734,7 +848,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteProfile':
+  '/#X-Amz-Target=AlexaForBusiness.DeleteProfile':
     post:
       operationId: DeleteProfile
       description: Deletes a room profile by the profile ARN.
@@ -757,6 +871,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteProfileRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.DeleteProfile
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -767,7 +887,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteRoom':
+  '/#X-Amz-Target=AlexaForBusiness.DeleteRoom':
     post:
       operationId: DeleteRoom
       description: Deletes a room by the room ARN.
@@ -790,6 +910,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteRoomRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.DeleteRoom
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -800,7 +926,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteRoomSkillParameter':
+  '/#X-Amz-Target=AlexaForBusiness.DeleteRoomSkillParameter':
     post:
       operationId: DeleteRoomSkillParameter
       description: 'Deletes room skill parameter details by room, skill, and parameter key ID.'
@@ -819,6 +945,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteRoomSkillParameterRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.DeleteRoomSkillParameter
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -829,7 +961,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteSkillAuthorization':
+  '/#X-Amz-Target=AlexaForBusiness.DeleteSkillAuthorization':
     post:
       operationId: DeleteSkillAuthorization
       description: Unlinks a third-party account from a skill.
@@ -852,6 +984,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteSkillAuthorizationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.DeleteSkillAuthorization
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -862,7 +1000,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteSkillGroup':
+  '/#X-Amz-Target=AlexaForBusiness.DeleteSkillGroup':
     post:
       operationId: DeleteSkillGroup
       description: Deletes a skill group by skill group ARN.
@@ -885,6 +1023,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteSkillGroupRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.DeleteSkillGroup
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -895,7 +1039,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteUser':
+  '/#X-Amz-Target=AlexaForBusiness.DeleteUser':
     post:
       operationId: DeleteUser
       description: Deletes a specified user by user ARN and enrollment ARN.
@@ -918,6 +1062,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteUserRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.DeleteUser
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -928,7 +1078,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DisassociateContactFromAddressBook':
+  '/#X-Amz-Target=AlexaForBusiness.DisassociateContactFromAddressBook':
     post:
       operationId: DisassociateContactFromAddressBook
       description: Disassociates a contact from a given address book.
@@ -943,6 +1093,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DisassociateContactFromAddressBookRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.DisassociateContactFromAddressBook
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -953,7 +1109,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DisassociateDeviceFromRoom':
+  '/#X-Amz-Target=AlexaForBusiness.DisassociateDeviceFromRoom':
     post:
       operationId: DisassociateDeviceFromRoom
       description: Disassociates a device from its current room. The device continues to be connected to the Wi-Fi network and is still registered to the account. The device settings and skills are removed from the room.
@@ -976,6 +1132,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DisassociateDeviceFromRoomRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.DisassociateDeviceFromRoom
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -986,7 +1148,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DisassociateSkillFromSkillGroup':
+  '/#X-Amz-Target=AlexaForBusiness.DisassociateSkillFromSkillGroup':
     post:
       operationId: DisassociateSkillFromSkillGroup
       description: Disassociates a skill from a skill group.
@@ -1009,6 +1171,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DisassociateSkillFromSkillGroupRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.DisassociateSkillFromSkillGroup
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1019,7 +1187,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DisassociateSkillFromUsers':
+  '/#X-Amz-Target=AlexaForBusiness.DisassociateSkillFromUsers':
     post:
       operationId: DisassociateSkillFromUsers
       description: Makes a private skill unavailable for enrolled users and prevents them from enabling it on their devices.
@@ -1042,6 +1210,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DisassociateSkillFromUsersRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.DisassociateSkillFromUsers
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1052,7 +1226,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DisassociateSkillGroupFromRoom':
+  '/#X-Amz-Target=AlexaForBusiness.DisassociateSkillGroupFromRoom':
     post:
       operationId: DisassociateSkillGroupFromRoom
       description: Disassociates a skill group from a specified room. This disables all skills in the skill group on all devices in the room.
@@ -1071,6 +1245,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DisassociateSkillGroupFromRoomRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.DisassociateSkillGroupFromRoom
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1081,7 +1261,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ForgetSmartHomeAppliances':
+  '/#X-Amz-Target=AlexaForBusiness.ForgetSmartHomeAppliances':
     post:
       operationId: ForgetSmartHomeAppliances
       description: Forgets smart home appliances associated to a room.
@@ -1100,6 +1280,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ForgetSmartHomeAppliancesRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.ForgetSmartHomeAppliances
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1110,7 +1296,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetAddressBook':
+  '/#X-Amz-Target=AlexaForBusiness.GetAddressBook':
     post:
       operationId: GetAddressBook
       description: Gets address the book details by the address book ARN.
@@ -1129,6 +1315,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetAddressBookRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.GetAddressBook
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1139,7 +1331,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetConferencePreference':
+  '/#X-Amz-Target=AlexaForBusiness.GetConferencePreference':
     post:
       operationId: GetConferencePreference
       description: Retrieves the existing conference preferences.
@@ -1158,6 +1350,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetConferencePreferenceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.GetConferencePreference
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1168,7 +1366,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetConferenceProvider':
+  '/#X-Amz-Target=AlexaForBusiness.GetConferenceProvider':
     post:
       operationId: GetConferenceProvider
       description: Gets details about a specific conference provider.
@@ -1187,6 +1385,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetConferenceProviderRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.GetConferenceProvider
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1197,7 +1401,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetContact':
+  '/#X-Amz-Target=AlexaForBusiness.GetContact':
     post:
       operationId: GetContact
       description: Gets the contact details by the contact ARN.
@@ -1216,6 +1420,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetContactRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.GetContact
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1226,7 +1436,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetDevice':
+  '/#X-Amz-Target=AlexaForBusiness.GetDevice':
     post:
       operationId: GetDevice
       description: Gets the details of a device by device ARN.
@@ -1245,6 +1455,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetDeviceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.GetDevice
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1255,7 +1471,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetInvitationConfiguration':
+  '/#X-Amz-Target=AlexaForBusiness.GetInvitationConfiguration':
     post:
       operationId: GetInvitationConfiguration
       description: Retrieves the configured values for the user enrollment invitation email template.
@@ -1274,6 +1490,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetInvitationConfigurationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.GetInvitationConfiguration
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1284,7 +1506,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetProfile':
+  '/#X-Amz-Target=AlexaForBusiness.GetProfile':
     post:
       operationId: GetProfile
       description: Gets the details of a room profile by profile ARN.
@@ -1303,6 +1525,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetProfileRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.GetProfile
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1313,7 +1541,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetRoom':
+  '/#X-Amz-Target=AlexaForBusiness.GetRoom':
     post:
       operationId: GetRoom
       description: Gets room details by room ARN.
@@ -1332,6 +1560,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetRoomRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.GetRoom
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1342,7 +1576,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetRoomSkillParameter':
+  '/#X-Amz-Target=AlexaForBusiness.GetRoomSkillParameter':
     post:
       operationId: GetRoomSkillParameter
       description: 'Gets room skill parameter details by room, skill, and parameter key ARN.'
@@ -1361,6 +1595,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetRoomSkillParameterRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.GetRoomSkillParameter
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1371,7 +1611,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetSkillGroup':
+  '/#X-Amz-Target=AlexaForBusiness.GetSkillGroup':
     post:
       operationId: GetSkillGroup
       description: Gets skill group details by skill group ARN.
@@ -1390,6 +1630,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetSkillGroupRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.GetSkillGroup
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1400,7 +1646,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListBusinessReportSchedules':
+  '/#X-Amz-Target=AlexaForBusiness.ListBusinessReportSchedules':
     post:
       operationId: ListBusinessReportSchedules
       description: Lists the details of the schedules that a user configured.
@@ -1425,6 +1671,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.ListBusinessReportSchedules
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1435,7 +1687,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListConferenceProviders':
+  '/#X-Amz-Target=AlexaForBusiness.ListConferenceProviders':
     post:
       operationId: ListConferenceProviders
       description: Lists conference providers under a specific AWS account.
@@ -1460,6 +1712,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.ListConferenceProviders
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1470,7 +1728,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListDeviceEvents':
+  '/#X-Amz-Target=AlexaForBusiness.ListDeviceEvents':
     post:
       operationId: ListDeviceEvents
       description: 'Lists the device event history, including device connection status, for up to 30 days.'
@@ -1499,6 +1757,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.ListDeviceEvents
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1509,7 +1773,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListSkills':
+  '/#X-Amz-Target=AlexaForBusiness.ListSkills':
     post:
       operationId: ListSkills
       description: Lists all enabled skills in a specific skill group.
@@ -1534,6 +1798,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.ListSkills
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1544,7 +1814,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListSkillsStoreCategories':
+  '/#X-Amz-Target=AlexaForBusiness.ListSkillsStoreCategories':
     post:
       operationId: ListSkillsStoreCategories
       description: Lists all categories in the Alexa skill store.
@@ -1569,6 +1839,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.ListSkillsStoreCategories
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1579,7 +1855,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListSkillsStoreSkillsByCategory':
+  '/#X-Amz-Target=AlexaForBusiness.ListSkillsStoreSkillsByCategory':
     post:
       operationId: ListSkillsStoreSkillsByCategory
       description: Lists all skills in the Alexa skill store by category.
@@ -1604,6 +1880,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.ListSkillsStoreSkillsByCategory
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1614,7 +1896,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListSmartHomeAppliances':
+  '/#X-Amz-Target=AlexaForBusiness.ListSmartHomeAppliances':
     post:
       operationId: ListSmartHomeAppliances
       description: Lists all of the smart home appliances associated with a room.
@@ -1643,6 +1925,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.ListSmartHomeAppliances
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1653,7 +1941,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListTags':
+  '/#X-Amz-Target=AlexaForBusiness.ListTags':
     post:
       operationId: ListTags
       description: Lists all tags for the specified resource.
@@ -1682,6 +1970,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.ListTags
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1692,7 +1986,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#PutConferencePreference':
+  '/#X-Amz-Target=AlexaForBusiness.PutConferencePreference':
     post:
       operationId: PutConferencePreference
       description: Sets the conference preferences on a specific conference provider at the account level.
@@ -1711,6 +2005,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutConferencePreferenceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.PutConferencePreference
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1721,7 +2021,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#PutInvitationConfiguration':
+  '/#X-Amz-Target=AlexaForBusiness.PutInvitationConfiguration':
     post:
       operationId: PutInvitationConfiguration
       description: Configures the email template for the user enrollment invitation with the specified attributes.
@@ -1744,6 +2044,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutInvitationConfigurationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.PutInvitationConfiguration
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1754,7 +2060,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#PutRoomSkillParameter':
+  '/#X-Amz-Target=AlexaForBusiness.PutRoomSkillParameter':
     post:
       operationId: PutRoomSkillParameter
       description: 'Updates room skill parameter details by room, skill, and parameter key ID. Not all skills have a room skill parameter.'
@@ -1773,6 +2079,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutRoomSkillParameterRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.PutRoomSkillParameter
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1783,7 +2095,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#PutSkillAuthorization':
+  '/#X-Amz-Target=AlexaForBusiness.PutSkillAuthorization':
     post:
       operationId: PutSkillAuthorization
       description: 'Links a user''s account to a third-party skill provider. If this API operation is called by an assumed IAM role, the skill being linked must be a private skill. Also, the skill must be owned by the AWS account that assumed the IAM role.'
@@ -1806,6 +2118,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutSkillAuthorizationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.PutSkillAuthorization
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1816,7 +2134,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#RegisterAVSDevice':
+  '/#X-Amz-Target=AlexaForBusiness.RegisterAVSDevice':
     post:
       operationId: RegisterAVSDevice
       description: Registers an Alexa-enabled device built by an Original Equipment Manufacturer (OEM) using Alexa Voice Service (AVS).
@@ -1843,6 +2161,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/RegisterAVSDeviceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.RegisterAVSDevice
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1853,7 +2177,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#RejectSkill':
+  '/#X-Amz-Target=AlexaForBusiness.RejectSkill':
     post:
       operationId: RejectSkill
       description: 'Disassociates a skill from the organization under a user''s AWS account. If the skill is a private skill, it moves to an AcceptStatus of PENDING. Any private or public skill that is rejected can be added later by calling the ApproveSkill API. '
@@ -1876,6 +2200,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/RejectSkillRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.RejectSkill
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1886,7 +2216,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ResolveRoom':
+  '/#X-Amz-Target=AlexaForBusiness.ResolveRoom':
     post:
       operationId: ResolveRoom
       description: Determines the details for the room from which a skill request was invoked. This operation is used by skill developers.
@@ -1905,6 +2235,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ResolveRoomRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.ResolveRoom
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1915,7 +2251,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#RevokeInvitation':
+  '/#X-Amz-Target=AlexaForBusiness.RevokeInvitation':
     post:
       operationId: RevokeInvitation
       description: Revokes an invitation and invalidates the enrollment URL.
@@ -1938,6 +2274,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/RevokeInvitationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.RevokeInvitation
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1948,7 +2290,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#SearchAddressBooks':
+  '/#X-Amz-Target=AlexaForBusiness.SearchAddressBooks':
     post:
       operationId: SearchAddressBooks
       description: Searches address books and lists the ones that meet a set of filter and sort criteria.
@@ -1973,6 +2315,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.SearchAddressBooks
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1983,7 +2331,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#SearchContacts':
+  '/#X-Amz-Target=AlexaForBusiness.SearchContacts':
     post:
       operationId: SearchContacts
       description: Searches contacts and lists the ones that meet a set of filter and sort criteria.
@@ -2008,6 +2356,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.SearchContacts
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2018,7 +2372,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#SearchDevices':
+  '/#X-Amz-Target=AlexaForBusiness.SearchDevices':
     post:
       operationId: SearchDevices
       description: Searches devices and lists the ones that meet a set of filter criteria.
@@ -2043,6 +2397,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.SearchDevices
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2053,7 +2413,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#SearchProfiles':
+  '/#X-Amz-Target=AlexaForBusiness.SearchProfiles':
     post:
       operationId: SearchProfiles
       description: Searches room profiles and lists the ones that meet a set of filter criteria.
@@ -2078,6 +2438,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.SearchProfiles
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2088,7 +2454,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#SearchRooms':
+  '/#X-Amz-Target=AlexaForBusiness.SearchRooms':
     post:
       operationId: SearchRooms
       description: Searches rooms and lists the ones that meet a set of filter and sort criteria.
@@ -2113,6 +2479,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.SearchRooms
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2123,7 +2495,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#SearchSkillGroups':
+  '/#X-Amz-Target=AlexaForBusiness.SearchSkillGroups':
     post:
       operationId: SearchSkillGroups
       description: Searches skill groups and lists the ones that meet a set of filter and sort criteria.
@@ -2148,6 +2520,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.SearchSkillGroups
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2158,7 +2536,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#SearchUsers':
+  '/#X-Amz-Target=AlexaForBusiness.SearchUsers':
     post:
       operationId: SearchUsers
       description: Searches users and lists the ones that meet a set of filter and sort criteria.
@@ -2183,6 +2561,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.SearchUsers
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2193,7 +2577,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#SendInvitation':
+  '/#X-Amz-Target=AlexaForBusiness.SendInvitation':
     post:
       operationId: SendInvitation
       description: 'Sends an enrollment invitation email with a URL to a user. The URL is valid for 72 hours or until you call this operation again, whichever comes first. '
@@ -2220,6 +2604,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/SendInvitationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.SendInvitation
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2230,7 +2620,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#StartDeviceSync':
+  '/#X-Amz-Target=AlexaForBusiness.StartDeviceSync':
     post:
       operationId: StartDeviceSync
       description: 'Resets a device and its account to the known default settings, by clearing all information and settings set by previous users.'
@@ -2249,6 +2639,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StartDeviceSyncRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.StartDeviceSync
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2259,7 +2655,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#StartSmartHomeApplianceDiscovery':
+  '/#X-Amz-Target=AlexaForBusiness.StartSmartHomeApplianceDiscovery':
     post:
       operationId: StartSmartHomeApplianceDiscovery
       description: Initiates the discovery of any smart home appliances associated with the room.
@@ -2278,6 +2674,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StartSmartHomeApplianceDiscoveryRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.StartSmartHomeApplianceDiscovery
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2288,7 +2690,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#TagResource':
+  '/#X-Amz-Target=AlexaForBusiness.TagResource':
     post:
       operationId: TagResource
       description: Adds metadata tags to a specified resource.
@@ -2307,6 +2709,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/TagResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.TagResource
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2317,7 +2725,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UntagResource':
+  '/#X-Amz-Target=AlexaForBusiness.UntagResource':
     post:
       operationId: UntagResource
       description: Removes metadata tags from a specified resource.
@@ -2336,6 +2744,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UntagResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.UntagResource
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2346,7 +2760,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateAddressBook':
+  '/#X-Amz-Target=AlexaForBusiness.UpdateAddressBook':
     post:
       operationId: UpdateAddressBook
       description: Updates address book details by the address book ARN.
@@ -2373,6 +2787,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateAddressBookRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.UpdateAddressBook
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2383,7 +2803,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateBusinessReportSchedule':
+  '/#X-Amz-Target=AlexaForBusiness.UpdateBusinessReportSchedule':
     post:
       operationId: UpdateBusinessReportSchedule
       description: Updates the configuration of the report delivery schedule with the specified schedule ARN.
@@ -2406,6 +2826,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateBusinessReportScheduleRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.UpdateBusinessReportSchedule
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2416,7 +2842,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateConferenceProvider':
+  '/#X-Amz-Target=AlexaForBusiness.UpdateConferenceProvider':
     post:
       operationId: UpdateConferenceProvider
       description: Updates an existing conference provider's settings.
@@ -2435,6 +2861,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateConferenceProviderRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.UpdateConferenceProvider
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2445,7 +2877,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateContact':
+  '/#X-Amz-Target=AlexaForBusiness.UpdateContact':
     post:
       operationId: UpdateContact
       description: Updates the contact details by the contact ARN.
@@ -2468,6 +2900,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateContactRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.UpdateContact
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2478,7 +2916,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateDevice':
+  '/#X-Amz-Target=AlexaForBusiness.UpdateDevice':
     post:
       operationId: UpdateDevice
       description: Updates the device name by device ARN.
@@ -2505,6 +2943,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateDeviceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.UpdateDevice
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2515,7 +2959,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateProfile':
+  '/#X-Amz-Target=AlexaForBusiness.UpdateProfile':
     post:
       operationId: UpdateProfile
       description: Updates an existing room profile by room profile ARN.
@@ -2542,6 +2986,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateProfileRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.UpdateProfile
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2552,7 +3002,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateRoom':
+  '/#X-Amz-Target=AlexaForBusiness.UpdateRoom':
     post:
       operationId: UpdateRoom
       description: Updates room details by room ARN.
@@ -2575,6 +3025,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateRoomRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.UpdateRoom
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2585,7 +3041,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateSkillGroup':
+  '/#X-Amz-Target=AlexaForBusiness.UpdateSkillGroup':
     post:
       operationId: UpdateSkillGroup
       description: Updates skill group details by skill group ARN.
@@ -2612,6 +3068,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateSkillGroupRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.UpdateSkillGroup
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -4089,21 +4551,13 @@ definitions:
   SkillId:
     type: string
     pattern: '(^amzn1\.ask\.skill\.[0-9a-f\-]{1,200})|(^amzn1\.echo-sdk-ams\.app\.[0-9a-f\-]{1,200})'
-  Key:
-    type: string
-    minLength: 1
   Value:
     type: string
     minLength: 1
   AuthorizationResult:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/Key'
-        value:
-          $ref: '#/definitions/Value'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/Value'
   Boolean:
     type: boolean
   BulletPoint:
@@ -4842,6 +5296,9 @@ definitions:
     type: string
   InvocationPhrase:
     type: string
+  Key:
+    type: string
+    minLength: 1
   NextToken:
     type: string
     minLength: 1
@@ -4948,14 +5405,9 @@ definitions:
   ReviewValue:
     type: string
   Reviews:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/ReviewKey'
-        value:
-          $ref: '#/definitions/ReviewValue'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/ReviewValue'
   RoomData:
     type: object
     properties:

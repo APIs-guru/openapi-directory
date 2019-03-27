@@ -99,7 +99,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /:
+  '/#X-Amz-Target=PerformanceInsightsv20180227.DescribeDimensionKeys':
     post:
       operationId: DescribeDimensionKeys
       description: 'For a specific time period, retrieve the top <code>N</code> dimension keys for a metric.'
@@ -126,6 +126,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeDimensionKeysRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - PerformanceInsightsv20180227.DescribeDimensionKeys
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -136,7 +142,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetResourceMetrics':
+  '/#X-Amz-Target=PerformanceInsightsv20180227.GetResourceMetrics':
     post:
       operationId: GetResourceMetrics
       description: 'Retrieve Performance Insights metrics for a set of data sources, over a time period. You can provide specific dimension groups and dimensions, and provide aggregation and filtering criteria for each group.'
@@ -163,6 +169,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetResourceMetricsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - PerformanceInsightsv20180227.GetResourceMetrics
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -351,14 +363,9 @@ definitions:
         description: The maximum number of items to fetch for this dimension group.
     description: 'A logical grouping of Performance Insights metrics for a related subject area. For example, the <code>db.sql</code> dimension group consists of the following dimensions: <code>db.sql.id</code>, <code>db.sql.db_id</code>, <code>db.sql.statement</code>, and <code>db.sql.tokenized_id</code>.'
   MetricQueryFilterMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/String'
-        value:
-          $ref: '#/definitions/String'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/String'
   MaxResults:
     type: integer
     minimum: 0
@@ -382,14 +389,9 @@ definitions:
     minimum: 1
     maximum: 10
   DimensionMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/String'
-        value:
-          $ref: '#/definitions/String'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/String'
   MetricValuesList:
     type: array
     items:

@@ -126,7 +126,19 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/AddTagsRequest'
+            type: object
+            required:
+              - ARN
+              - TagList
+            properties:
+              ARN:
+                description: 'The Amazon Resource Name (ARN) of the Elasticsearch domain. See <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html" target="_blank">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i> for more information.'
+                type: string
+              TagList:
+                description: 'A list of <code>Tag</code> '
+                type: array
+                items:
+                  $ref: '#/definitions/Tag'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -167,7 +179,16 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CancelElasticsearchServiceSoftwareUpdateRequest'
+            type: object
+            required:
+              - DomainName
+            properties:
+              DomainName:
+                description: 'The name of an Elasticsearch domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+                type: string
+                pattern: '[a-z][a-z0-9\-]+'
+                minLength: 3
+                maxLength: 28
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -220,7 +241,123 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateElasticsearchDomainRequest'
+            type: object
+            required:
+              - DomainName
+            properties:
+              DomainName:
+                description: 'The name of an Elasticsearch domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+                type: string
+                pattern: '[a-z][a-z0-9\-]+'
+                minLength: 3
+                maxLength: 28
+              ElasticsearchVersion:
+                description: 'String of format X.Y to specify version for the Elasticsearch domain eg. "1.5" or "2.3". For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomains" target="_blank">Creating Elasticsearch Domains</a> in the <i>Amazon Elasticsearch Service Developer Guide</i>.'
+                type: string
+              ElasticsearchClusterConfig:
+                description: 'Specifies the configuration for the domain cluster, such as the type and number of instances.'
+                type: object
+                properties:
+                  InstanceType:
+                    $ref: '#/definitions/ESPartitionInstanceType'
+                    description: The instance type for an Elasticsearch cluster.
+                  InstanceCount:
+                    $ref: '#/definitions/IntegerClass'
+                    description: The number of instances in the specified domain cluster.
+                  DedicatedMasterEnabled:
+                    $ref: '#/definitions/Boolean'
+                    description: 'A boolean value to indicate whether a dedicated master node is enabled. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-dedicatedmasternodes" target="_blank">About Dedicated Master Nodes</a> for more information.'
+                  ZoneAwarenessEnabled:
+                    $ref: '#/definitions/Boolean'
+                    description: 'A boolean value to indicate whether zone awareness is enabled. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-zoneawareness" target="_blank">About Zone Awareness</a> for more information.'
+                  ZoneAwarenessConfig:
+                    $ref: '#/definitions/ZoneAwarenessConfig'
+                    description: Specifies the zone awareness configuration for a domain when zone awareness is enabled.
+                  DedicatedMasterType:
+                    $ref: '#/definitions/ESPartitionInstanceType'
+                    description: The instance type for a dedicated master node.
+                  DedicatedMasterCount:
+                    $ref: '#/definitions/IntegerClass'
+                    description: 'Total number of dedicated master nodes, active and on standby, for the cluster.'
+              EBSOptions:
+                description: 'Options to enable, disable, and specify the properties of EBS storage volumes. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs" target="_blank"> Configuring EBS-based Storage</a>.'
+                type: object
+                properties:
+                  EBSEnabled:
+                    $ref: '#/definitions/Boolean'
+                    description: Specifies whether EBS-based storage is enabled.
+                  VolumeType:
+                    $ref: '#/definitions/VolumeType'
+                    description: ' Specifies the volume type for EBS-based storage.'
+                  VolumeSize:
+                    $ref: '#/definitions/IntegerClass'
+                    description: ' Integer to specify the size of an EBS volume.'
+                  Iops:
+                    $ref: '#/definitions/IntegerClass'
+                    description: Specifies the IOPD for a Provisioned IOPS EBS volume (SSD).
+              AccessPolicies:
+                description: 'Access policy rules for an Elasticsearch domain service endpoints. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-access-policies" target="_blank">Configuring Access Policies</a> in the <i>Amazon Elasticsearch Service Developer Guide</i>. The maximum size of a policy document is 100 KB.'
+                type: string
+              SnapshotOptions:
+                description: 'Specifies the time, in UTC format, when the service takes a daily automated snapshot of the specified Elasticsearch domain. Default value is <code>0</code> hours.'
+                type: object
+                properties:
+                  AutomatedSnapshotStartHour:
+                    $ref: '#/definitions/IntegerClass'
+                    description: 'Specifies the time, in UTC format, when the service takes a daily automated snapshot of the specified Elasticsearch domain. Default value is <code>0</code> hours.'
+              VPCOptions:
+                description: 'Options to specify the subnets and security groups for VPC endpoint. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html" target="_blank"> VPC Endpoints for Amazon Elasticsearch Service Domains</a>.'
+                type: object
+                properties:
+                  SubnetIds:
+                    $ref: '#/definitions/StringList'
+                    description: Specifies the subnets for VPC endpoint.
+                  SecurityGroupIds:
+                    $ref: '#/definitions/StringList'
+                    description: Specifies the security groups for VPC endpoint.
+              CognitoOptions:
+                description: 'Options to specify the Cognito user and identity pools for Kibana authentication. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html" target="_blank">Amazon Cognito Authentication for Kibana</a>.'
+                type: object
+                properties:
+                  Enabled:
+                    $ref: '#/definitions/Boolean'
+                    description: Specifies the option to enable Cognito for Kibana authentication.
+                  UserPoolId:
+                    $ref: '#/definitions/UserPoolId'
+                    description: Specifies the Cognito user pool ID for Kibana authentication.
+                  IdentityPoolId:
+                    $ref: '#/definitions/IdentityPoolId'
+                    description: Specifies the Cognito identity pool ID for Kibana authentication.
+                  RoleArn:
+                    $ref: '#/definitions/RoleArn'
+                    description: Specifies the role ARN that provides Elasticsearch permissions for accessing Cognito resources.
+              EncryptionAtRestOptions:
+                description: Specifies the Encryption At Rest Options.
+                type: object
+                properties:
+                  Enabled:
+                    $ref: '#/definitions/Boolean'
+                    description: Specifies the option to enable Encryption At Rest.
+                  KmsKeyId:
+                    $ref: '#/definitions/KmsKeyId'
+                    description: ' Specifies the KMS Key ID for Encryption At Rest options.'
+              NodeToNodeEncryptionOptions:
+                description: Specifies the node-to-node encryption options.
+                type: object
+                properties:
+                  Enabled:
+                    $ref: '#/definitions/Boolean'
+                    description: Specify true to enable node-to-node encryption.
+              AdvancedOptions:
+                description: '<p> Exposes select native Elasticsearch configuration values from <code>elasticsearch.yml</code>. Currently, the following advanced options are available:</p> <ul> <li>Option to allow references to indices in an HTTP request body. Must be <code>false</code> when configuring access to individual sub-resources. By default, the value is <code>true</code>. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options" target="_blank">Configuration Advanced Options</a> for more information.</li> <li>Option to specify the percentage of heap space that is allocated to field data. By default, this setting is unbounded.</li> </ul> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options">Configuring Advanced Options</a>.</p>'
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/String'
+              LogPublishingOptions:
+                description: 'Map of <code>LogType</code> and <code>LogPublishingOption</code>, each containing options to publish a given type of Elasticsearch log.'
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/LogPublishingOption'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -257,15 +394,14 @@ paths:
           schema:
             $ref: '#/definitions/ValidationException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteElasticsearchDomainRequest'
         - name: DomainName
-          type: string
           in: path
           required: true
+          description: 'The name of an Elasticsearch domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+          type: string
+          pattern: '[a-z][a-z0-9\-]+'
+          minLength: 3
+          maxLength: 28
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -301,15 +437,14 @@ paths:
           schema:
             $ref: '#/definitions/ValidationException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeElasticsearchDomainRequest'
         - name: DomainName
-          type: string
           in: path
           required: true
+          description: 'The name of an Elasticsearch domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+          type: string
+          pattern: '[a-z][a-z0-9\-]+'
+          minLength: 3
+          maxLength: 28
   /2015-01-01/es/role:
     delete:
       operationId: DeleteElasticsearchServiceRole
@@ -365,15 +500,14 @@ paths:
           schema:
             $ref: '#/definitions/ValidationException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeElasticsearchDomainConfigRequest'
         - name: DomainName
-          type: string
           in: path
           required: true
+          description: 'The name of an Elasticsearch domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+          type: string
+          pattern: '[a-z][a-z0-9\-]+'
+          minLength: 3
+          maxLength: 28
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -417,15 +551,107 @@ paths:
           schema:
             $ref: '#/definitions/ValidationException'
       parameters:
+        - name: DomainName
+          in: path
+          required: true
+          description: 'The name of an Elasticsearch domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+          type: string
+          pattern: '[a-z][a-z0-9\-]+'
+          minLength: 3
+          maxLength: 28
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateElasticsearchDomainConfigRequest'
-        - name: DomainName
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              ElasticsearchClusterConfig:
+                description: 'Specifies the configuration for the domain cluster, such as the type and number of instances.'
+                type: object
+                properties:
+                  InstanceType:
+                    $ref: '#/definitions/ESPartitionInstanceType'
+                    description: The instance type for an Elasticsearch cluster.
+                  InstanceCount:
+                    $ref: '#/definitions/IntegerClass'
+                    description: The number of instances in the specified domain cluster.
+                  DedicatedMasterEnabled:
+                    $ref: '#/definitions/Boolean'
+                    description: 'A boolean value to indicate whether a dedicated master node is enabled. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-dedicatedmasternodes" target="_blank">About Dedicated Master Nodes</a> for more information.'
+                  ZoneAwarenessEnabled:
+                    $ref: '#/definitions/Boolean'
+                    description: 'A boolean value to indicate whether zone awareness is enabled. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-zoneawareness" target="_blank">About Zone Awareness</a> for more information.'
+                  ZoneAwarenessConfig:
+                    $ref: '#/definitions/ZoneAwarenessConfig'
+                    description: Specifies the zone awareness configuration for a domain when zone awareness is enabled.
+                  DedicatedMasterType:
+                    $ref: '#/definitions/ESPartitionInstanceType'
+                    description: The instance type for a dedicated master node.
+                  DedicatedMasterCount:
+                    $ref: '#/definitions/IntegerClass'
+                    description: 'Total number of dedicated master nodes, active and on standby, for the cluster.'
+              EBSOptions:
+                description: 'Options to enable, disable, and specify the properties of EBS storage volumes. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs" target="_blank"> Configuring EBS-based Storage</a>.'
+                type: object
+                properties:
+                  EBSEnabled:
+                    $ref: '#/definitions/Boolean'
+                    description: Specifies whether EBS-based storage is enabled.
+                  VolumeType:
+                    $ref: '#/definitions/VolumeType'
+                    description: ' Specifies the volume type for EBS-based storage.'
+                  VolumeSize:
+                    $ref: '#/definitions/IntegerClass'
+                    description: ' Integer to specify the size of an EBS volume.'
+                  Iops:
+                    $ref: '#/definitions/IntegerClass'
+                    description: Specifies the IOPD for a Provisioned IOPS EBS volume (SSD).
+              SnapshotOptions:
+                description: 'Specifies the time, in UTC format, when the service takes a daily automated snapshot of the specified Elasticsearch domain. Default value is <code>0</code> hours.'
+                type: object
+                properties:
+                  AutomatedSnapshotStartHour:
+                    $ref: '#/definitions/IntegerClass'
+                    description: 'Specifies the time, in UTC format, when the service takes a daily automated snapshot of the specified Elasticsearch domain. Default value is <code>0</code> hours.'
+              VPCOptions:
+                description: 'Options to specify the subnets and security groups for VPC endpoint. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html" target="_blank"> VPC Endpoints for Amazon Elasticsearch Service Domains</a>.'
+                type: object
+                properties:
+                  SubnetIds:
+                    $ref: '#/definitions/StringList'
+                    description: Specifies the subnets for VPC endpoint.
+                  SecurityGroupIds:
+                    $ref: '#/definitions/StringList'
+                    description: Specifies the security groups for VPC endpoint.
+              CognitoOptions:
+                description: 'Options to specify the Cognito user and identity pools for Kibana authentication. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html" target="_blank">Amazon Cognito Authentication for Kibana</a>.'
+                type: object
+                properties:
+                  Enabled:
+                    $ref: '#/definitions/Boolean'
+                    description: Specifies the option to enable Cognito for Kibana authentication.
+                  UserPoolId:
+                    $ref: '#/definitions/UserPoolId'
+                    description: Specifies the Cognito user pool ID for Kibana authentication.
+                  IdentityPoolId:
+                    $ref: '#/definitions/IdentityPoolId'
+                    description: Specifies the Cognito identity pool ID for Kibana authentication.
+                  RoleArn:
+                    $ref: '#/definitions/RoleArn'
+                    description: Specifies the role ARN that provides Elasticsearch permissions for accessing Cognito resources.
+              AdvancedOptions:
+                description: '<p> Exposes select native Elasticsearch configuration values from <code>elasticsearch.yml</code>. Currently, the following advanced options are available:</p> <ul> <li>Option to allow references to indices in an HTTP request body. Must be <code>false</code> when configuring access to individual sub-resources. By default, the value is <code>true</code>. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options" target="_blank">Configuration Advanced Options</a> for more information.</li> <li>Option to specify the percentage of heap space that is allocated to field data. By default, this setting is unbounded.</li> </ul> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options">Configuring Advanced Options</a>.</p>'
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/String'
+              AccessPolicies:
+                description: 'Access policy rules for an Elasticsearch domain service endpoints. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-access-policies" target="_blank">Configuring Access Policies</a> in the <i>Amazon Elasticsearch Service Developer Guide</i>. The maximum size of a policy document is 100 KB.'
+                type: string
+              LogPublishingOptions:
+                description: 'Map of <code>LogType</code> and <code>LogPublishingOption</code>, each containing options to publish a given type of Elasticsearch log.'
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/LogPublishingOption'
   /2015-01-01/es/domain-info:
     post:
       operationId: DescribeElasticsearchDomains
@@ -452,7 +678,15 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/DescribeElasticsearchDomainsRequest'
+            type: object
+            required:
+              - DomainNames
+            properties:
+              DomainNames:
+                description: A list of Elasticsearch domain names.
+                type: array
+                items:
+                  $ref: '#/definitions/DomainName'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -497,19 +731,65 @@ paths:
           schema:
             $ref: '#/definitions/ValidationException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeElasticsearchInstanceTypeLimitsRequest'
-        - name: ElasticsearchVersion
+        - name: domainName
+          in: query
+          required: false
+          description: 'The name of an Elasticsearch domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
           type: string
-          in: path
-          required: true
+          pattern: '[a-z][a-z0-9\-]+'
+          minLength: 3
+          maxLength: 28
         - name: InstanceType
-          type: string
           in: path
           required: true
+          description: ' The instance type for an Elasticsearch cluster for which Elasticsearch <code> <a>Limits</a> </code> are needed. '
+          type: string
+          enum:
+            - m3.medium.elasticsearch
+            - m3.large.elasticsearch
+            - m3.xlarge.elasticsearch
+            - m3.2xlarge.elasticsearch
+            - m4.large.elasticsearch
+            - m4.xlarge.elasticsearch
+            - m4.2xlarge.elasticsearch
+            - m4.4xlarge.elasticsearch
+            - m4.10xlarge.elasticsearch
+            - t2.micro.elasticsearch
+            - t2.small.elasticsearch
+            - t2.medium.elasticsearch
+            - r3.large.elasticsearch
+            - r3.xlarge.elasticsearch
+            - r3.2xlarge.elasticsearch
+            - r3.4xlarge.elasticsearch
+            - r3.8xlarge.elasticsearch
+            - i2.xlarge.elasticsearch
+            - i2.2xlarge.elasticsearch
+            - d2.xlarge.elasticsearch
+            - d2.2xlarge.elasticsearch
+            - d2.4xlarge.elasticsearch
+            - d2.8xlarge.elasticsearch
+            - c4.large.elasticsearch
+            - c4.xlarge.elasticsearch
+            - c4.2xlarge.elasticsearch
+            - c4.4xlarge.elasticsearch
+            - c4.8xlarge.elasticsearch
+            - r4.large.elasticsearch
+            - r4.xlarge.elasticsearch
+            - r4.2xlarge.elasticsearch
+            - r4.4xlarge.elasticsearch
+            - r4.8xlarge.elasticsearch
+            - r4.16xlarge.elasticsearch
+            - i3.large.elasticsearch
+            - i3.xlarge.elasticsearch
+            - i3.2xlarge.elasticsearch
+            - i3.4xlarge.elasticsearch
+            - i3.8xlarge.elasticsearch
+            - i3.16xlarge.elasticsearch
+        - name: ElasticsearchVersion
+          in: path
+          required: true
+          description: ' Version of Elasticsearch for which <code> <a>Limits</a> </code> are needed. '
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -546,11 +826,23 @@ paths:
           schema:
             $ref: '#/definitions/InternalException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeReservedElasticsearchInstanceOfferingsRequest'
+        - name: offeringId
+          in: query
+          required: false
+          description: The offering identifier filter value. Use this parameter to show only the available offering that matches the specified reservation identifier.
+          type: string
+          pattern: '\p{XDigit}{8}-\p{XDigit}{4}-\p{XDigit}{4}-\p{XDigit}{4}-\p{XDigit}{12}'
+        - name: maxResults
+          in: query
+          required: false
+          description: ' Set this value to limit the number of results returned. '
+          type: integer
+          maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: ' Paginated APIs accepts NextToken input to returns next page results and provides a NextToken output in the response which can be used by the client to retrieve more results. '
+          type: string
         - name: MaxResults
           type: string
           in: query
@@ -597,11 +889,23 @@ paths:
           schema:
             $ref: '#/definitions/DisabledOperationException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeReservedElasticsearchInstancesRequest'
+        - name: reservationId
+          in: query
+          required: false
+          description: The reserved instance identifier filter value. Use this parameter to show only the reservation that matches the specified reserved Elasticsearch instance ID.
+          type: string
+          pattern: '\p{XDigit}{8}-\p{XDigit}{4}-\p{XDigit}{4}-\p{XDigit}{4}-\p{XDigit}{12}'
+        - name: maxResults
+          in: query
+          required: false
+          description: ' Set this value to limit the number of results returned. '
+          type: integer
+          maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: ' Paginated APIs accepts NextToken input to returns next page results and provides a NextToken output in the response which can be used by the client to retrieve more results. '
+          type: string
         - name: MaxResults
           type: string
           in: query
@@ -652,11 +956,14 @@ paths:
           schema:
             $ref: '#/definitions/InternalException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetCompatibleElasticsearchVersionsRequest'
+        - name: domainName
+          in: query
+          required: false
+          description: 'The name of an Elasticsearch domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+          type: string
+          pattern: '[a-z][a-z0-9\-]+'
+          minLength: 3
+          maxLength: 28
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -697,11 +1004,25 @@ paths:
           schema:
             $ref: '#/definitions/InternalException'
       parameters:
-        - name: body
-          in: body
+        - name: DomainName
+          in: path
           required: true
-          schema:
-            $ref: '#/definitions/GetUpgradeHistoryRequest'
+          description: 'The name of an Elasticsearch domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+          type: string
+          pattern: '[a-z][a-z0-9\-]+'
+          minLength: 3
+          maxLength: 28
+        - name: maxResults
+          in: query
+          required: false
+          description: ' Set this value to limit the number of results returned. '
+          type: integer
+          maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: ' Paginated APIs accepts NextToken input to returns next page results and provides a NextToken output in the response which can be used by the client to retrieve more results. '
+          type: string
         - name: MaxResults
           type: string
           in: query
@@ -712,10 +1033,6 @@ paths:
           in: query
           description: Pagination token
           required: false
-        - name: DomainName
-          type: string
-          in: path
-          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -756,15 +1073,14 @@ paths:
           schema:
             $ref: '#/definitions/InternalException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetUpgradeStatusRequest'
         - name: DomainName
-          type: string
           in: path
           required: true
+          description: 'The name of an Elasticsearch domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+          type: string
+          pattern: '[a-z][a-z0-9\-]+'
+          minLength: 3
+          maxLength: 28
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -828,11 +1144,30 @@ paths:
           schema:
             $ref: '#/definitions/ValidationException'
       parameters:
-        - name: body
-          in: body
+        - name: ElasticsearchVersion
+          in: path
           required: true
-          schema:
-            $ref: '#/definitions/ListElasticsearchInstanceTypesRequest'
+          description: 'Version of Elasticsearch for which list of supported elasticsearch instance types are needed. '
+          type: string
+        - name: domainName
+          in: query
+          required: false
+          description: 'The name of an Elasticsearch domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+          type: string
+          pattern: '[a-z][a-z0-9\-]+'
+          minLength: 3
+          maxLength: 28
+        - name: maxResults
+          in: query
+          required: false
+          description: ' Set this value to limit the number of results returned. '
+          type: integer
+          maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: ' Paginated APIs accepts NextToken input to returns next page results and provides a NextToken output in the response which can be used by the client to retrieve more results. '
+          type: string
         - name: MaxResults
           type: string
           in: query
@@ -843,10 +1178,6 @@ paths:
           in: query
           description: Pagination token
           required: false
-        - name: ElasticsearchVersion
-          type: string
-          in: path
-          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -883,11 +1214,17 @@ paths:
           schema:
             $ref: '#/definitions/ValidationException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListElasticsearchVersionsRequest'
+        - name: maxResults
+          in: query
+          required: false
+          description: ' Set this value to limit the number of results returned. '
+          type: integer
+          maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: ' Paginated APIs accepts NextToken input to returns next page results and provides a NextToken output in the response which can be used by the client to retrieve more results. '
+          type: string
         - name: MaxResults
           type: string
           in: query
@@ -908,7 +1245,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /2015-01-01/tags/:
+  '/2015-01-01/tags/#arn':
     get:
       operationId: ListTags
       description: Returns all tags for the given Elasticsearch domain.
@@ -934,11 +1271,11 @@ paths:
           schema:
             $ref: '#/definitions/InternalException'
       parameters:
-        - name: body
-          in: body
+        - name: arn
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/ListTagsRequest'
+          description: 'The Amazon Resource Name (ARN) of the Elasticsearch domain. See <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html" target="_blank">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i> for more information.'
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -987,7 +1324,24 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/PurchaseReservedElasticsearchInstanceOfferingRequest'
+            type: object
+            required:
+              - ReservedElasticsearchInstanceOfferingId
+              - ReservationName
+            properties:
+              ReservedElasticsearchInstanceOfferingId:
+                description: The ID of the reserved Elasticsearch instance offering to purchase.
+                type: string
+                pattern: '\p{XDigit}{8}-\p{XDigit}{4}-\p{XDigit}{4}-\p{XDigit}{4}-\p{XDigit}{12}'
+              ReservationName:
+                description: A customer-specified identifier to track this reservation.
+                type: string
+                minLength: 5
+                maxLength: 64
+              InstanceCount:
+                description: Specifies the number of EC2 instances in the Elasticsearch domain.
+                type: integer
+                minimum: 1
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1022,7 +1376,19 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/RemoveTagsRequest'
+            type: object
+            required:
+              - ARN
+              - TagKeys
+            properties:
+              ARN:
+                description: 'The Amazon Resource Name (ARN) of the Elasticsearch domain. See <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html" target="_blank">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i> for more information.'
+                type: string
+              TagKeys:
+                description: Specifies the <code>TagKey</code> list which you want to remove from the Elasticsearch domain.
+                type: array
+                items:
+                  $ref: '#/definitions/String'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1063,7 +1429,16 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/StartElasticsearchServiceSoftwareUpdateRequest'
+            type: object
+            required:
+              - DomainName
+            properties:
+              DomainName:
+                description: 'The name of an Elasticsearch domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+                type: string
+                pattern: '[a-z][a-z0-9\-]+'
+                minLength: 3
+                maxLength: 28
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1112,7 +1487,23 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpgradeElasticsearchDomainRequest'
+            type: object
+            required:
+              - DomainName
+              - TargetVersion
+            properties:
+              DomainName:
+                description: 'The name of an Elasticsearch domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+                type: string
+                pattern: '[a-z][a-z0-9\-]+'
+                minLength: 3
+                maxLength: 28
+              TargetVersion:
+                description: The version of Elasticsearch that you intend to upgrade the domain to.
+                type: string
+              PerformCheckOnly:
+                description: ' This flag, when set to True, indicates that an Upgrade Eligibility Check needs to be performed. This will not actually perform the Upgrade. '
+                type: boolean
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1124,19 +1515,19 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  AddTagsRequest:
+  Tag:
     type: object
     required:
-      - ARN
-      - TagList
+      - Key
+      - Value
     properties:
-      ARN:
-        $ref: '#/definitions/ARN'
-        description: ' Specify the <code>ARN</code> for which you want to add the tags.'
-      TagList:
-        $ref: '#/definitions/TagList'
-        description: ' List of <code>Tag</code> that need to be added for the Elasticsearch domain. '
-    description: Container for the parameters to the <code><a>AddTags</a></code> operation. Specify the tags that you want to attach to the Elasticsearch domain.
+      Key:
+        $ref: '#/definitions/TagKey'
+        description: 'Specifies the <code>TagKey</code>, the name of the tag. Tag keys must be unique for the Elasticsearch domain to which they are attached.'
+      Value:
+        $ref: '#/definitions/TagValue'
+        description: 'Specifies the <code>TagValue</code>, the value assigned to the corresponding tag key. Tag values can be null and do not have to be unique in a tag set. For example, you can have a key value pair in a tag set of <code>project : Trinity</code> and <code>cost-center : Trinity</code>'
+    description: Specifies a key value pair for a resource tag.
   BaseException: {}
   LimitExceededException: {}
   ValidationException: {}
@@ -1148,15 +1539,6 @@ definitions:
         $ref: '#/definitions/ServiceSoftwareOptions'
         description: The current status of the Elasticsearch service software update.
     description: The result of a <code>CancelElasticsearchServiceSoftwareUpdate</code> operation. Contains the status of the update.
-  CancelElasticsearchServiceSoftwareUpdateRequest:
-    type: object
-    required:
-      - DomainName
-    properties:
-      DomainName:
-        $ref: '#/definitions/DomainName'
-        description: The name of the domain that you want to stop the latest service software update on.
-    description: Container for the parameters to the <code><a>CancelElasticsearchServiceSoftwareUpdate</a></code> operation. Specifies the name of the Elasticsearch domain that you wish to cancel a service software update on.
   ResourceNotFoundException: {}
   CreateElasticsearchDomainResponse:
     type: object
@@ -1165,47 +1547,100 @@ definitions:
         $ref: '#/definitions/ElasticsearchDomainStatus'
         description: 'The status of the newly created Elasticsearch domain. '
     description: The result of a <code>CreateElasticsearchDomain</code> operation. Contains the status of the newly created Elasticsearch domain.
-  CreateElasticsearchDomainRequest:
+  ESPartitionInstanceType:
+    type: string
+    enum:
+      - m3.medium.elasticsearch
+      - m3.large.elasticsearch
+      - m3.xlarge.elasticsearch
+      - m3.2xlarge.elasticsearch
+      - m4.large.elasticsearch
+      - m4.xlarge.elasticsearch
+      - m4.2xlarge.elasticsearch
+      - m4.4xlarge.elasticsearch
+      - m4.10xlarge.elasticsearch
+      - t2.micro.elasticsearch
+      - t2.small.elasticsearch
+      - t2.medium.elasticsearch
+      - r3.large.elasticsearch
+      - r3.xlarge.elasticsearch
+      - r3.2xlarge.elasticsearch
+      - r3.4xlarge.elasticsearch
+      - r3.8xlarge.elasticsearch
+      - i2.xlarge.elasticsearch
+      - i2.2xlarge.elasticsearch
+      - d2.xlarge.elasticsearch
+      - d2.2xlarge.elasticsearch
+      - d2.4xlarge.elasticsearch
+      - d2.8xlarge.elasticsearch
+      - c4.large.elasticsearch
+      - c4.xlarge.elasticsearch
+      - c4.2xlarge.elasticsearch
+      - c4.4xlarge.elasticsearch
+      - c4.8xlarge.elasticsearch
+      - r4.large.elasticsearch
+      - r4.xlarge.elasticsearch
+      - r4.2xlarge.elasticsearch
+      - r4.4xlarge.elasticsearch
+      - r4.8xlarge.elasticsearch
+      - r4.16xlarge.elasticsearch
+      - i3.large.elasticsearch
+      - i3.xlarge.elasticsearch
+      - i3.2xlarge.elasticsearch
+      - i3.4xlarge.elasticsearch
+      - i3.8xlarge.elasticsearch
+      - i3.16xlarge.elasticsearch
+  IntegerClass:
+    type: integer
+  Boolean:
+    type: boolean
+  ZoneAwarenessConfig:
     type: object
-    required:
-      - DomainName
     properties:
-      DomainName:
-        $ref: '#/definitions/DomainName'
-        description: 'The name of the Elasticsearch domain that you are creating. Domain names are unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
-      ElasticsearchVersion:
-        $ref: '#/definitions/ElasticsearchVersionString'
-        description: 'String of format X.Y to specify version for the Elasticsearch domain eg. "1.5" or "2.3". For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomains" target="_blank">Creating Elasticsearch Domains</a> in the <i>Amazon Elasticsearch Service Developer Guide</i>.'
-      ElasticsearchClusterConfig:
-        $ref: '#/definitions/ElasticsearchClusterConfig'
-        description: 'Configuration options for an Elasticsearch domain. Specifies the instance type and number of instances in the domain cluster. '
-      EBSOptions:
-        $ref: '#/definitions/EBSOptions'
-        description: 'Options to enable, disable and specify the type and size of EBS storage volumes. '
-      AccessPolicies:
-        $ref: '#/definitions/PolicyDocument'
-        description: ' IAM access policy as a JSON-formatted string.'
-      SnapshotOptions:
-        $ref: '#/definitions/SnapshotOptions'
-        description: 'Option to set time, in UTC format, of the daily automated snapshot. Default value is 0 hours. '
-      VPCOptions:
-        $ref: '#/definitions/VPCOptions'
-        description: 'Options to specify the subnets and security groups for VPC endpoint. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-creating-vpc" target="_blank">Creating a VPC</a> in <i>VPC Endpoints for Amazon Elasticsearch Service Domains</i>'
-      CognitoOptions:
-        $ref: '#/definitions/CognitoOptions'
-        description: 'Options to specify the Cognito user and identity pools for Kibana authentication. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html" target="_blank">Amazon Cognito Authentication for Kibana</a>.'
-      EncryptionAtRestOptions:
-        $ref: '#/definitions/EncryptionAtRestOptions'
-        description: Specifies the Encryption At Rest Options.
-      NodeToNodeEncryptionOptions:
-        $ref: '#/definitions/NodeToNodeEncryptionOptions'
-        description: Specifies the NodeToNodeEncryptionOptions.
-      AdvancedOptions:
-        $ref: '#/definitions/AdvancedOptions'
-        description: ' Option to allow references to indices in an HTTP request body. Must be <code>false</code> when configuring access to individual sub-resources. By default, the value is <code>true</code>. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options" target="_blank">Configuration Advanced Options</a> for more information.'
-      LogPublishingOptions:
-        $ref: '#/definitions/LogPublishingOptions'
-        description: 'Map of <code>LogType</code> and <code>LogPublishingOption</code>, each containing options to publish a given type of Elasticsearch log.'
+      AvailabilityZoneCount:
+        $ref: '#/definitions/IntegerClass'
+        description: An integer value to indicate the number of availability zones for a domain when zone awareness is enabled. This should be equal to number of subnets if VPC endpoints is enabled
+    description: 'Specifies the zone awareness configuration for the domain cluster, such as the number of availability zones.'
+  VolumeType:
+    type: string
+    enum:
+      - standard
+      - gp2
+      - io1
+    description: ' The type of EBS volume, standard, gp2, or io1. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs" target="_blank">Configuring EBS-based Storage</a>for more information.'
+  StringList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  UserPoolId:
+    type: string
+    pattern: '[\w-]+_[0-9a-zA-Z]+'
+    minLength: 1
+    maxLength: 55
+  IdentityPoolId:
+    type: string
+    pattern: '[\w-]+:[0-9a-f-]+'
+    minLength: 1
+    maxLength: 55
+  RoleArn:
+    type: string
+    minLength: 20
+    maxLength: 2048
+  KmsKeyId:
+    type: string
+    minLength: 1
+    maxLength: 500
+  String:
+    type: string
+  LogPublishingOption:
+    type: object
+    properties:
+      CloudWatchLogsLogGroupArn:
+        $ref: '#/definitions/CloudWatchLogsLogGroupArn'
+      Enabled:
+        $ref: '#/definitions/Boolean'
+        description: ' Specifies whether given log publishing option is enabled or not.'
+    description: 'Log Publishing option that is set for given domain. <br/>Attributes and their details: <ul> <li>CloudWatchLogsLogGroupArn: ARN of the Cloudwatch log group to which log needs to be published.</li> <li>Enabled: Whether the log publishing for given log type is enabled or not</li> </ul> '
   DisabledOperationException: {}
   InvalidTypeException: {}
   ResourceAlreadyExistsException: {}
@@ -1216,10 +1651,6 @@ definitions:
         $ref: '#/definitions/ElasticsearchDomainStatus'
         description: The status of the Elasticsearch domain being deleted.
     description: 'The result of a <code>DeleteElasticsearchDomain</code> request. Contains the status of the pending deletion, or no status if the domain and all of its resources have been deleted.'
-  DeleteElasticsearchDomainRequest:
-    type: object
-    properties: {}
-    description: Container for the parameters to the <code><a>DeleteElasticsearchDomain</a></code> operation. Specifies the name of the Elasticsearch domain that you want to delete.
   DescribeElasticsearchDomainResponse:
     type: object
     required:
@@ -1229,10 +1660,6 @@ definitions:
         $ref: '#/definitions/ElasticsearchDomainStatus'
         description: The current status of the Elasticsearch domain.
     description: The result of a <code>DescribeElasticsearchDomain</code> request. Contains the status of the domain specified in the request.
-  DescribeElasticsearchDomainRequest:
-    type: object
-    properties: {}
-    description: Container for the parameters to the <code><a>DescribeElasticsearchDomain</a></code> operation.
   DescribeElasticsearchDomainConfigResponse:
     type: object
     required:
@@ -1242,10 +1669,6 @@ definitions:
         $ref: '#/definitions/ElasticsearchDomainConfig'
         description: The configuration information of the domain requested in the <code>DescribeElasticsearchDomainConfig</code> request.
     description: The result of a <code>DescribeElasticsearchDomainConfig</code> request. Contains the configuration information of the requested domain.
-  DescribeElasticsearchDomainConfigRequest:
-    type: object
-    properties: {}
-    description: ' Container for the parameters to the <code>DescribeElasticsearchDomainConfig</code> operation. Specifies the domain name for which you want configuration information.'
   DescribeElasticsearchDomainsResponse:
     type: object
     required:
@@ -1255,25 +1678,18 @@ definitions:
         $ref: '#/definitions/ElasticsearchDomainStatusList'
         description: The status of the domains requested in the <code>DescribeElasticsearchDomains</code> request.
     description: The result of a <code>DescribeElasticsearchDomains</code> request. Contains the status of the specified domains or all domains owned by the account.
-  DescribeElasticsearchDomainsRequest:
-    type: object
-    required:
-      - DomainNames
-    properties:
-      DomainNames:
-        $ref: '#/definitions/DomainNameList'
-        description: The Elasticsearch domains for which you want information.
-    description: 'Container for the parameters to the <code><a>DescribeElasticsearchDomains</a></code> operation. By default, the API returns the status of all Elasticsearch domains.'
+  DomainName:
+    type: string
+    pattern: '[a-z][a-z0-9\-]+'
+    description: 'The name of an Elasticsearch domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+    minLength: 3
+    maxLength: 28
   DescribeElasticsearchInstanceTypeLimitsResponse:
     type: object
     properties:
       LimitsByRole:
         $ref: '#/definitions/LimitsByRole'
     description: ' Container for the parameters received from <code> <a>DescribeElasticsearchInstanceTypeLimits</a> </code> operation. '
-  DescribeElasticsearchInstanceTypeLimitsRequest:
-    type: object
-    properties: {}
-    description: ' Container for the parameters to <code> <a>DescribeElasticsearchInstanceTypeLimits</a> </code> operation. '
   DescribeReservedElasticsearchInstanceOfferingsResponse:
     type: object
     properties:
@@ -1284,10 +1700,6 @@ definitions:
         $ref: '#/definitions/ReservedElasticsearchInstanceOfferingList'
         description: List of reserved Elasticsearch instance offerings
     description: Container for results from <code>DescribeReservedElasticsearchInstanceOfferings</code>
-  DescribeReservedElasticsearchInstanceOfferingsRequest:
-    type: object
-    properties: {}
-    description: Container for parameters to <code>DescribeReservedElasticsearchInstanceOfferings</code>
   DescribeReservedElasticsearchInstancesResponse:
     type: object
     properties:
@@ -1298,10 +1710,6 @@ definitions:
         $ref: '#/definitions/ReservedElasticsearchInstanceList'
         description: List of reserved Elasticsearch instances.
     description: Container for results from <code>DescribeReservedElasticsearchInstances</code>
-  DescribeReservedElasticsearchInstancesRequest:
-    type: object
-    properties: {}
-    description: Container for parameters to <code>DescribeReservedElasticsearchInstances</code>
   GetCompatibleElasticsearchVersionsResponse:
     type: object
     properties:
@@ -1309,10 +1717,6 @@ definitions:
         $ref: '#/definitions/CompatibleElasticsearchVersionsList'
         description: ' A map of compatible Elasticsearch versions returned as part of the <code> <a>GetCompatibleElasticsearchVersions</a> </code> operation. '
     description: ' Container for response returned by <code> <a>GetCompatibleElasticsearchVersions</a> </code> operation. '
-  GetCompatibleElasticsearchVersionsRequest:
-    type: object
-    properties: {}
-    description: ' Container for request parameters to <code> <a>GetCompatibleElasticsearchVersions</a> </code> operation. '
   GetUpgradeHistoryResponse:
     type: object
     properties:
@@ -1323,10 +1727,6 @@ definitions:
         $ref: '#/definitions/String'
         description: Pagination token that needs to be supplied to the next call to get the next page of results
     description: ' Container for response returned by <code> <a>GetUpgradeHistory</a> </code> operation. '
-  GetUpgradeHistoryRequest:
-    type: object
-    properties: {}
-    description: ' Container for request parameters to <code> <a>GetUpgradeHistory</a> </code> operation. '
   GetUpgradeStatusResponse:
     type: object
     properties:
@@ -1340,10 +1740,6 @@ definitions:
         $ref: '#/definitions/UpgradeName'
         description: A string that describes the update briefly
     description: ' Container for response returned by <code> <a>GetUpgradeStatus</a> </code> operation. '
-  GetUpgradeStatusRequest:
-    type: object
-    properties: {}
-    description: ' Container for request parameters to <code> <a>GetUpgradeStatus</a> </code> operation. '
   ListDomainNamesResponse:
     type: object
     properties:
@@ -1361,10 +1757,6 @@ definitions:
         $ref: '#/definitions/NextToken'
         description: 'In case if there are more results available NextToken would be present, make further request to the same API with received NextToken to paginate remaining results. '
     description: ' Container for the parameters returned by <code> <a>ListElasticsearchInstanceTypes</a> </code> operation. '
-  ListElasticsearchInstanceTypesRequest:
-    type: object
-    properties: {}
-    description: ' Container for the parameters to the <code> <a>ListElasticsearchInstanceTypes</a> </code> operation. '
   ListElasticsearchVersionsResponse:
     type: object
     properties:
@@ -1373,10 +1765,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
     description: ' Container for the parameters for response received from <code> <a>ListElasticsearchVersions</a> </code> operation. '
-  ListElasticsearchVersionsRequest:
-    type: object
-    properties: {}
-    description: '<p> Container for the parameters to the <code> <a>ListElasticsearchVersions</a> </code> operation. <p> Use <code> <a>MaxResults</a> </code> to control the maximum number of results to retrieve in a single call. </p> <p> Use <code> <a>NextToken</a> </code> in response to retrieve more results. If the received response does not contain a NextToken, then there are no more results to retrieve. </p> </p>'
   ListTagsResponse:
     type: object
     properties:
@@ -1384,10 +1772,6 @@ definitions:
         $ref: '#/definitions/TagList'
         description: ' List of <code>Tag</code> for the requested Elasticsearch domain.'
     description: The result of a <code>ListTags</code> operation. Contains tags for all requested Elasticsearch domains.
-  ListTagsRequest:
-    type: object
-    properties: {}
-    description: Container for the parameters to the <code><a>ListTags</a></code> operation. Specify the <code>ARN</code> for the Elasticsearch domain to which the tags are attached that you want to view are attached.
   PurchaseReservedElasticsearchInstanceOfferingResponse:
     type: object
     properties:
@@ -1398,35 +1782,6 @@ definitions:
         $ref: '#/definitions/ReservationToken'
         description: The customer-specified identifier used to track this reservation.
     description: Represents the output of a <code>PurchaseReservedElasticsearchInstanceOffering</code> operation.
-  PurchaseReservedElasticsearchInstanceOfferingRequest:
-    type: object
-    required:
-      - ReservedElasticsearchInstanceOfferingId
-      - ReservationName
-    properties:
-      ReservedElasticsearchInstanceOfferingId:
-        $ref: '#/definitions/GUID'
-        description: The ID of the reserved Elasticsearch instance offering to purchase.
-      ReservationName:
-        $ref: '#/definitions/ReservationToken'
-        description: A customer-specified identifier to track this reservation.
-      InstanceCount:
-        $ref: '#/definitions/InstanceCount'
-        description: The number of Elasticsearch instances to reserve.
-    description: Container for parameters to <code>PurchaseReservedElasticsearchInstanceOffering</code>
-  RemoveTagsRequest:
-    type: object
-    required:
-      - ARN
-      - TagKeys
-    properties:
-      ARN:
-        $ref: '#/definitions/ARN'
-        description: Specifies the <code>ARN</code> for the Elasticsearch domain from which you want to delete the specified tags.
-      TagKeys:
-        $ref: '#/definitions/StringList'
-        description: Specifies the <code>TagKey</code> list which you want to remove from the Elasticsearch domain.
-    description: Container for the parameters to the <code><a>RemoveTags</a></code> operation. Specify the <code>ARN</code> for the Elasticsearch domain from which you want to remove the specified <code>TagKey</code>.
   StartElasticsearchServiceSoftwareUpdateResponse:
     type: object
     properties:
@@ -1434,15 +1789,6 @@ definitions:
         $ref: '#/definitions/ServiceSoftwareOptions'
         description: The current status of the Elasticsearch service software update.
     description: The result of a <code>StartElasticsearchServiceSoftwareUpdate</code> operation. Contains the status of the update.
-  StartElasticsearchServiceSoftwareUpdateRequest:
-    type: object
-    required:
-      - DomainName
-    properties:
-      DomainName:
-        $ref: '#/definitions/DomainName'
-        description: The name of the domain that you want to update to the latest service software.
-    description: Container for the parameters to the <code><a>StartElasticsearchServiceSoftwareUpdate</a></code> operation. Specifies the name of the Elasticsearch domain that you wish to schedule a service software update on.
   UpdateElasticsearchDomainConfigResponse:
     type: object
     required:
@@ -1452,34 +1798,6 @@ definitions:
         $ref: '#/definitions/ElasticsearchDomainConfig'
         description: 'The status of the updated Elasticsearch domain. '
     description: The result of an <code>UpdateElasticsearchDomain</code> request. Contains the status of the Elasticsearch domain being updated.
-  UpdateElasticsearchDomainConfigRequest:
-    type: object
-    properties:
-      ElasticsearchClusterConfig:
-        $ref: '#/definitions/ElasticsearchClusterConfig'
-        description: The type and number of instances to instantiate for the domain cluster.
-      EBSOptions:
-        $ref: '#/definitions/EBSOptions'
-        description: 'Specify the type and size of the EBS volume that you want to use. '
-      SnapshotOptions:
-        $ref: '#/definitions/SnapshotOptions'
-        description: 'Option to set the time, in UTC format, for the daily automated snapshot. Default value is <code>0</code> hours. '
-      VPCOptions:
-        $ref: '#/definitions/VPCOptions'
-        description: 'Options to specify the subnets and security groups for VPC endpoint. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-creating-vpc" target="_blank">Creating a VPC</a> in <i>VPC Endpoints for Amazon Elasticsearch Service Domains</i>'
-      CognitoOptions:
-        $ref: '#/definitions/CognitoOptions'
-        description: 'Options to specify the Cognito user and identity pools for Kibana authentication. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html" target="_blank">Amazon Cognito Authentication for Kibana</a>.'
-      AdvancedOptions:
-        $ref: '#/definitions/AdvancedOptions'
-        description: 'Modifies the advanced option to allow references to indices in an HTTP request body. Must be <code>false</code> when configuring access to individual sub-resources. By default, the value is <code>true</code>. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options" target="_blank">Configuration Advanced Options</a> for more information.'
-      AccessPolicies:
-        $ref: '#/definitions/PolicyDocument'
-        description: IAM access policy as a JSON-formatted string.
-      LogPublishingOptions:
-        $ref: '#/definitions/LogPublishingOptions'
-        description: 'Map of <code>LogType</code> and <code>LogPublishingOption</code>, each containing options to publish a given type of Elasticsearch log.'
-    description: Container for the parameters to the <code><a>UpdateElasticsearchDomain</a></code> operation. Specifies the type and number of instances in the domain cluster.
   UpgradeElasticsearchDomainResponse:
     type: object
     properties:
@@ -1492,21 +1810,6 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: ' This flag, when set to True, indicates that an Upgrade Eligibility Check needs to be performed. This will not actually perform the Upgrade. '
     description: ' Container for response returned by <code> <a>UpgradeElasticsearchDomain</a> </code> operation. '
-  UpgradeElasticsearchDomainRequest:
-    type: object
-    required:
-      - DomainName
-      - TargetVersion
-    properties:
-      DomainName:
-        $ref: '#/definitions/DomainName'
-      TargetVersion:
-        $ref: '#/definitions/ElasticsearchVersionString'
-        description: The version of Elasticsearch that you intend to upgrade the domain to.
-      PerformCheckOnly:
-        $ref: '#/definitions/Boolean'
-        description: ' This flag, when set to True, indicates that an Upgrade Eligibility Check needs to be performed. This will not actually perform the Upgrade. '
-    description: ' Container for request parameters to <code> <a>UpgradeElasticsearchDomain</a> </code> operation. '
   ARN:
     type: string
     description: 'The Amazon Resource Name (ARN) of the Elasticsearch domain. See <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html" target="_blank">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i> for more information.'
@@ -1554,6 +1857,19 @@ definitions:
     description: 'A list of <code>Tag</code> '
     items:
       $ref: '#/definitions/Tag'
+  AddTagsRequest:
+    type: object
+    required:
+      - ARN
+      - TagList
+    properties:
+      ARN:
+        $ref: '#/definitions/ARN'
+        description: ' Specify the <code>ARN</code> for which you want to add the tags.'
+      TagList:
+        $ref: '#/definitions/TagList'
+        description: ' List of <code>Tag</code> that need to be added for the Elasticsearch domain. '
+    description: Container for the parameters to the <code><a>AddTags</a></code> operation. Specify the tags that you want to attach to the Elasticsearch domain.
   LimitName:
     type: string
   LimitValueList:
@@ -1574,18 +1890,11 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/AdditionalLimit'
-  String:
-    type: string
   AdvancedOptions:
-    type: array
+    type: object
     description: '<p> Exposes select native Elasticsearch configuration values from <code>elasticsearch.yml</code>. Currently, the following advanced options are available:</p> <ul> <li>Option to allow references to indices in an HTTP request body. Must be <code>false</code> when configuring access to individual sub-resources. By default, the value is <code>true</code>. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options" target="_blank">Configuration Advanced Options</a> for more information.</li> <li>Option to specify the percentage of heap space that is allocated to field data. By default, this setting is unbounded.</li> </ul> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options">Configuring Advanced Options</a>.</p>'
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/String'
-        value:
-          $ref: '#/definitions/String'
+    additionalProperties:
+      $ref: '#/definitions/String'
   AdvancedOptionsStatus:
     type: object
     required:
@@ -1599,14 +1908,15 @@ definitions:
         $ref: '#/definitions/OptionStatus'
         description: ' Specifies the status of <code>OptionStatus</code> for advanced options for the specified Elasticsearch domain.'
     description: '<p> Status of the advanced options for the specified Elasticsearch domain. Currently, the following advanced options are available:</p> <ul> <li>Option to allow references to indices in an HTTP request body. Must be <code>false</code> when configuring access to individual sub-resources. By default, the value is <code>true</code>. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options" target="_blank">Configuration Advanced Options</a> for more information.</li> <li>Option to specify the percentage of heap space that is allocated to field data. By default, this setting is unbounded.</li> </ul> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options">Configuring Advanced Options</a>.</p>'
-  Boolean:
-    type: boolean
-  DomainName:
-    type: string
-    pattern: '[a-z][a-z0-9\-]+'
-    description: 'The name of an Elasticsearch domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
-    minLength: 3
-    maxLength: 28
+  CancelElasticsearchServiceSoftwareUpdateRequest:
+    type: object
+    required:
+      - DomainName
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+        description: The name of the domain that you want to stop the latest service software update on.
+    description: Container for the parameters to the <code><a>CancelElasticsearchServiceSoftwareUpdate</a></code> operation. Specifies the name of the Elasticsearch domain that you wish to cancel a service software update on.
   ServiceSoftwareOptions:
     type: object
     properties:
@@ -1635,20 +1945,6 @@ definitions:
   CloudWatchLogsLogGroupArn:
     type: string
     description: ARN of the Cloudwatch log group to which log needs to be published.
-  UserPoolId:
-    type: string
-    pattern: '[\w-]+_[0-9a-zA-Z]+'
-    minLength: 1
-    maxLength: 55
-  IdentityPoolId:
-    type: string
-    pattern: '[\w-]+:[0-9a-f-]+'
-    minLength: 1
-    maxLength: 55
-  RoleArn:
-    type: string
-    minLength: 20
-    maxLength: 2048
   CognitoOptions:
     type: object
     properties:
@@ -1774,14 +2070,50 @@ definitions:
         description: Specify true to enable node-to-node encryption.
     description: Specifies the node-to-node encryption options.
   LogPublishingOptions:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/LogType'
-        value:
-          $ref: '#/definitions/LogPublishingOption'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/LogPublishingOption'
+  CreateElasticsearchDomainRequest:
+    type: object
+    required:
+      - DomainName
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+        description: 'The name of the Elasticsearch domain that you are creating. Domain names are unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+      ElasticsearchVersion:
+        $ref: '#/definitions/ElasticsearchVersionString'
+        description: 'String of format X.Y to specify version for the Elasticsearch domain eg. "1.5" or "2.3". For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomains" target="_blank">Creating Elasticsearch Domains</a> in the <i>Amazon Elasticsearch Service Developer Guide</i>.'
+      ElasticsearchClusterConfig:
+        $ref: '#/definitions/ElasticsearchClusterConfig'
+        description: 'Configuration options for an Elasticsearch domain. Specifies the instance type and number of instances in the domain cluster. '
+      EBSOptions:
+        $ref: '#/definitions/EBSOptions'
+        description: 'Options to enable, disable and specify the type and size of EBS storage volumes. '
+      AccessPolicies:
+        $ref: '#/definitions/PolicyDocument'
+        description: ' IAM access policy as a JSON-formatted string.'
+      SnapshotOptions:
+        $ref: '#/definitions/SnapshotOptions'
+        description: 'Option to set time, in UTC format, of the daily automated snapshot. Default value is 0 hours. '
+      VPCOptions:
+        $ref: '#/definitions/VPCOptions'
+        description: 'Options to specify the subnets and security groups for VPC endpoint. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-creating-vpc" target="_blank">Creating a VPC</a> in <i>VPC Endpoints for Amazon Elasticsearch Service Domains</i>'
+      CognitoOptions:
+        $ref: '#/definitions/CognitoOptions'
+        description: 'Options to specify the Cognito user and identity pools for Kibana authentication. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html" target="_blank">Amazon Cognito Authentication for Kibana</a>.'
+      EncryptionAtRestOptions:
+        $ref: '#/definitions/EncryptionAtRestOptions'
+        description: Specifies the Encryption At Rest Options.
+      NodeToNodeEncryptionOptions:
+        $ref: '#/definitions/NodeToNodeEncryptionOptions'
+        description: Specifies the NodeToNodeEncryptionOptions.
+      AdvancedOptions:
+        $ref: '#/definitions/AdvancedOptions'
+        description: ' Option to allow references to indices in an HTTP request body. Must be <code>false</code> when configuring access to individual sub-resources. By default, the value is <code>true</code>. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options" target="_blank">Configuration Advanced Options</a> for more information.'
+      LogPublishingOptions:
+        $ref: '#/definitions/LogPublishingOptions'
+        description: 'Map of <code>LogType</code> and <code>LogPublishingOption</code>, each containing options to publish a given type of Elasticsearch log.'
   ElasticsearchDomainStatus:
     type: object
     required:
@@ -1853,6 +2185,10 @@ definitions:
         $ref: '#/definitions/ServiceSoftwareOptions'
         description: The current status of the Elasticsearch domain's service software.
     description: The current status of an Elasticsearch domain.
+  DeleteElasticsearchDomainRequest:
+    type: object
+    properties: {}
+    description: Container for the parameters to the <code><a>DeleteElasticsearchDomain</a></code> operation. Specifies the name of the Elasticsearch domain that you want to delete.
   DeploymentCloseDateTimeStamp:
     type: string
     format: date-time
@@ -1864,6 +2200,10 @@ definitions:
       - COMPLETED
       - NOT_ELIGIBLE
       - ELIGIBLE
+  DescribeElasticsearchDomainConfigRequest:
+    type: object
+    properties: {}
+    description: ' Container for the parameters to the <code>DescribeElasticsearchDomainConfig</code> operation. Specifies the domain name for which you want configuration information.'
   ElasticsearchDomainConfig:
     type: object
     properties:
@@ -1901,69 +2241,38 @@ definitions:
         $ref: '#/definitions/LogPublishingOptionsStatus'
         description: Log publishing options for the given domain.
     description: The configuration of an Elasticsearch domain.
+  DescribeElasticsearchDomainRequest:
+    type: object
+    properties: {}
+    description: Container for the parameters to the <code><a>DescribeElasticsearchDomain</a></code> operation.
   DomainNameList:
     type: array
     description: A list of Elasticsearch domain names.
     items:
       $ref: '#/definitions/DomainName'
+  DescribeElasticsearchDomainsRequest:
+    type: object
+    required:
+      - DomainNames
+    properties:
+      DomainNames:
+        $ref: '#/definitions/DomainNameList'
+        description: The Elasticsearch domains for which you want information.
+    description: 'Container for the parameters to the <code><a>DescribeElasticsearchDomains</a></code> operation. By default, the API returns the status of all Elasticsearch domains.'
   ElasticsearchDomainStatusList:
     type: array
     description: A list that contains the status of each requested Elasticsearch domain.
     items:
       $ref: '#/definitions/ElasticsearchDomainStatus'
-  ESPartitionInstanceType:
-    type: string
-    enum:
-      - m3.medium.elasticsearch
-      - m3.large.elasticsearch
-      - m3.xlarge.elasticsearch
-      - m3.2xlarge.elasticsearch
-      - m4.large.elasticsearch
-      - m4.xlarge.elasticsearch
-      - m4.2xlarge.elasticsearch
-      - m4.4xlarge.elasticsearch
-      - m4.10xlarge.elasticsearch
-      - t2.micro.elasticsearch
-      - t2.small.elasticsearch
-      - t2.medium.elasticsearch
-      - r3.large.elasticsearch
-      - r3.xlarge.elasticsearch
-      - r3.2xlarge.elasticsearch
-      - r3.4xlarge.elasticsearch
-      - r3.8xlarge.elasticsearch
-      - i2.xlarge.elasticsearch
-      - i2.2xlarge.elasticsearch
-      - d2.xlarge.elasticsearch
-      - d2.2xlarge.elasticsearch
-      - d2.4xlarge.elasticsearch
-      - d2.8xlarge.elasticsearch
-      - c4.large.elasticsearch
-      - c4.xlarge.elasticsearch
-      - c4.2xlarge.elasticsearch
-      - c4.4xlarge.elasticsearch
-      - c4.8xlarge.elasticsearch
-      - r4.large.elasticsearch
-      - r4.xlarge.elasticsearch
-      - r4.2xlarge.elasticsearch
-      - r4.4xlarge.elasticsearch
-      - r4.8xlarge.elasticsearch
-      - r4.16xlarge.elasticsearch
-      - i3.large.elasticsearch
-      - i3.xlarge.elasticsearch
-      - i3.2xlarge.elasticsearch
-      - i3.4xlarge.elasticsearch
-      - i3.8xlarge.elasticsearch
-      - i3.16xlarge.elasticsearch
+  DescribeElasticsearchInstanceTypeLimitsRequest:
+    type: object
+    properties: {}
+    description: ' Container for the parameters to <code> <a>DescribeElasticsearchInstanceTypeLimits</a> </code> operation. '
   LimitsByRole:
-    type: array
+    type: object
     description: ' Map of Role of the Instance and Limits that are applicable. Role performed by given Instance in Elasticsearch can be one of the following: <ul> <li>Data: If the given InstanceType is used as Data node</li> <li>Master: If the given InstanceType is used as Master node</li> </ul> '
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/InstanceRole'
-        value:
-          $ref: '#/definitions/Limits'
+    additionalProperties:
+      $ref: '#/definitions/Limits'
   GUID:
     type: string
     pattern: '\p{XDigit}{8}-\p{XDigit}{4}-\p{XDigit}{4}-\p{XDigit}{4}-\p{XDigit}{12}'
@@ -1974,10 +2283,18 @@ definitions:
   NextToken:
     type: string
     description: ' Paginated APIs accepts NextToken input to returns next page results and provides a NextToken output in the response which can be used by the client to retrieve more results. '
+  DescribeReservedElasticsearchInstanceOfferingsRequest:
+    type: object
+    properties: {}
+    description: Container for parameters to <code>DescribeReservedElasticsearchInstanceOfferings</code>
   ReservedElasticsearchInstanceOfferingList:
     type: array
     items:
       $ref: '#/definitions/ReservedElasticsearchInstanceOffering'
+  DescribeReservedElasticsearchInstancesRequest:
+    type: object
+    properties: {}
+    description: Container for parameters to <code>DescribeReservedElasticsearchInstances</code>
   ReservedElasticsearchInstanceList:
     type: array
     items:
@@ -2001,15 +2318,6 @@ definitions:
   Double:
     type: number
     format: double
-  VolumeType:
-    type: string
-    enum:
-      - standard
-      - gp2
-      - io1
-    description: ' The type of EBS volume, standard, gp2, or io1. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs" target="_blank">Configuring EBS-based Storage</a>for more information.'
-  IntegerClass:
-    type: integer
   EBSOptionsStatus:
     type: object
     required:
@@ -2023,13 +2331,6 @@ definitions:
         $ref: '#/definitions/OptionStatus'
         description: ' Specifies the status of the EBS options for the specified Elasticsearch domain.'
     description: ' Status of the EBS options for the specified Elasticsearch domain.'
-  ZoneAwarenessConfig:
-    type: object
-    properties:
-      AvailabilityZoneCount:
-        $ref: '#/definitions/IntegerClass'
-        description: An integer value to indicate the number of availability zones for a domain when zone awareness is enabled. This should be equal to number of subnets if VPC endpoints is enabled
-    description: 'Specifies the zone awareness configuration for the domain cluster, such as the number of availability zones.'
   ElasticsearchClusterConfigStatus:
     type: object
     required:
@@ -2122,14 +2423,9 @@ definitions:
     type: string
     description: 'The endpoint to which service requests are submitted. For example, <code>search-imdb-movies-oopcnjfn6ugofer3zx5iadxxca.eu-west-1.es.amazonaws.com</code> or <code>doc-imdb-movies-oopcnjfn6ugofer3zx5iadxxca.eu-west-1.es.amazonaws.com</code>.'
   EndpointsMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/String'
-        value:
-          $ref: '#/definitions/ServiceUrl'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/ServiceUrl'
   VPCDerivedInfo:
     type: object
     properties:
@@ -2151,14 +2447,22 @@ definitions:
     description: ' List of instance types supported by Amazon Elasticsearch service. '
     items:
       $ref: '#/definitions/ESPartitionInstanceType'
-  KmsKeyId:
-    type: string
-    minLength: 1
-    maxLength: 500
+  GetCompatibleElasticsearchVersionsRequest:
+    type: object
+    properties: {}
+    description: ' Container for request parameters to <code> <a>GetCompatibleElasticsearchVersions</a> </code> operation. '
+  GetUpgradeHistoryRequest:
+    type: object
+    properties: {}
+    description: ' Container for request parameters to <code> <a>GetUpgradeHistory</a> </code> operation. '
   UpgradeHistoryList:
     type: array
     items:
       $ref: '#/definitions/UpgradeHistory'
+  GetUpgradeStatusRequest:
+    type: object
+    properties: {}
+    description: ' Container for request parameters to <code> <a>GetUpgradeStatus</a> </code> operation. '
   UpgradeStep:
     type: string
     enum:
@@ -2226,15 +2530,18 @@ definitions:
         $ref: '#/definitions/AdditionalLimitList'
         description: ' List of additional limits that are specific to a given InstanceType and for each of it''s <code> <a>InstanceRole</a> </code> . '
     description: ' Limits for given InstanceType and for each of it''s role. <br/> Limits contains following <code> <a>StorageTypes,</a> </code> <code> <a>InstanceLimits</a> </code> and <code> <a>AdditionalLimits</a> </code> '
-  LogPublishingOption:
+  ListElasticsearchInstanceTypesRequest:
     type: object
-    properties:
-      CloudWatchLogsLogGroupArn:
-        $ref: '#/definitions/CloudWatchLogsLogGroupArn'
-      Enabled:
-        $ref: '#/definitions/Boolean'
-        description: ' Specifies whether given log publishing option is enabled or not.'
-    description: 'Log Publishing option that is set for given domain. <br/>Attributes and their details: <ul> <li>CloudWatchLogsLogGroupArn: ARN of the Cloudwatch log group to which log needs to be published.</li> <li>Enabled: Whether the log publishing for given log type is enabled or not</li> </ul> '
+    properties: {}
+    description: ' Container for the parameters to the <code> <a>ListElasticsearchInstanceTypes</a> </code> operation. '
+  ListElasticsearchVersionsRequest:
+    type: object
+    properties: {}
+    description: '<p> Container for the parameters to the <code> <a>ListElasticsearchVersions</a> </code> operation. <p> Use <code> <a>MaxResults</a> </code> to control the maximum number of results to retrieve in a single call. </p> <p> Use <code> <a>NextToken</a> </code> in response to retrieve more results. If the received response does not contain a NextToken, then there are no more results to retrieve. </p> </p>'
+  ListTagsRequest:
+    type: object
+    properties: {}
+    description: Container for the parameters to the <code><a>ListTags</a></code> operation. Specify the <code>ARN</code> for the Elasticsearch domain to which the tags are attached that you want to view are attached.
   LogType:
     type: string
     enum:
@@ -2259,6 +2566,22 @@ definitions:
     type: string
     minLength: 5
     maxLength: 64
+  PurchaseReservedElasticsearchInstanceOfferingRequest:
+    type: object
+    required:
+      - ReservedElasticsearchInstanceOfferingId
+      - ReservationName
+    properties:
+      ReservedElasticsearchInstanceOfferingId:
+        $ref: '#/definitions/GUID'
+        description: The ID of the reserved Elasticsearch instance offering to purchase.
+      ReservationName:
+        $ref: '#/definitions/ReservationToken'
+        description: A customer-specified identifier to track this reservation.
+      InstanceCount:
+        $ref: '#/definitions/InstanceCount'
+        description: The number of Elasticsearch instances to reserve.
+    description: Container for parameters to <code>PurchaseReservedElasticsearchInstanceOffering</code>
   RecurringCharge:
     type: object
     properties:
@@ -2273,10 +2596,19 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/RecurringCharge'
-  StringList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
+  RemoveTagsRequest:
+    type: object
+    required:
+      - ARN
+      - TagKeys
+    properties:
+      ARN:
+        $ref: '#/definitions/ARN'
+        description: Specifies the <code>ARN</code> for the Elasticsearch domain from which you want to delete the specified tags.
+      TagKeys:
+        $ref: '#/definitions/StringList'
+        description: Specifies the <code>TagKey</code> list which you want to remove from the Elasticsearch domain.
+    description: Container for the parameters to the <code><a>RemoveTags</a></code> operation. Specify the <code>ARN</code> for the Elasticsearch domain from which you want to remove the specified <code>TagKey</code>.
   ReservedElasticsearchInstancePaymentOption:
     type: string
     enum:
@@ -2354,6 +2686,15 @@ definitions:
         $ref: '#/definitions/RecurringChargeList'
         description: The charge to your account regardless of whether you are creating any domains using the instance offering.
     description: Details of a reserved Elasticsearch instance offering.
+  StartElasticsearchServiceSoftwareUpdateRequest:
+    type: object
+    required:
+      - DomainName
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+        description: The name of the domain that you want to update to the latest service software.
+    description: Container for the parameters to the <code><a>StartElasticsearchServiceSoftwareUpdate</a></code> operation. Specifies the name of the Elasticsearch domain that you wish to schedule a service software update on.
   StartTimestamp:
     type: string
     format: date-time
@@ -2398,19 +2739,49 @@ definitions:
     description: A string of length from 0 to 256 characters that specifies the value for a Tag. Tag values can be null and do not have to be unique in a tag set.
     minLength: 0
     maxLength: 256
-  Tag:
+  UpdateElasticsearchDomainConfigRequest:
+    type: object
+    properties:
+      ElasticsearchClusterConfig:
+        $ref: '#/definitions/ElasticsearchClusterConfig'
+        description: The type and number of instances to instantiate for the domain cluster.
+      EBSOptions:
+        $ref: '#/definitions/EBSOptions'
+        description: 'Specify the type and size of the EBS volume that you want to use. '
+      SnapshotOptions:
+        $ref: '#/definitions/SnapshotOptions'
+        description: 'Option to set the time, in UTC format, for the daily automated snapshot. Default value is <code>0</code> hours. '
+      VPCOptions:
+        $ref: '#/definitions/VPCOptions'
+        description: 'Options to specify the subnets and security groups for VPC endpoint. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-creating-vpc" target="_blank">Creating a VPC</a> in <i>VPC Endpoints for Amazon Elasticsearch Service Domains</i>'
+      CognitoOptions:
+        $ref: '#/definitions/CognitoOptions'
+        description: 'Options to specify the Cognito user and identity pools for Kibana authentication. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html" target="_blank">Amazon Cognito Authentication for Kibana</a>.'
+      AdvancedOptions:
+        $ref: '#/definitions/AdvancedOptions'
+        description: 'Modifies the advanced option to allow references to indices in an HTTP request body. Must be <code>false</code> when configuring access to individual sub-resources. By default, the value is <code>true</code>. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options" target="_blank">Configuration Advanced Options</a> for more information.'
+      AccessPolicies:
+        $ref: '#/definitions/PolicyDocument'
+        description: IAM access policy as a JSON-formatted string.
+      LogPublishingOptions:
+        $ref: '#/definitions/LogPublishingOptions'
+        description: 'Map of <code>LogType</code> and <code>LogPublishingOption</code>, each containing options to publish a given type of Elasticsearch log.'
+    description: Container for the parameters to the <code><a>UpdateElasticsearchDomain</a></code> operation. Specifies the type and number of instances in the domain cluster.
+  UpgradeElasticsearchDomainRequest:
     type: object
     required:
-      - Key
-      - Value
+      - DomainName
+      - TargetVersion
     properties:
-      Key:
-        $ref: '#/definitions/TagKey'
-        description: 'Specifies the <code>TagKey</code>, the name of the tag. Tag keys must be unique for the Elasticsearch domain to which they are attached.'
-      Value:
-        $ref: '#/definitions/TagValue'
-        description: 'Specifies the <code>TagValue</code>, the value assigned to the corresponding tag key. Tag values can be null and do not have to be unique in a tag set. For example, you can have a key value pair in a tag set of <code>project : Trinity</code> and <code>cost-center : Trinity</code>'
-    description: Specifies a key value pair for a resource tag.
+      DomainName:
+        $ref: '#/definitions/DomainName'
+      TargetVersion:
+        $ref: '#/definitions/ElasticsearchVersionString'
+        description: The version of Elasticsearch that you intend to upgrade the domain to.
+      PerformCheckOnly:
+        $ref: '#/definitions/Boolean'
+        description: ' This flag, when set to True, indicates that an Upgrade Eligibility Check needs to be performed. This will not actually perform the Upgrade. '
+    description: ' Container for request parameters to <code> <a>UpgradeElasticsearchDomain</a> </code> operation. '
   UpgradeStepsList:
     type: array
     items:

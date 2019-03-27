@@ -99,7 +99,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /:
+  '/#X-Amz-Target=CodeCommit_20150413.BatchGetRepositories':
     post:
       operationId: BatchGetRepositories
       description: <p>Returns information about one or more repositories.</p> <note> <p>The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page.</p> </note>
@@ -146,6 +146,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/BatchGetRepositoriesInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.BatchGetRepositories
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -156,7 +162,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateBranch':
+  '/#X-Amz-Target=CodeCommit_20150413.CreateBranch':
     post:
       operationId: CreateBranch
       description: '<p>Creates a new branch in a repository and points the branch to a commit.</p> <note> <p>Calling the create branch operation does not set a repository''s default branch. To do this, call the update default branch operation.</p> </note>'
@@ -225,6 +231,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateBranchInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.CreateBranch
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -235,7 +247,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateCommit':
+  '/#X-Amz-Target=CodeCommit_20150413.CreateCommit':
     post:
       operationId: CreateCommit
       description: Creates a commit for a repository on the tip of a specified branch.
@@ -402,6 +414,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateCommitInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.CreateCommit
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -412,7 +430,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreatePullRequest':
+  '/#X-Amz-Target=CodeCommit_20150413.CreatePullRequest':
     post:
       operationId: CreatePullRequest
       description: Creates a pull request in the specified repository.
@@ -527,6 +545,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreatePullRequestInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.CreatePullRequest
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -537,7 +561,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateRepository':
+  '/#X-Amz-Target=CodeCommit_20150413.CreateRepository':
     post:
       operationId: CreateRepository
       description: 'Creates a new, empty repository.'
@@ -592,6 +616,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateRepositoryInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.CreateRepository
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -602,7 +632,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteBranch':
+  '/#X-Amz-Target=CodeCommit_20150413.DeleteBranch':
     post:
       operationId: DeleteBranch
       description: 'Deletes a branch from a repository, unless that branch is the default branch for the repository. '
@@ -661,6 +691,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteBranchInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.DeleteBranch
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -671,7 +707,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteCommentContent':
+  '/#X-Amz-Target=CodeCommit_20150413.DeleteCommentContent':
     post:
       operationId: DeleteCommentContent
       description: 'Deletes the content of a comment made on a change, file, or commit in a repository.'
@@ -702,6 +738,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteCommentContentInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.DeleteCommentContent
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -712,7 +754,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteFile':
+  '/#X-Amz-Target=CodeCommit_20150413.DeleteFile':
     post:
       operationId: DeleteFile
       description: Deletes a specified file from a specified branch. A commit is created on the branch that contains the revision. The file will still exist in the commits prior to the commit that contains the deletion.
@@ -815,6 +857,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteFileInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.DeleteFile
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -825,7 +873,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteRepository':
+  '/#X-Amz-Target=CodeCommit_20150413.DeleteRepository':
     post:
       operationId: DeleteRepository
       description: '<p>Deletes a repository. If a specified repository was already deleted, a null repository ID will be returned.</p> <important> <p>Deleting a repository also deletes all associated objects and metadata. After a repository is deleted, all future push calls to the deleted repository will fail.</p> </important>'
@@ -868,6 +916,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteRepositoryInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.DeleteRepository
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -878,7 +932,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribePullRequestEvents':
+  '/#X-Amz-Target=CodeCommit_20150413.DescribePullRequestEvents':
     post:
       operationId: DescribePullRequestEvents
       description: Returns information about one or more pull request events.
@@ -955,6 +1009,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.DescribePullRequestEvents
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -965,7 +1025,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetBlob':
+  '/#X-Amz-Target=CodeCommit_20150413.GetBlob':
     post:
       operationId: GetBlob
       description: Returns the base-64 encoded content of an individual blob within a repository.
@@ -1028,6 +1088,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetBlobInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.GetBlob
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1038,7 +1104,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetBranch':
+  '/#X-Amz-Target=CodeCommit_20150413.GetBranch':
     post:
       operationId: GetBranch
       description: 'Returns information about a repository branch, including its name and the last commit ID.'
@@ -1097,6 +1163,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetBranchInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.GetBranch
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1107,7 +1179,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetComment':
+  '/#X-Amz-Target=CodeCommit_20150413.GetComment':
     post:
       operationId: GetComment
       description: 'Returns the content of a comment made on a change, file, or commit in a repository.'
@@ -1138,6 +1210,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetCommentInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.GetComment
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1148,7 +1226,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetCommentsForComparedCommit':
+  '/#X-Amz-Target=CodeCommit_20150413.GetCommentsForComparedCommit':
     post:
       operationId: GetCommentsForComparedCommit
       description: Returns information about comments made on the comparison between two commits.
@@ -1225,6 +1303,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.GetCommentsForComparedCommit
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1235,7 +1319,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetCommentsForPullRequest':
+  '/#X-Amz-Target=CodeCommit_20150413.GetCommentsForPullRequest':
     post:
       operationId: GetCommentsForPullRequest
       description: Returns comments made on a pull request.
@@ -1328,6 +1412,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.GetCommentsForPullRequest
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1338,7 +1428,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetCommit':
+  '/#X-Amz-Target=CodeCommit_20150413.GetCommit':
     post:
       operationId: GetCommit
       description: 'Returns information about a commit, including commit message and committer information.'
@@ -1397,6 +1487,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetCommitInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.GetCommit
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1407,7 +1503,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetDifferences':
+  '/#X-Amz-Target=CodeCommit_20150413.GetDifferences':
     post:
       operationId: GetDifferences
       description: 'Returns information about the differences in a valid commit specifier (such as a branch, tag, HEAD, commit ID or other fully qualified reference). Results can be limited to a specified path.'
@@ -1496,6 +1592,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.GetDifferences
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1506,7 +1608,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetFile':
+  '/#X-Amz-Target=CodeCommit_20150413.GetFile':
     post:
       operationId: GetFile
       description: Returns the base-64 encoded contents of a specified file and its metadata.
@@ -1577,6 +1679,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetFileInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.GetFile
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1587,7 +1695,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetFolder':
+  '/#X-Amz-Target=CodeCommit_20150413.GetFolder':
     post:
       operationId: GetFolder
       description: Returns the contents of a specified folder in a repository.
@@ -1654,6 +1762,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetFolderInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.GetFolder
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1664,7 +1778,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetMergeConflicts':
+  '/#X-Amz-Target=CodeCommit_20150413.GetMergeConflicts':
     post:
       operationId: GetMergeConflicts
       description: Returns information about merge conflicts between the before and after commit IDs for a pull request in a repository.
@@ -1743,6 +1857,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetMergeConflictsInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.GetMergeConflicts
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1753,7 +1873,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetPullRequest':
+  '/#X-Amz-Target=CodeCommit_20150413.GetPullRequest':
     post:
       operationId: GetPullRequest
       description: Gets information about a pull request in a specified repository.
@@ -1800,6 +1920,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetPullRequestInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.GetPullRequest
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1810,7 +1936,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetRepository':
+  '/#X-Amz-Target=CodeCommit_20150413.GetRepository':
     post:
       operationId: GetRepository
       description: <p>Returns information about a repository.</p> <note> <p>The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page.</p> </note>
@@ -1857,6 +1983,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetRepositoryInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.GetRepository
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1867,7 +1999,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetRepositoryTriggers':
+  '/#X-Amz-Target=CodeCommit_20150413.GetRepositoryTriggers':
     post:
       operationId: GetRepositoryTriggers
       description: Gets information about triggers configured for a repository.
@@ -1914,6 +2046,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetRepositoryTriggersInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.GetRepositoryTriggers
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1924,7 +2062,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListBranches':
+  '/#X-Amz-Target=CodeCommit_20150413.ListBranches':
     post:
       operationId: ListBranches
       description: Gets information about one or more branches in a repository.
@@ -1980,6 +2118,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.ListBranches
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1990,7 +2134,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListPullRequests':
+  '/#X-Amz-Target=CodeCommit_20150413.ListPullRequests':
     post:
       operationId: ListPullRequests
       description: Returns a list of pull requests for a specified repository. The return list can be refined by pull request status or pull request author ARN.
@@ -2067,6 +2211,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.ListPullRequests
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2077,7 +2227,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListRepositories':
+  '/#X-Amz-Target=CodeCommit_20150413.ListRepositories':
     post:
       operationId: ListRepositories
       description: Gets information about one or more repositories.
@@ -2109,6 +2259,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.ListRepositories
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2119,7 +2275,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#MergePullRequestByFastForward':
+  '/#X-Amz-Target=CodeCommit_20150413.MergePullRequestByFastForward':
     post:
       operationId: MergePullRequestByFastForward
       description: Closes a pull request and attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the fast-forward merge option.
@@ -2198,6 +2354,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/MergePullRequestByFastForwardInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.MergePullRequestByFastForward
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2208,7 +2370,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#PostCommentForComparedCommit':
+  '/#X-Amz-Target=CodeCommit_20150413.PostCommentForComparedCommit':
     post:
       operationId: PostCommentForComparedCommit
       description: Posts a comment on the comparison between two commits.
@@ -2315,6 +2477,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PostCommentForComparedCommitInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.PostCommentForComparedCommit
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2325,7 +2493,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#PostCommentForPullRequest':
+  '/#X-Amz-Target=CodeCommit_20150413.PostCommentForPullRequest':
     post:
       operationId: PostCommentForPullRequest
       description: Posts a comment on a pull request.
@@ -2452,6 +2620,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PostCommentForPullRequestInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.PostCommentForPullRequest
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2462,7 +2636,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#PostCommentReply':
+  '/#X-Amz-Target=CodeCommit_20150413.PostCommentReply':
     post:
       operationId: PostCommentReply
       description: Posts a comment in reply to an existing comment on a comparison between commits or a pull request.
@@ -2509,6 +2683,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PostCommentReplyInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.PostCommentReply
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2519,7 +2699,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#PutFile':
+  '/#X-Amz-Target=CodeCommit_20150413.PutFile':
     post:
       operationId: PutFile
       description: 'Adds or updates a file in a branch in an AWS CodeCommit repository, and generates a commit for the addition in the specified branch.'
@@ -2654,6 +2834,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutFileInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.PutFile
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2664,7 +2850,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#PutRepositoryTriggers':
+  '/#X-Amz-Target=CodeCommit_20150413.PutRepositoryTriggers':
     post:
       operationId: PutRepositoryTriggers
       description: Replaces all triggers for a repository. This can be used to create or delete triggers.
@@ -2763,6 +2949,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutRepositoryTriggersInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.PutRepositoryTriggers
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2773,7 +2965,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#TestRepositoryTriggers':
+  '/#X-Amz-Target=CodeCommit_20150413.TestRepositoryTriggers':
     post:
       operationId: TestRepositoryTriggers
       description: 'Tests the functionality of repository triggers by sending information to the trigger target. If real data is available in the repository, the test will send data from the last commit. If no data is available, sample data will be generated.'
@@ -2872,6 +3064,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/TestRepositoryTriggersInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.TestRepositoryTriggers
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2882,7 +3080,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateComment':
+  '/#X-Amz-Target=CodeCommit_20150413.UpdateComment':
     post:
       operationId: UpdateComment
       description: Replaces the contents of a comment.
@@ -2925,6 +3123,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateCommentInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.UpdateComment
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2935,7 +3139,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateDefaultBranch':
+  '/#X-Amz-Target=CodeCommit_20150413.UpdateDefaultBranch':
     post:
       operationId: UpdateDefaultBranch
       description: '<p>Sets or changes the default branch name for the specified repository.</p> <note> <p>If you use this operation to change the default branch name to the current default branch name, a success message is returned even though the default branch did not change.</p> </note>'
@@ -2992,6 +3196,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateDefaultBranchInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.UpdateDefaultBranch
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3002,7 +3212,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdatePullRequestDescription':
+  '/#X-Amz-Target=CodeCommit_20150413.UpdatePullRequestDescription':
     post:
       operationId: UpdatePullRequestDescription
       description: Replaces the contents of the description of a pull request.
@@ -3037,6 +3247,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdatePullRequestDescriptionInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.UpdatePullRequestDescription
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3047,7 +3263,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdatePullRequestStatus':
+  '/#X-Amz-Target=CodeCommit_20150413.UpdatePullRequestStatus':
     post:
       operationId: UpdatePullRequestStatus
       description: 'Updates the status of a pull request. '
@@ -3106,6 +3322,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdatePullRequestStatusInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.UpdatePullRequestStatus
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3116,7 +3338,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdatePullRequestTitle':
+  '/#X-Amz-Target=CodeCommit_20150413.UpdatePullRequestTitle':
     post:
       operationId: UpdatePullRequestTitle
       description: Replaces the title of a pull request.
@@ -3155,6 +3377,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdatePullRequestTitleInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.UpdatePullRequestTitle
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3165,7 +3393,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateRepositoryDescription':
+  '/#X-Amz-Target=CodeCommit_20150413.UpdateRepositoryDescription':
     post:
       operationId: UpdateRepositoryDescription
       description: <p>Sets or changes the comment or description for a repository.</p> <note> <p>The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page.</p> </note>
@@ -3214,6 +3442,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateRepositoryDescriptionInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.UpdateRepositoryDescription
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3224,7 +3458,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateRepositoryName':
+  '/#X-Amz-Target=CodeCommit_20150413.UpdateRepositoryName':
     post:
       operationId: UpdateRepositoryName
       description: 'Renames a repository. The repository name must be unique across the calling AWS account. In addition, repository names are limited to 100 alphanumeric, dash, and underscore characters, and cannot include certain characters. The suffix ".git" is prohibited. For a full description of the limits on repository names, see <a href="http://docs.aws.amazon.com/codecommit/latest/userguide/limits.html">Limits</a> in the AWS CodeCommit User Guide.'
@@ -3253,6 +3487,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateRepositoryNameInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.UpdateRepositoryName
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'

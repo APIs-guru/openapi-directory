@@ -128,7 +128,32 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/ExecuteSqlRequest'
+            type: object
+            required:
+              - awsSecretStoreArn
+              - dbClusterOrInstanceArn
+              - sqlStatements
+            properties:
+              awsSecretStoreArn:
+                description: ARN of the db credentials in AWS Secret Store or the friendly secret name
+                type: string
+                maxLength: 1024
+              database:
+                description: Target DB name
+                type: string
+                maxLength: 64
+              dbClusterOrInstanceArn:
+                description: ARN of the target db cluster or instance
+                type: string
+                maxLength: 1024
+              schema:
+                description: Target Schema name
+                type: string
+                maxLength: 64
+              sqlStatements:
+                description: SQL statement(s) to be executed. Statements can be chained by using semicolons
+                type: string
+                maxLength: 65536
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -149,29 +174,6 @@ definitions:
         $ref: '#/definitions/SqlStatementResults'
         description: Results returned by executing the sql statement(s)
     description: Execute SQL response
-  ExecuteSqlRequest:
-    type: object
-    required:
-      - awsSecretStoreArn
-      - dbClusterOrInstanceArn
-      - sqlStatements
-    properties:
-      awsSecretStoreArn:
-        $ref: '#/definitions/Arn'
-        description: ARN of the db credentials in AWS Secret Store or the friendly secret name
-      database:
-        $ref: '#/definitions/DbName'
-        description: Target DB name
-      dbClusterOrInstanceArn:
-        $ref: '#/definitions/Arn'
-        description: ARN of the target db cluster or instance
-      schema:
-        $ref: '#/definitions/DbName'
-        description: Target Schema name
-      sqlStatements:
-        $ref: '#/definitions/SqlStatement'
-        description: SQL statement(s) to be executed. Statements can be chained by using semicolons
-    description: Execute SQL Request
   BadRequestException: {}
   ForbiddenException: {}
   InternalServerErrorException: {}
@@ -350,3 +352,26 @@ definitions:
   SqlStatement:
     type: string
     maxLength: 65536
+  ExecuteSqlRequest:
+    type: object
+    required:
+      - awsSecretStoreArn
+      - dbClusterOrInstanceArn
+      - sqlStatements
+    properties:
+      awsSecretStoreArn:
+        $ref: '#/definitions/Arn'
+        description: ARN of the db credentials in AWS Secret Store or the friendly secret name
+      database:
+        $ref: '#/definitions/DbName'
+        description: Target DB name
+      dbClusterOrInstanceArn:
+        $ref: '#/definitions/Arn'
+        description: ARN of the target db cluster or instance
+      schema:
+        $ref: '#/definitions/DbName'
+        description: Target Schema name
+      sqlStatements:
+        $ref: '#/definitions/SqlStatement'
+        description: SQL statement(s) to be executed. Statements can be chained by using semicolons
+    description: Execute SQL Request

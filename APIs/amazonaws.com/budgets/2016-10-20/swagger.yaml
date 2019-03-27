@@ -99,7 +99,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /:
+  '/#X-Amz-Target=AWSBudgetServiceGateway.CreateBudget':
     post:
       operationId: CreateBudget
       description: 'Creates a budget and, if included, notifications and subscribers. '
@@ -130,6 +130,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateBudgetRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSBudgetServiceGateway.CreateBudget
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -140,7 +146,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateNotification':
+  '/#X-Amz-Target=AWSBudgetServiceGateway.CreateNotification':
     post:
       operationId: CreateNotification
       description: Creates a notification. You must create the budget before you create the associated notification.
@@ -175,6 +181,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateNotificationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSBudgetServiceGateway.CreateNotification
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -185,7 +197,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateSubscriber':
+  '/#X-Amz-Target=AWSBudgetServiceGateway.CreateSubscriber':
     post:
       operationId: CreateSubscriber
       description: Creates a subscriber. You must create the associated budget and notification before you create the subscriber.
@@ -220,6 +232,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateSubscriberRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSBudgetServiceGateway.CreateSubscriber
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -230,7 +248,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteBudget':
+  '/#X-Amz-Target=AWSBudgetServiceGateway.DeleteBudget':
     post:
       operationId: DeleteBudget
       description: <p>Deletes a budget. You can delete your budget at any time.</p> <important> <p>Deleting a budget also deletes the notifications and subscribers that are associated with that budget.</p> </important>
@@ -257,6 +275,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteBudgetRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSBudgetServiceGateway.DeleteBudget
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -267,7 +291,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteNotification':
+  '/#X-Amz-Target=AWSBudgetServiceGateway.DeleteNotification':
     post:
       operationId: DeleteNotification
       description: <p>Deletes a notification.</p> <important> <p>Deleting a notification also deletes the subscribers that are associated with the notification.</p> </important>
@@ -294,6 +318,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteNotificationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSBudgetServiceGateway.DeleteNotification
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -304,7 +334,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteSubscriber':
+  '/#X-Amz-Target=AWSBudgetServiceGateway.DeleteSubscriber':
     post:
       operationId: DeleteSubscriber
       description: <p>Deletes a subscriber.</p> <important> <p>Deleting the last subscriber to a notification also deletes the notification.</p> </important>
@@ -331,6 +361,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteSubscriberRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSBudgetServiceGateway.DeleteSubscriber
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -341,7 +377,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeBudget':
+  '/#X-Amz-Target=AWSBudgetServiceGateway.DescribeBudget':
     post:
       operationId: DescribeBudget
       description: Describes a budget.
@@ -368,6 +404,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeBudgetRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSBudgetServiceGateway.DescribeBudget
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -378,7 +420,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeBudgetPerformanceHistory':
+  '/#X-Amz-Target=AWSBudgetServiceGateway.DescribeBudgetPerformanceHistory':
     post:
       operationId: DescribeBudgetPerformanceHistory
       description: 'Describes the history for <code>DAILY</code>, <code>MONTHLY</code>, and <code>QUARTERLY</code> budgets. Budget history isn''t available for <code>ANNUAL</code> budgets.'
@@ -413,6 +455,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeBudgetPerformanceHistoryRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSBudgetServiceGateway.DescribeBudgetPerformanceHistory
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -423,7 +471,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeBudgets':
+  '/#X-Amz-Target=AWSBudgetServiceGateway.DescribeBudgets':
     post:
       operationId: DescribeBudgets
       description: Lists the budgets that are associated with an account.
@@ -458,6 +506,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeBudgetsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSBudgetServiceGateway.DescribeBudgets
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -468,7 +522,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeNotificationsForBudget':
+  '/#X-Amz-Target=AWSBudgetServiceGateway.DescribeNotificationsForBudget':
     post:
       operationId: DescribeNotificationsForBudget
       description: Lists the notifications that are associated with a budget.
@@ -503,6 +557,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeNotificationsForBudgetRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSBudgetServiceGateway.DescribeNotificationsForBudget
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -513,7 +573,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeSubscribersForNotification':
+  '/#X-Amz-Target=AWSBudgetServiceGateway.DescribeSubscribersForNotification':
     post:
       operationId: DescribeSubscribersForNotification
       description: Lists the subscribers that are associated with a notification.
@@ -548,6 +608,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeSubscribersForNotificationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSBudgetServiceGateway.DescribeSubscribersForNotification
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -558,7 +624,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateBudget':
+  '/#X-Amz-Target=AWSBudgetServiceGateway.UpdateBudget':
     post:
       operationId: UpdateBudget
       description: 'Updates a budget. You can change every part of a budget except for the <code>budgetName</code> and the <code>calculatedSpend</code>. When you modify a budget, the <code>calculatedSpend</code> drops to zero until AWS has new usage data to use for forecasting.'
@@ -585,6 +651,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateBudgetRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSBudgetServiceGateway.UpdateBudget
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -595,7 +667,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateNotification':
+  '/#X-Amz-Target=AWSBudgetServiceGateway.UpdateNotification':
     post:
       operationId: UpdateNotification
       description: Updates a notification.
@@ -626,6 +698,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateNotificationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSBudgetServiceGateway.UpdateNotification
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -636,7 +714,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateSubscriber':
+  '/#X-Amz-Target=AWSBudgetServiceGateway.UpdateSubscriber':
     post:
       operationId: UpdateSubscriber
       description: Updates a subscriber.
@@ -667,6 +745,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateSubscriberRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSBudgetServiceGateway.UpdateSubscriber
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1047,15 +1131,10 @@ definitions:
         description: 'The unit of measurement that is used for the budget forecast, actual spend, or budget threshold, such as dollars or GB.'
     description: '<p>The amount of cost or usage that is measured for a budget.</p> <p>For example, a <code>Spend</code> for <code>3 GB</code> of S3 usage would have the following parameters:</p> <ul> <li> <p>An <code>Amount</code> of <code>3</code> </p> </li> <li> <p>A <code>unit</code> of <code>GB</code> </p> </li> </ul>'
   CostFilters:
-    type: array
+    type: object
     description: ' A map that represents the cost filters that are applied to the budget.'
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/GenericString'
-        value:
-          $ref: '#/definitions/DimensionValues'
+    additionalProperties:
+      $ref: '#/definitions/DimensionValues'
   CostTypes:
     type: object
     properties:
@@ -1218,12 +1297,6 @@ definitions:
       - LESS_THAN
       - EQUAL_TO
     description: '<p> The comparison operator of a notification. Currently the service supports the following operators:</p> <p> <code>GREATER_THAN</code>, <code>LESS_THAN</code>, <code>EQUAL_TO</code> </p>'
-  GenericString:
-    type: string
-    pattern: .*
-    description: ' A generic string.'
-    minLength: 0
-    maxLength: 2147483647
   DimensionValues:
     type: array
     items:
@@ -1284,6 +1357,12 @@ definitions:
     description: ' An integer that represents how many entries a paginated response contains. The maximum is 100.'
     minimum: 1
     maximum: 100
+  GenericString:
+    type: string
+    pattern: .*
+    description: ' A generic string.'
+    minLength: 0
+    maxLength: 2147483647
   Notifications:
     type: array
     description: ' A list of notifications.'

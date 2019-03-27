@@ -99,7 +99,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /:
+  '/#X-Amz-Target=FmrsService.CancelTaskExecution':
     post:
       operationId: CancelTaskExecution
       description: '<p>Cancels execution of a task. </p> <p>When you cancel a task execution, the transfer of some files are abruptly interrupted. The contents of files that are transferred to the destination might be incomplete or inconsistent with the source files. However, if you start a new task execution on the same task and you allow the task execution to complete, file content on the destination is complete and consistent. This applies to other unexpected failures that interrupt a task execution. In all of these cases, AWS DataSync successfully complete the transfer when you start the next task execution. </p>'
@@ -118,6 +118,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CancelTaskExecutionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.CancelTaskExecution
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -128,7 +134,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateAgent':
+  '/#X-Amz-Target=FmrsService.CreateAgent':
     post:
       operationId: CreateAgent
       description: '<p>Activates an AWS DataSync agent that you have deployed on your host. The activation process associates your agent with your account. In the activation process, you specify information such as the AWS Region that you want to activate the agent in. You activate the agent in the AWS Region where your target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created in this AWS Region. </p> <p>You can use an agent for more than one location. If a task uses multiple agents, all of them need to have status AVAILABLE for the task to run. If you use multiple agents for a source location, the status of all the agents must be AVAILABLE for the task to run. For more information, see <a href="https://docs.aws.amazon.com/sync-service/latest/userguide/working-with-sync-agents.html#activating-sync-agent">Activating a Sync Agent</a> in the <i>AWS DataSync User Guide.</i> </p> <p>Agents are automatically updated by AWS on a regular basis, using a mechanism that ensures minimal interruption to your tasks.</p> <p/>'
@@ -147,6 +153,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateAgentRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.CreateAgent
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -157,7 +169,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateLocationEfs':
+  '/#X-Amz-Target=FmrsService.CreateLocationEfs':
     post:
       operationId: CreateLocationEfs
       description: Creates an endpoint for an Amazon EFS file system.
@@ -176,6 +188,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateLocationEfsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.CreateLocationEfs
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -186,7 +204,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateLocationNfs':
+  '/#X-Amz-Target=FmrsService.CreateLocationNfs':
     post:
       operationId: CreateLocationNfs
       description: Creates an endpoint for a Network File System (NFS) file system.
@@ -205,6 +223,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateLocationNfsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.CreateLocationNfs
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -215,7 +239,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateLocationS3':
+  '/#X-Amz-Target=FmrsService.CreateLocationS3':
     post:
       operationId: CreateLocationS3
       description: '<p>Creates an endpoint for an Amazon S3 bucket.</p> <p>For AWS DataSync to access a destination S3 bucket, it needs an AWS Identity and Access Management (IAM) role that has the required permissions. You can set up the required permissions by creating an IAM policy that grants the required permissions and attaching the policy to the role. An example of such a policy is shown in the examples section. For more information, see <a href="https://docs.aws.amazon.com/sync-service/latest/userguide/configuring-s3-locations.html">Configuring Amazon S3 Location Settings</a> in the <i>AWS DataSync User Guide</i>.</p>'
@@ -234,6 +258,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateLocationS3Request'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.CreateLocationS3
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -244,7 +274,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateTask':
+  '/#X-Amz-Target=FmrsService.CreateTask':
     post:
       operationId: CreateTask
       description: '<p>Creates a task. A task is a set of two locations (source and destination) and a set of default <code>OverrideOptions</code> that you use to control the behavior of a task. If you don''t specify default values for <code>Options</code> when you create a task, AWS DataSync populates them with safe service defaults.</p> <p>When you initially create a task, it enters the INITIALIZING status and then the CREATING status. In CREATING status, AWS DataSync attempts to mount the source Network File System (NFS) location. The task transitions to the AVAILABLE status without waiting for the destination location to mount. Instead, AWS DataSync mounts a destination before every task execution and then unmounts it after every task execution. </p> <p>If an agent that is associated with a source (NFS) location goes offline, the task transitions to the UNAVAILABLE status. If the status of the task remains in the CREATING status for more than a few minutes, it means that your agent might be having trouble mounting the source NFS file system. Check the task''s <code>ErrorCode</code> and <code>ErrorDetail</code>. Mount issues are often caused by either a misconfigured firewall or a mistyped NFS server host name.</p>'
@@ -263,6 +293,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateTaskRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.CreateTask
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -273,7 +309,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteAgent':
+  '/#X-Amz-Target=FmrsService.DeleteAgent':
     post:
       operationId: DeleteAgent
       description: '<p>Deletes an agent. To specify which agent to delete, use the Amazon Resource Name (ARN) of the agent in your request. The operation disassociates the agent from your AWS account. However, it doesn''t delete the agent virtual machine (VM) from your on-premises environment.</p> <note> <p>After you delete an agent, you can''t reactivate it and you longer pay software charges for it.</p> </note>'
@@ -292,6 +328,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteAgentRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.DeleteAgent
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -302,7 +344,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteLocation':
+  '/#X-Amz-Target=FmrsService.DeleteLocation':
     post:
       operationId: DeleteLocation
       description: 'Deletes the configuration of a location used by AWS DataSync. '
@@ -321,6 +363,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteLocationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.DeleteLocation
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -331,7 +379,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteTask':
+  '/#X-Amz-Target=FmrsService.DeleteTask':
     post:
       operationId: DeleteTask
       description: Deletes a task.
@@ -350,6 +398,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteTaskRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.DeleteTask
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -360,7 +414,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeAgent':
+  '/#X-Amz-Target=FmrsService.DescribeAgent':
     post:
       operationId: DescribeAgent
       description: 'Returns metadata such as the name, the network interfaces, and the status (that is, whether the agent is running or not) for an agent. To specify which agent to describe, use the Amazon Resource Name (ARN) of the agent in your request. '
@@ -379,6 +433,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeAgentRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.DescribeAgent
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -389,7 +449,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeLocationEfs':
+  '/#X-Amz-Target=FmrsService.DescribeLocationEfs':
     post:
       operationId: DescribeLocationEfs
       description: 'Returns metadata, such as the path information about an Amazon EFS location.'
@@ -408,6 +468,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeLocationEfsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.DescribeLocationEfs
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -418,7 +484,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeLocationNfs':
+  '/#X-Amz-Target=FmrsService.DescribeLocationNfs':
     post:
       operationId: DescribeLocationNfs
       description: 'Returns metadata, such as the path information, about a NFS location.'
@@ -437,6 +503,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeLocationNfsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.DescribeLocationNfs
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -447,7 +519,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeLocationS3':
+  '/#X-Amz-Target=FmrsService.DescribeLocationS3':
     post:
       operationId: DescribeLocationS3
       description: 'Returns metadata, such as bucket name, about an Amazon S3 bucket location.'
@@ -466,6 +538,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeLocationS3Request'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.DescribeLocationS3
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -476,7 +554,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeTask':
+  '/#X-Amz-Target=FmrsService.DescribeTask':
     post:
       operationId: DescribeTask
       description: Returns metadata about a task.
@@ -495,6 +573,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeTaskRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.DescribeTask
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -505,7 +589,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeTaskExecution':
+  '/#X-Amz-Target=FmrsService.DescribeTaskExecution':
     post:
       operationId: DescribeTaskExecution
       description: Returns detailed metadata about a task that is being executed.
@@ -524,6 +608,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeTaskExecutionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.DescribeTaskExecution
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -534,7 +624,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListAgents':
+  '/#X-Amz-Target=FmrsService.ListAgents':
     post:
       operationId: ListAgents
       description: '<p>Returns a list of agents owned by an AWS account in the AWS Region specified in the request. The returned list is ordered by agent Amazon Resource Name (ARN).</p> <p>By default, this operation returns a maximum of 100 agents. This operation supports pagination that enables you to optionally reduce the number of agents returned in a response.</p> <p>If you have more agents than are returned in a response (that is, the response returns only a truncated list of your agents), the response contains a marker that you can specify in your next request to fetch the next page of agents.</p>'
@@ -563,6 +653,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.ListAgents
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -573,7 +669,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListLocations':
+  '/#X-Amz-Target=FmrsService.ListLocations':
     post:
       operationId: ListLocations
       description: '<p>Returns a lists of source and destination locations.</p> <p>If you have more locations than are returned in a response (that is, the response returns only a truncated list of your agents), the response contains a token that you can specify in your next request to fetch the next page of locations.</p>'
@@ -602,6 +698,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.ListLocations
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -612,7 +714,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListTagsForResource':
+  '/#X-Amz-Target=FmrsService.ListTagsForResource':
     post:
       operationId: ListTagsForResource
       description: 'Returns all the tags associated with a specified resources. '
@@ -641,6 +743,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.ListTagsForResource
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -651,7 +759,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListTaskExecutions':
+  '/#X-Amz-Target=FmrsService.ListTaskExecutions':
     post:
       operationId: ListTaskExecutions
       description: Returns a list of executed tasks.
@@ -680,6 +788,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.ListTaskExecutions
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -690,7 +804,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListTasks':
+  '/#X-Amz-Target=FmrsService.ListTasks':
     post:
       operationId: ListTasks
       description: Returns a list of all the tasks.
@@ -719,6 +833,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.ListTasks
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -729,7 +849,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#StartTaskExecution':
+  '/#X-Amz-Target=FmrsService.StartTaskExecution':
     post:
       operationId: StartTaskExecution
       description: '<p>Starts a specific invocation of a task. A <code>TaskExecution</code> value represents an individual run of a task. Each task can have at most one <code>TaskExecution</code> at a time.</p> <p> <code>TaskExecution</code> has the following transition phases: INITIALIZING | PREPARING | TRANSFERRING | VERIFYING | SUCCESS/FAILURE. </p> <p>For detailed information, see <i>Task Execution</i> in <a href="https://docs.aws.amazon.com/sync-service/latest/userguide/how-awssync-works.html#terminology">Components and Terminology</a> in the <i>AWS DataSync User Guide</i>.</p>'
@@ -748,6 +868,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StartTaskExecutionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.StartTaskExecution
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -758,7 +884,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#TagResource':
+  '/#X-Amz-Target=FmrsService.TagResource':
     post:
       operationId: TagResource
       description: Applies a key-value pair to an AWS resource.
@@ -777,6 +903,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/TagResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.TagResource
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -787,7 +919,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UntagResource':
+  '/#X-Amz-Target=FmrsService.UntagResource':
     post:
       operationId: UntagResource
       description: Removes a tag from an AWS resource.
@@ -806,6 +938,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UntagResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.UntagResource
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -816,7 +954,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateAgent':
+  '/#X-Amz-Target=FmrsService.UpdateAgent':
     post:
       operationId: UpdateAgent
       description: Updates the name of an agent.
@@ -835,6 +973,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateAgentRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.UpdateAgent
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -845,7 +989,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateTask':
+  '/#X-Amz-Target=FmrsService.UpdateTask':
     post:
       operationId: UpdateTask
       description: Updates the metadata associated with a task.
@@ -864,6 +1008,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateTaskRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.UpdateTask
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'

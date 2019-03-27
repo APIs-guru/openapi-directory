@@ -99,7 +99,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /:
+  '/#X-Amz-Target=DataPipeline.ActivatePipeline':
     post:
       operationId: ActivatePipeline
       description: '<p>Validates the specified pipeline and starts processing pipeline tasks. If the pipeline does not pass validation, activation fails.</p> <p>If you need to pause the pipeline to investigate an issue with a component, such as a data source or script, call <a>DeactivatePipeline</a>.</p> <p>To activate a finished pipeline, modify the end date for the pipeline and then activate it.</p>'
@@ -134,6 +134,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ActivatePipelineInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DataPipeline.ActivatePipeline
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -144,7 +150,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AddTags':
+  '/#X-Amz-Target=DataPipeline.AddTags':
     post:
       operationId: AddTags
       description: Adds or modifies tags for the specified pipeline.
@@ -179,6 +185,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AddTagsInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DataPipeline.AddTags
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -189,7 +201,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreatePipeline':
+  '/#X-Amz-Target=DataPipeline.CreatePipeline':
     post:
       operationId: CreatePipeline
       description: 'Creates a new, empty pipeline. Use <a>PutPipelineDefinition</a> to populate the pipeline.'
@@ -214,6 +226,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreatePipelineInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DataPipeline.CreatePipeline
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -224,7 +242,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeactivatePipeline':
+  '/#X-Amz-Target=DataPipeline.DeactivatePipeline':
     post:
       operationId: DeactivatePipeline
       description: '<p>Deactivates the specified running pipeline. The pipeline is set to the <code>DEACTIVATING</code> state until the deactivation process completes.</p> <p>To resume a deactivated pipeline, use <a>ActivatePipeline</a>. By default, the pipeline resumes from the last completed execution. Optionally, you can specify the date and time to resume the pipeline.</p>'
@@ -259,6 +277,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeactivatePipelineInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DataPipeline.DeactivatePipeline
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -269,7 +293,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeletePipeline':
+  '/#X-Amz-Target=DataPipeline.DeletePipeline':
     post:
       operationId: DeletePipeline
       description: '<p>Deletes a pipeline, its pipeline definition, and its run history. AWS Data Pipeline attempts to cancel instances associated with the pipeline that are currently being processed by task runners.</p> <p>Deleting a pipeline cannot be undone. You cannot query or restore a deleted pipeline. To temporarily pause a pipeline instead of deleting it, call <a>SetStatus</a> with the status set to <code>PAUSE</code> on individual components. Components that are paused by <a>SetStatus</a> can be resumed.</p>'
@@ -297,6 +321,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeletePipelineInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DataPipeline.DeletePipeline
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -307,7 +337,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeObjects':
+  '/#X-Amz-Target=DataPipeline.DescribeObjects':
     post:
       operationId: DescribeObjects
       description: Gets the object definitions for a set of objects associated with the pipeline. Object definitions are composed of a set of fields that define the properties of the object.
@@ -347,6 +377,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DataPipeline.DescribeObjects
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -357,7 +393,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribePipelines':
+  '/#X-Amz-Target=DataPipeline.DescribePipelines':
     post:
       operationId: DescribePipelines
       description: '<p>Retrieves metadata about one or more pipelines. The information retrieved includes the name of the pipeline, the pipeline identifier, its current state, and the user account that owns the pipeline. Using account credentials, you can retrieve metadata about pipelines that you or your IAM users have created. If you are using an IAM user account, you can retrieve metadata about only those pipelines for which you have read permissions.</p> <p>To retrieve the full pipeline definition instead of metadata about the pipeline, call <a>GetPipelineDefinition</a>.</p>'
@@ -392,6 +428,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribePipelinesInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DataPipeline.DescribePipelines
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -402,7 +444,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#EvaluateExpression':
+  '/#X-Amz-Target=DataPipeline.EvaluateExpression':
     post:
       operationId: EvaluateExpression
       description: 'Task runners call <code>EvaluateExpression</code> to evaluate a string in the context of the specified object. For example, a task runner can evaluate SQL queries stored in Amazon S3.'
@@ -442,6 +484,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/EvaluateExpressionInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DataPipeline.EvaluateExpression
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -452,7 +500,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetPipelineDefinition':
+  '/#X-Amz-Target=DataPipeline.GetPipelineDefinition':
     post:
       operationId: GetPipelineDefinition
       description: Gets the definition of the specified pipeline. You can call <code>GetPipelineDefinition</code> to retrieve the pipeline definition that you provided using <a>PutPipelineDefinition</a>.
@@ -487,6 +535,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetPipelineDefinitionInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DataPipeline.GetPipelineDefinition
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -497,7 +551,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListPipelines':
+  '/#X-Amz-Target=DataPipeline.ListPipelines':
     post:
       operationId: ListPipelines
       description: Lists the pipeline identifiers for all active pipelines that you have permission to access.
@@ -527,6 +581,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DataPipeline.ListPipelines
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -537,7 +597,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#PollForTask':
+  '/#X-Amz-Target=DataPipeline.PollForTask':
     post:
       operationId: PollForTask
       description: '<p>Task runners call <code>PollForTask</code> to receive a task to perform from AWS Data Pipeline. The task runner specifies which tasks it can perform by setting a value for the <code>workerGroup</code> parameter. The task returned can come from any of the pipelines that match the <code>workerGroup</code> value passed in by the task runner and that was launched using the IAM user credentials specified by the task runner.</p> <p>If tasks are ready in the work queue, <code>PollForTask</code> returns a response immediately. If no tasks are available in the queue, <code>PollForTask</code> uses long-polling and holds on to a poll connection for up to a 90 seconds, during which time the first newly scheduled task is handed to the task runner. To accomodate this, set the socket timeout in your task runner to 90 seconds. The task runner should not call <code>PollForTask</code> again on the same <code>workerGroup</code> until it receives a response, and this can take up to 90 seconds. </p>'
@@ -567,6 +627,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PollForTaskInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DataPipeline.PollForTask
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -577,7 +643,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#PutPipelineDefinition':
+  '/#X-Amz-Target=DataPipeline.PutPipelineDefinition':
     post:
       operationId: PutPipelineDefinition
       description: '<p>Adds tasks, schedules, and preconditions to the specified pipeline. You can use <code>PutPipelineDefinition</code> to populate a new pipeline.</p> <p> <code>PutPipelineDefinition</code> also validates the configuration as it adds it to the pipeline. Changes to the pipeline are saved unless one of the following three validation errors exists in the pipeline. </p> <ol> <li>An object is missing a name or identifier field.</li> <li>A string or reference field is empty.</li> <li>The number of objects in the pipeline exceeds the maximum allowed objects.</li> <li>The pipeline is in a FINISHED state.</li> </ol> <p> Pipeline object definitions are passed to the <code>PutPipelineDefinition</code> action and returned by the <a>GetPipelineDefinition</a> action. </p>'
@@ -612,6 +678,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutPipelineDefinitionInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DataPipeline.PutPipelineDefinition
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -622,7 +694,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#QueryObjects':
+  '/#X-Amz-Target=DataPipeline.QueryObjects':
     post:
       operationId: QueryObjects
       description: Queries the specified pipeline for the names of objects that match the specified set of conditions.
@@ -667,6 +739,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DataPipeline.QueryObjects
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -677,7 +755,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#RemoveTags':
+  '/#X-Amz-Target=DataPipeline.RemoveTags':
     post:
       operationId: RemoveTags
       description: Removes existing tags from the specified pipeline.
@@ -712,6 +790,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/RemoveTagsInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DataPipeline.RemoveTags
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -722,7 +806,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ReportTaskProgress':
+  '/#X-Amz-Target=DataPipeline.ReportTaskProgress':
     post:
       operationId: ReportTaskProgress
       description: '<p>Task runners call <code>ReportTaskProgress</code> when assigned a task to acknowledge that it has the task. If the web service does not receive this acknowledgement within 2 minutes, it assigns the task in a subsequent <a>PollForTask</a> call. After this initial acknowledgement, the task runner only needs to report progress every 15 minutes to maintain its ownership of the task. You can change this reporting time from 15 minutes by specifying a <code>reportProgressTimeout</code> field in your pipeline.</p> <p>If a task runner does not report its status after 5 minutes, AWS Data Pipeline assumes that the task runner is unable to process the task and reassigns the task in a subsequent response to <a>PollForTask</a>. Task runners should call <code>ReportTaskProgress</code> every 60 seconds.</p>'
@@ -762,6 +846,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ReportTaskProgressInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DataPipeline.ReportTaskProgress
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -772,7 +862,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ReportTaskRunnerHeartbeat':
+  '/#X-Amz-Target=DataPipeline.ReportTaskRunnerHeartbeat':
     post:
       operationId: ReportTaskRunnerHeartbeat
       description: 'Task runners call <code>ReportTaskRunnerHeartbeat</code> every 15 minutes to indicate that they are operational. If the AWS Data Pipeline Task Runner is launched on a resource managed by AWS Data Pipeline, the web service can use this call to detect when the task runner application has failed and restart a new instance.'
@@ -797,6 +887,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ReportTaskRunnerHeartbeatInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DataPipeline.ReportTaskRunnerHeartbeat
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -807,7 +903,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#SetStatus':
+  '/#X-Amz-Target=DataPipeline.SetStatus':
     post:
       operationId: SetStatus
       description: 'Requests that the status of the specified physical or logical pipeline objects be updated in the specified pipeline. This update might not occur immediately, but is eventually consistent. The status that can be set depends on the type of object (for example, DataNode or Activity). You cannot perform this operation on <code>FINISHED</code> pipelines and attempting to do so returns <code>InvalidRequestException</code>.'
@@ -840,6 +936,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/SetStatusInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DataPipeline.SetStatus
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -850,7 +952,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#SetTaskStatus':
+  '/#X-Amz-Target=DataPipeline.SetTaskStatus':
     post:
       operationId: SetTaskStatus
       description: Task runners call <code>SetTaskStatus</code> to notify AWS Data Pipeline that a task is completed and provide information about the final status. A task runner makes this call regardless of whether the task was sucessful. A task runner does not need to call <code>SetTaskStatus</code> for tasks that are canceled by the web service during a call to <a>ReportTaskProgress</a>.
@@ -890,6 +992,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/SetTaskStatusInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DataPipeline.SetTaskStatus
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -900,7 +1008,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ValidatePipelineDefinition':
+  '/#X-Amz-Target=DataPipeline.ValidatePipelineDefinition':
     post:
       operationId: ValidatePipelineDefinition
       description: Validates the specified pipeline definition to ensure that it is well formed and can be run without error.
@@ -935,6 +1043,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ValidatePipelineDefinitionInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DataPipeline.ValidatePipelineDefinition
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1644,14 +1758,9 @@ definitions:
         description: Key-value pairs that define the properties of the object.
     description: 'Contains information about a pipeline object. This can be a logical, physical, or physical attempt pipeline object. The complete set of components of a pipeline defines the pipeline.'
   PipelineObjectMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/id'
-        value:
-          $ref: '#/definitions/PipelineObject'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/PipelineObject'
   TaskObject:
     type: object
     properties:

@@ -99,7 +99,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /:
+  '/#X-Amz-Target=AWSOrigamiServiceGatewayService.DeleteReportDefinition':
     post:
       operationId: DeleteReportDefinition
       description: Deletes the specified report.
@@ -122,6 +122,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteReportDefinitionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSOrigamiServiceGatewayService.DeleteReportDefinition
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -132,7 +138,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeReportDefinitions':
+  '/#X-Amz-Target=AWSOrigamiServiceGatewayService.DescribeReportDefinitions':
     post:
       operationId: DescribeReportDefinitions
       description: Lists the AWS Cost and Usage reports available to this account.
@@ -161,6 +167,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSOrigamiServiceGatewayService.DescribeReportDefinitions
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -171,7 +183,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#PutReportDefinition':
+  '/#X-Amz-Target=AWSOrigamiServiceGatewayService.PutReportDefinition':
     post:
       operationId: PutReportDefinition
       description: Creates a new report using the description that you provide.
@@ -202,6 +214,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutReportDefinitionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSOrigamiServiceGatewayService.PutReportDefinition
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -221,8 +239,6 @@ definitions:
     description: 'If the action is successful, the service sends back an HTTP 200 response.'
   DeleteReportDefinitionRequest:
     type: object
-    example:
-      ReportName: ExampleReport
     properties:
       ReportName:
         $ref: '#/definitions/ReportName'
@@ -264,8 +280,6 @@ definitions:
     description: 'If the action is successful, the service sends back an HTTP 200 response.'
   DescribeReportDefinitionsRequest:
     type: object
-    example:
-      MaxResults: 5
     properties:
       MaxResults:
         $ref: '#/definitions/MaxResults'
@@ -280,20 +294,6 @@ definitions:
     type: object
     required:
       - ReportDefinition
-    example:
-      ReportDefinition:
-        AdditionalArtifacts:
-          - REDSHIFT
-          - QUICKSIGHT
-        AdditionalSchemaElements:
-          - RESOURCES
-        Compression: ZIP
-        Format: textORcsv
-        ReportName: ExampleReport
-        S3Bucket: example-s3-bucket
-        S3Prefix: exampleprefix
-        S3Region: us-east-1
-        TimeUnit: DAILY
     properties:
       ReportDefinition:
         $ref: '#/definitions/ReportDefinition'

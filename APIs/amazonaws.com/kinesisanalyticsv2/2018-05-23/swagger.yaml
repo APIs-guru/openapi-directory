@@ -99,7 +99,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /:
+  '/#X-Amz-Target=KinesisAnalytics_20180523.AddApplicationCloudWatchLoggingOption':
     post:
       operationId: AddApplicationCloudWatchLoggingOption
       description: Adds an Amazon CloudWatch log stream to monitor application configuration errors.
@@ -134,6 +134,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AddApplicationCloudWatchLoggingOptionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - KinesisAnalytics_20180523.AddApplicationCloudWatchLoggingOption
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -144,7 +150,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AddApplicationInput':
+  '/#X-Amz-Target=KinesisAnalytics_20180523.AddApplicationInput':
     post:
       operationId: AddApplicationInput
       description: '<p> Adds a streaming source to your SQL-based Amazon Kinesis Data Analytics application. </p> <p>You can add a streaming source when you create an application, or you can use this operation to add a streaming source after you create an application. For more information, see <a>CreateApplication</a>.</p> <p>Any configuration update, including adding a streaming source using this operation, results in a new version of the application. You can use the <a>DescribeApplication</a> operation to find the current application version. </p>'
@@ -183,6 +189,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AddApplicationInputRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - KinesisAnalytics_20180523.AddApplicationInput
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -193,7 +205,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AddApplicationInputProcessingConfiguration':
+  '/#X-Amz-Target=KinesisAnalytics_20180523.AddApplicationInputProcessingConfiguration':
     post:
       operationId: AddApplicationInputProcessingConfiguration
       description: 'Adds an <a>InputProcessingConfiguration</a> to an SQL-based Kinesis Data Analytics application. An input processor pre-processes records on the input stream before the application''s SQL code executes. Currently, the only input processor available is <a href="https://aws.amazon.com/documentation/lambda/">AWS Lambda</a>.'
@@ -228,6 +240,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AddApplicationInputProcessingConfigurationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - KinesisAnalytics_20180523.AddApplicationInputProcessingConfiguration
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -238,7 +256,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AddApplicationOutput':
+  '/#X-Amz-Target=KinesisAnalytics_20180523.AddApplicationOutput':
     post:
       operationId: AddApplicationOutput
       description: '<p>Adds an external destination to your SQL-based Amazon Kinesis Data Analytics application.</p> <p>If you want Kinesis Data Analytics to deliver data from an in-application stream within your application to an external destination (such as an Kinesis data stream, a Kinesis Data Firehose delivery stream, or an AWS Lambda function), you add the relevant configuration to your application using this operation. You can configure one or more outputs for your application. Each output configuration maps an in-application stream and an external destination.</p> <p> You can use one of the output configurations to deliver data from your in-application error stream to an external destination so that you can analyze the errors. </p> <p> Any configuration update, including adding a streaming source using this operation, results in a new version of the application. You can use the <a>DescribeApplication</a> operation to find the current application version.</p>'
@@ -273,6 +291,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AddApplicationOutputRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - KinesisAnalytics_20180523.AddApplicationOutput
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -283,7 +307,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AddApplicationReferenceDataSource':
+  '/#X-Amz-Target=KinesisAnalytics_20180523.AddApplicationReferenceDataSource':
     post:
       operationId: AddApplicationReferenceDataSource
       description: '<p>Adds a reference data source to an existing SQL-based Amazon Kinesis Data Analytics application.</p> <p>Kinesis Data Analytics reads reference data (that is, an Amazon S3 object) and creates an in-application table within your application. In the request, you provide the source (S3 bucket name and object key name), name of the in-application table to create, and the necessary mapping information that describes how data in an Amazon S3 object maps to columns in the resulting in-application table.</p>'
@@ -318,6 +342,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AddApplicationReferenceDataSourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - KinesisAnalytics_20180523.AddApplicationReferenceDataSource
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -328,7 +358,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateApplication':
+  '/#X-Amz-Target=KinesisAnalytics_20180523.CreateApplication':
     post:
       operationId: CreateApplication
       description: '<p>Creates an Amazon Kinesis Data Analytics application. For information about creating a Kinesis Data Analytics application, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/Java/creating-app.html">Creating an Application</a>. </p> <note> <p>SQL is not enabled for this private beta release. Using SQL parameters (such as <a>SqlApplicationConfiguration</a>) will result in an error.</p> </note>'
@@ -363,6 +393,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateApplicationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - KinesisAnalytics_20180523.CreateApplication
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -373,7 +409,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateApplicationSnapshot':
+  '/#X-Amz-Target=KinesisAnalytics_20180523.CreateApplicationSnapshot':
     post:
       operationId: CreateApplicationSnapshot
       description: Creates a snapshot of the application's state data.
@@ -412,6 +448,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateApplicationSnapshotRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - KinesisAnalytics_20180523.CreateApplicationSnapshot
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -422,7 +464,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteApplication':
+  '/#X-Amz-Target=KinesisAnalytics_20180523.DeleteApplication':
     post:
       operationId: DeleteApplication
       description: Deletes the specified application. Kinesis Data Analytics halts application execution and deletes the application.
@@ -457,6 +499,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteApplicationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - KinesisAnalytics_20180523.DeleteApplication
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -467,7 +515,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteApplicationCloudWatchLoggingOption':
+  '/#X-Amz-Target=KinesisAnalytics_20180523.DeleteApplicationCloudWatchLoggingOption':
     post:
       operationId: DeleteApplicationCloudWatchLoggingOption
       description: 'Deletes an Amazon CloudWatch log stream from an Amazon Kinesis Data Analytics application. '
@@ -502,6 +550,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteApplicationCloudWatchLoggingOptionRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - KinesisAnalytics_20180523.DeleteApplicationCloudWatchLoggingOption
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -512,7 +566,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteApplicationInputProcessingConfiguration':
+  '/#X-Amz-Target=KinesisAnalytics_20180523.DeleteApplicationInputProcessingConfiguration':
     post:
       operationId: DeleteApplicationInputProcessingConfiguration
       description: Deletes an <a>InputProcessingConfiguration</a> from an input.
@@ -547,6 +601,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteApplicationInputProcessingConfigurationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - KinesisAnalytics_20180523.DeleteApplicationInputProcessingConfiguration
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -557,7 +617,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteApplicationOutput':
+  '/#X-Amz-Target=KinesisAnalytics_20180523.DeleteApplicationOutput':
     post:
       operationId: DeleteApplicationOutput
       description: Deletes the output destination configuration from your SQL-based Amazon Kinesis Data Analytics application's configuration. Kinesis Data Analytics will no longer write data from the corresponding in-application stream to the external output destination.
@@ -592,6 +652,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteApplicationOutputRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - KinesisAnalytics_20180523.DeleteApplicationOutput
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -602,7 +668,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteApplicationReferenceDataSource':
+  '/#X-Amz-Target=KinesisAnalytics_20180523.DeleteApplicationReferenceDataSource':
     post:
       operationId: DeleteApplicationReferenceDataSource
       description: '<p>Deletes a reference data source configuration from the specified SQL-based Amazon Kinesis Data Analytics application''s configuration.</p> <p>If the application is running, Kinesis Data Analytics immediately removes the in-application table that you created using the <a>AddApplicationReferenceDataSource</a> operation. </p>'
@@ -637,6 +703,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteApplicationReferenceDataSourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - KinesisAnalytics_20180523.DeleteApplicationReferenceDataSource
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -647,7 +719,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteApplicationSnapshot':
+  '/#X-Amz-Target=KinesisAnalytics_20180523.DeleteApplicationSnapshot':
     post:
       operationId: DeleteApplicationSnapshot
       description: Deletes a snapshot of application state.
@@ -682,6 +754,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteApplicationSnapshotRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - KinesisAnalytics_20180523.DeleteApplicationSnapshot
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -692,7 +770,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeApplication':
+  '/#X-Amz-Target=KinesisAnalytics_20180523.DescribeApplication':
     post:
       operationId: DescribeApplication
       description: '<p>Returns information about a specific Amazon Kinesis Data Analytics application.</p> <p>If you want to retrieve a list of all applications in your account, use the <a>ListApplications</a> operation.</p>'
@@ -719,6 +797,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeApplicationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - KinesisAnalytics_20180523.DescribeApplication
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -729,7 +813,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeApplicationSnapshot':
+  '/#X-Amz-Target=KinesisAnalytics_20180523.DescribeApplicationSnapshot':
     post:
       operationId: DescribeApplicationSnapshot
       description: Returns information about a snapshot of application state data.
@@ -756,6 +840,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeApplicationSnapshotRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - KinesisAnalytics_20180523.DescribeApplicationSnapshot
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -766,7 +856,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DiscoverInputSchema':
+  '/#X-Amz-Target=KinesisAnalytics_20180523.DiscoverInputSchema':
     post:
       operationId: DiscoverInputSchema
       description: '<p>Infers a schema for an SQL-based Amazon Kinesis Data Analytics application by evaluating sample records on the specified streaming source (Kinesis data stream or Kinesis Data Firehose delivery stream) or Amazon S3 object. In the response, the operation returns the inferred schema and also the sample records that the operation used to infer the schema.</p> <p> You can use the inferred schema when configuring a streaming source for your application. When you create an application using the Kinesis Data Analytics console, the console uses this operation to infer a schema and show it in the console user interface. </p>'
@@ -801,6 +891,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DiscoverInputSchemaRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - KinesisAnalytics_20180523.DiscoverInputSchema
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -811,7 +907,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListApplicationSnapshots':
+  '/#X-Amz-Target=KinesisAnalytics_20180523.ListApplicationSnapshots':
     post:
       operationId: ListApplicationSnapshots
       description: Lists information about the current application snapshots.
@@ -834,6 +930,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListApplicationSnapshotsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - KinesisAnalytics_20180523.ListApplicationSnapshots
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -844,7 +946,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListApplications':
+  '/#X-Amz-Target=KinesisAnalytics_20180523.ListApplications':
     post:
       operationId: ListApplications
       description: '<p>Returns a list of Amazon Kinesis Data Analytics applications in your account. For each application, the response includes the application name, Amazon Resource Name (ARN), and status. </p> <p>If you want detailed information about a specific application, use <a>DescribeApplication</a>.</p>'
@@ -863,6 +965,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListApplicationsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - KinesisAnalytics_20180523.ListApplications
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -873,7 +981,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#StartApplication':
+  '/#X-Amz-Target=KinesisAnalytics_20180523.StartApplication':
     post:
       operationId: StartApplication
       description: '<p>Starts the specified Amazon Kinesis Data Analytics application. After creating an application, you must exclusively call this operation to start your application.</p> <note> <p>SQL is not enabled for this private beta. Using SQL parameters (such as <a>RunConfiguration$SqlRunConfigurations</a>) will result in an error.</p> </note>'
@@ -908,6 +1016,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StartApplicationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - KinesisAnalytics_20180523.StartApplication
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -918,7 +1032,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#StopApplication':
+  '/#X-Amz-Target=KinesisAnalytics_20180523.StopApplication':
     post:
       operationId: StopApplication
       description: 'Stops the application from processing data. You can stop an application only if it is in the running state. You can use the <a>DescribeApplication</a> operation to find the application state. '
@@ -949,6 +1063,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StopApplicationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - KinesisAnalytics_20180523.StopApplication
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -959,7 +1079,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateApplication':
+  '/#X-Amz-Target=KinesisAnalytics_20180523.UpdateApplication':
     post:
       operationId: UpdateApplication
       description: '<p>Updates an existing Amazon Kinesis Data Analytics application. Using this operation, you can update application code, input configuration, and output configuration. </p> <p>Kinesis Data Analytics updates the <code>ApplicationVersionId</code> each time you update your application. </p> <note> <p>SQL is not enabled for this private beta. Using SQL parameters (such as <a>SqlApplicationConfigurationUpdate</a>) will result in an error.</p> </note>'
@@ -998,6 +1118,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateApplicationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - KinesisAnalytics_20180523.UpdateApplication
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2882,16 +3008,11 @@ definitions:
   ProcessedInputRecord:
     type: string
   PropertyMap:
-    type: array
-    minItems: 1
-    maxItems: 50
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/PropertyKey'
-        value:
-          $ref: '#/definitions/PropertyValue'
+    type: object
+    minProperties: 1
+    maxProperties: 50
+    additionalProperties:
+      $ref: '#/definitions/PropertyValue'
   PropertyGroup:
     type: object
     required:

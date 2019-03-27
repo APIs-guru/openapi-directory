@@ -99,7 +99,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /:
+  '/#X-Amz-Target=AmazonML_20141212.AddTags':
     post:
       operationId: AddTags
       description: 'Adds one or more tags to an object, up to a limit of 10. Each tag consists of a key and an optional value. If you add a tag using a key that is already associated with the ML object, <code>AddTags</code> updates the tag''s value.'
@@ -139,6 +139,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AddTagsInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonML_20141212.AddTags
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -149,7 +155,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateBatchPrediction':
+  '/#X-Amz-Target=AmazonML_20141212.CreateBatchPrediction':
     post:
       operationId: CreateBatchPrediction
       description: '<p>Generates predictions for a group of observations. The observations to process exist in one or more data files referenced by a <code>DataSource</code>. This operation creates a new <code>BatchPrediction</code>, and uses an <code>MLModel</code> and the data files referenced by the <code>DataSource</code> as information sources. </p> <p><code>CreateBatchPrediction</code> is an asynchronous operation. In response to <code>CreateBatchPrediction</code>, Amazon Machine Learning (Amazon ML) immediately returns and sets the <code>BatchPrediction</code> status to <code>PENDING</code>. After the <code>BatchPrediction</code> completes, Amazon ML sets the status to <code>COMPLETED</code>. </p> <p>You can poll for status updates by using the <a>GetBatchPrediction</a> operation and checking the <code>Status</code> parameter of the result. After the <code>COMPLETED</code> status appears, the results are available in the location specified by the <code>OutputUri</code> parameter.</p>'
@@ -174,6 +180,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateBatchPredictionInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonML_20141212.CreateBatchPrediction
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -184,7 +196,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateDataSourceFromRDS':
+  '/#X-Amz-Target=AmazonML_20141212.CreateDataSourceFromRDS':
     post:
       operationId: CreateDataSourceFromRDS
       description: '<p>Creates a <code>DataSource</code> object from an <a href="http://aws.amazon.com/rds/"> Amazon Relational Database Service</a> (Amazon RDS). A <code>DataSource</code> references data that can be used to perform <code>CreateMLModel</code>, <code>CreateEvaluation</code>, or <code>CreateBatchPrediction</code> operations.</p> <p><code>CreateDataSourceFromRDS</code> is an asynchronous operation. In response to <code>CreateDataSourceFromRDS</code>, Amazon Machine Learning (Amazon ML) immediately returns and sets the <code>DataSource</code> status to <code>PENDING</code>. After the <code>DataSource</code> is created and ready for use, Amazon ML sets the <code>Status</code> parameter to <code>COMPLETED</code>. <code>DataSource</code> in the <code>COMPLETED</code> or <code>PENDING</code> state can be used only to perform <code>&gt;CreateMLModel</code>&gt;, <code>CreateEvaluation</code>, or <code>CreateBatchPrediction</code> operations. </p> <p> If Amazon ML cannot accept the input source, it sets the <code>Status</code> parameter to <code>FAILED</code> and includes an error message in the <code>Message</code> attribute of the <code>GetDataSource</code> operation response. </p>'
@@ -209,6 +221,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateDataSourceFromRDSInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonML_20141212.CreateDataSourceFromRDS
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -219,7 +237,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateDataSourceFromRedshift':
+  '/#X-Amz-Target=AmazonML_20141212.CreateDataSourceFromRedshift':
     post:
       operationId: CreateDataSourceFromRedshift
       description: '<p>Creates a <code>DataSource</code> from a database hosted on an Amazon Redshift cluster. A <code>DataSource</code> references data that can be used to perform either <code>CreateMLModel</code>, <code>CreateEvaluation</code>, or <code>CreateBatchPrediction</code> operations.</p> <p><code>CreateDataSourceFromRedshift</code> is an asynchronous operation. In response to <code>CreateDataSourceFromRedshift</code>, Amazon Machine Learning (Amazon ML) immediately returns and sets the <code>DataSource</code> status to <code>PENDING</code>. After the <code>DataSource</code> is created and ready for use, Amazon ML sets the <code>Status</code> parameter to <code>COMPLETED</code>. <code>DataSource</code> in <code>COMPLETED</code> or <code>PENDING</code> states can be used to perform only <code>CreateMLModel</code>, <code>CreateEvaluation</code>, or <code>CreateBatchPrediction</code> operations. </p> <p> If Amazon ML can''t accept the input source, it sets the <code>Status</code> parameter to <code>FAILED</code> and includes an error message in the <code>Message</code> attribute of the <code>GetDataSource</code> operation response. </p> <p>The observations should be contained in the database hosted on an Amazon Redshift cluster and should be specified by a <code>SelectSqlQuery</code> query. Amazon ML executes an <code>Unload</code> command in Amazon Redshift to transfer the result set of the <code>SelectSqlQuery</code> query to <code>S3StagingLocation</code>.</p> <p>After the <code>DataSource</code> has been created, it''s ready for use in evaluations and batch predictions. If you plan to use the <code>DataSource</code> to train an <code>MLModel</code>, the <code>DataSource</code> also requires a recipe. A recipe describes how each input variable will be used in training an <code>MLModel</code>. Will the variable be included or excluded from training? Will the variable be manipulated; for example, will it be combined with another variable or will it be split apart into word combinations? The recipe provides answers to these questions.</p> <?oxy_insert_start author="laurama" timestamp="20160406T153842-0700"><p>You can''t change an existing datasource, but you can copy and modify the settings from an existing Amazon Redshift datasource to create a new datasource. To do so, call <code>GetDataSource</code> for an existing datasource and copy the values to a <code>CreateDataSource</code> call. Change the settings that you want to change and make sure that all required fields have the appropriate values.</p> <?oxy_insert_end>'
@@ -244,6 +262,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateDataSourceFromRedshiftInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonML_20141212.CreateDataSourceFromRedshift
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -254,7 +278,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateDataSourceFromS3':
+  '/#X-Amz-Target=AmazonML_20141212.CreateDataSourceFromS3':
     post:
       operationId: CreateDataSourceFromS3
       description: '<p>Creates a <code>DataSource</code> object. A <code>DataSource</code> references data that can be used to perform <code>CreateMLModel</code>, <code>CreateEvaluation</code>, or <code>CreateBatchPrediction</code> operations.</p> <p><code>CreateDataSourceFromS3</code> is an asynchronous operation. In response to <code>CreateDataSourceFromS3</code>, Amazon Machine Learning (Amazon ML) immediately returns and sets the <code>DataSource</code> status to <code>PENDING</code>. After the <code>DataSource</code> has been created and is ready for use, Amazon ML sets the <code>Status</code> parameter to <code>COMPLETED</code>. <code>DataSource</code> in the <code>COMPLETED</code> or <code>PENDING</code> state can be used to perform only <code>CreateMLModel</code>, <code>CreateEvaluation</code> or <code>CreateBatchPrediction</code> operations. </p> <p> If Amazon ML can''t accept the input source, it sets the <code>Status</code> parameter to <code>FAILED</code> and includes an error message in the <code>Message</code> attribute of the <code>GetDataSource</code> operation response. </p> <p>The observation data used in a <code>DataSource</code> should be ready to use; that is, it should have a consistent structure, and missing data values should be kept to a minimum. The observation data must reside in one or more .csv files in an Amazon Simple Storage Service (Amazon S3) location, along with a schema that describes the data items by name and type. The same schema must be used for all of the data files referenced by the <code>DataSource</code>. </p> <p>After the <code>DataSource</code> has been created, it''s ready to use in evaluations and batch predictions. If you plan to use the <code>DataSource</code> to train an <code>MLModel</code>, the <code>DataSource</code> also needs a recipe. A recipe describes how each input variable will be used in training an <code>MLModel</code>. Will the variable be included or excluded from training? Will the variable be manipulated; for example, will it be combined with another variable or will it be split apart into word combinations? The recipe provides answers to these questions.</p>'
@@ -279,6 +303,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateDataSourceFromS3Input'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonML_20141212.CreateDataSourceFromS3
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -289,7 +319,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateEvaluation':
+  '/#X-Amz-Target=AmazonML_20141212.CreateEvaluation':
     post:
       operationId: CreateEvaluation
       description: '<p>Creates a new <code>Evaluation</code> of an <code>MLModel</code>. An <code>MLModel</code> is evaluated on a set of observations associated to a <code>DataSource</code>. Like a <code>DataSource</code> for an <code>MLModel</code>, the <code>DataSource</code> for an <code>Evaluation</code> contains values for the <code>Target Variable</code>. The <code>Evaluation</code> compares the predicted result for each observation to the actual outcome and provides a summary so that you know how effective the <code>MLModel</code> functions on the test data. Evaluation generates a relevant performance metric, such as BinaryAUC, RegressionRMSE or MulticlassAvgFScore based on the corresponding <code>MLModelType</code>: <code>BINARY</code>, <code>REGRESSION</code> or <code>MULTICLASS</code>. </p> <p><code>CreateEvaluation</code> is an asynchronous operation. In response to <code>CreateEvaluation</code>, Amazon Machine Learning (Amazon ML) immediately returns and sets the evaluation status to <code>PENDING</code>. After the <code>Evaluation</code> is created and ready for use, Amazon ML sets the status to <code>COMPLETED</code>. </p> <p>You can use the <code>GetEvaluation</code> operation to check progress of the evaluation during the creation operation.</p>'
@@ -314,6 +344,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateEvaluationInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonML_20141212.CreateEvaluation
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -324,7 +360,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateMLModel':
+  '/#X-Amz-Target=AmazonML_20141212.CreateMLModel':
     post:
       operationId: CreateMLModel
       description: '<p>Creates a new <code>MLModel</code> using the <code>DataSource</code> and the recipe as information sources. </p> <p>An <code>MLModel</code> is nearly immutable. Users can update only the <code>MLModelName</code> and the <code>ScoreThreshold</code> in an <code>MLModel</code> without creating a new <code>MLModel</code>. </p> <p><code>CreateMLModel</code> is an asynchronous operation. In response to <code>CreateMLModel</code>, Amazon Machine Learning (Amazon ML) immediately returns and sets the <code>MLModel</code> status to <code>PENDING</code>. After the <code>MLModel</code> has been created and ready is for use, Amazon ML sets the status to <code>COMPLETED</code>. </p> <p>You can use the <code>GetMLModel</code> operation to check the progress of the <code>MLModel</code> during the creation operation.</p> <p> <code>CreateMLModel</code> requires a <code>DataSource</code> with computed statistics, which can be created by setting <code>ComputeStatistics</code> to <code>true</code> in <code>CreateDataSourceFromRDS</code>, <code>CreateDataSourceFromS3</code>, or <code>CreateDataSourceFromRedshift</code> operations. </p>'
@@ -349,6 +385,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateMLModelInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonML_20141212.CreateMLModel
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -359,7 +401,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateRealtimeEndpoint':
+  '/#X-Amz-Target=AmazonML_20141212.CreateRealtimeEndpoint':
     post:
       operationId: CreateRealtimeEndpoint
       description: 'Creates a real-time endpoint for the <code>MLModel</code>. The endpoint contains the URI of the <code>MLModel</code>; that is, the location to send real-time prediction requests for the specified <code>MLModel</code>.'
@@ -389,6 +431,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateRealtimeEndpointInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonML_20141212.CreateRealtimeEndpoint
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -399,7 +447,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteBatchPrediction':
+  '/#X-Amz-Target=AmazonML_20141212.DeleteBatchPrediction':
     post:
       operationId: DeleteBatchPrediction
       description: '<p>Assigns the DELETED status to a <code>BatchPrediction</code>, rendering it unusable.</p> <p>After using the <code>DeleteBatchPrediction</code> operation, you can use the <a>GetBatchPrediction</a> operation to verify that the status of the <code>BatchPrediction</code> changed to DELETED.</p> <p><b>Caution:</b> The result of the <code>DeleteBatchPrediction</code> operation is irreversible.</p>'
@@ -429,6 +477,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteBatchPredictionInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonML_20141212.DeleteBatchPrediction
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -439,7 +493,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteDataSource':
+  '/#X-Amz-Target=AmazonML_20141212.DeleteDataSource':
     post:
       operationId: DeleteDataSource
       description: '<p>Assigns the DELETED status to a <code>DataSource</code>, rendering it unusable.</p> <p>After using the <code>DeleteDataSource</code> operation, you can use the <a>GetDataSource</a> operation to verify that the status of the <code>DataSource</code> changed to DELETED.</p> <p><b>Caution:</b> The results of the <code>DeleteDataSource</code> operation are irreversible.</p>'
@@ -469,6 +523,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteDataSourceInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonML_20141212.DeleteDataSource
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -479,7 +539,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteEvaluation':
+  '/#X-Amz-Target=AmazonML_20141212.DeleteEvaluation':
     post:
       operationId: DeleteEvaluation
       description: '<p>Assigns the <code>DELETED</code> status to an <code>Evaluation</code>, rendering it unusable.</p> <p>After invoking the <code>DeleteEvaluation</code> operation, you can use the <code>GetEvaluation</code> operation to verify that the status of the <code>Evaluation</code> changed to <code>DELETED</code>.</p> <caution><title>Caution</title> <p>The results of the <code>DeleteEvaluation</code> operation are irreversible.</p></caution>'
@@ -509,6 +569,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteEvaluationInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonML_20141212.DeleteEvaluation
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -519,7 +585,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteMLModel':
+  '/#X-Amz-Target=AmazonML_20141212.DeleteMLModel':
     post:
       operationId: DeleteMLModel
       description: '<p>Assigns the <code>DELETED</code> status to an <code>MLModel</code>, rendering it unusable.</p> <p>After using the <code>DeleteMLModel</code> operation, you can use the <code>GetMLModel</code> operation to verify that the status of the <code>MLModel</code> changed to DELETED.</p> <p><b>Caution:</b> The result of the <code>DeleteMLModel</code> operation is irreversible.</p>'
@@ -549,6 +615,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteMLModelInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonML_20141212.DeleteMLModel
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -559,7 +631,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteRealtimeEndpoint':
+  '/#X-Amz-Target=AmazonML_20141212.DeleteRealtimeEndpoint':
     post:
       operationId: DeleteRealtimeEndpoint
       description: Deletes a real time endpoint of an <code>MLModel</code>.
@@ -589,6 +661,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteRealtimeEndpointInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonML_20141212.DeleteRealtimeEndpoint
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -599,7 +677,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteTags':
+  '/#X-Amz-Target=AmazonML_20141212.DeleteTags':
     post:
       operationId: DeleteTags
       description: '<p>Deletes the specified tags associated with an ML object. After this operation is complete, you can''t recover deleted tags.</p> <p>If you specify a tag that doesn''t exist, Amazon ML ignores it.</p>'
@@ -634,6 +712,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteTagsInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonML_20141212.DeleteTags
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -644,7 +728,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeBatchPredictions':
+  '/#X-Amz-Target=AmazonML_20141212.DescribeBatchPredictions':
     post:
       operationId: DescribeBatchPredictions
       description: Returns a list of <code>BatchPrediction</code> operations that match the search criteria in the request.
@@ -679,6 +763,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonML_20141212.DescribeBatchPredictions
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -689,7 +779,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeDataSources':
+  '/#X-Amz-Target=AmazonML_20141212.DescribeDataSources':
     post:
       operationId: DescribeDataSources
       description: Returns a list of <code>DataSource</code> that match the search criteria in the request.
@@ -724,6 +814,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonML_20141212.DescribeDataSources
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -734,7 +830,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeEvaluations':
+  '/#X-Amz-Target=AmazonML_20141212.DescribeEvaluations':
     post:
       operationId: DescribeEvaluations
       description: Returns a list of <code>DescribeEvaluations</code> that match the search criteria in the request.
@@ -769,6 +865,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonML_20141212.DescribeEvaluations
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -779,7 +881,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeMLModels':
+  '/#X-Amz-Target=AmazonML_20141212.DescribeMLModels':
     post:
       operationId: DescribeMLModels
       description: Returns a list of <code>MLModel</code> that match the search criteria in the request.
@@ -814,6 +916,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonML_20141212.DescribeMLModels
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -824,7 +932,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeTags':
+  '/#X-Amz-Target=AmazonML_20141212.DescribeTags':
     post:
       operationId: DescribeTags
       description: Describes one or more of the tags for your Amazon ML object.
@@ -854,6 +962,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeTagsInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonML_20141212.DescribeTags
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -864,7 +978,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetBatchPrediction':
+  '/#X-Amz-Target=AmazonML_20141212.GetBatchPrediction':
     post:
       operationId: GetBatchPrediction
       description: 'Returns a <code>BatchPrediction</code> that includes detailed metadata, status, and data file information for a <code>Batch Prediction</code> request.'
@@ -894,6 +1008,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetBatchPredictionInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonML_20141212.GetBatchPrediction
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -904,7 +1024,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetDataSource':
+  '/#X-Amz-Target=AmazonML_20141212.GetDataSource':
     post:
       operationId: GetDataSource
       description: '<p>Returns a <code>DataSource</code> that includes metadata and data file information, as well as the current status of the <code>DataSource</code>.</p> <p><code>GetDataSource</code> provides results in normal or verbose format. The verbose format adds the schema description and the list of files pointed to by the DataSource to the normal format.</p>'
@@ -934,6 +1054,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetDataSourceInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonML_20141212.GetDataSource
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -944,7 +1070,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetEvaluation':
+  '/#X-Amz-Target=AmazonML_20141212.GetEvaluation':
     post:
       operationId: GetEvaluation
       description: Returns an <code>Evaluation</code> that includes metadata as well as the current status of the <code>Evaluation</code>.
@@ -974,6 +1100,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetEvaluationInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonML_20141212.GetEvaluation
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -984,7 +1116,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetMLModel':
+  '/#X-Amz-Target=AmazonML_20141212.GetMLModel':
     post:
       operationId: GetMLModel
       description: '<p>Returns an <code>MLModel</code> that includes detailed metadata, data source information, and the current status of the <code>MLModel</code>.</p> <p><code>GetMLModel</code> provides results in normal or verbose format. </p>'
@@ -1014,6 +1146,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetMLModelInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonML_20141212.GetMLModel
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1024,7 +1162,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Predict':
+  '/#X-Amz-Target=AmazonML_20141212.Predict':
     post:
       operationId: Predict
       description: <p>Generates a prediction for the observation using the specified <code>ML Model</code>.</p> <note><title>Note</title> <p>Not all response parameters will be populated. Whether a response parameter is populated depends on the type of model requested.</p></note>
@@ -1059,6 +1197,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PredictInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonML_20141212.Predict
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1069,7 +1213,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateBatchPrediction':
+  '/#X-Amz-Target=AmazonML_20141212.UpdateBatchPrediction':
     post:
       operationId: UpdateBatchPrediction
       description: <p>Updates the <code>BatchPredictionName</code> of a <code>BatchPrediction</code>.</p> <p>You can use the <code>GetBatchPrediction</code> operation to view the contents of the updated data element.</p>
@@ -1099,6 +1243,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateBatchPredictionInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonML_20141212.UpdateBatchPrediction
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1109,7 +1259,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateDataSource':
+  '/#X-Amz-Target=AmazonML_20141212.UpdateDataSource':
     post:
       operationId: UpdateDataSource
       description: <p>Updates the <code>DataSourceName</code> of a <code>DataSource</code>.</p> <p>You can use the <code>GetDataSource</code> operation to view the contents of the updated data element.</p>
@@ -1139,6 +1289,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateDataSourceInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonML_20141212.UpdateDataSource
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1149,7 +1305,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateEvaluation':
+  '/#X-Amz-Target=AmazonML_20141212.UpdateEvaluation':
     post:
       operationId: UpdateEvaluation
       description: <p>Updates the <code>EvaluationName</code> of an <code>Evaluation</code>.</p> <p>You can use the <code>GetEvaluation</code> operation to view the contents of the updated data element.</p>
@@ -1179,6 +1335,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateEvaluationInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonML_20141212.UpdateEvaluation
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1189,7 +1351,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateMLModel':
+  '/#X-Amz-Target=AmazonML_20141212.UpdateMLModel':
     post:
       operationId: UpdateMLModel
       description: <p>Updates the <code>MLModelName</code> and the <code>ScoreThreshold</code> of an <code>MLModel</code>.</p> <p>You can use the <code>GetMLModel</code> operation to view the contents of the updated data element.</p>
@@ -1219,6 +1381,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateMLModelInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonML_20141212.UpdateMLModel
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2415,14 +2583,9 @@ definitions:
       - BINARY
       - MULTICLASS
   TrainingParameters:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/StringType'
-        value:
-          $ref: '#/definitions/StringType'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/StringType'
   Recipe:
     type: string
     maxLength: 131071
@@ -2607,15 +2770,10 @@ definitions:
     type: string
     minLength: 1
   DetailsMap:
-    type: array
+    type: object
     description: Provides any additional details regarding the prediction.
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/DetailsAttributes'
-        value:
-          $ref: '#/definitions/DetailsValue'
+    additionalProperties:
+      $ref: '#/definitions/DetailsValue'
   EDPPipelineId:
     type: string
     minLength: 1
@@ -2768,28 +2926,18 @@ definitions:
         $ref: '#/definitions/EpochTime'
     description: <p> Represents the output of a <code>GetMLModel</code> operation. </p> <p>The content consists of the detailed metadata and the current status of the <code>MLModel</code>.</p>
   PerformanceMetricsProperties:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/PerformanceMetricsPropertyKey'
-        value:
-          $ref: '#/definitions/PerformanceMetricsPropertyValue'
-  PerformanceMetricsPropertyKey:
-    type: string
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/PerformanceMetricsPropertyValue'
   PerformanceMetricsPropertyValue:
     type: string
+  PerformanceMetricsPropertyKey:
+    type: string
   Record:
-    type: array
+    type: object
     description: A map of variable name-value pairs that represent an observation.
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/VariableName'
-        value:
-          $ref: '#/definitions/VariableValue'
+    additionalProperties:
+      $ref: '#/definitions/VariableValue'
   VipURL:
     type: string
     pattern: 'https://[a-zA-Z0-9-.]*\.amazon(aws)?\.com[/]?'
@@ -2812,15 +2960,10 @@ definitions:
     type: number
     format: float
   ScoreValuePerLabelMap:
-    type: array
+    type: object
     description: Provides the raw classification score corresponding to each label.
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/Label'
-        value:
-          $ref: '#/definitions/ScoreValue'
+    additionalProperties:
+      $ref: '#/definitions/ScoreValue'
   RDSDatabase:
     type: object
     required:
@@ -2877,9 +3020,6 @@ definitions:
       - READY
       - UPDATING
       - FAILED
-  VariableName:
-    type: string
-    description: 'The name of a variable. Currently it''s used to specify the name of the target value, label, weight, and tags.'
   VariableValue:
     type: string
     description: 'The value of a variable. Currently it''s used to specify values of the target value, weights, and tag variables and for filtering variable values.'
@@ -2955,3 +3095,6 @@ definitions:
         $ref: '#/definitions/TagValue'
         description: 'An optional string, typically used to describe or define the tag. Valid characters include Unicode letters, digits, white space, _, ., /, =, +, -, %, and @.'
     description: 'A custom key-value pair associated with an ML object, such as an ML model.'
+  VariableName:
+    type: string
+    description: 'The name of a variable. Currently it''s used to specify the name of the target value, label, weight, and tags.'

@@ -124,15 +124,45 @@ paths:
           schema:
             $ref: '#/definitions/ModelError'
       parameters:
+        - name: EndpointName
+          in: path
+          required: true
+          description: 'The name of the endpoint that you specified when you created the endpoint using the <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html">CreateEndpoint</a> API. '
+          type: string
+          pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+          maxLength: 63
+        - name: Content-Type
+          in: header
+          required: false
+          description: The MIME type of the input data in the request body.
+          type: string
+          maxLength: 1024
+        - name: Accept
+          in: header
+          required: false
+          description: The desired MIME type of the inference in the response.
+          type: string
+          maxLength: 1024
+        - name: X-Amzn-SageMaker-Custom-Attributes
+          in: header
+          required: false
+          description: <p/>
+          type: string
+          maxLength: 1024
+          format: password
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/InvokeEndpointInput'
-        - name: EndpointName
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - Body
+            properties:
+              Body:
+                description: '<p>Provides input data, in the format specified in the <code>ContentType</code> request header. Amazon SageMaker passes all of the data in the body to the model. </p> <p>For information about the format of the request body, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html">Common Data Formats—Inference</a>.</p>'
+                type: string
+                maxLength: 5242880
+                format: password
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -152,14 +182,6 @@ definitions:
       Body:
         $ref: '#/definitions/BodyBlob'
         description: '<p>Includes the inference provided by the model.</p> <p>For information about the format of the response body, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html">Common Data Formats—Inference</a>.</p>'
-  InvokeEndpointInput:
-    type: object
-    required:
-      - Body
-    properties:
-      Body:
-        $ref: '#/definitions/BodyBlob'
-        description: '<p>Provides input data, in the format specified in the <code>ContentType</code> request header. Amazon SageMaker passes all of the data in the body to the model. </p> <p>For information about the format of the request body, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html">Common Data Formats—Inference</a>.</p>'
   InternalFailure: {}
   ServiceUnavailable: {}
   ValidationError: {}
@@ -179,3 +201,11 @@ definitions:
   Header:
     type: string
     maxLength: 1024
+  InvokeEndpointInput:
+    type: object
+    required:
+      - Body
+    properties:
+      Body:
+        $ref: '#/definitions/BodyBlob'
+        description: '<p>Provides input data, in the format specified in the <code>ContentType</code> request header. Amazon SageMaker passes all of the data in the body to the model. </p> <p>For information about the format of the request body, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html">Common Data Formats—Inference</a>.</p>'

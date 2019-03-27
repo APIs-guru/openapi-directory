@@ -141,15 +141,34 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: channelId
+          in: path
+          required: true
+          description: Placeholder documentation for __string
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/BatchUpdateScheduleRequest'
-        - name: channelId
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - creates
+              - deletes
+            properties:
+              creates:
+                description: A list of schedule actions to create (in a request) or that have been created (in a response).
+                type: object
+                properties:
+                  ScheduleActions:
+                    $ref: '#/definitions/__listOfScheduleAction'
+                    description: A list of schedule actions to create.
+              deletes:
+                description: A list of schedule actions to delete.
+                type: object
+                properties:
+                  ActionNames:
+                    $ref: '#/definitions/__listOf__string'
+                    description: A list of schedule actions to delete.
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -197,11 +216,23 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
+        - name: channelId
+          in: path
           required: true
-          schema:
-            $ref: '#/definitions/DescribeScheduleRequest'
+          description: Placeholder documentation for __string
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: Placeholder documentation for MaxResults
+          type: integer
+          minimum: 1
+          maximum: 1000
+        - name: nextToken
+          in: query
+          required: false
+          description: Placeholder documentation for __string
+          type: string
         - name: MaxResults
           type: string
           in: query
@@ -212,10 +243,6 @@ paths:
           in: query
           description: Pagination token
           required: false
-        - name: channelId
-          type: string
-          in: path
-          required: true
   /prod/channels:
     post:
       operationId: CreateChannel
@@ -262,7 +289,87 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateChannelRequest'
+            type: object
+            required:
+              - encoderSettings
+            properties:
+              destinations:
+                description: Placeholder documentation for __listOfOutputDestination
+                type: array
+                items:
+                  $ref: '#/definitions/OutputDestination'
+              encoderSettings:
+                description: Placeholder documentation for EncoderSettings
+                type: object
+                properties:
+                  AudioDescriptions:
+                    $ref: '#/definitions/__listOfAudioDescription'
+                  AvailBlanking:
+                    $ref: '#/definitions/AvailBlanking'
+                    description: Settings for ad avail blanking.
+                  AvailConfiguration:
+                    $ref: '#/definitions/AvailConfiguration'
+                    description: Event-wide configuration settings for ad avail insertion.
+                  BlackoutSlate:
+                    $ref: '#/definitions/BlackoutSlate'
+                    description: Settings for blackout slate.
+                  CaptionDescriptions:
+                    $ref: '#/definitions/__listOfCaptionDescription'
+                    description: Settings for caption decriptions
+                  GlobalConfiguration:
+                    $ref: '#/definitions/GlobalConfiguration'
+                    description: Configuration settings that apply to the event as a whole.
+                  OutputGroups:
+                    $ref: '#/definitions/__listOfOutputGroup'
+                  TimecodeConfig:
+                    $ref: '#/definitions/TimecodeConfig'
+                    description: Contains settings used to acquire and adjust timecode information from inputs.
+                  VideoDescriptions:
+                    $ref: '#/definitions/__listOfVideoDescription'
+              inputAttachments:
+                description: Placeholder documentation for __listOfInputAttachment
+                type: array
+                items:
+                  $ref: '#/definitions/InputAttachment'
+              inputSpecification:
+                description: Placeholder documentation for InputSpecification
+                type: object
+                properties:
+                  Codec:
+                    $ref: '#/definitions/InputCodec'
+                    description: Input codec
+                  MaximumBitrate:
+                    $ref: '#/definitions/InputMaximumBitrate'
+                    description: 'Maximum input bitrate, categorized coarsely'
+                  Resolution:
+                    $ref: '#/definitions/InputResolution'
+                    description: 'Input resolution, categorized coarsely'
+              logLevel:
+                description: The log level the user wants for their channel.
+                type: string
+                enum:
+                  - ERROR
+                  - WARNING
+                  - INFO
+                  - DEBUG
+                  - DISABLED
+              name:
+                description: Placeholder documentation for __string
+                type: string
+              requestId:
+                description: Placeholder documentation for __string
+                type: string
+              reserved:
+                description: Placeholder documentation for __string
+                type: string
+              roleArn:
+                description: Placeholder documentation for __string
+                type: string
+              tags:
+                description: Placeholder documentation for Tags
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/__string'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -306,11 +413,18 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListChannelsRequest'
+        - name: maxResults
+          in: query
+          required: false
+          description: Placeholder documentation for MaxResults
+          type: integer
+          minimum: 1
+          maximum: 1000
+        - name: nextToken
+          in: query
+          required: false
+          description: Placeholder documentation for __string
+          type: string
         - name: MaxResults
           type: string
           in: query
@@ -359,7 +473,73 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateInputRequest'
+            type: object
+            required:
+              - vpc
+            properties:
+              destinations:
+                description: Placeholder documentation for __listOfInputDestinationRequest
+                type: array
+                items:
+                  $ref: '#/definitions/InputDestinationRequest'
+              inputSecurityGroups:
+                description: Placeholder documentation for __listOf__string
+                type: array
+                items:
+                  $ref: '#/definitions/__string'
+              mediaConnectFlows:
+                description: Placeholder documentation for __listOfMediaConnectFlowRequest
+                type: array
+                items:
+                  $ref: '#/definitions/MediaConnectFlowRequest'
+              name:
+                description: Placeholder documentation for __string
+                type: string
+              requestId:
+                description: Placeholder documentation for __string
+                type: string
+              roleArn:
+                description: Placeholder documentation for __string
+                type: string
+              sources:
+                description: Placeholder documentation for __listOfInputSourceRequest
+                type: array
+                items:
+                  $ref: '#/definitions/InputSourceRequest'
+              tags:
+                description: Placeholder documentation for Tags
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/__string'
+              type:
+                description: Placeholder documentation for InputType
+                type: string
+                enum:
+                  - UDP_PUSH
+                  - RTP_PUSH
+                  - RTMP_PUSH
+                  - RTMP_PULL
+                  - URL_PULL
+                  - MP4_FILE
+                  - MEDIACONNECT
+              vpc:
+                description: |
+                  Settings for a private VPC Input.
+                  When this property is specified, the input destination addresses will be created in a VPC rather than with public Internet addresses.
+                  This property requires setting the roleArn property on Input creation.
+                  Not compatible with the inputSecurityGroups property.
+                type: object
+                properties:
+                  SecurityGroupIds:
+                    $ref: '#/definitions/__listOf__string'
+                    description: |
+                      A list of up to 5 EC2 VPC security group IDs to attach to the Input VPC network interfaces.
+                      Requires subnetIds. If none are specified then the VPC default security group will be used.
+                  SubnetIds:
+                    $ref: '#/definitions/__listOf__string'
+                    description: |
+                      A list of 2 VPC subnet IDs from the same VPC.
+                      Subnet IDs must be mapped to two unique availability zones (AZ).
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -403,11 +583,18 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListInputsRequest'
+        - name: maxResults
+          in: query
+          required: false
+          description: Placeholder documentation for MaxResults
+          type: integer
+          minimum: 1
+          maximum: 1000
+        - name: nextToken
+          in: query
+          required: false
+          description: Placeholder documentation for __string
+          type: string
         - name: MaxResults
           type: string
           in: query
@@ -456,7 +643,18 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateInputSecurityGroupRequest'
+            type: object
+            properties:
+              tags:
+                description: Placeholder documentation for Tags
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/__string'
+              whitelistRules:
+                description: Placeholder documentation for __listOfInputWhitelistRuleCidr
+                type: array
+                items:
+                  $ref: '#/definitions/InputWhitelistRuleCidr'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -500,11 +698,18 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListInputSecurityGroupsRequest'
+        - name: maxResults
+          in: query
+          required: false
+          description: Placeholder documentation for MaxResults
+          type: integer
+          minimum: 1
+          maximum: 1000
+        - name: nextToken
+          in: query
+          required: false
+          description: Placeholder documentation for __string
+          type: string
         - name: MaxResults
           type: string
           in: query
@@ -539,15 +744,22 @@ paths:
           schema:
             $ref: '#/definitions/ForbiddenException'
       parameters:
+        - name: resource-arn
+          in: path
+          required: true
+          description: Placeholder documentation for __string
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateTagsRequest'
-        - name: resource-arn
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              tags:
+                description: Placeholder documentation for Tags
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/__string'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -558,38 +770,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-    delete:
-      operationId: DeleteTags
-      description: Removes tags for a resource
-      responses:
-        '204':
-          description: Success
-        '480':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '481':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '482':
-          description: InternalServerErrorException
-          schema:
-            $ref: '#/definitions/InternalServerErrorException'
-        '483':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteTagsRequest'
-        - name: resource-arn
-          type: string
-          in: path
-          required: true
     get:
       operationId: ListTagsForResource
       description: Produces list of tags that have been created for a resource
@@ -615,15 +795,11 @@ paths:
           schema:
             $ref: '#/definitions/ForbiddenException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListTagsForResourceRequest'
         - name: resource-arn
-          type: string
           in: path
           required: true
+          description: Placeholder documentation for __string
+          type: string
   '/prod/channels/{channelId}':
     delete:
       operationId: DeleteChannel
@@ -666,15 +842,11 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteChannelRequest'
         - name: channelId
-          type: string
           in: path
           required: true
+          description: Placeholder documentation for __string
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -722,15 +894,11 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeChannelRequest'
         - name: channelId
-          type: string
           in: path
           required: true
+          description: Placeholder documentation for __string
+          type: string
     put:
       operationId: UpdateChannel
       description: Updates a channel.
@@ -768,15 +936,85 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
+        - name: channelId
+          in: path
+          required: true
+          description: Placeholder documentation for __string
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateChannelRequest'
-        - name: channelId
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - encoderSettings
+            properties:
+              destinations:
+                description: Placeholder documentation for __listOfOutputDestination
+                type: array
+                items:
+                  $ref: '#/definitions/OutputDestination'
+              encoderSettings:
+                description: Placeholder documentation for EncoderSettings
+                type: object
+                properties:
+                  AudioDescriptions:
+                    $ref: '#/definitions/__listOfAudioDescription'
+                  AvailBlanking:
+                    $ref: '#/definitions/AvailBlanking'
+                    description: Settings for ad avail blanking.
+                  AvailConfiguration:
+                    $ref: '#/definitions/AvailConfiguration'
+                    description: Event-wide configuration settings for ad avail insertion.
+                  BlackoutSlate:
+                    $ref: '#/definitions/BlackoutSlate'
+                    description: Settings for blackout slate.
+                  CaptionDescriptions:
+                    $ref: '#/definitions/__listOfCaptionDescription'
+                    description: Settings for caption decriptions
+                  GlobalConfiguration:
+                    $ref: '#/definitions/GlobalConfiguration'
+                    description: Configuration settings that apply to the event as a whole.
+                  OutputGroups:
+                    $ref: '#/definitions/__listOfOutputGroup'
+                  TimecodeConfig:
+                    $ref: '#/definitions/TimecodeConfig'
+                    description: Contains settings used to acquire and adjust timecode information from inputs.
+                  VideoDescriptions:
+                    $ref: '#/definitions/__listOfVideoDescription'
+              inputAttachments:
+                description: Placeholder documentation for __listOfInputAttachment
+                type: array
+                items:
+                  $ref: '#/definitions/InputAttachment'
+              inputSpecification:
+                description: Placeholder documentation for InputSpecification
+                type: object
+                properties:
+                  Codec:
+                    $ref: '#/definitions/InputCodec'
+                    description: Input codec
+                  MaximumBitrate:
+                    $ref: '#/definitions/InputMaximumBitrate'
+                    description: 'Maximum input bitrate, categorized coarsely'
+                  Resolution:
+                    $ref: '#/definitions/InputResolution'
+                    description: 'Input resolution, categorized coarsely'
+              logLevel:
+                description: The log level the user wants for their channel.
+                type: string
+                enum:
+                  - ERROR
+                  - WARNING
+                  - INFO
+                  - DEBUG
+                  - DISABLED
+              name:
+                description: Placeholder documentation for __string
+                type: string
+              roleArn:
+                description: Placeholder documentation for __string
+                type: string
   '/prod/inputs/{inputId}':
     delete:
       operationId: DeleteInput
@@ -819,15 +1057,11 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteInputRequest'
         - name: inputId
-          type: string
           in: path
           required: true
+          description: Placeholder documentation for __string
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -875,15 +1109,11 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeInputRequest'
         - name: inputId
-          type: string
           in: path
           required: true
+          description: Placeholder documentation for __string
+          type: string
     put:
       operationId: UpdateInput
       description: Updates an input.
@@ -921,15 +1151,43 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
+        - name: inputId
+          in: path
+          required: true
+          description: Placeholder documentation for __string
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateInputRequest'
-        - name: inputId
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              destinations:
+                description: Placeholder documentation for __listOfInputDestinationRequest
+                type: array
+                items:
+                  $ref: '#/definitions/InputDestinationRequest'
+              inputSecurityGroups:
+                description: Placeholder documentation for __listOf__string
+                type: array
+                items:
+                  $ref: '#/definitions/__string'
+              mediaConnectFlows:
+                description: Placeholder documentation for __listOfMediaConnectFlowRequest
+                type: array
+                items:
+                  $ref: '#/definitions/MediaConnectFlowRequest'
+              name:
+                description: Placeholder documentation for __string
+                type: string
+              roleArn:
+                description: Placeholder documentation for __string
+                type: string
+              sources:
+                description: Placeholder documentation for __listOfInputSourceRequest
+                type: array
+                items:
+                  $ref: '#/definitions/InputSourceRequest'
   '/prod/inputSecurityGroups/{inputSecurityGroupId}':
     delete:
       operationId: DeleteInputSecurityGroup
@@ -968,15 +1226,11 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteInputSecurityGroupRequest'
         - name: inputSecurityGroupId
-          type: string
           in: path
           required: true
+          description: Placeholder documentation for __string
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1024,15 +1278,11 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeInputSecurityGroupRequest'
         - name: inputSecurityGroupId
-          type: string
           in: path
           required: true
+          description: Placeholder documentation for __string
+          type: string
     put:
       operationId: UpdateInputSecurityGroup
       description: Update an Input Security Group's Whilelists.
@@ -1070,15 +1320,27 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
+        - name: inputSecurityGroupId
+          in: path
+          required: true
+          description: Placeholder documentation for __string
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateInputSecurityGroupRequest'
-        - name: inputSecurityGroupId
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              tags:
+                description: Placeholder documentation for Tags
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/__string'
+              whitelistRules:
+                description: Placeholder documentation for __listOfInputWhitelistRuleCidr
+                type: array
+                items:
+                  $ref: '#/definitions/InputWhitelistRuleCidr'
   '/prod/reservations/{reservationId}':
     delete:
       operationId: DeleteReservation
@@ -1121,15 +1383,11 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteReservationRequest'
         - name: reservationId
-          type: string
           in: path
           required: true
+          description: Placeholder documentation for __string
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1177,15 +1435,57 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeReservationRequest'
         - name: reservationId
-          type: string
           in: path
           required: true
+          description: Placeholder documentation for __string
+          type: string
+  '/prod/tags/{resource-arn}#tagKeys':
+    delete:
+      operationId: DeleteTags
+      description: Removes tags for a resource
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+      parameters:
+        - name: resource-arn
+          in: path
+          required: true
+          description: Placeholder documentation for __string
+          type: string
+        - name: tagKeys
+          in: query
+          required: true
+          description: Placeholder documentation for __listOf__string
+          type: array
+          items:
+            type: string
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/prod/offerings/{offeringId}':
     get:
       operationId: DescribeOffering
@@ -1224,15 +1524,11 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeOfferingRequest'
         - name: offeringId
-          type: string
           in: path
           required: true
+          description: Placeholder documentation for __string
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1277,11 +1573,58 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListOfferingsRequest'
+        - name: channelConfiguration
+          in: query
+          required: false
+          description: Placeholder documentation for __string
+          type: string
+        - name: codec
+          in: query
+          required: false
+          description: Placeholder documentation for __string
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: Placeholder documentation for MaxResults
+          type: integer
+          minimum: 1
+          maximum: 1000
+        - name: maximumBitrate
+          in: query
+          required: false
+          description: Placeholder documentation for __string
+          type: string
+        - name: maximumFramerate
+          in: query
+          required: false
+          description: Placeholder documentation for __string
+          type: string
+        - name: nextToken
+          in: query
+          required: false
+          description: Placeholder documentation for __string
+          type: string
+        - name: resolution
+          in: query
+          required: false
+          description: Placeholder documentation for __string
+          type: string
+        - name: resourceType
+          in: query
+          required: false
+          description: Placeholder documentation for __string
+          type: string
+        - name: specialFeature
+          in: query
+          required: false
+          description: Placeholder documentation for __string
+          type: string
+        - name: videoQuality
+          in: query
+          required: false
+          description: Placeholder documentation for __string
+          type: string
         - name: MaxResults
           type: string
           in: query
@@ -1336,11 +1679,53 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListReservationsRequest'
+        - name: codec
+          in: query
+          required: false
+          description: Placeholder documentation for __string
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: Placeholder documentation for MaxResults
+          type: integer
+          minimum: 1
+          maximum: 1000
+        - name: maximumBitrate
+          in: query
+          required: false
+          description: Placeholder documentation for __string
+          type: string
+        - name: maximumFramerate
+          in: query
+          required: false
+          description: Placeholder documentation for __string
+          type: string
+        - name: nextToken
+          in: query
+          required: false
+          description: Placeholder documentation for __string
+          type: string
+        - name: resolution
+          in: query
+          required: false
+          description: Placeholder documentation for __string
+          type: string
+        - name: resourceType
+          in: query
+          required: false
+          description: Placeholder documentation for __string
+          type: string
+        - name: specialFeature
+          in: query
+          required: false
+          description: Placeholder documentation for __string
+          type: string
+        - name: videoQuality
+          in: query
+          required: false
+          description: Placeholder documentation for __string
+          type: string
         - name: MaxResults
           type: string
           in: query
@@ -1403,15 +1788,32 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
+        - name: offeringId
+          in: path
+          required: true
+          description: Placeholder documentation for __string
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/PurchaseOfferingRequest'
-        - name: offeringId
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - count
+            properties:
+              count:
+                description: Placeholder documentation for __integerMin1
+                type: integer
+                minimum: 1
+              name:
+                description: Placeholder documentation for __string
+                type: string
+              requestId:
+                description: Placeholder documentation for __string
+                type: string
+              start:
+                description: Placeholder documentation for __string
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1464,15 +1866,11 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/StartChannelRequest'
         - name: channelId
-          type: string
           in: path
           required: true
+          description: Placeholder documentation for __string
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1525,15 +1923,11 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/StopChannelRequest'
         - name: channelId
-          type: string
           in: path
           required: true
+          description: Placeholder documentation for __string
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1555,16 +1949,16 @@ definitions:
         $ref: '#/definitions/BatchScheduleActionDeleteResult'
         description: Schedule actions deleted from the schedule.
     description: Placeholder documentation for BatchUpdateScheduleResponse
-  BatchUpdateScheduleRequest:
-    type: object
-    properties:
-      Creates:
-        $ref: '#/definitions/BatchScheduleActionCreateRequest'
-        description: Schedule actions to create in the schedule.
-      Deletes:
-        $ref: '#/definitions/BatchScheduleActionDeleteRequest'
-        description: Schedule actions to delete from the schedule.
-    description: List of actions to create and list of actions to delete.
+  __listOfScheduleAction:
+    type: array
+    description: Placeholder documentation for __listOfScheduleAction
+    items:
+      $ref: '#/definitions/ScheduleAction'
+  __listOf__string:
+    type: array
+    description: Placeholder documentation for __listOf__string
+    items:
+      $ref: '#/definitions/__string'
   BadRequestException: {}
   UnprocessableEntityException: {}
   InternalServerErrorException: {}
@@ -1579,40 +1973,148 @@ definitions:
       Channel:
         $ref: '#/definitions/Channel'
     description: Placeholder documentation for CreateChannelResponse
-  CreateChannelRequest:
+  OutputDestination:
     type: object
     properties:
-      Destinations:
-        $ref: '#/definitions/__listOfOutputDestination'
-      EncoderSettings:
-        $ref: '#/definitions/EncoderSettings'
-      InputAttachments:
-        $ref: '#/definitions/__listOfInputAttachment'
-        description: List of input attachments for channel.
-      InputSpecification:
-        $ref: '#/definitions/InputSpecification'
-        description: 'Specification of input for this channel (max. bitrate, resolution, codec, etc.)'
-      LogLevel:
-        $ref: '#/definitions/LogLevel'
-        description: The log level to write to CloudWatch Logs.
-      Name:
+      Id:
         $ref: '#/definitions/__string'
-        description: Name of channel.
-      RequestId:
+        description: User-specified id. This is used in an output group or an output.
+      MediaPackageSettings:
+        $ref: '#/definitions/__listOfMediaPackageOutputDestinationSettings'
+        description: Destination settings for a MediaPackage output; one destination for both encoders.
+      Settings:
+        $ref: '#/definitions/__listOfOutputDestinationSettings'
+        description: Destination settings for a standard output; one destination for each redundant encoder.
+    description: Placeholder documentation for OutputDestination
+  __listOfAudioDescription:
+    type: array
+    description: Placeholder documentation for __listOfAudioDescription
+    items:
+      $ref: '#/definitions/AudioDescription'
+  AvailBlanking:
+    type: object
+    properties:
+      AvailBlankingImage:
+        $ref: '#/definitions/InputLocation'
+        description: Blanking image to be used. Leave empty for solid black. Only bmp and png images are supported.
+      State:
+        $ref: '#/definitions/AvailBlankingState'
+        description: 'When set to enabled, causes video, audio and captions to be blanked when insertion metadata is added.'
+    description: Placeholder documentation for AvailBlanking
+  AvailConfiguration:
+    type: object
+    properties:
+      AvailSettings:
+        $ref: '#/definitions/AvailSettings'
+        description: Ad avail settings.
+    description: Placeholder documentation for AvailConfiguration
+  BlackoutSlate:
+    type: object
+    properties:
+      BlackoutSlateImage:
+        $ref: '#/definitions/InputLocation'
+        description: Blackout slate image to be used. Leave empty for solid black. Only bmp and png images are supported.
+      NetworkEndBlackout:
+        $ref: '#/definitions/BlackoutSlateNetworkEndBlackout'
+        description: 'Setting to enabled causes the encoder to blackout the video, audio, and captions, and raise the "Network Blackout Image" slate when an SCTE104/35 Network End Segmentation Descriptor is encountered. The blackout will be lifted when the Network Start Segmentation Descriptor is encountered. The Network End and Network Start descriptors must contain a network ID that matches the value entered in "Network ID".'
+      NetworkEndBlackoutImage:
+        $ref: '#/definitions/InputLocation'
+        description: Path to local file to use as Network End Blackout image. Image will be scaled to fill the entire output raster.
+      NetworkId:
+        $ref: '#/definitions/__stringMin34Max34'
+        description: 'Provides Network ID that matches EIDR ID format (e.g., "10.XXXX/XXXX-XXXX-XXXX-XXXX-XXXX-C").'
+      State:
+        $ref: '#/definitions/BlackoutSlateState'
+        description: 'When set to enabled, causes video, audio and captions to be blanked when indicated by program metadata.'
+    description: Placeholder documentation for BlackoutSlate
+  __listOfCaptionDescription:
+    type: array
+    description: Placeholder documentation for __listOfCaptionDescription
+    items:
+      $ref: '#/definitions/CaptionDescription'
+  GlobalConfiguration:
+    type: object
+    properties:
+      InitialAudioGain:
+        $ref: '#/definitions/__integerMinNegative60Max60'
+        description: Value to set the initial audio gain for the Live Event.
+      InputEndAction:
+        $ref: '#/definitions/GlobalConfigurationInputEndAction'
+        description: 'Indicates the action to take when the current input completes (e.g. end-of-file). When switchAndLoopInputs is configured the encoder will restart at the beginning of the first input.  When "none" is configured the encoder will transcode either black, a solid color, or a user specified slate images per the "Input Loss Behavior" configuration until the next input switch occurs (which is controlled through the Channel Schedule API).'
+      InputLossBehavior:
+        $ref: '#/definitions/InputLossBehavior'
+        description: Settings for system actions when input is lost.
+      OutputTimingSource:
+        $ref: '#/definitions/GlobalConfigurationOutputTimingSource'
+        description: Indicates whether the rate of frames emitted by the Live encoder should be paced by its system clock (which optionally may be locked to another source via NTP) or should be locked to the clock of the source that is providing the input stream.
+      SupportLowFramerateInputs:
+        $ref: '#/definitions/GlobalConfigurationLowFramerateInputs'
+        description: Adjusts video input buffer for streams with very low video framerates. This is commonly set to enabled for music channels with less than one video frame per second.
+    description: Placeholder documentation for GlobalConfiguration
+  __listOfOutputGroup:
+    type: array
+    description: Placeholder documentation for __listOfOutputGroup
+    items:
+      $ref: '#/definitions/OutputGroup'
+  TimecodeConfig:
+    type: object
+    required:
+      - Source
+    properties:
+      Source:
+        $ref: '#/definitions/TimecodeConfigSource'
+        description: |-
+          Identifies the source for the timecode that will be associated with the events outputs.
+          -Embedded (embedded): Initialize the output timecode with timecode from the the source.  If no embedded timecode is detected in the source, the system falls back to using "Start at 0" (zerobased).
+          -System Clock (systemclock): Use the UTC time.
+          -Start at 0 (zerobased): The time of the first frame of the event will be 00:00:00:00.
+      SyncThreshold:
+        $ref: '#/definitions/__integerMin1Max1000000'
+        description: Threshold in frames beyond which output timecode is resynchronized to the input timecode. Discrepancies below this threshold are permitted to avoid unnecessary discontinuities in the output timecode. No timecode sync when this is not specified.
+    description: Placeholder documentation for TimecodeConfig
+  __listOfVideoDescription:
+    type: array
+    description: Placeholder documentation for __listOfVideoDescription
+    items:
+      $ref: '#/definitions/VideoDescription'
+  InputAttachment:
+    type: object
+    properties:
+      InputAttachmentName:
         $ref: '#/definitions/__string'
-        description: |
-          Unique request ID to be specified. This is needed to prevent retries from
-          creating multiple resources.
-      Reserved:
+        description: User-specified name for the attachment. This is required if the user wants to use this input in an input switch action.
+      InputId:
         $ref: '#/definitions/__string'
-        description: Deprecated field that's only usable by whitelisted customers.
-      RoleArn:
-        $ref: '#/definitions/__string'
-        description: An optional Amazon Resource Name (ARN) of the role to assume when running the Channel.
-      Tags:
-        $ref: '#/definitions/Tags'
-        description: A collection of key-value pairs.
-    description: A request to create a channel
+        description: The ID of the input
+      InputSettings:
+        $ref: '#/definitions/InputSettings'
+        description: 'Settings of an input (caption selector, etc.)'
+    description: Placeholder documentation for InputAttachment
+  InputCodec:
+    type: string
+    enum:
+      - MPEG2
+      - AVC
+      - HEVC
+    description: codec in increasing order of complexity
+  InputMaximumBitrate:
+    type: string
+    enum:
+      - MAX_10_MBPS
+      - MAX_20_MBPS
+      - MAX_50_MBPS
+    description: Maximum input bitrate in megabits per second. Bitrates up to 50 Mbps are supported currently.
+  InputResolution:
+    type: string
+    enum:
+      - SD
+      - HD
+      - UHD
+    description: |
+      Input resolution based on lines of vertical resolution in the input; SD is less than 720 lines, HD is 720 to 1080 lines, UHD is greater than 1080 lines
+  __string:
+    type: string
+    description: Placeholder documentation for __string
   ConflictException: {}
   CreateInputResponse:
     type: object
@@ -1620,68 +2122,50 @@ definitions:
       Input:
         $ref: '#/definitions/Input'
     description: Placeholder documentation for CreateInputResponse
-  CreateInputRequest:
+  InputDestinationRequest:
     type: object
     properties:
-      Destinations:
-        $ref: '#/definitions/__listOfInputDestinationRequest'
-        description: Destination settings for PUSH type inputs.
-      InputSecurityGroups:
-        $ref: '#/definitions/__listOf__string'
-        description: A list of security groups referenced by IDs to attach to the input.
-      MediaConnectFlows:
-        $ref: '#/definitions/__listOfMediaConnectFlowRequest'
-        description: |
-          A list of the MediaConnect Flows that you want to use in this input. You can specify as few as one
-          Flow and presently, as many as two. The only requirement is when you have more than one is that each Flow is in a
-          separate Availability Zone as this ensures your EML input is redundant to AZ issues.
-      Name:
-        $ref: '#/definitions/__string'
-        description: Name of the input.
-      RequestId:
+      StreamName:
         $ref: '#/definitions/__string'
         description: |
-          Unique identifier of the request to ensure the request is handled
-          exactly once in case of retries.
-      RoleArn:
+          A unique name for the location the RTMP stream is being pushed
+          to.
+    description: Endpoint settings for a PUSH type input.
+  MediaConnectFlowRequest:
+    type: object
+    properties:
+      FlowArn:
         $ref: '#/definitions/__string'
-        description: The Amazon Resource Name (ARN) of the role this input assumes during and after creation.
-      Sources:
-        $ref: '#/definitions/__listOfInputSourceRequest'
+        description: The ARN of the MediaConnect Flow that you want to use as a source.
+    description: The settings for a MediaConnect Flow.
+  InputSourceRequest:
+    type: object
+    properties:
+      PasswordParam:
+        $ref: '#/definitions/__string'
+        description: The key used to extract the password from EC2 Parameter store.
+      Url:
+        $ref: '#/definitions/__string'
         description: |
-          The source URLs for a PULL-type input. Every PULL type input needs
-          exactly two source URLs for redundancy.
-          Only specify sources for PULL type Inputs. Leave Destinations empty.
-      Tags:
-        $ref: '#/definitions/Tags'
-        description: A collection of key-value pairs.
-      Type:
-        $ref: '#/definitions/InputType'
-      Vpc:
-        $ref: '#/definitions/InputVpcRequest'
-    description: The name of the input
+          This represents the customer's source URL where stream is
+          pulled from.
+      Username:
+        $ref: '#/definitions/__string'
+        description: The username for the input source.
+    description: Settings for for a PULL type input.
   CreateInputSecurityGroupResponse:
     type: object
     properties:
       SecurityGroup:
         $ref: '#/definitions/InputSecurityGroup'
     description: Placeholder documentation for CreateInputSecurityGroupResponse
-  CreateInputSecurityGroupRequest:
+  InputWhitelistRuleCidr:
     type: object
     properties:
-      Tags:
-        $ref: '#/definitions/Tags'
-        description: A collection of key-value pairs.
-      WhitelistRules:
-        $ref: '#/definitions/__listOfInputWhitelistRuleCidr'
-        description: List of IPv4 CIDR addresses to whitelist
-    description: The IPv4 CIDRs to whitelist for this Input Security Group
-  CreateTagsRequest:
-    type: object
-    properties:
-      Tags:
-        $ref: '#/definitions/Tags'
-    description: Placeholder documentation for CreateTagsRequest
+      Cidr:
+        $ref: '#/definitions/__string'
+        description: The IPv4 CIDR to whitelist.
+    description: An IPv4 CIDR to whitelist.
   DeleteChannelResponse:
     type: object
     properties:
@@ -1725,26 +2209,14 @@ definitions:
         $ref: '#/definitions/Tags'
         description: A collection of key-value pairs.
     description: Placeholder documentation for DeleteChannelResponse
-  DeleteChannelRequest:
-    type: object
-    properties: {}
-    description: Placeholder documentation for DeleteChannelRequest
   DeleteInputResponse:
     type: object
     properties: {}
     description: Placeholder documentation for DeleteInputResponse
-  DeleteInputRequest:
-    type: object
-    properties: {}
-    description: Placeholder documentation for DeleteInputRequest
   DeleteInputSecurityGroupResponse:
     type: object
     properties: {}
     description: Placeholder documentation for DeleteInputSecurityGroupResponse
-  DeleteInputSecurityGroupRequest:
-    type: object
-    properties: {}
-    description: Placeholder documentation for DeleteInputSecurityGroupRequest
   DeleteReservationResponse:
     type: object
     properties:
@@ -1800,14 +2272,6 @@ definitions:
         $ref: '#/definitions/__double'
         description: 'Recurring usage charge for each reserved resource, e.g. ''157.0'''
     description: Placeholder documentation for DeleteReservationResponse
-  DeleteReservationRequest:
-    type: object
-    properties: {}
-    description: Placeholder documentation for DeleteReservationRequest
-  DeleteTagsRequest:
-    type: object
-    properties: {}
-    description: Placeholder documentation for DeleteTagsRequest
   DescribeChannelResponse:
     type: object
     properties:
@@ -1851,10 +2315,6 @@ definitions:
         $ref: '#/definitions/Tags'
         description: A collection of key-value pairs.
     description: Placeholder documentation for DescribeChannelResponse
-  DescribeChannelRequest:
-    type: object
-    properties: {}
-    description: Placeholder documentation for DescribeChannelRequest
   DescribeInputResponse:
     type: object
     properties:
@@ -1893,10 +2353,6 @@ definitions:
       Type:
         $ref: '#/definitions/InputType'
     description: Placeholder documentation for DescribeInputResponse
-  DescribeInputRequest:
-    type: object
-    properties: {}
-    description: Placeholder documentation for DescribeInputRequest
   DescribeInputSecurityGroupResponse:
     type: object
     properties:
@@ -1919,10 +2375,6 @@ definitions:
         $ref: '#/definitions/__listOfInputWhitelistRule'
         description: Whitelist rules and their sync status
     description: Placeholder documentation for DescribeInputSecurityGroupResponse
-  DescribeInputSecurityGroupRequest:
-    type: object
-    properties: {}
-    description: Placeholder documentation for DescribeInputSecurityGroupRequest
   DescribeOfferingResponse:
     type: object
     properties:
@@ -1960,10 +2412,6 @@ definitions:
         $ref: '#/definitions/__double'
         description: 'Recurring usage charge for each reserved resource, e.g. ''157.0'''
     description: Placeholder documentation for DescribeOfferingResponse
-  DescribeOfferingRequest:
-    type: object
-    properties: {}
-    description: Placeholder documentation for DescribeOfferingRequest
   DescribeReservationResponse:
     type: object
     properties:
@@ -2019,10 +2467,6 @@ definitions:
         $ref: '#/definitions/__double'
         description: 'Recurring usage charge for each reserved resource, e.g. ''157.0'''
     description: Placeholder documentation for DescribeReservationResponse
-  DescribeReservationRequest:
-    type: object
-    properties: {}
-    description: Placeholder documentation for DescribeReservationRequest
   DescribeScheduleResponse:
     type: object
     properties:
@@ -2033,10 +2477,6 @@ definitions:
         $ref: '#/definitions/__listOfScheduleAction'
         description: The list of actions in the schedule.
     description: Placeholder documentation for DescribeScheduleResponse
-  DescribeScheduleRequest:
-    type: object
-    properties: {}
-    description: Placeholder documentation for DescribeScheduleRequest
   ListChannelsResponse:
     type: object
     properties:
@@ -2045,10 +2485,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/__string'
     description: Placeholder documentation for ListChannelsResponse
-  ListChannelsRequest:
-    type: object
-    properties: {}
-    description: Placeholder documentation for ListChannelsRequest
   ListInputSecurityGroupsResponse:
     type: object
     properties:
@@ -2058,10 +2494,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/__string'
     description: Placeholder documentation for ListInputSecurityGroupsResponse
-  ListInputSecurityGroupsRequest:
-    type: object
-    properties: {}
-    description: Placeholder documentation for ListInputSecurityGroupsRequest
   ListInputsResponse:
     type: object
     properties:
@@ -2070,10 +2502,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/__string'
     description: Placeholder documentation for ListInputsResponse
-  ListInputsRequest:
-    type: object
-    properties: {}
-    description: Placeholder documentation for ListInputsRequest
   ListOfferingsResponse:
     type: object
     properties:
@@ -2084,10 +2512,6 @@ definitions:
         $ref: '#/definitions/__listOfOffering'
         description: List of offerings
     description: Placeholder documentation for ListOfferingsResponse
-  ListOfferingsRequest:
-    type: object
-    properties: {}
-    description: Placeholder documentation for ListOfferingsRequest
   ListReservationsResponse:
     type: object
     properties:
@@ -2098,44 +2522,18 @@ definitions:
         $ref: '#/definitions/__listOfReservation'
         description: List of reservations
     description: Placeholder documentation for ListReservationsResponse
-  ListReservationsRequest:
-    type: object
-    properties: {}
-    description: Placeholder documentation for ListReservationsRequest
   ListTagsForResourceResponse:
     type: object
     properties:
       Tags:
         $ref: '#/definitions/Tags'
     description: Placeholder documentation for ListTagsForResourceResponse
-  ListTagsForResourceRequest:
-    type: object
-    properties: {}
-    description: Placeholder documentation for ListTagsForResourceRequest
   PurchaseOfferingResponse:
     type: object
     properties:
       Reservation:
         $ref: '#/definitions/Reservation'
     description: Placeholder documentation for PurchaseOfferingResponse
-  PurchaseOfferingRequest:
-    type: object
-    required:
-      - Count
-    properties:
-      Count:
-        $ref: '#/definitions/__integerMin1'
-        description: Number of resources
-      Name:
-        $ref: '#/definitions/__string'
-        description: Name for the new reservation
-      RequestId:
-        $ref: '#/definitions/__string'
-        description: Unique request ID to be specified. This is needed to prevent retries from creating multiple resources.
-      Start:
-        $ref: '#/definitions/__string'
-        description: 'Requested reservation start time (UTC) in ISO-8601 format. The specified time must be between the first day of the current month and one year from now. If no value is given, the default is now.'
-    description: Placeholder documentation for PurchaseOfferingRequest
   StartChannelResponse:
     type: object
     properties:
@@ -2179,10 +2577,6 @@ definitions:
         $ref: '#/definitions/Tags'
         description: A collection of key-value pairs.
     description: Placeholder documentation for StartChannelResponse
-  StartChannelRequest:
-    type: object
-    properties: {}
-    description: Placeholder documentation for StartChannelRequest
   StopChannelResponse:
     type: object
     properties:
@@ -2226,90 +2620,24 @@ definitions:
         $ref: '#/definitions/Tags'
         description: A collection of key-value pairs.
     description: Placeholder documentation for StopChannelResponse
-  StopChannelRequest:
-    type: object
-    properties: {}
-    description: Placeholder documentation for StopChannelRequest
   UpdateChannelResponse:
     type: object
     properties:
       Channel:
         $ref: '#/definitions/Channel'
     description: Placeholder documentation for UpdateChannelResponse
-  UpdateChannelRequest:
-    type: object
-    properties:
-      Destinations:
-        $ref: '#/definitions/__listOfOutputDestination'
-        description: A list of output destinations for this channel.
-      EncoderSettings:
-        $ref: '#/definitions/EncoderSettings'
-        description: The encoder settings for this channel.
-      InputAttachments:
-        $ref: '#/definitions/__listOfInputAttachment'
-      InputSpecification:
-        $ref: '#/definitions/InputSpecification'
-        description: 'Specification of input for this channel (max. bitrate, resolution, codec, etc.)'
-      LogLevel:
-        $ref: '#/definitions/LogLevel'
-        description: The log level to write to CloudWatch Logs.
-      Name:
-        $ref: '#/definitions/__string'
-        description: The name of the channel.
-      RoleArn:
-        $ref: '#/definitions/__string'
-        description: An optional Amazon Resource Name (ARN) of the role to assume when running the Channel. If you do not specify this on an update call but the role was previously set that role will be removed.
-    description: A request to update a channel.
   UpdateInputResponse:
     type: object
     properties:
       Input:
         $ref: '#/definitions/Input'
     description: Placeholder documentation for UpdateInputResponse
-  UpdateInputRequest:
-    type: object
-    properties:
-      Destinations:
-        $ref: '#/definitions/__listOfInputDestinationRequest'
-        description: Destination settings for PUSH type inputs.
-      InputSecurityGroups:
-        $ref: '#/definitions/__listOf__string'
-        description: A list of security groups referenced by IDs to attach to the input.
-      MediaConnectFlows:
-        $ref: '#/definitions/__listOfMediaConnectFlowRequest'
-        description: |
-          A list of the MediaConnect Flow ARNs that you want to use as the source of the input. You can specify as few as one
-          Flow and presently, as many as two. The only requirement is when you have more than one is that each Flow is in a
-          separate Availability Zone as this ensures your EML input is redundant to AZ issues.
-      Name:
-        $ref: '#/definitions/__string'
-        description: Name of the input.
-      RoleArn:
-        $ref: '#/definitions/__string'
-        description: The Amazon Resource Name (ARN) of the role this input assumes during and after creation.
-      Sources:
-        $ref: '#/definitions/__listOfInputSourceRequest'
-        description: |
-          The source URLs for a PULL-type input. Every PULL type input needs
-          exactly two source URLs for redundancy.
-          Only specify sources for PULL type Inputs. Leave Destinations empty.
-    description: A request to update an input.
   UpdateInputSecurityGroupResponse:
     type: object
     properties:
       SecurityGroup:
         $ref: '#/definitions/InputSecurityGroup'
     description: Placeholder documentation for UpdateInputSecurityGroupResponse
-  UpdateInputSecurityGroupRequest:
-    type: object
-    properties:
-      Tags:
-        $ref: '#/definitions/Tags'
-        description: A collection of key-value pairs.
-      WhitelistRules:
-        $ref: '#/definitions/__listOfInputWhitelistRuleCidr'
-        description: List of IPv4 CIDR addresses to whitelist
-    description: The request to update some combination of the Input Security Group name and the IPv4 CIDRs the Input Security Group should allow.
   AacCodingMode:
     type: string
     enum:
@@ -2646,9 +2974,6 @@ definitions:
         $ref: '#/definitions/__integerMin1'
         description: Number of seconds to write to archive file before closing and starting a new one.
     description: Placeholder documentation for ArchiveGroupSettings
-  __string:
-    type: string
-    description: Placeholder documentation for __string
   ArchiveOutputSettings:
     type: object
     required:
@@ -3018,16 +3343,6 @@ definitions:
       - DISABLED
       - ENABLED
     description: Placeholder documentation for AvailBlankingState
-  AvailBlanking:
-    type: object
-    properties:
-      AvailBlankingImage:
-        $ref: '#/definitions/InputLocation'
-        description: Blanking image to be used. Leave empty for solid black. Only bmp and png images are supported.
-      State:
-        $ref: '#/definitions/AvailBlankingState'
-        description: 'When set to enabled, causes video, audio and captions to be blanked when insertion metadata is added.'
-    description: Placeholder documentation for AvailBlanking
   AvailSettings:
     type: object
     properties:
@@ -3036,13 +3351,6 @@ definitions:
       Scte35TimeSignalApos:
         $ref: '#/definitions/Scte35TimeSignalApos'
     description: Placeholder documentation for AvailSettings
-  AvailConfiguration:
-    type: object
-    properties:
-      AvailSettings:
-        $ref: '#/definitions/AvailSettings'
-        description: Ad avail settings.
-    description: Placeholder documentation for AvailConfiguration
   Scte35SpliceInsert:
     type: object
     properties:
@@ -3069,11 +3377,6 @@ definitions:
         $ref: '#/definitions/Scte35AposWebDeliveryAllowedBehavior'
         description: 'When set to ignore, Segment Descriptors with webDeliveryAllowedFlag set to 0 will no longer trigger blackouts or Ad Avail slates'
     description: Placeholder documentation for Scte35TimeSignalApos
-  __listOfScheduleAction:
-    type: array
-    description: Placeholder documentation for __listOfScheduleAction
-    items:
-      $ref: '#/definitions/ScheduleAction'
   BatchScheduleActionCreateRequest:
     type: object
     required:
@@ -3092,11 +3395,6 @@ definitions:
         $ref: '#/definitions/__listOfScheduleAction'
         description: List of actions that have been created in the schedule.
     description: List of actions that have been created in the schedule.
-  __listOf__string:
-    type: array
-    description: Placeholder documentation for __listOf__string
-    items:
-      $ref: '#/definitions/__string'
   BatchScheduleActionDeleteRequest:
     type: object
     required:
@@ -3115,6 +3413,16 @@ definitions:
         $ref: '#/definitions/__listOfScheduleAction'
         description: List of actions that have been deleted from the schedule.
     description: List of actions that have been deleted from the schedule.
+  BatchUpdateScheduleRequest:
+    type: object
+    properties:
+      Creates:
+        $ref: '#/definitions/BatchScheduleActionCreateRequest'
+        description: Schedule actions to create in the schedule.
+      Deletes:
+        $ref: '#/definitions/BatchScheduleActionDeleteRequest'
+        description: Schedule actions to delete from the schedule.
+    description: List of actions to create and list of actions to delete.
   BlackoutSlateNetworkEndBlackout:
     type: string
     enum:
@@ -3132,25 +3440,6 @@ definitions:
       - DISABLED
       - ENABLED
     description: Placeholder documentation for BlackoutSlateState
-  BlackoutSlate:
-    type: object
-    properties:
-      BlackoutSlateImage:
-        $ref: '#/definitions/InputLocation'
-        description: Blackout slate image to be used. Leave empty for solid black. Only bmp and png images are supported.
-      NetworkEndBlackout:
-        $ref: '#/definitions/BlackoutSlateNetworkEndBlackout'
-        description: 'Setting to enabled causes the encoder to blackout the video, audio, and captions, and raise the "Network Blackout Image" slate when an SCTE104/35 Network End Segmentation Descriptor is encountered. The blackout will be lifted when the Network Start Segmentation Descriptor is encountered. The Network End and Network Start descriptors must contain a network ID that matches the value entered in "Network ID".'
-      NetworkEndBlackoutImage:
-        $ref: '#/definitions/InputLocation'
-        description: Path to local file to use as Network End Blackout image. Image will be scaled to fill the entire output raster.
-      NetworkId:
-        $ref: '#/definitions/__stringMin34Max34'
-        description: 'Provides Network ID that matches EIDR ID format (e.g., "10.XXXX/XXXX-XXXX-XXXX-XXXX-XXXX-C").'
-      State:
-        $ref: '#/definitions/BlackoutSlateState'
-        description: 'When set to enabled, causes video, audio and captions to be blanked when indicated by program metadata.'
-    description: Placeholder documentation for BlackoutSlate
   BurnInAlignment:
     type: string
     enum:
@@ -3608,15 +3897,10 @@ definitions:
       - DELETED
     description: Placeholder documentation for ChannelState
   Tags:
-    type: array
+    type: object
     description: Placeholder documentation for Tags
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/__string'
+    additionalProperties:
+      $ref: '#/definitions/__string'
   Channel:
     type: object
     properties:
@@ -3708,6 +3992,40 @@ definitions:
         $ref: '#/definitions/Tags'
         description: A collection of key-value pairs.
     description: Placeholder documentation for ChannelSummary
+  CreateChannelRequest:
+    type: object
+    properties:
+      Destinations:
+        $ref: '#/definitions/__listOfOutputDestination'
+      EncoderSettings:
+        $ref: '#/definitions/EncoderSettings'
+      InputAttachments:
+        $ref: '#/definitions/__listOfInputAttachment'
+        description: List of input attachments for channel.
+      InputSpecification:
+        $ref: '#/definitions/InputSpecification'
+        description: 'Specification of input for this channel (max. bitrate, resolution, codec, etc.)'
+      LogLevel:
+        $ref: '#/definitions/LogLevel'
+        description: The log level to write to CloudWatch Logs.
+      Name:
+        $ref: '#/definitions/__string'
+        description: Name of channel.
+      RequestId:
+        $ref: '#/definitions/__string'
+        description: |
+          Unique request ID to be specified. This is needed to prevent retries from
+          creating multiple resources.
+      Reserved:
+        $ref: '#/definitions/__string'
+        description: Deprecated field that's only usable by whitelisted customers.
+      RoleArn:
+        $ref: '#/definitions/__string'
+        description: An optional Amazon Resource Name (ARN) of the role to assume when running the Channel.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: A collection of key-value pairs.
+    description: A request to create a channel
   __listOfInputDestinationRequest:
     type: array
     description: Placeholder documentation for __listOfInputDestinationRequest
@@ -3754,6 +4072,46 @@ definitions:
       When this property is specified, the input destination addresses will be created in a VPC rather than with public Internet addresses.
       This property requires setting the roleArn property on Input creation.
       Not compatible with the inputSecurityGroups property.
+  CreateInputRequest:
+    type: object
+    properties:
+      Destinations:
+        $ref: '#/definitions/__listOfInputDestinationRequest'
+        description: Destination settings for PUSH type inputs.
+      InputSecurityGroups:
+        $ref: '#/definitions/__listOf__string'
+        description: A list of security groups referenced by IDs to attach to the input.
+      MediaConnectFlows:
+        $ref: '#/definitions/__listOfMediaConnectFlowRequest'
+        description: |
+          A list of the MediaConnect Flows that you want to use in this input. You can specify as few as one
+          Flow and presently, as many as two. The only requirement is when you have more than one is that each Flow is in a
+          separate Availability Zone as this ensures your EML input is redundant to AZ issues.
+      Name:
+        $ref: '#/definitions/__string'
+        description: Name of the input.
+      RequestId:
+        $ref: '#/definitions/__string'
+        description: |
+          Unique identifier of the request to ensure the request is handled
+          exactly once in case of retries.
+      RoleArn:
+        $ref: '#/definitions/__string'
+        description: The Amazon Resource Name (ARN) of the role this input assumes during and after creation.
+      Sources:
+        $ref: '#/definitions/__listOfInputSourceRequest'
+        description: |
+          The source URLs for a PULL-type input. Every PULL type input needs
+          exactly two source URLs for redundancy.
+          Only specify sources for PULL type Inputs. Leave Destinations empty.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: A collection of key-value pairs.
+      Type:
+        $ref: '#/definitions/InputType'
+      Vpc:
+        $ref: '#/definitions/InputVpcRequest'
+    description: The name of the input
   Input:
     type: object
     properties:
@@ -3797,6 +4155,16 @@ definitions:
     description: Placeholder documentation for __listOfInputWhitelistRuleCidr
     items:
       $ref: '#/definitions/InputWhitelistRuleCidr'
+  CreateInputSecurityGroupRequest:
+    type: object
+    properties:
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: A collection of key-value pairs.
+      WhitelistRules:
+        $ref: '#/definitions/__listOfInputWhitelistRuleCidr'
+        description: List of IPv4 CIDR addresses to whitelist
+    description: The IPv4 CIDRs to whitelist for this Input Security Group
   InputSecurityGroup:
     type: object
     properties:
@@ -3819,6 +4187,28 @@ definitions:
         $ref: '#/definitions/__listOfInputWhitelistRule'
         description: Whitelist rules and their sync status
     description: An Input Security Group
+  CreateTagsRequest:
+    type: object
+    properties:
+      Tags:
+        $ref: '#/definitions/Tags'
+    description: Placeholder documentation for CreateTagsRequest
+  DeleteChannelRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for DeleteChannelRequest
+  DeleteInputRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for DeleteInputRequest
+  DeleteInputSecurityGroupRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for DeleteInputSecurityGroupRequest
+  DeleteReservationRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for DeleteReservationRequest
   OfferingDurationUnits:
     type: string
     enum:
@@ -3862,6 +4252,18 @@ definitions:
       - CANCELED
       - DELETED
     description: Current reservation state
+  DeleteTagsRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for DeleteTagsRequest
+  DescribeChannelRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for DescribeChannelRequest
+  DescribeInputRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for DescribeInputRequest
   __listOfInputDestination:
     type: array
     description: Placeholder documentation for __listOfInputDestination
@@ -3886,6 +4288,10 @@ definitions:
       - DELETING
       - DELETED
     description: Placeholder documentation for InputState
+  DescribeInputSecurityGroupRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for DescribeInputSecurityGroupRequest
   InputSecurityGroupState:
     type: string
     enum:
@@ -3899,11 +4305,23 @@ definitions:
     description: Placeholder documentation for __listOfInputWhitelistRule
     items:
       $ref: '#/definitions/InputWhitelistRule'
+  DescribeOfferingRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for DescribeOfferingRequest
+  DescribeReservationRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for DescribeReservationRequest
   MaxResults:
     type: integer
     description: Placeholder documentation for MaxResults
     minimum: 1
     maximum: 1000
+  DescribeScheduleRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for DescribeScheduleRequest
   __integerMin0Max65536:
     type: integer
     description: Placeholder documentation for __integerMin0Max65536
@@ -4140,61 +4558,6 @@ definitions:
     description: Placeholder documentation for __integerMin1Max5
     minimum: 1
     maximum: 5
-  __listOfAudioDescription:
-    type: array
-    description: Placeholder documentation for __listOfAudioDescription
-    items:
-      $ref: '#/definitions/AudioDescription'
-  __listOfCaptionDescription:
-    type: array
-    description: Placeholder documentation for __listOfCaptionDescription
-    items:
-      $ref: '#/definitions/CaptionDescription'
-  GlobalConfiguration:
-    type: object
-    properties:
-      InitialAudioGain:
-        $ref: '#/definitions/__integerMinNegative60Max60'
-        description: Value to set the initial audio gain for the Live Event.
-      InputEndAction:
-        $ref: '#/definitions/GlobalConfigurationInputEndAction'
-        description: 'Indicates the action to take when the current input completes (e.g. end-of-file). When switchAndLoopInputs is configured the encoder will restart at the beginning of the first input.  When "none" is configured the encoder will transcode either black, a solid color, or a user specified slate images per the "Input Loss Behavior" configuration until the next input switch occurs (which is controlled through the Channel Schedule API).'
-      InputLossBehavior:
-        $ref: '#/definitions/InputLossBehavior'
-        description: Settings for system actions when input is lost.
-      OutputTimingSource:
-        $ref: '#/definitions/GlobalConfigurationOutputTimingSource'
-        description: Indicates whether the rate of frames emitted by the Live encoder should be paced by its system clock (which optionally may be locked to another source via NTP) or should be locked to the clock of the source that is providing the input stream.
-      SupportLowFramerateInputs:
-        $ref: '#/definitions/GlobalConfigurationLowFramerateInputs'
-        description: Adjusts video input buffer for streams with very low video framerates. This is commonly set to enabled for music channels with less than one video frame per second.
-    description: Placeholder documentation for GlobalConfiguration
-  __listOfOutputGroup:
-    type: array
-    description: Placeholder documentation for __listOfOutputGroup
-    items:
-      $ref: '#/definitions/OutputGroup'
-  TimecodeConfig:
-    type: object
-    required:
-      - Source
-    properties:
-      Source:
-        $ref: '#/definitions/TimecodeConfigSource'
-        description: |-
-          Identifies the source for the timecode that will be associated with the events outputs.
-          -Embedded (embedded): Initialize the output timecode with timecode from the the source.  If no embedded timecode is detected in the source, the system falls back to using "Start at 0" (zerobased).
-          -System Clock (systemclock): Use the UTC time.
-          -Start at 0 (zerobased): The time of the first frame of the event will be 00:00:00:00.
-      SyncThreshold:
-        $ref: '#/definitions/__integerMin1Max1000000'
-        description: Threshold in frames beyond which output timecode is resynchronized to the input timecode. Discrepancies below this threshold are permitted to avoid unnecessary discontinuities in the output timecode. No timecode sync when this is not specified.
-    description: Placeholder documentation for TimecodeConfig
-  __listOfVideoDescription:
-    type: array
-    description: Placeholder documentation for __listOfVideoDescription
-    items:
-      $ref: '#/definitions/VideoDescription'
   FecOutputIncludeFec:
     type: string
     enum:
@@ -5159,19 +5522,6 @@ definitions:
         $ref: '#/definitions/VideoSelector'
         description: Informs which video elementary stream to decode for input types that have multiple available.
     description: Live Event input parameters. There can be multiple inputs in a single Live Event.
-  InputAttachment:
-    type: object
-    properties:
-      InputAttachmentName:
-        $ref: '#/definitions/__string'
-        description: User-specified name for the attachment. This is required if the user wants to use this input in an input switch action.
-      InputId:
-        $ref: '#/definitions/__string'
-        description: The ID of the input
-      InputSettings:
-        $ref: '#/definitions/InputSettings'
-        description: 'Settings of an input (caption selector, etc.)'
-    description: Placeholder documentation for InputAttachment
   __integerMinNegative60Max6:
     type: integer
     description: Placeholder documentation for __integerMinNegative60Max6
@@ -5190,13 +5540,6 @@ definitions:
         $ref: '#/definitions/__integerMin0Max15'
         description: The index of the input channel used as a source.
     description: Placeholder documentation for InputChannelLevel
-  InputCodec:
-    type: string
-    enum:
-      - MPEG2
-      - AVC
-      - HEVC
-    description: codec in increasing order of complexity
   InputDeblockFilter:
     type: string
     enum:
@@ -5240,15 +5583,6 @@ definitions:
       Vpc:
         $ref: '#/definitions/InputDestinationVpc'
     description: The settings for a PUSH type input.
-  InputDestinationRequest:
-    type: object
-    properties:
-      StreamName:
-        $ref: '#/definitions/__string'
-        description: |
-          A unique name for the location the RTMP stream is being pushed
-          to.
-    description: Endpoint settings for a PUSH type input.
   InputFilter:
     type: string
     enum:
@@ -5291,21 +5625,6 @@ definitions:
       - COLOR
       - SLATE
     description: Placeholder documentation for InputLossImageType
-  InputMaximumBitrate:
-    type: string
-    enum:
-      - MAX_10_MBPS
-      - MAX_20_MBPS
-      - MAX_50_MBPS
-    description: Maximum input bitrate in megabits per second. Bitrates up to 50 Mbps are supported currently.
-  InputResolution:
-    type: string
-    enum:
-      - SD
-      - HD
-      - UHD
-    description: |
-      Input resolution based on lines of vertical resolution in the input; SD is less than 720 lines, HD is 720 to 1080 lines, UHD is greater than 1080 lines
   __listOfAudioSelector:
     type: array
     description: Placeholder documentation for __listOfAudioSelector
@@ -5360,21 +5679,6 @@ definitions:
         $ref: '#/definitions/__string'
         description: The username for the input source.
     description: The settings for a PULL type input.
-  InputSourceRequest:
-    type: object
-    properties:
-      PasswordParam:
-        $ref: '#/definitions/__string'
-        description: The key used to extract the password from EC2 Parameter store.
-      Url:
-        $ref: '#/definitions/__string'
-        description: |
-          This represents the customer's source URL where stream is
-          pulled from.
-      Username:
-        $ref: '#/definitions/__string'
-        description: The username for the input source.
-    description: Settings for for a PULL type input.
   InputSwitchScheduleActionSettings:
     type: object
     required:
@@ -5391,13 +5695,6 @@ definitions:
         $ref: '#/definitions/__string'
         description: The IPv4 CIDR that's whitelisted.
     description: Whitelist rule
-  InputWhitelistRuleCidr:
-    type: object
-    properties:
-      Cidr:
-        $ref: '#/definitions/__string'
-        description: The IPv4 CIDR to whitelist.
-    description: An IPv4 CIDR to whitelist.
   StaticKeySettings:
     type: object
     required:
@@ -5410,31 +5707,55 @@ definitions:
         $ref: '#/definitions/__stringMin32Max32'
         description: Static key value as a 32 character hexadecimal string.
     description: Placeholder documentation for StaticKeySettings
+  ListChannelsRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for ListChannelsRequest
   __listOfChannelSummary:
     type: array
     description: Placeholder documentation for __listOfChannelSummary
     items:
       $ref: '#/definitions/ChannelSummary'
+  ListInputSecurityGroupsRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for ListInputSecurityGroupsRequest
   __listOfInputSecurityGroup:
     type: array
     description: Placeholder documentation for __listOfInputSecurityGroup
     items:
       $ref: '#/definitions/InputSecurityGroup'
+  ListInputsRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for ListInputsRequest
   __listOfInput:
     type: array
     description: Placeholder documentation for __listOfInput
     items:
       $ref: '#/definitions/Input'
+  ListOfferingsRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for ListOfferingsRequest
   __listOfOffering:
     type: array
     description: Placeholder documentation for __listOfOffering
     items:
       $ref: '#/definitions/Offering'
+  ListReservationsRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for ListReservationsRequest
   __listOfReservation:
     type: array
     description: Placeholder documentation for __listOfReservation
     items:
       $ref: '#/definitions/Reservation'
+  ListTagsForResourceRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for ListTagsForResourceRequest
   M2tsAbsentInputAudioBehavior:
     type: string
     enum:
@@ -5647,13 +5968,6 @@ definitions:
       FlowArn:
         $ref: '#/definitions/__string'
         description: The unique ARN of the MediaConnect Flow being used as a source.
-    description: The settings for a MediaConnect Flow.
-  MediaConnectFlowRequest:
-    type: object
-    properties:
-      FlowArn:
-        $ref: '#/definitions/__string'
-        description: The ARN of the MediaConnect Flow that you want to use as a source.
     description: The settings for a MediaConnect Flow.
   MediaPackageGroupSettings:
     type: object
@@ -5909,19 +6223,6 @@ definitions:
     description: Placeholder documentation for __listOfOutputDestinationSettings
     items:
       $ref: '#/definitions/OutputDestinationSettings'
-  OutputDestination:
-    type: object
-    properties:
-      Id:
-        $ref: '#/definitions/__string'
-        description: User-specified id. This is used in an output group or an output.
-      MediaPackageSettings:
-        $ref: '#/definitions/__listOfMediaPackageOutputDestinationSettings'
-        description: Destination settings for a MediaPackage output; one destination for both encoders.
-      Settings:
-        $ref: '#/definitions/__listOfOutputDestinationSettings'
-        description: Destination settings for a standard output; one destination for each redundant encoder.
-    description: Placeholder documentation for OutputDestination
   OutputDestinationSettings:
     type: object
     properties:
@@ -6081,6 +6382,24 @@ definitions:
         $ref: '#/definitions/PipelineId'
         description: Pipeline ID to pause ("PIPELINE_0" or "PIPELINE_1").
     description: Settings for pausing a pipeline.
+  PurchaseOfferingRequest:
+    type: object
+    required:
+      - Count
+    properties:
+      Count:
+        $ref: '#/definitions/__integerMin1'
+        description: Number of resources
+      Name:
+        $ref: '#/definitions/__string'
+        description: Name for the new reservation
+      RequestId:
+        $ref: '#/definitions/__string'
+        description: Unique request ID to be specified. This is needed to prevent retries from creating multiple resources.
+      Start:
+        $ref: '#/definitions/__string'
+        description: 'Requested reservation start time (UTC) in ISO-8601 format. The specified time must be between the first day of the current month and one year from now. If no value is given, the default is now.'
+    description: Placeholder documentation for PurchaseOfferingRequest
   Reservation:
     type: object
     properties:
@@ -6520,6 +6839,14 @@ definitions:
     description: Placeholder documentation for __listOfScte35Descriptor
     items:
       $ref: '#/definitions/Scte35Descriptor'
+  StartChannelRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for StartChannelRequest
+  StopChannelRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for StopChannelRequest
   TimecodeConfigSource:
     type: string
     enum:
@@ -6551,6 +6878,68 @@ definitions:
       - PRIV
       - TDRL
     description: Placeholder documentation for UdpTimedMetadataId3Frame
+  UpdateChannelRequest:
+    type: object
+    properties:
+      Destinations:
+        $ref: '#/definitions/__listOfOutputDestination'
+        description: A list of output destinations for this channel.
+      EncoderSettings:
+        $ref: '#/definitions/EncoderSettings'
+        description: The encoder settings for this channel.
+      InputAttachments:
+        $ref: '#/definitions/__listOfInputAttachment'
+      InputSpecification:
+        $ref: '#/definitions/InputSpecification'
+        description: 'Specification of input for this channel (max. bitrate, resolution, codec, etc.)'
+      LogLevel:
+        $ref: '#/definitions/LogLevel'
+        description: The log level to write to CloudWatch Logs.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the channel.
+      RoleArn:
+        $ref: '#/definitions/__string'
+        description: An optional Amazon Resource Name (ARN) of the role to assume when running the Channel. If you do not specify this on an update call but the role was previously set that role will be removed.
+    description: A request to update a channel.
+  UpdateInputRequest:
+    type: object
+    properties:
+      Destinations:
+        $ref: '#/definitions/__listOfInputDestinationRequest'
+        description: Destination settings for PUSH type inputs.
+      InputSecurityGroups:
+        $ref: '#/definitions/__listOf__string'
+        description: A list of security groups referenced by IDs to attach to the input.
+      MediaConnectFlows:
+        $ref: '#/definitions/__listOfMediaConnectFlowRequest'
+        description: |
+          A list of the MediaConnect Flow ARNs that you want to use as the source of the input. You can specify as few as one
+          Flow and presently, as many as two. The only requirement is when you have more than one is that each Flow is in a
+          separate Availability Zone as this ensures your EML input is redundant to AZ issues.
+      Name:
+        $ref: '#/definitions/__string'
+        description: Name of the input.
+      RoleArn:
+        $ref: '#/definitions/__string'
+        description: The Amazon Resource Name (ARN) of the role this input assumes during and after creation.
+      Sources:
+        $ref: '#/definitions/__listOfInputSourceRequest'
+        description: |
+          The source URLs for a PULL-type input. Every PULL type input needs
+          exactly two source URLs for redundancy.
+          Only specify sources for PULL type Inputs. Leave Destinations empty.
+    description: A request to update an input.
+  UpdateInputSecurityGroupRequest:
+    type: object
+    properties:
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: A collection of key-value pairs.
+      WhitelistRules:
+        $ref: '#/definitions/__listOfInputWhitelistRuleCidr'
+        description: List of IPv4 CIDR addresses to whitelist
+    description: The request to update some combination of the Input Security Group name and the IPv4 CIDRs the Input Security Group should allow.
   VideoCodecSettings:
     type: object
     properties:

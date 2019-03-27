@@ -123,7 +123,33 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/AddEventSourceRequest'
+            type: object
+            required:
+              - EventSource
+              - FunctionName
+              - Role
+            properties:
+              EventSource:
+                description: 'The Amazon Resource Name (ARN) of the Amazon Kinesis stream that is the event source. Any record added to this stream causes AWS Lambda to invoke your Lambda function. AWS Lambda POSTs the Amazon Kinesis event, containing records, to your Lambda function as JSON.'
+                type: string
+              FunctionName:
+                description: The Lambda function to invoke when AWS Lambda detects an event on the stream.
+                type: string
+                pattern: '[a-zA-Z0-9-_]+'
+                minLength: 1
+                maxLength: 64
+              Role:
+                description: The ARN of the IAM role (invocation role) that AWS Lambda can assume to read from the stream and invoke the function.
+                type: string
+                pattern: 'arn:aws:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+'
+              BatchSize:
+                description: The largest number of records that AWS Lambda will give to your function in a single event. The default is 100 records.
+                type: integer
+              Parameters:
+                description: 'A map (key-value pairs) defining the configuration for AWS Lambda to use when reading the event source. Currently, AWS Lambda supports only the <code>InitialPositionInStream</code> key. The valid values are: "TRIM_HORIZON" and "LATEST". The default value is "TRIM_HORIZON". For more information, go to <a href="http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetShardIterator.html#Kinesis-GetShardIterator-request-ShardIteratorType">ShardIteratorType</a> in the Amazon Kinesis Service API Reference. '
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/String'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -158,21 +184,31 @@ paths:
           schema:
             $ref: '#/definitions/ServiceException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListEventSourcesRequest'
-        - name: MaxItems
-          type: string
+        - name: EventSource
           in: query
-          description: Pagination limit
           required: false
+          description: The Amazon Resource Name (ARN) of the Amazon Kinesis stream.
+          type: string
+        - name: FunctionName
+          in: query
+          required: false
+          description: The name of the AWS Lambda function.
+          type: string
+          pattern: '[a-zA-Z0-9-_]+'
+          minLength: 1
+          maxLength: 64
         - name: Marker
-          type: string
           in: query
-          description: Pagination token
           required: false
+          description: 'Optional string. An opaque pagination token returned from a previous <code>ListEventSources</code> operation. If present, specifies to continue the list from where the returning call left off. '
+          type: string
+        - name: MaxItems
+          in: query
+          required: false
+          description: Optional integer. Specifies the maximum number of event sources to return in response. This value must be greater than 0.
+          type: integer
+          minimum: 1
+          maximum: 10000
   '/2014-11-13/functions/{FunctionName}':
     delete:
       operationId: DeleteFunction
@@ -191,15 +227,14 @@ paths:
           schema:
             $ref: '#/definitions/ServiceException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteFunctionRequest'
         - name: FunctionName
-          type: string
           in: path
           required: true
+          description: The Lambda function to delete.
+          type: string
+          pattern: '[a-zA-Z0-9-_]+'
+          minLength: 1
+          maxLength: 64
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -229,48 +264,14 @@ paths:
           schema:
             $ref: '#/definitions/ServiceException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetFunctionRequest'
         - name: FunctionName
-          type: string
           in: path
           required: true
-    put:
-      operationId: UploadFunction
-      description: '<p>Creates a new Lambda function or updates an existing function. The function metadata is created from the request parameters, and the code for the function is provided by a .zip file in the request body. If the function name already exists, the existing Lambda function is updated with the new code and metadata. </p> <p>This operation requires permission for the <code>lambda:UploadFunction</code> action.</p>'
-      responses:
-        '201':
-          description: Success
-          schema:
-            $ref: '#/definitions/FunctionConfiguration'
-        '400':
-          description: InvalidParameterValueException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/InvalidParameterValueException'
-        '404':
-          description: ResourceNotFoundException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
-        '500':
-          description: ServiceException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/ServiceException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/UploadFunctionRequest'
-        - name: FunctionName
+          description: The Lambda function name.
           type: string
-          in: path
-          required: true
+          pattern: '[a-zA-Z0-9-_]+'
+          minLength: 1
+          maxLength: 64
   '/2014-11-13/event-source-mappings/{UUID}':
     get:
       operationId: GetEventSource
@@ -296,15 +297,11 @@ paths:
           schema:
             $ref: '#/definitions/ServiceException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetEventSourceRequest'
         - name: UUID
-          type: string
           in: path
           required: true
+          description: The AWS Lambda assigned ID of the event source mapping.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -337,15 +334,11 @@ paths:
           schema:
             $ref: '#/definitions/ServiceException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/RemoveEventSourceRequest'
         - name: UUID
-          type: string
           in: path
           required: true
+          description: The event source mapping ID.
+          type: string
   '/2014-11-13/functions/{FunctionName}/configuration':
     get:
       operationId: GetFunctionConfiguration
@@ -366,15 +359,14 @@ paths:
           schema:
             $ref: '#/definitions/ServiceException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetFunctionConfigurationRequest'
         - name: FunctionName
-          type: string
           in: path
           required: true
+          description: The name of the Lambda function for which you want to retrieve the configuration information.
+          type: string
+          pattern: '[a-zA-Z0-9-_]+'
+          minLength: 1
+          maxLength: 64
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -409,15 +401,47 @@ paths:
           schema:
             $ref: '#/definitions/ServiceException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/UpdateFunctionConfigurationRequest'
         - name: FunctionName
-          type: string
           in: path
           required: true
+          description: The name of the Lambda function.
+          type: string
+          pattern: '[a-zA-Z0-9-_]+'
+          minLength: 1
+          maxLength: 64
+        - name: Role
+          in: query
+          required: false
+          description: 'The Amazon Resource Name (ARN) of the IAM role that Lambda will assume when it executes your function. '
+          type: string
+          pattern: 'arn:aws:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+'
+        - name: Handler
+          in: query
+          required: false
+          description: 'The function that Lambda calls to begin executing your function. For Node.js, it is the <i>module-name.export</i> value in your function. '
+          type: string
+          pattern: '[a-zA-Z0-9./\-_]+'
+        - name: Description
+          in: query
+          required: false
+          description: A short user-defined function description. Lambda does not use this value. Assign a meaningful description as you see fit.
+          type: string
+          minLength: 0
+          maxLength: 256
+        - name: Timeout
+          in: query
+          required: false
+          description: 'The function execution time at which Lambda should terminate the function. Because the execution time has cost implications, we recommend you set this value based on your expected execution time. The default is 3 seconds. '
+          type: integer
+          minimum: 1
+          maximum: 60
+        - name: MemorySize
+          in: query
+          required: false
+          description: 'The amount of memory, in MB, your Lambda function is given. Lambda uses this memory size to infer the amount of CPU allocated to your function. Your function use-case determines your CPU and memory requirements. For example, a database operation might need less memory compared to an image processing function. The default value is 128 MB. The value must be a multiple of 64 MB.'
+          type: integer
+          minimum: 128
+          maximum: 1024
   '/2014-11-13/functions/{FunctionName}/invoke-async/':
     post:
       operationId: InvokeAsync
@@ -443,15 +467,25 @@ paths:
           schema:
             $ref: '#/definitions/ServiceException'
       parameters:
+        - name: FunctionName
+          in: path
+          required: true
+          description: The Lambda function name.
+          type: string
+          pattern: '[a-zA-Z0-9-_]+'
+          minLength: 1
+          maxLength: 64
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/InvokeAsyncRequest'
-        - name: FunctionName
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - InvokeArgs
+            properties:
+              InvokeArgs:
+                description: JSON that you want to provide to your Lambda function as input.
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -477,21 +511,119 @@ paths:
           schema:
             $ref: '#/definitions/ServiceException'
       parameters:
+        - name: Marker
+          in: query
+          required: false
+          description: 'Optional string. An opaque pagination token returned from a previous <code>ListFunctions</code> operation. If present, indicates where to continue the listing. '
+          type: string
+        - name: MaxItems
+          in: query
+          required: false
+          description: Optional integer. Specifies the maximum number of AWS Lambda functions to return in response. This parameter value must be greater than 0.
+          type: integer
+          minimum: 1
+          maximum: 10000
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/2014-11-13/functions/{FunctionName}#Runtime&Role&Handler&Mode':
+    put:
+      operationId: UploadFunction
+      description: '<p>Creates a new Lambda function or updates an existing function. The function metadata is created from the request parameters, and the code for the function is provided by a .zip file in the request body. If the function name already exists, the existing Lambda function is updated with the new code and metadata. </p> <p>This operation requires permission for the <code>lambda:UploadFunction</code> action.</p>'
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/FunctionConfiguration'
+        '400':
+          description: InvalidParameterValueException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '500':
+          description: ServiceException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ServiceException'
+      parameters:
+        - name: FunctionName
+          in: path
+          required: true
+          description: 'The name you want to assign to the function you are uploading. The function names appear in the console and are returned in the <a>ListFunctions</a> API. Function names are used to specify functions to other AWS Lambda APIs, such as <a>InvokeAsync</a>. '
+          type: string
+          pattern: '[a-zA-Z0-9-_]+'
+          minLength: 1
+          maxLength: 64
+        - name: Runtime
+          in: query
+          required: true
+          description: 'The runtime environment for the Lambda function you are uploading. Currently, Lambda supports only "nodejs" as the runtime.'
+          type: string
+          enum:
+            - nodejs
+        - name: Role
+          in: query
+          required: true
+          description: 'The Amazon Resource Name (ARN) of the IAM role that Lambda assumes when it executes your function to access any other Amazon Web Services (AWS) resources. '
+          type: string
+          pattern: 'arn:aws:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+'
+        - name: Handler
+          in: query
+          required: true
+          description: 'The function that Lambda calls to begin execution. For Node.js, it is the <i>module-name</i>.<i>export</i> value in your function. '
+          type: string
+          pattern: '[a-zA-Z0-9./\-_]+'
+        - name: Mode
+          in: query
+          required: true
+          description: 'How the Lambda function will be invoked. Lambda supports only the "event" mode. '
+          type: string
+          enum:
+            - event
+        - name: Description
+          in: query
+          required: false
+          description: 'A short, user-defined function description. Lambda does not use this value. Assign a meaningful description as you see fit.'
+          type: string
+          minLength: 0
+          maxLength: 256
+        - name: Timeout
+          in: query
+          required: false
+          description: 'The function execution time at which Lambda should terminate the function. Because the execution time has cost implications, we recommend you set this value based on your expected execution time. The default is 3 seconds. '
+          type: integer
+          minimum: 1
+          maximum: 60
+        - name: MemorySize
+          in: query
+          required: false
+          description: 'The amount of memory, in MB, your Lambda function is given. Lambda uses this memory size to infer the amount of CPU allocated to your function. Your function use-case determines your CPU and memory requirements. For example, database operation might need less memory compared to image processing function. The default value is 128 MB. The value must be a multiple of 64 MB.'
+          type: integer
+          minimum: 128
+          maximum: 1024
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/ListFunctionsRequest'
-        - name: MaxItems
-          type: string
-          in: query
-          description: Pagination limit
-          required: false
-        - name: Marker
-          type: string
-          in: query
-          description: Pagination token
-          required: false
+            type: object
+            required:
+              - FunctionZip
+            properties:
+              FunctionZip:
+                description: 'A .zip file containing your packaged source code. For more information about creating a .zip file, go to <a href="http://docs.aws.amazon.com/lambda/latest/dg/walkthrough-custom-events.html">AWS LambdaL How it Works</a> in the AWS Lambda Developer Guide. '
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -534,28 +666,8 @@ definitions:
         $ref: '#/definitions/String'
         description: 'The description of the health of the event source mapping. Valid values are: "PENDING", "OK", and "PROBLEM:<i>message</i>". Initially this staus is "PENDING". When AWS Lambda begins processing events, it changes the status to "OK".'
     description: Describes mapping between an Amazon Kinesis stream and a Lambda function.
-  AddEventSourceRequest:
-    type: object
-    required:
-      - EventSource
-      - FunctionName
-      - Role
-    properties:
-      EventSource:
-        $ref: '#/definitions/String'
-        description: 'The Amazon Resource Name (ARN) of the Amazon Kinesis stream that is the event source. Any record added to this stream causes AWS Lambda to invoke your Lambda function. AWS Lambda POSTs the Amazon Kinesis event, containing records, to your Lambda function as JSON.'
-      FunctionName:
-        $ref: '#/definitions/FunctionName'
-        description: The Lambda function to invoke when AWS Lambda detects an event on the stream.
-      Role:
-        $ref: '#/definitions/RoleArn'
-        description: The ARN of the IAM role (invocation role) that AWS Lambda can assume to read from the stream and invoke the function.
-      BatchSize:
-        $ref: '#/definitions/Integer'
-        description: The largest number of records that AWS Lambda will give to your function in a single event. The default is 100 records.
-      Parameters:
-        $ref: '#/definitions/Map'
-        description: 'A map (key-value pairs) defining the configuration for AWS Lambda to use when reading the event source. Currently, AWS Lambda supports only the <code>InitialPositionInStream</code> key. The valid values are: "TRIM_HORIZON" and "LATEST". The default value is "TRIM_HORIZON". For more information, go to <a href="http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetShardIterator.html#Kinesis-GetShardIterator-request-ShardIteratorType">ShardIteratorType</a> in the Amazon Kinesis Service API Reference. '
+  String:
+    type: string
   ServiceException:
     type: object
     properties:
@@ -572,9 +684,6 @@ definitions:
       message:
         $ref: '#/definitions/String'
     description: 'One of the parameters in the request is invalid. For example, if you provided an IAM role for AWS Lambda to assume in the <code>UploadFunction</code> or the <code>UpdateFunctionConfiguration</code> API, that AWS Lambda is unable to assume you will get this exception. '
-  DeleteFunctionRequest:
-    type: object
-    properties: {}
   ResourceNotFoundException:
     type: object
     properties:
@@ -583,9 +692,6 @@ definitions:
       Message:
         $ref: '#/definitions/String'
     description: The function or the event source specified in the request does not exist.
-  GetEventSourceRequest:
-    type: object
-    properties: {}
   GetFunctionResponse:
     type: object
     properties:
@@ -594,9 +700,6 @@ definitions:
       Code:
         $ref: '#/definitions/FunctionCodeLocation'
     description: This response contains the object for AWS Lambda function location (see <a>API_FunctionCodeLocation</a>
-  GetFunctionRequest:
-    type: object
-    properties: {}
   FunctionConfiguration:
     type: object
     properties:
@@ -637,9 +740,6 @@ definitions:
         $ref: '#/definitions/Timestamp'
         description: The timestamp of the last time you updated the function.
     description: A complex type that describes function metadata.
-  GetFunctionConfigurationRequest:
-    type: object
-    properties: {}
   InvokeAsyncResponse:
     type: object
     properties:
@@ -647,14 +747,6 @@ definitions:
         $ref: '#/definitions/HttpStatus'
         description: It will be 202 upon success.
     description: 'Upon success, it returns empty response. Otherwise, throws an exception.'
-  InvokeAsyncRequest:
-    type: object
-    required:
-      - InvokeArgs
-    properties:
-      InvokeArgs:
-        $ref: '#/definitions/Blob'
-        description: JSON that you want to provide to your Lambda function as input.
   InvalidRequestContentException:
     type: object
     properties:
@@ -673,9 +765,6 @@ definitions:
         $ref: '#/definitions/EventSourceList'
         description: An arrary of <code>EventSourceConfiguration</code> objects.
     description: Contains a list of event sources (see <a>API_EventSourceConfiguration</a>)
-  ListEventSourcesRequest:
-    type: object
-    properties: {}
   ListFunctionsResponse:
     type: object
     properties:
@@ -686,25 +775,6 @@ definitions:
         $ref: '#/definitions/FunctionList'
         description: A list of Lambda functions.
     description: Contains a list of AWS Lambda function configurations (see <a>API_FunctionConfiguration</a>.
-  ListFunctionsRequest:
-    type: object
-    properties: {}
-  RemoveEventSourceRequest:
-    type: object
-    properties: {}
-  UpdateFunctionConfigurationRequest:
-    type: object
-    properties: {}
-  UploadFunctionRequest:
-    type: object
-    required:
-      - FunctionZip
-    properties:
-      FunctionZip:
-        $ref: '#/definitions/Blob'
-        description: 'A .zip file containing your packaged source code. For more information about creating a .zip file, go to <a href="http://docs.aws.amazon.com/lambda/latest/dg/walkthrough-custom-events.html">AWS LambdaL How it Works</a> in the AWS Lambda Developer Guide. '
-  String:
-    type: string
   FunctionName:
     type: string
     pattern: '[a-zA-Z0-9-_]+'
@@ -716,16 +786,36 @@ definitions:
   Integer:
     type: integer
   Map:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/String'
-        value:
-          $ref: '#/definitions/String'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/String'
+  AddEventSourceRequest:
+    type: object
+    required:
+      - EventSource
+      - FunctionName
+      - Role
+    properties:
+      EventSource:
+        $ref: '#/definitions/String'
+        description: 'The Amazon Resource Name (ARN) of the Amazon Kinesis stream that is the event source. Any record added to this stream causes AWS Lambda to invoke your Lambda function. AWS Lambda POSTs the Amazon Kinesis event, containing records, to your Lambda function as JSON.'
+      FunctionName:
+        $ref: '#/definitions/FunctionName'
+        description: The Lambda function to invoke when AWS Lambda detects an event on the stream.
+      Role:
+        $ref: '#/definitions/RoleArn'
+        description: The ARN of the IAM role (invocation role) that AWS Lambda can assume to read from the stream and invoke the function.
+      BatchSize:
+        $ref: '#/definitions/Integer'
+        description: The largest number of records that AWS Lambda will give to your function in a single event. The default is 100 records.
+      Parameters:
+        $ref: '#/definitions/Map'
+        description: 'A map (key-value pairs) defining the configuration for AWS Lambda to use when reading the event source. Currently, AWS Lambda supports only the <code>InitialPositionInStream</code> key. The valid values are: "TRIM_HORIZON" and "LATEST". The default value is "TRIM_HORIZON". For more information, go to <a href="http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetShardIterator.html#Kinesis-GetShardIterator-request-ShardIteratorType">ShardIteratorType</a> in the Amazon Kinesis Service API Reference. '
   Blob:
     type: string
+  DeleteFunctionRequest:
+    type: object
+    properties: {}
   Description:
     type: string
     minLength: 0
@@ -777,9 +867,46 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/FunctionConfiguration'
+  GetEventSourceRequest:
+    type: object
+    properties: {}
+  GetFunctionConfigurationRequest:
+    type: object
+    properties: {}
+  GetFunctionRequest:
+    type: object
+    properties: {}
   HttpStatus:
     type: integer
+  InvokeAsyncRequest:
+    type: object
+    required:
+      - InvokeArgs
+    properties:
+      InvokeArgs:
+        $ref: '#/definitions/Blob'
+        description: JSON that you want to provide to your Lambda function as input.
   MaxListItems:
     type: integer
     minimum: 1
     maximum: 10000
+  ListEventSourcesRequest:
+    type: object
+    properties: {}
+  ListFunctionsRequest:
+    type: object
+    properties: {}
+  RemoveEventSourceRequest:
+    type: object
+    properties: {}
+  UpdateFunctionConfigurationRequest:
+    type: object
+    properties: {}
+  UploadFunctionRequest:
+    type: object
+    required:
+      - FunctionZip
+    properties:
+      FunctionZip:
+        $ref: '#/definitions/Blob'
+        description: 'A .zip file containing your packaged source code. For more information about creating a .zip file, go to <a href="http://docs.aws.amazon.com/lambda/latest/dg/walkthrough-custom-events.html">AWS LambdaL How it Works</a> in the AWS Lambda Developer Guide. '

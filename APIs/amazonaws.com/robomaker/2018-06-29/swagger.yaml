@@ -129,7 +129,17 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/BatchDescribeSimulationJobRequest'
+            type: object
+            required:
+              - jobs
+            properties:
+              jobs:
+                description: A list of Amazon Resource Names (ARNs) of simulation jobs to describe.
+                type: array
+                items:
+                  $ref: '#/definitions/Arn'
+                minItems: 1
+                maxItems: 100
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -170,7 +180,16 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CancelSimulationJobRequest'
+            type: object
+            required:
+              - job
+            properties:
+              job:
+                description: The simulation job ARN to cancel.
+                type: string
+                pattern: 'arn:.*'
+                minLength: 1
+                maxLength: 1224
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -223,7 +242,48 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateDeploymentJobRequest'
+            type: object
+            required:
+              - clientRequestToken
+              - fleet
+              - deploymentApplicationConfigs
+            properties:
+              deploymentConfig:
+                description: Information about a deployment configuration.
+                type: object
+                properties:
+                  concurrentDeploymentPercentage:
+                    $ref: '#/definitions/Percentage'
+                    description: The percentage of robots receiving the deployment at the same time.
+                  failureThresholdPercentage:
+                    $ref: '#/definitions/Percentage'
+                    description: The percentage of deployments that need to fail before stopping deployment.
+              clientRequestToken:
+                description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+                type: string
+                pattern: '[a-zA-Z0-9_\-=]*'
+                minLength: 1
+                maxLength: 64
+              fleet:
+                description: The Amazon Resource Name (ARN) of the fleet to deploy.
+                type: string
+                pattern: 'arn:.*'
+                minLength: 1
+                maxLength: 1224
+              deploymentApplicationConfigs:
+                description: The deployment application configuration.
+                type: array
+                items:
+                  $ref: '#/definitions/DeploymentApplicationConfig'
+                minItems: 1
+                maxItems: 1
+              tags:
+                description: A map that contains tag keys and tag values that are attached to the deployment job.
+                type: object
+                minProperties: 0
+                maxProperties: 50
+                additionalProperties:
+                  $ref: '#/definitions/TagValue'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -264,7 +324,23 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateFleetRequest'
+            type: object
+            required:
+              - name
+            properties:
+              name:
+                description: The name of the fleet.
+                type: string
+                pattern: '[a-zA-Z0-9_\-]*'
+                minLength: 1
+                maxLength: 255
+              tags:
+                description: A map that contains tag keys and tag values that are attached to the fleet.
+                type: object
+                minProperties: 0
+                maxProperties: 50
+                additionalProperties:
+                  $ref: '#/definitions/TagValue'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -309,7 +385,37 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateRobotRequest'
+            type: object
+            required:
+              - name
+              - architecture
+              - greengrassGroupId
+            properties:
+              name:
+                description: The name for the robot.
+                type: string
+                pattern: '[a-zA-Z0-9_\-]*'
+                minLength: 1
+                maxLength: 255
+              architecture:
+                description: The target architecture of the robot.
+                type: string
+                enum:
+                  - X86_64
+                  - ARM64
+                  - ARMHF
+              greengrassGroupId:
+                description: The Greengrass group id.
+                type: string
+                minLength: 1
+                maxLength: 1224
+              tags:
+                description: A map that contains tag keys and tag values that are attached to the robot.
+                type: object
+                minProperties: 0
+                maxProperties: 50
+                additionalProperties:
+                  $ref: '#/definitions/TagValue'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -358,7 +464,40 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateRobotApplicationRequest'
+            type: object
+            required:
+              - name
+              - sources
+              - robotSoftwareSuite
+            properties:
+              name:
+                description: The name of the robot application.
+                type: string
+                pattern: '[a-zA-Z0-9_\-]*'
+                minLength: 1
+                maxLength: 255
+              sources:
+                description: The sources of the robot application.
+                type: array
+                items:
+                  $ref: '#/definitions/SourceConfig'
+              robotSoftwareSuite:
+                description: Information about a robot software suite.
+                type: object
+                properties:
+                  name:
+                    $ref: '#/definitions/RobotSoftwareSuiteType'
+                    description: The name of the robot software suite.
+                  version:
+                    $ref: '#/definitions/RobotSoftwareSuiteVersionType'
+                    description: The version of the robot software suite.
+              tags:
+                description: A map that contains tag keys and tag values that are attached to the robot application.
+                type: object
+                minProperties: 0
+                maxProperties: 50
+                additionalProperties:
+                  $ref: '#/definitions/TagValue'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -403,7 +542,22 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateRobotApplicationVersionRequest'
+            type: object
+            required:
+              - application
+            properties:
+              application:
+                description: The application information for the robot application.
+                type: string
+                pattern: 'arn:.*'
+                minLength: 1
+                maxLength: 1224
+              currentRevisionId:
+                description: 'The current revision id for the robot application. If you provide a value and it matches the latest revision ID, a new version will be created.'
+                type: string
+                pattern: '[a-zA-Z0-9_.\-]*'
+                minLength: 1
+                maxLength: 40
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -452,7 +606,62 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateSimulationApplicationRequest'
+            type: object
+            required:
+              - name
+              - sources
+              - simulationSoftwareSuite
+              - robotSoftwareSuite
+              - renderingEngine
+            properties:
+              name:
+                description: The name of the simulation application.
+                type: string
+                pattern: '[a-zA-Z0-9_\-]*'
+                minLength: 1
+                maxLength: 255
+              sources:
+                description: The sources of the simulation application.
+                type: array
+                items:
+                  $ref: '#/definitions/SourceConfig'
+              simulationSoftwareSuite:
+                description: Information about a simulation software suite.
+                type: object
+                properties:
+                  name:
+                    $ref: '#/definitions/SimulationSoftwareSuiteType'
+                    description: The name of the simulation software suite.
+                  version:
+                    $ref: '#/definitions/SimulationSoftwareSuiteVersionType'
+                    description: The version of the simulation software suite.
+              robotSoftwareSuite:
+                description: Information about a robot software suite.
+                type: object
+                properties:
+                  name:
+                    $ref: '#/definitions/RobotSoftwareSuiteType'
+                    description: The name of the robot software suite.
+                  version:
+                    $ref: '#/definitions/RobotSoftwareSuiteVersionType'
+                    description: The version of the robot software suite.
+              renderingEngine:
+                description: Information about a rendering engine.
+                type: object
+                properties:
+                  name:
+                    $ref: '#/definitions/RenderingEngineType'
+                    description: The name of the rendering engine.
+                  version:
+                    $ref: '#/definitions/RenderingEngineVersionType'
+                    description: The version of the rendering engine.
+              tags:
+                description: A map that contains tag keys and tag values that are attached to the simulation application.
+                type: object
+                minProperties: 0
+                maxProperties: 50
+                additionalProperties:
+                  $ref: '#/definitions/TagValue'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -497,7 +706,22 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateSimulationApplicationVersionRequest'
+            type: object
+            required:
+              - application
+            properties:
+              application:
+                description: The application information for the simulation application.
+                type: string
+                pattern: 'arn:.*'
+                minLength: 1
+                maxLength: 1224
+              currentRevisionId:
+                description: 'The current revision id for the simulation application. If you provide a value and it matches the latest revision ID, a new version will be created.'
+                type: string
+                pattern: '[a-zA-Z0-9_.\-]*'
+                minLength: 1
+                maxLength: 40
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -546,7 +770,77 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateSimulationJobRequest'
+            type: object
+            required:
+              - maxJobDurationInSeconds
+              - iamRole
+              - vpcConfig
+            properties:
+              clientRequestToken:
+                description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+                type: string
+                pattern: '[a-zA-Z0-9_\-=]*'
+                minLength: 1
+                maxLength: 64
+              outputLocation:
+                description: The output location.
+                type: object
+                properties:
+                  s3Bucket:
+                    $ref: '#/definitions/S3Bucket'
+                    description: The S3 bucket for output.
+                  s3Prefix:
+                    $ref: '#/definitions/S3Key'
+                    description: The S3 folder in the <code>s3Bucket</code> where output files will be placed.
+              maxJobDurationInSeconds:
+                description: 'The maximum simulation job duration in seconds (up to 14 days or 1,209,600 seconds. When <code>maxJobDurationInSeconds</code> is reached, the simulation job will status will transition to <code>Completed</code>.'
+                type: integer
+              iamRole:
+                description: 'The IAM role name that allows the simulation instance to call the AWS APIs that are specified in its associated policies on your behalf. This is how credentials are passed in to your simulation job. '
+                type: string
+                pattern: 'arn:.*'
+                minLength: 1
+                maxLength: 255
+              failureBehavior:
+                description: <p>The failure behavior the simulation job.</p> <dl> <dt>Continue</dt> <dd> <p>Restart the simulation job in the same host instance.</p> </dd> <dt>Fail</dt> <dd> <p>Stop the simulation job and terminate the instance.</p> </dd> </dl>
+                type: string
+                enum:
+                  - Fail
+                  - Continue
+              robotApplications:
+                description: The robot application to use in the simulation job.
+                type: array
+                items:
+                  $ref: '#/definitions/RobotApplicationConfig'
+                minItems: 1
+                maxItems: 1
+              simulationApplications:
+                description: The simulation application to use in the simulation job.
+                type: array
+                items:
+                  $ref: '#/definitions/SimulationApplicationConfig'
+                minItems: 1
+                maxItems: 1
+              tags:
+                description: A map that contains tag keys and tag values that are attached to the simulation job.
+                type: object
+                minProperties: 0
+                maxProperties: 50
+                additionalProperties:
+                  $ref: '#/definitions/TagValue'
+              vpcConfig:
+                description: 'If your simulation job accesses resources in a VPC, you provide this parameter identifying the list of security group IDs and subnet IDs. These must belong to the same VPC. You must provide at least one security group and two subnet IDs.'
+                type: object
+                properties:
+                  subnets:
+                    $ref: '#/definitions/Subnets'
+                    description: A list of one or more subnet IDs in your VPC.
+                  securityGroups:
+                    $ref: '#/definitions/SecurityGroups'
+                    description: A list of one or more security groups IDs in your VPC.
+                  assignPublicIp:
+                    $ref: '#/definitions/Boolean'
+                    description: A boolean indicating whether to assign a public IP address.
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -583,7 +877,16 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/DeleteFleetRequest'
+            type: object
+            required:
+              - fleet
+            properties:
+              fleet:
+                description: The Amazon Resource Name (ARN) of the fleet.
+                type: string
+                pattern: 'arn:.*'
+                minLength: 1
+                maxLength: 1224
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -620,7 +923,16 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/DeleteRobotRequest'
+            type: object
+            required:
+              - robot
+            properties:
+              robot:
+                description: The Amazon Resource Name (ARN) of the robot.
+                type: string
+                pattern: 'arn:.*'
+                minLength: 1
+                maxLength: 1224
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -657,7 +969,22 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/DeleteRobotApplicationRequest'
+            type: object
+            required:
+              - application
+            properties:
+              application:
+                description: The Amazon Resource Name (ARN) of the the robot application.
+                type: string
+                pattern: 'arn:.*'
+                minLength: 1
+                maxLength: 1224
+              applicationVersion:
+                description: The version of the robot application to delete.
+                type: string
+                pattern: '(\$LATEST)|[0-9]*'
+                minLength: 1
+                maxLength: 255
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -694,7 +1021,22 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/DeleteSimulationApplicationRequest'
+            type: object
+            required:
+              - application
+            properties:
+              application:
+                description: The application information for the simulation application to delete.
+                type: string
+                pattern: 'arn:.*'
+                minLength: 1
+                maxLength: 1224
+              applicationVersion:
+                description: The version of the simulation application to delete.
+                type: string
+                pattern: '(\$LATEST)|[0-9]*'
+                minLength: 1
+                maxLength: 255
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -735,7 +1077,23 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/DeregisterRobotRequest'
+            type: object
+            required:
+              - fleet
+              - robot
+            properties:
+              fleet:
+                description: The Amazon Resource Name (ARN) of the fleet.
+                type: string
+                pattern: 'arn:.*'
+                minLength: 1
+                maxLength: 1224
+              robot:
+                description: The Amazon Resource Name (ARN) of the robot.
+                type: string
+                pattern: 'arn:.*'
+                minLength: 1
+                maxLength: 1224
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -776,7 +1134,16 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/DescribeDeploymentJobRequest'
+            type: object
+            required:
+              - job
+            properties:
+              job:
+                description: The Amazon Resource Name (ARN) of the deployment job.
+                type: string
+                pattern: 'arn:.*'
+                minLength: 1
+                maxLength: 1224
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -817,7 +1184,16 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/DescribeFleetRequest'
+            type: object
+            required:
+              - fleet
+            properties:
+              fleet:
+                description: The Amazon Resource Name (ARN) of the fleet.
+                type: string
+                pattern: 'arn:.*'
+                minLength: 1
+                maxLength: 1224
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -858,7 +1234,16 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/DescribeRobotRequest'
+            type: object
+            required:
+              - robot
+            properties:
+              robot:
+                description: The Amazon Resource Name (ARN) of the robot to be described.
+                type: string
+                pattern: 'arn:.*'
+                minLength: 1
+                maxLength: 1224
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -899,7 +1284,22 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/DescribeRobotApplicationRequest'
+            type: object
+            required:
+              - application
+            properties:
+              application:
+                description: The Amazon Resource Name (ARN) of the robot application.
+                type: string
+                pattern: 'arn:.*'
+                minLength: 1
+                maxLength: 1224
+              applicationVersion:
+                description: The version of the robot application to describe.
+                type: string
+                pattern: '(\$LATEST)|[0-9]*'
+                minLength: 1
+                maxLength: 255
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -940,7 +1340,22 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/DescribeSimulationApplicationRequest'
+            type: object
+            required:
+              - application
+            properties:
+              application:
+                description: The application information for the simulation application.
+                type: string
+                pattern: 'arn:.*'
+                minLength: 1
+                maxLength: 1224
+              applicationVersion:
+                description: The version of the simulation application to describe.
+                type: string
+                pattern: '(\$LATEST)|[0-9]*'
+                minLength: 1
+                maxLength: 255
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -981,7 +1396,16 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/DescribeSimulationJobRequest'
+            type: object
+            required:
+              - job
+            properties:
+              job:
+                description: The Amazon Resource Name (ARN) of the simulation job to be described.
+                type: string
+                pattern: 'arn:.*'
+                minLength: 1
+                maxLength: 1224
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1022,7 +1446,24 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/ListDeploymentJobsRequest'
+            type: object
+            properties:
+              filters:
+                description: '<p>Optional filters to limit results.</p> <p>The filter names <code>status</code> and <code>fleetName</code> are supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters, but they must be for the same named item. For example, if you are looking for items with the status <code>InProgress</code> or the status <code>Pending</code>.</p>'
+                type: array
+                items:
+                  $ref: '#/definitions/Filter'
+                minItems: 1
+                maxItems: 1
+              nextToken:
+                description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListDeploymentJobs</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+                type: string
+                pattern: '[a-zA-Z0-9_.\-\/+=]*'
+                minLength: 1
+                maxLength: 2048
+              maxResults:
+                description: 'The maximum number of deployment job results returned by <code>ListDeploymentJobs</code> in paginated output. When this parameter is used, <code>ListDeploymentJobs</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListDeploymentJobs</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListDeploymentJobs</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+                type: integer
         - name: maxResults
           type: string
           in: query
@@ -1073,7 +1514,24 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/ListFleetsRequest'
+            type: object
+            properties:
+              nextToken:
+                description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListFleets</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+                type: string
+                pattern: '[a-zA-Z0-9_.\-\/+=]*'
+                minLength: 1
+                maxLength: 2048
+              maxResults:
+                description: 'The maximum number of deployment job results returned by <code>ListFleets</code> in paginated output. When this parameter is used, <code>ListFleets</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListFleets</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListFleets</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+                type: integer
+              filters:
+                description: '<p>Optional filters to limit results.</p> <p>The filter name <code>name</code> is supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters.</p>'
+                type: array
+                items:
+                  $ref: '#/definitions/Filter'
+                minItems: 1
+                maxItems: 1
         - name: maxResults
           type: string
           in: query
@@ -1120,7 +1578,28 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/ListRobotApplicationsRequest'
+            type: object
+            properties:
+              versionQualifier:
+                description: The version qualifier of the robot application.
+                type: string
+                pattern: ALL
+              nextToken:
+                description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListRobotApplications</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+                type: string
+                pattern: '[a-zA-Z0-9_.\-\/+=]*'
+                minLength: 1
+                maxLength: 2048
+              maxResults:
+                description: 'The maximum number of deployment job results returned by <code>ListRobotApplications</code> in paginated output. When this parameter is used, <code>ListRobotApplications</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListRobotApplications</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListRobotApplications</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+                type: integer
+              filters:
+                description: '<p>Optional filters to limit results.</p> <p>The filter name <code>name</code> is supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters.</p>'
+                type: array
+                items:
+                  $ref: '#/definitions/Filter'
+                minItems: 1
+                maxItems: 1
         - name: maxResults
           type: string
           in: query
@@ -1171,7 +1650,24 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/ListRobotsRequest'
+            type: object
+            properties:
+              nextToken:
+                description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListRobots</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+                type: string
+                pattern: '[a-zA-Z0-9_.\-\/+=]*'
+                minLength: 1
+                maxLength: 2048
+              maxResults:
+                description: 'The maximum number of deployment job results returned by <code>ListRobots</code> in paginated output. When this parameter is used, <code>ListRobots</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListRobots</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListRobots</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+                type: integer
+              filters:
+                description: '<p>Optional filters to limit results.</p> <p>The filter names <code>status</code> and <code>fleetName</code> are supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters, but they must be for the same named item. For example, if you are looking for items with the status <code>Registered</code> or the status <code>Available</code>.</p>'
+                type: array
+                items:
+                  $ref: '#/definitions/Filter'
+                minItems: 1
+                maxItems: 1
         - name: maxResults
           type: string
           in: query
@@ -1218,7 +1714,28 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/ListSimulationApplicationsRequest'
+            type: object
+            properties:
+              versionQualifier:
+                description: The version qualifier of the simulation application.
+                type: string
+                pattern: ALL
+              nextToken:
+                description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListSimulationApplications</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+                type: string
+                pattern: '[a-zA-Z0-9_.\-\/+=]*'
+                minLength: 1
+                maxLength: 2048
+              maxResults:
+                description: 'The maximum number of deployment job results returned by <code>ListSimulationApplications</code> in paginated output. When this parameter is used, <code>ListSimulationApplications</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListSimulationApplications</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListSimulationApplications</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+                type: integer
+              filters:
+                description: '<p>Optional list of filters to limit results.</p> <p>The filter name <code>name</code> is supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters.</p>'
+                type: array
+                items:
+                  $ref: '#/definitions/Filter'
+                minItems: 1
+                maxItems: 1
         - name: maxResults
           type: string
           in: query
@@ -1265,7 +1782,24 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/ListSimulationJobsRequest'
+            type: object
+            properties:
+              nextToken:
+                description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListSimulationJobs</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+                type: string
+                pattern: '[a-zA-Z0-9_.\-\/+=]*'
+                minLength: 1
+                maxLength: 2048
+              maxResults:
+                description: 'The maximum number of deployment job results returned by <code>ListSimulationJobs</code> in paginated output. When this parameter is used, <code>ListSimulationJobs</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListSimulationJobs</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListSimulationJobs</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+                type: integer
+              filters:
+                description: '<p>Optional filters to limit results.</p> <p>The filter names <code>status</code> and <code>simulationApplicationName</code> and <code>robotApplicationName</code> are supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters, but they must be for the same named item. For example, if you are looking for items with the status <code>Preparing</code> or the status <code>Running</code>.</p>'
+                type: array
+                items:
+                  $ref: '#/definitions/Filter'
+                minItems: 1
+                maxItems: 1
         - name: maxResults
           type: string
           in: query
@@ -1312,15 +1846,14 @@ paths:
           schema:
             $ref: '#/definitions/ThrottlingException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListTagsForResourceRequest'
         - name: resourceArn
-          type: string
           in: path
           required: true
+          description: The AWS RoboMaker Amazon Resource Name (ARN) with tags to be listed.
+          type: string
+          pattern: 'arn:.*'
+          minLength: 1
+          maxLength: 1224
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1356,49 +1889,29 @@ paths:
           schema:
             $ref: '#/definitions/ThrottlingException'
       parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the AWS RoboMaker resource you are tagging.
+          type: string
+          pattern: 'arn:.*'
+          minLength: 1
+          maxLength: 1224
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/TagResourceRequest'
-        - name: resourceArn
-          type: string
-          in: path
-          required: true
-    delete:
-      operationId: UntagResource
-      description: '<p>Removes the specified tags from the specified AWS RoboMaker resource.</p> <p>To remove a tag, specify the tag key. To change the tag value of an existing tag key, use <a href="https://docs.aws.amazon.com/robomaker/latest/dg/API_TagResource.html"> <code>TagResource</code> </a>. </p>'
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/UntagResourceResponse'
-        '480':
-          description: InternalServerException
-          schema:
-            $ref: '#/definitions/InternalServerException'
-        '481':
-          description: ResourceNotFoundException
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
-        '482':
-          description: InvalidParameterException
-          schema:
-            $ref: '#/definitions/InvalidParameterException'
-        '483':
-          description: ThrottlingException
-          schema:
-            $ref: '#/definitions/ThrottlingException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/UntagResourceRequest'
-        - name: resourceArn
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - tags
+            properties:
+              tags:
+                description: A map that contains tag keys and tag values that are attached to the resource.
+                type: object
+                minProperties: 0
+                maxProperties: 50
+                additionalProperties:
+                  $ref: '#/definitions/TagValue'
   /registerRobot:
     post:
       operationId: RegisterRobot
@@ -1433,7 +1946,23 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/RegisterRobotRequest'
+            type: object
+            required:
+              - fleet
+              - robot
+            properties:
+              fleet:
+                description: The Amazon Resource Name (ARN) of the fleet.
+                type: string
+                pattern: 'arn:.*'
+                minLength: 1
+                maxLength: 1224
+              robot:
+                description: The Amazon Resource Name (ARN) of the robot.
+                type: string
+                pattern: 'arn:.*'
+                minLength: 1
+                maxLength: 1224
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1478,7 +2007,16 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/RestartSimulationJobRequest'
+            type: object
+            required:
+              - job
+            properties:
+              job:
+                description: The Amazon Resource Name (ARN) of the simulation job.
+                type: string
+                pattern: 'arn:.*'
+                minLength: 1
+                maxLength: 1224
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1531,7 +2069,74 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/SyncDeploymentJobRequest'
+            type: object
+            required:
+              - clientRequestToken
+              - fleet
+            properties:
+              clientRequestToken:
+                description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+                type: string
+                pattern: '[a-zA-Z0-9_\-=]*'
+                minLength: 1
+                maxLength: 64
+              fleet:
+                description: The target fleet for the synchronization.
+                type: string
+                pattern: 'arn:.*'
+                minLength: 1
+                maxLength: 1224
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/tags/{resourceArn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: '<p>Removes the specified tags from the specified AWS RoboMaker resource.</p> <p>To remove a tag, specify the tag key. To change the tag value of an existing tag key, use <a href="https://docs.aws.amazon.com/robomaker/latest/dg/API_TagResource.html"> <code>TagResource</code> </a>. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UntagResourceResponse'
+        '480':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the AWS RoboMaker resource you are removing tags.
+          type: string
+          pattern: 'arn:.*'
+          minLength: 1
+          maxLength: 1224
+        - name: tagKeys
+          in: query
+          required: true
+          description: A map that contains tag keys and tag values that will be unattached from the resource.
+          type: array
+          items:
+            type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1576,7 +2181,39 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateRobotApplicationRequest'
+            type: object
+            required:
+              - application
+              - sources
+              - robotSoftwareSuite
+            properties:
+              application:
+                description: The application information for the robot application.
+                type: string
+                pattern: 'arn:.*'
+                minLength: 1
+                maxLength: 1224
+              sources:
+                description: The sources of the robot application.
+                type: array
+                items:
+                  $ref: '#/definitions/SourceConfig'
+              robotSoftwareSuite:
+                description: Information about a robot software suite.
+                type: object
+                properties:
+                  name:
+                    $ref: '#/definitions/RobotSoftwareSuiteType'
+                    description: The name of the robot software suite.
+                  version:
+                    $ref: '#/definitions/RobotSoftwareSuiteVersionType'
+                    description: The version of the robot software suite.
+              currentRevisionId:
+                description: The revision id for the robot application.
+                type: string
+                pattern: '[a-zA-Z0-9_.\-]*'
+                minLength: 1
+                maxLength: 40
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1621,7 +2258,61 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateSimulationApplicationRequest'
+            type: object
+            required:
+              - application
+              - sources
+              - simulationSoftwareSuite
+              - robotSoftwareSuite
+              - renderingEngine
+            properties:
+              application:
+                description: The application information for the simulation application.
+                type: string
+                pattern: 'arn:.*'
+                minLength: 1
+                maxLength: 1224
+              sources:
+                description: The sources of the simulation application.
+                type: array
+                items:
+                  $ref: '#/definitions/SourceConfig'
+              simulationSoftwareSuite:
+                description: Information about a simulation software suite.
+                type: object
+                properties:
+                  name:
+                    $ref: '#/definitions/SimulationSoftwareSuiteType'
+                    description: The name of the simulation software suite.
+                  version:
+                    $ref: '#/definitions/SimulationSoftwareSuiteVersionType'
+                    description: The version of the simulation software suite.
+              robotSoftwareSuite:
+                description: Information about a robot software suite.
+                type: object
+                properties:
+                  name:
+                    $ref: '#/definitions/RobotSoftwareSuiteType'
+                    description: The name of the robot software suite.
+                  version:
+                    $ref: '#/definitions/RobotSoftwareSuiteVersionType'
+                    description: The version of the robot software suite.
+              renderingEngine:
+                description: Information about a rendering engine.
+                type: object
+                properties:
+                  name:
+                    $ref: '#/definitions/RenderingEngineType'
+                    description: The name of the rendering engine.
+                  version:
+                    $ref: '#/definitions/RenderingEngineVersionType'
+                    description: The version of the rendering engine.
+              currentRevisionId:
+                description: The revision id for the robot application.
+                type: string
+                pattern: '[a-zA-Z0-9_.\-]*'
+                minLength: 1
+                maxLength: 40
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1642,14 +2333,11 @@ definitions:
       unprocessedJobs:
         $ref: '#/definitions/Arns'
         description: A list of unprocessed simulation job Amazon Resource Names (ARNs).
-  BatchDescribeSimulationJobRequest:
-    type: object
-    required:
-      - jobs
-    properties:
-      jobs:
-        $ref: '#/definitions/Arns'
-        description: A list of Amazon Resource Names (ARNs) of simulation jobs to describe.
+  Arn:
+    type: string
+    pattern: 'arn:.*'
+    minLength: 1
+    maxLength: 1224
   ResourceNotFoundException: {}
   InvalidParameterException: {}
   InternalServerException: {}
@@ -1657,14 +2345,6 @@ definitions:
   CancelSimulationJobResponse:
     type: object
     properties: {}
-  CancelSimulationJobRequest:
-    type: object
-    required:
-      - job
-    properties:
-      job:
-        $ref: '#/definitions/Arn'
-        description: The simulation job ARN to cancel.
   CreateDeploymentJobResponse:
     type: object
     properties:
@@ -1695,28 +2375,32 @@ definitions:
       tags:
         $ref: '#/definitions/TagMap'
         description: The list of all tags added to the deployment job.
-  CreateDeploymentJobRequest:
+  Percentage:
+    type: integer
+    minimum: 1
+    maximum: 100
+  DeploymentApplicationConfig:
     type: object
     required:
-      - clientRequestToken
-      - fleet
-      - deploymentApplicationConfigs
+      - application
+      - applicationVersion
+      - launchConfig
     properties:
-      deploymentConfig:
-        $ref: '#/definitions/DeploymentConfig'
-        description: The requested deployment configuration.
-      clientRequestToken:
-        $ref: '#/definitions/ClientRequestToken'
-        description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
-      fleet:
+      application:
         $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the fleet to deploy.
-      deploymentApplicationConfigs:
-        $ref: '#/definitions/DeploymentApplicationConfigs'
-        description: The deployment application configuration.
-      tags:
-        $ref: '#/definitions/TagMap'
-        description: A map that contains tag keys and tag values that are attached to the deployment job.
+        description: The Amazon Resource Name (ARN) of the robot application.
+      applicationVersion:
+        $ref: '#/definitions/DeploymentVersion'
+        description: The version of the application.
+      launchConfig:
+        $ref: '#/definitions/DeploymentLaunchConfig'
+        description: The launch configuration.
+    description: Information about a deployment application configuration.
+  TagValue:
+    type: string
+    pattern: '[a-zA-Z0-9 _.\-\/+=:]*'
+    minLength: 0
+    maxLength: 256
   LimitExceededException: {}
   ConcurrentDeploymentException: {}
   IdempotentParameterMismatchException: {}
@@ -1735,17 +2419,6 @@ definitions:
       tags:
         $ref: '#/definitions/TagMap'
         description: The list of all tags added to the fleet.
-  CreateFleetRequest:
-    type: object
-    required:
-      - name
-    properties:
-      name:
-        $ref: '#/definitions/Name'
-        description: The name of the fleet.
-      tags:
-        $ref: '#/definitions/TagMap'
-        description: A map that contains tag keys and tag values that are attached to the fleet.
   CreateRobotResponse:
     type: object
     properties:
@@ -1767,25 +2440,6 @@ definitions:
       tags:
         $ref: '#/definitions/TagMap'
         description: The list of all tags added to the robot.
-  CreateRobotRequest:
-    type: object
-    required:
-      - name
-      - architecture
-      - greengrassGroupId
-    properties:
-      name:
-        $ref: '#/definitions/Name'
-        description: The name for the robot.
-      architecture:
-        $ref: '#/definitions/Architecture'
-        description: The target architecture of the robot.
-      greengrassGroupId:
-        $ref: '#/definitions/Id'
-        description: The Greengrass group id.
-      tags:
-        $ref: '#/definitions/TagMap'
-        description: A map that contains tag keys and tag values that are attached to the robot.
   ResourceAlreadyExistsException: {}
   CreateRobotApplicationResponse:
     type: object
@@ -1814,25 +2468,27 @@ definitions:
       tags:
         $ref: '#/definitions/TagMap'
         description: The list of all tags added to the robot application.
-  CreateRobotApplicationRequest:
+  SourceConfig:
     type: object
-    required:
-      - name
-      - sources
-      - robotSoftwareSuite
     properties:
-      name:
-        $ref: '#/definitions/Name'
-        description: The name of the robot application.
-      sources:
-        $ref: '#/definitions/SourceConfigs'
-        description: The sources of the robot application.
-      robotSoftwareSuite:
-        $ref: '#/definitions/RobotSoftwareSuite'
-        description: The robot software suite used by the robot application.
-      tags:
-        $ref: '#/definitions/TagMap'
-        description: A map that contains tag keys and tag values that are attached to the robot application.
+      s3Bucket:
+        $ref: '#/definitions/S3Bucket'
+        description: The Amazon S3 bucket name.
+      s3Key:
+        $ref: '#/definitions/S3Key'
+        description: The s3 object key.
+      architecture:
+        $ref: '#/definitions/Architecture'
+        description: The target processor architecture for the application.
+    description: Information about a source configuration.
+  RobotSoftwareSuiteType:
+    type: string
+    enum:
+      - ROS
+  RobotSoftwareSuiteVersionType:
+    type: string
+    enum:
+      - Kinetic
   CreateRobotApplicationVersionResponse:
     type: object
     properties:
@@ -1857,17 +2513,6 @@ definitions:
       revisionId:
         $ref: '#/definitions/RevisionId'
         description: The revision id of the robot application.
-  CreateRobotApplicationVersionRequest:
-    type: object
-    required:
-      - application
-    properties:
-      application:
-        $ref: '#/definitions/Arn'
-        description: The application information for the robot application.
-      currentRevisionId:
-        $ref: '#/definitions/RevisionId'
-        description: 'The current revision id for the robot application. If you provide a value and it matches the latest revision ID, a new version will be created.'
   CreateSimulationApplicationResponse:
     type: object
     properties:
@@ -1901,33 +2546,20 @@ definitions:
       tags:
         $ref: '#/definitions/TagMap'
         description: The list of all tags added to the simulation application.
-  CreateSimulationApplicationRequest:
-    type: object
-    required:
-      - name
-      - sources
-      - simulationSoftwareSuite
-      - robotSoftwareSuite
-      - renderingEngine
-    properties:
-      name:
-        $ref: '#/definitions/Name'
-        description: The name of the simulation application.
-      sources:
-        $ref: '#/definitions/SourceConfigs'
-        description: The sources of the simulation application.
-      simulationSoftwareSuite:
-        $ref: '#/definitions/SimulationSoftwareSuite'
-        description: The simulation software suite used by the simulation application.
-      robotSoftwareSuite:
-        $ref: '#/definitions/RobotSoftwareSuite'
-        description: The robot software suite of the simulation application.
-      renderingEngine:
-        $ref: '#/definitions/RenderingEngine'
-        description: The rendering engine for the simulation application.
-      tags:
-        $ref: '#/definitions/TagMap'
-        description: A map that contains tag keys and tag values that are attached to the simulation application.
+  SimulationSoftwareSuiteType:
+    type: string
+    enum:
+      - Gazebo
+  SimulationSoftwareSuiteVersionType:
+    type: string
+    pattern: 7|9
+  RenderingEngineType:
+    type: string
+    enum:
+      - OGRE
+  RenderingEngineVersionType:
+    type: string
+    pattern: 1.x
   CreateSimulationApplicationVersionResponse:
     type: object
     properties:
@@ -1958,17 +2590,6 @@ definitions:
       revisionId:
         $ref: '#/definitions/RevisionId'
         description: The revision ID of the simulation application.
-  CreateSimulationApplicationVersionRequest:
-    type: object
-    required:
-      - application
-    properties:
-      application:
-        $ref: '#/definitions/Arn'
-        description: The application information for the simulation application.
-      currentRevisionId:
-        $ref: '#/definitions/RevisionId'
-        description: 'The current revision id for the simulation application. If you provide a value and it matches the latest revision ID, a new version will be created.'
   CreateSimulationJobResponse:
     type: object
     properties:
@@ -2014,103 +2635,76 @@ definitions:
       vpcConfig:
         $ref: '#/definitions/VPCConfigResponse'
         description: Information about the vpc configuration.
-  CreateSimulationJobRequest:
+  S3Bucket:
+    type: string
+    pattern: '[a-z0-9][a-z0-9\-]*[a-z0-9]'
+    minLength: 3
+    maxLength: 63
+  S3Key:
+    type: string
+    pattern: .*
+    minLength: 1
+    maxLength: 1024
+  RobotApplicationConfig:
     type: object
     required:
-      - maxJobDurationInSeconds
-      - iamRole
+      - application
+      - launchConfig
     properties:
-      clientRequestToken:
-        $ref: '#/definitions/ClientRequestToken'
-        description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
-      outputLocation:
-        $ref: '#/definitions/OutputLocation'
-        description: Location for output files generated by the simulation job.
-      maxJobDurationInSeconds:
-        $ref: '#/definitions/JobDuration'
-        description: 'The maximum simulation job duration in seconds (up to 14 days or 1,209,600 seconds. When <code>maxJobDurationInSeconds</code> is reached, the simulation job will status will transition to <code>Completed</code>.'
-      iamRole:
-        $ref: '#/definitions/IamRole'
-        description: 'The IAM role name that allows the simulation instance to call the AWS APIs that are specified in its associated policies on your behalf. This is how credentials are passed in to your simulation job. '
-      failureBehavior:
-        $ref: '#/definitions/FailureBehavior'
-        description: <p>The failure behavior the simulation job.</p> <dl> <dt>Continue</dt> <dd> <p>Restart the simulation job in the same host instance.</p> </dd> <dt>Fail</dt> <dd> <p>Stop the simulation job and terminate the instance.</p> </dd> </dl>
-      robotApplications:
-        $ref: '#/definitions/RobotApplicationConfigs'
-        description: The robot application to use in the simulation job.
-      simulationApplications:
-        $ref: '#/definitions/SimulationApplicationConfigs'
-        description: The simulation application to use in the simulation job.
-      tags:
-        $ref: '#/definitions/TagMap'
-        description: A map that contains tag keys and tag values that are attached to the simulation job.
-      vpcConfig:
-        $ref: '#/definitions/VPCConfig'
-        description: 'If your simulation job accesses resources in a VPC, you provide this parameter identifying the list of security group IDs and subnet IDs. These must belong to the same VPC. You must provide at least one security group and one subnet ID. '
+      application:
+        $ref: '#/definitions/Arn'
+        description: The application information for the robot application.
+      applicationVersion:
+        $ref: '#/definitions/Version'
+        description: The version of the robot application.
+      launchConfig:
+        $ref: '#/definitions/LaunchConfig'
+        description: The launch configuration for the robot application.
+    description: Application configuration information for a robot.
+  SimulationApplicationConfig:
+    type: object
+    required:
+      - application
+      - launchConfig
+    properties:
+      application:
+        $ref: '#/definitions/Arn'
+        description: The application information for the simulation application.
+      applicationVersion:
+        $ref: '#/definitions/Version'
+        description: The version of the simulation application.
+      launchConfig:
+        $ref: '#/definitions/LaunchConfig'
+        description: The launch configuration for the simulation application.
+    description: Information about a simulation application configuration.
+  Subnets:
+    type: array
+    items:
+      $ref: '#/definitions/GenericString'
+    minItems: 1
+    maxItems: 16
+  SecurityGroups:
+    type: array
+    items:
+      $ref: '#/definitions/GenericString'
+    minItems: 1
+    maxItems: 5
+  Boolean:
+    type: boolean
   DeleteFleetResponse:
     type: object
     properties: {}
-  DeleteFleetRequest:
-    type: object
-    required:
-      - fleet
-    properties:
-      fleet:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the fleet.
   DeleteRobotResponse:
     type: object
     properties: {}
-  DeleteRobotRequest:
-    type: object
-    required:
-      - robot
-    properties:
-      robot:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the robot.
   DeleteRobotApplicationResponse:
     type: object
     properties: {}
-  DeleteRobotApplicationRequest:
-    type: object
-    required:
-      - application
-    properties:
-      application:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the the robot application.
-      applicationVersion:
-        $ref: '#/definitions/Version'
-        description: The version of the robot application to delete.
   DeleteSimulationApplicationResponse:
     type: object
     properties: {}
-  DeleteSimulationApplicationRequest:
-    type: object
-    required:
-      - application
-    properties:
-      application:
-        $ref: '#/definitions/Arn'
-        description: The application information for the simulation application to delete.
-      applicationVersion:
-        $ref: '#/definitions/Version'
-        description: The version of the simulation application to delete.
   DeregisterRobotResponse:
     type: object
-    properties:
-      fleet:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the fleet.
-      robot:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the robot.
-  DeregisterRobotRequest:
-    type: object
-    required:
-      - fleet
-      - robot
     properties:
       fleet:
         $ref: '#/definitions/Arn'
@@ -2151,14 +2745,6 @@ definitions:
       tags:
         $ref: '#/definitions/TagMap'
         description: The list of all tags added to the specified deployment job.
-  DescribeDeploymentJobRequest:
-    type: object
-    required:
-      - job
-    properties:
-      job:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the deployment job.
   DescribeFleetResponse:
     type: object
     properties:
@@ -2186,14 +2772,6 @@ definitions:
       tags:
         $ref: '#/definitions/TagMap'
         description: The list of all tags added to the specified fleet.
-  DescribeFleetRequest:
-    type: object
-    required:
-      - fleet
-    properties:
-      fleet:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the fleet.
   DescribeRobotResponse:
     type: object
     properties:
@@ -2227,14 +2805,6 @@ definitions:
       tags:
         $ref: '#/definitions/TagMap'
         description: The list of all tags added to the specified robot.
-  DescribeRobotRequest:
-    type: object
-    required:
-      - robot
-    properties:
-      robot:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the robot to be described.
   DescribeRobotApplicationResponse:
     type: object
     properties:
@@ -2262,17 +2832,6 @@ definitions:
       tags:
         $ref: '#/definitions/TagMap'
         description: The list of all tags added to the specified robot application.
-  DescribeRobotApplicationRequest:
-    type: object
-    required:
-      - application
-    properties:
-      application:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the robot application.
-      applicationVersion:
-        $ref: '#/definitions/Version'
-        description: The version of the robot application to describe.
   DescribeSimulationApplicationResponse:
     type: object
     properties:
@@ -2306,17 +2865,6 @@ definitions:
       tags:
         $ref: '#/definitions/TagMap'
         description: The list of all tags added to the specified simulation application.
-  DescribeSimulationApplicationRequest:
-    type: object
-    required:
-      - application
-    properties:
-      application:
-        $ref: '#/definitions/Arn'
-        description: The application information for the simulation application.
-      applicationVersion:
-        $ref: '#/definitions/Version'
-        description: The version of the simulation application to describe.
   DescribeSimulationJobResponse:
     type: object
     properties:
@@ -2368,14 +2916,6 @@ definitions:
       vpcConfig:
         $ref: '#/definitions/VPCConfigResponse'
         description: The VPC configuration.
-  DescribeSimulationJobRequest:
-    type: object
-    required:
-      - job
-    properties:
-      job:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the simulation job to be described.
   ListDeploymentJobsResponse:
     type: object
     properties:
@@ -2385,18 +2925,16 @@ definitions:
       nextToken:
         $ref: '#/definitions/PaginationToken'
         description: 'The <code>nextToken</code> value to include in a future <code>ListDeploymentJobs</code> request. When the results of a <code>ListDeploymentJobs</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
-  ListDeploymentJobsRequest:
+  Filter:
     type: object
     properties:
-      filters:
-        $ref: '#/definitions/Filters'
-        description: '<p>Optional filters to limit results.</p> <p>The filter names <code>status</code> and <code>fleetName</code> are supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters, but they must be for the same named item. For example, if you are looking for items with the status <code>InProgress</code> or the status <code>Pending</code>.</p>'
-      nextToken:
-        $ref: '#/definitions/PaginationToken'
-        description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListDeploymentJobs</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
-      maxResults:
-        $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of deployment job results returned by <code>ListDeploymentJobs</code> in paginated output. When this parameter is used, <code>ListDeploymentJobs</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListDeploymentJobs</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListDeploymentJobs</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+      name:
+        $ref: '#/definitions/Name'
+        description: The name of the filter.
+      values:
+        $ref: '#/definitions/FilterValues'
+        description: A list of values.
+    description: Information about a filter.
   ListFleetsResponse:
     type: object
     properties:
@@ -2406,18 +2944,6 @@ definitions:
       nextToken:
         $ref: '#/definitions/PaginationToken'
         description: 'The <code>nextToken</code> value to include in a future <code>ListDeploymentJobs</code> request. When the results of a <code>ListFleets</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
-  ListFleetsRequest:
-    type: object
-    properties:
-      nextToken:
-        $ref: '#/definitions/PaginationToken'
-        description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListFleets</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
-      maxResults:
-        $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of deployment job results returned by <code>ListFleets</code> in paginated output. When this parameter is used, <code>ListFleets</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListFleets</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListFleets</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
-      filters:
-        $ref: '#/definitions/Filters'
-        description: '<p>Optional filters to limit results.</p> <p>The filter name <code>name</code> is supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters.</p>'
   ListRobotApplicationsResponse:
     type: object
     properties:
@@ -2427,21 +2953,6 @@ definitions:
       nextToken:
         $ref: '#/definitions/PaginationToken'
         description: 'The <code>nextToken</code> value to include in a future <code>ListRobotApplications</code> request. When the results of a <code>ListRobotApplications</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
-  ListRobotApplicationsRequest:
-    type: object
-    properties:
-      versionQualifier:
-        $ref: '#/definitions/VersionQualifier'
-        description: The version qualifier of the robot application.
-      nextToken:
-        $ref: '#/definitions/PaginationToken'
-        description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListRobotApplications</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
-      maxResults:
-        $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of deployment job results returned by <code>ListRobotApplications</code> in paginated output. When this parameter is used, <code>ListRobotApplications</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListRobotApplications</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListRobotApplications</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
-      filters:
-        $ref: '#/definitions/Filters'
-        description: '<p>Optional filters to limit results.</p> <p>The filter name <code>name</code> is supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters.</p>'
   ListRobotsResponse:
     type: object
     properties:
@@ -2451,18 +2962,6 @@ definitions:
       nextToken:
         $ref: '#/definitions/PaginationToken'
         description: 'The <code>nextToken</code> value to include in a future <code>ListRobots</code> request. When the results of a <code>ListRobot</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
-  ListRobotsRequest:
-    type: object
-    properties:
-      nextToken:
-        $ref: '#/definitions/PaginationToken'
-        description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListRobots</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
-      maxResults:
-        $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of deployment job results returned by <code>ListRobots</code> in paginated output. When this parameter is used, <code>ListRobots</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListRobots</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListRobots</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
-      filters:
-        $ref: '#/definitions/Filters'
-        description: '<p>Optional filters to limit results.</p> <p>The filter names <code>status</code> and <code>fleetName</code> are supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters, but they must be for the same named item. For example, if you are looking for items with the status <code>Registered</code> or the status <code>Available</code>.</p>'
   ListSimulationApplicationsResponse:
     type: object
     properties:
@@ -2472,21 +2971,6 @@ definitions:
       nextToken:
         $ref: '#/definitions/PaginationToken'
         description: 'The <code>nextToken</code> value to include in a future <code>ListSimulationApplications</code> request. When the results of a <code>ListRobot</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
-  ListSimulationApplicationsRequest:
-    type: object
-    properties:
-      versionQualifier:
-        $ref: '#/definitions/VersionQualifier'
-        description: The version qualifier of the simulation application.
-      nextToken:
-        $ref: '#/definitions/PaginationToken'
-        description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListSimulationApplications</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
-      maxResults:
-        $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of deployment job results returned by <code>ListSimulationApplications</code> in paginated output. When this parameter is used, <code>ListSimulationApplications</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListSimulationApplications</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListSimulationApplications</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
-      filters:
-        $ref: '#/definitions/Filters'
-        description: '<p>Optional list of filters to limit results.</p> <p>The filter name <code>name</code> is supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters.</p>'
   ListSimulationJobsResponse:
     type: object
     required:
@@ -2498,27 +2982,12 @@ definitions:
       nextToken:
         $ref: '#/definitions/PaginationToken'
         description: 'The <code>nextToken</code> value to include in a future <code>ListSimulationJobs</code> request. When the results of a <code>ListRobot</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
-  ListSimulationJobsRequest:
-    type: object
-    properties:
-      nextToken:
-        $ref: '#/definitions/PaginationToken'
-        description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListSimulationJobs</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
-      maxResults:
-        $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of deployment job results returned by <code>ListSimulationJobs</code> in paginated output. When this parameter is used, <code>ListSimulationJobs</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListSimulationJobs</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListSimulationJobs</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
-      filters:
-        $ref: '#/definitions/Filters'
-        description: '<p>Optional filters to limit results.</p> <p>The filter names <code>status</code> and <code>simulationApplicationName</code> and <code>robotApplicationName</code> are supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters, but they must be for the same named item. For example, if you are looking for items with the status <code>Preparing</code> or the status <code>Running</code>.</p>'
   ListTagsForResourceResponse:
     type: object
     properties:
       tags:
         $ref: '#/definitions/TagMap'
         description: The list of all tags added to the specified resource.
-  ListTagsForResourceRequest:
-    type: object
-    properties: {}
   RegisterRobotResponse:
     type: object
     properties:
@@ -2528,29 +2997,9 @@ definitions:
       robot:
         $ref: '#/definitions/Arn'
         description: Information about the robot registration.
-  RegisterRobotRequest:
-    type: object
-    required:
-      - fleet
-      - robot
-    properties:
-      fleet:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the fleet.
-      robot:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the robot.
   RestartSimulationJobResponse:
     type: object
     properties: {}
-  RestartSimulationJobRequest:
-    type: object
-    required:
-      - job
-    properties:
-      job:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the simulation job.
   SyncDeploymentJobResponse:
     type: object
     properties:
@@ -2578,35 +3027,17 @@ definitions:
       createdAt:
         $ref: '#/definitions/CreatedAt'
         description: 'The time, in milliseconds since the epoch, when the fleet was created.'
-  SyncDeploymentJobRequest:
-    type: object
-    required:
-      - clientRequestToken
-      - fleet
-    properties:
-      clientRequestToken:
-        $ref: '#/definitions/ClientRequestToken'
-        description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
-      fleet:
-        $ref: '#/definitions/Arn'
-        description: The target fleet for the synchronization.
   TagResourceResponse:
     type: object
     properties: {}
-  TagResourceRequest:
-    type: object
-    required:
-      - tags
-    properties:
-      tags:
-        $ref: '#/definitions/TagMap'
-        description: A map that contains tag keys and tag values that are attached to the resource.
   UntagResourceResponse:
     type: object
     properties: {}
-  UntagResourceRequest:
-    type: object
-    properties: {}
+  TagKey:
+    type: string
+    pattern: '[a-zA-Z0-9 _.\-\/+=:]*'
+    minLength: 1
+    maxLength: 128
   UpdateRobotApplicationResponse:
     type: object
     properties:
@@ -2631,25 +3062,6 @@ definitions:
       revisionId:
         $ref: '#/definitions/RevisionId'
         description: The revision id of the robot application.
-  UpdateRobotApplicationRequest:
-    type: object
-    required:
-      - application
-      - sources
-      - robotSoftwareSuite
-    properties:
-      application:
-        $ref: '#/definitions/Arn'
-        description: The application information for the robot application.
-      sources:
-        $ref: '#/definitions/SourceConfigs'
-        description: The sources of the robot application.
-      robotSoftwareSuite:
-        $ref: '#/definitions/RobotSoftwareSuite'
-        description: The robot software suite used by the robot application.
-      currentRevisionId:
-        $ref: '#/definitions/RevisionId'
-        description: The revision id for the robot application.
   UpdateSimulationApplicationResponse:
     type: object
     properties:
@@ -2680,56 +3092,38 @@ definitions:
       revisionId:
         $ref: '#/definitions/RevisionId'
         description: The revision id of the simulation application.
-  UpdateSimulationApplicationRequest:
-    type: object
-    required:
-      - application
-      - sources
-      - simulationSoftwareSuite
-      - robotSoftwareSuite
-      - renderingEngine
-    properties:
-      application:
-        $ref: '#/definitions/Arn'
-        description: The application information for the simulation application.
-      sources:
-        $ref: '#/definitions/SourceConfigs'
-        description: The sources of the simulation application.
-      simulationSoftwareSuite:
-        $ref: '#/definitions/SimulationSoftwareSuite'
-        description: The simulation software suite used by the simulation application.
-      robotSoftwareSuite:
-        $ref: '#/definitions/RobotSoftwareSuite'
-        description: Information about the robot software suite.
-      renderingEngine:
-        $ref: '#/definitions/RenderingEngine'
-        description: The rendering engine for the simulation application.
-      currentRevisionId:
-        $ref: '#/definitions/RevisionId'
-        description: The revision id for the robot application.
   Architecture:
     type: string
     enum:
       - X86_64
       - ARM64
       - ARMHF
-  Arn:
-    type: string
-    pattern: 'arn:.*'
-    minLength: 1
-    maxLength: 1224
   Arns:
     type: array
     items:
       $ref: '#/definitions/Arn'
     minItems: 1
     maxItems: 100
+  BatchDescribeSimulationJobRequest:
+    type: object
+    required:
+      - jobs
+    properties:
+      jobs:
+        $ref: '#/definitions/Arns'
+        description: A list of Amazon Resource Names (ARNs) of simulation jobs to describe.
   SimulationJobs:
     type: array
     items:
       $ref: '#/definitions/SimulationJob'
-  Boolean:
-    type: boolean
+  CancelSimulationJobRequest:
+    type: object
+    required:
+      - job
+    properties:
+      job:
+        $ref: '#/definitions/Arn'
+        description: The simulation job ARN to cancel.
   ClientRequestToken:
     type: string
     pattern: '[a-zA-Z0-9_\-=]*'
@@ -2757,16 +3151,33 @@ definitions:
     minItems: 1
     maxItems: 1
   TagMap:
-    type: array
-    minItems: 0
-    maxItems: 50
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/TagKey'
-        value:
-          $ref: '#/definitions/TagValue'
+    type: object
+    minProperties: 0
+    maxProperties: 50
+    additionalProperties:
+      $ref: '#/definitions/TagValue'
+  CreateDeploymentJobRequest:
+    type: object
+    required:
+      - clientRequestToken
+      - fleet
+      - deploymentApplicationConfigs
+    properties:
+      deploymentConfig:
+        $ref: '#/definitions/DeploymentConfig'
+        description: The requested deployment configuration.
+      clientRequestToken:
+        $ref: '#/definitions/ClientRequestToken'
+        description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+      fleet:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the fleet to deploy.
+      deploymentApplicationConfigs:
+        $ref: '#/definitions/DeploymentApplicationConfigs'
+        description: The deployment application configuration.
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: A map that contains tag keys and tag values that are attached to the deployment job.
   DeploymentStatus:
     type: string
     enum:
@@ -2804,6 +3215,17 @@ definitions:
     pattern: '[a-zA-Z0-9_\-]*'
     minLength: 1
     maxLength: 255
+  CreateFleetRequest:
+    type: object
+    required:
+      - name
+    properties:
+      name:
+        $ref: '#/definitions/Name'
+        description: The name of the fleet.
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: A map that contains tag keys and tag values that are attached to the fleet.
   SourceConfigs:
     type: array
     items:
@@ -2818,6 +3240,25 @@ definitions:
         $ref: '#/definitions/RobotSoftwareSuiteVersionType'
         description: The version of the robot software suite.
     description: Information about a robot software suite.
+  CreateRobotApplicationRequest:
+    type: object
+    required:
+      - name
+      - sources
+      - robotSoftwareSuite
+    properties:
+      name:
+        $ref: '#/definitions/Name'
+        description: The name of the robot application.
+      sources:
+        $ref: '#/definitions/SourceConfigs'
+        description: The sources of the robot application.
+      robotSoftwareSuite:
+        $ref: '#/definitions/RobotSoftwareSuite'
+        description: The robot software suite used by the robot application.
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: A map that contains tag keys and tag values that are attached to the robot application.
   Version:
     type: string
     pattern: '(\$LATEST)|[0-9]*'
@@ -2835,10 +3276,40 @@ definitions:
     pattern: '[a-zA-Z0-9_.\-]*'
     minLength: 1
     maxLength: 40
+  CreateRobotApplicationVersionRequest:
+    type: object
+    required:
+      - application
+    properties:
+      application:
+        $ref: '#/definitions/Arn'
+        description: The application information for the robot application.
+      currentRevisionId:
+        $ref: '#/definitions/RevisionId'
+        description: 'The current revision id for the robot application. If you provide a value and it matches the latest revision ID, a new version will be created.'
   Id:
     type: string
     minLength: 1
     maxLength: 1224
+  CreateRobotRequest:
+    type: object
+    required:
+      - name
+      - architecture
+      - greengrassGroupId
+    properties:
+      name:
+        $ref: '#/definitions/Name'
+        description: The name for the robot.
+      architecture:
+        $ref: '#/definitions/Architecture'
+        description: The target architecture of the robot.
+      greengrassGroupId:
+        $ref: '#/definitions/Id'
+        description: The Greengrass group id.
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: A map that contains tag keys and tag values that are attached to the robot.
   SimulationSoftwareSuite:
     type: object
     properties:
@@ -2859,6 +3330,44 @@ definitions:
         $ref: '#/definitions/RenderingEngineVersionType'
         description: The version of the rendering engine.
     description: Information about a rendering engine.
+  CreateSimulationApplicationRequest:
+    type: object
+    required:
+      - name
+      - sources
+      - simulationSoftwareSuite
+      - robotSoftwareSuite
+      - renderingEngine
+    properties:
+      name:
+        $ref: '#/definitions/Name'
+        description: The name of the simulation application.
+      sources:
+        $ref: '#/definitions/SourceConfigs'
+        description: The sources of the simulation application.
+      simulationSoftwareSuite:
+        $ref: '#/definitions/SimulationSoftwareSuite'
+        description: The simulation software suite used by the simulation application.
+      robotSoftwareSuite:
+        $ref: '#/definitions/RobotSoftwareSuite'
+        description: The robot software suite of the simulation application.
+      renderingEngine:
+        $ref: '#/definitions/RenderingEngine'
+        description: The rendering engine for the simulation application.
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: A map that contains tag keys and tag values that are attached to the simulation application.
+  CreateSimulationApplicationVersionRequest:
+    type: object
+    required:
+      - application
+    properties:
+      application:
+        $ref: '#/definitions/Arn'
+        description: The application information for the simulation application.
+      currentRevisionId:
+        $ref: '#/definitions/RevisionId'
+        description: 'The current revision id for the simulation application. If you provide a value and it matches the latest revision ID, a new version will be created.'
   OutputLocation:
     type: object
     properties:
@@ -2908,6 +3417,39 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: A boolean indicating whether to assign a public IP address.
     description: 'If your simulation job accesses resources in a VPC, you provide this parameter identifying the list of security group IDs and subnet IDs. These must belong to the same VPC. You must provide at least one security group and two subnet IDs.'
+  CreateSimulationJobRequest:
+    type: object
+    required:
+      - maxJobDurationInSeconds
+      - iamRole
+    properties:
+      clientRequestToken:
+        $ref: '#/definitions/ClientRequestToken'
+        description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+      outputLocation:
+        $ref: '#/definitions/OutputLocation'
+        description: Location for output files generated by the simulation job.
+      maxJobDurationInSeconds:
+        $ref: '#/definitions/JobDuration'
+        description: 'The maximum simulation job duration in seconds (up to 14 days or 1,209,600 seconds. When <code>maxJobDurationInSeconds</code> is reached, the simulation job will status will transition to <code>Completed</code>.'
+      iamRole:
+        $ref: '#/definitions/IamRole'
+        description: 'The IAM role name that allows the simulation instance to call the AWS APIs that are specified in its associated policies on your behalf. This is how credentials are passed in to your simulation job. '
+      failureBehavior:
+        $ref: '#/definitions/FailureBehavior'
+        description: <p>The failure behavior the simulation job.</p> <dl> <dt>Continue</dt> <dd> <p>Restart the simulation job in the same host instance.</p> </dd> <dt>Fail</dt> <dd> <p>Stop the simulation job and terminate the instance.</p> </dd> </dl>
+      robotApplications:
+        $ref: '#/definitions/RobotApplicationConfigs'
+        description: The robot application to use in the simulation job.
+      simulationApplications:
+        $ref: '#/definitions/SimulationApplicationConfigs'
+        description: The simulation application to use in the simulation job.
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: A map that contains tag keys and tag values that are attached to the simulation job.
+      vpcConfig:
+        $ref: '#/definitions/VPCConfig'
+        description: 'If your simulation job accesses resources in a VPC, you provide this parameter identifying the list of security group IDs and subnet IDs. These must belong to the same VPC. You must provide at least one security group and one subnet ID. '
   SimulationJobStatus:
     type: string
     enum:
@@ -2959,6 +3501,44 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: A boolean indicating if a public IP was assigned.
     description: VPC configuration associated with your simulation job.
+  DeleteFleetRequest:
+    type: object
+    required:
+      - fleet
+    properties:
+      fleet:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the fleet.
+  DeleteRobotApplicationRequest:
+    type: object
+    required:
+      - application
+    properties:
+      application:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the the robot application.
+      applicationVersion:
+        $ref: '#/definitions/Version'
+        description: The version of the robot application to delete.
+  DeleteRobotRequest:
+    type: object
+    required:
+      - robot
+    properties:
+      robot:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the robot.
+  DeleteSimulationApplicationRequest:
+    type: object
+    required:
+      - application
+    properties:
+      application:
+        $ref: '#/definitions/Arn'
+        description: The application information for the simulation application to delete.
+      applicationVersion:
+        $ref: '#/definitions/Version'
+        description: The version of the simulation application to delete.
   DeploymentVersion:
     type: string
     pattern: '[0-9]*'
@@ -2986,27 +3566,6 @@ definitions:
         $ref: '#/definitions/EnvironmentVariableMap'
         description: An array of key/value pairs specifying environment variables for the robot application
     description: Configuration information for a deployment launch.
-  DeploymentApplicationConfig:
-    type: object
-    required:
-      - application
-      - applicationVersion
-      - launchConfig
-    properties:
-      application:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the robot application.
-      applicationVersion:
-        $ref: '#/definitions/DeploymentVersion'
-        description: The version of the application.
-      launchConfig:
-        $ref: '#/definitions/DeploymentLaunchConfig'
-        description: The launch configuration.
-    description: Information about a deployment application configuration.
-  Percentage:
-    type: integer
-    minimum: 1
-    maximum: 100
   DeploymentJob:
     type: object
     properties:
@@ -3046,26 +3605,68 @@ definitions:
     minLength: 1
     maxLength: 1024
   EnvironmentVariableMap:
-    type: array
-    minItems: 0
-    maxItems: 16
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/EnvironmentVariableKey'
-        value:
-          $ref: '#/definitions/EnvironmentVariableValue'
+    type: object
+    minProperties: 0
+    maxProperties: 16
+    additionalProperties:
+      $ref: '#/definitions/EnvironmentVariableValue'
+  DeregisterRobotRequest:
+    type: object
+    required:
+      - fleet
+      - robot
+    properties:
+      fleet:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the fleet.
+      robot:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the robot.
+  DescribeDeploymentJobRequest:
+    type: object
+    required:
+      - job
+    properties:
+      job:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the deployment job.
   RobotDeploymentSummary:
     type: array
     items:
       $ref: '#/definitions/RobotDeployment'
+  DescribeFleetRequest:
+    type: object
+    required:
+      - fleet
+    properties:
+      fleet:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the fleet.
   Robots:
     type: array
     items:
       $ref: '#/definitions/Robot'
     minItems: 0
     maxItems: 1000
+  DescribeRobotApplicationRequest:
+    type: object
+    required:
+      - application
+    properties:
+      application:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the robot application.
+      applicationVersion:
+        $ref: '#/definitions/Version'
+        description: The version of the robot application to describe.
+  DescribeRobotRequest:
+    type: object
+    required:
+      - robot
+    properties:
+      robot:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the robot to be described.
   RobotStatus:
     type: string
     enum:
@@ -3076,6 +3677,25 @@ definitions:
       - Failed
       - InSync
       - NoResponse
+  DescribeSimulationApplicationRequest:
+    type: object
+    required:
+      - application
+    properties:
+      application:
+        $ref: '#/definitions/Arn'
+        description: The application information for the simulation application.
+      applicationVersion:
+        $ref: '#/definitions/Version'
+        description: The version of the simulation application to describe.
+  DescribeSimulationJobRequest:
+    type: object
+    required:
+      - job
+    properties:
+      job:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the simulation job to be described.
   EnvironmentVariableKey:
     type: string
     pattern: '[A-Z_][A-Z0-9_]*'
@@ -3091,16 +3711,6 @@ definitions:
       $ref: '#/definitions/Name'
     minItems: 1
     maxItems: 1
-  Filter:
-    type: object
-    properties:
-      name:
-        $ref: '#/definitions/Name'
-        description: The name of the filter.
-      values:
-        $ref: '#/definitions/FilterValues'
-        description: A list of values.
-    description: Information about a filter.
   Filters:
     type: array
     items:
@@ -3160,37 +3770,108 @@ definitions:
     maxLength: 2048
   MaxResults:
     type: integer
+  ListDeploymentJobsRequest:
+    type: object
+    properties:
+      filters:
+        $ref: '#/definitions/Filters'
+        description: '<p>Optional filters to limit results.</p> <p>The filter names <code>status</code> and <code>fleetName</code> are supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters, but they must be for the same named item. For example, if you are looking for items with the status <code>InProgress</code> or the status <code>Pending</code>.</p>'
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListDeploymentJobs</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of deployment job results returned by <code>ListDeploymentJobs</code> in paginated output. When this parameter is used, <code>ListDeploymentJobs</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListDeploymentJobs</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListDeploymentJobs</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+  ListFleetsRequest:
+    type: object
+    properties:
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListFleets</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of deployment job results returned by <code>ListFleets</code> in paginated output. When this parameter is used, <code>ListFleets</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListFleets</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListFleets</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+      filters:
+        $ref: '#/definitions/Filters'
+        description: '<p>Optional filters to limit results.</p> <p>The filter name <code>name</code> is supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters.</p>'
   VersionQualifier:
     type: string
     pattern: ALL
+  ListRobotApplicationsRequest:
+    type: object
+    properties:
+      versionQualifier:
+        $ref: '#/definitions/VersionQualifier'
+        description: The version qualifier of the robot application.
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListRobotApplications</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of deployment job results returned by <code>ListRobotApplications</code> in paginated output. When this parameter is used, <code>ListRobotApplications</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListRobotApplications</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListRobotApplications</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+      filters:
+        $ref: '#/definitions/Filters'
+        description: '<p>Optional filters to limit results.</p> <p>The filter name <code>name</code> is supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters.</p>'
   RobotApplicationSummaries:
     type: array
     items:
       $ref: '#/definitions/RobotApplicationSummary'
     minItems: 0
     maxItems: 100
+  ListRobotsRequest:
+    type: object
+    properties:
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListRobots</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of deployment job results returned by <code>ListRobots</code> in paginated output. When this parameter is used, <code>ListRobots</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListRobots</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListRobots</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+      filters:
+        $ref: '#/definitions/Filters'
+        description: '<p>Optional filters to limit results.</p> <p>The filter names <code>status</code> and <code>fleetName</code> are supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters, but they must be for the same named item. For example, if you are looking for items with the status <code>Registered</code> or the status <code>Available</code>.</p>'
+  ListSimulationApplicationsRequest:
+    type: object
+    properties:
+      versionQualifier:
+        $ref: '#/definitions/VersionQualifier'
+        description: The version qualifier of the simulation application.
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListSimulationApplications</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of deployment job results returned by <code>ListSimulationApplications</code> in paginated output. When this parameter is used, <code>ListSimulationApplications</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListSimulationApplications</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListSimulationApplications</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+      filters:
+        $ref: '#/definitions/Filters'
+        description: '<p>Optional list of filters to limit results.</p> <p>The filter name <code>name</code> is supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters.</p>'
   SimulationApplicationSummaries:
     type: array
     items:
       $ref: '#/definitions/SimulationApplicationSummary'
     minItems: 0
     maxItems: 100
+  ListSimulationJobsRequest:
+    type: object
+    properties:
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListSimulationJobs</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of deployment job results returned by <code>ListSimulationJobs</code> in paginated output. When this parameter is used, <code>ListSimulationJobs</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListSimulationJobs</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListSimulationJobs</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+      filters:
+        $ref: '#/definitions/Filters'
+        description: '<p>Optional filters to limit results.</p> <p>The filter names <code>status</code> and <code>simulationApplicationName</code> and <code>robotApplicationName</code> are supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters, but they must be for the same named item. For example, if you are looking for items with the status <code>Preparing</code> or the status <code>Running</code>.</p>'
   SimulationJobSummaries:
     type: array
     items:
       $ref: '#/definitions/SimulationJobSummary'
     minItems: 0
     maxItems: 100
-  S3Bucket:
-    type: string
-    pattern: '[a-z0-9][a-z0-9\-]*[a-z0-9]'
-    minLength: 3
-    maxLength: 63
-  S3Key:
-    type: string
-    pattern: .*
-    minLength: 1
-    maxLength: 1024
+  ListTagsForResourceRequest:
+    type: object
+    properties: {}
   PercentDone:
     type: number
     format: float
@@ -3221,13 +3902,26 @@ definitions:
         $ref: '#/definitions/GenericString'
         description: The Amazon Resource Name (ARN) of the deployment job.
     description: Information about the progress of a deployment job.
-  RenderingEngineType:
-    type: string
-    enum:
-      - OGRE
-  RenderingEngineVersionType:
-    type: string
-    pattern: 1.x
+  RegisterRobotRequest:
+    type: object
+    required:
+      - fleet
+      - robot
+    properties:
+      fleet:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the fleet.
+      robot:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the robot.
+  RestartSimulationJobRequest:
+    type: object
+    required:
+      - job
+    properties:
+      job:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the simulation job.
   Robot:
     type: object
     properties:
@@ -3259,22 +3953,6 @@ definitions:
         $ref: '#/definitions/CreatedAt'
         description: The time of the last deployment.
     description: Information about a robot.
-  RobotApplicationConfig:
-    type: object
-    required:
-      - application
-      - launchConfig
-    properties:
-      application:
-        $ref: '#/definitions/Arn'
-        description: The application information for the robot application.
-      applicationVersion:
-        $ref: '#/definitions/Version'
-        description: The version of the robot application.
-      launchConfig:
-        $ref: '#/definitions/LaunchConfig'
-        description: The launch configuration for the robot application.
-    description: Application configuration information for a robot.
   RobotApplicationNames:
     type: array
     items:
@@ -3322,38 +4000,8 @@ definitions:
         $ref: '#/definitions/DeploymentJobErrorCode'
         description: The robot deployment failure code.
     description: Information about a robot deployment.
-  RobotSoftwareSuiteType:
-    type: string
-    enum:
-      - ROS
-  RobotSoftwareSuiteVersionType:
-    type: string
-    enum:
-      - Kinetic
   S3Etag:
     type: string
-  SecurityGroups:
-    type: array
-    items:
-      $ref: '#/definitions/GenericString'
-    minItems: 1
-    maxItems: 5
-  SimulationApplicationConfig:
-    type: object
-    required:
-      - application
-      - launchConfig
-    properties:
-      application:
-        $ref: '#/definitions/Arn'
-        description: The application information for the simulation application.
-      applicationVersion:
-        $ref: '#/definitions/Version'
-        description: The version of the simulation application.
-      launchConfig:
-        $ref: '#/definitions/LaunchConfig'
-        description: The launch configuration for the simulation application.
-    description: Information about a simulation application configuration.
   SimulationApplicationNames:
     type: array
     items:
@@ -3450,13 +4098,6 @@ definitions:
         $ref: '#/definitions/RobotApplicationNames'
         description: A list of simulation job robot application names.
     description: Summary information for a simulation job.
-  SimulationSoftwareSuiteType:
-    type: string
-    enum:
-      - Gazebo
-  SimulationSoftwareSuiteVersionType:
-    type: string
-    pattern: 7|9
   Source:
     type: object
     properties:
@@ -3473,36 +4114,76 @@ definitions:
         $ref: '#/definitions/Architecture'
         description: The taget processor architecture for the application.
     description: Information about a source.
-  SourceConfig:
+  SyncDeploymentJobRequest:
     type: object
+    required:
+      - clientRequestToken
+      - fleet
     properties:
-      s3Bucket:
-        $ref: '#/definitions/S3Bucket'
-        description: The Amazon S3 bucket name.
-      s3Key:
-        $ref: '#/definitions/S3Key'
-        description: The s3 object key.
-      architecture:
-        $ref: '#/definitions/Architecture'
-        description: The target processor architecture for the application.
-    description: Information about a source configuration.
-  Subnets:
-    type: array
-    items:
-      $ref: '#/definitions/GenericString'
-    minItems: 1
-    maxItems: 16
-  TagKey:
-    type: string
-    pattern: '[a-zA-Z0-9 _.\-\/+=:]*'
-    minLength: 1
-    maxLength: 128
+      clientRequestToken:
+        $ref: '#/definitions/ClientRequestToken'
+        description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+      fleet:
+        $ref: '#/definitions/Arn'
+        description: The target fleet for the synchronization.
   TagKeyList:
     type: array
     items:
       $ref: '#/definitions/TagKey'
-  TagValue:
-    type: string
-    pattern: '[a-zA-Z0-9 _.\-\/+=:]*'
-    minLength: 0
-    maxLength: 256
+  TagResourceRequest:
+    type: object
+    required:
+      - tags
+    properties:
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: A map that contains tag keys and tag values that are attached to the resource.
+  UntagResourceRequest:
+    type: object
+    properties: {}
+  UpdateRobotApplicationRequest:
+    type: object
+    required:
+      - application
+      - sources
+      - robotSoftwareSuite
+    properties:
+      application:
+        $ref: '#/definitions/Arn'
+        description: The application information for the robot application.
+      sources:
+        $ref: '#/definitions/SourceConfigs'
+        description: The sources of the robot application.
+      robotSoftwareSuite:
+        $ref: '#/definitions/RobotSoftwareSuite'
+        description: The robot software suite used by the robot application.
+      currentRevisionId:
+        $ref: '#/definitions/RevisionId'
+        description: The revision id for the robot application.
+  UpdateSimulationApplicationRequest:
+    type: object
+    required:
+      - application
+      - sources
+      - simulationSoftwareSuite
+      - robotSoftwareSuite
+      - renderingEngine
+    properties:
+      application:
+        $ref: '#/definitions/Arn'
+        description: The application information for the simulation application.
+      sources:
+        $ref: '#/definitions/SourceConfigs'
+        description: The sources of the simulation application.
+      simulationSoftwareSuite:
+        $ref: '#/definitions/SimulationSoftwareSuite'
+        description: The simulation software suite used by the simulation application.
+      robotSoftwareSuite:
+        $ref: '#/definitions/RobotSoftwareSuite'
+        description: Information about the robot software suite.
+      renderingEngine:
+        $ref: '#/definitions/RenderingEngine'
+        description: The rendering engine for the simulation application.
+      currentRevisionId:
+        $ref: '#/definitions/RevisionId'
+        description: The revision id for the robot application.

@@ -99,7 +99,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /:
+  '/#X-Amz-Target=MacieService.AssociateMemberAccount':
     post:
       operationId: AssociateMemberAccount
       description: Associates a specified AWS account with Amazon Macie as a member account.
@@ -124,6 +124,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AssociateMemberAccountRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - MacieService.AssociateMemberAccount
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -134,7 +140,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#AssociateS3Resources':
+  '/#X-Amz-Target=MacieService.AssociateS3Resources':
     post:
       operationId: AssociateS3Resources
       description: 'Associates specified S3 resources with Amazon Macie for monitoring and data classification. If memberAccountId isn''t specified, the action associates specified S3 resources with Macie for the current master account. If memberAccountId is specified, the action associates specified S3 resources with Macie for the specified member account. '
@@ -165,6 +171,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AssociateS3ResourcesRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - MacieService.AssociateS3Resources
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -175,7 +187,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DisassociateMemberAccount':
+  '/#X-Amz-Target=MacieService.DisassociateMemberAccount':
     post:
       operationId: DisassociateMemberAccount
       description: Removes the specified member account from Amazon Macie.
@@ -196,6 +208,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DisassociateMemberAccountRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - MacieService.DisassociateMemberAccount
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -206,7 +224,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DisassociateS3Resources':
+  '/#X-Amz-Target=MacieService.DisassociateS3Resources':
     post:
       operationId: DisassociateS3Resources
       description: 'Removes specified S3 resources from being monitored by Amazon Macie. If memberAccountId isn''t specified, the action removes specified S3 resources from Macie for the current master account. If memberAccountId is specified, the action removes specified S3 resources from Macie for the specified member account.'
@@ -233,6 +251,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DisassociateS3ResourcesRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - MacieService.DisassociateS3Resources
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -243,7 +267,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListMemberAccounts':
+  '/#X-Amz-Target=MacieService.ListMemberAccounts':
     post:
       operationId: ListMemberAccounts
       description: Lists all Amazon Macie member accounts for the current Amazon Macie master account.
@@ -276,6 +300,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - MacieService.ListMemberAccounts
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -286,7 +316,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListS3Resources':
+  '/#X-Amz-Target=MacieService.ListS3Resources':
     post:
       operationId: ListS3Resources
       description: 'Lists all the S3 resources associated with Amazon Macie. If memberAccountId isn''t specified, the action lists the S3 resources associated with Amazon Macie for the current master account. If memberAccountId is specified, the action lists the S3 resources associated with Amazon Macie for the specified member account. '
@@ -323,6 +353,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - MacieService.ListS3Resources
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -333,7 +369,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateS3Resources':
+  '/#X-Amz-Target=MacieService.UpdateS3Resources':
     post:
       operationId: UpdateS3Resources
       description: 'Updates the classification types for the specified S3 resources. If memberAccountId isn''t specified, the action updates the classification types of the S3 resources associated with Amazon Macie for the current master account. If memberAccountId is specified, the action updates the classification types of the S3 resources associated with Amazon Macie for the specified member account. '
@@ -360,6 +396,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateS3ResourcesRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - MacieService.UpdateS3Resources
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'

@@ -99,7 +99,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  '/accounts/{accountId}/users/{userId}':
+  '/accounts/{accountId}/users/{userId}#operation=associate-phone-number':
     post:
       operationId: AssociatePhoneNumberWithUser
       description: Associates a phone number with the specified Amazon Chime user.
@@ -137,25 +137,35 @@ paths:
           schema:
             $ref: '#/definitions/ServiceFailureException'
       parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: The Amazon Chime account ID.
+          type: string
+        - name: userId
+          in: path
+          required: true
+          description: The user ID.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/AssociatePhoneNumberWithUserRequest'
+            type: object
+            required:
+              - E164PhoneNumber
+            properties:
+              E164PhoneNumber:
+                description: 'The phone number, in E.164 format.'
+                type: string
+                pattern: '^\+?[1-9]\d{1,14}$'
+                format: password
         - name: operation
           in: query
           required: true
           type: string
           enum:
             - associate-phone-number
-        - name: accountId
-          type: string
-          in: path
-          required: true
-        - name: userId
-          type: string
-          in: path
-          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -166,7 +176,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/voice-connectors/{voiceConnectorId}':
+  '/voice-connectors/{voiceConnectorId}#operation=associate-phone-numbers':
     post:
       operationId: AssociatePhoneNumbersWithVoiceConnector
       description: Associates a phone number with the specified Amazon Chime Voice Connector.
@@ -204,21 +214,29 @@ paths:
           schema:
             $ref: '#/definitions/ServiceFailureException'
       parameters:
+        - name: voiceConnectorId
+          in: path
+          required: true
+          description: The Amazon Chime Voice Connector ID.
+          type: string
+          pattern: .*\S.*
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/AssociatePhoneNumbersWithVoiceConnectorRequest'
+            type: object
+            properties:
+              E164PhoneNumbers:
+                description: 'List of phone numbers, in E.164 format.'
+                type: array
+                items:
+                  $ref: '#/definitions/E164PhoneNumber'
         - name: operation
           in: query
           required: true
           type: string
           enum:
             - associate-phone-numbers
-        - name: voiceConnectorId
-          type: string
-          in: path
-          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -229,7 +247,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /phone-numbers:
+  '/phone-numbers#operation=batch-delete':
     post:
       operationId: BatchDeletePhoneNumber
       description: <p>Moves phone numbers into the <b>Deletion queue</b>. Phone numbers must be disassociated from any users or Amazon Chime Voice Connectors before they can be deleted.</p> <p>Phone numbers remain in the <b>Deletion queue</b> for 7 days before they are deleted permanently.</p>
@@ -271,7 +289,16 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/BatchDeletePhoneNumberRequest'
+            type: object
+            required:
+              - PhoneNumberIds
+            properties:
+              PhoneNumberIds:
+                description: List of phone number IDs.
+                type: array
+                items:
+                  $ref: '#/definitions/String'
+                minItems: 1
         - name: operation
           in: query
           required: true
@@ -288,7 +315,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/accounts/{accountId}/users':
+  '/accounts/{accountId}/users#operation=suspend':
     post:
       operationId: BatchSuspendUser
       description: '<p>Suspends up to 50 users from a <code>Team</code> or <code>EnterpriseLWA</code> Amazon Chime account. For more information about different account types, see <a href="https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html">Managing Your Amazon Chime Accounts</a> in the <i>Amazon Chime Administration Guide</i>.</p> <p>Users suspended from a <code>Team</code> account are dissociated from the account, but they can continue to use Amazon Chime as free users. To remove the suspension from suspended <code>Team</code> account users, invite them to the <code>Team</code> account again. You can use the <a>InviteUsers</a> action to do so.</p> <p>Users suspended from an <code>EnterpriseLWA</code> account are immediately signed out of Amazon Chime and can no longer sign in. To remove the suspension from suspended <code>EnterpriseLWA</code> account users, use the <a>BatchUnsuspendUser</a> action. </p> <p>To sign out users without suspending them, use the <a>LogoutUser</a> action.</p>'
@@ -326,21 +353,32 @@ paths:
           schema:
             $ref: '#/definitions/ServiceFailureException'
       parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: The Amazon Chime account ID.
+          type: string
+          pattern: .*\S.*
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/BatchSuspendUserRequest'
+            type: object
+            required:
+              - UserIdList
+            properties:
+              UserIdList:
+                description: The request containing the user IDs to suspend.
+                type: array
+                items:
+                  $ref: '#/definitions/NonEmptyString'
+                maxItems: 50
         - name: operation
           in: query
           required: true
           type: string
           enum:
             - suspend
-        - name: accountId
-          type: string
-          in: path
-          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -351,7 +389,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/accounts/{accountId}/users#BatchUnsuspendUser':
+  '/accounts/{accountId}/users#operation=unsuspend':
     post:
       operationId: BatchUnsuspendUser
       description: '<p>Removes the suspension from up to 50 previously suspended users for the specified Amazon Chime <code>EnterpriseLWA</code> account. Only users on <code>EnterpriseLWA</code> accounts can be unsuspended using this action. For more information about different account types, see <a href="https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html">Managing Your Amazon Chime Accounts</a> in the <i>Amazon Chime Administration Guide</i>.</p> <p>Previously suspended users who are unsuspended using this action are returned to <code>Registered</code> status. Users who are not previously suspended are ignored.</p>'
@@ -389,21 +427,32 @@ paths:
           schema:
             $ref: '#/definitions/ServiceFailureException'
       parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: The Amazon Chime account ID.
+          type: string
+          pattern: .*\S.*
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/BatchUnsuspendUserRequest'
+            type: object
+            required:
+              - UserIdList
+            properties:
+              UserIdList:
+                description: The request containing the user IDs to unsuspend.
+                type: array
+                items:
+                  $ref: '#/definitions/NonEmptyString'
+                maxItems: 50
         - name: operation
           in: query
           required: true
           type: string
           enum:
             - unsuspend
-        - name: accountId
-          type: string
-          in: path
-          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -414,7 +463,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/phone-numbers#BatchUpdatePhoneNumber':
+  '/phone-numbers#operation=batch-update':
     post:
       operationId: BatchUpdatePhoneNumber
       description: Updates phone number product types. Choose from Amazon Chime Business Calling and Amazon Chime Voice Connector product types.
@@ -456,7 +505,15 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/BatchUpdatePhoneNumberRequest'
+            type: object
+            required:
+              - UpdatePhoneNumberRequestItems
+            properties:
+              UpdatePhoneNumberRequestItems:
+                description: The request containing the phone number IDs and product types to update.
+                type: array
+                items:
+                  $ref: '#/definitions/UpdatePhoneNumberRequestItem'
         - name: operation
           in: query
           required: true
@@ -473,7 +530,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/accounts/{accountId}/users#BatchUpdateUser':
+  '/accounts/{accountId}/users':
     post:
       operationId: BatchUpdateUser
       description: 'Updates user details within the <a>UpdateUserRequestItem</a> object for up to 20 users for the specified Amazon Chime account. Currently, only <code>LicenseType</code> updates are supported for this action.'
@@ -511,15 +568,26 @@ paths:
           schema:
             $ref: '#/definitions/ServiceFailureException'
       parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: The Amazon Chime account ID.
+          type: string
+          pattern: .*\S.*
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/BatchUpdateUserRequest'
-        - name: accountId
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - UpdateUserRequestItems
+            properties:
+              UpdateUserRequestItems:
+                description: The request containing the user IDs and details to update.
+                type: array
+                items:
+                  $ref: '#/definitions/UpdateUserRequestItem'
+                maxItems: 20
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -530,7 +598,79 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/accounts#CreateAccount':
+    get:
+      operationId: ListUsers
+      description: Lists the users that belong to the specified Amazon Chime account. You can specify an email address to list only the user that the email address belongs to.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListUsersResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: The Amazon Chime account ID.
+          type: string
+          pattern: .*\S.*
+        - name: user-email
+          in: query
+          required: false
+          description: Optional. The user email address used to filter results. Maximum 1.
+          type: string
+          pattern: .+@.+\..+
+          format: password
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of results to return in a single call. Defaults to 100.
+          type: integer
+          minimum: 1
+          maximum: 200
+        - name: next-token
+          in: query
+          required: false
+          description: The token to use to retrieve the next page of results.
+          type: string
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+  /accounts:
     post:
       operationId: CreateAccount
       description: 'Creates an Amazon Chime account under the administrator''s AWS account. Only <code>Team</code> account types are currently supported for this action. For more information about different account types, see <a href="https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html">Managing Your Amazon Chime Accounts</a> in the <i>Amazon Chime Administration Guide</i>.'
@@ -572,7 +712,16 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateAccountRequest'
+            type: object
+            required:
+              - Name
+            properties:
+              Name:
+                description: The name of the Amazon Chime account.
+                type: string
+                pattern: .*\S.*
+                minLength: 1
+                maxLength: 100
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -583,7 +732,81 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/phone-number-orders#CreatePhoneNumberOrder':
+    get:
+      operationId: ListAccounts
+      description: 'Lists the Amazon Chime accounts under the administrator''s AWS account. You can filter accounts by account name prefix. To find out which Amazon Chime account a user belongs to, you can filter by the user''s email address, which returns one account result.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListAccountsResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: name
+          in: query
+          required: false
+          description: Amazon Chime account name prefix with which to filter results.
+          type: string
+          pattern: .*\S.*
+          minLength: 1
+          maxLength: 100
+        - name: user-email
+          in: query
+          required: false
+          description: User email address with which to filter results.
+          type: string
+          pattern: .+@.+\..+
+          format: password
+        - name: next-token
+          in: query
+          required: false
+          description: The token to use to retrieve the next page of results.
+          type: string
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of results to return in a single call. Defaults to 100.
+          type: integer
+          minimum: 1
+          maximum: 200
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+  /phone-number-orders:
     post:
       operationId: CreatePhoneNumberOrder
       description: Creates an order for phone numbers to be provisioned. Choose from Amazon Chime Business Calling and Amazon Chime Voice Connector product types.
@@ -621,7 +844,22 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreatePhoneNumberOrderRequest'
+            type: object
+            required:
+              - ProductType
+              - E164PhoneNumbers
+            properties:
+              ProductType:
+                description: The phone number product type.
+                type: string
+                enum:
+                  - BusinessCalling
+                  - VoiceConnector
+              E164PhoneNumbers:
+                description: 'List of phone numbers, in E.164 format.'
+                type: array
+                items:
+                  $ref: '#/definitions/E164PhoneNumber'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -632,7 +870,62 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/voice-connectors#CreateVoiceConnector':
+    get:
+      operationId: ListPhoneNumberOrders
+      description: Lists the phone number orders for the administrator's Amazon Chime account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListPhoneNumberOrdersResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '483':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: next-token
+          in: query
+          required: false
+          description: The token to use to retrieve the next page of results.
+          type: string
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of results to return in a single call.
+          type: integer
+          minimum: 1
+          maximum: 99
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+  /voice-connectors:
     post:
       operationId: CreateVoiceConnector
       description: 'Creates an Amazon Chime Voice Connector under the administrator''s AWS account. Enabling <a>CreateVoiceConnectorRequest$RequireEncryption</a> configures your Amazon Chime Voice Connector to use TLS transport for SIP signaling and Secure RTP (SRTP) for media. Inbound calls use TLS transport, and unencrypted outbound calls are blocked.'
@@ -670,7 +963,19 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateVoiceConnectorRequest'
+            type: object
+            required:
+              - Name
+              - RequireEncryption
+            properties:
+              Name:
+                description: The name of the Amazon Chime Voice Connector.
+                type: string
+                minLength: 1
+                maxLength: 256
+              RequireEncryption:
+                description: 'When enabled, requires encryption for the Amazon Chime Voice Connector.'
+                type: boolean
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -681,7 +986,62 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/accounts/{accountId}#DeleteAccount':
+    get:
+      operationId: ListVoiceConnectors
+      description: Lists the Amazon Chime Voice Connectors for the administrator's AWS account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListVoiceConnectorsResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '483':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: next-token
+          in: query
+          required: false
+          description: The token to use to retrieve the next page of results.
+          type: string
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of results to return in a single call.
+          type: integer
+          minimum: 1
+          maximum: 99
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+  '/accounts/{accountId}':
     delete:
       operationId: DeleteAccount
       description: '<p>Deletes the specified Amazon Chime account. You must suspend all users before deleting a <code>Team</code> account. You can use the <a>BatchSuspendUser</a> action to do so.</p> <p>For <code>EnterpriseLWA</code> and <code>EnterpriseAD</code> accounts, you must release the claimed domains for your Amazon Chime account before deletion. As soon as you release the domain, all users under that account are suspended.</p> <p>Deleted accounts appear in your <code>Disabled</code> accounts list for 90 days. To restore a deleted account from your <code>Disabled</code> accounts list, you must contact AWS Support.</p> <p>After 90 days, deleted accounts are permanently removed from your <code>Disabled</code> accounts list.</p>'
@@ -723,15 +1083,12 @@ paths:
           schema:
             $ref: '#/definitions/ServiceFailureException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteAccountRequest'
         - name: accountId
-          type: string
           in: path
           required: true
+          description: The Amazon Chime account ID.
+          type: string
+          pattern: .*\S.*
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -742,418 +1099,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/phone-numbers/{phoneNumberId}#DeletePhoneNumber':
-    delete:
-      operationId: DeletePhoneNumber
-      description: <p>Moves the specified phone number into the <b>Deletion queue</b>. A phone number must be disassociated from any users or Amazon Chime Voice Connectors before it can be deleted.</p> <p>Deleted phone numbers remain in the <b>Deletion queue</b> for 7 days before they are deleted permanently.</p>
-      responses:
-        '204':
-          description: Success
-        '480':
-          description: UnauthorizedClientException
-          schema:
-            $ref: '#/definitions/UnauthorizedClientException'
-        '481':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '483':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '484':
-          description: ThrottledClientException
-          schema:
-            $ref: '#/definitions/ThrottledClientException'
-        '485':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '486':
-          description: ServiceFailureException
-          schema:
-            $ref: '#/definitions/ServiceFailureException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeletePhoneNumberRequest'
-        - name: phoneNumberId
-          type: string
-          in: path
-          required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/voice-connectors/{voiceConnectorId}#DeleteVoiceConnector':
-    delete:
-      operationId: DeleteVoiceConnector
-      description: Deletes the specified Amazon Chime Voice Connector. Any phone numbers assigned to the Amazon Chime Voice Connector must be unassigned from it before it can be deleted.
-      responses:
-        '204':
-          description: Success
-        '480':
-          description: UnauthorizedClientException
-          schema:
-            $ref: '#/definitions/UnauthorizedClientException'
-        '481':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '483':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '484':
-          description: ThrottledClientException
-          schema:
-            $ref: '#/definitions/ThrottledClientException'
-        '485':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '486':
-          description: ServiceFailureException
-          schema:
-            $ref: '#/definitions/ServiceFailureException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteVoiceConnectorRequest'
-        - name: voiceConnectorId
-          type: string
-          in: path
-          required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/voice-connectors/{voiceConnectorId}/origination#DeleteVoiceConnectorOrigination':
-    delete:
-      operationId: DeleteVoiceConnectorOrigination
-      description: Deletes the origination settings for the specified Amazon Chime Voice Connector.
-      responses:
-        '204':
-          description: Success
-        '480':
-          description: UnauthorizedClientException
-          schema:
-            $ref: '#/definitions/UnauthorizedClientException'
-        '481':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '483':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '484':
-          description: ThrottledClientException
-          schema:
-            $ref: '#/definitions/ThrottledClientException'
-        '485':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '486':
-          description: ServiceFailureException
-          schema:
-            $ref: '#/definitions/ServiceFailureException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteVoiceConnectorOriginationRequest'
-        - name: voiceConnectorId
-          type: string
-          in: path
-          required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/voice-connectors/{voiceConnectorId}/termination#DeleteVoiceConnectorTermination':
-    delete:
-      operationId: DeleteVoiceConnectorTermination
-      description: Deletes the termination settings for the specified Amazon Chime Voice Connector.
-      responses:
-        '204':
-          description: Success
-        '480':
-          description: UnauthorizedClientException
-          schema:
-            $ref: '#/definitions/UnauthorizedClientException'
-        '481':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '483':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '484':
-          description: ThrottledClientException
-          schema:
-            $ref: '#/definitions/ThrottledClientException'
-        '485':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '486':
-          description: ServiceFailureException
-          schema:
-            $ref: '#/definitions/ServiceFailureException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteVoiceConnectorTerminationRequest'
-        - name: voiceConnectorId
-          type: string
-          in: path
-          required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/voice-connectors/{voiceConnectorId}/termination/credentials#DeleteVoiceConnectorTerminationCredentials':
-    post:
-      operationId: DeleteVoiceConnectorTerminationCredentials
-      description: Deletes the specified SIP credentials used by your equipment to authenticate during call termination.
-      responses:
-        '204':
-          description: Success
-        '480':
-          description: UnauthorizedClientException
-          schema:
-            $ref: '#/definitions/UnauthorizedClientException'
-        '481':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '483':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '484':
-          description: ThrottledClientException
-          schema:
-            $ref: '#/definitions/ThrottledClientException'
-        '485':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '486':
-          description: ServiceFailureException
-          schema:
-            $ref: '#/definitions/ServiceFailureException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteVoiceConnectorTerminationCredentialsRequest'
-        - name: operation
-          in: query
-          required: true
-          type: string
-          enum:
-            - delete
-        - name: voiceConnectorId
-          type: string
-          in: path
-          required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/accounts/{accountId}/users/{userId}#DisassociatePhoneNumberFromUser':
-    post:
-      operationId: DisassociatePhoneNumberFromUser
-      description: Disassociates the primary provisioned phone number from the specified Amazon Chime user.
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/DisassociatePhoneNumberFromUserResponse'
-        '480':
-          description: UnauthorizedClientException
-          schema:
-            $ref: '#/definitions/UnauthorizedClientException'
-        '481':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '483':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '484':
-          description: ThrottledClientException
-          schema:
-            $ref: '#/definitions/ThrottledClientException'
-        '485':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '486':
-          description: ServiceFailureException
-          schema:
-            $ref: '#/definitions/ServiceFailureException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DisassociatePhoneNumberFromUserRequest'
-        - name: operation
-          in: query
-          required: true
-          type: string
-          enum:
-            - disassociate-phone-number
-        - name: accountId
-          type: string
-          in: path
-          required: true
-        - name: userId
-          type: string
-          in: path
-          required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/voice-connectors/{voiceConnectorId}#DisassociatePhoneNumbersFromVoiceConnector':
-    post:
-      operationId: DisassociatePhoneNumbersFromVoiceConnector
-      description: Disassociates the specified phone number from the specified Amazon Chime Voice Connector.
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/DisassociatePhoneNumbersFromVoiceConnectorResponse'
-        '480':
-          description: UnauthorizedClientException
-          schema:
-            $ref: '#/definitions/UnauthorizedClientException'
-        '481':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '483':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '484':
-          description: ThrottledClientException
-          schema:
-            $ref: '#/definitions/ThrottledClientException'
-        '485':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '486':
-          description: ServiceFailureException
-          schema:
-            $ref: '#/definitions/ServiceFailureException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DisassociatePhoneNumbersFromVoiceConnectorRequest'
-        - name: operation
-          in: query
-          required: true
-          type: string
-          enum:
-            - disassociate-phone-numbers
-        - name: voiceConnectorId
-          type: string
-          in: path
-          required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/accounts/{accountId}#GetAccount':
     get:
       operationId: GetAccount
       description: 'Retrieves details for the specified Amazon Chime account, such as account type and supported licenses.'
@@ -1191,15 +1136,108 @@ paths:
           schema:
             $ref: '#/definitions/ServiceFailureException'
       parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: The Amazon Chime account ID.
+          type: string
+          pattern: .*\S.*
+    post:
+      operationId: UpdateAccount
+      description: 'Updates account details for the specified Amazon Chime account. Currently, only account name updates are supported for this action.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateAccountResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: The Amazon Chime account ID.
+          type: string
+          pattern: .*\S.*
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/GetAccountRequest'
-        - name: accountId
-          type: string
+            type: object
+            properties:
+              Name:
+                description: The new name for the specified Amazon Chime account.
+                type: string
+                pattern: .*\S.*
+                minLength: 1
+                maxLength: 100
+  '/phone-numbers/{phoneNumberId}':
+    delete:
+      operationId: DeletePhoneNumber
+      description: <p>Moves the specified phone number into the <b>Deletion queue</b>. A phone number must be disassociated from any users or Amazon Chime Voice Connectors before it can be deleted.</p> <p>Deleted phone numbers remain in the <b>Deletion queue</b> for 7 days before they are deleted permanently.</p>
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: phoneNumberId
           in: path
           required: true
+          description: The phone number ID.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1210,7 +1248,783 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/accounts/{accountId}/settings#GetAccountSettings':
+    get:
+      operationId: GetPhoneNumber
+      description: 'Retrieves details for the specified phone number ID, such as associations, capabilities, and product type.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetPhoneNumberResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: phoneNumberId
+          in: path
+          required: true
+          description: The phone number ID.
+          type: string
+    post:
+      operationId: UpdatePhoneNumber
+      description: 'Updates phone number details, such as product type, for the specified phone number ID.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdatePhoneNumberResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: phoneNumberId
+          in: path
+          required: true
+          description: The phone number ID.
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              ProductType:
+                description: The product type.
+                type: string
+                enum:
+                  - BusinessCalling
+                  - VoiceConnector
+  '/voice-connectors/{voiceConnectorId}':
+    delete:
+      operationId: DeleteVoiceConnector
+      description: Deletes the specified Amazon Chime Voice Connector. Any phone numbers assigned to the Amazon Chime Voice Connector must be unassigned from it before it can be deleted.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: voiceConnectorId
+          in: path
+          required: true
+          description: The Amazon Chime Voice Connector ID.
+          type: string
+          pattern: .*\S.*
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetVoiceConnector
+      description: 'Retrieves details for the specified Amazon Chime Voice Connector, such as timestamps, name, outbound host, and encryption requirements.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetVoiceConnectorResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: voiceConnectorId
+          in: path
+          required: true
+          description: The Amazon Chime Voice Connector ID.
+          type: string
+          pattern: .*\S.*
+    put:
+      operationId: UpdateVoiceConnector
+      description: Updates details for the specified Amazon Chime Voice Connector.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateVoiceConnectorResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: voiceConnectorId
+          in: path
+          required: true
+          description: The Amazon Chime Voice Connector ID.
+          type: string
+          pattern: .*\S.*
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - Name
+              - RequireEncryption
+            properties:
+              Name:
+                description: The name of the Amazon Chime Voice Connector.
+                type: string
+                minLength: 1
+                maxLength: 256
+              RequireEncryption:
+                description: 'When enabled, requires encryption for the Amazon Chime Voice Connector.'
+                type: boolean
+  '/voice-connectors/{voiceConnectorId}/origination':
+    delete:
+      operationId: DeleteVoiceConnectorOrigination
+      description: Deletes the origination settings for the specified Amazon Chime Voice Connector.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: voiceConnectorId
+          in: path
+          required: true
+          description: The Amazon Chime Voice Connector ID.
+          type: string
+          pattern: .*\S.*
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetVoiceConnectorOrigination
+      description: Retrieves origination setting details for the specified Amazon Chime Voice Connector.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetVoiceConnectorOriginationResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: voiceConnectorId
+          in: path
+          required: true
+          description: The Amazon Chime Voice Connector ID.
+          type: string
+          pattern: .*\S.*
+    put:
+      operationId: PutVoiceConnectorOrigination
+      description: Adds origination settings for the specified Amazon Chime Voice Connector.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutVoiceConnectorOriginationResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: voiceConnectorId
+          in: path
+          required: true
+          description: The Amazon Chime Voice Connector ID.
+          type: string
+          pattern: .*\S.*
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - Origination
+            properties:
+              Origination:
+                description: Origination settings enable your SIP hosts to receive inbound calls using your Amazon Chime Voice Connector.
+                type: object
+                properties:
+                  Routes:
+                    $ref: '#/definitions/OriginationRouteList'
+                    description: 'The call distribution properties defined for your SIP hosts. Valid range: Minimum value of 1. Maximum value of 20.'
+                  Disabled:
+                    $ref: '#/definitions/Boolean'
+                    description: 'When origination settings are disabled, inbound calls are not enabled for your Amazon Chime Voice Connector.'
+  '/voice-connectors/{voiceConnectorId}/termination':
+    delete:
+      operationId: DeleteVoiceConnectorTermination
+      description: Deletes the termination settings for the specified Amazon Chime Voice Connector.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: voiceConnectorId
+          in: path
+          required: true
+          description: The Amazon Chime Voice Connector ID.
+          type: string
+          pattern: .*\S.*
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetVoiceConnectorTermination
+      description: Retrieves termination setting details for the specified Amazon Chime Voice Connector.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetVoiceConnectorTerminationResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: voiceConnectorId
+          in: path
+          required: true
+          description: The Amazon Chime Voice Connector ID.
+          type: string
+          pattern: .*\S.*
+    put:
+      operationId: PutVoiceConnectorTermination
+      description: Adds termination settings for the specified Amazon Chime Voice Connector.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutVoiceConnectorTerminationResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: voiceConnectorId
+          in: path
+          required: true
+          description: The Amazon Chime Voice Connector ID.
+          type: string
+          pattern: .*\S.*
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - Termination
+            properties:
+              Termination:
+                description: Termination settings enable your SIP hosts to make outbound calls using your Amazon Chime Voice Connector.
+                type: object
+                properties:
+                  CpsLimit:
+                    $ref: '#/definitions/CpsLimit'
+                    description: The limit on calls per second. Max value based on account service limit. Default value of 1.
+                  DefaultPhoneNumber:
+                    $ref: '#/definitions/E164PhoneNumber'
+                    description: The default caller ID phone number.
+                  CallingRegions:
+                    $ref: '#/definitions/CallingRegionList'
+                    description: The countries to which calls are allowed.
+                  CidrAllowedList:
+                    $ref: '#/definitions/StringList'
+                    description: 'The IP addresses allowed to make calls, in CIDR format.'
+                  Disabled:
+                    $ref: '#/definitions/Boolean'
+                    description: 'When termination settings are disabled, outbound calls can not be made.'
+  '/voice-connectors/{voiceConnectorId}/termination/credentials#operation=delete':
+    post:
+      operationId: DeleteVoiceConnectorTerminationCredentials
+      description: Deletes the specified SIP credentials used by your equipment to authenticate during call termination.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: voiceConnectorId
+          in: path
+          required: true
+          description: The Amazon Chime Voice Connector ID.
+          type: string
+          pattern: .*\S.*
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              Usernames:
+                description: 'The RFC2617 compliant username associated with the SIP credentials, in US-ASCII format.'
+                type: array
+                items:
+                  $ref: '#/definitions/SensitiveString'
+        - name: operation
+          in: query
+          required: true
+          type: string
+          enum:
+            - delete
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/accounts/{accountId}/users/{userId}#operation=disassociate-phone-number':
+    post:
+      operationId: DisassociatePhoneNumberFromUser
+      description: Disassociates the primary provisioned phone number from the specified Amazon Chime user.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DisassociatePhoneNumberFromUserResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: The Amazon Chime account ID.
+          type: string
+        - name: userId
+          in: path
+          required: true
+          description: The user ID.
+          type: string
+        - name: operation
+          in: query
+          required: true
+          type: string
+          enum:
+            - disassociate-phone-number
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/voice-connectors/{voiceConnectorId}#operation=disassociate-phone-numbers':
+    post:
+      operationId: DisassociatePhoneNumbersFromVoiceConnector
+      description: Disassociates the specified phone number from the specified Amazon Chime Voice Connector.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DisassociatePhoneNumbersFromVoiceConnectorResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: voiceConnectorId
+          in: path
+          required: true
+          description: The Amazon Chime Voice Connector ID.
+          type: string
+          pattern: .*\S.*
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              E164PhoneNumbers:
+                description: 'List of phone numbers, in E.164 format.'
+                type: array
+                items:
+                  $ref: '#/definitions/E164PhoneNumber'
+        - name: operation
+          in: query
+          required: true
+          type: string
+          enum:
+            - disassociate-phone-numbers
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/accounts/{accountId}/settings':
     get:
       operationId: GetAccountSettings
       description: 'Retrieves account settings for the specified Amazon Chime account ID, such as remote control and dial out settings. For more information about these settings, see <a href="https://docs.aws.amazon.com/chime/latest/ag/policies.html">Use the Policies Page</a> in the <i>Amazon Chime Administration Guide</i>.'
@@ -1248,15 +2062,12 @@ paths:
           schema:
             $ref: '#/definitions/ServiceFailureException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetAccountSettingsRequest'
         - name: accountId
-          type: string
           in: path
           required: true
+          description: The Amazon Chime account ID.
+          type: string
+          pattern: .*\S.*
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1267,7 +2078,72 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/settings#GetGlobalSettings':
+    put:
+      operationId: UpdateAccountSettings
+      description: 'Updates the settings for the specified Amazon Chime account. You can update settings for remote control of shared screens, or for the dial-out option. For more information about these settings, see <a href="https://docs.aws.amazon.com/chime/latest/ag/policies.html">Use the Policies Page</a> in the <i>Amazon Chime Administration Guide</i>.'
+      responses:
+        '204':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateAccountSettingsResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '484':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '485':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '486':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: The Amazon Chime account ID.
+          type: string
+          pattern: .*\S.*
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - AccountSettings
+            properties:
+              AccountSettings:
+                description: 'Settings related to the Amazon Chime account. This includes settings that start or stop remote control of shared screens, or start or stop the dial-out option in the Amazon Chime web application. For more information about these settings, see <a href="https://docs.aws.amazon.com/chime/latest/ag/policies.html">Use the Policies Page</a> in the <i>Amazon Chime Administration Guide</i>.'
+                type: object
+                properties:
+                  DisableRemoteControl:
+                    $ref: '#/definitions/Boolean'
+                    description: Setting that stops or starts remote control of shared screens during meetings.
+                  EnableDialOut:
+                    $ref: '#/definitions/Boolean'
+                    description: 'Setting that allows meeting participants to choose the <b>Call me at a phone number</b> option. For more information, see <a href="https://docs.aws.amazon.com/chime/latest/ug/chime-join-meeting.html">Join a Meeting without the Amazon Chime App</a>.'
+  /settings:
     get:
       operationId: GetGlobalSettings
       description: 'Retrieves global settings for the administrator''s AWS account, such as Amazon Chime Business Calling and Amazon Chime Voice Connector settings.'
@@ -1310,40 +2186,33 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/phone-numbers/{phoneNumberId}#GetPhoneNumber':
-    get:
-      operationId: GetPhoneNumber
-      description: 'Retrieves details for the specified phone number ID, such as associations, capabilities, and product type.'
+    put:
+      operationId: UpdateGlobalSettings
+      description: 'Updates global settings for the administrator''s AWS account, such as Amazon Chime Business Calling and Amazon Chime Voice Connector settings.'
       responses:
-        '200':
+        '204':
           description: Success
-          schema:
-            $ref: '#/definitions/GetPhoneNumberResponse'
         '480':
           description: UnauthorizedClientException
           schema:
             $ref: '#/definitions/UnauthorizedClientException'
         '481':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
           description: ForbiddenException
           schema:
             $ref: '#/definitions/ForbiddenException'
-        '483':
+        '482':
           description: BadRequestException
           schema:
             $ref: '#/definitions/BadRequestException'
-        '484':
+        '483':
           description: ThrottledClientException
           schema:
             $ref: '#/definitions/ThrottledClientException'
-        '485':
+        '484':
           description: ServiceUnavailableException
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
-        '486':
+        '485':
           description: ServiceFailureException
           schema:
             $ref: '#/definitions/ServiceFailureException'
@@ -1352,22 +2221,26 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/GetPhoneNumberRequest'
-        - name: phoneNumberId
-          type: string
-          in: path
-          required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/phone-number-orders/{phoneNumberOrderId}#GetPhoneNumberOrder':
+            type: object
+            required:
+              - BusinessCalling
+              - VoiceConnector
+            properties:
+              BusinessCalling:
+                description: The Amazon Chime Business Calling settings for the administrator's AWS account. Includes any Amazon S3 buckets designated for storing call detail records.
+                type: object
+                properties:
+                  CdrBucket:
+                    $ref: '#/definitions/String'
+                    description: The Amazon S3 bucket designated for call detail record storage.
+              VoiceConnector:
+                description: The Amazon Chime Voice Connector settings. Includes any Amazon S3 buckets designated for storing call detail records.
+                type: object
+                properties:
+                  CdrBucket:
+                    $ref: '#/definitions/String'
+                    description: The Amazon S3 bucket designated for call detail record storage.
+  '/phone-number-orders/{phoneNumberOrderId}':
     get:
       operationId: GetPhoneNumberOrder
       description: 'Retrieves details for the specified phone number order, such as order creation timestamp, phone numbers in E.164 format, product type, and order status.'
@@ -1405,15 +2278,12 @@ paths:
           schema:
             $ref: '#/definitions/ServiceFailureException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetPhoneNumberOrderRequest'
         - name: phoneNumberOrderId
-          type: string
           in: path
           required: true
+          description: The ID for the phone number order.
+          type: string
+          pattern: '[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1424,7 +2294,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/accounts/{accountId}/users/{userId}#GetUser':
+  '/accounts/{accountId}/users/{userId}':
     get:
       operationId: GetUser
       description: '<p>Retrieves details for the specified user ID, such as primary email address, license type, and personal meeting PIN.</p> <p>To retrieve user details with an email address instead of a user ID, use the <a>ListUsers</a> action, and then filter by email address.</p>'
@@ -1462,19 +2332,18 @@ paths:
           schema:
             $ref: '#/definitions/ServiceFailureException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetUserRequest'
         - name: accountId
-          type: string
           in: path
           required: true
+          description: The Amazon Chime account ID.
+          type: string
+          pattern: .*\S.*
         - name: userId
-          type: string
           in: path
           required: true
+          description: The user ID.
+          type: string
+          pattern: .*\S.*
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1485,1372 +2354,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/accounts/{accountId}/users/{userId}/settings#GetUserSettings':
-    get:
-      operationId: GetUserSettings
-      description: 'Retrieves settings for the specified user ID, such as any associated phone number settings.'
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/GetUserSettingsResponse'
-        '480':
-          description: UnauthorizedClientException
-          schema:
-            $ref: '#/definitions/UnauthorizedClientException'
-        '481':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '483':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '484':
-          description: ThrottledClientException
-          schema:
-            $ref: '#/definitions/ThrottledClientException'
-        '485':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '486':
-          description: ServiceFailureException
-          schema:
-            $ref: '#/definitions/ServiceFailureException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetUserSettingsRequest'
-        - name: accountId
-          type: string
-          in: path
-          required: true
-        - name: userId
-          type: string
-          in: path
-          required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/voice-connectors/{voiceConnectorId}#GetVoiceConnector':
-    get:
-      operationId: GetVoiceConnector
-      description: 'Retrieves details for the specified Amazon Chime Voice Connector, such as timestamps, name, outbound host, and encryption requirements.'
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/GetVoiceConnectorResponse'
-        '480':
-          description: UnauthorizedClientException
-          schema:
-            $ref: '#/definitions/UnauthorizedClientException'
-        '481':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '483':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '484':
-          description: ThrottledClientException
-          schema:
-            $ref: '#/definitions/ThrottledClientException'
-        '485':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '486':
-          description: ServiceFailureException
-          schema:
-            $ref: '#/definitions/ServiceFailureException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetVoiceConnectorRequest'
-        - name: voiceConnectorId
-          type: string
-          in: path
-          required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/voice-connectors/{voiceConnectorId}/origination#GetVoiceConnectorOrigination':
-    get:
-      operationId: GetVoiceConnectorOrigination
-      description: Retrieves origination setting details for the specified Amazon Chime Voice Connector.
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/GetVoiceConnectorOriginationResponse'
-        '480':
-          description: UnauthorizedClientException
-          schema:
-            $ref: '#/definitions/UnauthorizedClientException'
-        '481':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '483':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '484':
-          description: ThrottledClientException
-          schema:
-            $ref: '#/definitions/ThrottledClientException'
-        '485':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '486':
-          description: ServiceFailureException
-          schema:
-            $ref: '#/definitions/ServiceFailureException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetVoiceConnectorOriginationRequest'
-        - name: voiceConnectorId
-          type: string
-          in: path
-          required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/voice-connectors/{voiceConnectorId}/termination#GetVoiceConnectorTermination':
-    get:
-      operationId: GetVoiceConnectorTermination
-      description: Retrieves termination setting details for the specified Amazon Chime Voice Connector.
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/GetVoiceConnectorTerminationResponse'
-        '480':
-          description: UnauthorizedClientException
-          schema:
-            $ref: '#/definitions/UnauthorizedClientException'
-        '481':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '483':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '484':
-          description: ThrottledClientException
-          schema:
-            $ref: '#/definitions/ThrottledClientException'
-        '485':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '486':
-          description: ServiceFailureException
-          schema:
-            $ref: '#/definitions/ServiceFailureException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetVoiceConnectorTerminationRequest'
-        - name: voiceConnectorId
-          type: string
-          in: path
-          required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/voice-connectors/{voiceConnectorId}/termination/health#GetVoiceConnectorTerminationHealth':
-    get:
-      operationId: GetVoiceConnectorTerminationHealth
-      description: Retrieves information about the last time a SIP <code>OPTIONS</code> ping was received from your SIP infrastructure for the specified Amazon Chime Voice Connector.
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/GetVoiceConnectorTerminationHealthResponse'
-        '480':
-          description: UnauthorizedClientException
-          schema:
-            $ref: '#/definitions/UnauthorizedClientException'
-        '481':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '483':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '484':
-          description: ThrottledClientException
-          schema:
-            $ref: '#/definitions/ThrottledClientException'
-        '485':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '486':
-          description: ServiceFailureException
-          schema:
-            $ref: '#/definitions/ServiceFailureException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetVoiceConnectorTerminationHealthRequest'
-        - name: voiceConnectorId
-          type: string
-          in: path
-          required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/accounts/{accountId}/users#InviteUsers':
-    post:
-      operationId: InviteUsers
-      description: 'Sends email invites to as many as 50 users, inviting them to the specified Amazon Chime <code>Team</code> account. Only <code>Team</code> account types are currently supported for this action. '
-      responses:
-        '201':
-          description: Success
-          schema:
-            $ref: '#/definitions/InviteUsersResponse'
-        '480':
-          description: UnauthorizedClientException
-          schema:
-            $ref: '#/definitions/UnauthorizedClientException'
-        '481':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '483':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '484':
-          description: ThrottledClientException
-          schema:
-            $ref: '#/definitions/ThrottledClientException'
-        '485':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '486':
-          description: ServiceFailureException
-          schema:
-            $ref: '#/definitions/ServiceFailureException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/InviteUsersRequest'
-        - name: operation
-          in: query
-          required: true
-          type: string
-          enum:
-            - add
-        - name: accountId
-          type: string
-          in: path
-          required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/accounts#ListAccounts':
-    get:
-      operationId: ListAccounts
-      description: 'Lists the Amazon Chime accounts under the administrator''s AWS account. You can filter accounts by account name prefix. To find out which Amazon Chime account a user belongs to, you can filter by the user''s email address, which returns one account result.'
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/ListAccountsResponse'
-        '480':
-          description: UnauthorizedClientException
-          schema:
-            $ref: '#/definitions/UnauthorizedClientException'
-        '481':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '483':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '484':
-          description: ThrottledClientException
-          schema:
-            $ref: '#/definitions/ThrottledClientException'
-        '485':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '486':
-          description: ServiceFailureException
-          schema:
-            $ref: '#/definitions/ServiceFailureException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListAccountsRequest'
-        - name: MaxResults
-          type: string
-          in: query
-          description: Pagination limit
-          required: false
-        - name: NextToken
-          type: string
-          in: query
-          description: Pagination token
-          required: false
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/phone-number-orders#ListPhoneNumberOrders':
-    get:
-      operationId: ListPhoneNumberOrders
-      description: Lists the phone number orders for the administrator's Amazon Chime account.
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/ListPhoneNumberOrdersResponse'
-        '480':
-          description: UnauthorizedClientException
-          schema:
-            $ref: '#/definitions/UnauthorizedClientException'
-        '481':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '482':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '483':
-          description: ThrottledClientException
-          schema:
-            $ref: '#/definitions/ThrottledClientException'
-        '484':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '485':
-          description: ServiceFailureException
-          schema:
-            $ref: '#/definitions/ServiceFailureException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListPhoneNumberOrdersRequest'
-        - name: MaxResults
-          type: string
-          in: query
-          description: Pagination limit
-          required: false
-        - name: NextToken
-          type: string
-          in: query
-          description: Pagination token
-          required: false
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/phone-numbers#ListPhoneNumbers':
-    get:
-      operationId: ListPhoneNumbers
-      description: 'Lists the phone numbers for the specified Amazon Chime account, Amazon Chime user, or Amazon Chime Voice Connector.'
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/ListPhoneNumbersResponse'
-        '480':
-          description: UnauthorizedClientException
-          schema:
-            $ref: '#/definitions/UnauthorizedClientException'
-        '481':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '482':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '483':
-          description: ThrottledClientException
-          schema:
-            $ref: '#/definitions/ThrottledClientException'
-        '484':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '485':
-          description: ServiceFailureException
-          schema:
-            $ref: '#/definitions/ServiceFailureException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListPhoneNumbersRequest'
-        - name: MaxResults
-          type: string
-          in: query
-          description: Pagination limit
-          required: false
-        - name: NextToken
-          type: string
-          in: query
-          description: Pagination token
-          required: false
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/accounts/{accountId}/users#ListUsers':
-    get:
-      operationId: ListUsers
-      description: Lists the users that belong to the specified Amazon Chime account. You can specify an email address to list only the user that the email address belongs to.
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/ListUsersResponse'
-        '480':
-          description: UnauthorizedClientException
-          schema:
-            $ref: '#/definitions/UnauthorizedClientException'
-        '481':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '483':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '484':
-          description: ThrottledClientException
-          schema:
-            $ref: '#/definitions/ThrottledClientException'
-        '485':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '486':
-          description: ServiceFailureException
-          schema:
-            $ref: '#/definitions/ServiceFailureException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListUsersRequest'
-        - name: MaxResults
-          type: string
-          in: query
-          description: Pagination limit
-          required: false
-        - name: NextToken
-          type: string
-          in: query
-          description: Pagination token
-          required: false
-        - name: accountId
-          type: string
-          in: path
-          required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/voice-connectors/{voiceConnectorId}/termination/credentials#ListVoiceConnectorTerminationCredentials':
-    get:
-      operationId: ListVoiceConnectorTerminationCredentials
-      description: Lists the SIP credentials for the specified Amazon Chime Voice Connector.
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/ListVoiceConnectorTerminationCredentialsResponse'
-        '480':
-          description: UnauthorizedClientException
-          schema:
-            $ref: '#/definitions/UnauthorizedClientException'
-        '481':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '483':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '484':
-          description: ThrottledClientException
-          schema:
-            $ref: '#/definitions/ThrottledClientException'
-        '485':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '486':
-          description: ServiceFailureException
-          schema:
-            $ref: '#/definitions/ServiceFailureException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListVoiceConnectorTerminationCredentialsRequest'
-        - name: voiceConnectorId
-          type: string
-          in: path
-          required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/voice-connectors#ListVoiceConnectors':
-    get:
-      operationId: ListVoiceConnectors
-      description: Lists the Amazon Chime Voice Connectors for the administrator's AWS account.
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/ListVoiceConnectorsResponse'
-        '480':
-          description: UnauthorizedClientException
-          schema:
-            $ref: '#/definitions/UnauthorizedClientException'
-        '481':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '482':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '483':
-          description: ThrottledClientException
-          schema:
-            $ref: '#/definitions/ThrottledClientException'
-        '484':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '485':
-          description: ServiceFailureException
-          schema:
-            $ref: '#/definitions/ServiceFailureException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListVoiceConnectorsRequest'
-        - name: MaxResults
-          type: string
-          in: query
-          description: Pagination limit
-          required: false
-        - name: NextToken
-          type: string
-          in: query
-          description: Pagination token
-          required: false
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/accounts/{accountId}/users/{userId}#LogoutUser':
-    post:
-      operationId: LogoutUser
-      description: Logs out the specified user from all of the devices they are currently logged into.
-      responses:
-        '204':
-          description: Success
-          schema:
-            $ref: '#/definitions/LogoutUserResponse'
-        '480':
-          description: UnauthorizedClientException
-          schema:
-            $ref: '#/definitions/UnauthorizedClientException'
-        '481':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '483':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '484':
-          description: ThrottledClientException
-          schema:
-            $ref: '#/definitions/ThrottledClientException'
-        '485':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '486':
-          description: ServiceFailureException
-          schema:
-            $ref: '#/definitions/ServiceFailureException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/LogoutUserRequest'
-        - name: operation
-          in: query
-          required: true
-          type: string
-          enum:
-            - logout
-        - name: accountId
-          type: string
-          in: path
-          required: true
-        - name: userId
-          type: string
-          in: path
-          required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/voice-connectors/{voiceConnectorId}/origination#PutVoiceConnectorOrigination':
-    put:
-      operationId: PutVoiceConnectorOrigination
-      description: Adds origination settings for the specified Amazon Chime Voice Connector.
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/PutVoiceConnectorOriginationResponse'
-        '480':
-          description: UnauthorizedClientException
-          schema:
-            $ref: '#/definitions/UnauthorizedClientException'
-        '481':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '483':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '484':
-          description: ThrottledClientException
-          schema:
-            $ref: '#/definitions/ThrottledClientException'
-        '485':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '486':
-          description: ServiceFailureException
-          schema:
-            $ref: '#/definitions/ServiceFailureException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/PutVoiceConnectorOriginationRequest'
-        - name: voiceConnectorId
-          type: string
-          in: path
-          required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/voice-connectors/{voiceConnectorId}/termination#PutVoiceConnectorTermination':
-    put:
-      operationId: PutVoiceConnectorTermination
-      description: Adds termination settings for the specified Amazon Chime Voice Connector.
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/PutVoiceConnectorTerminationResponse'
-        '480':
-          description: UnauthorizedClientException
-          schema:
-            $ref: '#/definitions/UnauthorizedClientException'
-        '481':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '483':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '484':
-          description: ThrottledClientException
-          schema:
-            $ref: '#/definitions/ThrottledClientException'
-        '485':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '486':
-          description: ServiceFailureException
-          schema:
-            $ref: '#/definitions/ServiceFailureException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/PutVoiceConnectorTerminationRequest'
-        - name: voiceConnectorId
-          type: string
-          in: path
-          required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/voice-connectors/{voiceConnectorId}/termination/credentials#PutVoiceConnectorTerminationCredentials':
-    post:
-      operationId: PutVoiceConnectorTerminationCredentials
-      description: Adds termination SIP credentials for the specified Amazon Chime Voice Connector.
-      responses:
-        '204':
-          description: Success
-        '480':
-          description: UnauthorizedClientException
-          schema:
-            $ref: '#/definitions/UnauthorizedClientException'
-        '481':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '483':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '484':
-          description: ThrottledClientException
-          schema:
-            $ref: '#/definitions/ThrottledClientException'
-        '485':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '486':
-          description: ServiceFailureException
-          schema:
-            $ref: '#/definitions/ServiceFailureException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/PutVoiceConnectorTerminationCredentialsRequest'
-        - name: operation
-          in: query
-          required: true
-          type: string
-          enum:
-            - put
-        - name: voiceConnectorId
-          type: string
-          in: path
-          required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/accounts/{accountId}/users/{userId}#ResetPersonalPIN':
-    post:
-      operationId: ResetPersonalPIN
-      description: Resets the personal meeting PIN for the specified user on an Amazon Chime account. Returns the <a>User</a> object with the updated personal meeting PIN.
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/ResetPersonalPINResponse'
-        '480':
-          description: UnauthorizedClientException
-          schema:
-            $ref: '#/definitions/UnauthorizedClientException'
-        '481':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '483':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '484':
-          description: ThrottledClientException
-          schema:
-            $ref: '#/definitions/ThrottledClientException'
-        '485':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '486':
-          description: ServiceFailureException
-          schema:
-            $ref: '#/definitions/ServiceFailureException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ResetPersonalPINRequest'
-        - name: operation
-          in: query
-          required: true
-          type: string
-          enum:
-            - reset-personal-pin
-        - name: accountId
-          type: string
-          in: path
-          required: true
-        - name: userId
-          type: string
-          in: path
-          required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/phone-numbers/{phoneNumberId}#RestorePhoneNumber':
-    post:
-      operationId: RestorePhoneNumber
-      description: Moves a phone number from the <b>Deletion queue</b> back into the phone number <b>Inventory</b>.
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/RestorePhoneNumberResponse'
-        '480':
-          description: UnauthorizedClientException
-          schema:
-            $ref: '#/definitions/UnauthorizedClientException'
-        '481':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '483':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '484':
-          description: ThrottledClientException
-          schema:
-            $ref: '#/definitions/ThrottledClientException'
-        '485':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '486':
-          description: ServiceFailureException
-          schema:
-            $ref: '#/definitions/ServiceFailureException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/RestorePhoneNumberRequest'
-        - name: operation
-          in: query
-          required: true
-          type: string
-          enum:
-            - restore
-        - name: phoneNumberId
-          type: string
-          in: path
-          required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/search#SearchAvailablePhoneNumbers':
-    get:
-      operationId: SearchAvailablePhoneNumbers
-      description: Searches phone numbers that can be ordered.
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/SearchAvailablePhoneNumbersResponse'
-        '480':
-          description: UnauthorizedClientException
-          schema:
-            $ref: '#/definitions/UnauthorizedClientException'
-        '481':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '482':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '483':
-          description: ThrottledClientException
-          schema:
-            $ref: '#/definitions/ThrottledClientException'
-        '484':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '485':
-          description: ServiceFailureException
-          schema:
-            $ref: '#/definitions/ServiceFailureException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/SearchAvailablePhoneNumbersRequest'
-        - name: type
-          in: query
-          required: true
-          type: string
-          enum:
-            - phone-numbers
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/accounts/{accountId}#UpdateAccount':
-    post:
-      operationId: UpdateAccount
-      description: 'Updates account details for the specified Amazon Chime account. Currently, only account name updates are supported for this action.'
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/UpdateAccountResponse'
-        '480':
-          description: UnauthorizedClientException
-          schema:
-            $ref: '#/definitions/UnauthorizedClientException'
-        '481':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '483':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '484':
-          description: ThrottledClientException
-          schema:
-            $ref: '#/definitions/ThrottledClientException'
-        '485':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '486':
-          description: ServiceFailureException
-          schema:
-            $ref: '#/definitions/ServiceFailureException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/UpdateAccountRequest'
-        - name: accountId
-          type: string
-          in: path
-          required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/accounts/{accountId}/settings#UpdateAccountSettings':
-    put:
-      operationId: UpdateAccountSettings
-      description: 'Updates the settings for the specified Amazon Chime account. You can update settings for remote control of shared screens, or for the dial-out option. For more information about these settings, see <a href="https://docs.aws.amazon.com/chime/latest/ag/policies.html">Use the Policies Page</a> in the <i>Amazon Chime Administration Guide</i>.'
-      responses:
-        '204':
-          description: Success
-          schema:
-            $ref: '#/definitions/UpdateAccountSettingsResponse'
-        '480':
-          description: UnauthorizedClientException
-          schema:
-            $ref: '#/definitions/UnauthorizedClientException'
-        '481':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '483':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '484':
-          description: ConflictException
-          schema:
-            $ref: '#/definitions/ConflictException'
-        '485':
-          description: ThrottledClientException
-          schema:
-            $ref: '#/definitions/ThrottledClientException'
-        '486':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '487':
-          description: ServiceFailureException
-          schema:
-            $ref: '#/definitions/ServiceFailureException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/UpdateAccountSettingsRequest'
-        - name: accountId
-          type: string
-          in: path
-          required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/settings#UpdateGlobalSettings':
-    put:
-      operationId: UpdateGlobalSettings
-      description: 'Updates global settings for the administrator''s AWS account, such as Amazon Chime Business Calling and Amazon Chime Voice Connector settings.'
-      responses:
-        '204':
-          description: Success
-        '480':
-          description: UnauthorizedClientException
-          schema:
-            $ref: '#/definitions/UnauthorizedClientException'
-        '481':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '482':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '483':
-          description: ThrottledClientException
-          schema:
-            $ref: '#/definitions/ThrottledClientException'
-        '484':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '485':
-          description: ServiceFailureException
-          schema:
-            $ref: '#/definitions/ServiceFailureException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/UpdateGlobalSettingsRequest'
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/phone-numbers/{phoneNumberId}#UpdatePhoneNumber':
-    post:
-      operationId: UpdatePhoneNumber
-      description: 'Updates phone number details, such as product type, for the specified phone number ID.'
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/UpdatePhoneNumberResponse'
-        '480':
-          description: UnauthorizedClientException
-          schema:
-            $ref: '#/definitions/UnauthorizedClientException'
-        '481':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '483':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '484':
-          description: ThrottledClientException
-          schema:
-            $ref: '#/definitions/ThrottledClientException'
-        '485':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '486':
-          description: ServiceFailureException
-          schema:
-            $ref: '#/definitions/ServiceFailureException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/UpdatePhoneNumberRequest'
-        - name: phoneNumberId
-          type: string
-          in: path
-          required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/accounts/{accountId}/users/{userId}#UpdateUser':
     post:
       operationId: UpdateUser
       description: 'Updates user details for a specified user ID. Currently, only <code>LicenseType</code> updates are supported for this action.'
@@ -2888,19 +2391,80 @@ paths:
           schema:
             $ref: '#/definitions/ServiceFailureException'
       parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: The Amazon Chime account ID.
+          type: string
+          pattern: .*\S.*
+        - name: userId
+          in: path
+          required: true
+          description: The user ID.
+          type: string
+          pattern: .*\S.*
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateUserRequest'
+            type: object
+            properties:
+              LicenseType:
+                description: The user license type to update. This must be a supported license type for the Amazon Chime account that the user belongs to.
+                type: string
+                enum:
+                  - Basic
+                  - Plus
+                  - Pro
+                  - ProTrial
+  '/accounts/{accountId}/users/{userId}/settings':
+    get:
+      operationId: GetUserSettings
+      description: 'Retrieves settings for the specified user ID, such as any associated phone number settings.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetUserSettingsResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
         - name: accountId
-          type: string
           in: path
           required: true
+          description: The Amazon Chime account ID.
+          type: string
         - name: userId
-          type: string
           in: path
           required: true
+          description: The user ID.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2911,7 +2475,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/accounts/{accountId}/users/{userId}/settings#UpdateUserSettings':
     put:
       operationId: UpdateUserSettings
       description: 'Updates the settings for the specified user, such as phone number settings.'
@@ -2947,38 +2510,40 @@ paths:
           schema:
             $ref: '#/definitions/ServiceFailureException'
       parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: The Amazon Chime account ID.
+          type: string
+        - name: userId
+          in: path
+          required: true
+          description: The user ID.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateUserSettingsRequest'
-        - name: accountId
-          type: string
-          in: path
-          required: true
-        - name: userId
-          type: string
-          in: path
-          required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/voice-connectors/{voiceConnectorId}#UpdateVoiceConnector':
-    put:
-      operationId: UpdateVoiceConnector
-      description: Updates details for the specified Amazon Chime Voice Connector.
+            type: object
+            required:
+              - UserSettings
+            properties:
+              UserSettings:
+                description: 'Settings associated with an Amazon Chime user, including inbound and outbound calling and text messaging.'
+                type: object
+                properties:
+                  Telephony:
+                    $ref: '#/definitions/TelephonySettings'
+                    description: The telephony settings associated with the user.
+  '/voice-connectors/{voiceConnectorId}/termination/health':
+    get:
+      operationId: GetVoiceConnectorTerminationHealth
+      description: Retrieves information about the last time a SIP <code>OPTIONS</code> ping was received from your SIP infrastructure for the specified Amazon Chime Voice Connector.
       responses:
         '200':
           description: Success
           schema:
-            $ref: '#/definitions/UpdateVoiceConnectorResponse'
+            $ref: '#/definitions/GetVoiceConnectorTerminationHealthResponse'
         '480':
           description: UnauthorizedClientException
           schema:
@@ -3008,15 +2573,585 @@ paths:
           schema:
             $ref: '#/definitions/ServiceFailureException'
       parameters:
+        - name: voiceConnectorId
+          in: path
+          required: true
+          description: The Amazon Chime Voice Connector ID.
+          type: string
+          pattern: .*\S.*
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/accounts/{accountId}/users#operation=add':
+    post:
+      operationId: InviteUsers
+      description: 'Sends email invites to as many as 50 users, inviting them to the specified Amazon Chime <code>Team</code> account. Only <code>Team</code> account types are currently supported for this action. '
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/InviteUsersResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: The Amazon Chime account ID.
+          type: string
+          pattern: .*\S.*
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateVoiceConnectorRequest'
-        - name: voiceConnectorId
+            type: object
+            required:
+              - UserEmailList
+            properties:
+              UserEmailList:
+                description: The user email addresses to which to send the invite.
+                type: array
+                items:
+                  $ref: '#/definitions/EmailAddress'
+                maxItems: 50
+        - name: operation
+          in: query
+          required: true
           type: string
+          enum:
+            - add
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /phone-numbers:
+    get:
+      operationId: ListPhoneNumbers
+      description: 'Lists the phone numbers for the specified Amazon Chime account, Amazon Chime user, or Amazon Chime Voice Connector.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListPhoneNumbersResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '483':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: status
+          in: query
+          required: false
+          description: The phone number status.
+          type: string
+          enum:
+            - AcquireInProgress
+            - AcquireFailed
+            - Unassigned
+            - Assigned
+            - ReleaseInProgress
+            - DeleteInProgress
+            - ReleaseFailed
+            - DeleteFailed
+        - name: product-type
+          in: query
+          required: false
+          description: The phone number product type.
+          type: string
+          enum:
+            - BusinessCalling
+            - VoiceConnector
+        - name: filter-name
+          in: query
+          required: false
+          description: The filter to use to limit the number of results.
+          type: string
+          enum:
+            - AccountId
+            - UserId
+            - VoiceConnectorId
+        - name: filter-value
+          in: query
+          required: false
+          description: The value to use for the filter.
+          type: string
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of results to return in a single call.
+          type: integer
+          minimum: 1
+          maximum: 99
+        - name: next-token
+          in: query
+          required: false
+          description: The token to use to retrieve the next page of results.
+          type: string
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/voice-connectors/{voiceConnectorId}/termination/credentials':
+    get:
+      operationId: ListVoiceConnectorTerminationCredentials
+      description: Lists the SIP credentials for the specified Amazon Chime Voice Connector.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListVoiceConnectorTerminationCredentialsResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: voiceConnectorId
           in: path
           required: true
+          description: The Amazon Chime Voice Connector ID.
+          type: string
+          pattern: .*\S.*
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/accounts/{accountId}/users/{userId}#operation=logout':
+    post:
+      operationId: LogoutUser
+      description: Logs out the specified user from all of the devices they are currently logged into.
+      responses:
+        '204':
+          description: Success
+          schema:
+            $ref: '#/definitions/LogoutUserResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: The Amazon Chime account ID.
+          type: string
+          pattern: .*\S.*
+        - name: userId
+          in: path
+          required: true
+          description: The user ID.
+          type: string
+          pattern: .*\S.*
+        - name: operation
+          in: query
+          required: true
+          type: string
+          enum:
+            - logout
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/voice-connectors/{voiceConnectorId}/termination/credentials#operation=put':
+    post:
+      operationId: PutVoiceConnectorTerminationCredentials
+      description: Adds termination SIP credentials for the specified Amazon Chime Voice Connector.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: voiceConnectorId
+          in: path
+          required: true
+          description: The Amazon Chime Voice Connector ID.
+          type: string
+          pattern: .*\S.*
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              Credentials:
+                description: The termination SIP credentials.
+                type: array
+                items:
+                  $ref: '#/definitions/Credential'
+        - name: operation
+          in: query
+          required: true
+          type: string
+          enum:
+            - put
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/accounts/{accountId}/users/{userId}#operation=reset-personal-pin':
+    post:
+      operationId: ResetPersonalPIN
+      description: Resets the personal meeting PIN for the specified user on an Amazon Chime account. Returns the <a>User</a> object with the updated personal meeting PIN.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ResetPersonalPINResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: The Amazon Chime account ID.
+          type: string
+          pattern: .*\S.*
+        - name: userId
+          in: path
+          required: true
+          description: The user ID.
+          type: string
+          pattern: .*\S.*
+        - name: operation
+          in: query
+          required: true
+          type: string
+          enum:
+            - reset-personal-pin
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/phone-numbers/{phoneNumberId}#operation=restore':
+    post:
+      operationId: RestorePhoneNumber
+      description: Moves a phone number from the <b>Deletion queue</b> back into the phone number <b>Inventory</b>.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RestorePhoneNumberResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: phoneNumberId
+          in: path
+          required: true
+          description: The phone number.
+          type: string
+          pattern: .*\S.*
+        - name: operation
+          in: query
+          required: true
+          type: string
+          enum:
+            - restore
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/search#type=phone-numbers':
+    get:
+      operationId: SearchAvailablePhoneNumbers
+      description: Searches phone numbers that can be ordered.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SearchAvailablePhoneNumbersResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '483':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: area-code
+          in: query
+          required: false
+          description: The area code used to filter results.
+          type: string
+        - name: city
+          in: query
+          required: false
+          description: The city used to filter results.
+          type: string
+        - name: country
+          in: query
+          required: false
+          description: The country used to filter results.
+          type: string
+        - name: state
+          in: query
+          required: false
+          description: The state used to filter results.
+          type: string
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of results to return in a single call.
+          type: integer
+          minimum: 1
+          maximum: 500
+        - name: next-token
+          in: query
+          required: false
+          description: The token to use to retrieve the next page of results.
+          type: string
+        - name: type
+          in: query
+          required: true
+          type: string
+          enum:
+            - phone-numbers
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3031,14 +3166,6 @@ definitions:
   AssociatePhoneNumberWithUserResponse:
     type: object
     properties: {}
-  AssociatePhoneNumberWithUserRequest:
-    type: object
-    required:
-      - E164PhoneNumber
-    properties:
-      E164PhoneNumber:
-        $ref: '#/definitions/E164PhoneNumber'
-        description: 'The phone number, in E.164 format.'
   UnauthorizedClientException: {}
   NotFoundException: {}
   ForbiddenException: {}
@@ -3052,161 +3179,95 @@ definitions:
       PhoneNumberErrors:
         $ref: '#/definitions/PhoneNumberErrorList'
         description: 'If the action fails for one or more of the phone numbers in the request, a list of the phone numbers is returned, along with error codes and error messages.'
-  AssociatePhoneNumbersWithVoiceConnectorRequest:
-    type: object
-    properties:
-      E164PhoneNumbers:
-        $ref: '#/definitions/E164PhoneNumberList'
-        description: 'List of phone numbers, in E.164 format.'
+  E164PhoneNumber:
+    type: string
+    pattern: '^\+?[1-9]\d{1,14}$'
+    format: password
   BatchDeletePhoneNumberResponse:
     type: object
     properties:
       PhoneNumberErrors:
         $ref: '#/definitions/PhoneNumberErrorList'
         description: 'If the action fails for one or more of the phone numbers in the request, a list of the phone numbers is returned, along with error codes and error messages.'
-  BatchDeletePhoneNumberRequest:
-    type: object
-    required:
-      - PhoneNumberIds
-    properties:
-      PhoneNumberIds:
-        $ref: '#/definitions/NonEmptyStringList'
-        description: List of phone number IDs.
+  String:
+    type: string
   BatchSuspendUserResponse:
     type: object
     properties:
       UserErrors:
         $ref: '#/definitions/UserErrorList'
         description: 'If the <a>BatchSuspendUser</a> action fails for one or more of the user IDs in the request, a list of the user IDs is returned, along with error codes and error messages.'
-  BatchSuspendUserRequest:
-    type: object
-    required:
-      - UserIdList
-    properties:
-      UserIdList:
-        $ref: '#/definitions/UserIdList'
-        description: The request containing the user IDs to suspend.
+  NonEmptyString:
+    type: string
+    pattern: .*\S.*
   BatchUnsuspendUserResponse:
     type: object
     properties:
       UserErrors:
         $ref: '#/definitions/UserErrorList'
         description: 'If the <a>BatchUnsuspendUser</a> action fails for one or more of the user IDs in the request, a list of the user IDs is returned, along with error codes and error messages.'
-  BatchUnsuspendUserRequest:
-    type: object
-    required:
-      - UserIdList
-    properties:
-      UserIdList:
-        $ref: '#/definitions/UserIdList'
-        description: The request containing the user IDs to unsuspend.
   BatchUpdatePhoneNumberResponse:
     type: object
     properties:
       PhoneNumberErrors:
         $ref: '#/definitions/PhoneNumberErrorList'
         description: 'If the action fails for one or more of the phone numbers in the request, a list of the phone numbers is returned, along with error codes and error messages.'
-  BatchUpdatePhoneNumberRequest:
+  UpdatePhoneNumberRequestItem:
     type: object
     required:
-      - UpdatePhoneNumberRequestItems
+      - PhoneNumberId
     properties:
-      UpdatePhoneNumberRequestItems:
-        $ref: '#/definitions/UpdatePhoneNumberRequestItemList'
-        description: The request containing the phone number IDs and product types to update.
+      PhoneNumberId:
+        $ref: '#/definitions/NonEmptyString'
+        description: The phone number ID to update.
+      ProductType:
+        $ref: '#/definitions/PhoneNumberProductType'
+        description: The product type to update.
+    description: 'The phone number ID and product type fields to update, used with the <a>BatchUpdatePhoneNumber</a> and <a>UpdatePhoneNumber</a> actions.'
   BatchUpdateUserResponse:
     type: object
     properties:
       UserErrors:
         $ref: '#/definitions/UserErrorList'
         description: 'If the <a>BatchUpdateUser</a> action fails for one or more of the user IDs in the request, a list of the user IDs is returned, along with error codes and error messages.'
-  BatchUpdateUserRequest:
+  UpdateUserRequestItem:
     type: object
     required:
-      - UpdateUserRequestItems
+      - UserId
     properties:
-      UpdateUserRequestItems:
-        $ref: '#/definitions/UpdateUserRequestItemList'
-        description: The request containing the user IDs and details to update.
+      UserId:
+        $ref: '#/definitions/NonEmptyString'
+        description: The user ID.
+      LicenseType:
+        $ref: '#/definitions/License'
+        description: The user license type.
+    description: 'The user ID and user fields to update, used with the <a>BatchUpdateUser</a> action.'
   CreateAccountResponse:
     type: object
     properties:
       Account:
         $ref: '#/definitions/Account'
         description: The Amazon Chime account details.
-  CreateAccountRequest:
-    type: object
-    required:
-      - Name
-    properties:
-      Name:
-        $ref: '#/definitions/AccountName'
-        description: The name of the Amazon Chime account.
   CreatePhoneNumberOrderResponse:
     type: object
     properties:
       PhoneNumberOrder:
         $ref: '#/definitions/PhoneNumberOrder'
         description: The phone number order details.
-  CreatePhoneNumberOrderRequest:
-    type: object
-    required:
-      - ProductType
-      - E164PhoneNumbers
-    properties:
-      ProductType:
-        $ref: '#/definitions/PhoneNumberProductType'
-        description: The phone number product type.
-      E164PhoneNumbers:
-        $ref: '#/definitions/E164PhoneNumberList'
-        description: 'List of phone numbers, in E.164 format.'
   CreateVoiceConnectorResponse:
     type: object
     properties:
       VoiceConnector:
         $ref: '#/definitions/VoiceConnector'
         description: The Amazon Chime Voice Connector details.
-  CreateVoiceConnectorRequest:
-    type: object
-    required:
-      - Name
-      - RequireEncryption
-    properties:
-      Name:
-        $ref: '#/definitions/VoiceConnectorName'
-        description: The name of the Amazon Chime Voice Connector.
-      RequireEncryption:
-        $ref: '#/definitions/Boolean'
-        description: 'When enabled, requires encryption for the Amazon Chime Voice Connector.'
   DeleteAccountResponse:
     type: object
     properties: {}
-  DeleteAccountRequest:
-    type: object
-    properties: {}
   UnprocessableEntityException: {}
-  DeletePhoneNumberRequest:
-    type: object
-    properties: {}
-  DeleteVoiceConnectorRequest:
-    type: object
-    properties: {}
-  DeleteVoiceConnectorOriginationRequest:
-    type: object
-    properties: {}
-  DeleteVoiceConnectorTerminationRequest:
-    type: object
-    properties: {}
-  DeleteVoiceConnectorTerminationCredentialsRequest:
-    type: object
-    properties:
-      Usernames:
-        $ref: '#/definitions/SensitiveStringList'
-        description: 'The RFC2617 compliant username associated with the SIP credentials, in US-ASCII format.'
+  SensitiveString:
+    type: string
+    format: password
   DisassociatePhoneNumberFromUserResponse:
-    type: object
-    properties: {}
-  DisassociatePhoneNumberFromUserRequest:
     type: object
     properties: {}
   DisassociatePhoneNumbersFromVoiceConnectorResponse:
@@ -3215,30 +3276,18 @@ definitions:
       PhoneNumberErrors:
         $ref: '#/definitions/PhoneNumberErrorList'
         description: 'If the action fails for one or more of the phone numbers in the request, a list of the phone numbers is returned, along with error codes and error messages.'
-  DisassociatePhoneNumbersFromVoiceConnectorRequest:
-    type: object
-    properties:
-      E164PhoneNumbers:
-        $ref: '#/definitions/E164PhoneNumberList'
-        description: 'List of phone numbers, in E.164 format.'
   GetAccountResponse:
     type: object
     properties:
       Account:
         $ref: '#/definitions/Account'
         description: The Amazon Chime account details.
-  GetAccountRequest:
-    type: object
-    properties: {}
   GetAccountSettingsResponse:
     type: object
     properties:
       AccountSettings:
         $ref: '#/definitions/AccountSettings'
         description: The Amazon Chime account settings.
-  GetAccountSettingsRequest:
-    type: object
-    properties: {}
   GetGlobalSettingsResponse:
     type: object
     properties:
@@ -3254,86 +3303,58 @@ definitions:
       PhoneNumber:
         $ref: '#/definitions/PhoneNumber'
         description: The phone number details.
-  GetPhoneNumberRequest:
-    type: object
-    properties: {}
   GetPhoneNumberOrderResponse:
     type: object
     properties:
       PhoneNumberOrder:
         $ref: '#/definitions/PhoneNumberOrder'
         description: The phone number order details.
-  GetPhoneNumberOrderRequest:
-    type: object
-    properties: {}
   GetUserResponse:
     type: object
     properties:
       User:
         $ref: '#/definitions/User'
         description: The user details.
-  GetUserRequest:
-    type: object
-    properties: {}
   GetUserSettingsResponse:
     type: object
     properties:
       UserSettings:
         $ref: '#/definitions/UserSettings'
         description: The user settings.
-  GetUserSettingsRequest:
-    type: object
-    properties: {}
   GetVoiceConnectorResponse:
     type: object
     properties:
       VoiceConnector:
         $ref: '#/definitions/VoiceConnector'
         description: The Amazon Chime Voice Connector details.
-  GetVoiceConnectorRequest:
-    type: object
-    properties: {}
   GetVoiceConnectorOriginationResponse:
     type: object
     properties:
       Origination:
         $ref: '#/definitions/Origination'
         description: The origination setting details.
-  GetVoiceConnectorOriginationRequest:
-    type: object
-    properties: {}
   GetVoiceConnectorTerminationResponse:
     type: object
     properties:
       Termination:
         $ref: '#/definitions/Termination'
         description: The termination setting details.
-  GetVoiceConnectorTerminationRequest:
-    type: object
-    properties: {}
   GetVoiceConnectorTerminationHealthResponse:
     type: object
     properties:
       TerminationHealth:
         $ref: '#/definitions/TerminationHealth'
         description: The termination health details.
-  GetVoiceConnectorTerminationHealthRequest:
-    type: object
-    properties: {}
   InviteUsersResponse:
     type: object
     properties:
       Invites:
         $ref: '#/definitions/InviteList'
         description: The invite details.
-  InviteUsersRequest:
-    type: object
-    required:
-      - UserEmailList
-    properties:
-      UserEmailList:
-        $ref: '#/definitions/UserEmailList'
-        description: The user email addresses to which to send the invite.
+  EmailAddress:
+    type: string
+    pattern: .+@.+\..+
+    format: password
   ListAccountsResponse:
     type: object
     properties:
@@ -3343,9 +3364,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results.
-  ListAccountsRequest:
-    type: object
-    properties: {}
   ListPhoneNumberOrdersResponse:
     type: object
     properties:
@@ -3355,9 +3373,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results.
-  ListPhoneNumberOrdersRequest:
-    type: object
-    properties: {}
   ListPhoneNumbersResponse:
     type: object
     properties:
@@ -3367,9 +3382,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results.
-  ListPhoneNumbersRequest:
-    type: object
-    properties: {}
   ListUsersResponse:
     type: object
     properties:
@@ -3379,18 +3391,12 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results.
-  ListUsersRequest:
-    type: object
-    properties: {}
   ListVoiceConnectorTerminationCredentialsResponse:
     type: object
     properties:
       Usernames:
         $ref: '#/definitions/SensitiveStringList'
         description: A list of user names.
-  ListVoiceConnectorTerminationCredentialsRequest:
-    type: object
-    properties: {}
   ListVoiceConnectorsResponse:
     type: object
     properties:
@@ -3400,13 +3406,7 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results.
-  ListVoiceConnectorsRequest:
-    type: object
-    properties: {}
   LogoutUserResponse:
-    type: object
-    properties: {}
-  LogoutUserRequest:
     type: object
     properties: {}
   PutVoiceConnectorOriginationResponse:
@@ -3415,149 +3415,102 @@ definitions:
       Origination:
         $ref: '#/definitions/Origination'
         description: The updated origination setting details.
-  PutVoiceConnectorOriginationRequest:
-    type: object
-    required:
-      - Origination
-    properties:
-      Origination:
-        $ref: '#/definitions/Origination'
-        description: The origination setting details to add.
+  OriginationRouteList:
+    type: array
+    items:
+      $ref: '#/definitions/OriginationRoute'
+  Boolean:
+    type: boolean
   PutVoiceConnectorTerminationResponse:
     type: object
     properties:
       Termination:
         $ref: '#/definitions/Termination'
         description: The updated termination setting details.
-  PutVoiceConnectorTerminationRequest:
+  CpsLimit:
+    type: integer
+    minimum: 1
+  CallingRegionList:
+    type: array
+    items:
+      $ref: '#/definitions/CallingRegion'
+  StringList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  Credential:
     type: object
-    required:
-      - Termination
     properties:
-      Termination:
-        $ref: '#/definitions/Termination'
-        description: The termination setting details to add.
-  PutVoiceConnectorTerminationCredentialsRequest:
-    type: object
-    properties:
-      Credentials:
-        $ref: '#/definitions/CredentialList'
-        description: The termination SIP credentials.
+      Username:
+        $ref: '#/definitions/SensitiveString'
+        description: 'The RFC2617 compliant user name associated with the SIP credentials, in US-ASCII format.'
+      Password:
+        $ref: '#/definitions/SensitiveString'
+        description: 'The RFC2617 compliant password associated with the SIP credentials, in US-ASCII format.'
+    description: The SIP credentials used to authenticate requests to your Amazon Chime Voice Connector.
   ResetPersonalPINResponse:
     type: object
     properties:
       User:
         $ref: '#/definitions/User'
         description: The user details and new personal meeting PIN.
-  ResetPersonalPINRequest:
-    type: object
-    properties: {}
   RestorePhoneNumberResponse:
     type: object
     properties:
       PhoneNumber:
         $ref: '#/definitions/PhoneNumber'
         description: The phone number details.
-  RestorePhoneNumberRequest:
-    type: object
-    properties: {}
   SearchAvailablePhoneNumbersResponse:
     type: object
     properties:
       E164PhoneNumbers:
         $ref: '#/definitions/E164PhoneNumberList'
         description: 'List of phone numbers, in E.164 format.'
-  SearchAvailablePhoneNumbersRequest:
-    type: object
-    properties: {}
   UpdateAccountResponse:
     type: object
     properties:
       Account:
         $ref: '#/definitions/Account'
         description: The updated Amazon Chime account details.
-  UpdateAccountRequest:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/AccountName'
-        description: The new name for the specified Amazon Chime account.
   UpdateAccountSettingsResponse:
     type: object
     properties: {}
-  UpdateAccountSettingsRequest:
-    type: object
-    required:
-      - AccountSettings
-    properties:
-      AccountSettings:
-        $ref: '#/definitions/AccountSettings'
-        description: The Amazon Chime account settings to update.
   ConflictException: {}
-  UpdateGlobalSettingsRequest:
-    type: object
-    required:
-      - BusinessCalling
-      - VoiceConnector
-    properties:
-      BusinessCalling:
-        $ref: '#/definitions/BusinessCallingSettings'
-        description: The Amazon Chime Business Calling settings.
-      VoiceConnector:
-        $ref: '#/definitions/VoiceConnectorSettings'
-        description: The Amazon Chime Voice Connector settings.
   UpdatePhoneNumberResponse:
     type: object
     properties:
       PhoneNumber:
         $ref: '#/definitions/PhoneNumber'
         description: The updated phone number details.
-  UpdatePhoneNumberRequest:
-    type: object
-    properties:
-      ProductType:
-        $ref: '#/definitions/PhoneNumberProductType'
-        description: The product type.
   UpdateUserResponse:
     type: object
     properties:
       User:
         $ref: '#/definitions/User'
         description: The updated user details.
-  UpdateUserRequest:
-    type: object
-    properties:
-      LicenseType:
-        $ref: '#/definitions/License'
-        description: The user license type to update. This must be a supported license type for the Amazon Chime account that the user belongs to.
-  UpdateUserSettingsRequest:
+  TelephonySettings:
     type: object
     required:
-      - UserSettings
+      - InboundCalling
+      - OutboundCalling
+      - SMS
     properties:
-      UserSettings:
-        $ref: '#/definitions/UserSettings'
-        description: The user settings to update.
+      InboundCalling:
+        $ref: '#/definitions/Boolean'
+        description: Allows or denies inbound calling.
+      OutboundCalling:
+        $ref: '#/definitions/Boolean'
+        description: Allows or denies outbound calling.
+      SMS:
+        $ref: '#/definitions/Boolean'
+        description: Allows or denies SMS messaging.
+    description: 'Settings that allow management of telephony permissions for an Amazon Chime user, such as inbound and outbound calling and text messaging.'
   UpdateVoiceConnectorResponse:
     type: object
     properties:
       VoiceConnector:
         $ref: '#/definitions/VoiceConnector'
         description: The Amazon Chime Voice Connector details.
-  UpdateVoiceConnectorRequest:
-    type: object
-    required:
-      - Name
-      - RequireEncryption
-    properties:
-      Name:
-        $ref: '#/definitions/VoiceConnectorName'
-        description: The name of the Amazon Chime Voice Connector.
-      RequireEncryption:
-        $ref: '#/definitions/Boolean'
-        description: 'When enabled, requires encryption for the Amazon Chime Voice Connector.'
-  String:
-    type: string
   AccountType:
     type: string
     enum:
@@ -3617,8 +3570,6 @@ definitions:
     pattern: .*\S.*
     minLength: 1
     maxLength: 100
-  Boolean:
-    type: boolean
   AccountSettings:
     type: object
     properties:
@@ -3629,17 +3580,24 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Setting that allows meeting participants to choose the <b>Call me at a phone number</b> option. For more information, see <a href="https://docs.aws.amazon.com/chime/latest/ug/chime-join-meeting.html">Join a Meeting without the Amazon Chime App</a>.'
     description: 'Settings related to the Amazon Chime account. This includes settings that start or stop remote control of shared screens, or start or stop the dial-out option in the Amazon Chime web application. For more information about these settings, see <a href="https://docs.aws.amazon.com/chime/latest/ag/policies.html">Use the Policies Page</a> in the <i>Amazon Chime Administration Guide</i>.'
-  E164PhoneNumber:
-    type: string
-    pattern: '^\+?[1-9]\d{1,14}$'
-    format: password
-  NonEmptyString:
-    type: string
-    pattern: .*\S.*
+  AssociatePhoneNumberWithUserRequest:
+    type: object
+    required:
+      - E164PhoneNumber
+    properties:
+      E164PhoneNumber:
+        $ref: '#/definitions/E164PhoneNumber'
+        description: 'The phone number, in E.164 format.'
   E164PhoneNumberList:
     type: array
     items:
       $ref: '#/definitions/E164PhoneNumber'
+  AssociatePhoneNumbersWithVoiceConnectorRequest:
+    type: object
+    properties:
+      E164PhoneNumbers:
+        $ref: '#/definitions/E164PhoneNumberList'
+        description: 'List of phone numbers, in E.164 format.'
   PhoneNumberErrorList:
     type: array
     items:
@@ -3649,24 +3607,64 @@ definitions:
     items:
       $ref: '#/definitions/String'
     minItems: 1
+  BatchDeletePhoneNumberRequest:
+    type: object
+    required:
+      - PhoneNumberIds
+    properties:
+      PhoneNumberIds:
+        $ref: '#/definitions/NonEmptyStringList'
+        description: List of phone number IDs.
   UserIdList:
     type: array
     items:
       $ref: '#/definitions/NonEmptyString'
     maxItems: 50
+  BatchSuspendUserRequest:
+    type: object
+    required:
+      - UserIdList
+    properties:
+      UserIdList:
+        $ref: '#/definitions/UserIdList'
+        description: The request containing the user IDs to suspend.
   UserErrorList:
     type: array
     items:
       $ref: '#/definitions/UserError'
+  BatchUnsuspendUserRequest:
+    type: object
+    required:
+      - UserIdList
+    properties:
+      UserIdList:
+        $ref: '#/definitions/UserIdList'
+        description: The request containing the user IDs to unsuspend.
   UpdatePhoneNumberRequestItemList:
     type: array
     items:
       $ref: '#/definitions/UpdatePhoneNumberRequestItem'
+  BatchUpdatePhoneNumberRequest:
+    type: object
+    required:
+      - UpdatePhoneNumberRequestItems
+    properties:
+      UpdatePhoneNumberRequestItems:
+        $ref: '#/definitions/UpdatePhoneNumberRequestItemList'
+        description: The request containing the phone number IDs and product types to update.
   UpdateUserRequestItemList:
     type: array
     items:
       $ref: '#/definitions/UpdateUserRequestItem'
     maxItems: 20
+  BatchUpdateUserRequest:
+    type: object
+    required:
+      - UpdateUserRequestItems
+    properties:
+      UpdateUserRequestItems:
+        $ref: '#/definitions/UpdateUserRequestItemList'
+        description: The request containing the user IDs and details to update.
   BusinessCallingSettings:
     type: object
     properties:
@@ -3676,18 +3674,31 @@ definitions:
     description: The Amazon Chime Business Calling settings for the administrator's AWS account. Includes any Amazon S3 buckets designated for storing call detail records.
   CallingRegion:
     type: string
-  CallingRegionList:
-    type: array
-    items:
-      $ref: '#/definitions/CallingRegion'
-  CpsLimit:
-    type: integer
-    minimum: 1
+  CreateAccountRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/AccountName'
+        description: The name of the Amazon Chime account.
   PhoneNumberProductType:
     type: string
     enum:
       - BusinessCalling
       - VoiceConnector
+  CreatePhoneNumberOrderRequest:
+    type: object
+    required:
+      - ProductType
+      - E164PhoneNumbers
+    properties:
+      ProductType:
+        $ref: '#/definitions/PhoneNumberProductType'
+        description: The phone number product type.
+      E164PhoneNumbers:
+        $ref: '#/definitions/E164PhoneNumberList'
+        description: 'List of phone numbers, in E.164 format.'
   PhoneNumberOrder:
     type: object
     properties:
@@ -3714,6 +3725,18 @@ definitions:
     type: string
     minLength: 1
     maxLength: 256
+  CreateVoiceConnectorRequest:
+    type: object
+    required:
+      - Name
+      - RequireEncryption
+    properties:
+      Name:
+        $ref: '#/definitions/VoiceConnectorName'
+        description: The name of the Amazon Chime Voice Connector.
+      RequireEncryption:
+        $ref: '#/definitions/Boolean'
+        description: 'When enabled, requires encryption for the Amazon Chime Voice Connector.'
   VoiceConnector:
     type: object
     properties:
@@ -3736,31 +3759,44 @@ definitions:
         $ref: '#/definitions/Iso8601Timestamp'
         description: 'The updated Amazon Chime Voice Connector timestamp, in ISO 8601 format.'
     description: 'The Amazon Chime Voice Connector configuration, including outbound host name and encryption settings.'
-  SensitiveString:
-    type: string
-    format: password
-  Credential:
-    type: object
-    properties:
-      Username:
-        $ref: '#/definitions/SensitiveString'
-        description: 'The RFC2617 compliant user name associated with the SIP credentials, in US-ASCII format.'
-      Password:
-        $ref: '#/definitions/SensitiveString'
-        description: 'The RFC2617 compliant password associated with the SIP credentials, in US-ASCII format.'
-    description: The SIP credentials used to authenticate requests to your Amazon Chime Voice Connector.
   CredentialList:
     type: array
     items:
       $ref: '#/definitions/Credential'
+  DeleteAccountRequest:
+    type: object
+    properties: {}
+  DeletePhoneNumberRequest:
+    type: object
+    properties: {}
+  DeleteVoiceConnectorOriginationRequest:
+    type: object
+    properties: {}
+  DeleteVoiceConnectorRequest:
+    type: object
+    properties: {}
   SensitiveStringList:
     type: array
     items:
       $ref: '#/definitions/SensitiveString'
-  EmailAddress:
-    type: string
-    pattern: .+@.+\..+
-    format: password
+  DeleteVoiceConnectorTerminationCredentialsRequest:
+    type: object
+    properties:
+      Usernames:
+        $ref: '#/definitions/SensitiveStringList'
+        description: 'The RFC2617 compliant username associated with the SIP credentials, in US-ASCII format.'
+  DeleteVoiceConnectorTerminationRequest:
+    type: object
+    properties: {}
+  DisassociatePhoneNumberFromUserRequest:
+    type: object
+    properties: {}
+  DisassociatePhoneNumbersFromVoiceConnectorRequest:
+    type: object
+    properties:
+      E164PhoneNumbers:
+        $ref: '#/definitions/E164PhoneNumberList'
+        description: 'List of phone numbers, in E.164 format.'
   EmailStatus:
     type: string
     enum:
@@ -3780,6 +3816,12 @@ definitions:
       - Unprocessable
       - Throttled
       - PreconditionFailed
+  GetAccountRequest:
+    type: object
+    properties: {}
+  GetAccountSettingsRequest:
+    type: object
+    properties: {}
   VoiceConnectorSettings:
     type: object
     properties:
@@ -3790,6 +3832,12 @@ definitions:
   GuidString:
     type: string
     pattern: '[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}'
+  GetPhoneNumberOrderRequest:
+    type: object
+    properties: {}
+  GetPhoneNumberRequest:
+    type: object
+    properties: {}
   PhoneNumber:
     type: object
     properties:
@@ -3821,6 +3869,9 @@ definitions:
         $ref: '#/definitions/Iso8601Timestamp'
         description: 'The deleted phone number timestamp, in ISO 8601 format.'
     description: A phone number used for Amazon Chime Business Calling or an Amazon Chime Voice Connector.
+  GetUserRequest:
+    type: object
+    properties: {}
   User:
     type: object
     required:
@@ -3860,6 +3911,9 @@ definitions:
         $ref: '#/definitions/String'
         description: The user's personal meeting PIN.
     description: The user on the Amazon Chime account.
+  GetUserSettingsRequest:
+    type: object
+    properties: {}
   UserSettings:
     type: object
     required:
@@ -3869,6 +3923,9 @@ definitions:
         $ref: '#/definitions/TelephonySettings'
         description: The telephony settings associated with the user.
     description: 'Settings associated with an Amazon Chime user, including inbound and outbound calling and text messaging.'
+  GetVoiceConnectorOriginationRequest:
+    type: object
+    properties: {}
   Origination:
     type: object
     properties:
@@ -3879,6 +3936,12 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'When origination settings are disabled, inbound calls are not enabled for your Amazon Chime Voice Connector.'
     description: Origination settings enable your SIP hosts to receive inbound calls using your Amazon Chime Voice Connector.
+  GetVoiceConnectorRequest:
+    type: object
+    properties: {}
+  GetVoiceConnectorTerminationHealthRequest:
+    type: object
+    properties: {}
   TerminationHealth:
     type: object
     properties:
@@ -3889,6 +3952,9 @@ definitions:
         $ref: '#/definitions/String'
         description: The source IP address.
     description: 'The termination health details, including the source IP address and timestamp of the last successful SIP <code>OPTIONS</code> message from your SIP infrastructure.'
+  GetVoiceConnectorTerminationRequest:
+    type: object
+    properties: {}
   Termination:
     type: object
     properties:
@@ -3939,14 +4005,28 @@ definitions:
     items:
       $ref: '#/definitions/EmailAddress'
     maxItems: 50
+  InviteUsersRequest:
+    type: object
+    required:
+      - UserEmailList
+    properties:
+      UserEmailList:
+        $ref: '#/definitions/UserEmailList'
+        description: The user email addresses to which to send the invite.
   ProfileServiceMaxResults:
     type: integer
     minimum: 1
     maximum: 200
+  ListAccountsRequest:
+    type: object
+    properties: {}
   ResultMax:
     type: integer
     minimum: 1
     maximum: 99
+  ListPhoneNumberOrdersRequest:
+    type: object
+    properties: {}
   PhoneNumberOrderList:
     type: array
     items:
@@ -3968,18 +4048,33 @@ definitions:
       - AccountId
       - UserId
       - VoiceConnectorId
+  ListPhoneNumbersRequest:
+    type: object
+    properties: {}
   PhoneNumberList:
     type: array
     items:
       $ref: '#/definitions/PhoneNumber'
+  ListUsersRequest:
+    type: object
+    properties: {}
   UserList:
     type: array
     items:
       $ref: '#/definitions/User'
+  ListVoiceConnectorTerminationCredentialsRequest:
+    type: object
+    properties: {}
+  ListVoiceConnectorsRequest:
+    type: object
+    properties: {}
   VoiceConnectorList:
     type: array
     items:
       $ref: '#/definitions/VoiceConnector'
+  LogoutUserRequest:
+    type: object
+    properties: {}
   NullableBoolean:
     type: boolean
   OrderedPhoneNumberStatus:
@@ -4002,10 +4097,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/OrderedPhoneNumber'
-  OriginationRouteList:
-    type: array
-    items:
-      $ref: '#/definitions/OriginationRoute'
   Port:
     type: integer
     minimum: 0
@@ -4105,57 +4196,101 @@ definitions:
       - Successful
       - Failed
       - Partial
+  PutVoiceConnectorOriginationRequest:
+    type: object
+    required:
+      - Origination
+    properties:
+      Origination:
+        $ref: '#/definitions/Origination'
+        description: The origination setting details to add.
+  PutVoiceConnectorTerminationCredentialsRequest:
+    type: object
+    properties:
+      Credentials:
+        $ref: '#/definitions/CredentialList'
+        description: The termination SIP credentials.
+  PutVoiceConnectorTerminationRequest:
+    type: object
+    required:
+      - Termination
+    properties:
+      Termination:
+        $ref: '#/definitions/Termination'
+        description: The termination setting details to add.
   RegistrationStatus:
     type: string
     enum:
       - Unregistered
       - Registered
       - Suspended
-  StringList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  TelephonySettings:
+  ResetPersonalPINRequest:
+    type: object
+    properties: {}
+  RestorePhoneNumberRequest:
+    type: object
+    properties: {}
+  SearchAvailablePhoneNumbersRequest:
+    type: object
+    properties: {}
+  UpdateAccountRequest:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/AccountName'
+        description: The new name for the specified Amazon Chime account.
+  UpdateAccountSettingsRequest:
     type: object
     required:
-      - InboundCalling
-      - OutboundCalling
-      - SMS
+      - AccountSettings
     properties:
-      InboundCalling:
-        $ref: '#/definitions/Boolean'
-        description: Allows or denies inbound calling.
-      OutboundCalling:
-        $ref: '#/definitions/Boolean'
-        description: Allows or denies outbound calling.
-      SMS:
-        $ref: '#/definitions/Boolean'
-        description: Allows or denies SMS messaging.
-    description: 'Settings that allow management of telephony permissions for an Amazon Chime user, such as inbound and outbound calling and text messaging.'
-  UpdatePhoneNumberRequestItem:
+      AccountSettings:
+        $ref: '#/definitions/AccountSettings'
+        description: The Amazon Chime account settings to update.
+  UpdateGlobalSettingsRequest:
     type: object
     required:
-      - PhoneNumberId
+      - BusinessCalling
+      - VoiceConnector
     properties:
-      PhoneNumberId:
-        $ref: '#/definitions/NonEmptyString'
-        description: The phone number ID to update.
+      BusinessCalling:
+        $ref: '#/definitions/BusinessCallingSettings'
+        description: The Amazon Chime Business Calling settings.
+      VoiceConnector:
+        $ref: '#/definitions/VoiceConnectorSettings'
+        description: The Amazon Chime Voice Connector settings.
+  UpdatePhoneNumberRequest:
+    type: object
+    properties:
       ProductType:
         $ref: '#/definitions/PhoneNumberProductType'
-        description: The product type to update.
-    description: 'The phone number ID and product type fields to update, used with the <a>BatchUpdatePhoneNumber</a> and <a>UpdatePhoneNumber</a> actions.'
-  UpdateUserRequestItem:
+        description: The product type.
+  UpdateUserRequest:
     type: object
-    required:
-      - UserId
     properties:
-      UserId:
-        $ref: '#/definitions/NonEmptyString'
-        description: The user ID.
       LicenseType:
         $ref: '#/definitions/License'
-        description: The user license type.
-    description: 'The user ID and user fields to update, used with the <a>BatchUpdateUser</a> action.'
+        description: The user license type to update. This must be a supported license type for the Amazon Chime account that the user belongs to.
+  UpdateUserSettingsRequest:
+    type: object
+    required:
+      - UserSettings
+    properties:
+      UserSettings:
+        $ref: '#/definitions/UserSettings'
+        description: The user settings to update.
+  UpdateVoiceConnectorRequest:
+    type: object
+    required:
+      - Name
+      - RequireEncryption
+    properties:
+      Name:
+        $ref: '#/definitions/VoiceConnectorName'
+        description: The name of the Amazon Chime Voice Connector.
+      RequireEncryption:
+        $ref: '#/definitions/Boolean'
+        description: 'When enabled, requires encryption for the Amazon Chime Voice Connector.'
   UserError:
     type: object
     properties:

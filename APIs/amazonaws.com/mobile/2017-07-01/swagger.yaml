@@ -136,11 +136,30 @@ paths:
           schema:
             $ref: '#/definitions/LimitExceededException'
       parameters:
+        - name: name
+          in: query
+          required: false
+          description: ' Name of the project. '
+          type: string
+        - name: region
+          in: query
+          required: false
+          description: ' Default region to use for AWS resource creation in the AWS Mobile Hub project. '
+          type: string
+        - name: snapshotId
+          in: query
+          required: false
+          description: ' Unique identifier for the exported snapshot of the project configuration. This snapshot identifier is included in the share URL. '
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateProjectRequest'
+            type: object
+            properties:
+              contents:
+                description: ' Binary file data. '
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -180,21 +199,16 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListProjectsRequest'
         - name: maxResults
-          type: string
           in: query
-          description: Pagination limit
           required: false
+          description: ' Maximum number of records to list in a single response. '
+          type: integer
         - name: nextToken
-          type: string
           in: query
-          description: Pagination token
           required: false
+          description: ' Pagination token. Set to null to start listing records from start. If non-null pagination token is returned in a result, then pass its value in here in another request to list more entries. '
+          type: string
   '/projects/{projectId}':
     delete:
       operationId: DeleteProject
@@ -225,15 +239,11 @@ paths:
           schema:
             $ref: '#/definitions/NotFoundException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteProjectRequest'
         - name: projectId
-          type: string
           in: path
           required: true
+          description: ' Unique project identifier. '
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -278,15 +288,11 @@ paths:
           schema:
             $ref: '#/definitions/NotFoundException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeBundleRequest'
         - name: bundleId
-          type: string
           in: path
           required: true
+          description: ' Unique bundle identifier. '
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -330,16 +336,30 @@ paths:
           schema:
             $ref: '#/definitions/NotFoundException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ExportBundleRequest'
         - name: bundleId
-          type: string
           in: path
           required: true
-  /project:
+          description: ' Unique bundle identifier. '
+          type: string
+        - name: projectId
+          in: query
+          required: false
+          description: ' Unique project identifier. '
+          type: string
+        - name: platform
+          in: query
+          required: false
+          description: ' Developer desktop or target mobile app or website platform. '
+          type: string
+          enum:
+            - OSX
+            - WINDOWS
+            - LINUX
+            - OBJC
+            - SWIFT
+            - ANDROID
+            - JAVASCRIPT
+  '/project#projectId':
     get:
       operationId: DescribeProject
       description: ' Gets details about a project in AWS Mobile Hub. '
@@ -373,11 +393,16 @@ paths:
           schema:
             $ref: '#/definitions/NotFoundException'
       parameters:
-        - name: body
-          in: body
+        - name: projectId
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/DescribeProjectRequest'
+          description: ' Unique project identifier. '
+          type: string
+        - name: syncFromResources
+          in: query
+          required: false
+          description: ' If set to true, causes AWS Mobile Hub to synchronize information from other services, e.g., update state of AWS CloudFormation stacks in the AWS Mobile Hub project. '
+          type: boolean
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -422,15 +447,11 @@ paths:
           schema:
             $ref: '#/definitions/NotFoundException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ExportProjectRequest'
         - name: projectId
-          type: string
           in: path
           required: true
+          description: ' Unique project identifier. '
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -471,21 +492,16 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListBundlesRequest'
         - name: maxResults
-          type: string
           in: query
-          description: Pagination limit
           required: false
+          description: ' Maximum number of records to list in a single response. '
+          type: integer
         - name: nextToken
-          type: string
           in: query
-          description: Pagination token
           required: false
+          description: ' Pagination token. Set to null to start listing records from start. If non-null pagination token is returned in a result, then pass its value in here in another request to list more entries. '
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -496,7 +512,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /update:
+  '/update#projectId':
     post:
       operationId: UpdateProject
       description: ' Update an existing project. '
@@ -538,11 +554,20 @@ paths:
           schema:
             $ref: '#/definitions/LimitExceededException'
       parameters:
+        - name: projectId
+          in: query
+          required: true
+          description: ' Unique project identifier. '
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateProjectRequest'
+            type: object
+            properties:
+              contents:
+                description: ' Binary file data. '
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -561,13 +586,6 @@ definitions:
         $ref: '#/definitions/ProjectDetails'
         description: ' Detailed information about the created AWS Mobile Hub project. '
     description: ' Result structure used in response to a request to create a project. '
-  CreateProjectRequest:
-    type: object
-    properties:
-      contents:
-        $ref: '#/definitions/Contents'
-        description: ' ZIP or YAML file which contains configuration settings to be used when creating the project. This may be the contents of the file downloaded from the URL provided in an export project operation. '
-    description: ' Request structure used to request a project be created. '
   InternalFailureException:
     type: object
     properties:
@@ -620,10 +638,6 @@ definitions:
         $ref: '#/definitions/Resources'
         description: ' Resources which were not deleted, due to a risk of losing potentially important data or files. '
     description: ' Result structure used in response to request to delete a project. '
-  DeleteProjectRequest:
-    type: object
-    properties: {}
-    description: ' Request structure used to request a project be deleted. '
   DescribeBundleResult:
     type: object
     properties:
@@ -631,20 +645,12 @@ definitions:
         $ref: '#/definitions/BundleDetails'
         description: ' The details of the bundle. '
     description: ' Result structure contains the details of the bundle. '
-  DescribeBundleRequest:
-    type: object
-    properties: {}
-    description: ' Request structure to request the details of a specific bundle. '
   DescribeProjectResult:
     type: object
     properties:
       details:
         $ref: '#/definitions/ProjectDetails'
     description: ' Result structure used for requests of project details. '
-  DescribeProjectRequest:
-    type: object
-    properties: {}
-    description: ' Request structure used to request details about a project. '
   ExportBundleResult:
     type: object
     properties:
@@ -652,10 +658,6 @@ definitions:
         $ref: '#/definitions/DownloadUrl'
         description: ' URL which contains the custom-generated SDK and tool packages used to integrate the client mobile app or web app with the AWS resources created by the AWS Mobile Hub project. '
     description: ' Result structure which contains link to download custom-generated SDK and tool packages used to integrate mobile web or app clients with backed AWS resources. '
-  ExportBundleRequest:
-    type: object
-    properties: {}
-    description: ' Request structure used to request generation of custom SDK and tool packages required to integrate mobile web or app clients with backed AWS resources. '
   ExportProjectResult:
     type: object
     properties:
@@ -669,10 +671,6 @@ definitions:
         $ref: '#/definitions/SnapshotId'
         description: ' Unique identifier for the exported snapshot of the project configuration. This snapshot identifier is included in the share URL. '
     description: ' Result structure used for requests to export project configuration details. '
-  ExportProjectRequest:
-    type: object
-    properties: {}
-    description: ' Request structure used in requests to export project configuration details. '
   ListBundlesResult:
     type: object
     properties:
@@ -683,10 +681,6 @@ definitions:
         $ref: '#/definitions/NextToken'
         description: ' Pagination token. If non-null pagination token is returned in a result, then pass its value in another request to fetch more entries. '
     description: ' Result structure contains a list of all available bundles with details. '
-  ListBundlesRequest:
-    type: object
-    properties: {}
-    description: ' Request structure to request all available bundles. '
   ListProjectsResult:
     type: object
     properties:
@@ -695,10 +689,6 @@ definitions:
       nextToken:
         $ref: '#/definitions/NextToken'
     description: ' Result structure used for requests to list projects in AWS Mobile Hub. '
-  ListProjectsRequest:
-    type: object
-    properties: {}
-    description: ' Request structure used to request projects list in AWS Mobile Hub. '
   UpdateProjectResult:
     type: object
     properties:
@@ -706,13 +696,6 @@ definitions:
         $ref: '#/definitions/ProjectDetails'
         description: ' Detailed information about the updated AWS Mobile Hub project. '
     description: ' Result structure used for requests to updated project configuration. '
-  UpdateProjectRequest:
-    type: object
-    properties:
-      contents:
-        $ref: '#/definitions/Contents'
-        description: ' ZIP or YAML file which contains project configuration to be updated. This should be the contents of the file downloaded from the URL provided in an export project operation. '
-    description: ' Request structure used for requests to update project configuration. '
   AccountActionRequiredException:
     type: object
     properties:
@@ -729,15 +712,10 @@ definitions:
     type: string
     description: ' Value part of key-value attribute pairs. '
   Attributes:
-    type: array
+    type: object
     description: ' Key-value attribute pairs. '
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/AttributeKey'
-        value:
-          $ref: '#/definitions/AttributeValue'
+    additionalProperties:
+      $ref: '#/definitions/AttributeValue'
   Boolean:
     type: boolean
   BundleDescription:
@@ -795,6 +773,13 @@ definitions:
   SnapshotId:
     type: string
     description: ' Unique identifier for the exported snapshot of the project configuration. This snapshot identifier is included in the share URL. '
+  CreateProjectRequest:
+    type: object
+    properties:
+      contents:
+        $ref: '#/definitions/Contents'
+        description: ' ZIP or YAML file which contains configuration settings to be used when creating the project. This may be the contents of the file downloaded from the URL provided in an export project operation. '
+    description: ' Request structure used to request a project be created. '
   ProjectDetails:
     type: object
     properties:
@@ -824,11 +809,23 @@ definitions:
   ProjectId:
     type: string
     description: ' Unique project identifier. '
+  DeleteProjectRequest:
+    type: object
+    properties: {}
+    description: ' Request structure used to request a project be deleted. '
   Resources:
     type: array
     description: ' List of AWS resources associated with a project. '
     items:
       $ref: '#/definitions/Resource'
+  DescribeBundleRequest:
+    type: object
+    properties: {}
+    description: ' Request structure to request the details of a specific bundle. '
+  DescribeProjectRequest:
+    type: object
+    properties: {}
+    description: ' Request structure used to request details about a project. '
   DownloadUrl:
     type: string
     description: ' The download Url. '
@@ -843,6 +840,14 @@ definitions:
       - ANDROID
       - JAVASCRIPT
     description: ' Developer desktop or target mobile app or website platform. '
+  ExportBundleRequest:
+    type: object
+    properties: {}
+    description: ' Request structure used to request generation of custom SDK and tool packages required to integrate mobile web or app clients with backed AWS resources. '
+  ExportProjectRequest:
+    type: object
+    properties: {}
+    description: ' Request structure used in requests to export project configuration details. '
   ShareUrl:
     type: string
     description: ' URL which can be shared to allow other AWS users to create their own project in AWS Mobile Hub with the same configuration as the specified project. This URL pertains to a snapshot in time of the project configuration that is created when this API is called. If you want to share additional changes to your project configuration, then you will need to create and share a new snapshot by calling this method again. '
@@ -855,6 +860,14 @@ definitions:
   NextToken:
     type: string
     description: ' Pagination token. Set to null to start listing records from start. If non-null pagination token is returned in a result, then pass its value in here in another request to list more entries. '
+  ListBundlesRequest:
+    type: object
+    properties: {}
+    description: ' Request structure to request all available bundles. '
+  ListProjectsRequest:
+    type: object
+    properties: {}
+    description: ' Request structure used to request projects list in AWS Mobile Hub. '
   ProjectSummaries:
     type: array
     description: ' List of projects. '
@@ -900,3 +913,10 @@ definitions:
       attributes:
         $ref: '#/definitions/Attributes'
     description: ' Information about an instance of an AWS resource associated with a project. '
+  UpdateProjectRequest:
+    type: object
+    properties:
+      contents:
+        $ref: '#/definitions/Contents'
+        description: ' ZIP or YAML file which contains project configuration to be updated. This should be the contents of the file downloaded from the URL provided in an export project operation. '
+    description: ' Request structure used for requests to update project configuration. '

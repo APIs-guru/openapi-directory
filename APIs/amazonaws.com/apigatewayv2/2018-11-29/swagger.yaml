@@ -35,7 +35,6 @@ externalDocs:
   url: 'https://docs.aws.amazon.com/apigateway/'
 host: apigateway.amazonaws.com
 basePath: /
-x-hasEquivalentPaths: true
 schemes:
   - https
   - http
@@ -129,7 +128,35 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateApiRequest'
+            type: object
+            required:
+              - name
+              - protocolType
+              - routeSelectionExpression
+            properties:
+              apiKeySelectionExpression:
+                description: 'An expression used to extract information at runtime. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions">Selection Expressions</a> for more information.'
+                type: string
+              description:
+                description: 'A string with a length between [0-1024].'
+                type: string
+              disableSchemaValidation:
+                description: Avoid validating models when creating a deployment.
+                type: boolean
+              name:
+                description: 'A string with a length between [1-128].'
+                type: string
+              protocolType:
+                description: ''
+                type: string
+                enum:
+                  - WEBSOCKET
+              routeSelectionExpression:
+                description: 'An expression used to extract information at runtime. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions">Selection Expressions</a> for more information.'
+                type: string
+              version:
+                description: 'A string with a length between [1-64].'
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -161,11 +188,18 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetApisRequest'
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of elements to be returned for this resource.
+          type: string
+        - name: nextToken
+          in: query
+          required: false
+          description: |-
+            The next page of elements from this collection. Not valid for the last element of
+             the collection.
+          type: string
   '/v2/domainnames/{domainName}/apimappings':
     post:
       operationId: CreateApiMapping
@@ -192,15 +226,32 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
+        - name: domainName
+          in: path
+          required: true
+          description: The domain name.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateApiMappingRequest'
-        - name: domainName
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - apiId
+              - stage
+            properties:
+              apiId:
+                description: The identifier.
+                type: string
+              apiMappingKey:
+                description: |-
+                  After evaulating a selection expression, the result is compared against one or
+                   more selection keys to find a matching key. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions">Selection Expressions</a> for a list of expressions and each expression's
+                   associated selection key type.
+                type: string
+              stage:
+                description: 'A string with a length between [1-128].'
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -232,15 +283,23 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetApiMappingsRequest'
         - name: domainName
-          type: string
           in: path
           required: true
+          description: The domain name.
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of elements to be returned for this resource.
+          type: string
+        - name: nextToken
+          in: query
+          required: false
+          description: |-
+            The next page of elements from this collection. Not valid for the last element of
+             the collection.
+          type: string
   '/v2/apis/{apiId}/authorizers':
     post:
       operationId: CreateAuthorizer
@@ -267,15 +326,69 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
+        - name: apiId
+          in: path
+          required: true
+          description: The API identifier.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateAuthorizerRequest'
-        - name: apiId
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - authorizerType
+              - authorizerUri
+              - identitySource
+              - name
+            properties:
+              authorizerCredentialsArn:
+                description: Represents an Amazon Resource Name (ARN).
+                type: string
+              authorizerResultTtlInSeconds:
+                description: 'An integer with a value between [0-3600].'
+                type: integer
+                minimum: -2147483648
+                maximum: 2147483647
+              authorizerType:
+                description: |-
+                  The authorizer type. Currently the only valid value is REQUEST, for a
+                   Lambda function using incoming request parameters.
+                type: string
+                enum:
+                  - REQUEST
+              authorizerUri:
+                description: 'A string representation of a URI with a length between [1-2048].'
+                type: string
+              identitySource:
+                description: |-
+                  The identity source for which authorization is requested. For the REQUEST
+                   authorizer, this is required when authorization caching is enabled. The value is a
+                   comma-separated string of one or more mapping expressions of the specified request
+                   parameters. For example, if an Auth header, a Name query string parameter are defined
+                   as identity sources, this value is $method.request.header.Auth,
+                   $method.request.querystring.Name. These parameters will be used to derive
+                   the authorization caching key and to perform runtime validation of the REQUEST
+                   authorizer by verifying all of the identity-related request parameters are present,
+                   not null and non-empty. Only when this is true does the authorizer invoke the
+                   authorizer Lambda function, otherwise, it returns a 401 Unauthorized
+                   response without calling the Lambda function. The valid value is a string of
+                   comma-separated mapping expressions of the specified request parameters. When the
+                   authorization caching is not enabled, this property is optional.
+                type: array
+                items:
+                  $ref: '#/definitions/__string'
+              identityValidationExpression:
+                description: 'A string with a length between [0-1024].'
+                type: string
+              name:
+                description: 'A string with a length between [1-128].'
+                type: string
+              providerArns:
+                description: 'For REQUEST authorizer, this is not defined.'
+                type: array
+                items:
+                  $ref: '#/definitions/Arn'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -307,15 +420,23 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetAuthorizersRequest'
         - name: apiId
-          type: string
           in: path
           required: true
+          description: The API identifier.
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of elements to be returned for this resource.
+          type: string
+        - name: nextToken
+          in: query
+          required: false
+          description: |-
+            The next page of elements from this collection. Not valid for the last element of
+             the collection.
+          type: string
   '/v2/apis/{apiId}/deployments':
     post:
       operationId: CreateDeployment
@@ -342,15 +463,23 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
+        - name: apiId
+          in: path
+          required: true
+          description: The API identifier.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateDeploymentRequest'
-        - name: apiId
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              description:
+                description: 'A string with a length between [0-1024].'
+                type: string
+              stageName:
+                description: 'A string with a length between [1-128].'
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -382,15 +511,23 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetDeploymentsRequest'
         - name: apiId
-          type: string
           in: path
           required: true
+          description: The API identifier.
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of elements to be returned for this resource.
+          type: string
+        - name: nextToken
+          in: query
+          required: false
+          description: |-
+            The next page of elements from this collection. Not valid for the last element of
+             the collection.
+          type: string
   /v2/domainnames:
     post:
       operationId: CreateDomainName
@@ -421,7 +558,18 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateDomainNameRequest'
+            type: object
+            required:
+              - domainName
+            properties:
+              domainName:
+                description: 'A string with a length between [1-512].'
+                type: string
+              domainNameConfigurations:
+                description: The domain name configurations.
+                type: array
+                items:
+                  $ref: '#/definitions/DomainNameConfiguration'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -453,11 +601,18 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetDomainNamesRequest'
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of elements to be returned for this resource.
+          type: string
+        - name: nextToken
+          in: query
+          required: false
+          description: |-
+            The next page of elements from this collection. Not valid for the last element of
+             the collection.
+          type: string
   '/v2/apis/{apiId}/integrations':
     post:
       operationId: CreateIntegration
@@ -484,15 +639,92 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
+        - name: apiId
+          in: path
+          required: true
+          description: The API identifier.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateIntegrationRequest'
-        - name: apiId
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - integrationType
+            properties:
+              connectionId:
+                description: 'A string with a length between [1-1024].'
+                type: string
+              connectionType:
+                description: Represents a connection type.
+                type: string
+                enum:
+                  - INTERNET
+                  - VPC_LINK
+              contentHandlingStrategy:
+                description: Specifies how to handle response payload content type conversions.
+                type: string
+                enum:
+                  - CONVERT_TO_BINARY
+                  - CONVERT_TO_TEXT
+              credentialsArn:
+                description: Represents an Amazon Resource Name (ARN).
+                type: string
+              description:
+                description: 'A string with a length between [0-1024].'
+                type: string
+              integrationMethod:
+                description: 'A string with a length between [1-64].'
+                type: string
+              integrationType:
+                description: Represents an API method integration type.
+                type: string
+                enum:
+                  - AWS
+                  - HTTP
+                  - MOCK
+                  - HTTP_PROXY
+                  - AWS_PROXY
+              integrationUri:
+                description: 'A string representation of a URI with a length between [1-2048].'
+                type: string
+              passthroughBehavior:
+                description: Represents passthrough behavior for an integration response.
+                type: string
+                enum:
+                  - WHEN_NO_MATCH
+                  - NEVER
+                  - WHEN_NO_TEMPLATES
+              requestParameters:
+                description: |-
+                  A key-value map specifying response parameters that are passed to the method
+                   response from the backend. The key is a method response header parameter name and the
+                   mapped value is an integration response header value, a static value enclosed within
+                   a pair of single quotes, or a JSON expression from the integration response body. The
+                   mapping key must match the pattern of method.response.header.{name}, where name is a
+                   valid and unique header name. The mapped non-static value must match the pattern of
+                   integration.response.header.{name} or integration.response.body.{JSON-expression},
+                   where name is a valid and unique response header name and JSON-expression is a valid
+                   JSON expression without the $ prefix.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/StringWithLengthBetween1And512'
+              requestTemplates:
+                description: |-
+                  A mapping of identifier keys to templates. The value is an actual template script.
+                   The key is typically a SelectionKey which is chosen based on evaluating
+                   a selection expression.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/StringWithLengthBetween0And32K'
+              templateSelectionExpression:
+                description: 'An expression used to extract information at runtime. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions">Selection Expressions</a> for more information.'
+                type: string
+              timeoutInMillis:
+                description: 'An integer with a value between [50-29000].'
+                type: integer
+                minimum: -2147483648
+                maximum: 2147483647
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -524,15 +756,23 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetIntegrationsRequest'
         - name: apiId
-          type: string
           in: path
           required: true
+          description: The API identifier.
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of elements to be returned for this resource.
+          type: string
+        - name: nextToken
+          in: query
+          required: false
+          description: |-
+            The next page of elements from this collection. Not valid for the last element of
+             the collection.
+          type: string
   '/v2/apis/{apiId}/integrations/{integrationId}/integrationresponses':
     post:
       operationId: CreateIntegrationResponse
@@ -559,19 +799,61 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
+        - name: apiId
+          in: path
+          required: true
+          description: The API identifier.
+          type: string
+        - name: integrationId
+          in: path
+          required: true
+          description: The integration ID.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateIntegrationResponseRequest'
-        - name: apiId
-          type: string
-          in: path
-          required: true
-        - name: integrationId
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - integrationResponseKey
+            properties:
+              contentHandlingStrategy:
+                description: Specifies how to handle response payload content type conversions.
+                type: string
+                enum:
+                  - CONVERT_TO_BINARY
+                  - CONVERT_TO_TEXT
+              integrationResponseKey:
+                description: |-
+                  After evaulating a selection expression, the result is compared against one or
+                   more selection keys to find a matching key. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions">Selection Expressions</a> for a list of expressions and each expression's
+                   associated selection key type.
+                type: string
+              responseParameters:
+                description: |-
+                  A key-value map specifying response parameters that are passed to the method
+                   response from the backend. The key is a method response header parameter name and the
+                   mapped value is an integration response header value, a static value enclosed within
+                   a pair of single quotes, or a JSON expression from the integration response body. The
+                   mapping key must match the pattern of method.response.header.{name}, where name is a
+                   valid and unique header name. The mapped non-static value must match the pattern of
+                   integration.response.header.{name} or integration.response.body.{JSON-expression},
+                   where name is a valid and unique response header name and JSON-expression is a valid
+                   JSON expression without the $ prefix.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/StringWithLengthBetween1And512'
+              responseTemplates:
+                description: |-
+                  A mapping of identifier keys to templates. The value is an actual template script.
+                   The key is typically a SelectionKey which is chosen based on evaluating
+                   a selection expression.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/StringWithLengthBetween0And32K'
+              templateSelectionExpression:
+                description: 'An expression used to extract information at runtime. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions">Selection Expressions</a> for more information.'
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -603,19 +885,28 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetIntegrationResponsesRequest'
         - name: apiId
-          type: string
           in: path
           required: true
+          description: The API identifier.
+          type: string
         - name: integrationId
-          type: string
           in: path
           required: true
+          description: The integration ID.
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of elements to be returned for this resource.
+          type: string
+        - name: nextToken
+          in: query
+          required: false
+          description: |-
+            The next page of elements from this collection. Not valid for the last element of
+             the collection.
+          type: string
   '/v2/apis/{apiId}/models':
     post:
       operationId: CreateModel
@@ -642,15 +933,32 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
+        - name: apiId
+          in: path
+          required: true
+          description: The API identifier.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateModelRequest'
-        - name: apiId
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - name
+              - schema
+            properties:
+              contentType:
+                description: 'A string with a length between [1-256].'
+                type: string
+              description:
+                description: 'A string with a length between [0-1024].'
+                type: string
+              name:
+                description: 'A string with a length between [1-128].'
+                type: string
+              schema:
+                description: 'A string with a length between [0-32768].'
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -682,15 +990,23 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetModelsRequest'
         - name: apiId
-          type: string
           in: path
           required: true
+          description: The API identifier.
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of elements to be returned for this resource.
+          type: string
+        - name: nextToken
+          in: query
+          required: false
+          description: |-
+            The next page of elements from this collection. Not valid for the last element of
+             the collection.
+          type: string
   '/v2/apis/{apiId}/routes':
     post:
       operationId: CreateRoute
@@ -717,15 +1033,75 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
+        - name: apiId
+          in: path
+          required: true
+          description: The API identifier.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateRouteRequest'
-        - name: apiId
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - routeKey
+            properties:
+              apiKeyRequired:
+                description: Specifies whether an API key is required for the route.
+                type: boolean
+              authorizationScopes:
+                description: |-
+                  A list of authorization scopes configured on a route. The scopes are used with a
+                   COGNITO_USER_POOLS authorizer to authorize the method invocation. The authorization
+                   works by matching the route scopes against the scopes parsed from the access token in
+                   the incoming request. The method invocation is authorized if any route scope matches
+                   a claimed scope in the access token. Otherwise, the invocation is not authorized.
+                   When the route scope is configured, the client must provide an access token instead
+                   of an identity token for authorization purposes.
+                type: array
+                items:
+                  $ref: '#/definitions/StringWithLengthBetween1And64'
+              authorizationType:
+                description: |-
+                  The authorization type. Valid values are NONE for open access,
+                   AWS_IAM for using AWS IAM permissions, and CUSTOM for
+                   using a Lambda authorizer.
+                type: string
+                enum:
+                  - NONE
+                  - AWS_IAM
+                  - CUSTOM
+              authorizerId:
+                description: The identifier.
+                type: string
+              modelSelectionExpression:
+                description: 'An expression used to extract information at runtime. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions">Selection Expressions</a> for more information.'
+                type: string
+              operationName:
+                description: 'A string with a length between [1-64].'
+                type: string
+              requestModels:
+                description: The route models.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/StringWithLengthBetween1And128'
+              requestParameters:
+                description: The route parameters.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/ParameterConstraints'
+              routeKey:
+                description: |-
+                  After evaulating a selection expression, the result is compared against one or
+                   more selection keys to find a matching key. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions">Selection Expressions</a> for a list of expressions and each expression's
+                   associated selection key type.
+                type: string
+              routeResponseSelectionExpression:
+                description: 'An expression used to extract information at runtime. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions">Selection Expressions</a> for more information.'
+                type: string
+              target:
+                description: 'A string with a length between [1-128].'
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -757,15 +1133,23 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetRoutesRequest'
         - name: apiId
-          type: string
           in: path
           required: true
+          description: The API identifier.
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of elements to be returned for this resource.
+          type: string
+        - name: nextToken
+          in: query
+          required: false
+          description: |-
+            The next page of elements from this collection. Not valid for the last element of
+             the collection.
+          type: string
   '/v2/apis/{apiId}/routes/{routeId}/routeresponses':
     post:
       operationId: CreateRouteResponse
@@ -792,19 +1176,43 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
+        - name: apiId
+          in: path
+          required: true
+          description: The API identifier.
+          type: string
+        - name: routeId
+          in: path
+          required: true
+          description: The route ID.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateRouteResponseRequest'
-        - name: apiId
-          type: string
-          in: path
-          required: true
-        - name: routeId
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - routeResponseKey
+            properties:
+              modelSelectionExpression:
+                description: 'An expression used to extract information at runtime. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions">Selection Expressions</a> for more information.'
+                type: string
+              responseModels:
+                description: The route models.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/StringWithLengthBetween1And128'
+              responseParameters:
+                description: The route parameters.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/ParameterConstraints'
+              routeResponseKey:
+                description: |-
+                  After evaulating a selection expression, the result is compared against one or
+                   more selection keys to find a matching key. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions">Selection Expressions</a> for a list of expressions and each expression's
+                   associated selection key type.
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -836,19 +1244,28 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetRouteResponsesRequest'
         - name: apiId
-          type: string
           in: path
           required: true
+          description: The API identifier.
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of elements to be returned for this resource.
+          type: string
+        - name: nextToken
+          in: query
+          required: false
+          description: |-
+            The next page of elements from this collection. Not valid for the last element of
+             the collection.
+          type: string
         - name: routeId
-          type: string
           in: path
           required: true
+          description: The route ID.
+          type: string
   '/v2/apis/{apiId}/stages':
     post:
       operationId: CreateStage
@@ -875,15 +1292,78 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
+        - name: apiId
+          in: path
+          required: true
+          description: The API identifier.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateStageRequest'
-        - name: apiId
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - stageName
+            properties:
+              accessLogSettings:
+                description: Settings for logging access in a stage.
+                type: object
+                properties:
+                  DestinationArn:
+                    $ref: '#/definitions/Arn'
+                    description: The ARN of the CloudWatch Logs log group to receive access logs.
+                  Format:
+                    $ref: '#/definitions/StringWithLengthBetween1And1024'
+                    description: |-
+                      A single line format of the access logs of data, as specified by selected $context
+                       variables. The format must include at least $context.requestId.
+              clientCertificateId:
+                description: The identifier.
+                type: string
+              defaultRouteSettings:
+                description: Represents a collection of route settings.
+                type: object
+                properties:
+                  DataTraceEnabled:
+                    $ref: '#/definitions/__boolean'
+                    description: |-
+                      Specifies whether (true) or not (false) data trace
+                       logging is enabled for this route. This property affects the log entries pushed to
+                       Amazon CloudWatch Logs.
+                  DetailedMetricsEnabled:
+                    $ref: '#/definitions/__boolean'
+                    description: Specifies whether detailed metrics are enabled.
+                  LoggingLevel:
+                    $ref: '#/definitions/LoggingLevel'
+                    description: |-
+                      Specifies the logging level for this route: DEBUG, INFO,
+                       or WARN. This property affects the log entries pushed to Amazon
+                       CloudWatch Logs.
+                  ThrottlingBurstLimit:
+                    $ref: '#/definitions/__integer'
+                    description: Specifies the throttling burst limit.
+                  ThrottlingRateLimit:
+                    $ref: '#/definitions/__double'
+                    description: Specifies the throttling rate limit.
+              deploymentId:
+                description: The identifier.
+                type: string
+              description:
+                description: 'A string with a length between [0-1024].'
+                type: string
+              routeSettings:
+                description: The route settings map.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/RouteSettings'
+              stageName:
+                description: 'A string with a length between [1-128].'
+                type: string
+              stageVariables:
+                description: The stage variable map.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/StringWithLengthBetween0And2048'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -915,15 +1395,23 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetStagesRequest'
         - name: apiId
-          type: string
           in: path
           required: true
+          description: The API identifier.
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of elements to be returned for this resource.
+          type: string
+        - name: nextToken
+          in: query
+          required: false
+          description: |-
+            The next page of elements from this collection. Not valid for the last element of
+             the collection.
+          type: string
   '/v2/apis/{apiId}':
     delete:
       operationId: DeleteApi
@@ -940,15 +1428,11 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteApiRequest'
         - name: apiId
-          type: string
           in: path
           required: true
+          description: The API identifier.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -976,15 +1460,11 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetApiRequest'
         - name: apiId
-          type: string
           in: path
           required: true
+          description: The API identifier.
+          type: string
     patch:
       operationId: UpdateApi
       description: Updates an Api resource.
@@ -1010,15 +1490,35 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
+        - name: apiId
+          in: path
+          required: true
+          description: The API identifier.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateApiRequest'
-        - name: apiId
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              apiKeySelectionExpression:
+                description: 'An expression used to extract information at runtime. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions">Selection Expressions</a> for more information.'
+                type: string
+              description:
+                description: 'A string with a length between [0-1024].'
+                type: string
+              disableSchemaValidation:
+                description: Avoid validating models when creating a deployment.
+                type: boolean
+              name:
+                description: 'A string with a length between [1-128].'
+                type: string
+              routeSelectionExpression:
+                description: 'An expression used to extract information at runtime. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions">Selection Expressions</a> for more information.'
+                type: string
+              version:
+                description: 'A string with a length between [1-64].'
+                type: string
   '/v2/domainnames/{domainName}/apimappings/{apiMappingId}':
     delete:
       operationId: DeleteApiMapping
@@ -1039,19 +1539,16 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteApiMappingRequest'
-        - name: domainName
-          type: string
-          in: path
-          required: true
         - name: apiMappingId
-          type: string
           in: path
           required: true
+          description: The API mapping identifier.
+          type: string
+        - name: domainName
+          in: path
+          required: true
+          description: The domain name.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1083,19 +1580,16 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetApiMappingRequest'
-        - name: domainName
-          type: string
-          in: path
-          required: true
         - name: apiMappingId
-          type: string
           in: path
           required: true
+          description: The API mapping identifier.
+          type: string
+        - name: domainName
+          in: path
+          required: true
+          description: The domain name.
+          type: string
     patch:
       operationId: UpdateApiMapping
       description: The API mapping.
@@ -1121,19 +1615,36 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
+        - name: apiMappingId
+          in: path
+          required: true
+          description: The API mapping identifier.
+          type: string
+        - name: domainName
+          in: path
+          required: true
+          description: The domain name.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateApiMappingRequest'
-        - name: domainName
-          type: string
-          in: path
-          required: true
-        - name: apiMappingId
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - apiId
+            properties:
+              apiId:
+                description: The identifier.
+                type: string
+              apiMappingKey:
+                description: |-
+                  After evaulating a selection expression, the result is compared against one or
+                   more selection keys to find a matching key. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions">Selection Expressions</a> for a list of expressions and each expression's
+                   associated selection key type.
+                type: string
+              stage:
+                description: 'A string with a length between [1-128].'
+                type: string
   '/v2/apis/{apiId}/authorizers/{authorizerId}':
     delete:
       operationId: DeleteAuthorizer
@@ -1150,19 +1661,16 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteAuthorizerRequest'
         - name: apiId
-          type: string
           in: path
           required: true
+          description: The API identifier.
+          type: string
         - name: authorizerId
-          type: string
           in: path
           required: true
+          description: The authorizer identifier.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1190,19 +1698,16 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetAuthorizerRequest'
         - name: apiId
-          type: string
           in: path
           required: true
+          description: The API identifier.
+          type: string
         - name: authorizerId
-          type: string
           in: path
           required: true
+          description: The authorizer identifier.
+          type: string
     patch:
       operationId: UpdateAuthorizer
       description: Updates an Authorizer.
@@ -1228,19 +1733,69 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
+        - name: apiId
+          in: path
+          required: true
+          description: The API identifier.
+          type: string
+        - name: authorizerId
+          in: path
+          required: true
+          description: The authorizer identifier.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateAuthorizerRequest'
-        - name: apiId
-          type: string
-          in: path
-          required: true
-        - name: authorizerId
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              authorizerCredentialsArn:
+                description: Represents an Amazon Resource Name (ARN).
+                type: string
+              authorizerResultTtlInSeconds:
+                description: 'An integer with a value between [0-3600].'
+                type: integer
+                minimum: -2147483648
+                maximum: 2147483647
+              authorizerType:
+                description: |-
+                  The authorizer type. Currently the only valid value is REQUEST, for a
+                   Lambda function using incoming request parameters.
+                type: string
+                enum:
+                  - REQUEST
+              authorizerUri:
+                description: 'A string representation of a URI with a length between [1-2048].'
+                type: string
+              identitySource:
+                description: |-
+                  The identity source for which authorization is requested. For the REQUEST
+                   authorizer, this is required when authorization caching is enabled. The value is a
+                   comma-separated string of one or more mapping expressions of the specified request
+                   parameters. For example, if an Auth header, a Name query string parameter are defined
+                   as identity sources, this value is $method.request.header.Auth,
+                   $method.request.querystring.Name. These parameters will be used to derive
+                   the authorization caching key and to perform runtime validation of the REQUEST
+                   authorizer by verifying all of the identity-related request parameters are present,
+                   not null and non-empty. Only when this is true does the authorizer invoke the
+                   authorizer Lambda function, otherwise, it returns a 401 Unauthorized
+                   response without calling the Lambda function. The valid value is a string of
+                   comma-separated mapping expressions of the specified request parameters. When the
+                   authorization caching is not enabled, this property is optional.
+                type: array
+                items:
+                  $ref: '#/definitions/__string'
+              identityValidationExpression:
+                description: 'A string with a length between [0-1024].'
+                type: string
+              name:
+                description: 'A string with a length between [1-128].'
+                type: string
+              providerArns:
+                description: 'For REQUEST authorizer, this is not defined.'
+                type: array
+                items:
+                  $ref: '#/definitions/Arn'
   '/v2/apis/{apiId}/deployments/{deploymentId}':
     delete:
       operationId: DeleteDeployment
@@ -1257,19 +1812,16 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteDeploymentRequest'
         - name: apiId
-          type: string
           in: path
           required: true
+          description: The API identifier.
+          type: string
         - name: deploymentId
-          type: string
           in: path
           required: true
+          description: The deployment ID.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1297,19 +1849,16 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetDeploymentRequest'
         - name: apiId
-          type: string
           in: path
           required: true
+          description: The API identifier.
+          type: string
         - name: deploymentId
-          type: string
           in: path
           required: true
+          description: The deployment ID.
+          type: string
     patch:
       operationId: UpdateDeployment
       description: Updates a Deployment.
@@ -1335,19 +1884,25 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
+        - name: apiId
+          in: path
+          required: true
+          description: The API identifier.
+          type: string
+        - name: deploymentId
+          in: path
+          required: true
+          description: The deployment ID.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateDeploymentRequest'
-        - name: apiId
-          type: string
-          in: path
-          required: true
-        - name: deploymentId
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              description:
+                description: 'A string with a length between [0-1024].'
+                type: string
   '/v2/domainnames/{domainName}':
     delete:
       operationId: DeleteDomainName
@@ -1364,15 +1919,11 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteDomainNameRequest'
         - name: domainName
-          type: string
           in: path
           required: true
+          description: The domain name.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1400,15 +1951,11 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetDomainNameRequest'
         - name: domainName
-          type: string
           in: path
           required: true
+          description: The domain name.
+          type: string
     patch:
       operationId: UpdateDomainName
       description: Updates a domain name.
@@ -1434,15 +1981,22 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
+        - name: domainName
+          in: path
+          required: true
+          description: The domain name.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateDomainNameRequest'
-        - name: domainName
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              domainNameConfigurations:
+                description: The domain name configurations.
+                type: array
+                items:
+                  $ref: '#/definitions/DomainNameConfiguration'
   '/v2/apis/{apiId}/integrations/{integrationId}':
     delete:
       operationId: DeleteIntegration
@@ -1459,19 +2013,16 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteIntegrationRequest'
         - name: apiId
-          type: string
           in: path
           required: true
+          description: The API identifier.
+          type: string
         - name: integrationId
-          type: string
           in: path
           required: true
+          description: The integration ID.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1499,19 +2050,16 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetIntegrationRequest'
         - name: apiId
-          type: string
           in: path
           required: true
+          description: The API identifier.
+          type: string
         - name: integrationId
-          type: string
           in: path
           required: true
+          description: The integration ID.
+          type: string
     patch:
       operationId: UpdateIntegration
       description: Updates an Integration.
@@ -1537,19 +2085,95 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
+        - name: apiId
+          in: path
+          required: true
+          description: The API identifier.
+          type: string
+        - name: integrationId
+          in: path
+          required: true
+          description: The integration ID.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateIntegrationRequest'
-        - name: apiId
-          type: string
-          in: path
-          required: true
-        - name: integrationId
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              connectionId:
+                description: 'A string with a length between [1-1024].'
+                type: string
+              connectionType:
+                description: Represents a connection type.
+                type: string
+                enum:
+                  - INTERNET
+                  - VPC_LINK
+              contentHandlingStrategy:
+                description: Specifies how to handle response payload content type conversions.
+                type: string
+                enum:
+                  - CONVERT_TO_BINARY
+                  - CONVERT_TO_TEXT
+              credentialsArn:
+                description: Represents an Amazon Resource Name (ARN).
+                type: string
+              description:
+                description: 'A string with a length between [0-1024].'
+                type: string
+              integrationMethod:
+                description: 'A string with a length between [1-64].'
+                type: string
+              integrationType:
+                description: Represents an API method integration type.
+                type: string
+                enum:
+                  - AWS
+                  - HTTP
+                  - MOCK
+                  - HTTP_PROXY
+                  - AWS_PROXY
+              integrationUri:
+                description: 'A string representation of a URI with a length between [1-2048].'
+                type: string
+              passthroughBehavior:
+                description: Represents passthrough behavior for an integration response.
+                type: string
+                enum:
+                  - WHEN_NO_MATCH
+                  - NEVER
+                  - WHEN_NO_TEMPLATES
+              requestParameters:
+                description: |-
+                  A key-value map specifying response parameters that are passed to the method
+                   response from the backend. The key is a method response header parameter name and the
+                   mapped value is an integration response header value, a static value enclosed within
+                   a pair of single quotes, or a JSON expression from the integration response body. The
+                   mapping key must match the pattern of method.response.header.{name}, where name is a
+                   valid and unique header name. The mapped non-static value must match the pattern of
+                   integration.response.header.{name} or integration.response.body.{JSON-expression},
+                   where name is a valid and unique response header name and JSON-expression is a valid
+                   JSON expression without the $ prefix.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/StringWithLengthBetween1And512'
+              requestTemplates:
+                description: |-
+                  A mapping of identifier keys to templates. The value is an actual template script.
+                   The key is typically a SelectionKey which is chosen based on evaluating
+                   a selection expression.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/StringWithLengthBetween0And32K'
+              templateSelectionExpression:
+                description: 'An expression used to extract information at runtime. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions">Selection Expressions</a> for more information.'
+                type: string
+              timeoutInMillis:
+                description: 'An integer with a value between [50-29000].'
+                type: integer
+                minimum: -2147483648
+                maximum: 2147483647
   '/v2/apis/{apiId}/integrations/{integrationId}/integrationresponses/{integrationResponseId}':
     delete:
       operationId: DeleteIntegrationResponse
@@ -1566,23 +2190,21 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteIntegrationResponseRequest'
         - name: apiId
-          type: string
           in: path
           required: true
+          description: The API identifier.
+          type: string
         - name: integrationId
-          type: string
           in: path
           required: true
+          description: The integration ID.
+          type: string
         - name: integrationResponseId
-          type: string
           in: path
           required: true
+          description: The integration response ID.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1610,23 +2232,21 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetIntegrationResponseRequest'
         - name: apiId
-          type: string
           in: path
           required: true
+          description: The API identifier.
+          type: string
         - name: integrationId
-          type: string
           in: path
           required: true
+          description: The integration ID.
+          type: string
         - name: integrationResponseId
-          type: string
           in: path
           required: true
+          description: The integration response ID.
+          type: string
     patch:
       operationId: UpdateIntegrationResponse
       description: Updates an IntegrationResponses.
@@ -1652,23 +2272,64 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
+        - name: apiId
+          in: path
+          required: true
+          description: The API identifier.
+          type: string
+        - name: integrationId
+          in: path
+          required: true
+          description: The integration ID.
+          type: string
+        - name: integrationResponseId
+          in: path
+          required: true
+          description: The integration response ID.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateIntegrationResponseRequest'
-        - name: apiId
-          type: string
-          in: path
-          required: true
-        - name: integrationId
-          type: string
-          in: path
-          required: true
-        - name: integrationResponseId
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              contentHandlingStrategy:
+                description: Specifies how to handle response payload content type conversions.
+                type: string
+                enum:
+                  - CONVERT_TO_BINARY
+                  - CONVERT_TO_TEXT
+              integrationResponseKey:
+                description: |-
+                  After evaulating a selection expression, the result is compared against one or
+                   more selection keys to find a matching key. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions">Selection Expressions</a> for a list of expressions and each expression's
+                   associated selection key type.
+                type: string
+              responseParameters:
+                description: |-
+                  A key-value map specifying response parameters that are passed to the method
+                   response from the backend. The key is a method response header parameter name and the
+                   mapped value is an integration response header value, a static value enclosed within
+                   a pair of single quotes, or a JSON expression from the integration response body. The
+                   mapping key must match the pattern of method.response.header.{name}, where name is a
+                   valid and unique header name. The mapped non-static value must match the pattern of
+                   integration.response.header.{name} or integration.response.body.{JSON-expression},
+                   where name is a valid and unique response header name and JSON-expression is a valid
+                   JSON expression without the $ prefix.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/StringWithLengthBetween1And512'
+              responseTemplates:
+                description: |-
+                  A mapping of identifier keys to templates. The value is an actual template script.
+                   The key is typically a SelectionKey which is chosen based on evaluating
+                   a selection expression.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/StringWithLengthBetween0And32K'
+              templateSelectionExpression:
+                description: 'An expression used to extract information at runtime. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions">Selection Expressions</a> for more information.'
+                type: string
   '/v2/apis/{apiId}/models/{modelId}':
     delete:
       operationId: DeleteModel
@@ -1685,19 +2346,16 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteModelRequest'
         - name: apiId
-          type: string
           in: path
           required: true
+          description: The API identifier.
+          type: string
         - name: modelId
-          type: string
           in: path
           required: true
+          description: The model ID.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1725,19 +2383,16 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetModelRequest'
         - name: apiId
-          type: string
           in: path
           required: true
+          description: The API identifier.
+          type: string
         - name: modelId
-          type: string
           in: path
           required: true
+          description: The model ID.
+          type: string
     patch:
       operationId: UpdateModel
       description: Updates a Model.
@@ -1763,19 +2418,34 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
+        - name: apiId
+          in: path
+          required: true
+          description: The API identifier.
+          type: string
+        - name: modelId
+          in: path
+          required: true
+          description: The model ID.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateModelRequest'
-        - name: apiId
-          type: string
-          in: path
-          required: true
-        - name: modelId
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              contentType:
+                description: 'A string with a length between [1-256].'
+                type: string
+              description:
+                description: 'A string with a length between [0-1024].'
+                type: string
+              name:
+                description: 'A string with a length between [1-128].'
+                type: string
+              schema:
+                description: 'A string with a length between [0-32768].'
+                type: string
   '/v2/apis/{apiId}/routes/{routeId}':
     delete:
       operationId: DeleteRoute
@@ -1792,19 +2462,16 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteRouteRequest'
         - name: apiId
-          type: string
           in: path
           required: true
+          description: The API identifier.
+          type: string
         - name: routeId
-          type: string
           in: path
           required: true
+          description: The route ID.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1832,19 +2499,16 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetRouteRequest'
         - name: apiId
-          type: string
           in: path
           required: true
+          description: The API identifier.
+          type: string
         - name: routeId
-          type: string
           in: path
           required: true
+          description: The route ID.
+          type: string
     patch:
       operationId: UpdateRoute
       description: Updates a Route.
@@ -1870,19 +2534,78 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
+        - name: apiId
+          in: path
+          required: true
+          description: The API identifier.
+          type: string
+        - name: routeId
+          in: path
+          required: true
+          description: The route ID.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateRouteRequest'
-        - name: apiId
-          type: string
-          in: path
-          required: true
-        - name: routeId
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              apiKeyRequired:
+                description: Specifies whether an API key is required for the route.
+                type: boolean
+              authorizationScopes:
+                description: |-
+                  A list of authorization scopes configured on a route. The scopes are used with a
+                   COGNITO_USER_POOLS authorizer to authorize the method invocation. The authorization
+                   works by matching the route scopes against the scopes parsed from the access token in
+                   the incoming request. The method invocation is authorized if any route scope matches
+                   a claimed scope in the access token. Otherwise, the invocation is not authorized.
+                   When the route scope is configured, the client must provide an access token instead
+                   of an identity token for authorization purposes.
+                type: array
+                items:
+                  $ref: '#/definitions/StringWithLengthBetween1And64'
+              authorizationType:
+                description: |-
+                  The authorization type. Valid values are NONE for open access,
+                   AWS_IAM for using AWS IAM permissions, and CUSTOM for
+                   using a Lambda authorizer.
+                type: string
+                enum:
+                  - NONE
+                  - AWS_IAM
+                  - CUSTOM
+              authorizerId:
+                description: The identifier.
+                type: string
+              modelSelectionExpression:
+                description: 'An expression used to extract information at runtime. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions">Selection Expressions</a> for more information.'
+                type: string
+              operationName:
+                description: 'A string with a length between [1-64].'
+                type: string
+              requestModels:
+                description: The route models.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/StringWithLengthBetween1And128'
+              requestParameters:
+                description: The route parameters.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/ParameterConstraints'
+              routeKey:
+                description: |-
+                  After evaulating a selection expression, the result is compared against one or
+                   more selection keys to find a matching key. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions">Selection Expressions</a> for a list of expressions and each expression's
+                   associated selection key type.
+                type: string
+              routeResponseSelectionExpression:
+                description: 'An expression used to extract information at runtime. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions">Selection Expressions</a> for more information.'
+                type: string
+              target:
+                description: 'A string with a length between [1-128].'
+                type: string
   '/v2/apis/{apiId}/routes/{routeId}/routeresponses/{routeResponseId}':
     delete:
       operationId: DeleteRouteResponse
@@ -1899,23 +2622,21 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteRouteResponseRequest'
         - name: apiId
-          type: string
           in: path
           required: true
+          description: The API identifier.
+          type: string
         - name: routeId
-          type: string
           in: path
           required: true
+          description: The route ID.
+          type: string
         - name: routeResponseId
-          type: string
           in: path
           required: true
+          description: The route response ID.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1943,23 +2664,21 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetRouteResponseRequest'
         - name: apiId
-          type: string
           in: path
           required: true
+          description: The API identifier.
+          type: string
         - name: routeId
-          type: string
           in: path
           required: true
+          description: The route ID.
+          type: string
         - name: routeResponseId
-          type: string
           in: path
           required: true
+          description: The route response ID.
+          type: string
     patch:
       operationId: UpdateRouteResponse
       description: Updates a RouteResponse.
@@ -1985,23 +2704,46 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
+        - name: apiId
+          in: path
+          required: true
+          description: The API identifier.
+          type: string
+        - name: routeId
+          in: path
+          required: true
+          description: The route ID.
+          type: string
+        - name: routeResponseId
+          in: path
+          required: true
+          description: The route response ID.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateRouteResponseRequest'
-        - name: apiId
-          type: string
-          in: path
-          required: true
-        - name: routeId
-          type: string
-          in: path
-          required: true
-        - name: routeResponseId
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              modelSelectionExpression:
+                description: 'An expression used to extract information at runtime. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions">Selection Expressions</a> for more information.'
+                type: string
+              responseModels:
+                description: The route models.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/StringWithLengthBetween1And128'
+              responseParameters:
+                description: The route parameters.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/ParameterConstraints'
+              routeResponseKey:
+                description: |-
+                  After evaulating a selection expression, the result is compared against one or
+                   more selection keys to find a matching key. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions">Selection Expressions</a> for a list of expressions and each expression's
+                   associated selection key type.
+                type: string
   '/v2/apis/{apiId}/stages/{stageName}':
     delete:
       operationId: DeleteStage
@@ -2018,19 +2760,16 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteStageRequest'
         - name: apiId
-          type: string
           in: path
           required: true
+          description: The API identifier.
+          type: string
         - name: stageName
-          type: string
           in: path
           required: true
+          description: The stage name.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2058,19 +2797,16 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetStageRequest'
         - name: apiId
-          type: string
           in: path
           required: true
+          description: The API identifier.
+          type: string
         - name: stageName
-          type: string
           in: path
           required: true
+          description: The stage name.
+          type: string
     patch:
       operationId: UpdateStage
       description: Updates a Stage.
@@ -2096,19 +2832,78 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
+        - name: apiId
+          in: path
+          required: true
+          description: The API identifier.
+          type: string
+        - name: stageName
+          in: path
+          required: true
+          description: The stage name.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateStageRequest'
-        - name: apiId
-          type: string
-          in: path
-          required: true
-        - name: stageName
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              accessLogSettings:
+                description: Settings for logging access in a stage.
+                type: object
+                properties:
+                  DestinationArn:
+                    $ref: '#/definitions/Arn'
+                    description: The ARN of the CloudWatch Logs log group to receive access logs.
+                  Format:
+                    $ref: '#/definitions/StringWithLengthBetween1And1024'
+                    description: |-
+                      A single line format of the access logs of data, as specified by selected $context
+                       variables. The format must include at least $context.requestId.
+              clientCertificateId:
+                description: The identifier.
+                type: string
+              defaultRouteSettings:
+                description: Represents a collection of route settings.
+                type: object
+                properties:
+                  DataTraceEnabled:
+                    $ref: '#/definitions/__boolean'
+                    description: |-
+                      Specifies whether (true) or not (false) data trace
+                       logging is enabled for this route. This property affects the log entries pushed to
+                       Amazon CloudWatch Logs.
+                  DetailedMetricsEnabled:
+                    $ref: '#/definitions/__boolean'
+                    description: Specifies whether detailed metrics are enabled.
+                  LoggingLevel:
+                    $ref: '#/definitions/LoggingLevel'
+                    description: |-
+                      Specifies the logging level for this route: DEBUG, INFO,
+                       or WARN. This property affects the log entries pushed to Amazon
+                       CloudWatch Logs.
+                  ThrottlingBurstLimit:
+                    $ref: '#/definitions/__integer'
+                    description: Specifies the throttling burst limit.
+                  ThrottlingRateLimit:
+                    $ref: '#/definitions/__double'
+                    description: Specifies the throttling rate limit.
+              deploymentId:
+                description: The identifier.
+                type: string
+              description:
+                description: 'A string with a length between [0-1024].'
+                type: string
+              routeSettings:
+                description: The route settings map.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/RouteSettings'
+              stageVariables:
+                description: The stage variable map.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/StringWithLengthBetween0And2048'
   '/v2/apis/{apiId}/models/{modelId}/template':
     get:
       operationId: GetModelTemplate
@@ -2127,19 +2922,16 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetModelTemplateRequest'
         - name: apiId
-          type: string
           in: path
           required: true
+          description: The API identifier.
+          type: string
         - name: modelId
-          type: string
           in: path
           required: true
+          description: The model ID.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2192,34 +2984,6 @@ definitions:
         description: |-
           The warning messages reported when failonwarnings is turned on during
            API import.
-  CreateApiRequest:
-    type: object
-    required:
-      - RouteSelectionExpression
-      - ProtocolType
-      - Name
-    properties:
-      ApiKeySelectionExpression:
-        $ref: '#/definitions/SelectionExpression'
-        description: 'An API key selection expression. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions">API Key Selection Expressions</a>.'
-      Description:
-        $ref: '#/definitions/StringWithLengthBetween0And1024'
-        description: The description of the API.
-      DisableSchemaValidation:
-        $ref: '#/definitions/__boolean'
-        description: Avoid validating models when creating a deployment.
-      Name:
-        $ref: '#/definitions/StringWithLengthBetween1And128'
-        description: The name of the API.
-      ProtocolType:
-        $ref: '#/definitions/ProtocolType'
-        description: 'The API protocol: Currently only WEBSOCKET is supported.'
-      RouteSelectionExpression:
-        $ref: '#/definitions/SelectionExpression'
-        description: The route selection expression for the API.
-      Version:
-        $ref: '#/definitions/StringWithLengthBetween1And64'
-        description: A version identifier for the API.
   NotFoundException: {}
   TooManyRequestsException: {}
   BadRequestException: {}
@@ -2236,21 +3000,6 @@ definitions:
       ApiMappingKey:
         $ref: '#/definitions/SelectionKey'
         description: The API mapping key.
-      Stage:
-        $ref: '#/definitions/StringWithLengthBetween1And128'
-        description: The API stage.
-  CreateApiMappingRequest:
-    type: object
-    required:
-      - Stage
-      - ApiId
-    properties:
-      ApiId:
-        $ref: '#/definitions/Id'
-        description: The API identifier.
-      ApiMappingKey:
-        $ref: '#/definitions/SelectionKey'
-        description: ''
       Stage:
         $ref: '#/definitions/StringWithLengthBetween1And128'
         description: The API stage.
@@ -2324,78 +3073,11 @@ definitions:
           For
            REQUEST authorizer, this is not
            defined.
-  CreateAuthorizerRequest:
-    type: object
-    required:
-      - AuthorizerUri
-      - AuthorizerType
-      - IdentitySource
-      - Name
-    properties:
-      AuthorizerCredentialsArn:
-        $ref: '#/definitions/Arn'
-        description: |-
-          Specifies the required credentials as an IAM role for API Gateway to invoke the
-           authorizer. To specify an IAM role for API Gateway to assume, use the role's Amazon
-           Resource Name (ARN). To use resource-based permissions on the Lambda function,
-           specify null.
-      AuthorizerResultTtlInSeconds:
-        $ref: '#/definitions/IntegerWithLengthBetween0And3600'
-        description: |-
-          The time to live (TTL), in seconds, of cached authorizer results. If it equals 0,
-           authorization caching is disabled. If it is greater than 0, API Gateway will cache
-           authorizer responses. If this field is not set, the default value is 300. The maximum
-           value is 3600, or 1 hour.
-      AuthorizerType:
-        $ref: '#/definitions/AuthorizerType'
-        description: |-
-          The authorizer type. Currently the only valid value is REQUEST, for a
-           Lambda function using incoming request parameters.
-      AuthorizerUri:
-        $ref: '#/definitions/UriWithLengthBetween1And2048'
-        description: |-
-          The authorizer's Uniform Resource Identifier (URI). For
-           REQUEST authorizers, this must be a
-           well-formed Lambda function URI, for example,
-           arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations.
-           In general, the URI has this form:
-           arn:aws:apigateway:{region}:lambda:path/{service_api}
-           , where {region} is the same as the region hosting the Lambda
-           function, path indicates that the remaining substring in the URI should be treated as
-           the path to the resource, including the initial /. For Lambda functions,
-           this is usually of the form
-           /2015-03-31/functions/[FunctionARN]/invocations.
-      IdentitySource:
-        $ref: '#/definitions/IdentitySourceList'
-        description: |-
-          <p>The identity source for which authorization is requested.</p><p>For the REQUEST authorizer, this is required when authorization
-           caching is enabled. The value is a comma-separated string of one or more mapping
-           expressions of the specified request parameters. For example, if an Auth
-           header and a Name query string parameters are defined as identity
-           sources, this value is method.request.header.Auth,
-           method.request.querystring.Name. These parameters will be used to
-           derive the authorization caching key and to perform runtime validation of the
-           REQUEST authorizer by verifying all of the identity-related request
-           parameters are present, not null, and non-empty. Only when this is true does the
-           authorizer invoke the authorizer Lambda function, otherwise, it returns a 401
-           Unauthorized response without calling the Lambda function. The valid value
-           is a string of comma-separated mapping expressions of the specified request
-           parameters. When the authorization caching is not enabled, this property is
-           optional.</p>
-      IdentityValidationExpression:
-        $ref: '#/definitions/StringWithLengthBetween0And1024'
-        description: |-
-          The
-           validation expression does not apply to the REQUEST authorizer.
-      Name:
-        $ref: '#/definitions/StringWithLengthBetween1And128'
-        description: The name of the authorizer.
-      ProviderArns:
-        $ref: '#/definitions/ProviderArnList'
-        description: |-
-          For
-           REQUEST authorizer, this is not
-           defined.
+  __string:
+    type: string
+  Arn:
+    type: string
+    description: Represents an Amazon Resource Name (ARN).
   CreateDeploymentResponse:
     type: object
     properties:
@@ -2416,17 +3098,6 @@ definitions:
       Description:
         $ref: '#/definitions/StringWithLengthBetween0And1024'
         description: The description for the deployment.
-  CreateDeploymentRequest:
-    type: object
-    properties:
-      Description:
-        $ref: '#/definitions/StringWithLengthBetween0And1024'
-        description: The description for the deployment resource.
-      StageName:
-        $ref: '#/definitions/StringWithLengthBetween1And128'
-        description: |-
-          The name of the Stage resource for the Deployment
-           resource to create.
   CreateDomainNameResponse:
     type: object
     properties:
@@ -2439,17 +3110,34 @@ definitions:
       DomainNameConfigurations:
         $ref: '#/definitions/DomainNameConfigurations'
         description: The domain name configurations.
-  CreateDomainNameRequest:
+  DomainNameConfiguration:
     type: object
-    required:
-      - DomainName
     properties:
-      DomainName:
-        $ref: '#/definitions/StringWithLengthBetween1And512'
-        description: The domain name.
-      DomainNameConfigurations:
-        $ref: '#/definitions/DomainNameConfigurations'
-        description: The domain name configurations.
+      ApiGatewayDomainName:
+        $ref: '#/definitions/__string'
+        description: A domain name for the WebSocket API.
+      CertificateArn:
+        $ref: '#/definitions/Arn'
+        description: |-
+          An AWS-managed certificate that will be used by the edge-optimized endpoint for
+           this domain name. AWS Certificate Manager is the only supported source.
+      CertificateName:
+        $ref: '#/definitions/StringWithLengthBetween1And128'
+        description: |-
+          The user-friendly name of the certificate that will be used by the edge-optimized
+           endpoint for this domain name.
+      CertificateUploadDate:
+        $ref: '#/definitions/__timestampIso8601'
+        description: |-
+          The timestamp when the certificate that was used by edge-optimized endpoint for
+           this domain name was uploaded.
+      EndpointType:
+        $ref: '#/definitions/EndpointType'
+        description: The endpoint type.
+      HostedZoneId:
+        $ref: '#/definitions/__string'
+        description: The Amazon Route 53 Hosted Zone ID of the endpoint.
+    description: The domain name configuration.
   CreateIntegrationResponse:
     type: object
     properties:
@@ -2563,115 +3251,12 @@ definitions:
         description: |-
           Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000
            milliseconds or 29 seconds.
-  CreateIntegrationRequest:
-    type: object
-    required:
-      - IntegrationType
-    properties:
-      ConnectionId:
-        $ref: '#/definitions/StringWithLengthBetween1And1024'
-        description: The connection ID.
-      ConnectionType:
-        $ref: '#/definitions/ConnectionType'
-        description: |-
-          The type of the network connection to the integration endpoint. Currently the only
-           valid value is INTERNET, for connections through the public routable
-           internet.
-      ContentHandlingStrategy:
-        $ref: '#/definitions/ContentHandlingStrategy'
-        description: |-
-          <p>Specifies how to handle response payload content type conversions. Supported
-           values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the
-           following behaviors:</p><p>
-           CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded
-           string to the corresponding binary blob.</p><p>
-           CONVERT_TO_TEXT: Converts a response payload from a binary blob to a
-           Base64-encoded string.</p><p>If this property is not defined, the response payload will be passed through from
-           the integration response to the route response or method response without
-           modification.</p>
-      CredentialsArn:
-        $ref: '#/definitions/Arn'
-        description: |-
-          Specifies the credentials required for the integration, if any. For AWS
-           integrations, three options are available. To specify an IAM Role for API Gateway to
-           assume, use the role's Amazon Resource Name (ARN). To require that the caller's
-           identity be passed through from the request, specify the string
-           arn:aws:iam::*:user/*. To use resource-based permissions on supported
-           AWS services, specify null.
-      Description:
-        $ref: '#/definitions/StringWithLengthBetween0And1024'
-        description: The description of the integration.
-      IntegrationMethod:
-        $ref: '#/definitions/StringWithLengthBetween1And64'
-        description: Specifies the integration's HTTP method type.
-      IntegrationType:
-        $ref: '#/definitions/IntegrationType'
-        description: |-
-          <p>The integration type of an integration. One of the following:</p><p>
-           AWS: for integrating the route or method request with an AWS service
-           action, including the Lambda function-invoking action. With the Lambda
-           function-invoking action, this is referred to as the Lambda custom integration. With
-           any other AWS service action, this is known as AWS integration.</p><p>
-           AWS_PROXY: for integrating the route or method request with the Lambda
-           function-invoking action with the client request passed through as-is. This
-           integration is also referred to as Lambda proxy integration.</p><p>
-           HTTP: for integrating the route or method request with an HTTP
-           endpoint. This
-           integration is also referred to as HTTP custom integration.</p><p>
-           HTTP_PROXY: for integrating route or method request with an HTTP
-           endpoint, with the client
-           request passed through as-is. This is also referred to as HTTP proxy
-           integration.</p><p>
-           MOCK: for integrating the route or method request with API Gateway as a
-           "loopback" endpoint without invoking any backend.</p>
-      IntegrationUri:
-        $ref: '#/definitions/UriWithLengthBetween1And2048'
-        description: 'For a Lambda proxy integration, this is the URI of the Lambda function.'
-      PassthroughBehavior:
-        $ref: '#/definitions/PassthroughBehavior'
-        description: |-
-          <p>Specifies the pass-through behavior for incoming requests based on the
-           Content-Type header in the request, and the available mapping
-           templates specified as the requestTemplates property on the
-           Integration resource. There are three valid values:
-           WHEN_NO_MATCH, WHEN_NO_TEMPLATES, and
-           NEVER.</p><p>
-           WHEN_NO_MATCH passes the request body for unmapped content types through
-           to the integration backend without transformation.</p><p>
-           NEVER rejects unmapped content types with an HTTP 415 Unsupported
-           Media Type response.</p><p>
-           WHEN_NO_TEMPLATES allows pass-through when the integration has no
-           content types mapped to templates. However, if there is at least one content type
-           defined, unmapped content types will be rejected with the same HTTP 415
-           Unsupported Media Type response.</p>
-      RequestParameters:
-        $ref: '#/definitions/IntegrationParameters'
-        description: |-
-          A key-value map specifying request parameters that are passed from the method
-           request to the backend. The key is an integration request parameter name and the
-           associated value is a method request parameter value or static value that must be
-           enclosed within single quotes and pre-encoded as required by the backend. The method
-           request parameter value must match the pattern of
-           method.request.{location}.{name}
-           , where 
-           {location}
-            is querystring, path, or header; and 
-           {name}
-            must be a valid and unique method request parameter name.
-      RequestTemplates:
-        $ref: '#/definitions/TemplateMap'
-        description: |-
-          Represents a map of Velocity templates that are applied on the request payload
-           based on the value of the Content-Type header sent by the client. The content type
-           value is the key in this map, and the template (as a String) is the value.
-      TemplateSelectionExpression:
-        $ref: '#/definitions/SelectionExpression'
-        description: The template selection expression for the integration.
-      TimeoutInMillis:
-        $ref: '#/definitions/IntegerWithLengthBetween50And29000'
-        description: |-
-          Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000
-           milliseconds or 29 seconds.
+  StringWithLengthBetween1And512:
+    type: string
+    description: 'A string with a length between [1-512].'
+  StringWithLengthBetween0And32K:
+    type: string
+    description: 'A string with a length between [0-32768].'
   CreateIntegrationResponseResponse:
     type: object
     properties:
@@ -2714,49 +3299,6 @@ definitions:
       TemplateSelectionExpression:
         $ref: '#/definitions/SelectionExpression'
         description: The template selection expressions for the integration response.
-  CreateIntegrationResponseRequest:
-    type: object
-    required:
-      - IntegrationResponseKey
-    properties:
-      ContentHandlingStrategy:
-        $ref: '#/definitions/ContentHandlingStrategy'
-        description: |-
-          <p>Specifies how to handle response payload content type conversions. Supported
-           values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the
-           following behaviors:</p><p>
-           CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded
-           string to the corresponding binary blob.</p><p>
-           CONVERT_TO_TEXT: Converts a response payload from a binary blob to a
-           Base64-encoded string.</p><p>If this property is not defined, the response payload will be passed through from
-           the integration response to the route response or method response without
-           modification.</p>
-      IntegrationResponseKey:
-        $ref: '#/definitions/SelectionKey'
-        description: The integration response key.
-      ResponseParameters:
-        $ref: '#/definitions/IntegrationParameters'
-        description: |-
-          A key-value map specifying response parameters that are passed to the method
-           response from the backend. The key is a method response header parameter name and the
-           mapped value is an integration response header value, a static value enclosed within
-           a pair of single quotes, or a JSON expression from the integration response body. The
-           mapping key must match the pattern of method.response.header.{name},
-           where {name} is a valid and unique header name. The mapped non-static
-           value must match the pattern of integration.response.header.{name} or
-           integration.response.body.{JSON-expression}, where
-           {name} is a valid and unique response header name and
-           {JSON-expression} is a valid JSON expression without the $
-           prefix.
-      ResponseTemplates:
-        $ref: '#/definitions/TemplateMap'
-        description: |-
-          The collection of response templates for the integration response as a
-           string-to-string map of key-value pairs. Response templates are represented as a
-           key/value map, with a content-type as the key and a template as the value.
-      TemplateSelectionExpression:
-        $ref: '#/definitions/SelectionExpression'
-        description: The template selection expression for the integration response.
   CreateModelResponse:
     type: object
     properties:
@@ -2769,26 +3311,6 @@ definitions:
       ModelId:
         $ref: '#/definitions/Id'
         description: The model identifier.
-      Name:
-        $ref: '#/definitions/StringWithLengthBetween1And128'
-        description: The name of the model. Must be alphanumeric.
-      Schema:
-        $ref: '#/definitions/StringWithLengthBetween0And32K'
-        description: |-
-          The schema for the model. For application/json models, this should be JSON schema
-           draft 4 model.
-  CreateModelRequest:
-    type: object
-    required:
-      - Schema
-      - Name
-    properties:
-      ContentType:
-        $ref: '#/definitions/StringWithLengthBetween1And256'
-        description: 'The content-type for the model, for example, "application/json".'
-      Description:
-        $ref: '#/definitions/StringWithLengthBetween0And1024'
-        description: The description of the model.
       Name:
         $ref: '#/definitions/StringWithLengthBetween1And128'
         description: The name of the model. Must be alphanumeric.
@@ -2851,54 +3373,21 @@ definitions:
       Target:
         $ref: '#/definitions/StringWithLengthBetween1And128'
         description: The target for the route.
-  CreateRouteRequest:
+  StringWithLengthBetween1And64:
+    type: string
+    description: 'A string with a length between [1-64].'
+  StringWithLengthBetween1And128:
+    type: string
+    description: 'A string with a length between [1-128].'
+  ParameterConstraints:
     type: object
-    required:
-      - RouteKey
     properties:
-      ApiKeyRequired:
+      Required:
         $ref: '#/definitions/__boolean'
-        description: Specifies whether an API key is required for the route.
-      AuthorizationScopes:
-        $ref: '#/definitions/AuthorizationScopes'
-        description: |-
-          The authorization scopes supported by this
-           route.
-      AuthorizationType:
-        $ref: '#/definitions/AuthorizationType'
-        description: |-
-          The authorization type for the route. Valid values are NONE for open
-           access, AWS_IAM for using AWS IAM permissions, and CUSTOM
-           for using a Lambda
-           authorizer.
-      AuthorizerId:
-        $ref: '#/definitions/Id'
-        description: |-
-          The identifier of the Authorizer resource to be associated with this
-           route, if the authorizationType is CUSTOM
-           . The authorizer identifier is generated by API Gateway
-           when you created the authorizer.
-      ModelSelectionExpression:
-        $ref: '#/definitions/SelectionExpression'
-        description: The model selection expression for the route.
-      OperationName:
-        $ref: '#/definitions/StringWithLengthBetween1And64'
-        description: The operation name for the route.
-      RequestModels:
-        $ref: '#/definitions/RouteModels'
-        description: The request models for the route.
-      RequestParameters:
-        $ref: '#/definitions/RouteParameters'
-        description: The request parameters for the route.
-      RouteKey:
-        $ref: '#/definitions/SelectionKey'
-        description: The route key for the route.
-      RouteResponseSelectionExpression:
-        $ref: '#/definitions/SelectionExpression'
-        description: The route response selection expression for the route.
-      Target:
-        $ref: '#/definitions/StringWithLengthBetween1And128'
-        description: The target for the route.
+        description: Whether or not the parameter is required.
+    description: |-
+      Validation constraints imposed on parameters of a request (path, query string,
+       headers).
   CreateRouteResponseResponse:
     type: object
     properties:
@@ -2917,23 +3406,6 @@ definitions:
       RouteResponseKey:
         $ref: '#/definitions/SelectionKey'
         description: Represents the route response key of a route response.
-  CreateRouteResponseRequest:
-    type: object
-    required:
-      - RouteResponseKey
-    properties:
-      ModelSelectionExpression:
-        $ref: '#/definitions/SelectionExpression'
-        description: The model selection expression for the route response.
-      ResponseModels:
-        $ref: '#/definitions/RouteModels'
-        description: The response models for the route response.
-      ResponseParameters:
-        $ref: '#/definitions/RouteParameters'
-        description: The route response parameters.
-      RouteResponseKey:
-        $ref: '#/definitions/SelectionKey'
-        description: The route response key.
   CreateStageResponse:
     type: object
     properties:
@@ -2972,71 +3444,51 @@ definitions:
           A map that defines the stage variables for a stage resource. Variable names can
            have alphanumeric and underscore characters, and the values must match
            [A-Za-z0-9-._~:/?#&=,]+.
-  CreateStageRequest:
+  StringWithLengthBetween1And1024:
+    type: string
+    description: 'A string with a length between [1-1024].'
+  __boolean:
+    type: boolean
+  LoggingLevel:
+    type: string
+    enum:
+      - ERROR
+      - INFO
+      - 'false'
+    description: The logging level.
+  __integer:
+    type: integer
+  __double:
+    type: number
+    format: double
+  RouteSettings:
     type: object
-    required:
-      - StageName
     properties:
-      AccessLogSettings:
-        $ref: '#/definitions/AccessLogSettings'
-        description: Settings for logging access in this stage.
-      ClientCertificateId:
-        $ref: '#/definitions/Id'
-        description: The identifier of a client certificate for a Stage.
-      DefaultRouteSettings:
-        $ref: '#/definitions/RouteSettings'
-        description: The default route settings for the stage.
-      DeploymentId:
-        $ref: '#/definitions/Id'
-        description: The deployment identifier of the API stage.
-      Description:
-        $ref: '#/definitions/StringWithLengthBetween0And1024'
-        description: The description for the API stage.
-      RouteSettings:
-        $ref: '#/definitions/RouteSettingsMap'
-        description: Route settings for the stage.
-      StageName:
-        $ref: '#/definitions/StringWithLengthBetween1And128'
-        description: The name of the stage.
-      StageVariables:
-        $ref: '#/definitions/StageVariablesMap'
+      DataTraceEnabled:
+        $ref: '#/definitions/__boolean'
         description: |-
-          A map that defines the stage variables for a Stage. Variable names
-           can have alphanumeric and underscore characters, and the values must match
-           [A-Za-z0-9-._~:/?#&=,]+.
-  DeleteApiRequest:
-    type: object
-    properties: {}
-  DeleteApiMappingRequest:
-    type: object
-    properties: {}
-  DeleteAuthorizerRequest:
-    type: object
-    properties: {}
-  DeleteDeploymentRequest:
-    type: object
-    properties: {}
-  DeleteDomainNameRequest:
-    type: object
-    properties: {}
-  DeleteIntegrationRequest:
-    type: object
-    properties: {}
-  DeleteIntegrationResponseRequest:
-    type: object
-    properties: {}
-  DeleteModelRequest:
-    type: object
-    properties: {}
-  DeleteRouteRequest:
-    type: object
-    properties: {}
-  DeleteRouteResponseRequest:
-    type: object
-    properties: {}
-  DeleteStageRequest:
-    type: object
-    properties: {}
+          Specifies whether (true) or not (false) data trace
+           logging is enabled for this route. This property affects the log entries pushed to
+           Amazon CloudWatch Logs.
+      DetailedMetricsEnabled:
+        $ref: '#/definitions/__boolean'
+        description: Specifies whether detailed metrics are enabled.
+      LoggingLevel:
+        $ref: '#/definitions/LoggingLevel'
+        description: |-
+          Specifies the logging level for this route: DEBUG, INFO,
+           or WARN. This property affects the log entries pushed to Amazon
+           CloudWatch Logs.
+      ThrottlingBurstLimit:
+        $ref: '#/definitions/__integer'
+        description: Specifies the throttling burst limit.
+      ThrottlingRateLimit:
+        $ref: '#/definitions/__double'
+        description: Specifies the throttling rate limit.
+    description: Represents a collection of route settings.
+  StringWithLengthBetween0And2048:
+    type: string
+    description: 'A string with a length between [0-2048].'
   GetApiResponse:
     type: object
     properties:
@@ -3078,9 +3530,6 @@ definitions:
         description: |-
           The warning messages reported when failonwarnings is turned on during
            API import.
-  GetApiRequest:
-    type: object
-    properties: {}
   GetApiMappingResponse:
     type: object
     properties:
@@ -3096,9 +3545,6 @@ definitions:
       Stage:
         $ref: '#/definitions/StringWithLengthBetween1And128'
         description: The API stage.
-  GetApiMappingRequest:
-    type: object
-    properties: {}
   GetApiMappingsResponse:
     type: object
     properties:
@@ -3110,9 +3556,6 @@ definitions:
         description: |-
           The next page of elements from this collection. Not valid for the last element of
            the collection.
-  GetApiMappingsRequest:
-    type: object
-    properties: {}
   GetApisResponse:
     type: object
     properties:
@@ -3124,9 +3567,6 @@ definitions:
         description: |-
           The next page of elements from this collection. Not valid for the last element of
            the collection.
-  GetApisRequest:
-    type: object
-    properties: {}
   GetAuthorizerResponse:
     type: object
     properties:
@@ -3197,9 +3637,6 @@ definitions:
           For
            REQUEST authorizer, this is not
            defined.
-  GetAuthorizerRequest:
-    type: object
-    properties: {}
   GetAuthorizersResponse:
     type: object
     properties:
@@ -3211,9 +3648,6 @@ definitions:
         description: |-
           The next page of elements from this collection. Not valid for the last element of
            the collection.
-  GetAuthorizersRequest:
-    type: object
-    properties: {}
   GetDeploymentResponse:
     type: object
     properties:
@@ -3234,9 +3668,6 @@ definitions:
       Description:
         $ref: '#/definitions/StringWithLengthBetween0And1024'
         description: The description for the deployment.
-  GetDeploymentRequest:
-    type: object
-    properties: {}
   GetDeploymentsResponse:
     type: object
     properties:
@@ -3248,9 +3679,6 @@ definitions:
         description: |-
           The next page of elements from this collection. Not valid for the last element of
            the collection.
-  GetDeploymentsRequest:
-    type: object
-    properties: {}
   GetDomainNameResponse:
     type: object
     properties:
@@ -3263,9 +3691,6 @@ definitions:
       DomainNameConfigurations:
         $ref: '#/definitions/DomainNameConfigurations'
         description: The domain name configurations.
-  GetDomainNameRequest:
-    type: object
-    properties: {}
   GetDomainNamesResponse:
     type: object
     properties:
@@ -3277,9 +3702,6 @@ definitions:
         description: |-
           The next page of elements from this collection. Not valid for the last element of
            the collection.
-  GetDomainNamesRequest:
-    type: object
-    properties: {}
   GetIntegrationResponse:
     type: object
     properties:
@@ -3393,9 +3815,6 @@ definitions:
         description: |-
           Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000
            milliseconds or 29 seconds.
-  GetIntegrationRequest:
-    type: object
-    properties: {}
   GetIntegrationResponseResponse:
     type: object
     properties:
@@ -3438,9 +3857,6 @@ definitions:
       TemplateSelectionExpression:
         $ref: '#/definitions/SelectionExpression'
         description: The template selection expressions for the integration response.
-  GetIntegrationResponseRequest:
-    type: object
-    properties: {}
   GetIntegrationResponsesResponse:
     type: object
     properties:
@@ -3452,9 +3868,6 @@ definitions:
         description: |-
           The next page of elements from this collection. Not valid for the last element of
            the collection.
-  GetIntegrationResponsesRequest:
-    type: object
-    properties: {}
   GetIntegrationsResponse:
     type: object
     properties:
@@ -3466,9 +3879,6 @@ definitions:
         description: |-
           The next page of elements from this collection. Not valid for the last element of
            the collection.
-  GetIntegrationsRequest:
-    type: object
-    properties: {}
   GetModelResponse:
     type: object
     properties:
@@ -3489,18 +3899,12 @@ definitions:
         description: |-
           The schema for the model. For application/json models, this should be JSON schema
            draft 4 model.
-  GetModelRequest:
-    type: object
-    properties: {}
   GetModelTemplateResponse:
     type: object
     properties:
       Value:
         $ref: '#/definitions/__string'
         description: The template value.
-  GetModelTemplateRequest:
-    type: object
-    properties: {}
   GetModelsResponse:
     type: object
     properties:
@@ -3512,9 +3916,6 @@ definitions:
         description: |-
           The next page of elements from this collection. Not valid for the last element of
            the collection.
-  GetModelsRequest:
-    type: object
-    properties: {}
   GetRouteResponse:
     type: object
     properties:
@@ -3569,9 +3970,6 @@ definitions:
       Target:
         $ref: '#/definitions/StringWithLengthBetween1And128'
         description: The target for the route.
-  GetRouteRequest:
-    type: object
-    properties: {}
   GetRouteResponseResponse:
     type: object
     properties:
@@ -3590,9 +3988,6 @@ definitions:
       RouteResponseKey:
         $ref: '#/definitions/SelectionKey'
         description: Represents the route response key of a route response.
-  GetRouteResponseRequest:
-    type: object
-    properties: {}
   GetRouteResponsesResponse:
     type: object
     properties:
@@ -3604,9 +3999,6 @@ definitions:
         description: |-
           The next page of elements from this collection. Not valid for the last element of
            the collection.
-  GetRouteResponsesRequest:
-    type: object
-    properties: {}
   GetRoutesResponse:
     type: object
     properties:
@@ -3618,9 +4010,6 @@ definitions:
         description: |-
           The next page of elements from this collection. Not valid for the last element of
            the collection.
-  GetRoutesRequest:
-    type: object
-    properties: {}
   GetStageResponse:
     type: object
     properties:
@@ -3659,9 +4048,6 @@ definitions:
           A map that defines the stage variables for a stage resource. Variable names can
            have alphanumeric and underscore characters, and the values must match
            [A-Za-z0-9-._~:/?#&=,]+.
-  GetStageRequest:
-    type: object
-    properties: {}
   GetStagesResponse:
     type: object
     properties:
@@ -3673,9 +4059,6 @@ definitions:
         description: |-
           The next page of elements from this collection. Not valid for the last element of
            the collection.
-  GetStagesRequest:
-    type: object
-    properties: {}
   UpdateApiResponse:
     type: object
     properties:
@@ -3717,27 +4100,6 @@ definitions:
         description: |-
           The warning messages reported when failonwarnings is turned on during
            API import.
-  UpdateApiRequest:
-    type: object
-    properties:
-      ApiKeySelectionExpression:
-        $ref: '#/definitions/SelectionExpression'
-        description: 'An API key selection expression. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions">API Key Selection Expressions</a>.'
-      Description:
-        $ref: '#/definitions/StringWithLengthBetween0And1024'
-        description: The description of the API.
-      DisableSchemaValidation:
-        $ref: '#/definitions/__boolean'
-        description: Avoid validating models when creating a deployment.
-      Name:
-        $ref: '#/definitions/StringWithLengthBetween1And128'
-        description: The name of the API.
-      RouteSelectionExpression:
-        $ref: '#/definitions/SelectionExpression'
-        description: The route selection expression for the API.
-      Version:
-        $ref: '#/definitions/StringWithLengthBetween1And64'
-        description: A version identifier for the API.
   UpdateApiMappingResponse:
     type: object
     properties:
@@ -3747,20 +4109,6 @@ definitions:
       ApiMappingId:
         $ref: '#/definitions/Id'
         description: The API mapping identifier.
-      ApiMappingKey:
-        $ref: '#/definitions/SelectionKey'
-        description: The API mapping key.
-      Stage:
-        $ref: '#/definitions/StringWithLengthBetween1And128'
-        description: The API stage.
-  UpdateApiMappingRequest:
-    type: object
-    required:
-      - ApiId
-    properties:
-      ApiId:
-        $ref: '#/definitions/Id'
-        description: The API identifier.
       ApiMappingKey:
         $ref: '#/definitions/SelectionKey'
         description: The API mapping key.
@@ -3837,72 +4185,6 @@ definitions:
           For
            REQUEST authorizer, this is not
            defined.
-  UpdateAuthorizerRequest:
-    type: object
-    properties:
-      AuthorizerCredentialsArn:
-        $ref: '#/definitions/Arn'
-        description: |-
-          Specifies the required credentials as an IAM role for API Gateway to invoke the
-           authorizer. To specify an IAM role for API Gateway to assume, use the role's Amazon
-           Resource Name (ARN). To use resource-based permissions on the Lambda function,
-           specify null.
-      AuthorizerResultTtlInSeconds:
-        $ref: '#/definitions/IntegerWithLengthBetween0And3600'
-        description: |-
-          The time to live (TTL), in seconds, of cached authorizer results. If it is zero,
-           authorization caching is disabled. If it is greater than zero, API Gateway will cache
-           authorizer responses. If this field is not set, the default value is 300. The maximum
-           value is 3600, or 1 hour.
-      AuthorizerType:
-        $ref: '#/definitions/AuthorizerType'
-        description: |-
-          The authorizer type. Currently the only valid value is REQUEST, for a
-           Lambda function using incoming request parameters.
-      AuthorizerUri:
-        $ref: '#/definitions/UriWithLengthBetween1And2048'
-        description: |-
-          The authorizer's Uniform Resource Identifier (URI). For
-           REQUEST authorizers, this must be a
-           well-formed Lambda function URI, for example,
-           arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations.
-           In general, the URI has this form:
-           arn:aws:apigateway:{region}:lambda:path/{service_api}
-           , where {region} is the same as the region hosting the Lambda
-           function, path indicates that the remaining substring in the URI should be treated as
-           the path to the resource, including the initial /. For Lambda functions,
-           this is usually of the form
-           /2015-03-31/functions/[FunctionARN]/invocations.
-      IdentitySource:
-        $ref: '#/definitions/IdentitySourceList'
-        description: |-
-          <p>The identity source for which authorization is requested.</p><p>For the REQUEST authorizer, this is required when authorization
-           caching is enabled. The value is a comma-separated string of one or more mapping
-           expressions of the specified request parameters. For example, if an Auth header, a
-           Name query string parameter are defined as identity sources, this value is
-           $method.request.header.Auth, $method.request.querystring.Name. These
-           parameters will be used to derive the authorization caching key and to perform
-           runtime validation of the REQUEST authorizer by verifying all of the
-           identity-related request parameters are present, not null and non-empty. Only when
-           this is true does the authorizer invoke the authorizer Lambda function, otherwise, it
-           returns a 401 Unauthorized response without calling the Lambda function.
-           The valid value is a string of comma-separated mapping expressions of the specified
-           request parameters. When the authorization caching is not enabled, this property is
-           optional.</p>
-      IdentityValidationExpression:
-        $ref: '#/definitions/StringWithLengthBetween0And1024'
-        description: |-
-          The
-           validation expression does not apply to the REQUEST authorizer.
-      Name:
-        $ref: '#/definitions/StringWithLengthBetween1And128'
-        description: The name of the authorizer.
-      ProviderArns:
-        $ref: '#/definitions/ProviderArnList'
-        description: |-
-          For
-           REQUEST authorizer, this is not
-           defined.
   UpdateDeploymentResponse:
     type: object
     properties:
@@ -3923,12 +4205,6 @@ definitions:
       Description:
         $ref: '#/definitions/StringWithLengthBetween0And1024'
         description: The description for the deployment.
-  UpdateDeploymentRequest:
-    type: object
-    properties:
-      Description:
-        $ref: '#/definitions/StringWithLengthBetween0And1024'
-        description: The description for the deployment resource.
   UpdateDomainNameResponse:
     type: object
     properties:
@@ -3938,12 +4214,6 @@ definitions:
       DomainName:
         $ref: '#/definitions/StringWithLengthBetween1And512'
         description: The name of the DomainName resource.
-      DomainNameConfigurations:
-        $ref: '#/definitions/DomainNameConfigurations'
-        description: The domain name configurations.
-  UpdateDomainNameRequest:
-    type: object
-    properties:
       DomainNameConfigurations:
         $ref: '#/definitions/DomainNameConfigurations'
         description: The domain name configurations.
@@ -4060,113 +4330,6 @@ definitions:
         description: |-
           Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000
            milliseconds or 29 seconds.
-  UpdateIntegrationRequest:
-    type: object
-    properties:
-      ConnectionId:
-        $ref: '#/definitions/StringWithLengthBetween1And1024'
-        description: The connection ID.
-      ConnectionType:
-        $ref: '#/definitions/ConnectionType'
-        description: |-
-          The type of the network connection to the integration endpoint. Currently the only
-           valid value is INTERNET, for connections through the public routable
-           internet.
-      ContentHandlingStrategy:
-        $ref: '#/definitions/ContentHandlingStrategy'
-        description: |-
-          <p>Specifies how to handle response payload content type conversions. Supported
-           values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the
-           following behaviors:</p><p>
-           CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded
-           string to the corresponding binary blob.</p><p>
-           CONVERT_TO_TEXT: Converts a response payload from a binary blob to a
-           Base64-encoded string.</p><p>If this property is not defined, the response payload will be passed through from
-           the integration response to the route response or method response without
-           modification.</p>
-      CredentialsArn:
-        $ref: '#/definitions/Arn'
-        description: |-
-          Specifies the credentials required for the integration, if any. For AWS
-           integrations, three options are available. To specify an IAM Role for API Gateway to
-           assume, use the role's Amazon Resource Name (ARN). To require that the caller's
-           identity be passed through from the request, specify the string
-           arn:aws:iam::*:user/*. To use resource-based permissions on supported
-           AWS services, specify null.
-      Description:
-        $ref: '#/definitions/StringWithLengthBetween0And1024'
-        description: The description of the integration
-      IntegrationMethod:
-        $ref: '#/definitions/StringWithLengthBetween1And64'
-        description: Specifies the integration's HTTP method type.
-      IntegrationType:
-        $ref: '#/definitions/IntegrationType'
-        description: |-
-          <p>The integration type of an integration. One of the following:</p><p>
-           AWS: for integrating the route or method request with an AWS service
-           action, including the Lambda function-invoking action. With the Lambda
-           function-invoking action, this is referred to as the Lambda custom integration. With
-           any other AWS service action, this is known as AWS integration.</p><p>
-           AWS_PROXY: for integrating the route or method request with the Lambda
-           function-invoking action with the client request passed through as-is. This
-           integration is also referred to as Lambda proxy integration.</p><p>
-           HTTP: for integrating the route or method request with an HTTP
-           endpoint. This
-           integration is also referred to as the HTTP custom integration.</p><p>
-           HTTP_PROXY: for integrating route or method request with an HTTP
-           endpoint, with the client
-           request passed through as-is. This is also referred to as HTTP proxy
-           integration.</p><p>
-           MOCK: for integrating the route or method request with API Gateway as a
-           "loopback" endpoint without invoking any backend.</p>
-      IntegrationUri:
-        $ref: '#/definitions/UriWithLengthBetween1And2048'
-        description: 'For a Lambda proxy integration, this is the URI of the Lambda function.'
-      PassthroughBehavior:
-        $ref: '#/definitions/PassthroughBehavior'
-        description: |-
-          <p>Specifies the pass-through behavior for incoming requests based on the
-           Content-Type header in the request, and the available mapping
-           templates specified as the requestTemplates property on the
-           Integration resource. There are three valid values:
-           WHEN_NO_MATCH, WHEN_NO_TEMPLATES, and
-           NEVER.</p><p>
-           WHEN_NO_MATCH passes the request body for unmapped content types through
-           to the integration backend without transformation.</p><p>
-           NEVER rejects unmapped content types with an HTTP 415 Unsupported
-           Media Type response.</p><p>
-           WHEN_NO_TEMPLATES allows pass-through when the integration has no
-           content types mapped to templates. However, if there is at least one content type
-           defined, unmapped content types will be rejected with the same HTTP 415
-           Unsupported Media Type response.</p>
-      RequestParameters:
-        $ref: '#/definitions/IntegrationParameters'
-        description: |-
-          A key-value map specifying request parameters that are passed from the method
-           request to the backend. The key is an integration request parameter name and the
-           associated value is a method request parameter value or static value that must be
-           enclosed within single quotes and pre-encoded as required by the backend. The method
-           request parameter value must match the pattern of
-           method.request.{location}.{name}
-           , where 
-           {location}
-            is querystring, path, or header; and 
-           {name}
-            must be a valid and unique method request parameter name.
-      RequestTemplates:
-        $ref: '#/definitions/TemplateMap'
-        description: |-
-          Represents a map of Velocity templates that are applied on the request payload
-           based on the value of the Content-Type header sent by the client. The content type
-           value is the key in this map, and the template (as a String) is the value.
-      TemplateSelectionExpression:
-        $ref: '#/definitions/SelectionExpression'
-        description: The template selection expression for the integration.
-      TimeoutInMillis:
-        $ref: '#/definitions/IntegerWithLengthBetween50And29000'
-        description: |-
-          Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000
-           milliseconds or 29 seconds.
   UpdateIntegrationResponseResponse:
     type: object
     properties:
@@ -4209,52 +4372,6 @@ definitions:
       TemplateSelectionExpression:
         $ref: '#/definitions/SelectionExpression'
         description: The template selection expressions for the integration response.
-  UpdateIntegrationResponseRequest:
-    type: object
-    properties:
-      ContentHandlingStrategy:
-        $ref: '#/definitions/ContentHandlingStrategy'
-        description: |-
-          <p>Specifies how to handle response payload content type conversions. Supported
-           values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the
-           following behaviors:</p><p>
-           CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded
-           string to the corresponding binary blob.</p><p>
-           CONVERT_TO_TEXT: Converts a response payload from a binary blob to a
-           Base64-encoded string.</p><p>If this property is not defined, the response payload will be passed through from
-           the integration response to the route response or method response without
-           modification.</p>
-      IntegrationResponseKey:
-        $ref: '#/definitions/SelectionKey'
-        description: The integration response key.
-      ResponseParameters:
-        $ref: '#/definitions/IntegrationParameters'
-        description: |-
-          A key-value map specifying response parameters that are passed to the method
-           response from the backend. The key is a method response header parameter name and the
-           mapped value is an integration response header value, a static value enclosed within
-           a pair of single quotes, or a JSON expression from the integration response body. The
-           mapping key must match the pattern of
-           method.response.header.{name}
-           , where name is a valid and unique header name. The mapped non-static value
-           must match the pattern of
-           integration.response.header.{name}
-            or
-           integration.response.body.{JSON-expression}
-           , where 
-           {name}
-            is a valid and unique response header name and 
-           {JSON-expression}
-            is a valid JSON expression without the $ prefix.
-      ResponseTemplates:
-        $ref: '#/definitions/TemplateMap'
-        description: |-
-          The collection of response templates for the integration response as a
-           string-to-string map of key-value pairs. Response templates are represented as a
-           key/value map, with a content-type as the key and a template as the value.
-      TemplateSelectionExpression:
-        $ref: '#/definitions/SelectionExpression'
-        description: The template selection expression for the integration response.
   UpdateModelResponse:
     type: object
     properties:
@@ -4270,23 +4387,6 @@ definitions:
       Name:
         $ref: '#/definitions/StringWithLengthBetween1And128'
         description: The name of the model. Must be alphanumeric.
-      Schema:
-        $ref: '#/definitions/StringWithLengthBetween0And32K'
-        description: |-
-          The schema for the model. For application/json models, this should be JSON schema
-           draft 4 model.
-  UpdateModelRequest:
-    type: object
-    properties:
-      ContentType:
-        $ref: '#/definitions/StringWithLengthBetween1And256'
-        description: 'The content-type for the model, for example, "application/json".'
-      Description:
-        $ref: '#/definitions/StringWithLengthBetween0And1024'
-        description: The description of the model.
-      Name:
-        $ref: '#/definitions/StringWithLengthBetween1And128'
-        description: The name of the model.
       Schema:
         $ref: '#/definitions/StringWithLengthBetween0And32K'
         description: |-
@@ -4346,52 +4446,6 @@ definitions:
       Target:
         $ref: '#/definitions/StringWithLengthBetween1And128'
         description: The target for the route.
-  UpdateRouteRequest:
-    type: object
-    properties:
-      ApiKeyRequired:
-        $ref: '#/definitions/__boolean'
-        description: Specifies whether an API key is required for the route.
-      AuthorizationScopes:
-        $ref: '#/definitions/AuthorizationScopes'
-        description: |-
-          The authorization scopes supported by this
-           route.
-      AuthorizationType:
-        $ref: '#/definitions/AuthorizationType'
-        description: |-
-          The authorization type for the route. Valid values are NONE for open
-           access, AWS_IAM for using AWS IAM permissions, and CUSTOM
-           for using a Lambda
-           authorizer.
-      AuthorizerId:
-        $ref: '#/definitions/Id'
-        description: |-
-          The identifier of the Authorizer resource to be associated with this
-           route, if the authorizationType is CUSTOM
-           . The authorizer identifier is generated by API Gateway
-           when you created the authorizer.
-      ModelSelectionExpression:
-        $ref: '#/definitions/SelectionExpression'
-        description: The model selection expression for the route.
-      OperationName:
-        $ref: '#/definitions/StringWithLengthBetween1And64'
-        description: The operation name for the route.
-      RequestModels:
-        $ref: '#/definitions/RouteModels'
-        description: The request models for the route.
-      RequestParameters:
-        $ref: '#/definitions/RouteParameters'
-        description: The request parameters for the route.
-      RouteKey:
-        $ref: '#/definitions/SelectionKey'
-        description: The route key for the route.
-      RouteResponseSelectionExpression:
-        $ref: '#/definitions/SelectionExpression'
-        description: The route response selection expression for the route.
-      Target:
-        $ref: '#/definitions/StringWithLengthBetween1And128'
-        description: The target for the route.
   UpdateRouteResponseResponse:
     type: object
     properties:
@@ -4410,21 +4464,6 @@ definitions:
       RouteResponseKey:
         $ref: '#/definitions/SelectionKey'
         description: Represents the route response key of a route response.
-  UpdateRouteResponseRequest:
-    type: object
-    properties:
-      ModelSelectionExpression:
-        $ref: '#/definitions/SelectionExpression'
-        description: The model selection expression for the route response.
-      ResponseModels:
-        $ref: '#/definitions/RouteModels'
-        description: The response models for the route response.
-      ResponseParameters:
-        $ref: '#/definitions/RouteParameters'
-        description: The route response parameters.
-      RouteResponseKey:
-        $ref: '#/definitions/SelectionKey'
-        description: The route response key.
   UpdateStageResponse:
     type: object
     properties:
@@ -4463,39 +4502,6 @@ definitions:
           A map that defines the stage variables for a stage resource. Variable names can
            have alphanumeric and underscore characters, and the values must match
            [A-Za-z0-9-._~:/?#&=,]+.
-  UpdateStageRequest:
-    type: object
-    properties:
-      AccessLogSettings:
-        $ref: '#/definitions/AccessLogSettings'
-        description: Settings for logging access in this stage.
-      ClientCertificateId:
-        $ref: '#/definitions/Id'
-        description: The identifier of a client certificate for a Stage.
-      DefaultRouteSettings:
-        $ref: '#/definitions/RouteSettings'
-        description: The default route settings for the stage.
-      DeploymentId:
-        $ref: '#/definitions/Id'
-        description: The deployment identifier for the API stage.
-      Description:
-        $ref: '#/definitions/StringWithLengthBetween0And1024'
-        description: The description for the API stage.
-      RouteSettings:
-        $ref: '#/definitions/RouteSettingsMap'
-        description: Route settings for the stage.
-      StageVariables:
-        $ref: '#/definitions/StageVariablesMap'
-        description: |-
-          A map that defines the stage variables for a Stage. Variable names
-           can have alphanumeric and underscore characters, and the values must match
-           [A-Za-z0-9-._~:/?#&=,]+.
-  Arn:
-    type: string
-    description: Represents an Amazon Resource Name (ARN).
-  StringWithLengthBetween1And1024:
-    type: string
-    description: 'A string with a length between [1-1024].'
   AccessLogSettings:
     type: object
     properties:
@@ -4508,8 +4514,6 @@ definitions:
           A single line format of the access logs of data, as specified by selected $context
            variables. The format must include at least $context.requestId.
     description: Settings for logging access in a stage.
-  __string:
-    type: string
   Id:
     type: string
     description: The identifier.
@@ -4522,19 +4526,11 @@ definitions:
   StringWithLengthBetween0And1024:
     type: string
     description: 'A string with a length between [0-1024].'
-  __boolean:
-    type: boolean
-  StringWithLengthBetween1And128:
-    type: string
-    description: 'A string with a length between [1-128].'
   ProtocolType:
     type: string
     enum:
       - WEBSOCKET
     description: ''
-  StringWithLengthBetween1And64:
-    type: string
-    description: 'A string with a length between [1-64].'
   __listOf__string:
     type: array
     items:
@@ -4755,6 +4751,132 @@ definitions:
       - CONVERT_TO_BINARY
       - CONVERT_TO_TEXT
     description: Specifies how to handle response payload content type conversions.
+  CreateApiMappingRequest:
+    type: object
+    required:
+      - Stage
+      - ApiId
+    properties:
+      ApiId:
+        $ref: '#/definitions/Id'
+        description: The API identifier.
+      ApiMappingKey:
+        $ref: '#/definitions/SelectionKey'
+        description: ''
+      Stage:
+        $ref: '#/definitions/StringWithLengthBetween1And128'
+        description: The API stage.
+  CreateApiRequest:
+    type: object
+    required:
+      - RouteSelectionExpression
+      - ProtocolType
+      - Name
+    properties:
+      ApiKeySelectionExpression:
+        $ref: '#/definitions/SelectionExpression'
+        description: 'An API key selection expression. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions">API Key Selection Expressions</a>.'
+      Description:
+        $ref: '#/definitions/StringWithLengthBetween0And1024'
+        description: The description of the API.
+      DisableSchemaValidation:
+        $ref: '#/definitions/__boolean'
+        description: Avoid validating models when creating a deployment.
+      Name:
+        $ref: '#/definitions/StringWithLengthBetween1And128'
+        description: The name of the API.
+      ProtocolType:
+        $ref: '#/definitions/ProtocolType'
+        description: 'The API protocol: Currently only WEBSOCKET is supported.'
+      RouteSelectionExpression:
+        $ref: '#/definitions/SelectionExpression'
+        description: The route selection expression for the API.
+      Version:
+        $ref: '#/definitions/StringWithLengthBetween1And64'
+        description: A version identifier for the API.
+  CreateAuthorizerRequest:
+    type: object
+    required:
+      - AuthorizerUri
+      - AuthorizerType
+      - IdentitySource
+      - Name
+    properties:
+      AuthorizerCredentialsArn:
+        $ref: '#/definitions/Arn'
+        description: |-
+          Specifies the required credentials as an IAM role for API Gateway to invoke the
+           authorizer. To specify an IAM role for API Gateway to assume, use the role's Amazon
+           Resource Name (ARN). To use resource-based permissions on the Lambda function,
+           specify null.
+      AuthorizerResultTtlInSeconds:
+        $ref: '#/definitions/IntegerWithLengthBetween0And3600'
+        description: |-
+          The time to live (TTL), in seconds, of cached authorizer results. If it equals 0,
+           authorization caching is disabled. If it is greater than 0, API Gateway will cache
+           authorizer responses. If this field is not set, the default value is 300. The maximum
+           value is 3600, or 1 hour.
+      AuthorizerType:
+        $ref: '#/definitions/AuthorizerType'
+        description: |-
+          The authorizer type. Currently the only valid value is REQUEST, for a
+           Lambda function using incoming request parameters.
+      AuthorizerUri:
+        $ref: '#/definitions/UriWithLengthBetween1And2048'
+        description: |-
+          The authorizer's Uniform Resource Identifier (URI). For
+           REQUEST authorizers, this must be a
+           well-formed Lambda function URI, for example,
+           arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations.
+           In general, the URI has this form:
+           arn:aws:apigateway:{region}:lambda:path/{service_api}
+           , where {region} is the same as the region hosting the Lambda
+           function, path indicates that the remaining substring in the URI should be treated as
+           the path to the resource, including the initial /. For Lambda functions,
+           this is usually of the form
+           /2015-03-31/functions/[FunctionARN]/invocations.
+      IdentitySource:
+        $ref: '#/definitions/IdentitySourceList'
+        description: |-
+          <p>The identity source for which authorization is requested.</p><p>For the REQUEST authorizer, this is required when authorization
+           caching is enabled. The value is a comma-separated string of one or more mapping
+           expressions of the specified request parameters. For example, if an Auth
+           header and a Name query string parameters are defined as identity
+           sources, this value is method.request.header.Auth,
+           method.request.querystring.Name. These parameters will be used to
+           derive the authorization caching key and to perform runtime validation of the
+           REQUEST authorizer by verifying all of the identity-related request
+           parameters are present, not null, and non-empty. Only when this is true does the
+           authorizer invoke the authorizer Lambda function, otherwise, it returns a 401
+           Unauthorized response without calling the Lambda function. The valid value
+           is a string of comma-separated mapping expressions of the specified request
+           parameters. When the authorization caching is not enabled, this property is
+           optional.</p>
+      IdentityValidationExpression:
+        $ref: '#/definitions/StringWithLengthBetween0And1024'
+        description: |-
+          The
+           validation expression does not apply to the REQUEST authorizer.
+      Name:
+        $ref: '#/definitions/StringWithLengthBetween1And128'
+        description: The name of the authorizer.
+      ProviderArns:
+        $ref: '#/definitions/ProviderArnList'
+        description: |-
+          For
+           REQUEST authorizer, this is not
+           defined.
+  CreateDeploymentRequest:
+    type: object
+    properties:
+      Description:
+        $ref: '#/definitions/StringWithLengthBetween0And1024'
+        description: The description for the deployment resource.
+      StageName:
+        $ref: '#/definitions/StringWithLengthBetween1And128'
+        description: |-
+          The name of the Stage resource for the Deployment
+           resource to create.
   DeploymentStatus:
     type: string
     enum:
@@ -4762,14 +4884,22 @@ definitions:
       - FAILED
       - DEPLOYED
     description: Represents a deployment status.
-  StringWithLengthBetween1And512:
-    type: string
-    description: 'A string with a length between [1-512].'
   DomainNameConfigurations:
     type: array
     description: The domain name configurations.
     items:
       $ref: '#/definitions/DomainNameConfiguration'
+  CreateDomainNameRequest:
+    type: object
+    required:
+      - DomainName
+    properties:
+      DomainName:
+        $ref: '#/definitions/StringWithLengthBetween1And512'
+        description: The domain name.
+      DomainNameConfigurations:
+        $ref: '#/definitions/DomainNameConfigurations'
+        description: The domain name configurations.
   IntegrationType:
     type: string
     enum:
@@ -4787,7 +4917,7 @@ definitions:
       - WHEN_NO_TEMPLATES
     description: Represents passthrough behavior for an integration response.
   IntegrationParameters:
-    type: array
+    type: object
     description: |-
       A key-value map specifying response parameters that are passed to the method
        response from the backend. The key is a method response header parameter name and the
@@ -4798,102 +4928,346 @@ definitions:
        integration.response.header.{name} or integration.response.body.{JSON-expression},
        where name is a valid and unique response header name and JSON-expression is a valid
        JSON expression without the $ prefix.
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/StringWithLengthBetween1And512'
+    additionalProperties:
+      $ref: '#/definitions/StringWithLengthBetween1And512'
   TemplateMap:
-    type: array
+    type: object
     description: |-
       A mapping of identifier keys to templates. The value is an actual template script.
        The key is typically a SelectionKey which is chosen based on evaluating
        a selection expression.
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/StringWithLengthBetween0And32K'
+    additionalProperties:
+      $ref: '#/definitions/StringWithLengthBetween0And32K'
   IntegerWithLengthBetween50And29000:
     type: integer
     description: 'An integer with a value between [50-29000].'
     minimum: -2147483648
     maximum: 2147483647
+  CreateIntegrationRequest:
+    type: object
+    required:
+      - IntegrationType
+    properties:
+      ConnectionId:
+        $ref: '#/definitions/StringWithLengthBetween1And1024'
+        description: The connection ID.
+      ConnectionType:
+        $ref: '#/definitions/ConnectionType'
+        description: |-
+          The type of the network connection to the integration endpoint. Currently the only
+           valid value is INTERNET, for connections through the public routable
+           internet.
+      ContentHandlingStrategy:
+        $ref: '#/definitions/ContentHandlingStrategy'
+        description: |-
+          <p>Specifies how to handle response payload content type conversions. Supported
+           values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the
+           following behaviors:</p><p>
+           CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded
+           string to the corresponding binary blob.</p><p>
+           CONVERT_TO_TEXT: Converts a response payload from a binary blob to a
+           Base64-encoded string.</p><p>If this property is not defined, the response payload will be passed through from
+           the integration response to the route response or method response without
+           modification.</p>
+      CredentialsArn:
+        $ref: '#/definitions/Arn'
+        description: |-
+          Specifies the credentials required for the integration, if any. For AWS
+           integrations, three options are available. To specify an IAM Role for API Gateway to
+           assume, use the role's Amazon Resource Name (ARN). To require that the caller's
+           identity be passed through from the request, specify the string
+           arn:aws:iam::*:user/*. To use resource-based permissions on supported
+           AWS services, specify null.
+      Description:
+        $ref: '#/definitions/StringWithLengthBetween0And1024'
+        description: The description of the integration.
+      IntegrationMethod:
+        $ref: '#/definitions/StringWithLengthBetween1And64'
+        description: Specifies the integration's HTTP method type.
+      IntegrationType:
+        $ref: '#/definitions/IntegrationType'
+        description: |-
+          <p>The integration type of an integration. One of the following:</p><p>
+           AWS: for integrating the route or method request with an AWS service
+           action, including the Lambda function-invoking action. With the Lambda
+           function-invoking action, this is referred to as the Lambda custom integration. With
+           any other AWS service action, this is known as AWS integration.</p><p>
+           AWS_PROXY: for integrating the route or method request with the Lambda
+           function-invoking action with the client request passed through as-is. This
+           integration is also referred to as Lambda proxy integration.</p><p>
+           HTTP: for integrating the route or method request with an HTTP
+           endpoint. This
+           integration is also referred to as HTTP custom integration.</p><p>
+           HTTP_PROXY: for integrating route or method request with an HTTP
+           endpoint, with the client
+           request passed through as-is. This is also referred to as HTTP proxy
+           integration.</p><p>
+           MOCK: for integrating the route or method request with API Gateway as a
+           "loopback" endpoint without invoking any backend.</p>
+      IntegrationUri:
+        $ref: '#/definitions/UriWithLengthBetween1And2048'
+        description: 'For a Lambda proxy integration, this is the URI of the Lambda function.'
+      PassthroughBehavior:
+        $ref: '#/definitions/PassthroughBehavior'
+        description: |-
+          <p>Specifies the pass-through behavior for incoming requests based on the
+           Content-Type header in the request, and the available mapping
+           templates specified as the requestTemplates property on the
+           Integration resource. There are three valid values:
+           WHEN_NO_MATCH, WHEN_NO_TEMPLATES, and
+           NEVER.</p><p>
+           WHEN_NO_MATCH passes the request body for unmapped content types through
+           to the integration backend without transformation.</p><p>
+           NEVER rejects unmapped content types with an HTTP 415 Unsupported
+           Media Type response.</p><p>
+           WHEN_NO_TEMPLATES allows pass-through when the integration has no
+           content types mapped to templates. However, if there is at least one content type
+           defined, unmapped content types will be rejected with the same HTTP 415
+           Unsupported Media Type response.</p>
+      RequestParameters:
+        $ref: '#/definitions/IntegrationParameters'
+        description: |-
+          A key-value map specifying request parameters that are passed from the method
+           request to the backend. The key is an integration request parameter name and the
+           associated value is a method request parameter value or static value that must be
+           enclosed within single quotes and pre-encoded as required by the backend. The method
+           request parameter value must match the pattern of
+           method.request.{location}.{name}
+           , where 
+           {location}
+            is querystring, path, or header; and 
+           {name}
+            must be a valid and unique method request parameter name.
+      RequestTemplates:
+        $ref: '#/definitions/TemplateMap'
+        description: |-
+          Represents a map of Velocity templates that are applied on the request payload
+           based on the value of the Content-Type header sent by the client. The content type
+           value is the key in this map, and the template (as a String) is the value.
+      TemplateSelectionExpression:
+        $ref: '#/definitions/SelectionExpression'
+        description: The template selection expression for the integration.
+      TimeoutInMillis:
+        $ref: '#/definitions/IntegerWithLengthBetween50And29000'
+        description: |-
+          Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000
+           milliseconds or 29 seconds.
+  CreateIntegrationResponseRequest:
+    type: object
+    required:
+      - IntegrationResponseKey
+    properties:
+      ContentHandlingStrategy:
+        $ref: '#/definitions/ContentHandlingStrategy'
+        description: |-
+          <p>Specifies how to handle response payload content type conversions. Supported
+           values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the
+           following behaviors:</p><p>
+           CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded
+           string to the corresponding binary blob.</p><p>
+           CONVERT_TO_TEXT: Converts a response payload from a binary blob to a
+           Base64-encoded string.</p><p>If this property is not defined, the response payload will be passed through from
+           the integration response to the route response or method response without
+           modification.</p>
+      IntegrationResponseKey:
+        $ref: '#/definitions/SelectionKey'
+        description: The integration response key.
+      ResponseParameters:
+        $ref: '#/definitions/IntegrationParameters'
+        description: |-
+          A key-value map specifying response parameters that are passed to the method
+           response from the backend. The key is a method response header parameter name and the
+           mapped value is an integration response header value, a static value enclosed within
+           a pair of single quotes, or a JSON expression from the integration response body. The
+           mapping key must match the pattern of method.response.header.{name},
+           where {name} is a valid and unique header name. The mapped non-static
+           value must match the pattern of integration.response.header.{name} or
+           integration.response.body.{JSON-expression}, where
+           {name} is a valid and unique response header name and
+           {JSON-expression} is a valid JSON expression without the $
+           prefix.
+      ResponseTemplates:
+        $ref: '#/definitions/TemplateMap'
+        description: |-
+          The collection of response templates for the integration response as a
+           string-to-string map of key-value pairs. Response templates are represented as a
+           key/value map, with a content-type as the key and a template as the value.
+      TemplateSelectionExpression:
+        $ref: '#/definitions/SelectionExpression'
+        description: The template selection expression for the integration response.
   StringWithLengthBetween1And256:
     type: string
     description: 'A string with a length between [1-256].'
-  StringWithLengthBetween0And32K:
-    type: string
-    description: 'A string with a length between [0-32768].'
-  RouteModels:
-    type: array
-    description: The route models.
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/StringWithLengthBetween1And128'
-  RouteParameters:
-    type: array
-    description: The route parameters.
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/ParameterConstraints'
-  RouteSettings:
+  CreateModelRequest:
     type: object
+    required:
+      - Schema
+      - Name
     properties:
-      DataTraceEnabled:
-        $ref: '#/definitions/__boolean'
+      ContentType:
+        $ref: '#/definitions/StringWithLengthBetween1And256'
+        description: 'The content-type for the model, for example, "application/json".'
+      Description:
+        $ref: '#/definitions/StringWithLengthBetween0And1024'
+        description: The description of the model.
+      Name:
+        $ref: '#/definitions/StringWithLengthBetween1And128'
+        description: The name of the model. Must be alphanumeric.
+      Schema:
+        $ref: '#/definitions/StringWithLengthBetween0And32K'
         description: |-
-          Specifies whether (true) or not (false) data trace
-           logging is enabled for this route. This property affects the log entries pushed to
-           Amazon CloudWatch Logs.
-      DetailedMetricsEnabled:
+          The schema for the model. For application/json models, this should be JSON schema
+           draft 4 model.
+  RouteModels:
+    type: object
+    description: The route models.
+    additionalProperties:
+      $ref: '#/definitions/StringWithLengthBetween1And128'
+  RouteParameters:
+    type: object
+    description: The route parameters.
+    additionalProperties:
+      $ref: '#/definitions/ParameterConstraints'
+  CreateRouteRequest:
+    type: object
+    required:
+      - RouteKey
+    properties:
+      ApiKeyRequired:
         $ref: '#/definitions/__boolean'
-        description: Specifies whether detailed metrics are enabled.
-      LoggingLevel:
-        $ref: '#/definitions/LoggingLevel'
+        description: Specifies whether an API key is required for the route.
+      AuthorizationScopes:
+        $ref: '#/definitions/AuthorizationScopes'
         description: |-
-          Specifies the logging level for this route: DEBUG, INFO,
-           or WARN. This property affects the log entries pushed to Amazon
-           CloudWatch Logs.
-      ThrottlingBurstLimit:
-        $ref: '#/definitions/__integer'
-        description: Specifies the throttling burst limit.
-      ThrottlingRateLimit:
-        $ref: '#/definitions/__double'
-        description: Specifies the throttling rate limit.
-    description: Represents a collection of route settings.
+          The authorization scopes supported by this
+           route.
+      AuthorizationType:
+        $ref: '#/definitions/AuthorizationType'
+        description: |-
+          The authorization type for the route. Valid values are NONE for open
+           access, AWS_IAM for using AWS IAM permissions, and CUSTOM
+           for using a Lambda
+           authorizer.
+      AuthorizerId:
+        $ref: '#/definitions/Id'
+        description: |-
+          The identifier of the Authorizer resource to be associated with this
+           route, if the authorizationType is CUSTOM
+           . The authorizer identifier is generated by API Gateway
+           when you created the authorizer.
+      ModelSelectionExpression:
+        $ref: '#/definitions/SelectionExpression'
+        description: The model selection expression for the route.
+      OperationName:
+        $ref: '#/definitions/StringWithLengthBetween1And64'
+        description: The operation name for the route.
+      RequestModels:
+        $ref: '#/definitions/RouteModels'
+        description: The request models for the route.
+      RequestParameters:
+        $ref: '#/definitions/RouteParameters'
+        description: The request parameters for the route.
+      RouteKey:
+        $ref: '#/definitions/SelectionKey'
+        description: The route key for the route.
+      RouteResponseSelectionExpression:
+        $ref: '#/definitions/SelectionExpression'
+        description: The route response selection expression for the route.
+      Target:
+        $ref: '#/definitions/StringWithLengthBetween1And128'
+        description: The target for the route.
+  CreateRouteResponseRequest:
+    type: object
+    required:
+      - RouteResponseKey
+    properties:
+      ModelSelectionExpression:
+        $ref: '#/definitions/SelectionExpression'
+        description: The model selection expression for the route response.
+      ResponseModels:
+        $ref: '#/definitions/RouteModels'
+        description: The response models for the route response.
+      ResponseParameters:
+        $ref: '#/definitions/RouteParameters'
+        description: The route response parameters.
+      RouteResponseKey:
+        $ref: '#/definitions/SelectionKey'
+        description: The route response key.
   RouteSettingsMap:
-    type: array
+    type: object
     description: The route settings map.
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/RouteSettings'
+    additionalProperties:
+      $ref: '#/definitions/RouteSettings'
   StageVariablesMap:
-    type: array
+    type: object
     description: The stage variable map.
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/StringWithLengthBetween0And2048'
+    additionalProperties:
+      $ref: '#/definitions/StringWithLengthBetween0And2048'
+  CreateStageRequest:
+    type: object
+    required:
+      - StageName
+    properties:
+      AccessLogSettings:
+        $ref: '#/definitions/AccessLogSettings'
+        description: Settings for logging access in this stage.
+      ClientCertificateId:
+        $ref: '#/definitions/Id'
+        description: The identifier of a client certificate for a Stage.
+      DefaultRouteSettings:
+        $ref: '#/definitions/RouteSettings'
+        description: The default route settings for the stage.
+      DeploymentId:
+        $ref: '#/definitions/Id'
+        description: The deployment identifier of the API stage.
+      Description:
+        $ref: '#/definitions/StringWithLengthBetween0And1024'
+        description: The description for the API stage.
+      RouteSettings:
+        $ref: '#/definitions/RouteSettingsMap'
+        description: Route settings for the stage.
+      StageName:
+        $ref: '#/definitions/StringWithLengthBetween1And128'
+        description: The name of the stage.
+      StageVariables:
+        $ref: '#/definitions/StageVariablesMap'
+        description: |-
+          A map that defines the stage variables for a Stage. Variable names
+           can have alphanumeric and underscore characters, and the values must match
+           [A-Za-z0-9-._~:/?#&=,]+.
+  DeleteApiMappingRequest:
+    type: object
+    properties: {}
+  DeleteApiRequest:
+    type: object
+    properties: {}
+  DeleteAuthorizerRequest:
+    type: object
+    properties: {}
+  DeleteDeploymentRequest:
+    type: object
+    properties: {}
+  DeleteDomainNameRequest:
+    type: object
+    properties: {}
+  DeleteIntegrationRequest:
+    type: object
+    properties: {}
+  DeleteIntegrationResponseRequest:
+    type: object
+    properties: {}
+  DeleteModelRequest:
+    type: object
+    properties: {}
+  DeleteRouteRequest:
+    type: object
+    properties: {}
+  DeleteRouteResponseRequest:
+    type: object
+    properties: {}
+  DeleteStageRequest:
+    type: object
+    properties: {}
   Deployment:
     type: object
     properties:
@@ -4939,34 +5313,12 @@ definitions:
       - REGIONAL
       - EDGE
     description: Represents an endpoint type.
-  DomainNameConfiguration:
+  GetApiMappingRequest:
     type: object
-    properties:
-      ApiGatewayDomainName:
-        $ref: '#/definitions/__string'
-        description: A domain name for the WebSocket API.
-      CertificateArn:
-        $ref: '#/definitions/Arn'
-        description: |-
-          An AWS-managed certificate that will be used by the edge-optimized endpoint for
-           this domain name. AWS Certificate Manager is the only supported source.
-      CertificateName:
-        $ref: '#/definitions/StringWithLengthBetween1And128'
-        description: |-
-          The user-friendly name of the certificate that will be used by the edge-optimized
-           endpoint for this domain name.
-      CertificateUploadDate:
-        $ref: '#/definitions/__timestampIso8601'
-        description: |-
-          The timestamp when the certificate that was used by edge-optimized endpoint for
-           this domain name was uploaded.
-      EndpointType:
-        $ref: '#/definitions/EndpointType'
-        description: The endpoint type.
-      HostedZoneId:
-        $ref: '#/definitions/__string'
-        description: The Amazon Route 53 Hosted Zone ID of the endpoint.
-    description: The domain name configuration.
+    properties: {}
+  GetApiMappingsRequest:
+    type: object
+    properties: {}
   __listOfApiMapping:
     type: array
     items:
@@ -4976,42 +5328,105 @@ definitions:
     description: |-
       The next page of elements from this collection. Not valid for the last element of
        the collection.
+  GetApiRequest:
+    type: object
+    properties: {}
+  GetApisRequest:
+    type: object
+    properties: {}
   __listOfApi:
     type: array
     items:
       $ref: '#/definitions/Api'
+  GetAuthorizerRequest:
+    type: object
+    properties: {}
+  GetAuthorizersRequest:
+    type: object
+    properties: {}
   __listOfAuthorizer:
     type: array
     items:
       $ref: '#/definitions/Authorizer'
+  GetDeploymentRequest:
+    type: object
+    properties: {}
+  GetDeploymentsRequest:
+    type: object
+    properties: {}
   __listOfDeployment:
     type: array
     items:
       $ref: '#/definitions/Deployment'
+  GetDomainNameRequest:
+    type: object
+    properties: {}
+  GetDomainNamesRequest:
+    type: object
+    properties: {}
   __listOfDomainName:
     type: array
     items:
       $ref: '#/definitions/DomainName'
+  GetIntegrationRequest:
+    type: object
+    properties: {}
+  GetIntegrationResponseRequest:
+    type: object
+    properties: {}
+  GetIntegrationResponsesRequest:
+    type: object
+    properties: {}
   __listOfIntegrationResponse:
     type: array
     items:
       $ref: '#/definitions/IntegrationResponse'
+  GetIntegrationsRequest:
+    type: object
+    properties: {}
   __listOfIntegration:
     type: array
     items:
       $ref: '#/definitions/Integration'
+  GetModelRequest:
+    type: object
+    properties: {}
+  GetModelTemplateRequest:
+    type: object
+    properties: {}
+  GetModelsRequest:
+    type: object
+    properties: {}
   __listOfModel:
     type: array
     items:
       $ref: '#/definitions/Model'
+  GetRouteRequest:
+    type: object
+    properties: {}
+  GetRouteResponseRequest:
+    type: object
+    properties: {}
+  GetRouteResponsesRequest:
+    type: object
+    properties: {}
   __listOfRouteResponse:
     type: array
     items:
       $ref: '#/definitions/RouteResponse'
+  GetRoutesRequest:
+    type: object
+    properties: {}
   __listOfRoute:
     type: array
     items:
       $ref: '#/definitions/Route'
+  GetStageRequest:
+    type: object
+    properties: {}
+  GetStagesRequest:
+    type: object
+    properties: {}
   __listOfStage:
     type: array
     items:
@@ -5175,13 +5590,6 @@ definitions:
         $ref: '#/definitions/SelectionExpression'
         description: The template selection expressions for the integration response.
     description: Represents an integration response.
-  LoggingLevel:
-    type: string
-    enum:
-      - ERROR
-      - INFO
-      - 'false'
-    description: The logging level.
   Model:
     type: object
     required:
@@ -5207,15 +5615,6 @@ definitions:
     description: |-
       Represents a data model for an API. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html">Create Models and Mapping Templates for Request and Response
        Mappings</a>.
-  ParameterConstraints:
-    type: object
-    properties:
-      Required:
-        $ref: '#/definitions/__boolean'
-        description: Whether or not the parameter is required.
-    description: |-
-      Validation constraints imposed on parameters of a request (path, query string,
-       headers).
   Route:
     type: object
     required:
@@ -5294,11 +5693,6 @@ definitions:
         $ref: '#/definitions/SelectionKey'
         description: Represents the route response key of a route response.
     description: Represents a route response.
-  __integer:
-    type: integer
-  __double:
-    type: number
-    format: double
   Stage:
     type: object
     required:
@@ -5340,6 +5734,374 @@ definitions:
            have alphanumeric and underscore characters, and the values must match
            [A-Za-z0-9-._~:/?#&=,]+.
     description: Represents an API stage.
-  StringWithLengthBetween0And2048:
-    type: string
-    description: 'A string with a length between [0-2048].'
+  UpdateApiMappingRequest:
+    type: object
+    required:
+      - ApiId
+    properties:
+      ApiId:
+        $ref: '#/definitions/Id'
+        description: The API identifier.
+      ApiMappingKey:
+        $ref: '#/definitions/SelectionKey'
+        description: The API mapping key.
+      Stage:
+        $ref: '#/definitions/StringWithLengthBetween1And128'
+        description: The API stage.
+  UpdateApiRequest:
+    type: object
+    properties:
+      ApiKeySelectionExpression:
+        $ref: '#/definitions/SelectionExpression'
+        description: 'An API key selection expression. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions">API Key Selection Expressions</a>.'
+      Description:
+        $ref: '#/definitions/StringWithLengthBetween0And1024'
+        description: The description of the API.
+      DisableSchemaValidation:
+        $ref: '#/definitions/__boolean'
+        description: Avoid validating models when creating a deployment.
+      Name:
+        $ref: '#/definitions/StringWithLengthBetween1And128'
+        description: The name of the API.
+      RouteSelectionExpression:
+        $ref: '#/definitions/SelectionExpression'
+        description: The route selection expression for the API.
+      Version:
+        $ref: '#/definitions/StringWithLengthBetween1And64'
+        description: A version identifier for the API.
+  UpdateAuthorizerRequest:
+    type: object
+    properties:
+      AuthorizerCredentialsArn:
+        $ref: '#/definitions/Arn'
+        description: |-
+          Specifies the required credentials as an IAM role for API Gateway to invoke the
+           authorizer. To specify an IAM role for API Gateway to assume, use the role's Amazon
+           Resource Name (ARN). To use resource-based permissions on the Lambda function,
+           specify null.
+      AuthorizerResultTtlInSeconds:
+        $ref: '#/definitions/IntegerWithLengthBetween0And3600'
+        description: |-
+          The time to live (TTL), in seconds, of cached authorizer results. If it is zero,
+           authorization caching is disabled. If it is greater than zero, API Gateway will cache
+           authorizer responses. If this field is not set, the default value is 300. The maximum
+           value is 3600, or 1 hour.
+      AuthorizerType:
+        $ref: '#/definitions/AuthorizerType'
+        description: |-
+          The authorizer type. Currently the only valid value is REQUEST, for a
+           Lambda function using incoming request parameters.
+      AuthorizerUri:
+        $ref: '#/definitions/UriWithLengthBetween1And2048'
+        description: |-
+          The authorizer's Uniform Resource Identifier (URI). For
+           REQUEST authorizers, this must be a
+           well-formed Lambda function URI, for example,
+           arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations.
+           In general, the URI has this form:
+           arn:aws:apigateway:{region}:lambda:path/{service_api}
+           , where {region} is the same as the region hosting the Lambda
+           function, path indicates that the remaining substring in the URI should be treated as
+           the path to the resource, including the initial /. For Lambda functions,
+           this is usually of the form
+           /2015-03-31/functions/[FunctionARN]/invocations.
+      IdentitySource:
+        $ref: '#/definitions/IdentitySourceList'
+        description: |-
+          <p>The identity source for which authorization is requested.</p><p>For the REQUEST authorizer, this is required when authorization
+           caching is enabled. The value is a comma-separated string of one or more mapping
+           expressions of the specified request parameters. For example, if an Auth header, a
+           Name query string parameter are defined as identity sources, this value is
+           $method.request.header.Auth, $method.request.querystring.Name. These
+           parameters will be used to derive the authorization caching key and to perform
+           runtime validation of the REQUEST authorizer by verifying all of the
+           identity-related request parameters are present, not null and non-empty. Only when
+           this is true does the authorizer invoke the authorizer Lambda function, otherwise, it
+           returns a 401 Unauthorized response without calling the Lambda function.
+           The valid value is a string of comma-separated mapping expressions of the specified
+           request parameters. When the authorization caching is not enabled, this property is
+           optional.</p>
+      IdentityValidationExpression:
+        $ref: '#/definitions/StringWithLengthBetween0And1024'
+        description: |-
+          The
+           validation expression does not apply to the REQUEST authorizer.
+      Name:
+        $ref: '#/definitions/StringWithLengthBetween1And128'
+        description: The name of the authorizer.
+      ProviderArns:
+        $ref: '#/definitions/ProviderArnList'
+        description: |-
+          For
+           REQUEST authorizer, this is not
+           defined.
+  UpdateDeploymentRequest:
+    type: object
+    properties:
+      Description:
+        $ref: '#/definitions/StringWithLengthBetween0And1024'
+        description: The description for the deployment resource.
+  UpdateDomainNameRequest:
+    type: object
+    properties:
+      DomainNameConfigurations:
+        $ref: '#/definitions/DomainNameConfigurations'
+        description: The domain name configurations.
+  UpdateIntegrationRequest:
+    type: object
+    properties:
+      ConnectionId:
+        $ref: '#/definitions/StringWithLengthBetween1And1024'
+        description: The connection ID.
+      ConnectionType:
+        $ref: '#/definitions/ConnectionType'
+        description: |-
+          The type of the network connection to the integration endpoint. Currently the only
+           valid value is INTERNET, for connections through the public routable
+           internet.
+      ContentHandlingStrategy:
+        $ref: '#/definitions/ContentHandlingStrategy'
+        description: |-
+          <p>Specifies how to handle response payload content type conversions. Supported
+           values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the
+           following behaviors:</p><p>
+           CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded
+           string to the corresponding binary blob.</p><p>
+           CONVERT_TO_TEXT: Converts a response payload from a binary blob to a
+           Base64-encoded string.</p><p>If this property is not defined, the response payload will be passed through from
+           the integration response to the route response or method response without
+           modification.</p>
+      CredentialsArn:
+        $ref: '#/definitions/Arn'
+        description: |-
+          Specifies the credentials required for the integration, if any. For AWS
+           integrations, three options are available. To specify an IAM Role for API Gateway to
+           assume, use the role's Amazon Resource Name (ARN). To require that the caller's
+           identity be passed through from the request, specify the string
+           arn:aws:iam::*:user/*. To use resource-based permissions on supported
+           AWS services, specify null.
+      Description:
+        $ref: '#/definitions/StringWithLengthBetween0And1024'
+        description: The description of the integration
+      IntegrationMethod:
+        $ref: '#/definitions/StringWithLengthBetween1And64'
+        description: Specifies the integration's HTTP method type.
+      IntegrationType:
+        $ref: '#/definitions/IntegrationType'
+        description: |-
+          <p>The integration type of an integration. One of the following:</p><p>
+           AWS: for integrating the route or method request with an AWS service
+           action, including the Lambda function-invoking action. With the Lambda
+           function-invoking action, this is referred to as the Lambda custom integration. With
+           any other AWS service action, this is known as AWS integration.</p><p>
+           AWS_PROXY: for integrating the route or method request with the Lambda
+           function-invoking action with the client request passed through as-is. This
+           integration is also referred to as Lambda proxy integration.</p><p>
+           HTTP: for integrating the route or method request with an HTTP
+           endpoint. This
+           integration is also referred to as the HTTP custom integration.</p><p>
+           HTTP_PROXY: for integrating route or method request with an HTTP
+           endpoint, with the client
+           request passed through as-is. This is also referred to as HTTP proxy
+           integration.</p><p>
+           MOCK: for integrating the route or method request with API Gateway as a
+           "loopback" endpoint without invoking any backend.</p>
+      IntegrationUri:
+        $ref: '#/definitions/UriWithLengthBetween1And2048'
+        description: 'For a Lambda proxy integration, this is the URI of the Lambda function.'
+      PassthroughBehavior:
+        $ref: '#/definitions/PassthroughBehavior'
+        description: |-
+          <p>Specifies the pass-through behavior for incoming requests based on the
+           Content-Type header in the request, and the available mapping
+           templates specified as the requestTemplates property on the
+           Integration resource. There are three valid values:
+           WHEN_NO_MATCH, WHEN_NO_TEMPLATES, and
+           NEVER.</p><p>
+           WHEN_NO_MATCH passes the request body for unmapped content types through
+           to the integration backend without transformation.</p><p>
+           NEVER rejects unmapped content types with an HTTP 415 Unsupported
+           Media Type response.</p><p>
+           WHEN_NO_TEMPLATES allows pass-through when the integration has no
+           content types mapped to templates. However, if there is at least one content type
+           defined, unmapped content types will be rejected with the same HTTP 415
+           Unsupported Media Type response.</p>
+      RequestParameters:
+        $ref: '#/definitions/IntegrationParameters'
+        description: |-
+          A key-value map specifying request parameters that are passed from the method
+           request to the backend. The key is an integration request parameter name and the
+           associated value is a method request parameter value or static value that must be
+           enclosed within single quotes and pre-encoded as required by the backend. The method
+           request parameter value must match the pattern of
+           method.request.{location}.{name}
+           , where 
+           {location}
+            is querystring, path, or header; and 
+           {name}
+            must be a valid and unique method request parameter name.
+      RequestTemplates:
+        $ref: '#/definitions/TemplateMap'
+        description: |-
+          Represents a map of Velocity templates that are applied on the request payload
+           based on the value of the Content-Type header sent by the client. The content type
+           value is the key in this map, and the template (as a String) is the value.
+      TemplateSelectionExpression:
+        $ref: '#/definitions/SelectionExpression'
+        description: The template selection expression for the integration.
+      TimeoutInMillis:
+        $ref: '#/definitions/IntegerWithLengthBetween50And29000'
+        description: |-
+          Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000
+           milliseconds or 29 seconds.
+  UpdateIntegrationResponseRequest:
+    type: object
+    properties:
+      ContentHandlingStrategy:
+        $ref: '#/definitions/ContentHandlingStrategy'
+        description: |-
+          <p>Specifies how to handle response payload content type conversions. Supported
+           values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the
+           following behaviors:</p><p>
+           CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded
+           string to the corresponding binary blob.</p><p>
+           CONVERT_TO_TEXT: Converts a response payload from a binary blob to a
+           Base64-encoded string.</p><p>If this property is not defined, the response payload will be passed through from
+           the integration response to the route response or method response without
+           modification.</p>
+      IntegrationResponseKey:
+        $ref: '#/definitions/SelectionKey'
+        description: The integration response key.
+      ResponseParameters:
+        $ref: '#/definitions/IntegrationParameters'
+        description: |-
+          A key-value map specifying response parameters that are passed to the method
+           response from the backend. The key is a method response header parameter name and the
+           mapped value is an integration response header value, a static value enclosed within
+           a pair of single quotes, or a JSON expression from the integration response body. The
+           mapping key must match the pattern of
+           method.response.header.{name}
+           , where name is a valid and unique header name. The mapped non-static value
+           must match the pattern of
+           integration.response.header.{name}
+            or
+           integration.response.body.{JSON-expression}
+           , where 
+           {name}
+            is a valid and unique response header name and 
+           {JSON-expression}
+            is a valid JSON expression without the $ prefix.
+      ResponseTemplates:
+        $ref: '#/definitions/TemplateMap'
+        description: |-
+          The collection of response templates for the integration response as a
+           string-to-string map of key-value pairs. Response templates are represented as a
+           key/value map, with a content-type as the key and a template as the value.
+      TemplateSelectionExpression:
+        $ref: '#/definitions/SelectionExpression'
+        description: The template selection expression for the integration response.
+  UpdateModelRequest:
+    type: object
+    properties:
+      ContentType:
+        $ref: '#/definitions/StringWithLengthBetween1And256'
+        description: 'The content-type for the model, for example, "application/json".'
+      Description:
+        $ref: '#/definitions/StringWithLengthBetween0And1024'
+        description: The description of the model.
+      Name:
+        $ref: '#/definitions/StringWithLengthBetween1And128'
+        description: The name of the model.
+      Schema:
+        $ref: '#/definitions/StringWithLengthBetween0And32K'
+        description: |-
+          The schema for the model. For application/json models, this should be JSON schema
+           draft 4 model.
+  UpdateRouteRequest:
+    type: object
+    properties:
+      ApiKeyRequired:
+        $ref: '#/definitions/__boolean'
+        description: Specifies whether an API key is required for the route.
+      AuthorizationScopes:
+        $ref: '#/definitions/AuthorizationScopes'
+        description: |-
+          The authorization scopes supported by this
+           route.
+      AuthorizationType:
+        $ref: '#/definitions/AuthorizationType'
+        description: |-
+          The authorization type for the route. Valid values are NONE for open
+           access, AWS_IAM for using AWS IAM permissions, and CUSTOM
+           for using a Lambda
+           authorizer.
+      AuthorizerId:
+        $ref: '#/definitions/Id'
+        description: |-
+          The identifier of the Authorizer resource to be associated with this
+           route, if the authorizationType is CUSTOM
+           . The authorizer identifier is generated by API Gateway
+           when you created the authorizer.
+      ModelSelectionExpression:
+        $ref: '#/definitions/SelectionExpression'
+        description: The model selection expression for the route.
+      OperationName:
+        $ref: '#/definitions/StringWithLengthBetween1And64'
+        description: The operation name for the route.
+      RequestModels:
+        $ref: '#/definitions/RouteModels'
+        description: The request models for the route.
+      RequestParameters:
+        $ref: '#/definitions/RouteParameters'
+        description: The request parameters for the route.
+      RouteKey:
+        $ref: '#/definitions/SelectionKey'
+        description: The route key for the route.
+      RouteResponseSelectionExpression:
+        $ref: '#/definitions/SelectionExpression'
+        description: The route response selection expression for the route.
+      Target:
+        $ref: '#/definitions/StringWithLengthBetween1And128'
+        description: The target for the route.
+  UpdateRouteResponseRequest:
+    type: object
+    properties:
+      ModelSelectionExpression:
+        $ref: '#/definitions/SelectionExpression'
+        description: The model selection expression for the route response.
+      ResponseModels:
+        $ref: '#/definitions/RouteModels'
+        description: The response models for the route response.
+      ResponseParameters:
+        $ref: '#/definitions/RouteParameters'
+        description: The route response parameters.
+      RouteResponseKey:
+        $ref: '#/definitions/SelectionKey'
+        description: The route response key.
+  UpdateStageRequest:
+    type: object
+    properties:
+      AccessLogSettings:
+        $ref: '#/definitions/AccessLogSettings'
+        description: Settings for logging access in this stage.
+      ClientCertificateId:
+        $ref: '#/definitions/Id'
+        description: The identifier of a client certificate for a Stage.
+      DefaultRouteSettings:
+        $ref: '#/definitions/RouteSettings'
+        description: The default route settings for the stage.
+      DeploymentId:
+        $ref: '#/definitions/Id'
+        description: The deployment identifier for the API stage.
+      Description:
+        $ref: '#/definitions/StringWithLengthBetween0And1024'
+        description: The description for the API stage.
+      RouteSettings:
+        $ref: '#/definitions/RouteSettingsMap'
+        description: Route settings for the stage.
+      StageVariables:
+        $ref: '#/definitions/StageVariablesMap'
+        description: |-
+          A map that defines the stage variables for a Stage. Variable names
+           can have alphanumeric and underscore characters, and the values must match
+           [A-Za-z0-9-._~:/?#&=,]+.

@@ -99,7 +99,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /:
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.BatchCheckLayerAvailability':
     post:
       operationId: BatchCheckLayerAvailability
       description: '<p>Check the availability of multiple image layers in a specified registry and repository.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>'
@@ -126,6 +126,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/BatchCheckLayerAvailabilityRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonEC2ContainerRegistry_V20150921.BatchCheckLayerAvailability
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -136,7 +142,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#BatchDeleteImage':
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.BatchDeleteImage':
     post:
       operationId: BatchDeleteImage
       description: '<p>Deletes a list of specified images within a specified repository. Images are specified with either <code>imageTag</code> or <code>imageDigest</code>.</p> <p>You can remove a tag from an image by specifying the image''s tag in your request. When you remove the last tag from an image, the image is deleted from your repository.</p> <p>You can completely delete an image (and all of its tags) by specifying the image''s digest in your request.</p>'
@@ -163,6 +169,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/BatchDeleteImageRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonEC2ContainerRegistry_V20150921.BatchDeleteImage
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -173,7 +185,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#BatchGetImage':
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.BatchGetImage':
     post:
       operationId: BatchGetImage
       description: Gets detailed information for specified images within a specified repository. Images are specified with either <code>imageTag</code> or <code>imageDigest</code>.
@@ -200,6 +212,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/BatchGetImageRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonEC2ContainerRegistry_V20150921.BatchGetImage
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -210,7 +228,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CompleteLayerUpload':
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.CompleteLayerUpload':
     post:
       operationId: CompleteLayerUpload
       description: '<p>Informs Amazon ECR that the image layer upload has completed for a specified registry, repository name, and upload ID. You can optionally provide a <code>sha256</code> digest of the image layer for data validation purposes.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>'
@@ -257,6 +275,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CompleteLayerUploadRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonEC2ContainerRegistry_V20150921.CompleteLayerUpload
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -267,7 +291,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateRepository':
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.CreateRepository':
     post:
       operationId: CreateRepository
       description: Creates an image repository.
@@ -306,6 +330,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateRepositoryRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonEC2ContainerRegistry_V20150921.CreateRepository
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -316,7 +346,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteLifecyclePolicy':
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.DeleteLifecyclePolicy':
     post:
       operationId: DeleteLifecyclePolicy
       description: Deletes the specified lifecycle policy.
@@ -347,6 +377,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteLifecyclePolicyRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonEC2ContainerRegistry_V20150921.DeleteLifecyclePolicy
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -357,7 +393,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteRepository':
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.DeleteRepository':
     post:
       operationId: DeleteRepository
       description: 'Deletes an existing image repository. If a repository contains images, you must use the <code>force</code> option to delete it.'
@@ -388,6 +424,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteRepositoryRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonEC2ContainerRegistry_V20150921.DeleteRepository
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -398,7 +440,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteRepositoryPolicy':
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.DeleteRepositoryPolicy':
     post:
       operationId: DeleteRepositoryPolicy
       description: Deletes the repository policy from a specified repository.
@@ -429,6 +471,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteRepositoryPolicyRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonEC2ContainerRegistry_V20150921.DeleteRepositoryPolicy
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -439,7 +487,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeImages':
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.DescribeImages':
     post:
       operationId: DescribeImages
       description: '<p>Returns metadata about the images in a repository, including image size, image tags, and creation date.</p> <note> <p>Beginning with Docker version 1.9, the Docker client compresses image layers before pushing them to a V2 Docker registry. The output of the <code>docker images</code> command shows the uncompressed image size, so it may return a larger image size than the image sizes returned by <a>DescribeImages</a>.</p> </note>'
@@ -480,6 +528,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonEC2ContainerRegistry_V20150921.DescribeImages
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -490,7 +544,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeRepositories':
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.DescribeRepositories':
     post:
       operationId: DescribeRepositories
       description: Describes image repositories in a registry.
@@ -527,6 +581,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonEC2ContainerRegistry_V20150921.DescribeRepositories
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -537,7 +597,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetAuthorizationToken':
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.GetAuthorizationToken':
     post:
       operationId: GetAuthorizationToken
       description: '<p>Retrieves a token that is valid for a specified registry for 12 hours. This command allows you to use the <code>docker</code> CLI to push and pull images with Amazon ECR. If you do not specify a registry, the default registry is assumed.</p> <p>The <code>authorizationToken</code> returned for each registry specified is a base64 encoded string that can be decoded and used in a <code>docker login</code> command to authenticate to a registry. The AWS CLI offers an <code>aws ecr get-login</code> command that simplifies the login process.</p>'
@@ -560,6 +620,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetAuthorizationTokenRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonEC2ContainerRegistry_V20150921.GetAuthorizationToken
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -570,7 +636,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetDownloadUrlForLayer':
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.GetDownloadUrlForLayer':
     post:
       operationId: GetDownloadUrlForLayer
       description: '<p>Retrieves the pre-signed Amazon S3 download URL corresponding to an image layer. You can only get URLs for image layers that are referenced in an image.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>'
@@ -605,6 +671,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetDownloadUrlForLayerRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonEC2ContainerRegistry_V20150921.GetDownloadUrlForLayer
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -615,7 +687,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetLifecyclePolicy':
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.GetLifecyclePolicy':
     post:
       operationId: GetLifecyclePolicy
       description: Retrieves the specified lifecycle policy.
@@ -646,6 +718,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetLifecyclePolicyRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonEC2ContainerRegistry_V20150921.GetLifecyclePolicy
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -656,7 +734,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetLifecyclePolicyPreview':
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.GetLifecyclePolicyPreview':
     post:
       operationId: GetLifecyclePolicyPreview
       description: Retrieves the results of the specified lifecycle policy preview request.
@@ -687,6 +765,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetLifecyclePolicyPreviewRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonEC2ContainerRegistry_V20150921.GetLifecyclePolicyPreview
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -697,7 +781,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetRepositoryPolicy':
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.GetRepositoryPolicy':
     post:
       operationId: GetRepositoryPolicy
       description: Retrieves the repository policy for a specified repository.
@@ -728,6 +812,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetRepositoryPolicyRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonEC2ContainerRegistry_V20150921.GetRepositoryPolicy
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -738,7 +828,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#InitiateLayerUpload':
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.InitiateLayerUpload':
     post:
       operationId: InitiateLayerUpload
       description: '<p>Notify Amazon ECR that you intend to upload an image layer.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>'
@@ -765,6 +855,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/InitiateLayerUploadRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonEC2ContainerRegistry_V20150921.InitiateLayerUpload
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -775,7 +871,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListImages':
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.ListImages':
     post:
       operationId: ListImages
       description: '<p>Lists all the image IDs for a given repository.</p> <p>You can filter images based on whether or not they are tagged by setting the <code>tagStatus</code> parameter to <code>TAGGED</code> or <code>UNTAGGED</code>. For example, you can filter your results to return only <code>UNTAGGED</code> images and then pipe that result to a <a>BatchDeleteImage</a> operation to delete them. Or, you can filter your results to return only <code>TAGGED</code> images to list all of the tags in your repository.</p>'
@@ -812,6 +908,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonEC2ContainerRegistry_V20150921.ListImages
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -822,7 +924,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListTagsForResource':
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.ListTagsForResource':
     post:
       operationId: ListTagsForResource
       description: List the tags for an Amazon ECR resource.
@@ -849,6 +951,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListTagsForResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonEC2ContainerRegistry_V20150921.ListTagsForResource
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -859,7 +967,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#PutImage':
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.PutImage':
     post:
       operationId: PutImage
       description: '<p>Creates or updates the image manifest and tags associated with an image.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>'
@@ -898,6 +1006,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutImageRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonEC2ContainerRegistry_V20150921.PutImage
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -908,7 +1022,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#PutLifecyclePolicy':
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.PutLifecyclePolicy':
     post:
       operationId: PutLifecyclePolicy
       description: 'Creates or updates a lifecycle policy. For information about lifecycle policy syntax, see <a href="http://docs.aws.amazon.com/AmazonECR/latest/userguide/LifecyclePolicies.html">Lifecycle Policy Template</a>.'
@@ -935,6 +1049,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutLifecyclePolicyRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonEC2ContainerRegistry_V20150921.PutLifecyclePolicy
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -945,7 +1065,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#SetRepositoryPolicy':
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.SetRepositoryPolicy':
     post:
       operationId: SetRepositoryPolicy
       description: Applies a repository policy on a specified repository to control access permissions.
@@ -972,6 +1092,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/SetRepositoryPolicyRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonEC2ContainerRegistry_V20150921.SetRepositoryPolicy
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -982,7 +1108,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#StartLifecyclePolicyPreview':
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.StartLifecyclePolicyPreview':
     post:
       operationId: StartLifecyclePolicyPreview
       description: Starts a preview of the specified lifecycle policy. This allows you to see the results before creating the lifecycle policy.
@@ -1017,6 +1143,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StartLifecyclePolicyPreviewRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonEC2ContainerRegistry_V20150921.StartLifecyclePolicyPreview
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1027,7 +1159,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#TagResource':
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.TagResource':
     post:
       operationId: TagResource
       description: Adds specified tags to a resource with the specified ARN. Existing tags on a resource are not changed if they are not specified in the request parameters.
@@ -1062,6 +1194,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/TagResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonEC2ContainerRegistry_V20150921.TagResource
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1072,7 +1210,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UntagResource':
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.UntagResource':
     post:
       operationId: UntagResource
       description: Deletes specified tags from a resource.
@@ -1107,6 +1245,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UntagResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonEC2ContainerRegistry_V20150921.UntagResource
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1117,7 +1261,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UploadLayerPart':
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.UploadLayerPart':
     post:
       operationId: UploadLayerPart
       description: '<p>Uploads an image layer part to Amazon ECR.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>'
@@ -1156,6 +1300,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UploadLayerPartRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonEC2ContainerRegistry_V20150921.UploadLayerPart
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1213,10 +1363,6 @@ definitions:
     required:
       - repositoryName
       - imageIds
-    example:
-      imageIds:
-        - imageTag: precise
-      repositoryName: ubuntu
     properties:
       registryId:
         $ref: '#/definitions/RegistryId'
@@ -1256,10 +1402,6 @@ definitions:
     required:
       - repositoryName
       - imageIds
-    example:
-      imageIds:
-        - imageTag: precise
-      repositoryName: ubuntu
     properties:
       registryId:
         $ref: '#/definitions/RegistryId'
@@ -1327,8 +1469,6 @@ definitions:
     type: object
     required:
       - repositoryName
-    example:
-      repositoryName: project-a/nginx-web-app
     properties:
       repositoryName:
         $ref: '#/definitions/RepositoryName'
@@ -1382,9 +1522,6 @@ definitions:
     type: object
     required:
       - repositoryName
-    example:
-      force: true
-      repositoryName: ubuntu
     properties:
       registryId:
         $ref: '#/definitions/RegistryId'
@@ -1416,8 +1553,6 @@ definitions:
     type: object
     required:
       - repositoryName
-    example:
-      repositoryName: ubuntu
     properties:
       registryId:
         $ref: '#/definitions/RegistryId'
@@ -1478,7 +1613,6 @@ definitions:
         description: 'The <code>nextToken</code> value to include in a future <code>DescribeRepositories</code> request. When the results of a <code>DescribeRepositories</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
   DescribeRepositoriesRequest:
     type: object
-    example: {}
     properties:
       registryId:
         $ref: '#/definitions/RegistryId'
@@ -1505,7 +1639,6 @@ definitions:
         description: A list of authorization token data objects that correspond to the <code>registryIds</code> values in the request.
   GetAuthorizationTokenRequest:
     type: object
-    example: {}
     properties:
       registryIds:
         $ref: '#/definitions/GetAuthorizationTokenRegistryIdList'
@@ -1641,8 +1774,6 @@ definitions:
     type: object
     required:
       - repositoryName
-    example:
-      repositoryName: ubuntu
     properties:
       registryId:
         $ref: '#/definitions/RegistryId'
@@ -1687,8 +1818,6 @@ definitions:
     type: object
     required:
       - repositoryName
-    example:
-      repositoryName: ubuntu
     properties:
       registryId:
         $ref: '#/definitions/RegistryId'

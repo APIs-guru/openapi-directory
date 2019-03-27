@@ -136,7 +136,45 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateFileSystemRequest'
+            type: object
+            required:
+              - CreationToken
+            properties:
+              CreationToken:
+                description: A string of up to 64 ASCII characters. Amazon EFS uses this to ensure idempotent creation.
+                type: string
+                minLength: 1
+                maxLength: 64
+              PerformanceMode:
+                description: The performance mode of the file system. We recommend <code>generalPurpose</code> performance mode for most file systems. File systems using the <code>maxIO</code> performance mode can scale to higher levels of aggregate throughput and operations per second with a tradeoff of slightly higher latencies for most file operations. The performance mode can't be changed after the file system has been created.
+                type: string
+                enum:
+                  - generalPurpose
+                  - maxIO
+              Encrypted:
+                description: 'A Boolean value that, if true, creates an encrypted file system. When creating an encrypted file system, you have the option of specifying <a>CreateFileSystemRequest$KmsKeyId</a> for an existing AWS Key Management Service (AWS KMS) customer master key (CMK). If you don''t specify a CMK, then the default CMK for Amazon EFS, <code>/aws/elasticfilesystem</code>, is used to protect the encrypted file system. '
+                type: boolean
+              KmsKeyId:
+                description: '<p>The ID of the AWS KMS CMK to be used to protect the encrypted file system. This parameter is only required if you want to use a nondefault CMK. If this parameter is not specified, the default CMK for Amazon EFS is used. This ID can be in one of the following formats:</p> <ul> <li> <p>Key ID - A unique identifier of the key, for example <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p> </li> <li> <p>ARN - An Amazon Resource Name (ARN) for the key, for example <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p> </li> <li> <p>Key alias - A previously created display name for a key, for example <code>alias/projectKey1</code>.</p> </li> <li> <p>Key alias ARN - An ARN for a key alias, for example <code>arn:aws:kms:us-west-2:444455556666:alias/projectKey1</code>.</p> </li> </ul> <p>If <code>KmsKeyId</code> is specified, the <a>CreateFileSystemRequest$Encrypted</a> parameter must be set to true.</p>'
+                type: string
+                minLength: 1
+                maxLength: 2048
+              ThroughputMode:
+                description: 'The throughput mode for the file system to be created. There are two throughput modes to choose from for your file system: bursting and provisioned. You can decrease your file system''s throughput in Provisioned Throughput mode or change between the throughput modes as long as it’s been more than 24 hours since the last decrease or throughput mode change.'
+                type: string
+                enum:
+                  - bursting
+                  - provisioned
+              ProvisionedThroughputInMibps:
+                description: 'The throughput, measured in MiB/s, that you want to provision for a file system that you''re creating. The limit on throughput is 1024 MiB/s. You can get these limits increased by contacting AWS Support. For more information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits">Amazon EFS Limits That You Can Increase</a> in the <i>Amazon EFS User Guide.</i> '
+                type: number
+                format: double
+                minimum: 0
+              Tags:
+                description: 'A value that specifies to create one or more tags associated with the file system. Each tag is a user-defined key-value pair. Name your file system on creation by including a <code>"Key":"Name","Value":"{value}"</code> key-value pair.'
+                type: array
+                items:
+                  $ref: '#/definitions/Tag'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -168,11 +206,29 @@ paths:
           schema:
             $ref: '#/definitions/FileSystemNotFound'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeFileSystemsRequest'
+        - name: MaxItems
+          in: query
+          required: false
+          description: '(Optional) Specifies the maximum number of file systems to return in the response (integer). Currently, this number is automatically set to 10. '
+          type: integer
+          minimum: 1
+        - name: Marker
+          in: query
+          required: false
+          description: '(Optional) Opaque pagination token returned from a previous <code>DescribeFileSystems</code> operation (String). If present, specifies to continue the list from where the returning call had left off. '
+          type: string
+        - name: CreationToken
+          in: query
+          required: false
+          description: (Optional) Restricts the list to the file system with this creation token (String). You specify a creation token when you create an Amazon EFS file system.
+          type: string
+          minLength: 1
+          maxLength: 64
+        - name: FileSystemId
+          in: query
+          required: false
+          description: (Optional) ID of the file system whose description you want to retrieve (String).
+          type: string
   /2015-02-01/mount-targets:
     post:
       operationId: CreateMountTarget
@@ -235,7 +291,26 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateMountTargetRequest'
+            type: object
+            required:
+              - FileSystemId
+              - SubnetId
+            properties:
+              FileSystemId:
+                description: The ID of the file system for which to create the mount target.
+                type: string
+              SubnetId:
+                description: The ID of the subnet to add the mount target in.
+                type: string
+              IpAddress:
+                description: Valid IPv4 address within the address range of the specified subnet.
+                type: string
+              SecurityGroups:
+                description: 'Up to five VPC security group IDs, of the form <code>sg-xxxxxxxx</code>. These must be for the same VPC as subnet specified.'
+                type: array
+                items:
+                  $ref: '#/definitions/SecurityGroup'
+                maxItems: 5
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -271,11 +346,27 @@ paths:
           schema:
             $ref: '#/definitions/MountTargetNotFound'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeMountTargetsRequest'
+        - name: MaxItems
+          in: query
+          required: false
+          description: '(Optional) Maximum number of mount targets to return in the response. Currently, this number is automatically set to 10.'
+          type: integer
+          minimum: 1
+        - name: Marker
+          in: query
+          required: false
+          description: '(Optional) Opaque pagination token returned from a previous <code>DescribeMountTargets</code> operation (String). If present, it specifies to continue the list from where the previous returning call left off.'
+          type: string
+        - name: FileSystemId
+          in: query
+          required: false
+          description: (Optional) ID of the file system whose mount targets you want to list (String). It must be included in your request if <code>MountTargetId</code> is not included.
+          type: string
+        - name: MountTargetId
+          in: query
+          required: false
+          description: (Optional) ID of the mount target that you want to have described (String). It must be included in your request if <code>FileSystemId</code> is not included.
+          type: string
   '/2015-02-01/create-tags/{FileSystemId}':
     post:
       operationId: CreateTags
@@ -296,15 +387,24 @@ paths:
           schema:
             $ref: '#/definitions/FileSystemNotFound'
       parameters:
+        - name: FileSystemId
+          in: path
+          required: true
+          description: 'The ID of the file system whose tags you want to modify (String). This operation modifies the tags only, not the file system.'
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateTagsRequest'
-        - name: FileSystemId
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - Tags
+            properties:
+              Tags:
+                description: 'An array of <code>Tag</code> objects to add. Each <code>Tag</code> object is a key-value pair. '
+                type: array
+                items:
+                  $ref: '#/definitions/Tag'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -339,15 +439,11 @@ paths:
           schema:
             $ref: '#/definitions/FileSystemInUse'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteFileSystemRequest'
         - name: FileSystemId
-          type: string
           in: path
           required: true
+          description: The ID of the file system you want to delete.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -395,15 +491,28 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequests'
       parameters:
+        - name: FileSystemId
+          in: path
+          required: true
+          description: The ID of the file system that you want to update.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateFileSystemRequest'
-        - name: FileSystemId
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              ThroughputMode:
+                description: '(Optional) The throughput mode that you want your file system to use. If you''re not updating your throughput mode, you don''t need to provide this value in your request.'
+                type: string
+                enum:
+                  - bursting
+                  - provisioned
+              ProvisionedThroughputInMibps:
+                description: '(Optional) The amount of throughput, in MiB/s, that you want to provision for your file system. If you''re not updating the amount of provisioned throughput for your file system, you don''t need to provide this value in your request.'
+                type: number
+                format: double
+                minimum: 0
   '/2015-02-01/mount-targets/{MountTargetId}':
     delete:
       operationId: DeleteMountTarget
@@ -428,15 +537,11 @@ paths:
           schema:
             $ref: '#/definitions/MountTargetNotFound'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteMountTargetRequest'
         - name: MountTargetId
-          type: string
           in: path
           required: true
+          description: The ID of the mount target to delete (String).
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -467,15 +572,24 @@ paths:
           schema:
             $ref: '#/definitions/FileSystemNotFound'
       parameters:
+        - name: FileSystemId
+          in: path
+          required: true
+          description: The ID of the file system whose tags you want to delete (String).
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/DeleteTagsRequest'
-        - name: FileSystemId
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - TagKeys
+            properties:
+              TagKeys:
+                description: A list of tag keys to delete.
+                type: array
+                items:
+                  $ref: '#/definitions/TagKey'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -508,15 +622,11 @@ paths:
           schema:
             $ref: '#/definitions/FileSystemNotFound'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeLifecycleConfigurationRequest'
         - name: FileSystemId
-          type: string
           in: path
           required: true
+          description: The ID of the file system whose <code>LifecycleConfiguration</code> object you want to retrieve (String).
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -552,15 +662,24 @@ paths:
           schema:
             $ref: '#/definitions/IncorrectFileSystemLifeCycleState'
       parameters:
+        - name: FileSystemId
+          in: path
+          required: true
+          description: The ID of the file system for which you are creating the <code>LifecycleConfiguration</code> object (String).
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/PutLifecycleConfigurationRequest'
-        - name: FileSystemId
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - LifecyclePolicies
+            properties:
+              LifecyclePolicies:
+                description: An array of <code>LifecyclePolicy</code> objects that define the file system's <code>LifecycleConfiguration</code> object. A <code>LifecycleConfiguration</code> object tells lifecycle management when to transition files from the Standard storage class to the Infrequent Access storage class.
+                type: array
+                items:
+                  $ref: '#/definitions/LifecyclePolicy'
   '/2015-02-01/mount-targets/{MountTargetId}/security-groups':
     get:
       operationId: DescribeMountTargetSecurityGroups
@@ -587,15 +706,11 @@ paths:
           schema:
             $ref: '#/definitions/IncorrectMountTargetState'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeMountTargetSecurityGroupsRequest'
         - name: MountTargetId
-          type: string
           in: path
           required: true
+          description: The ID of the mount target whose security groups you want to retrieve.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -637,15 +752,23 @@ paths:
           schema:
             $ref: '#/definitions/SecurityGroupNotFound'
       parameters:
+        - name: MountTargetId
+          in: path
+          required: true
+          description: The ID of the mount target whose security groups you want to modify.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/ModifyMountTargetSecurityGroupsRequest'
-        - name: MountTargetId
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              SecurityGroups:
+                description: An array of up to five VPC security group IDs.
+                type: array
+                items:
+                  $ref: '#/definitions/SecurityGroup'
+                maxItems: 5
   '/2015-02-01/tags/{FileSystemId}/':
     get:
       operationId: DescribeTags
@@ -668,15 +791,22 @@ paths:
           schema:
             $ref: '#/definitions/FileSystemNotFound'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeTagsRequest'
-        - name: FileSystemId
+        - name: MaxItems
+          in: query
+          required: false
+          description: '(Optional) The maximum number of file system tags to return in the response. Currently, this number is automatically set to 10.'
+          type: integer
+          minimum: 1
+        - name: Marker
+          in: query
+          required: false
+          description: '(Optional) An opaque pagination token returned from a previous <code>DescribeTags</code> operation (String). If present, it specifies to continue the list from where the previous call left off.'
           type: string
+        - name: FileSystemId
           in: path
           required: true
+          description: The ID of the file system whose tag set you want to retrieve.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -757,38 +887,19 @@ definitions:
         $ref: '#/definitions/Tags'
         description: 'The tags associated with the file system, presented as an array of <code>Tag</code> objects.'
     description: A description of the file system.
-  CreateFileSystemRequest:
+  Tag:
     type: object
     required:
-      - CreationToken
-    example:
-      CreationToken: tokenstring
-      PerformanceMode: generalPurpose
-      Tags:
-        - Key: Name
-          Value: MyFileSystem
+      - Key
+      - Value
     properties:
-      CreationToken:
-        $ref: '#/definitions/CreationToken'
-        description: A string of up to 64 ASCII characters. Amazon EFS uses this to ensure idempotent creation.
-      PerformanceMode:
-        $ref: '#/definitions/PerformanceMode'
-        description: The performance mode of the file system. We recommend <code>generalPurpose</code> performance mode for most file systems. File systems using the <code>maxIO</code> performance mode can scale to higher levels of aggregate throughput and operations per second with a tradeoff of slightly higher latencies for most file operations. The performance mode can't be changed after the file system has been created.
-      Encrypted:
-        $ref: '#/definitions/Encrypted'
-        description: 'A Boolean value that, if true, creates an encrypted file system. When creating an encrypted file system, you have the option of specifying <a>CreateFileSystemRequest$KmsKeyId</a> for an existing AWS Key Management Service (AWS KMS) customer master key (CMK). If you don''t specify a CMK, then the default CMK for Amazon EFS, <code>/aws/elasticfilesystem</code>, is used to protect the encrypted file system. '
-      KmsKeyId:
-        $ref: '#/definitions/KmsKeyId'
-        description: '<p>The ID of the AWS KMS CMK to be used to protect the encrypted file system. This parameter is only required if you want to use a nondefault CMK. If this parameter is not specified, the default CMK for Amazon EFS is used. This ID can be in one of the following formats:</p> <ul> <li> <p>Key ID - A unique identifier of the key, for example <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p> </li> <li> <p>ARN - An Amazon Resource Name (ARN) for the key, for example <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p> </li> <li> <p>Key alias - A previously created display name for a key, for example <code>alias/projectKey1</code>.</p> </li> <li> <p>Key alias ARN - An ARN for a key alias, for example <code>arn:aws:kms:us-west-2:444455556666:alias/projectKey1</code>.</p> </li> </ul> <p>If <code>KmsKeyId</code> is specified, the <a>CreateFileSystemRequest$Encrypted</a> parameter must be set to true.</p>'
-      ThroughputMode:
-        $ref: '#/definitions/ThroughputMode'
-        description: 'The throughput mode for the file system to be created. There are two throughput modes to choose from for your file system: bursting and provisioned. You can decrease your file system''s throughput in Provisioned Throughput mode or change between the throughput modes as long as it’s been more than 24 hours since the last decrease or throughput mode change.'
-      ProvisionedThroughputInMibps:
-        $ref: '#/definitions/ProvisionedThroughputInMibps'
-        description: 'The throughput, measured in MiB/s, that you want to provision for a file system that you''re creating. The limit on throughput is 1024 MiB/s. You can get these limits increased by contacting AWS Support. For more information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits">Amazon EFS Limits That You Can Increase</a> in the <i>Amazon EFS User Guide.</i> '
-      Tags:
-        $ref: '#/definitions/Tags'
-        description: 'A value that specifies to create one or more tags associated with the file system. Each tag is a user-defined key-value pair. Name your file system on creation by including a <code>"Key":"Name","Value":"{value}"</code> key-value pair.'
+      Key:
+        $ref: '#/definitions/TagKey'
+        description: 'The tag key (String). The key can''t start with <code>aws:</code>.'
+      Value:
+        $ref: '#/definitions/TagValue'
+        description: The value of the tag key.
+    description: 'A tag is a key-value pair. Allowed characters are letters, white space, and numbers that can be represented in UTF-8, and the following characters:<code> + - = . _ : /</code> '
   BadRequest: {}
   InternalServerError: {}
   FileSystemAlreadyExists: {}
@@ -833,28 +944,8 @@ definitions:
         $ref: '#/definitions/NetworkInterfaceId'
         description: The ID of the network interface that Amazon EFS created when it created the mount target.
     description: Provides a description of a mount target.
-  CreateMountTargetRequest:
-    type: object
-    required:
-      - FileSystemId
-      - SubnetId
-    example:
-      FileSystemId: fs-01234567
-      SubnetId: subnet-1234abcd
-    properties:
-      FileSystemId:
-        $ref: '#/definitions/FileSystemId'
-        description: The ID of the file system for which to create the mount target.
-      SubnetId:
-        $ref: '#/definitions/SubnetId'
-        description: The ID of the subnet to add the mount target in.
-      IpAddress:
-        $ref: '#/definitions/IpAddress'
-        description: Valid IPv4 address within the address range of the specified subnet.
-      SecurityGroups:
-        $ref: '#/definitions/SecurityGroups'
-        description: 'Up to five VPC security group IDs, of the form <code>sg-xxxxxxxx</code>. These must be for the same VPC as subnet specified.'
-    description: <p/>
+  SecurityGroup:
+    type: string
   FileSystemNotFound: {}
   IncorrectFileSystemLifeCycleState: {}
   MountTargetConflict: {}
@@ -865,48 +956,13 @@ definitions:
   SecurityGroupLimitExceeded: {}
   SecurityGroupNotFound: {}
   UnsupportedAvailabilityZone: {}
-  CreateTagsRequest:
-    type: object
-    required:
-      - Tags
-    example:
-      FileSystemId: fs-01234567
-      Tags:
-        - Key: Name
-          Value: MyFileSystem
-    properties:
-      Tags:
-        $ref: '#/definitions/Tags'
-        description: 'An array of <code>Tag</code> objects to add. Each <code>Tag</code> object is a key-value pair. '
-    description: <p/>
-  DeleteFileSystemRequest:
-    type: object
-    example:
-      FileSystemId: fs-01234567
-    properties: {}
-    description: <p/>
   FileSystemInUse: {}
-  DeleteMountTargetRequest:
-    type: object
-    example:
-      MountTargetId: fsmt-12340abc
-    properties: {}
-    description: <p/>
   DependencyTimeout: {}
   MountTargetNotFound: {}
-  DeleteTagsRequest:
-    type: object
-    required:
-      - TagKeys
-    example:
-      FileSystemId: fs-01234567
-      TagKeys:
-        - Name
-    properties:
-      TagKeys:
-        $ref: '#/definitions/TagKeys'
-        description: A list of tag keys to delete.
-    description: <p/>
+  TagKey:
+    type: string
+    minLength: 1
+    maxLength: 128
   DescribeFileSystemsResponse:
     type: object
     example:
@@ -934,11 +990,6 @@ definitions:
       NextMarker:
         $ref: '#/definitions/Marker'
         description: Present if there are more file systems than returned in the response (String). You can use the <code>NextMarker</code> in the subsequent request to fetch the descriptions.
-  DescribeFileSystemsRequest:
-    type: object
-    example: {}
-    properties: {}
-    description: <p/>
   LifecycleConfigurationDescription:
     type: object
     example:
@@ -948,11 +999,6 @@ definitions:
       LifecyclePolicies:
         $ref: '#/definitions/LifecyclePolicies'
         description: 'An array of lifecycle management policies. Currently, EFS supports a maximum of one policy per file system.'
-  DescribeLifecycleConfigurationRequest:
-    type: object
-    example:
-      FileSystemId: fs-01234567
-    properties: {}
   DescribeMountTargetSecurityGroupsResponse:
     type: object
     required:
@@ -964,12 +1010,6 @@ definitions:
       SecurityGroups:
         $ref: '#/definitions/SecurityGroups'
         description: An array of security groups.
-  DescribeMountTargetSecurityGroupsRequest:
-    type: object
-    example:
-      MountTargetId: fsmt-12340abc
-    properties: {}
-    description: <p/>
   IncorrectMountTargetState: {}
   DescribeMountTargetsResponse:
     type: object
@@ -993,12 +1033,6 @@ definitions:
         $ref: '#/definitions/Marker'
         description: 'If a value is present, there are more mount targets to return. In a subsequent request, you can provide <code>Marker</code> in your request with this value to retrieve the next set of mount targets.'
     description: <p/>
-  DescribeMountTargetsRequest:
-    type: object
-    example:
-      FileSystemId: fs-01234567
-    properties: {}
-    description: <p/>
   DescribeTagsResponse:
     type: object
     required:
@@ -1018,44 +1052,13 @@ definitions:
         $ref: '#/definitions/Marker'
         description: 'If a value is present, there are more tags to return. In a subsequent request, you can provide the value of <code>NextMarker</code> as the value of the <code>Marker</code> parameter in your next request to retrieve the next set of tags.'
     description: <p/>
-  DescribeTagsRequest:
-    type: object
-    example:
-      FileSystemId: fs-01234567
-    properties: {}
-    description: <p/>
-  ModifyMountTargetSecurityGroupsRequest:
-    type: object
-    example:
-      MountTargetId: fsmt-12340abc
-      SecurityGroups:
-        - sg-abcd1234
-    properties:
-      SecurityGroups:
-        $ref: '#/definitions/SecurityGroups'
-        description: An array of up to five VPC security group IDs.
-    description: <p/>
-  PutLifecycleConfigurationRequest:
-    type: object
-    required:
-      - LifecyclePolicies
-    example:
-      FileSystemId: fs-01234567
-      LifecyclePolicies:
-        - TransitionToIA: AFTER_30_DAYS
-    properties:
-      LifecyclePolicies:
-        $ref: '#/definitions/LifecyclePolicies'
-        description: An array of <code>LifecyclePolicy</code> objects that define the file system's <code>LifecycleConfiguration</code> object. A <code>LifecycleConfiguration</code> object tells lifecycle management when to transition files from the Standard storage class to the Infrequent Access storage class.
-  UpdateFileSystemRequest:
+  LifecyclePolicy:
     type: object
     properties:
-      ThroughputMode:
-        $ref: '#/definitions/ThroughputMode'
-        description: '(Optional) The throughput mode that you want your file system to use. If you''re not updating your throughput mode, you don''t need to provide this value in your request.'
-      ProvisionedThroughputInMibps:
-        $ref: '#/definitions/ProvisionedThroughputInMibps'
-        description: '(Optional) The amount of throughput, in MiB/s, that you want to provision for your file system. If you''re not updating the amount of provisioned throughput for your file system, you don''t need to provide this value in your request.'
+      TransitionToIA:
+        $ref: '#/definitions/TransitionToIARules'
+        description: '<p>A value that indicates how long it takes to transition files to the IA storage class. Currently, the only valid value is <code>AFTER_30_DAYS</code>.</p> <p> <code>AFTER_30_DAYS</code> indicates files that have not been read from or written to for 30 days are transitioned from the Standard storage class to the IA storage class. Metadata operations such as listing the contents of a directory don''t count as a file access event.</p>'
+    description: Describes a policy used by EFS lifecycle management to transition files to the Infrequent Access (IA) storage class.
   TooManyRequests: {}
   AwsAccountId:
     type: string
@@ -1087,6 +1090,32 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Tag'
+  CreateFileSystemRequest:
+    type: object
+    required:
+      - CreationToken
+    properties:
+      CreationToken:
+        $ref: '#/definitions/CreationToken'
+        description: A string of up to 64 ASCII characters. Amazon EFS uses this to ensure idempotent creation.
+      PerformanceMode:
+        $ref: '#/definitions/PerformanceMode'
+        description: The performance mode of the file system. We recommend <code>generalPurpose</code> performance mode for most file systems. File systems using the <code>maxIO</code> performance mode can scale to higher levels of aggregate throughput and operations per second with a tradeoff of slightly higher latencies for most file operations. The performance mode can't be changed after the file system has been created.
+      Encrypted:
+        $ref: '#/definitions/Encrypted'
+        description: 'A Boolean value that, if true, creates an encrypted file system. When creating an encrypted file system, you have the option of specifying <a>CreateFileSystemRequest$KmsKeyId</a> for an existing AWS Key Management Service (AWS KMS) customer master key (CMK). If you don''t specify a CMK, then the default CMK for Amazon EFS, <code>/aws/elasticfilesystem</code>, is used to protect the encrypted file system. '
+      KmsKeyId:
+        $ref: '#/definitions/KmsKeyId'
+        description: '<p>The ID of the AWS KMS CMK to be used to protect the encrypted file system. This parameter is only required if you want to use a nondefault CMK. If this parameter is not specified, the default CMK for Amazon EFS is used. This ID can be in one of the following formats:</p> <ul> <li> <p>Key ID - A unique identifier of the key, for example <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p> </li> <li> <p>ARN - An Amazon Resource Name (ARN) for the key, for example <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p> </li> <li> <p>Key alias - A previously created display name for a key, for example <code>alias/projectKey1</code>.</p> </li> <li> <p>Key alias ARN - An ARN for a key alias, for example <code>arn:aws:kms:us-west-2:444455556666:alias/projectKey1</code>.</p> </li> </ul> <p>If <code>KmsKeyId</code> is specified, the <a>CreateFileSystemRequest$Encrypted</a> parameter must be set to true.</p>'
+      ThroughputMode:
+        $ref: '#/definitions/ThroughputMode'
+        description: 'The throughput mode for the file system to be created. There are two throughput modes to choose from for your file system: bursting and provisioned. You can decrease your file system''s throughput in Provisioned Throughput mode or change between the throughput modes as long as it’s been more than 24 hours since the last decrease or throughput mode change.'
+      ProvisionedThroughputInMibps:
+        $ref: '#/definitions/ProvisionedThroughputInMibps'
+        description: 'The throughput, measured in MiB/s, that you want to provision for a file system that you''re creating. The limit on throughput is 1024 MiB/s. You can get these limits increased by contacting AWS Support. For more information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits">Amazon EFS Limits That You Can Increase</a> in the <i>Amazon EFS User Guide.</i> '
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: 'A value that specifies to create one or more tags associated with the file system. Each tag is a user-defined key-value pair. Name your file system on creation by including a <code>"Key":"Name","Value":"{value}"</code> key-value pair.'
   FileSystemId:
     type: string
   SubnetId:
@@ -1098,25 +1127,89 @@ definitions:
     items:
       $ref: '#/definitions/SecurityGroup'
     maxItems: 5
+  CreateMountTargetRequest:
+    type: object
+    required:
+      - FileSystemId
+      - SubnetId
+    properties:
+      FileSystemId:
+        $ref: '#/definitions/FileSystemId'
+        description: The ID of the file system for which to create the mount target.
+      SubnetId:
+        $ref: '#/definitions/SubnetId'
+        description: The ID of the subnet to add the mount target in.
+      IpAddress:
+        $ref: '#/definitions/IpAddress'
+        description: Valid IPv4 address within the address range of the specified subnet.
+      SecurityGroups:
+        $ref: '#/definitions/SecurityGroups'
+        description: 'Up to five VPC security group IDs, of the form <code>sg-xxxxxxxx</code>. These must be for the same VPC as subnet specified.'
+    description: <p/>
+  CreateTagsRequest:
+    type: object
+    required:
+      - Tags
+    properties:
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: 'An array of <code>Tag</code> objects to add. Each <code>Tag</code> object is a key-value pair. '
+    description: <p/>
+  DeleteFileSystemRequest:
+    type: object
+    properties: {}
+    description: <p/>
   MountTargetId:
     type: string
+  DeleteMountTargetRequest:
+    type: object
+    properties: {}
+    description: <p/>
   TagKeys:
     type: array
     items:
       $ref: '#/definitions/TagKey'
+  DeleteTagsRequest:
+    type: object
+    required:
+      - TagKeys
+    properties:
+      TagKeys:
+        $ref: '#/definitions/TagKeys'
+        description: A list of tag keys to delete.
+    description: <p/>
   MaxItems:
     type: integer
     minimum: 1
   Marker:
     type: string
+  DescribeFileSystemsRequest:
+    type: object
+    properties: {}
+    description: <p/>
   FileSystemDescriptions:
     type: array
     items:
       $ref: '#/definitions/FileSystemDescription'
+  DescribeLifecycleConfigurationRequest:
+    type: object
+    properties: {}
+  DescribeMountTargetSecurityGroupsRequest:
+    type: object
+    properties: {}
+    description: <p/>
+  DescribeMountTargetsRequest:
+    type: object
+    properties: {}
+    description: <p/>
   MountTargetDescriptions:
     type: array
     items:
       $ref: '#/definitions/MountTargetDescription'
+  DescribeTagsRequest:
+    type: object
+    properties: {}
+    description: <p/>
   Timestamp:
     type: string
     format: date-time
@@ -1162,35 +1255,33 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/LifecyclePolicy'
-  LifecyclePolicy:
-    type: object
-    properties:
-      TransitionToIA:
-        $ref: '#/definitions/TransitionToIARules'
-        description: '<p>A value that indicates how long it takes to transition files to the IA storage class. Currently, the only valid value is <code>AFTER_30_DAYS</code>.</p> <p> <code>AFTER_30_DAYS</code> indicates files that have not been read from or written to for 30 days are transitioned from the Standard storage class to the IA storage class. Metadata operations such as listing the contents of a directory don''t count as a file access event.</p>'
-    description: Describes a policy used by EFS lifecycle management to transition files to the Infrequent Access (IA) storage class.
   TransitionToIARules:
     type: string
     enum:
       - AFTER_30_DAYS
+  ModifyMountTargetSecurityGroupsRequest:
+    type: object
+    properties:
+      SecurityGroups:
+        $ref: '#/definitions/SecurityGroups'
+        description: An array of up to five VPC security group IDs.
+    description: <p/>
   NetworkInterfaceId:
     type: string
-  SecurityGroup:
-    type: string
-  TagKey:
-    type: string
-    minLength: 1
-    maxLength: 128
-  Tag:
+  PutLifecycleConfigurationRequest:
     type: object
     required:
-      - Key
-      - Value
+      - LifecyclePolicies
     properties:
-      Key:
-        $ref: '#/definitions/TagKey'
-        description: 'The tag key (String). The key can''t start with <code>aws:</code>.'
-      Value:
-        $ref: '#/definitions/TagValue'
-        description: The value of the tag key.
-    description: 'A tag is a key-value pair. Allowed characters are letters, white space, and numbers that can be represented in UTF-8, and the following characters:<code> + - = . _ : /</code> '
+      LifecyclePolicies:
+        $ref: '#/definitions/LifecyclePolicies'
+        description: An array of <code>LifecyclePolicy</code> objects that define the file system's <code>LifecycleConfiguration</code> object. A <code>LifecycleConfiguration</code> object tells lifecycle management when to transition files from the Standard storage class to the Infrequent Access storage class.
+  UpdateFileSystemRequest:
+    type: object
+    properties:
+      ThroughputMode:
+        $ref: '#/definitions/ThroughputMode'
+        description: '(Optional) The throughput mode that you want your file system to use. If you''re not updating your throughput mode, you don''t need to provide this value in your request.'
+      ProvisionedThroughputInMibps:
+        $ref: '#/definitions/ProvisionedThroughputInMibps'
+        description: '(Optional) The amount of throughput, in MiB/s, that you want to provision for your file system. If you''re not updating the amount of provisioned throughput for your file system, you don''t need to provide this value in your request.'

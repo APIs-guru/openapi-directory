@@ -35,7 +35,6 @@ externalDocs:
   url: 'https://docs.aws.amazon.com/mediaconvert/'
 host: mediaconvert.amazonaws.com
 basePath: /
-x-hasEquivalentPaths: true
 schemes:
   - https
   - http
@@ -137,7 +136,13 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/AssociateCertificateRequest'
+            type: object
+            required:
+              - arn
+            properties:
+              arn:
+                description: The ARN of the ACM certificate that you want to associate with your MediaConvert resource.
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -182,15 +187,11 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/CancelJobRequest'
         - name: id
-          type: string
           in: path
           required: true
+          description: The Job ID of the job to be cancelled.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -234,15 +235,11 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetJobRequest'
         - name: id
-          type: string
           in: path
           required: true
+          description: the job ID of the job.
+          type: string
   /2017-08-29/jobs:
     post:
       operationId: CreateJob
@@ -281,7 +278,93 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateJobRequest'
+            type: object
+            required:
+              - accelerationSettings
+              - role
+              - settings
+            properties:
+              accelerationSettings:
+                description: Accelerated transcoding is currently in private preview. Contact AWS for more information.
+                type: object
+                properties:
+                  Mode:
+                    $ref: '#/definitions/AccelerationMode'
+                    description: Acceleration configuration for the job.
+              billingTagsSource:
+                description: 'Optional. Choose a tag type that AWS Billing and Cost Management will use to sort your AWS Elemental MediaConvert costs on any billing report that you set up. Any transcoding outputs that don''t have an associated tag will appear in your billing report unsorted. If you don''t choose a valid value for this field, your job outputs will appear on the billing report unsorted.'
+                type: string
+                enum:
+                  - QUEUE
+                  - PRESET
+                  - JOB_TEMPLATE
+              clientRequestToken:
+                description: Idempotency token for CreateJob operation.
+                type: string
+              jobTemplate:
+                description: 'When you create a job, you can either specify a job template or specify the transcoding settings individually'
+                type: string
+              queue:
+                description: 'Optional. When you create a job, you can specify a queue to send it to. If you don''t specify, the job will go to the default queue. For more about queues, see the User Guide topic at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html.'
+                type: string
+              role:
+                description: 'Required. The IAM role you use for creating this job. For details about permissions, see the User Guide topic at the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html.'
+                type: string
+              settings:
+                description: JobSettings contains all the transcode settings for a job.
+                type: object
+                properties:
+                  AdAvailOffset:
+                    $ref: '#/definitions/__integerMinNegative1000Max1000'
+                    description: 'When specified, this offset (in milliseconds) is added to the input Ad Avail PTS time.'
+                  AvailBlanking:
+                    $ref: '#/definitions/AvailBlanking'
+                    description: 'Settings for ad avail blanking.  Video can be blanked or overlaid with an image, and audio muted during SCTE-35 triggered ad avails.'
+                  Esam:
+                    $ref: '#/definitions/EsamSettings'
+                    description: Settings for Event Signaling And Messaging (ESAM).
+                  Inputs:
+                    $ref: '#/definitions/__listOfInput'
+                    description: Use Inputs (inputs) to define source file used in the transcode job. There can be multiple inputs add in a job. These inputs will be concantenated together to create the output.
+                  MotionImageInserter:
+                    $ref: '#/definitions/MotionImageInserter'
+                    description: Overlay motion graphics on top of your video. The motion graphics that you specify here appear on all outputs in all output groups.
+                  NielsenConfiguration:
+                    $ref: '#/definitions/NielsenConfiguration'
+                    description: Settings for Nielsen Configuration
+                  OutputGroups:
+                    $ref: '#/definitions/__listOfOutputGroup'
+                    description: '(OutputGroups) contains one group of settings for each set of outputs that share a common package type. All unpackaged files (MPEG-4, MPEG-2 TS, Quicktime, MXF, and no container) are grouped in a single output group as well. Required in (OutputGroups) is a group of settings that apply to the whole group. This required object depends on the value you set for (Type) under (OutputGroups)>(OutputGroupSettings). Type, settings object pairs are as follows. * FILE_GROUP_SETTINGS, FileGroupSettings * HLS_GROUP_SETTINGS, HlsGroupSettings * DASH_ISO_GROUP_SETTINGS, DashIsoGroupSettings * MS_SMOOTH_GROUP_SETTINGS, MsSmoothGroupSettings * CMAF_GROUP_SETTINGS, CmafGroupSettings'
+                  TimecodeConfig:
+                    $ref: '#/definitions/TimecodeConfig'
+                    description: Contains settings used to acquire and adjust timecode information from inputs.
+                  TimedMetadataInsertion:
+                    $ref: '#/definitions/TimedMetadataInsertion'
+                    description: 'Enable Timed metadata insertion (TimedMetadataInsertion) to include ID3 tags in your job. To include timed metadata, you must enable it here, enable it in each output container, and specify tags and timecodes in ID3 insertion (Id3Insertion) objects.'
+              statusUpdateInterval:
+                description: 'Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch Events. Set the interval, in seconds, between status updates. MediaConvert sends an update at this interval from the time the service begins processing your job to the time it completes the transcode or encounters an error.'
+                type: string
+                enum:
+                  - SECONDS_10
+                  - SECONDS_12
+                  - SECONDS_15
+                  - SECONDS_20
+                  - SECONDS_30
+                  - SECONDS_60
+                  - SECONDS_120
+                  - SECONDS_180
+                  - SECONDS_240
+                  - SECONDS_300
+                  - SECONDS_360
+                  - SECONDS_420
+                  - SECONDS_480
+                  - SECONDS_540
+                  - SECONDS_600
+              userMetadata:
+                description: User-defined metadata that you want to associate with an MediaConvert job. You specify metadata in key/value pairs.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/__string'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -325,11 +408,42 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListJobsRequest'
+        - name: maxResults
+          in: query
+          required: false
+          description: 'Optional. Number of jobs, up to twenty, that will be returned at one time.'
+          type: integer
+          minimum: 1
+          maximum: 20
+        - name: nextToken
+          in: query
+          required: false
+          description: 'Use this string, provided with the response to a previous request, to request the next batch of jobs.'
+          type: string
+        - name: order
+          in: query
+          required: false
+          description: 'When you request lists of resources, you can optionally specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.'
+          type: string
+          enum:
+            - ASCENDING
+            - DESCENDING
+        - name: queue
+          in: query
+          required: false
+          description: Provide a queue name to get back only jobs from that queue.
+          type: string
+        - name: status
+          in: query
+          required: false
+          description: 'A job''s status can be SUBMITTED, PROGRESSING, COMPLETE, CANCELED, or ERROR.'
+          type: string
+          enum:
+            - SUBMITTED
+            - PROGRESSING
+            - COMPLETE
+            - CANCELED
+            - ERROR
         - name: MaxResults
           type: string
           in: query
@@ -378,7 +492,86 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateJobTemplateRequest'
+            type: object
+            required:
+              - accelerationSettings
+              - name
+              - settings
+            properties:
+              accelerationSettings:
+                description: Accelerated transcoding is currently in private preview. Contact AWS for more information.
+                type: object
+                properties:
+                  Mode:
+                    $ref: '#/definitions/AccelerationMode'
+                    description: Acceleration configuration for the job.
+              category:
+                description: Optional. A category for the job template you are creating
+                type: string
+              description:
+                description: Optional. A description of the job template you are creating.
+                type: string
+              name:
+                description: The name of the job template you are creating.
+                type: string
+              queue:
+                description: 'Optional. The queue that jobs created from this template are assigned to. If you don''t specify this, jobs will go to the default queue.'
+                type: string
+              settings:
+                description: JobTemplateSettings contains all the transcode settings saved in the template that will be applied to jobs created from it.
+                type: object
+                properties:
+                  AdAvailOffset:
+                    $ref: '#/definitions/__integerMinNegative1000Max1000'
+                    description: 'When specified, this offset (in milliseconds) is added to the input Ad Avail PTS time.'
+                  AvailBlanking:
+                    $ref: '#/definitions/AvailBlanking'
+                    description: 'Settings for ad avail blanking.  Video can be blanked or overlaid with an image, and audio muted during SCTE-35 triggered ad avails.'
+                  Esam:
+                    $ref: '#/definitions/EsamSettings'
+                    description: Settings for Event Signaling And Messaging (ESAM).
+                  Inputs:
+                    $ref: '#/definitions/__listOfInputTemplate'
+                    description: 'Use Inputs (inputs) to define the source file used in the transcode job. There can only be one input in a job template.  Using the API, you can include multiple inputs when referencing a job template.'
+                  MotionImageInserter:
+                    $ref: '#/definitions/MotionImageInserter'
+                    description: Overlay motion graphics on top of your video. The motion graphics that you specify here appear on all outputs in all output groups.
+                  NielsenConfiguration:
+                    $ref: '#/definitions/NielsenConfiguration'
+                    description: Settings for Nielsen Configuration
+                  OutputGroups:
+                    $ref: '#/definitions/__listOfOutputGroup'
+                    description: '(OutputGroups) contains one group of settings for each set of outputs that share a common package type. All unpackaged files (MPEG-4, MPEG-2 TS, Quicktime, MXF, and no container) are grouped in a single output group as well. Required in (OutputGroups) is a group of settings that apply to the whole group. This required object depends on the value you set for (Type) under (OutputGroups)>(OutputGroupSettings). Type, settings object pairs are as follows. * FILE_GROUP_SETTINGS, FileGroupSettings * HLS_GROUP_SETTINGS, HlsGroupSettings * DASH_ISO_GROUP_SETTINGS, DashIsoGroupSettings * MS_SMOOTH_GROUP_SETTINGS, MsSmoothGroupSettings * CMAF_GROUP_SETTINGS, CmafGroupSettings'
+                  TimecodeConfig:
+                    $ref: '#/definitions/TimecodeConfig'
+                    description: Contains settings used to acquire and adjust timecode information from inputs.
+                  TimedMetadataInsertion:
+                    $ref: '#/definitions/TimedMetadataInsertion'
+                    description: 'Enable Timed metadata insertion (TimedMetadataInsertion) to include ID3 tags in your job. To include timed metadata, you must enable it here, enable it in each output container, and specify tags and timecodes in ID3 insertion (Id3Insertion) objects.'
+              statusUpdateInterval:
+                description: 'Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch Events. Set the interval, in seconds, between status updates. MediaConvert sends an update at this interval from the time the service begins processing your job to the time it completes the transcode or encounters an error.'
+                type: string
+                enum:
+                  - SECONDS_10
+                  - SECONDS_12
+                  - SECONDS_15
+                  - SECONDS_20
+                  - SECONDS_30
+                  - SECONDS_60
+                  - SECONDS_120
+                  - SECONDS_180
+                  - SECONDS_240
+                  - SECONDS_300
+                  - SECONDS_360
+                  - SECONDS_420
+                  - SECONDS_480
+                  - SECONDS_540
+                  - SECONDS_600
+              tags:
+                description: The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/__string'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -422,11 +615,40 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListJobTemplatesRequest'
+        - name: category
+          in: query
+          required: false
+          description: 'Optionally, specify a job template category to limit responses to only job templates from that category.'
+          type: string
+        - name: listBy
+          in: query
+          required: false
+          description: 'Optional. When you request a list of job templates, you can choose to list them alphabetically by NAME or chronologically by CREATION_DATE. If you don''t specify, the service will list them by name.'
+          type: string
+          enum:
+            - NAME
+            - CREATION_DATE
+            - SYSTEM
+        - name: maxResults
+          in: query
+          required: false
+          description: 'Optional. Number of job templates, up to twenty, that will be returned at one time.'
+          type: integer
+          minimum: 1
+          maximum: 20
+        - name: nextToken
+          in: query
+          required: false
+          description: 'Use this string, provided with the response to a previous request, to request the next batch of job templates.'
+          type: string
+        - name: order
+          in: query
+          required: false
+          description: 'When you request lists of resources, you can optionally specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.'
+          type: string
+          enum:
+            - ASCENDING
+            - DESCENDING
         - name: MaxResults
           type: string
           in: query
@@ -475,7 +697,41 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreatePresetRequest'
+            type: object
+            required:
+              - name
+              - settings
+            properties:
+              category:
+                description: Optional. A category for the preset you are creating.
+                type: string
+              description:
+                description: Optional. A description of the preset you are creating.
+                type: string
+              name:
+                description: The name of the preset you are creating.
+                type: string
+              settings:
+                description: Settings for preset
+                type: object
+                properties:
+                  AudioDescriptions:
+                    $ref: '#/definitions/__listOfAudioDescription'
+                    description: (AudioDescriptions) contains groups of audio encoding settings organized by audio codec. Include one instance of (AudioDescriptions) per output. (AudioDescriptions) can contain multiple groups of encoding settings.
+                  CaptionDescriptions:
+                    $ref: '#/definitions/__listOfCaptionDescriptionPreset'
+                    description: Caption settings for this preset. There can be multiple caption settings in a single output.
+                  ContainerSettings:
+                    $ref: '#/definitions/ContainerSettings'
+                    description: Container specific settings.
+                  VideoDescription:
+                    $ref: '#/definitions/VideoDescription'
+                    description: (VideoDescription) contains a group of video encoding settings. The specific video settings depend on the video codec you choose when you specify a value for Video codec (codec). Include one instance of (VideoDescription) per output.
+              tags:
+                description: The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/__string'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -519,11 +775,40 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListPresetsRequest'
+        - name: category
+          in: query
+          required: false
+          description: 'Optionally, specify a preset category to limit responses to only presets from that category.'
+          type: string
+        - name: listBy
+          in: query
+          required: false
+          description: 'Optional. When you request a list of presets, you can choose to list them alphabetically by NAME or chronologically by CREATION_DATE. If you don''t specify, the service will list them by name.'
+          type: string
+          enum:
+            - NAME
+            - CREATION_DATE
+            - SYSTEM
+        - name: maxResults
+          in: query
+          required: false
+          description: 'Optional. Number of presets, up to twenty, that will be returned at one time'
+          type: integer
+          minimum: 1
+          maximum: 20
+        - name: nextToken
+          in: query
+          required: false
+          description: 'Use this string, provided with the response to a previous request, to request the next batch of presets.'
+          type: string
+        - name: order
+          in: query
+          required: false
+          description: 'When you request lists of resources, you can optionally specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.'
+          type: string
+          enum:
+            - ASCENDING
+            - DESCENDING
         - name: MaxResults
           type: string
           in: query
@@ -572,7 +857,41 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateQueueRequest'
+            type: object
+            required:
+              - name
+              - reservationPlanSettings
+            properties:
+              description:
+                description: Optional. A description of the queue that you are creating.
+                type: string
+              name:
+                description: The name of the queue that you are creating.
+                type: string
+              pricingPlan:
+                description: 'Specifies whether the pricing plan for the queue is on-demand or reserved. For on-demand, you pay per minute, billed in increments of .01 minute. For reserved, you pay for the transcoding capacity of the entire queue, regardless of how much or how little you use it. Reserved pricing requires a 12-month commitment.'
+                type: string
+                enum:
+                  - ON_DEMAND
+                  - RESERVED
+              reservationPlanSettings:
+                description: Details about the pricing plan for your reserved queue. Required for reserved queues and not applicable to on-demand queues.
+                type: object
+                properties:
+                  Commitment:
+                    $ref: '#/definitions/Commitment'
+                    description: The length of the term of your reserved queue pricing plan commitment.
+                  RenewalType:
+                    $ref: '#/definitions/RenewalType'
+                    description: 'Specifies whether the term of your reserved queue pricing plan is automatically extended (AUTO_RENEW) or expires (EXPIRE) at the end of the term. When your term is auto renewed, you extend your commitment by 12 months from the auto renew date. You can cancel this commitment.'
+                  ReservedSlots:
+                    $ref: '#/definitions/__integer'
+                    description: Specifies the number of reserved transcode slots (RTS) for this queue. The number of RTS determines how many jobs the queue can process in parallel; each RTS can process one job at a time. You can't decrease the number of RTS in your reserved queue. You can increase the number of RTS by extending your existing commitment with a new 12-month commitment for the larger number. The new commitment begins when you purchase the additional capacity. You can't cancel your commitment or revert to your original commitment after you increase the capacity.
+              tags:
+                description: The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/__string'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -616,11 +935,34 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListQueuesRequest'
+        - name: listBy
+          in: query
+          required: false
+          description: 'Optional. When you request a list of queues, you can choose to list them alphabetically by NAME or chronologically by CREATION_DATE. If you don''t specify, the service will list them by creation date.'
+          type: string
+          enum:
+            - NAME
+            - CREATION_DATE
+        - name: maxResults
+          in: query
+          required: false
+          description: 'Optional. Number of queues, up to twenty, that will be returned at one time.'
+          type: integer
+          minimum: 1
+          maximum: 20
+        - name: nextToken
+          in: query
+          required: false
+          description: 'Use this string, provided with the response to a previous request, to request the next batch of queues.'
+          type: string
+        - name: order
+          in: query
+          required: false
+          description: 'When you request lists of resources, you can optionally specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.'
+          type: string
+          enum:
+            - ASCENDING
+            - DESCENDING
         - name: MaxResults
           type: string
           in: query
@@ -665,15 +1007,11 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteJobTemplateRequest'
         - name: name
-          type: string
           in: path
           required: true
+          description: The name of the job template to be deleted.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -717,15 +1055,11 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetJobTemplateRequest'
         - name: name
-          type: string
           in: path
           required: true
+          description: The name of the job template.
+          type: string
     put:
       operationId: UpdateJobTemplate
       description: Modify one of your existing job templates.
@@ -759,15 +1093,85 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the job template you are modifying
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateJobTemplateRequest'
-        - name: name
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - accelerationSettings
+            properties:
+              accelerationSettings:
+                description: Accelerated transcoding is currently in private preview. Contact AWS for more information.
+                type: object
+                properties:
+                  Mode:
+                    $ref: '#/definitions/AccelerationMode'
+                    description: Acceleration configuration for the job.
+              category:
+                description: 'The new category for the job template, if you are changing it.'
+                type: string
+              description:
+                description: 'The new description for the job template, if you are changing it.'
+                type: string
+              queue:
+                description: 'The new queue for the job template, if you are changing it.'
+                type: string
+              settings:
+                description: JobTemplateSettings contains all the transcode settings saved in the template that will be applied to jobs created from it.
+                type: object
+                properties:
+                  AdAvailOffset:
+                    $ref: '#/definitions/__integerMinNegative1000Max1000'
+                    description: 'When specified, this offset (in milliseconds) is added to the input Ad Avail PTS time.'
+                  AvailBlanking:
+                    $ref: '#/definitions/AvailBlanking'
+                    description: 'Settings for ad avail blanking.  Video can be blanked or overlaid with an image, and audio muted during SCTE-35 triggered ad avails.'
+                  Esam:
+                    $ref: '#/definitions/EsamSettings'
+                    description: Settings for Event Signaling And Messaging (ESAM).
+                  Inputs:
+                    $ref: '#/definitions/__listOfInputTemplate'
+                    description: 'Use Inputs (inputs) to define the source file used in the transcode job. There can only be one input in a job template.  Using the API, you can include multiple inputs when referencing a job template.'
+                  MotionImageInserter:
+                    $ref: '#/definitions/MotionImageInserter'
+                    description: Overlay motion graphics on top of your video. The motion graphics that you specify here appear on all outputs in all output groups.
+                  NielsenConfiguration:
+                    $ref: '#/definitions/NielsenConfiguration'
+                    description: Settings for Nielsen Configuration
+                  OutputGroups:
+                    $ref: '#/definitions/__listOfOutputGroup'
+                    description: '(OutputGroups) contains one group of settings for each set of outputs that share a common package type. All unpackaged files (MPEG-4, MPEG-2 TS, Quicktime, MXF, and no container) are grouped in a single output group as well. Required in (OutputGroups) is a group of settings that apply to the whole group. This required object depends on the value you set for (Type) under (OutputGroups)>(OutputGroupSettings). Type, settings object pairs are as follows. * FILE_GROUP_SETTINGS, FileGroupSettings * HLS_GROUP_SETTINGS, HlsGroupSettings * DASH_ISO_GROUP_SETTINGS, DashIsoGroupSettings * MS_SMOOTH_GROUP_SETTINGS, MsSmoothGroupSettings * CMAF_GROUP_SETTINGS, CmafGroupSettings'
+                  TimecodeConfig:
+                    $ref: '#/definitions/TimecodeConfig'
+                    description: Contains settings used to acquire and adjust timecode information from inputs.
+                  TimedMetadataInsertion:
+                    $ref: '#/definitions/TimedMetadataInsertion'
+                    description: 'Enable Timed metadata insertion (TimedMetadataInsertion) to include ID3 tags in your job. To include timed metadata, you must enable it here, enable it in each output container, and specify tags and timecodes in ID3 insertion (Id3Insertion) objects.'
+              statusUpdateInterval:
+                description: 'Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch Events. Set the interval, in seconds, between status updates. MediaConvert sends an update at this interval from the time the service begins processing your job to the time it completes the transcode or encounters an error.'
+                type: string
+                enum:
+                  - SECONDS_10
+                  - SECONDS_12
+                  - SECONDS_15
+                  - SECONDS_20
+                  - SECONDS_30
+                  - SECONDS_60
+                  - SECONDS_120
+                  - SECONDS_180
+                  - SECONDS_240
+                  - SECONDS_300
+                  - SECONDS_360
+                  - SECONDS_420
+                  - SECONDS_480
+                  - SECONDS_540
+                  - SECONDS_600
   '/2017-08-29/presets/{name}':
     delete:
       operationId: DeletePreset
@@ -802,15 +1206,11 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeletePresetRequest'
         - name: name
-          type: string
           in: path
           required: true
+          description: The name of the preset to be deleted.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -854,15 +1254,11 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetPresetRequest'
         - name: name
-          type: string
           in: path
           required: true
+          description: The name of the preset.
+          type: string
     put:
       operationId: UpdatePreset
       description: Modify one of your existing presets.
@@ -896,15 +1292,39 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the preset you are modifying.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdatePresetRequest'
-        - name: name
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              category:
+                description: 'The new category for the preset, if you are changing it.'
+                type: string
+              description:
+                description: 'The new description for the preset, if you are changing it.'
+                type: string
+              settings:
+                description: Settings for preset
+                type: object
+                properties:
+                  AudioDescriptions:
+                    $ref: '#/definitions/__listOfAudioDescription'
+                    description: (AudioDescriptions) contains groups of audio encoding settings organized by audio codec. Include one instance of (AudioDescriptions) per output. (AudioDescriptions) can contain multiple groups of encoding settings.
+                  CaptionDescriptions:
+                    $ref: '#/definitions/__listOfCaptionDescriptionPreset'
+                    description: Caption settings for this preset. There can be multiple caption settings in a single output.
+                  ContainerSettings:
+                    $ref: '#/definitions/ContainerSettings'
+                    description: Container specific settings.
+                  VideoDescription:
+                    $ref: '#/definitions/VideoDescription'
+                    description: (VideoDescription) contains a group of video encoding settings. The specific video settings depend on the video codec you choose when you specify a value for Video codec (codec). Include one instance of (VideoDescription) per output.
   '/2017-08-29/queues/{name}':
     delete:
       operationId: DeleteQueue
@@ -939,15 +1359,11 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteQueueRequest'
         - name: name
-          type: string
           in: path
           required: true
+          description: The name of the queue that you want to delete.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -991,15 +1407,11 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetQueueRequest'
         - name: name
-          type: string
           in: path
           required: true
+          description: The name of the queue that you want information about.
+          type: string
     put:
       operationId: UpdateQueue
       description: Modify one of your existing queues.
@@ -1033,15 +1445,41 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the queue that you are modifying.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateQueueRequest'
-        - name: name
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - reservationPlanSettings
+            properties:
+              description:
+                description: 'The new description for the queue, if you are changing it.'
+                type: string
+              reservationPlanSettings:
+                description: Details about the pricing plan for your reserved queue. Required for reserved queues and not applicable to on-demand queues.
+                type: object
+                properties:
+                  Commitment:
+                    $ref: '#/definitions/Commitment'
+                    description: The length of the term of your reserved queue pricing plan commitment.
+                  RenewalType:
+                    $ref: '#/definitions/RenewalType'
+                    description: 'Specifies whether the term of your reserved queue pricing plan is automatically extended (AUTO_RENEW) or expires (EXPIRE) at the end of the term. When your term is auto renewed, you extend your commitment by 12 months from the auto renew date. You can cancel this commitment.'
+                  ReservedSlots:
+                    $ref: '#/definitions/__integer'
+                    description: Specifies the number of reserved transcode slots (RTS) for this queue. The number of RTS determines how many jobs the queue can process in parallel; each RTS can process one job at a time. You can't decrease the number of RTS in your reserved queue. You can increase the number of RTS by extending your existing commitment with a new 12-month commitment for the larger number. The new commitment begins when you purchase the additional capacity. You can't cancel your commitment or revert to your original commitment after you increase the capacity.
+              status:
+                description: 'Queues can be ACTIVE or PAUSED. If you pause a queue, jobs in that queue won''t begin. Jobs that are running when you pause a queue continue to run until they finish or result in an error.'
+                type: string
+                enum:
+                  - ACTIVE
+                  - PAUSED
   /2017-08-29/endpoints:
     post:
       operationId: DescribeEndpoints
@@ -1080,7 +1518,20 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/DescribeEndpointsRequest'
+            type: object
+            properties:
+              maxResults:
+                description: 'Optional. Max number of endpoints, up to twenty, that will be returned at one time.'
+                type: integer
+              mode:
+                description: 'Optional field, defaults to DEFAULT. Specify DEFAULT for this operation to return your endpoints if any exist, or to create an endpoint for you and return it if one doesn''t already exist. Specify GET_ONLY to return your endpoints if any exist, or an empty list if none exist.'
+                type: string
+                enum:
+                  - DEFAULT
+                  - GET_ONLY
+              nextToken:
+                description: 'Use this string, provided with the response to a previous request, to request the next batch of endpoints.'
+                type: string
         - name: MaxResults
           type: string
           in: query
@@ -1139,7 +1590,13 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/DisassociateCertificateRequest'
+            type: object
+            required:
+              - arn
+            properties:
+              arn:
+                description: The ARN of the ACM certificate that you want to disassociate from your MediaConvert resource.
+                type: string
         - name: arn
           type: string
           in: path
@@ -1188,15 +1645,11 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListTagsForResourceRequest'
         - name: arn
-          type: string
           in: path
           required: true
+          description: 'The Amazon Resource Name (ARN) of the resource that you want to list tags for. To get the ARN, send a GET request with the resource name.'
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1240,15 +1693,22 @@ paths:
           schema:
             $ref: '#/definitions/ConflictException'
       parameters:
+        - name: arn
+          in: path
+          required: true
+          description: 'The Amazon Resource Name (ARN) of the resource that you want to remove tags from. To get the ARN, send a GET request with the resource name.'
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UntagResourceRequest'
-        - name: arn
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              tagKeys:
+                description: The keys of the tags that you want to remove from the resource.
+                type: array
+                items:
+                  $ref: '#/definitions/__string'
   /2017-08-29/tags:
     post:
       operationId: TagResource
@@ -1287,7 +1747,19 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/TagResourceRequest'
+            type: object
+            required:
+              - arn
+              - tags
+            properties:
+              arn:
+                description: 'The Amazon Resource Name (ARN) of the resource that you want to tag. To get the ARN, send a GET request with the resource name.'
+                type: string
+              tags:
+                description: The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/__string'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1302,14 +1774,6 @@ definitions:
   AssociateCertificateResponse:
     type: object
     properties: {}
-  AssociateCertificateRequest:
-    type: object
-    required:
-      - Arn
-    properties:
-      Arn:
-        $ref: '#/definitions/__string'
-        description: The ARN of the ACM certificate that you want to associate with your MediaConvert resource.
   BadRequestException: {}
   InternalServerErrorException: {}
   ForbiddenException: {}
@@ -1319,153 +1783,228 @@ definitions:
   CancelJobResponse:
     type: object
     properties: {}
-  CancelJobRequest:
-    type: object
-    properties: {}
   CreateJobResponse:
     type: object
     properties:
       Job:
         $ref: '#/definitions/Job'
         description: 'Each job converts an input file into an output file or files. For more information, see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html'
-  CreateJobRequest:
+  AccelerationMode:
+    type: string
+    enum:
+      - DISABLED
+      - ENABLED
+    description: Acceleration configuration for the job.
+  __integerMinNegative1000Max1000:
+    type: integer
+    minimum: -1000
+    maximum: 1000
+  AvailBlanking:
     type: object
-    required:
-      - Role
-      - Settings
     properties:
-      AccelerationSettings:
-        $ref: '#/definitions/AccelerationSettings'
-        description: 'This is a beta feature. If you are interested in using this feature, please contact AWS customer support.'
-      BillingTagsSource:
-        $ref: '#/definitions/BillingTagsSource'
-        description: 'Optional. Choose a tag type that AWS Billing and Cost Management will use to sort your AWS Elemental MediaConvert costs on any billing report that you set up. Any transcoding outputs that don''t have an associated tag will appear in your billing report unsorted. If you don''t choose a valid value for this field, your job outputs will appear on the billing report unsorted.'
-      ClientRequestToken:
+      AvailBlankingImage:
+        $ref: '#/definitions/__stringMin14PatternS3BmpBMPPngPNG'
+        description: Blanking image to be used. Leave empty for solid black. Only bmp and png images are supported.
+    description: Settings for Avail Blanking
+  EsamSettings:
+    type: object
+    properties:
+      ManifestConfirmConditionNotification:
+        $ref: '#/definitions/EsamManifestConfirmConditionNotification'
+        description: Specifies an ESAM ManifestConfirmConditionNotification XML as per OC-SP-ESAM-API-I03-131025. The transcoder uses the manifest conditioning instructions that you provide in the setting MCC XML (mccXml).
+      ResponseSignalPreroll:
+        $ref: '#/definitions/__integerMin0Max30000'
+        description: 'Specifies the stream distance, in milliseconds, between the SCTE 35 messages that the transcoder places and the splice points that they refer to. If the time between the start of the asset and the SCTE-35 message is less than this value, then the transcoder places the SCTE-35 marker at the beginning of the stream.'
+      SignalProcessingNotification:
+        $ref: '#/definitions/EsamSignalProcessingNotification'
+        description: Specifies an ESAM SignalProcessingNotification XML as per OC-SP-ESAM-API-I03-131025. The transcoder uses the signal processing instructions that you provide in the setting SCC XML (sccXml).
+    description: 'Settings for Event Signaling And Messaging (ESAM). If you don''t do ad insertion, you can ignore these settings.'
+  __listOfInput:
+    type: array
+    items:
+      $ref: '#/definitions/Input'
+  MotionImageInserter:
+    type: object
+    properties:
+      Framerate:
+        $ref: '#/definitions/MotionImageInsertionFramerate'
+        description: 'If your motion graphic asset is a .mov file, keep this setting unspecified. If your motion graphic asset is a series of .png files, specify the frame rate of the overlay in frames per second, as a fraction. For example, specify 24 fps as 24/1. Make sure that the number of images in your series matches the frame rate and your intended overlay duration. For example, if you want a 30-second overlay at 30 fps, you should have 900 .png images. This overlay frame rate doesn''t need to match the frame rate of the underlying video.'
+      Input:
+        $ref: '#/definitions/__stringMin14Max1285PatternS3Mov09Png'
+        description: 'Specify the .mov file or series of .png files that you want to overlay on your video. For .png files, provide the file name of the first file in the series. Make sure that the names of the .png files end with sequential numbers that specify the order that they are played in. For example, overlay_000.png, overlay_001.png, overlay_002.png, and so on. The sequence must start at zero, and each image file name must have the same number of digits. Pad your initial file names with enough zeros to complete the sequence. For example, if the first image is overlay_0.png, there can be only 10 images in the sequence, with the last image being overlay_9.png. But if the first image is overlay_00.png, there can be 100 images in the sequence.'
+      InsertionMode:
+        $ref: '#/definitions/MotionImageInsertionMode'
+        description: Choose the type of motion graphic asset that you are providing for your overlay. You can choose either a .mov file or a series of .png files.
+      Offset:
+        $ref: '#/definitions/MotionImageInsertionOffset'
+        description: 'Use Offset to specify the placement of your motion graphic overlay on the video frame. Specify in pixels, from the upper-left corner of the frame. If you don''t specify an offset, the service scales your overlay to the full size of the frame. Otherwise, the service inserts the overlay at its native resolution and scales the size up or down with any video scaling.'
+      Playback:
+        $ref: '#/definitions/MotionImagePlayback'
+        description: Specify whether your motion graphic overlay repeats on a loop or plays only once.
+      StartTime:
+        $ref: '#/definitions/__stringMin11Max11Pattern01D20305D205D'
+        description: 'Specify when the motion overlay begins. Use timecode format (HH:MM:SS:FF or HH:MM:SS;FF). Make sure that the timecode you provide here takes into account how you have set up your timecode configuration under both job settings and input settings. The simplest way to do that is to set both to start at 0. If you need to set up your job to follow timecodes embedded in your source that don''t start at zero, make sure that you specify a start time that is after the first embedded timecode. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/setting-up-timecode.html Find job-wide and input timecode configuration settings in your JSON job settings specification at settings>timecodeConfig>source and settings>inputs>timecodeSource.'
+    description: Overlay motion graphics on top of your video at the time that you specify.
+  NielsenConfiguration:
+    type: object
+    properties:
+      BreakoutCode:
+        $ref: '#/definitions/__integerMin0Max9'
+        description: 'Use Nielsen Configuration (NielsenConfiguration) to set the Nielsen measurement system breakout code. Supported values are 0, 3, 7, and 9.'
+      DistributorId:
         $ref: '#/definitions/__string'
-        description: Idempotency token for CreateJob operation.
-      JobTemplate:
-        $ref: '#/definitions/__string'
-        description: 'When you create a job, you can either specify a job template or specify the transcoding settings individually'
-      Queue:
-        $ref: '#/definitions/__string'
-        description: 'Optional. When you create a job, you can specify a queue to send it to. If you don''t specify, the job will go to the default queue. For more about queues, see the User Guide topic at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html.'
-      Role:
-        $ref: '#/definitions/__string'
-        description: 'Required. The IAM role you use for creating this job. For details about permissions, see the User Guide topic at the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html.'
-      Settings:
-        $ref: '#/definitions/JobSettings'
-        description: JobSettings contains all the transcode settings for a job.
-      StatusUpdateInterval:
-        $ref: '#/definitions/StatusUpdateInterval'
-        description: 'Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch Events. Set the interval, in seconds, between status updates. MediaConvert sends an update at this interval from the time the service begins processing your job to the time it completes the transcode or encounters an error.'
-      UserMetadata:
-        $ref: '#/definitions/__mapOf__string'
-        description: User-defined metadata that you want to associate with an MediaConvert job. You specify metadata in key/value pairs.
+        description: Use Distributor ID (DistributorID) to specify the distributor ID that is assigned to your organization by Neilsen.
+    description: Settings for Nielsen Configuration
+  __listOfOutputGroup:
+    type: array
+    items:
+      $ref: '#/definitions/OutputGroup'
+  TimecodeConfig:
+    type: object
+    properties:
+      Anchor:
+        $ref: '#/definitions/__stringPattern010920405090509092'
+        description: 'If you use an editing platform that relies on an anchor timecode, use Anchor Timecode (Anchor) to specify a timecode that will match the input video frame to the output video frame. Use 24-hour format with frame number, (HH:MM:SS:FF) or (HH:MM:SS;FF). This setting ignores frame rate conversion. System behavior for Anchor Timecode varies depending on your setting for Source (TimecodeSource). * If Source (TimecodeSource) is set to Specified Start (SPECIFIEDSTART), the first input frame is the specified value in Start Timecode (Start). Anchor Timecode (Anchor) and Start Timecode (Start) are used calculate output timecode. * If Source (TimecodeSource) is set to Start at 0 (ZEROBASED)  the  first frame is 00:00:00:00. * If Source (TimecodeSource) is set to Embedded (EMBEDDED), the  first frame is the timecode value on the first input frame of the input.'
+      Source:
+        $ref: '#/definitions/TimecodeSource'
+        description: 'Use Source (TimecodeSource) to set how timecodes are handled within this job. To make sure that your video, audio, captions, and markers are synchronized and that time-based features, such as image inserter, work correctly, choose the Timecode source option that matches your assets. All timecodes are in a 24-hour format with frame number (HH:MM:SS:FF). * Embedded (EMBEDDED) - Use the timecode that is in the input video. If no embedded timecode is in the source, the service will use Start at 0 (ZEROBASED) instead. * Start at 0 (ZEROBASED) - Set the timecode of the initial frame to 00:00:00:00. * Specified Start (SPECIFIEDSTART) - Set the timecode of the initial frame to a value other than zero. You use Start timecode (Start) to provide this value.'
+      Start:
+        $ref: '#/definitions/__stringPattern010920405090509092'
+        description: 'Only use when you set Source (TimecodeSource) to Specified start (SPECIFIEDSTART). Use Start timecode (Start) to specify the timecode for the initial frame. Use 24-hour format with frame number, (HH:MM:SS:FF) or (HH:MM:SS;FF).'
+      TimestampOffset:
+        $ref: '#/definitions/__stringPattern0940191020191209301'
+        description: 'Only applies to outputs that support program-date-time stamp. Use Timestamp offset (TimestampOffset) to overwrite the timecode date without affecting the time and frame number. Provide the new date as a string in the format "yyyy-mm-dd".  To use Time stamp offset, you must also enable Insert program-date-time (InsertProgramDateTime) in the output settings. For example, if the date part of your timecodes is 2002-1-25 and you want to change it to one year later, set Timestamp offset (TimestampOffset) to 2003-1-25.'
+    description: These settings control how the service handles timecodes throughout the job. These settings don't affect input clipping.
+  TimedMetadataInsertion:
+    type: object
+    properties:
+      Id3Insertions:
+        $ref: '#/definitions/__listOfId3Insertion'
+        description: Id3Insertions contains the array of Id3Insertion instances.
+    description: 'Enable Timed metadata insertion (TimedMetadataInsertion) to include ID3 tags in your job. To include timed metadata, you must enable it here, enable it in each output container, and specify tags and timecodes in ID3 insertion (Id3Insertion) objects.'
+  __string:
+    type: string
   CreateJobTemplateResponse:
     type: object
     properties:
       JobTemplate:
         $ref: '#/definitions/JobTemplate'
         description: A job template is a pre-made set of encoding instructions that you can use to quickly create a job.
-  CreateJobTemplateRequest:
-    type: object
-    required:
-      - Settings
-      - Name
-    properties:
-      AccelerationSettings:
-        $ref: '#/definitions/AccelerationSettings'
-        description: This is a beta feature. If you are interested in using this feature please contact AWS customer support.
-      Category:
-        $ref: '#/definitions/__string'
-        description: Optional. A category for the job template you are creating
-      Description:
-        $ref: '#/definitions/__string'
-        description: Optional. A description of the job template you are creating.
-      Name:
-        $ref: '#/definitions/__string'
-        description: The name of the job template you are creating.
-      Queue:
-        $ref: '#/definitions/__string'
-        description: 'Optional. The queue that jobs created from this template are assigned to. If you don''t specify this, jobs will go to the default queue.'
-      Settings:
-        $ref: '#/definitions/JobTemplateSettings'
-        description: JobTemplateSettings contains all the transcode settings saved in the template that will be applied to jobs created from it.
-      StatusUpdateInterval:
-        $ref: '#/definitions/StatusUpdateInterval'
-        description: 'Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch Events. Set the interval, in seconds, between status updates. MediaConvert sends an update at this interval from the time the service begins processing your job to the time it completes the transcode or encounters an error.'
-      Tags:
-        $ref: '#/definitions/__mapOf__string'
-        description: The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
+  __listOfInputTemplate:
+    type: array
+    items:
+      $ref: '#/definitions/InputTemplate'
   CreatePresetResponse:
     type: object
     properties:
       Preset:
         $ref: '#/definitions/Preset'
         description: A preset is a collection of preconfigured media conversion settings that you want MediaConvert to apply to the output during the conversion process.
-  CreatePresetRequest:
+  __listOfAudioDescription:
+    type: array
+    items:
+      $ref: '#/definitions/AudioDescription'
+  __listOfCaptionDescriptionPreset:
+    type: array
+    items:
+      $ref: '#/definitions/CaptionDescriptionPreset'
+  ContainerSettings:
     type: object
-    required:
-      - Settings
-      - Name
     properties:
-      Category:
-        $ref: '#/definitions/__string'
-        description: Optional. A category for the preset you are creating.
-      Description:
-        $ref: '#/definitions/__string'
-        description: Optional. A description of the preset you are creating.
-      Name:
-        $ref: '#/definitions/__string'
-        description: The name of the preset you are creating.
-      Settings:
-        $ref: '#/definitions/PresetSettings'
-        description: Settings for preset
-      Tags:
-        $ref: '#/definitions/__mapOf__string'
-        description: The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
+      Container:
+        $ref: '#/definitions/ContainerType'
+        description: 'Container for this output. Some containers require a container settings object. If not specified, the default object will be created.'
+      F4vSettings:
+        $ref: '#/definitions/F4vSettings'
+        description: Settings for F4v container
+      M2tsSettings:
+        $ref: '#/definitions/M2tsSettings'
+        description: 'MPEG-2 TS container settings. These apply to outputs in a File output group when the output''s container (ContainerType) is MPEG-2 Transport Stream (M2TS). In these assets, data is organized by the program map table (PMT). Each transport stream program contains subsets of data, including audio, video, and metadata. Each of these subsets of data has a numerical label called a packet identifier (PID). Each transport stream program corresponds to one MediaConvert output. The PMT lists the types of data in a program along with their PID. Downstream systems and players use the program map table to look up the PID for each type of data it accesses and then uses the PIDs to locate specific data within the asset.'
+      M3u8Settings:
+        $ref: '#/definitions/M3u8Settings'
+        description: Settings for TS segments in HLS
+      MovSettings:
+        $ref: '#/definitions/MovSettings'
+        description: Settings for MOV Container.
+      Mp4Settings:
+        $ref: '#/definitions/Mp4Settings'
+        description: Settings for MP4 Container
+    description: Container specific settings.
+  VideoDescription:
+    type: object
+    properties:
+      AfdSignaling:
+        $ref: '#/definitions/AfdSignaling'
+        description: 'This setting only applies to H.264, H.265, and MPEG2 outputs. Use Insert AFD signaling (AfdSignaling) to specify whether the service includes AFD values in the output video data and what those values are. * Choose None to remove all AFD values from this output. * Choose Fixed to ignore input AFD values and instead encode the value specified in the job. * Choose Auto to calculate output AFD values based on the input AFD scaler data.'
+      AntiAlias:
+        $ref: '#/definitions/AntiAlias'
+        description: 'The anti-alias filter is automatically applied to all outputs. The service no longer accepts the value DISABLED for AntiAlias. If you specify that in your job, the service will ignore the setting.'
+      CodecSettings:
+        $ref: '#/definitions/VideoCodecSettings'
+        description: 'Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value you choose for Video codec (Codec). For each codec enum you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * FRAME_CAPTURE, FrameCaptureSettings'
+      ColorMetadata:
+        $ref: '#/definitions/ColorMetadata'
+        description: Enable Insert color metadata (ColorMetadata) to include color metadata in this output. This setting is enabled by default.
+      Crop:
+        $ref: '#/definitions/Rectangle'
+        description: 'Applies only if your input aspect ratio is different from your output aspect ratio. Use Input cropping rectangle (Crop) to specify the  video area the service will include in the output. This will crop the input source, causing video pixels to be removed on encode. If you crop your input frame size to smaller than your output frame size, make sure to specify the behavior you want in your output setting "Scaling behavior".'
+      DropFrameTimecode:
+        $ref: '#/definitions/DropFrameTimecode'
+        description: 'Applies only to 29.97 fps outputs. When this feature is enabled, the service will use drop-frame timecode on outputs. If it is not possible to use drop-frame timecode, the system will fall back to non-drop-frame. This setting is enabled by default when Timecode insertion (TimecodeInsertion) is enabled.'
+      FixedAfd:
+        $ref: '#/definitions/__integerMin0Max15'
+        description: Applies only if you set AFD Signaling(AfdSignaling) to Fixed (FIXED). Use Fixed (FixedAfd) to specify a four-bit AFD value which the service will write on all  frames of this video output.
+      Height:
+        $ref: '#/definitions/__integerMin32Max2160'
+        description: 'Use the Height (Height) setting to define the video resolution height for this output. Specify in pixels. If you don''t provide a value here, the service will use the input height.'
+      Position:
+        $ref: '#/definitions/Rectangle'
+        description: Use Position (Position) to point to a rectangle object to define your position. This setting overrides any other aspect ratio.
+      RespondToAfd:
+        $ref: '#/definitions/RespondToAfd'
+        description: 'Use Respond to AFD (RespondToAfd) to specify how the service changes the video itself in response to AFD values in the input. * Choose Respond to clip the input video frame according to the AFD value, input display aspect ratio, and output display aspect ratio. * Choose Passthrough to include the input AFD values. Do not choose this when AfdSignaling is set to (NONE). A preferred implementation of this workflow is to set RespondToAfd to (NONE) and set AfdSignaling to (AUTO). * Choose None to remove all input AFD values from this output.'
+      ScalingBehavior:
+        $ref: '#/definitions/ScalingBehavior'
+        description: Applies only if your input aspect ratio is different from your output aspect ratio. Choose "Stretch to output" to have the service stretch your video image to fit. Keep the setting "Default" to allow the service to letterbox your video instead. This setting overrides any positioning value you specify elsewhere in the job.
+      Sharpness:
+        $ref: '#/definitions/__integerMin0Max100'
+        description: 'Use Sharpness (Sharpness) setting to specify the strength of anti-aliasing. This setting changes the width of the anti-alias filter kernel used for scaling. Sharpness only applies if your output resolution is different from your input resolution. 0 is the softest setting, 100 the sharpest, and 50 recommended for most content.'
+      TimecodeInsertion:
+        $ref: '#/definitions/VideoTimecodeInsertion'
+        description: 'Applies only to H.264, H.265, MPEG2, and ProRes outputs. Only enable Timecode insertion when the input frame rate is identical to the output frame rate. To include timecodes in this output, set Timecode insertion (VideoTimecodeInsertion) to PIC_TIMING_SEI. To leave them out, set it to DISABLED. Default is DISABLED. When the service inserts timecodes in an output, by default, it uses any embedded timecodes from the input. If none are present, the service will set the timecode for the first output frame to zero. To change this default behavior, adjust the settings under Timecode configuration (TimecodeConfig). In the console, these settings are located under Job > Job settings > Timecode configuration. Note - Timecode source under input settings (InputTimecodeSource) does not affect the timecodes that are inserted in the output. Source under Job settings > Timecode configuration (TimecodeSource) does.'
+      VideoPreprocessors:
+        $ref: '#/definitions/VideoPreprocessor'
+        description: Find additional transcoding features under Preprocessors (VideoPreprocessors). Enable the features at each output individually. These features are disabled by default.
+      Width:
+        $ref: '#/definitions/__integerMin32Max4096'
+        description: 'Use Width (Width) to define the video resolution width, in pixels, for this output. If you don''t provide a value here, the service will use the input width.'
+    description: Settings for video outputs
   CreateQueueResponse:
     type: object
     properties:
       Queue:
         $ref: '#/definitions/Queue'
         description: 'You can use queues to manage the resources that are available to your AWS account for running multiple transcoding jobs at the same time. If you don''t specify a queue, the service sends all jobs through the default queue. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/working-with-queues.html.'
-  CreateQueueRequest:
-    type: object
-    required:
-      - Name
-    properties:
-      Description:
-        $ref: '#/definitions/__string'
-        description: Optional. A description of the queue that you are creating.
-      Name:
-        $ref: '#/definitions/__string'
-        description: The name of the queue that you are creating.
-      PricingPlan:
-        $ref: '#/definitions/PricingPlan'
-        description: 'Specifies whether the pricing plan for the queue is on-demand or reserved. For on-demand, you pay per minute, billed in increments of .01 minute. For reserved, you pay for the transcoding capacity of the entire queue, regardless of how much or how little you use it. Reserved pricing requires a 12-month commitment. When you use the API to create a queue, the default is on-demand.'
-      ReservationPlanSettings:
-        $ref: '#/definitions/ReservationPlanSettings'
-        description: Details about the pricing plan for your reserved queue. Required for reserved queues and not applicable to on-demand queues.
-      Tags:
-        $ref: '#/definitions/__mapOf__string'
-        description: The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
+  Commitment:
+    type: string
+    enum:
+      - ONE_YEAR
+    description: The length of the term of your reserved queue pricing plan commitment.
+  RenewalType:
+    type: string
+    enum:
+      - AUTO_RENEW
+      - EXPIRE
+    description: Specifies whether the term of your reserved queue pricing plan is automatically extended (AUTO_RENEW) or expires (EXPIRE) at the end of the term.
+  __integer:
+    type: integer
   DeleteJobTemplateResponse:
-    type: object
-    properties: {}
-  DeleteJobTemplateRequest:
     type: object
     properties: {}
   DeletePresetResponse:
     type: object
     properties: {}
-  DeletePresetRequest:
-    type: object
-    properties: {}
   DeleteQueueResponse:
-    type: object
-    properties: {}
-  DeleteQueueRequest:
     type: object
     properties: {}
   DescribeEndpointsResponse:
@@ -1477,66 +2016,33 @@ definitions:
       NextToken:
         $ref: '#/definitions/__string'
         description: Use this string to request the next batch of endpoints.
-  DescribeEndpointsRequest:
-    type: object
-    properties:
-      MaxResults:
-        $ref: '#/definitions/__integer'
-        description: 'Optional. Max number of endpoints, up to twenty, that will be returned at one time.'
-      Mode:
-        $ref: '#/definitions/DescribeEndpointsMode'
-        description: 'Optional field, defaults to DEFAULT. Specify DEFAULT for this operation to return your endpoints if any exist, or to create an endpoint for you and return it if one doesn''t already exist. Specify GET_ONLY to return your endpoints if any exist, or an empty list if none exist.'
-      NextToken:
-        $ref: '#/definitions/__string'
-        description: 'Use this string, provided with the response to a previous request, to request the next batch of endpoints.'
-    description: DescribeEndpointsRequest
   DisassociateCertificateResponse:
     type: object
     properties: {}
-  DisassociateCertificateRequest:
-    type: object
-    required:
-      - Arn
-    properties:
-      Arn:
-        $ref: '#/definitions/__string'
-        description: The ARN of the ACM certificate that you want to disassociate from your MediaConvert resource.
   GetJobResponse:
     type: object
     properties:
       Job:
         $ref: '#/definitions/Job'
         description: 'Each job converts an input file into an output file or files. For more information, see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html'
-  GetJobRequest:
-    type: object
-    properties: {}
   GetJobTemplateResponse:
     type: object
     properties:
       JobTemplate:
         $ref: '#/definitions/JobTemplate'
         description: A job template is a pre-made set of encoding instructions that you can use to quickly create a job.
-  GetJobTemplateRequest:
-    type: object
-    properties: {}
   GetPresetResponse:
     type: object
     properties:
       Preset:
         $ref: '#/definitions/Preset'
         description: A preset is a collection of preconfigured media conversion settings that you want MediaConvert to apply to the output during the conversion process.
-  GetPresetRequest:
-    type: object
-    properties: {}
   GetQueueResponse:
     type: object
     properties:
       Queue:
         $ref: '#/definitions/Queue'
         description: 'You can use queues to manage the resources that are available to your AWS account for running multiple transcoding jobs at the same time. If you don''t specify a queue, the service sends all jobs through the default queue. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/working-with-queues.html.'
-  GetQueueRequest:
-    type: object
-    properties: {}
   ListJobTemplatesResponse:
     type: object
     properties:
@@ -1546,9 +2052,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/__string'
         description: Use this string to request the next batch of job templates.
-  ListJobTemplatesRequest:
-    type: object
-    properties: {}
   ListJobsResponse:
     type: object
     properties:
@@ -1558,9 +2061,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/__string'
         description: Use this string to request the next batch of jobs.
-  ListJobsRequest:
-    type: object
-    properties: {}
   ListPresetsResponse:
     type: object
     properties:
@@ -1570,9 +2070,6 @@ definitions:
       Presets:
         $ref: '#/definitions/__listOfPreset'
         description: List of presets
-  ListPresetsRequest:
-    type: object
-    properties: {}
   ListQueuesResponse:
     type: object
     properties:
@@ -1582,105 +2079,36 @@ definitions:
       Queues:
         $ref: '#/definitions/__listOfQueue'
         description: List of queues.
-  ListQueuesRequest:
-    type: object
-    properties: {}
   ListTagsForResourceResponse:
     type: object
     properties:
       ResourceTags:
         $ref: '#/definitions/ResourceTags'
         description: The Amazon Resource Name (ARN) and tags for an AWS Elemental MediaConvert resource.
-  ListTagsForResourceRequest:
-    type: object
-    properties: {}
   TagResourceResponse:
     type: object
     properties: {}
-  TagResourceRequest:
-    type: object
-    required:
-      - Arn
-      - Tags
-    properties:
-      Arn:
-        $ref: '#/definitions/__string'
-        description: 'The Amazon Resource Name (ARN) of the resource that you want to tag. To get the ARN, send a GET request with the resource name.'
-      Tags:
-        $ref: '#/definitions/__mapOf__string'
-        description: The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
   UntagResourceResponse:
     type: object
     properties: {}
-  UntagResourceRequest:
-    type: object
-    properties:
-      TagKeys:
-        $ref: '#/definitions/__listOf__string'
-        description: The keys of the tags that you want to remove from the resource.
   UpdateJobTemplateResponse:
     type: object
     properties:
       JobTemplate:
         $ref: '#/definitions/JobTemplate'
         description: A job template is a pre-made set of encoding instructions that you can use to quickly create a job.
-  UpdateJobTemplateRequest:
-    type: object
-    properties:
-      AccelerationSettings:
-        $ref: '#/definitions/AccelerationSettings'
-        description: 'This is a beta feature. If you are interested in using this feature, please contact AWS customer support.'
-      Category:
-        $ref: '#/definitions/__string'
-        description: 'The new category for the job template, if you are changing it.'
-      Description:
-        $ref: '#/definitions/__string'
-        description: 'The new description for the job template, if you are changing it.'
-      Queue:
-        $ref: '#/definitions/__string'
-        description: 'The new queue for the job template, if you are changing it.'
-      Settings:
-        $ref: '#/definitions/JobTemplateSettings'
-        description: JobTemplateSettings contains all the transcode settings saved in the template that will be applied to jobs created from it.
-      StatusUpdateInterval:
-        $ref: '#/definitions/StatusUpdateInterval'
-        description: 'Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch Events. Set the interval, in seconds, between status updates. MediaConvert sends an update at this interval from the time the service begins processing your job to the time it completes the transcode or encounters an error.'
   UpdatePresetResponse:
     type: object
     properties:
       Preset:
         $ref: '#/definitions/Preset'
         description: A preset is a collection of preconfigured media conversion settings that you want MediaConvert to apply to the output during the conversion process.
-  UpdatePresetRequest:
-    type: object
-    properties:
-      Category:
-        $ref: '#/definitions/__string'
-        description: 'The new category for the preset, if you are changing it.'
-      Description:
-        $ref: '#/definitions/__string'
-        description: 'The new description for the preset, if you are changing it.'
-      Settings:
-        $ref: '#/definitions/PresetSettings'
-        description: Settings for preset
   UpdateQueueResponse:
     type: object
     properties:
       Queue:
         $ref: '#/definitions/Queue'
         description: 'You can use queues to manage the resources that are available to your AWS account for running multiple transcoding jobs at the same time. If you don''t specify a queue, the service sends all jobs through the default queue. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/working-with-queues.html.'
-  UpdateQueueRequest:
-    type: object
-    properties:
-      Description:
-        $ref: '#/definitions/__string'
-        description: 'The new description for the queue, if you are changing it.'
-      ReservationPlanSettings:
-        $ref: '#/definitions/ReservationPlanSettings'
-        description: 'The new details of your pricing plan for your reserved queue. When you set up a new pricing plan to replace an expired one, you enter into another 12-month commitment. When you add capacity to your queue by increasing the number of RTS, you extend the term of your commitment to 12 months from when you add capacity. After you make these commitments, you can''t cancel them.'
-      Status:
-        $ref: '#/definitions/QueueStatus'
-        description: 'Pause or activate a queue by changing its status between ACTIVE and PAUSED. If you pause a queue, jobs in that queue won''t begin. Jobs that are running when you pause the queue continue to run until they finish or result in an error.'
   AacAudioDescriptionBroadcasterMix:
     type: string
     enum:
@@ -1846,12 +2274,6 @@ definitions:
         $ref: '#/definitions/__integerMin48000Max48000'
         description: Sample rate in hz. Sample rate is always 48000.
     description: Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the value AC3.
-  AccelerationMode:
-    type: string
-    enum:
-      - DISABLED
-      - ENABLED
-    description: Acceleration configuration for the job.
   AccelerationSettings:
     type: object
     required:
@@ -1910,8 +2332,14 @@ definitions:
       - DISABLED
       - ENABLED
     description: 'The anti-alias filter is automatically applied to all outputs. The service no longer accepts the value DISABLED for AntiAlias. If you specify that in your job, the service will ignore the setting.'
-  __string:
-    type: string
+  AssociateCertificateRequest:
+    type: object
+    required:
+      - Arn
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the ACM certificate that you want to associate with your MediaConvert resource.
   AudioCodec:
     type: string
     enum:
@@ -2448,13 +2876,6 @@ definitions:
     type: string
     pattern: '^(s3:\/\/)(.*?)\.(bmp|BMP|png|PNG)$'
     minLength: 14
-  AvailBlanking:
-    type: object
-    properties:
-      AvailBlankingImage:
-        $ref: '#/definitions/__stringMin14PatternS3BmpBMPPngPNG'
-        description: Blanking image to be used. Leave empty for solid black. Only bmp and png images are supported.
-    description: Settings for Avail Blanking
   BillingTagsSource:
     type: string
     enum:
@@ -2598,6 +3019,9 @@ definitions:
         $ref: '#/definitions/__integerMin0Max2147483647'
         description: 'Specifies the vertical position of the caption relative to the top of the output in pixels. A value of 10 would result in the captions starting 10 pixels from the top of the output. If no explicit y_position is provided, the caption will be positioned towards the bottom of the output. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.'
     description: Burn-In Destination Settings.
+  CancelJobRequest:
+    type: object
+    properties: {}
   __stringMin1:
     type: string
     minLength: 1
@@ -3152,11 +3576,6 @@ definitions:
       - FORCE
       - FALLBACK
     description: 'There are two sources for color metadata, the input file and the job configuration (in the Color space and HDR master display informaiton settings). The Color space usage setting controls which takes precedence. FORCE: The system will use color metadata supplied by user, if any. If the user does not supply color metadata, the system will use data from the source. FALLBACK: The system will use color metadata from the source. If source has no color metadata, the system will use user-supplied color metadata values if available.'
-  Commitment:
-    type: string
-    enum:
-      - ONE_YEAR
-    description: The length of the term of your reserved queue pricing plan commitment.
   ContainerType:
     type: string
     enum:
@@ -3377,28 +3796,6 @@ definitions:
         $ref: '#/definitions/__string'
         description: Overrides the "Major Brand" field in the output file. Usually not necessary to specify.
     description: Settings for MP4 Container
-  ContainerSettings:
-    type: object
-    properties:
-      Container:
-        $ref: '#/definitions/ContainerType'
-        description: 'Container for this output. Some containers require a container settings object. If not specified, the default object will be created.'
-      F4vSettings:
-        $ref: '#/definitions/F4vSettings'
-        description: Settings for F4v container
-      M2tsSettings:
-        $ref: '#/definitions/M2tsSettings'
-        description: 'MPEG-2 TS container settings. These apply to outputs in a File output group when the output''s container (ContainerType) is MPEG-2 Transport Stream (M2TS). In these assets, data is organized by the program map table (PMT). Each transport stream program contains subsets of data, including audio, video, and metadata. Each of these subsets of data has a numerical label called a packet identifier (PID). Each transport stream program corresponds to one MediaConvert output. The PMT lists the types of data in a program along with their PID. Downstream systems and players use the program map table to look up the PID for each type of data it accesses and then uses the PIDs to locate specific data within the asset.'
-      M3u8Settings:
-        $ref: '#/definitions/M3u8Settings'
-        description: Settings for TS segments in HLS
-      MovSettings:
-        $ref: '#/definitions/MovSettings'
-        description: Settings for MOV Container.
-      Mp4Settings:
-        $ref: '#/definitions/Mp4Settings'
-        description: Settings for MP4 Container
-    description: Container specific settings.
   JobSettings:
     type: object
     properties:
@@ -3450,14 +3847,42 @@ definitions:
       - SECONDS_600
     description: 'Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch Events. Set the interval, in seconds, between status updates. MediaConvert sends an update at this interval from the time the service begins processing your job to the time it completes the transcode or encounters an error.'
   __mapOf__string:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/__string'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/__string'
+  CreateJobRequest:
+    type: object
+    required:
+      - Role
+      - Settings
+    properties:
+      AccelerationSettings:
+        $ref: '#/definitions/AccelerationSettings'
+        description: 'This is a beta feature. If you are interested in using this feature, please contact AWS customer support.'
+      BillingTagsSource:
+        $ref: '#/definitions/BillingTagsSource'
+        description: 'Optional. Choose a tag type that AWS Billing and Cost Management will use to sort your AWS Elemental MediaConvert costs on any billing report that you set up. Any transcoding outputs that don''t have an associated tag will appear in your billing report unsorted. If you don''t choose a valid value for this field, your job outputs will appear on the billing report unsorted.'
+      ClientRequestToken:
+        $ref: '#/definitions/__string'
+        description: Idempotency token for CreateJob operation.
+      JobTemplate:
+        $ref: '#/definitions/__string'
+        description: 'When you create a job, you can either specify a job template or specify the transcoding settings individually'
+      Queue:
+        $ref: '#/definitions/__string'
+        description: 'Optional. When you create a job, you can specify a queue to send it to. If you don''t specify, the job will go to the default queue. For more about queues, see the User Guide topic at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html.'
+      Role:
+        $ref: '#/definitions/__string'
+        description: 'Required. The IAM role you use for creating this job. For details about permissions, see the User Guide topic at the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html.'
+      Settings:
+        $ref: '#/definitions/JobSettings'
+        description: JobSettings contains all the transcode settings for a job.
+      StatusUpdateInterval:
+        $ref: '#/definitions/StatusUpdateInterval'
+        description: 'Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch Events. Set the interval, in seconds, between status updates. MediaConvert sends an update at this interval from the time the service begins processing your job to the time it completes the transcode or encounters an error.'
+      UserMetadata:
+        $ref: '#/definitions/__mapOf__string'
+        description: User-defined metadata that you want to associate with an MediaConvert job. You specify metadata in key/value pairs.
   Job:
     type: object
     required:
@@ -3553,6 +3978,36 @@ definitions:
         $ref: '#/definitions/TimedMetadataInsertion'
         description: 'Enable Timed metadata insertion (TimedMetadataInsertion) to include ID3 tags in your job. To include timed metadata, you must enable it here, enable it in each output container, and specify tags and timecodes in ID3 insertion (Id3Insertion) objects.'
     description: JobTemplateSettings contains all the transcode settings saved in the template that will be applied to jobs created from it.
+  CreateJobTemplateRequest:
+    type: object
+    required:
+      - Settings
+      - Name
+    properties:
+      AccelerationSettings:
+        $ref: '#/definitions/AccelerationSettings'
+        description: This is a beta feature. If you are interested in using this feature please contact AWS customer support.
+      Category:
+        $ref: '#/definitions/__string'
+        description: Optional. A category for the job template you are creating
+      Description:
+        $ref: '#/definitions/__string'
+        description: Optional. A description of the job template you are creating.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the job template you are creating.
+      Queue:
+        $ref: '#/definitions/__string'
+        description: 'Optional. The queue that jobs created from this template are assigned to. If you don''t specify this, jobs will go to the default queue.'
+      Settings:
+        $ref: '#/definitions/JobTemplateSettings'
+        description: JobTemplateSettings contains all the transcode settings saved in the template that will be applied to jobs created from it.
+      StatusUpdateInterval:
+        $ref: '#/definitions/StatusUpdateInterval'
+        description: 'Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch Events. Set the interval, in seconds, between status updates. MediaConvert sends an update at this interval from the time the service begins processing your job to the time it completes the transcode or encounters an error.'
+      Tags:
+        $ref: '#/definitions/__mapOf__string'
+        description: The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
   JobTemplate:
     type: object
     required:
@@ -3609,6 +4064,27 @@ definitions:
         $ref: '#/definitions/VideoDescription'
         description: (VideoDescription) contains a group of video encoding settings. The specific video settings depend on the video codec you choose when you specify a value for Video codec (codec). Include one instance of (VideoDescription) per output.
     description: Settings for preset
+  CreatePresetRequest:
+    type: object
+    required:
+      - Settings
+      - Name
+    properties:
+      Category:
+        $ref: '#/definitions/__string'
+        description: Optional. A category for the preset you are creating.
+      Description:
+        $ref: '#/definitions/__string'
+        description: Optional. A description of the preset you are creating.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the preset you are creating.
+      Settings:
+        $ref: '#/definitions/PresetSettings'
+        description: Settings for preset
+      Tags:
+        $ref: '#/definitions/__mapOf__string'
+        description: The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
   Preset:
     type: object
     required:
@@ -3663,6 +4139,26 @@ definitions:
         $ref: '#/definitions/__integer'
         description: Specifies the number of reserved transcode slots (RTS) for this queue. The number of RTS determines how many jobs the queue can process in parallel; each RTS can process one job at a time. You can't decrease the number of RTS in your reserved queue. You can increase the number of RTS by extending your existing commitment with a new 12-month commitment for the larger number. The new commitment begins when you purchase the additional capacity. You can't cancel your commitment or revert to your original commitment after you increase the capacity.
     description: Details about the pricing plan for your reserved queue. Required for reserved queues and not applicable to on-demand queues.
+  CreateQueueRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Description:
+        $ref: '#/definitions/__string'
+        description: Optional. A description of the queue that you are creating.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the queue that you are creating.
+      PricingPlan:
+        $ref: '#/definitions/PricingPlan'
+        description: 'Specifies whether the pricing plan for the queue is on-demand or reserved. For on-demand, you pay per minute, billed in increments of .01 minute. For reserved, you pay for the transcoding capacity of the entire queue, regardless of how much or how little you use it. Reserved pricing requires a 12-month commitment. When you use the API to create a queue, the default is on-demand.'
+      ReservationPlanSettings:
+        $ref: '#/definitions/ReservationPlanSettings'
+        description: Details about the pricing plan for your reserved queue. Required for reserved queues and not applicable to on-demand queues.
+      Tags:
+        $ref: '#/definitions/__mapOf__string'
+        description: The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
   Queue:
     type: object
     required:
@@ -3818,14 +4314,34 @@ definitions:
         $ref: '#/definitions/DeinterlacerMode'
         description: Use Deinterlacer (DeinterlaceMode) to choose how the service will do deinterlacing. Default is Deinterlace. - Deinterlace converts interlaced to progressive. - Inverse telecine converts Hard Telecine 29.97i to progressive 23.976p. - Adaptive auto-detects and converts to progressive.
     description: Settings for deinterlacer
+  DeleteJobTemplateRequest:
+    type: object
+    properties: {}
+  DeletePresetRequest:
+    type: object
+    properties: {}
+  DeleteQueueRequest:
+    type: object
+    properties: {}
   DescribeEndpointsMode:
     type: string
     enum:
       - DEFAULT
       - GET_ONLY
     description: 'Optional field, defaults to DEFAULT. Specify DEFAULT for this operation to return your endpoints if any exist, or to create an endpoint for you and return it if one doesn''t already exist. Specify GET_ONLY to return your endpoints if any exist, or an empty list if none exist.'
-  __integer:
-    type: integer
+  DescribeEndpointsRequest:
+    type: object
+    properties:
+      MaxResults:
+        $ref: '#/definitions/__integer'
+        description: 'Optional. Max number of endpoints, up to twenty, that will be returned at one time.'
+      Mode:
+        $ref: '#/definitions/DescribeEndpointsMode'
+        description: 'Optional field, defaults to DEFAULT. Specify DEFAULT for this operation to return your endpoints if any exist, or to create an endpoint for you and return it if one doesn''t already exist. Specify GET_ONLY to return your endpoints if any exist, or an empty list if none exist.'
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: 'Use this string, provided with the response to a previous request, to request the next batch of endpoints.'
+    description: DescribeEndpointsRequest
   __listOfEndpoint:
     type: array
     items:
@@ -3837,6 +4353,14 @@ definitions:
         $ref: '#/definitions/S3EncryptionSettings'
         description: Settings for how your job outputs are encrypted as they are uploaded to Amazon S3.
     description: Settings associated with S3 destination
+  DisassociateCertificateRequest:
+    type: object
+    required:
+      - Arn
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the ACM certificate that you want to disassociate from your MediaConvert resource.
   DropFrameTimecode:
     type: string
     enum:
@@ -4101,19 +4625,6 @@ definitions:
         $ref: '#/definitions/__stringPatternSNSignalProcessingNotificationNS'
         description: 'Provide your ESAM SignalProcessingNotification XML document inside your JSON job settings. Form the XML document as per OC-SP-ESAM-API-I03-131025. The transcoder will use the signal processing instructions in the message that you supply. Provide your ESAM SignalProcessingNotification XML document inside your JSON job settings. If you want the service to place SCTE-35 markers at the insertion points you specify in the XML document, you must also enable SCTE-35 ESAM (scte35Esam). Note that you can either specify an ESAM XML document or enable SCTE-35 passthrough. You can''t do both.'
     description: ESAM SignalProcessingNotification data defined by OC-SP-ESAM-API-I03-131025.
-  EsamSettings:
-    type: object
-    properties:
-      ManifestConfirmConditionNotification:
-        $ref: '#/definitions/EsamManifestConfirmConditionNotification'
-        description: Specifies an ESAM ManifestConfirmConditionNotification XML as per OC-SP-ESAM-API-I03-131025. The transcoder uses the manifest conditioning instructions that you provide in the setting MCC XML (mccXml).
-      ResponseSignalPreroll:
-        $ref: '#/definitions/__integerMin0Max30000'
-        description: 'Specifies the stream distance, in milliseconds, between the SCTE 35 messages that the transcoder places and the splice points that they refer to. If the time between the start of the asset and the SCTE-35 message is less than this value, then the transcoder places the SCTE-35 marker at the beginning of the stream.'
-      SignalProcessingNotification:
-        $ref: '#/definitions/EsamSignalProcessingNotification'
-        description: Specifies an ESAM SignalProcessingNotification XML as per OC-SP-ESAM-API-I03-131025. The transcoder uses the signal processing instructions that you provide in the setting SCC XML (sccXml).
-    description: 'Settings for Event Signaling And Messaging (ESAM). If you don''t do ad insertion, you can ignore these settings.'
   __stringPatternSNSignalProcessingNotificationNS:
     type: string
     pattern: ^\s*<(.|\n)*SignalProcessingNotification(.|\n)*>\s*$
@@ -4163,6 +4674,18 @@ definitions:
         $ref: '#/definitions/__integerMin1Max100'
         description: JPEG Quality - a higher value equals higher quality.
     description: Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the value FRAME_CAPTURE.
+  GetJobRequest:
+    type: object
+    properties: {}
+  GetJobTemplateRequest:
+    type: object
+    properties: {}
+  GetPresetRequest:
+    type: object
+    properties: {}
+  GetQueueRequest:
+    type: object
+    properties: {}
   H264AdaptiveQuantization:
     type: string
     enum:
@@ -5115,32 +5638,17 @@ definitions:
         description: Specify the images that you want to overlay on your video. The images must be PNG or TGA files.
     description: Enable the image inserter feature to include a graphic overlay on your video. Enable or disable this feature for each input or output individually. This setting is disabled by default.
   __mapOfAudioSelectorGroup:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/AudioSelectorGroup'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/AudioSelectorGroup'
   __mapOfAudioSelector:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/AudioSelector'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/AudioSelector'
   __mapOfCaptionSelector:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/CaptionSelector'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/CaptionSelector'
   InputDeblockFilter:
     type: string
     enum:
@@ -5439,73 +5947,6 @@ definitions:
         $ref: '#/definitions/__timestampUnix'
         description: 'The time, in Unix epoch format, that you submitted the job.'
     description: 'Information about when jobs are submitted, started, and finished is specified in Unix epoch format in seconds.'
-  __integerMinNegative1000Max1000:
-    type: integer
-    minimum: -1000
-    maximum: 1000
-  __listOfInput:
-    type: array
-    items:
-      $ref: '#/definitions/Input'
-  MotionImageInserter:
-    type: object
-    properties:
-      Framerate:
-        $ref: '#/definitions/MotionImageInsertionFramerate'
-        description: 'If your motion graphic asset is a .mov file, keep this setting unspecified. If your motion graphic asset is a series of .png files, specify the frame rate of the overlay in frames per second, as a fraction. For example, specify 24 fps as 24/1. Make sure that the number of images in your series matches the frame rate and your intended overlay duration. For example, if you want a 30-second overlay at 30 fps, you should have 900 .png images. This overlay frame rate doesn''t need to match the frame rate of the underlying video.'
-      Input:
-        $ref: '#/definitions/__stringMin14Max1285PatternS3Mov09Png'
-        description: 'Specify the .mov file or series of .png files that you want to overlay on your video. For .png files, provide the file name of the first file in the series. Make sure that the names of the .png files end with sequential numbers that specify the order that they are played in. For example, overlay_000.png, overlay_001.png, overlay_002.png, and so on. The sequence must start at zero, and each image file name must have the same number of digits. Pad your initial file names with enough zeros to complete the sequence. For example, if the first image is overlay_0.png, there can be only 10 images in the sequence, with the last image being overlay_9.png. But if the first image is overlay_00.png, there can be 100 images in the sequence.'
-      InsertionMode:
-        $ref: '#/definitions/MotionImageInsertionMode'
-        description: Choose the type of motion graphic asset that you are providing for your overlay. You can choose either a .mov file or a series of .png files.
-      Offset:
-        $ref: '#/definitions/MotionImageInsertionOffset'
-        description: 'Use Offset to specify the placement of your motion graphic overlay on the video frame. Specify in pixels, from the upper-left corner of the frame. If you don''t specify an offset, the service scales your overlay to the full size of the frame. Otherwise, the service inserts the overlay at its native resolution and scales the size up or down with any video scaling.'
-      Playback:
-        $ref: '#/definitions/MotionImagePlayback'
-        description: Specify whether your motion graphic overlay repeats on a loop or plays only once.
-      StartTime:
-        $ref: '#/definitions/__stringMin11Max11Pattern01D20305D205D'
-        description: 'Specify when the motion overlay begins. Use timecode format (HH:MM:SS:FF or HH:MM:SS;FF). Make sure that the timecode you provide here takes into account how you have set up your timecode configuration under both job settings and input settings. The simplest way to do that is to set both to start at 0. If you need to set up your job to follow timecodes embedded in your source that don''t start at zero, make sure that you specify a start time that is after the first embedded timecode. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/setting-up-timecode.html Find job-wide and input timecode configuration settings in your JSON job settings specification at settings>timecodeConfig>source and settings>inputs>timecodeSource.'
-    description: Overlay motion graphics on top of your video at the time that you specify.
-  NielsenConfiguration:
-    type: object
-    properties:
-      BreakoutCode:
-        $ref: '#/definitions/__integerMin0Max9'
-        description: 'Use Nielsen Configuration (NielsenConfiguration) to set the Nielsen measurement system breakout code. Supported values are 0, 3, 7, and 9.'
-      DistributorId:
-        $ref: '#/definitions/__string'
-        description: Use Distributor ID (DistributorID) to specify the distributor ID that is assigned to your organization by Neilsen.
-    description: Settings for Nielsen Configuration
-  __listOfOutputGroup:
-    type: array
-    items:
-      $ref: '#/definitions/OutputGroup'
-  TimecodeConfig:
-    type: object
-    properties:
-      Anchor:
-        $ref: '#/definitions/__stringPattern010920405090509092'
-        description: 'If you use an editing platform that relies on an anchor timecode, use Anchor Timecode (Anchor) to specify a timecode that will match the input video frame to the output video frame. Use 24-hour format with frame number, (HH:MM:SS:FF) or (HH:MM:SS;FF). This setting ignores frame rate conversion. System behavior for Anchor Timecode varies depending on your setting for Source (TimecodeSource). * If Source (TimecodeSource) is set to Specified Start (SPECIFIEDSTART), the first input frame is the specified value in Start Timecode (Start). Anchor Timecode (Anchor) and Start Timecode (Start) are used calculate output timecode. * If Source (TimecodeSource) is set to Start at 0 (ZEROBASED)  the  first frame is 00:00:00:00. * If Source (TimecodeSource) is set to Embedded (EMBEDDED), the  first frame is the timecode value on the first input frame of the input.'
-      Source:
-        $ref: '#/definitions/TimecodeSource'
-        description: 'Use Source (TimecodeSource) to set how timecodes are handled within this job. To make sure that your video, audio, captions, and markers are synchronized and that time-based features, such as image inserter, work correctly, choose the Timecode source option that matches your assets. All timecodes are in a 24-hour format with frame number (HH:MM:SS:FF). * Embedded (EMBEDDED) - Use the timecode that is in the input video. If no embedded timecode is in the source, the service will use Start at 0 (ZEROBASED) instead. * Start at 0 (ZEROBASED) - Set the timecode of the initial frame to 00:00:00:00. * Specified Start (SPECIFIEDSTART) - Set the timecode of the initial frame to a value other than zero. You use Start timecode (Start) to provide this value.'
-      Start:
-        $ref: '#/definitions/__stringPattern010920405090509092'
-        description: 'Only use when you set Source (TimecodeSource) to Specified start (SPECIFIEDSTART). Use Start timecode (Start) to specify the timecode for the initial frame. Use 24-hour format with frame number, (HH:MM:SS:FF) or (HH:MM:SS;FF).'
-      TimestampOffset:
-        $ref: '#/definitions/__stringPattern0940191020191209301'
-        description: 'Only applies to outputs that support program-date-time stamp. Use Timestamp offset (TimestampOffset) to overwrite the timecode date without affecting the time and frame number. Provide the new date as a string in the format "yyyy-mm-dd".  To use Time stamp offset, you must also enable Insert program-date-time (InsertProgramDateTime) in the output settings. For example, if the date part of your timecodes is 2002-1-25 and you want to change it to one year later, set Timestamp offset (TimestampOffset) to 2003-1-25.'
-    description: These settings control how the service handles timecodes throughout the job. These settings don't affect input clipping.
-  TimedMetadataInsertion:
-    type: object
-    properties:
-      Id3Insertions:
-        $ref: '#/definitions/__listOfId3Insertion'
-        description: Id3Insertions contains the array of Id3Insertion instances.
-    description: 'Enable Timed metadata insertion (TimedMetadataInsertion) to include ID3 tags in your job. To include timed metadata, you must enable it here, enable it in each output container, and specify tags and timecodes in ID3 insertion (Id3Insertion) objects.'
   Type:
     type: string
     enum:
@@ -5518,10 +5959,6 @@ definitions:
       - CREATION_DATE
       - SYSTEM
     description: 'Optional. When you request a list of job templates, you can choose to list them alphabetically by NAME or chronologically by CREATION_DATE. If you don''t specify, the service will list them by name.'
-  __listOfInputTemplate:
-    type: array
-    items:
-      $ref: '#/definitions/InputTemplate'
   __integerMin1Max20:
     type: integer
     minimum: 1
@@ -5532,10 +5969,16 @@ definitions:
       - ASCENDING
       - DESCENDING
     description: 'When you request lists of resources, you can optionally specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.'
+  ListJobTemplatesRequest:
+    type: object
+    properties: {}
   __listOfJobTemplate:
     type: array
     items:
       $ref: '#/definitions/JobTemplate'
+  ListJobsRequest:
+    type: object
+    properties: {}
   __listOfJob:
     type: array
     items:
@@ -5547,6 +5990,9 @@ definitions:
       - CREATION_DATE
       - SYSTEM
     description: 'Optional. When you request a list of presets, you can choose to list them alphabetically by NAME or chronologically by CREATION_DATE. If you don''t specify, the service will list them by name.'
+  ListPresetsRequest:
+    type: object
+    properties: {}
   __listOfPreset:
     type: array
     items:
@@ -5557,10 +6003,16 @@ definitions:
       - NAME
       - CREATION_DATE
     description: 'Optional. When you request a list of queues, you can choose to list them alphabetically by NAME or chronologically by CREATION_DATE. If you don''t specify, the service will list them by creation date.'
+  ListQueuesRequest:
+    type: object
+    properties: {}
   __listOfQueue:
     type: array
     items:
       $ref: '#/definitions/Queue'
+  ListTagsForResourceRequest:
+    type: object
+    properties: {}
   ResourceTags:
     type: object
     properties:
@@ -6148,10 +6600,6 @@ definitions:
     type: integer
     minimum: 0
     maximum: 16
-  __listOfAudioDescription:
-    type: array
-    items:
-      $ref: '#/definitions/AudioDescription'
   __listOfCaptionDescription:
     type: array
     items:
@@ -6166,55 +6614,6 @@ definitions:
   __stringMin0:
     type: string
     minLength: 0
-  VideoDescription:
-    type: object
-    properties:
-      AfdSignaling:
-        $ref: '#/definitions/AfdSignaling'
-        description: 'This setting only applies to H.264, H.265, and MPEG2 outputs. Use Insert AFD signaling (AfdSignaling) to specify whether the service includes AFD values in the output video data and what those values are. * Choose None to remove all AFD values from this output. * Choose Fixed to ignore input AFD values and instead encode the value specified in the job. * Choose Auto to calculate output AFD values based on the input AFD scaler data.'
-      AntiAlias:
-        $ref: '#/definitions/AntiAlias'
-        description: 'The anti-alias filter is automatically applied to all outputs. The service no longer accepts the value DISABLED for AntiAlias. If you specify that in your job, the service will ignore the setting.'
-      CodecSettings:
-        $ref: '#/definitions/VideoCodecSettings'
-        description: 'Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value you choose for Video codec (Codec). For each codec enum you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * FRAME_CAPTURE, FrameCaptureSettings'
-      ColorMetadata:
-        $ref: '#/definitions/ColorMetadata'
-        description: Enable Insert color metadata (ColorMetadata) to include color metadata in this output. This setting is enabled by default.
-      Crop:
-        $ref: '#/definitions/Rectangle'
-        description: 'Applies only if your input aspect ratio is different from your output aspect ratio. Use Input cropping rectangle (Crop) to specify the  video area the service will include in the output. This will crop the input source, causing video pixels to be removed on encode. If you crop your input frame size to smaller than your output frame size, make sure to specify the behavior you want in your output setting "Scaling behavior".'
-      DropFrameTimecode:
-        $ref: '#/definitions/DropFrameTimecode'
-        description: 'Applies only to 29.97 fps outputs. When this feature is enabled, the service will use drop-frame timecode on outputs. If it is not possible to use drop-frame timecode, the system will fall back to non-drop-frame. This setting is enabled by default when Timecode insertion (TimecodeInsertion) is enabled.'
-      FixedAfd:
-        $ref: '#/definitions/__integerMin0Max15'
-        description: Applies only if you set AFD Signaling(AfdSignaling) to Fixed (FIXED). Use Fixed (FixedAfd) to specify a four-bit AFD value which the service will write on all  frames of this video output.
-      Height:
-        $ref: '#/definitions/__integerMin32Max2160'
-        description: 'Use the Height (Height) setting to define the video resolution height for this output. Specify in pixels. If you don''t provide a value here, the service will use the input height.'
-      Position:
-        $ref: '#/definitions/Rectangle'
-        description: Use Position (Position) to point to a rectangle object to define your position. This setting overrides any other aspect ratio.
-      RespondToAfd:
-        $ref: '#/definitions/RespondToAfd'
-        description: 'Use Respond to AFD (RespondToAfd) to specify how the service changes the video itself in response to AFD values in the input. * Choose Respond to clip the input video frame according to the AFD value, input display aspect ratio, and output display aspect ratio. * Choose Passthrough to include the input AFD values. Do not choose this when AfdSignaling is set to (NONE). A preferred implementation of this workflow is to set RespondToAfd to (NONE) and set AfdSignaling to (AUTO). * Choose None to remove all input AFD values from this output.'
-      ScalingBehavior:
-        $ref: '#/definitions/ScalingBehavior'
-        description: Applies only if your input aspect ratio is different from your output aspect ratio. Choose "Stretch to output" to have the service stretch your video image to fit. Keep the setting "Default" to allow the service to letterbox your video instead. This setting overrides any positioning value you specify elsewhere in the job.
-      Sharpness:
-        $ref: '#/definitions/__integerMin0Max100'
-        description: 'Use Sharpness (Sharpness) setting to specify the strength of anti-aliasing. This setting changes the width of the anti-alias filter kernel used for scaling. Sharpness only applies if your output resolution is different from your input resolution. 0 is the softest setting, 100 the sharpest, and 50 recommended for most content.'
-      TimecodeInsertion:
-        $ref: '#/definitions/VideoTimecodeInsertion'
-        description: 'Applies only to H.264, H.265, MPEG2, and ProRes outputs. Only enable Timecode insertion when the input frame rate is identical to the output frame rate. To include timecodes in this output, set Timecode insertion (VideoTimecodeInsertion) to PIC_TIMING_SEI. To leave them out, set it to DISABLED. Default is DISABLED. When the service inserts timecodes in an output, by default, it uses any embedded timecodes from the input. If none are present, the service will set the timecode for the first output frame to zero. To change this default behavior, adjust the settings under Timecode configuration (TimecodeConfig). In the console, these settings are located under Job > Job settings > Timecode configuration. Note - Timecode source under input settings (InputTimecodeSource) does not affect the timecodes that are inserted in the output. Source under Job settings > Timecode configuration (TimecodeSource) does.'
-      VideoPreprocessors:
-        $ref: '#/definitions/VideoPreprocessor'
-        description: Find additional transcoding features under Preprocessors (VideoPreprocessors). Enable the features at each output individually. These features are disabled by default.
-      Width:
-        $ref: '#/definitions/__integerMin32Max4096'
-        description: 'Use Width (Width) to define the video resolution width, in pixels, for this output. If you don''t provide a value here, the service will use the input width.'
-    description: Settings for video outputs
   Output:
     type: object
     properties:
@@ -6336,10 +6735,6 @@ definitions:
       - MS_SMOOTH_GROUP_SETTINGS
       - CMAF_GROUP_SETTINGS
     description: 'Type of output group (File group, Apple HLS, DASH ISO, Microsoft Smooth Streaming, CMAF)'
-  __listOfCaptionDescriptionPreset:
-    type: array
-    items:
-      $ref: '#/definitions/CaptionDescriptionPreset'
   ProresCodecProfile:
     type: string
     enum:
@@ -6486,12 +6881,6 @@ definitions:
     type: integer
     minimum: 1
     maximum: 8
-  RenewalType:
-    type: string
-    enum:
-      - AUTO_RENEW
-      - EXPIRE
-    description: Specifies whether the term of your reserved queue pricing plan is automatically extended (AUTO_RENEW) or expires (EXPIRE) at the end of the term.
   ReservationPlanStatus:
     type: string
     enum:
@@ -6557,6 +6946,18 @@ definitions:
   __stringPatternAZaZ0932:
     type: string
     pattern: '^[A-Za-z0-9]{32}$'
+  TagResourceRequest:
+    type: object
+    required:
+      - Arn
+      - Tags
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: 'The Amazon Resource Name (ARN) of the resource that you want to tag. To get the ARN, send a GET request with the resource name.'
+      Tags:
+        $ref: '#/definitions/__mapOf__string'
+        description: The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
   __stringMin3Max3Pattern1809aFAF09aEAE:
     type: string
     pattern: '^[1-8][0-9a-fA-F][0-9a-eA-E]$'
@@ -6619,6 +7020,57 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/__string'
+  UntagResourceRequest:
+    type: object
+    properties:
+      TagKeys:
+        $ref: '#/definitions/__listOf__string'
+        description: The keys of the tags that you want to remove from the resource.
+  UpdateJobTemplateRequest:
+    type: object
+    properties:
+      AccelerationSettings:
+        $ref: '#/definitions/AccelerationSettings'
+        description: 'This is a beta feature. If you are interested in using this feature, please contact AWS customer support.'
+      Category:
+        $ref: '#/definitions/__string'
+        description: 'The new category for the job template, if you are changing it.'
+      Description:
+        $ref: '#/definitions/__string'
+        description: 'The new description for the job template, if you are changing it.'
+      Queue:
+        $ref: '#/definitions/__string'
+        description: 'The new queue for the job template, if you are changing it.'
+      Settings:
+        $ref: '#/definitions/JobTemplateSettings'
+        description: JobTemplateSettings contains all the transcode settings saved in the template that will be applied to jobs created from it.
+      StatusUpdateInterval:
+        $ref: '#/definitions/StatusUpdateInterval'
+        description: 'Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch Events. Set the interval, in seconds, between status updates. MediaConvert sends an update at this interval from the time the service begins processing your job to the time it completes the transcode or encounters an error.'
+  UpdatePresetRequest:
+    type: object
+    properties:
+      Category:
+        $ref: '#/definitions/__string'
+        description: 'The new category for the preset, if you are changing it.'
+      Description:
+        $ref: '#/definitions/__string'
+        description: 'The new description for the preset, if you are changing it.'
+      Settings:
+        $ref: '#/definitions/PresetSettings'
+        description: Settings for preset
+  UpdateQueueRequest:
+    type: object
+    properties:
+      Description:
+        $ref: '#/definitions/__string'
+        description: 'The new description for the queue, if you are changing it.'
+      ReservationPlanSettings:
+        $ref: '#/definitions/ReservationPlanSettings'
+        description: 'The new details of your pricing plan for your reserved queue. When you set up a new pricing plan to replace an expired one, you enter into another 12-month commitment. When you add capacity to your queue by increasing the number of RTS, you extend the term of your commitment to 12 months from when you add capacity. After you make these commitments, you can''t cancel them.'
+      Status:
+        $ref: '#/definitions/QueueStatus'
+        description: 'Pause or activate a queue by changing its status between ACTIVE and PAUSED. If you pause a queue, jobs in that queue won''t begin. Jobs that are running when you pause the queue continue to run until they finish or result in an error.'
   VideoCodec:
     type: string
     enum:

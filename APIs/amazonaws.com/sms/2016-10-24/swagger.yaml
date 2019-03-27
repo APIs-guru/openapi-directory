@@ -99,7 +99,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /:
+  '/#X-Amz-Target=AWSServerMigrationService_V2016_10_24.CreateApp':
     post:
       operationId: CreateApp
       description: Creates an application. An application consists of one or more server groups. Each server group contain one or more servers.
@@ -134,6 +134,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateAppRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSServerMigrationService_V2016_10_24.CreateApp
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -144,7 +150,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateReplicationJob':
+  '/#X-Amz-Target=AWSServerMigrationService_V2016_10_24.CreateReplicationJob':
     post:
       operationId: CreateReplicationJob
       description: Creates a replication job. The replication job schedules periodic replication runs to replicate your server to AWS. Each replication run creates an Amazon Machine Image (AMI).
@@ -195,6 +201,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateReplicationJobRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSServerMigrationService_V2016_10_24.CreateReplicationJob
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -205,7 +217,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteApp':
+  '/#X-Amz-Target=AWSServerMigrationService_V2016_10_24.DeleteApp':
     post:
       operationId: DeleteApp
       description: Deletes an existing application. Optionally deletes the launched stack associated with the application and all AWS SMS replication jobs for servers in the application.
@@ -240,6 +252,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteAppRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSServerMigrationService_V2016_10_24.DeleteApp
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -250,7 +268,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteAppLaunchConfiguration':
+  '/#X-Amz-Target=AWSServerMigrationService_V2016_10_24.DeleteAppLaunchConfiguration':
     post:
       operationId: DeleteAppLaunchConfiguration
       description: Deletes existing launch configuration for an application.
@@ -285,6 +303,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteAppLaunchConfigurationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSServerMigrationService_V2016_10_24.DeleteAppLaunchConfiguration
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -295,7 +319,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteAppReplicationConfiguration':
+  '/#X-Amz-Target=AWSServerMigrationService_V2016_10_24.DeleteAppReplicationConfiguration':
     post:
       operationId: DeleteAppReplicationConfiguration
       description: Deletes existing replication configuration for an application.
@@ -330,6 +354,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteAppReplicationConfigurationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSServerMigrationService_V2016_10_24.DeleteAppReplicationConfiguration
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -340,7 +370,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteReplicationJob':
+  '/#X-Amz-Target=AWSServerMigrationService_V2016_10_24.DeleteReplicationJob':
     post:
       operationId: DeleteReplicationJob
       description: '<p>Deletes the specified replication job.</p> <p>After you delete a replication job, there are no further replication runs. AWS deletes the contents of the Amazon S3 bucket used to store AWS SMS artifacts. The AMIs created by the replication runs are not deleted.</p>'
@@ -375,6 +405,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteReplicationJobRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSServerMigrationService_V2016_10_24.DeleteReplicationJob
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -385,7 +421,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteServerCatalog':
+  '/#X-Amz-Target=AWSServerMigrationService_V2016_10_24.DeleteServerCatalog':
     post:
       operationId: DeleteServerCatalog
       description: Deletes all servers from your server catalog.
@@ -416,6 +452,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteServerCatalogRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSServerMigrationService_V2016_10_24.DeleteServerCatalog
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -426,7 +468,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DisassociateConnector':
+  '/#X-Amz-Target=AWSServerMigrationService_V2016_10_24.DisassociateConnector':
     post:
       operationId: DisassociateConnector
       description: '<p>Disassociates the specified connector from AWS SMS.</p> <p>After you disassociate a connector, it is no longer available to support replication jobs.</p>'
@@ -457,6 +499,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DisassociateConnectorRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSServerMigrationService_V2016_10_24.DisassociateConnector
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -467,7 +515,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GenerateChangeSet':
+  '/#X-Amz-Target=AWSServerMigrationService_V2016_10_24.GenerateChangeSet':
     post:
       operationId: GenerateChangeSet
       description: Generates a target change set for a currently launched stack and writes it to an Amazon S3 object in the customer’s Amazon S3 bucket.
@@ -502,6 +550,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GenerateChangeSetRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSServerMigrationService_V2016_10_24.GenerateChangeSet
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -512,7 +566,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GenerateTemplate':
+  '/#X-Amz-Target=AWSServerMigrationService_V2016_10_24.GenerateTemplate':
     post:
       operationId: GenerateTemplate
       description: Generates an Amazon CloudFormation template based on the current launch configuration and writes it to an Amazon S3 object in the customer’s Amazon S3 bucket.
@@ -547,6 +601,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GenerateTemplateRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSServerMigrationService_V2016_10_24.GenerateTemplate
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -557,7 +617,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetApp':
+  '/#X-Amz-Target=AWSServerMigrationService_V2016_10_24.GetApp':
     post:
       operationId: GetApp
       description: Retrieve information about an application.
@@ -592,6 +652,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetAppRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSServerMigrationService_V2016_10_24.GetApp
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -602,7 +668,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetAppLaunchConfiguration':
+  '/#X-Amz-Target=AWSServerMigrationService_V2016_10_24.GetAppLaunchConfiguration':
     post:
       operationId: GetAppLaunchConfiguration
       description: Retrieves the application launch configuration associated with an application.
@@ -637,6 +703,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetAppLaunchConfigurationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSServerMigrationService_V2016_10_24.GetAppLaunchConfiguration
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -647,7 +719,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetAppReplicationConfiguration':
+  '/#X-Amz-Target=AWSServerMigrationService_V2016_10_24.GetAppReplicationConfiguration':
     post:
       operationId: GetAppReplicationConfiguration
       description: Retrieves an application replication configuration associatd with an application.
@@ -682,6 +754,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetAppReplicationConfigurationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSServerMigrationService_V2016_10_24.GetAppReplicationConfiguration
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -692,7 +770,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetConnectors':
+  '/#X-Amz-Target=AWSServerMigrationService_V2016_10_24.GetConnectors':
     post:
       operationId: GetConnectors
       description: Describes the connectors registered with the AWS SMS.
@@ -721,6 +799,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSServerMigrationService_V2016_10_24.GetConnectors
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -731,7 +815,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetReplicationJobs':
+  '/#X-Amz-Target=AWSServerMigrationService_V2016_10_24.GetReplicationJobs':
     post:
       operationId: GetReplicationJobs
       description: Describes the specified replication job or all of your replication jobs.
@@ -768,6 +852,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSServerMigrationService_V2016_10_24.GetReplicationJobs
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -778,7 +868,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetReplicationRuns':
+  '/#X-Amz-Target=AWSServerMigrationService_V2016_10_24.GetReplicationRuns':
     post:
       operationId: GetReplicationRuns
       description: Describes the replication runs for the specified replication job.
@@ -815,6 +905,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSServerMigrationService_V2016_10_24.GetReplicationRuns
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -825,7 +921,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetServers':
+  '/#X-Amz-Target=AWSServerMigrationService_V2016_10_24.GetServers':
     post:
       operationId: GetServers
       description: '<p>Describes the servers in your server catalog.</p> <p>Before you can describe your servers, you must import them using <a>ImportServerCatalog</a>.</p>'
@@ -854,6 +950,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSServerMigrationService_V2016_10_24.GetServers
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -864,7 +966,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ImportServerCatalog':
+  '/#X-Amz-Target=AWSServerMigrationService_V2016_10_24.ImportServerCatalog':
     post:
       operationId: ImportServerCatalog
       description: '<p>Gathers a complete list of on-premises servers. Connectors must be installed and monitoring all servers that you want to import.</p> <p>This call returns immediately, but might take additional time to retrieve all the servers.</p>'
@@ -899,6 +1001,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ImportServerCatalogRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSServerMigrationService_V2016_10_24.ImportServerCatalog
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -909,7 +1017,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#LaunchApp':
+  '/#X-Amz-Target=AWSServerMigrationService_V2016_10_24.LaunchApp':
     post:
       operationId: LaunchApp
       description: Launches an application stack.
@@ -944,6 +1052,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/LaunchAppRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSServerMigrationService_V2016_10_24.LaunchApp
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -954,7 +1068,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListApps':
+  '/#X-Amz-Target=AWSServerMigrationService_V2016_10_24.ListApps':
     post:
       operationId: ListApps
       description: Returns a list of summaries for all applications.
@@ -989,6 +1103,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListAppsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSServerMigrationService_V2016_10_24.ListApps
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -999,7 +1119,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#PutAppLaunchConfiguration':
+  '/#X-Amz-Target=AWSServerMigrationService_V2016_10_24.PutAppLaunchConfiguration':
     post:
       operationId: PutAppLaunchConfiguration
       description: Creates a launch configuration for an application.
@@ -1034,6 +1154,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutAppLaunchConfigurationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSServerMigrationService_V2016_10_24.PutAppLaunchConfiguration
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1044,7 +1170,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#PutAppReplicationConfiguration':
+  '/#X-Amz-Target=AWSServerMigrationService_V2016_10_24.PutAppReplicationConfiguration':
     post:
       operationId: PutAppReplicationConfiguration
       description: Creates or updates a replication configuration for an application.
@@ -1079,6 +1205,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutAppReplicationConfigurationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSServerMigrationService_V2016_10_24.PutAppReplicationConfiguration
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1089,7 +1221,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#StartAppReplication':
+  '/#X-Amz-Target=AWSServerMigrationService_V2016_10_24.StartAppReplication':
     post:
       operationId: StartAppReplication
       description: Starts replicating an application.
@@ -1124,6 +1256,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StartAppReplicationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSServerMigrationService_V2016_10_24.StartAppReplication
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1134,7 +1272,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#StartOnDemandReplicationRun':
+  '/#X-Amz-Target=AWSServerMigrationService_V2016_10_24.StartOnDemandReplicationRun':
     post:
       operationId: StartOnDemandReplicationRun
       description: <p>Starts an on-demand replication run for the specified replication job. This replication run starts immediately. This replication run is in addition to the ones already scheduled.</p> <p>There is a limit on the number of on-demand replications runs you can request in a 24-hour period.</p>
@@ -1169,6 +1307,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StartOnDemandReplicationRunRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSServerMigrationService_V2016_10_24.StartOnDemandReplicationRun
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1179,7 +1323,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#StopAppReplication':
+  '/#X-Amz-Target=AWSServerMigrationService_V2016_10_24.StopAppReplication':
     post:
       operationId: StopAppReplication
       description: Stops replicating an application.
@@ -1214,6 +1358,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StopAppReplicationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSServerMigrationService_V2016_10_24.StopAppReplication
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1224,7 +1374,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#TerminateApp':
+  '/#X-Amz-Target=AWSServerMigrationService_V2016_10_24.TerminateApp':
     post:
       operationId: TerminateApp
       description: Terminates the stack for an application.
@@ -1259,6 +1409,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/TerminateAppRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSServerMigrationService_V2016_10_24.TerminateApp
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1269,7 +1425,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateApp':
+  '/#X-Amz-Target=AWSServerMigrationService_V2016_10_24.UpdateApp':
     post:
       operationId: UpdateApp
       description: Updates an application.
@@ -1304,6 +1460,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateAppRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSServerMigrationService_V2016_10_24.UpdateApp
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1314,7 +1476,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateReplicationJob':
+  '/#X-Amz-Target=AWSServerMigrationService_V2016_10_24.UpdateReplicationJob':
     post:
       operationId: UpdateReplicationJob
       description: Updates the specified settings for the specified replication job.
@@ -1361,6 +1523,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateReplicationJobRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSServerMigrationService_V2016_10_24.UpdateReplicationJob
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'

@@ -144,7 +144,16 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/AcceptResourceShareInvitationRequest'
+            type: object
+            required:
+              - resourceShareInvitationArn
+            properties:
+              resourceShareInvitationArn:
+                description: The Amazon Resource Name (ARN) of the invitation.
+                type: string
+              clientToken:
+                description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -217,7 +226,26 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/AssociateResourceShareRequest'
+            type: object
+            required:
+              - resourceShareArn
+            properties:
+              resourceShareArn:
+                description: The Amazon Resource Name (ARN) of the resource share.
+                type: string
+              resourceArns:
+                description: The Amazon Resource Names (ARN) of the resources.
+                type: array
+                items:
+                  $ref: '#/definitions/String'
+              principals:
+                description: The principals.
+                type: array
+                items:
+                  $ref: '#/definitions/String'
+              clientToken:
+                description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -282,7 +310,34 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateResourceShareRequest'
+            type: object
+            required:
+              - name
+            properties:
+              name:
+                description: The name of the resource share.
+                type: string
+              resourceArns:
+                description: The Amazon Resource Names (ARN) of the resources to associate with the resource share.
+                type: array
+                items:
+                  $ref: '#/definitions/String'
+              principals:
+                description: 'The principals to associate with the resource share. The possible values are IDs of AWS accounts, the ARN of an OU or organization from AWS Organizations.'
+                type: array
+                items:
+                  $ref: '#/definitions/String'
+              tags:
+                description: One or more tags.
+                type: array
+                items:
+                  $ref: '#/definitions/Tag'
+              allowExternalPrincipals:
+                description: Indicates whether principals outside your organization can be associated with a resource share.
+                type: boolean
+              clientToken:
+                description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -293,7 +348,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /deleteresourceshare:
+  '/deleteresourceshare#resourceShareArn':
     delete:
       operationId: DeleteResourceShare
       description: Deletes the specified resource share.
@@ -339,11 +394,16 @@ paths:
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
-        - name: body
-          in: body
+        - name: resourceShareArn
+          in: query
           required: true
-          schema:
-            $ref: '#/definitions/DeleteResourceShareRequest'
+          description: The Amazon Resource Name (ARN) of the resource share.
+          type: string
+        - name: clientToken
+          in: query
+          required: false
+          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -408,7 +468,26 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/DisassociateResourceShareRequest'
+            type: object
+            required:
+              - resourceShareArn
+            properties:
+              resourceShareArn:
+                description: The Amazon Resource Name (ARN) of the resource share.
+                type: string
+              resourceArns:
+                description: The Amazon Resource Names (ARN) of the resources.
+                type: array
+                items:
+                  $ref: '#/definitions/String'
+              principals:
+                description: The principals.
+                type: array
+                items:
+                  $ref: '#/definitions/String'
+              clientToken:
+                description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -440,12 +519,7 @@ paths:
           description: ServiceUnavailableException
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/EnableSharingWithAwsOrganizationRequest'
+      parameters: []
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -490,7 +564,26 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/GetResourcePoliciesRequest'
+            type: object
+            required:
+              - resourceArns
+            properties:
+              resourceArns:
+                description: The Amazon Resource Names (ARN) of the resources.
+                type: array
+                items:
+                  $ref: '#/definitions/String'
+              principal:
+                description: The principal.
+                type: string
+              nextToken:
+                description: The token for the next page of results.
+                type: string
+              maxResults:
+                description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+                type: integer
+                minimum: 1
+                maximum: 500
         - name: maxResults
           type: string
           in: query
@@ -553,7 +646,44 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/GetResourceShareAssociationsRequest'
+            type: object
+            required:
+              - associationType
+            properties:
+              associationType:
+                description: The association type.
+                type: string
+                enum:
+                  - PRINCIPAL
+                  - RESOURCE
+              resourceShareArns:
+                description: The Amazon Resource Names (ARN) of the resource shares.
+                type: array
+                items:
+                  $ref: '#/definitions/String'
+              resourceArn:
+                description: The Amazon Resource Name (ARN) of the resource.
+                type: string
+              principal:
+                description: The principal.
+                type: string
+              associationStatus:
+                description: The status of the association.
+                type: string
+                enum:
+                  - ASSOCIATING
+                  - ASSOCIATED
+                  - FAILED
+                  - DISASSOCIATING
+                  - DISASSOCIATED
+              nextToken:
+                description: The token for the next page of results.
+                type: string
+              maxResults:
+                description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+                type: integer
+                minimum: 1
+                maximum: 500
         - name: maxResults
           type: string
           in: query
@@ -616,7 +746,26 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/GetResourceShareInvitationsRequest'
+            type: object
+            properties:
+              resourceShareInvitationArns:
+                description: The Amazon Resource Names (ARN) of the invitations.
+                type: array
+                items:
+                  $ref: '#/definitions/String'
+              resourceShareArns:
+                description: The Amazon Resource Names (ARN) of the resource shares.
+                type: array
+                items:
+                  $ref: '#/definitions/String'
+              nextToken:
+                description: The token for the next page of results.
+                type: string
+              maxResults:
+                description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+                type: integer
+                minimum: 1
+                maximum: 500
         - name: maxResults
           type: string
           in: query
@@ -675,7 +824,46 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/GetResourceSharesRequest'
+            type: object
+            required:
+              - resourceOwner
+            properties:
+              resourceShareArns:
+                description: The Amazon Resource Names (ARN) of the resource shares.
+                type: array
+                items:
+                  $ref: '#/definitions/String'
+              resourceShareStatus:
+                description: The status of the resource share.
+                type: string
+                enum:
+                  - PENDING
+                  - ACTIVE
+                  - FAILED
+                  - DELETING
+                  - DELETED
+              resourceOwner:
+                description: The type of owner.
+                type: string
+                enum:
+                  - SELF
+                  - OTHER-ACCOUNTS
+              name:
+                description: The name of the resource share.
+                type: string
+              tagFilters:
+                description: One or more tag filters.
+                type: array
+                items:
+                  $ref: '#/definitions/TagFilter'
+              nextToken:
+                description: The token for the next page of results.
+                type: string
+              maxResults:
+                description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+                type: integer
+                minimum: 1
+                maximum: 500
         - name: maxResults
           type: string
           in: query
@@ -734,7 +922,40 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/ListPrincipalsRequest'
+            type: object
+            required:
+              - resourceOwner
+            properties:
+              resourceOwner:
+                description: The type of owner.
+                type: string
+                enum:
+                  - SELF
+                  - OTHER-ACCOUNTS
+              resourceArn:
+                description: The Amazon Resource Name (ARN) of the resource.
+                type: string
+              principals:
+                description: The principals.
+                type: array
+                items:
+                  $ref: '#/definitions/String'
+              resourceType:
+                description: The resource type.
+                type: string
+              resourceShareArns:
+                description: The Amazon Resource Names (ARN) of the resource shares.
+                type: array
+                items:
+                  $ref: '#/definitions/String'
+              nextToken:
+                description: The token for the next page of results.
+                type: string
+              maxResults:
+                description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+                type: integer
+                minimum: 1
+                maximum: 500
         - name: maxResults
           type: string
           in: query
@@ -797,7 +1018,40 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/ListResourcesRequest'
+            type: object
+            required:
+              - resourceOwner
+            properties:
+              resourceOwner:
+                description: The type of owner.
+                type: string
+                enum:
+                  - SELF
+                  - OTHER-ACCOUNTS
+              principal:
+                description: The principal.
+                type: string
+              resourceType:
+                description: The resource type.
+                type: string
+              resourceArns:
+                description: The Amazon Resource Names (ARN) of the resources.
+                type: array
+                items:
+                  $ref: '#/definitions/String'
+              resourceShareArns:
+                description: The Amazon Resource Names (ARN) of the resource shares.
+                type: array
+                items:
+                  $ref: '#/definitions/String'
+              nextToken:
+                description: The token for the next page of results.
+                type: string
+              maxResults:
+                description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+                type: integer
+                minimum: 1
+                maximum: 500
         - name: maxResults
           type: string
           in: query
@@ -864,7 +1118,16 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/RejectResourceShareInvitationRequest'
+            type: object
+            required:
+              - resourceShareInvitationArn
+            properties:
+              resourceShareInvitationArn:
+                description: The Amazon Resource Name (ARN) of the invitation.
+                type: string
+              clientToken:
+                description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -913,7 +1176,19 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/TagResourceRequest'
+            type: object
+            required:
+              - resourceShareArn
+              - tags
+            properties:
+              resourceShareArn:
+                description: The Amazon Resource Name (ARN) of the resource share.
+                type: string
+              tags:
+                description: One or more tags.
+                type: array
+                items:
+                  $ref: '#/definitions/Tag'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -950,7 +1225,19 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UntagResourceRequest'
+            type: object
+            required:
+              - resourceShareArn
+              - tagKeys
+            properties:
+              resourceShareArn:
+                description: The Amazon Resource Name (ARN) of the resource share.
+                type: string
+              tagKeys:
+                description: The tag keys of the tags to remove.
+                type: array
+                items:
+                  $ref: '#/definitions/TagKey'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1011,7 +1298,22 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateResourceShareRequest'
+            type: object
+            required:
+              - resourceShareArn
+            properties:
+              resourceShareArn:
+                description: The Amazon Resource Name (ARN) of the resource share.
+                type: string
+              name:
+                description: The name of the resource share.
+                type: string
+              allowExternalPrincipals:
+                description: Indicates whether principals outside your organization can be associated with a resource share.
+                type: boolean
+              clientToken:
+                description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1032,17 +1334,6 @@ definitions:
       clientToken:
         $ref: '#/definitions/String'
         description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
-  AcceptResourceShareInvitationRequest:
-    type: object
-    required:
-      - resourceShareInvitationArn
-    properties:
-      resourceShareInvitationArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the invitation.
-      clientToken:
-        $ref: '#/definitions/String'
-        description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
   MalformedArnException: {}
   OperationNotPermittedException: {}
   ResourceShareInvitationArnNotFoundException: {}
@@ -1060,23 +1351,8 @@ definitions:
       clientToken:
         $ref: '#/definitions/String'
         description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
-  AssociateResourceShareRequest:
-    type: object
-    required:
-      - resourceShareArn
-    properties:
-      resourceShareArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the resource share.
-      resourceArns:
-        $ref: '#/definitions/ResourceArnList'
-        description: The Amazon Resource Names (ARN) of the resources.
-      principals:
-        $ref: '#/definitions/PrincipalArnOrIdList'
-        description: The principals.
-      clientToken:
-        $ref: '#/definitions/String'
-        description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+  String:
+    type: string
   IdempotentParameterMismatchException: {}
   UnknownResourceException: {}
   InvalidStateTransitionException: {}
@@ -1092,29 +1368,16 @@ definitions:
       clientToken:
         $ref: '#/definitions/String'
         description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
-  CreateResourceShareRequest:
+  Tag:
     type: object
-    required:
-      - name
     properties:
-      name:
-        $ref: '#/definitions/String'
-        description: The name of the resource share.
-      resourceArns:
-        $ref: '#/definitions/ResourceArnList'
-        description: The Amazon Resource Names (ARN) of the resources to associate with the resource share.
-      principals:
-        $ref: '#/definitions/PrincipalArnOrIdList'
-        description: 'The principals to associate with the resource share. The possible values are IDs of AWS accounts, the ARN of an OU or organization from AWS Organizations.'
-      tags:
-        $ref: '#/definitions/TagList'
-        description: One or more tags.
-      allowExternalPrincipals:
-        $ref: '#/definitions/Boolean'
-        description: Indicates whether principals outside your organization can be associated with a resource share.
-      clientToken:
-        $ref: '#/definitions/String'
-        description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+      key:
+        $ref: '#/definitions/TagKey'
+        description: The key of the tag.
+      value:
+        $ref: '#/definitions/TagValue'
+        description: The value of the tag.
+    description: Information about a tag.
   DeleteResourceShareResponse:
     type: object
     properties:
@@ -1124,9 +1387,6 @@ definitions:
       clientToken:
         $ref: '#/definitions/String'
         description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
-  DeleteResourceShareRequest:
-    type: object
-    properties: {}
   DisassociateResourceShareResponse:
     type: object
     properties:
@@ -1136,32 +1396,12 @@ definitions:
       clientToken:
         $ref: '#/definitions/String'
         description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
-  DisassociateResourceShareRequest:
-    type: object
-    required:
-      - resourceShareArn
-    properties:
-      resourceShareArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the resource share.
-      resourceArns:
-        $ref: '#/definitions/ResourceArnList'
-        description: The Amazon Resource Names (ARN) of the resources.
-      principals:
-        $ref: '#/definitions/PrincipalArnOrIdList'
-        description: The principals.
-      clientToken:
-        $ref: '#/definitions/String'
-        description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
   EnableSharingWithAwsOrganizationResponse:
     type: object
     properties:
       returnValue:
         $ref: '#/definitions/Boolean'
         description: Indicates whether the request succeeded.
-  EnableSharingWithAwsOrganizationRequest:
-    type: object
-    properties: {}
   GetResourcePoliciesResponse:
     type: object
     properties:
@@ -1171,23 +1411,6 @@ definitions:
       nextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
-  GetResourcePoliciesRequest:
-    type: object
-    required:
-      - resourceArns
-    properties:
-      resourceArns:
-        $ref: '#/definitions/ResourceArnList'
-        description: The Amazon Resource Names (ARN) of the resources.
-      principal:
-        $ref: '#/definitions/String'
-        description: The principal.
-      nextToken:
-        $ref: '#/definitions/String'
-        description: The token for the next page of results.
-      maxResults:
-        $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
   InvalidNextTokenException: {}
   GetResourceShareAssociationsResponse:
     type: object
@@ -1198,32 +1421,6 @@ definitions:
       nextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
-  GetResourceShareAssociationsRequest:
-    type: object
-    required:
-      - associationType
-    properties:
-      associationType:
-        $ref: '#/definitions/ResourceShareAssociationType'
-        description: The association type.
-      resourceShareArns:
-        $ref: '#/definitions/ResourceShareArnList'
-        description: The Amazon Resource Names (ARN) of the resource shares.
-      resourceArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the resource.
-      principal:
-        $ref: '#/definitions/String'
-        description: The principal.
-      associationStatus:
-        $ref: '#/definitions/ResourceShareAssociationStatus'
-        description: The status of the association.
-      nextToken:
-        $ref: '#/definitions/String'
-        description: The token for the next page of results.
-      maxResults:
-        $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
   GetResourceShareInvitationsResponse:
     type: object
     properties:
@@ -1233,21 +1430,6 @@ definitions:
       nextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
-  GetResourceShareInvitationsRequest:
-    type: object
-    properties:
-      resourceShareInvitationArns:
-        $ref: '#/definitions/ResourceShareInvitationArnList'
-        description: The Amazon Resource Names (ARN) of the invitations.
-      resourceShareArns:
-        $ref: '#/definitions/ResourceShareArnList'
-        description: The Amazon Resource Names (ARN) of the resource shares.
-      nextToken:
-        $ref: '#/definitions/String'
-        description: The token for the next page of results.
-      maxResults:
-        $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
   InvalidMaxResultsException: {}
   GetResourceSharesResponse:
     type: object
@@ -1258,32 +1440,16 @@ definitions:
       nextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
-  GetResourceSharesRequest:
+  TagFilter:
     type: object
-    required:
-      - resourceOwner
     properties:
-      resourceShareArns:
-        $ref: '#/definitions/ResourceShareArnList'
-        description: The Amazon Resource Names (ARN) of the resource shares.
-      resourceShareStatus:
-        $ref: '#/definitions/ResourceShareStatus'
-        description: The status of the resource share.
-      resourceOwner:
-        $ref: '#/definitions/ResourceOwner'
-        description: The type of owner.
-      name:
-        $ref: '#/definitions/String'
-        description: The name of the resource share.
-      tagFilters:
-        $ref: '#/definitions/TagFilters'
-        description: One or more tag filters.
-      nextToken:
-        $ref: '#/definitions/String'
-        description: The token for the next page of results.
-      maxResults:
-        $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+      tagKey:
+        $ref: '#/definitions/TagKey'
+        description: The tag key.
+      tagValues:
+        $ref: '#/definitions/TagValueList'
+        description: The tag values.
+    description: Used to filter information based on tags.
   ListPrincipalsResponse:
     type: object
     properties:
@@ -1293,32 +1459,6 @@ definitions:
       nextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
-  ListPrincipalsRequest:
-    type: object
-    required:
-      - resourceOwner
-    properties:
-      resourceOwner:
-        $ref: '#/definitions/ResourceOwner'
-        description: The type of owner.
-      resourceArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the resource.
-      principals:
-        $ref: '#/definitions/PrincipalArnOrIdList'
-        description: The principals.
-      resourceType:
-        $ref: '#/definitions/String'
-        description: The resource type.
-      resourceShareArns:
-        $ref: '#/definitions/ResourceShareArnList'
-        description: The Amazon Resource Names (ARN) of the resource shares.
-      nextToken:
-        $ref: '#/definitions/String'
-        description: The token for the next page of results.
-      maxResults:
-        $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
   ListResourcesResponse:
     type: object
     properties:
@@ -1328,32 +1468,6 @@ definitions:
       nextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
-  ListResourcesRequest:
-    type: object
-    required:
-      - resourceOwner
-    properties:
-      resourceOwner:
-        $ref: '#/definitions/ResourceOwner'
-        description: The type of owner.
-      principal:
-        $ref: '#/definitions/String'
-        description: The principal.
-      resourceType:
-        $ref: '#/definitions/String'
-        description: The resource type.
-      resourceArns:
-        $ref: '#/definitions/ResourceArnList'
-        description: The Amazon Resource Names (ARN) of the resources.
-      resourceShareArns:
-        $ref: '#/definitions/ResourceShareArnList'
-        description: The Amazon Resource Names (ARN) of the resource shares.
-      nextToken:
-        $ref: '#/definitions/String'
-        description: The token for the next page of results.
-      maxResults:
-        $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
   InvalidResourceTypeException: {}
   RejectResourceShareInvitationResponse:
     type: object
@@ -1364,7 +1478,27 @@ definitions:
       clientToken:
         $ref: '#/definitions/String'
         description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
-  RejectResourceShareInvitationRequest:
+  TagResourceResponse:
+    type: object
+    properties: {}
+  TagLimitExceededException: {}
+  ResourceArnNotFoundException: {}
+  UntagResourceResponse:
+    type: object
+    properties: {}
+  TagKey:
+    type: string
+  UpdateResourceShareResponse:
+    type: object
+    properties:
+      resourceShare:
+        $ref: '#/definitions/ResourceShare'
+        description: Information about the resource share.
+      clientToken:
+        $ref: '#/definitions/String'
+        description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+  MissingRequiredParameterException: {}
+  AcceptResourceShareInvitationRequest:
     type: object
     required:
       - resourceShareInvitationArn
@@ -1375,67 +1509,6 @@ definitions:
       clientToken:
         $ref: '#/definitions/String'
         description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
-  TagResourceResponse:
-    type: object
-    properties: {}
-  TagResourceRequest:
-    type: object
-    required:
-      - resourceShareArn
-      - tags
-    properties:
-      resourceShareArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the resource share.
-      tags:
-        $ref: '#/definitions/TagList'
-        description: One or more tags.
-  TagLimitExceededException: {}
-  ResourceArnNotFoundException: {}
-  UntagResourceResponse:
-    type: object
-    properties: {}
-  UntagResourceRequest:
-    type: object
-    required:
-      - resourceShareArn
-      - tagKeys
-    properties:
-      resourceShareArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the resource share.
-      tagKeys:
-        $ref: '#/definitions/TagKeyList'
-        description: The tag keys of the tags to remove.
-  UpdateResourceShareResponse:
-    type: object
-    properties:
-      resourceShare:
-        $ref: '#/definitions/ResourceShare'
-        description: Information about the resource share.
-      clientToken:
-        $ref: '#/definitions/String'
-        description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
-  UpdateResourceShareRequest:
-    type: object
-    required:
-      - resourceShareArn
-    properties:
-      resourceShareArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the resource share.
-      name:
-        $ref: '#/definitions/String'
-        description: The name of the resource share.
-      allowExternalPrincipals:
-        $ref: '#/definitions/Boolean'
-        description: Indicates whether principals outside your organization can be associated with a resource share.
-      clientToken:
-        $ref: '#/definitions/String'
-        description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
-  MissingRequiredParameterException: {}
-  String:
-    type: string
   ResourceShareInvitation:
     type: object
     properties:
@@ -1472,6 +1545,23 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/String'
+  AssociateResourceShareRequest:
+    type: object
+    required:
+      - resourceShareArn
+    properties:
+      resourceShareArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the resource share.
+      resourceArns:
+        $ref: '#/definitions/ResourceArnList'
+        description: The Amazon Resource Names (ARN) of the resources.
+      principals:
+        $ref: '#/definitions/PrincipalArnOrIdList'
+        description: The principals.
+      clientToken:
+        $ref: '#/definitions/String'
+        description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
   ResourceShareAssociationList:
     type: array
     items:
@@ -1482,6 +1572,29 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Tag'
+  CreateResourceShareRequest:
+    type: object
+    required:
+      - name
+    properties:
+      name:
+        $ref: '#/definitions/String'
+        description: The name of the resource share.
+      resourceArns:
+        $ref: '#/definitions/ResourceArnList'
+        description: The Amazon Resource Names (ARN) of the resources to associate with the resource share.
+      principals:
+        $ref: '#/definitions/PrincipalArnOrIdList'
+        description: 'The principals to associate with the resource share. The possible values are IDs of AWS accounts, the ARN of an OU or organization from AWS Organizations.'
+      tags:
+        $ref: '#/definitions/TagList'
+        description: One or more tags.
+      allowExternalPrincipals:
+        $ref: '#/definitions/Boolean'
+        description: Indicates whether principals outside your organization can be associated with a resource share.
+      clientToken:
+        $ref: '#/definitions/String'
+        description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
   ResourceShare:
     type: object
     properties:
@@ -1516,10 +1629,50 @@ definitions:
   DateTime:
     type: string
     format: date-time
+  DeleteResourceShareRequest:
+    type: object
+    properties: {}
+  DisassociateResourceShareRequest:
+    type: object
+    required:
+      - resourceShareArn
+    properties:
+      resourceShareArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the resource share.
+      resourceArns:
+        $ref: '#/definitions/ResourceArnList'
+        description: The Amazon Resource Names (ARN) of the resources.
+      principals:
+        $ref: '#/definitions/PrincipalArnOrIdList'
+        description: The principals.
+      clientToken:
+        $ref: '#/definitions/String'
+        description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+  EnableSharingWithAwsOrganizationRequest:
+    type: object
+    properties: {}
   MaxResults:
     type: integer
     minimum: 1
     maximum: 500
+  GetResourcePoliciesRequest:
+    type: object
+    required:
+      - resourceArns
+    properties:
+      resourceArns:
+        $ref: '#/definitions/ResourceArnList'
+        description: The Amazon Resource Names (ARN) of the resources.
+      principal:
+        $ref: '#/definitions/String'
+        description: The principal.
+      nextToken:
+        $ref: '#/definitions/String'
+        description: The token for the next page of results.
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
   PolicyList:
     type: array
     items:
@@ -1541,10 +1694,51 @@ definitions:
       - FAILED
       - DISASSOCIATING
       - DISASSOCIATED
+  GetResourceShareAssociationsRequest:
+    type: object
+    required:
+      - associationType
+    properties:
+      associationType:
+        $ref: '#/definitions/ResourceShareAssociationType'
+        description: The association type.
+      resourceShareArns:
+        $ref: '#/definitions/ResourceShareArnList'
+        description: The Amazon Resource Names (ARN) of the resource shares.
+      resourceArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the resource.
+      principal:
+        $ref: '#/definitions/String'
+        description: The principal.
+      associationStatus:
+        $ref: '#/definitions/ResourceShareAssociationStatus'
+        description: The status of the association.
+      nextToken:
+        $ref: '#/definitions/String'
+        description: The token for the next page of results.
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
   ResourceShareInvitationArnList:
     type: array
     items:
       $ref: '#/definitions/String'
+  GetResourceShareInvitationsRequest:
+    type: object
+    properties:
+      resourceShareInvitationArns:
+        $ref: '#/definitions/ResourceShareInvitationArnList'
+        description: The Amazon Resource Names (ARN) of the invitations.
+      resourceShareArns:
+        $ref: '#/definitions/ResourceShareArnList'
+        description: The Amazon Resource Names (ARN) of the resource shares.
+      nextToken:
+        $ref: '#/definitions/String'
+        description: The token for the next page of results.
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
   ResourceShareInvitationList:
     type: array
     items:
@@ -1566,14 +1760,92 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/TagFilter'
+  GetResourceSharesRequest:
+    type: object
+    required:
+      - resourceOwner
+    properties:
+      resourceShareArns:
+        $ref: '#/definitions/ResourceShareArnList'
+        description: The Amazon Resource Names (ARN) of the resource shares.
+      resourceShareStatus:
+        $ref: '#/definitions/ResourceShareStatus'
+        description: The status of the resource share.
+      resourceOwner:
+        $ref: '#/definitions/ResourceOwner'
+        description: The type of owner.
+      name:
+        $ref: '#/definitions/String'
+        description: The name of the resource share.
+      tagFilters:
+        $ref: '#/definitions/TagFilters'
+        description: One or more tag filters.
+      nextToken:
+        $ref: '#/definitions/String'
+        description: The token for the next page of results.
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
   ResourceShareList:
     type: array
     items:
       $ref: '#/definitions/ResourceShare'
+  ListPrincipalsRequest:
+    type: object
+    required:
+      - resourceOwner
+    properties:
+      resourceOwner:
+        $ref: '#/definitions/ResourceOwner'
+        description: The type of owner.
+      resourceArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the resource.
+      principals:
+        $ref: '#/definitions/PrincipalArnOrIdList'
+        description: The principals.
+      resourceType:
+        $ref: '#/definitions/String'
+        description: The resource type.
+      resourceShareArns:
+        $ref: '#/definitions/ResourceShareArnList'
+        description: The Amazon Resource Names (ARN) of the resource shares.
+      nextToken:
+        $ref: '#/definitions/String'
+        description: The token for the next page of results.
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
   PrincipalList:
     type: array
     items:
       $ref: '#/definitions/Principal'
+  ListResourcesRequest:
+    type: object
+    required:
+      - resourceOwner
+    properties:
+      resourceOwner:
+        $ref: '#/definitions/ResourceOwner'
+        description: The type of owner.
+      principal:
+        $ref: '#/definitions/String'
+        description: The principal.
+      resourceType:
+        $ref: '#/definitions/String'
+        description: The resource type.
+      resourceArns:
+        $ref: '#/definitions/ResourceArnList'
+        description: The Amazon Resource Names (ARN) of the resources.
+      resourceShareArns:
+        $ref: '#/definitions/ResourceShareArnList'
+        description: The Amazon Resource Names (ARN) of the resource shares.
+      nextToken:
+        $ref: '#/definitions/String'
+        description: The token for the next page of results.
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
   ResourceList:
     type: array
     items:
@@ -1599,6 +1871,17 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: Indicates whether the principal belongs to the same organization as the AWS account that owns the resource share.
     description: Describes a principal for use with AWS Resource Access Manager.
+  RejectResourceShareInvitationRequest:
+    type: object
+    required:
+      - resourceShareInvitationArn
+    properties:
+      resourceShareInvitationArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the invitation.
+      clientToken:
+        $ref: '#/definitions/String'
+        description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
   ResourceStatus:
     type: string
     enum:
@@ -1666,35 +1949,54 @@ definitions:
       - ACCEPTED
       - REJECTED
       - EXPIRED
-  TagKey:
-    type: string
   TagValue:
     type: string
-  Tag:
-    type: object
-    properties:
-      key:
-        $ref: '#/definitions/TagKey'
-        description: The key of the tag.
-      value:
-        $ref: '#/definitions/TagValue'
-        description: The value of the tag.
-    description: Information about a tag.
   TagValueList:
     type: array
     items:
       $ref: '#/definitions/TagValue'
-  TagFilter:
-    type: object
-    properties:
-      tagKey:
-        $ref: '#/definitions/TagKey'
-        description: The tag key.
-      tagValues:
-        $ref: '#/definitions/TagValueList'
-        description: The tag values.
-    description: Used to filter information based on tags.
   TagKeyList:
     type: array
     items:
       $ref: '#/definitions/TagKey'
+  TagResourceRequest:
+    type: object
+    required:
+      - resourceShareArn
+      - tags
+    properties:
+      resourceShareArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the resource share.
+      tags:
+        $ref: '#/definitions/TagList'
+        description: One or more tags.
+  UntagResourceRequest:
+    type: object
+    required:
+      - resourceShareArn
+      - tagKeys
+    properties:
+      resourceShareArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the resource share.
+      tagKeys:
+        $ref: '#/definitions/TagKeyList'
+        description: The tag keys of the tags to remove.
+  UpdateResourceShareRequest:
+    type: object
+    required:
+      - resourceShareArn
+    properties:
+      resourceShareArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the resource share.
+      name:
+        $ref: '#/definitions/String'
+        description: The name of the resource share.
+      allowExternalPrincipals:
+        $ref: '#/definitions/Boolean'
+        description: Indicates whether principals outside your organization can be associated with a resource share.
+      clientToken:
+        $ref: '#/definitions/String'
+        description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'

@@ -99,7 +99,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /:
+  '/#X-Amz-Target=AmazonAthena.BatchGetNamedQuery':
     post:
       operationId: BatchGetNamedQuery
       description: 'Returns the details of a single named query or a list of up to 50 queries, which you provide as an array of query ID strings. Requires you to have access to the workgroup in which the queries were saved. Use <a>ListNamedQueriesInput</a> to get the list of named query IDs in the specified workgroup. If information could not be retrieved for a submitted query ID, information about the query ID submitted is listed under <a>UnprocessedNamedQueryId</a>. Named queries differ from executed queries. Use <a>BatchGetQueryExecutionInput</a> to get details about each unique query execution, and <a>ListQueryExecutionsInput</a> to get a list of query execution IDs.'
@@ -122,6 +122,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/BatchGetNamedQueryInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonAthena.BatchGetNamedQuery
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -132,7 +138,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#BatchGetQueryExecution':
+  '/#X-Amz-Target=AmazonAthena.BatchGetQueryExecution':
     post:
       operationId: BatchGetQueryExecution
       description: 'Returns the details of a single query execution or a list of up to 50 query executions, which you provide as an array of query execution ID strings. Requires you to have access to the workgroup in which the queries ran. To get a list of query execution IDs, use <a>ListQueryExecutionsInput$WorkGroup</a>. Query executions differ from named (saved) queries. Use <a>BatchGetNamedQueryInput</a> to get details about named queries.'
@@ -155,6 +161,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/BatchGetQueryExecutionInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonAthena.BatchGetQueryExecution
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -165,7 +177,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateNamedQuery':
+  '/#X-Amz-Target=AmazonAthena.CreateNamedQuery':
     post:
       operationId: CreateNamedQuery
       description: '<p>Creates a named query in the specified workgroup. Requires that you have access to the workgroup.</p> <p>For code samples using the AWS SDK for Java, see <a href="http://docs.aws.amazon.com/athena/latest/ug/code-samples.html">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>'
@@ -188,6 +200,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateNamedQueryInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonAthena.CreateNamedQuery
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -198,7 +216,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateWorkGroup':
+  '/#X-Amz-Target=AmazonAthena.CreateWorkGroup':
     post:
       operationId: CreateWorkGroup
       description: Creates a workgroup with the specified name.
@@ -221,6 +239,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateWorkGroupInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonAthena.CreateWorkGroup
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -231,7 +255,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteNamedQuery':
+  '/#X-Amz-Target=AmazonAthena.DeleteNamedQuery':
     post:
       operationId: DeleteNamedQuery
       description: '<p>Deletes the named query if you have access to the workgroup in which the query was saved.</p> <p>For code samples using the AWS SDK for Java, see <a href="http://docs.aws.amazon.com/athena/latest/ug/code-samples.html">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>'
@@ -254,6 +278,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteNamedQueryInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonAthena.DeleteNamedQuery
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -264,7 +294,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteWorkGroup':
+  '/#X-Amz-Target=AmazonAthena.DeleteWorkGroup':
     post:
       operationId: DeleteWorkGroup
       description: Deletes the workgroup with the specified name. The primary workgroup cannot be deleted.
@@ -287,6 +317,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteWorkGroupInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonAthena.DeleteWorkGroup
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -297,7 +333,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetNamedQuery':
+  '/#X-Amz-Target=AmazonAthena.GetNamedQuery':
     post:
       operationId: GetNamedQuery
       description: Returns information about a single query. Requires that you have access to the workgroup in which the query was saved.
@@ -320,6 +356,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetNamedQueryInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonAthena.GetNamedQuery
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -330,7 +372,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetQueryExecution':
+  '/#X-Amz-Target=AmazonAthena.GetQueryExecution':
     post:
       operationId: GetQueryExecution
       description: 'Returns information about a single execution of a query if you have access to the workgroup in which the query ran. Each time a query executes, information about the query execution is saved with a unique ID.'
@@ -353,6 +395,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetQueryExecutionInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonAthena.GetQueryExecution
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -363,7 +411,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetQueryResults':
+  '/#X-Amz-Target=AmazonAthena.GetQueryResults':
     post:
       operationId: GetQueryResults
       description: Returns the results of a single query execution specified by <code>QueryExecutionId</code> if you have access to the workgroup in which the query ran. This request does not execute the query but returns results. Use <a>StartQueryExecution</a> to run a query.
@@ -396,6 +444,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonAthena.GetQueryResults
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -406,7 +460,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetWorkGroup':
+  '/#X-Amz-Target=AmazonAthena.GetWorkGroup':
     post:
       operationId: GetWorkGroup
       description: Returns information about the workgroup with the specified name.
@@ -429,6 +483,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetWorkGroupInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonAthena.GetWorkGroup
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -439,7 +499,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListNamedQueries':
+  '/#X-Amz-Target=AmazonAthena.ListNamedQueries':
     post:
       operationId: ListNamedQueries
       description: '<p>Provides a list of available query IDs only for queries saved in the specified workgroup. Requires that you have access to the workgroup.</p> <p>For code samples using the AWS SDK for Java, see <a href="http://docs.aws.amazon.com/athena/latest/ug/code-samples.html">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>'
@@ -472,6 +532,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonAthena.ListNamedQueries
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -482,7 +548,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListQueryExecutions':
+  '/#X-Amz-Target=AmazonAthena.ListQueryExecutions':
     post:
       operationId: ListQueryExecutions
       description: '<p>Provides a list of available query execution IDs for the queries in the specified workgroup. Requires you to have access to the workgroup in which the queries ran.</p> <p>For code samples using the AWS SDK for Java, see <a href="http://docs.aws.amazon.com/athena/latest/ug/code-samples.html">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>'
@@ -515,6 +581,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonAthena.ListQueryExecutions
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -525,7 +597,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListTagsForResource':
+  '/#X-Amz-Target=AmazonAthena.ListTagsForResource':
     post:
       operationId: ListTagsForResource
       description: Lists the tags associated with this workgroup.
@@ -552,6 +624,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListTagsForResourceInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonAthena.ListTagsForResource
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -562,7 +640,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListWorkGroups':
+  '/#X-Amz-Target=AmazonAthena.ListWorkGroups':
     post:
       operationId: ListWorkGroups
       description: Lists available workgroups for the account.
@@ -595,6 +673,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonAthena.ListWorkGroups
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -605,7 +689,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#StartQueryExecution':
+  '/#X-Amz-Target=AmazonAthena.StartQueryExecution':
     post:
       operationId: StartQueryExecution
       description: '<p>Runs the SQL query statements contained in the <code>Query</code>. Requires you to have access to the workgroup in which the query ran.</p> <p>For code samples using the AWS SDK for Java, see <a href="http://docs.aws.amazon.com/athena/latest/ug/code-samples.html">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>'
@@ -632,6 +716,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StartQueryExecutionInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonAthena.StartQueryExecution
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -642,7 +732,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#StopQueryExecution':
+  '/#X-Amz-Target=AmazonAthena.StopQueryExecution':
     post:
       operationId: StopQueryExecution
       description: '<p>Stops a query execution. Requires you to have access to the workgroup in which the query ran.</p> <p>For code samples using the AWS SDK for Java, see <a href="http://docs.aws.amazon.com/athena/latest/ug/code-samples.html">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>'
@@ -665,6 +755,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StopQueryExecutionInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonAthena.StopQueryExecution
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -675,7 +771,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#TagResource':
+  '/#X-Amz-Target=AmazonAthena.TagResource':
     post:
       operationId: TagResource
       description: 'Adds one or more tags to the resource, such as a workgroup. A tag is a label that you assign to an AWS Athena resource (a workgroup). Each tag consists of a key and an optional value, both of which you define. Tags enable you to categorize resources (workgroups) in Athena, for example, by purpose, owner, or environment. Use a consistent set of tag keys to make it easier to search and filter workgroups in your account. For best practices, see <a href="https://aws.amazon.com/answers/account-management/aws-tagging-strategies/">AWS Tagging Strategies</a>. The key length is from 1 (minimum) to 128 (maximum) Unicode characters in UTF-8. The tag value length is from 0 (minimum) to 256 (maximum) Unicode characters in UTF-8. You can use letters and numbers representable in UTF-8, and the following characters: + - = . _ : / @. Tag keys and values are case-sensitive. Tag keys must be unique per resource. If you specify more than one, separate them by commas.'
@@ -702,6 +798,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/TagResourceInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonAthena.TagResource
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -712,7 +814,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UntagResource':
+  '/#X-Amz-Target=AmazonAthena.UntagResource':
     post:
       operationId: UntagResource
       description: 'Removes one or more tags from the workgroup resource. Takes as an input a list of TagKey Strings separated by commas, and removes their tags at the same time.'
@@ -739,6 +841,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UntagResourceInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonAthena.UntagResource
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -749,7 +857,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateWorkGroup':
+  '/#X-Amz-Target=AmazonAthena.UpdateWorkGroup':
     post:
       operationId: UpdateWorkGroup
       description: Updates the workgroup with the specified name. The workgroup's name cannot be changed.
@@ -772,6 +880,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateWorkGroupInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonAthena.UpdateWorkGroup
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'

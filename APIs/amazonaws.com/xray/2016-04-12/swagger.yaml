@@ -120,7 +120,18 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/BatchGetTracesRequest'
+            type: object
+            required:
+              - TraceIds
+            properties:
+              TraceIds:
+                description: Specify the trace IDs of requests for which to retrieve segments.
+                type: array
+                items:
+                  $ref: '#/definitions/TraceId'
+              NextToken:
+                description: Pagination token. Not used.
+                type: string
         - name: NextToken
           type: string
           in: query
@@ -158,7 +169,20 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateGroupRequest'
+            type: object
+            required:
+              - GroupName
+            properties:
+              GroupName:
+                description: The case-sensitive name of the new group. Default is a reserved name and names must be unique.
+                type: string
+                minLength: 1
+                maxLength: 32
+              FilterExpression:
+                description: The filter expression defining criteria by which to group traces.
+                type: string
+                minLength: 1
+                maxLength: 2000
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -195,7 +219,53 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateSamplingRuleRequest'
+            type: object
+            required:
+              - SamplingRule
+            properties:
+              SamplingRule:
+                description: 'A sampling rule that services use to decide whether to instrument a request. Rule fields can match properties of the service, or properties of a request. The service can ignore rules that don''t match its properties.'
+                type: object
+                properties:
+                  RuleName:
+                    $ref: '#/definitions/RuleName'
+                    description: 'The name of the sampling rule. Specify a rule by either name or ARN, but not both.'
+                  RuleARN:
+                    $ref: '#/definitions/String'
+                    description: 'The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.'
+                  ResourceARN:
+                    $ref: '#/definitions/ResourceARN'
+                    description: Matches the ARN of the AWS resource on which the service runs.
+                  Priority:
+                    $ref: '#/definitions/Priority'
+                    description: The priority of the sampling rule.
+                  FixedRate:
+                    $ref: '#/definitions/FixedRate'
+                    description: 'The percentage of matching requests to instrument, after the reservoir is exhausted.'
+                  ReservoirSize:
+                    $ref: '#/definitions/ReservoirSize'
+                    description: 'A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.'
+                  ServiceName:
+                    $ref: '#/definitions/ServiceName'
+                    description: Matches the <code>name</code> that the service uses to identify itself in segments.
+                  ServiceType:
+                    $ref: '#/definitions/ServiceType'
+                    description: Matches the <code>origin</code> that the service uses to identify its type in segments.
+                  Host:
+                    $ref: '#/definitions/Host'
+                    description: Matches the hostname from a request URL.
+                  HTTPMethod:
+                    $ref: '#/definitions/HTTPMethod'
+                    description: Matches the HTTP method of a request.
+                  URLPath:
+                    $ref: '#/definitions/URLPath'
+                    description: Matches the path from a request URL.
+                  Version:
+                    $ref: '#/definitions/Version'
+                    description: The version of the sampling rule format (<code>1</code>).
+                  Attributes:
+                    $ref: '#/definitions/AttributeMap'
+                    description: Matches attributes derived from the request.
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -228,7 +298,18 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/DeleteGroupRequest'
+            type: object
+            properties:
+              GroupName:
+                description: The case-sensitive name of the group.
+                type: string
+                minLength: 1
+                maxLength: 32
+              GroupARN:
+                description: The ARN of the group that was generated on creation.
+                type: string
+                minLength: 1
+                maxLength: 400
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -261,7 +342,14 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/DeleteSamplingRuleRequest'
+            type: object
+            properties:
+              RuleName:
+                description: 'The name of the sampling rule. Specify a rule by either name or ARN, but not both.'
+                type: string
+              RuleARN:
+                description: 'The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.'
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -289,12 +377,7 @@ paths:
           description: ThrottledException
           schema:
             $ref: '#/definitions/ThrottledException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetEncryptionConfigRequest'
+      parameters: []
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -327,7 +410,18 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/GetGroupRequest'
+            type: object
+            properties:
+              GroupName:
+                description: The case-sensitive name of the group.
+                type: string
+                minLength: 1
+                maxLength: 32
+              GroupARN:
+                description: The ARN of the group that was generated on creation.
+                type: string
+                minLength: 1
+                maxLength: 400
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -360,7 +454,13 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/GetGroupsRequest'
+            type: object
+            properties:
+              NextToken:
+                description: Pagination token. Not used.
+                type: string
+                minLength: 1
+                maxLength: 100
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -393,7 +493,11 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/GetSamplingRulesRequest'
+            type: object
+            properties:
+              NextToken:
+                description: Pagination token. Not used.
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -426,7 +530,11 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/GetSamplingStatisticSummariesRequest'
+            type: object
+            properties:
+              NextToken:
+                description: Pagination token. Not used.
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -459,7 +567,16 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/GetSamplingTargetsRequest'
+            type: object
+            required:
+              - SamplingStatisticsDocuments
+            properties:
+              SamplingStatisticsDocuments:
+                description: Information about rules that the service is using to sample requests.
+                type: array
+                items:
+                  $ref: '#/definitions/SamplingStatisticsDocument'
+                maxItems: 25
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -492,7 +609,32 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/GetServiceGraphRequest'
+            type: object
+            required:
+              - StartTime
+              - EndTime
+            properties:
+              StartTime:
+                description: The start of the time frame for which to generate a graph.
+                type: string
+                format: date-time
+              EndTime:
+                description: The end of the timeframe for which to generate a graph.
+                type: string
+                format: date-time
+              GroupName:
+                description: The name of a group to generate a graph based on.
+                type: string
+                minLength: 1
+                maxLength: 32
+              GroupARN:
+                description: The ARN of a group to generate a graph based on.
+                type: string
+                minLength: 1
+                maxLength: 400
+              NextToken:
+                description: Pagination token. Not used.
+                type: string
         - name: NextToken
           type: string
           in: query
@@ -530,7 +672,18 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/GetTraceGraphRequest'
+            type: object
+            required:
+              - TraceIds
+            properties:
+              TraceIds:
+                description: Trace IDs of requests for which to generate a service graph.
+                type: array
+                items:
+                  $ref: '#/definitions/TraceId'
+              NextToken:
+                description: Pagination token. Not used.
+                type: string
         - name: NextToken
           type: string
           in: query
@@ -568,7 +721,30 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/GetTraceSummariesRequest'
+            type: object
+            required:
+              - StartTime
+              - EndTime
+            properties:
+              StartTime:
+                description: The start of the time frame for which to retrieve traces.
+                type: string
+                format: date-time
+              EndTime:
+                description: The end of the time frame for which to retrieve traces.
+                type: string
+                format: date-time
+              Sampling:
+                description: Set to <code>true</code> to get summaries for only a subset of available traces.
+                type: boolean
+              FilterExpression:
+                description: Specify a filter expression to retrieve trace summaries for services or requests that meet certain requirements.
+                type: string
+                minLength: 1
+                maxLength: 2000
+              NextToken:
+                description: Specify the pagination token returned by a previous request to retrieve the next page of results.
+                type: string
         - name: NextToken
           type: string
           in: query
@@ -606,7 +782,21 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/PutEncryptionConfigRequest'
+            type: object
+            required:
+              - Type
+            properties:
+              KeyId:
+                description: '<p>An AWS KMS customer master key (CMK) in one of the following formats:</p> <ul> <li> <p> <b>Alias</b> - The name of the key. For example, <code>alias/MyKey</code>.</p> </li> <li> <p> <b>Key ID</b> - The KMS key ID of the key. For example, <code>ae4aa6d49-a4d8-9df9-a475-4ff6d7898456</code>.</p> </li> <li> <p> <b>ARN</b> - The full Amazon Resource Name of the key ID or alias. For example, <code>arn:aws:kms:us-east-2:123456789012:key/ae4aa6d49-a4d8-9df9-a475-4ff6d7898456</code>. Use this format to specify a key in a different account.</p> </li> </ul> <p>Omit this key if you set <code>Type</code> to <code>NONE</code>.</p>'
+                type: string
+                minLength: 1
+                maxLength: 3000
+              Type:
+                description: The type of encryption. Set to <code>KMS</code> to use your own key for encryption. Set to <code>NONE</code> for default encryption.
+                type: string
+                enum:
+                  - NONE
+                  - KMS
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -639,7 +829,27 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/PutTelemetryRecordsRequest'
+            type: object
+            required:
+              - TelemetryRecords
+            properties:
+              TelemetryRecords:
+                description: <p/>
+                type: array
+                items:
+                  $ref: '#/definitions/TelemetryRecord'
+              EC2InstanceId:
+                description: <p/>
+                type: string
+                maxLength: 20
+              Hostname:
+                description: <p/>
+                type: string
+                maxLength: 255
+              ResourceARN:
+                description: <p/>
+                type: string
+                maxLength: 500
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -672,7 +882,15 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/PutTraceSegmentsRequest'
+            type: object
+            required:
+              - TraceSegmentDocuments
+            properties:
+              TraceSegmentDocuments:
+                description: A string containing a JSON document defining one or more segments or subsegments.
+                type: array
+                items:
+                  $ref: '#/definitions/TraceSegmentDocument'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -705,7 +923,23 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateGroupRequest'
+            type: object
+            properties:
+              GroupName:
+                description: The case-sensitive name of the group.
+                type: string
+                minLength: 1
+                maxLength: 32
+              GroupARN:
+                description: The ARN that was generated upon creation.
+                type: string
+                minLength: 1
+                maxLength: 400
+              FilterExpression:
+                description: The updated filter expression defining criteria by which to group traces.
+                type: string
+                minLength: 1
+                maxLength: 2000
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -738,7 +972,50 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateSamplingRuleRequest'
+            type: object
+            required:
+              - SamplingRuleUpdate
+            properties:
+              SamplingRuleUpdate:
+                description: A document specifying changes to a sampling rule's configuration.
+                type: object
+                properties:
+                  RuleName:
+                    $ref: '#/definitions/RuleName'
+                    description: 'The name of the sampling rule. Specify a rule by either name or ARN, but not both.'
+                  RuleARN:
+                    $ref: '#/definitions/String'
+                    description: 'The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.'
+                  ResourceARN:
+                    $ref: '#/definitions/ResourceARN'
+                    description: Matches the ARN of the AWS resource on which the service runs.
+                  Priority:
+                    $ref: '#/definitions/NullableInteger'
+                    description: The priority of the sampling rule.
+                  FixedRate:
+                    $ref: '#/definitions/NullableDouble'
+                    description: 'The percentage of matching requests to instrument, after the reservoir is exhausted.'
+                  ReservoirSize:
+                    $ref: '#/definitions/NullableInteger'
+                    description: 'A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.'
+                  Host:
+                    $ref: '#/definitions/Host'
+                    description: Matches the hostname from a request URL.
+                  ServiceName:
+                    $ref: '#/definitions/ServiceName'
+                    description: Matches the <code>name</code> that the service uses to identify itself in segments.
+                  ServiceType:
+                    $ref: '#/definitions/ServiceType'
+                    description: Matches the <code>origin</code> that the service uses to identify its type in segments.
+                  HTTPMethod:
+                    $ref: '#/definitions/HTTPMethod'
+                    description: Matches the HTTP method of a request.
+                  URLPath:
+                    $ref: '#/definitions/URLPath'
+                    description: Matches the path from a request URL.
+                  Attributes:
+                    $ref: '#/definitions/AttributeMap'
+                    description: Matches attributes derived from the request.
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -762,17 +1039,10 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: Pagination token. Not used.
-  BatchGetTracesRequest:
-    type: object
-    required:
-      - TraceIds
-    properties:
-      TraceIds:
-        $ref: '#/definitions/TraceIdList'
-        description: Specify the trace IDs of requests for which to retrieve segments.
-      NextToken:
-        $ref: '#/definitions/String'
-        description: Pagination token. Not used.
+  TraceId:
+    type: string
+    minLength: 1
+    maxLength: 35
   InvalidRequestException: {}
   ThrottledException: {}
   CreateGroupResult:
@@ -781,83 +1051,78 @@ definitions:
       Group:
         $ref: '#/definitions/Group'
         description: 'The group that was created. Contains the name of the group that was created, the ARN of the group that was generated based on the group name, and the filter expression that was assigned to the group.'
-  CreateGroupRequest:
-    type: object
-    required:
-      - GroupName
-    properties:
-      GroupName:
-        $ref: '#/definitions/GroupName'
-        description: The case-sensitive name of the new group. Default is a reserved name and names must be unique.
-      FilterExpression:
-        $ref: '#/definitions/FilterExpression'
-        description: The filter expression defining criteria by which to group traces.
   CreateSamplingRuleResult:
     type: object
     properties:
       SamplingRuleRecord:
         $ref: '#/definitions/SamplingRuleRecord'
         description: The saved rule definition and metadata.
-  CreateSamplingRuleRequest:
+  RuleName:
+    type: string
+    minLength: 1
+    maxLength: 32
+  String:
+    type: string
+  ResourceARN:
+    type: string
+    maxLength: 500
+  Priority:
+    type: integer
+    minimum: 1
+    maximum: 9999
+  FixedRate:
+    type: number
+    format: double
+    minimum: 0
+    maximum: 1
+  ReservoirSize:
+    type: integer
+    minimum: 0
+  ServiceName:
+    type: string
+    maxLength: 64
+  ServiceType:
+    type: string
+    maxLength: 64
+  Host:
+    type: string
+    maxLength: 64
+  HTTPMethod:
+    type: string
+    maxLength: 10
+  URLPath:
+    type: string
+    maxLength: 128
+  Version:
+    type: integer
+    minimum: 1
+  AttributeMap:
     type: object
-    required:
-      - SamplingRule
-    properties:
-      SamplingRule:
-        $ref: '#/definitions/SamplingRule'
-        description: The rule definition.
+    maxProperties: 5
+    additionalProperties:
+      $ref: '#/definitions/AttributeValue'
   RuleLimitExceededException: {}
   DeleteGroupResult:
     type: object
     properties: {}
-  DeleteGroupRequest:
-    type: object
-    properties:
-      GroupName:
-        $ref: '#/definitions/GroupName'
-        description: The case-sensitive name of the group.
-      GroupARN:
-        $ref: '#/definitions/GroupARN'
-        description: The ARN of the group that was generated on creation.
   DeleteSamplingRuleResult:
     type: object
     properties:
       SamplingRuleRecord:
         $ref: '#/definitions/SamplingRuleRecord'
         description: The deleted rule definition and metadata.
-  DeleteSamplingRuleRequest:
-    type: object
-    properties:
-      RuleName:
-        $ref: '#/definitions/String'
-        description: 'The name of the sampling rule. Specify a rule by either name or ARN, but not both.'
-      RuleARN:
-        $ref: '#/definitions/String'
-        description: 'The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.'
   GetEncryptionConfigResult:
     type: object
     properties:
       EncryptionConfig:
         $ref: '#/definitions/EncryptionConfig'
         description: The encryption configuration document.
-  GetEncryptionConfigRequest:
-    type: object
-    properties: {}
   GetGroupResult:
     type: object
     properties:
       Group:
         $ref: '#/definitions/Group'
         description: 'The group that was requested. Contains the name of the group, the ARN of the group, and the filter expression that assigned to the group.'
-  GetGroupRequest:
-    type: object
-    properties:
-      GroupName:
-        $ref: '#/definitions/GroupName'
-        description: The case-sensitive name of the group.
-      GroupARN:
-        $ref: '#/definitions/GroupARN'
-        description: The ARN of the group that was generated on creation.
   GetGroupsResult:
     type: object
     properties:
@@ -866,12 +1131,6 @@ definitions:
         description: The collection of all active groups.
       NextToken:
         $ref: '#/definitions/String'
-        description: Pagination token. Not used.
-  GetGroupsRequest:
-    type: object
-    properties:
-      NextToken:
-        $ref: '#/definitions/GetGroupsNextToken'
         description: Pagination token. Not used.
   GetSamplingRulesResult:
     type: object
@@ -882,24 +1141,12 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: Pagination token. Not used.
-  GetSamplingRulesRequest:
-    type: object
-    properties:
-      NextToken:
-        $ref: '#/definitions/String'
-        description: Pagination token. Not used.
   GetSamplingStatisticSummariesResult:
     type: object
     properties:
       SamplingStatisticSummaries:
         $ref: '#/definitions/SamplingStatisticSummaryList'
         description: Information about the number of requests instrumented for each sampling rule.
-      NextToken:
-        $ref: '#/definitions/String'
-        description: Pagination token. Not used.
-  GetSamplingStatisticSummariesRequest:
-    type: object
-    properties:
       NextToken:
         $ref: '#/definitions/String'
         description: Pagination token. Not used.
@@ -915,14 +1162,34 @@ definitions:
       UnprocessedStatistics:
         $ref: '#/definitions/UnprocessedStatisticsList'
         description: Information about <a>SamplingStatisticsDocument</a> that X-Ray could not process.
-  GetSamplingTargetsRequest:
+  SamplingStatisticsDocument:
     type: object
     required:
-      - SamplingStatisticsDocuments
+      - RuleName
+      - ClientID
+      - Timestamp
+      - RequestCount
+      - SampledCount
     properties:
-      SamplingStatisticsDocuments:
-        $ref: '#/definitions/SamplingStatisticsDocumentList'
-        description: Information about rules that the service is using to sample requests.
+      RuleName:
+        $ref: '#/definitions/RuleName'
+        description: The name of the sampling rule.
+      ClientID:
+        $ref: '#/definitions/ClientID'
+        description: A unique identifier for the service in hexadecimal.
+      Timestamp:
+        $ref: '#/definitions/Timestamp'
+        description: The current time.
+      RequestCount:
+        $ref: '#/definitions/RequestCount'
+        description: The number of requests that matched the rule.
+      SampledCount:
+        $ref: '#/definitions/SampledCount'
+        description: The number of requests recorded.
+      BorrowCount:
+        $ref: '#/definitions/BorrowCount'
+        description: The number of requests recorded with borrowed reservoir quota.
+    description: Request sampling results for a single rule from a service. Results are for the last 10 seconds unless the service has been assigned a longer reporting interval after a previous call to <a>GetSamplingTargets</a>.
   GetServiceGraphResult:
     type: object
     properties:
@@ -941,44 +1208,12 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: Pagination token. Not used.
-  GetServiceGraphRequest:
-    type: object
-    required:
-      - StartTime
-      - EndTime
-    properties:
-      StartTime:
-        $ref: '#/definitions/Timestamp'
-        description: The start of the time frame for which to generate a graph.
-      EndTime:
-        $ref: '#/definitions/Timestamp'
-        description: The end of the timeframe for which to generate a graph.
-      GroupName:
-        $ref: '#/definitions/GroupName'
-        description: The name of a group to generate a graph based on.
-      GroupARN:
-        $ref: '#/definitions/GroupARN'
-        description: The ARN of a group to generate a graph based on.
-      NextToken:
-        $ref: '#/definitions/String'
-        description: Pagination token. Not used.
   GetTraceGraphResult:
     type: object
     properties:
       Services:
         $ref: '#/definitions/ServiceList'
         description: The services that have processed one of the specified requests.
-      NextToken:
-        $ref: '#/definitions/String'
-        description: Pagination token. Not used.
-  GetTraceGraphRequest:
-    type: object
-    required:
-      - TraceIds
-    properties:
-      TraceIds:
-        $ref: '#/definitions/TraceIdList'
-        description: Trace IDs of requests for which to generate a service graph.
       NextToken:
         $ref: '#/definitions/String'
         description: Pagination token. Not used.
@@ -997,112 +1232,64 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: 'If the requested time frame contained more than one page of results, you can use this token to retrieve the next page. The first page contains the most most recent results, closest to the end of the time frame.'
-  GetTraceSummariesRequest:
-    type: object
-    required:
-      - StartTime
-      - EndTime
-    properties:
-      StartTime:
-        $ref: '#/definitions/Timestamp'
-        description: The start of the time frame for which to retrieve traces.
-      EndTime:
-        $ref: '#/definitions/Timestamp'
-        description: The end of the time frame for which to retrieve traces.
-      Sampling:
-        $ref: '#/definitions/NullableBoolean'
-        description: Set to <code>true</code> to get summaries for only a subset of available traces.
-      FilterExpression:
-        $ref: '#/definitions/FilterExpression'
-        description: Specify a filter expression to retrieve trace summaries for services or requests that meet certain requirements.
-      NextToken:
-        $ref: '#/definitions/String'
-        description: Specify the pagination token returned by a previous request to retrieve the next page of results.
   PutEncryptionConfigResult:
     type: object
     properties:
       EncryptionConfig:
         $ref: '#/definitions/EncryptionConfig'
         description: The new encryption configuration.
-  PutEncryptionConfigRequest:
-    type: object
-    required:
-      - Type
-    properties:
-      KeyId:
-        $ref: '#/definitions/EncryptionKeyId'
-        description: '<p>An AWS KMS customer master key (CMK) in one of the following formats:</p> <ul> <li> <p> <b>Alias</b> - The name of the key. For example, <code>alias/MyKey</code>.</p> </li> <li> <p> <b>Key ID</b> - The KMS key ID of the key. For example, <code>ae4aa6d49-a4d8-9df9-a475-4ff6d7898456</code>.</p> </li> <li> <p> <b>ARN</b> - The full Amazon Resource Name of the key ID or alias. For example, <code>arn:aws:kms:us-east-2:123456789012:key/ae4aa6d49-a4d8-9df9-a475-4ff6d7898456</code>. Use this format to specify a key in a different account.</p> </li> </ul> <p>Omit this key if you set <code>Type</code> to <code>NONE</code>.</p>'
-      Type:
-        $ref: '#/definitions/EncryptionType'
-        description: The type of encryption. Set to <code>KMS</code> to use your own key for encryption. Set to <code>NONE</code> for default encryption.
   PutTelemetryRecordsResult:
     type: object
     properties: {}
-  PutTelemetryRecordsRequest:
+  TelemetryRecord:
     type: object
     required:
-      - TelemetryRecords
+      - Timestamp
     properties:
-      TelemetryRecords:
-        $ref: '#/definitions/TelemetryRecordList'
+      Timestamp:
+        $ref: '#/definitions/Timestamp'
         description: <p/>
-      EC2InstanceId:
-        $ref: '#/definitions/EC2InstanceId'
+      SegmentsReceivedCount:
+        $ref: '#/definitions/NullableInteger'
         description: <p/>
-      Hostname:
-        $ref: '#/definitions/Hostname'
+      SegmentsSentCount:
+        $ref: '#/definitions/NullableInteger'
         description: <p/>
-      ResourceARN:
-        $ref: '#/definitions/ResourceARN'
+      SegmentsSpilloverCount:
+        $ref: '#/definitions/NullableInteger'
         description: <p/>
+      SegmentsRejectedCount:
+        $ref: '#/definitions/NullableInteger'
+        description: <p/>
+      BackendConnectionErrors:
+        $ref: '#/definitions/BackendConnectionErrors'
+        description: <p/>
+    description: <p/>
   PutTraceSegmentsResult:
     type: object
     properties:
       UnprocessedTraceSegments:
         $ref: '#/definitions/UnprocessedTraceSegmentList'
         description: Segments that failed processing.
-  PutTraceSegmentsRequest:
-    type: object
-    required:
-      - TraceSegmentDocuments
-    properties:
-      TraceSegmentDocuments:
-        $ref: '#/definitions/TraceSegmentDocumentList'
-        description: A string containing a JSON document defining one or more segments or subsegments.
+  TraceSegmentDocument:
+    type: string
   UpdateGroupResult:
     type: object
     properties:
       Group:
         $ref: '#/definitions/Group'
         description: 'The group that was updated. Contains the name of the group that was updated, the ARN of the group that was updated, and the updated filter expression assigned to the group.'
-  UpdateGroupRequest:
-    type: object
-    properties:
-      GroupName:
-        $ref: '#/definitions/GroupName'
-        description: The case-sensitive name of the group.
-      GroupARN:
-        $ref: '#/definitions/GroupARN'
-        description: The ARN that was generated upon creation.
-      FilterExpression:
-        $ref: '#/definitions/FilterExpression'
-        description: The updated filter expression defining criteria by which to group traces.
   UpdateSamplingRuleResult:
     type: object
     properties:
       SamplingRuleRecord:
         $ref: '#/definitions/SamplingRuleRecord'
         description: The updated rule definition and metadata.
-  UpdateSamplingRuleRequest:
-    type: object
-    required:
-      - SamplingRuleUpdate
-    properties:
-      SamplingRuleUpdate:
-        $ref: '#/definitions/SamplingRuleUpdate'
-        description: The rule and fields to change.
-  String:
-    type: string
+  NullableInteger:
+    type: integer
+  NullableDouble:
+    type: number
+    format: double
   AliasNames:
     type: array
     items:
@@ -1126,9 +1313,6 @@ definitions:
       $ref: '#/definitions/Alias'
   AnnotationKey:
     type: string
-  NullableDouble:
-    type: number
-    format: double
   NullableBoolean:
     type: boolean
   AnnotationValue:
@@ -1149,14 +1333,9 @@ definitions:
     items:
       $ref: '#/definitions/ValueWithServiceIds'
   Annotations:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/AnnotationKey'
-        value:
-          $ref: '#/definitions/ValuesWithServiceIds'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/ValuesWithServiceIds'
   AttributeKey:
     type: string
     minLength: 1
@@ -1165,16 +1344,6 @@ definitions:
     type: string
     minLength: 1
     maxLength: 32
-  AttributeMap:
-    type: array
-    maxItems: 5
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/AttributeKey'
-        value:
-          $ref: '#/definitions/AttributeValue'
   AvailabilityZoneDetail:
     type: object
     properties:
@@ -1182,8 +1351,6 @@ definitions:
         $ref: '#/definitions/String'
         description: The name of a corresponding availability zone.
     description: A list of availability zones corresponding to the segments in a trace.
-  NullableInteger:
-    type: integer
   BackendConnectionErrors:
     type: object
     properties:
@@ -1210,6 +1377,17 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/TraceId'
+  BatchGetTracesRequest:
+    type: object
+    required:
+      - TraceIds
+    properties:
+      TraceIds:
+        $ref: '#/definitions/TraceIdList'
+        description: Specify the trace IDs of requests for which to retrieve segments.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Pagination token. Not used.
   TraceList:
     type: array
     items:
@@ -1235,6 +1413,17 @@ definitions:
     type: string
     minLength: 1
     maxLength: 2000
+  CreateGroupRequest:
+    type: object
+    required:
+      - GroupName
+    properties:
+      GroupName:
+        $ref: '#/definitions/GroupName'
+        description: The case-sensitive name of the new group. Default is a reserved name and names must be unique.
+      FilterExpression:
+        $ref: '#/definitions/FilterExpression'
+        description: The filter expression defining criteria by which to group traces.
   Group:
     type: object
     properties:
@@ -1302,6 +1491,14 @@ definitions:
         $ref: '#/definitions/AttributeMap'
         description: Matches attributes derived from the request.
     description: 'A sampling rule that services use to decide whether to instrument a request. Rule fields can match properties of the service, or properties of a request. The service can ignore rules that don''t match its properties.'
+  CreateSamplingRuleRequest:
+    type: object
+    required:
+      - SamplingRule
+    properties:
+      SamplingRule:
+        $ref: '#/definitions/SamplingRule'
+        description: The rule definition.
   SamplingRuleRecord:
     type: object
     properties:
@@ -1319,6 +1516,24 @@ definitions:
     type: string
     minLength: 1
     maxLength: 400
+  DeleteGroupRequest:
+    type: object
+    properties:
+      GroupName:
+        $ref: '#/definitions/GroupName'
+        description: The case-sensitive name of the group.
+      GroupARN:
+        $ref: '#/definitions/GroupARN'
+        description: The ARN of the group that was generated on creation.
+  DeleteSamplingRuleRequest:
+    type: object
+    properties:
+      RuleName:
+        $ref: '#/definitions/String'
+        description: 'The name of the sampling rule. Specify a rule by either name or ARN, but not both.'
+      RuleARN:
+        $ref: '#/definitions/String'
+        description: 'The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.'
   Double:
     type: number
     format: double
@@ -1545,23 +1760,48 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/FaultRootCause'
-  FixedRate:
-    type: number
-    format: double
-    minimum: 0
-    maximum: 1
+  GetEncryptionConfigRequest:
+    type: object
+    properties: {}
+  GetGroupRequest:
+    type: object
+    properties:
+      GroupName:
+        $ref: '#/definitions/GroupName'
+        description: The case-sensitive name of the group.
+      GroupARN:
+        $ref: '#/definitions/GroupARN'
+        description: The ARN of the group that was generated on creation.
   GetGroupsNextToken:
     type: string
     minLength: 1
     maxLength: 100
+  GetGroupsRequest:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/GetGroupsNextToken'
+        description: Pagination token. Not used.
   GroupSummaryList:
     type: array
     items:
       $ref: '#/definitions/GroupSummary'
+  GetSamplingRulesRequest:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Pagination token. Not used.
   SamplingRuleRecordList:
     type: array
     items:
       $ref: '#/definitions/SamplingRuleRecord'
+  GetSamplingStatisticSummariesRequest:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Pagination token. Not used.
   SamplingStatisticSummaryList:
     type: array
     items:
@@ -1571,6 +1811,14 @@ definitions:
     items:
       $ref: '#/definitions/SamplingStatisticsDocument'
     maxItems: 25
+  GetSamplingTargetsRequest:
+    type: object
+    required:
+      - SamplingStatisticsDocuments
+    properties:
+      SamplingStatisticsDocuments:
+        $ref: '#/definitions/SamplingStatisticsDocumentList'
+        description: Information about rules that the service is using to sample requests.
   SamplingTargetDocumentList:
     type: array
     items:
@@ -1579,10 +1827,63 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/UnprocessedStatistics'
+  GetServiceGraphRequest:
+    type: object
+    required:
+      - StartTime
+      - EndTime
+    properties:
+      StartTime:
+        $ref: '#/definitions/Timestamp'
+        description: The start of the time frame for which to generate a graph.
+      EndTime:
+        $ref: '#/definitions/Timestamp'
+        description: The end of the timeframe for which to generate a graph.
+      GroupName:
+        $ref: '#/definitions/GroupName'
+        description: The name of a group to generate a graph based on.
+      GroupARN:
+        $ref: '#/definitions/GroupARN'
+        description: The ARN of a group to generate a graph based on.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Pagination token. Not used.
   ServiceList:
     type: array
     items:
       $ref: '#/definitions/Service'
+  GetTraceGraphRequest:
+    type: object
+    required:
+      - TraceIds
+    properties:
+      TraceIds:
+        $ref: '#/definitions/TraceIdList'
+        description: Trace IDs of requests for which to generate a service graph.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Pagination token. Not used.
+  GetTraceSummariesRequest:
+    type: object
+    required:
+      - StartTime
+      - EndTime
+    properties:
+      StartTime:
+        $ref: '#/definitions/Timestamp'
+        description: The start of the time frame for which to retrieve traces.
+      EndTime:
+        $ref: '#/definitions/Timestamp'
+        description: The end of the time frame for which to retrieve traces.
+      Sampling:
+        $ref: '#/definitions/NullableBoolean'
+        description: Set to <code>true</code> to get summaries for only a subset of available traces.
+      FilterExpression:
+        $ref: '#/definitions/FilterExpression'
+        description: Specify a filter expression to retrieve trace summaries for services or requests that meet certain requirements.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Specify the pagination token returned by a previous request to retrieve the next page of results.
   TraceSummaryList:
     type: array
     items:
@@ -1600,9 +1901,6 @@ definitions:
         $ref: '#/definitions/String'
         description: The filter expression defining the parameters to include traces.
     description: Details for a group without metadata.
-  HTTPMethod:
-    type: string
-    maxLength: 10
   HistogramEntry:
     type: object
     properties:
@@ -1615,9 +1913,6 @@ definitions:
     description: 'An entry in a histogram for a statistic. A histogram maps the range of observed values on the X axis, and the prevalence of each value on the Y axis.'
   Integer:
     type: integer
-  Host:
-    type: string
-    maxLength: 64
   Hostname:
     type: string
     maxLength: 255
@@ -1647,29 +1942,55 @@ definitions:
         $ref: '#/definitions/String'
         description: The ID of a corresponding EC2 instance.
     description: 'A list of EC2 instance IDs corresponding to the segments in a trace. '
-  Priority:
-    type: integer
-    minimum: 1
-    maximum: 9999
+  PutEncryptionConfigRequest:
+    type: object
+    required:
+      - Type
+    properties:
+      KeyId:
+        $ref: '#/definitions/EncryptionKeyId'
+        description: '<p>An AWS KMS customer master key (CMK) in one of the following formats:</p> <ul> <li> <p> <b>Alias</b> - The name of the key. For example, <code>alias/MyKey</code>.</p> </li> <li> <p> <b>Key ID</b> - The KMS key ID of the key. For example, <code>ae4aa6d49-a4d8-9df9-a475-4ff6d7898456</code>.</p> </li> <li> <p> <b>ARN</b> - The full Amazon Resource Name of the key ID or alias. For example, <code>arn:aws:kms:us-east-2:123456789012:key/ae4aa6d49-a4d8-9df9-a475-4ff6d7898456</code>. Use this format to specify a key in a different account.</p> </li> </ul> <p>Omit this key if you set <code>Type</code> to <code>NONE</code>.</p>'
+      Type:
+        $ref: '#/definitions/EncryptionType'
+        description: The type of encryption. Set to <code>KMS</code> to use your own key for encryption. Set to <code>NONE</code> for default encryption.
   TelemetryRecordList:
     type: array
     items:
       $ref: '#/definitions/TelemetryRecord'
-  ResourceARN:
-    type: string
-    maxLength: 500
+  PutTelemetryRecordsRequest:
+    type: object
+    required:
+      - TelemetryRecords
+    properties:
+      TelemetryRecords:
+        $ref: '#/definitions/TelemetryRecordList'
+        description: <p/>
+      EC2InstanceId:
+        $ref: '#/definitions/EC2InstanceId'
+        description: <p/>
+      Hostname:
+        $ref: '#/definitions/Hostname'
+        description: <p/>
+      ResourceARN:
+        $ref: '#/definitions/ResourceARN'
+        description: <p/>
   TraceSegmentDocumentList:
     type: array
     items:
       $ref: '#/definitions/TraceSegmentDocument'
+  PutTraceSegmentsRequest:
+    type: object
+    required:
+      - TraceSegmentDocuments
+    properties:
+      TraceSegmentDocuments:
+        $ref: '#/definitions/TraceSegmentDocumentList'
+        description: A string containing a JSON document defining one or more segments or subsegments.
   UnprocessedTraceSegmentList:
     type: array
     items:
       $ref: '#/definitions/UnprocessedTraceSegment'
   RequestCount:
-    type: integer
-    minimum: 0
-  ReservoirSize:
     type: integer
     minimum: 0
   ResourceARNDetail:
@@ -1743,25 +2064,9 @@ definitions:
         $ref: '#/definitions/String'
         description: The message of the exception.
     description: The exception associated with a root cause.
-  RuleName:
-    type: string
-    minLength: 1
-    maxLength: 32
   SampledCount:
     type: integer
     minimum: 0
-  ServiceName:
-    type: string
-    maxLength: 64
-  ServiceType:
-    type: string
-    maxLength: 64
-  URLPath:
-    type: string
-    maxLength: 128
-  Version:
-    type: integer
-    minimum: 1
   SamplingRuleUpdate:
     type: object
     properties:
@@ -1821,34 +2126,6 @@ definitions:
         $ref: '#/definitions/Integer'
         description: The number of requests recorded.
     description: Aggregated request sampling data for a sampling rule across all services for a 10 second window.
-  SamplingStatisticsDocument:
-    type: object
-    required:
-      - RuleName
-      - ClientID
-      - Timestamp
-      - RequestCount
-      - SampledCount
-    properties:
-      RuleName:
-        $ref: '#/definitions/RuleName'
-        description: The name of the sampling rule.
-      ClientID:
-        $ref: '#/definitions/ClientID'
-        description: A unique identifier for the service in hexadecimal.
-      Timestamp:
-        $ref: '#/definitions/Timestamp'
-        description: The current time.
-      RequestCount:
-        $ref: '#/definitions/RequestCount'
-        description: The number of requests that matched the rule.
-      SampledCount:
-        $ref: '#/definitions/SampledCount'
-        description: The number of requests recorded.
-      BorrowCount:
-        $ref: '#/definitions/BorrowCount'
-        description: The number of requests recorded with borrowed reservoir quota.
-    description: Request sampling results for a single rule from a service. Results are for the last 10 seconds unless the service has been assigned a longer reporting interval after a previous call to <a>GetSamplingTargets</a>.
   SamplingTargetDocument:
     type: object
     properties:
@@ -1969,34 +2246,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ServiceId'
-  TelemetryRecord:
-    type: object
-    required:
-      - Timestamp
-    properties:
-      Timestamp:
-        $ref: '#/definitions/Timestamp'
-        description: <p/>
-      SegmentsReceivedCount:
-        $ref: '#/definitions/NullableInteger'
-        description: <p/>
-      SegmentsSentCount:
-        $ref: '#/definitions/NullableInteger'
-        description: <p/>
-      SegmentsSpilloverCount:
-        $ref: '#/definitions/NullableInteger'
-        description: <p/>
-      SegmentsRejectedCount:
-        $ref: '#/definitions/NullableInteger'
-        description: <p/>
-      BackendConnectionErrors:
-        $ref: '#/definitions/BackendConnectionErrors'
-        description: <p/>
-    description: <p/>
-  TraceId:
-    type: string
-    minLength: 1
-    maxLength: 35
   Trace:
     type: object
     properties:
@@ -2022,8 +2271,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ResourceARNDetail'
-  TraceSegmentDocument:
-    type: string
   TraceUsers:
     type: array
     items:
@@ -2125,6 +2372,26 @@ definitions:
         $ref: '#/definitions/String'
         description: The error message.
     description: Information about a segment that failed processing.
+  UpdateGroupRequest:
+    type: object
+    properties:
+      GroupName:
+        $ref: '#/definitions/GroupName'
+        description: The case-sensitive name of the group.
+      GroupARN:
+        $ref: '#/definitions/GroupARN'
+        description: The ARN that was generated upon creation.
+      FilterExpression:
+        $ref: '#/definitions/FilterExpression'
+        description: The updated filter expression defining criteria by which to group traces.
+  UpdateSamplingRuleRequest:
+    type: object
+    required:
+      - SamplingRuleUpdate
+    properties:
+      SamplingRuleUpdate:
+        $ref: '#/definitions/SamplingRuleUpdate'
+        description: The rule and fields to change.
   ValueWithServiceIds:
     type: object
     properties:

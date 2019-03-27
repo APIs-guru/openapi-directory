@@ -137,7 +137,20 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateAppRequest'
+            type: object
+            required:
+              - CreateApplicationRequest
+            properties:
+              CreateApplicationRequest:
+                description: Application Request.
+                type: object
+                properties:
+                  Name:
+                    $ref: '#/definitions/__string'
+                    description: The display name of the application. Used in the Amazon Pinpoint console.
+                  tags:
+                    $ref: '#/definitions/MapOf__string'
+                    description: The Tags for the app.
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -181,11 +194,16 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetAppsRequest'
+        - name: page-size
+          in: query
+          required: false
+          description: The number of entries you want on each page in the response.
+          type: string
+        - name: token
+          in: query
+          required: false
+          description: The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+          type: string
   '/v1/apps/{application-id}/campaigns':
     post:
       operationId: CreateCampaign
@@ -220,15 +238,65 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: application-id
+          in: path
+          required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateCampaignRequest'
-        - name: application-id
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - WriteCampaignRequest
+            properties:
+              WriteCampaignRequest:
+                description: Used to create a campaign.
+                type: object
+                properties:
+                  AdditionalTreatments:
+                    $ref: '#/definitions/ListOfWriteTreatmentResource'
+                    description: Treatments that are defined in addition to the default treatment.
+                  Description:
+                    $ref: '#/definitions/__string'
+                    description: A description of the campaign.
+                  HoldoutPercent:
+                    $ref: '#/definitions/__integer'
+                    description: The allocated percentage of end users who will not receive messages from this campaign.
+                  Hook:
+                    $ref: '#/definitions/CampaignHook'
+                    description: Campaign hook information.
+                  IsPaused:
+                    $ref: '#/definitions/__boolean'
+                    description: Indicates whether the campaign is paused. A paused campaign does not send messages unless you resume it by setting IsPaused to false.
+                  Limits:
+                    $ref: '#/definitions/CampaignLimits'
+                    description: The campaign limits settings.
+                  MessageConfiguration:
+                    $ref: '#/definitions/MessageConfiguration'
+                    description: The message configuration settings.
+                  Name:
+                    $ref: '#/definitions/__string'
+                    description: The custom name of the campaign.
+                  Schedule:
+                    $ref: '#/definitions/Schedule'
+                    description: The campaign schedule.
+                  SegmentId:
+                    $ref: '#/definitions/__string'
+                    description: The ID of the segment to which the campaign sends messages.
+                  SegmentVersion:
+                    $ref: '#/definitions/__integer'
+                    description: The version of the segment to which the campaign sends messages.
+                  tags:
+                    $ref: '#/definitions/MapOf__string'
+                    description: The Tags for the campaign.
+                  TreatmentDescription:
+                    $ref: '#/definitions/__string'
+                    description: A custom description for the treatment.
+                  TreatmentName:
+                    $ref: '#/definitions/__string'
+                    description: The custom name of a variation of the campaign used for A/B testing.
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -272,15 +340,21 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetCampaignsRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
+        - name: page-size
+          in: query
+          required: false
+          description: The number of entries you want on each page in the response.
+          type: string
+        - name: token
+          in: query
+          required: false
+          description: The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+          type: string
   '/v1/apps/{application-id}/jobs/export':
     post:
       operationId: CreateExportJob
@@ -315,15 +389,40 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: application-id
+          in: path
+          required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateExportJobRequest'
-        - name: application-id
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - ExportJobRequest
+            properties:
+              ExportJobRequest:
+                description: Export job request.
+                type: object
+                properties:
+                  RoleArn:
+                    $ref: '#/definitions/__string'
+                    description: The Amazon Resource Name (ARN) of an IAM role that grants Amazon Pinpoint access to the Amazon S3 location that endpoints will be exported to.
+                  S3UrlPrefix:
+                    $ref: '#/definitions/__string'
+                    description: |-
+                      A URL that points to the location within an Amazon S3 bucket that will receive the export. The location is typically a folder with multiple files.
+
+                      The URL should follow this format: s3://bucket-name/folder-name/
+
+                      Amazon Pinpoint will export endpoints to this location.
+                  SegmentId:
+                    $ref: '#/definitions/__string'
+                    description: 'The ID of the segment to export endpoints from. If not present, Amazon Pinpoint exports all of the endpoints that belong to the application.'
+                  SegmentVersion:
+                    $ref: '#/definitions/__integer'
+                    description: The version of the segment to export if specified.
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -367,15 +466,21 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetExportJobsRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
+        - name: page-size
+          in: query
+          required: false
+          description: The number of entries you want on each page in the response.
+          type: string
+        - name: token
+          in: query
+          required: false
+          description: The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+          type: string
   '/v1/apps/{application-id}/jobs/import':
     post:
       operationId: CreateImportJob
@@ -410,15 +515,52 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: application-id
+          in: path
+          required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateImportJobRequest'
-        - name: application-id
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - ImportJobRequest
+            properties:
+              ImportJobRequest:
+                description: Import job request.
+                type: object
+                properties:
+                  DefineSegment:
+                    $ref: '#/definitions/__boolean'
+                    description: Sets whether the endpoints create a segment when they are imported.
+                  ExternalId:
+                    $ref: '#/definitions/__string'
+                    description: '(Deprecated) Your AWS account ID, which you assigned to the ExternalID key in an IAM trust policy. Used by Amazon Pinpoint to assume an IAM role. This requirement is removed, and external IDs are not recommended for IAM roles assumed by Amazon Pinpoint.'
+                  Format:
+                    $ref: '#/definitions/Format'
+                    description: |-
+                      The format of the files that contain the endpoint definitions.
+                      Valid values: CSV, JSON
+                  RegisterEndpoints:
+                    $ref: '#/definitions/__boolean'
+                    description: Sets whether the endpoints are registered with Amazon Pinpoint when they are imported.
+                  RoleArn:
+                    $ref: '#/definitions/__string'
+                    description: The Amazon Resource Name (ARN) of an IAM role that grants Amazon Pinpoint access to the Amazon S3 location that contains the endpoints to import.
+                  S3Url:
+                    $ref: '#/definitions/__string'
+                    description: |-
+                      The URL of the S3 bucket that contains the segment information to import. The location can be a folder or a single file. The URL should use the following format: s3://bucket-name/folder-name/file-name
+
+                      Amazon Pinpoint imports endpoints from this location and any subfolders it contains.
+                  SegmentId:
+                    $ref: '#/definitions/__string'
+                    description: The ID of the segment to update if the import job is meant to update an existing segment.
+                  SegmentName:
+                    $ref: '#/definitions/__string'
+                    description: A custom name for the segment created by the import job. Use if DefineSegment is true.
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -462,15 +604,21 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetImportJobsRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
+        - name: page-size
+          in: query
+          required: false
+          description: The number of entries you want on each page in the response.
+          type: string
+        - name: token
+          in: query
+          required: false
+          description: The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+          type: string
   '/v1/apps/{application-id}/segments':
     post:
       operationId: CreateSegment
@@ -505,15 +653,35 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: application-id
+          in: path
+          required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateSegmentRequest'
-        - name: application-id
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - WriteSegmentRequest
+            properties:
+              WriteSegmentRequest:
+                description: Segment definition.
+                type: object
+                properties:
+                  Dimensions:
+                    $ref: '#/definitions/SegmentDimensions'
+                    description: The segment dimensions attributes.
+                  Name:
+                    $ref: '#/definitions/__string'
+                    description: The name of segment
+                  SegmentGroups:
+                    $ref: '#/definitions/SegmentGroupList'
+                    description: 'A segment group, which consists of zero or more source segments, plus dimensions that are applied to those source segments. Your request can only include one segment group. Your request can include either a SegmentGroups object or a Dimensions object, but not both.'
+                  tags:
+                    $ref: '#/definitions/MapOf__string'
+                    description: The Tags for the segments.
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -557,15 +725,21 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetSegmentsRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
+        - name: page-size
+          in: query
+          required: false
+          description: The number of entries you want on each page in the response.
+          type: string
+        - name: token
+          in: query
+          required: false
+          description: The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+          type: string
   '/v1/apps/{application-id}/channels/adm':
     delete:
       operationId: DeleteAdmChannel
@@ -600,15 +774,11 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteAdmChannelRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -652,15 +822,11 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetAdmChannelRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
     put:
       operationId: UpdateAdmChannel
       description: Update an ADM channel.
@@ -694,15 +860,32 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: application-id
+          in: path
+          required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateAdmChannelRequest'
-        - name: application-id
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - ADMChannelRequest
+            properties:
+              ADMChannelRequest:
+                description: Amazon Device Messaging channel definition.
+                type: object
+                properties:
+                  ClientId:
+                    $ref: '#/definitions/__string'
+                    description: The Client ID that you obtained from the Amazon App Distribution Portal.
+                  ClientSecret:
+                    $ref: '#/definitions/__string'
+                    description: The Client Secret that you obtained from the Amazon App Distribution Portal.
+                  Enabled:
+                    $ref: '#/definitions/__boolean'
+                    description: Indicates whether or not the channel is enabled for sending messages.
   '/v1/apps/{application-id}/channels/apns':
     delete:
       operationId: DeleteApnsChannel
@@ -737,15 +920,11 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteApnsChannelRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -789,15 +968,11 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetApnsChannelRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
     put:
       operationId: UpdateApnsChannel
       description: Use to update the APNs channel for an app.
@@ -831,15 +1006,47 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: application-id
+          in: path
+          required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateApnsChannelRequest'
-        - name: application-id
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - APNSChannelRequest
+            properties:
+              APNSChannelRequest:
+                description: Apple Push Notification Service channel definition.
+                type: object
+                properties:
+                  BundleId:
+                    $ref: '#/definitions/__string'
+                    description: The bundle id used for APNs Tokens.
+                  Certificate:
+                    $ref: '#/definitions/__string'
+                    description: The distribution certificate from Apple.
+                  DefaultAuthenticationMethod:
+                    $ref: '#/definitions/__string'
+                    description: The default authentication method used for APNs.
+                  Enabled:
+                    $ref: '#/definitions/__boolean'
+                    description: If the channel is enabled for sending messages.
+                  PrivateKey:
+                    $ref: '#/definitions/__string'
+                    description: The certificate private key.
+                  TeamId:
+                    $ref: '#/definitions/__string'
+                    description: The team id used for APNs Tokens.
+                  TokenKey:
+                    $ref: '#/definitions/__string'
+                    description: The token key used for APNs Tokens.
+                  TokenKeyId:
+                    $ref: '#/definitions/__string'
+                    description: The token key used for APNs Tokens.
   '/v1/apps/{application-id}/channels/apns_sandbox':
     delete:
       operationId: DeleteApnsSandboxChannel
@@ -874,15 +1081,11 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteApnsSandboxChannelRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -926,15 +1129,11 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetApnsSandboxChannelRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
     put:
       operationId: UpdateApnsSandboxChannel
       description: Update an APNS sandbox channel.
@@ -968,15 +1167,47 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: application-id
+          in: path
+          required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateApnsSandboxChannelRequest'
-        - name: application-id
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - APNSSandboxChannelRequest
+            properties:
+              APNSSandboxChannelRequest:
+                description: Apple Development Push Notification Service channel definition.
+                type: object
+                properties:
+                  BundleId:
+                    $ref: '#/definitions/__string'
+                    description: The bundle id used for APNs Tokens.
+                  Certificate:
+                    $ref: '#/definitions/__string'
+                    description: The distribution certificate from Apple.
+                  DefaultAuthenticationMethod:
+                    $ref: '#/definitions/__string'
+                    description: The default authentication method used for APNs.
+                  Enabled:
+                    $ref: '#/definitions/__boolean'
+                    description: If the channel is enabled for sending messages.
+                  PrivateKey:
+                    $ref: '#/definitions/__string'
+                    description: The certificate private key.
+                  TeamId:
+                    $ref: '#/definitions/__string'
+                    description: The team id used for APNs Tokens.
+                  TokenKey:
+                    $ref: '#/definitions/__string'
+                    description: The token key used for APNs Tokens.
+                  TokenKeyId:
+                    $ref: '#/definitions/__string'
+                    description: The token key used for APNs Tokens.
   '/v1/apps/{application-id}/channels/apns_voip':
     delete:
       operationId: DeleteApnsVoipChannel
@@ -1011,15 +1242,11 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteApnsVoipChannelRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1063,15 +1290,11 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetApnsVoipChannelRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
     put:
       operationId: UpdateApnsVoipChannel
       description: Update an APNS VoIP channel
@@ -1105,15 +1328,47 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: application-id
+          in: path
+          required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateApnsVoipChannelRequest'
-        - name: application-id
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - APNSVoipChannelRequest
+            properties:
+              APNSVoipChannelRequest:
+                description: Apple VoIP Push Notification Service channel definition.
+                type: object
+                properties:
+                  BundleId:
+                    $ref: '#/definitions/__string'
+                    description: The bundle id used for APNs Tokens.
+                  Certificate:
+                    $ref: '#/definitions/__string'
+                    description: The distribution certificate from Apple.
+                  DefaultAuthenticationMethod:
+                    $ref: '#/definitions/__string'
+                    description: The default authentication method used for APNs.
+                  Enabled:
+                    $ref: '#/definitions/__boolean'
+                    description: If the channel is enabled for sending messages.
+                  PrivateKey:
+                    $ref: '#/definitions/__string'
+                    description: The certificate private key.
+                  TeamId:
+                    $ref: '#/definitions/__string'
+                    description: The team id used for APNs Tokens.
+                  TokenKey:
+                    $ref: '#/definitions/__string'
+                    description: The token key used for APNs Tokens.
+                  TokenKeyId:
+                    $ref: '#/definitions/__string'
+                    description: The token key used for APNs Tokens.
   '/v1/apps/{application-id}/channels/apns_voip_sandbox':
     delete:
       operationId: DeleteApnsVoipSandboxChannel
@@ -1148,15 +1403,11 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteApnsVoipSandboxChannelRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1200,15 +1451,11 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetApnsVoipSandboxChannelRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
     put:
       operationId: UpdateApnsVoipSandboxChannel
       description: Update an APNS VoIP sandbox channel
@@ -1242,15 +1489,47 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: application-id
+          in: path
+          required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateApnsVoipSandboxChannelRequest'
-        - name: application-id
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - APNSVoipSandboxChannelRequest
+            properties:
+              APNSVoipSandboxChannelRequest:
+                description: Apple VoIP Developer Push Notification Service channel definition.
+                type: object
+                properties:
+                  BundleId:
+                    $ref: '#/definitions/__string'
+                    description: The bundle id used for APNs Tokens.
+                  Certificate:
+                    $ref: '#/definitions/__string'
+                    description: The distribution certificate from Apple.
+                  DefaultAuthenticationMethod:
+                    $ref: '#/definitions/__string'
+                    description: The default authentication method used for APNs.
+                  Enabled:
+                    $ref: '#/definitions/__boolean'
+                    description: If the channel is enabled for sending messages.
+                  PrivateKey:
+                    $ref: '#/definitions/__string'
+                    description: The certificate private key.
+                  TeamId:
+                    $ref: '#/definitions/__string'
+                    description: The team id used for APNs Tokens.
+                  TokenKey:
+                    $ref: '#/definitions/__string'
+                    description: The token key used for APNs Tokens.
+                  TokenKeyId:
+                    $ref: '#/definitions/__string'
+                    description: The token key used for APNs Tokens.
   '/v1/apps/{application-id}':
     delete:
       operationId: DeleteApp
@@ -1285,15 +1564,11 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteAppRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1337,15 +1612,11 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetAppRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
   '/v1/apps/{application-id}/channels/baidu':
     delete:
       operationId: DeleteBaiduChannel
@@ -1380,15 +1651,11 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteBaiduChannelRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1432,15 +1699,11 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetBaiduChannelRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
     put:
       operationId: UpdateBaiduChannel
       description: Update a BAIDU GCM channel
@@ -1474,15 +1737,32 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: application-id
+          in: path
+          required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateBaiduChannelRequest'
-        - name: application-id
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - BaiduChannelRequest
+            properties:
+              BaiduChannelRequest:
+                description: Baidu Cloud Push credentials
+                type: object
+                properties:
+                  ApiKey:
+                    $ref: '#/definitions/__string'
+                    description: Platform credential API key from Baidu.
+                  Enabled:
+                    $ref: '#/definitions/__boolean'
+                    description: If the channel is enabled for sending messages.
+                  SecretKey:
+                    $ref: '#/definitions/__string'
+                    description: Platform credential Secret key from Baidu.
   '/v1/apps/{application-id}/campaigns/{campaign-id}':
     delete:
       operationId: DeleteCampaign
@@ -1517,19 +1797,16 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteCampaignRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
         - name: campaign-id
-          type: string
           in: path
           required: true
+          description: The unique ID of the campaign.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1573,19 +1850,16 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetCampaignRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
         - name: campaign-id
-          type: string
           in: path
           required: true
+          description: The unique ID of the campaign.
+          type: string
     put:
       operationId: UpdateCampaign
       description: Use to update a campaign.
@@ -1619,19 +1893,70 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: application-id
+          in: path
+          required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
+        - name: campaign-id
+          in: path
+          required: true
+          description: The unique ID of the campaign.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateCampaignRequest'
-        - name: application-id
-          type: string
-          in: path
-          required: true
-        - name: campaign-id
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - WriteCampaignRequest
+            properties:
+              WriteCampaignRequest:
+                description: Used to create a campaign.
+                type: object
+                properties:
+                  AdditionalTreatments:
+                    $ref: '#/definitions/ListOfWriteTreatmentResource'
+                    description: Treatments that are defined in addition to the default treatment.
+                  Description:
+                    $ref: '#/definitions/__string'
+                    description: A description of the campaign.
+                  HoldoutPercent:
+                    $ref: '#/definitions/__integer'
+                    description: The allocated percentage of end users who will not receive messages from this campaign.
+                  Hook:
+                    $ref: '#/definitions/CampaignHook'
+                    description: Campaign hook information.
+                  IsPaused:
+                    $ref: '#/definitions/__boolean'
+                    description: Indicates whether the campaign is paused. A paused campaign does not send messages unless you resume it by setting IsPaused to false.
+                  Limits:
+                    $ref: '#/definitions/CampaignLimits'
+                    description: The campaign limits settings.
+                  MessageConfiguration:
+                    $ref: '#/definitions/MessageConfiguration'
+                    description: The message configuration settings.
+                  Name:
+                    $ref: '#/definitions/__string'
+                    description: The custom name of the campaign.
+                  Schedule:
+                    $ref: '#/definitions/Schedule'
+                    description: The campaign schedule.
+                  SegmentId:
+                    $ref: '#/definitions/__string'
+                    description: The ID of the segment to which the campaign sends messages.
+                  SegmentVersion:
+                    $ref: '#/definitions/__integer'
+                    description: The version of the segment to which the campaign sends messages.
+                  tags:
+                    $ref: '#/definitions/MapOf__string'
+                    description: The Tags for the campaign.
+                  TreatmentDescription:
+                    $ref: '#/definitions/__string'
+                    description: A custom description for the treatment.
+                  TreatmentName:
+                    $ref: '#/definitions/__string'
+                    description: The custom name of a variation of the campaign used for A/B testing.
   '/v1/apps/{application-id}/channels/email':
     delete:
       operationId: DeleteEmailChannel
@@ -1666,15 +1991,11 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteEmailChannelRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1718,15 +2039,11 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetEmailChannelRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
     put:
       operationId: UpdateEmailChannel
       description: Update an email channel.
@@ -1760,15 +2077,38 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: application-id
+          in: path
+          required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateEmailChannelRequest'
-        - name: application-id
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - EmailChannelRequest
+            properties:
+              EmailChannelRequest:
+                description: Email Channel Request
+                type: object
+                properties:
+                  ConfigurationSet:
+                    $ref: '#/definitions/__string'
+                    description: The configuration set that you want to use when you send email using the Pinpoint Email API.
+                  Enabled:
+                    $ref: '#/definitions/__boolean'
+                    description: If the channel is enabled for sending messages.
+                  FromAddress:
+                    $ref: '#/definitions/__string'
+                    description: The email address used to send emails from.
+                  Identity:
+                    $ref: '#/definitions/__string'
+                    description: The ARN of an identity verified with SES.
+                  RoleArn:
+                    $ref: '#/definitions/__string'
+                    description: The ARN of an IAM Role used to submit events to Mobile Analytics' event ingestion service
   '/v1/apps/{application-id}/endpoints/{endpoint-id}':
     delete:
       operationId: DeleteEndpoint
@@ -1803,19 +2143,16 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteEndpointRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
         - name: endpoint-id
-          type: string
           in: path
           required: true
+          description: The unique ID of the endpoint.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1859,19 +2196,16 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetEndpointRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
         - name: endpoint-id
-          type: string
           in: path
           required: true
+          description: The unique ID of the endpoint.
+          type: string
     put:
       operationId: UpdateEndpoint
       description: Creates or updates an endpoint.
@@ -1905,19 +2239,72 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: application-id
+          in: path
+          required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
+        - name: endpoint-id
+          in: path
+          required: true
+          description: The unique ID of the endpoint.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateEndpointRequest'
-        - name: application-id
-          type: string
-          in: path
-          required: true
-        - name: endpoint-id
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - EndpointRequest
+            properties:
+              EndpointRequest:
+                description: An endpoint update request.
+                type: object
+                properties:
+                  Address:
+                    $ref: '#/definitions/__string'
+                    description: 'The destination for messages that you send to this endpoint. The address varies by channel. For mobile push channels, use the token provided by the push notification service, such as the APNs device token or the FCM registration token. For the SMS channel, use a phone number in E.164 format, such as +12065550100. For the email channel, use an email address.'
+                  Attributes:
+                    $ref: '#/definitions/MapOfListOf__string'
+                    description: |-
+                      Custom attributes that describe the endpoint by associating a name with an array of values. For example, an attribute named "interests" might have the values ["science", "politics", "travel"]. You can use these attributes as selection criteria when you create a segment of users to engage with a messaging campaign.
+
+                      The following characters are not recommended in attribute names: # : ? \ /. The Amazon Pinpoint console does not display attributes that include these characters in the name. This limitation does not apply to attribute values.
+                  ChannelType:
+                    $ref: '#/definitions/ChannelType'
+                    description: |-
+                      The channel type.
+
+                      Valid values: GCM | APNS | APNS_SANDBOX | APNS_VOIP | APNS_VOIP_SANDBOX | ADM | SMS | EMAIL | BAIDU
+                  Demographic:
+                    $ref: '#/definitions/EndpointDemographic'
+                    description: Demographic attributes for the endpoint.
+                  EffectiveDate:
+                    $ref: '#/definitions/__string'
+                    description: 'The date and time when the endpoint was updated, shown in ISO 8601 format.'
+                  EndpointStatus:
+                    $ref: '#/definitions/__string'
+                    description: Unused.
+                  Location:
+                    $ref: '#/definitions/EndpointLocation'
+                    description: The endpoint location attributes.
+                  Metrics:
+                    $ref: '#/definitions/MapOf__double'
+                    description: Custom metrics that your app reports to Amazon Pinpoint.
+                  OptOut:
+                    $ref: '#/definitions/__string'
+                    description: |-
+                      Indicates whether a user has opted out of receiving messages with one of the following values:
+
+                      ALL - User has opted out of all messages.
+
+                      NONE - Users has not opted out and receives all messages.
+                  RequestId:
+                    $ref: '#/definitions/__string'
+                    description: The unique ID for the most recent request to update the endpoint.
+                  User:
+                    $ref: '#/definitions/EndpointUser'
+                    description: Custom user-specific attributes that your app reports to Amazon Pinpoint.
   '/v1/apps/{application-id}/eventstream':
     delete:
       operationId: DeleteEventStream
@@ -1952,15 +2339,11 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteEventStreamRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2004,15 +2387,11 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetEventStreamRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
     post:
       operationId: PutEventStream
       description: Use to create or update the event stream for an app.
@@ -2046,15 +2425,32 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: application-id
+          in: path
+          required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/PutEventStreamRequest'
-        - name: application-id
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - WriteEventStream
+            properties:
+              WriteEventStream:
+                description: Request to save an EventStream.
+                type: object
+                properties:
+                  DestinationStreamArn:
+                    $ref: '#/definitions/__string'
+                    description: |-
+                      The Amazon Resource Name (ARN) of the Amazon Kinesis stream or Firehose delivery stream to which you want to publish events.
+                       Firehose ARN: arn:aws:firehose:REGION:ACCOUNT_ID:deliverystream/STREAM_NAME
+                       Kinesis ARN: arn:aws:kinesis:REGION:ACCOUNT_ID:stream/STREAM_NAME
+                  RoleArn:
+                    $ref: '#/definitions/__string'
+                    description: The IAM role that authorizes Amazon Pinpoint to publish events to the stream in your account.
   '/v1/apps/{application-id}/channels/gcm':
     delete:
       operationId: DeleteGcmChannel
@@ -2089,15 +2485,11 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteGcmChannelRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2141,15 +2533,11 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetGcmChannelRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
     put:
       operationId: UpdateGcmChannel
       description: Use to update the GCM channel for an app.
@@ -2183,15 +2571,29 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: application-id
+          in: path
+          required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateGcmChannelRequest'
-        - name: application-id
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - GCMChannelRequest
+            properties:
+              GCMChannelRequest:
+                description: Google Cloud Messaging credentials
+                type: object
+                properties:
+                  ApiKey:
+                    $ref: '#/definitions/__string'
+                    description: Platform credential API key from Google.
+                  Enabled:
+                    $ref: '#/definitions/__boolean'
+                    description: If the channel is enabled for sending messages.
   '/v1/apps/{application-id}/segments/{segment-id}':
     delete:
       operationId: DeleteSegment
@@ -2226,19 +2628,16 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteSegmentRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
         - name: segment-id
-          type: string
           in: path
           required: true
+          description: The unique ID of the segment.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2282,19 +2681,16 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetSegmentRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
         - name: segment-id
-          type: string
           in: path
           required: true
+          description: The unique ID of the segment.
+          type: string
     put:
       operationId: UpdateSegment
       description: Used to update a segment.
@@ -2328,19 +2724,40 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: application-id
+          in: path
+          required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
+        - name: segment-id
+          in: path
+          required: true
+          description: The unique ID of the segment.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateSegmentRequest'
-        - name: application-id
-          type: string
-          in: path
-          required: true
-        - name: segment-id
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - WriteSegmentRequest
+            properties:
+              WriteSegmentRequest:
+                description: Segment definition.
+                type: object
+                properties:
+                  Dimensions:
+                    $ref: '#/definitions/SegmentDimensions'
+                    description: The segment dimensions attributes.
+                  Name:
+                    $ref: '#/definitions/__string'
+                    description: The name of segment
+                  SegmentGroups:
+                    $ref: '#/definitions/SegmentGroupList'
+                    description: 'A segment group, which consists of zero or more source segments, plus dimensions that are applied to those source segments. Your request can only include one segment group. Your request can include either a SegmentGroups object or a Dimensions object, but not both.'
+                  tags:
+                    $ref: '#/definitions/MapOf__string'
+                    description: The Tags for the segments.
   '/v1/apps/{application-id}/channels/sms':
     delete:
       operationId: DeleteSmsChannel
@@ -2375,15 +2792,11 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteSmsChannelRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2427,15 +2840,11 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetSmsChannelRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
     put:
       operationId: UpdateSmsChannel
       description: Update an SMS channel.
@@ -2469,15 +2878,32 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: application-id
+          in: path
+          required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateSmsChannelRequest'
-        - name: application-id
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - SMSChannelRequest
+            properties:
+              SMSChannelRequest:
+                description: SMS Channel Request
+                type: object
+                properties:
+                  Enabled:
+                    $ref: '#/definitions/__boolean'
+                    description: If the channel is enabled for sending messages.
+                  SenderId:
+                    $ref: '#/definitions/__string'
+                    description: Sender identifier of your messages.
+                  ShortCode:
+                    $ref: '#/definitions/__string'
+                    description: ShortCode registered with phone provider.
   '/v1/apps/{application-id}/users/{user-id}':
     delete:
       operationId: DeleteUserEndpoints
@@ -2512,19 +2938,16 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteUserEndpointsRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
         - name: user-id
-          type: string
           in: path
           required: true
+          description: The unique ID of the user.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2568,19 +2991,16 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetUserEndpointsRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
         - name: user-id
-          type: string
           in: path
           required: true
+          description: The unique ID of the user.
+          type: string
   '/v1/apps/{application-id}/channels/voice':
     delete:
       operationId: DeleteVoiceChannel
@@ -2615,15 +3035,11 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteVoiceChannelRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2667,15 +3083,11 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetVoiceChannelRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
     put:
       operationId: UpdateVoiceChannel
       description: Update an Voice channel
@@ -2709,15 +3121,26 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: application-id
+          in: path
+          required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateVoiceChannelRequest'
-        - name: application-id
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - VoiceChannelRequest
+            properties:
+              VoiceChannelRequest:
+                description: Voice Channel Request
+                type: object
+                properties:
+                  Enabled:
+                    $ref: '#/definitions/__boolean'
+                    description: If the channel is enabled for sending messages.
   '/v1/apps/{application-id}/settings':
     get:
       operationId: GetApplicationSettings
@@ -2752,15 +3175,11 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetApplicationSettingsRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2804,15 +3223,45 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: application-id
+          in: path
+          required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateApplicationSettingsRequest'
-        - name: application-id
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - WriteApplicationSettingsRequest
+            properties:
+              WriteApplicationSettingsRequest:
+                description: Creating application setting request
+                type: object
+                properties:
+                  CampaignHook:
+                    $ref: '#/definitions/CampaignHook'
+                    description: Default campaign hook information.
+                  CloudWatchMetricsEnabled:
+                    $ref: '#/definitions/__boolean'
+                    description: The CloudWatchMetrics settings for the app.
+                  Limits:
+                    $ref: '#/definitions/CampaignLimits'
+                    description: 'The limits that apply to each campaign in the project by default. Campaigns can also have their own limits, which override the settings at the project level.'
+                  QuietTime:
+                    $ref: '#/definitions/QuietTime'
+                    description: |-
+                      The default quiet time for the app. Campaigns in the app don't send messages to endpoints during the quiet time.
+
+                      Note: Make sure that your endpoints include the Demographics.Timezone attribute if you plan to enable a quiet time for your app. If your endpoints don't include this attribute, they'll receive the messages that you send them, even if quiet time is enabled.
+
+                      When you set up an app to use quiet time, campaigns in that app don't send messages during the time range you specified, as long as all of the following are true:
+                      - The endpoint includes a valid Demographic.Timezone attribute.
+                      - The current time in the endpoint's time zone is later than or equal to the time specified in the QuietTime.Start attribute for the app (or campaign, if applicable).
+                      - The current time in the endpoint's time zone is earlier than or equal to the time specified in the QuietTime.End attribute for the app (or campaign, if applicable).
+
+                      Individual campaigns within the app can have their own quiet time settings, which override the quiet time settings at the app level.
   '/v1/apps/{application-id}/campaigns/{campaign-id}/activities':
     get:
       operationId: GetCampaignActivities
@@ -2847,19 +3296,26 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetCampaignActivitiesRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
         - name: campaign-id
-          type: string
           in: path
           required: true
+          description: The unique ID of the campaign.
+          type: string
+        - name: page-size
+          in: query
+          required: false
+          description: The number of entries you want on each page in the response.
+          type: string
+        - name: token
+          in: query
+          required: false
+          description: The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2904,23 +3360,21 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetCampaignVersionRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
         - name: campaign-id
-          type: string
           in: path
           required: true
+          description: The unique ID of the campaign.
+          type: string
         - name: version
-          type: string
           in: path
           required: true
+          description: The version of the campaign.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2965,19 +3419,26 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetCampaignVersionsRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
         - name: campaign-id
-          type: string
           in: path
           required: true
+          description: The unique ID of the campaign.
+          type: string
+        - name: page-size
+          in: query
+          required: false
+          description: The number of entries you want on each page in the response.
+          type: string
+        - name: token
+          in: query
+          required: false
+          description: The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3022,15 +3483,11 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetChannelsRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3075,19 +3532,16 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetExportJobRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
         - name: job-id
-          type: string
           in: path
           required: true
+          description: The unique ID of the job.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3132,19 +3586,16 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetImportJobRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
         - name: job-id
-          type: string
           in: path
           required: true
+          description: The unique ID of the job.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3189,19 +3640,26 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetSegmentExportJobsRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
+        - name: page-size
+          in: query
+          required: false
+          description: The number of entries you want on each page in the response.
+          type: string
         - name: segment-id
-          type: string
           in: path
           required: true
+          description: The unique ID of the segment.
+          type: string
+        - name: token
+          in: query
+          required: false
+          description: The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3246,19 +3704,26 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetSegmentImportJobsRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
+        - name: page-size
+          in: query
+          required: false
+          description: The number of entries you want on each page in the response.
+          type: string
         - name: segment-id
-          type: string
           in: path
           required: true
+          description: The unique ID of the segment.
+          type: string
+        - name: token
+          in: query
+          required: false
+          description: The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3303,23 +3768,21 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetSegmentVersionRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
         - name: segment-id
-          type: string
           in: path
           required: true
+          description: The unique ID of the segment.
+          type: string
         - name: version
-          type: string
           in: path
           required: true
+          description: The segment version.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3364,19 +3827,26 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetSegmentVersionsRequest'
         - name: application-id
-          type: string
           in: path
           required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
+        - name: page-size
+          in: query
+          required: false
+          description: The number of entries you want on each page in the response.
+          type: string
         - name: segment-id
-          type: string
           in: path
           required: true
+          description: The unique ID of the segment.
+          type: string
+        - name: token
+          in: query
+          required: false
+          description: The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3397,15 +3867,11 @@ paths:
           schema:
             $ref: '#/definitions/ListTagsForResourceResponse'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListTagsForResourceRequest'
         - name: resource-arn
-          type: string
           in: path
           required: true
+          description: ''
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3423,31 +3889,25 @@ paths:
         '204':
           description: Success
       parameters:
+        - name: resource-arn
+          in: path
+          required: true
+          description: ''
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/TagResourceRequest'
-        - name: resource-arn
-          type: string
-          in: path
-          required: true
-    delete:
-      operationId: UntagResource
-      description: ''
-      responses:
-        '204':
-          description: Success
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/UntagResourceRequest'
-        - name: resource-arn
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - TagsModel
+            properties:
+              TagsModel:
+                description: ''
+                type: object
+                properties:
+                  tags:
+                    $ref: '#/definitions/MapOf__string'
   /v1/phone/number/validate:
     post:
       operationId: PhoneNumberValidate
@@ -3486,7 +3946,20 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/PhoneNumberValidateRequest'
+            type: object
+            required:
+              - NumberValidateRequest
+            properties:
+              NumberValidateRequest:
+                description: Phone Number Validate request.
+                type: object
+                properties:
+                  IsoCountryCode:
+                    $ref: '#/definitions/__string'
+                    description: (Optional) The two-character ISO country code for the country or region where the phone number was originally registered.
+                  PhoneNumber:
+                    $ref: '#/definitions/__string'
+                    description: 'The phone number to get information about. The phone number that you provide should include a country code. If the number doesn''t include a valid country code, the operation might result in an error.'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3531,15 +4004,26 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: application-id
+          in: path
+          required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/PutEventsRequest'
-        - name: application-id
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - EventsRequest
+            properties:
+              EventsRequest:
+                description: A set of events to process.
+                type: object
+                properties:
+                  BatchItem:
+                    $ref: '#/definitions/MapOfEventsBatch'
+                    description: 'A batch of events to process. Each BatchItem consists of an endpoint ID as the key, and an EventsBatch object as the value.'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3584,19 +4068,31 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: application-id
+          in: path
+          required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
+        - name: attribute-type
+          in: path
+          required: true
+          description: 'Type of attribute. Can be endpoint-custom-attributes, endpoint-custom-metrics, endpoint-user-attributes.'
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/RemoveAttributesRequest'
-        - name: application-id
-          type: string
-          in: path
-          required: true
-        - name: attribute-type
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - UpdateAttributesRequest
+            properties:
+              UpdateAttributesRequest:
+                description: Update attributes request
+                type: object
+                properties:
+                  Blacklist:
+                    $ref: '#/definitions/ListOf__string'
+                    description: The GLOB wildcard for removing the attributes in the application
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3641,15 +4137,38 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: application-id
+          in: path
+          required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/SendMessagesRequest'
-        - name: application-id
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - MessageRequest
+            properties:
+              MessageRequest:
+                description: Send message request.
+                type: object
+                properties:
+                  Addresses:
+                    $ref: '#/definitions/MapOfAddressConfiguration'
+                    description: 'A map of key-value pairs, where each key is an address and each value is an AddressConfiguration object. An address can be a push notification token, a phone number, or an email address.'
+                  Context:
+                    $ref: '#/definitions/MapOf__string'
+                    description: A map of custom attributes to attributes to be attached to the message. This payload is added to the push notification's 'data.pinpoint' object or added to the email/sms delivery receipt event attributes.
+                  Endpoints:
+                    $ref: '#/definitions/MapOfEndpointSendConfiguration'
+                    description: 'A map of key-value pairs, where each key is an endpoint ID and each value is an EndpointSendConfiguration object. Within an EndpointSendConfiguration object, you can tailor the message for an endpoint by specifying message overrides or substitutions.'
+                  MessageConfiguration:
+                    $ref: '#/definitions/DirectMessageConfiguration'
+                    description: Message configuration.
+                  TraceId:
+                    $ref: '#/definitions/__string'
+                    description: A unique ID that you can use to trace a message. This ID is visible to recipients.
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3694,15 +4213,65 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: application-id
+          in: path
+          required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/SendUsersMessagesRequest'
-        - name: application-id
-          type: string
+            type: object
+            required:
+              - SendUsersMessageRequest
+            properties:
+              SendUsersMessageRequest:
+                description: Send message request.
+                type: object
+                properties:
+                  Context:
+                    $ref: '#/definitions/MapOf__string'
+                    description: A map of custom attribute-value pairs. Amazon Pinpoint adds these attributes to the data.pinpoint object in the body of the push notification payload. Amazon Pinpoint also provides these attributes in the events that it generates for users-messages deliveries.
+                  MessageConfiguration:
+                    $ref: '#/definitions/DirectMessageConfiguration'
+                    description: Message definitions for the default message and any messages that are tailored for specific channels.
+                  TraceId:
+                    $ref: '#/definitions/__string'
+                    description: A unique ID that you can use to trace a message. This ID is visible to recipients.
+                  Users:
+                    $ref: '#/definitions/MapOfEndpointSendConfiguration'
+                    description: 'A map that associates user IDs with EndpointSendConfiguration objects. Within an EndpointSendConfiguration object, you can tailor the message for a user by specifying message overrides or substitutions.'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/tags/{resource-arn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: ''
+      responses:
+        '204':
+          description: Success
+      parameters:
+        - name: resource-arn
           in: path
           required: true
+          description: ''
+          type: string
+        - name: tagKeys
+          in: query
+          required: true
+          description: The key(s) of tag to be deleted
+          type: array
+          items:
+            type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3747,15 +4316,26 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: application-id
+          in: path
+          required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateEndpointsBatchRequest'
-        - name: application-id
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - EndpointBatchRequest
+            properties:
+              EndpointBatchRequest:
+                description: Endpoint batch update request.
+                type: object
+                properties:
+                  Item:
+                    $ref: '#/definitions/ListOfEndpointBatchItem'
+                    description: List of items to update. Maximum 100 items
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3774,13 +4354,12 @@ definitions:
     properties:
       ApplicationResponse:
         $ref: '#/definitions/ApplicationResponse'
-  CreateAppRequest:
+  __string:
+    type: string
+  MapOf__string:
     type: object
-    required:
-      - CreateApplicationRequest
-    properties:
-      CreateApplicationRequest:
-        $ref: '#/definitions/CreateApplicationRequest'
+    additionalProperties:
+      $ref: '#/definitions/__string'
   BadRequestException: {}
   InternalServerErrorException: {}
   ForbiddenException: {}
@@ -3794,13 +4373,150 @@ definitions:
     properties:
       CampaignResponse:
         $ref: '#/definitions/CampaignResponse'
-  CreateCampaignRequest:
+  ListOfWriteTreatmentResource:
+    type: array
+    items:
+      $ref: '#/definitions/WriteTreatmentResource'
+  __integer:
+    type: integer
+  CampaignHook:
     type: object
-    required:
-      - WriteCampaignRequest
     properties:
-      WriteCampaignRequest:
-        $ref: '#/definitions/WriteCampaignRequest'
+      LambdaFunctionName:
+        $ref: '#/definitions/__string'
+        description: Lambda function name or arn to be called for delivery
+      Mode:
+        $ref: '#/definitions/Mode'
+        description: What mode Lambda should be invoked in.
+      WebUrl:
+        $ref: '#/definitions/__string'
+        description: Web URL to call for hook. If the URL has authentication specified it will be added as authentication to the request
+    description: Campaign hook information.
+  __boolean:
+    type: boolean
+  CampaignLimits:
+    type: object
+    properties:
+      Daily:
+        $ref: '#/definitions/__integer'
+        description: The maximum number of messages that each campaign can send to a single endpoint in a 24-hour period.
+      MaximumDuration:
+        $ref: '#/definitions/__integer'
+        description: The length of time (in seconds) that the campaign can run before it ends and message deliveries stop. This duration begins at the scheduled start time for the campaign. The minimum value is 60.
+      MessagesPerSecond:
+        $ref: '#/definitions/__integer'
+        description: 'The number of messages that the campaign can send per second. The minimum value is 50, and the maximum is 20000.'
+      Total:
+        $ref: '#/definitions/__integer'
+        description: The maximum number of messages that an individual campaign can send to a single endpoint over the course of the campaign.
+    description: Campaign Limits are used to limit the number of messages that can be sent to a single endpoint.
+  MessageConfiguration:
+    type: object
+    properties:
+      ADMMessage:
+        $ref: '#/definitions/Message'
+        description: The message that the campaign delivers to ADM channels. Overrides the default message.
+      APNSMessage:
+        $ref: '#/definitions/Message'
+        description: The message that the campaign delivers to APNS channels. Overrides the default message.
+      BaiduMessage:
+        $ref: '#/definitions/Message'
+        description: The message that the campaign delivers to Baidu channels. Overrides the default message.
+      DefaultMessage:
+        $ref: '#/definitions/Message'
+        description: The default message for all channels.
+      EmailMessage:
+        $ref: '#/definitions/CampaignEmailMessage'
+        description: The email message configuration.
+      GCMMessage:
+        $ref: '#/definitions/Message'
+        description: The message that the campaign delivers to GCM channels. Overrides the default message.
+      SMSMessage:
+        $ref: '#/definitions/CampaignSmsMessage'
+        description: The SMS message configuration.
+    description: Message configuration for a campaign.
+  Schedule:
+    type: object
+    properties:
+      EndTime:
+        $ref: '#/definitions/__string'
+        description: The scheduled time that the campaign ends in ISO 8601 format.
+      EventFilter:
+        $ref: '#/definitions/CampaignEventFilter'
+        description: Defines the type of events that can trigger the campaign. Used when the Frequency is set to EVENT.
+      Frequency:
+        $ref: '#/definitions/Frequency'
+        description: |-
+          How often the campaign delivers messages.
+
+          Valid values:
+
+          ONCE
+
+          HOURLY
+
+          DAILY
+
+          WEEKLY
+
+          MONTHLY
+
+          EVENT
+      IsLocalTime:
+        $ref: '#/definitions/__boolean'
+        description: Indicates whether the campaign schedule takes effect according to each user's local time.
+      QuietTime:
+        $ref: '#/definitions/QuietTime'
+        description: |-
+          The default quiet time for the campaign. The campaign doesn't send messages to endpoints during the quiet time.
+
+          Note: Make sure that your endpoints include the Demographics.Timezone attribute if you plan to enable a quiet time for your campaign. If your endpoints don't include this attribute, they'll receive the messages that you send them, even if quiet time is enabled.
+
+          When you set up a campaign to use quiet time, the campaign doesn't send messages during the time range you specified, as long as all of the following are true:
+          - The endpoint includes a valid Demographic.Timezone attribute.
+          - The current time in the endpoint's time zone is later than or equal to the time specified in the QuietTime.Start attribute for the campaign.
+          - The current time in the endpoint's time zone is earlier than or equal to the time specified in the QuietTime.End attribute for the campaign.
+      StartTime:
+        $ref: '#/definitions/__string'
+        description: The scheduled time that the campaign begins in ISO 8601 format.
+      Timezone:
+        $ref: '#/definitions/__string'
+        description: |-
+          The starting UTC offset for the schedule if the value for isLocalTime is true
+
+          Valid values: 
+          UTC
+          UTC+01
+          UTC+02
+          UTC+03
+          UTC+03:30
+          UTC+04
+          UTC+04:30
+          UTC+05
+          UTC+05:30
+          UTC+05:45
+          UTC+06
+          UTC+06:30
+          UTC+07
+          UTC+08
+          UTC+09
+          UTC+09:30
+          UTC+10
+          UTC+10:30
+          UTC+11
+          UTC+12
+          UTC+13
+          UTC-02
+          UTC-03
+          UTC-04
+          UTC-05
+          UTC-06
+          UTC-07
+          UTC-08
+          UTC-09
+          UTC-10
+          UTC-11
+    description: Shcedule that defines when a campaign is run.
   CreateExportJobResponse:
     type: object
     required:
@@ -3808,13 +4524,6 @@ definitions:
     properties:
       ExportJobResponse:
         $ref: '#/definitions/ExportJobResponse'
-  CreateExportJobRequest:
-    type: object
-    required:
-      - ExportJobRequest
-    properties:
-      ExportJobRequest:
-        $ref: '#/definitions/ExportJobRequest'
   CreateImportJobResponse:
     type: object
     required:
@@ -3822,13 +4531,11 @@ definitions:
     properties:
       ImportJobResponse:
         $ref: '#/definitions/ImportJobResponse'
-  CreateImportJobRequest:
-    type: object
-    required:
-      - ImportJobRequest
-    properties:
-      ImportJobRequest:
-        $ref: '#/definitions/ImportJobRequest'
+  Format:
+    type: string
+    enum:
+      - CSV
+      - JSON
   CreateSegmentResponse:
     type: object
     required:
@@ -3836,13 +4543,38 @@ definitions:
     properties:
       SegmentResponse:
         $ref: '#/definitions/SegmentResponse'
-  CreateSegmentRequest:
+  SegmentDimensions:
     type: object
-    required:
-      - WriteSegmentRequest
     properties:
-      WriteSegmentRequest:
-        $ref: '#/definitions/WriteSegmentRequest'
+      Attributes:
+        $ref: '#/definitions/MapOfAttributeDimension'
+        description: Custom segment attributes.
+      Behavior:
+        $ref: '#/definitions/SegmentBehaviors'
+        description: The segment behaviors attributes.
+      Demographic:
+        $ref: '#/definitions/SegmentDemographics'
+        description: The segment demographics attributes.
+      Location:
+        $ref: '#/definitions/SegmentLocation'
+        description: The segment location attributes.
+      Metrics:
+        $ref: '#/definitions/MapOfMetricDimension'
+        description: Custom segment metrics.
+      UserAttributes:
+        $ref: '#/definitions/MapOfAttributeDimension'
+        description: Custom segment user attributes.
+    description: Segment dimensions
+  SegmentGroupList:
+    type: object
+    properties:
+      Groups:
+        $ref: '#/definitions/ListOfSegmentGroup'
+        description: A set of segment criteria to evaluate.
+      Include:
+        $ref: '#/definitions/Include'
+        description: 'Specify how to handle multiple segment groups. For example, if the segment includes three segment groups, should the resulting segment include endpoints that are matched by all, any, or none of the segment groups you created. Acceptable values: ALL, ANY, or NONE.'
+    description: Segment group definition.
   DeleteAdmChannelResponse:
     type: object
     required:
@@ -3850,9 +4582,6 @@ definitions:
     properties:
       ADMChannelResponse:
         $ref: '#/definitions/ADMChannelResponse'
-  DeleteAdmChannelRequest:
-    type: object
-    properties: {}
   DeleteApnsChannelResponse:
     type: object
     required:
@@ -3860,9 +4589,6 @@ definitions:
     properties:
       APNSChannelResponse:
         $ref: '#/definitions/APNSChannelResponse'
-  DeleteApnsChannelRequest:
-    type: object
-    properties: {}
   DeleteApnsSandboxChannelResponse:
     type: object
     required:
@@ -3870,9 +4596,6 @@ definitions:
     properties:
       APNSSandboxChannelResponse:
         $ref: '#/definitions/APNSSandboxChannelResponse'
-  DeleteApnsSandboxChannelRequest:
-    type: object
-    properties: {}
   DeleteApnsVoipChannelResponse:
     type: object
     required:
@@ -3880,9 +4603,6 @@ definitions:
     properties:
       APNSVoipChannelResponse:
         $ref: '#/definitions/APNSVoipChannelResponse'
-  DeleteApnsVoipChannelRequest:
-    type: object
-    properties: {}
   DeleteApnsVoipSandboxChannelResponse:
     type: object
     required:
@@ -3890,9 +4610,6 @@ definitions:
     properties:
       APNSVoipSandboxChannelResponse:
         $ref: '#/definitions/APNSVoipSandboxChannelResponse'
-  DeleteApnsVoipSandboxChannelRequest:
-    type: object
-    properties: {}
   DeleteAppResponse:
     type: object
     required:
@@ -3900,9 +4617,6 @@ definitions:
     properties:
       ApplicationResponse:
         $ref: '#/definitions/ApplicationResponse'
-  DeleteAppRequest:
-    type: object
-    properties: {}
   DeleteBaiduChannelResponse:
     type: object
     required:
@@ -3910,9 +4624,6 @@ definitions:
     properties:
       BaiduChannelResponse:
         $ref: '#/definitions/BaiduChannelResponse'
-  DeleteBaiduChannelRequest:
-    type: object
-    properties: {}
   DeleteCampaignResponse:
     type: object
     required:
@@ -3920,9 +4631,6 @@ definitions:
     properties:
       CampaignResponse:
         $ref: '#/definitions/CampaignResponse'
-  DeleteCampaignRequest:
-    type: object
-    properties: {}
   DeleteEmailChannelResponse:
     type: object
     required:
@@ -3930,9 +4638,6 @@ definitions:
     properties:
       EmailChannelResponse:
         $ref: '#/definitions/EmailChannelResponse'
-  DeleteEmailChannelRequest:
-    type: object
-    properties: {}
   DeleteEndpointResponse:
     type: object
     required:
@@ -3940,9 +4645,6 @@ definitions:
     properties:
       EndpointResponse:
         $ref: '#/definitions/EndpointResponse'
-  DeleteEndpointRequest:
-    type: object
-    properties: {}
   DeleteEventStreamResponse:
     type: object
     required:
@@ -3950,9 +4652,6 @@ definitions:
     properties:
       EventStream:
         $ref: '#/definitions/EventStream'
-  DeleteEventStreamRequest:
-    type: object
-    properties: {}
   DeleteGcmChannelResponse:
     type: object
     required:
@@ -3960,9 +4659,6 @@ definitions:
     properties:
       GCMChannelResponse:
         $ref: '#/definitions/GCMChannelResponse'
-  DeleteGcmChannelRequest:
-    type: object
-    properties: {}
   DeleteSegmentResponse:
     type: object
     required:
@@ -3970,9 +4666,6 @@ definitions:
     properties:
       SegmentResponse:
         $ref: '#/definitions/SegmentResponse'
-  DeleteSegmentRequest:
-    type: object
-    properties: {}
   DeleteSmsChannelResponse:
     type: object
     required:
@@ -3980,9 +4673,6 @@ definitions:
     properties:
       SMSChannelResponse:
         $ref: '#/definitions/SMSChannelResponse'
-  DeleteSmsChannelRequest:
-    type: object
-    properties: {}
   DeleteUserEndpointsResponse:
     type: object
     required:
@@ -3990,9 +4680,6 @@ definitions:
     properties:
       EndpointsResponse:
         $ref: '#/definitions/EndpointsResponse'
-  DeleteUserEndpointsRequest:
-    type: object
-    properties: {}
   DeleteVoiceChannelResponse:
     type: object
     required:
@@ -4000,9 +4687,6 @@ definitions:
     properties:
       VoiceChannelResponse:
         $ref: '#/definitions/VoiceChannelResponse'
-  DeleteVoiceChannelRequest:
-    type: object
-    properties: {}
   GetAdmChannelResponse:
     type: object
     required:
@@ -4010,9 +4694,6 @@ definitions:
     properties:
       ADMChannelResponse:
         $ref: '#/definitions/ADMChannelResponse'
-  GetAdmChannelRequest:
-    type: object
-    properties: {}
   GetApnsChannelResponse:
     type: object
     required:
@@ -4020,9 +4701,6 @@ definitions:
     properties:
       APNSChannelResponse:
         $ref: '#/definitions/APNSChannelResponse'
-  GetApnsChannelRequest:
-    type: object
-    properties: {}
   GetApnsSandboxChannelResponse:
     type: object
     required:
@@ -4030,9 +4708,6 @@ definitions:
     properties:
       APNSSandboxChannelResponse:
         $ref: '#/definitions/APNSSandboxChannelResponse'
-  GetApnsSandboxChannelRequest:
-    type: object
-    properties: {}
   GetApnsVoipChannelResponse:
     type: object
     required:
@@ -4040,9 +4715,6 @@ definitions:
     properties:
       APNSVoipChannelResponse:
         $ref: '#/definitions/APNSVoipChannelResponse'
-  GetApnsVoipChannelRequest:
-    type: object
-    properties: {}
   GetApnsVoipSandboxChannelResponse:
     type: object
     required:
@@ -4050,9 +4722,6 @@ definitions:
     properties:
       APNSVoipSandboxChannelResponse:
         $ref: '#/definitions/APNSVoipSandboxChannelResponse'
-  GetApnsVoipSandboxChannelRequest:
-    type: object
-    properties: {}
   GetAppResponse:
     type: object
     required:
@@ -4060,9 +4729,6 @@ definitions:
     properties:
       ApplicationResponse:
         $ref: '#/definitions/ApplicationResponse'
-  GetAppRequest:
-    type: object
-    properties: {}
   GetApplicationSettingsResponse:
     type: object
     required:
@@ -4070,9 +4736,6 @@ definitions:
     properties:
       ApplicationSettingsResource:
         $ref: '#/definitions/ApplicationSettingsResource'
-  GetApplicationSettingsRequest:
-    type: object
-    properties: {}
   GetAppsResponse:
     type: object
     required:
@@ -4080,9 +4743,6 @@ definitions:
     properties:
       ApplicationsResponse:
         $ref: '#/definitions/ApplicationsResponse'
-  GetAppsRequest:
-    type: object
-    properties: {}
   GetBaiduChannelResponse:
     type: object
     required:
@@ -4090,9 +4750,6 @@ definitions:
     properties:
       BaiduChannelResponse:
         $ref: '#/definitions/BaiduChannelResponse'
-  GetBaiduChannelRequest:
-    type: object
-    properties: {}
   GetCampaignResponse:
     type: object
     required:
@@ -4100,9 +4757,6 @@ definitions:
     properties:
       CampaignResponse:
         $ref: '#/definitions/CampaignResponse'
-  GetCampaignRequest:
-    type: object
-    properties: {}
   GetCampaignActivitiesResponse:
     type: object
     required:
@@ -4110,9 +4764,6 @@ definitions:
     properties:
       ActivitiesResponse:
         $ref: '#/definitions/ActivitiesResponse'
-  GetCampaignActivitiesRequest:
-    type: object
-    properties: {}
   GetCampaignVersionResponse:
     type: object
     required:
@@ -4120,9 +4771,6 @@ definitions:
     properties:
       CampaignResponse:
         $ref: '#/definitions/CampaignResponse'
-  GetCampaignVersionRequest:
-    type: object
-    properties: {}
   GetCampaignVersionsResponse:
     type: object
     required:
@@ -4130,9 +4778,6 @@ definitions:
     properties:
       CampaignsResponse:
         $ref: '#/definitions/CampaignsResponse'
-  GetCampaignVersionsRequest:
-    type: object
-    properties: {}
   GetCampaignsResponse:
     type: object
     required:
@@ -4140,9 +4785,6 @@ definitions:
     properties:
       CampaignsResponse:
         $ref: '#/definitions/CampaignsResponse'
-  GetCampaignsRequest:
-    type: object
-    properties: {}
   GetChannelsResponse:
     type: object
     required:
@@ -4150,9 +4792,6 @@ definitions:
     properties:
       ChannelsResponse:
         $ref: '#/definitions/ChannelsResponse'
-  GetChannelsRequest:
-    type: object
-    properties: {}
   GetEmailChannelResponse:
     type: object
     required:
@@ -4160,9 +4799,6 @@ definitions:
     properties:
       EmailChannelResponse:
         $ref: '#/definitions/EmailChannelResponse'
-  GetEmailChannelRequest:
-    type: object
-    properties: {}
   GetEndpointResponse:
     type: object
     required:
@@ -4170,9 +4806,6 @@ definitions:
     properties:
       EndpointResponse:
         $ref: '#/definitions/EndpointResponse'
-  GetEndpointRequest:
-    type: object
-    properties: {}
   GetEventStreamResponse:
     type: object
     required:
@@ -4180,9 +4813,6 @@ definitions:
     properties:
       EventStream:
         $ref: '#/definitions/EventStream'
-  GetEventStreamRequest:
-    type: object
-    properties: {}
   GetExportJobResponse:
     type: object
     required:
@@ -4190,9 +4820,6 @@ definitions:
     properties:
       ExportJobResponse:
         $ref: '#/definitions/ExportJobResponse'
-  GetExportJobRequest:
-    type: object
-    properties: {}
   GetExportJobsResponse:
     type: object
     required:
@@ -4200,9 +4827,6 @@ definitions:
     properties:
       ExportJobsResponse:
         $ref: '#/definitions/ExportJobsResponse'
-  GetExportJobsRequest:
-    type: object
-    properties: {}
   GetGcmChannelResponse:
     type: object
     required:
@@ -4210,9 +4834,6 @@ definitions:
     properties:
       GCMChannelResponse:
         $ref: '#/definitions/GCMChannelResponse'
-  GetGcmChannelRequest:
-    type: object
-    properties: {}
   GetImportJobResponse:
     type: object
     required:
@@ -4220,9 +4841,6 @@ definitions:
     properties:
       ImportJobResponse:
         $ref: '#/definitions/ImportJobResponse'
-  GetImportJobRequest:
-    type: object
-    properties: {}
   GetImportJobsResponse:
     type: object
     required:
@@ -4230,9 +4848,6 @@ definitions:
     properties:
       ImportJobsResponse:
         $ref: '#/definitions/ImportJobsResponse'
-  GetImportJobsRequest:
-    type: object
-    properties: {}
   GetSegmentResponse:
     type: object
     required:
@@ -4240,9 +4855,6 @@ definitions:
     properties:
       SegmentResponse:
         $ref: '#/definitions/SegmentResponse'
-  GetSegmentRequest:
-    type: object
-    properties: {}
   GetSegmentExportJobsResponse:
     type: object
     required:
@@ -4250,9 +4862,6 @@ definitions:
     properties:
       ExportJobsResponse:
         $ref: '#/definitions/ExportJobsResponse'
-  GetSegmentExportJobsRequest:
-    type: object
-    properties: {}
   GetSegmentImportJobsResponse:
     type: object
     required:
@@ -4260,9 +4869,6 @@ definitions:
     properties:
       ImportJobsResponse:
         $ref: '#/definitions/ImportJobsResponse'
-  GetSegmentImportJobsRequest:
-    type: object
-    properties: {}
   GetSegmentVersionResponse:
     type: object
     required:
@@ -4270,9 +4876,6 @@ definitions:
     properties:
       SegmentResponse:
         $ref: '#/definitions/SegmentResponse'
-  GetSegmentVersionRequest:
-    type: object
-    properties: {}
   GetSegmentVersionsResponse:
     type: object
     required:
@@ -4280,9 +4883,6 @@ definitions:
     properties:
       SegmentsResponse:
         $ref: '#/definitions/SegmentsResponse'
-  GetSegmentVersionsRequest:
-    type: object
-    properties: {}
   GetSegmentsResponse:
     type: object
     required:
@@ -4290,9 +4890,6 @@ definitions:
     properties:
       SegmentsResponse:
         $ref: '#/definitions/SegmentsResponse'
-  GetSegmentsRequest:
-    type: object
-    properties: {}
   GetSmsChannelResponse:
     type: object
     required:
@@ -4300,9 +4897,6 @@ definitions:
     properties:
       SMSChannelResponse:
         $ref: '#/definitions/SMSChannelResponse'
-  GetSmsChannelRequest:
-    type: object
-    properties: {}
   GetUserEndpointsResponse:
     type: object
     required:
@@ -4310,9 +4904,6 @@ definitions:
     properties:
       EndpointsResponse:
         $ref: '#/definitions/EndpointsResponse'
-  GetUserEndpointsRequest:
-    type: object
-    properties: {}
   GetVoiceChannelResponse:
     type: object
     required:
@@ -4320,9 +4911,6 @@ definitions:
     properties:
       VoiceChannelResponse:
         $ref: '#/definitions/VoiceChannelResponse'
-  GetVoiceChannelRequest:
-    type: object
-    properties: {}
   ListTagsForResourceResponse:
     type: object
     required:
@@ -4330,9 +4918,6 @@ definitions:
     properties:
       TagsModel:
         $ref: '#/definitions/TagsModel'
-  ListTagsForResourceRequest:
-    type: object
-    properties: {}
   PhoneNumberValidateResponse:
     type: object
     required:
@@ -4340,13 +4925,6 @@ definitions:
     properties:
       NumberValidateResponse:
         $ref: '#/definitions/NumberValidateResponse'
-  PhoneNumberValidateRequest:
-    type: object
-    required:
-      - NumberValidateRequest
-    properties:
-      NumberValidateRequest:
-        $ref: '#/definitions/NumberValidateRequest'
   PutEventStreamResponse:
     type: object
     required:
@@ -4354,13 +4932,6 @@ definitions:
     properties:
       EventStream:
         $ref: '#/definitions/EventStream'
-  PutEventStreamRequest:
-    type: object
-    required:
-      - WriteEventStream
-    properties:
-      WriteEventStream:
-        $ref: '#/definitions/WriteEventStream'
   PutEventsResponse:
     type: object
     required:
@@ -4368,13 +4939,10 @@ definitions:
     properties:
       EventsResponse:
         $ref: '#/definitions/EventsResponse'
-  PutEventsRequest:
+  MapOfEventsBatch:
     type: object
-    required:
-      - EventsRequest
-    properties:
-      EventsRequest:
-        $ref: '#/definitions/EventsRequest'
+    additionalProperties:
+      $ref: '#/definitions/EventsBatch'
   RemoveAttributesResponse:
     type: object
     required:
@@ -4382,13 +4950,10 @@ definitions:
     properties:
       AttributesResource:
         $ref: '#/definitions/AttributesResource'
-  RemoveAttributesRequest:
-    type: object
-    required:
-      - UpdateAttributesRequest
-    properties:
-      UpdateAttributesRequest:
-        $ref: '#/definitions/UpdateAttributesRequest'
+  ListOf__string:
+    type: array
+    items:
+      $ref: '#/definitions/__string'
   SendMessagesResponse:
     type: object
     required:
@@ -4396,13 +4961,45 @@ definitions:
     properties:
       MessageResponse:
         $ref: '#/definitions/MessageResponse'
-  SendMessagesRequest:
+  MapOfAddressConfiguration:
     type: object
-    required:
-      - MessageRequest
+    additionalProperties:
+      $ref: '#/definitions/AddressConfiguration'
+  MapOfEndpointSendConfiguration:
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/EndpointSendConfiguration'
+  DirectMessageConfiguration:
+    type: object
     properties:
-      MessageRequest:
-        $ref: '#/definitions/MessageRequest'
+      ADMMessage:
+        $ref: '#/definitions/ADMMessage'
+        description: The message to ADM channels. Overrides the default push notification message.
+      APNSMessage:
+        $ref: '#/definitions/APNSMessage'
+        description: The message to APNS channels. Overrides the default push notification message.
+      BaiduMessage:
+        $ref: '#/definitions/BaiduMessage'
+        description: The message to Baidu GCM channels. Overrides the default push notification message.
+      DefaultMessage:
+        $ref: '#/definitions/DefaultMessage'
+        description: The default message for all channels.
+      DefaultPushNotificationMessage:
+        $ref: '#/definitions/DefaultPushNotificationMessage'
+        description: The default push notification message for all push channels.
+      EmailMessage:
+        $ref: '#/definitions/EmailMessage'
+        description: The message to Email channels. Overrides the default message.
+      GCMMessage:
+        $ref: '#/definitions/GCMMessage'
+        description: The message to GCM channels. Overrides the default push notification message.
+      SMSMessage:
+        $ref: '#/definitions/SMSMessage'
+        description: The message to SMS channels. Overrides the default message.
+      VoiceMessage:
+        $ref: '#/definitions/VoiceMessage'
+        description: The message to Voice channels. Overrides the default message.
+    description: Message definitions for the default message and any messages that are tailored for specific channels.
   SendUsersMessagesResponse:
     type: object
     required:
@@ -4410,23 +5007,6 @@ definitions:
     properties:
       SendUsersMessageResponse:
         $ref: '#/definitions/SendUsersMessageResponse'
-  SendUsersMessagesRequest:
-    type: object
-    required:
-      - SendUsersMessageRequest
-    properties:
-      SendUsersMessageRequest:
-        $ref: '#/definitions/SendUsersMessageRequest'
-  TagResourceRequest:
-    type: object
-    required:
-      - TagsModel
-    properties:
-      TagsModel:
-        $ref: '#/definitions/TagsModel'
-  UntagResourceRequest:
-    type: object
-    properties: {}
   UpdateAdmChannelResponse:
     type: object
     required:
@@ -4434,13 +5014,6 @@ definitions:
     properties:
       ADMChannelResponse:
         $ref: '#/definitions/ADMChannelResponse'
-  UpdateAdmChannelRequest:
-    type: object
-    required:
-      - ADMChannelRequest
-    properties:
-      ADMChannelRequest:
-        $ref: '#/definitions/ADMChannelRequest'
   UpdateApnsChannelResponse:
     type: object
     required:
@@ -4448,13 +5021,6 @@ definitions:
     properties:
       APNSChannelResponse:
         $ref: '#/definitions/APNSChannelResponse'
-  UpdateApnsChannelRequest:
-    type: object
-    required:
-      - APNSChannelRequest
-    properties:
-      APNSChannelRequest:
-        $ref: '#/definitions/APNSChannelRequest'
   UpdateApnsSandboxChannelResponse:
     type: object
     required:
@@ -4462,13 +5028,6 @@ definitions:
     properties:
       APNSSandboxChannelResponse:
         $ref: '#/definitions/APNSSandboxChannelResponse'
-  UpdateApnsSandboxChannelRequest:
-    type: object
-    required:
-      - APNSSandboxChannelRequest
-    properties:
-      APNSSandboxChannelRequest:
-        $ref: '#/definitions/APNSSandboxChannelRequest'
   UpdateApnsVoipChannelResponse:
     type: object
     required:
@@ -4476,13 +5035,6 @@ definitions:
     properties:
       APNSVoipChannelResponse:
         $ref: '#/definitions/APNSVoipChannelResponse'
-  UpdateApnsVoipChannelRequest:
-    type: object
-    required:
-      - APNSVoipChannelRequest
-    properties:
-      APNSVoipChannelRequest:
-        $ref: '#/definitions/APNSVoipChannelRequest'
   UpdateApnsVoipSandboxChannelResponse:
     type: object
     required:
@@ -4490,13 +5042,6 @@ definitions:
     properties:
       APNSVoipSandboxChannelResponse:
         $ref: '#/definitions/APNSVoipSandboxChannelResponse'
-  UpdateApnsVoipSandboxChannelRequest:
-    type: object
-    required:
-      - APNSVoipSandboxChannelRequest
-    properties:
-      APNSVoipSandboxChannelRequest:
-        $ref: '#/definitions/APNSVoipSandboxChannelRequest'
   UpdateApplicationSettingsResponse:
     type: object
     required:
@@ -4504,13 +5049,16 @@ definitions:
     properties:
       ApplicationSettingsResource:
         $ref: '#/definitions/ApplicationSettingsResource'
-  UpdateApplicationSettingsRequest:
+  QuietTime:
     type: object
-    required:
-      - WriteApplicationSettingsRequest
     properties:
-      WriteApplicationSettingsRequest:
-        $ref: '#/definitions/WriteApplicationSettingsRequest'
+      End:
+        $ref: '#/definitions/__string'
+        description: 'The time at which quiet time should end. The value that you specify has to be in HH:mm format, where HH is the hour in 24-hour format (with a leading zero, if applicable), and mm is the minutes. For example, use 02:30 to represent 2:30 AM, or 14:30 to represent 2:30 PM.'
+      Start:
+        $ref: '#/definitions/__string'
+        description: 'The time at which quiet time should begin. The value that you specify has to be in HH:mm format, where HH is the hour in 24-hour format (with a leading zero, if applicable), and mm is the minutes. For example, use 02:30 to represent 2:30 AM, or 14:30 to represent 2:30 PM.'
+    description: Quiet Time
   UpdateBaiduChannelResponse:
     type: object
     required:
@@ -4518,13 +5066,6 @@ definitions:
     properties:
       BaiduChannelResponse:
         $ref: '#/definitions/BaiduChannelResponse'
-  UpdateBaiduChannelRequest:
-    type: object
-    required:
-      - BaiduChannelRequest
-    properties:
-      BaiduChannelRequest:
-        $ref: '#/definitions/BaiduChannelRequest'
   UpdateCampaignResponse:
     type: object
     required:
@@ -4532,13 +5073,6 @@ definitions:
     properties:
       CampaignResponse:
         $ref: '#/definitions/CampaignResponse'
-  UpdateCampaignRequest:
-    type: object
-    required:
-      - WriteCampaignRequest
-    properties:
-      WriteCampaignRequest:
-        $ref: '#/definitions/WriteCampaignRequest'
   UpdateEmailChannelResponse:
     type: object
     required:
@@ -4546,13 +5080,6 @@ definitions:
     properties:
       EmailChannelResponse:
         $ref: '#/definitions/EmailChannelResponse'
-  UpdateEmailChannelRequest:
-    type: object
-    required:
-      - EmailChannelRequest
-    properties:
-      EmailChannelRequest:
-        $ref: '#/definitions/EmailChannelRequest'
   UpdateEndpointResponse:
     type: object
     required:
@@ -4560,13 +5087,92 @@ definitions:
     properties:
       MessageBody:
         $ref: '#/definitions/MessageBody'
-  UpdateEndpointRequest:
+  MapOfListOf__string:
     type: object
-    required:
-      - EndpointRequest
+    additionalProperties:
+      $ref: '#/definitions/ListOf__string'
+  ChannelType:
+    type: string
+    enum:
+      - GCM
+      - APNS
+      - APNS_SANDBOX
+      - APNS_VOIP
+      - APNS_VOIP_SANDBOX
+      - ADM
+      - SMS
+      - VOICE
+      - EMAIL
+      - BAIDU
+      - CUSTOM
+  EndpointDemographic:
+    type: object
     properties:
-      EndpointRequest:
-        $ref: '#/definitions/EndpointRequest'
+      AppVersion:
+        $ref: '#/definitions/__string'
+        description: The version of the application associated with the endpoint.
+      Locale:
+        $ref: '#/definitions/__string'
+        description: |
+          The endpoint locale in the following format: The ISO 639-1 alpha-2 code, followed by an underscore, followed by an ISO 3166-1 alpha-2 value.
+      Make:
+        $ref: '#/definitions/__string'
+        description: 'The manufacturer of the endpoint device, such as Apple or Samsung.'
+      Model:
+        $ref: '#/definitions/__string'
+        description: 'The model name or number of the endpoint device, such as iPhone.'
+      ModelVersion:
+        $ref: '#/definitions/__string'
+        description: The model version of the endpoint device.
+      Platform:
+        $ref: '#/definitions/__string'
+        description: 'The platform of the endpoint device, such as iOS or Android.'
+      PlatformVersion:
+        $ref: '#/definitions/__string'
+        description: The platform version of the endpoint device.
+      Timezone:
+        $ref: '#/definitions/__string'
+        description: 'The timezone of the endpoint. Specified as a tz database value, such as Americas/Los_Angeles.'
+    description: Demographic information about the endpoint.
+  EndpointLocation:
+    type: object
+    properties:
+      City:
+        $ref: '#/definitions/__string'
+        description: The city where the endpoint is located.
+      Country:
+        $ref: '#/definitions/__string'
+        description: 'The two-letter code for the country or region of the endpoint. Specified as an ISO 3166-1 alpha-2 code, such as "US" for the United States.'
+      Latitude:
+        $ref: '#/definitions/__double'
+        description: 'The latitude of the endpoint location, rounded to one decimal place.'
+      Longitude:
+        $ref: '#/definitions/__double'
+        description: 'The longitude of the endpoint location, rounded to one decimal place.'
+      PostalCode:
+        $ref: '#/definitions/__string'
+        description: The postal code or zip code of the endpoint.
+      Region:
+        $ref: '#/definitions/__string'
+        description: 'The region of the endpoint location. For example, in the United States, this corresponds to a state.'
+    description: Location data for the endpoint.
+  MapOf__double:
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/__double'
+  EndpointUser:
+    type: object
+    properties:
+      UserAttributes:
+        $ref: '#/definitions/MapOfListOf__string'
+        description: |-
+          Custom attributes that describe the user by associating a name with an array of values. For example, an attribute named "interests" might have the following values: ["science", "politics", "travel"]. You can use these attributes as selection criteria when you create segments.
+
+          The Amazon Pinpoint console can't display attribute names that include the following characters: hash/pound sign (#), colon (:), question mark (?), backslash (\), and forward slash (/). For this reason, you should avoid using these characters in the names of custom attributes.
+      UserId:
+        $ref: '#/definitions/__string'
+        description: The unique ID of the user.
+    description: Endpoint user specific custom userAttributes
   UpdateEndpointsBatchResponse:
     type: object
     required:
@@ -4574,13 +5180,10 @@ definitions:
     properties:
       MessageBody:
         $ref: '#/definitions/MessageBody'
-  UpdateEndpointsBatchRequest:
-    type: object
-    required:
-      - EndpointBatchRequest
-    properties:
-      EndpointBatchRequest:
-        $ref: '#/definitions/EndpointBatchRequest'
+  ListOfEndpointBatchItem:
+    type: array
+    items:
+      $ref: '#/definitions/EndpointBatchItem'
   UpdateGcmChannelResponse:
     type: object
     required:
@@ -4588,13 +5191,6 @@ definitions:
     properties:
       GCMChannelResponse:
         $ref: '#/definitions/GCMChannelResponse'
-  UpdateGcmChannelRequest:
-    type: object
-    required:
-      - GCMChannelRequest
-    properties:
-      GCMChannelRequest:
-        $ref: '#/definitions/GCMChannelRequest'
   UpdateSegmentResponse:
     type: object
     required:
@@ -4602,13 +5198,6 @@ definitions:
     properties:
       SegmentResponse:
         $ref: '#/definitions/SegmentResponse'
-  UpdateSegmentRequest:
-    type: object
-    required:
-      - WriteSegmentRequest
-    properties:
-      WriteSegmentRequest:
-        $ref: '#/definitions/WriteSegmentRequest'
   UpdateSmsChannelResponse:
     type: object
     required:
@@ -4616,13 +5205,6 @@ definitions:
     properties:
       SMSChannelResponse:
         $ref: '#/definitions/SMSChannelResponse'
-  UpdateSmsChannelRequest:
-    type: object
-    required:
-      - SMSChannelRequest
-    properties:
-      SMSChannelRequest:
-        $ref: '#/definitions/SMSChannelRequest'
   UpdateVoiceChannelResponse:
     type: object
     required:
@@ -4630,17 +5212,6 @@ definitions:
     properties:
       VoiceChannelResponse:
         $ref: '#/definitions/VoiceChannelResponse'
-  UpdateVoiceChannelRequest:
-    type: object
-    required:
-      - VoiceChannelRequest
-    properties:
-      VoiceChannelRequest:
-        $ref: '#/definitions/VoiceChannelRequest'
-  __string:
-    type: string
-  __boolean:
-    type: boolean
   ADMChannelRequest:
     type: object
     properties:
@@ -4654,8 +5225,6 @@ definitions:
         $ref: '#/definitions/__boolean'
         description: Indicates whether or not the channel is enabled for sending messages.
     description: Amazon Device Messaging channel definition.
-  __integer:
-    type: integer
   ADMChannelResponse:
     type: object
     properties:
@@ -4696,24 +5265,6 @@ definitions:
       - OPEN_APP
       - DEEP_LINK
       - URL
-  MapOf__string:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/__string'
-  MapOfListOf__string:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/ListOf__string'
   ADMMessage:
     type: object
     properties:
@@ -5167,20 +5718,6 @@ definitions:
         $ref: '#/definitions/__string'
         description: The ID of a variation of the campaign used for A/B testing.
     description: Activity definition
-  ChannelType:
-    type: string
-    enum:
-      - GCM
-      - APNS
-      - APNS_SANDBOX
-      - APNS_VOIP
-      - APNS_VOIP_SANDBOX
-      - ADM
-      - SMS
-      - VOICE
-      - EMAIL
-      - BAIDU
-      - CUSTOM
   AddressConfiguration:
     type: object
     properties:
@@ -5222,45 +5759,6 @@ definitions:
         $ref: '#/definitions/MapOf__string'
         description: The Tags for the application.
     description: Application Response.
-  CampaignHook:
-    type: object
-    properties:
-      LambdaFunctionName:
-        $ref: '#/definitions/__string'
-        description: Lambda function name or arn to be called for delivery
-      Mode:
-        $ref: '#/definitions/Mode'
-        description: What mode Lambda should be invoked in.
-      WebUrl:
-        $ref: '#/definitions/__string'
-        description: Web URL to call for hook. If the URL has authentication specified it will be added as authentication to the request
-    description: Campaign hook information.
-  CampaignLimits:
-    type: object
-    properties:
-      Daily:
-        $ref: '#/definitions/__integer'
-        description: The maximum number of messages that each campaign can send to a single endpoint in a 24-hour period.
-      MaximumDuration:
-        $ref: '#/definitions/__integer'
-        description: The length of time (in seconds) that the campaign can run before it ends and message deliveries stop. This duration begins at the scheduled start time for the campaign. The minimum value is 60.
-      MessagesPerSecond:
-        $ref: '#/definitions/__integer'
-        description: 'The number of messages that the campaign can send per second. The minimum value is 50, and the maximum is 20000.'
-      Total:
-        $ref: '#/definitions/__integer'
-        description: The maximum number of messages that an individual campaign can send to a single endpoint over the course of the campaign.
-    description: Campaign Limits are used to limit the number of messages that can be sent to a single endpoint.
-  QuietTime:
-    type: object
-    properties:
-      End:
-        $ref: '#/definitions/__string'
-        description: 'The time at which quiet time should end. The value that you specify has to be in HH:mm format, where HH is the hour in 24-hour format (with a leading zero, if applicable), and mm is the minutes. For example, use 02:30 to represent 2:30 AM, or 14:30 to represent 2:30 PM.'
-      Start:
-        $ref: '#/definitions/__string'
-        description: 'The time at which quiet time should begin. The value that you specify has to be in HH:mm format, where HH is the hour in 24-hour format (with a leading zero, if applicable), and mm is the minutes. For example, use 02:30 to represent 2:30 AM, or 14:30 to represent 2:30 PM.'
-    description: Quiet Time
   ApplicationSettingsResource:
     type: object
     properties:
@@ -5309,10 +5807,6 @@ definitions:
     enum:
       - INCLUSIVE
       - EXCLUSIVE
-  ListOf__string:
-    type: array
-    items:
-      $ref: '#/definitions/__string'
   AttributeDimension:
     type: object
     properties:
@@ -5505,113 +5999,6 @@ definitions:
 
           Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
     description: State of the Campaign
-  MessageConfiguration:
-    type: object
-    properties:
-      ADMMessage:
-        $ref: '#/definitions/Message'
-        description: The message that the campaign delivers to ADM channels. Overrides the default message.
-      APNSMessage:
-        $ref: '#/definitions/Message'
-        description: The message that the campaign delivers to APNS channels. Overrides the default message.
-      BaiduMessage:
-        $ref: '#/definitions/Message'
-        description: The message that the campaign delivers to Baidu channels. Overrides the default message.
-      DefaultMessage:
-        $ref: '#/definitions/Message'
-        description: The default message for all channels.
-      EmailMessage:
-        $ref: '#/definitions/CampaignEmailMessage'
-        description: The email message configuration.
-      GCMMessage:
-        $ref: '#/definitions/Message'
-        description: The message that the campaign delivers to GCM channels. Overrides the default message.
-      SMSMessage:
-        $ref: '#/definitions/CampaignSmsMessage'
-        description: The SMS message configuration.
-    description: Message configuration for a campaign.
-  Schedule:
-    type: object
-    properties:
-      EndTime:
-        $ref: '#/definitions/__string'
-        description: The scheduled time that the campaign ends in ISO 8601 format.
-      EventFilter:
-        $ref: '#/definitions/CampaignEventFilter'
-        description: Defines the type of events that can trigger the campaign. Used when the Frequency is set to EVENT.
-      Frequency:
-        $ref: '#/definitions/Frequency'
-        description: |-
-          How often the campaign delivers messages.
-
-          Valid values:
-
-          ONCE
-
-          HOURLY
-
-          DAILY
-
-          WEEKLY
-
-          MONTHLY
-
-          EVENT
-      IsLocalTime:
-        $ref: '#/definitions/__boolean'
-        description: Indicates whether the campaign schedule takes effect according to each user's local time.
-      QuietTime:
-        $ref: '#/definitions/QuietTime'
-        description: |-
-          The default quiet time for the campaign. The campaign doesn't send messages to endpoints during the quiet time.
-
-          Note: Make sure that your endpoints include the Demographics.Timezone attribute if you plan to enable a quiet time for your campaign. If your endpoints don't include this attribute, they'll receive the messages that you send them, even if quiet time is enabled.
-
-          When you set up a campaign to use quiet time, the campaign doesn't send messages during the time range you specified, as long as all of the following are true:
-          - The endpoint includes a valid Demographic.Timezone attribute.
-          - The current time in the endpoint's time zone is later than or equal to the time specified in the QuietTime.Start attribute for the campaign.
-          - The current time in the endpoint's time zone is earlier than or equal to the time specified in the QuietTime.End attribute for the campaign.
-      StartTime:
-        $ref: '#/definitions/__string'
-        description: The scheduled time that the campaign begins in ISO 8601 format.
-      Timezone:
-        $ref: '#/definitions/__string'
-        description: |-
-          The starting UTC offset for the schedule if the value for isLocalTime is true
-
-          Valid values: 
-          UTC
-          UTC+01
-          UTC+02
-          UTC+03
-          UTC+03:30
-          UTC+04
-          UTC+04:30
-          UTC+05
-          UTC+05:30
-          UTC+05:45
-          UTC+06
-          UTC+06:30
-          UTC+07
-          UTC+08
-          UTC+09
-          UTC+09:30
-          UTC+10
-          UTC+10:30
-          UTC+11
-          UTC+12
-          UTC+13
-          UTC-02
-          UTC-03
-          UTC-04
-          UTC-05
-          UTC-06
-          UTC-07
-          UTC-08
-          UTC-09
-          UTC-10
-          UTC-11
-    description: Shcedule that defines when a campaign is run.
   CampaignResponse:
     type: object
     properties:
@@ -5758,14 +6145,9 @@ definitions:
         description: Version of channel
     description: Base definition for channel response.
   MapOfChannelResponse:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/ChannelResponse'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/ChannelResponse'
   ChannelsResponse:
     type: object
     properties:
@@ -5783,6 +6165,13 @@ definitions:
         $ref: '#/definitions/MapOf__string'
         description: The Tags for the app.
     description: Application Request.
+  CreateAppRequest:
+    type: object
+    required:
+      - CreateApplicationRequest
+    properties:
+      CreateApplicationRequest:
+        $ref: '#/definitions/CreateApplicationRequest'
   WriteCampaignRequest:
     type: object
     properties:
@@ -5829,6 +6218,13 @@ definitions:
         $ref: '#/definitions/__string'
         description: The custom name of a variation of the campaign used for A/B testing.
     description: Used to create a campaign.
+  CreateCampaignRequest:
+    type: object
+    required:
+      - WriteCampaignRequest
+    properties:
+      WriteCampaignRequest:
+        $ref: '#/definitions/WriteCampaignRequest'
   ExportJobRequest:
     type: object
     properties:
@@ -5850,6 +6246,13 @@ definitions:
         $ref: '#/definitions/__integer'
         description: The version of the segment to export if specified.
     description: Export job request.
+  CreateExportJobRequest:
+    type: object
+    required:
+      - ExportJobRequest
+    properties:
+      ExportJobRequest:
+        $ref: '#/definitions/ExportJobRequest'
   ExportJobResponse:
     type: object
     properties:
@@ -5930,6 +6333,13 @@ definitions:
         $ref: '#/definitions/__string'
         description: A custom name for the segment created by the import job. Use if DefineSegment is true.
     description: Import job request.
+  CreateImportJobRequest:
+    type: object
+    required:
+      - ImportJobRequest
+    properties:
+      ImportJobRequest:
+        $ref: '#/definitions/ImportJobRequest'
   ImportJobResponse:
     type: object
     properties:
@@ -5993,6 +6403,13 @@ definitions:
         $ref: '#/definitions/MapOf__string'
         description: The Tags for the segments.
     description: Segment definition.
+  CreateSegmentRequest:
+    type: object
+    required:
+      - WriteSegmentRequest
+    properties:
+      WriteSegmentRequest:
+        $ref: '#/definitions/WriteSegmentRequest'
   SegmentResponse:
     type: object
     properties:
@@ -6071,6 +6488,33 @@ definitions:
         $ref: '#/definitions/__string'
         description: The URL to open in the user's mobile browser. Used if the value for Action is URL.
     description: Default Push Notification Message.
+  DeleteAdmChannelRequest:
+    type: object
+    properties: {}
+  DeleteApnsChannelRequest:
+    type: object
+    properties: {}
+  DeleteApnsSandboxChannelRequest:
+    type: object
+    properties: {}
+  DeleteApnsVoipChannelRequest:
+    type: object
+    properties: {}
+  DeleteApnsVoipSandboxChannelRequest:
+    type: object
+    properties: {}
+  DeleteAppRequest:
+    type: object
+    properties: {}
+  DeleteBaiduChannelRequest:
+    type: object
+    properties: {}
+  DeleteCampaignRequest:
+    type: object
+    properties: {}
+  DeleteEmailChannelRequest:
+    type: object
+    properties: {}
   EmailChannelResponse:
     type: object
     properties:
@@ -6120,6 +6564,9 @@ definitions:
         $ref: '#/definitions/__integer'
         description: Version of channel
     description: Email Channel Response.
+  DeleteEndpointRequest:
+    type: object
+    properties: {}
   EndpointResponse:
     type: object
     properties:
@@ -6180,6 +6627,9 @@ definitions:
         $ref: '#/definitions/EndpointUser'
         description: Custom user-specific attributes that your app reports to Amazon Pinpoint.
     description: Endpoint response
+  DeleteEventStreamRequest:
+    type: object
+    properties: {}
   EventStream:
     type: object
     properties:
@@ -6205,6 +6655,9 @@ definitions:
         $ref: '#/definitions/__string'
         description: The IAM role that authorizes Amazon Pinpoint to publish events to the stream in your account.
     description: Model for an event publishing subscription export.
+  DeleteGcmChannelRequest:
+    type: object
+    properties: {}
   GCMChannelResponse:
     type: object
     properties:
@@ -6242,6 +6695,12 @@ definitions:
         $ref: '#/definitions/__integer'
         description: Version of channel
     description: Google Cloud Messaging channel definition
+  DeleteSegmentRequest:
+    type: object
+    properties: {}
+  DeleteSmsChannelRequest:
+    type: object
+    properties: {}
   SMSChannelResponse:
     type: object
     properties:
@@ -6288,6 +6747,9 @@ definitions:
         $ref: '#/definitions/__integer'
         description: Version of channel
     description: SMS Channel Response.
+  DeleteUserEndpointsRequest:
+    type: object
+    properties: {}
   EndpointsResponse:
     type: object
     properties:
@@ -6295,6 +6757,9 @@ definitions:
         $ref: '#/definitions/ListOfEndpointResponse'
         description: The list of endpoints.
     description: List of endpoints
+  DeleteVoiceChannelRequest:
+    type: object
+    properties: {}
   VoiceChannelResponse:
     type: object
     properties:
@@ -6473,37 +6938,6 @@ definitions:
         $ref: '#/definitions/__string'
         description: Voice ID of sent message.
     description: Voice Message.
-  DirectMessageConfiguration:
-    type: object
-    properties:
-      ADMMessage:
-        $ref: '#/definitions/ADMMessage'
-        description: The message to ADM channels. Overrides the default push notification message.
-      APNSMessage:
-        $ref: '#/definitions/APNSMessage'
-        description: The message to APNS channels. Overrides the default push notification message.
-      BaiduMessage:
-        $ref: '#/definitions/BaiduMessage'
-        description: The message to Baidu GCM channels. Overrides the default push notification message.
-      DefaultMessage:
-        $ref: '#/definitions/DefaultMessage'
-        description: The default message for all channels.
-      DefaultPushNotificationMessage:
-        $ref: '#/definitions/DefaultPushNotificationMessage'
-        description: The default push notification message for all push channels.
-      EmailMessage:
-        $ref: '#/definitions/EmailMessage'
-        description: The message to Email channels. Overrides the default message.
-      GCMMessage:
-        $ref: '#/definitions/GCMMessage'
-        description: The message to GCM channels. Overrides the default push notification message.
-      SMSMessage:
-        $ref: '#/definitions/SMSMessage'
-        description: The message to SMS channels. Overrides the default message.
-      VoiceMessage:
-        $ref: '#/definitions/VoiceMessage'
-        description: The message to Voice channels. Overrides the default message.
-    description: Message definitions for the default message and any messages that are tailored for specific channels.
   Duration:
     type: string
     enum:
@@ -6550,79 +6984,6 @@ definitions:
         $ref: '#/definitions/SimpleEmailPart'
         description: 'The content of the message, in text format. Use this for text-based email clients, or clients on high-latency networks (such as mobile devices).'
     description: 'An email composed of a subject, a text part and a html part.'
-  EndpointDemographic:
-    type: object
-    properties:
-      AppVersion:
-        $ref: '#/definitions/__string'
-        description: The version of the application associated with the endpoint.
-      Locale:
-        $ref: '#/definitions/__string'
-        description: |
-          The endpoint locale in the following format: The ISO 639-1 alpha-2 code, followed by an underscore, followed by an ISO 3166-1 alpha-2 value.
-      Make:
-        $ref: '#/definitions/__string'
-        description: 'The manufacturer of the endpoint device, such as Apple or Samsung.'
-      Model:
-        $ref: '#/definitions/__string'
-        description: 'The model name or number of the endpoint device, such as iPhone.'
-      ModelVersion:
-        $ref: '#/definitions/__string'
-        description: The model version of the endpoint device.
-      Platform:
-        $ref: '#/definitions/__string'
-        description: 'The platform of the endpoint device, such as iOS or Android.'
-      PlatformVersion:
-        $ref: '#/definitions/__string'
-        description: The platform version of the endpoint device.
-      Timezone:
-        $ref: '#/definitions/__string'
-        description: 'The timezone of the endpoint. Specified as a tz database value, such as Americas/Los_Angeles.'
-    description: Demographic information about the endpoint.
-  EndpointLocation:
-    type: object
-    properties:
-      City:
-        $ref: '#/definitions/__string'
-        description: The city where the endpoint is located.
-      Country:
-        $ref: '#/definitions/__string'
-        description: 'The two-letter code for the country or region of the endpoint. Specified as an ISO 3166-1 alpha-2 code, such as "US" for the United States.'
-      Latitude:
-        $ref: '#/definitions/__double'
-        description: 'The latitude of the endpoint location, rounded to one decimal place.'
-      Longitude:
-        $ref: '#/definitions/__double'
-        description: 'The longitude of the endpoint location, rounded to one decimal place.'
-      PostalCode:
-        $ref: '#/definitions/__string'
-        description: The postal code or zip code of the endpoint.
-      Region:
-        $ref: '#/definitions/__string'
-        description: 'The region of the endpoint location. For example, in the United States, this corresponds to a state.'
-    description: Location data for the endpoint.
-  MapOf__double:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/__double'
-  EndpointUser:
-    type: object
-    properties:
-      UserAttributes:
-        $ref: '#/definitions/MapOfListOf__string'
-        description: |-
-          Custom attributes that describe the user by associating a name with an array of values. For example, an attribute named "interests" might have the following values: ["science", "politics", "travel"]. You can use these attributes as selection criteria when you create segments.
-
-          The Amazon Pinpoint console can't display attribute names that include the following characters: hash/pound sign (#), colon (:), question mark (?), backslash (\), and forward slash (/). For this reason, you should avoid using these characters in the names of custom attributes.
-      UserId:
-        $ref: '#/definitions/__string'
-        description: The unique ID of the user.
-    description: Endpoint user specific custom userAttributes
   EndpointBatchItem:
     type: object
     properties:
@@ -6674,10 +7035,6 @@ definitions:
         $ref: '#/definitions/EndpointUser'
         description: Custom user-specific attributes that your app reports to Amazon Pinpoint.
     description: Endpoint update request
-  ListOfEndpointBatchItem:
-    type: array
-    items:
-      $ref: '#/definitions/EndpointBatchItem'
   EndpointBatchRequest:
     type: object
     properties:
@@ -6867,14 +7224,9 @@ definitions:
         description: 'The date and time when the event occurred, in ISO 8601 format.'
     description: Model for creating or updating events.
   MapOfAttributeDimension:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/AttributeDimension'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/AttributeDimension'
   SetDimension:
     type: object
     properties:
@@ -6891,14 +7243,9 @@ definitions:
         description: 'The criteria values for the segment dimension. Endpoints with matching attribute values are included or excluded from the segment, depending on the setting for Type.'
     description: Dimension specification of a segment.
   MapOfMetricDimension:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/MetricDimension'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/MetricDimension'
   EventItemResponse:
     type: object
     properties:
@@ -6958,14 +7305,9 @@ definitions:
         description: Custom user-specific attributes that your app reports to Amazon Pinpoint.
     description: Public endpoint attributes.
   MapOfEvent:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/Event'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/Event'
   EventsBatch:
     type: object
     properties:
@@ -6976,15 +7318,6 @@ definitions:
         $ref: '#/definitions/MapOfEvent'
         description: An object that contains a set of events associated with the endpoint.
     description: A batch of PublicEndpoints and Events to process.
-  MapOfEventsBatch:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/EventsBatch'
   EventsRequest:
     type: object
     properties:
@@ -6993,14 +7326,9 @@ definitions:
         description: 'A batch of events to process. Each BatchItem consists of an endpoint ID as the key, and an EventsBatch object as the value.'
     description: A set of events to process.
   MapOfItemResponse:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/ItemResponse'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/ItemResponse'
   EventsResponse:
     type: object
     properties:
@@ -7056,11 +7384,6 @@ definitions:
         $ref: '#/definitions/__string'
         description: The string that you use in a subsequent request to get the next page of results in a paginated response.
     description: Export job list.
-  Format:
-    type: string
-    enum:
-      - CSV
-      - JSON
   Frequency:
     type: string
     enum:
@@ -7100,6 +7423,75 @@ definitions:
         $ref: '#/definitions/__double'
         description: Range in kilometers from the coordinate.
     description: GPS point location dimension
+  GetAdmChannelRequest:
+    type: object
+    properties: {}
+  GetApnsChannelRequest:
+    type: object
+    properties: {}
+  GetApnsSandboxChannelRequest:
+    type: object
+    properties: {}
+  GetApnsVoipChannelRequest:
+    type: object
+    properties: {}
+  GetApnsVoipSandboxChannelRequest:
+    type: object
+    properties: {}
+  GetAppRequest:
+    type: object
+    properties: {}
+  GetApplicationSettingsRequest:
+    type: object
+    properties: {}
+  GetAppsRequest:
+    type: object
+    properties: {}
+  GetBaiduChannelRequest:
+    type: object
+    properties: {}
+  GetCampaignActivitiesRequest:
+    type: object
+    properties: {}
+  GetCampaignRequest:
+    type: object
+    properties: {}
+  GetCampaignVersionRequest:
+    type: object
+    properties: {}
+  GetCampaignVersionsRequest:
+    type: object
+    properties: {}
+  GetCampaignsRequest:
+    type: object
+    properties: {}
+  GetChannelsRequest:
+    type: object
+    properties: {}
+  GetEmailChannelRequest:
+    type: object
+    properties: {}
+  GetEndpointRequest:
+    type: object
+    properties: {}
+  GetEventStreamRequest:
+    type: object
+    properties: {}
+  GetExportJobRequest:
+    type: object
+    properties: {}
+  GetExportJobsRequest:
+    type: object
+    properties: {}
+  GetGcmChannelRequest:
+    type: object
+    properties: {}
+  GetImportJobRequest:
+    type: object
+    properties: {}
+  GetImportJobsRequest:
+    type: object
+    properties: {}
   ImportJobsResponse:
     type: object
     properties:
@@ -7110,6 +7502,21 @@ definitions:
         $ref: '#/definitions/__string'
         description: The string that you use in a subsequent request to get the next page of results in a paginated response.
     description: Import job list.
+  GetSegmentExportJobsRequest:
+    type: object
+    properties: {}
+  GetSegmentImportJobsRequest:
+    type: object
+    properties: {}
+  GetSegmentRequest:
+    type: object
+    properties: {}
+  GetSegmentVersionRequest:
+    type: object
+    properties: {}
+  GetSegmentVersionsRequest:
+    type: object
+    properties: {}
   SegmentsResponse:
     type: object
     properties:
@@ -7120,6 +7527,18 @@ definitions:
         $ref: '#/definitions/__string'
         description: An identifier used to retrieve the next page of results. The token is null if no additional pages exist.
     description: Segments in your account.
+  GetSegmentsRequest:
+    type: object
+    properties: {}
+  GetSmsChannelRequest:
+    type: object
+    properties: {}
+  GetUserEndpointsRequest:
+    type: object
+    properties: {}
+  GetVoiceChannelRequest:
+    type: object
+    properties: {}
   ImportJobResource:
     type: object
     properties:
@@ -7164,14 +7583,9 @@ definitions:
       - ANY
       - NONE
   MapOfEventItemResponse:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/EventItemResponse'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/EventItemResponse'
   ItemResponse:
     type: object
     properties:
@@ -7182,6 +7596,9 @@ definitions:
         $ref: '#/definitions/MapOfEventItemResponse'
         description: 'A multipart response object that contains a key and value for each event ID in the request. In each object, the event ID is the key, and an EventItemResponse object is the value.'
     description: The response that's provided after registering the endpoint.
+  ListTagsForResourceRequest:
+    type: object
+    properties: {}
   TagsModel:
     type: object
     required:
@@ -7248,24 +7665,6 @@ definitions:
         $ref: '#/definitions/__string'
         description: The unique message body ID.
     description: Simple message object.
-  MapOfAddressConfiguration:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/AddressConfiguration'
-  MapOfEndpointSendConfiguration:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/EndpointSendConfiguration'
   MessageRequest:
     type: object
     properties:
@@ -7286,23 +7685,13 @@ definitions:
         description: A unique ID that you can use to trace a message. This ID is visible to recipients.
     description: Send message request.
   MapOfEndpointMessageResult:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/EndpointMessageResult'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/EndpointMessageResult'
   MapOfMessageResult:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/MessageResult'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/MessageResult'
   MessageResponse:
     type: object
     properties:
@@ -7429,6 +7818,13 @@ definitions:
         $ref: '#/definitions/__string'
         description: The postal code for the location where the phone number was originally registered.
     description: Phone Number Validate response.
+  PhoneNumberValidateRequest:
+    type: object
+    required:
+      - NumberValidateRequest
+    properties:
+      NumberValidateRequest:
+        $ref: '#/definitions/NumberValidateRequest'
   WriteEventStream:
     type: object
     properties:
@@ -7442,6 +7838,20 @@ definitions:
         $ref: '#/definitions/__string'
         description: The IAM role that authorizes Amazon Pinpoint to publish events to the stream in your account.
     description: Request to save an EventStream.
+  PutEventStreamRequest:
+    type: object
+    required:
+      - WriteEventStream
+    properties:
+      WriteEventStream:
+        $ref: '#/definitions/WriteEventStream'
+  PutEventsRequest:
+    type: object
+    required:
+      - EventsRequest
+    properties:
+      EventsRequest:
+        $ref: '#/definitions/EventsRequest'
   __blob:
     type: string
   RecencyType:
@@ -7474,6 +7884,13 @@ definitions:
         $ref: '#/definitions/ListOf__string'
         description: The GLOB wildcard for removing the attributes in the application
     description: Update attributes request
+  RemoveAttributesRequest:
+    type: object
+    required:
+      - UpdateAttributesRequest
+    properties:
+      UpdateAttributesRequest:
+        $ref: '#/definitions/UpdateAttributesRequest'
   SMSChannelRequest:
     type: object
     properties:
@@ -7526,28 +7943,6 @@ definitions:
         $ref: '#/definitions/GPSPointDimension'
         description: The GPS Point dimension.
     description: Segment location dimensions
-  SegmentDimensions:
-    type: object
-    properties:
-      Attributes:
-        $ref: '#/definitions/MapOfAttributeDimension'
-        description: Custom segment attributes.
-      Behavior:
-        $ref: '#/definitions/SegmentBehaviors'
-        description: The segment behaviors attributes.
-      Demographic:
-        $ref: '#/definitions/SegmentDemographics'
-        description: The segment demographics attributes.
-      Location:
-        $ref: '#/definitions/SegmentLocation'
-        description: The segment location attributes.
-      Metrics:
-        $ref: '#/definitions/MapOfMetricDimension'
-        description: Custom segment metrics.
-      UserAttributes:
-        $ref: '#/definitions/MapOfAttributeDimension'
-        description: Custom segment user attributes.
-    description: Segment dimensions
   ListOfSegmentDimensions:
     type: array
     items:
@@ -7591,25 +7986,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/SegmentGroup'
-  SegmentGroupList:
-    type: object
-    properties:
-      Groups:
-        $ref: '#/definitions/ListOfSegmentGroup'
-        description: A set of segment criteria to evaluate.
-      Include:
-        $ref: '#/definitions/Include'
-        description: 'Specify how to handle multiple segment groups. For example, if the segment includes three segment groups, should the resulting segment include endpoints that are matched by all, any, or none of the segment groups you created. Acceptable values: ALL, ANY, or NONE.'
-    description: Segment group definition.
   MapOf__integer:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/__integer'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/__integer'
   SegmentImportResource:
     type: object
     properties:
@@ -7653,6 +8033,13 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/SegmentResponse'
+  SendMessagesRequest:
+    type: object
+    required:
+      - MessageRequest
+    properties:
+      MessageRequest:
+        $ref: '#/definitions/MessageRequest'
   SendUsersMessageRequest:
     type: object
     properties:
@@ -7670,14 +8057,9 @@ definitions:
         description: 'A map that associates user IDs with EndpointSendConfiguration objects. Within an EndpointSendConfiguration object, you can tailor the message for a user by specifying message overrides or substitutions.'
     description: Send message request.
   MapOfMapOfEndpointMessageResult:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/MapOfEndpointMessageResult'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/MapOfEndpointMessageResult'
   SendUsersMessageResponse:
     type: object
     properties:
@@ -7691,6 +8073,13 @@ definitions:
         $ref: '#/definitions/MapOfMapOfEndpointMessageResult'
         description: 'An object that shows the endpoints that were messaged for each user. The object provides a list of user IDs. For each user ID, it provides the endpoint IDs that were messaged. For each endpoint ID, it provides an EndpointMessageResult object.'
     description: User send message response.
+  SendUsersMessagesRequest:
+    type: object
+    required:
+      - SendUsersMessageRequest
+    properties:
+      SendUsersMessageRequest:
+        $ref: '#/definitions/SendUsersMessageRequest'
   SimpleEmailPart:
     type: object
     properties:
@@ -7701,6 +8090,13 @@ definitions:
         $ref: '#/definitions/__string'
         description: The textual data of the content.
     description: 'Textual email data, plus an optional character set specification.'
+  TagResourceRequest:
+    type: object
+    required:
+      - TagsModel
+    properties:
+      TagsModel:
+        $ref: '#/definitions/TagsModel'
   TreatmentResource:
     type: object
     properties:
@@ -7726,6 +8122,44 @@ definitions:
         $ref: '#/definitions/__string'
         description: The custom name of a variation of the campaign used for A/B testing.
     description: Treatment resource
+  UntagResourceRequest:
+    type: object
+    properties: {}
+  UpdateAdmChannelRequest:
+    type: object
+    required:
+      - ADMChannelRequest
+    properties:
+      ADMChannelRequest:
+        $ref: '#/definitions/ADMChannelRequest'
+  UpdateApnsChannelRequest:
+    type: object
+    required:
+      - APNSChannelRequest
+    properties:
+      APNSChannelRequest:
+        $ref: '#/definitions/APNSChannelRequest'
+  UpdateApnsSandboxChannelRequest:
+    type: object
+    required:
+      - APNSSandboxChannelRequest
+    properties:
+      APNSSandboxChannelRequest:
+        $ref: '#/definitions/APNSSandboxChannelRequest'
+  UpdateApnsVoipChannelRequest:
+    type: object
+    required:
+      - APNSVoipChannelRequest
+    properties:
+      APNSVoipChannelRequest:
+        $ref: '#/definitions/APNSVoipChannelRequest'
+  UpdateApnsVoipSandboxChannelRequest:
+    type: object
+    required:
+      - APNSVoipSandboxChannelRequest
+    properties:
+      APNSVoipSandboxChannelRequest:
+        $ref: '#/definitions/APNSVoipSandboxChannelRequest'
   WriteApplicationSettingsRequest:
     type: object
     properties:
@@ -7752,6 +8186,69 @@ definitions:
 
           Individual campaigns within the app can have their own quiet time settings, which override the quiet time settings at the app level.
     description: Creating application setting request
+  UpdateApplicationSettingsRequest:
+    type: object
+    required:
+      - WriteApplicationSettingsRequest
+    properties:
+      WriteApplicationSettingsRequest:
+        $ref: '#/definitions/WriteApplicationSettingsRequest'
+  UpdateBaiduChannelRequest:
+    type: object
+    required:
+      - BaiduChannelRequest
+    properties:
+      BaiduChannelRequest:
+        $ref: '#/definitions/BaiduChannelRequest'
+  UpdateCampaignRequest:
+    type: object
+    required:
+      - WriteCampaignRequest
+    properties:
+      WriteCampaignRequest:
+        $ref: '#/definitions/WriteCampaignRequest'
+  UpdateEmailChannelRequest:
+    type: object
+    required:
+      - EmailChannelRequest
+    properties:
+      EmailChannelRequest:
+        $ref: '#/definitions/EmailChannelRequest'
+  UpdateEndpointRequest:
+    type: object
+    required:
+      - EndpointRequest
+    properties:
+      EndpointRequest:
+        $ref: '#/definitions/EndpointRequest'
+  UpdateEndpointsBatchRequest:
+    type: object
+    required:
+      - EndpointBatchRequest
+    properties:
+      EndpointBatchRequest:
+        $ref: '#/definitions/EndpointBatchRequest'
+  UpdateGcmChannelRequest:
+    type: object
+    required:
+      - GCMChannelRequest
+    properties:
+      GCMChannelRequest:
+        $ref: '#/definitions/GCMChannelRequest'
+  UpdateSegmentRequest:
+    type: object
+    required:
+      - WriteSegmentRequest
+    properties:
+      WriteSegmentRequest:
+        $ref: '#/definitions/WriteSegmentRequest'
+  UpdateSmsChannelRequest:
+    type: object
+    required:
+      - SMSChannelRequest
+    properties:
+      SMSChannelRequest:
+        $ref: '#/definitions/SMSChannelRequest'
   VoiceChannelRequest:
     type: object
     properties:
@@ -7759,10 +8256,13 @@ definitions:
         $ref: '#/definitions/__boolean'
         description: If the channel is enabled for sending messages.
     description: Voice Channel Request
-  ListOfWriteTreatmentResource:
-    type: array
-    items:
-      $ref: '#/definitions/WriteTreatmentResource'
+  UpdateVoiceChannelRequest:
+    type: object
+    required:
+      - VoiceChannelRequest
+    properties:
+      VoiceChannelRequest:
+        $ref: '#/definitions/VoiceChannelRequest'
   WriteTreatmentResource:
     type: object
     properties:

@@ -99,7 +99,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /:
+  '/#X-Amz-Target=AWSFMS_20180101.AssociateAdminAccount':
     post:
       operationId: AssociateAdminAccount
       description: '<p>Sets the AWS Firewall Manager administrator account. AWS Firewall Manager must be associated with the master account your AWS organization or associated with a member account that has the appropriate permissions. If the account ID that you submit is not an AWS Organizations master account, AWS Firewall Manager will set the appropriate permissions for the given member account.</p> <p>The account that you associate with AWS Firewall Manager is called the AWS Firewall Manager administrator account. </p>'
@@ -128,6 +128,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AssociateAdminAccountRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSFMS_20180101.AssociateAdminAccount
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -138,7 +144,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteNotificationChannel':
+  '/#X-Amz-Target=AWSFMS_20180101.DeleteNotificationChannel':
     post:
       operationId: DeleteNotificationChannel
       description: Deletes an AWS Firewall Manager association with the IAM role and the Amazon Simple Notification Service (SNS) topic that is used to record AWS Firewall Manager SNS logs.
@@ -163,6 +169,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteNotificationChannelRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSFMS_20180101.DeleteNotificationChannel
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -173,7 +185,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeletePolicy':
+  '/#X-Amz-Target=AWSFMS_20180101.DeletePolicy':
     post:
       operationId: DeletePolicy
       description: 'Permanently deletes an AWS Firewall Manager policy. '
@@ -198,6 +210,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeletePolicyRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSFMS_20180101.DeletePolicy
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -208,7 +226,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DisassociateAdminAccount':
+  '/#X-Amz-Target=AWSFMS_20180101.DisassociateAdminAccount':
     post:
       operationId: DisassociateAdminAccount
       description: 'Disassociates the account that has been set as the AWS Firewall Manager administrator account. To set a different account as the administrator account, you must submit an <code>AssociateAdminAccount</code> request .'
@@ -233,6 +251,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DisassociateAdminAccountRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSFMS_20180101.DisassociateAdminAccount
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -243,7 +267,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetAdminAccount':
+  '/#X-Amz-Target=AWSFMS_20180101.GetAdminAccount':
     post:
       operationId: GetAdminAccount
       description: Returns the AWS Organizations master account that is associated with AWS Firewall Manager as the AWS Firewall Manager administrator.
@@ -270,6 +294,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetAdminAccountRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSFMS_20180101.GetAdminAccount
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -280,7 +310,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetComplianceDetail':
+  '/#X-Amz-Target=AWSFMS_20180101.GetComplianceDetail':
     post:
       operationId: GetComplianceDetail
       description: Returns detailed compliance information about the specified member account. Details include resources that are in and out of compliance with the specified policy. Resources are considered non-compliant if the specified policy has not been applied to them.
@@ -303,6 +333,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetComplianceDetailRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSFMS_20180101.GetComplianceDetail
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -313,7 +349,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetNotificationChannel':
+  '/#X-Amz-Target=AWSFMS_20180101.GetNotificationChannel':
     post:
       operationId: GetNotificationChannel
       description: Returns information about the Amazon Simple Notification Service (SNS) topic that is used to record AWS Firewall Manager SNS logs.
@@ -340,6 +376,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetNotificationChannelRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSFMS_20180101.GetNotificationChannel
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -350,7 +392,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetPolicy':
+  '/#X-Amz-Target=AWSFMS_20180101.GetPolicy':
     post:
       operationId: GetPolicy
       description: Returns information about the specified AWS Firewall Manager policy.
@@ -381,6 +423,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetPolicyRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSFMS_20180101.GetPolicy
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -391,7 +439,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetProtectionStatus':
+  '/#X-Amz-Target=AWSFMS_20180101.GetProtectionStatus':
     post:
       operationId: GetProtectionStatus
       description: 'If you created a Shield Advanced policy, returns policy-level attack summary information in the event of a potential DDoS attack.'
@@ -418,6 +466,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetProtectionStatusRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSFMS_20180101.GetProtectionStatus
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -428,7 +482,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListComplianceStatus':
+  '/#X-Amz-Target=AWSFMS_20180101.ListComplianceStatus':
     post:
       operationId: ListComplianceStatus
       description: 'Returns an array of <code>PolicyComplianceStatus</code> objects in the response. Use <code>PolicyComplianceStatus</code> to get a summary of which member accounts are protected by the specified policy. '
@@ -461,6 +515,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSFMS_20180101.ListComplianceStatus
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -471,7 +531,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListMemberAccounts':
+  '/#X-Amz-Target=AWSFMS_20180101.ListMemberAccounts':
     post:
       operationId: ListMemberAccounts
       description: <p>Returns a <code>MemberAccounts</code> object that lists the member accounts in the administrator's AWS organization.</p> <p>The <code>ListMemberAccounts</code> must be submitted by the account that is set as the AWS Firewall Manager administrator.</p>
@@ -504,6 +564,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSFMS_20180101.ListMemberAccounts
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -514,7 +580,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListPolicies':
+  '/#X-Amz-Target=AWSFMS_20180101.ListPolicies':
     post:
       operationId: ListPolicies
       description: Returns an array of <code>PolicySummary</code> objects in the response.
@@ -555,6 +621,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSFMS_20180101.ListPolicies
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -565,7 +637,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#PutNotificationChannel':
+  '/#X-Amz-Target=AWSFMS_20180101.PutNotificationChannel':
     post:
       operationId: PutNotificationChannel
       description: Designates the IAM role and Amazon Simple Notification Service (SNS) topic that AWS Firewall Manager uses to record SNS logs.
@@ -590,6 +662,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutNotificationChannelRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSFMS_20180101.PutNotificationChannel
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -600,7 +678,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#PutPolicy':
+  '/#X-Amz-Target=AWSFMS_20180101.PutPolicy':
     post:
       operationId: PutPolicy
       description: '<p>Creates an AWS Firewall Manager policy.</p> <p>Firewall Manager provides two types of policies: A Shield Advanced policy, which applies Shield Advanced protection to specified accounts and resources, or a WAF policy, which contains a rule group and defines which resources are to be protected by that rule group. A policy is specific to either WAF or Shield Advanced. If you want to enforce both WAF rules and Shield Advanced protection across accounts, you can create multiple policies. You can create one or more policies for WAF rules, and one or more policies for Shield Advanced.</p> <p>You must be subscribed to Shield Advanced to create a Shield Advanced policy. For more information on subscribing to Shield Advanced, see <a href="https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_CreateSubscription.html">CreateSubscription</a>.</p>'
@@ -639,6 +717,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutPolicyRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSFMS_20180101.PutPolicy
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -929,14 +1013,9 @@ definitions:
     enum:
       - ACCOUNT
   CustomerPolicyScopeMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/CustomerPolicyScopeIdType'
-        value:
-          $ref: '#/definitions/CustomerPolicyScopeIdList'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/CustomerPolicyScopeIdList'
   PolicyId:
     type: string
     pattern: '^[a-z0-9A-Z-]{36}$'
@@ -1070,14 +1149,9 @@ definitions:
   ProtectionData:
     type: string
   IssueInfoMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/DependentServiceName'
-        value:
-          $ref: '#/definitions/DetailedInfo'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/DetailedInfo'
   PolicyComplianceStatusList:
     type: array
     items:

@@ -99,7 +99,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /:
+  '/#X-Amz-Target=Transcribe.CreateVocabulary':
     post:
       operationId: CreateVocabulary
       description: 'Creates a new custom vocabulary that you can use to change the way Amazon Transcribe handles transcription of an audio file. '
@@ -130,6 +130,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateVocabularyRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Transcribe.CreateVocabulary
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -140,7 +146,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteTranscriptionJob':
+  '/#X-Amz-Target=Transcribe.DeleteTranscriptionJob':
     post:
       operationId: DeleteTranscriptionJob
       description: 'Deletes a previously submitted transcription job along with any other generated results such as the transcription, models, and so on.'
@@ -165,6 +171,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteTranscriptionJobRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Transcribe.DeleteTranscriptionJob
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -175,7 +187,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteVocabulary':
+  '/#X-Amz-Target=Transcribe.DeleteVocabulary':
     post:
       operationId: DeleteVocabulary
       description: 'Deletes a vocabulary from Amazon Transcribe. '
@@ -204,6 +216,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteVocabularyRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Transcribe.DeleteVocabulary
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -214,7 +232,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetTranscriptionJob':
+  '/#X-Amz-Target=Transcribe.GetTranscriptionJob':
     post:
       operationId: GetTranscriptionJob
       description: 'Returns information about a transcription job. To see the status of the job, check the <code>TranscriptionJobStatus</code> field. If the status is <code>COMPLETED</code>, the job is finished and you can find the results at the location specified in the <code>TranscriptionFileUri</code> field.'
@@ -245,6 +263,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetTranscriptionJobRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Transcribe.GetTranscriptionJob
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -255,7 +279,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#GetVocabulary':
+  '/#X-Amz-Target=Transcribe.GetVocabulary':
     post:
       operationId: GetVocabulary
       description: 'Gets information about a vocabulary. '
@@ -286,6 +310,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetVocabularyRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Transcribe.GetVocabulary
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -296,7 +326,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListTranscriptionJobs':
+  '/#X-Amz-Target=Transcribe.ListTranscriptionJobs':
     post:
       operationId: ListTranscriptionJobs
       description: Lists transcription jobs with the specified status.
@@ -333,6 +363,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Transcribe.ListTranscriptionJobs
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -343,7 +379,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListVocabularies':
+  '/#X-Amz-Target=Transcribe.ListVocabularies':
     post:
       operationId: ListVocabularies
       description: 'Returns a list of vocabularies that match the specified criteria. If no criteria are specified, returns the entire list of vocabularies.'
@@ -380,6 +416,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Transcribe.ListVocabularies
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -390,7 +432,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#StartTranscriptionJob':
+  '/#X-Amz-Target=Transcribe.StartTranscriptionJob':
     post:
       operationId: StartTranscriptionJob
       description: 'Starts an asynchronous job to transcribe speech to text. '
@@ -421,6 +463,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StartTranscriptionJobRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Transcribe.StartTranscriptionJob
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -431,7 +479,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateVocabulary':
+  '/#X-Amz-Target=Transcribe.UpdateVocabulary':
     post:
       operationId: UpdateVocabulary
       description: 'Updates an existing vocabulary with new values. The <code>UpdateVocabulary</code> operation overwrites all of the existing information with the values that you provide in the request. '
@@ -466,6 +514,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateVocabularyRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - Transcribe.UpdateVocabulary
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'

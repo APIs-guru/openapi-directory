@@ -35,7 +35,6 @@ externalDocs:
   url: 'https://docs.aws.amazon.com/quicksight/'
 host: quicksight.amazonaws.com
 basePath: /
-x-hasEquivalentPaths: true
 schemes:
   - https
   - http
@@ -145,19 +144,38 @@ paths:
           schema:
             $ref: '#/definitions/ResourceUnavailableException'
       parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: 'The ID for the AWS account that the group is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.'
+          type: string
+          pattern: '^[0-9]{12}$'
+          minLength: 12
+          maxLength: 12
+        - name: Namespace
+          in: path
+          required: true
+          description: 'The namespace. Currently, you should set this to <code>default</code>.'
+          type: string
+          pattern: default
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateGroupRequest'
-        - name: AwsAccountId
-          type: string
-          in: path
-          required: true
-        - name: Namespace
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - GroupName
+            properties:
+              GroupName:
+                description: A name for the group that you want to create.
+                type: string
+                pattern: '[\u0020-\u00FF]+'
+                minLength: 1
+              Description:
+                description: A description for the group that you want to create.
+                type: string
+                minLength: 1
+                maxLength: 512
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -209,19 +227,32 @@ paths:
           schema:
             $ref: '#/definitions/ResourceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListGroupsRequest'
         - name: AwsAccountId
-          type: string
           in: path
           required: true
+          description: 'The ID for the AWS account that the group is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.'
+          type: string
+          pattern: '^[0-9]{12}$'
+          minLength: 12
+          maxLength: 12
+        - name: next-token
+          in: query
+          required: false
+          description: A pagination token that can be used in a subsequent request.
+          type: string
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of results to return.
+          type: integer
+          minimum: 1
+          maximum: 100000
         - name: Namespace
-          type: string
           in: path
           required: true
+          description: 'The namespace. Currently, you should set this to <code>default</code>.'
+          type: string
+          pattern: default
   '/accounts/{AwsAccountId}/namespaces/{Namespace}/groups/{GroupName}/members/{MemberName}':
     put:
       operationId: CreateGroupMembership
@@ -260,27 +291,35 @@ paths:
           schema:
             $ref: '#/definitions/ResourceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/CreateGroupMembershipRequest'
-        - name: AwsAccountId
-          type: string
-          in: path
-          required: true
-        - name: Namespace
-          type: string
-          in: path
-          required: true
-        - name: GroupName
-          type: string
-          in: path
-          required: true
         - name: MemberName
-          type: string
           in: path
           required: true
+          description: The name of the user that you want to add to the group membership.
+          type: string
+          pattern: '[\u0020-\u00FF]+'
+          minLength: 1
+          maxLength: 256
+        - name: GroupName
+          in: path
+          required: true
+          description: The name of the group that you want to add the user to.
+          type: string
+          pattern: '[\u0020-\u00FF]+'
+          minLength: 1
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: 'The ID for the AWS account that the group is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.'
+          type: string
+          pattern: '^[0-9]{12}$'
+          minLength: 12
+          maxLength: 12
+        - name: Namespace
+          in: path
+          required: true
+          description: 'The namespace. Currently, you should set this to <code>default</code>.'
+          type: string
+          pattern: default
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -328,27 +367,35 @@ paths:
           schema:
             $ref: '#/definitions/ResourceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteGroupMembershipRequest'
-        - name: AwsAccountId
-          type: string
-          in: path
-          required: true
-        - name: Namespace
-          type: string
-          in: path
-          required: true
-        - name: GroupName
-          type: string
-          in: path
-          required: true
         - name: MemberName
-          type: string
           in: path
           required: true
+          description: The name of the user that you want to delete from the group membership.
+          type: string
+          pattern: '[\u0020-\u00FF]+'
+          minLength: 1
+          maxLength: 256
+        - name: GroupName
+          in: path
+          required: true
+          description: The name of the group that you want to delete the user from.
+          type: string
+          pattern: '[\u0020-\u00FF]+'
+          minLength: 1
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: 'The ID for the AWS account that the group is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.'
+          type: string
+          pattern: '^[0-9]{12}$'
+          minLength: 12
+          maxLength: 12
+        - name: Namespace
+          in: path
+          required: true
+          description: 'The namespace. Currently, you should set this to <code>default</code>.'
+          type: string
+          pattern: default
   '/accounts/{AwsAccountId}/namespaces/{Namespace}/groups/{GroupName}':
     delete:
       operationId: DeleteGroup
@@ -387,23 +434,27 @@ paths:
           schema:
             $ref: '#/definitions/ResourceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteGroupRequest'
-        - name: AwsAccountId
-          type: string
-          in: path
-          required: true
-        - name: Namespace
-          type: string
-          in: path
-          required: true
         - name: GroupName
-          type: string
           in: path
           required: true
+          description: The name of the group that you want to delete.
+          type: string
+          pattern: '[\u0020-\u00FF]+'
+          minLength: 1
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: 'The ID for the AWS account that the group is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.'
+          type: string
+          pattern: '^[0-9]{12}$'
+          minLength: 12
+          maxLength: 12
+        - name: Namespace
+          in: path
+          required: true
+          description: 'The namespace. Currently, you should set this to <code>default</code>.'
+          type: string
+          pattern: default
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -451,23 +502,27 @@ paths:
           schema:
             $ref: '#/definitions/ResourceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeGroupRequest'
-        - name: AwsAccountId
-          type: string
-          in: path
-          required: true
-        - name: Namespace
-          type: string
-          in: path
-          required: true
         - name: GroupName
-          type: string
           in: path
           required: true
+          description: The name of the group that you want to describe.
+          type: string
+          pattern: '[\u0020-\u00FF]+'
+          minLength: 1
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: 'The ID for the AWS account that the group is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.'
+          type: string
+          pattern: '^[0-9]{12}$'
+          minLength: 12
+          maxLength: 12
+        - name: Namespace
+          in: path
+          required: true
+          description: 'The namespace. Currently, you should set this to <code>default</code>.'
+          type: string
+          pattern: default
     put:
       operationId: UpdateGroup
       description: '<p>Changes a group description. </p> <p>The permissions resource is <code>arn:aws:quicksight:us-east-1:<i>&lt;aws-account-id&gt;</i>:group/default/<i>&lt;group-name&gt;</i> </code>.</p> <p>The response is a group object.</p> <p> <b>CLI Sample:</b> </p> <p> <code>aws quicksight update-group --aws-account-id=111122223333 --namespace=default --group-name=Sales --description="Sales BI Dashboards" </code> </p>'
@@ -505,23 +560,38 @@ paths:
           schema:
             $ref: '#/definitions/ResourceUnavailableException'
       parameters:
+        - name: GroupName
+          in: path
+          required: true
+          description: The name of the group that you want to update.
+          type: string
+          pattern: '[\u0020-\u00FF]+'
+          minLength: 1
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: 'The ID for the AWS account that the group is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.'
+          type: string
+          pattern: '^[0-9]{12}$'
+          minLength: 12
+          maxLength: 12
+        - name: Namespace
+          in: path
+          required: true
+          description: 'The namespace. Currently, you should set this to <code>default</code>.'
+          type: string
+          pattern: default
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateGroupRequest'
-        - name: AwsAccountId
-          type: string
-          in: path
-          required: true
-        - name: Namespace
-          type: string
-          in: path
-          required: true
-        - name: GroupName
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              Description:
+                description: The description for the group that you want to update.
+                type: string
+                minLength: 1
+                maxLength: 512
   '/accounts/{AwsAccountId}/namespaces/{Namespace}/users/{UserName}':
     delete:
       operationId: DeleteUser
@@ -556,23 +626,27 @@ paths:
           schema:
             $ref: '#/definitions/ResourceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteUserRequest'
-        - name: AwsAccountId
-          type: string
-          in: path
-          required: true
-        - name: Namespace
-          type: string
-          in: path
-          required: true
         - name: UserName
-          type: string
           in: path
           required: true
+          description: The name of the user that you want to delete.
+          type: string
+          pattern: '[\u0020-\u00FF]+'
+          minLength: 1
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: 'The ID for the AWS account that the user is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.'
+          type: string
+          pattern: '^[0-9]{12}$'
+          minLength: 12
+          maxLength: 12
+        - name: Namespace
+          in: path
+          required: true
+          description: 'The namespace. Currently, you should set this to <code>default</code>.'
+          type: string
+          pattern: default
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -616,23 +690,27 @@ paths:
           schema:
             $ref: '#/definitions/ResourceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeUserRequest'
-        - name: AwsAccountId
-          type: string
-          in: path
-          required: true
-        - name: Namespace
-          type: string
-          in: path
-          required: true
         - name: UserName
-          type: string
           in: path
           required: true
+          description: The name of the user that you want to describe.
+          type: string
+          pattern: '[\u0020-\u00FF]+'
+          minLength: 1
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: 'The ID for the AWS account that the user is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.'
+          type: string
+          pattern: '^[0-9]{12}$'
+          minLength: 12
+          maxLength: 12
+        - name: Namespace
+          in: path
+          required: true
+          description: 'The namespace. Currently, you should set this to <code>default</code>.'
+          type: string
+          pattern: default
     put:
       operationId: UpdateUser
       description: '<p>Updates an Amazon QuickSight user.</p> <p>The permission resource is <code>arn:aws:quicksight:us-east-1:<i>&lt;aws-account-id&gt;</i>:user/default/<i>&lt;user-name&gt;</i> </code>. </p> <p>The response is a user object that contains the user''s Amazon QuickSight user name, email address, active or inactive status in Amazon QuickSight, Amazon QuickSight role, and Amazon Resource Name (ARN). </p> <p> <b>CLI Sample:</b> </p> <p> <code>aws quicksight update-user --user-name=Pat --role=ADMIN --email=new_address@amazon.com --aws-account-id=111122223333 --namespace=default --region=us-east-1 </code> </p>'
@@ -666,23 +744,48 @@ paths:
           schema:
             $ref: '#/definitions/ResourceUnavailableException'
       parameters:
+        - name: UserName
+          in: path
+          required: true
+          description: The Amazon QuickSight user name that you want to update.
+          type: string
+          pattern: '[\u0020-\u00FF]+'
+          minLength: 1
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: 'The ID for the AWS account that the user is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.'
+          type: string
+          pattern: '^[0-9]{12}$'
+          minLength: 12
+          maxLength: 12
+        - name: Namespace
+          in: path
+          required: true
+          description: 'The namespace. Currently, you should set this to <code>default</code>.'
+          type: string
+          pattern: default
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateUserRequest'
-        - name: AwsAccountId
-          type: string
-          in: path
-          required: true
-        - name: Namespace
-          type: string
-          in: path
-          required: true
-        - name: UserName
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - Email
+              - Role
+            properties:
+              Email:
+                description: The email address of the user that you want to update.
+                type: string
+              Role:
+                description: '<p>The Amazon QuickSight role of the user. The user role can be one of the following:</p> <ul> <li> <p> <code>READER</code>: A user who has read-only access to dashboards.</p> </li> <li> <p> <code>AUTHOR</code>: A user who can create data sources, data sets, analyses, and dashboards.</p> </li> <li> <p> <code>ADMIN</code>: A user who is an author, who can also manage Amazon QuickSight settings.</p> </li> </ul>'
+                type: string
+                enum:
+                  - ADMIN
+                  - AUTHOR
+                  - READER
+                  - RESTRICTED_AUTHOR
+                  - RESTRICTED_READER
   '/accounts/{AwsAccountId}/namespaces/{Namespace}/user-principals/{PrincipalId}':
     delete:
       operationId: DeleteUserByPrincipalId
@@ -717,23 +820,25 @@ paths:
           schema:
             $ref: '#/definitions/ResourceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteUserByPrincipalIdRequest'
-        - name: AwsAccountId
-          type: string
-          in: path
-          required: true
-        - name: Namespace
-          type: string
-          in: path
-          required: true
         - name: PrincipalId
-          type: string
           in: path
           required: true
+          description: The principal ID of the user.
+          type: string
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: 'The ID for the AWS account that the user is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.'
+          type: string
+          pattern: '^[0-9]{12}$'
+          minLength: 12
+          maxLength: 12
+        - name: Namespace
+          in: path
+          required: true
+          description: 'The namespace. Currently, you should set this to <code>default</code>.'
+          type: string
+          pattern: default
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -744,7 +849,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/accounts/{AwsAccountId}/dashboards/{DashboardId}/embed-url':
+  '/accounts/{AwsAccountId}/dashboards/{DashboardId}/embed-url#creds-type':
     get:
       operationId: GetDashboardEmbedUrl
       description: '<p>Generates a server-side embeddable URL and authorization code. Before this can work properly, first you need to configure the dashboards and user permissions. For more information, see <a href="https://docs.aws.amazon.com/en_us/quicksight/latest/user/embedding.html"> Embedding Amazon QuickSight Dashboards</a>.</p> <p>Currently, you can use <code>GetDashboardEmbedURL</code> only from the server, not from the user’s browser.</p> <p> <b>CLI Sample:</b> </p> <p>Assume the role with permissions enabled for actions: <code>quickSight:RegisterUser</code> and <code>quicksight:GetDashboardEmbedURL</code>. You can use assume-role, assume-role-with-web-identity, or assume-role-with-saml. </p> <p> <code>aws sts assume-role --role-arn "arn:aws:iam::111122223333:role/embedding_quicksight_dashboard_role" --role-session-name embeddingsession</code> </p> <p>If the user does not exist in QuickSight, register the user:</p> <p> <code>aws quicksight register-user --aws-account-id 111122223333 --namespace default --identity-type IAM --iam-arn "arn:aws:iam::111122223333:role/embedding_quicksight_dashboard_role" --user-role READER --session-name "embeddingsession" --email user123@example.com --region us-east-1</code> </p> <p>Get the URL for the embedded dashboard</p> <p> <code>aws quicksight get-dashboard-embed-url --aws-account-id 111122223333 --dashboard-id 1a1ac2b2-3fc3-4b44-5e5d-c6db6778df89 --identity-type IAM</code> </p>'
@@ -806,19 +911,44 @@ paths:
           schema:
             $ref: '#/definitions/ResourceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetDashboardEmbedUrlRequest'
         - name: AwsAccountId
-          type: string
           in: path
           required: true
+          description: AWS account ID that contains the dashboard you are embedding.
+          type: string
+          pattern: '^[0-9]{12}$'
+          minLength: 12
+          maxLength: 12
         - name: DashboardId
-          type: string
           in: path
           required: true
+          description: 'The ID for the dashboard, also added to IAM policy'
+          type: string
+        - name: creds-type
+          in: query
+          required: true
+          description: The authentication method the user uses to sign in (IAM only).
+          type: string
+          enum:
+            - IAM
+            - QUICKSIGHT
+        - name: session-lifetime
+          in: query
+          required: false
+          description: How many minutes the session is valid. The session lifetime must be between 15 and 600 minutes.
+          type: integer
+          minimum: 15
+          maximum: 600
+        - name: undo-redo-disabled
+          in: query
+          required: false
+          description: 'Remove the undo/redo button on embedded dashboard. The default is FALSE, which enables the undo/redo button.'
+          type: boolean
+        - name: reset-disabled
+          in: query
+          required: false
+          description: 'Remove the reset button on embedded dashboard. The default is FALSE, which allows the reset button.'
+          type: boolean
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -871,23 +1001,39 @@ paths:
           schema:
             $ref: '#/definitions/ResourceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListGroupMembershipsRequest'
-        - name: AwsAccountId
-          type: string
-          in: path
-          required: true
-        - name: Namespace
-          type: string
-          in: path
-          required: true
         - name: GroupName
-          type: string
           in: path
           required: true
+          description: The name of the group that you want to see a membership list of.
+          type: string
+          pattern: '[\u0020-\u00FF]+'
+          minLength: 1
+        - name: next-token
+          in: query
+          required: false
+          description: A pagination token that can be used in a subsequent request.
+          type: string
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of results to return from this request.
+          type: integer
+          minimum: 1
+          maximum: 100000
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: 'The ID for the AWS account that the group is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.'
+          type: string
+          pattern: '^[0-9]{12}$'
+          minLength: 12
+          maxLength: 12
+        - name: Namespace
+          in: path
+          required: true
+          description: 'The namespace. Currently, you should set this to <code>default</code>.'
+          type: string
+          pattern: default
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -932,23 +1078,39 @@ paths:
           schema:
             $ref: '#/definitions/ResourceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListUserGroupsRequest'
-        - name: AwsAccountId
-          type: string
-          in: path
-          required: true
-        - name: Namespace
-          type: string
-          in: path
-          required: true
         - name: UserName
-          type: string
           in: path
           required: true
+          description: The Amazon QuickSight user name that you want to list group memberships for.
+          type: string
+          pattern: '[\u0020-\u00FF]+'
+          minLength: 1
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: 'The AWS Account ID that the user is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.'
+          type: string
+          pattern: '^[0-9]{12}$'
+          minLength: 12
+          maxLength: 12
+        - name: Namespace
+          in: path
+          required: true
+          description: 'The namespace. Currently, you should set this to <code>default</code>.'
+          type: string
+          pattern: default
+        - name: next-token
+          in: query
+          required: false
+          description: A pagination token that can be used in a subsequent request.
+          type: string
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of results to return from this request.
+          type: integer
+          minimum: 1
+          maximum: 100000
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -997,19 +1159,32 @@ paths:
           schema:
             $ref: '#/definitions/ResourceUnavailableException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListUsersRequest'
         - name: AwsAccountId
-          type: string
           in: path
           required: true
+          description: 'The ID for the AWS account that the user is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.'
+          type: string
+          pattern: '^[0-9]{12}$'
+          minLength: 12
+          maxLength: 12
+        - name: next-token
+          in: query
+          required: false
+          description: A pagination token that can be used in a subsequent request.
+          type: string
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of results to return from this request.
+          type: integer
+          minimum: 1
+          maximum: 100000
         - name: Namespace
-          type: string
           in: path
           required: true
+          description: 'The namespace. Currently, you should set this to <code>default</code>.'
+          type: string
+          pattern: default
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1065,19 +1240,62 @@ paths:
           schema:
             $ref: '#/definitions/ResourceUnavailableException'
       parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: 'The ID for the AWS account that the user is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.'
+          type: string
+          pattern: '^[0-9]{12}$'
+          minLength: 12
+          maxLength: 12
+        - name: Namespace
+          in: path
+          required: true
+          description: 'The namespace. Currently, you should set this to <code>default</code>.'
+          type: string
+          pattern: default
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/RegisterUserRequest'
-        - name: AwsAccountId
-          type: string
-          in: path
-          required: true
-        - name: Namespace
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - IdentityType
+              - Email
+              - UserRole
+            properties:
+              IdentityType:
+                description: '<p>Amazon QuickSight supports several ways of managing the identity of users. This parameter accepts two values:</p> <ul> <li> <p> <code>IAM</code>: A user whose identity maps to an existing IAM user or role. </p> </li> <li> <p> <code>QUICKSIGHT</code>: A user whose identity is owned and managed internally by Amazon QuickSight. </p> </li> </ul>'
+                type: string
+                enum:
+                  - IAM
+                  - QUICKSIGHT
+              Email:
+                description: The email address of the user that you want to register.
+                type: string
+              UserRole:
+                description: '<p>The Amazon QuickSight role of the user. The user role can be one of the following:</p> <ul> <li> <p> <code>READER</code>: A user who has read-only access to dashboards.</p> </li> <li> <p> <code>AUTHOR</code>: A user who can create data sources, data sets, analyses, and dashboards.</p> </li> <li> <p> <code>ADMIN</code>: A user who is an author, who can also manage Amazon QuickSight settings.</p> </li> </ul>'
+                type: string
+                enum:
+                  - ADMIN
+                  - AUTHOR
+                  - READER
+                  - RESTRICTED_AUTHOR
+                  - RESTRICTED_READER
+              IamArn:
+                description: 'The ARN of the IAM user or role that you are registering with Amazon QuickSight. '
+                type: string
+              SessionName:
+                description: 'The name of the session with the assumed IAM role. By using this parameter, you can register multiple users with the same IAM role, provided that each has a different session name. For more information on assuming IAM roles, see <a href="https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role.html"> <code>assume-role</code> </a> in the <i>AWS CLI Reference.</i> '
+                type: string
+                pattern: '[\w+=.@-]*'
+                minLength: 2
+                maxLength: 64
+              UserName:
+                description: The Amazon QuickSight user name that you want to create for the user you are registering.
+                type: string
+                pattern: '[\u0020-\u00FF]+'
+                minLength: 1
 definitions:
   CreateGroupResponse:
     type: object
@@ -1092,18 +1310,6 @@ definitions:
         $ref: '#/definitions/StatusCode'
         description: The http status of the request.
     description: The response object for this operation.
-  CreateGroupRequest:
-    type: object
-    required:
-      - GroupName
-    properties:
-      GroupName:
-        $ref: '#/definitions/GroupName'
-        description: A name for the group that you want to create.
-      Description:
-        $ref: '#/definitions/GroupDescription'
-        description: A description for the group that you want to create.
-    description: 'The request object for this operation. '
   AccessDeniedException: {}
   InvalidParameterValueException: {}
   ResourceExistsException: {}
@@ -1125,9 +1331,6 @@ definitions:
       Status:
         $ref: '#/definitions/StatusCode'
         description: The http status of the request.
-  CreateGroupMembershipRequest:
-    type: object
-    properties: {}
   DeleteGroupResponse:
     type: object
     properties:
@@ -1137,9 +1340,6 @@ definitions:
       Status:
         $ref: '#/definitions/StatusCode'
         description: The http status of the request.
-  DeleteGroupRequest:
-    type: object
-    properties: {}
   DeleteGroupMembershipResponse:
     type: object
     properties:
@@ -1149,9 +1349,6 @@ definitions:
       Status:
         $ref: '#/definitions/StatusCode'
         description: The http status of the request.
-  DeleteGroupMembershipRequest:
-    type: object
-    properties: {}
   DeleteUserResponse:
     type: object
     properties:
@@ -1161,9 +1358,6 @@ definitions:
       Status:
         $ref: '#/definitions/StatusCode'
         description: The http status of the request.
-  DeleteUserRequest:
-    type: object
-    properties: {}
   DeleteUserByPrincipalIdResponse:
     type: object
     properties:
@@ -1173,9 +1367,6 @@ definitions:
       Status:
         $ref: '#/definitions/StatusCode'
         description: The http status of the request.
-  DeleteUserByPrincipalIdRequest:
-    type: object
-    properties: {}
   DescribeGroupResponse:
     type: object
     properties:
@@ -1188,9 +1379,6 @@ definitions:
       Status:
         $ref: '#/definitions/StatusCode'
         description: The http status of the request.
-  DescribeGroupRequest:
-    type: object
-    properties: {}
   DescribeUserResponse:
     type: object
     properties:
@@ -1203,9 +1391,6 @@ definitions:
       Status:
         $ref: '#/definitions/StatusCode'
         description: The http status of the request.
-  DescribeUserRequest:
-    type: object
-    properties: {}
   GetDashboardEmbedUrlResponse:
     type: object
     properties:
@@ -1218,9 +1403,6 @@ definitions:
       RequestId:
         $ref: '#/definitions/String'
         description: The AWS request ID for this operation.
-  GetDashboardEmbedUrlRequest:
-    type: object
-    properties: {}
   DomainNotWhitelistedException: {}
   QuickSightUserNotFoundException: {}
   IdentityTypeNotSupportedException: {}
@@ -1241,9 +1423,6 @@ definitions:
       Status:
         $ref: '#/definitions/StatusCode'
         description: The http status of the request.
-  ListGroupMembershipsRequest:
-    type: object
-    properties: {}
   InvalidNextTokenException: {}
   ListGroupsResponse:
     type: object
@@ -1260,9 +1439,6 @@ definitions:
       Status:
         $ref: '#/definitions/StatusCode'
         description: The http status of the request.
-  ListGroupsRequest:
-    type: object
-    properties: {}
   ListUserGroupsResponse:
     type: object
     properties:
@@ -1278,9 +1454,6 @@ definitions:
       Status:
         $ref: '#/definitions/StatusCode'
         description: The HTTP status of the request.
-  ListUserGroupsRequest:
-    type: object
-    properties: {}
   ListUsersResponse:
     type: object
     properties:
@@ -1296,9 +1469,6 @@ definitions:
       Status:
         $ref: '#/definitions/StatusCode'
         description: The http status of the request.
-  ListUsersRequest:
-    type: object
-    properties: {}
   RegisterUserResponse:
     type: object
     properties:
@@ -1314,31 +1484,6 @@ definitions:
       Status:
         $ref: '#/definitions/StatusCode'
         description: The http status of the request.
-  RegisterUserRequest:
-    type: object
-    required:
-      - IdentityType
-      - Email
-      - UserRole
-    properties:
-      IdentityType:
-        $ref: '#/definitions/IdentityType'
-        description: '<p>Amazon QuickSight supports several ways of managing the identity of users. This parameter accepts two values:</p> <ul> <li> <p> <code>IAM</code>: A user whose identity maps to an existing IAM user or role. </p> </li> <li> <p> <code>QUICKSIGHT</code>: A user whose identity is owned and managed internally by Amazon QuickSight. </p> </li> </ul>'
-      Email:
-        $ref: '#/definitions/String'
-        description: The email address of the user that you want to register.
-      UserRole:
-        $ref: '#/definitions/UserRole'
-        description: '<p>The Amazon QuickSight role of the user. The user role can be one of the following:</p> <ul> <li> <p> <code>READER</code>: A user who has read-only access to dashboards.</p> </li> <li> <p> <code>AUTHOR</code>: A user who can create data sources, data sets, analyses, and dashboards.</p> </li> <li> <p> <code>ADMIN</code>: A user who is an author, who can also manage Amazon QuickSight settings.</p> </li> </ul>'
-      IamArn:
-        $ref: '#/definitions/String'
-        description: 'The ARN of the IAM user or role that you are registering with Amazon QuickSight. '
-      SessionName:
-        $ref: '#/definitions/RoleSessionName'
-        description: 'The name of the session with the assumed IAM role. By using this parameter, you can register multiple users with the same IAM role, provided that each has a different session name. For more information on assuming IAM roles, see <a href="https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role.html"> <code>assume-role</code> </a> in the <i>AWS CLI Reference.</i> '
-      UserName:
-        $ref: '#/definitions/UserName'
-        description: The Amazon QuickSight user name that you want to create for the user you are registering.
   UpdateGroupResponse:
     type: object
     properties:
@@ -1351,12 +1496,6 @@ definitions:
       Status:
         $ref: '#/definitions/StatusCode'
         description: The http status of the request.
-  UpdateGroupRequest:
-    type: object
-    properties:
-      Description:
-        $ref: '#/definitions/GroupDescription'
-        description: The description for the group that you want to update.
   UpdateUserResponse:
     type: object
     properties:
@@ -1369,18 +1508,6 @@ definitions:
       Status:
         $ref: '#/definitions/StatusCode'
         description: The http status of the request.
-  UpdateUserRequest:
-    type: object
-    required:
-      - Email
-      - Role
-    properties:
-      Email:
-        $ref: '#/definitions/String'
-        description: The email address of the user that you want to update.
-      Role:
-        $ref: '#/definitions/UserRole'
-        description: '<p>The Amazon QuickSight role of the user. The user role can be one of the following:</p> <ul> <li> <p> <code>READER</code>: A user who has read-only access to dashboards.</p> </li> <li> <p> <code>AUTHOR</code>: A user who can create data sources, data sets, analyses, and dashboards.</p> </li> <li> <p> <code>ADMIN</code>: A user who is an author, who can also manage Amazon QuickSight settings.</p> </li> </ul>'
   Arn:
     type: string
   AwsAccountId:
@@ -1402,6 +1529,9 @@ definitions:
   Namespace:
     type: string
     pattern: default
+  CreateGroupMembershipRequest:
+    type: object
+    properties: {}
   GroupMember:
     type: object
     properties:
@@ -1420,6 +1550,18 @@ definitions:
     type: string
     minLength: 1
     maxLength: 512
+  CreateGroupRequest:
+    type: object
+    required:
+      - GroupName
+    properties:
+      GroupName:
+        $ref: '#/definitions/GroupName'
+        description: A name for the group that you want to create.
+      Description:
+        $ref: '#/definitions/GroupDescription'
+        description: A description for the group that you want to create.
+    description: 'The request object for this operation. '
   Group:
     type: object
     properties:
@@ -1436,10 +1578,28 @@ definitions:
         $ref: '#/definitions/String'
         description: The principal ID of the group.
     description: 'A <i>group</i> in Amazon QuickSight consists of a set of users. You can use groups to make it easier to manage access and security. Currently, an Amazon QuickSight subscription can''t contain more than 500 Amazon QuickSight groups.'
+  DeleteGroupMembershipRequest:
+    type: object
+    properties: {}
+  DeleteGroupRequest:
+    type: object
+    properties: {}
+  DeleteUserByPrincipalIdRequest:
+    type: object
+    properties: {}
   UserName:
     type: string
     pattern: '[\u0020-\u00FF]+'
     minLength: 1
+  DeleteUserRequest:
+    type: object
+    properties: {}
+  DescribeGroupRequest:
+    type: object
+    properties: {}
+  DescribeUserRequest:
+    type: object
+    properties: {}
   User:
     type: object
     properties:
@@ -1479,6 +1639,9 @@ definitions:
     maximum: 600
   boolean:
     type: boolean
+  GetDashboardEmbedUrlRequest:
+    type: object
+    properties: {}
   GroupList:
     type: array
     items:
@@ -1491,6 +1654,18 @@ definitions:
     type: integer
     minimum: 1
     maximum: 100000
+  ListGroupMembershipsRequest:
+    type: object
+    properties: {}
+  ListGroupsRequest:
+    type: object
+    properties: {}
+  ListUserGroupsRequest:
+    type: object
+    properties: {}
+  ListUsersRequest:
+    type: object
+    properties: {}
   UserList:
     type: array
     items:
@@ -1508,3 +1683,46 @@ definitions:
     pattern: '[\w+=.@-]*'
     minLength: 2
     maxLength: 64
+  RegisterUserRequest:
+    type: object
+    required:
+      - IdentityType
+      - Email
+      - UserRole
+    properties:
+      IdentityType:
+        $ref: '#/definitions/IdentityType'
+        description: '<p>Amazon QuickSight supports several ways of managing the identity of users. This parameter accepts two values:</p> <ul> <li> <p> <code>IAM</code>: A user whose identity maps to an existing IAM user or role. </p> </li> <li> <p> <code>QUICKSIGHT</code>: A user whose identity is owned and managed internally by Amazon QuickSight. </p> </li> </ul>'
+      Email:
+        $ref: '#/definitions/String'
+        description: The email address of the user that you want to register.
+      UserRole:
+        $ref: '#/definitions/UserRole'
+        description: '<p>The Amazon QuickSight role of the user. The user role can be one of the following:</p> <ul> <li> <p> <code>READER</code>: A user who has read-only access to dashboards.</p> </li> <li> <p> <code>AUTHOR</code>: A user who can create data sources, data sets, analyses, and dashboards.</p> </li> <li> <p> <code>ADMIN</code>: A user who is an author, who can also manage Amazon QuickSight settings.</p> </li> </ul>'
+      IamArn:
+        $ref: '#/definitions/String'
+        description: 'The ARN of the IAM user or role that you are registering with Amazon QuickSight. '
+      SessionName:
+        $ref: '#/definitions/RoleSessionName'
+        description: 'The name of the session with the assumed IAM role. By using this parameter, you can register multiple users with the same IAM role, provided that each has a different session name. For more information on assuming IAM roles, see <a href="https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role.html"> <code>assume-role</code> </a> in the <i>AWS CLI Reference.</i> '
+      UserName:
+        $ref: '#/definitions/UserName'
+        description: The Amazon QuickSight user name that you want to create for the user you are registering.
+  UpdateGroupRequest:
+    type: object
+    properties:
+      Description:
+        $ref: '#/definitions/GroupDescription'
+        description: The description for the group that you want to update.
+  UpdateUserRequest:
+    type: object
+    required:
+      - Email
+      - Role
+    properties:
+      Email:
+        $ref: '#/definitions/String'
+        description: The email address of the user that you want to update.
+      Role:
+        $ref: '#/definitions/UserRole'
+        description: '<p>The Amazon QuickSight role of the user. The user role can be one of the following:</p> <ul> <li> <p> <code>READER</code>: A user who has read-only access to dashboards.</p> </li> <li> <p> <code>AUTHOR</code>: A user who can create data sources, data sets, analyses, and dashboards.</p> </li> <li> <p> <code>ADMIN</code>: A user who is an author, who can also manage Amazon QuickSight settings.</p> </li> </ul>'

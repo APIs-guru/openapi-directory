@@ -137,19 +137,52 @@ paths:
           schema:
             $ref: '#/definitions/PreconditionFailedException'
       parameters:
+        - name: LayerName
+          in: path
+          required: true
+          description: The name or Amazon Resource Name (ARN) of the layer.
+          type: string
+          pattern: '(arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+)|[a-zA-Z0-9-_]+'
+          minLength: 1
+          maxLength: 140
+        - name: VersionNumber
+          in: path
+          required: true
+          description: The version number.
+          type: integer
+        - name: RevisionId
+          in: query
+          required: false
+          description: Only update the policy if the revision ID matches the ID specified. Use this option to avoid modifying a policy that has changed since you last read it.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/AddLayerVersionPermissionRequest'
-        - name: LayerName
-          type: string
-          in: path
-          required: true
-        - name: VersionNumber
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - StatementId
+              - Action
+              - Principal
+            properties:
+              StatementId:
+                description: An identifier that distinguishes the policy from others on the same layer version.
+                type: string
+                pattern: '([a-zA-Z0-9-_]+)'
+                minLength: 1
+                maxLength: 100
+              Action:
+                description: 'The API action that grants access to the layer. For example, <code>lambda:GetLayerVersion</code>.'
+                type: string
+                pattern: 'lambda:GetLayerVersion'
+              Principal:
+                description: 'An account ID, or <code>*</code> to grant permission to all AWS accounts.'
+                type: string
+                pattern: '\d{12}|\*|arn:(aws[a-zA-Z-]*):iam::\d{12}:root'
+              OrganizationId:
+                description: 'With the principal set to <code>*</code>, grant permission to all accounts in the specified organization.'
+                type: string
+                pattern: 'o-[a-z0-9]{10,32}'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -185,19 +218,19 @@ paths:
           schema:
             $ref: '#/definitions/InvalidParameterValueException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetLayerVersionPolicyRequest'
         - name: LayerName
-          type: string
           in: path
           required: true
+          description: The name or Amazon Resource Name (ARN) of the layer.
+          type: string
+          pattern: '(arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+)|[a-zA-Z0-9-_]+'
+          minLength: 1
+          maxLength: 140
         - name: VersionNumber
-          type: string
           in: path
           required: true
+          description: The version number.
+          type: integer
   '/2015-03-31/functions/{FunctionName}/policy':
     post:
       operationId: AddPermission
@@ -236,15 +269,63 @@ paths:
           schema:
             $ref: '#/definitions/PreconditionFailedException'
       parameters:
+        - name: FunctionName
+          in: path
+          required: true
+          description: '<p>The name of the Lambda function, version, or alias.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>my-function</code> (name-only), <code>my-function:v1</code> (with alias).</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:my-function</code>.</p> </li> </ul> <p>You can append a version number or alias to any of the formats. The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
+          type: string
+          pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+          minLength: 1
+          maxLength: 140
+        - name: Qualifier
+          in: query
+          required: false
+          description: Specify a version or alias to add permissions to a published version of the function.
+          type: string
+          pattern: '(|[a-zA-Z0-9$_-]+)'
+          minLength: 1
+          maxLength: 128
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/AddPermissionRequest'
-        - name: FunctionName
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - StatementId
+              - Action
+              - Principal
+            properties:
+              StatementId:
+                description: A statement identifier that differentiates the statement from others in the same policy.
+                type: string
+                pattern: '([a-zA-Z0-9-_]+)'
+                minLength: 1
+                maxLength: 100
+              Action:
+                description: 'The action that the principal can use on the function. For example, <code>lambda:InvokeFunction</code> or <code>lambda:GetFunction</code>.'
+                type: string
+                pattern: '(lambda:[*]|lambda:[a-zA-Z]+|[*])'
+              Principal:
+                description: 'The AWS service or account that invokes the function. If you specify a service, use <code>SourceArn</code> or <code>SourceAccount</code> to limit who can invoke the function through that service.'
+                type: string
+                pattern: .*
+              SourceArn:
+                description: 'For AWS services, the ARN of the AWS resource that invokes the function. For example, an Amazon S3 bucket or Amazon SNS topic.'
+                type: string
+                pattern: 'arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)'
+              SourceAccount:
+                description: 'For AWS services, the ID of the account that owns the resource. Use this instead of <code>SourceArn</code> to grant permission to resources that are owned by another account (for example, all of an account''s Amazon S3 buckets). Or use it together with <code>SourceArn</code> to ensure that the resource is owned by the specified account. For example, an Amazon S3 bucket could be deleted by its owner and recreated by another account.'
+                type: string
+                pattern: '\d{12}'
+              EventSourceToken:
+                description: 'For Alexa Smart Home functions, a token that must be supplied by the invoker.'
+                type: string
+                pattern: '[a-zA-Z0-9._\-]+'
+                minLength: 0
+                maxLength: 256
+              RevisionId:
+                description: Only update the policy if the revision ID matches the ID that's specified. Use this option to avoid modifying a policy that has changed since you last read it.
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -280,15 +361,22 @@ paths:
           schema:
             $ref: '#/definitions/InvalidParameterValueException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetPolicyRequest'
         - name: FunctionName
-          type: string
           in: path
           required: true
+          description: '<p>The name of the Lambda function, version, or alias.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>my-function</code> (name-only), <code>my-function:v1</code> (with alias).</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:my-function</code>.</p> </li> </ul> <p>You can append a version number or alias to any of the formats. The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
+          type: string
+          pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_\.]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+          minLength: 1
+          maxLength: 170
+        - name: Qualifier
+          in: query
+          required: false
+          description: Specify a version or alias to get the policy for that resource.
+          type: string
+          pattern: '(|[a-zA-Z0-9$_-]+)'
+          minLength: 1
+          maxLength: 128
   '/2015-03-31/functions/{FunctionName}/aliases':
     post:
       operationId: CreateAlias
@@ -319,15 +407,47 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: FunctionName
+          in: path
+          required: true
+          description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
+          type: string
+          pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+          minLength: 1
+          maxLength: 140
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateAliasRequest'
-        - name: FunctionName
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - Name
+              - FunctionVersion
+            properties:
+              Name:
+                description: The name of the alias.
+                type: string
+                pattern: '(?!^[0-9]+$)([a-zA-Z0-9-_]+)'
+                minLength: 1
+                maxLength: 128
+              FunctionVersion:
+                description: The function version that the alias invokes.
+                type: string
+                pattern: '(\$LATEST|[0-9]+)'
+                minLength: 1
+                maxLength: 1024
+              Description:
+                description: A description of the alias.
+                type: string
+                minLength: 0
+                maxLength: 256
+              RoutingConfig:
+                description: 'The <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html">traffic-shifting</a> configuration of a Lambda function alias.'
+                type: object
+                properties:
+                  AdditionalVersionWeights:
+                    $ref: '#/definitions/AdditionalVersionWeights'
+                    description: 'The name of the second alias, and the percentage of traffic that''s routed to it.'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -363,15 +483,34 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListAliasesRequest'
         - name: FunctionName
-          type: string
           in: path
           required: true
+          description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
+          type: string
+          pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+          minLength: 1
+          maxLength: 140
+        - name: FunctionVersion
+          in: query
+          required: false
+          description: Specify a function version to only list aliases that invoke that version.
+          type: string
+          pattern: '(\$LATEST|[0-9]+)'
+          minLength: 1
+          maxLength: 1024
+        - name: Marker
+          in: query
+          required: false
+          description: Specify the pagination token that's returned by a previous request to retrieve the next page of results.
+          type: string
+        - name: MaxItems
+          in: query
+          required: false
+          description: Limit the number of aliases returned.
+          type: integer
+          minimum: 1
+          maximum: 10000
   /2015-03-31/event-source-mappings/:
     post:
       operationId: CreateEventSourceMapping
@@ -406,7 +545,40 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateEventSourceMappingRequest'
+            type: object
+            required:
+              - EventSourceArn
+              - FunctionName
+            properties:
+              EventSourceArn:
+                description: <p>The Amazon Resource Name (ARN) of the event source.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - The ARN of the data stream or a stream consumer.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - The ARN of the stream.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - The ARN of the queue.</p> </li> </ul>
+                type: string
+                pattern: 'arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)'
+              FunctionName:
+                description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Version or Alias ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it''s limited to 64 characters in length.</p>'
+                type: string
+                pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+                minLength: 1
+                maxLength: 140
+              Enabled:
+                description: Disables the event source mapping to pause polling and invocation.
+                type: boolean
+              BatchSize:
+                description: '<p>The maximum number of items to retrieve in a single batch.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - Default 10. Max 10.</p> </li> </ul>'
+                type: integer
+                minimum: 1
+                maximum: 10000
+              StartingPosition:
+                description: The position in a stream from which to start reading. Required for Amazon Kinesis and Amazon DynamoDB Streams sources. <code>AT_TIMESTAMP</code> is only supported for Amazon Kinesis streams.
+                type: string
+                enum:
+                  - TRIM_HORIZON
+                  - LATEST
+                  - AT_TIMESTAMP
+              StartingPositionTimestamp:
+                description: 'With <code>StartingPosition</code> set to <code>AT_TIMESTAMP</code>, the time from which to start reading.'
+                type: string
+                format: date-time
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -442,21 +614,32 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListEventSourceMappingsRequest'
-        - name: MaxItems
-          type: string
+        - name: EventSourceArn
           in: query
-          description: Pagination limit
           required: false
+          description: <p>The Amazon Resource Name (ARN) of the event source.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - The ARN of the data stream or a stream consumer.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - The ARN of the stream.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - The ARN of the queue.</p> </li> </ul>
+          type: string
+          pattern: 'arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)'
+        - name: FunctionName
+          in: query
+          required: false
+          description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Version or Alias ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it''s limited to 64 characters in length.</p>'
+          type: string
+          pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+          minLength: 1
+          maxLength: 140
         - name: Marker
-          type: string
           in: query
-          description: Pagination token
           required: false
+          description: A pagination token returned by a previous call.
+          type: string
+        - name: MaxItems
+          in: query
+          required: false
+          description: The maximum number of event source mappings to return.
+          type: integer
+          minimum: 1
+          maximum: 10000
   /2015-03-31/functions:
     post:
       operationId: CreateFunction
@@ -495,7 +678,126 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateFunctionRequest'
+            type: object
+            required:
+              - FunctionName
+              - Runtime
+              - Role
+              - Handler
+              - Code
+            properties:
+              FunctionName:
+                description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>my-function</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:my-function</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
+                type: string
+                pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+                minLength: 1
+                maxLength: 140
+              Runtime:
+                description: 'The identifier of the function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">runtime</a>.'
+                type: string
+                enum:
+                  - nodejs
+                  - nodejs4.3
+                  - nodejs6.10
+                  - nodejs8.10
+                  - java8
+                  - python2.7
+                  - python3.6
+                  - python3.7
+                  - dotnetcore1.0
+                  - dotnetcore2.0
+                  - dotnetcore2.1
+                  - nodejs4.3-edge
+                  - go1.x
+                  - ruby2.5
+                  - provided
+              Role:
+                description: The Amazon Resource Name (ARN) of the function's execution role.
+                type: string
+                pattern: 'arn:(aws[a-zA-Z-]*)?:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+'
+              Handler:
+                description: 'The name of the method within your code that Lambda calls to execute your function. The format includes the file name. It can also include namespaces and other qualifiers, depending on the runtime. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html">Programming Model</a>.'
+                type: string
+                pattern: '[^\s]+'
+                maxLength: 128
+              Code:
+                description: 'The code for the Lambda function. You can specify either an object in Amazon S3, or upload a deployment package directly.'
+                type: object
+                properties:
+                  ZipFile:
+                    $ref: '#/definitions/Blob'
+                    description: The base64-encoded contents of the deployment package. AWS SDK and AWS CLI clients handle the encoding for you.
+                  S3Bucket:
+                    $ref: '#/definitions/S3Bucket'
+                    description: An Amazon S3 bucket in the same AWS Region as your function. The bucket can be in a different AWS account.
+                  S3Key:
+                    $ref: '#/definitions/S3Key'
+                    description: The Amazon S3 key of the deployment package.
+                  S3ObjectVersion:
+                    $ref: '#/definitions/S3ObjectVersion'
+                    description: 'For versioned objects, the version of the deployment package object to use.'
+              Description:
+                description: A description of the function.
+                type: string
+                minLength: 0
+                maxLength: 256
+              Timeout:
+                description: The amount of time that Lambda allows a function to run before stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds.
+                type: integer
+                minimum: 1
+              MemorySize:
+                description: The amount of memory that your function has access to. Increasing the function's memory also increases its CPU allocation. The default value is 128 MB. The value must be a multiple of 64 MB.
+                type: integer
+                minimum: 128
+                maximum: 3008
+              Publish:
+                description: Set to true to publish the first version of the function during creation.
+                type: boolean
+              VpcConfig:
+                description: The VPC security groups and subnets that are attached to a Lambda function.
+                type: object
+                properties:
+                  SubnetIds:
+                    $ref: '#/definitions/SubnetIds'
+                    description: A list of VPC subnet IDs.
+                  SecurityGroupIds:
+                    $ref: '#/definitions/SecurityGroupIds'
+                    description: A list of VPC security groups IDs.
+              DeadLetterConfig:
+                description: 'The <a href="https://docs.aws.amazon.com/lambda/latest/dg/dlq.html">dead letter queue</a> for failed asynchronous invocations.'
+                type: object
+                properties:
+                  TargetArn:
+                    $ref: '#/definitions/ResourceArn'
+                    description: The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.
+              Environment:
+                description: A function's environment variable settings.
+                type: object
+                properties:
+                  Variables:
+                    $ref: '#/definitions/EnvironmentVariables'
+                    description: Environment variable key-value pairs.
+              KMSKeyArn:
+                description: 'The ARN of the AWS Key Management Service (AWS KMS) key that''s used to encrypt your function''s environment variables. If it''s not provided, AWS Lambda uses a default service key.'
+                type: string
+                pattern: '(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()'
+              TracingConfig:
+                description: The function's AWS X-Ray tracing configuration.
+                type: object
+                properties:
+                  Mode:
+                    $ref: '#/definitions/TracingMode'
+                    description: The tracing mode.
+              Tags:
+                description: 'A list of <a href="https://docs.aws.amazon.com/lambda/latest/dg/tagging.html">tags</a> to apply to the function.'
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/TagValue'
+              Layers:
+                description: 'A list of <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">function layers</a> to add to the function''s execution environment. Specify each layer by its ARN, including the version.'
+                type: array
+                items:
+                  $ref: '#/definitions/LayerVersionArn'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -526,19 +828,22 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteAliasRequest'
         - name: FunctionName
-          type: string
           in: path
           required: true
+          description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
+          type: string
+          pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+          minLength: 1
+          maxLength: 140
         - name: Name
-          type: string
           in: path
           required: true
+          description: The name of the alias.
+          type: string
+          pattern: '(?!^[0-9]+$)([a-zA-Z0-9-_]+)'
+          minLength: 1
+          maxLength: 128
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -574,19 +879,22 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetAliasRequest'
         - name: FunctionName
-          type: string
           in: path
           required: true
+          description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
+          type: string
+          pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+          minLength: 1
+          maxLength: 140
         - name: Name
-          type: string
           in: path
           required: true
+          description: The name of the alias.
+          type: string
+          pattern: '(?!^[0-9]+$)([a-zA-Z0-9-_]+)'
+          minLength: 1
+          maxLength: 128
     put:
       operationId: UpdateAlias
       description: 'Updates the configuration of a Lambda function <a href="https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html">alias</a>.'
@@ -616,19 +924,49 @@ paths:
           schema:
             $ref: '#/definitions/PreconditionFailedException'
       parameters:
+        - name: FunctionName
+          in: path
+          required: true
+          description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
+          type: string
+          pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+          minLength: 1
+          maxLength: 140
+        - name: Name
+          in: path
+          required: true
+          description: The name of the alias.
+          type: string
+          pattern: '(?!^[0-9]+$)([a-zA-Z0-9-_]+)'
+          minLength: 1
+          maxLength: 128
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateAliasRequest'
-        - name: FunctionName
-          type: string
-          in: path
-          required: true
-        - name: Name
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              FunctionVersion:
+                description: The function version that the alias invokes.
+                type: string
+                pattern: '(\$LATEST|[0-9]+)'
+                minLength: 1
+                maxLength: 1024
+              Description:
+                description: A description of the alias.
+                type: string
+                minLength: 0
+                maxLength: 256
+              RoutingConfig:
+                description: 'The <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html">traffic-shifting</a> configuration of a Lambda function alias.'
+                type: object
+                properties:
+                  AdditionalVersionWeights:
+                    $ref: '#/definitions/AdditionalVersionWeights'
+                    description: 'The name of the second alias, and the percentage of traffic that''s routed to it.'
+              RevisionId:
+                description: Only update the alias if the revision ID matches the ID that's specified. Use this option to avoid modifying an alias that has changed since you last read it.
+                type: string
   '/2015-03-31/event-source-mappings/{UUID}':
     delete:
       operationId: DeleteEventSourceMapping
@@ -659,15 +997,11 @@ paths:
           schema:
             $ref: '#/definitions/ResourceInUseException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteEventSourceMappingRequest'
         - name: UUID
-          type: string
           in: path
           required: true
+          description: The identifier of the event source mapping.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -703,15 +1037,11 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetEventSourceMappingRequest'
         - name: UUID
-          type: string
           in: path
           required: true
+          description: The identifier of the event source mapping.
+          type: string
     put:
       operationId: UpdateEventSourceMapping
       description: 'Updates an event source mapping. You can change the function that AWS Lambda invokes, or pause invocation and resume later from the same location.'
@@ -745,15 +1075,31 @@ paths:
           schema:
             $ref: '#/definitions/ResourceInUseException'
       parameters:
+        - name: UUID
+          in: path
+          required: true
+          description: The identifier of the event source mapping.
+          type: string
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateEventSourceMappingRequest'
-        - name: UUID
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              FunctionName:
+                description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Version or Alias ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it''s limited to 64 characters in length.</p>'
+                type: string
+                pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+                minLength: 1
+                maxLength: 140
+              Enabled:
+                description: Disables the event source mapping to pause polling and invocation.
+                type: boolean
+              BatchSize:
+                description: '<p>The maximum number of items to retrieve in a single batch.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - Default 10. Max 10.</p> </li> </ul>'
+                type: integer
+                minimum: 1
+                maximum: 10000
   '/2015-03-31/functions/{FunctionName}':
     delete:
       operationId: DeleteFunction
@@ -782,15 +1128,22 @@ paths:
           schema:
             $ref: '#/definitions/ResourceConflictException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteFunctionRequest'
         - name: FunctionName
-          type: string
           in: path
           required: true
+          description: '<p>The name of the Lambda function or version.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>my-function</code> (name-only), <code>my-function:1</code> (with version).</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:my-function</code>.</p> </li> </ul> <p>You can append a version number or alias to any of the formats. The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
+          type: string
+          pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+          minLength: 1
+          maxLength: 140
+        - name: Qualifier
+          in: query
+          required: false
+          description: Specify a version to delete. You can't delete a version that's referenced by an alias.
+          type: string
+          pattern: '(|[a-zA-Z0-9$_-]+)'
+          minLength: 1
+          maxLength: 128
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -826,15 +1179,22 @@ paths:
           schema:
             $ref: '#/definitions/InvalidParameterValueException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetFunctionRequest'
         - name: FunctionName
-          type: string
           in: path
           required: true
+          description: '<p>The name of the Lambda function, version, or alias.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>my-function</code> (name-only), <code>my-function:v1</code> (with alias).</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:my-function</code>.</p> </li> </ul> <p>You can append a version number or alias to any of the formats. The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
+          type: string
+          pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_\.]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+          minLength: 1
+          maxLength: 170
+        - name: Qualifier
+          in: query
+          required: false
+          description: Specify a version or alias to get details about a published version of the function.
+          type: string
+          pattern: '(|[a-zA-Z0-9$_-]+)'
+          minLength: 1
+          maxLength: 128
   '/2017-10-31/functions/{FunctionName}/concurrency':
     delete:
       operationId: DeleteFunctionConcurrency
@@ -859,15 +1219,14 @@ paths:
           schema:
             $ref: '#/definitions/InvalidParameterValueException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteFunctionConcurrencyRequest'
         - name: FunctionName
-          type: string
           in: path
           required: true
+          description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>my-function</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:my-function</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
+          type: string
+          pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+          minLength: 1
+          maxLength: 140
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -903,15 +1262,26 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: FunctionName
+          in: path
+          required: true
+          description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>my-function</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:my-function</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
+          type: string
+          pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+          minLength: 1
+          maxLength: 140
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/PutFunctionConcurrencyRequest'
-        - name: FunctionName
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - ReservedConcurrentExecutions
+            properties:
+              ReservedConcurrentExecutions:
+                description: The number of simultaneous executions to reserve for the function.
+                type: integer
+                minimum: 0
   '/2018-10-31/layers/{LayerName}/versions/{VersionNumber}':
     delete:
       operationId: DeleteLayerVersion
@@ -928,19 +1298,19 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteLayerVersionRequest'
         - name: LayerName
-          type: string
           in: path
           required: true
+          description: The name or Amazon Resource Name (ARN) of the layer.
+          type: string
+          pattern: '(arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+)|[a-zA-Z0-9-_]+'
+          minLength: 1
+          maxLength: 140
         - name: VersionNumber
-          type: string
           in: path
           required: true
+          description: The version number.
+          type: integer
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -976,19 +1346,19 @@ paths:
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetLayerVersionRequest'
         - name: LayerName
-          type: string
           in: path
           required: true
+          description: The name or Amazon Resource Name (ARN) of the layer.
+          type: string
+          pattern: '(arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+)|[a-zA-Z0-9-_]+'
+          minLength: 1
+          maxLength: 140
         - name: VersionNumber
-          type: string
           in: path
           required: true
+          description: The version number.
+          type: integer
   /2016-08-19/account-settings/:
     get:
       operationId: GetAccountSettings
@@ -1006,12 +1376,7 @@ paths:
           description: ServiceException
           schema:
             $ref: '#/definitions/ServiceException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetAccountSettingsRequest'
+      parameters: []
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1048,15 +1413,22 @@ paths:
           schema:
             $ref: '#/definitions/InvalidParameterValueException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetFunctionConfigurationRequest'
         - name: FunctionName
-          type: string
           in: path
           required: true
+          description: '<p>The name of the Lambda function, version, or alias.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>my-function</code> (name-only), <code>my-function:v1</code> (with alias).</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:my-function</code>.</p> </li> </ul> <p>You can append a version number or alias to any of the formats. The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
+          type: string
+          pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_\.]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+          minLength: 1
+          maxLength: 170
+        - name: Qualifier
+          in: query
+          required: false
+          description: Specify a version or alias to get details about a published version of the function.
+          type: string
+          pattern: '(|[a-zA-Z0-9$_-]+)'
+          minLength: 1
+          maxLength: 128
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1100,15 +1472,105 @@ paths:
           schema:
             $ref: '#/definitions/PreconditionFailedException'
       parameters:
+        - name: FunctionName
+          in: path
+          required: true
+          description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>my-function</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:my-function</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
+          type: string
+          pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+          minLength: 1
+          maxLength: 140
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateFunctionConfigurationRequest'
-        - name: FunctionName
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              Role:
+                description: The Amazon Resource Name (ARN) of the function's execution role.
+                type: string
+                pattern: 'arn:(aws[a-zA-Z-]*)?:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+'
+              Handler:
+                description: 'The name of the method within your code that Lambda calls to execute your function. The format includes the file name. It can also include namespaces and other qualifiers, depending on the runtime. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html">Programming Model</a>.'
+                type: string
+                pattern: '[^\s]+'
+                maxLength: 128
+              Description:
+                description: A description of the function.
+                type: string
+                minLength: 0
+                maxLength: 256
+              Timeout:
+                description: The amount of time that Lambda allows a function to run before stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds.
+                type: integer
+                minimum: 1
+              MemorySize:
+                description: The amount of memory that your function has access to. Increasing the function's memory also increases its CPU allocation. The default value is 128 MB. The value must be a multiple of 64 MB.
+                type: integer
+                minimum: 128
+                maximum: 3008
+              VpcConfig:
+                description: The VPC security groups and subnets that are attached to a Lambda function.
+                type: object
+                properties:
+                  SubnetIds:
+                    $ref: '#/definitions/SubnetIds'
+                    description: A list of VPC subnet IDs.
+                  SecurityGroupIds:
+                    $ref: '#/definitions/SecurityGroupIds'
+                    description: A list of VPC security groups IDs.
+              Environment:
+                description: A function's environment variable settings.
+                type: object
+                properties:
+                  Variables:
+                    $ref: '#/definitions/EnvironmentVariables'
+                    description: Environment variable key-value pairs.
+              Runtime:
+                description: 'The identifier of the function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">runtime</a>.'
+                type: string
+                enum:
+                  - nodejs
+                  - nodejs4.3
+                  - nodejs6.10
+                  - nodejs8.10
+                  - java8
+                  - python2.7
+                  - python3.6
+                  - python3.7
+                  - dotnetcore1.0
+                  - dotnetcore2.0
+                  - dotnetcore2.1
+                  - nodejs4.3-edge
+                  - go1.x
+                  - ruby2.5
+                  - provided
+              DeadLetterConfig:
+                description: 'The <a href="https://docs.aws.amazon.com/lambda/latest/dg/dlq.html">dead letter queue</a> for failed asynchronous invocations.'
+                type: object
+                properties:
+                  TargetArn:
+                    $ref: '#/definitions/ResourceArn'
+                    description: The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.
+              KMSKeyArn:
+                description: 'The ARN of the AWS Key Management Service (AWS KMS) key that''s used to encrypt your function''s environment variables. If it''s not provided, AWS Lambda uses a default service key.'
+                type: string
+                pattern: '(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()'
+              TracingConfig:
+                description: The function's AWS X-Ray tracing configuration.
+                type: object
+                properties:
+                  Mode:
+                    $ref: '#/definitions/TracingMode'
+                    description: The tracing mode.
+              RevisionId:
+                description: Only update the function if the revision ID matches the ID that's specified. Use this option to avoid modifying a function that has changed since you last read it.
+                type: string
+              Layers:
+                description: 'A list of <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">function layers</a> to add to the function''s execution environment. Specify each layer by its ARN, including the version.'
+                type: array
+                items:
+                  $ref: '#/definitions/LayerVersionArn'
   '/2015-03-31/functions/{FunctionName}/invocations':
     post:
       operationId: Invoke
@@ -1199,15 +1661,54 @@ paths:
           schema:
             $ref: '#/definitions/InvalidRuntimeException'
       parameters:
+        - name: FunctionName
+          in: path
+          required: true
+          description: '<p>The name of the Lambda function, version, or alias.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>my-function</code> (name-only), <code>my-function:v1</code> (with alias).</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:my-function</code>.</p> </li> </ul> <p>You can append a version number or alias to any of the formats. The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
+          type: string
+          pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_\.]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+          minLength: 1
+          maxLength: 170
+        - name: X-Amz-Invocation-Type
+          in: header
+          required: false
+          description: <p>Choose from the following options.</p> <ul> <li> <p> <code>RequestResponse</code> (default) - Invoke the function synchronously. Keep the connection open until the function returns a response or times out. The API response includes the function response and additional data.</p> </li> <li> <p> <code>Event</code> - Invoke the function asynchronously. Send events that fail multiple times to the function's dead-letter queue (if it's configured). The API response only includes a status code.</p> </li> <li> <p> <code>DryRun</code> - Validate parameter values and verify that the user or role has permission to invoke the function.</p> </li> </ul>
+          type: string
+          enum:
+            - Event
+            - RequestResponse
+            - DryRun
+        - name: X-Amz-Log-Type
+          in: header
+          required: false
+          description: Set to <code>Tail</code> to include the execution log in the response.
+          type: string
+          enum:
+            - None
+            - Tail
+        - name: X-Amz-Client-Context
+          in: header
+          required: false
+          description: Up to 3583 bytes of base64-encoded data about the invoking client to pass to the function in the context object.
+          type: string
+        - name: Qualifier
+          in: query
+          required: false
+          description: Specify a version or alias to invoke a published version of the function.
+          type: string
+          pattern: '(|[a-zA-Z0-9$_-]+)'
+          minLength: 1
+          maxLength: 128
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/InvocationRequest'
-        - name: FunctionName
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              Payload:
+                description: The JSON that you want to provide to your Lambda function as input.
+                type: string
+                format: password
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1220,6 +1721,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/2014-11-13/functions/{FunctionName}/invoke-async/':
     post:
+      deprecated: true
       operationId: InvokeAsync
       description: '<important> <p>For asynchronous function invocation, use <a>Invoke</a>.</p> </important> <p>Invokes a function asynchronously.</p>'
       responses:
@@ -1244,15 +1746,25 @@ paths:
           schema:
             $ref: '#/definitions/InvalidRuntimeException'
       parameters:
+        - name: FunctionName
+          in: path
+          required: true
+          description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>my-function</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:my-function</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
+          type: string
+          pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_\.]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+          minLength: 1
+          maxLength: 170
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/InvokeAsyncRequest'
-        - name: FunctionName
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - InvokeArgs
+            properties:
+              InvokeArgs:
+                description: The JSON that you want to provide to your Lambda function as input.
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1285,21 +1797,31 @@ paths:
           schema:
             $ref: '#/definitions/InvalidParameterValueException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListFunctionsRequest'
-        - name: MaxItems
-          type: string
+        - name: MasterRegion
           in: query
-          description: Pagination limit
           required: false
+          description: 'For Lambda@Edge functions, the AWS Region of the master function. For example, <code>us-east-2</code> or <code>ALL</code>. If specified, you must set <code>FunctionVersion</code> to <code>ALL</code>.'
+          type: string
+          pattern: 'ALL|[a-z]{2}(-gov)?-[a-z]+-\d{1}'
+        - name: FunctionVersion
+          in: query
+          required: false
+          description: Set to <code>ALL</code> to include entries for all published versions of each function.
+          type: string
+          enum:
+            - ALL
         - name: Marker
-          type: string
           in: query
-          description: Pagination token
           required: false
+          description: Specify the pagination token that's returned by a previous request to retrieve the next page of results.
+          type: string
+        - name: MaxItems
+          in: query
+          required: false
+          description: Specify a value between 1 and 50 to limit the number of functions in the response.
+          type: integer
+          minimum: 1
+          maximum: 10000
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1336,15 +1858,47 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListLayerVersionsRequest'
-        - name: LayerName
+        - name: CompatibleRuntime
+          in: query
+          required: false
+          description: 'A runtime identifier. For example, <code>go1.x</code>.'
           type: string
+          enum:
+            - nodejs
+            - nodejs4.3
+            - nodejs6.10
+            - nodejs8.10
+            - java8
+            - python2.7
+            - python3.6
+            - python3.7
+            - dotnetcore1.0
+            - dotnetcore2.0
+            - dotnetcore2.1
+            - nodejs4.3-edge
+            - go1.x
+            - ruby2.5
+            - provided
+        - name: LayerName
           in: path
           required: true
+          description: The name or Amazon Resource Name (ARN) of the layer.
+          type: string
+          pattern: '(arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+)|[a-zA-Z0-9-_]+'
+          minLength: 1
+          maxLength: 140
+        - name: Marker
+          in: query
+          required: false
+          description: A pagination token returned by a previous call.
+          type: string
+        - name: MaxItems
+          in: query
+          required: false
+          description: The maximum number of versions to return.
+          type: integer
+          minimum: 1
+          maximum: 50
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1384,15 +1938,53 @@ paths:
           schema:
             $ref: '#/definitions/CodeStorageExceededException'
       parameters:
+        - name: LayerName
+          in: path
+          required: true
+          description: The name or Amazon Resource Name (ARN) of the layer.
+          type: string
+          pattern: '(arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+)|[a-zA-Z0-9-_]+'
+          minLength: 1
+          maxLength: 140
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/PublishLayerVersionRequest'
-        - name: LayerName
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - Content
+            properties:
+              Description:
+                description: The description of the version.
+                type: string
+                minLength: 0
+                maxLength: 256
+              Content:
+                description: 'A ZIP archive that contains the contents of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">AWS Lambda layer</a>. You can specify either an Amazon S3 location, or upload a layer archive directly.'
+                type: object
+                properties:
+                  S3Bucket:
+                    $ref: '#/definitions/S3Bucket'
+                    description: The Amazon S3 bucket of the layer archive.
+                  S3Key:
+                    $ref: '#/definitions/S3Key'
+                    description: The Amazon S3 key of the layer archive.
+                  S3ObjectVersion:
+                    $ref: '#/definitions/S3ObjectVersion'
+                    description: 'For versioned objects, the version of the layer archive object to use.'
+                  ZipFile:
+                    $ref: '#/definitions/Blob'
+                    description: The base64-encoded contents of the layer archive. AWS SDK and AWS CLI clients handle the encoding for you.
+              CompatibleRuntimes:
+                description: 'A list of compatible <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">function runtimes</a>. Used for filtering with <a>ListLayers</a> and <a>ListLayerVersions</a>.'
+                type: array
+                items:
+                  $ref: '#/definitions/Runtime'
+                maxItems: 5
+              LicenseInfo:
+                description: '<p>The layer''s software license. It can be any of the following:</p> <ul> <li> <p>An <a href="https://spdx.org/licenses/">SPDX license identifier</a>. For example, <code>MIT</code>.</p> </li> <li> <p>The URL of a license hosted on the internet. For example, <code>https://opensource.org/licenses/MIT</code>.</p> </li> <li> <p>The full text of the license.</p> </li> </ul>'
+                type: string
+                maxLength: 512
   /2018-10-31/layers:
     get:
       operationId: ListLayers
@@ -1415,11 +2007,39 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListLayersRequest'
+        - name: CompatibleRuntime
+          in: query
+          required: false
+          description: 'A runtime identifier. For example, <code>go1.x</code>.'
+          type: string
+          enum:
+            - nodejs
+            - nodejs4.3
+            - nodejs6.10
+            - nodejs8.10
+            - java8
+            - python2.7
+            - python3.6
+            - python3.7
+            - dotnetcore1.0
+            - dotnetcore2.0
+            - dotnetcore2.1
+            - nodejs4.3-edge
+            - go1.x
+            - ruby2.5
+            - provided
+        - name: Marker
+          in: query
+          required: false
+          description: A pagination token returned by a previous call.
+          type: string
+        - name: MaxItems
+          in: query
+          required: false
+          description: The maximum number of layers to return.
+          type: integer
+          minimum: 1
+          maximum: 50
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1456,15 +2076,12 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListTagsRequest'
         - name: ARN
-          type: string
           in: path
           required: true
+          description: The function's Amazon Resource Name (ARN).
+          type: string
+          pattern: 'arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1498,47 +2115,25 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
+        - name: ARN
+          in: path
+          required: true
+          description: The function's Amazon Resource Name (ARN).
+          type: string
+          pattern: 'arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?'
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/TagResourceRequest'
-        - name: ARN
-          type: string
-          in: path
-          required: true
-    delete:
-      operationId: UntagResource
-      description: 'Removes <a href="https://docs.aws.amazon.com/lambda/latest/dg/tagging.html">tags</a> from a function.'
-      responses:
-        '204':
-          description: Success
-        '480':
-          description: ServiceException
-          schema:
-            $ref: '#/definitions/ServiceException'
-        '481':
-          description: ResourceNotFoundException
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
-        '482':
-          description: InvalidParameterValueException
-          schema:
-            $ref: '#/definitions/InvalidParameterValueException'
-        '483':
-          description: TooManyRequestsException
-          schema:
-            $ref: '#/definitions/TooManyRequestsException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/UntagResourceRequest'
-        - name: ARN
-          type: string
-          in: path
-          required: true
+            type: object
+            required:
+              - Tags
+            properties:
+              Tags:
+                description: A list of tags to apply to the function.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/TagValue'
   '/2015-03-31/functions/{FunctionName}/versions':
     get:
       operationId: ListVersionsByFunction
@@ -1565,15 +2160,26 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListVersionsByFunctionRequest'
         - name: FunctionName
-          type: string
           in: path
           required: true
+          description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
+          type: string
+          pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_\.]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+          minLength: 1
+          maxLength: 170
+        - name: Marker
+          in: query
+          required: false
+          description: Specify the pagination token that's returned by a previous request to retrieve the next page of results.
+          type: string
+        - name: MaxItems
+          in: query
+          required: false
+          description: Limit the number of versions that are returned.
+          type: integer
+          minimum: 1
+          maximum: 10000
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1617,15 +2223,31 @@ paths:
           schema:
             $ref: '#/definitions/PreconditionFailedException'
       parameters:
+        - name: FunctionName
+          in: path
+          required: true
+          description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
+          type: string
+          pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+          minLength: 1
+          maxLength: 140
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/PublishVersionRequest'
-        - name: FunctionName
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              CodeSha256:
+                description: Only publish a version if the hash value matches the value that's specified. Use this option to avoid publishing a version if the function code has changed since you last updated it. You can get the hash for the version that you uploaded from the output of <a>UpdateFunctionCode</a>.
+                type: string
+              Description:
+                description: A description for the version to override the description in the function configuration.
+                type: string
+                minLength: 0
+                maxLength: 256
+              RevisionId:
+                description: Only update the function if the revision ID matches the ID that's specified. Use this option to avoid publishing a version if the function configuration has changed since you last updated it.
+                type: string
   '/2018-10-31/layers/{LayerName}/versions/{VersionNumber}/policy/{StatementId}':
     delete:
       operationId: RemoveLayerVersionPermission
@@ -1654,23 +2276,32 @@ paths:
           schema:
             $ref: '#/definitions/PreconditionFailedException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/RemoveLayerVersionPermissionRequest'
         - name: LayerName
-          type: string
           in: path
           required: true
+          description: The name or Amazon Resource Name (ARN) of the layer.
+          type: string
+          pattern: '(arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+)|[a-zA-Z0-9-_]+'
+          minLength: 1
+          maxLength: 140
         - name: VersionNumber
-          type: string
           in: path
           required: true
+          description: The version number.
+          type: integer
         - name: StatementId
-          type: string
           in: path
           required: true
+          description: The identifier that was specified when the statement was added.
+          type: string
+          pattern: '([a-zA-Z0-9-_]+)'
+          minLength: 1
+          maxLength: 100
+        - name: RevisionId
+          in: query
+          required: false
+          description: Only update the policy if the revision ID matches the ID specified. Use this option to avoid modifying a policy that has changed since you last read it.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1709,19 +2340,82 @@ paths:
           schema:
             $ref: '#/definitions/PreconditionFailedException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/RemovePermissionRequest'
         - name: FunctionName
-          type: string
           in: path
           required: true
+          description: '<p>The name of the Lambda function, version, or alias.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>my-function</code> (name-only), <code>my-function:v1</code> (with alias).</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:my-function</code>.</p> </li> </ul> <p>You can append a version number or alias to any of the formats. The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
+          type: string
+          pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+          minLength: 1
+          maxLength: 140
         - name: StatementId
-          type: string
           in: path
           required: true
+          description: Statement ID of the permission to remove.
+          type: string
+          pattern: '([a-zA-Z0-9-_.]+)'
+          minLength: 1
+          maxLength: 100
+        - name: Qualifier
+          in: query
+          required: false
+          description: Specify a version or alias to remove permissions from a published version of the function.
+          type: string
+          pattern: '(|[a-zA-Z0-9$_-]+)'
+          minLength: 1
+          maxLength: 128
+        - name: RevisionId
+          in: query
+          required: false
+          description: Only update the policy if the revision ID matches the ID that's specified. Use this option to avoid modifying a policy that has changed since you last read it.
+          type: string
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/2017-03-31/tags/{ARN}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: 'Removes <a href="https://docs.aws.amazon.com/lambda/latest/dg/tagging.html">tags</a> from a function.'
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: ARN
+          in: path
+          required: true
+          description: The function's Amazon Resource Name (ARN).
+          type: string
+          pattern: 'arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+        - name: tagKeys
+          in: query
+          required: true
+          description: A list of tag keys to remove from the function.
+          type: array
+          items:
+            type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1766,15 +2460,49 @@ paths:
           schema:
             $ref: '#/definitions/PreconditionFailedException'
       parameters:
+        - name: FunctionName
+          in: path
+          required: true
+          description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>my-function</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:my-function</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
+          type: string
+          pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+          minLength: 1
+          maxLength: 140
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UpdateFunctionCodeRequest'
-        - name: FunctionName
-          type: string
-          in: path
-          required: true
+            type: object
+            properties:
+              ZipFile:
+                description: The base64-encoded contents of the deployment package. AWS SDK and AWS CLI clients handle the encoding for you.
+                type: string
+                format: password
+              S3Bucket:
+                description: An Amazon S3 bucket in the same AWS Region as your function. The bucket can be in a different AWS account.
+                type: string
+                pattern: '^[0-9A-Za-z\.\-_]*(?<!\.)$'
+                minLength: 3
+                maxLength: 63
+              S3Key:
+                description: The Amazon S3 key of the deployment package.
+                type: string
+                minLength: 1
+                maxLength: 1024
+              S3ObjectVersion:
+                description: 'For versioned objects, the version of the deployment package object to use.'
+                type: string
+                minLength: 1
+                maxLength: 1024
+              Publish:
+                description: Set to true to publish a new version of the function after updating the code. This has the same effect as calling <a>PublishVersion</a> separately.
+                type: boolean
+              DryRun:
+                description: Set to true to validate the request parameters and access permissions without modifying the function code.
+                type: boolean
+              RevisionId:
+                description: Only update the function if the revision ID matches the ID that's specified. Use this option to avoid modifying a function that has changed since you last read it.
+                type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1795,25 +2523,6 @@ definitions:
       RevisionId:
         $ref: '#/definitions/String'
         description: A unique identifier for the current revision of the policy.
-  AddLayerVersionPermissionRequest:
-    type: object
-    required:
-      - StatementId
-      - Action
-      - Principal
-    properties:
-      StatementId:
-        $ref: '#/definitions/StatementId'
-        description: An identifier that distinguishes the policy from others on the same layer version.
-      Action:
-        $ref: '#/definitions/LayerPermissionAllowedAction'
-        description: 'The API action that grants access to the layer. For example, <code>lambda:GetLayerVersion</code>.'
-      Principal:
-        $ref: '#/definitions/LayerPermissionAllowedPrincipal'
-        description: 'An account ID, or <code>*</code> to grant permission to all AWS accounts.'
-      OrganizationId:
-        $ref: '#/definitions/OrganizationId'
-        description: 'With the principal set to <code>*</code>, grant permission to all accounts in the specified organization.'
   ServiceException: {}
   ResourceNotFoundException: {}
   ResourceConflictException: {}
@@ -1829,41 +2538,6 @@ definitions:
       Statement:
         $ref: '#/definitions/String'
         description: The permission statement that's added to the function policy.
-  AddPermissionRequest:
-    type: object
-    required:
-      - StatementId
-      - Action
-      - Principal
-    example:
-      Action: 'lambda:InvokeFunction'
-      FunctionName: MyFunction
-      Principal: s3.amazonaws.com
-      SourceAccount: '123456789012'
-      SourceArn: 'arn:aws:s3:::examplebucket/*'
-      StatementId: ID-1
-    properties:
-      StatementId:
-        $ref: '#/definitions/StatementId'
-        description: A statement identifier that differentiates the statement from others in the same policy.
-      Action:
-        $ref: '#/definitions/Action'
-        description: 'The action that the principal can use on the function. For example, <code>lambda:InvokeFunction</code> or <code>lambda:GetFunction</code>.'
-      Principal:
-        $ref: '#/definitions/Principal'
-        description: 'The AWS service or account that invokes the function. If you specify a service, use <code>SourceArn</code> or <code>SourceAccount</code> to limit who can invoke the function through that service.'
-      SourceArn:
-        $ref: '#/definitions/Arn'
-        description: 'For AWS services, the ARN of the AWS resource that invokes the function. For example, an Amazon S3 bucket or Amazon SNS topic.'
-      SourceAccount:
-        $ref: '#/definitions/SourceOwner'
-        description: 'For AWS services, the ID of the account that owns the resource. Use this instead of <code>SourceArn</code> to grant permission to resources that are owned by another account (for example, all of an account''s Amazon S3 buckets). Or use it together with <code>SourceArn</code> to ensure that the resource is owned by the specified account. For example, an Amazon S3 bucket could be deleted by its owner and recreated by another account.'
-      EventSourceToken:
-        $ref: '#/definitions/EventSourceToken'
-        description: 'For Alexa Smart Home functions, a token that must be supplied by the invoker.'
-      RevisionId:
-        $ref: '#/definitions/String'
-        description: Only update the policy if the revision ID matches the ID that's specified. Use this option to avoid modifying a policy that has changed since you last read it.
   AliasConfiguration:
     type: object
     example:
@@ -1891,24 +2565,10 @@ definitions:
         $ref: '#/definitions/String'
         description: A unique identifier that changes when you update the alias.
     description: 'Provides configuration information about a Lambda function <a href="https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html">alias</a>.'
-  CreateAliasRequest:
+  AdditionalVersionWeights:
     type: object
-    required:
-      - Name
-      - FunctionVersion
-    properties:
-      Name:
-        $ref: '#/definitions/Alias'
-        description: The name of the alias.
-      FunctionVersion:
-        $ref: '#/definitions/Version'
-        description: The function version that the alias invokes.
-      Description:
-        $ref: '#/definitions/Description'
-        description: A description of the alias.
-      RoutingConfig:
-        $ref: '#/definitions/AliasRoutingConfiguration'
-        description: 'The <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html">routing configuration</a> of the alias.'
+    additionalProperties:
+      $ref: '#/definitions/Weight'
   EventSourceMappingConfiguration:
     type: object
     example:
@@ -1946,30 +2606,6 @@ definitions:
         $ref: '#/definitions/String'
         description: 'The cause of the last state change, either <code>User initiated</code> or <code>Lambda initiated</code>.'
     description: A mapping between an AWS resource and an AWS Lambda function. See <a>CreateEventSourceMapping</a> for details.
-  CreateEventSourceMappingRequest:
-    type: object
-    required:
-      - EventSourceArn
-      - FunctionName
-    properties:
-      EventSourceArn:
-        $ref: '#/definitions/Arn'
-        description: <p>The Amazon Resource Name (ARN) of the event source.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - The ARN of the data stream or a stream consumer.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - The ARN of the stream.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - The ARN of the queue.</p> </li> </ul>
-      FunctionName:
-        $ref: '#/definitions/FunctionName'
-        description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Version or Alias ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it''s limited to 64 characters in length.</p>'
-      Enabled:
-        $ref: '#/definitions/Enabled'
-        description: Disables the event source mapping to pause polling and invocation.
-      BatchSize:
-        $ref: '#/definitions/BatchSize'
-        description: '<p>The maximum number of items to retrieve in a single batch.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - Default 10. Max 10.</p> </li> </ul>'
-      StartingPosition:
-        $ref: '#/definitions/EventSourcePosition'
-        description: The position in a stream from which to start reading. Required for Amazon Kinesis and Amazon DynamoDB Streams sources. <code>AT_TIMESTAMP</code> is only supported for Amazon Kinesis streams.
-      StartingPositionTimestamp:
-        $ref: '#/definitions/Date'
-        description: 'With <code>StartingPosition</code> set to <code>AT_TIMESTAMP</code>, the time from which to start reading.'
   FunctionConfiguration:
     type: object
     example:
@@ -2048,99 +2684,53 @@ definitions:
         $ref: '#/definitions/LayersReferenceList'
         description: 'The function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html"> layers</a>.'
     description: Details about a function's configuration.
-  CreateFunctionRequest:
+  Blob:
+    type: string
+    format: password
+  S3Bucket:
+    type: string
+    pattern: '^[0-9A-Za-z\.\-_]*(?<!\.)$'
+    minLength: 3
+    maxLength: 63
+  S3Key:
+    type: string
+    minLength: 1
+    maxLength: 1024
+  S3ObjectVersion:
+    type: string
+    minLength: 1
+    maxLength: 1024
+  SubnetIds:
+    type: array
+    items:
+      $ref: '#/definitions/SubnetId'
+    maxItems: 16
+  SecurityGroupIds:
+    type: array
+    items:
+      $ref: '#/definitions/SecurityGroupId'
+    maxItems: 5
+  ResourceArn:
+    type: string
+    pattern: '(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()'
+  EnvironmentVariables:
     type: object
-    required:
-      - FunctionName
-      - Runtime
-      - Role
-      - Handler
-      - Code
-    example:
-      Code: {}
-      Description: ''
-      FunctionName: MyFunction
-      Handler: souce_file.handler_name
-      MemorySize: 128
-      Publish: true
-      Role: 'arn:aws:iam::123456789012:role/service-role/role-name'
-      Runtime: nodejs8.10
-      Timeout: 15
-      VpcConfig: {}
-    properties:
-      FunctionName:
-        $ref: '#/definitions/FunctionName'
-        description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>my-function</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:my-function</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
-      Runtime:
-        $ref: '#/definitions/Runtime'
-        description: 'The identifier of the function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">runtime</a>.'
-      Role:
-        $ref: '#/definitions/RoleArn'
-        description: The Amazon Resource Name (ARN) of the function's execution role.
-      Handler:
-        $ref: '#/definitions/Handler'
-        description: 'The name of the method within your code that Lambda calls to execute your function. The format includes the file name. It can also include namespaces and other qualifiers, depending on the runtime. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html">Programming Model</a>.'
-      Code:
-        $ref: '#/definitions/FunctionCode'
-        description: The code for the function.
-      Description:
-        $ref: '#/definitions/Description'
-        description: A description of the function.
-      Timeout:
-        $ref: '#/definitions/Timeout'
-        description: The amount of time that Lambda allows a function to run before stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds.
-      MemorySize:
-        $ref: '#/definitions/MemorySize'
-        description: The amount of memory that your function has access to. Increasing the function's memory also increases its CPU allocation. The default value is 128 MB. The value must be a multiple of 64 MB.
-      Publish:
-        $ref: '#/definitions/Boolean'
-        description: Set to true to publish the first version of the function during creation.
-      VpcConfig:
-        $ref: '#/definitions/VpcConfig'
-        description: 'For network connectivity to AWS resources in a VPC, specify a list of security groups and subnets in the VPC. When you connect a function to a VPC, it can only access resources and the internet through that VPC. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/vpc.html">VPC Settings</a>.'
-      DeadLetterConfig:
-        $ref: '#/definitions/DeadLetterConfig'
-        description: 'A dead letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/dlq.html">Dead Letter Queues</a>.'
-      Environment:
-        $ref: '#/definitions/Environment'
-        description: Environment variables that are accessible from function code during execution.
-      KMSKeyArn:
-        $ref: '#/definitions/KMSKeyArn'
-        description: 'The ARN of the AWS Key Management Service (AWS KMS) key that''s used to encrypt your function''s environment variables. If it''s not provided, AWS Lambda uses a default service key.'
-      TracingConfig:
-        $ref: '#/definitions/TracingConfig'
-        description: Set <code>Mode</code> to <code>Active</code> to sample and trace a subset of incoming requests with AWS X-Ray.
-      Tags:
-        $ref: '#/definitions/Tags'
-        description: 'A list of <a href="https://docs.aws.amazon.com/lambda/latest/dg/tagging.html">tags</a> to apply to the function.'
-      Layers:
-        $ref: '#/definitions/LayerList'
-        description: 'A list of <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">function layers</a> to add to the function''s execution environment. Specify each layer by its ARN, including the version.'
+    additionalProperties:
+      $ref: '#/definitions/EnvironmentVariableValue'
+  TracingMode:
+    type: string
+    enum:
+      - Active
+      - PassThrough
+  TagValue:
+    type: string
+  LayerVersionArn:
+    type: string
+    pattern: 'arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+:[0-9]+'
+    minLength: 1
+    maxLength: 140
   CodeStorageExceededException: {}
-  DeleteAliasRequest:
-    type: object
-    example:
-      FunctionName: myFunction
-      Name: alias
-    properties: {}
-  DeleteEventSourceMappingRequest:
-    type: object
-    example:
-      UUID: 12345kxodurf3443
-    properties: {}
   ResourceInUseException: {}
-  DeleteFunctionRequest:
-    type: object
-    example:
-      FunctionName: myFunction
-      Qualifier: '1'
-    properties: {}
-  DeleteFunctionConcurrencyRequest:
-    type: object
-    properties: {}
-  DeleteLayerVersionRequest:
-    type: object
-    properties: {}
   GetAccountSettingsResponse:
     type: object
     example:
@@ -2153,21 +2743,6 @@ definitions:
       AccountUsage:
         $ref: '#/definitions/AccountUsage'
         description: The number of functions and amount of storage in use.
-  GetAccountSettingsRequest:
-    type: object
-    example: {}
-    properties: {}
-  GetAliasRequest:
-    type: object
-    example:
-      FunctionName: myFunction
-      Name: myFunctionAlias
-    properties: {}
-  GetEventSourceMappingRequest:
-    type: object
-    example:
-      UUID: 123489-xxxxx-kdla8d89d7
-    properties: {}
   GetFunctionResponse:
     type: object
     example:
@@ -2206,18 +2781,6 @@ definitions:
       Concurrency:
         $ref: '#/definitions/Concurrency'
         description: 'The function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html">reserved concurrency</a>.'
-  GetFunctionRequest:
-    type: object
-    example:
-      FunctionName: myFunction
-      Qualifier: '1'
-    properties: {}
-  GetFunctionConfigurationRequest:
-    type: object
-    example:
-      FunctionName: myFunction
-      Qualifier: '1'
-    properties: {}
   GetLayerVersionResponse:
     type: object
     properties:
@@ -2245,9 +2808,6 @@ definitions:
       LicenseInfo:
         $ref: '#/definitions/LicenseInfo'
         description: The layer's software license.
-  GetLayerVersionRequest:
-    type: object
-    properties: {}
   GetLayerVersionPolicyResponse:
     type: object
     properties:
@@ -2257,9 +2817,6 @@ definitions:
       RevisionId:
         $ref: '#/definitions/String'
         description: A unique identifier for the current revision of the policy.
-  GetLayerVersionPolicyRequest:
-    type: object
-    properties: {}
   GetPolicyResponse:
     type: object
     example:
@@ -2271,12 +2828,6 @@ definitions:
       RevisionId:
         $ref: '#/definitions/String'
         description: A unique identifier for the current revision of the policy.
-  GetPolicyRequest:
-    type: object
-    example:
-      FunctionName: myFunction
-      Qualifier: '1'
-    properties: {}
   InvocationResponse:
     type: object
     example:
@@ -2291,19 +2842,6 @@ definitions:
       Payload:
         $ref: '#/definitions/Blob'
         description: 'The response from the function, or an error object.'
-  InvocationRequest:
-    type: object
-    example:
-      ClientContext: MyApp
-      FunctionName: MyFunction
-      InvocationType: Event
-      LogType: Tail
-      Payload: 'fileb://file-path/input.json'
-      Qualifier: '1'
-    properties:
-      Payload:
-        $ref: '#/definitions/Blob'
-        description: The JSON that you want to provide to your Lambda function as input.
   InvalidRequestContentException: {}
   RequestTooLargeException: {}
   UnsupportedMediaTypeException: {}
@@ -2329,17 +2867,6 @@ definitions:
         $ref: '#/definitions/HttpStatus'
         description: The status code.
     description: 'A success response (<code>202 Accepted</code>) indicates that the request is queued for invocation. '
-  InvokeAsyncRequest:
-    type: object
-    required:
-      - InvokeArgs
-    example:
-      FunctionName: myFunction
-      InvokeArgs: 'fileb://file-path/input.json'
-    properties:
-      InvokeArgs:
-        $ref: '#/definitions/BlobStream'
-        description: The JSON that you want to provide to your Lambda function as input.
   ListAliasesResponse:
     type: object
     example:
@@ -2352,14 +2879,6 @@ definitions:
       Aliases:
         $ref: '#/definitions/AliasList'
         description: A list of aliases.
-  ListAliasesRequest:
-    type: object
-    example:
-      FunctionName: myFunction
-      FunctionVersion: '1'
-      Marker: ''
-      MaxItems: 123
-    properties: {}
   ListEventSourceMappingsResponse:
     type: object
     properties:
@@ -2369,9 +2888,6 @@ definitions:
       EventSourceMappings:
         $ref: '#/definitions/EventSourceMappingsList'
         description: A list of event source mappings.
-  ListEventSourceMappingsRequest:
-    type: object
-    properties: {}
   ListFunctionsResponse:
     type: object
     example:
@@ -2385,12 +2901,6 @@ definitions:
         $ref: '#/definitions/FunctionList'
         description: A list of Lambda functions.
     description: A list of Lambda functions.
-  ListFunctionsRequest:
-    type: object
-    example:
-      Marker: ''
-      MaxItems: 123
-    properties: {}
   ListLayerVersionsResponse:
     type: object
     properties:
@@ -2400,9 +2910,6 @@ definitions:
       LayerVersions:
         $ref: '#/definitions/LayerVersionsList'
         description: A list of versions.
-  ListLayerVersionsRequest:
-    type: object
-    properties: {}
   ListLayersResponse:
     type: object
     properties:
@@ -2412,18 +2919,12 @@ definitions:
       Layers:
         $ref: '#/definitions/LayersList'
         description: A list of function layers.
-  ListLayersRequest:
-    type: object
-    properties: {}
   ListTagsResponse:
     type: object
     properties:
       Tags:
         $ref: '#/definitions/Tags'
         description: The function's tags.
-  ListTagsRequest:
-    type: object
-    properties: {}
   ListVersionsByFunctionResponse:
     type: object
     example:
@@ -2436,13 +2937,6 @@ definitions:
       Versions:
         $ref: '#/definitions/FunctionList'
         description: A list of Lambda function versions.
-  ListVersionsByFunctionRequest:
-    type: object
-    example:
-      FunctionName: myFunction
-      Marker: ''
-      MaxItems: 123
-    properties: {}
   PublishLayerVersionResponse:
     type: object
     properties:
@@ -2470,193 +2964,32 @@ definitions:
       LicenseInfo:
         $ref: '#/definitions/LicenseInfo'
         description: The layer's software license.
-  PublishLayerVersionRequest:
-    type: object
-    required:
-      - Content
-    properties:
-      Description:
-        $ref: '#/definitions/Description'
-        description: The description of the version.
-      Content:
-        $ref: '#/definitions/LayerVersionContentInput'
-        description: The function layer archive.
-      CompatibleRuntimes:
-        $ref: '#/definitions/CompatibleRuntimes'
-        description: 'A list of compatible <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">function runtimes</a>. Used for filtering with <a>ListLayers</a> and <a>ListLayerVersions</a>.'
-      LicenseInfo:
-        $ref: '#/definitions/LicenseInfo'
-        description: '<p>The layer''s software license. It can be any of the following:</p> <ul> <li> <p>An <a href="https://spdx.org/licenses/">SPDX license identifier</a>. For example, <code>MIT</code>.</p> </li> <li> <p>The URL of a license hosted on the internet. For example, <code>https://opensource.org/licenses/MIT</code>.</p> </li> <li> <p>The full text of the license.</p> </li> </ul>'
-  PublishVersionRequest:
-    type: object
-    example:
-      CodeSha256: ''
-      Description: ''
-      FunctionName: myFunction
-    properties:
-      CodeSha256:
-        $ref: '#/definitions/String'
-        description: Only publish a version if the hash value matches the value that's specified. Use this option to avoid publishing a version if the function code has changed since you last updated it. You can get the hash for the version that you uploaded from the output of <a>UpdateFunctionCode</a>.
-      Description:
-        $ref: '#/definitions/Description'
-        description: A description for the version to override the description in the function configuration.
-      RevisionId:
-        $ref: '#/definitions/String'
-        description: Only update the function if the revision ID matches the ID that's specified. Use this option to avoid publishing a version if the function configuration has changed since you last updated it.
+  Runtime:
+    type: string
+    enum:
+      - nodejs
+      - nodejs4.3
+      - nodejs6.10
+      - nodejs8.10
+      - java8
+      - python2.7
+      - python3.6
+      - python3.7
+      - dotnetcore1.0
+      - dotnetcore2.0
+      - dotnetcore2.1
+      - nodejs4.3-edge
+      - go1.x
+      - ruby2.5
+      - provided
   Concurrency:
     type: object
     properties:
       ReservedConcurrentExecutions:
         $ref: '#/definitions/ReservedConcurrentExecutions'
         description: 'The number of concurrent executions that are reserved for this function. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html">Managing Concurrency</a>.'
-  PutFunctionConcurrencyRequest:
-    type: object
-    required:
-      - ReservedConcurrentExecutions
-    properties:
-      ReservedConcurrentExecutions:
-        $ref: '#/definitions/ReservedConcurrentExecutions'
-        description: The number of simultaneous executions to reserve for the function.
-  RemoveLayerVersionPermissionRequest:
-    type: object
-    properties: {}
-  RemovePermissionRequest:
-    type: object
-    example:
-      FunctionName: myFunction
-      Qualifier: '1'
-      StatementId: role-statement-id
-    properties: {}
-  TagResourceRequest:
-    type: object
-    required:
-      - Tags
-    properties:
-      Tags:
-        $ref: '#/definitions/Tags'
-        description: A list of tags to apply to the function.
-  UntagResourceRequest:
-    type: object
-    properties: {}
-  UpdateAliasRequest:
-    type: object
-    example:
-      Description: ''
-      FunctionName: myFunction
-      FunctionVersion: '1'
-      Name: functionAlias
-    properties:
-      FunctionVersion:
-        $ref: '#/definitions/Version'
-        description: The function version that the alias invokes.
-      Description:
-        $ref: '#/definitions/Description'
-        description: A description of the alias.
-      RoutingConfig:
-        $ref: '#/definitions/AliasRoutingConfiguration'
-        description: 'The <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html">routing configuration</a> of the alias.'
-      RevisionId:
-        $ref: '#/definitions/String'
-        description: Only update the alias if the revision ID matches the ID that's specified. Use this option to avoid modifying an alias that has changed since you last read it.
-  UpdateEventSourceMappingRequest:
-    type: object
-    example:
-      BatchSize: 123
-      Enabled: true
-      FunctionName: myFunction
-      UUID: 1234xCy789012
-    properties:
-      FunctionName:
-        $ref: '#/definitions/FunctionName'
-        description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Version or Alias ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it''s limited to 64 characters in length.</p>'
-      Enabled:
-        $ref: '#/definitions/Enabled'
-        description: Disables the event source mapping to pause polling and invocation.
-      BatchSize:
-        $ref: '#/definitions/BatchSize'
-        description: '<p>The maximum number of items to retrieve in a single batch.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - Default 10. Max 10.</p> </li> </ul>'
-  UpdateFunctionCodeRequest:
-    type: object
-    example:
-      FunctionName: myFunction
-      Publish: true
-      S3Bucket: myBucket
-      S3Key: myKey
-      S3ObjectVersion: '1'
-      ZipFile: 'fileb://file-path/file.zip'
-    properties:
-      ZipFile:
-        $ref: '#/definitions/Blob'
-        description: The base64-encoded contents of the deployment package. AWS SDK and AWS CLI clients handle the encoding for you.
-      S3Bucket:
-        $ref: '#/definitions/S3Bucket'
-        description: An Amazon S3 bucket in the same AWS Region as your function. The bucket can be in a different AWS account.
-      S3Key:
-        $ref: '#/definitions/S3Key'
-        description: The Amazon S3 key of the deployment package.
-      S3ObjectVersion:
-        $ref: '#/definitions/S3ObjectVersion'
-        description: 'For versioned objects, the version of the deployment package object to use.'
-      Publish:
-        $ref: '#/definitions/Boolean'
-        description: Set to true to publish a new version of the function after updating the code. This has the same effect as calling <a>PublishVersion</a> separately.
-      DryRun:
-        $ref: '#/definitions/Boolean'
-        description: Set to true to validate the request parameters and access permissions without modifying the function code.
-      RevisionId:
-        $ref: '#/definitions/String'
-        description: Only update the function if the revision ID matches the ID that's specified. Use this option to avoid modifying a function that has changed since you last read it.
-  UpdateFunctionConfigurationRequest:
-    type: object
-    example:
-      Description: ''
-      FunctionName: myFunction
-      Handler: index.handler
-      MemorySize: 128
-      Role: 'arn:aws:iam::123456789012:role/lambda_basic_execution'
-      Runtime: python2.7
-      Timeout: 123
-      VpcConfig: {}
-    properties:
-      Role:
-        $ref: '#/definitions/RoleArn'
-        description: The Amazon Resource Name (ARN) of the function's execution role.
-      Handler:
-        $ref: '#/definitions/Handler'
-        description: 'The name of the method within your code that Lambda calls to execute your function. The format includes the file name. It can also include namespaces and other qualifiers, depending on the runtime. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html">Programming Model</a>.'
-      Description:
-        $ref: '#/definitions/Description'
-        description: A description of the function.
-      Timeout:
-        $ref: '#/definitions/Timeout'
-        description: The amount of time that Lambda allows a function to run before stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds.
-      MemorySize:
-        $ref: '#/definitions/MemorySize'
-        description: The amount of memory that your function has access to. Increasing the function's memory also increases its CPU allocation. The default value is 128 MB. The value must be a multiple of 64 MB.
-      VpcConfig:
-        $ref: '#/definitions/VpcConfig'
-        description: 'For network connectivity to AWS resources in a VPC, specify a list of security groups and subnets in the VPC. When you connect a function to a VPC, it can only access resources and the internet through that VPC. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/vpc.html">VPC Settings</a>.'
-      Environment:
-        $ref: '#/definitions/Environment'
-        description: Environment variables that are accessible from function code during execution.
-      Runtime:
-        $ref: '#/definitions/Runtime'
-        description: 'The identifier of the function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">runtime</a>.'
-      DeadLetterConfig:
-        $ref: '#/definitions/DeadLetterConfig'
-        description: 'A dead letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/dlq.html">Dead Letter Queues</a>.'
-      KMSKeyArn:
-        $ref: '#/definitions/KMSKeyArn'
-        description: 'The ARN of the AWS Key Management Service (AWS KMS) key that''s used to encrypt your function''s environment variables. If it''s not provided, AWS Lambda uses a default service key.'
-      TracingConfig:
-        $ref: '#/definitions/TracingConfig'
-        description: Set <code>Mode</code> to <code>Active</code> to sample and trace a subset of incoming requests with AWS X-Ray.
-      RevisionId:
-        $ref: '#/definitions/String'
-        description: Only update the function if the revision ID matches the ID that's specified. Use this option to avoid modifying a function that has changed since you last read it.
-      Layers:
-        $ref: '#/definitions/LayerList'
-        description: 'A list of <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">function layers</a> to add to the function''s execution environment. Specify each layer by its ARN, including the version.'
+  TagKey:
+    type: string
   Long:
     type: integer
   Integer:
@@ -2719,6 +3052,25 @@ definitions:
     pattern: 'o-[a-z0-9]{10,32}'
   String:
     type: string
+  AddLayerVersionPermissionRequest:
+    type: object
+    required:
+      - StatementId
+      - Action
+      - Principal
+    properties:
+      StatementId:
+        $ref: '#/definitions/StatementId'
+        description: An identifier that distinguishes the policy from others on the same layer version.
+      Action:
+        $ref: '#/definitions/LayerPermissionAllowedAction'
+        description: 'The API action that grants access to the layer. For example, <code>lambda:GetLayerVersion</code>.'
+      Principal:
+        $ref: '#/definitions/LayerPermissionAllowedPrincipal'
+        description: 'An account ID, or <code>*</code> to grant permission to all AWS accounts.'
+      OrganizationId:
+        $ref: '#/definitions/OrganizationId'
+        description: 'With the principal set to <code>*</code>, grant permission to all accounts in the specified organization.'
   FunctionName:
     type: string
     pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
@@ -2743,6 +3095,34 @@ definitions:
     pattern: '(|[a-zA-Z0-9$_-]+)'
     minLength: 1
     maxLength: 128
+  AddPermissionRequest:
+    type: object
+    required:
+      - StatementId
+      - Action
+      - Principal
+    properties:
+      StatementId:
+        $ref: '#/definitions/StatementId'
+        description: A statement identifier that differentiates the statement from others in the same policy.
+      Action:
+        $ref: '#/definitions/Action'
+        description: 'The action that the principal can use on the function. For example, <code>lambda:InvokeFunction</code> or <code>lambda:GetFunction</code>.'
+      Principal:
+        $ref: '#/definitions/Principal'
+        description: 'The AWS service or account that invokes the function. If you specify a service, use <code>SourceArn</code> or <code>SourceAccount</code> to limit who can invoke the function through that service.'
+      SourceArn:
+        $ref: '#/definitions/Arn'
+        description: 'For AWS services, the ARN of the AWS resource that invokes the function. For example, an Amazon S3 bucket or Amazon SNS topic.'
+      SourceAccount:
+        $ref: '#/definitions/SourceOwner'
+        description: 'For AWS services, the ID of the account that owns the resource. Use this instead of <code>SourceArn</code> to grant permission to resources that are owned by another account (for example, all of an account''s Amazon S3 buckets). Or use it together with <code>SourceArn</code> to ensure that the resource is owned by the specified account. For example, an Amazon S3 bucket could be deleted by its owner and recreated by another account.'
+      EventSourceToken:
+        $ref: '#/definitions/EventSourceToken'
+        description: 'For Alexa Smart Home functions, a token that must be supplied by the invoker.'
+      RevisionId:
+        $ref: '#/definitions/String'
+        description: Only update the policy if the revision ID matches the ID that's specified. Use this option to avoid modifying a policy that has changed since you last read it.
   AdditionalVersion:
     type: string
     pattern: '[0-9]+'
@@ -2753,15 +3133,6 @@ definitions:
     format: double
     minimum: 0
     maximum: 1
-  AdditionalVersionWeights:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/AdditionalVersion'
-        value:
-          $ref: '#/definitions/Weight'
   Alias:
     type: string
     pattern: '(?!^[0-9]+$)([a-zA-Z0-9-_]+)'
@@ -2794,31 +3165,10 @@ definitions:
     type: integer
     minimum: 1
     maximum: 10000
-  Blob:
-    type: string
-    format: password
   BlobStream:
     type: string
   Boolean:
     type: boolean
-  Runtime:
-    type: string
-    enum:
-      - nodejs
-      - nodejs4.3
-      - nodejs6.10
-      - nodejs8.10
-      - java8
-      - python2.7
-      - python3.6
-      - python3.7
-      - dotnetcore1.0
-      - dotnetcore2.0
-      - dotnetcore2.1
-      - nodejs4.3-edge
-      - go1.x
-      - ruby2.5
-      - provided
   CompatibleRuntimes:
     type: array
     items:
@@ -2827,6 +3177,24 @@ definitions:
   ReservedConcurrentExecutions:
     type: integer
     minimum: 0
+  CreateAliasRequest:
+    type: object
+    required:
+      - Name
+      - FunctionVersion
+    properties:
+      Name:
+        $ref: '#/definitions/Alias'
+        description: The name of the alias.
+      FunctionVersion:
+        $ref: '#/definitions/Version'
+        description: The function version that the alias invokes.
+      Description:
+        $ref: '#/definitions/Description'
+        description: A description of the alias.
+      RoutingConfig:
+        $ref: '#/definitions/AliasRoutingConfiguration'
+        description: 'The <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html">routing configuration</a> of the alias.'
   Enabled:
     type: boolean
   EventSourcePosition:
@@ -2838,6 +3206,30 @@ definitions:
   Date:
     type: string
     format: date-time
+  CreateEventSourceMappingRequest:
+    type: object
+    required:
+      - EventSourceArn
+      - FunctionName
+    properties:
+      EventSourceArn:
+        $ref: '#/definitions/Arn'
+        description: <p>The Amazon Resource Name (ARN) of the event source.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - The ARN of the data stream or a stream consumer.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - The ARN of the stream.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - The ARN of the queue.</p> </li> </ul>
+      FunctionName:
+        $ref: '#/definitions/FunctionName'
+        description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Version or Alias ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it''s limited to 64 characters in length.</p>'
+      Enabled:
+        $ref: '#/definitions/Enabled'
+        description: Disables the event source mapping to pause polling and invocation.
+      BatchSize:
+        $ref: '#/definitions/BatchSize'
+        description: '<p>The maximum number of items to retrieve in a single batch.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - Default 10. Max 10.</p> </li> </ul>'
+      StartingPosition:
+        $ref: '#/definitions/EventSourcePosition'
+        description: The position in a stream from which to start reading. Required for Amazon Kinesis and Amazon DynamoDB Streams sources. <code>AT_TIMESTAMP</code> is only supported for Amazon Kinesis streams.
+      StartingPositionTimestamp:
+        $ref: '#/definitions/Date'
+        description: 'With <code>StartingPosition</code> set to <code>AT_TIMESTAMP</code>, the time from which to start reading.'
   RoleArn:
     type: string
     pattern: 'arn:(aws[a-zA-Z-]*)?:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+'
@@ -2903,30 +3295,85 @@ definitions:
         description: The tracing mode.
     description: The function's AWS X-Ray tracing configuration.
   Tags:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/TagKey'
-        value:
-          $ref: '#/definitions/TagValue'
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/TagValue'
   LayerList:
     type: array
     items:
       $ref: '#/definitions/LayerVersionArn'
-  ResourceArn:
-    type: string
-    pattern: '(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()'
-  EnvironmentVariables:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/EnvironmentVariableName'
-        value:
-          $ref: '#/definitions/EnvironmentVariableValue'
+  CreateFunctionRequest:
+    type: object
+    required:
+      - FunctionName
+      - Runtime
+      - Role
+      - Handler
+      - Code
+    properties:
+      FunctionName:
+        $ref: '#/definitions/FunctionName'
+        description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>my-function</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:my-function</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
+      Runtime:
+        $ref: '#/definitions/Runtime'
+        description: 'The identifier of the function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">runtime</a>.'
+      Role:
+        $ref: '#/definitions/RoleArn'
+        description: The Amazon Resource Name (ARN) of the function's execution role.
+      Handler:
+        $ref: '#/definitions/Handler'
+        description: 'The name of the method within your code that Lambda calls to execute your function. The format includes the file name. It can also include namespaces and other qualifiers, depending on the runtime. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html">Programming Model</a>.'
+      Code:
+        $ref: '#/definitions/FunctionCode'
+        description: The code for the function.
+      Description:
+        $ref: '#/definitions/Description'
+        description: A description of the function.
+      Timeout:
+        $ref: '#/definitions/Timeout'
+        description: The amount of time that Lambda allows a function to run before stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds.
+      MemorySize:
+        $ref: '#/definitions/MemorySize'
+        description: The amount of memory that your function has access to. Increasing the function's memory also increases its CPU allocation. The default value is 128 MB. The value must be a multiple of 64 MB.
+      Publish:
+        $ref: '#/definitions/Boolean'
+        description: Set to true to publish the first version of the function during creation.
+      VpcConfig:
+        $ref: '#/definitions/VpcConfig'
+        description: 'For network connectivity to AWS resources in a VPC, specify a list of security groups and subnets in the VPC. When you connect a function to a VPC, it can only access resources and the internet through that VPC. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/vpc.html">VPC Settings</a>.'
+      DeadLetterConfig:
+        $ref: '#/definitions/DeadLetterConfig'
+        description: 'A dead letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/dlq.html">Dead Letter Queues</a>.'
+      Environment:
+        $ref: '#/definitions/Environment'
+        description: Environment variables that are accessible from function code during execution.
+      KMSKeyArn:
+        $ref: '#/definitions/KMSKeyArn'
+        description: 'The ARN of the AWS Key Management Service (AWS KMS) key that''s used to encrypt your function''s environment variables. If it''s not provided, AWS Lambda uses a default service key.'
+      TracingConfig:
+        $ref: '#/definitions/TracingConfig'
+        description: Set <code>Mode</code> to <code>Active</code> to sample and trace a subset of incoming requests with AWS X-Ray.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: 'A list of <a href="https://docs.aws.amazon.com/lambda/latest/dg/tagging.html">tags</a> to apply to the function.'
+      Layers:
+        $ref: '#/definitions/LayerList'
+        description: 'A list of <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">function layers</a> to add to the function''s execution environment. Specify each layer by its ARN, including the version.'
+  DeleteAliasRequest:
+    type: object
+    properties: {}
+  DeleteEventSourceMappingRequest:
+    type: object
+    properties: {}
+  DeleteFunctionConcurrencyRequest:
+    type: object
+    properties: {}
+  DeleteFunctionRequest:
+    type: object
+    properties: {}
+  DeleteLayerVersionRequest:
+    type: object
+    properties: {}
   SensitiveString:
     type: string
     format: password
@@ -2961,19 +3408,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/EventSourceMappingConfiguration'
-  S3Bucket:
-    type: string
-    pattern: '^[0-9A-Za-z\.\-_]*(?<!\.)$'
-    minLength: 3
-    maxLength: 63
-  S3Key:
-    type: string
-    minLength: 1
-    maxLength: 1024
-  S3ObjectVersion:
-    type: string
-    minLength: 1
-    maxLength: 1024
   FunctionCodeLocation:
     type: object
     properties:
@@ -3026,6 +3460,27 @@ definitions:
     type: string
     enum:
       - ALL
+  GetAccountSettingsRequest:
+    type: object
+    properties: {}
+  GetAliasRequest:
+    type: object
+    properties: {}
+  GetEventSourceMappingRequest:
+    type: object
+    properties: {}
+  GetFunctionConfigurationRequest:
+    type: object
+    properties: {}
+  GetFunctionRequest:
+    type: object
+    properties: {}
+  GetLayerVersionPolicyRequest:
+    type: object
+    properties: {}
+  GetLayerVersionRequest:
+    type: object
+    properties: {}
   LayerVersionContentOutput:
     type: object
     properties:
@@ -3044,14 +3499,12 @@ definitions:
     pattern: 'arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+'
     minLength: 1
     maxLength: 140
-  LayerVersionArn:
-    type: string
-    pattern: 'arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+:[0-9]+'
-    minLength: 1
-    maxLength: 140
   LicenseInfo:
     type: string
     maxLength: 512
+  GetPolicyRequest:
+    type: object
+    properties: {}
   HttpStatus:
     type: integer
   InvocationType:
@@ -3065,6 +3518,20 @@ definitions:
     enum:
       - None
       - Tail
+  InvocationRequest:
+    type: object
+    properties:
+      Payload:
+        $ref: '#/definitions/Blob'
+        description: The JSON that you want to provide to your Lambda function as input.
+  InvokeAsyncRequest:
+    type: object
+    required:
+      - InvokeArgs
+    properties:
+      InvokeArgs:
+        $ref: '#/definitions/BlobStream'
+        description: The JSON that you want to provide to your Lambda function as input.
   Layer:
     type: object
     properties:
@@ -3138,44 +3605,193 @@ definitions:
     type: integer
     minimum: 1
     maximum: 10000
+  ListAliasesRequest:
+    type: object
+    properties: {}
+  ListEventSourceMappingsRequest:
+    type: object
+    properties: {}
   MasterRegion:
     type: string
     pattern: 'ALL|[a-z]{2}(-gov)?-[a-z]+-\d{1}'
+  ListFunctionsRequest:
+    type: object
+    properties: {}
   MaxLayerListItems:
     type: integer
     minimum: 1
     maximum: 50
+  ListLayerVersionsRequest:
+    type: object
+    properties: {}
+  ListLayersRequest:
+    type: object
+    properties: {}
+  ListTagsRequest:
+    type: object
+    properties: {}
+  ListVersionsByFunctionRequest:
+    type: object
+    properties: {}
   NamespacedStatementId:
     type: string
     pattern: '([a-zA-Z0-9-_.]+)'
     minLength: 1
     maxLength: 100
+  PublishLayerVersionRequest:
+    type: object
+    required:
+      - Content
+    properties:
+      Description:
+        $ref: '#/definitions/Description'
+        description: The description of the version.
+      Content:
+        $ref: '#/definitions/LayerVersionContentInput'
+        description: The function layer archive.
+      CompatibleRuntimes:
+        $ref: '#/definitions/CompatibleRuntimes'
+        description: 'A list of compatible <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">function runtimes</a>. Used for filtering with <a>ListLayers</a> and <a>ListLayerVersions</a>.'
+      LicenseInfo:
+        $ref: '#/definitions/LicenseInfo'
+        description: '<p>The layer''s software license. It can be any of the following:</p> <ul> <li> <p>An <a href="https://spdx.org/licenses/">SPDX license identifier</a>. For example, <code>MIT</code>.</p> </li> <li> <p>The URL of a license hosted on the internet. For example, <code>https://opensource.org/licenses/MIT</code>.</p> </li> <li> <p>The full text of the license.</p> </li> </ul>'
+  PublishVersionRequest:
+    type: object
+    properties:
+      CodeSha256:
+        $ref: '#/definitions/String'
+        description: Only publish a version if the hash value matches the value that's specified. Use this option to avoid publishing a version if the function code has changed since you last updated it. You can get the hash for the version that you uploaded from the output of <a>UpdateFunctionCode</a>.
+      Description:
+        $ref: '#/definitions/Description'
+        description: A description for the version to override the description in the function configuration.
+      RevisionId:
+        $ref: '#/definitions/String'
+        description: Only update the function if the revision ID matches the ID that's specified. Use this option to avoid publishing a version if the function configuration has changed since you last updated it.
+  PutFunctionConcurrencyRequest:
+    type: object
+    required:
+      - ReservedConcurrentExecutions
+    properties:
+      ReservedConcurrentExecutions:
+        $ref: '#/definitions/ReservedConcurrentExecutions'
+        description: The number of simultaneous executions to reserve for the function.
+  RemoveLayerVersionPermissionRequest:
+    type: object
+    properties: {}
+  RemovePermissionRequest:
+    type: object
+    properties: {}
   SecurityGroupId:
     type: string
-  SecurityGroupIds:
-    type: array
-    items:
-      $ref: '#/definitions/SecurityGroupId'
-    maxItems: 5
   SubnetId:
-    type: string
-  SubnetIds:
-    type: array
-    items:
-      $ref: '#/definitions/SubnetId'
-    maxItems: 16
-  TagKey:
     type: string
   TagKeyList:
     type: array
     items:
       $ref: '#/definitions/TagKey'
-  TagValue:
-    type: string
-  TracingMode:
-    type: string
-    enum:
-      - Active
-      - PassThrough
+  TagResourceRequest:
+    type: object
+    required:
+      - Tags
+    properties:
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: A list of tags to apply to the function.
+  UntagResourceRequest:
+    type: object
+    properties: {}
+  UpdateAliasRequest:
+    type: object
+    properties:
+      FunctionVersion:
+        $ref: '#/definitions/Version'
+        description: The function version that the alias invokes.
+      Description:
+        $ref: '#/definitions/Description'
+        description: A description of the alias.
+      RoutingConfig:
+        $ref: '#/definitions/AliasRoutingConfiguration'
+        description: 'The <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html">routing configuration</a> of the alias.'
+      RevisionId:
+        $ref: '#/definitions/String'
+        description: Only update the alias if the revision ID matches the ID that's specified. Use this option to avoid modifying an alias that has changed since you last read it.
+  UpdateEventSourceMappingRequest:
+    type: object
+    properties:
+      FunctionName:
+        $ref: '#/definitions/FunctionName'
+        description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Version or Alias ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it''s limited to 64 characters in length.</p>'
+      Enabled:
+        $ref: '#/definitions/Enabled'
+        description: Disables the event source mapping to pause polling and invocation.
+      BatchSize:
+        $ref: '#/definitions/BatchSize'
+        description: '<p>The maximum number of items to retrieve in a single batch.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - Default 10. Max 10.</p> </li> </ul>'
+  UpdateFunctionCodeRequest:
+    type: object
+    properties:
+      ZipFile:
+        $ref: '#/definitions/Blob'
+        description: The base64-encoded contents of the deployment package. AWS SDK and AWS CLI clients handle the encoding for you.
+      S3Bucket:
+        $ref: '#/definitions/S3Bucket'
+        description: An Amazon S3 bucket in the same AWS Region as your function. The bucket can be in a different AWS account.
+      S3Key:
+        $ref: '#/definitions/S3Key'
+        description: The Amazon S3 key of the deployment package.
+      S3ObjectVersion:
+        $ref: '#/definitions/S3ObjectVersion'
+        description: 'For versioned objects, the version of the deployment package object to use.'
+      Publish:
+        $ref: '#/definitions/Boolean'
+        description: Set to true to publish a new version of the function after updating the code. This has the same effect as calling <a>PublishVersion</a> separately.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: Set to true to validate the request parameters and access permissions without modifying the function code.
+      RevisionId:
+        $ref: '#/definitions/String'
+        description: Only update the function if the revision ID matches the ID that's specified. Use this option to avoid modifying a function that has changed since you last read it.
+  UpdateFunctionConfigurationRequest:
+    type: object
+    properties:
+      Role:
+        $ref: '#/definitions/RoleArn'
+        description: The Amazon Resource Name (ARN) of the function's execution role.
+      Handler:
+        $ref: '#/definitions/Handler'
+        description: 'The name of the method within your code that Lambda calls to execute your function. The format includes the file name. It can also include namespaces and other qualifiers, depending on the runtime. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html">Programming Model</a>.'
+      Description:
+        $ref: '#/definitions/Description'
+        description: A description of the function.
+      Timeout:
+        $ref: '#/definitions/Timeout'
+        description: The amount of time that Lambda allows a function to run before stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds.
+      MemorySize:
+        $ref: '#/definitions/MemorySize'
+        description: The amount of memory that your function has access to. Increasing the function's memory also increases its CPU allocation. The default value is 128 MB. The value must be a multiple of 64 MB.
+      VpcConfig:
+        $ref: '#/definitions/VpcConfig'
+        description: 'For network connectivity to AWS resources in a VPC, specify a list of security groups and subnets in the VPC. When you connect a function to a VPC, it can only access resources and the internet through that VPC. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/vpc.html">VPC Settings</a>.'
+      Environment:
+        $ref: '#/definitions/Environment'
+        description: Environment variables that are accessible from function code during execution.
+      Runtime:
+        $ref: '#/definitions/Runtime'
+        description: 'The identifier of the function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">runtime</a>.'
+      DeadLetterConfig:
+        $ref: '#/definitions/DeadLetterConfig'
+        description: 'A dead letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/dlq.html">Dead Letter Queues</a>.'
+      KMSKeyArn:
+        $ref: '#/definitions/KMSKeyArn'
+        description: 'The ARN of the AWS Key Management Service (AWS KMS) key that''s used to encrypt your function''s environment variables. If it''s not provided, AWS Lambda uses a default service key.'
+      TracingConfig:
+        $ref: '#/definitions/TracingConfig'
+        description: Set <code>Mode</code> to <code>Active</code> to sample and trace a subset of incoming requests with AWS X-Ray.
+      RevisionId:
+        $ref: '#/definitions/String'
+        description: Only update the function if the revision ID matches the ID that's specified. Use this option to avoid modifying a function that has changed since you last read it.
+      Layers:
+        $ref: '#/definitions/LayerList'
+        description: 'A list of <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">function layers</a> to add to the function''s execution environment. Specify each layer by its ARN, including the version.'
   VpcId:
     type: string

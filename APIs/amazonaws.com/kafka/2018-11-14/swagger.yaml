@@ -140,7 +140,63 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateClusterRequest'
+            type: object
+            required:
+              - brokerNodeGroupInfo
+              - clusterName
+              - kafkaVersion
+              - numberOfBrokerNodes
+            properties:
+              brokerNodeGroupInfo:
+                description: Describes the setup to be used for Kafka broker nodes in the cluster.
+                type: object
+                properties:
+                  BrokerAZDistribution:
+                    $ref: '#/definitions/BrokerAZDistribution'
+                    description: The distribution of broker nodes across Availability Zones.
+                  ClientSubnets:
+                    $ref: '#/definitions/__listOf__string'
+                    description: The list of subnets to connect to in the client virtual private cloud (VPC). AWS creates elastic network interfaces inside these subnets. Client applications use elastic network interfaces to produce and consume data. Client subnets can't be in Availability Zone us-east-1e.
+                  InstanceType:
+                    $ref: '#/definitions/__stringMin5Max32'
+                    description: |-
+                      The type of Amazon EC2 instances to use for Kafka brokers. The following instance types are allowed: kafka.m5.large, kafka.m5.xlarge, kafka.m5.2xlarge,
+                      kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
+                  SecurityGroups:
+                    $ref: '#/definitions/__listOf__string'
+                    description: The AWS security groups to associate with the elastic network interfaces in order to specify who can connect to and communicate with the Amazon MSK cluster.
+                  StorageInfo:
+                    $ref: '#/definitions/StorageInfo'
+                    description: Contains information about storage volumes attached to MSK broker nodes.
+              clusterName:
+                description: The name of the cluster.
+                type: string
+                minLength: 1
+                maxLength: 64
+              encryptionInfo:
+                description: 'Includes encryption-related information, such as the AWS KMS key used for encrypting data at rest.'
+                type: object
+                properties:
+                  EncryptionAtRest:
+                    $ref: '#/definitions/EncryptionAtRest'
+                    description: The data volume encryption details.
+              enhancedMonitoring:
+                description: 'Specifies which metrics are gathered for the MSK cluster. This property has three possible values: DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER.'
+                type: string
+                enum:
+                  - DEFAULT
+                  - PER_BROKER
+                  - PER_TOPIC_PER_BROKER
+              kafkaVersion:
+                description: The version of Apache Kafka.
+                type: string
+                minLength: 1
+                maxLength: 128
+              numberOfBrokerNodes:
+                description: The number of Kafka broker nodes in the Amazon MSK cluster.
+                type: integer
+                minimum: 1
+                maximum: 15
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -176,11 +232,25 @@ paths:
           schema:
             $ref: '#/definitions/ForbiddenException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListClustersRequest'
+        - name: clusterNameFilter
+          in: query
+          required: false
+          description: Specify a prefix of the name of the clusters that you want to list. The service lists all the clusters whose names start with this prefix.
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: 'The maximum number of clusters to return in the response. If there are more clusters, the response includes a NextToken parameter.'
+          type: integer
+          minimum: 1
+          maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: |-
+            The paginated results marker. When the result of a ListClusters operation is truncated, the call returns NextToken in the response. 
+             To get another batch of clusters, provide this token in your next request.
+          type: string
   '/v1/clusters/{clusterArn}':
     delete:
       operationId: DeleteCluster
@@ -207,15 +277,16 @@ paths:
           schema:
             $ref: '#/definitions/ForbiddenException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteClusterRequest'
         - name: clusterArn
-          type: string
           in: path
           required: true
+          description: The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+          type: string
+        - name: currentVersion
+          in: query
+          required: false
+          description: The current version of the MSK cluster.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -255,15 +326,11 @@ paths:
           schema:
             $ref: '#/definitions/ForbiddenException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeClusterRequest'
         - name: clusterArn
-          type: string
           in: path
           required: true
+          description: The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+          type: string
   '/v1/clusters/{clusterArn}/bootstrap-brokers':
     get:
       operationId: GetBootstrapBrokers
@@ -294,15 +361,11 @@ paths:
           schema:
             $ref: '#/definitions/ForbiddenException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetBootstrapBrokersRequest'
         - name: clusterArn
-          type: string
           in: path
           required: true
+          description: The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -339,15 +402,25 @@ paths:
           schema:
             $ref: '#/definitions/ForbiddenException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListNodesRequest'
         - name: clusterArn
-          type: string
           in: path
           required: true
+          description: The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: 'The maximum number of clusters to return in the response. If there are more clusters, the response includes a NextToken parameter.'
+          type: integer
+          minimum: 1
+          maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: |-
+            The paginated results marker. When the result of a ListClusters operation is truncated, the call returns NextToken in the response. 
+             To get another batch of clusters, provide this token in your next request.
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -371,98 +444,6 @@ definitions:
       State:
         $ref: '#/definitions/ClusterState'
         description: 'The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.'
-  CreateClusterRequest:
-    type: object
-    required:
-      - BrokerNodeGroupInfo
-      - KafkaVersion
-      - NumberOfBrokerNodes
-      - ClusterName
-    properties:
-      BrokerNodeGroupInfo:
-        $ref: '#/definitions/BrokerNodeGroupInfo'
-        description: Information about the broker nodes in the cluster.
-      ClusterName:
-        $ref: '#/definitions/__stringMin1Max64'
-        description: The name of the cluster.
-      EncryptionInfo:
-        $ref: '#/definitions/EncryptionInfo'
-        description: Includes all encryption-related information.
-      EnhancedMonitoring:
-        $ref: '#/definitions/EnhancedMonitoring'
-        description: 'Specifies the level of monitoring for the MSK cluster. The possible values are DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER.'
-      KafkaVersion:
-        $ref: '#/definitions/__stringMin1Max128'
-        description: The version of Apache Kafka.
-      NumberOfBrokerNodes:
-        $ref: '#/definitions/__integerMin1Max15'
-        description: The number of Kafka broker nodes in the Amazon MSK cluster.
-  BadRequestException: {}
-  InternalServerErrorException: {}
-  UnauthorizedException: {}
-  ForbiddenException: {}
-  ServiceUnavailableException: {}
-  TooManyRequestsException: {}
-  ConflictException: {}
-  DeleteClusterResponse:
-    type: object
-    properties:
-      ClusterArn:
-        $ref: '#/definitions/__string'
-        description: The Amazon Resource Name (ARN) of the cluster.
-      State:
-        $ref: '#/definitions/ClusterState'
-        description: 'The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.'
-  DeleteClusterRequest:
-    type: object
-    properties: {}
-  NotFoundException: {}
-  DescribeClusterResponse:
-    type: object
-    properties:
-      ClusterInfo:
-        $ref: '#/definitions/ClusterInfo'
-        description: The cluster information.
-  DescribeClusterRequest:
-    type: object
-    properties: {}
-  GetBootstrapBrokersResponse:
-    type: object
-    properties:
-      BootstrapBrokerString:
-        $ref: '#/definitions/__string'
-        description: 'A string containing one or more hostname:port pairs.'
-  GetBootstrapBrokersRequest:
-    type: object
-    properties: {}
-  ListClustersResponse:
-    type: object
-    properties:
-      ClusterInfoList:
-        $ref: '#/definitions/__listOfClusterInfo'
-        description: Information on each of the MSK clusters in the response.
-      NextToken:
-        $ref: '#/definitions/__string'
-        description: |-
-          The paginated results marker. When the result of a ListClusters operation is truncated, the call returns NextToken in the response. 
-           To get another batch of clusters, provide this token in your next request.
-  ListClustersRequest:
-    type: object
-    properties: {}
-  ListNodesResponse:
-    type: object
-    properties:
-      NextToken:
-        $ref: '#/definitions/__string'
-        description: |-
-          The paginated results marker. When the result of a ListNodes operation is truncated, the call returns NextToken in the response. 
-           To get another batch of nodes, provide this token in your next request.
-      NodeInfoList:
-        $ref: '#/definitions/__listOfNodeInfo'
-        description: List containing a NodeInfo object.
-  ListNodesRequest:
-    type: object
-    properties: {}
   BrokerAZDistribution:
     type: string
     enum:
@@ -483,6 +464,66 @@ definitions:
         $ref: '#/definitions/EBSStorageInfo'
         description: EBS volume information.
     description: Contains information about storage volumes attached to MSK broker nodes.
+  EncryptionAtRest:
+    type: object
+    required:
+      - DataVolumeKMSKeyId
+    properties:
+      DataVolumeKMSKeyId:
+        $ref: '#/definitions/__string'
+        description: The AWS KMS key used for data encryption.
+    description: The data volume encryption details.
+  BadRequestException: {}
+  InternalServerErrorException: {}
+  UnauthorizedException: {}
+  ForbiddenException: {}
+  ServiceUnavailableException: {}
+  TooManyRequestsException: {}
+  ConflictException: {}
+  DeleteClusterResponse:
+    type: object
+    properties:
+      ClusterArn:
+        $ref: '#/definitions/__string'
+        description: The Amazon Resource Name (ARN) of the cluster.
+      State:
+        $ref: '#/definitions/ClusterState'
+        description: 'The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.'
+  NotFoundException: {}
+  DescribeClusterResponse:
+    type: object
+    properties:
+      ClusterInfo:
+        $ref: '#/definitions/ClusterInfo'
+        description: The cluster information.
+  GetBootstrapBrokersResponse:
+    type: object
+    properties:
+      BootstrapBrokerString:
+        $ref: '#/definitions/__string'
+        description: 'A string containing one or more hostname:port pairs.'
+  ListClustersResponse:
+    type: object
+    properties:
+      ClusterInfoList:
+        $ref: '#/definitions/__listOfClusterInfo'
+        description: Information on each of the MSK clusters in the response.
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: |-
+          The paginated results marker. When the result of a ListClusters operation is truncated, the call returns NextToken in the response. 
+           To get another batch of clusters, provide this token in your next request.
+  ListNodesResponse:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: |-
+          The paginated results marker. When the result of a ListNodes operation is truncated, the call returns NextToken in the response. 
+           To get another batch of nodes, provide this token in your next request.
+      NodeInfoList:
+        $ref: '#/definitions/__listOfNodeInfo'
+        description: List containing a NodeInfo object.
   BrokerNodeGroupInfo:
     type: object
     required:
@@ -620,6 +661,38 @@ definitions:
     type: integer
     minimum: 1
     maximum: 15
+  CreateClusterRequest:
+    type: object
+    required:
+      - BrokerNodeGroupInfo
+      - KafkaVersion
+      - NumberOfBrokerNodes
+      - ClusterName
+    properties:
+      BrokerNodeGroupInfo:
+        $ref: '#/definitions/BrokerNodeGroupInfo'
+        description: Information about the broker nodes in the cluster.
+      ClusterName:
+        $ref: '#/definitions/__stringMin1Max64'
+        description: The name of the cluster.
+      EncryptionInfo:
+        $ref: '#/definitions/EncryptionInfo'
+        description: Includes all encryption-related information.
+      EnhancedMonitoring:
+        $ref: '#/definitions/EnhancedMonitoring'
+        description: 'Specifies the level of monitoring for the MSK cluster. The possible values are DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER.'
+      KafkaVersion:
+        $ref: '#/definitions/__stringMin1Max128'
+        description: The version of Apache Kafka.
+      NumberOfBrokerNodes:
+        $ref: '#/definitions/__integerMin1Max15'
+        description: The number of Kafka broker nodes in the Amazon MSK cluster.
+  DeleteClusterRequest:
+    type: object
+    properties: {}
+  DescribeClusterRequest:
+    type: object
+    properties: {}
   __integerMin1Max16384:
     type: integer
     minimum: 1
@@ -631,23 +704,23 @@ definitions:
         $ref: '#/definitions/__integerMin1Max16384'
         description: The size in GiB of the EBS volume for the data drive on each broker node.
     description: Contains information about the EBS storage volumes attached to Kafka broker nodes.
-  EncryptionAtRest:
+  GetBootstrapBrokersRequest:
     type: object
-    required:
-      - DataVolumeKMSKeyId
-    properties:
-      DataVolumeKMSKeyId:
-        $ref: '#/definitions/__string'
-        description: The AWS KMS key used for data encryption.
-    description: The data volume encryption details.
+    properties: {}
   MaxResults:
     type: integer
     minimum: 1
     maximum: 100
+  ListClustersRequest:
+    type: object
+    properties: {}
   __listOfClusterInfo:
     type: array
     items:
       $ref: '#/definitions/ClusterInfo'
+  ListNodesRequest:
+    type: object
+    properties: {}
   __listOfNodeInfo:
     type: array
     items:

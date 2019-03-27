@@ -99,7 +99,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /:
+  '/#X-Amz-Target=AmazonDAXV3.CreateCluster':
     post:
       operationId: CreateCluster
       description: Creates a DAX cluster. All nodes in the cluster run the same DAX caching software.
@@ -170,6 +170,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateClusterRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonDAXV3.CreateCluster
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -180,7 +186,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateParameterGroup':
+  '/#X-Amz-Target=AmazonDAXV3.CreateParameterGroup':
     post:
       operationId: CreateParameterGroup
       description: Creates a new parameter group. A parameter group is a collection of parameters that you apply to all of the nodes in a DAX cluster.
@@ -219,6 +225,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateParameterGroupRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonDAXV3.CreateParameterGroup
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -229,7 +241,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#CreateSubnetGroup':
+  '/#X-Amz-Target=AmazonDAXV3.CreateSubnetGroup':
     post:
       operationId: CreateSubnetGroup
       description: Creates a new subnet group.
@@ -264,6 +276,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateSubnetGroupRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonDAXV3.CreateSubnetGroup
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -274,7 +292,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DecreaseReplicationFactor':
+  '/#X-Amz-Target=AmazonDAXV3.DecreaseReplicationFactor':
     post:
       operationId: DecreaseReplicationFactor
       description: '<p>Removes one or more nodes from a DAX cluster.</p> <note> <p>You cannot use <code>DecreaseReplicationFactor</code> to remove the last node in a DAX cluster. If you need to do this, use <code>DeleteCluster</code> instead.</p> </note>'
@@ -313,6 +331,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DecreaseReplicationFactorRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonDAXV3.DecreaseReplicationFactor
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -323,7 +347,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteCluster':
+  '/#X-Amz-Target=AmazonDAXV3.DeleteCluster':
     post:
       operationId: DeleteCluster
       description: 'Deletes a previously provisioned DAX cluster. <i>DeleteCluster</i> deletes all associated nodes, node endpoints and the DAX cluster itself. When you receive a successful response from this action, DAX immediately begins deleting the cluster; you cannot cancel or revert this action.'
@@ -358,6 +382,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteClusterRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonDAXV3.DeleteCluster
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -368,7 +398,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteParameterGroup':
+  '/#X-Amz-Target=AmazonDAXV3.DeleteParameterGroup':
     post:
       operationId: DeleteParameterGroup
       description: Deletes the specified parameter group. You cannot delete a parameter group if it is associated with any DAX clusters.
@@ -403,6 +433,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteParameterGroupRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonDAXV3.DeleteParameterGroup
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -413,7 +449,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DeleteSubnetGroup':
+  '/#X-Amz-Target=AmazonDAXV3.DeleteSubnetGroup':
     post:
       operationId: DeleteSubnetGroup
       description: <p>Deletes a subnet group.</p> <note> <p>You cannot delete a subnet group if it is associated with any DAX clusters.</p> </note>
@@ -440,6 +476,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteSubnetGroupRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonDAXV3.DeleteSubnetGroup
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -450,7 +492,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeClusters':
+  '/#X-Amz-Target=AmazonDAXV3.DescribeClusters':
     post:
       operationId: DescribeClusters
       description: '<p>Returns information about all provisioned DAX clusters if no cluster identifier is specified, or about a specific DAX cluster if a cluster identifier is supplied.</p> <p>If the cluster is in the CREATING state, only cluster level information will be displayed until all of the nodes are successfully provisioned.</p> <p>If the cluster is in the DELETING state, only cluster level information will be displayed.</p> <p>If nodes are currently being added to the DAX cluster, node endpoint information and creation time for the additional nodes will not be displayed until they are completely provisioned. When the DAX cluster state is <i>available</i>, the cluster is ready for use.</p> <p>If nodes are currently being removed from the DAX cluster, no endpoint information for the removed nodes is displayed.</p>'
@@ -481,6 +523,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeClustersRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonDAXV3.DescribeClusters
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -491,7 +539,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeDefaultParameters':
+  '/#X-Amz-Target=AmazonDAXV3.DescribeDefaultParameters':
     post:
       operationId: DescribeDefaultParameters
       description: Returns the default system parameter information for the DAX caching software.
@@ -518,6 +566,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeDefaultParametersRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonDAXV3.DescribeDefaultParameters
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -528,7 +582,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeEvents':
+  '/#X-Amz-Target=AmazonDAXV3.DescribeEvents':
     post:
       operationId: DescribeEvents
       description: '<p>Returns events related to DAX clusters and parameter groups. You can obtain events specific to a particular DAX cluster or parameter group by providing the name as a parameter.</p> <p>By default, only the events occurring within the last hour are returned; however, you can retrieve up to 14 days'' worth of events if necessary.</p>'
@@ -555,6 +609,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeEventsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonDAXV3.DescribeEvents
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -565,7 +625,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeParameterGroups':
+  '/#X-Amz-Target=AmazonDAXV3.DescribeParameterGroups':
     post:
       operationId: DescribeParameterGroups
       description: 'Returns a list of parameter group descriptions. If a parameter group name is specified, the list will contain only the descriptions for that group.'
@@ -596,6 +656,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeParameterGroupsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonDAXV3.DescribeParameterGroups
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -606,7 +672,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeParameters':
+  '/#X-Amz-Target=AmazonDAXV3.DescribeParameters':
     post:
       operationId: DescribeParameters
       description: Returns the detailed parameter list for a particular parameter group.
@@ -637,6 +703,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeParametersRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonDAXV3.DescribeParameters
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -647,7 +719,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeSubnetGroups':
+  '/#X-Amz-Target=AmazonDAXV3.DescribeSubnetGroups':
     post:
       operationId: DescribeSubnetGroups
       description: 'Returns a list of subnet group descriptions. If a subnet group name is specified, the list will contain only the description of that group.'
@@ -670,6 +742,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeSubnetGroupsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonDAXV3.DescribeSubnetGroups
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -680,7 +758,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#IncreaseReplicationFactor':
+  '/#X-Amz-Target=AmazonDAXV3.IncreaseReplicationFactor':
     post:
       operationId: IncreaseReplicationFactor
       description: Adds one or more nodes to a DAX cluster.
@@ -731,6 +809,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/IncreaseReplicationFactorRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonDAXV3.IncreaseReplicationFactor
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -741,7 +825,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ListTags':
+  '/#X-Amz-Target=AmazonDAXV3.ListTags':
     post:
       operationId: ListTags
       description: 'List all of the tags for a DAX cluster. You can call <code>ListTags</code> up to 10 times per second, per account.'
@@ -780,6 +864,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListTagsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonDAXV3.ListTags
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -790,7 +880,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#RebootNode':
+  '/#X-Amz-Target=AmazonDAXV3.RebootNode':
     post:
       operationId: RebootNode
       description: 'Reboots a single node of a DAX cluster. The reboot action takes place as soon as possible. During the reboot, the node status is set to REBOOTING.'
@@ -829,6 +919,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/RebootNodeRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonDAXV3.RebootNode
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -839,7 +935,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#TagResource':
+  '/#X-Amz-Target=AmazonDAXV3.TagResource':
     post:
       operationId: TagResource
       description: 'Associates a set of tags with a DAX resource. You can call <code>TagResource</code> up to 5 times per second, per account. '
@@ -882,6 +978,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/TagResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonDAXV3.TagResource
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -892,7 +994,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UntagResource':
+  '/#X-Amz-Target=AmazonDAXV3.UntagResource':
     post:
       operationId: UntagResource
       description: 'Removes the association of tags from a DAX resource. You can call <code>UntagResource</code> up to 5 times per second, per account. '
@@ -935,6 +1037,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UntagResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonDAXV3.UntagResource
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -945,7 +1053,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateCluster':
+  '/#X-Amz-Target=AmazonDAXV3.UpdateCluster':
     post:
       operationId: UpdateCluster
       description: Modifies the settings for a DAX cluster. You can use this action to change one or more cluster configuration parameters by specifying the parameters and the new values.
@@ -988,6 +1096,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateClusterRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonDAXV3.UpdateCluster
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -998,7 +1112,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateParameterGroup':
+  '/#X-Amz-Target=AmazonDAXV3.UpdateParameterGroup':
     post:
       operationId: UpdateParameterGroup
       description: Modifies the parameters of a parameter group. You can modify up to 20 parameters in a single request by submitting a list parameter name and value pairs.
@@ -1033,6 +1147,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateParameterGroupRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonDAXV3.UpdateParameterGroup
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1043,7 +1163,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#UpdateSubnetGroup':
+  '/#X-Amz-Target=AmazonDAXV3.UpdateSubnetGroup':
     post:
       operationId: UpdateSubnetGroup
       description: Modifies an existing subnet group.
@@ -1078,6 +1198,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateSubnetGroupRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonDAXV3.UpdateSubnetGroup
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
