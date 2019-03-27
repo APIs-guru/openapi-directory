@@ -311,7 +311,7 @@ paths:
   '/#BatchGetCrawlers':
     post:
       operationId: BatchGetCrawlers
-      description: 'Returns a list of resource metadata for a given list of crawler names. After calling the <code>ListCrawlers</code> operation, you can call this operation to access the data to which you have been granted permissions to based on tags.'
+      description: 'Returns a list of resource metadata for a given list of crawler names. After calling the <code>ListCrawlers</code> operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.'
       responses:
         '200':
           description: Success
@@ -541,7 +541,7 @@ paths:
   '/#CreateClassifier':
     post:
       operationId: CreateClassifier
-      description: 'Creates a classifier in the user''s account. This may be a <code>GrokClassifier</code>, an <code>XMLClassifier</code>, or abbrev <code>JsonClassifier</code>, depending on which field of the request is present.'
+      description: 'Creates a classifier in the user''s account. This may be a <code>GrokClassifier</code>, an <code>XMLClassifier</code>, a <code>JsonClassifier</code>, or a <code>CsvClassifier</code>, depending on which field of the request is present.'
       responses:
         '200':
           description: Success
@@ -3869,7 +3869,7 @@ paths:
   '/#UpdateClassifier':
     post:
       operationId: UpdateClassifier
-      description: 'Modifies an existing classifier (a <code>GrokClassifier</code>, <code>XMLClassifier</code>, or <code>JsonClassifier</code>, depending on which field is present).'
+      description: 'Modifies an existing classifier (a <code>GrokClassifier</code>, an <code>XMLClassifier</code>, a <code>JsonClassifier</code>, or a <code>CsvClassifier</code>, depending on which field is present).'
       responses:
         '200':
           description: Success
@@ -4497,7 +4497,7 @@ definitions:
         description: A list of crawler definitions.
       CrawlersNotFound:
         $ref: '#/definitions/CrawlerNameList'
-        description: A list of crawlers not found.
+        description: A list of names of crawlers not found.
   BatchGetCrawlersRequest:
     type: object
     required:
@@ -4622,6 +4622,9 @@ definitions:
       JsonClassifier:
         $ref: '#/definitions/CreateJsonClassifierRequest'
         description: A <code>JsonClassifier</code> object specifying the classifier to create.
+      CsvClassifier:
+        $ref: '#/definitions/CreateCsvClassifierRequest'
+        description: A <code>CsvClassifier</code> object specifying the classifier to create.
   CreateConnectionResponse:
     type: object
     properties: {}
@@ -6168,6 +6171,9 @@ definitions:
       JsonClassifier:
         $ref: '#/definitions/UpdateJsonClassifierRequest'
         description: A <code>JsonClassifier</code> object with updated fields.
+      CsvClassifier:
+        $ref: '#/definitions/UpdateCsvClassifierRequest'
+        description: A <code>CsvClassifier</code> object with updated fields.
   VersionMismatchException: {}
   UpdateConnectionResponse:
     type: object
@@ -6749,6 +6755,42 @@ definitions:
         $ref: '#/definitions/JsonPath'
         description: 'A <code>JsonPath</code> string defining the JSON data for the classifier to classify. AWS Glue supports a subset of JsonPath, as described in <a href="https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json">Writing JsonPath Custom Classifiers</a>.'
     description: A classifier for <code>JSON</code> content.
+  CsvClassifier:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/NameString'
+        description: The name of the classifier.
+      CreationTime:
+        $ref: '#/definitions/Timestamp'
+        description: The time this classifier was registered.
+      LastUpdated:
+        $ref: '#/definitions/Timestamp'
+        description: The time this classifier was last updated.
+      Version:
+        $ref: '#/definitions/VersionId'
+        description: The version of this classifier.
+      Delimiter:
+        $ref: '#/definitions/CsvColumnDelimiter'
+        description: A custom symbol to denote what separates each column entry in the row.
+      QuoteSymbol:
+        $ref: '#/definitions/CsvQuoteSymbol'
+        description: A custom symbol to denote what combines content into a single column value. Must be different from the column delimiter.
+      ContainsHeader:
+        $ref: '#/definitions/CsvHeaderOption'
+        description: Indicates whether the CSV file contains a header.
+      Header:
+        $ref: '#/definitions/CsvHeader'
+        description: A list of strings representing column names.
+      DisableValueTrimming:
+        $ref: '#/definitions/NullableBoolean'
+        description: Specifies not to trim values before identifying the type of column values. The default value is true.
+      AllowSingleColumn:
+        $ref: '#/definitions/NullableBoolean'
+        description: Enables the processing of files that contain only one column.
+    description: A classifier for custom <code>CSV</code> content.
   Classifier:
     type: object
     properties:
@@ -6761,7 +6803,10 @@ definitions:
       JsonClassifier:
         $ref: '#/definitions/JsonClassifier'
         description: A <code>JsonClassifier</code> object.
-    description: '<p>Classifiers are triggered during a crawl task. A classifier checks whether a given file is in a format it can handle, and if it is, the classifier creates a schema in the form of a <code>StructType</code> object that matches that data format.</p> <p>You can use the standard classifiers that AWS Glue supplies, or you can write your own classifiers to best categorize your data sources and specify the appropriate schemas to use for them. A classifier can be a <code>grok</code> classifier, an <code>XML</code> classifier, or a <code>JSON</code> classifier, as specified in one of the fields in the <code>Classifier</code> object.</p>'
+      CsvClassifier:
+        $ref: '#/definitions/CsvClassifier'
+        description: A <code>CSVClassifier</code> object.
+    description: '<p>Classifiers are triggered during a crawl task. A classifier checks whether a given file is in a format it can handle, and if it is, the classifier creates a schema in the form of a <code>StructType</code> object that matches that data format.</p> <p>You can use the standard classifiers that AWS Glue supplies, or you can write your own classifiers to best categorize your data sources and specify the appropriate schemas to use for them. A classifier can be a <code>grok</code> classifier, an <code>XML</code> classifier, a <code>JSON</code> classifier, or a custom <code>CSV</code> classifier as specified in one of the fields in the <code>Classifier</code> object.</p>'
   ClassifierList:
     type: array
     items:
@@ -7301,6 +7346,33 @@ definitions:
         $ref: '#/definitions/JsonPath'
         description: 'A <code>JsonPath</code> string defining the JSON data for the classifier to classify. AWS Glue supports a subset of JsonPath, as described in <a href="https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json">Writing JsonPath Custom Classifiers</a>.'
     description: Specifies a JSON classifier for <code>CreateClassifier</code> to create.
+  CreateCsvClassifierRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/NameString'
+        description: The name of the classifier.
+      Delimiter:
+        $ref: '#/definitions/CsvColumnDelimiter'
+        description: A custom symbol to denote what separates each column entry in the row.
+      QuoteSymbol:
+        $ref: '#/definitions/CsvQuoteSymbol'
+        description: A custom symbol to denote what combines content into a single column value. Must be different from the column delimiter.
+      ContainsHeader:
+        $ref: '#/definitions/CsvHeaderOption'
+        description: Indicates whether the CSV file contains a header.
+      Header:
+        $ref: '#/definitions/CsvHeader'
+        description: A list of strings representing column names.
+      DisableValueTrimming:
+        $ref: '#/definitions/NullableBoolean'
+        description: Specifies not to trim values before identifying the type of column values. The default value is true.
+      AllowSingleColumn:
+        $ref: '#/definitions/NullableBoolean'
+        description: Enables the processing of files that contain only one column.
+    description: Specifies a custom CSV classifier for <code>CreateClassifier</code> to create.
   CronExpression:
     type: string
   TagsMap:
@@ -7314,6 +7386,28 @@ definitions:
           $ref: '#/definitions/TagKey'
         value:
           $ref: '#/definitions/TagValue'
+  CsvColumnDelimiter:
+    type: string
+    pattern: '[^\r\n]'
+    minLength: 1
+    maxLength: 1
+  CsvQuoteSymbol:
+    type: string
+    pattern: '[^\r\n]'
+    minLength: 1
+    maxLength: 1
+  CsvHeaderOption:
+    type: string
+    enum:
+      - UNKNOWN
+      - PRESENT
+      - ABSENT
+  CsvHeader:
+    type: array
+    items:
+      $ref: '#/definitions/NameString'
+  NullableBoolean:
+    type: boolean
   DatabaseInput:
     type: object
     required:
@@ -8553,3 +8647,30 @@ definitions:
         $ref: '#/definitions/JsonPath'
         description: 'A <code>JsonPath</code> string defining the JSON data for the classifier to classify. AWS Glue supports a subset of JsonPath, as described in <a href="https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json">Writing JsonPath Custom Classifiers</a>.'
     description: Specifies a JSON classifier to be updated.
+  UpdateCsvClassifierRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/NameString'
+        description: The name of the classifier.
+      Delimiter:
+        $ref: '#/definitions/CsvColumnDelimiter'
+        description: A custom symbol to denote what separates each column entry in the row.
+      QuoteSymbol:
+        $ref: '#/definitions/CsvQuoteSymbol'
+        description: A custom symbol to denote what combines content into a single column value. Must be different from the column delimiter.
+      ContainsHeader:
+        $ref: '#/definitions/CsvHeaderOption'
+        description: Indicates whether the CSV file contains a header.
+      Header:
+        $ref: '#/definitions/CsvHeader'
+        description: A list of strings representing column names.
+      DisableValueTrimming:
+        $ref: '#/definitions/NullableBoolean'
+        description: Specifies not to trim values before identifying the type of column values. The default value is true.
+      AllowSingleColumn:
+        $ref: '#/definitions/NullableBoolean'
+        description: Enables the processing of files that contain only one column.
+    description: Specifies a custom CSV classifier to be updated.

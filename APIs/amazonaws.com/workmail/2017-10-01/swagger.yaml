@@ -3,7 +3,7 @@ info:
   version: '2017-10-01'
   x-release: v4
   title: Amazon WorkMail
-  description: '<p>Amazon WorkMail is a secure, managed business email and calendaring service with support for existing desktop and mobile email clients. You can access your email, contacts, and calendars using Microsoft Outlook, your browser, or their native iOS and Android email applications. You can integrate Amazon WorkMail with your existing corporate directory and control both the keys that encrypt your data and the location in which your data is stored.</p> <p>The Amazon WorkMail API is designed for the following scenarios:</p> <ul> <li> <p>Listing and describing organizations</p> </li> </ul> <ul> <li> <p>Managing users</p> </li> </ul> <ul> <li> <p>Managing groups</p> </li> </ul> <ul> <li> <p>Managing resources</p> </li> </ul> <p>All Amazon WorkMail API actions are Amazon-authenticated and certificate-signed. They not only require the use of the AWS SDK, but also allow for the exclusive use of IAM users and roles to help facilitate access, trust, and permission policies. By creating a role and allowing an IAM user to access the Amazon WorkMail site, the IAM user gains full administrative visibility into the entire Amazon WorkMail organization (or as set in the IAM policy). This includes, but is not limited to, the ability to create, update, and delete users, groups, and resources. This allows developers to perform the scenarios listed above, as well as give users the ability to grant access on a selective basis using the IAM model.</p>'
+  description: '<p>Amazon WorkMail is a secure, managed business email and calendaring service with support for existing desktop and mobile email clients. You can access your email, contacts, and calendars using Microsoft Outlook, your browser, or other native iOS and Android email applications. You can integrate WorkMail with your existing corporate directory and control both the keys that encrypt your data and the location in which your data is stored.</p> <p>The WorkMail API is designed for the following scenarios:</p> <ul> <li> <p>Listing and describing organizations</p> </li> </ul> <ul> <li> <p>Managing users</p> </li> </ul> <ul> <li> <p>Managing groups</p> </li> </ul> <ul> <li> <p>Managing resources</p> </li> </ul> <p>All WorkMail API operations are Amazon-authenticated and certificate-signed. They not only require the use of the AWS SDK, but also allow for the exclusive use of AWS Identity and Access Management users and roles to help facilitate access, trust, and permission policies. By creating a role and allowing an IAM user to access the WorkMail site, the IAM user gains full administrative visibility into the entire WorkMail organization (or as set in the IAM policy). This includes, but is not limited to, the ability to create, update, and delete users, groups, and resources. This allows developers to perform the scenarios listed above, as well as give users the ability to grant access on a selective basis using the IAM model.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -102,7 +102,7 @@ paths:
   /:
     post:
       operationId: AssociateDelegateToResource
-      description: Adds a member to the resource's set of delegates.
+      description: Adds a member (user or group) to the resource's set of delegates.
       responses:
         '200':
           description: Success
@@ -147,7 +147,7 @@ paths:
   '/#AssociateMemberToGroup':
     post:
       operationId: AssociateMemberToGroup
-      description: Adds a member to the group's set.
+      description: Adds a member (user or group) to the group's set.
       responses:
         '200':
           description: Success
@@ -204,7 +204,7 @@ paths:
   '/#CreateAlias':
     post:
       operationId: CreateAlias
-      description: Adds an alias to the set of a given member of Amazon WorkMail.
+      description: Adds an alias to the set of a given member (user or group) of Amazon WorkMail.
       responses:
         '200':
           description: Success
@@ -261,7 +261,7 @@ paths:
   '/#CreateGroup':
     post:
       operationId: CreateGroup
-      description: Creates a group that can be used in Amazon WorkMail by calling the RegisterToWorkMail operation.
+      description: Creates a group that can be used in Amazon WorkMail by calling the <a>RegisterToWorkMail</a> operation.
       responses:
         '200':
           description: Success
@@ -318,7 +318,7 @@ paths:
   '/#CreateResource':
     post:
       operationId: CreateResource
-      description: Creates a new Amazon WorkMail resource. The available types are equipment and room.
+      description: 'Creates a new Amazon WorkMail resource. '
       responses:
         '200':
           description: Success
@@ -371,7 +371,7 @@ paths:
   '/#CreateUser':
     post:
       operationId: CreateUser
-      description: Creates a user who can be used in Amazon WorkMail by calling the RegisterToWorkMail operation.
+      description: Creates a user who can be used in Amazon WorkMail by calling the <a>RegisterToWorkMail</a> operation.
       responses:
         '200':
           description: Success
@@ -432,7 +432,7 @@ paths:
   '/#DeleteAlias':
     post:
       operationId: DeleteAlias
-      description: Remove the alias from a set of aliases for a given user.
+      description: Remove one or more specified aliases from a set of aliases for a given user.
       responses:
         '200':
           description: Success
@@ -530,7 +530,7 @@ paths:
   '/#DeleteMailboxPermissions':
     post:
       operationId: DeleteMailboxPermissions
-      description: Deletes permissions granted to a user or group.
+      description: Deletes permissions granted to a member (user or group).
       responses:
         '200':
           description: Success
@@ -616,7 +616,7 @@ paths:
   '/#DeleteUser':
     post:
       operationId: DeleteUser
-      description: 'Deletes a user from Amazon WorkMail and all subsequent systems. The action can''t be undone. The mailbox is kept as-is for a minimum of 30 days, without any means to restore it. '
+      description: '<p>Deletes a user from Amazon WorkMail and all subsequent systems. Before you can delete a user, the user state must be <code>DISABLED</code>. Use the <a>DescribeUser</a> action to confirm the user state.</p> <p>Deleting a user is permanent and cannot be undone. WorkMail archives user mailboxes for 30 days before they are permanently removed.</p>'
       responses:
         '200':
           description: Success
@@ -669,7 +669,7 @@ paths:
   '/#DeregisterFromWorkMail':
     post:
       operationId: DeregisterFromWorkMail
-      description: 'Mark a user, group, or resource as no longer used in Amazon WorkMail. This action disassociates the mailbox and schedules it for clean-up. Amazon WorkMail keeps mailboxes for 30 days before they are permanently removed. The functionality in the console is <i>Disable</i>.'
+      description: 'Mark a user, group, or resource as no longer used in Amazon WorkMail. This action disassociates the mailbox and schedules it for clean-up. WorkMail keeps mailboxes for 30 days before they are permanently removed. The functionality in the console is <i>Disable</i>.'
       responses:
         '200':
           description: Success
@@ -1027,7 +1027,7 @@ paths:
   '/#ListGroupMembers':
     post:
       operationId: ListGroupMembers
-      description: Returns an overview of the members of a group.
+      description: Returns an overview of the members of a group. Users and groups can be members of a group.
       responses:
         '200':
           description: Success
@@ -1133,7 +1133,7 @@ paths:
   '/#ListMailboxPermissions':
     post:
       operationId: ListMailboxPermissions
-      description: Lists the mailbox permissions associated with a mailbox.
+      description: 'Lists the mailbox permissions associated with a user, group, or resource mailbox.'
       responses:
         '200':
           description: Success
@@ -1362,7 +1362,7 @@ paths:
   '/#PutMailboxPermissions':
     post:
       operationId: PutMailboxPermissions
-      description: Sets permissions for a user or group. This replaces any pre-existing permissions set for the entity.
+      description: 'Sets permissions for a user, group, or resource. This replaces any pre-existing permissions.'
       responses:
         '200':
           description: Success
@@ -1407,7 +1407,7 @@ paths:
   '/#RegisterToWorkMail':
     post:
       operationId: RegisterToWorkMail
-      description: 'Registers an existing and disabled user, group, or resource/entity for Amazon WorkMail use by associating a mailbox and calendaring capabilities. It performs no change if the entity is enabled and fails if the entity is deleted. This operation results in the accumulation of costs. For more information, see <a href="http://aws.amazon.com/workmail/pricing">Pricing</a>. The equivalent console functionality for this operation is <i>Enable</i>. Users can either be created by calling the CreateUser API or they can be synchronized from your directory. For more information, see DeregisterFromWorkMail.'
+      description: '<p>Registers an existing and disabled user, group, or resource for Amazon WorkMail use by associating a mailbox and calendaring capabilities. It performs no change if the user, group, or resource is enabled and fails if the user, group, or resource is deleted. This operation results in the accumulation of costs. For more information, see <a href="https://aws.amazon.com//workmail/pricing">Pricing</a>. The equivalent console functionality for this operation is <i>Enable</i>. </p> <p>Users can either be created by calling the <a>CreateUser</a> API operation or they can be synchronized from your directory. For more information, see <a>DeregisterFromWorkMail</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1537,7 +1537,7 @@ paths:
   '/#UpdatePrimaryEmailAddress':
     post:
       operationId: UpdatePrimaryEmailAddress
-      description: Updates the primary email for an entity. The current email is moved into the list of aliases (or swapped between an existing alias and the current primary email) and the email provided in the input is promoted as the primary.
+      description: 'Updates the primary email for a user, group, or resource. The current email is moved into the list of aliases (or swapped between an existing alias and the current primary email), and the email provided in the input is promoted as the primary.'
       responses:
         '200':
           description: Success
@@ -1610,7 +1610,7 @@ paths:
   '/#UpdateResource':
     post:
       operationId: UpdateResource
-      description: Updates data for the resource. It must be preceded by a describe call in order to have the latest information. The dataset in the request should be the one expected when performing another describe call.
+      description: 'Updates data for the resource. To have the latest information, it must be preceded by a <a>DescribeResource</a> call. The dataset in the request should be the one expected when performing another <code>DescribeResource</code> call.'
       responses:
         '200':
           description: Success
@@ -1688,40 +1688,15 @@ definitions:
         description: The organization under which the resource exists.
       ResourceId:
         $ref: '#/definitions/ResourceId'
-        description: The resource for which members are associated.
+        description: The resource for which members (users or groups) are associated.
       EntityId:
         $ref: '#/definitions/WorkMailIdentifier'
         description: The member (user or group) to associate to the resource.
-  EntityNotFoundException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/String'
-    description: 'The identifier supplied for the entity is valid, but it does not exist in your organization.'
-  EntityStateException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/String'
-    description: 'You are performing an operation on an entity that isn''t in the expected state, such as trying to update a deleted user.'
-  InvalidParameterException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/String'
-    description: One or more of the input parameters don't match the service's restrictions.
-  OrganizationNotFoundException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/String'
-    description: An operation received a valid organization identifier that either doesn't belong or exist in the system.
-  OrganizationStateException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/String'
-    description: The organization must have a valid state (Active or Synchronizing) to perform certain operations on the organization or its entities.
+  EntityNotFoundException: {}
+  EntityStateException: {}
+  InvalidParameterException: {}
+  OrganizationNotFoundException: {}
+  OrganizationStateException: {}
   AssociateMemberToGroupResponse:
     type: object
     properties: {}
@@ -1737,28 +1712,13 @@ definitions:
         description: The organization under which the group exists.
       GroupId:
         $ref: '#/definitions/WorkMailIdentifier'
-        description: The group for which the member is associated.
+        description: The group to which the member (user or group) is associated.
       MemberId:
         $ref: '#/definitions/WorkMailIdentifier'
-        description: The member to associate to the group.
-  DirectoryServiceAuthenticationFailedException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/String'
-    description: The Directory Service doesn't recognize the credentials supplied by the Amazon WorkMail service.
-  DirectoryUnavailableException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/String'
-    description: The directory that you are trying to perform operations on isn't available.
-  UnsupportedOperationException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/String'
-    description: You can't perform a write operation against a read-only directory.
+        description: The member (user or group) to associate to the group.
+  DirectoryServiceAuthenticationFailedException: {}
+  DirectoryUnavailableException: {}
+  UnsupportedOperationException: {}
   CreateAliasResponse:
     type: object
     properties: {}
@@ -1771,37 +1731,22 @@ definitions:
     properties:
       OrganizationId:
         $ref: '#/definitions/OrganizationId'
-        description: The organization under which the member exists.
+        description: The organization under which the member (user or group) exists.
       EntityId:
         $ref: '#/definitions/WorkMailIdentifier'
-        description: The alias is added to this Amazon WorkMail entity.
+        description: The member (user or group) to which this alias is added.
       Alias:
         $ref: '#/definitions/EmailAddress'
-        description: The alias to add to the user.
-  EmailAddressInUseException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/String'
-    description: 'The email address that you''re trying to assign is already created for a different user, group, or resource.'
-  MailDomainNotFoundException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/String'
-    description: 'For an email or alias to be created in Amazon WorkMail, the included domain must be defined in the organization.'
-  MailDomainStateException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/String'
-    description: 'After a domain has been added to the organization, it must be verified. The domain is not yet verified.'
+        description: The alias to add to the member set.
+  EmailAddressInUseException: {}
+  MailDomainNotFoundException: {}
+  MailDomainStateException: {}
   CreateGroupResponse:
     type: object
     properties:
       GroupId:
         $ref: '#/definitions/WorkMailIdentifier'
-        description: The ID of the group.
+        description: The identifier of the group.
   CreateGroupRequest:
     type: object
     required:
@@ -1814,24 +1759,14 @@ definitions:
       Name:
         $ref: '#/definitions/GroupName'
         description: The name of the group.
-  NameAvailabilityException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/String'
-    description: 'The entity (user, group, or user) name isn''t unique in Amazon WorkMail.'
-  ReservedNameException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/String'
-    description: This entity name is not allowed in Amazon WorkMail.
+  NameAvailabilityException: {}
+  ReservedNameException: {}
   CreateResourceResponse:
     type: object
     properties:
       ResourceId:
         $ref: '#/definitions/ResourceId'
-        description: The identifier of the created resource.
+        description: The identifier of the new resource.
   CreateResourceRequest:
     type: object
     required:
@@ -1844,16 +1779,16 @@ definitions:
         description: The identifier associated with the organization for which the resource is created.
       Name:
         $ref: '#/definitions/ResourceName'
-        description: The name of the created resource.
+        description: The name of the new resource.
       Type:
         $ref: '#/definitions/ResourceType'
-        description: The type of the created resource.
+        description: The type of the new resource. The available types are <code>equipment</code> and <code>room</code>.
   CreateUserResponse:
     type: object
     properties:
       UserId:
         $ref: '#/definitions/WorkMailIdentifier'
-        description: The information regarding the newly created user.
+        description: The identifier for the new user.
   CreateUserRequest:
     type: object
     required:
@@ -1867,19 +1802,14 @@ definitions:
         description: The identifier of the organization for which the user is created.
       Name:
         $ref: '#/definitions/UserName'
-        description: The name for the user to be created.
+        description: The name for the new user. Simple AD or AD Connector user names have a maximum length of 20. All others have a maximum length of 64.
       DisplayName:
         $ref: '#/definitions/String'
-        description: The display name for the user to be created.
+        description: The display name for the new user.
       Password:
         $ref: '#/definitions/Password'
-        description: The password for the user to be created.
-  InvalidPasswordException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/String'
-    description: 'The supplied password doesn''t match the minimum security constraints, such as length or use of special characters.'
+        description: The password for the new user.
+  InvalidPasswordException: {}
   DeleteAliasResponse:
     type: object
     properties: {}
@@ -1895,7 +1825,7 @@ definitions:
         description: The identifier for the organization under which the user exists.
       EntityId:
         $ref: '#/definitions/WorkMailIdentifier'
-        description: The identifier for the Amazon WorkMail entity to have the aliases removed.
+        description: The identifier for the member (user or group) from which to have the aliases removed.
       Alias:
         $ref: '#/definitions/EmailAddress'
         description: The aliases to be removed from the user's set of aliases. Duplicate entries in the list are collapsed into single entries (the list is transformed into a set).
@@ -1926,13 +1856,13 @@ definitions:
     properties:
       OrganizationId:
         $ref: '#/definitions/OrganizationId'
-        description: The identifier of the organization under which the entity (user or group) exists.
+        description: The identifier of the organization under which the member (user or group) exists.
       EntityId:
         $ref: '#/definitions/WorkMailIdentifier'
-        description: The identifier of the entity (user or group) for which to delete mailbox permissions.
+        description: The identifier of the member (user or group)that owns the mailbox.
       GranteeId:
         $ref: '#/definitions/WorkMailIdentifier'
-        description: The identifier of the entity (user or group) for which to delete granted permissions.
+        description: The identifier of the member (user or group) for which to delete granted permissions.
   DeleteResourceResponse:
     type: object
     properties: {}
@@ -1944,7 +1874,7 @@ definitions:
     properties:
       OrganizationId:
         $ref: '#/definitions/OrganizationId'
-        description: The identifier associated with the organization for which the resource is deleted.
+        description: The identifier associated with the organization from which the resource is deleted.
       ResourceId:
         $ref: '#/definitions/ResourceId'
         description: The identifier of the resource to be deleted.
@@ -1959,7 +1889,7 @@ definitions:
     properties:
       OrganizationId:
         $ref: '#/definitions/OrganizationId'
-        description: The organization that contains the user.
+        description: The organization that contains the user to be deleted.
       UserId:
         $ref: '#/definitions/WorkMailIdentifier'
         description: The identifier of the user to be deleted.
@@ -1977,7 +1907,7 @@ definitions:
         description: The identifier for the organization under which the Amazon WorkMail entity exists.
       EntityId:
         $ref: '#/definitions/WorkMailIdentifier'
-        description: The identifier for the entity to be updated.
+        description: The identifier for the member (user or group) to be updated.
   DescribeGroupResponse:
     type: object
     properties:
@@ -1992,13 +1922,13 @@ definitions:
         description: The email of the described group.
       State:
         $ref: '#/definitions/EntityState'
-        description: 'The state of the user: enabled (registered to Amazon WorkMail) or disabled (deregistered or never registered to Amazon WorkMail).'
+        description: 'The state of the user: enabled (registered to Amazon WorkMail) or disabled (deregistered or never registered to WorkMail).'
       EnabledDate:
         $ref: '#/definitions/Timestamp'
-        description: 'The date and time when a user was registered to Amazon WorkMail, in UNIX epoch time format.'
+        description: 'The date and time when a user was registered to WorkMail, in UNIX epoch time format.'
       DisabledDate:
         $ref: '#/definitions/Timestamp'
-        description: 'The date and time when a user was deregistered from Amazon WorkMail, in UNIX epoch time format.'
+        description: 'The date and time when a user was deregistered from WorkMail, in UNIX epoch time format.'
   DescribeGroupRequest:
     type: object
     required:
@@ -2028,16 +1958,16 @@ definitions:
         description: The identifier for the directory associated with an Amazon WorkMail organization.
       DirectoryType:
         $ref: '#/definitions/String'
-        description: The type of directory associated with the Amazon WorkMail organization.
+        description: The type of directory associated with the WorkMail organization.
       DefaultMailDomain:
         $ref: '#/definitions/String'
         description: The default mail domain associated with the organization.
       CompletedDate:
         $ref: '#/definitions/Timestamp'
-        description: 'The date at which the organization became usable in the Amazon WorkMail context, in UNIX epoch time format.'
+        description: 'The date at which the organization became usable in the WorkMail context, in UNIX epoch time format.'
       ErrorMessage:
         $ref: '#/definitions/String'
-        description: The (optional) error message indicating if unexpected behavior was encountered with regards to the organization.
+        description: (Optional) The error message indicating if unexpected behavior was encountered with regards to the organization.
   DescribeOrganizationRequest:
     type: object
     required:
@@ -2066,13 +1996,13 @@ definitions:
         description: The booking options for the described resource.
       State:
         $ref: '#/definitions/EntityState'
-        description: 'The state of the resource: enabled (registered to Amazon WorkMail) or disabled (deregistered or never registered to Amazon WorkMail).'
+        description: 'The state of the resource: enabled (registered to Amazon WorkMail) or disabled (deregistered or never registered to WorkMail).'
       EnabledDate:
         $ref: '#/definitions/Timestamp'
-        description: 'The date and time when a resource was registered to Amazon WorkMail, in UNIX epoch time format.'
+        description: 'The date and time when a resource was enabled for WorkMail, in UNIX epoch time format.'
       DisabledDate:
         $ref: '#/definitions/Timestamp'
-        description: 'The date and time when a resource was registered from Amazon WorkMail, in UNIX epoch time format.'
+        description: 'The date and time when a resource was disabled from WorkMail, in UNIX epoch time format.'
   DescribeResourceRequest:
     type: object
     required:
@@ -2102,10 +2032,10 @@ definitions:
         description: The display name of the user.
       State:
         $ref: '#/definitions/EntityState'
-        description: 'The state of a user: enabled (registered to Amazon WorkMail) or disabled (deregistered or never registered to Amazon WorkMail).'
+        description: 'The state of a user: enabled (registered to Amazon WorkMail) or disabled (deregistered or never registered to WorkMail).'
       UserRole:
         $ref: '#/definitions/UserRole'
-        description: 'In certain cases other entities are modeled as users. If interoperability is enabled, resources are imported into Amazon WorkMail as users. Because different Amazon WorkMail organizations rely on different directory types, administrators can distinguish between a user that is not registered to Amazon WorkMail (is disabled and has a user role) and the administrative users of the directory. The values are USER, RESOURCE, and SYSTEM_USER.'
+        description: 'In certain cases, other entities are modeled as users. If interoperability is enabled, resources are imported into Amazon WorkMail as users. Because different WorkMail organizations rely on different directory types, administrators can distinguish between an unregistered user (account is disabled and has a user role) and the directory administrators. The values are USER, RESOURCE, and SYSTEM_USER.'
       EnabledDate:
         $ref: '#/definitions/Timestamp'
         description: 'The date and time at which the user was enabled for Amazon WorkMail usage, in UNIX epoch time format.'
@@ -2209,7 +2139,7 @@ definitions:
         description: The identifier for the organization under which the group exists.
       GroupId:
         $ref: '#/definitions/WorkMailIdentifier'
-        description: The identifier for the group to which the members are associated.
+        description: The identifier for the group to which the members (users or groups) are associated.
       NextToken:
         $ref: '#/definitions/NextToken'
         description: ' The token to use to retrieve the next page of results. The first call does not contain any tokens.'
@@ -2244,7 +2174,7 @@ definitions:
     properties:
       Permissions:
         $ref: '#/definitions/Permissions'
-        description: One page of the entity's mailbox permissions.
+        description: 'One page of the user, group, or resource mailbox permissions.'
       NextToken:
         $ref: '#/definitions/NextToken'
         description: The token to use to retrieve the next page of results. The value is "null" when there are no more results to return.
@@ -2256,10 +2186,10 @@ definitions:
     properties:
       OrganizationId:
         $ref: '#/definitions/OrganizationId'
-        description: The identifier of the organization under which the entity (user or group) exists.
+        description: 'The identifier of the organization under which the user, group, or resource exists.'
       EntityId:
         $ref: '#/definitions/WorkMailIdentifier'
-        description: The identifier of the entity (user or group) for which to list mailbox permissions.
+        description: 'The identifier of the user, group, or resource for which to list mailbox permissions.'
       NextToken:
         $ref: '#/definitions/NextToken'
         description: The token to use to retrieve the next page of results. The first call does not contain any tokens.
@@ -2353,7 +2283,7 @@ definitions:
         description: The identifier for the organization under which the users exist.
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: TBD
+        description: The token to use to retrieve the next page of results. The first call does not contain any tokens.
       MaxResults:
         $ref: '#/definitions/MaxResults'
         description: The maximum number of results to return in a single call.
@@ -2370,13 +2300,13 @@ definitions:
     properties:
       OrganizationId:
         $ref: '#/definitions/OrganizationId'
-        description: The identifier of the organization under which the entity (user or group) exists.
+        description: 'The identifier of the organization under which the user, group, or resource exists.'
       EntityId:
         $ref: '#/definitions/WorkMailIdentifier'
-        description: The identifier of the entity (user or group) for which to update mailbox permissions.
+        description: 'The identifier of the user, group, or resource for which to update mailbox permissions.'
       GranteeId:
         $ref: '#/definitions/WorkMailIdentifier'
-        description: The identifier of the entity (user or group) to which to grant the permissions.
+        description: 'The identifier of the user, group, or resource to which to grant the permissions.'
       PermissionValues:
         $ref: '#/definitions/PermissionValues'
         description: 'The permissions granted to the grantee. SEND_AS allows the grantee to send email as the owner of the mailbox (the grantee is not mentioned on these emails). SEND_ON_BEHALF allows the grantee to send email on behalf of the owner of the mailbox (the grantee is not mentioned as the physical sender of these emails). FULL_ACCESS allows the grantee full access to the mailbox, irrespective of other folder-level permissions set on the mailbox.'
@@ -2392,19 +2322,14 @@ definitions:
     properties:
       OrganizationId:
         $ref: '#/definitions/OrganizationId'
-        description: The identifier for the organization under which the Amazon WorkMail entity exists.
+        description: 'The identifier for the organization under which the user, group, or resource exists.'
       EntityId:
         $ref: '#/definitions/WorkMailIdentifier'
-        description: The identifier for the entity to be updated.
+        description: 'The identifier for the user, group, or resource to be updated.'
       Email:
         $ref: '#/definitions/EmailAddress'
-        description: The email for the entity to be updated.
-  EntityAlreadyRegisteredException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/String'
-    description: 'The user, group, or resource that you''re trying to register is already registered.'
+        description: 'The email for the user, group, or resource to be updated.'
+  EntityAlreadyRegisteredException: {}
   ResetPasswordResponse:
     type: object
     properties: {}
@@ -2436,10 +2361,10 @@ definitions:
     properties:
       OrganizationId:
         $ref: '#/definitions/OrganizationId'
-        description: The organization that contains the entity to update.
+        description: 'The organization that contains the user, group, or resource to update.'
       EntityId:
         $ref: '#/definitions/WorkMailIdentifier'
-        description: 'The entity to update (user, group, or resource).'
+        description: 'The user, group, or resource to update.'
       Email:
         $ref: '#/definitions/EmailAddress'
         description: The value of the email to be updated as primary.
@@ -2464,12 +2389,7 @@ definitions:
       BookingOptions:
         $ref: '#/definitions/BookingOptions'
         description: The resource's booking options to be updated.
-  InvalidConfigurationException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/String'
-    description: The configuration for a resource isn't valid. A resource must either be able to auto-respond to requests or have at least one delegate associated that can do it on its behalf.
+  InvalidConfigurationException: {}
   EmailAddress:
     type: string
     pattern: '[a-zA-Z0-9._%+-]{1,64}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
@@ -2545,7 +2465,7 @@ definitions:
     properties:
       Id:
         $ref: '#/definitions/String'
-        description: The identifier for the user or group is associated as the resource's delegate.
+        description: The identifier for the user or group associated as the resource's delegate.
       Type:
         $ref: '#/definitions/MemberType'
         description: 'The type of the delegate: user or group.'
@@ -2649,7 +2569,7 @@ definitions:
       DisabledDate:
         $ref: '#/definitions/Timestamp'
         description: The date indicating when the member was disabled from Amazon WorkMail use.
-    description: The representation of a group member (user or group).
+    description: The representation of a user or group.
   OrganizationSummary:
     type: object
     properties:
@@ -2665,7 +2585,7 @@ definitions:
       State:
         $ref: '#/definitions/String'
         description: The state associated with the organization.
-    description: The brief overview associated with an organization.
+    description: The representation of an organization.
   PermissionValues:
     type: array
     items:
@@ -2679,14 +2599,14 @@ definitions:
     properties:
       GranteeId:
         $ref: '#/definitions/WorkMailIdentifier'
-        description: The identifier of the entity (user or group) to which the permissions are granted.
+        description: 'The identifier of the user, group, or resource to which the permissions are granted.'
       GranteeType:
         $ref: '#/definitions/MemberType'
-        description: 'The type of entity (user, group) of the entity referred to in GranteeId.'
+        description: 'The type of user, group, or resource referred to in GranteeId.'
       PermissionValues:
         $ref: '#/definitions/PermissionValues'
         description: 'The permissions granted to the grantee. SEND_AS allows the grantee to send email as the owner of the mailbox (the grantee is not mentioned on these emails). SEND_ON_BEHALF allows the grantee to send email on behalf of the owner of the mailbox (the grantee is not mentioned as the physical sender of these emails). FULL_ACCESS allows the grantee full access to the mailbox, irrespective of other folder-level permissions set on the mailbox.'
-    description: 'Permission granted to an entity (user, group) to access a certain aspect of another entity''s mailbox.'
+    description: 'Permission granted to a user, group, or resource to access a certain aspect of another user, group, or resource mailbox.'
   PermissionType:
     type: string
     enum:
@@ -2717,7 +2637,7 @@ definitions:
       DisabledDate:
         $ref: '#/definitions/Timestamp'
         description: The date indicating when the resource was disabled from Amazon WorkMail use.
-    description: The overview for a resource containing relevant data regarding it.
+    description: The representation of a resource.
   User:
     type: object
     properties:
