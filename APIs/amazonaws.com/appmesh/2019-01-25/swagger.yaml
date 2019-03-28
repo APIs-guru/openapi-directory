@@ -5,19 +5,19 @@ info:
   title: AWS App Mesh
   description: |-
     <p>AWS App Mesh is a service mesh based on the Envoy proxy that makes it easy to monitor and
-             control containerized microservices. App Mesh standardizes how your microservices
-             communicate, giving you end-to-end visibility and helping to ensure high-availability for
-             your applications.</p>
+             control microservices. App Mesh standardizes how your microservices communicate, giving you
+             end-to-end visibility and helping to ensure high availability for your applications.</p>
              <p>App Mesh gives you consistent visibility and network traffic controls for every
-             microservice in an application. You can use App Mesh with Amazon ECS
-             (using the Amazon EC2 launch type), Amazon EKS, and Kubernetes on AWS.</p>
+             microservice in an application. You can use App Mesh with AWS Fargate, Amazon ECS, Amazon EKS, and
+             Kubernetes on AWS.</p>
              <note>
-                <p>App Mesh supports containerized microservice applications that use service discovery
-                naming for their components. To use App Mesh, you must have a containerized application
-                running on Amazon EC2 instances, hosted in either Amazon ECS, Amazon EKS, or Kubernetes on AWS. For
-                more information about service discovery on Amazon ECS, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html">Service Discovery</a> in the
-                   <i>Amazon Elastic Container Service Developer Guide</i>. Kubernetes <code>kube-dns</code> and
-                   <code>coredns</code> are supported. For more information, see <a href="https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/">DNS
+                <p>App Mesh supports microservice applications that use service discovery naming for their
+                components. To use App Mesh, you must have an application running on Amazon EC2 instances,
+                hosted in either Amazon ECS, Amazon EKS, or Kubernetes on AWS. For more information about
+                service discovery on Amazon ECS, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html">Service
+                   Discovery</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. Kubernetes
+                   <code>kube-dns</code> and <code>coredns</code> are supported. For more information,
+                see <a href="https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/">DNS
                    for Services and Pods</a> in the Kubernetes documentation.</p>
              </note>
   x-logo:
@@ -118,7 +118,7 @@ paths:
     put:
       operationId: CreateMesh
       description: |-
-        <p>Creates a new service mesh. A service mesh is a logical boundary for network traffic
+        <p>Creates a service mesh. A service mesh is a logical boundary for network traffic
                  between the services that reside within it.</p>
                  <p>After you create your service mesh, you can create virtual services, virtual nodes,
                  virtual routers, and routes to distribute traffic between the applications in your
@@ -179,6 +179,24 @@ paths:
                 type: string
                 minLength: 1
                 maxLength: 255
+              spec:
+                description: An object representing the specification of a service mesh.
+                type: object
+                properties:
+                  egressFilter:
+                    $ref: '#/definitions/EgressFilter'
+                    description: The egress filter rules for the service mesh.
+              tags:
+                description: |-
+                  Optional metadata that you can apply to the service mesh to assist with categorization and organization.
+                           Each tag consists of a key and an optional value, both of which you define.
+                           Tag keys can have a maximum character length of 128 characters, and tag values can have
+                              a maximum length of 256 characters.
+                type: array
+                items:
+                  $ref: '#/definitions/TagRef'
+                minItems: 0
+                maxItems: 50
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -246,7 +264,7 @@ paths:
                      results exceeded the value of that parameter. Pagination continues from the end of the
                      previous results that returned the <code>nextToken</code> value.</p>
                      <note>
-                        <p>This token should be treated as an opaque identifier that is only used to
+                        <p>This token should be treated as an opaque identifier that is used only to
                             retrieve the next items in a list and not for other programmatic purposes.</p>
                     </note>
           type: string
@@ -254,11 +272,11 @@ paths:
     put:
       operationId: CreateRoute
       description: |-
-        <p>Creates a new route that is associated with a virtual router.</p>
+        <p>Creates a route that is associated with a virtual router.</p>
                  <p>You can use the <code>prefix</code> parameter in your route specification for path-based
-                 routing of requests. For example, if your virtual router service name is
-                    <code>my-service.local</code>, and you want the route to match requests to
-                    <code>my-service.local/metrics</code>, then your prefix should be
+                 routing of requests. For example, if your virtual service name is
+                    <code>my-service.local</code> and you want the route to match requests to
+                    <code>my-service.local/metrics</code>, your prefix should be
                  <code>/metrics</code>.</p>
                  <p>If your route matches a request, you can distribute traffic to one or more target
                  virtual nodes with relative weighting.</p>
@@ -303,7 +321,7 @@ paths:
         - name: meshName
           in: path
           required: true
-          description: The name of the service mesh in which to create the route.
+          description: The name of the service mesh to create the route in.
           type: string
           minLength: 1
           maxLength: 255
@@ -340,6 +358,20 @@ paths:
                   httpRoute:
                     $ref: '#/definitions/HttpRoute'
                     description: The HTTP routing information for the route.
+                  tcpRoute:
+                    $ref: '#/definitions/TcpRoute'
+                    description: The TCP routing information for the route.
+              tags:
+                description: |-
+                  Optional metadata that you can apply to the route to assist with categorization and organization.
+                           Each tag consists of a key and an optional value, both of which you define.
+                           Tag keys can have a maximum character length of 128 characters, and tag values can have
+                              a maximum length of 256 characters.
+                type: array
+                items:
+                  $ref: '#/definitions/TagRef'
+                minItems: 0
+                maxItems: 50
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -401,7 +433,7 @@ paths:
         - name: meshName
           in: path
           required: true
-          description: The name of the service mesh in which to list routes.
+          description: The name of the service mesh to list routes in.
           type: string
           minLength: 1
           maxLength: 255
@@ -425,8 +457,8 @@ paths:
     put:
       operationId: CreateVirtualNode
       description: |-
-        <p>Creates a new virtual node within a service mesh.</p>
-                 <p>A virtual node acts as logical pointer to a particular task group, such as an Amazon ECS
+        <p>Creates a virtual node within a service mesh.</p>
+                 <p>A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS
                  service or a Kubernetes deployment. When you create a virtual node, you must specify the
                  DNS service discovery hostname for your task group.</p>
                  <p>Any inbound traffic that your virtual node expects should be specified as a
@@ -434,7 +466,7 @@ paths:
                  should be specified as a <code>backend</code>.</p>
                  <p>The response metadata for your new virtual node contains the <code>arn</code> that is
                  associated with the virtual node. Set this value (either the full ARN or the truncated
-                 resource name, for example, <code>mesh/default/virtualNode/simpleapp</code>, as the
+                 resource name: for example, <code>mesh/default/virtualNode/simpleapp</code>) as the
                     <code>APPMESH_VIRTUAL_NODE_NAME</code> environment variable for your task group's Envoy
                  proxy container in your task definition or pod spec. This is then mapped to the
                     <code>node.id</code> and <code>node.cluster</code> Envoy parameters.</p>
@@ -485,7 +517,7 @@ paths:
         - name: meshName
           in: path
           required: true
-          description: The name of the service mesh in which to create the virtual node.
+          description: The name of the service mesh to create the virtual node in.
           type: string
           minLength: 1
           maxLength: 255
@@ -513,9 +545,25 @@ paths:
                   listeners:
                     $ref: '#/definitions/Listeners'
                     description: The listeners that the virtual node is expected to receive inbound traffic from. Currently only one listener is supported per virtual node.
+                  logging:
+                    $ref: '#/definitions/Logging'
+                    description: The inbound and outbound access logging information for the virtual node.
                   serviceDiscovery:
                     $ref: '#/definitions/ServiceDiscovery'
-                    description: The service discovery information for the virtual node.
+                    description: |-
+                      The service discovery information for the virtual node. If your virtual node does not
+                               expect ingress traffic, you can omit this parameter.
+              tags:
+                description: |-
+                  Optional metadata that you can apply to the virtual node to assist with categorization and organization.
+                           Each tag consists of a key and an optional value, both of which you define.
+                           Tag keys can have a maximum character length of 128 characters, and tag values can have
+                              a maximum length of 256 characters.
+                type: array
+                items:
+                  $ref: '#/definitions/TagRef'
+                minItems: 0
+                maxItems: 50
               virtualNodeName:
                 description: The name to use for the virtual node.
                 type: string
@@ -599,12 +647,12 @@ paths:
     put:
       operationId: CreateVirtualRouter
       description: |-
-        <p>Creates a new virtual router within a service mesh.</p>
+        <p>Creates a virtual router within a service mesh.</p>
                  <p>Any inbound traffic that your virtual router expects should be specified as a
                     <code>listener</code>. </p>
-                 <p>Virtual routers handle traffic for one or more service names within your mesh. After you
-                 create your virtual router, create and associate routes for your virtual router that direct
-                 incoming requests to different virtual nodes.</p>
+                 <p>Virtual routers handle traffic for one or more virtual services within your mesh. After
+                 you create your virtual router, create and associate routes for your virtual router that
+                 direct incoming requests to different virtual nodes.</p>
       responses:
         '200':
           description: Success
@@ -671,6 +719,17 @@ paths:
                   listeners:
                     $ref: '#/definitions/VirtualRouterListeners'
                     description: The listeners that the virtual router is expected to receive inbound traffic from. Currently only one listener is supported per virtual router.
+              tags:
+                description: |-
+                  Optional metadata that you can apply to the virtual router to assist with categorization and organization.
+                           Each tag consists of a key and an optional value, both of which you define.
+                           Tag keys can have a maximum character length of 128 characters, and tag values can have
+                              a maximum length of 256 characters.
+                type: array
+                items:
+                  $ref: '#/definitions/TagRef'
+                minItems: 0
+                maxItems: 50
               virtualRouterName:
                 description: The name to use for the virtual router.
                 type: string
@@ -726,7 +785,7 @@ paths:
             The maximum number of results returned by <code>ListVirtualRouters</code> in paginated
                      output. When you use this parameter, <code>ListVirtualRouters</code> returns only
                         <code>limit</code> results in a single page along with a <code>nextToken</code> response
-                     element. You can see the remaining results of the initial request  by sending another
+                     element. You can see the remaining results of the initial request by sending another
                         <code>ListVirtualRouters</code> request with the returned <code>nextToken</code> value.
                      This value can be between 1 and 100. If you don't use this parameter, 
                      <code>ListVirtualRouters</code> returns up to 100 results and
@@ -755,8 +814,8 @@ paths:
       operationId: CreateVirtualService
       description: |-
         <p>Creates a virtual service within a service mesh.</p>
-                 <p>A virtual service is an abstraction of a real service that is either provided by a
-                 virtual node directly, or indirectly by means of a virtual router. Dependent services call
+                 <p>A virtual service is an abstraction of a real service that is provided by a
+                 virtual node directly or indirectly by means of a virtual router. Dependent services call
                  your virtual service by its <code>virtualServiceName</code>, and those requests are routed
                  to the virtual node or virtual router that is specified as the provider for the virtual
                  service.</p>
@@ -801,7 +860,7 @@ paths:
         - name: meshName
           in: path
           required: true
-          description: The name of the service mesh in which to create the virtual service.
+          description: The name of the service mesh to create the virtual service in.
           type: string
           minLength: 1
           maxLength: 255
@@ -828,6 +887,17 @@ paths:
                     description: |-
                       The App Mesh object that is acting as the provider for a virtual service. You can specify
                                a single virtual node or virtual router.
+              tags:
+                description: |-
+                  Optional metadata that you can apply to the virtual service to assist with categorization and organization.
+                           Each tag consists of a key and an optional value, both of which you define.
+                           Tag keys can have a maximum character length of 128 characters, and tag values can have
+                              a maximum length of 256 characters.
+                type: array
+                items:
+                  $ref: '#/definitions/TagRef'
+                minItems: 0
+                maxItems: 50
               virtualServiceName:
                 description: The name to use for the virtual service.
                 type: string
@@ -910,7 +980,7 @@ paths:
       operationId: DeleteMesh
       description: |-
         <p>Deletes an existing service mesh.</p>
-                 <p>You must delete all resources (virtual services, routes, virtual routers, virtual nodes)
+                 <p>You must delete all resources (virtual services, routes, virtual routers, and virtual nodes)
                  in the service mesh before you can delete the mesh itself.</p>
       responses:
         '200':
@@ -1003,6 +1073,68 @@ paths:
           type: string
           minLength: 1
           maxLength: 255
+    put:
+      operationId: UpdateMesh
+      description: Updates an existing service mesh.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateMeshOutput'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '484':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: meshName
+          in: path
+          required: true
+          description: The name of the service mesh to update.
+          type: string
+          minLength: 1
+          maxLength: 255
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              clientToken:
+                description: |-
+                  Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+                  request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+                type: string
+              spec:
+                description: An object representing the specification of a service mesh.
+                type: object
+                properties:
+                  egressFilter:
+                    $ref: '#/definitions/EgressFilter'
+                    description: The egress filter rules for the service mesh.
   '/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes/{routeName}':
     delete:
       operationId: DeleteRoute
@@ -1208,6 +1340,9 @@ paths:
                   httpRoute:
                     $ref: '#/definitions/HttpRoute'
                     description: The HTTP routing information for the route.
+                  tcpRoute:
+                    $ref: '#/definitions/TcpRoute'
+                    description: The TCP routing information for the route.
   '/v20190125/meshes/{meshName}/virtualNodes/{virtualNodeName}':
     delete:
       operationId: DeleteVirtualNode
@@ -1398,9 +1533,14 @@ paths:
                   listeners:
                     $ref: '#/definitions/Listeners'
                     description: The listeners that the virtual node is expected to receive inbound traffic from. Currently only one listener is supported per virtual node.
+                  logging:
+                    $ref: '#/definitions/Logging'
+                    description: The inbound and outbound access logging information for the virtual node.
                   serviceDiscovery:
                     $ref: '#/definitions/ServiceDiscovery'
-                    description: The service discovery information for the virtual node.
+                    description: |-
+                      The service discovery information for the virtual node. If your virtual node does not
+                               expect ingress traffic, you can omit this parameter.
   '/v20190125/meshes/{meshName}/virtualRouters/{virtualRouterName}':
     delete:
       operationId: DeleteVirtualRouter
@@ -1764,6 +1904,194 @@ paths:
                     description: |-
                       The App Mesh object that is acting as the provider for a virtual service. You can specify
                                a single virtual node or virtual router.
+  '/v20190125/tags#resourceArn':
+    get:
+      operationId: ListTagsForResource
+      description: List the tags for an App Mesh resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsForResourceOutput'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            The maximum number of tag results returned by <code>ListTagsForResource</code> in
+                     paginated output. When this parameter is used, <code>ListTagsForResource</code> returns only
+                     <code>limit</code> results in a single page along with a <code>nextToken</code>
+                     response element. You can see the remaining results of the initial request by sending
+                     another <code>ListTagsForResource</code> request with the returned <code>nextToken</code>
+                     value. This value can be between 1 and 100. If you don't use this
+                     parameter, <code>ListTagsForResource</code> returns up to
+                     100 results and a <code>nextToken</code> value if applicable.
+          type: integer
+          minimum: 1
+          maximum: 50
+        - name: nextToken
+          in: query
+          required: false
+          description: |-
+            The <code>nextToken</code> value returned from a previous paginated
+                     <code>ListTagsForResource</code> request where <code>limit</code> was used and the
+                     results exceeded the value of that parameter. Pagination continues from the end of the
+                     previous results that returned the <code>nextToken</code> value.
+          type: string
+        - name: resourceArn
+          in: query
+          required: true
+          description: The Amazon Resource Name (ARN) that identifies the resource to list the tags for.
+          type: string
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v20190125/tag#resourceArn':
+    put:
+      operationId: TagResource
+      description: |-
+        Associates the specified tags to a resource with the specified
+                 <code>resourceArn</code>. If existing tags on a resource aren't specified in the
+                 request parameters, they aren't changed. When a resource is deleted, the tags
+                 associated with that resource are also deleted.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TagResourceOutput'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: TooManyTagsException
+          schema:
+            $ref: '#/definitions/TooManyTagsException'
+      parameters:
+        - name: resourceArn
+          in: query
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource to add tags to.
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - tags
+            properties:
+              tags:
+                description: |-
+                  The tags to add to the resource. A tag is an array of key-value pairs.
+                           Tag keys can have a maximum character length of 128 characters, and tag values can have
+                              a maximum length of 256 characters.
+                type: array
+                items:
+                  $ref: '#/definitions/TagRef'
+                minItems: 0
+                maxItems: 50
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v20190125/untag#resourceArn':
+    put:
+      operationId: UntagResource
+      description: Deletes specified tags from a resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UntagResourceOutput'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: resourceArn
+          in: query
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource to delete tags from.
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - tagKeys
+            properties:
+              tagKeys:
+                description: The keys of the tags to be removed.
+                type: array
+                items:
+                  $ref: '#/definitions/TagKey'
+                minItems: 0
+                maxItems: 50
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
   CreateMeshOutput:
     type: object
@@ -1774,6 +2102,40 @@ definitions:
         $ref: '#/definitions/MeshData'
         description: The full description of your service mesh following the create call.
     description: ''
+  EgressFilter:
+    type: object
+    required:
+      - type
+    properties:
+      type:
+        $ref: '#/definitions/EgressFilterType'
+        description: |-
+          The egress filter type. By default, the type is <code>DROP_ALL</code>, which allows
+                   egress only from virtual nodes to other defined resources in the service mesh (and any traffic
+                   to <code>*.amazonaws.com</code> for AWS API calls). You can set the egress filter type to
+                      <code>ALLOW_ALL</code> to allow egress to any endpoint inside or outside of the service
+                   mesh.
+    description: An object representing the egress filter rules for a service mesh.
+  TagRef:
+    type: object
+    required:
+      - key
+    properties:
+      key:
+        $ref: '#/definitions/TagKey'
+        description: |-
+          One part of a key-value pair that make up a tag. A <code>key</code> is a general label
+                   that acts like a category for more specific tag values.
+      value:
+        $ref: '#/definitions/TagValue'
+        description: |-
+          The optional part of a key-value pair that make up a tag. A <code>value</code> acts as
+                   a descriptor within a tag category (key).
+    description: |-
+      Optional metadata that you apply to a resource to assist with categorization and organization.
+               Each tag consists of a key and an optional value, both of which you define.
+               Tag keys can have a maximum character length of 128 characters, and tag values can have
+                  a maximum length of 256 characters.
   BadRequestException: {}
   ConflictException: {}
   ForbiddenException: {}
@@ -1804,6 +2166,15 @@ definitions:
         $ref: '#/definitions/HttpRouteMatch'
         description: The criteria for determining an HTTP request match.
     description: An object representing the HTTP routing specification for a route.
+  TcpRoute:
+    type: object
+    required:
+      - action
+    properties:
+      action:
+        $ref: '#/definitions/TcpRouteAction'
+        description: The action to take if a match is determined.
+    description: An object representing the TCP routing specification for a route.
   CreateVirtualNodeOutput:
     type: object
     required:
@@ -1817,10 +2188,21 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Backend'
+    minItems: 0
+    maxItems: 25
   Listeners:
     type: array
     items:
       $ref: '#/definitions/Listener'
+    minItems: 0
+    maxItems: 1
+  Logging:
+    type: object
+    properties:
+      accessLog:
+        $ref: '#/definitions/AccessLog'
+        description: The access log configuration for a virtual node.
+    description: An object representing the logging information for a virtual node.
   ServiceDiscovery:
     type: object
     properties:
@@ -1841,6 +2223,8 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/VirtualRouterListener'
+    minItems: 1
+    maxItems: 1
   CreateVirtualServiceOutput:
     type: object
     required:
@@ -1985,6 +2369,23 @@ definitions:
         $ref: '#/definitions/RouteList'
         description: The list of existing routes for the specified service mesh and virtual router.
     description: ''
+  ListTagsForResourceOutput:
+    type: object
+    required:
+      - tags
+    properties:
+      nextToken:
+        $ref: '#/definitions/String'
+        description: |-
+          The <code>nextToken</code> value to include in a future <code>ListTagsForResource</code>
+                   request. When the results of a <code>ListTagsForResource</code> request exceed
+                   <code>limit</code>, you can use this value to retrieve the next page of
+                   results. This value is <code>null</code> when there are no more results to
+                   return.
+      tags:
+        $ref: '#/definitions/TagList'
+        description: The tags for the resource.
+    description: ''
   ListVirtualNodesOutput:
     type: object
     required:
@@ -2034,6 +2435,27 @@ definitions:
       virtualServices:
         $ref: '#/definitions/VirtualServiceList'
         description: The list of existing virtual services for the specified service mesh.
+    description: ''
+  TagResourceOutput:
+    type: object
+    properties: {}
+    description: ''
+  TooManyTagsException: {}
+  UntagResourceOutput:
+    type: object
+    properties: {}
+    description: ''
+  TagKey:
+    type: string
+    minLength: 1
+    maxLength: 128
+  UpdateMeshOutput:
+    type: object
+    required:
+      - mesh
+    properties:
+      mesh:
+        $ref: '#/definitions/MeshData'
     description: ''
   UpdateRouteOutput:
     type: object
@@ -2107,9 +2529,14 @@ definitions:
       listeners:
         $ref: '#/definitions/Listeners'
         description: The listeners that the virtual node is expected to receive inbound traffic from. Currently only one listener is supported per virtual node.
+      logging:
+        $ref: '#/definitions/Logging'
+        description: The inbound and outbound access logging information for the virtual node.
       serviceDiscovery:
         $ref: '#/definitions/ServiceDiscovery'
-        description: The service discovery information for the virtual node.
+        description: |-
+          The service discovery information for the virtual node. If your virtual node does not
+                   expect ingress traffic, you can omit this parameter.
     description: An object representing the specification of a virtual node.
   UpdateVirtualNodeInput:
     type: object
@@ -2138,6 +2565,12 @@ definitions:
           The App Mesh object that is acting as the provider for a virtual service. You can specify
                    a single virtual node or virtual router.
     description: An object representing the specification of a virtual service.
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/TagRef'
+    minItems: 0
+    maxItems: 50
   ServiceName:
     type: string
   CreateVirtualServiceInput:
@@ -2154,6 +2587,13 @@ definitions:
       spec:
         $ref: '#/definitions/VirtualServiceSpec'
         description: The virtual service specification to apply.
+      tags:
+        $ref: '#/definitions/TagList'
+        description: |-
+          Optional metadata that you can apply to the virtual service to assist with categorization and organization.
+                   Each tag consists of a key and an optional value, both of which you define.
+                   Tag keys can have a maximum character length of 128 characters, and tag values can have
+                      a maximum length of 256 characters.
       virtualServiceName:
         $ref: '#/definitions/ServiceName'
         description: The name to use for the virtual service.
@@ -2187,6 +2627,22 @@ definitions:
         $ref: '#/definitions/VirtualRouterSpec'
         description: The new virtual router specification to apply. This overwrites the existing data.
     description: ''
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+    minItems: 0
+    maxItems: 50
+  TagsLimit:
+    type: integer
+    minimum: 1
+    maximum: 50
+  Arn:
+    type: string
+  ListTagsForResourceInput:
+    type: object
+    properties: {}
+    description: ''
   VirtualNodeData:
     type: object
     required:
@@ -2212,6 +2668,13 @@ definitions:
         $ref: '#/definitions/ResourceName'
         description: The name of the virtual node.
     description: An object representing a virtual node returned by a describe operation.
+  AccessLog:
+    type: object
+    properties:
+      file:
+        $ref: '#/definitions/FileAccessLog'
+        description: The file object to send virtual node access logs to.
+    description: An object representing the access logging information for a virtual node.
   Long:
     type: integer
   VirtualRouterData:
@@ -2244,6 +2707,7 @@ definitions:
     required:
       - meshName
       - metadata
+      - spec
       - status
     properties:
       meshName:
@@ -2252,6 +2716,9 @@ definitions:
       metadata:
         $ref: '#/definitions/ResourceMetadata'
         description: The associated metadata for the service mesh.
+      spec:
+        $ref: '#/definitions/MeshSpec'
+        description: The associated specification for the service mesh.
       status:
         $ref: '#/definitions/MeshStatus'
         description: The status of the service mesh.
@@ -2297,8 +2764,6 @@ definitions:
         $ref: '#/definitions/ResourceName'
         description: The virtual router that the route is associated with.
     description: An object representing a route returned by a describe operation.
-  Arn:
-    type: string
   Timestamp:
     type: string
     format: date-time
@@ -2313,19 +2778,7 @@ definitions:
     properties:
       arn:
         $ref: '#/definitions/Arn'
-        description: |-
-          <p>The full Amazon Resource Name (ARN) for the resource.</p>
-                   <note>
-                      <p>After you create a virtual node, set this value (either the full ARN or the
-                      truncated resource name, for example, <code>mesh/default/virtualNode/simpleapp</code>,
-                      as the <code>APPMESH_VIRTUAL_NODE_NAME</code> environment variable for your task group's
-                      Envoy proxy container in your task definition or pod spec. This is then mapped to the
-                         <code>node.id</code> and <code>node.cluster</code> Envoy parameters.</p>
-                      <p>If you require your Envoy stats or tracing to use a different name, you can override
-                      the <code>node.cluster</code> value that is set by
-                         <code>APPMESH_VIRTUAL_NODE_NAME</code> with the
-                         <code>APPMESH_VIRTUAL_NODE_CLUSTER</code> environment variable.</p>
-                   </note>
+        description: The full Amazon Resource Name (ARN) for the resource.
       createdAt:
         $ref: '#/definitions/Timestamp'
         description: The Unix epoch timestamp in seconds for when the resource was created.
@@ -2410,10 +2863,16 @@ definitions:
     type: integer
     minimum: 0
     maximum: 100
+  TagValue:
+    type: string
+    minLength: 0
+    maxLength: 256
   WeightedTargets:
     type: array
     items:
       $ref: '#/definitions/WeightedTarget'
+    minItems: 1
+    maxItems: 10
   HttpRouteAction:
     type: object
     required:
@@ -2505,6 +2964,11 @@ definitions:
         $ref: '#/definitions/ServiceName'
         description: The name of the virtual service.
     description: An object representing a virtual service returned by a list operation.
+  EgressFilterType:
+    type: string
+    enum:
+      - ALLOW_ALL
+      - DROP_ALL
   VirtualServiceList:
     type: array
     items:
@@ -2568,6 +3032,10 @@ definitions:
         $ref: '#/definitions/ServiceName'
         description: The name of the virtual service.
     description: An object representing a virtual service returned by a describe operation.
+  FilePath:
+    type: string
+    minLength: 1
+    maxLength: 255
   VirtualNodeRef:
     type: object
     required:
@@ -2585,6 +3053,13 @@ definitions:
         $ref: '#/definitions/ResourceName'
         description: The name of the virtual node.
     description: An object representing a virtual node returned by a list operation.
+  MeshSpec:
+    type: object
+    properties:
+      egressFilter:
+        $ref: '#/definitions/EgressFilter'
+        description: The egress filter rules for the service mesh.
+    description: An object representing the specification of a service mesh.
   CreateMeshInput:
     type: object
     required:
@@ -2598,6 +3073,16 @@ definitions:
       meshName:
         $ref: '#/definitions/ResourceName'
         description: The name to use for the service mesh.
+      spec:
+        $ref: '#/definitions/MeshSpec'
+        description: The service mesh specification to apply.
+      tags:
+        $ref: '#/definitions/TagList'
+        description: |-
+          Optional metadata that you can apply to the service mesh to assist with categorization and organization.
+                   Each tag consists of a key and an optional value, both of which you define.
+                   Tag keys can have a maximum character length of 128 characters, and tag values can have
+                      a maximum length of 256 characters.
     description: ''
   Hostname:
     type: string
@@ -2636,6 +3121,19 @@ definitions:
     type: object
     properties: {}
     description: ''
+  TcpRouteAction:
+    type: object
+    required:
+      - weightedTargets
+    properties:
+      weightedTargets:
+        $ref: '#/definitions/WeightedTargets'
+        description: |-
+          The targets that traffic is routed to when a request matches the route. You can specify
+                   one or more targets and their relative weights to distribute traffic with.
+    description: |-
+      An object representing the traffic distribution requirements for matched TCP
+               requests.
   VirtualNodeList:
     type: array
     items:
@@ -2653,6 +3151,18 @@ definitions:
         $ref: '#/definitions/VirtualRouterStatusCode'
         description: The current status of the virtual router.
     description: 'An object representing the status of a virtual router. '
+  UpdateMeshInput:
+    type: object
+    properties:
+      clientToken:
+        $ref: '#/definitions/String'
+        description: |-
+          Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+          request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+      spec:
+        $ref: '#/definitions/MeshSpec'
+        description: The service mesh specification to apply.
+    description: ''
   ListVirtualServicesInput:
     type: object
     properties: {}
@@ -2671,10 +3181,35 @@ definitions:
       spec:
         $ref: '#/definitions/VirtualRouterSpec'
         description: The virtual router specification to apply.
+      tags:
+        $ref: '#/definitions/TagList'
+        description: |-
+          Optional metadata that you can apply to the virtual router to assist with categorization and organization.
+                   Each tag consists of a key and an optional value, both of which you define.
+                   Tag keys can have a maximum character length of 128 characters, and tag values can have
+                      a maximum length of 256 characters.
       virtualRouterName:
         $ref: '#/definitions/ResourceName'
         description: The name to use for the virtual router.
     description: ''
+  FileAccessLog:
+    type: object
+    required:
+      - path
+    properties:
+      path:
+        $ref: '#/definitions/FilePath'
+        description: |-
+          <p>The file path to write access logs to. You can use <code>/dev/stdout</code> to send
+                   access logs to standard out and configure your Envoy container to use a log driver, such as
+                      <code>awslogs</code>, to export the access logs to a log storage service such as Amazon CloudWatch
+                   Logs. You can also specify a path in the Envoy container's file system to write the files
+                   to disk.</p>
+                   <note>
+                      <p>The Envoy process must have write permissions to the path that you specify here.
+                      Otherwise, Envoy fails to bootstrap properly.</p>
+                   </note>
+    description: An object representing an access log file.
   ListVirtualNodesLimit:
     type: integer
     minimum: 1
@@ -2702,9 +3237,9 @@ definitions:
         $ref: '#/definitions/String'
         description: |-
           Specifies the path to match requests with. This parameter must always start with
-                      <code>/</code>, which by itself matches all requests to the virtual router service name.
-                   You can also match for path-based routing of requests. For example, if your virtual router
-                   service name is <code>my-service.local</code> and you want the route to match requests to
+                      <code>/</code>, which by itself matches all requests to the virtual service name. You
+                   can also match for path-based routing of requests. For example, if your virtual service
+                   name is <code>my-service.local</code> and you want the route to match requests to
                       <code>my-service.local/metrics</code>, your prefix should be
                    <code>/metrics</code>.
     description: |-
@@ -2803,6 +3338,9 @@ definitions:
       httpRoute:
         $ref: '#/definitions/HttpRoute'
         description: The HTTP routing information for the route.
+      tcpRoute:
+        $ref: '#/definitions/TcpRoute'
+        description: The TCP routing information for the route.
     description: An object representing the specification of a route.
   VirtualNodeServiceProvider:
     type: object
@@ -2816,6 +3354,18 @@ definitions:
   DescribeVirtualRouterInput:
     type: object
     properties: {}
+    description: ''
+  TagResourceInput:
+    type: object
+    required:
+      - tags
+    properties:
+      tags:
+        $ref: '#/definitions/TagList'
+        description: |-
+          The tags to add to the resource. A tag is an array of key-value pairs.
+                   Tag keys can have a maximum character length of 128 characters, and tag values can have
+                      a maximum length of 256 characters.
     description: ''
   CreateRouteInput:
     type: object
@@ -2834,6 +3384,13 @@ definitions:
       spec:
         $ref: '#/definitions/RouteSpec'
         description: The route specification to apply.
+      tags:
+        $ref: '#/definitions/TagList'
+        description: |-
+          Optional metadata that you can apply to the route to assist with categorization and organization.
+                   Each tag consists of a key and an optional value, both of which you define.
+                   Tag keys can have a maximum character length of 128 characters, and tag values can have
+                      a maximum length of 256 characters.
     description: ''
   VirtualRouterServiceProvider:
     type: object
@@ -2872,6 +3429,13 @@ definitions:
       spec:
         $ref: '#/definitions/VirtualNodeSpec'
         description: The virtual node specification to apply.
+      tags:
+        $ref: '#/definitions/TagList'
+        description: |-
+          Optional metadata that you can apply to the virtual node to assist with categorization and organization.
+                   Each tag consists of a key and an optional value, both of which you define.
+                   Tag keys can have a maximum character length of 128 characters, and tag values can have
+                      a maximum length of 256 characters.
       virtualNodeName:
         $ref: '#/definitions/ResourceName'
         description: The name to use for the virtual node.
@@ -2883,4 +3447,13 @@ definitions:
   DeleteVirtualServiceInput:
     type: object
     properties: {}
+    description: ''
+  UntagResourceInput:
+    type: object
+    required:
+      - tagKeys
+    properties:
+      tagKeys:
+        $ref: '#/definitions/TagKeyList'
+        description: The keys of the tags to be removed.
     description: ''

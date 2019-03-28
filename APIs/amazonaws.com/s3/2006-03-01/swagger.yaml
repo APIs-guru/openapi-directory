@@ -66,7 +66,7 @@ paths:
       externalDocs:
         url: 'http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadAbort.html'
       responses:
-        '200':
+        '204':
           description: Success
           schema:
             $ref: '#/definitions/AbortMultipartUploadOutput'
@@ -356,6 +356,7 @@ paths:
             - ONEZONE_IA
             - INTELLIGENT_TIERING
             - GLACIER
+            - DEEP_ARCHIVE
         - name: x-amz-website-redirect-location
           in: header
           required: false
@@ -532,7 +533,7 @@ paths:
       externalDocs:
         url: 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETE.html'
       responses:
-        '200':
+        '204':
           description: Success
       parameters:
         - name: Bucket
@@ -729,6 +730,7 @@ paths:
             - ONEZONE_IA
             - INTELLIGENT_TIERING
             - GLACIER
+            - DEEP_ARCHIVE
         - name: x-amz-website-redirect-location
           in: header
           required: false
@@ -815,7 +817,7 @@ paths:
       operationId: DeleteBucketAnalyticsConfiguration
       description: Deletes an analytics configuration for the bucket (specified by the analytics configuration ID).
       responses:
-        '200':
+        '204':
           description: Success
       parameters:
         - name: Bucket
@@ -915,7 +917,7 @@ paths:
       externalDocs:
         url: 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEcors.html'
       responses:
-        '200':
+        '204':
           description: Success
       parameters:
         - name: Bucket
@@ -1001,7 +1003,7 @@ paths:
       operationId: DeleteBucketEncryption
       description: Deletes the server-side encryption configuration from the bucket.
       responses:
-        '200':
+        '204':
           description: Success
       parameters:
         - name: Bucket
@@ -1083,7 +1085,7 @@ paths:
       operationId: DeleteBucketInventoryConfiguration
       description: Deletes an inventory configuration (identified by the inventory ID) from the bucket.
       responses:
-        '200':
+        '204':
           description: Success
       parameters:
         - name: Bucket
@@ -1195,7 +1197,7 @@ paths:
       externalDocs:
         url: 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETElifecycle.html'
       responses:
-        '200':
+        '204':
           description: Success
       parameters:
         - name: Bucket
@@ -1272,7 +1274,7 @@ paths:
       operationId: DeleteBucketMetricsConfiguration
       description: Deletes a metrics configuration (specified by the metrics configuration ID) from the bucket.
       responses:
-        '200':
+        '204':
           description: Success
       parameters:
         - name: Bucket
@@ -1369,7 +1371,7 @@ paths:
       externalDocs:
         url: 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEpolicy.html'
       responses:
-        '200':
+        '204':
           description: Success
       parameters:
         - name: Bucket
@@ -1456,7 +1458,7 @@ paths:
       operationId: DeleteBucketReplication
       description: ' Deletes the replication configuration from the bucket. For information about replication configuration, see <a href=" https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html">Cross-Region Replication (CRR)</a> in the <i>Amazon S3 Developer Guide</i>. '
       responses:
-        '200':
+        '204':
           description: Success
       parameters:
         - name: Bucket
@@ -1543,7 +1545,7 @@ paths:
       externalDocs:
         url: 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEtagging.html'
       responses:
-        '200':
+        '204':
           description: Success
       parameters:
         - name: Bucket
@@ -1631,7 +1633,7 @@ paths:
       externalDocs:
         url: 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEwebsite.html'
       responses:
-        '200':
+        '204':
           description: Success
       parameters:
         - name: Bucket
@@ -1728,7 +1730,7 @@ paths:
       externalDocs:
         url: 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectDELETE.html'
       responses:
-        '200':
+        '204':
           description: Success
           schema:
             $ref: '#/definitions/DeleteObjectOutput'
@@ -2087,6 +2089,7 @@ paths:
             - ONEZONE_IA
             - INTELLIGENT_TIERING
             - GLACIER
+            - DEEP_ARCHIVE
         - name: x-amz-website-redirect-location
           in: header
           required: false
@@ -2167,7 +2170,7 @@ paths:
       operationId: DeleteObjectTagging
       description: Removes the tag-set from an existing object.
       responses:
-        '200':
+        '204':
           description: Success
           schema:
             $ref: '#/definitions/DeleteObjectTaggingOutput'
@@ -2347,7 +2350,7 @@ paths:
       operationId: DeletePublicAccessBlock
       description: Removes the <code>PublicAccessBlock</code> configuration from an Amazon S3 bucket.
       responses:
-        '200':
+        '204':
           description: Success
       parameters:
         - name: Bucket
@@ -4290,7 +4293,7 @@ definitions:
   CreateBucketOutput:
     type: object
     example:
-      Location: 'http://examplebucket.s3.amazonaws.com/'
+      Location: /examplebucket
     properties: {}
   BucketLocationConstraint:
     type: string
@@ -4331,7 +4334,7 @@ definitions:
   DeleteObjectTaggingOutput:
     type: object
     example:
-      VersionId: ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI
+      VersionId: 'null'
     properties: {}
   DeleteObjectsOutput:
     type: object
@@ -4573,12 +4576,12 @@ definitions:
     type: object
     example:
       AcceptRanges: bytes
-      ContentLength: '3191'
-      ContentType: image/jpeg
-      ETag: '"6805f2cfc46c0f04559748bb039d69ae"'
-      LastModified: 'Thu, 15 Dec 2016 01:19:41 GMT'
+      ContentLength: '10'
+      ContentRange: bytes 0-9/43
+      ContentType: text/plain
+      ETag: '"0d94420ffd0bc68cd3d152506b97a9cc"'
+      LastModified: 'Thu, 09 Oct 2014 22:57:28 GMT'
       Metadata: {}
-      TagCount: 2
       VersionId: 'null'
     properties:
       Body:
@@ -4646,9 +4649,11 @@ definitions:
       - TagSet
     example:
       TagSet:
-        - Key: Key1
-          Value: Value1
-      VersionId: ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI
+        - Key: Key4
+          Value: Value4
+        - Key: Key3
+          Value: Value3
+      VersionId: 'null'
     properties:
       TagSet:
         $ref: '#/definitions/TagSet'
@@ -5306,7 +5311,7 @@ definitions:
     example:
       ETag: '"6805f2cfc46c0f04559748bb039d69ae"'
       ServerSideEncryption: AES256
-      VersionId: CG612hodqujkf8FaaNfp8U..FIhLROcp
+      VersionId: Ri.vC6qVlA4dEnjgRV4ZHsHoFIjqEMNt
     properties: {}
   PutObjectAclOutput:
     type: object
@@ -5984,6 +5989,7 @@ definitions:
       - ONEZONE_IA
       - INTELLIGENT_TIERING
       - GLACIER
+      - DEEP_ARCHIVE
   WebsiteRedirectLocation:
     type: string
   SSECustomerKey:
@@ -6825,7 +6831,7 @@ definitions:
     properties:
       NoncurrentDays:
         $ref: '#/definitions/Days'
-        description: 'Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations">How Amazon S3 Calculates When an Object Became Noncurrent</a> in the Amazon Simple Storage Service Developer Guide.'
+        description: 'Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html">How Amazon S3 Calculates When an Object Became Noncurrent</a> in the Amazon Simple Storage Service Developer Guide.'
     description: 'Specifies when noncurrent object versions expire. Upon expiration, Amazon S3 permanently deletes the noncurrent object versions. You set this lifecycle configuration action on a bucket that has versioning enabled (or suspended) to request that Amazon S3 delete noncurrent object versions at a specific period in the object''s lifetime.'
   LifecycleRule:
     type: object
@@ -7016,6 +7022,7 @@ definitions:
       - STANDARD_IA
       - ONEZONE_IA
       - INTELLIGENT_TIERING
+      - DEEP_ARCHIVE
   NoncurrentVersionTransition:
     type: object
     properties:
@@ -7025,7 +7032,7 @@ definitions:
       StorageClass:
         $ref: '#/definitions/TransitionStorageClass'
         description: The class of storage used to store the object.
-    description: 'Container for the transition rule that describes when noncurrent objects transition to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING or GLACIER storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING or GLACIER storage class at a specific period in the object''s lifetime.'
+    description: 'Container for the transition rule that describes when noncurrent objects transition to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER or DEEP_ARCHIVE storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER or DEEP_ARCHIVE storage class at a specific period in the object''s lifetime.'
   S3KeyFilter:
     type: object
     properties:
@@ -7043,6 +7050,7 @@ definitions:
       - STANDARD_IA
       - ONEZONE_IA
       - INTELLIGENT_TIERING
+      - DEEP_ARCHIVE
   Object:
     type: object
     properties:

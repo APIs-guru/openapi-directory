@@ -145,7 +145,7 @@ paths:
   '/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.CreateService':
     post:
       operationId: CreateService
-      description: '<p>Runs and maintains a desired number of tasks from a specified task definition. If the number of tasks running in a service drops below <code>desiredCount</code>, Amazon ECS spawns another copy of the task in the specified cluster. To update an existing service, see <a>UpdateService</a>.</p> <p>In addition to maintaining the desired count of tasks in your service, you can optionally run your service behind a load balancer. The load balancer distributes traffic across the tasks that are associated with the service. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html">Service Load Balancing</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> <p>You can optionally specify a deployment configuration for your service. The deployment is triggered by changing properties, such as the task definition or the desired count of a service, with an <a>UpdateService</a> operation.</p> <p>If a service is using the <code>ECS</code> deployment controller, the <b>minimum healthy percent</b> represents a lower limit on the number of tasks in a service that must remain in the <code>RUNNING</code> state during a deployment, as a percentage of the desired number of tasks (rounded up to the nearest integer), and while any container instances are in the <code>DRAINING</code> state if the service contains tasks using the EC2 launch type. This parameter enables you to deploy without using additional cluster capacity. For example, if your service has a desired number of four tasks and a minimum healthy percent of 50%, the scheduler may stop two existing tasks to free up cluster capacity before starting two new tasks. Tasks for services that <i>do not</i> use a load balancer are considered healthy if they are in the <code>RUNNING</code> state; tasks for services that <i>do</i> use a load balancer are considered healthy if they are in the <code>RUNNING</code> state and they are reported as healthy by the load balancer. The default value for minimum healthy percent is 100%.</p> <p>If a service is using the <code>ECS</code> deployment controller, the <b>maximum percent</b> parameter represents an upper limit on the number of tasks in a service that are allowed in the <code>RUNNING</code> or <code>PENDING</code> state during a deployment, as a percentage of the desired number of tasks (rounded down to the nearest integer), and while any container instances are in the <code>DRAINING</code> state if the service contains tasks using the EC2 launch type. This parameter enables you to define the deployment batch size. For example, if your service has a desired number of four tasks and a maximum percent value of 200%, the scheduler may start four new tasks before stopping the four older tasks (provided that the cluster resources required to do this are available). The default value for maximum percent is 200%.</p> <p>If a service is using the <code>CODE_DEPLOY</code> deployment controller and tasks that use the EC2 launch type, the <b>minimum healthy percent</b> and <b>maximum percent</b> values are only used to define the lower and upper limit on the number of the tasks in the service that remain in the <code>RUNNING</code> state while the container instances are in the <code>DRAINING</code> state. If the tasks in the service use the Fargate launch type, the minimum healthy percent and maximum percent values are not used, although they are currently visible when describing your service.</p> <p>Tasks for services that <i>do not</i> use a load balancer are considered healthy if they are in the <code>RUNNING</code> state. Tasks for services that <i>do</i> use a load balancer are considered healthy if they are in the <code>RUNNING</code> state and the container instance they are hosted on is reported as healthy by the load balancer. The default value for a replica service for <code>minimumHealthyPercent</code> is 100%. The default value for a daemon service for <code>minimumHealthyPercent</code> is 0%.</p> <p>When the service scheduler launches new tasks, it determines task placement in your cluster using the following logic:</p> <ul> <li> <p>Determine which of the container instances in your cluster can support your service''s task definition (for example, they have the required CPU, memory, ports, and container instance attributes).</p> </li> <li> <p>By default, the service scheduler attempts to balance tasks across Availability Zones in this manner (although you can choose a different placement strategy) with the <code>placementStrategy</code> parameter):</p> <ul> <li> <p>Sort the valid container instances, giving priority to instances that have the fewest number of running tasks for this service in their respective Availability Zone. For example, if zone A has one running service task and zones B and C each have zero, valid container instances in either zone B or C are considered optimal for placement.</p> </li> <li> <p>Place the new service task on a valid container instance in an optimal Availability Zone (based on the previous steps), favoring container instances with the fewest number of running tasks for this service.</p> </li> </ul> </li> </ul>'
+      description: '<p>Runs and maintains a desired number of tasks from a specified task definition. If the number of tasks running in a service drops below the <code>desiredCount</code>, Amazon ECS spawns another copy of the task in the specified cluster. To update an existing service, see <a>UpdateService</a>.</p> <p>In addition to maintaining the desired count of tasks in your service, you can optionally run your service behind a load balancer. The load balancer distributes traffic across the tasks that are associated with the service. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html">Service Load Balancing</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> <p>Tasks for services that <i>do not</i> use a load balancer are considered healthy if they''re in the <code>RUNNING</code> state. Tasks for services that <i>do</i> use a load balancer are considered healthy if they''re in the <code>RUNNING</code> state and the container instance that they''re hosted on is reported as healthy by the load balancer.</p> <p>There are two service scheduler strategies available:</p> <ul> <li> <p> <code>REPLICA</code> - The replica scheduling strategy places and maintains the desired number of tasks across your cluster. By default, the service scheduler spreads tasks across Availability Zones. You can use task placement strategies and constraints to customize task placement decisions. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html">Service Scheduler Concepts</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> </li> <li> <p> <code>DAEMON</code> - The daemon scheduling strategy deploys exactly one task on each active container instance that meets all of the task placement constraints that you specify in your cluster. When using this strategy, you don''t need to specify a desired number of tasks, a task placement strategy, or use Service Auto Scaling policies. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html">Service Scheduler Concepts</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> </li> </ul> <p>You can optionally specify a deployment configuration for your service. The deployment is triggered by changing properties, such as the task definition or the desired count of a service, with an <a>UpdateService</a> operation. The default value for a replica service for <code>minimumHealthyPercent</code> is 100%. The default value for a daemon service for <code>minimumHealthyPercent</code> is 0%.</p> <p>If a service is using the <code>ECS</code> deployment controller, the minimum healthy percent represents a lower limit on the number of tasks in a service that must remain in the <code>RUNNING</code> state during a deployment, as a percentage of the desired number of tasks (rounded up to the nearest integer), and while any container instances are in the <code>DRAINING</code> state if the service contains tasks using the EC2 launch type. This parameter enables you to deploy without using additional cluster capacity. For example, if your service has a desired number of four tasks and a minimum healthy percent of 50%, the scheduler might stop two existing tasks to free up cluster capacity before starting two new tasks. Tasks for services that <i>do not</i> use a load balancer are considered healthy if they''re in the <code>RUNNING</code> state. Tasks for services that <i>do</i> use a load balancer are considered healthy if they''re in the <code>RUNNING</code> state and they''re reported as healthy by the load balancer. The default value for minimum healthy percent is 100%.</p> <p>If a service is using the <code>ECS</code> deployment controller, the <b>maximum percent</b> parameter represents an upper limit on the number of tasks in a service that are allowed in the <code>RUNNING</code> or <code>PENDING</code> state during a deployment, as a percentage of the desired number of tasks (rounded down to the nearest integer), and while any container instances are in the <code>DRAINING</code> state if the service contains tasks using the EC2 launch type. This parameter enables you to define the deployment batch size. For example, if your service has a desired number of four tasks and a maximum percent value of 200%, the scheduler may start four new tasks before stopping the four older tasks (provided that the cluster resources required to do this are available). The default value for maximum percent is 200%.</p> <p>If a service is using either the <code>CODE_DEPLOY</code> or <code>EXTERNAL</code> deployment controller types and tasks that use the EC2 launch type, the <b>minimum healthy percent</b> and <b>maximum percent</b> values are used only to define the lower and upper limit on the number of the tasks in the service that remain in the <code>RUNNING</code> state while the container instances are in the <code>DRAINING</code> state. If the tasks in the service use the Fargate launch type, the minimum healthy percent and maximum percent values aren''t used, although they''re currently visible when describing your service.</p> <p>When creating a service that uses the <code>EXTERNAL</code> deployment controller, you can specify only parameters that aren''t controlled at the task set level. The only required parameter is the service name. You control your services using the <a>CreateTaskSet</a> operation. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html">Amazon ECS Deployment Types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> <p>When the service scheduler launches new tasks, it determines task placement in your cluster using the following logic:</p> <ul> <li> <p>Determine which of the container instances in your cluster can support your service''s task definition (for example, they have the required CPU, memory, ports, and container instance attributes).</p> </li> <li> <p>By default, the service scheduler attempts to balance tasks across Availability Zones in this manner (although you can choose a different placement strategy) with the <code>placementStrategy</code> parameter):</p> <ul> <li> <p>Sort the valid container instances, giving priority to instances that have the fewest number of running tasks for this service in their respective Availability Zone. For example, if zone A has one running service task and zones B and C each have zero, valid container instances in either zone B or C are considered optimal for placement.</p> </li> <li> <p>Place the new service task on a valid container instance in an optimal Availability Zone (based on the previous steps), favoring container instances with the fewest number of running tasks for this service.</p> </li> </ul> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -195,6 +195,77 @@ paths:
           type: string
           enum:
             - AmazonEC2ContainerServiceV20141113.CreateService
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.CreateTaskSet':
+    post:
+      operationId: CreateTaskSet
+      description: 'Create a task set in the specified cluster and service. This is used when a service uses the <code>EXTERNAL</code> deployment controller type. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html">Amazon ECS Deployment Types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateTaskSetResponse'
+        '480':
+          description: ServerException
+          schema:
+            $ref: '#/definitions/ServerException'
+        '481':
+          description: ClientException
+          schema:
+            $ref: '#/definitions/ClientException'
+        '482':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '483':
+          description: ClusterNotFoundException
+          schema:
+            $ref: '#/definitions/ClusterNotFoundException'
+        '484':
+          description: UnsupportedFeatureException
+          schema:
+            $ref: '#/definitions/UnsupportedFeatureException'
+        '485':
+          description: PlatformUnknownException
+          schema:
+            $ref: '#/definitions/PlatformUnknownException'
+        '486':
+          description: PlatformTaskDefinitionIncompatibilityException
+          schema:
+            $ref: '#/definitions/PlatformTaskDefinitionIncompatibilityException'
+        '487':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '488':
+          description: ServiceNotFoundException
+          schema:
+            $ref: '#/definitions/ServiceNotFoundException'
+        '489':
+          description: ServiceNotActiveException
+          schema:
+            $ref: '#/definitions/ServiceNotActiveException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateTaskSetRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonEC2ContainerServiceV20141113.CreateTaskSet
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -391,6 +462,73 @@ paths:
           type: string
           enum:
             - AmazonEC2ContainerServiceV20141113.DeleteService
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DeleteTaskSet':
+    post:
+      operationId: DeleteTaskSet
+      description: 'Deletes a specified task set within a service. This is used when a service uses the <code>EXTERNAL</code> deployment controller type. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html">Amazon ECS Deployment Types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteTaskSetResponse'
+        '480':
+          description: ServerException
+          schema:
+            $ref: '#/definitions/ServerException'
+        '481':
+          description: ClientException
+          schema:
+            $ref: '#/definitions/ClientException'
+        '482':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '483':
+          description: ClusterNotFoundException
+          schema:
+            $ref: '#/definitions/ClusterNotFoundException'
+        '484':
+          description: UnsupportedFeatureException
+          schema:
+            $ref: '#/definitions/UnsupportedFeatureException'
+        '485':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '486':
+          description: ServiceNotFoundException
+          schema:
+            $ref: '#/definitions/ServiceNotFoundException'
+        '487':
+          description: ServiceNotActiveException
+          schema:
+            $ref: '#/definitions/ServiceNotActiveException'
+        '488':
+          description: TaskSetNotFoundException
+          schema:
+            $ref: '#/definitions/TaskSetNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteTaskSetRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonEC2ContainerServiceV20141113.DeleteTaskSet
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -661,6 +799,69 @@ paths:
           type: string
           enum:
             - AmazonEC2ContainerServiceV20141113.DescribeTaskDefinition
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DescribeTaskSets':
+    post:
+      operationId: DescribeTaskSets
+      description: 'Describes the task sets in the specified cluster and service. This is used when a service uses the <code>EXTERNAL</code> deployment controller type. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html">Amazon ECS Deployment Types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeTaskSetsResponse'
+        '480':
+          description: ServerException
+          schema:
+            $ref: '#/definitions/ServerException'
+        '481':
+          description: ClientException
+          schema:
+            $ref: '#/definitions/ClientException'
+        '482':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '483':
+          description: ClusterNotFoundException
+          schema:
+            $ref: '#/definitions/ClusterNotFoundException'
+        '484':
+          description: UnsupportedFeatureException
+          schema:
+            $ref: '#/definitions/UnsupportedFeatureException'
+        '485':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '486':
+          description: ServiceNotFoundException
+          schema:
+            $ref: '#/definitions/ServiceNotFoundException'
+        '487':
+          description: ServiceNotActiveException
+          schema:
+            $ref: '#/definitions/ServiceNotActiveException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeTaskSetsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonEC2ContainerServiceV20141113.DescribeTaskSets
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1897,7 +2098,7 @@ paths:
   '/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.UpdateService':
     post:
       operationId: UpdateService
-      description: '<p>Modifies the parameters of a service.</p> <p>For services using the rolling update (<code>ECS</code>) deployment controller, the desired count, deployment configuration, network configuration, or task definition used can be updated.</p> <p>For services using the blue/green (<code>CODE_DEPLOY</code>) deployment controller, only the desired count, deployment configuration, and health check grace period can be updated using this API. If the network configuration, platform version, or task definition need to be updated, a new AWS CodeDeploy deployment should be created. For more information, see <a href="https://docs.aws.amazon.com/codedeploy/latest/APIReference/API_CreateDeployment.html">CreateDeployment</a> in the <i>AWS CodeDeploy API Reference</i>.</p> <p>You can add to or subtract from the number of instantiations of a task definition in a service by specifying the cluster that the service is running in and a new <code>desiredCount</code> parameter.</p> <p>If you have updated the Docker image of your application, you can create a new task definition with that image and deploy it to your service. The service scheduler uses the minimum healthy percent and maximum percent parameters (in the service''s deployment configuration) to determine the deployment strategy.</p> <note> <p>If your updated Docker image uses the same tag as what is in the existing task definition for your service (for example, <code>my_image:latest</code>), you do not need to create a new revision of your task definition. You can update the service using the <code>forceNewDeployment</code> option. The new tasks launched by the deployment pull the current image/tag combination from your repository when they start.</p> </note> <p>You can also update the deployment configuration of a service. When a deployment is triggered by updating the task definition of a service, the service scheduler uses the deployment configuration parameters, <code>minimumHealthyPercent</code> and <code>maximumPercent</code>, to determine the deployment strategy.</p> <ul> <li> <p>If <code>minimumHealthyPercent</code> is below 100%, the scheduler can ignore <code>desiredCount</code> temporarily during a deployment. For example, if <code>desiredCount</code> is four tasks, a minimum of 50% allows the scheduler to stop two existing tasks before starting two new tasks. Tasks for services that do not use a load balancer are considered healthy if they are in the <code>RUNNING</code> state. Tasks for services that use a load balancer are considered healthy if they are in the <code>RUNNING</code> state and the container instance they are hosted on is reported as healthy by the load balancer.</p> </li> <li> <p>The <code>maximumPercent</code> parameter represents an upper limit on the number of running tasks during a deployment, which enables you to define the deployment batch size. For example, if <code>desiredCount</code> is four tasks, a maximum of 200% starts four new tasks before stopping the four older tasks (provided that the cluster resources required to do this are available).</p> </li> </ul> <p>When <a>UpdateService</a> stops a task during a deployment, the equivalent of <code>docker stop</code> is issued to the containers running in the task. This results in a <code>SIGTERM</code> and a 30-second timeout, after which <code>SIGKILL</code> is sent and the containers are forcibly stopped. If the container handles the <code>SIGTERM</code> gracefully and exits within 30 seconds from receiving it, no <code>SIGKILL</code> is sent.</p> <p>When the service scheduler launches new tasks, it determines task placement in your cluster with the following logic:</p> <ul> <li> <p>Determine which of the container instances in your cluster can support your service''s task definition (for example, they have the required CPU, memory, ports, and container instance attributes).</p> </li> <li> <p>By default, the service scheduler attempts to balance tasks across Availability Zones in this manner (although you can choose a different placement strategy):</p> <ul> <li> <p>Sort the valid container instances by the fewest number of running tasks for this service in the same Availability Zone as the instance. For example, if zone A has one running service task and zones B and C each have zero, valid container instances in either zone B or C are considered optimal for placement.</p> </li> <li> <p>Place the new service task on a valid container instance in an optimal Availability Zone (based on the previous steps), favoring container instances with the fewest number of running tasks for this service.</p> </li> </ul> </li> </ul> <p>When the service scheduler stops running tasks, it attempts to maintain balance across the Availability Zones in your cluster using the following logic: </p> <ul> <li> <p>Sort the container instances by the largest number of running tasks for this service in the same Availability Zone as the instance. For example, if zone A has one running service task and zones B and C each have two, container instances in either zone B or C are considered optimal for termination.</p> </li> <li> <p>Stop the task on a container instance in an optimal Availability Zone (based on the previous steps), favoring container instances with the largest number of running tasks for this service.</p> </li> </ul>'
+      description: '<p>Modifies the parameters of a service.</p> <p>For services using the rolling update (<code>ECS</code>) deployment controller, the desired count, deployment configuration, network configuration, or task definition used can be updated.</p> <p>For services using the blue/green (<code>CODE_DEPLOY</code>) deployment controller, only the desired count, deployment configuration, and health check grace period can be updated using this API. If the network configuration, platform version, or task definition need to be updated, a new AWS CodeDeploy deployment should be created. For more information, see <a href="https://docs.aws.amazon.com/codedeploy/latest/APIReference/API_CreateDeployment.html">CreateDeployment</a> in the <i>AWS CodeDeploy API Reference</i>.</p> <p>For services using an external deployment controller, you can update only the desired count and health check grace period using this API. If the launch type, load balancer, network configuration, platform version, or task definition need to be updated, you should create a new task set. For more information, see <a>CreateTaskSet</a>.</p> <p>You can add to or subtract from the number of instantiations of a task definition in a service by specifying the cluster that the service is running in and a new <code>desiredCount</code> parameter.</p> <p>If you have updated the Docker image of your application, you can create a new task definition with that image and deploy it to your service. The service scheduler uses the minimum healthy percent and maximum percent parameters (in the service''s deployment configuration) to determine the deployment strategy.</p> <note> <p>If your updated Docker image uses the same tag as what is in the existing task definition for your service (for example, <code>my_image:latest</code>), you do not need to create a new revision of your task definition. You can update the service using the <code>forceNewDeployment</code> option. The new tasks launched by the deployment pull the current image/tag combination from your repository when they start.</p> </note> <p>You can also update the deployment configuration of a service. When a deployment is triggered by updating the task definition of a service, the service scheduler uses the deployment configuration parameters, <code>minimumHealthyPercent</code> and <code>maximumPercent</code>, to determine the deployment strategy.</p> <ul> <li> <p>If <code>minimumHealthyPercent</code> is below 100%, the scheduler can ignore <code>desiredCount</code> temporarily during a deployment. For example, if <code>desiredCount</code> is four tasks, a minimum of 50% allows the scheduler to stop two existing tasks before starting two new tasks. Tasks for services that do not use a load balancer are considered healthy if they are in the <code>RUNNING</code> state. Tasks for services that use a load balancer are considered healthy if they are in the <code>RUNNING</code> state and the container instance they are hosted on is reported as healthy by the load balancer.</p> </li> <li> <p>The <code>maximumPercent</code> parameter represents an upper limit on the number of running tasks during a deployment, which enables you to define the deployment batch size. For example, if <code>desiredCount</code> is four tasks, a maximum of 200% starts four new tasks before stopping the four older tasks (provided that the cluster resources required to do this are available).</p> </li> </ul> <p>When <a>UpdateService</a> stops a task during a deployment, the equivalent of <code>docker stop</code> is issued to the containers running in the task. This results in a <code>SIGTERM</code> and a 30-second timeout, after which <code>SIGKILL</code> is sent and the containers are forcibly stopped. If the container handles the <code>SIGTERM</code> gracefully and exits within 30 seconds from receiving it, no <code>SIGKILL</code> is sent.</p> <p>When the service scheduler launches new tasks, it determines task placement in your cluster with the following logic:</p> <ul> <li> <p>Determine which of the container instances in your cluster can support your service''s task definition (for example, they have the required CPU, memory, ports, and container instance attributes).</p> </li> <li> <p>By default, the service scheduler attempts to balance tasks across Availability Zones in this manner (although you can choose a different placement strategy):</p> <ul> <li> <p>Sort the valid container instances by the fewest number of running tasks for this service in the same Availability Zone as the instance. For example, if zone A has one running service task and zones B and C each have zero, valid container instances in either zone B or C are considered optimal for placement.</p> </li> <li> <p>Place the new service task on a valid container instance in an optimal Availability Zone (based on the previous steps), favoring container instances with the fewest number of running tasks for this service.</p> </li> </ul> </li> </ul> <p>When the service scheduler stops running tasks, it attempts to maintain balance across the Availability Zones in your cluster using the following logic: </p> <ul> <li> <p>Sort the container instances by the largest number of running tasks for this service in the same Availability Zone as the instance. For example, if zone A has one running service task and zones B and C each have two, container instances in either zone B or C are considered optimal for termination.</p> </li> <li> <p>Stop the task on a container instance in an optimal Availability Zone (based on the previous steps), favoring container instances with the largest number of running tasks for this service.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -1951,6 +2152,144 @@ paths:
           type: string
           enum:
             - AmazonEC2ContainerServiceV20141113.UpdateService
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.UpdateServicePrimaryTaskSet':
+    post:
+      operationId: UpdateServicePrimaryTaskSet
+      description: 'Modifies which task set in a service is the primary task set. Any parameters that are updated on the primary task set in a service will transition to the service. This is used when a service uses the <code>EXTERNAL</code> deployment controller type. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html">Amazon ECS Deployment Types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateServicePrimaryTaskSetResponse'
+        '480':
+          description: ServerException
+          schema:
+            $ref: '#/definitions/ServerException'
+        '481':
+          description: ClientException
+          schema:
+            $ref: '#/definitions/ClientException'
+        '482':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '483':
+          description: ClusterNotFoundException
+          schema:
+            $ref: '#/definitions/ClusterNotFoundException'
+        '484':
+          description: UnsupportedFeatureException
+          schema:
+            $ref: '#/definitions/UnsupportedFeatureException'
+        '485':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '486':
+          description: ServiceNotFoundException
+          schema:
+            $ref: '#/definitions/ServiceNotFoundException'
+        '487':
+          description: ServiceNotActiveException
+          schema:
+            $ref: '#/definitions/ServiceNotActiveException'
+        '488':
+          description: TaskSetNotFoundException
+          schema:
+            $ref: '#/definitions/TaskSetNotFoundException'
+        '489':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateServicePrimaryTaskSetRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonEC2ContainerServiceV20141113.UpdateServicePrimaryTaskSet
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.UpdateTaskSet':
+    post:
+      operationId: UpdateTaskSet
+      description: 'Modifies a task set. This is used when a service uses the <code>EXTERNAL</code> deployment controller type. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html">Amazon ECS Deployment Types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateTaskSetResponse'
+        '480':
+          description: ServerException
+          schema:
+            $ref: '#/definitions/ServerException'
+        '481':
+          description: ClientException
+          schema:
+            $ref: '#/definitions/ClientException'
+        '482':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '483':
+          description: ClusterNotFoundException
+          schema:
+            $ref: '#/definitions/ClusterNotFoundException'
+        '484':
+          description: UnsupportedFeatureException
+          schema:
+            $ref: '#/definitions/UnsupportedFeatureException'
+        '485':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '486':
+          description: ServiceNotFoundException
+          schema:
+            $ref: '#/definitions/ServiceNotFoundException'
+        '487':
+          description: ServiceNotActiveException
+          schema:
+            $ref: '#/definitions/ServiceNotActiveException'
+        '488':
+          description: TaskSetNotFoundException
+          schema:
+            $ref: '#/definitions/TaskSetNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateTaskSetRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonEC2ContainerServiceV20141113.UpdateTaskSet
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2028,7 +2367,6 @@ definitions:
     type: object
     required:
       - serviceName
-      - taskDefinition
     properties:
       cluster:
         $ref: '#/definitions/String'
@@ -2038,7 +2376,7 @@ definitions:
         description: 'The name of your service. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed. Service names must be unique within a cluster, but you can have similarly named services in multiple clusters within a Region or across multiple Regions.'
       taskDefinition:
         $ref: '#/definitions/String'
-        description: 'The <code>family</code> and <code>revision</code> (<code>family:revision</code>) or full ARN of the task definition to run in your service. If a <code>revision</code> is not specified, the latest <code>ACTIVE</code> revision is used.'
+        description: '<p>The <code>family</code> and <code>revision</code> (<code>family:revision</code>) or full ARN of the task definition to run in your service. If a <code>revision</code> is not specified, the latest <code>ACTIVE</code> revision is used.</p> <p>A task definition must be specified if the service is using the <code>ECS</code> deployment controller.</p>'
       loadBalancers:
         $ref: '#/definitions/LoadBalancers'
         description: '<p>A load balancer object representing the load balancer to use with your service.</p> <p>If the service is using the <code>ECS</code> deployment controller, you are limited to one load balancer or target group.</p> <p>If the service is using the <code>CODE_DEPLOY</code> deployment controller, the service is required to use either an Application Load Balancer or Network Load Balancer. When creating an AWS CodeDeploy deployment group, you specify two target groups (referred to as a <code>targetGroupPair</code>). During a deployment, AWS CodeDeploy determines which task set in your service has the status <code>PRIMARY</code> and associates one target group with it, and then associates the other target group with the replacement task set. The load balancer can also have up to two listeners: a required listener for production traffic and an optional listener that allows you perform validation tests with Lambda functions before routing production traffic to it.</p> <p>After you create a service using the <code>ECS</code> deployment controller, the load balancer name or target group ARN, container name, and container port specified in the service definition are immutable. If you are using the <code>CODE_DEPLOY</code> deployment controller, these values can be changed when updating the service.</p> <p>For Classic Load Balancers, this object must contain the load balancer name, the container name (as it appears in a container definition), and the container port to access from the load balancer. When a task from this service is placed on a container instance, the container instance is registered with the load balancer specified here.</p> <p>For Application Load Balancers and Network Load Balancers, this object must contain the load balancer target group ARN, the container name (as it appears in a container definition), and the container port to access from the load balancer. When a task from this service is placed on a container instance, the container instance and port combination is registered as a target in the target group specified here.</p> <p>Services with tasks that use the <code>awsvpc</code> network mode (for example, those with the Fargate launch type) only support Application Load Balancers and Network Load Balancers. Classic Load Balancers are not supported. Also, when you create any target groups for these services, you must choose <code>ip</code> as the target type, not <code>instance</code>, because tasks that use the <code>awsvpc</code> network mode are associated with an elastic network interface, not an Amazon EC2 instance.</p>'
@@ -2056,7 +2394,7 @@ definitions:
         description: 'The launch type on which to run your service. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html">Amazon ECS Launch Types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
       platformVersion:
         $ref: '#/definitions/String'
-        description: 'The platform version on which your tasks in the service are running. A platform version is only specified for tasks using the Fargate launch type. If one is not specified, the <code>LATEST</code> platform version is used by default. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html">AWS Fargate Platform Versions</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
+        description: 'The platform version that your tasks in the service are running on. A platform version is specified only for tasks using the Fargate launch type. If one isn''t specified, the <code>LATEST</code> platform version is used by default. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html">AWS Fargate Platform Versions</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
       role:
         $ref: '#/definitions/String'
         description: '<p>The name or full Amazon Resource Name (ARN) of the IAM role that allows Amazon ECS to make calls to your load balancer on your behalf. This parameter is only permitted if you are using a load balancer with your service and your task definition does not use the <code>awsvpc</code> network mode. If you specify the <code>role</code> parameter, you must also specify a load balancer object with the <code>loadBalancers</code> parameter.</p> <important> <p>If your account has already created the Amazon ECS service-linked role, that role is used by default for your service unless you specify a role here. The service-linked role is required if your task definition uses the <code>awsvpc</code> network mode, in which case you should not specify a role here. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html">Using Service-Linked Roles for Amazon ECS</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> </important> <p>If your specified role has a path other than <code>/</code>, then you must either specify the full role ARN (this is recommended) or prefix the role name with the path. For example, if a role with the name <code>bar</code> has a path of <code>/foo/</code> then you would specify <code>/foo/bar</code> as the role name. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-friendly-names">Friendly Names and Paths</a> in the <i>IAM User Guide</i>.</p>'
@@ -2077,7 +2415,7 @@ definitions:
         description: 'The period of time, in seconds, that the Amazon ECS service scheduler should ignore unhealthy Elastic Load Balancing target health checks after a task has first started. This is only valid if your service is configured to use a load balancer. If your service''s tasks take a while to start and respond to Elastic Load Balancing health checks, you can specify a health check grace period of up to 2,147,483,647 seconds. During that time, the ECS service scheduler ignores health check status. This grace period can prevent the ECS service scheduler from marking tasks as unhealthy and stopping them before they have time to come up.'
       schedulingStrategy:
         $ref: '#/definitions/SchedulingStrategy'
-        description: '<p>The scheduling strategy to use for the service. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html">Services</a>.</p> <p>There are two service scheduler strategies available:</p> <ul> <li> <p> <code>REPLICA</code>-The replica scheduling strategy places and maintains the desired number of tasks across your cluster. By default, the service scheduler spreads tasks across Availability Zones. You can use task placement strategies and constraints to customize task placement decisions. This scheduler strategy is required if using the <code>CODE_DEPLOY</code> deployment controller.</p> </li> <li> <p> <code>DAEMON</code>-The daemon scheduling strategy deploys exactly one task on each active container instance that meets all of the task placement constraints that you specify in your cluster. When you are using this strategy, there is no need to specify a desired number of tasks, a task placement strategy, or use Service Auto Scaling policies.</p> <note> <p>Tasks using the Fargate launch type or the <code>CODE_DEPLOY</code> deploymenet controller do not support the <code>DAEMON</code> scheduling strategy.</p> </note> </li> </ul>'
+        description: '<p>The scheduling strategy to use for the service. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html">Services</a>.</p> <p>There are two service scheduler strategies available:</p> <ul> <li> <p> <code>REPLICA</code>-The replica scheduling strategy places and maintains the desired number of tasks across your cluster. By default, the service scheduler spreads tasks across Availability Zones. You can use task placement strategies and constraints to customize task placement decisions. This scheduler strategy is required if the service is using the <code>CODE_DEPLOY</code> or <code>EXTERNAL</code> deployment controller types.</p> </li> <li> <p> <code>DAEMON</code>-The daemon scheduling strategy deploys exactly one task on each active container instance that meets all of the task placement constraints that you specify in your cluster. When you''re using this strategy, you don''t need to specify a desired number of tasks, a task placement strategy, or use Service Auto Scaling policies.</p> <note> <p>Tasks using the Fargate launch type or the <code>CODE_DEPLOY</code> or <code>EXTERNAL</code> deployment controller types don''t support the <code>DAEMON</code> scheduling strategy.</p> </note> </li> </ul>'
       deploymentController:
         $ref: '#/definitions/DeploymentController'
         description: The deployment controller to use for the service.
@@ -2095,6 +2433,51 @@ definitions:
   PlatformUnknownException: {}
   PlatformTaskDefinitionIncompatibilityException: {}
   AccessDeniedException: {}
+  CreateTaskSetResponse:
+    type: object
+    properties:
+      taskSet:
+        $ref: '#/definitions/TaskSet'
+  CreateTaskSetRequest:
+    type: object
+    required:
+      - service
+      - cluster
+      - taskDefinition
+    properties:
+      service:
+        $ref: '#/definitions/String'
+        description: The short name or full Amazon Resource Name (ARN) of the service to create the task set in.
+      cluster:
+        $ref: '#/definitions/String'
+        description: The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service to create the task set in.
+      externalId:
+        $ref: '#/definitions/String'
+        description: 'An optional non-unique tag that identifies this task set in external systems. If the task set is associated with a service discovery registry, the tasks in this task set will have the <code>ECS_TASK_SET_EXTERNAL_ID</code> AWS Cloud Map attribute set to the provided value.'
+      taskDefinition:
+        $ref: '#/definitions/String'
+        description: The task definition for the tasks in the task set to use.
+      networkConfiguration:
+        $ref: '#/definitions/NetworkConfiguration'
+      loadBalancers:
+        $ref: '#/definitions/LoadBalancers'
+        description: A load balancer object representing the load balancer to use with the task set. The supported load balancer types are either an Application Load Balancer or a Network Load Balancer.
+      serviceRegistries:
+        $ref: '#/definitions/ServiceRegistries'
+        description: 'The details of the service discovery registries to assign to this task set. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html">Service Discovery</a>.'
+      launchType:
+        $ref: '#/definitions/LaunchType'
+        description: 'The launch type that new tasks in the task set will use. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html">Amazon ECS Launch Types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
+      platformVersion:
+        $ref: '#/definitions/String'
+        description: 'The platform version that the tasks in the task set should use. A platform version is specified only for tasks using the Fargate launch type. If one isn''t specified, the <code>LATEST</code> platform version is used by default.'
+      scale:
+        $ref: '#/definitions/Scale'
+      clientToken:
+        $ref: '#/definitions/String'
+        description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Up to 32 ASCII characters are allowed.'
+  ServiceNotFoundException: {}
+  ServiceNotActiveException: {}
   DeleteAccountSettingResponse:
     type: object
     example:
@@ -2182,7 +2565,31 @@ definitions:
       force:
         $ref: '#/definitions/BoxedBoolean'
         description: 'If <code>true</code>, allows you to delete a service even if it has not been scaled down to zero tasks. It is only necessary to use this if the service is using the <code>REPLICA</code> scheduling strategy.'
-  ServiceNotFoundException: {}
+  DeleteTaskSetResponse:
+    type: object
+    properties:
+      taskSet:
+        $ref: '#/definitions/TaskSet'
+  DeleteTaskSetRequest:
+    type: object
+    required:
+      - cluster
+      - service
+      - taskSet
+    properties:
+      cluster:
+        $ref: '#/definitions/String'
+        description: The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service that the task set exists in to delete.
+      service:
+        $ref: '#/definitions/String'
+        description: The short name or full Amazon Resource Name (ARN) of the service that hosts the task set to delete.
+      taskSet:
+        $ref: '#/definitions/String'
+        description: The task set ID or full Amazon Resource Name (ARN) of the task set to delete.
+      force:
+        $ref: '#/definitions/BoxedBoolean'
+        description: 'If <code>true</code>, this allows you to delete a task set even if it hasn''t been scaled down to zero.'
+  TaskSetNotFoundException: {}
   DeregisterContainerInstanceResponse:
     type: object
     example: {}
@@ -2420,6 +2827,30 @@ definitions:
       include:
         $ref: '#/definitions/TaskDefinitionFieldList'
         description: 'Specifies whether to see the resource tags for the task definition. If <code>TAGS</code> is specified, the tags are included in the response. If this field is omitted, tags are not included in the response.'
+  DescribeTaskSetsResponse:
+    type: object
+    properties:
+      taskSets:
+        $ref: '#/definitions/TaskSets'
+        description: The list of task sets described.
+      failures:
+        $ref: '#/definitions/Failures'
+        description: Any failures associated with the call.
+  DescribeTaskSetsRequest:
+    type: object
+    required:
+      - cluster
+      - service
+    properties:
+      cluster:
+        $ref: '#/definitions/String'
+        description: The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service that the task sets exist in.
+      service:
+        $ref: '#/definitions/String'
+        description: The short name or full Amazon Resource Name (ARN) of the service that the task sets exist in.
+      taskSets:
+        $ref: '#/definitions/StringList'
+        description: The ID or full Amazon Resource Name (ARN) of task sets to describe.
   DescribeTasksResponse:
     type: object
     example:
@@ -3070,7 +3501,7 @@ definitions:
         description: 'The short name or full Amazon Resource Name (ARN) of the cluster that hosts the task to stop. If you do not specify a cluster, the default cluster is assumed.'
       task:
         $ref: '#/definitions/String'
-        description: The task ID or full ARN entry of the task to stop.
+        description: The task ID or full Amazon Resource Name (ARN) of the task to stop.
       reason:
         $ref: '#/definitions/String'
         description: 'An optional message specified when a task is stopped. For example, if you are using a custom scheduler, you can use this parameter to specify the reason for stopping the task here, and the message appears in subsequent <a>DescribeTasks</a> API operations on this task. Up to 255 characters are allowed in this message.'
@@ -3256,7 +3687,51 @@ definitions:
       healthCheckGracePeriodSeconds:
         $ref: '#/definitions/BoxedInteger'
         description: 'The period of time, in seconds, that the Amazon ECS service scheduler should ignore unhealthy Elastic Load Balancing target health checks after a task has first started. This is only valid if your service is configured to use a load balancer. If your service''s tasks take a while to start and respond to Elastic Load Balancing health checks, you can specify a health check grace period of up to 1,800 seconds. During that time, the ECS service scheduler ignores the Elastic Load Balancing health check status. This grace period can prevent the ECS service scheduler from marking tasks as unhealthy and stopping them before they have time to come up.'
-  ServiceNotActiveException: {}
+  UpdateServicePrimaryTaskSetResponse:
+    type: object
+    properties:
+      taskSet:
+        $ref: '#/definitions/TaskSet'
+  UpdateServicePrimaryTaskSetRequest:
+    type: object
+    required:
+      - cluster
+      - service
+      - primaryTaskSet
+    properties:
+      cluster:
+        $ref: '#/definitions/String'
+        description: The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service that the task set exists in.
+      service:
+        $ref: '#/definitions/String'
+        description: The short name or full Amazon Resource Name (ARN) of the service that the task set exists in.
+      primaryTaskSet:
+        $ref: '#/definitions/String'
+        description: The short name or full Amazon Resource Name (ARN) of the task set to set as the primary task set in the deployment.
+  UpdateTaskSetResponse:
+    type: object
+    properties:
+      taskSet:
+        $ref: '#/definitions/TaskSet'
+  UpdateTaskSetRequest:
+    type: object
+    required:
+      - cluster
+      - service
+      - taskSet
+      - scale
+    properties:
+      cluster:
+        $ref: '#/definitions/String'
+        description: The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service that the task set exists in.
+      service:
+        $ref: '#/definitions/String'
+        description: The short name or full Amazon Resource Name (ARN) of the service that the task set exists in.
+      taskSet:
+        $ref: '#/definitions/String'
+        description: The short name or full Amazon Resource Name (ARN) of the task set to update.
+      scale:
+        $ref: '#/definitions/Scale'
   AgentUpdateStatus:
     type: string
     enum:
@@ -3671,19 +4146,19 @@ definitions:
         description: 'The secrets to pass to the container. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html">Specifying Sensitive Data</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
       dependsOn:
         $ref: '#/definitions/ContainerDependencies'
-        description: The dependencies defined for container startup. A container can contain multiple dependencies.
+        description: '<p>The dependencies defined for container startup and shutdown. A container can contain multiple dependencies. When a dependency is defined for container startup, for container shutdown it is reversed.</p> <p>Your Amazon ECS container instances require at least version 1.26.0 of the container agent to enable container dependencies. However, we recommend using the latest container agent version. For information about checking your agent version and updating to the latest version, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html">Updating the Amazon ECS Container Agent</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. If you are using an Amazon ECS-optimized Linux AMI, your instance needs at least version 1.26.0-1 of the <code>ecs-init</code> package. If your container instances are launched from version <code>20190301</code> or later, then they contain the required versions of the container agent and <code>ecs-init</code>. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html">Amazon ECS-optimized Linux AMI</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>'
       startTimeout:
         $ref: '#/definitions/BoxedInteger'
-        description: '<p>Time duration to wait before giving up on starting the container.</p> <note> <p>The <code>startTimeout</code> value for the container will take precedence over the <code>ECS_CONTAINER_START_TIMEOUT</code> container agent configuration parameter, if used.</p> </note>'
+        description: '<p>Time duration to wait before giving up on resolving dependencies for a container. For example, you specify two containers in a task definition with containerA having a dependency on containerB reaching a <code>COMPLETE</code>, <code>SUCCESS</code>, or <code>HEALTHY</code> status. If a <code>startTimeout</code> value is specified for containerB and it does not reach the desired status within that time then containerA will give up and not start. This results in the task transitioning to a <code>STOPPED</code> state.</p> <p>Your Amazon ECS container instances require at least version 1.26.0 of the container agent to enable a container start timeout value. However, we recommend using the latest container agent version. For information about checking your agent version and updating to the latest version, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html">Updating the Amazon ECS Container Agent</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. If you are using an Amazon ECS-optimized Linux AMI, your instance needs at least version 1.26.0-1 of the <code>ecs-init</code> package. If your container instances are launched from version <code>20190301</code> or later, then they contain the required versions of the container agent and <code>ecs-init</code>. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html">Amazon ECS-optimized Linux AMI</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>'
       stopTimeout:
         $ref: '#/definitions/BoxedInteger'
-        description: '<p>Time duration to wait before the container is forcefully killed if it does not exit normally on its own.</p> <note> <p>The <code>stopTimeout</code> value for the container will take precedence over the <code>ECS_CONTAINER_STOP_TIMEOUT</code> container agent configuration parameter, if used.</p> </note>'
+        description: '<p>Time duration to wait before the container is forcefully killed if it doesn''t exit normally on its own. The stop timeout value for the container takes precedence over the <code>ECS_CONTAINER_STOP_TIMEOUT</code> container agent configuration parameter, if used.</p> <p>Your Amazon ECS container instances require at least version 1.26.0 of the container agent to enable a container stop timeout value. However, we recommend using the latest container agent version. For information about checking your agent version and updating to the latest version, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html">Updating the Amazon ECS Container Agent</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. If you are using an Amazon ECS-optimized Linux AMI, your instance needs at least version 1.26.0-1 of the <code>ecs-init</code> package. If your container instances are launched from version <code>20190301</code> or later, then they contain the required versions of the container agent and <code>ecs-init</code>. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html">Amazon ECS-optimized Linux AMI</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>'
       hostname:
         $ref: '#/definitions/String'
         description: '<p>The hostname to use for your container. This parameter maps to <code>Hostname</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/v1.35/">Docker Remote API</a> and the <code>--hostname</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>.</p> <note> <p>The <code>hostname</code> parameter is not supported if you are using the <code>awsvpc</code> network mode.</p> </note>'
       user:
         $ref: '#/definitions/String'
-        description: '<p>The username to use inside the container. This parameter maps to <code>User</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/v1.35/">Docker Remote API</a> and the <code>--user</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>.</p> <p>This following formats can be used. If specifying a UID or GID, it must be specified as a positive integer.</p> <ul> <li> <p> <code>user</code> </p> </li> <li> <p> <code>user:group</code> </p> </li> <li> <p> <code>uid</code> </p> </li> <li> <p> <code>uid:gid</code> </p> </li> <li> <p> <code>user:gid</code> </p> </li> <li> <p> <code>uid:group</code> </p> </li> </ul> <note> <p>This parameter is not supported for Windows containers.</p> </note>'
+        description: '<p>The user name to use inside the container. This parameter maps to <code>User</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/v1.35/">Docker Remote API</a> and the <code>--user</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>.</p> <p>You can use the following formats. If specifying a UID or GID, you must specify it as a positive integer.</p> <ul> <li> <p> <code>user</code> </p> </li> <li> <p> <code>user:group</code> </p> </li> <li> <p> <code>uid</code> </p> </li> <li> <p> <code>uid:gid</code> </p> </li> <li> <p> <code>user:gid</code> </p> </li> <li> <p> <code>uid:group</code> </p> </li> </ul> <note> <p>This parameter is not supported for Windows containers.</p> </note>'
       workingDirectory:
         $ref: '#/definitions/String'
         description: 'The working directory in which to run commands inside the container. This parameter maps to <code>WorkingDir</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/v1.35/">Docker Remote API</a> and the <code>--workdir</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>.'
@@ -3748,8 +4223,8 @@ definitions:
         description: The name of a container.
       condition:
         $ref: '#/definitions/ContainerCondition'
-        description: '<p>The dependency condition of the container. The following are the available conditions and their behavior:</p> <ul> <li> <p> <code>START</code> - This condition emulates the behavior of links and volumes today. It validates that a dependent container is started before permitting other containers to start.</p> </li> <li> <p> <code>COMPLETE</code> - This condition validates that a dependent container runs to completion (exits) before permitting other containers to start. This can be useful for non-essential containers that run a script and then subsequently exit.</p> </li> <li> <p> <code>SUCCESS</code> - This condition is the same as <code>COMPLETE</code>, but it will also require that the container exits with a <code>zero</code> status.</p> </li> <li> <p> <code>HEALTHY</code> - This condition validates that the dependent container passes its Docker health check before permitting other containers to start. This requires that the dependent container has health checks configured. This condition will only be confirmed at task startup.</p> </li> </ul>'
-    description: The dependencies defined for container startup. A container can contain multiple dependencies.
+        description: '<p>The dependency condition of the container. The following are the available conditions and their behavior:</p> <ul> <li> <p> <code>START</code> - This condition emulates the behavior of links and volumes today. It validates that a dependent container is started before permitting other containers to start.</p> </li> <li> <p> <code>COMPLETE</code> - This condition validates that a dependent container runs to completion (exits) before permitting other containers to start. This can be useful for nonessential containers that run a script and then exit.</p> </li> <li> <p> <code>SUCCESS</code> - This condition is the same as <code>COMPLETE</code>, but it also requires that the container exits with a <code>zero</code> status.</p> </li> <li> <p> <code>HEALTHY</code> - This condition validates that the dependent container passes its Docker health check before permitting other containers to start. This requires that the dependent container has health checks configured. This condition is confirmed only at task startup.</p> </li> </ul>'
+    description: '<p>The dependencies defined for container startup and shutdown. A container can contain multiple dependencies. When a dependency is defined for container startup, for container shutdown it is reversed.</p> <p>Your Amazon ECS container instances require at least version 1.26.0 of the container agent to enable container dependencies. However, we recommend using the latest container agent version. For information about checking your agent version and updating to the latest version, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html">Updating the Amazon ECS Container Agent</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. If you are using an Amazon ECS-optimized Linux AMI, your instance needs at least version 1.26.0-1 of the <code>ecs-init</code> package. If your container instances are launched from version <code>20190301</code> or later, then they contain the required versions of the container agent and <code>ecs-init</code>. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html">Amazon ECS-optimized Linux AMI</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> <note> <p>If you are using tasks that use the Fargate launch type, container dependency parameters are not supported.</p> </note>'
   Long:
     type: integer
   VersionInfo:
@@ -3912,11 +4387,11 @@ definitions:
     properties:
       maximumPercent:
         $ref: '#/definitions/BoxedInteger'
-        description: '<p>If a service is using the rolling update (<code>ECS</code>) deployment type, the <b>maximum percent</b> parameter represents an upper limit on the number of tasks in a service that are allowed in the <code>RUNNING</code> or <code>PENDING</code> state during a deployment, as a percentage of the desired number of tasks (rounded down to the nearest integer), and while any container instances are in the <code>DRAINING</code> state if the service contains tasks using the EC2 launch type. This parameter enables you to define the deployment batch size. For example, if your service has a desired number of four tasks and a maximum percent value of 200%, the scheduler may start four new tasks before stopping the four older tasks (provided that the cluster resources required to do this are available). The default value for maximum percent is 200%.</p> <p>If a service is using the blue/green (<code>CODE_DEPLOY</code>) deployment type and tasks that use the EC2 launch type, the <b>maximum percent</b> value is set to the default value and is used to define the upper limit on the number of the tasks in the service that remain in the <code>RUNNING</code> state while the container instances are in the <code>DRAINING</code> state. If the tasks in the service use the Fargate launch type, the maximum percent value is not used, although it is returned when describing your service.</p>'
+        description: '<p>If a service is using the rolling update (<code>ECS</code>) deployment type, the <b>maximum percent</b> parameter represents an upper limit on the number of tasks in a service that are allowed in the <code>RUNNING</code> or <code>PENDING</code> state during a deployment, as a percentage of the desired number of tasks (rounded down to the nearest integer), and while any container instances are in the <code>DRAINING</code> state if the service contains tasks using the EC2 launch type. This parameter enables you to define the deployment batch size. For example, if your service has a desired number of four tasks and a maximum percent value of 200%, the scheduler may start four new tasks before stopping the four older tasks (provided that the cluster resources required to do this are available). The default value for maximum percent is 200%.</p> <p>If a service is using the blue/green (<code>CODE_DEPLOY</code>) or <code>EXTERNAL</code> deployment types and tasks that use the EC2 launch type, the <b>maximum percent</b> value is set to the default value and is used to define the upper limit on the number of the tasks in the service that remain in the <code>RUNNING</code> state while the container instances are in the <code>DRAINING</code> state. If the tasks in the service use the Fargate launch type, the maximum percent value is not used, although it is returned when describing your service.</p>'
       minimumHealthyPercent:
         $ref: '#/definitions/BoxedInteger'
-        description: '<p>If a service is using the rolling update (<code>ECS</code>) deployment type, the <b>minimum healthy percent</b> represents a lower limit on the number of tasks in a service that must remain in the <code>RUNNING</code> state during a deployment, as a percentage of the desired number of tasks (rounded up to the nearest integer), and while any container instances are in the <code>DRAINING</code> state if the service contains tasks using the EC2 launch type. This parameter enables you to deploy without using additional cluster capacity. For example, if your service has a desired number of four tasks and a minimum healthy percent of 50%, the scheduler may stop two existing tasks to free up cluster capacity before starting two new tasks. Tasks for services that <i>do not</i> use a load balancer are considered healthy if they are in the <code>RUNNING</code> state; tasks for services that <i>do</i> use a load balancer are considered healthy if they are in the <code>RUNNING</code> state and they are reported as healthy by the load balancer. The default value for minimum healthy percent is 100%.</p> <p>If a service is using the blue/green (<code>CODE_DEPLOY</code>) deployment type and tasks that use the EC2 launch type, the <b>minimum healthy percent</b> value is set to the default value and is used to define the lower limit on the number of the tasks in the service that remain in the <code>RUNNING</code> state while the container instances are in the <code>DRAINING</code> state. If the tasks in the service use the Fargate launch type, the minimum healthy percent value is not used, although it is returned when describing your service.</p>'
-    description: Optional deployment parameters that control how many tasks run during the deployment and the ordering of stopping and starting tasks.
+        description: '<p>If a service is using the rolling update (<code>ECS</code>) deployment type, the <b>minimum healthy percent</b> represents a lower limit on the number of tasks in a service that must remain in the <code>RUNNING</code> state during a deployment, as a percentage of the desired number of tasks (rounded up to the nearest integer), and while any container instances are in the <code>DRAINING</code> state if the service contains tasks using the EC2 launch type. This parameter enables you to deploy without using additional cluster capacity. For example, if your service has a desired number of four tasks and a minimum healthy percent of 50%, the scheduler may stop two existing tasks to free up cluster capacity before starting two new tasks. Tasks for services that <i>do not</i> use a load balancer are considered healthy if they are in the <code>RUNNING</code> state; tasks for services that <i>do</i> use a load balancer are considered healthy if they are in the <code>RUNNING</code> state and they are reported as healthy by the load balancer. The default value for minimum healthy percent is 100%.</p> <p>If a service is using the blue/green (<code>CODE_DEPLOY</code>) or <code>EXTERNAL</code> deployment types and tasks that use the EC2 launch type, the <b>minimum healthy percent</b> value is set to the default value and is used to define the lower limit on the number of the tasks in the service that remain in the <code>RUNNING</code> state while the container instances are in the <code>DRAINING</code> state. If the tasks in the service use the Fargate launch type, the minimum healthy percent value is not used, although it is returned when describing your service.</p>'
+    description: Optional deployment parameters that control how many tasks run during a deployment and the ordering of stopping and starting tasks.
   PlacementConstraints:
     type: array
     items:
@@ -3944,7 +4419,7 @@ definitions:
     properties:
       type:
         $ref: '#/definitions/DeploymentControllerType'
-        description: '<p>The deployment controller type to use.</p> <p>There are two deployment controller types available:</p> <dl> <dt>ECS</dt> <dd> <p>The rolling update (<code>ECS</code>) deployment type involves replacing the current running version of the container with the latest version. The number of containers Amazon ECS adds or removes from the service during a rolling update is controlled by adjusting the minimum and maximum number of healthy tasks allowed during a service deployment, as specified in the <a>DeploymentConfiguration</a>.</p> </dd> <dt>CODE_DEPLOY</dt> <dd> <p>The blue/green (<code>CODE_DEPLOY</code>) deployment type uses the blue/green deployment model powered by AWS CodeDeploy, which allows you to verify a new deployment of a service before sending production traffic to it. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html">Amazon ECS Deployment Types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> </dd> </dl>'
+        description: '<p>The deployment controller type to use.</p> <p>There are three deployment controller types available:</p> <dl> <dt>ECS</dt> <dd> <p>The rolling update (<code>ECS</code>) deployment type involves replacing the current running version of the container with the latest version. The number of containers Amazon ECS adds or removes from the service during a rolling update is controlled by adjusting the minimum and maximum number of healthy tasks allowed during a service deployment, as specified in the <a>DeploymentConfiguration</a>.</p> </dd> <dt>CODE_DEPLOY</dt> <dd> <p>The blue/green (<code>CODE_DEPLOY</code>) deployment type uses the blue/green deployment model powered by AWS CodeDeploy, which allows you to verify a new deployment of a service before sending production traffic to it.</p> </dd> <dt>EXTERNAL</dt> <dd> <p>The external (<code>EXTERNAL</code>) deployment type enables you to use any third-party deployment controller for full control over the deployment process for an Amazon ECS service.</p> </dd> </dl>'
     description: 'The deployment controller to use for the service. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html">Amazon ECS Deployment Types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
   PropagateTags:
     type: string
@@ -3968,7 +4443,7 @@ definitions:
         description: '<p>A list of Elastic Load Balancing load balancer objects, containing the load balancer name, the container name (as it appears in a container definition), and the container port to access from the load balancer.</p> <p>Services with tasks that use the <code>awsvpc</code> network mode (for example, those with the Fargate launch type) only support Application Load Balancers and Network Load Balancers. Classic Load Balancers are not supported. Also, when you create any target groups for these services, you must choose <code>ip</code> as the target type, not <code>instance</code>. Tasks that use the <code>awsvpc</code> network mode are associated with an elastic network interface, not an Amazon EC2 instance.</p>'
       serviceRegistries:
         $ref: '#/definitions/ServiceRegistries'
-        description: <p/>
+        description: 'The details of the service discovery registries to assign to this service. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html">Service Discovery</a>.'
       status:
         $ref: '#/definitions/String'
         description: 'The status of the service. The valid values are <code>ACTIVE</code>, <code>DRAINING</code>, or <code>INACTIVE</code>.'
@@ -3995,7 +4470,7 @@ definitions:
         description: Optional deployment parameters that control how many tasks run during the deployment and the ordering of stopping and starting tasks.
       taskSets:
         $ref: '#/definitions/TaskSets'
-        description: 'Information about a set of Amazon ECS tasks in an AWS CodeDeploy deployment. An Amazon ECS task set includes details such as the desired number of tasks, how many tasks are running, and whether the task set serves production traffic.'
+        description: 'Information about a set of Amazon ECS tasks in either an AWS CodeDeploy or an <code>EXTERNAL</code> deployment. An Amazon ECS task set includes details such as the desired number of tasks, how many tasks are running, and whether the task set serves production traffic.'
       deployments:
         $ref: '#/definitions/Deployments'
         description: The current state of deployments for the service.
@@ -4039,6 +4514,83 @@ definitions:
         $ref: '#/definitions/PropagateTags'
         description: 'Specifies whether to propagate the tags from the task definition or the service to the task. If no value is specified, the tags are not propagated.'
     description: Details on a service within a cluster
+  Scale:
+    type: object
+    properties:
+      value:
+        $ref: '#/definitions/Double'
+        description: 'The value, specified as a percent total of a service''s <code>desiredCount</code>, to scale the task set. Accepted values are numbers between 0 and 100.'
+      unit:
+        $ref: '#/definitions/ScaleUnit'
+        description: The unit of measure for the scale value.
+    description: A floating-point percentage of the desired number of tasks to place and keep running in the task set.
+  TaskSet:
+    type: object
+    properties:
+      id:
+        $ref: '#/definitions/String'
+        description: The ID of the task set.
+      taskSetArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the task set.
+      serviceArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the service the task set exists in.
+      clusterArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the cluster that the service that hosts the task set exists in.
+      startedBy:
+        $ref: '#/definitions/String'
+        description: 'The tag specified when a task set is started. If the task set is created by an AWS CodeDeploy deployment, the <code>startedBy</code> parameter is <code>CODE_DEPLOY</code>. For a task set created for an external deployment, the startedBy field isn''t used.'
+      externalId:
+        $ref: '#/definitions/String'
+        description: '<p>The external ID associated with the task set.</p> <p>If a task set is created by an AWS CodeDeploy deployment, the <code>externalId</code> parameter contains the AWS CodeDeploy deployment ID.</p> <p>If a task set is created for an external deployment and is associated with a service discovery registry, the <code>externalId</code> parameter contains the <code>ECS_TASK_SET_EXTERNAL_ID</code> AWS Cloud Map attribute.</p>'
+      status:
+        $ref: '#/definitions/String'
+        description: '<p>The status of the task set. The following describes each state:</p> <dl> <dt>PRIMARY</dt> <dd> <p>The task set is serving production traffic.</p> </dd> <dt>ACTIVE</dt> <dd> <p>The task set is not serving production traffic.</p> </dd> <dt>DRAINING</dt> <dd> <p>The tasks in the task set are being stopped and their corresponding targets are being deregistered from their target group.</p> </dd> </dl>'
+      taskDefinition:
+        $ref: '#/definitions/String'
+        description: The task definition the task set is using.
+      computedDesiredCount:
+        $ref: '#/definitions/Integer'
+        description: 'The computed desired count for the task set. This is calculated by multiplying the service''s <code>desiredCount</code> by the task set''s <code>scale</code> percentage. The result is always rounded up. For example, if the computed desired count is 1.2, it rounds up to 2 tasks.'
+      pendingCount:
+        $ref: '#/definitions/Integer'
+        description: The number of tasks in the task set that are in the <code>PENDING</code> status during a deployment. A task in the <code>PENDING</code> state is preparing to enter the <code>RUNNING</code> state. A task set enters the <code>PENDING</code> status when it launches for the first time or when it is restarted after being in the <code>STOPPED</code> state.
+      runningCount:
+        $ref: '#/definitions/Integer'
+        description: The number of tasks in the task set that are in the <code>RUNNING</code> status during a deployment. A task in the <code>RUNNING</code> state is running and ready for use.
+      createdAt:
+        $ref: '#/definitions/Timestamp'
+        description: The Unix timestamp for when the task set was created.
+      updatedAt:
+        $ref: '#/definitions/Timestamp'
+        description: The Unix timestamp for when the task set was last updated.
+      launchType:
+        $ref: '#/definitions/LaunchType'
+        description: 'The launch type the tasks in the task set are using. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html">Amazon ECS Launch Types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
+      platformVersion:
+        $ref: '#/definitions/String'
+        description: 'The platform version on which the tasks in the task set are running. A platform version is only specified for tasks using the Fargate launch type. If one is not specified, the <code>LATEST</code> platform version is used by default. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html">AWS Fargate Platform Versions</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
+      networkConfiguration:
+        $ref: '#/definitions/NetworkConfiguration'
+        description: The network configuration for the task set.
+      loadBalancers:
+        $ref: '#/definitions/LoadBalancers'
+        description: Details on a load balancer that is used with a task set.
+      serviceRegistries:
+        $ref: '#/definitions/ServiceRegistries'
+        description: 'The details of the service discovery registries to assign to this task set. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html">Service Discovery</a>.'
+      scale:
+        $ref: '#/definitions/Scale'
+        description: A floating-point percentage of the desired number of tasks to place and keep running in the task set.
+      stabilityStatus:
+        $ref: '#/definitions/StabilityStatus'
+        description: '<p>The stability status, which indicates whether the task set has reached a steady state. If the following conditions are met, the task set will be in <code>STEADY_STATE</code>:</p> <ul> <li> <p>The task <code>runningCount</code> is equal to the <code>computedDesiredCount</code>.</p> </li> <li> <p>The <code>pendingCount</code> is <code>0</code>.</p> </li> <li> <p>There are no tasks running on container instances in the <code>DRAINING</code> status.</p> </li> <li> <p>All tasks are reporting a healthy status from the load balancers, service discovery, and container health checks.</p> </li> </ul> <p>If any of those conditions are not met, the stability status returns <code>STABILIZING</code>.</p>'
+      stabilityStatusAt:
+        $ref: '#/definitions/Timestamp'
+        description: The Unix timestamp for when the task set stability status was retrieved.
+    description: 'Information about a set of Amazon ECS tasks in either an AWS CodeDeploy or an <code>EXTERNAL</code> deployment. An Amazon ECS task set includes details such as the desired number of tasks, how many tasks are running, and whether the task set serves production traffic.'
   SettingName:
     type: string
     enum:
@@ -4053,7 +4605,7 @@ definitions:
         description: The account resource name.
       value:
         $ref: '#/definitions/String'
-        description: 'The current account setting for the resource name. If <code>enabled</code>, then the resource will receive the new Amazon Resource Name (ARN) and resource identifier (ID) format. If <code>disabled</code>, then the resource will receive the old Amazon Resource Name (ARN) and resource identifier (ID) format.'
+        description: 'The current account setting for the resource name. If <code>enabled</code>, the resource receives the new Amazon Resource Name (ARN) and resource identifier (ID) format. If <code>disabled</code>, the resource receives the old Amazon Resource Name (ARN) and resource identifier (ID) format.'
       principalArn:
         $ref: '#/definitions/String'
         description: 'The ARN of the principal, which can be an IAM user, IAM role, or the root user. If this field is omitted, the authenticated user is assumed.'
@@ -4094,12 +4646,13 @@ definitions:
       networkConfiguration:
         $ref: '#/definitions/NetworkConfiguration'
         description: The VPC subnet and security group configuration for tasks that receive their own elastic network interface by using the <code>awsvpc</code> networking mode.
-    description: The details of an Amazon ECS service deployment. This is used when a service uses the <code>CODE_DEPLOY</code> deployment controller type.
+    description: The details of an Amazon ECS service deployment. This is used only when a service uses the <code>ECS</code> deployment controller type.
   DeploymentControllerType:
     type: string
     enum:
       - ECS
       - CODE_DEPLOY
+      - EXTERNAL
   Deployments:
     type: array
     items:
@@ -4160,7 +4713,7 @@ definitions:
         description: '<p>The IPC resource namespace to use for the containers in the task. The valid values are <code>host</code>, <code>task</code>, or <code>none</code>. If <code>host</code> is specified, then all containers within the tasks that specified the <code>host</code> IPC mode on the same container instance share the same IPC resources with the host Amazon EC2 instance. If <code>task</code> is specified, all containers within the specified task share the same IPC resources. If <code>none</code> is specified, then IPC resources within the containers of a task are private and not shared with other containers in a task or on the container instance. If no value is specified, then the IPC resource namespace sharing depends on the Docker daemon setting on the container instance. For more information, see <a href="https://docs.docker.com/engine/reference/run/#ipc-settings---ipc">IPC settings</a> in the <i>Docker run reference</i>.</p> <p>If the <code>host</code> IPC mode is used, be aware that there is a heightened risk of undesired IPC namespace expose. For more information, see <a href="https://docs.docker.com/engine/security/security/">Docker security</a>.</p> <p>If you are setting namespaced kernel parameters using <code>systemControls</code> for the containers in the task, the following will apply to your IPC resource namespace. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html">System Controls</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> <ul> <li> <p>For tasks that use the <code>host</code> IPC mode, IPC namespace related <code>systemControls</code> are not supported.</p> </li> <li> <p>For tasks that use the <code>task</code> IPC mode, IPC namespace related <code>systemControls</code> will apply to all containers within a task.</p> </li> </ul> <note> <p>This parameter is not supported for Windows containers or tasks using the Fargate launch type.</p> </note>'
       proxyConfiguration:
         $ref: '#/definitions/ProxyConfiguration'
-        description: <p/>
+        description: '<p>The configuration details for the App Mesh proxy.</p> <p>Your Amazon ECS container instances require at least version 1.26.0 of the container agent and at least version 1.26.0-1 of the <code>ecs-init</code> package to enable a proxy configuration. If your container instances are launched from the Amazon ECS-optimized AMI version <code>20190301</code> or later, then they contain the required versions of the container agent and <code>ecs-init</code>. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html">Amazon ECS-optimized Linux AMI</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>'
     description: Details of a task definition.
   Failures:
     type: array
@@ -4178,6 +4731,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/TaskDefinitionField'
+  TaskSets:
+    type: array
+    items:
+      $ref: '#/definitions/TaskSet'
   TaskFieldList:
     type: array
     items:
@@ -4497,8 +5054,8 @@ definitions:
         description: The name of the container that will serve as the App Mesh proxy.
       properties:
         $ref: '#/definitions/ProxyConfigurationProperties'
-        description: '<p>The set of network configuration parameters to provide the Container Network Interface (CNI) plugin, specified as key-value pairs.</p> <ul> <li> <p> <code>IgnoredUID</code> - (Required) The user ID (UID) of the proxy container as defined by the <code>user</code> parameter in a container definition. This is used to ensure the proxy ignores its own traffic. If <code>IgnoredGID</code> is specified, this field can be empty.</p> </li> <li> <p> <code>IgnoredGID</code> - (Required) The group ID (GID) of the proxy container as defined by the <code>user</code> parameter in a container definition. This is used to ensure the proxy ignores its own traffic. If <code>IgnoredGID</code> is specified, this field can be empty.</p> </li> <li> <p> <code>AppPorts</code> - (Required) The list of ports that the application uses. Network traffic to these ports will be forwarded to the <code>ProxyIngressPort</code> and <code>ProxyEgressPort</code>.</p> </li> <li> <p> <code>ProxyIngressPort</code> - (Required) Specifies the port that incoming traffic to the <code>AppPorts</code> is directed to.</p> </li> <li> <p> <code>ProxyEgressPort</code> - (Required) Specifies the port that outgoing traffic from the <code>AppPorts</code> is directed to.</p> </li> <li> <p> <code>EgressIgnoredPorts</code> - (Required) The egress traffic going to these specified ports will be ignored and not redirected to the <code>ProxyEgressPort</code>. It can be empty list.</p> </li> <li> <p> <code>EgressIgnoredIPs</code> - (Required) The egress traffic going to these specified IP addresses will be ignored and not redirected to the <code>ProxyEgressPort</code>. It can be empty list.</p> </li> </ul>'
-    description: The configuration details for the App Mesh proxy.
+        description: '<p>The set of network configuration parameters to provide the Container Network Interface (CNI) plugin, specified as key-value pairs.</p> <ul> <li> <p> <code>IgnoredUID</code> - (Required) The user ID (UID) of the proxy container as defined by the <code>user</code> parameter in a container definition. This is used to ensure the proxy ignores its own traffic. If <code>IgnoredGID</code> is specified, this field can be empty.</p> </li> <li> <p> <code>IgnoredGID</code> - (Required) The group ID (GID) of the proxy container as defined by the <code>user</code> parameter in a container definition. This is used to ensure the proxy ignores its own traffic. If <code>IgnoredGID</code> is specified, this field can be empty.</p> </li> <li> <p> <code>AppPorts</code> - (Required) The list of ports that the application uses. Network traffic to these ports is forwarded to the <code>ProxyIngressPort</code> and <code>ProxyEgressPort</code>.</p> </li> <li> <p> <code>ProxyIngressPort</code> - (Required) Specifies the port that incoming traffic to the <code>AppPorts</code> is directed to.</p> </li> <li> <p> <code>ProxyEgressPort</code> - (Required) Specifies the port that outgoing traffic from the <code>AppPorts</code> is directed to.</p> </li> <li> <p> <code>EgressIgnoredPorts</code> - (Required) The egress traffic going to the specified ports is ignored and not redirected to the <code>ProxyEgressPort</code>. It can be an empty list.</p> </li> <li> <p> <code>EgressIgnoredIPs</code> - (Required) The egress traffic going to the specified IP addresses is ignored and not redirected to the <code>ProxyEgressPort</code>. It can be an empty list.</p> </li> </ul>'
+    description: '<p>The configuration details for the App Mesh proxy.</p> <p>Your Amazon ECS container instances require at least version 1.26.0 of the container agent and at least version 1.26.0-1 of the <code>ecs-init</code> package to enable a proxy configuration. If your container instances are launched from the Amazon ECS-optimized AMI version <code>20190301</code> or later, then they contain the required versions of the container agent and <code>ecs-init</code>. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html">Amazon ECS-optimized Linux AMI</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>'
   VolumeList:
     type: array
     items:
@@ -4567,16 +5124,6 @@ definitions:
     type: string
     enum:
       - PERCENT
-  Scale:
-    type: object
-    properties:
-      value:
-        $ref: '#/definitions/Double'
-        description: 'The value, specified as a percent total of a service''s <code>desiredCount</code>, to scale the task set.'
-      unit:
-        $ref: '#/definitions/ScaleUnit'
-        description: The unit of measure for the scale value.
-    description: A floating-point percentage of the desired number of tasks to place and keep running in the service. This is used when a service uses the <code>CODE_DEPLOY</code> deployment controller type.
   Secret:
     type: object
     required:
@@ -4590,10 +5137,6 @@ definitions:
         $ref: '#/definitions/String'
         description: '<p>The secret to expose to the container. If your task is using the EC2 launch type, then supported values are either the full ARN of the AWS Secrets Manager secret or the full ARN of the parameter in the AWS Systems Manager Parameter Store. If your task is using the Fargate launch type, then the only supported value is the full ARN of the parameter in the AWS Systems Manager Parameter Store.</p> <note> <p>If the AWS Systems Manager Parameter Store parameter exists in the same Region as the task you are launching, then you can use either the full ARN or name of the parameter. If the parameter exists in a different Region, then the full ARN must be specified.</p> </note>'
     description: 'An object representing the secret to expose to your container. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html">Specifying Sensitive Data</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
-  TaskSets:
-    type: array
-    items:
-      $ref: '#/definitions/TaskSet'
   ServiceEvents:
     type: array
     items:
@@ -4620,7 +5163,7 @@ definitions:
     properties:
       registryArn:
         $ref: '#/definitions/String'
-        description: 'The Amazon Resource Name (ARN) of the service registry. The currently supported service registry is Amazon Route 53 Auto Naming. For more information, see <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_autonaming_Service.html">Service</a>.'
+        description: 'The Amazon Resource Name (ARN) of the service registry. The currently supported service registry is AWS Cloud Map. For more information, see <a href="https://docs.aws.amazon.com/cloud-map/latest/api/API_CreateService.html">CreateService</a>.'
       port:
         $ref: '#/definitions/BoxedInteger'
         description: The port value used if your service discovery service specified an SRV record. This field may be used if both the <code>awsvpc</code> network mode and SRV records are used.
@@ -4789,64 +5332,6 @@ definitions:
     type: string
     enum:
       - TAGS
-  TaskSet:
-    type: object
-    properties:
-      id:
-        $ref: '#/definitions/String'
-        description: The ID of the task set.
-      taskSetArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the task set.
-      startedBy:
-        $ref: '#/definitions/String'
-        description: 'The tag specified when a task set is started. If the task is started by an AWS CodeDeploy deployment, then the <code>startedBy</code> parameter is <code>CODE_DEPLOY</code>.'
-      externalId:
-        $ref: '#/definitions/String'
-        description: The deployment ID of the AWS CodeDeploy deployment.
-      status:
-        $ref: '#/definitions/String'
-        description: '<p>The status of the task set. The following describes each state:</p> <dl> <dt>PRIMARY</dt> <dd> <p>The task set is serving production traffic.</p> </dd> <dt>ACTIVE</dt> <dd> <p>The task set is not serving production traffic.</p> </dd> <dt>DRAINING</dt> <dd> <p>The tasks in the task set are being stopped and their corresponding targets are being deregistered from their target group.</p> </dd> </dl>'
-      taskDefinition:
-        $ref: '#/definitions/String'
-        description: The task definition the task set is using.
-      computedDesiredCount:
-        $ref: '#/definitions/Integer'
-        description: The computed desired count for the task set. This is calculated by multiplying the service's <code>desiredCount</code> by the task set's <code>scale</code> percentage.
-      pendingCount:
-        $ref: '#/definitions/Integer'
-        description: 'The number of tasks in the task set that are in the <code>PENDING</code> status during a deployment. A task in the <code>PENDING</code> state is preparing to enter the <code>RUNNING</code> state. A task set enters the <code>PENDING</code> status when it launches for the first time, or when it is restarted after being in the <code>STOPPED</code> state.'
-      runningCount:
-        $ref: '#/definitions/Integer'
-        description: The number of tasks in the task set that are in the <code>RUNNING</code> status during a deployment. A task in the <code>RUNNING</code> state is running and ready for use.
-      createdAt:
-        $ref: '#/definitions/Timestamp'
-        description: The Unix timestamp for when the task set was created.
-      updatedAt:
-        $ref: '#/definitions/Timestamp'
-        description: The Unix timestamp for when the task set was last updated.
-      launchType:
-        $ref: '#/definitions/LaunchType'
-        description: 'The launch type the tasks in the task set are using. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html">Amazon ECS Launch Types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
-      platformVersion:
-        $ref: '#/definitions/String'
-        description: 'The platform version on which the tasks in the task set are running. A platform version is only specified for tasks using the Fargate launch type. If one is not specified, the <code>LATEST</code> platform version is used by default. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html">AWS Fargate Platform Versions</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
-      networkConfiguration:
-        $ref: '#/definitions/NetworkConfiguration'
-        description: The network configuration for the task set.
-      loadBalancers:
-        $ref: '#/definitions/LoadBalancers'
-        description: Details on a load balancer that is used with a task set.
-      scale:
-        $ref: '#/definitions/Scale'
-        description: A floating-point percentage of the desired number of tasks to place and keep running in the service.
-      stabilityStatus:
-        $ref: '#/definitions/StabilityStatus'
-        description: '<p>The stability status, which indicates whether the task set has reached a steady state. If the following conditions are met, the task set will be in <code>STEADY_STATE</code>:</p> <ul> <li> <p>The task <code>runningCount</code> is equal to the <code>computedDesiredCount</code>.</p> </li> <li> <p>The <code>pendingCount</code> is <code>0</code>.</p> </li> <li> <p>There are no tasks running on container instances in the <code>DRAINING</code> status.</p> </li> <li> <p>All tasks are reporting a healthy status from the load balancers, service discovery, and container health checks.</p> </li> </ul> <p>If any of those conditions are not met, the stability status returns <code>STABILIZING</code>.</p>'
-      stabilityStatusAt:
-        $ref: '#/definitions/Timestamp'
-        description: The Unix timestamp for when the task set stability status was retrieved.
-    description: 'Information about a set of Amazon ECS tasks in an AWS CodeDeploy deployment. An Amazon ECS task set includes details such as the desired number of tasks, how many tasks are running, and whether the task set serves production traffic.'
   Tmpfs:
     type: object
     required:

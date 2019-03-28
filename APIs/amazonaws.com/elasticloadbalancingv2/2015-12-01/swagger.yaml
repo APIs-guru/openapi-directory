@@ -2404,6 +2404,18 @@ definitions:
       Values:
         $ref: '#/definitions/ListOfString'
         description: '<p>The condition value.</p> <p>If the field name is <code>host-header</code>, you can specify a single host name (for example, my.example.com). A host name is case insensitive, can be up to 128 characters in length, and can contain any of the following characters. You can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>- .</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul> <p>If the field name is <code>path-pattern</code>, you can specify a single path pattern (for example, /img/*). A path pattern is case-sensitive, can be up to 128 characters in length, and can contain any of the following characters. You can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>_ - . $ / ~ " '' @ : +</p> </li> <li> <p>&amp; (using &amp;amp;)</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul>'
+      HostHeaderConfig:
+        $ref: '#/definitions/HostHeaderConditionConfig'
+      PathPatternConfig:
+        $ref: '#/definitions/PathPatternConditionConfig'
+      HttpHeaderConfig:
+        $ref: '#/definitions/HttpHeaderConditionConfig'
+      QueryStringConfig:
+        $ref: '#/definitions/QueryStringConditionConfig'
+      HttpRequestMethodConfig:
+        $ref: '#/definitions/HttpRequestMethodConditionConfig'
+      SourceIpConfig:
+        $ref: '#/definitions/SourceIpConditionConfig'
     description: Information about a condition for a rule.
   PriorityInUseException: {}
   TooManyTargetGroupsException: {}
@@ -3652,6 +3664,29 @@ definitions:
     type: string
     minLength: 0
     maxLength: 32
+  ListOfString:
+    type: array
+    items:
+      $ref: '#/definitions/StringValue'
+  HostHeaderConditionConfig:
+    type: object
+    properties:
+      Values:
+        $ref: '#/definitions/ListOfString'
+  HttpHeaderConditionName:
+    type: string
+  HttpHeaderConditionConfig:
+    type: object
+    properties:
+      HttpHeaderName:
+        $ref: '#/definitions/HttpHeaderConditionName'
+      Values:
+        $ref: '#/definitions/ListOfString'
+  HttpRequestMethodConditionConfig:
+    type: object
+    properties:
+      Values:
+        $ref: '#/definitions/ListOfString'
   IpAddress:
     type: string
   IsDefault:
@@ -3672,10 +3707,6 @@ definitions:
     description: Information about an Elastic Load Balancing resource limit for your AWS account.
   StringValue:
     type: string
-  ListOfString:
-    type: array
-    items:
-      $ref: '#/definitions/StringValue'
   Listener:
     type: object
     properties:
@@ -3873,6 +3904,27 @@ definitions:
       Matcher:
         $ref: '#/definitions/Matcher'
         description: '<p>[HTTP/HTTPS health checks] The HTTP codes to use when checking for a successful response from a target.</p> <p>If the protocol of the target group is TCP, you can''t modify this setting.</p>'
+  PathPatternConditionConfig:
+    type: object
+    properties:
+      Values:
+        $ref: '#/definitions/ListOfString'
+  QueryStringKeyValuePairList:
+    type: array
+    items:
+      $ref: '#/definitions/QueryStringKeyValuePair'
+  QueryStringConditionConfig:
+    type: object
+    properties:
+      Values:
+        $ref: '#/definitions/QueryStringKeyValuePairList'
+  QueryStringKeyValuePair:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/StringValue'
+      Value:
+        $ref: '#/definitions/StringValue'
   RedirectActionProtocol:
     type: string
     pattern: '^(HTTPS?|#\{protocol\})$'
@@ -3956,6 +4008,11 @@ definitions:
         $ref: '#/definitions/IsDefault'
         description: Indicates whether this is the default rule.
     description: Information about a rule.
+  SourceIpConditionConfig:
+    type: object
+    properties:
+      Values:
+        $ref: '#/definitions/ListOfString'
   RulePriorityList:
     type: array
     items:
