@@ -44,16 +44,6 @@ consumes:
 produces:
   - application/json
 parameters:
-  Action:
-    name: Action
-    in: query
-    type: string
-    required: true
-  Version:
-    name: Version
-    in: query
-    type: string
-    required: true
   X-Amz-Content-Sha256:
     name: X-Amz-Content-Sha256
     in: header
@@ -145,8 +135,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.AddCustomAttributes
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -198,8 +186,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.AdminAddUserToGroup
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -273,8 +259,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.AdminConfirmSignUp
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -368,8 +352,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.AdminCreateUser
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -421,8 +403,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.AdminDeleteUser
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -476,8 +456,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.AdminDeleteUserAttributes
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -535,8 +513,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.AdminDisableProviderForUser
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -590,8 +566,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.AdminDisableUser
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -645,8 +619,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.AdminEnableUser
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -702,8 +674,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.AdminForgetDevice
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -757,8 +727,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.AdminGetDevice
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -812,8 +780,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.AdminGetUser
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -903,8 +869,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.AdminInitiateAuth
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -962,8 +926,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.AdminLinkProviderForUser
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1017,8 +979,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.AdminListDevices
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1072,8 +1032,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.AdminListGroupsForUser
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1131,8 +1089,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.AdminListUserAuthEvents
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1184,8 +1140,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.AdminRemoveUserFromGroup
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1267,8 +1221,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.AdminResetUserPassword
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1378,8 +1330,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.AdminRespondToAuthChallenge
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1437,8 +1387,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.AdminSetUserMFAPreference
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1488,8 +1436,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.AdminSetUserSettings
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1547,8 +1493,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.AdminUpdateAuthEventFeedback
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1606,8 +1550,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.AdminUpdateDeviceStatus
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1677,8 +1619,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.AdminUpdateUserAttributes
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1732,8 +1672,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.AdminUserGlobalSignOut
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1783,8 +1721,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.AssociateSoftwareToken
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1854,8 +1790,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.ChangePassword
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1933,8 +1867,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.ConfirmDevice
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2024,8 +1956,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.ConfirmForgotPassword
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2111,8 +2041,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.ConfirmSignUp
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2170,8 +2098,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.CreateGroup
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2229,8 +2155,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.CreateIdentityProvider
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2284,8 +2208,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.CreateResourceServer
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2343,8 +2265,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.CreateUserImportJob
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2410,8 +2330,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.CreateUserPool
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2473,8 +2391,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.CreateUserPoolClient
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2524,8 +2440,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.CreateUserPoolDomain
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2573,8 +2487,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.DeleteGroup
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2626,8 +2538,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.DeleteIdentityProvider
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2675,8 +2585,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.DeleteResourceServer
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2736,8 +2644,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.DeleteUser
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2799,8 +2705,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.DeleteUserAttributes
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2852,8 +2756,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.DeleteUserPool
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2901,8 +2803,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.DeleteUserPoolClient
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2948,8 +2848,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.DeleteUserPoolDomain
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2999,8 +2897,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.DescribeIdentityProvider
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3050,8 +2946,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.DescribeResourceServer
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3105,8 +2999,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.DescribeRiskConfiguration
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3156,8 +3048,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.DescribeUserImportJob
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3211,8 +3101,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.DescribeUserPool
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3262,8 +3150,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.DescribeUserPoolClient
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3309,8 +3195,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.DescribeUserPoolDomain
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3374,8 +3258,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.ForgetDevice
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3465,8 +3347,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.ForgotPassword
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3516,8 +3396,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.GetCSVHeader
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3583,8 +3461,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.GetDevice
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3634,8 +3510,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.GetGroup
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3685,8 +3559,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.GetIdentityProviderByIdentifier
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3724,8 +3596,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.GetSigningCertificate
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3775,8 +3645,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.GetUICustomization
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3838,8 +3706,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.GetUser
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3933,8 +3799,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.GetUserAttributeVerificationCode
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3984,8 +3848,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.GetUserPoolMfaConfig
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4043,8 +3905,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.GlobalSignOut
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4122,8 +3982,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.InitiateAuth
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4189,8 +4047,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.ListDevices
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4240,8 +4096,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.ListGroups
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4291,8 +4145,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.ListIdentityProviders
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4342,8 +4194,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.ListResourceServers
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4393,8 +4243,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.ListTagsForResource
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4444,8 +4292,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.ListUserImportJobs
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4495,8 +4341,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.ListUserPoolClients
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4542,8 +4386,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.ListUserPools
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4593,8 +4435,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.ListUsers
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4644,8 +4484,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.ListUsersInGroup
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4731,8 +4569,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.ResendConfirmationCode
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4842,8 +4678,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.RespondToAuthChallenge
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4905,8 +4739,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.SetRiskConfiguration
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4956,8 +4788,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.SetUICustomization
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -5015,8 +4845,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.SetUserMFAPreference
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -5074,8 +4902,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.SetUserPoolMfaConfig
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -5133,8 +4959,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.SetUserSettings
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -5220,8 +5044,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.SignUp
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -5275,8 +5097,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.StartUserImportJob
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -5330,8 +5150,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.StopUserImportJob
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -5381,8 +5199,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.TagResource
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -5432,8 +5248,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.UntagResource
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -5491,8 +5305,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.UpdateAuthEventFeedback
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -5558,8 +5370,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.UpdateDeviceStatus
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -5609,8 +5419,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.UpdateGroup
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -5664,8 +5472,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.UpdateIdentityProvider
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -5715,8 +5521,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.UpdateResourceServer
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -5818,8 +5622,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.UpdateUserAttributes
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -5893,8 +5695,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.UpdateUserPool
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -5956,8 +5756,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.UpdateUserPoolClient
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -6007,8 +5805,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.UpdateUserPoolDomain
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -6090,8 +5886,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.VerifySoftwareToken
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -6165,8 +5959,6 @@ paths:
           enum:
             - AWSCognitoIdentityProviderService.VerifyUserAttribute
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'

@@ -44,16 +44,6 @@ consumes:
 produces:
   - application/json
 parameters:
-  Action:
-    name: Action
-    in: query
-    type: string
-    required: true
-  Version:
-    name: Version
-    in: query
-    type: string
-    required: true
   X-Amz-Content-Sha256:
     name: X-Amz-Content-Sha256
     in: header
@@ -129,8 +119,6 @@ paths:
           enum:
             - StorageGateway_20130630.ActivateGateway
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -168,8 +156,6 @@ paths:
           enum:
             - StorageGateway_20130630.AddCache
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -207,8 +193,6 @@ paths:
           enum:
             - StorageGateway_20130630.AddTagsToResource
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -246,8 +230,6 @@ paths:
           enum:
             - StorageGateway_20130630.AddUploadBuffer
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -285,8 +267,6 @@ paths:
           enum:
             - StorageGateway_20130630.AddWorkingStorage
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -324,8 +304,6 @@ paths:
           enum:
             - StorageGateway_20130630.AttachVolume
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -363,8 +341,6 @@ paths:
           enum:
             - StorageGateway_20130630.CancelArchival
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -402,8 +378,6 @@ paths:
           enum:
             - StorageGateway_20130630.CancelRetrieval
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -441,8 +415,6 @@ paths:
           enum:
             - StorageGateway_20130630.CreateCachediSCSIVolume
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -480,8 +452,6 @@ paths:
           enum:
             - StorageGateway_20130630.CreateNFSFileShare
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -519,8 +489,6 @@ paths:
           enum:
             - StorageGateway_20130630.CreateSMBFileShare
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -562,8 +530,6 @@ paths:
           enum:
             - StorageGateway_20130630.CreateSnapshot
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -605,8 +571,6 @@ paths:
           enum:
             - StorageGateway_20130630.CreateSnapshotFromVolumeRecoveryPoint
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -644,8 +608,6 @@ paths:
           enum:
             - StorageGateway_20130630.CreateStorediSCSIVolume
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -683,8 +645,6 @@ paths:
           enum:
             - StorageGateway_20130630.CreateTapeWithBarcode
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -722,8 +682,6 @@ paths:
           enum:
             - StorageGateway_20130630.CreateTapes
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -761,8 +719,6 @@ paths:
           enum:
             - StorageGateway_20130630.DeleteBandwidthRateLimit
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -800,8 +756,6 @@ paths:
           enum:
             - StorageGateway_20130630.DeleteChapCredentials
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -839,8 +793,6 @@ paths:
           enum:
             - StorageGateway_20130630.DeleteFileShare
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -878,8 +830,6 @@ paths:
           enum:
             - StorageGateway_20130630.DeleteGateway
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -917,8 +867,6 @@ paths:
           enum:
             - StorageGateway_20130630.DeleteSnapshotSchedule
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -956,8 +904,6 @@ paths:
           enum:
             - StorageGateway_20130630.DeleteTape
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -995,8 +941,6 @@ paths:
           enum:
             - StorageGateway_20130630.DeleteTapeArchive
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1034,8 +978,6 @@ paths:
           enum:
             - StorageGateway_20130630.DeleteVolume
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1073,8 +1015,6 @@ paths:
           enum:
             - StorageGateway_20130630.DescribeBandwidthRateLimit
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1112,8 +1052,6 @@ paths:
           enum:
             - StorageGateway_20130630.DescribeCache
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1151,8 +1089,6 @@ paths:
           enum:
             - StorageGateway_20130630.DescribeCachediSCSIVolumes
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1190,8 +1126,6 @@ paths:
           enum:
             - StorageGateway_20130630.DescribeChapCredentials
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1229,8 +1163,6 @@ paths:
           enum:
             - StorageGateway_20130630.DescribeGatewayInformation
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1268,8 +1200,6 @@ paths:
           enum:
             - StorageGateway_20130630.DescribeMaintenanceStartTime
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1307,8 +1237,6 @@ paths:
           enum:
             - StorageGateway_20130630.DescribeNFSFileShares
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1346,8 +1274,6 @@ paths:
           enum:
             - StorageGateway_20130630.DescribeSMBFileShares
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1385,8 +1311,6 @@ paths:
           enum:
             - StorageGateway_20130630.DescribeSMBSettings
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1424,8 +1348,6 @@ paths:
           enum:
             - StorageGateway_20130630.DescribeSnapshotSchedule
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1463,8 +1385,6 @@ paths:
           enum:
             - StorageGateway_20130630.DescribeStorediSCSIVolumes
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1512,8 +1432,6 @@ paths:
           enum:
             - StorageGateway_20130630.DescribeTapeArchives
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1561,8 +1479,6 @@ paths:
           enum:
             - StorageGateway_20130630.DescribeTapeRecoveryPoints
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1610,8 +1526,6 @@ paths:
           enum:
             - StorageGateway_20130630.DescribeTapes
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1649,8 +1563,6 @@ paths:
           enum:
             - StorageGateway_20130630.DescribeUploadBuffer
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1698,8 +1610,6 @@ paths:
           enum:
             - StorageGateway_20130630.DescribeVTLDevices
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1737,8 +1647,6 @@ paths:
           enum:
             - StorageGateway_20130630.DescribeWorkingStorage
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1776,8 +1684,6 @@ paths:
           enum:
             - StorageGateway_20130630.DetachVolume
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1815,8 +1721,6 @@ paths:
           enum:
             - StorageGateway_20130630.DisableGateway
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1854,8 +1758,6 @@ paths:
           enum:
             - StorageGateway_20130630.JoinDomain
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1893,8 +1795,6 @@ paths:
           enum:
             - StorageGateway_20130630.ListFileShares
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1942,8 +1842,6 @@ paths:
           enum:
             - StorageGateway_20130630.ListGateways
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1981,8 +1879,6 @@ paths:
           enum:
             - StorageGateway_20130630.ListLocalDisks
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2020,8 +1916,6 @@ paths:
           enum:
             - StorageGateway_20130630.ListTagsForResource
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2059,8 +1953,6 @@ paths:
           enum:
             - StorageGateway_20130630.ListTapes
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2098,8 +1990,6 @@ paths:
           enum:
             - StorageGateway_20130630.ListVolumeInitiators
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2137,8 +2027,6 @@ paths:
           enum:
             - StorageGateway_20130630.ListVolumeRecoveryPoints
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2186,8 +2074,6 @@ paths:
           enum:
             - StorageGateway_20130630.ListVolumes
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2225,8 +2111,6 @@ paths:
           enum:
             - StorageGateway_20130630.NotifyWhenUploaded
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2264,8 +2148,6 @@ paths:
           enum:
             - StorageGateway_20130630.RefreshCache
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2303,8 +2185,6 @@ paths:
           enum:
             - StorageGateway_20130630.RemoveTagsFromResource
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2342,8 +2222,6 @@ paths:
           enum:
             - StorageGateway_20130630.ResetCache
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2381,8 +2259,6 @@ paths:
           enum:
             - StorageGateway_20130630.RetrieveTapeArchive
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2420,8 +2296,6 @@ paths:
           enum:
             - StorageGateway_20130630.RetrieveTapeRecoveryPoint
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2459,8 +2333,6 @@ paths:
           enum:
             - StorageGateway_20130630.SetLocalConsolePassword
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2498,8 +2370,6 @@ paths:
           enum:
             - StorageGateway_20130630.SetSMBGuestPassword
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2537,8 +2407,6 @@ paths:
           enum:
             - StorageGateway_20130630.ShutdownGateway
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2576,8 +2444,6 @@ paths:
           enum:
             - StorageGateway_20130630.StartGateway
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2615,8 +2481,6 @@ paths:
           enum:
             - StorageGateway_20130630.UpdateBandwidthRateLimit
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2654,8 +2518,6 @@ paths:
           enum:
             - StorageGateway_20130630.UpdateChapCredentials
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2693,8 +2555,6 @@ paths:
           enum:
             - StorageGateway_20130630.UpdateGatewayInformation
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2732,8 +2592,6 @@ paths:
           enum:
             - StorageGateway_20130630.UpdateGatewaySoftwareNow
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2771,8 +2629,6 @@ paths:
           enum:
             - StorageGateway_20130630.UpdateMaintenanceStartTime
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2810,8 +2666,6 @@ paths:
           enum:
             - StorageGateway_20130630.UpdateNFSFileShare
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2849,8 +2703,6 @@ paths:
           enum:
             - StorageGateway_20130630.UpdateSMBFileShare
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2888,8 +2740,6 @@ paths:
           enum:
             - StorageGateway_20130630.UpdateSnapshotSchedule
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2927,8 +2777,6 @@ paths:
           enum:
             - StorageGateway_20130630.UpdateVTLDeviceType
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'

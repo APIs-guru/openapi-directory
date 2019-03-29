@@ -43,16 +43,6 @@ consumes:
 produces:
   - application/json
 parameters:
-  Action:
-    name: Action
-    in: query
-    type: string
-    required: true
-  Version:
-    name: Version
-    in: query
-    type: string
-    required: true
   X-Amz-Content-Sha256:
     name: X-Amz-Content-Sha256
     in: header
@@ -210,8 +200,6 @@ paths:
                 description: The unique identifier for the hierarchy group to assign to the user created.
                 type: string
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -260,8 +248,6 @@ paths:
           description: The unique identifier of the user to delete.
           type: string
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -353,8 +339,6 @@ paths:
           minLength: 1
           maxLength: 100
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -400,8 +384,6 @@ paths:
           minLength: 1
           maxLength: 100
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -446,8 +428,6 @@ paths:
           minLength: 1
           maxLength: 256
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -541,8 +521,6 @@ paths:
           description: Pagination token
           required: false
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -592,8 +570,6 @@ paths:
           minLength: 1
           maxLength: 100
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -697,8 +673,6 @@ paths:
           description: Pagination token
           required: false
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -756,8 +730,6 @@ paths:
           minimum: 1
           maximum: 1000
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -815,8 +787,6 @@ paths:
           minimum: 1
           maximum: 1000
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -874,8 +844,6 @@ paths:
           minimum: 1
           maximum: 1000
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -933,8 +901,6 @@ paths:
           minimum: 1
           maximum: 1000
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1018,8 +984,6 @@ paths:
                 additionalProperties:
                   $ref: '#/definitions/AttributeValue'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1077,8 +1041,6 @@ paths:
                 minLength: 1
                 maxLength: 100
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1138,8 +1100,6 @@ paths:
                 additionalProperties:
                   $ref: '#/definitions/AttributeValue'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1197,8 +1157,6 @@ paths:
                 description: The identifier for the hierarchy group to assign to the user.
                 type: string
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1268,8 +1226,6 @@ paths:
                     $ref: '#/definitions/Email'
                     description: 'The email address added to the user account. If you are using SAML for identity management and include this parameter, an <code>InvalidRequestException</code> is returned.'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1342,8 +1298,6 @@ paths:
                     $ref: '#/definitions/PhoneNumber'
                     description: The phone number for the user's desk phone.
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1403,8 +1357,6 @@ paths:
                 description: The identifier of the routing profile to assign to the user.
                 type: string
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1468,8 +1420,6 @@ paths:
                 minItems: 1
                 maxItems: 10
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'

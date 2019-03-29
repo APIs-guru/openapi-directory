@@ -44,16 +44,6 @@ consumes:
 produces:
   - application/json
 parameters:
-  Action:
-    name: Action
-    in: query
-    type: string
-    required: true
-  Version:
-    name: Version
-    in: query
-    type: string
-    required: true
   X-Amz-Content-Sha256:
     name: X-Amz-Content-Sha256
     in: header
@@ -147,8 +137,6 @@ paths:
           enum:
             - CodeDeploy_20141006.AddTagsToOnPremisesInstances
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -202,8 +190,6 @@ paths:
           enum:
             - CodeDeploy_20141006.BatchGetApplicationRevisions
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -249,8 +235,6 @@ paths:
           enum:
             - CodeDeploy_20141006.BatchGetApplications
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -308,8 +292,6 @@ paths:
           enum:
             - CodeDeploy_20141006.BatchGetDeploymentGroups
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -368,8 +350,6 @@ paths:
           enum:
             - CodeDeploy_20141006.BatchGetDeploymentInstances
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -427,8 +407,6 @@ paths:
           enum:
             - CodeDeploy_20141006.BatchGetDeploymentTargets
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -470,8 +448,6 @@ paths:
           enum:
             - CodeDeploy_20141006.BatchGetDeployments
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -513,8 +489,6 @@ paths:
           enum:
             - CodeDeploy_20141006.BatchGetOnPremisesInstances
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -574,8 +548,6 @@ paths:
           enum:
             - CodeDeploy_20141006.ContinueDeployment
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -625,8 +597,6 @@ paths:
           enum:
             - CodeDeploy_20141006.CreateApplication
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -748,8 +718,6 @@ paths:
           enum:
             - CodeDeploy_20141006.CreateDeployment
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -807,8 +775,6 @@ paths:
           enum:
             - CodeDeploy_20141006.CreateDeploymentConfig
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -962,8 +928,6 @@ paths:
           enum:
             - CodeDeploy_20141006.CreateDeploymentGroup
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -999,8 +963,6 @@ paths:
           enum:
             - CodeDeploy_20141006.DeleteApplication
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1044,8 +1006,6 @@ paths:
           enum:
             - CodeDeploy_20141006.DeleteDeploymentConfig
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1095,8 +1055,6 @@ paths:
           enum:
             - CodeDeploy_20141006.DeleteDeploymentGroup
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1146,8 +1104,6 @@ paths:
           enum:
             - CodeDeploy_20141006.DeleteGitHubAccountToken
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1183,8 +1139,6 @@ paths:
           enum:
             - CodeDeploy_20141006.DeregisterOnPremisesInstance
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1226,8 +1180,6 @@ paths:
           enum:
             - CodeDeploy_20141006.GetApplication
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1281,8 +1233,6 @@ paths:
           enum:
             - CodeDeploy_20141006.GetApplicationRevision
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1324,8 +1274,6 @@ paths:
           enum:
             - CodeDeploy_20141006.GetDeployment
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1371,8 +1319,6 @@ paths:
           enum:
             - CodeDeploy_20141006.GetDeploymentConfig
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1430,8 +1376,6 @@ paths:
           enum:
             - CodeDeploy_20141006.GetDeploymentGroup
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1490,8 +1434,6 @@ paths:
           enum:
             - CodeDeploy_20141006.GetDeploymentInstance
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1549,8 +1491,6 @@ paths:
           enum:
             - CodeDeploy_20141006.GetDeploymentTarget
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1592,8 +1532,6 @@ paths:
           enum:
             - CodeDeploy_20141006.GetOnPremisesInstance
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1668,8 +1606,6 @@ paths:
           enum:
             - CodeDeploy_20141006.ListApplicationRevisions
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1708,8 +1644,6 @@ paths:
           enum:
             - CodeDeploy_20141006.ListApplications
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1748,8 +1682,6 @@ paths:
           enum:
             - CodeDeploy_20141006.ListDeploymentConfigs
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1800,8 +1732,6 @@ paths:
           enum:
             - CodeDeploy_20141006.ListDeploymentGroups
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1877,8 +1807,6 @@ paths:
           enum:
             - CodeDeploy_20141006.ListDeploymentInstances
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1940,8 +1868,6 @@ paths:
           enum:
             - CodeDeploy_20141006.ListDeploymentTargets
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2012,8 +1938,6 @@ paths:
           enum:
             - CodeDeploy_20141006.ListDeployments
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2055,8 +1979,6 @@ paths:
           enum:
             - CodeDeploy_20141006.ListGitHubAccountTokenNames
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2098,8 +2020,6 @@ paths:
           enum:
             - CodeDeploy_20141006.ListOnPremisesInstances
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2157,8 +2077,6 @@ paths:
           enum:
             - CodeDeploy_20141006.PutLifecycleEventHookExecutionStatus
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2210,8 +2128,6 @@ paths:
           enum:
             - CodeDeploy_20141006.RegisterApplicationRevision
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2279,8 +2195,6 @@ paths:
           enum:
             - CodeDeploy_20141006.RegisterOnPremisesInstance
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2336,8 +2250,6 @@ paths:
           enum:
             - CodeDeploy_20141006.RemoveTagsFromOnPremisesInstances
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2390,8 +2302,6 @@ paths:
           enum:
             - CodeDeploy_20141006.SkipWaitTimeForInstanceTermination
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2441,8 +2351,6 @@ paths:
           enum:
             - CodeDeploy_20141006.StopDeployment
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2486,8 +2394,6 @@ paths:
           enum:
             - CodeDeploy_20141006.UpdateApplication
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2637,8 +2543,6 @@ paths:
           enum:
             - CodeDeploy_20141006.UpdateDeploymentGroup
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'

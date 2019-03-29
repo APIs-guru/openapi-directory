@@ -151,6 +151,12 @@ paths:
           type: string
           enum:
             - CancelJob
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-06-01'
     parameters:
       - $ref: '#/parameters/AWSAccessKeyId'
       - $ref: '#/parameters/Action'
@@ -289,6 +295,12 @@ paths:
           type: string
           enum:
             - CreateJob
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-06-01'
     parameters:
       - $ref: '#/parameters/AWSAccessKeyId'
       - $ref: '#/parameters/Action'
@@ -416,6 +428,12 @@ paths:
           type: string
           enum:
             - GetShippingLabel
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-06-01'
     parameters:
       - $ref: '#/parameters/AWSAccessKeyId'
       - $ref: '#/parameters/Action'
@@ -481,6 +499,12 @@ paths:
           type: string
           enum:
             - GetStatus
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-06-01'
     parameters:
       - $ref: '#/parameters/AWSAccessKeyId'
       - $ref: '#/parameters/Action'
@@ -541,6 +565,12 @@ paths:
           type: string
           enum:
             - ListJobs
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-06-01'
     parameters:
       - $ref: '#/parameters/AWSAccessKeyId'
       - $ref: '#/parameters/Action'
@@ -689,6 +719,12 @@ paths:
           type: string
           enum:
             - UpdateJob
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-06-01'
     parameters:
       - $ref: '#/parameters/AWSAccessKeyId'
       - $ref: '#/parameters/Action'

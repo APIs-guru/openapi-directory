@@ -44,16 +44,6 @@ consumes:
 produces:
   - application/json
 parameters:
-  Action:
-    name: Action
-    in: query
-    type: string
-    required: true
-  Version:
-    name: Version
-    in: query
-    type: string
-    required: true
   X-Amz-Content-Sha256:
     name: X-Amz-Content-Sha256
     in: header
@@ -141,8 +131,6 @@ paths:
           enum:
             - AWSServerMigrationService_V2016_10_24.CreateApp
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -208,8 +196,6 @@ paths:
           enum:
             - AWSServerMigrationService_V2016_10_24.CreateReplicationJob
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -259,8 +245,6 @@ paths:
           enum:
             - AWSServerMigrationService_V2016_10_24.DeleteApp
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -310,8 +294,6 @@ paths:
           enum:
             - AWSServerMigrationService_V2016_10_24.DeleteAppLaunchConfiguration
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -361,8 +343,6 @@ paths:
           enum:
             - AWSServerMigrationService_V2016_10_24.DeleteAppReplicationConfiguration
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -412,8 +392,6 @@ paths:
           enum:
             - AWSServerMigrationService_V2016_10_24.DeleteReplicationJob
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -459,8 +437,6 @@ paths:
           enum:
             - AWSServerMigrationService_V2016_10_24.DeleteServerCatalog
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -506,8 +482,6 @@ paths:
           enum:
             - AWSServerMigrationService_V2016_10_24.DisassociateConnector
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -557,8 +531,6 @@ paths:
           enum:
             - AWSServerMigrationService_V2016_10_24.GenerateChangeSet
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -608,8 +580,6 @@ paths:
           enum:
             - AWSServerMigrationService_V2016_10_24.GenerateTemplate
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -659,8 +629,6 @@ paths:
           enum:
             - AWSServerMigrationService_V2016_10_24.GetApp
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -710,8 +678,6 @@ paths:
           enum:
             - AWSServerMigrationService_V2016_10_24.GetAppLaunchConfiguration
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -761,8 +727,6 @@ paths:
           enum:
             - AWSServerMigrationService_V2016_10_24.GetAppReplicationConfiguration
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -806,8 +770,6 @@ paths:
           enum:
             - AWSServerMigrationService_V2016_10_24.GetConnectors
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -859,8 +821,6 @@ paths:
           enum:
             - AWSServerMigrationService_V2016_10_24.GetReplicationJobs
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -912,8 +872,6 @@ paths:
           enum:
             - AWSServerMigrationService_V2016_10_24.GetReplicationRuns
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -957,8 +915,6 @@ paths:
           enum:
             - AWSServerMigrationService_V2016_10_24.GetServers
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1008,8 +964,6 @@ paths:
           enum:
             - AWSServerMigrationService_V2016_10_24.ImportServerCatalog
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1059,8 +1013,6 @@ paths:
           enum:
             - AWSServerMigrationService_V2016_10_24.LaunchApp
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1110,8 +1062,6 @@ paths:
           enum:
             - AWSServerMigrationService_V2016_10_24.ListApps
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1161,8 +1111,6 @@ paths:
           enum:
             - AWSServerMigrationService_V2016_10_24.PutAppLaunchConfiguration
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1212,8 +1160,6 @@ paths:
           enum:
             - AWSServerMigrationService_V2016_10_24.PutAppReplicationConfiguration
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1263,8 +1209,6 @@ paths:
           enum:
             - AWSServerMigrationService_V2016_10_24.StartAppReplication
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1314,8 +1258,6 @@ paths:
           enum:
             - AWSServerMigrationService_V2016_10_24.StartOnDemandReplicationRun
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1365,8 +1307,6 @@ paths:
           enum:
             - AWSServerMigrationService_V2016_10_24.StopAppReplication
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1416,8 +1356,6 @@ paths:
           enum:
             - AWSServerMigrationService_V2016_10_24.TerminateApp
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1467,8 +1405,6 @@ paths:
           enum:
             - AWSServerMigrationService_V2016_10_24.UpdateApp
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1530,8 +1466,6 @@ paths:
           enum:
             - AWSServerMigrationService_V2016_10_24.UpdateReplicationJob
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'

@@ -44,16 +44,6 @@ consumes:
 produces:
   - text/xml
 parameters:
-  Action:
-    name: Action
-    in: query
-    type: string
-    required: true
-  Version:
-    name: Version
-    in: query
-    type: string
-    required: true
   X-Amz-Content-Sha256:
     name: X-Amz-Content-Sha256
     in: header
@@ -124,9 +114,13 @@ paths:
           type: string
           enum:
             - DeleteAlarms
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -169,9 +163,13 @@ paths:
           type: string
           enum:
             - DeleteDashboards
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -241,9 +239,13 @@ paths:
           type: string
           enum:
             - DescribeAlarmHistory
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -315,9 +317,13 @@ paths:
           type: string
           enum:
             - DescribeAlarms
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -419,9 +425,13 @@ paths:
           type: string
           enum:
             - DescribeAlarmsForMetric
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -450,9 +460,13 @@ paths:
           type: string
           enum:
             - DisableAlarmActions
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -481,9 +495,13 @@ paths:
           type: string
           enum:
             - EnableAlarmActions
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -524,9 +542,13 @@ paths:
           type: string
           enum:
             - GetDashboard
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -593,9 +615,13 @@ paths:
           type: string
           enum:
             - GetMetricData
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -722,9 +748,13 @@ paths:
           type: string
           enum:
             - GetMetricStatistics
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -758,9 +788,13 @@ paths:
           type: string
           enum:
             - GetMetricWidgetImage
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -804,9 +838,13 @@ paths:
           type: string
           enum:
             - ListDashboards
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -867,9 +905,13 @@ paths:
           type: string
           enum:
             - ListMetrics
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -911,9 +953,13 @@ paths:
           type: string
           enum:
             - PutDashboard
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1106,9 +1152,13 @@ paths:
           type: string
           enum:
             - PutMetricAlarm
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1161,9 +1211,13 @@ paths:
           type: string
           enum:
             - PutMetricData
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1223,9 +1277,13 @@ paths:
           type: string
           enum:
             - SetAlarmState
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'

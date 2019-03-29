@@ -44,16 +44,6 @@ consumes:
 produces:
   - text/xml
 parameters:
-  Action:
-    name: Action
-    in: query
-    type: string
-    required: true
-  Version:
-    name: Version
-    in: query
-    type: string
-    required: true
   X-Amz-Content-Sha256:
     name: X-Amz-Content-Sha256
     in: header
@@ -141,9 +131,13 @@ paths:
           type: string
           enum:
             - AddTags
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-06-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -191,9 +185,13 @@ paths:
           type: string
           enum:
             - ApplySecurityGroupsToLoadBalancer
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-06-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -245,9 +243,13 @@ paths:
           type: string
           enum:
             - AttachLoadBalancerToSubnets
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-06-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -310,9 +312,13 @@ paths:
           type: string
           enum:
             - ConfigureHealthCheck
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-06-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -367,9 +373,13 @@ paths:
           type: string
           enum:
             - CreateAppCookieStickinessPolicy
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-06-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -424,9 +434,13 @@ paths:
           type: string
           enum:
             - CreateLBCookieStickinessPolicy
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-06-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -543,9 +557,13 @@ paths:
           type: string
           enum:
             - CreateLoadBalancer
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-06-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -601,9 +619,13 @@ paths:
           type: string
           enum:
             - CreateLoadBalancerListeners
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-06-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -669,9 +691,13 @@ paths:
           type: string
           enum:
             - CreateLoadBalancerPolicy
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-06-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -700,9 +726,13 @@ paths:
           type: string
           enum:
             - DeleteLoadBalancer
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-06-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -742,9 +772,13 @@ paths:
           type: string
           enum:
             - DeleteLoadBalancerListeners
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-06-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -786,9 +820,13 @@ paths:
           type: string
           enum:
             - DeleteLoadBalancerPolicy
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-06-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -832,9 +870,13 @@ paths:
           type: string
           enum:
             - DeregisterInstancesFromLoadBalancer
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-06-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -870,9 +912,13 @@ paths:
           type: string
           enum:
             - DescribeAccountLimits
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-06-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -916,9 +962,13 @@ paths:
           type: string
           enum:
             - DescribeInstanceHealth
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-06-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -955,9 +1005,13 @@ paths:
           type: string
           enum:
             - DescribeLoadBalancerAttributes
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-06-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1001,9 +1055,13 @@ paths:
           type: string
           enum:
             - DescribeLoadBalancerPolicies
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-06-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1038,9 +1096,13 @@ paths:
           type: string
           enum:
             - DescribeLoadBalancerPolicyTypes
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-06-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1091,9 +1153,13 @@ paths:
           type: string
           enum:
             - DescribeLoadBalancers
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-06-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1128,9 +1194,13 @@ paths:
           type: string
           enum:
             - DescribeTags
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-06-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1174,9 +1244,13 @@ paths:
           type: string
           enum:
             - DetachLoadBalancerFromSubnets
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-06-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1220,9 +1294,13 @@ paths:
           type: string
           enum:
             - DisableAvailabilityZonesForLoadBalancer
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-06-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1262,9 +1340,13 @@ paths:
           type: string
           enum:
             - EnableAvailabilityZonesForLoadBalancer
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-06-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1337,9 +1419,13 @@ paths:
           type: string
           enum:
             - ModifyLoadBalancerAttributes
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-06-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1383,9 +1469,13 @@ paths:
           type: string
           enum:
             - RegisterInstancesWithLoadBalancer
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-06-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1427,9 +1517,13 @@ paths:
           type: string
           enum:
             - RemoveTags
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-06-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1488,9 +1582,13 @@ paths:
           type: string
           enum:
             - SetLoadBalancerListenerSSLCertificate
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-06-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1543,9 +1641,13 @@ paths:
           type: string
           enum:
             - SetLoadBalancerPoliciesForBackendServer
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-06-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1602,9 +1704,13 @@ paths:
           type: string
           enum:
             - SetLoadBalancerPoliciesOfListener
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-06-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'

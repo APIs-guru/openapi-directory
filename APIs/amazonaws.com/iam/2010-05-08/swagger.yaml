@@ -44,16 +44,6 @@ consumes:
 produces:
   - text/xml
 parameters:
-  Action:
-    name: Action
-    in: query
-    type: string
-    required: true
-  Version:
-    name: Version
-    in: query
-    type: string
-    required: true
   X-Amz-Content-Sha256:
     name: X-Amz-Content-Sha256
     in: header
@@ -143,9 +133,13 @@ paths:
           type: string
           enum:
             - AddClientIDToOpenIDConnectProvider
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -203,9 +197,13 @@ paths:
           type: string
           enum:
             - AddRoleToInstanceProfile
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -255,9 +253,13 @@ paths:
           type: string
           enum:
             - AddUserToGroup
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -314,9 +316,13 @@ paths:
           type: string
           enum:
             - AttachGroupPolicy
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -377,9 +383,13 @@ paths:
           type: string
           enum:
             - AttachRolePolicy
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -436,9 +446,13 @@ paths:
           type: string
           enum:
             - AttachUserPolicy
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -502,9 +516,13 @@ paths:
           type: string
           enum:
             - ChangePassword
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -548,9 +566,13 @@ paths:
           type: string
           enum:
             - CreateAccessKey
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -592,9 +614,13 @@ paths:
           type: string
           enum:
             - CreateAccountAlias
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -650,9 +676,13 @@ paths:
           type: string
           enum:
             - CreateGroup
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -704,9 +734,13 @@ paths:
           type: string
           enum:
             - CreateInstanceProfile
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -772,9 +806,13 @@ paths:
           type: string
           enum:
             - CreateLoginProfile
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -835,9 +873,13 @@ paths:
           type: string
           enum:
             - CreateOpenIDConnectProvider
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -909,9 +951,13 @@ paths:
           type: string
           enum:
             - CreatePolicy
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -975,9 +1021,13 @@ paths:
           type: string
           enum:
             - CreatePolicyVersion
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1077,9 +1127,13 @@ paths:
           type: string
           enum:
             - CreateRole
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1134,9 +1188,13 @@ paths:
           type: string
           enum:
             - CreateSAMLProvider
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1199,9 +1257,13 @@ paths:
           type: string
           enum:
             - CreateServiceLinkedRole
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1250,9 +1312,13 @@ paths:
           type: string
           enum:
             - CreateServiceSpecificCredential
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1330,9 +1396,13 @@ paths:
           type: string
           enum:
             - CreateUser
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1383,9 +1453,13 @@ paths:
           type: string
           enum:
             - CreateVirtualMFADevice
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1439,9 +1513,13 @@ paths:
           type: string
           enum:
             - DeactivateMFADevice
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1491,9 +1569,13 @@ paths:
           type: string
           enum:
             - DeleteAccessKey
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1535,9 +1617,13 @@ paths:
           type: string
           enum:
             - DeleteAccountAlias
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1571,9 +1657,13 @@ paths:
           type: string
           enum:
             - DeleteAccountPasswordPolicy
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1619,9 +1709,13 @@ paths:
           type: string
           enum:
             - DeleteGroup
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1671,9 +1765,13 @@ paths:
           type: string
           enum:
             - DeleteGroupPolicy
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1719,9 +1817,13 @@ paths:
           type: string
           enum:
             - DeleteInstanceProfile
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1767,9 +1869,13 @@ paths:
           type: string
           enum:
             - DeleteLoginProfile
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1810,9 +1916,13 @@ paths:
           type: string
           enum:
             - DeleteOpenIDConnectProvider
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1861,9 +1971,13 @@ paths:
           type: string
           enum:
             - DeletePolicy
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1918,9 +2032,13 @@ paths:
           type: string
           enum:
             - DeletePolicyVersion
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1974,9 +2092,13 @@ paths:
           type: string
           enum:
             - DeleteRole
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2018,9 +2140,13 @@ paths:
           type: string
           enum:
             - DeleteRolePermissionsBoundary
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2074,9 +2200,13 @@ paths:
           type: string
           enum:
             - DeleteRolePolicy
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2121,9 +2251,13 @@ paths:
           type: string
           enum:
             - DeleteSAMLProvider
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2165,9 +2299,13 @@ paths:
           type: string
           enum:
             - DeleteSSHPublicKey
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2213,9 +2351,13 @@ paths:
           type: string
           enum:
             - DeleteServerCertificate
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2259,9 +2401,13 @@ paths:
           type: string
           enum:
             - DeleteServiceLinkedRole
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2303,9 +2449,13 @@ paths:
           type: string
           enum:
             - DeleteServiceSpecificCredential
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2355,9 +2505,13 @@ paths:
           type: string
           enum:
             - DeleteSigningCertificate
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2407,9 +2561,13 @@ paths:
           type: string
           enum:
             - DeleteUser
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2447,9 +2605,13 @@ paths:
           type: string
           enum:
             - DeleteUserPermissionsBoundary
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2499,9 +2661,13 @@ paths:
           type: string
           enum:
             - DeleteUserPolicy
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2547,9 +2713,13 @@ paths:
           type: string
           enum:
             - DeleteVirtualMFADevice
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2602,9 +2772,13 @@ paths:
           type: string
           enum:
             - DetachGroupPolicy
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2661,9 +2835,13 @@ paths:
           type: string
           enum:
             - DetachRolePolicy
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2716,9 +2894,13 @@ paths:
           type: string
           enum:
             - DetachUserPolicy
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2796,9 +2978,13 @@ paths:
           type: string
           enum:
             - EnableMFADevice
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2830,9 +3016,13 @@ paths:
           type: string
           enum:
             - GenerateCredentialReport
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2871,9 +3061,13 @@ paths:
           type: string
           enum:
             - GenerateServiceLastAccessedDetails
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2909,9 +3103,13 @@ paths:
           type: string
           enum:
             - GetAccessKeyLastUsed
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2961,9 +3159,13 @@ paths:
           type: string
           enum:
             - GetAccountAuthorizationDetails
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2995,9 +3197,13 @@ paths:
           type: string
           enum:
             - GetAccountPasswordPolicy
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3025,9 +3231,13 @@ paths:
           type: string
           enum:
             - GetAccountSummary
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3062,9 +3272,13 @@ paths:
           type: string
           enum:
             - GetContextKeysForCustomPolicy
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3110,9 +3324,13 @@ paths:
           type: string
           enum:
             - GetContextKeysForPrincipalPolicy
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3152,9 +3370,13 @@ paths:
           type: string
           enum:
             - GetCredentialReport
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3209,9 +3431,13 @@ paths:
           type: string
           enum:
             - GetGroup
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3259,9 +3485,13 @@ paths:
           type: string
           enum:
             - GetGroupPolicy
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3301,9 +3531,13 @@ paths:
           type: string
           enum:
             - GetInstanceProfile
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3343,9 +3577,13 @@ paths:
           type: string
           enum:
             - GetLoginProfile
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3388,9 +3626,13 @@ paths:
           type: string
           enum:
             - GetOpenIDConnectProvider
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3433,9 +3675,13 @@ paths:
           type: string
           enum:
             - GetPolicy
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3484,9 +3730,13 @@ paths:
           type: string
           enum:
             - GetPolicyVersion
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3526,9 +3776,13 @@ paths:
           type: string
           enum:
             - GetRole
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3576,9 +3830,13 @@ paths:
           type: string
           enum:
             - GetRolePolicy
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3621,9 +3879,13 @@ paths:
           type: string
           enum:
             - GetSAMLProvider
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3679,9 +3941,13 @@ paths:
           type: string
           enum:
             - GetSSHPublicKey
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3721,9 +3987,13 @@ paths:
           type: string
           enum:
             - GetServerCertificate
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3777,9 +4047,13 @@ paths:
           type: string
           enum:
             - GetServiceLastAccessedDetails
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3841,9 +4115,13 @@ paths:
           type: string
           enum:
             - GetServiceLastAccessedDetailsWithEntities
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3886,9 +4164,13 @@ paths:
           type: string
           enum:
             - GetServiceLinkedRoleDeletionStatus
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3928,9 +4210,13 @@ paths:
           type: string
           enum:
             - GetUser
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3978,9 +4264,13 @@ paths:
           type: string
           enum:
             - GetUserPolicy
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4035,9 +4325,13 @@ paths:
           type: string
           enum:
             - ListAccessKeys
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4080,9 +4374,13 @@ paths:
           type: string
           enum:
             - ListAccountAliases
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4147,9 +4445,13 @@ paths:
           type: string
           enum:
             - ListAttachedGroupPolicies
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4214,9 +4516,13 @@ paths:
           type: string
           enum:
             - ListAttachedRolePolicies
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4281,9 +4587,13 @@ paths:
           type: string
           enum:
             - ListAttachedUserPolicies
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4368,9 +4678,13 @@ paths:
           type: string
           enum:
             - ListEntitiesForPolicy
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4425,9 +4739,13 @@ paths:
           type: string
           enum:
             - ListGroupPolicies
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4478,9 +4796,13 @@ paths:
           type: string
           enum:
             - ListGroups
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4535,9 +4857,13 @@ paths:
           type: string
           enum:
             - ListGroupsForUser
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4588,9 +4914,13 @@ paths:
           type: string
           enum:
             - ListInstanceProfiles
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4645,9 +4975,13 @@ paths:
           type: string
           enum:
             - ListInstanceProfilesForRole
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4702,9 +5036,13 @@ paths:
           type: string
           enum:
             - ListMFADevices
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4732,9 +5070,13 @@ paths:
           type: string
           enum:
             - ListOpenIDConnectProviders
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4805,9 +5147,13 @@ paths:
           type: string
           enum:
             - ListPolicies
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4861,9 +5207,13 @@ paths:
           type: string
           enum:
             - ListPoliciesGrantingServiceAccess
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4921,9 +5271,13 @@ paths:
           type: string
           enum:
             - ListPolicyVersions
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4978,9 +5332,13 @@ paths:
           type: string
           enum:
             - ListRolePolicies
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -5035,9 +5393,13 @@ paths:
           type: string
           enum:
             - ListRoleTags
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -5088,9 +5450,13 @@ paths:
           type: string
           enum:
             - ListRoles
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -5118,9 +5484,13 @@ paths:
           type: string
           enum:
             - ListSAMLProviders
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -5171,9 +5541,13 @@ paths:
           type: string
           enum:
             - ListSSHPublicKeys
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -5224,9 +5598,13 @@ paths:
           type: string
           enum:
             - ListServerCertificates
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -5271,9 +5649,13 @@ paths:
           type: string
           enum:
             - ListServiceSpecificCredentials
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -5328,9 +5710,13 @@ paths:
           type: string
           enum:
             - ListSigningCertificates
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -5385,9 +5771,13 @@ paths:
           type: string
           enum:
             - ListUserPolicies
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -5442,9 +5832,13 @@ paths:
           type: string
           enum:
             - ListUserTags
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -5495,9 +5889,13 @@ paths:
           type: string
           enum:
             - ListUsers
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -5545,9 +5943,13 @@ paths:
           type: string
           enum:
             - ListVirtualMFADevices
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -5609,9 +6011,13 @@ paths:
           type: string
           enum:
             - PutGroupPolicy
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -5668,9 +6074,13 @@ paths:
           type: string
           enum:
             - PutRolePermissionsBoundary
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -5736,9 +6146,13 @@ paths:
           type: string
           enum:
             - PutRolePolicy
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -5791,9 +6205,13 @@ paths:
           type: string
           enum:
             - PutUserPermissionsBoundary
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -5855,9 +6273,13 @@ paths:
           type: string
           enum:
             - PutUserPolicy
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -5905,9 +6327,13 @@ paths:
           type: string
           enum:
             - RemoveClientIDFromOpenIDConnectProvider
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -5961,9 +6387,13 @@ paths:
           type: string
           enum:
             - RemoveRoleFromInstanceProfile
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -6013,9 +6443,13 @@ paths:
           type: string
           enum:
             - RemoveUserFromGroup
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -6059,9 +6493,13 @@ paths:
           type: string
           enum:
             - ResetServiceSpecificCredential
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -6131,9 +6569,13 @@ paths:
           type: string
           enum:
             - ResyncMFADevice
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -6184,9 +6626,13 @@ paths:
           type: string
           enum:
             - SetDefaultPolicyVersion
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -6290,9 +6736,13 @@ paths:
           type: string
           enum:
             - SimulateCustomPolicy
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -6407,9 +6857,13 @@ paths:
           type: string
           enum:
             - SimulatePrincipalPolicy
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -6466,9 +6920,13 @@ paths:
           type: string
           enum:
             - TagRole
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -6525,9 +6983,13 @@ paths:
           type: string
           enum:
             - TagUser
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -6576,9 +7038,13 @@ paths:
           type: string
           enum:
             - UntagRole
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -6627,9 +7093,13 @@ paths:
           type: string
           enum:
             - UntagUser
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -6687,9 +7157,13 @@ paths:
           type: string
           enum:
             - UpdateAccessKey
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -6778,9 +7252,13 @@ paths:
           type: string
           enum:
             - UpdateAccountPasswordPolicy
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -6838,9 +7316,13 @@ paths:
           type: string
           enum:
             - UpdateAssumeRolePolicy
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -6902,9 +7384,13 @@ paths:
           type: string
           enum:
             - UpdateGroup
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -6968,9 +7454,13 @@ paths:
           type: string
           enum:
             - UpdateLoginProfile
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -7018,9 +7508,13 @@ paths:
           type: string
           enum:
             - UpdateOpenIDConnectProviderThumbprint
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -7078,9 +7572,13 @@ paths:
           type: string
           enum:
             - UpdateRole
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -7131,9 +7629,13 @@ paths:
           type: string
           enum:
             - UpdateRoleDescription
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -7187,9 +7689,13 @@ paths:
           type: string
           enum:
             - UpdateSAMLProvider
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -7239,9 +7745,13 @@ paths:
           type: string
           enum:
             - UpdateSSHPublicKey
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -7303,9 +7813,13 @@ paths:
           type: string
           enum:
             - UpdateServerCertificate
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -7355,9 +7869,13 @@ paths:
           type: string
           enum:
             - UpdateServiceSpecificCredential
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -7415,9 +7933,13 @@ paths:
           type: string
           enum:
             - UpdateSigningCertificate
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -7487,9 +8009,13 @@ paths:
           type: string
           enum:
             - UpdateUser
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -7549,9 +8075,13 @@ paths:
           type: string
           enum:
             - UploadSSHPublicKey
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -7636,9 +8166,13 @@ paths:
           type: string
           enum:
             - UploadServerCertificate
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -7706,9 +8240,13 @@ paths:
           type: string
           enum:
             - UploadSigningCertificate
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-05-08'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'

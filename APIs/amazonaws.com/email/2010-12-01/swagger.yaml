@@ -44,16 +44,6 @@ consumes:
 produces:
   - text/xml
 parameters:
-  Action:
-    name: Action
-    in: query
-    type: string
-    required: true
-  Version:
-    name: Version
-    in: query
-    type: string
-    required: true
   X-Amz-Content-Sha256:
     name: X-Amz-Content-Sha256
     in: header
@@ -137,9 +127,13 @@ paths:
           type: string
           enum:
             - CloneReceiptRuleSet
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -181,9 +175,13 @@ paths:
           type: string
           enum:
             - CreateConfigurationSet
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -274,9 +272,13 @@ paths:
           type: string
           enum:
             - CreateConfigurationSetEventDestination
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -323,9 +325,13 @@ paths:
           type: string
           enum:
             - CreateConfigurationSetTrackingOptions
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -393,9 +399,13 @@ paths:
           type: string
           enum:
             - CreateCustomVerificationEmailTemplate
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -439,9 +449,13 @@ paths:
           type: string
           enum:
             - CreateReceiptFilter
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -543,9 +557,13 @@ paths:
           type: string
           enum:
             - CreateReceiptRule
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -582,9 +600,13 @@ paths:
           type: string
           enum:
             - CreateReceiptRuleSet
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -644,9 +666,13 @@ paths:
           type: string
           enum:
             - CreateTemplate
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -679,9 +705,13 @@ paths:
           type: string
           enum:
             - DeleteConfigurationSet
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -723,9 +753,13 @@ paths:
           type: string
           enum:
             - DeleteConfigurationSetEventDestination
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -762,9 +796,13 @@ paths:
           type: string
           enum:
             - DeleteConfigurationSetTrackingOptions
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -791,9 +829,13 @@ paths:
           type: string
           enum:
             - DeleteCustomVerificationEmailTemplate
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -822,9 +864,13 @@ paths:
           type: string
           enum:
             - DeleteIdentity
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -860,9 +906,13 @@ paths:
           type: string
           enum:
             - DeleteIdentityPolicy
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -891,9 +941,13 @@ paths:
           type: string
           enum:
             - DeleteReceiptFilter
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -931,9 +985,13 @@ paths:
           type: string
           enum:
             - DeleteReceiptRule
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -966,9 +1024,13 @@ paths:
           type: string
           enum:
             - DeleteReceiptRuleSet
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -997,9 +1059,13 @@ paths:
           type: string
           enum:
             - DeleteTemplate
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1026,9 +1092,13 @@ paths:
           type: string
           enum:
             - DeleteVerifiedEmailAddress
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1052,9 +1122,13 @@ paths:
           type: string
           enum:
             - DescribeActiveReceiptRuleSet
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1094,9 +1168,13 @@ paths:
           type: string
           enum:
             - DescribeConfigurationSet
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1138,9 +1216,13 @@ paths:
           type: string
           enum:
             - DescribeReceiptRule
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1173,9 +1255,13 @@ paths:
           type: string
           enum:
             - DescribeReceiptRuleSet
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1199,9 +1285,13 @@ paths:
           type: string
           enum:
             - GetAccountSendingEnabled
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1234,9 +1324,13 @@ paths:
           type: string
           enum:
             - GetCustomVerificationEmailTemplate
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1267,9 +1361,13 @@ paths:
           type: string
           enum:
             - GetIdentityDkimAttributes
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1300,9 +1398,13 @@ paths:
           type: string
           enum:
             - GetIdentityMailFromDomainAttributes
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1333,9 +1435,13 @@ paths:
           type: string
           enum:
             - GetIdentityNotificationAttributes
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1371,9 +1477,13 @@ paths:
           type: string
           enum:
             - GetIdentityPolicies
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1404,9 +1514,13 @@ paths:
           type: string
           enum:
             - GetIdentityVerificationAttributes
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1430,9 +1544,13 @@ paths:
           type: string
           enum:
             - GetSendQuota
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1456,9 +1574,13 @@ paths:
           type: string
           enum:
             - GetSendStatistics
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1491,9 +1613,13 @@ paths:
           type: string
           enum:
             - GetTemplate
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1527,9 +1653,13 @@ paths:
           type: string
           enum:
             - ListConfigurationSets
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1565,9 +1695,13 @@ paths:
           type: string
           enum:
             - ListCustomVerificationEmailTemplates
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1609,9 +1743,13 @@ paths:
           type: string
           enum:
             - ListIdentities
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1640,9 +1778,13 @@ paths:
           type: string
           enum:
             - ListIdentityPolicies
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1666,9 +1808,13 @@ paths:
           type: string
           enum:
             - ListReceiptFilters
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1697,9 +1843,13 @@ paths:
           type: string
           enum:
             - ListReceiptRuleSets
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1733,9 +1883,13 @@ paths:
           type: string
           enum:
             - ListTemplates
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1759,9 +1913,13 @@ paths:
           type: string
           enum:
             - ListVerifiedEmailAddresses
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1807,9 +1965,13 @@ paths:
           type: string
           enum:
             - PutIdentityPolicy
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1853,9 +2015,13 @@ paths:
           type: string
           enum:
             - ReorderReceiptRuleSet
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1930,9 +2096,13 @@ paths:
           type: string
           enum:
             - SendBounce
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2042,9 +2212,13 @@ paths:
           type: string
           enum:
             - SendBulkTemplatedEmail
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2103,9 +2277,13 @@ paths:
           type: string
           enum:
             - SendCustomVerificationEmail
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2224,9 +2402,13 @@ paths:
           type: string
           enum:
             - SendEmail
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2315,9 +2497,13 @@ paths:
           type: string
           enum:
             - SendRawEmail
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2444,9 +2630,13 @@ paths:
           type: string
           enum:
             - SendTemplatedEmail
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2479,9 +2669,13 @@ paths:
           type: string
           enum:
             - SetActiveReceiptRuleSet
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2515,9 +2709,13 @@ paths:
           type: string
           enum:
             - SetIdentityDkimEnabled
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2551,9 +2749,13 @@ paths:
           type: string
           enum:
             - SetIdentityFeedbackForwardingEnabled
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2596,9 +2798,13 @@ paths:
           type: string
           enum:
             - SetIdentityHeadersInNotificationsEnabled
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2640,9 +2846,13 @@ paths:
           type: string
           enum:
             - SetIdentityMailFromDomain
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2685,9 +2895,13 @@ paths:
           type: string
           enum:
             - SetIdentityNotificationTopic
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2734,9 +2948,13 @@ paths:
           type: string
           enum:
             - SetReceiptRulePosition
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2783,9 +3001,13 @@ paths:
           type: string
           enum:
             - TestRenderTemplate
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2812,9 +3034,13 @@ paths:
           type: string
           enum:
             - UpdateAccountSendingEnabled
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2901,9 +3127,13 @@ paths:
           type: string
           enum:
             - UpdateConfigurationSetEventDestination
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2939,9 +3169,13 @@ paths:
           type: string
           enum:
             - UpdateConfigurationSetReputationMetricsEnabled
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2977,9 +3211,13 @@ paths:
           type: string
           enum:
             - UpdateConfigurationSetSendingEnabled
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3026,9 +3264,13 @@ paths:
           type: string
           enum:
             - UpdateConfigurationSetTrackingOptions
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3092,9 +3334,13 @@ paths:
           type: string
           enum:
             - UpdateCustomVerificationEmailTemplate
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3187,9 +3433,13 @@ paths:
           type: string
           enum:
             - UpdateReceiptRule
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3245,9 +3495,13 @@ paths:
           type: string
           enum:
             - UpdateTemplate
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3276,9 +3530,13 @@ paths:
           type: string
           enum:
             - VerifyDomainDkim
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3307,9 +3565,13 @@ paths:
           type: string
           enum:
             - VerifyDomainIdentity
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3336,9 +3598,13 @@ paths:
           type: string
           enum:
             - VerifyEmailAddress
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3367,9 +3633,13 @@ paths:
           type: string
           enum:
             - VerifyEmailIdentity
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'

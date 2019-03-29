@@ -44,16 +44,6 @@ consumes:
 produces:
   - text/xml
 parameters:
-  Action:
-    name: Action
-    in: query
-    type: string
-    required: true
-  Version:
-    name: Version
-    in: query
-    type: string
-    required: true
   X-Amz-Content-Sha256:
     name: X-Amz-Content-Sha256
     in: header
@@ -153,9 +143,13 @@ paths:
           type: string
           enum:
             - AddPermission
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-03-31'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -200,9 +194,13 @@ paths:
           type: string
           enum:
             - CheckIfPhoneNumberIsOptedOut
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-03-31'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -261,9 +259,13 @@ paths:
           type: string
           enum:
             - ConfirmSubscription
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-03-31'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -327,9 +329,13 @@ paths:
           type: string
           enum:
             - CreatePlatformApplication
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-03-31'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -402,9 +408,13 @@ paths:
           type: string
           enum:
             - CreatePlatformEndpoint
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-03-31'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -471,9 +481,13 @@ paths:
           type: string
           enum:
             - CreateTopic
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-03-31'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -512,9 +526,13 @@ paths:
           type: string
           enum:
             - DeleteEndpoint
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-03-31'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -553,9 +571,13 @@ paths:
           type: string
           enum:
             - DeletePlatformApplication
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-03-31'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -598,9 +620,13 @@ paths:
           type: string
           enum:
             - DeleteTopic
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-03-31'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -645,9 +671,13 @@ paths:
           type: string
           enum:
             - GetEndpointAttributes
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-03-31'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -692,9 +722,13 @@ paths:
           type: string
           enum:
             - GetPlatformApplicationAttributes
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-03-31'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -741,9 +775,13 @@ paths:
           type: string
           enum:
             - GetSMSAttributes
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-03-31'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -788,9 +826,13 @@ paths:
           type: string
           enum:
             - GetSubscriptionAttributes
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-03-31'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -839,9 +881,13 @@ paths:
           type: string
           enum:
             - GetTopicAttributes
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-03-31'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -891,9 +937,13 @@ paths:
           type: string
           enum:
             - ListEndpointsByPlatformApplication
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-03-31'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -938,9 +988,13 @@ paths:
           type: string
           enum:
             - ListPhoneNumbersOptedOut
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-03-31'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -981,9 +1035,13 @@ paths:
           type: string
           enum:
             - ListPlatformApplications
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-03-31'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1024,9 +1082,13 @@ paths:
           type: string
           enum:
             - ListSubscriptions
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-03-31'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1076,9 +1138,13 @@ paths:
           type: string
           enum:
             - ListSubscriptionsByTopic
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-03-31'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1119,9 +1185,13 @@ paths:
           type: string
           enum:
             - ListTopics
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-03-31'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1166,9 +1236,13 @@ paths:
           type: string
           enum:
             - OptInPhoneNumber
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-03-31'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1296,9 +1370,13 @@ paths:
           type: string
           enum:
             - Publish
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-03-31'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1346,9 +1424,13 @@ paths:
           type: string
           enum:
             - RemovePermission
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-03-31'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1409,9 +1491,13 @@ paths:
           type: string
           enum:
             - SetEndpointAttributes
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-03-31'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1472,9 +1558,13 @@ paths:
           type: string
           enum:
             - SetPlatformApplicationAttributes
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-03-31'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1532,9 +1622,13 @@ paths:
           type: string
           enum:
             - SetSMSAttributes
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-03-31'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1591,9 +1685,13 @@ paths:
           type: string
           enum:
             - SetSubscriptionAttributes
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-03-31'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1650,9 +1748,13 @@ paths:
           type: string
           enum:
             - SetTopicAttributes
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-03-31'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1742,9 +1844,13 @@ paths:
           type: string
           enum:
             - Subscribe
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-03-31'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1791,9 +1897,13 @@ paths:
           type: string
           enum:
             - Unsubscribe
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-03-31'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'

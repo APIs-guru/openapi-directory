@@ -115,6 +115,12 @@ paths:
           type: string
           enum:
             - BatchDeleteAttributes
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2009-04-15'
     parameters:
       - $ref: '#/parameters/AWSAccessKeyId'
       - $ref: '#/parameters/Action'
@@ -159,6 +165,12 @@ paths:
           type: string
           enum:
             - BatchPutAttributes
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2009-04-15'
     parameters:
       - $ref: '#/parameters/AWSAccessKeyId'
       - $ref: '#/parameters/Action'
@@ -196,6 +208,12 @@ paths:
           type: string
           enum:
             - CreateDomain
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2009-04-15'
     parameters:
       - $ref: '#/parameters/AWSAccessKeyId'
       - $ref: '#/parameters/Action'
@@ -263,6 +281,12 @@ paths:
           type: string
           enum:
             - DeleteAttributes
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2009-04-15'
     parameters:
       - $ref: '#/parameters/AWSAccessKeyId'
       - $ref: '#/parameters/Action'
@@ -295,6 +319,12 @@ paths:
           type: string
           enum:
             - DeleteDomain
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2009-04-15'
     parameters:
       - $ref: '#/parameters/AWSAccessKeyId'
       - $ref: '#/parameters/Action'
@@ -329,6 +359,12 @@ paths:
           type: string
           enum:
             - DomainMetadata
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2009-04-15'
     parameters:
       - $ref: '#/parameters/AWSAccessKeyId'
       - $ref: '#/parameters/Action'
@@ -380,6 +416,12 @@ paths:
           type: string
           enum:
             - GetAttributes
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2009-04-15'
     parameters:
       - $ref: '#/parameters/AWSAccessKeyId'
       - $ref: '#/parameters/Action'
@@ -419,6 +461,12 @@ paths:
           type: string
           enum:
             - ListDomains
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2009-04-15'
     parameters:
       - $ref: '#/parameters/AWSAccessKeyId'
       - $ref: '#/parameters/Action'
@@ -491,6 +539,12 @@ paths:
           type: string
           enum:
             - PutAttributes
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2009-04-15'
     parameters:
       - $ref: '#/parameters/AWSAccessKeyId'
       - $ref: '#/parameters/Action'
@@ -540,6 +594,12 @@ paths:
           type: string
           enum:
             - Select
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2009-04-15'
     parameters:
       - $ref: '#/parameters/AWSAccessKeyId'
       - $ref: '#/parameters/Action'

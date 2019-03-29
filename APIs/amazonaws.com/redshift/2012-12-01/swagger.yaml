@@ -44,16 +44,6 @@ consumes:
 produces:
   - text/xml
 parameters:
-  Action:
-    name: Action
-    in: query
-    type: string
-    required: true
-  Version:
-    name: Version
-    in: query
-    type: string
-    required: true
   X-Amz-Content-Sha256:
     name: X-Amz-Content-Sha256
     in: header
@@ -153,9 +143,13 @@ paths:
           type: string
           enum:
             - AcceptReservedNodeExchange
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -215,9 +209,13 @@ paths:
           type: string
           enum:
             - AuthorizeClusterSecurityGroupIngress
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -280,9 +278,13 @@ paths:
           type: string
           enum:
             - AuthorizeSnapshotAccess
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -317,9 +319,13 @@ paths:
           type: string
           enum:
             - BatchDeleteClusterSnapshots
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -368,9 +374,13 @@ paths:
           type: string
           enum:
             - BatchModifyClusterSnapshots
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -415,9 +425,13 @@ paths:
           type: string
           enum:
             - CancelResize
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -481,9 +495,13 @@ paths:
           type: string
           enum:
             - CopyClusterSnapshot
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -753,9 +771,13 @@ paths:
           type: string
           enum:
             - CreateCluster
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -817,9 +839,13 @@ paths:
           type: string
           enum:
             - CreateClusterParameterGroup
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -876,9 +902,13 @@ paths:
           type: string
           enum:
             - CreateClusterSecurityGroup
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -952,9 +982,13 @@ paths:
           type: string
           enum:
             - CreateClusterSnapshot
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1034,9 +1068,13 @@ paths:
           type: string
           enum:
             - CreateClusterSubnetGroup
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1150,9 +1188,13 @@ paths:
           type: string
           enum:
             - CreateEventSubscription
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1204,9 +1246,13 @@ paths:
           type: string
           enum:
             - CreateHsmClientCertificate
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1283,9 +1329,13 @@ paths:
           type: string
           enum:
             - CreateHsmConfiguration
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1350,9 +1400,13 @@ paths:
           type: string
           enum:
             - CreateSnapshotCopyGrant
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1430,9 +1484,13 @@ paths:
           type: string
           enum:
             - CreateSnapshotSchedule
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1478,9 +1536,13 @@ paths:
           type: string
           enum:
             - CreateTags
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1544,9 +1606,13 @@ paths:
           type: string
           enum:
             - DeleteCluster
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1581,9 +1647,13 @@ paths:
           type: string
           enum:
             - DeleteClusterParameterGroup
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1618,9 +1688,13 @@ paths:
           type: string
           enum:
             - DeleteClusterSecurityGroup
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1662,9 +1736,13 @@ paths:
           type: string
           enum:
             - DeleteClusterSnapshot
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1703,9 +1781,13 @@ paths:
           type: string
           enum:
             - DeleteClusterSubnetGroup
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1740,9 +1822,13 @@ paths:
           type: string
           enum:
             - DeleteEventSubscription
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1777,9 +1863,13 @@ paths:
           type: string
           enum:
             - DeleteHsmClientCertificate
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1814,9 +1904,13 @@ paths:
           type: string
           enum:
             - DeleteHsmConfiguration
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1851,9 +1945,13 @@ paths:
           type: string
           enum:
             - DeleteSnapshotCopyGrant
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1888,9 +1986,13 @@ paths:
           type: string
           enum:
             - DeleteSnapshotSchedule
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1932,9 +2034,13 @@ paths:
           type: string
           enum:
             - DeleteTags
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -1965,9 +2071,13 @@ paths:
           type: string
           enum:
             - DescribeAccountAttributes
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2014,9 +2124,13 @@ paths:
           type: string
           enum:
             - DescribeClusterDbRevisions
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2077,9 +2191,13 @@ paths:
           type: string
           enum:
             - DescribeClusterParameterGroups
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2127,9 +2245,13 @@ paths:
           type: string
           enum:
             - DescribeClusterParameters
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2190,9 +2312,13 @@ paths:
           type: string
           enum:
             - DescribeClusterSecurityGroups
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2296,9 +2422,13 @@ paths:
           type: string
           enum:
             - DescribeClusterSnapshots
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2359,9 +2489,13 @@ paths:
           type: string
           enum:
             - DescribeClusterSubnetGroups
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2408,9 +2542,13 @@ paths:
           type: string
           enum:
             - DescribeClusterTracks
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2454,9 +2592,13 @@ paths:
           type: string
           enum:
             - DescribeClusterVersions
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2517,9 +2659,13 @@ paths:
           type: string
           enum:
             - DescribeClusters
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2558,9 +2704,13 @@ paths:
           type: string
           enum:
             - DescribeDefaultClusterParameters
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2589,9 +2739,13 @@ paths:
           type: string
           enum:
             - DescribeEventCategories
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2652,9 +2806,13 @@ paths:
           type: string
           enum:
             - DescribeEventSubscriptions
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2720,9 +2878,13 @@ paths:
           type: string
           enum:
             - DescribeEvents
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2783,9 +2945,13 @@ paths:
           type: string
           enum:
             - DescribeHsmClientCertificates
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2846,9 +3012,13 @@ paths:
           type: string
           enum:
             - DescribeHsmConfigurations
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2881,9 +3051,13 @@ paths:
           type: string
           enum:
             - DescribeLoggingStatus
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2927,9 +3101,13 @@ paths:
           type: string
           enum:
             - DescribeOrderableClusterOptions
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -2980,9 +3158,13 @@ paths:
           type: string
           enum:
             - DescribeReservedNodeOfferings
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3029,9 +3211,13 @@ paths:
           type: string
           enum:
             - DescribeReservedNodes
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3068,9 +3254,13 @@ paths:
           type: string
           enum:
             - DescribeResize
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3131,9 +3321,13 @@ paths:
           type: string
           enum:
             - DescribeSnapshotCopyGrants
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3191,9 +3385,13 @@ paths:
           type: string
           enum:
             - DescribeSnapshotSchedules
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3217,9 +3415,13 @@ paths:
           type: string
           enum:
             - DescribeStorage
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3271,9 +3473,13 @@ paths:
           type: string
           enum:
             - DescribeTableRestoreStatus
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3339,9 +3545,13 @@ paths:
           type: string
           enum:
             - DescribeTags
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3374,9 +3584,13 @@ paths:
           type: string
           enum:
             - DisableLogging
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3421,9 +3635,13 @@ paths:
           type: string
           enum:
             - DisableSnapshotCopy
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3482,9 +3700,13 @@ paths:
           type: string
           enum:
             - EnableLogging
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3577,9 +3799,13 @@ paths:
           type: string
           enum:
             - EnableSnapshotCopy
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3643,9 +3869,13 @@ paths:
           type: string
           enum:
             - GetClusterCredentials
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3708,9 +3938,13 @@ paths:
           type: string
           enum:
             - GetReservedNodeExchangeOfferings
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3924,9 +4158,13 @@ paths:
           type: string
           enum:
             - ModifyCluster
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -3972,9 +4210,13 @@ paths:
           type: string
           enum:
             - ModifyClusterDbRevision
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4025,9 +4267,13 @@ paths:
           type: string
           enum:
             - ModifyClusterIamRoles
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4087,9 +4333,13 @@ paths:
           type: string
           enum:
             - ModifyClusterMaintenance
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4133,9 +4383,13 @@ paths:
           type: string
           enum:
             - ModifyClusterParameterGroup
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4186,9 +4440,13 @@ paths:
           type: string
           enum:
             - ModifyClusterSnapshot
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4237,9 +4495,13 @@ paths:
           type: string
           enum:
             - ModifyClusterSnapshotSchedule
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4304,9 +4566,13 @@ paths:
           type: string
           enum:
             - ModifyClusterSubnetGroup
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4405,9 +4671,13 @@ paths:
           type: string
           enum:
             - ModifyEventSubscription
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4466,9 +4736,13 @@ paths:
           type: string
           enum:
             - ModifySnapshotCopyRetentionPeriod
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4516,9 +4790,13 @@ paths:
           type: string
           enum:
             - ModifySnapshotSchedule
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4568,9 +4846,13 @@ paths:
           type: string
           enum:
             - PurchaseReservedNodeOffering
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4607,9 +4889,13 @@ paths:
           type: string
           enum:
             - RebootCluster
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4658,9 +4944,13 @@ paths:
           type: string
           enum:
             - ResetClusterParameterGroup
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4745,9 +5035,13 @@ paths:
           type: string
           enum:
             - ResizeCluster
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -4994,9 +5288,13 @@ paths:
           type: string
           enum:
             - RestoreFromClusterSnapshot
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -5088,9 +5386,13 @@ paths:
           type: string
           enum:
             - RestoreTableFromClusterSnapshot
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -5146,9 +5448,13 @@ paths:
           type: string
           enum:
             - RevokeClusterSecurityGroupIngress
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -5199,9 +5505,13 @@ paths:
           type: string
           enum:
             - RevokeSnapshotAccess
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -5242,9 +5552,13 @@ paths:
           type: string
           enum:
             - RotateEncryptionKey
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2012-12-01'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'

@@ -44,16 +44,6 @@ consumes:
 produces:
   - text/xml
 parameters:
-  Action:
-    name: Action
-    in: query
-    type: string
-    required: true
-  Version:
-    name: Version
-    in: query
-    type: string
-    required: true
   X-Amz-Content-Sha256:
     name: X-Amz-Content-Sha256
     in: header
@@ -182,9 +172,13 @@ paths:
           type: string
           enum:
             - AssumeRole
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-06-15'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -270,9 +264,13 @@ paths:
           type: string
           enum:
             - AssumeRoleWithSAML
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-06-15'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -369,9 +367,13 @@ paths:
           type: string
           enum:
             - AssumeRoleWithWebIdentity
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-06-15'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -406,9 +408,13 @@ paths:
           type: string
           enum:
             - DecodeAuthorizationMessage
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-06-15'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -432,9 +438,13 @@ paths:
           type: string
           enum:
             - GetCallerIdentity
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-06-15'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -493,9 +503,13 @@ paths:
           type: string
           enum:
             - GetFederationToken
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-06-15'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
@@ -546,9 +560,13 @@ paths:
           type: string
           enum:
             - GetSessionToken
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-06-15'
     parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
       - $ref: '#/parameters/X-Amz-Algorithm'
