@@ -299,7 +299,7 @@ paths:
                 items:
                   $ref: '#/definitions/OutputDestination'
               encoderSettings:
-                description: Placeholder documentation for EncoderSettings
+                description: Encoder Settings
                 type: object
                 properties:
                   AudioDescriptions:
@@ -955,7 +955,7 @@ paths:
                 items:
                   $ref: '#/definitions/OutputDestination'
               encoderSettings:
-                description: Placeholder documentation for EncoderSettings
+                description: Encoder Settings
                 type: object
                 properties:
                   AudioDescriptions:
@@ -2000,14 +2000,14 @@ definitions:
       State:
         $ref: '#/definitions/AvailBlankingState'
         description: 'When set to enabled, causes video, audio and captions to be blanked when insertion metadata is added.'
-    description: Placeholder documentation for AvailBlanking
+    description: Avail Blanking
   AvailConfiguration:
     type: object
     properties:
       AvailSettings:
         $ref: '#/definitions/AvailSettings'
         description: Ad avail settings.
-    description: Placeholder documentation for AvailConfiguration
+    description: Avail Configuration
   BlackoutSlate:
     type: object
     properties:
@@ -2026,7 +2026,7 @@ definitions:
       State:
         $ref: '#/definitions/BlackoutSlateState'
         description: 'When set to enabled, causes video, audio and captions to be blanked when indicated by program metadata.'
-    description: Placeholder documentation for BlackoutSlate
+    description: Blackout Slate
   __listOfCaptionDescription:
     type: array
     description: Placeholder documentation for __listOfCaptionDescription
@@ -2044,13 +2044,20 @@ definitions:
       InputLossBehavior:
         $ref: '#/definitions/InputLossBehavior'
         description: Settings for system actions when input is lost.
+      OutputLockingMode:
+        $ref: '#/definitions/GlobalConfigurationOutputLockingMode'
+        description: |-
+          Indicates how MediaLive pipelines are synchronized.
+
+          PIPELINELOCKING - MediaLive will attempt to synchronize the output of each pipeline to the other.
+          EPOCHLOCKING - MediaLive will attempt to synchronize the output of each pipeline to the Unix epoch.
       OutputTimingSource:
         $ref: '#/definitions/GlobalConfigurationOutputTimingSource'
         description: Indicates whether the rate of frames emitted by the Live encoder should be paced by its system clock (which optionally may be locked to another source via NTP) or should be locked to the clock of the source that is providing the input stream.
       SupportLowFramerateInputs:
         $ref: '#/definitions/GlobalConfigurationLowFramerateInputs'
         description: Adjusts video input buffer for streams with very low video framerates. This is commonly set to enabled for music channels with less than one video frame per second.
-    description: Placeholder documentation for GlobalConfiguration
+    description: Global Configuration
   __listOfOutputGroup:
     type: array
     description: Placeholder documentation for __listOfOutputGroup
@@ -2071,7 +2078,7 @@ definitions:
       SyncThreshold:
         $ref: '#/definitions/__integerMin1Max1000000'
         description: Threshold in frames beyond which output timecode is resynchronized to the input timecode. Discrepancies below this threshold are permitted to avoid unnecessary discontinuities in the output timecode. No timecode sync when this is not specified.
-    description: Placeholder documentation for TimecodeConfig
+    description: Timecode Config
   __listOfVideoDescription:
     type: array
     description: Placeholder documentation for __listOfVideoDescription
@@ -2646,32 +2653,32 @@ definitions:
       - CODING_MODE_1_1
       - CODING_MODE_2_0
       - CODING_MODE_5_1
-    description: Placeholder documentation for AacCodingMode
+    description: Aac Coding Mode
   AacInputType:
     type: string
     enum:
       - BROADCASTER_MIXED_AD
       - NORMAL
-    description: Placeholder documentation for AacInputType
+    description: Aac Input Type
   AacProfile:
     type: string
     enum:
       - HEV1
       - HEV2
       - LC
-    description: Placeholder documentation for AacProfile
+    description: Aac Profile
   AacRateControlMode:
     type: string
     enum:
       - CBR
       - VBR
-    description: Placeholder documentation for AacRateControlMode
+    description: Aac Rate Control Mode
   AacRawFormat:
     type: string
     enum:
       - LATM_LOAS
       - NONE
-    description: Placeholder documentation for AacRawFormat
+    description: Aac Raw Format
   __double:
     type: number
     description: Placeholder documentation for __double
@@ -2681,7 +2688,7 @@ definitions:
     enum:
       - MPEG2
       - MPEG4
-    description: Placeholder documentation for AacSpec
+    description: Aac Spec
   AacVbrQuality:
     type: string
     enum:
@@ -2689,7 +2696,7 @@ definitions:
       - LOW
       - MEDIUM_HIGH
       - MEDIUM_LOW
-    description: Placeholder documentation for AacVbrQuality
+    description: Aac Vbr Quality
   AacSettings:
     type: object
     properties:
@@ -2723,7 +2730,7 @@ definitions:
       VbrQuality:
         $ref: '#/definitions/AacVbrQuality'
         description: VBR Quality Level - Only used if rateControlMode is VBR.
-    description: Placeholder documentation for AacSettings
+    description: Aac Settings
   Ac3BitstreamMode:
     type: string
     enum:
@@ -2735,7 +2742,7 @@ definitions:
       - MUSIC_AND_EFFECTS
       - VISUALLY_IMPAIRED
       - VOICE_OVER
-    description: Placeholder documentation for Ac3BitstreamMode
+    description: Ac3 Bitstream Mode
   Ac3CodingMode:
     type: string
     enum:
@@ -2743,25 +2750,25 @@ definitions:
       - CODING_MODE_1_1
       - CODING_MODE_2_0
       - CODING_MODE_3_2_LFE
-    description: Placeholder documentation for Ac3CodingMode
+    description: Ac3 Coding Mode
   Ac3DrcProfile:
     type: string
     enum:
       - FILM_STANDARD
       - NONE
-    description: Placeholder documentation for Ac3DrcProfile
+    description: Ac3 Drc Profile
   Ac3LfeFilter:
     type: string
     enum:
       - DISABLED
       - ENABLED
-    description: Placeholder documentation for Ac3LfeFilter
+    description: Ac3 Lfe Filter
   Ac3MetadataControl:
     type: string
     enum:
       - FOLLOW_INPUT
       - USE_CONFIGURED
-    description: Placeholder documentation for Ac3MetadataControl
+    description: Ac3 Metadata Control
   __integerMin1Max31:
     type: integer
     description: Placeholder documentation for __integerMin1Max31
@@ -2791,14 +2798,14 @@ definitions:
       MetadataControl:
         $ref: '#/definitions/Ac3MetadataControl'
         description: 'When set to "followInput", encoder metadata will be sourced from the DD, DD+, or DolbyE decoder that supplied this audio data. If audio was not supplied from one of these streams, then the static metadata settings will be used.'
-    description: Placeholder documentation for Ac3Settings
+    description: Ac3 Settings
   AfdSignaling:
     type: string
     enum:
       - AUTO
       - FIXED
       - NONE
-    description: Placeholder documentation for AfdSignaling
+    description: Afd Signaling
   M2tsSettings:
     type: object
     properties:
@@ -2945,13 +2952,13 @@ definitions:
       VideoPid:
         $ref: '#/definitions/__string'
         description: Packet Identifier (PID) of the elementary video stream in the transport stream. Can be entered as a decimal or hexadecimal value.  Valid values are 32 (or 0x20)..8182 (or 0x1ff6).
-    description: Placeholder documentation for M2tsSettings
+    description: M2ts Settings
   ArchiveContainerSettings:
     type: object
     properties:
       M2tsSettings:
         $ref: '#/definitions/M2tsSettings'
-    description: Placeholder documentation for ArchiveContainerSettings
+    description: Archive Container Settings
   OutputLocationRef:
     type: object
     properties:
@@ -2973,7 +2980,7 @@ definitions:
       RolloverInterval:
         $ref: '#/definitions/__integerMin1'
         description: Number of seconds to write to archive file before closing and starting a new one.
-    description: Placeholder documentation for ArchiveGroupSettings
+    description: Archive Group Settings
   ArchiveOutputSettings:
     type: object
     required:
@@ -2988,15 +2995,15 @@ definitions:
       NameModifier:
         $ref: '#/definitions/__string'
         description: String concatenated to the end of the destination filename.  Required for multiple outputs of the same type.
-    description: Placeholder documentation for ArchiveOutputSettings
+    description: Archive Output Settings
   AribDestinationSettings:
     type: object
     properties: {}
-    description: Placeholder documentation for AribDestinationSettings
+    description: Arib Destination Settings
   AribSourceSettings:
     type: object
     properties: {}
-    description: Placeholder documentation for AribSourceSettings
+    description: Arib Source Settings
   __listOfInputChannelLevel:
     type: array
     description: Placeholder documentation for __listOfInputChannelLevel
@@ -3019,7 +3026,7 @@ definitions:
       OutputChannel:
         $ref: '#/definitions/__integerMin0Max7'
         description: The index of the output channel being produced.
-    description: Placeholder documentation for AudioChannelMapping
+    description: Audio Channel Mapping
   Eac3Settings:
     type: object
     properties:
@@ -3083,7 +3090,7 @@ definitions:
       SurroundMode:
         $ref: '#/definitions/Eac3SurroundMode'
         description: 'When encoding 2/0 audio, sets whether Dolby Surround is matrix encoded into the two channels.'
-    description: Placeholder documentation for Eac3Settings
+    description: Eac3 Settings
   Mp2Settings:
     type: object
     properties:
@@ -3096,11 +3103,11 @@ definitions:
       SampleRate:
         $ref: '#/definitions/__double'
         description: Sample rate in Hz.
-    description: Placeholder documentation for Mp2Settings
+    description: Mp2 Settings
   PassThroughSettings:
     type: object
     properties: {}
-    description: Placeholder documentation for PassThroughSettings
+    description: Pass Through Settings
   AudioCodecSettings:
     type: object
     properties:
@@ -3114,7 +3121,7 @@ definitions:
         $ref: '#/definitions/Mp2Settings'
       PassThroughSettings:
         $ref: '#/definitions/PassThroughSettings'
-    description: Placeholder documentation for AudioCodecSettings
+    description: Audio Codec Settings
   AudioNormalizationSettings:
     type: object
     properties:
@@ -3127,7 +3134,7 @@ definitions:
       TargetLkfs:
         $ref: '#/definitions/__doubleMinNegative59Max0'
         description: 'Target LKFS(loudness) to adjust volume to. If no value is entered, a default value will be used according to the chosen algorithm.  The CALM Act (1770-1) recommends a target of -24 LKFS. The EBU R-128 specification (1770-2) recommends a target of -23 LKFS.'
-    description: Placeholder documentation for AudioNormalizationSettings
+    description: Audio Normalization Settings
   AudioType:
     type: string
     enum:
@@ -3135,13 +3142,13 @@ definitions:
       - HEARING_IMPAIRED
       - UNDEFINED
       - VISUAL_IMPAIRED_COMMENTARY
-    description: Placeholder documentation for AudioType
+    description: Audio Type
   AudioDescriptionAudioTypeControl:
     type: string
     enum:
       - FOLLOW_INPUT
       - USE_CONFIGURED
-    description: Placeholder documentation for AudioDescriptionAudioTypeControl
+    description: Audio Description Audio Type Control
   __stringMin3Max3:
     type: string
     description: Placeholder documentation for __stringMin3Max3
@@ -3152,7 +3159,7 @@ definitions:
     enum:
       - FOLLOW_INPUT
       - USE_CONFIGURED
-    description: Placeholder documentation for AudioDescriptionLanguageCodeControl
+    description: Audio Description Language Code Control
   RemixSettings:
     type: object
     required:
@@ -3169,7 +3176,7 @@ definitions:
         description: |-
           Number of output channels to be produced.
           Valid values: 1, 2, 4, 6, 8
-    description: Placeholder documentation for RemixSettings
+    description: Remix Settings
   AudioDescription:
     type: object
     required:
@@ -3210,13 +3217,13 @@ definitions:
       StreamName:
         $ref: '#/definitions/__string'
         description: 'Used for MS Smooth and Apple HLS outputs. Indicates the name displayed by the player (eg. English, or Director Commentary).'
-    description: Placeholder documentation for AudioDescription
+    description: Audio Description
   AudioLanguageSelectionPolicy:
     type: string
     enum:
       - LOOSE
       - STRICT
-    description: Placeholder documentation for AudioLanguageSelectionPolicy
+    description: Audio Language Selection Policy
   AudioLanguageSelection:
     type: object
     required:
@@ -3228,18 +3235,18 @@ definitions:
       LanguageSelectionPolicy:
         $ref: '#/definitions/AudioLanguageSelectionPolicy'
         description: 'When set to "strict", the transport stream demux strictly identifies audio streams by their language descriptor. If a PMT update occurs such that an audio stream matching the initially selected language is no longer present then mute will be encoded until the language returns. If "loose", then on a PMT update the demux will choose another audio stream in the program with the same stream type if it can''t find one with the same language.'
-    description: Placeholder documentation for AudioLanguageSelection
+    description: Audio Language Selection
   AudioNormalizationAlgorithm:
     type: string
     enum:
       - ITU_1770_1
       - ITU_1770_2
-    description: Placeholder documentation for AudioNormalizationAlgorithm
+    description: Audio Normalization Algorithm
   AudioNormalizationAlgorithmControl:
     type: string
     enum:
       - CORRECT_AUDIO
-    description: Placeholder documentation for AudioNormalizationAlgorithmControl
+    description: Audio Normalization Algorithm Control
   __doubleMinNegative59Max0:
     type: number
     description: Placeholder documentation for __doubleMinNegative59Max0
@@ -3258,7 +3265,7 @@ definitions:
       Username:
         $ref: '#/definitions/__string'
         description: Documentation update needed
-    description: Placeholder documentation for InputLocation
+    description: Input Location
   AudioOnlyHlsTrackType:
     type: string
     enum:
@@ -3266,7 +3273,7 @@ definitions:
       - ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT
       - ALTERNATE_AUDIO_NOT_AUTO_SELECT
       - AUDIO_ONLY_VARIANT_STREAM
-    description: Placeholder documentation for AudioOnlyHlsTrackType
+    description: Audio Only Hls Track Type
   AudioOnlyHlsSettings:
     type: object
     properties:
@@ -3292,7 +3299,7 @@ definitions:
 
           Alternate Audio, not Auto Select
           Alternate rendition that the client will not try to play back by default. Represented as an EXT-X-MEDIA in the HLS manifest with DEFAULT=NO, AUTOSELECT=NO
-    description: Placeholder documentation for AudioOnlyHlsSettings
+    description: Audio Only Hls Settings
   __integerMin0Max8191:
     type: integer
     description: Placeholder documentation for __integerMin0Max8191
@@ -3306,7 +3313,7 @@ definitions:
       Pid:
         $ref: '#/definitions/__integerMin0Max8191'
         description: Selects a specific PID from within a source.
-    description: Placeholder documentation for AudioPidSelection
+    description: Audio Pid Selection
   __stringMin1:
     type: string
     description: Placeholder documentation for __stringMin1
@@ -3318,7 +3325,7 @@ definitions:
         $ref: '#/definitions/AudioLanguageSelection'
       AudioPidSelection:
         $ref: '#/definitions/AudioPidSelection'
-    description: Placeholder documentation for AudioSelectorSettings
+    description: Audio Selector Settings
   AudioSelector:
     type: object
     required:
@@ -3330,19 +3337,19 @@ definitions:
       SelectorSettings:
         $ref: '#/definitions/AudioSelectorSettings'
         description: The audio selector settings.
-    description: Placeholder documentation for AudioSelector
+    description: Audio Selector
   AuthenticationScheme:
     type: string
     enum:
       - AKAMAI
       - COMMON
-    description: Placeholder documentation for AuthenticationScheme
+    description: Authentication Scheme
   AvailBlankingState:
     type: string
     enum:
       - DISABLED
       - ENABLED
-    description: Placeholder documentation for AvailBlankingState
+    description: Avail Blanking State
   AvailSettings:
     type: object
     properties:
@@ -3350,7 +3357,7 @@ definitions:
         $ref: '#/definitions/Scte35SpliceInsert'
       Scte35TimeSignalApos:
         $ref: '#/definitions/Scte35TimeSignalApos'
-    description: Placeholder documentation for AvailSettings
+    description: Avail Settings
   Scte35SpliceInsert:
     type: object
     properties:
@@ -3363,7 +3370,7 @@ definitions:
       WebDeliveryAllowedFlag:
         $ref: '#/definitions/Scte35SpliceInsertWebDeliveryAllowedBehavior'
         description: 'When set to ignore, Segment Descriptors with webDeliveryAllowedFlag set to 0 will no longer trigger blackouts or Ad Avail slates'
-    description: Placeholder documentation for Scte35SpliceInsert
+    description: Scte35 Splice Insert
   Scte35TimeSignalApos:
     type: object
     properties:
@@ -3376,7 +3383,7 @@ definitions:
       WebDeliveryAllowedFlag:
         $ref: '#/definitions/Scte35AposWebDeliveryAllowedBehavior'
         description: 'When set to ignore, Segment Descriptors with webDeliveryAllowedFlag set to 0 will no longer trigger blackouts or Ad Avail slates'
-    description: Placeholder documentation for Scte35TimeSignalApos
+    description: Scte35 Time Signal Apos
   BatchScheduleActionCreateRequest:
     type: object
     required:
@@ -3428,7 +3435,7 @@ definitions:
     enum:
       - DISABLED
       - ENABLED
-    description: Placeholder documentation for BlackoutSlateNetworkEndBlackout
+    description: Blackout Slate Network End Blackout
   __stringMin34Max34:
     type: string
     description: Placeholder documentation for __stringMin34Max34
@@ -3439,21 +3446,21 @@ definitions:
     enum:
       - DISABLED
       - ENABLED
-    description: Placeholder documentation for BlackoutSlateState
+    description: Blackout Slate State
   BurnInAlignment:
     type: string
     enum:
       - CENTERED
       - LEFT
       - SMART
-    description: Placeholder documentation for BurnInAlignment
+    description: Burn In Alignment
   BurnInBackgroundColor:
     type: string
     enum:
       - BLACK
       - NONE
       - WHITE
-    description: Placeholder documentation for BurnInBackgroundColor
+    description: Burn In Background Color
   __integerMin0Max255:
     type: integer
     description: Placeholder documentation for __integerMin0Max255
@@ -3468,7 +3475,7 @@ definitions:
       - RED
       - WHITE
       - YELLOW
-    description: Placeholder documentation for BurnInFontColor
+    description: Burn In Font Color
   __integerMin96Max600:
     type: integer
     description: Placeholder documentation for __integerMin96Max600
@@ -3483,7 +3490,7 @@ definitions:
       - RED
       - WHITE
       - YELLOW
-    description: Placeholder documentation for BurnInOutlineColor
+    description: Burn In Outline Color
   __integerMin0Max10:
     type: integer
     description: Placeholder documentation for __integerMin0Max10
@@ -3495,7 +3502,7 @@ definitions:
       - BLACK
       - NONE
       - WHITE
-    description: Placeholder documentation for BurnInShadowColor
+    description: Burn In Shadow Color
   __integer:
     type: integer
     description: Placeholder documentation for __integer
@@ -3504,7 +3511,7 @@ definitions:
     enum:
       - FIXED
       - SCALED
-    description: Placeholder documentation for BurnInTeletextGridControl
+    description: Burn In Teletext Grid Control
   __integerMin0:
     type: integer
     description: Placeholder documentation for __integerMin0
@@ -3563,7 +3570,7 @@ definitions:
       YPosition:
         $ref: '#/definitions/__integerMin0'
         description: 'Specifies the vertical position of the caption relative to the top of the output in pixels. A value of 10 would result in the captions starting 10 pixels from the top of the output. If no explicit yPosition is provided, the caption will be positioned towards the bottom of the output.  All burn-in and DVB-Sub font settings must match.'
-    description: Placeholder documentation for BurnInDestinationSettings
+    description: Burn In Destination Settings
   CaptionDestinationSettings:
     type: object
     properties:
@@ -3591,7 +3598,7 @@ definitions:
         $ref: '#/definitions/TtmlDestinationSettings'
       WebvttDestinationSettings:
         $ref: '#/definitions/WebvttDestinationSettings'
-    description: Placeholder documentation for CaptionDestinationSettings
+    description: Caption Destination Settings
   CaptionDescription:
     type: object
     required:
@@ -3668,46 +3675,46 @@ definitions:
       YPosition:
         $ref: '#/definitions/__integerMin0'
         description: 'Specifies the vertical position of the caption relative to the top of the output in pixels. A value of 10 would result in the captions starting 10 pixels from the top of the output. If no explicit yPosition is provided, the caption will be positioned towards the bottom of the output.  This option is not valid for source captions that are STL, 608/embedded or teletext.  These source settings are already pre-defined by the caption stream.  All burn-in and DVB-Sub font settings must match.'
-    description: Placeholder documentation for DvbSubDestinationSettings
+    description: Dvb Sub Destination Settings
   EmbeddedDestinationSettings:
     type: object
     properties: {}
-    description: Placeholder documentation for EmbeddedDestinationSettings
+    description: Embedded Destination Settings
   EmbeddedPlusScte20DestinationSettings:
     type: object
     properties: {}
-    description: Placeholder documentation for EmbeddedPlusScte20DestinationSettings
+    description: Embedded Plus Scte20 Destination Settings
   RtmpCaptionInfoDestinationSettings:
     type: object
     properties: {}
-    description: Placeholder documentation for RtmpCaptionInfoDestinationSettings
+    description: Rtmp Caption Info Destination Settings
   Scte20PlusEmbeddedDestinationSettings:
     type: object
     properties: {}
-    description: Placeholder documentation for Scte20PlusEmbeddedDestinationSettings
+    description: Scte20 Plus Embedded Destination Settings
   Scte27DestinationSettings:
     type: object
     properties: {}
-    description: Placeholder documentation for Scte27DestinationSettings
+    description: Scte27 Destination Settings
   SmpteTtDestinationSettings:
     type: object
     properties: {}
-    description: Placeholder documentation for SmpteTtDestinationSettings
+    description: Smpte Tt Destination Settings
   TeletextDestinationSettings:
     type: object
     properties: {}
-    description: Placeholder documentation for TeletextDestinationSettings
+    description: Teletext Destination Settings
   TtmlDestinationSettings:
     type: object
     properties:
       StyleControl:
         $ref: '#/definitions/TtmlDestinationStyleControl'
         description: 'When set to passthrough, passes through style and position information from a TTML-like input source (TTML, SMPTE-TT, CFF-TT) to the CFF-TT output or TTML output.'
-    description: Placeholder documentation for TtmlDestinationSettings
+    description: Ttml Destination Settings
   WebvttDestinationSettings:
     type: object
     properties: {}
-    description: Placeholder documentation for WebvttDestinationSettings
+    description: Webvtt Destination Settings
   __integerMin1Max4:
     type: integer
     description: Placeholder documentation for __integerMin1Max4
@@ -3745,7 +3752,7 @@ definitions:
         $ref: '#/definitions/Scte27SourceSettings'
       TeletextSourceSettings:
         $ref: '#/definitions/TeletextSourceSettings'
-    description: Placeholder documentation for CaptionSelectorSettings
+    description: Caption Selector Settings
   CaptionSelector:
     type: object
     required:
@@ -3767,7 +3774,7 @@ definitions:
       Pid:
         $ref: '#/definitions/__integerMin1'
         description: 'When using DVB-Sub with Burn-In or SMPTE-TT, use this PID for the source content. Unused for DVB-Sub passthrough. All DVB-Sub content is passed through, regardless of selectors.'
-    description: Placeholder documentation for DvbSubSourceSettings
+    description: Dvb Sub Source Settings
   EmbeddedSourceSettings:
     type: object
     properties:
@@ -3783,7 +3790,7 @@ definitions:
       Source608TrackNumber:
         $ref: '#/definitions/__integerMin1Max5'
         description: This field is unused and deprecated.
-    description: Placeholder documentation for EmbeddedSourceSettings
+    description: Embedded Source Settings
   Scte20SourceSettings:
     type: object
     properties:
@@ -3793,7 +3800,7 @@ definitions:
       Source608ChannelNumber:
         $ref: '#/definitions/__integerMin1Max4'
         description: Specifies the 608/708 channel number within the video track from which to extract captions. Unused for passthrough.
-    description: Placeholder documentation for Scte20SourceSettings
+    description: Scte20 Source Settings
   Scte27SourceSettings:
     type: object
     properties:
@@ -3805,14 +3812,14 @@ definitions:
             - Specify PID and omit Language: Extracts the specified PID.
             - Omit PID and specify Language: Extracts the specified language, whichever PID that happens to be.
             - Omit PID and omit Language: Valid only if source is DVB-Sub that is being passed through; all languages will be passed through.
-    description: Placeholder documentation for Scte27SourceSettings
+    description: Scte27 Source Settings
   TeletextSourceSettings:
     type: object
     properties:
       PageNumber:
         $ref: '#/definitions/__string'
         description: Specifies the teletext page number within the data stream from which to extract captions. Range of 0x100 (256) to 0x8FF (2303). Unused for passthrough. Should be specified as a hexadecimal string with no "0x" prefix.
-    description: Placeholder documentation for TeletextSourceSettings
+    description: Teletext Source Settings
   __listOfOutputDestination:
     type: array
     description: Placeholder documentation for __listOfOutputDestination
@@ -3855,7 +3862,7 @@ definitions:
         description: Contains settings used to acquire and adjust timecode information from inputs.
       VideoDescriptions:
         $ref: '#/definitions/__listOfVideoDescription'
-    description: Placeholder documentation for EncoderSettings
+    description: Encoder Settings
   __listOfInputAttachment:
     type: array
     description: Placeholder documentation for __listOfInputAttachment
@@ -4360,7 +4367,7 @@ definitions:
       - SDT_FOLLOW_IF_PRESENT
       - SDT_MANUAL
       - SDT_NONE
-    description: Placeholder documentation for DvbSdtOutputSdt
+    description: Dvb Sdt Output Sdt
   __integerMin25Max2000:
     type: integer
     description: Placeholder documentation for __integerMin25Max2000
@@ -4388,14 +4395,14 @@ definitions:
       - CENTERED
       - LEFT
       - SMART
-    description: Placeholder documentation for DvbSubDestinationAlignment
+    description: Dvb Sub Destination Alignment
   DvbSubDestinationBackgroundColor:
     type: string
     enum:
       - BLACK
       - NONE
       - WHITE
-    description: Placeholder documentation for DvbSubDestinationBackgroundColor
+    description: Dvb Sub Destination Background Color
   DvbSubDestinationFontColor:
     type: string
     enum:
@@ -4405,7 +4412,7 @@ definitions:
       - RED
       - WHITE
       - YELLOW
-    description: Placeholder documentation for DvbSubDestinationFontColor
+    description: Dvb Sub Destination Font Color
   DvbSubDestinationOutlineColor:
     type: string
     enum:
@@ -4415,20 +4422,20 @@ definitions:
       - RED
       - WHITE
       - YELLOW
-    description: Placeholder documentation for DvbSubDestinationOutlineColor
+    description: Dvb Sub Destination Outline Color
   DvbSubDestinationShadowColor:
     type: string
     enum:
       - BLACK
       - NONE
       - WHITE
-    description: Placeholder documentation for DvbSubDestinationShadowColor
+    description: Dvb Sub Destination Shadow Color
   DvbSubDestinationTeletextGridControl:
     type: string
     enum:
       - FIXED
       - SCALED
-    description: Placeholder documentation for DvbSubDestinationTeletextGridControl
+    description: Dvb Sub Destination Teletext Grid Control
   __integerMin1000Max30000:
     type: integer
     description: Placeholder documentation for __integerMin1000Max30000
@@ -4446,7 +4453,7 @@ definitions:
     enum:
       - ATTENUATE_3_DB
       - NONE
-    description: Placeholder documentation for Eac3AttenuationControl
+    description: Eac3 Attenuation Control
   Eac3BitstreamMode:
     type: string
     enum:
@@ -4455,20 +4462,20 @@ definitions:
       - EMERGENCY
       - HEARING_IMPAIRED
       - VISUALLY_IMPAIRED
-    description: Placeholder documentation for Eac3BitstreamMode
+    description: Eac3 Bitstream Mode
   Eac3CodingMode:
     type: string
     enum:
       - CODING_MODE_1_0
       - CODING_MODE_2_0
       - CODING_MODE_3_2
-    description: Placeholder documentation for Eac3CodingMode
+    description: Eac3 Coding Mode
   Eac3DcFilter:
     type: string
     enum:
       - DISABLED
       - ENABLED
-    description: Placeholder documentation for Eac3DcFilter
+    description: Eac3 Dc Filter
   Eac3DrcLine:
     type: string
     enum:
@@ -4478,7 +4485,7 @@ definitions:
       - MUSIC_STANDARD
       - NONE
       - SPEECH
-    description: Placeholder documentation for Eac3DrcLine
+    description: Eac3 Drc Line
   Eac3DrcRf:
     type: string
     enum:
@@ -4488,37 +4495,37 @@ definitions:
       - MUSIC_STANDARD
       - NONE
       - SPEECH
-    description: Placeholder documentation for Eac3DrcRf
+    description: Eac3 Drc Rf
   Eac3LfeControl:
     type: string
     enum:
       - LFE
       - NO_LFE
-    description: Placeholder documentation for Eac3LfeControl
+    description: Eac3 Lfe Control
   Eac3LfeFilter:
     type: string
     enum:
       - DISABLED
       - ENABLED
-    description: Placeholder documentation for Eac3LfeFilter
+    description: Eac3 Lfe Filter
   Eac3MetadataControl:
     type: string
     enum:
       - FOLLOW_INPUT
       - USE_CONFIGURED
-    description: Placeholder documentation for Eac3MetadataControl
+    description: Eac3 Metadata Control
   Eac3PassthroughControl:
     type: string
     enum:
       - NO_PASSTHROUGH
       - WHEN_POSSIBLE
-    description: Placeholder documentation for Eac3PassthroughControl
+    description: Eac3 Passthrough Control
   Eac3PhaseControl:
     type: string
     enum:
       - NO_SHIFT
       - SHIFT_90_DEGREES
-    description: Placeholder documentation for Eac3PhaseControl
+    description: Eac3 Phase Control
   Eac3StereoDownmix:
     type: string
     enum:
@@ -4526,33 +4533,33 @@ definitions:
       - LO_RO
       - LT_RT
       - NOT_INDICATED
-    description: Placeholder documentation for Eac3StereoDownmix
+    description: Eac3 Stereo Downmix
   Eac3SurroundExMode:
     type: string
     enum:
       - DISABLED
       - ENABLED
       - NOT_INDICATED
-    description: Placeholder documentation for Eac3SurroundExMode
+    description: Eac3 Surround Ex Mode
   Eac3SurroundMode:
     type: string
     enum:
       - DISABLED
       - ENABLED
       - NOT_INDICATED
-    description: Placeholder documentation for Eac3SurroundMode
+    description: Eac3 Surround Mode
   EmbeddedConvert608To708:
     type: string
     enum:
       - DISABLED
       - UPCONVERT
-    description: Placeholder documentation for EmbeddedConvert608To708
+    description: Embedded Convert608 To708
   EmbeddedScte20Detection:
     type: string
     enum:
       - AUTO
       - 'OFF'
-    description: Placeholder documentation for EmbeddedScte20Detection
+    description: Embedded Scte20 Detection
   __integerMin1Max5:
     type: integer
     description: Placeholder documentation for __integerMin1Max5
@@ -4563,7 +4570,7 @@ definitions:
     enum:
       - COLUMN
       - COLUMN_AND_ROW
-    description: Placeholder documentation for FecOutputIncludeFec
+    description: Fec Output Include Fec
   __integerMin4Max20:
     type: integer
     description: Placeholder documentation for __integerMin4Max20
@@ -4586,7 +4593,7 @@ definitions:
       RowLength:
         $ref: '#/definitions/__integerMin1Max20'
         description: 'Parameter L from SMPTE 2022-1. The width of the FEC protection matrix.  Must be between 1 and 20, inclusive. If only Column FEC is used, then larger values increase robustness.  If Row FEC is used, then this is the number of transport stream packets per row error correction packet, and the value must be between 4 and 20, inclusive, if includeFec is columnAndRow. If includeFec is column, this value must be 1 to 20, inclusive.'
-    description: Placeholder documentation for FecOutputSettings
+    description: Fec Output Settings
   FixedAfd:
     type: string
     enum:
@@ -4601,7 +4608,7 @@ definitions:
       - AFD_1101
       - AFD_1110
       - AFD_1111
-    description: Placeholder documentation for FixedAfd
+    description: Fixed Afd
   FixedModeScheduleActionStartSettings:
     type: object
     required:
@@ -4648,6 +4655,7 @@ definitions:
     description: Frame Capture Output Settings
   __integerMin1Max3600:
     type: integer
+    description: Placeholder documentation for __integerMin1Max3600
     minimum: 1
     maximum: 3600
   FrameCaptureSettings:
@@ -4669,7 +4677,7 @@ definitions:
     enum:
       - NONE
       - SWITCH_AND_LOOP_INPUTS
-    description: Placeholder documentation for GlobalConfigurationInputEndAction
+    description: Global Configuration Input End Action
   InputLossBehavior:
     type: object
     properties:
@@ -4688,19 +4696,25 @@ definitions:
       RepeatFrameMsec:
         $ref: '#/definitions/__integerMin0Max1000000'
         description: Documentation update needed
-    description: Placeholder documentation for InputLossBehavior
+    description: Input Loss Behavior
+  GlobalConfigurationOutputLockingMode:
+    type: string
+    enum:
+      - EPOCH_LOCKING
+      - PIPELINE_LOCKING
+    description: Global Configuration Output Locking Mode
   GlobalConfigurationOutputTimingSource:
     type: string
     enum:
       - INPUT_CLOCK
       - SYSTEM_CLOCK
-    description: Placeholder documentation for GlobalConfigurationOutputTimingSource
+    description: Global Configuration Output Timing Source
   GlobalConfigurationLowFramerateInputs:
     type: string
     enum:
       - DISABLED
       - ENABLED
-    description: Placeholder documentation for GlobalConfigurationLowFramerateInputs
+    description: Global Configuration Low Framerate Inputs
   H264AdaptiveQuantization:
     type: string
     enum:
@@ -4710,43 +4724,43 @@ definitions:
       - MAX
       - MEDIUM
       - 'OFF'
-    description: Placeholder documentation for H264AdaptiveQuantization
+    description: H264 Adaptive Quantization
   H264ColorMetadata:
     type: string
     enum:
       - IGNORE
       - INSERT
-    description: Placeholder documentation for H264ColorMetadata
+    description: H264 Color Metadata
   H264EntropyEncoding:
     type: string
     enum:
       - CABAC
       - CAVLC
-    description: Placeholder documentation for H264EntropyEncoding
+    description: H264 Entropy Encoding
   H264FlickerAq:
     type: string
     enum:
       - DISABLED
       - ENABLED
-    description: Placeholder documentation for H264FlickerAq
+    description: H264 Flicker Aq
   H264FramerateControl:
     type: string
     enum:
       - INITIALIZE_FROM_SOURCE
       - SPECIFIED
-    description: Placeholder documentation for H264FramerateControl
+    description: H264 Framerate Control
   H264GopBReference:
     type: string
     enum:
       - DISABLED
       - ENABLED
-    description: Placeholder documentation for H264GopBReference
+    description: H264 Gop BReference
   H264GopSizeUnits:
     type: string
     enum:
       - FRAMES
       - SECONDS
-    description: Placeholder documentation for H264GopSizeUnits
+    description: H264 Gop Size Units
   H264Level:
     type: string
     enum:
@@ -4767,20 +4781,20 @@ definitions:
       - H264_LEVEL_5_1
       - H264_LEVEL_5_2
       - H264_LEVEL_AUTO
-    description: Placeholder documentation for H264Level
+    description: H264 Level
   H264LookAheadRateControl:
     type: string
     enum:
       - HIGH
       - LOW
       - MEDIUM
-    description: Placeholder documentation for H264LookAheadRateControl
+    description: H264 Look Ahead Rate Control
   H264ParControl:
     type: string
     enum:
       - INITIALIZE_FROM_SOURCE
       - SPECIFIED
-    description: Placeholder documentation for H264ParControl
+    description: H264 Par Control
   H264Profile:
     type: string
     enum:
@@ -4790,26 +4804,26 @@ definitions:
       - HIGH_422
       - HIGH_422_10BIT
       - MAIN
-    description: Placeholder documentation for H264Profile
+    description: H264 Profile
   H264RateControlMode:
     type: string
     enum:
       - CBR
       - QVBR
       - VBR
-    description: Placeholder documentation for H264RateControlMode
+    description: H264 Rate Control Mode
   H264ScanType:
     type: string
     enum:
       - INTERLACED
       - PROGRESSIVE
-    description: Placeholder documentation for H264ScanType
+    description: H264 Scan Type
   H264SceneChangeDetect:
     type: string
     enum:
       - DISABLED
       - ENABLED
-    description: Placeholder documentation for H264SceneChangeDetect
+    description: H264 Scene Change Detect
   __integerMin1000:
     type: integer
     description: Placeholder documentation for __integerMin1000
@@ -4853,31 +4867,31 @@ definitions:
     enum:
       - DISABLED
       - ENABLED
-    description: Placeholder documentation for H264SpatialAq
+    description: H264 Spatial Aq
   H264SubGopLength:
     type: string
     enum:
       - DYNAMIC
       - FIXED
-    description: Placeholder documentation for H264SubGopLength
+    description: H264 Sub Gop Length
   H264Syntax:
     type: string
     enum:
       - DEFAULT
       - RP2027
-    description: Placeholder documentation for H264Syntax
+    description: H264 Syntax
   H264TemporalAq:
     type: string
     enum:
       - DISABLED
       - ENABLED
-    description: Placeholder documentation for H264TemporalAq
+    description: H264 Temporal Aq
   H264TimecodeInsertionBehavior:
     type: string
     enum:
       - DISABLED
       - PIC_TIMING_SEI
-    description: Placeholder documentation for H264TimecodeInsertionBehavior
+    description: H264 Timecode Insertion Behavior
   H264Settings:
     type: object
     properties:
@@ -5018,20 +5032,20 @@ definitions:
           Determines how timecodes should be inserted into the video elementary stream.
           - 'disabled': Do not include timecodes
           - 'picTimingSei': Pass through picture timing SEI messages from the source specified in Timecode Config
-    description: Placeholder documentation for H264Settings
+    description: H264 Settings
   HlsAdMarkers:
     type: string
     enum:
       - ADOBE
       - ELEMENTAL
       - ELEMENTAL_SCTE35
-    description: Placeholder documentation for HlsAdMarkers
+    description: Hls Ad Markers
   HlsAkamaiHttpTransferMode:
     type: string
     enum:
       - CHUNKED
       - NON_CHUNKED
-    description: Placeholder documentation for HlsAkamaiHttpTransferMode
+    description: Hls Akamai Http Transfer Mode
   __integerMin0Max600:
     type: integer
     description: Placeholder documentation for __integerMin0Max600
@@ -5066,7 +5080,7 @@ definitions:
       Token:
         $ref: '#/definitions/__string'
         description: 'Token parameter for authenticated akamai. If not specified, _gda_ is used.'
-    description: Placeholder documentation for HlsAkamaiSettings
+    description: Hls Akamai Settings
   HlsBasicPutSettings:
     type: object
     properties:
@@ -5082,14 +5096,14 @@ definitions:
       RestartDelay:
         $ref: '#/definitions/__integerMin0Max15'
         description: 'If a streaming output fails, number of seconds to wait until a restart is initiated. A value of 0 means never restart.'
-    description: Placeholder documentation for HlsBasicPutSettings
+    description: Hls Basic Put Settings
   HlsCaptionLanguageSetting:
     type: string
     enum:
       - INSERT
       - NONE
       - OMIT
-    description: Placeholder documentation for HlsCaptionLanguageSetting
+    description: Hls Caption Language Setting
   HlsMediaStoreSettings:
     type: object
     properties:
@@ -5108,7 +5122,7 @@ definitions:
       RestartDelay:
         $ref: '#/definitions/__integerMin0Max15'
         description: 'If a streaming output fails, number of seconds to wait until a restart is initiated. A value of 0 means never restart.'
-    description: Placeholder documentation for HlsMediaStoreSettings
+    description: Hls Media Store Settings
   HlsWebdavSettings:
     type: object
     properties:
@@ -5127,7 +5141,7 @@ definitions:
       RestartDelay:
         $ref: '#/definitions/__integerMin0Max15'
         description: 'If a streaming output fails, number of seconds to wait until a restart is initiated. A value of 0 means never restart.'
-    description: Placeholder documentation for HlsWebdavSettings
+    description: Hls Webdav Settings
   HlsCdnSettings:
     type: object
     properties:
@@ -5139,31 +5153,31 @@ definitions:
         $ref: '#/definitions/HlsMediaStoreSettings'
       HlsWebdavSettings:
         $ref: '#/definitions/HlsWebdavSettings'
-    description: Placeholder documentation for HlsCdnSettings
+    description: Hls Cdn Settings
   HlsClientCache:
     type: string
     enum:
       - DISABLED
       - ENABLED
-    description: Placeholder documentation for HlsClientCache
+    description: Hls Client Cache
   HlsCodecSpecification:
     type: string
     enum:
       - RFC_4281
       - RFC_6381
-    description: Placeholder documentation for HlsCodecSpecification
+    description: Hls Codec Specification
   HlsDirectoryStructure:
     type: string
     enum:
       - SINGLE_DIRECTORY
       - SUBDIRECTORY_PER_STREAM
-    description: Placeholder documentation for HlsDirectoryStructure
+    description: Hls Directory Structure
   HlsEncryptionType:
     type: string
     enum:
       - AES128
       - SAMPLE_AES
-    description: Placeholder documentation for HlsEncryptionType
+    description: Hls Encryption Type
   __listOfHlsAdMarkers:
     type: array
     description: Placeholder documentation for __listOfHlsAdMarkers
@@ -5194,55 +5208,55 @@ definitions:
     enum:
       - EMIT_OUTPUT
       - PAUSE_OUTPUT
-    description: Placeholder documentation for InputLossActionForHlsOut
+    description: Input Loss Action For Hls Out
   HlsIvInManifest:
     type: string
     enum:
       - EXCLUDE
       - INCLUDE
-    description: Placeholder documentation for HlsIvInManifest
+    description: Hls Iv In Manifest
   HlsIvSource:
     type: string
     enum:
       - EXPLICIT
       - FOLLOWS_SEGMENT_NUMBER
-    description: Placeholder documentation for HlsIvSource
+    description: Hls Iv Source
   KeyProviderSettings:
     type: object
     properties:
       StaticKeySettings:
         $ref: '#/definitions/StaticKeySettings'
-    description: Placeholder documentation for KeyProviderSettings
+    description: Key Provider Settings
   HlsManifestCompression:
     type: string
     enum:
       - GZIP
       - NONE
-    description: Placeholder documentation for HlsManifestCompression
+    description: Hls Manifest Compression
   HlsManifestDurationFormat:
     type: string
     enum:
       - FLOATING_POINT
       - INTEGER
-    description: Placeholder documentation for HlsManifestDurationFormat
+    description: Hls Manifest Duration Format
   HlsMode:
     type: string
     enum:
       - LIVE
       - VOD
-    description: Placeholder documentation for HlsMode
+    description: Hls Mode
   HlsOutputSelection:
     type: string
     enum:
       - MANIFESTS_AND_SEGMENTS
       - SEGMENTS_ONLY
-    description: Placeholder documentation for HlsOutputSelection
+    description: Hls Output Selection
   HlsProgramDateTime:
     type: string
     enum:
       - EXCLUDE
       - INCLUDE
-    description: Placeholder documentation for HlsProgramDateTime
+    description: Hls Program Date Time
   __integerMin0Max3600:
     type: integer
     description: Placeholder documentation for __integerMin0Max3600
@@ -5253,32 +5267,32 @@ definitions:
     enum:
       - DISABLED
       - ENABLED
-    description: HLS Redundant Manifest
+    description: Hls Redundant Manifest
   HlsSegmentationMode:
     type: string
     enum:
       - USE_INPUT_SEGMENTATION
       - USE_SEGMENT_DURATION
-    description: Placeholder documentation for HlsSegmentationMode
+    description: Hls Segmentation Mode
   HlsStreamInfResolution:
     type: string
     enum:
       - EXCLUDE
       - INCLUDE
-    description: Placeholder documentation for HlsStreamInfResolution
+    description: Hls Stream Inf Resolution
   HlsTimedMetadataId3Frame:
     type: string
     enum:
       - NONE
       - PRIV
       - TDRL
-    description: Placeholder documentation for HlsTimedMetadataId3Frame
+    description: Hls Timed Metadata Id3 Frame
   HlsTsFileMode:
     type: string
     enum:
       - SEGMENTED_FILES
       - SINGLE_FILE
-    description: Placeholder documentation for HlsTsFileMode
+    description: Hls Ts File Mode
   HlsGroupSettings:
     type: object
     required:
@@ -5416,7 +5430,7 @@ definitions:
           SEGMENTEDFILES: Emit the program as segments - multiple .ts media files.
 
           SINGLEFILE: Applies only if Mode field is VOD. Emit the program as a single .ts media file. The media manifest includes #EXT-X-BYTERANGE tags to index segments for playback. A typical use for this value is when sending the output to AWS Elemental MediaConvert, which can accept only a single media file. Playback while the channel is running is not guaranteed due to HTTP server caching.
-    description: Placeholder documentation for HlsGroupSettings
+    description: Hls Group Settings
   HlsInputSettings:
     type: object
     properties:
@@ -5432,12 +5446,12 @@ definitions:
       RetryInterval:
         $ref: '#/definitions/__integerMin0'
         description: The number of seconds between retries when an attempt to read a manifest or segment fails.
-    description: Placeholder documentation for HlsInputSettings
+    description: Hls Input Settings
   HlsMediaStoreStorageClass:
     type: string
     enum:
       - TEMPORAL
-    description: Placeholder documentation for HlsMediaStoreStorageClass
+    description: Hls Media Store Storage Class
   HlsSettings:
     type: object
     properties:
@@ -5445,7 +5459,7 @@ definitions:
         $ref: '#/definitions/AudioOnlyHlsSettings'
       StandardHlsSettings:
         $ref: '#/definitions/StandardHlsSettings'
-    description: Placeholder documentation for HlsSettings
+    description: Hls Settings
   HlsOutputSettings:
     type: object
     required:
@@ -5460,7 +5474,7 @@ definitions:
       SegmentModifier:
         $ref: '#/definitions/__string'
         description: String concatenated to end of segment filenames.
-    description: Placeholder documentation for HlsOutputSettings
+    description: Hls Output Settings
   StandardHlsSettings:
     type: object
     required:
@@ -5471,7 +5485,7 @@ definitions:
         description: 'List all the audio groups that are used with the video output stream. Input all the audio GROUP-IDs that are associated to the video, separate by '',''.'
       M3u8Settings:
         $ref: '#/definitions/M3u8Settings'
-    description: Placeholder documentation for StandardHlsSettings
+    description: Standard Hls Settings
   HlsTimedMetadataScheduleActionSettings:
     type: object
     required:
@@ -5486,7 +5500,7 @@ definitions:
     enum:
       - CHUNKED
       - NON_CHUNKED
-    description: Placeholder documentation for HlsWebdavHttpTransferMode
+    description: Hls Webdav Http Transfer Mode
   InputSettings:
     type: object
     properties:
@@ -5539,19 +5553,19 @@ definitions:
       InputChannel:
         $ref: '#/definitions/__integerMin0Max15'
         description: The index of the input channel used as a source.
-    description: Placeholder documentation for InputChannelLevel
+    description: Input Channel Level
   InputDeblockFilter:
     type: string
     enum:
       - DISABLED
       - ENABLED
-    description: Placeholder documentation for InputDeblockFilter
+    description: Input Deblock Filter
   InputDenoiseFilter:
     type: string
     enum:
       - DISABLED
       - ENABLED
-    description: Placeholder documentation for InputDenoiseFilter
+    description: Input Denoise Filter
   InputDestinationVpc:
     type: object
     properties:
@@ -5589,26 +5603,26 @@ definitions:
       - AUTO
       - DISABLED
       - FORCED
-    description: Placeholder documentation for InputFilter
+    description: Input Filter
   InputLossActionForMsSmoothOut:
     type: string
     enum:
       - EMIT_OUTPUT
       - PAUSE_OUTPUT
-    description: Placeholder documentation for InputLossActionForMsSmoothOut
+    description: Input Loss Action For Ms Smooth Out
   InputLossActionForRtmpOut:
     type: string
     enum:
       - EMIT_OUTPUT
       - PAUSE_OUTPUT
-    description: Input Loss Action
+    description: Input Loss Action For Rtmp Out
   InputLossActionForUdpOut:
     type: string
     enum:
       - DROP_PROGRAM
       - DROP_TS
       - EMIT_PROGRAM
-    description: Placeholder documentation for InputLossActionForUdpOut
+    description: Input Loss Action For Udp Out
   __integerMin0Max1000000:
     type: integer
     description: Placeholder documentation for __integerMin0Max1000000
@@ -5624,7 +5638,7 @@ definitions:
     enum:
       - COLOR
       - SLATE
-    description: Placeholder documentation for InputLossImageType
+    description: Input Loss Image Type
   __listOfAudioSelector:
     type: array
     description: Placeholder documentation for __listOfAudioSelector
@@ -5650,7 +5664,7 @@ definitions:
     enum:
       - CONTINUE
       - LOOP
-    description: Placeholder documentation for InputSourceEndBehavior
+    description: Input Source End Behavior
   VideoSelector:
     type: object
     properties:
@@ -5706,7 +5720,7 @@ definitions:
       StaticKeyValue:
         $ref: '#/definitions/__stringMin32Max32'
         description: Static key value as a 32 character hexadecimal string.
-    description: Placeholder documentation for StaticKeySettings
+    description: Static Key Settings
   ListChannelsRequest:
     type: object
     properties: {}
@@ -5761,91 +5775,91 @@ definitions:
     enum:
       - DROP
       - ENCODE_SILENCE
-    description: Placeholder documentation for M2tsAbsentInputAudioBehavior
+    description: M2ts Absent Input Audio Behavior
   M2tsArib:
     type: string
     enum:
       - DISABLED
       - ENABLED
-    description: Placeholder documentation for M2tsArib
+    description: M2ts Arib
   M2tsAribCaptionsPidControl:
     type: string
     enum:
       - AUTO
       - USE_CONFIGURED
-    description: Placeholder documentation for M2tsAribCaptionsPidControl
+    description: M2ts Arib Captions Pid Control
   M2tsAudioBufferModel:
     type: string
     enum:
       - ATSC
       - DVB
-    description: Placeholder documentation for M2tsAudioBufferModel
+    description: M2ts Audio Buffer Model
   M2tsAudioInterval:
     type: string
     enum:
       - VIDEO_AND_FIXED_INTERVALS
       - VIDEO_INTERVAL
-    description: Placeholder documentation for M2tsAudioInterval
+    description: M2ts Audio Interval
   M2tsAudioStreamType:
     type: string
     enum:
       - ATSC
       - DVB
-    description: Placeholder documentation for M2tsAudioStreamType
+    description: M2ts Audio Stream Type
   M2tsBufferModel:
     type: string
     enum:
       - MULTIPLEX
       - NONE
-    description: Placeholder documentation for M2tsBufferModel
+    description: M2ts Buffer Model
   M2tsCcDescriptor:
     type: string
     enum:
       - DISABLED
       - ENABLED
-    description: Placeholder documentation for M2tsCcDescriptor
+    description: M2ts Cc Descriptor
   M2tsEbifControl:
     type: string
     enum:
       - NONE
       - PASSTHROUGH
-    description: Placeholder documentation for M2tsEbifControl
+    description: M2ts Ebif Control
   M2tsEbpPlacement:
     type: string
     enum:
       - VIDEO_AND_AUDIO_PIDS
       - VIDEO_PID
-    description: Placeholder documentation for M2tsEbpPlacement
+    description: M2ts Ebp Placement
   M2tsEsRateInPes:
     type: string
     enum:
       - EXCLUDE
       - INCLUDE
-    description: Placeholder documentation for M2tsEsRateInPes
+    description: M2ts Es Rate In Pes
   M2tsKlv:
     type: string
     enum:
       - NONE
       - PASSTHROUGH
-    description: Placeholder documentation for M2tsKlv
+    description: M2ts Klv
   M2tsPcrControl:
     type: string
     enum:
       - CONFIGURED_PCR_PERIOD
       - PCR_EVERY_PES_PACKET
-    description: Placeholder documentation for M2tsPcrControl
+    description: M2ts Pcr Control
   M2tsRateMode:
     type: string
     enum:
       - CBR
       - VBR
-    description: Placeholder documentation for M2tsRateMode
+    description: M2ts Rate Mode
   M2tsScte35Control:
     type: string
     enum:
       - NONE
       - PASSTHROUGH
-    description: Placeholder documentation for M2tsScte35Control
+    description: M2ts Scte35 Control
   M2tsSegmentationMarkers:
     type: string
     enum:
@@ -5855,13 +5869,13 @@ definitions:
       - PSI_SEGSTART
       - RAI_ADAPT
       - RAI_SEGSTART
-    description: Placeholder documentation for M2tsSegmentationMarkers
+    description: M2ts Segmentation Markers
   M2tsSegmentationStyle:
     type: string
     enum:
       - MAINTAIN_CADENCE
       - RESET_CADENCE
-    description: Placeholder documentation for M2tsSegmentationStyle
+    description: M2ts Segmentation Style
   __integerMin0Max10000:
     type: integer
     description: Placeholder documentation for __integerMin0Max10000
@@ -5891,25 +5905,25 @@ definitions:
     enum:
       - NO_PASSTHROUGH
       - PASSTHROUGH
-    description: Placeholder documentation for M2tsTimedMetadataBehavior
+    description: M2ts Timed Metadata Behavior
   M3u8PcrControl:
     type: string
     enum:
       - CONFIGURED_PCR_PERIOD
       - PCR_EVERY_PES_PACKET
-    description: Placeholder documentation for M3u8PcrControl
+    description: M3u8 Pcr Control
   M3u8Scte35Behavior:
     type: string
     enum:
       - NO_PASSTHROUGH
       - PASSTHROUGH
-    description: Placeholder documentation for M3u8Scte35Behavior
+    description: M3u8 Scte35 Behavior
   M3u8TimedMetadataBehavior:
     type: string
     enum:
       - NO_PASSTHROUGH
       - PASSTHROUGH
-    description: Placeholder documentation for M3u8TimedMetadataBehavior
+    description: M3u8 Timed Metadata Behavior
   M3u8Settings:
     type: object
     properties:
@@ -5994,56 +6008,56 @@ definitions:
     enum:
       - CODING_MODE_1_0
       - CODING_MODE_2_0
-    description: Placeholder documentation for Mp2CodingMode
+    description: Mp2 Coding Mode
   SmoothGroupAudioOnlyTimecodeControl:
     type: string
     enum:
       - PASSTHROUGH
       - USE_CONFIGURED_CLOCK
-    description: Placeholder documentation for SmoothGroupAudioOnlyTimecodeControl
+    description: Smooth Group Audio Only Timecode Control
   SmoothGroupCertificateMode:
     type: string
     enum:
       - SELF_SIGNED
       - VERIFY_AUTHENTICITY
-    description: Placeholder documentation for SmoothGroupCertificateMode
+    description: Smooth Group Certificate Mode
   SmoothGroupEventIdMode:
     type: string
     enum:
       - NO_EVENT_ID
       - USE_CONFIGURED
       - USE_TIMESTAMP
-    description: Placeholder documentation for SmoothGroupEventIdMode
+    description: Smooth Group Event Id Mode
   SmoothGroupEventStopBehavior:
     type: string
     enum:
       - NONE
       - SEND_EOS
-    description: Placeholder documentation for SmoothGroupEventStopBehavior
+    description: Smooth Group Event Stop Behavior
   SmoothGroupSegmentationMode:
     type: string
     enum:
       - USE_INPUT_SEGMENTATION
       - USE_SEGMENT_DURATION
-    description: Placeholder documentation for SmoothGroupSegmentationMode
+    description: Smooth Group Segmentation Mode
   SmoothGroupSparseTrackType:
     type: string
     enum:
       - NONE
       - SCTE_35
-    description: Placeholder documentation for SmoothGroupSparseTrackType
+    description: Smooth Group Sparse Track Type
   SmoothGroupStreamManifestBehavior:
     type: string
     enum:
       - DO_NOT_SEND
       - SEND
-    description: Placeholder documentation for SmoothGroupStreamManifestBehavior
+    description: Smooth Group Stream Manifest Behavior
   SmoothGroupTimestampOffsetMode:
     type: string
     enum:
       - USE_CONFIGURED_OFFSET
       - USE_EVENT_START_DATE
-    description: Placeholder documentation for SmoothGroupTimestampOffsetMode
+    description: Smooth Group Timestamp Offset Mode
   MsSmoothGroupSettings:
     type: object
     required:
@@ -6118,20 +6132,20 @@ definitions:
           Type of timestamp date offset to use.
           - useEventStartDate: Use the date the event was started as the offset
           - useConfiguredOffset: Use an explicitly configured date as the offset
-    description: Placeholder documentation for MsSmoothGroupSettings
+    description: Ms Smooth Group Settings
   MsSmoothOutputSettings:
     type: object
     properties:
       NameModifier:
         $ref: '#/definitions/__string'
         description: String concatenated to the end of the destination filename.  Required for multiple outputs of the same type.
-    description: Placeholder documentation for MsSmoothOutputSettings
+    description: Ms Smooth Output Settings
   NetworkInputServerValidation:
     type: string
     enum:
       - CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME
       - CHECK_CRYPTOGRAPHY_ONLY
-    description: Placeholder documentation for NetworkInputServerValidation
+    description: Network Input Server Validation
   Offering:
     type: object
     properties:
@@ -6191,7 +6205,7 @@ definitions:
         $ref: '#/definitions/RtmpOutputSettings'
       UdpOutputSettings:
         $ref: '#/definitions/UdpOutputSettings'
-    description: Placeholder documentation for OutputSettings
+    description: Output Settings
   Output:
     type: object
     required:
@@ -6260,7 +6274,7 @@ definitions:
         $ref: '#/definitions/RtmpGroupSettings'
       UdpGroupSettings:
         $ref: '#/definitions/UdpGroupSettings'
-    description: Placeholder documentation for OutputGroupSettings
+    description: Output Group Settings
   __listOfOutput:
     type: array
     description: Placeholder documentation for __listOfOutput
@@ -6306,7 +6320,7 @@ definitions:
       RestartDelay:
         $ref: '#/definitions/__integerMin0'
         description: 'If a streaming output fails, number of seconds to wait until a restart is initiated. A value of 0 means never restart.'
-    description: Placeholder documentation for RtmpGroupSettings
+    description: Rtmp Group Settings
   UdpGroupSettings:
     type: object
     properties:
@@ -6319,7 +6333,7 @@ definitions:
       TimedMetadataId3Period:
         $ref: '#/definitions/__integerMin0'
         description: Timed Metadata interval in seconds.
-    description: Placeholder documentation for UdpGroupSettings
+    description: Udp Group Settings
   RtmpOutputSettings:
     type: object
     required:
@@ -6337,7 +6351,7 @@ definitions:
       NumRetries:
         $ref: '#/definitions/__integerMin0'
         description: Number of retry attempts.
-    description: Placeholder documentation for RtmpOutputSettings
+    description: Rtmp Output Settings
   UdpOutputSettings:
     type: object
     required:
@@ -6355,7 +6369,7 @@ definitions:
       FecOutputSettings:
         $ref: '#/definitions/FecOutputSettings'
         description: Settings for enabling and adjusting Forward Error Correction on UDP outputs.
-    description: Placeholder documentation for UdpOutputSettings
+    description: Udp Output Settings
   __listOfPipelinePauseStateSettings:
     type: array
     description: Placeholder documentation for __listOfPipelinePauseStateSettings
@@ -6524,14 +6538,14 @@ definitions:
     enum:
       - DISCONNECT_IMMEDIATELY
       - WAIT_FOR_SERVER
-    description: Placeholder documentation for RtmpCacheFullBehavior
+    description: Rtmp Cache Full Behavior
   RtmpCaptionData:
     type: string
     enum:
       - ALL
       - FIELD1_608
       - FIELD1_AND_FIELD2_608
-    description: Placeholder documentation for RtmpCaptionData
+    description: Rtmp Caption Data
   __integerMin30:
     type: integer
     description: Placeholder documentation for __integerMin30
@@ -6541,7 +6555,7 @@ definitions:
     enum:
       - SELF_SIGNED
       - VERIFY_AUTHENTICITY
-    description: Placeholder documentation for RtmpOutputCertificateMode
+    description: Rtmp Output Certificate Mode
   ScheduleActionSettings:
     type: object
     properties:
@@ -6678,19 +6692,19 @@ definitions:
     enum:
       - DISABLED
       - UPCONVERT
-    description: Placeholder documentation for Scte20Convert608To708
+    description: Scte20 Convert608 To708
   Scte35AposNoRegionalBlackoutBehavior:
     type: string
     enum:
       - FOLLOW
       - IGNORE
-    description: Placeholder documentation for Scte35AposNoRegionalBlackoutBehavior
+    description: Scte35 Apos No Regional Blackout Behavior
   Scte35AposWebDeliveryAllowedBehavior:
     type: string
     enum:
       - FOLLOW
       - IGNORE
-    description: Placeholder documentation for Scte35AposWebDeliveryAllowedBehavior
+    description: Scte35 Apos Web Delivery Allowed Behavior
   Scte35ArchiveAllowedFlag:
     type: string
     enum:
@@ -6822,13 +6836,13 @@ definitions:
     enum:
       - FOLLOW
       - IGNORE
-    description: Placeholder documentation for Scte35SpliceInsertNoRegionalBlackoutBehavior
+    description: Scte35 Splice Insert No Regional Blackout Behavior
   Scte35SpliceInsertWebDeliveryAllowedBehavior:
     type: string
     enum:
       - FOLLOW
       - IGNORE
-    description: Placeholder documentation for Scte35SpliceInsertWebDeliveryAllowedBehavior
+    description: Scte35 Splice Insert Web Delivery Allowed Behavior
   __integerMin0Max8589934591:
     type: integer
     description: Placeholder documentation for __integerMin0Max8589934591
@@ -6853,7 +6867,7 @@ definitions:
       - EMBEDDED
       - SYSTEMCLOCK
       - ZEROBASED
-    description: Placeholder documentation for TimecodeConfigSource
+    description: Timecode Config Source
   __integerMin1Max1000000:
     type: integer
     description: Placeholder documentation for __integerMin1Max1000000
@@ -6864,20 +6878,20 @@ definitions:
     enum:
       - PASSTHROUGH
       - USE_CONFIGURED
-    description: Placeholder documentation for TtmlDestinationStyleControl
+    description: Ttml Destination Style Control
   UdpContainerSettings:
     type: object
     properties:
       M2tsSettings:
         $ref: '#/definitions/M2tsSettings'
-    description: Placeholder documentation for UdpContainerSettings
+    description: Udp Container Settings
   UdpTimedMetadataId3Frame:
     type: string
     enum:
       - NONE
       - PRIV
       - TDRL
-    description: Placeholder documentation for UdpTimedMetadataId3Frame
+    description: Udp Timed Metadata Id3 Frame
   UpdateChannelRequest:
     type: object
     properties:
@@ -6947,20 +6961,20 @@ definitions:
         $ref: '#/definitions/FrameCaptureSettings'
       H264Settings:
         $ref: '#/definitions/H264Settings'
-    description: Placeholder documentation for VideoCodecSettings
+    description: Video Codec Settings
   VideoDescriptionRespondToAfd:
     type: string
     enum:
       - NONE
       - PASSTHROUGH
       - RESPOND
-    description: Placeholder documentation for VideoDescriptionRespondToAfd
+    description: Video Description Respond To Afd
   VideoDescriptionScalingBehavior:
     type: string
     enum:
       - DEFAULT
       - STRETCH_TO_OUTPUT
-    description: Placeholder documentation for VideoDescriptionScalingBehavior
+    description: Video Description Scaling Behavior
   VideoDescription:
     type: object
     required:
@@ -6994,13 +7008,13 @@ definitions:
       - FOLLOW
       - REC_601
       - REC_709
-    description: Placeholder documentation for VideoSelectorColorSpace
+    description: Video Selector Color Space
   VideoSelectorColorSpaceUsage:
     type: string
     enum:
       - FALLBACK
       - FORCE
-    description: Placeholder documentation for VideoSelectorColorSpaceUsage
+    description: Video Selector Color Space Usage
   VideoSelectorSettings:
     type: object
     properties:
@@ -7008,18 +7022,18 @@ definitions:
         $ref: '#/definitions/VideoSelectorPid'
       VideoSelectorProgramId:
         $ref: '#/definitions/VideoSelectorProgramId'
-    description: Placeholder documentation for VideoSelectorSettings
+    description: Video Selector Settings
   VideoSelectorPid:
     type: object
     properties:
       Pid:
         $ref: '#/definitions/__integerMin0Max8191'
         description: Selects a specific PID from within a video source.
-    description: Placeholder documentation for VideoSelectorPid
+    description: Video Selector Pid
   VideoSelectorProgramId:
     type: object
     properties:
       ProgramId:
         $ref: '#/definitions/__integerMin0Max65536'
         description: 'Selects a specific program from within a multi-program transport stream. If the program doesn''t exist, the first program within the transport stream will be selected by default.'
-    description: Placeholder documentation for VideoSelectorProgramId
+    description: Video Selector Program Id

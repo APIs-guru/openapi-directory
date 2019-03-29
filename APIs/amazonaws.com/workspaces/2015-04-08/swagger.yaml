@@ -1044,7 +1044,7 @@ paths:
   '/#X-Amz-Target=WorkspacesService.ModifyClientProperties':
     post:
       operationId: ModifyClientProperties
-      description: Modifies the properties of the specified Amazon WorkSpaces client.
+      description: Modifies the properties of the specified Amazon WorkSpaces clients.
       responses:
         '200':
           description: Success
@@ -1220,7 +1220,7 @@ paths:
   '/#X-Amz-Target=WorkspacesService.RebuildWorkspaces':
     post:
       operationId: RebuildWorkspaces
-      description: '<p>Rebuilds the specified WorkSpace.</p> <p>You cannot rebuild a WorkSpace unless its state is <code>AVAILABLE</code>, <code>ERROR</code>, or <code>UNHEALTHY</code>.</p> <p>Rebuilding a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see <a href="http://docs.aws.amazon.com/workspaces/latest/adminguide/reset-workspace.html">Rebuild a WorkSpace</a>.</p> <p>This operation is asynchronous and returns before the WorkSpaces have been completely rebuilt.</p>'
+      description: '<p>Rebuilds the specified WorkSpace.</p> <p>You cannot rebuild a WorkSpace unless its state is <code>AVAILABLE</code>, <code>ERROR</code>, or <code>UNHEALTHY</code>.</p> <p>Rebuilding a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/reset-workspace.html">Rebuild a WorkSpace</a>.</p> <p>This operation is asynchronous and returns before the WorkSpaces have been completely rebuilt.</p>'
       responses:
         '200':
           description: Success
@@ -1496,6 +1496,9 @@ definitions:
       UserRules:
         $ref: '#/definitions/IpRuleList'
         description: The rules to add to the group.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tags. Each WorkSpaces resource can have a maximum of 50 tags.
   ResourceAlreadyExistsException: {}
   ResourceCreationFailedException: {}
   CreateTagsResult:
@@ -1608,7 +1611,7 @@ definitions:
     properties:
       ResourceIds:
         $ref: '#/definitions/ResourceIdList'
-        description: 'The resource identifiers, in the form of directory IDs.'
+        description: 'The resource identifier, in the form of directory IDs.'
   DescribeIpGroupsResult:
     type: object
     properties:
@@ -1794,6 +1797,9 @@ definitions:
       ImageDescription:
         $ref: '#/definitions/WorkspaceImageDescription'
         description: The description of the WorkSpace image.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tags. Each WorkSpaces resource can have a maximum of 50 tags.
   ListAvailableManagementCidrRangesResult:
     type: object
     properties:
@@ -2459,7 +2465,7 @@ definitions:
     properties:
       RunningMode:
         $ref: '#/definitions/RunningMode'
-        description: 'The running mode. For more information, see <a href="http://docs.aws.amazon.com/workspaces/latest/adminguide/running-mode.html">Manage the WorkSpace Running Mode</a>.'
+        description: 'The running mode. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/running-mode.html">Manage the WorkSpace Running Mode</a>.'
       RunningModeAutoStopTimeoutInMinutes:
         $ref: '#/definitions/RunningModeAutoStopTimeoutInMinutes'
         description: The time after a user logs off when WorkSpaces are automatically stopped. Configured in 60 minute intervals.

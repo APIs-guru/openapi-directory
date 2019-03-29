@@ -3,7 +3,7 @@ info:
   version: '2018-07-26'
   x-release: v4
   title: Amazon Pinpoint Email Service
-  description: '<fullname>Amazon Pinpoint Email Service</fullname> <p> This document contains reference information for the <a href="https://aws.amazon.com/pinpoint">Amazon Pinpoint</a> Email API, version 1.0. This document is best used in conjunction with the <a href="http://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html">Amazon Pinpoint Developer Guide</a>.</p> <p>The Amazon Pinpoint Email API is available in the US East (N. Virginia), US West (Oregon) and the EU (Ireland) Regions at the following endpoints:</p> <ul> <li> <p> <b>US East (N. Virginia)</b>: <code>email.us-east-1.amazonaws.com</code> </p> </li> <li> <p> <b>US West (Oregon)</b>: <code>email.us-west-2.amazonaws.com</code> </p> </li> <li> <p> <b>EU (Ireland)</b>: <code>email.eu-west-1.amazonaws.com</code> </p> </li> </ul>'
+  description: '<fullname>Amazon Pinpoint Email Service</fullname> <p> This document contains reference information for the <a href="https://aws.amazon.com/pinpoint">Amazon Pinpoint</a> Email API, version 1.0. This document is best used in conjunction with the <a href="https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html">Amazon Pinpoint Developer Guide</a>.</p> <p>The Amazon Pinpoint Email API is available in the US East (N. Virginia), US West (Oregon), EU (Frankfurt), and EU (Ireland) Regions at the following endpoints:</p> <ul> <li> <p> <b>US East (N. Virginia)</b>: <code>email.us-east-1.amazonaws.com</code> </p> </li> <li> <p> <b>US West (Oregon)</b>: <code>email.us-west-2.amazonaws.com</code> </p> </li> <li> <p> <b>EU (Frankfurt)</b>: <code>email.eu-central-1.amazonaws.com</code> </p> </li> <li> <p> <b>EU (Ireland)</b>: <code>email.eu-west-1.amazonaws.com</code> </p> </li> </ul>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -35,6 +35,7 @@ externalDocs:
   url: 'https://docs.aws.amazon.com/email/'
 host: email.amazonaws.com
 basePath: /
+x-hasEquivalentPaths: true
 schemes:
   - https
   - http
@@ -127,6 +128,10 @@ paths:
           description: BadRequestException
           schema:
             $ref: '#/definitions/BadRequestException'
+        '485':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
       parameters:
         - name: body
           in: body
@@ -170,6 +175,11 @@ paths:
                   SendingEnabled:
                     $ref: '#/definitions/Enabled'
                     description: 'If <code>true</code>, email sending is enabled for the configuration set. If <code>false</code>, email sending is disabled for the configuration set.'
+              Tags:
+                description: An object that defines the tags (keys and values) that you want to associate with the configuration set.
+                type: array
+                items:
+                  $ref: '#/definitions/Tag'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -349,6 +359,10 @@ paths:
           description: BadRequestException
           schema:
             $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
       parameters:
         - name: body
           in: body
@@ -361,6 +375,11 @@ paths:
               PoolName:
                 description: The name of a dedicated IP pool.
                 type: string
+              Tags:
+                description: An object that defines the tags (keys and values) that you want to associate with the pool.
+                type: array
+                items:
+                  $ref: '#/definitions/Tag'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -451,6 +470,10 @@ paths:
           description: BadRequestException
           schema:
             $ref: '#/definitions/BadRequestException'
+        '488':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
       parameters:
         - name: body
           in: body
@@ -477,6 +500,11 @@ paths:
                   Raw:
                     $ref: '#/definitions/RawMessage'
                     description: '<p>The raw email message. The message has to meet the following criteria:</p> <ul> <li> <p>The message has to contain a header and a body, separated by one blank line.</p> </li> <li> <p>All of the required header fields must be present in the message.</p> </li> <li> <p>Each part of a multipart MIME message must be formatted properly.</p> </li> <li> <p>If you include attachments, they must be in a file format that Amazon Pinpoint supports. </p> </li> <li> <p>The entire message must be Base64 encoded.</p> </li> <li> <p>If any of the MIME parts in your message contain content that is outside of the 7-bit ASCII character range, you should encode that content to ensure that recipients'' email clients render the message properly.</p> </li> <li> <p>The length of any single line of text in the message can''t exceed 1,000 characters. This restriction is defined in <a href="https://tools.ietf.org/html/rfc5321">RFC 5321</a>.</p> </li> </ul>'
+              Tags:
+                description: An object that defines the tags (keys and values) that you want to associate with the predictive inbox placement test.
+                type: array
+                items:
+                  $ref: '#/definitions/Tag'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -508,6 +536,10 @@ paths:
           description: BadRequestException
           schema:
             $ref: '#/definitions/BadRequestException'
+        '483':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
       parameters:
         - name: body
           in: body
@@ -520,6 +552,11 @@ paths:
               EmailIdentity:
                 description: The email address or domain that you want to verify.
                 type: string
+              Tags:
+                description: An object that defines the tags (keys and values) that you want to associate with the email identity.
+                type: array
+                items:
+                  $ref: '#/definitions/Tag'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -590,6 +627,10 @@ paths:
           description: BadRequestException
           schema:
             $ref: '#/definitions/BadRequestException'
+        '483':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
       parameters:
         - name: ConfigurationSetName
           in: path
@@ -756,6 +797,10 @@ paths:
           description: BadRequestException
           schema:
             $ref: '#/definitions/BadRequestException'
+        '483':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
       parameters:
         - name: PoolName
           in: path
@@ -793,6 +838,10 @@ paths:
           description: BadRequestException
           schema:
             $ref: '#/definitions/BadRequestException'
+        '483':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
       parameters:
         - name: EmailIdentity
           in: path
@@ -1219,6 +1268,91 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /v1/email/tags:
+    get:
+      operationId: ListTagsForResource
+      description: "Retrieve a list of the tags (keys and values) that are associated with a specific resource. A\_<i>tag</i>\_is a label that you optionally define and associate with a resource in Amazon Pinpoint. Each tag consists of a required\_<i>tag key</i>\_and an optional associated\_<i>tag value</i>. A tag key is a general label that acts as a category for more specific tag values. A tag value acts as a descriptor within a tag key."
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsForResourceResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - ResourceArn
+            properties:
+              ResourceArn:
+                description: The Amazon Resource Name (ARN) of the resource that you want to retrieve tag information for.
+                type: string
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: "<p>Add one or more tags (keys and values) to one or more specified resources. A <i>tag</i>\_is a label that you optionally define and associate with a resource in Amazon Pinpoint. Tags can help you categorize and manage resources in different ways, such as by purpose, owner, environment, or other criteria. A resource can have as many as 50 tags.</p> <p>Each tag consists of a required\_<i>tag key</i>\_and an associated\_<i>tag value</i>, both of which you define. A tag key is a general label that acts as a category for more specific tag values. A tag value acts as a descriptor within a tag key.</p>"
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TagResourceResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - ResourceArn
+              - Tags
+            properties:
+              ResourceArn:
+                description: The Amazon Resource Name (ARN) of the resource that you want to add one or more tags to.
+                type: string
+              Tags:
+                description: A list of the tags that you want to add to the resource. A tag consists of a required tag key (<code>Key</code>) and an associated tag value (<code>Value</code>). The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.
+                type: array
+                items:
+                  $ref: '#/definitions/Tag'
   /v1/email/account/dedicated-ips/warmup:
     put:
       operationId: PutAccountDedicatedIpWarmupAttributes
@@ -1820,6 +1954,54 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/email/tags#ResourceArn&TagKeys':
+    delete:
+      operationId: UntagResource
+      description: Remove one or more tags (keys and values) from a specified resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UntagResourceResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: ResourceArn
+          in: query
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource that you want to remove one or more tags from.
+          type: string
+        - name: TagKeys
+          in: query
+          required: true
+          description: '<p>The tags (tag keys) that you want to remove from the resource. When you specify a tag key, the action removes both that key and its associated tag value.</p> <p>To remove more than one tag from the resource, append the <code>TagKeys</code> parameter and argument for each additional tag to remove, separated by an ampersand. For example: <code>/v1/email/tags?ResourceArn=ResourceArn&amp;TagKeys=Key1&amp;TagKeys=Key2</code> </p>'
+          type: array
+          items:
+            type: string
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
   CreateConfigurationSetResponse:
     type: object
@@ -1837,11 +2019,25 @@ definitions:
     type: string
     description: 'The date and time (in Unix time) when the reputation metrics were last given a fresh start. When your account is given a fresh start, your reputation metrics are calculated starting from the date of the fresh start.'
     format: date-time
+  Tag:
+    type: object
+    required:
+      - Key
+      - Value
+    properties:
+      Key:
+        $ref: '#/definitions/TagKey'
+        description: One part of a key-value pair that defines a tag. The maximum length of a tag key is 128 characters. The minimum length is 1 character.
+      Value:
+        $ref: '#/definitions/TagValue'
+        description: "The optional part of a key-value pair that defines a tag. The maximum length of a tag value is 256 characters. The minimum length is 0 characters. If you don’t want a resource to have a specific tag value, don’t specify a value for this\_parameter. Amazon Pinpoint will set the value to an empty string."
+    description: "<p>An object that defines the tags that are associated with a resource. A\_<i>tag</i>\_is a label that you optionally define and associate with a resource in Amazon Pinpoint. Tags can help you categorize and manage resources in different ways, such as by purpose, owner, environment, or other criteria. A resource can have as many as 50 tags.</p> <p>Each tag consists of a required\_<i>tag key</i>\_and an associated\_<i>tag value</i>, both of which you define. A tag key is a general label that acts as a category for a more specific tag value. A tag value acts as a descriptor within a tag key. For example, if you have two versions of an Amazon Pinpoint project, one for internal testing and another for external use, you might assign a\_<code>Stack</code>\_tag key to both projects. The value of the\_<code>Stack</code>\_tag key might be\_<code>Test</code>\_for one project and\_<code>Production</code>\_for the other project.</p> <p>A tag key can contain as many as 128 characters. A tag value can contain as many as 256 characters. The characters can be Unicode letters, digits, white space, or one of the following symbols: _ . : / = + -. The following additional restrictions apply to tags:</p> <ul> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>For each associated resource, each tag key must be unique and it can have only one value.</p> </li> <li> <p>The\_<code>aws:</code>\_prefix is reserved for use by AWS; you can’t use it in any tag keys or values that you define. In addition, you can't edit or remove tag keys or values that use this prefix. Tags that use this prefix don’t count against the limit of 50 tags per resource.</p> </li> <li> <p>You can associate tags with public or shared resources, but the tags are available only for your AWS account, not any other accounts that share the resource. In addition, the tags are available only for resources that are located in the specified AWS Region for your AWS account.</p> </li> </ul>"
   AlreadyExistsException: {}
   NotFoundException: {}
   TooManyRequestsException: {}
   LimitExceededException: {}
   BadRequestException: {}
+  ConcurrentModificationException: {}
   CreateConfigurationSetEventDestinationResponse:
     type: object
     properties: {}
@@ -1879,7 +2075,7 @@ definitions:
     properties:
       TopicArn:
         $ref: '#/definitions/AmazonResourceName'
-        description: 'The Amazon Resource Name (ARN) of the Amazon SNS topic that you want to publish email events to. For more information about Amazon SNS topics, see the <a href="http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html">Amazon SNS Developer Guide</a>.'
+        description: 'The Amazon Resource Name (ARN) of the Amazon SNS topic that you want to publish email events to. For more information about Amazon SNS topics, see the <a href="https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html">Amazon SNS Developer Guide</a>.'
     description: An object that defines an Amazon SNS destination for email events. You can use Amazon SNS to send notification when certain email events occur.
   PinpointDestination:
     type: object
@@ -1939,7 +2135,7 @@ definitions:
         description: The email identity type.
       VerifiedForSendingStatus:
         $ref: '#/definitions/Enabled'
-        description: 'Specifies whether or not the identity is verified. In Amazon Pinpoint, you can only send email from verified email addresses or domains. For more information about verifying identities, see the <a href="http://docs.aws.amazon.com/pinpoint/latest/userguide/channels-email-manage-verify.html">Amazon Pinpoint User Guide</a>.'
+        description: 'Specifies whether or not the identity is verified. In Amazon Pinpoint, you can only send email from verified email addresses or domains. For more information about verifying identities, see the <a href="https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-email-manage-verify.html">Amazon Pinpoint User Guide</a>.'
       DkimAttributes:
         $ref: '#/definitions/DkimAttributes'
         description: An object that contains information about the DKIM attributes for the identity. This object includes the tokens that you use to create the CNAME records that are required to complete the DKIM verification process.
@@ -2087,7 +2283,7 @@ definitions:
         description: '<p>The feedback forwarding configuration for the identity.</p> <p>If the value is <code>true</code>, Amazon Pinpoint sends you email notifications when bounce or complaint events occur. Amazon Pinpoint sends this notification to the address that you specified in the Return-Path header of the original email.</p> <p>When you set this value to <code>false</code>, Amazon Pinpoint sends notifications through other mechanisms, such as by notifying an Amazon SNS topic or another event destination. You''re required to have a method of tracking bounces and complaints. If you haven''t set up another mechanism for receiving bounce or complaint notifications, Amazon Pinpoint sends an email notification when these events occur (even if this setting is disabled).</p>'
       VerifiedForSendingStatus:
         $ref: '#/definitions/Enabled'
-        description: 'Specifies whether or not the identity is verified. In Amazon Pinpoint, you can only send email from verified email addresses or domains. For more information about verifying identities, see the <a href="http://docs.aws.amazon.com/pinpoint/latest/userguide/channels-email-manage-verify.html">Amazon Pinpoint User Guide</a>.'
+        description: 'Specifies whether or not the identity is verified. In Amazon Pinpoint, you can only send email from verified email addresses or domains. For more information about verifying identities, see the <a href="https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-email-manage-verify.html">Amazon Pinpoint User Guide</a>.'
       DkimAttributes:
         $ref: '#/definitions/DkimAttributes'
         description: An object that contains information about the DKIM attributes for the identity. This object includes the tokens that you use to create the CNAME records that are required to complete the DKIM verification process.
@@ -2137,6 +2333,14 @@ definitions:
         $ref: '#/definitions/NextToken'
         description: 'A token that indicates that there are additional configuration sets to list. To view additional configuration sets, issue another request to <code>ListEmailIdentities</code>, and pass this token in the <code>NextToken</code> parameter.'
     description: 'A list of all of the identities that you''ve attempted to verify for use with Amazon Pinpoint, regardless of whether or not those identities were successfully verified.'
+  ListTagsForResourceResponse:
+    type: object
+    required:
+      - Tags
+    properties:
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: An array that lists all the tags that are associated with the resource. Each tag consists of a required tag key (<code>Key</code>) and an associated tag value (<code>Value</code>)
   PutAccountDedicatedIpWarmupAttributesResponse:
     type: object
     properties: {}
@@ -2211,6 +2415,14 @@ definitions:
         $ref: '#/definitions/MessageTagValue'
         description: '<p>The value of the message tag. The message tag value has to meet the following criteria:</p> <ul> <li> <p>It can only contain ASCII letters (a–z, A–Z), numbers (0–9), underscores (_), or dashes (-).</p> </li> <li> <p>It can contain no more than 256 characters.</p> </li> </ul>'
     description: 'Contains the name and value of a tag that you apply to an email. You can use message tags when you publish email sending events. '
+  TagResourceResponse:
+    type: object
+    properties: {}
+  UntagResourceResponse:
+    type: object
+    properties: {}
+  TagKey:
+    type: string
   UpdateConfigurationSetEventDestinationResponse:
     type: object
     properties: {}
@@ -2395,6 +2607,10 @@ definitions:
         $ref: '#/definitions/Enabled'
         description: 'If <code>true</code>, email sending is enabled for the configuration set. If <code>false</code>, email sending is disabled for the configuration set.'
     description: Used to enable or disable email sending for messages that use this configuration set in the current AWS Region.
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
   CreateConfigurationSetRequest:
     type: object
     properties:
@@ -2413,6 +2629,9 @@ definitions:
       SendingOptions:
         $ref: '#/definitions/SendingOptions'
         description: An object that defines whether or not Amazon Pinpoint can send email that you send using the configuration set.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: An object that defines the tags (keys and values) that you want to associate with the configuration set.
     description: A request to create a configuration set.
   CreateDedicatedIpPoolRequest:
     type: object
@@ -2422,6 +2641,9 @@ definitions:
       PoolName:
         $ref: '#/definitions/PoolName'
         description: The name of the dedicated IP pool.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: An object that defines the tags (keys and values) that you want to associate with the pool.
     description: A request to create a new dedicated IP pool.
   ReportName:
     type: string
@@ -2451,6 +2673,9 @@ definitions:
       Content:
         $ref: '#/definitions/EmailContent'
         description: The HTML body of the message that you sent when you performed the predictive inbox placement test.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: An object that defines the tags (keys and values) that you want to associate with the predictive inbox placement test.
     description: 'A request to perform a predictive inbox placement test. Predictive inbox placement tests can help you predict how your messages will be handled by various email providers around the world. When you perform a predictive inbox placement test, you provide a sample message that contains the content that you plan to send to your customers. Amazon Pinpoint then sends that message to special email addresses spread across several major email providers. After about 24 hours, the test is complete, and you can use the <code>GetDeliverabilityTestReport</code> operation to view the results of the test.'
   ReportId:
     type: string
@@ -2471,6 +2696,9 @@ definitions:
       EmailIdentity:
         $ref: '#/definitions/Identity'
         description: The email address or domain that you want to verify.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: An object that defines the tags (keys and values) that you want to associate with the email identity.
     description: A request to begin the verification process for an email identity (an email address or domain).
   IdentityType:
     type: string
@@ -2921,6 +3149,14 @@ definitions:
         $ref: '#/definitions/MaxItems'
         description: '<p>The number of results to show in a single call to <code>ListEmailIdentities</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.</p> <p>The value you specify has to be at least 0, and can be no more than 1000.</p>'
     description: 'A request to list all of the email identities associated with your Amazon Pinpoint account. This list includes identities that you''ve already verified, identities that are unverified, and identities that were verified in the past, but are no longer verified.'
+  ListTagsForResourceRequest:
+    type: object
+    required:
+      - ResourceArn
+    properties:
+      ResourceArn:
+        $ref: '#/definitions/AmazonResourceName'
+        description: The Amazon Resource Name (ARN) of the resource that you want to retrieve tag information for.
   MailFromDomainName:
     type: string
     description: The domain that you want to use as a MAIL FROM domain.
@@ -3081,6 +3317,27 @@ definitions:
   SentLast24Hours:
     type: number
     format: double
+  TagValue:
+    type: string
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+  TagResourceRequest:
+    type: object
+    required:
+      - ResourceArn
+      - Tags
+    properties:
+      ResourceArn:
+        $ref: '#/definitions/AmazonResourceName'
+        description: The Amazon Resource Name (ARN) of the resource that you want to add one or more tags to.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: A list of the tags that you want to add to the resource. A tag consists of a required tag key (<code>Key</code>) and an associated tag value (<code>Value</code>). The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.
+  UntagResourceRequest:
+    type: object
+    properties: {}
   UpdateConfigurationSetEventDestinationRequest:
     type: object
     required:
