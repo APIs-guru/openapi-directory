@@ -35,6 +35,7 @@ externalDocs:
   url: 'https://docs.aws.amazon.com/greengrass/'
 host: greengrass.amazonaws.com
 basePath: /
+x-hasEquivalentPaths: true
 schemes:
   - https
   - http
@@ -268,6 +269,11 @@ paths:
               Name:
                 description: The name of the connector definition.
                 type: string
+              tags:
+                description: Tag(s) to add to the new resource
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/__string'
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -401,6 +407,11 @@ paths:
               Name:
                 description: The name of the core definition.
                 type: string
+              tags:
+                description: Tag(s) to add to the new resource
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/__string'
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -614,6 +625,11 @@ paths:
               Name:
                 description: The name of the device definition.
                 type: string
+              tags:
+                description: Tag(s) to add to the new resource
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/__string'
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -750,6 +766,11 @@ paths:
               Name:
                 description: The name of the function definition.
                 type: string
+              tags:
+                description: Tag(s) to add to the new resource
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/__string'
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -907,6 +928,11 @@ paths:
               Name:
                 description: The name of the group.
                 type: string
+              tags:
+                description: Tag(s) to add to the new resource
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/__string'
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1114,6 +1140,11 @@ paths:
               Name:
                 description: The name of the logger definition.
                 type: string
+              tags:
+                description: Tag(s) to add to the new resource
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/__string'
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1247,6 +1278,11 @@ paths:
               Name:
                 description: The name of the resource definition.
                 type: string
+              tags:
+                description: Tag(s) to add to the new resource
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/__string'
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1457,6 +1493,11 @@ paths:
               Name:
                 description: The name of the subscription definition.
                 type: string
+              tags:
+                description: Tag(s) to add to the new resource
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/__string'
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1554,6 +1595,62 @@ paths:
           in: path
           required: true
           description: The ID of the subscription definition.
+          type: string
+  '/tags/{resource-arn}':
+    post:
+      operationId: TagResource
+      description: Add tags to a resource.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: resource-arn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource.
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - tags
+            properties:
+              tags:
+                description: A map of the key-value pairs for the resource tag.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/__string'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListTagsForResource
+      description: Retrieves the tags for a resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsForResourceResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: resource-arn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource.
           type: string
   '/greengrass/definition/connectors/{ConnectorDefinitionId}':
     delete:
@@ -2131,6 +2228,38 @@ paths:
               Name:
                 description: The name of the definition.
                 type: string
+  '/tags/{resource-arn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Remove tags with specified keys from a resource.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: resource-arn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource.
+          type: string
+        - name: tagKeys
+          in: query
+          required: true
+          description: A list of the keys to remove from the resource tags.
+          type: array
+          items:
+            type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/greengrass/bulk/deployments/{BulkDeploymentId}/status':
     get:
       operationId: GetBulkDeploymentStatus
@@ -2732,6 +2861,11 @@ paths:
               InputFileUri:
                 description: 'The URI of the input file contained in the S3 bucket. The execution role must have ''''getObject'''' permissions on this bucket to access the input file. The input file is a JSON-serialized, line delimited file with UTF-8 encoding that provides a list of group and version IDs and the deployment type. This file must be less than 100 MB. Currently, AWS IoT Greengrass supports only ''''NewDeployment'''' deployment types.'
                 type: string
+              tags:
+                description: Tag(s) to add to the new resource
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/__string'
   '/greengrass/groups/{GroupId}/deployments/$reset':
     post:
       operationId: ResetDeployments
@@ -2843,6 +2977,8 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Connector'
+  __string:
+    type: string
   CreateConnectorDefinitionVersionResponse:
     type: object
     properties:
@@ -3092,8 +3228,6 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
-  __string:
-    type: string
   CreateGroupCertificateAuthorityResponse:
     type: object
     properties:
@@ -3364,6 +3498,9 @@ definitions:
       ErrorMessage:
         $ref: '#/definitions/__string'
         description: Error message
+      tags:
+        $ref: '#/definitions/__mapOf__string'
+        description: The tags for the definition.
   GetConnectivityInfoResponse:
     type: object
     properties:
@@ -3397,6 +3534,9 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
+      tags:
+        $ref: '#/definitions/__mapOf__string'
+        description: The tags for the definition.
   GetConnectorDefinitionVersionResponse:
     type: object
     properties:
@@ -3442,6 +3582,9 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
+      tags:
+        $ref: '#/definitions/__mapOf__string'
+        description: The tags for the definition.
   GetCoreDefinitionVersionResponse:
     type: object
     properties:
@@ -3505,6 +3648,9 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
+      tags:
+        $ref: '#/definitions/__mapOf__string'
+        description: The tags for the definition.
   GetDeviceDefinitionVersionResponse:
     type: object
     properties:
@@ -3550,6 +3696,9 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
+      tags:
+        $ref: '#/definitions/__mapOf__string'
+        description: The tags for the definition.
   GetFunctionDefinitionVersionResponse:
     type: object
     properties:
@@ -3595,6 +3744,9 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
+      tags:
+        $ref: '#/definitions/__mapOf__string'
+        description: The tags for the definition.
   GetGroupCertificateAuthorityResponse:
     type: object
     properties:
@@ -3661,6 +3813,9 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
+      tags:
+        $ref: '#/definitions/__mapOf__string'
+        description: The tags for the definition.
   GetLoggerDefinitionVersionResponse:
     type: object
     properties:
@@ -3703,6 +3858,9 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
+      tags:
+        $ref: '#/definitions/__mapOf__string'
+        description: The tags for the definition.
   GetResourceDefinitionVersionResponse:
     type: object
     properties:
@@ -3754,6 +3912,9 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
+      tags:
+        $ref: '#/definitions/__mapOf__string'
+        description: The tags for the definition.
   GetSubscriptionDefinitionVersionResponse:
     type: object
     properties:
@@ -3952,6 +4113,12 @@ definitions:
       NextToken:
         $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+  ListTagsForResourceResponse:
+    type: object
+    properties:
+      tags:
+        $ref: '#/definitions/__mapOf__string'
+        description: A map of the key-value pairs for the resource tag.
   ResetDeploymentsResponse:
     type: object
     properties:
@@ -4153,6 +4320,10 @@ definitions:
         $ref: '#/definitions/__listOfCore'
         description: A list of cores in the core definition version.
     description: Information about a core definition version.
+  Tags:
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/__string'
   CreateConnectorDefinitionRequest:
     type: object
     properties:
@@ -4162,6 +4333,9 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of the connector definition.
+      tags:
+        $ref: '#/definitions/Tags'
+        description: Tag(s) to add to the new resource
   CreateConnectorDefinitionVersionRequest:
     type: object
     properties:
@@ -4177,6 +4351,9 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of the core definition.
+      tags:
+        $ref: '#/definitions/Tags'
+        description: Tag(s) to add to the new resource
     description: Information needed to create a core definition.
   CreateCoreDefinitionVersionRequest:
     type: object
@@ -4212,6 +4389,9 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of the device definition.
+      tags:
+        $ref: '#/definitions/Tags'
+        description: Tag(s) to add to the new resource
   CreateDeviceDefinitionVersionRequest:
     type: object
     properties:
@@ -4237,6 +4417,9 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of the function definition.
+      tags:
+        $ref: '#/definitions/Tags'
+        description: Tag(s) to add to the new resource
   CreateFunctionDefinitionVersionRequest:
     type: object
     properties:
@@ -4284,6 +4467,9 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of the group.
+      tags:
+        $ref: '#/definitions/Tags'
+        description: Tag(s) to add to the new resource
   CreateGroupVersionRequest:
     type: object
     properties:
@@ -4324,6 +4510,9 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of the logger definition.
+      tags:
+        $ref: '#/definitions/Tags'
+        description: Tag(s) to add to the new resource
   CreateLoggerDefinitionVersionRequest:
     type: object
     properties:
@@ -4346,6 +4535,9 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of the resource definition.
+      tags:
+        $ref: '#/definitions/Tags'
+        description: Tag(s) to add to the new resource
   CreateResourceDefinitionVersionRequest:
     type: object
     properties:
@@ -4423,12 +4615,23 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of the subscription definition.
+      tags:
+        $ref: '#/definitions/Tags'
+        description: Tag(s) to add to the new resource
   CreateSubscriptionDefinitionVersionRequest:
     type: object
     properties:
       Subscriptions:
         $ref: '#/definitions/__listOfSubscription'
         description: A list of subscriptions.
+  TagResourceRequest:
+    type: object
+    required:
+      - tags
+    properties:
+      tags:
+        $ref: '#/definitions/__mapOf__string'
+        description: A map of the key-value pairs for the resource tag.
   DefinitionInformation:
     type: object
     properties:
@@ -4453,6 +4656,9 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: The tags for the definition.
     description: Information about a definition.
   DeleteConnectorDefinitionRequest:
     type: object
@@ -4476,6 +4682,13 @@ definitions:
     type: object
     properties: {}
   DeleteSubscriptionDefinitionRequest:
+    type: object
+    properties: {}
+  __listOf__string:
+    type: array
+    items:
+      $ref: '#/definitions/__string'
+  UntagResourceRequest:
     type: object
     properties: {}
   Deployment:
@@ -4785,6 +4998,9 @@ definitions:
   ListSubscriptionDefinitionsRequest:
     type: object
     properties: {}
+  ListTagsForResourceRequest:
+    type: object
+    properties: {}
   LocalDeviceResourceData:
     type: object
     properties:
@@ -4898,10 +5114,6 @@ definitions:
         $ref: '#/definitions/__listOf__string'
         description: 'Optional. The staging labels whose values you want to make available on the core, in addition to ''''AWSCURRENT''''.'
     description: 'Attributes that define a secret resource, which references a secret from AWS Secrets Manager. AWS IoT Greengrass stores a local, encrypted copy of the secret on the Greengrass core, where it can be securely accessed by connectors and Lambda functions.'
-  __listOf__string:
-    type: array
-    items:
-      $ref: '#/definitions/__string'
   StartBulkDeploymentRequest:
     type: object
     properties:
@@ -4911,6 +5123,9 @@ definitions:
       InputFileUri:
         $ref: '#/definitions/__string'
         description: 'The URI of the input file contained in the S3 bucket. The execution role must have ''''getObject'''' permissions on this bucket to access the input file. The input file is a JSON-serialized, line delimited file with UTF-8 encoding that provides a list of group and version IDs and the deployment type. This file must be less than 100 MB. Currently, AWS IoT Greengrass supports only ''''NewDeployment'''' deployment types.'
+      tags:
+        $ref: '#/definitions/Tags'
+        description: Tag(s) to add to the new resource
   StopBulkDeploymentRequest:
     type: object
     properties: {}

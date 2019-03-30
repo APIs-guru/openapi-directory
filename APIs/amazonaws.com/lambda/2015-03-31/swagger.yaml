@@ -2427,7 +2427,7 @@ paths:
               S3Bucket:
                 description: An Amazon S3 bucket in the same AWS Region as your function. The bucket can be in a different AWS account.
                 type: string
-                pattern: '^[0-9A-Za-z\.\-_]*$'
+                pattern: '^[0-9A-Za-z\.\-_]*(?<!\.)$'
                 minLength: 3
                 maxLength: 63
               S3Key:
@@ -2633,7 +2633,7 @@ definitions:
     format: password
   S3Bucket:
     type: string
-    pattern: '^[0-9A-Za-z\.\-_]*$'
+    pattern: '^[0-9A-Za-z\.\-_]*(?<!\.)$'
     minLength: 3
     maxLength: 63
   S3Key:
