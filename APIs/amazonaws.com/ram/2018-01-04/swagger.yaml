@@ -1,50 +1,38 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  version: 2018-01-04
+  version: '2018-01-04'
   x-release: v4
   title: AWS Resource Access Manager
-  description: <p>Use AWS Resource Access Manager to share AWS resources between AWS
-    accounts. To share a resource, you create a resource share, associate the
-    resource with the resource share, and specify the principals that can access
-    the resource. The following principals are supported:</p> <ul> <li> <p>The
-    ID of an AWS account</p> </li> <li> <p>The Amazon Resource Name (ARN) of an
-    OU from AWS Organizations</p> </li> <li> <p>The Amazon Resource Name (ARN)
-    of an organization from AWS Organizations</p> </li> </ul> <p>If you specify
-    an AWS account that doesn't exist in the same organization as the account
-    that owns the resource share, the owner of the specified account receives an
-    invitation to accept the resource share. After the owner accepts the
-    invitation, they can access the resources in the resource share. An
-    administrator of the specified account can use IAM policies to restrict
-    access resources in the resource share.</p>
+  description: '<p>Use AWS Resource Access Manager to share AWS resources between AWS accounts. To share a resource, you create a resource share, associate the resource with the resource share, and specify the principals that can access the resource. The following principals are supported:</p> <ul> <li> <p>The ID of an AWS account</p> </li> <li> <p>The Amazon Resource Name (ARN) of an OU from AWS Organizations</p> </li> <li> <p>The Amazon Resource Name (ARN) of an organization from AWS Organizations</p> </li> </ul> <p>If you specify an AWS account that doesn''t exist in the same organization as the account that owns the resource share, the owner of the specified account receives an invitation to accept the resource share. After the owner accepts the invitation, they can access the resources in the resource share. An administrator of the specified account can use IAM policies to restrict access resources in the resource share.</p>'
   x-logo:
-    url: https://twitter.com/awscloud/profile_image?size=original
-    backgroundColor: "#FFFFFF"
-  termsOfService: https://aws.amazon.com/service-terms/
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
     name: Mike Ralphson
     email: mike.ralphson@gmail.com
-    url: https://github.com/mermade/aws2openapi
+    url: 'https://github.com/mermade/aws2openapi'
     x-twitter: PermittedSoc
   license:
     name: Apache 2.0 License
-    url: http://www.apache.org/licenses/
+    url: 'http://www.apache.org/licenses/'
   x-providerName: amazonaws.com
   x-serviceName: ram
   x-origin:
     - contentType: application/json
-      url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/ram-2018-01-04.normal.json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/ram-2018-01-04.normal.json'
       converter:
-        url: https://github.com/mermade/aws2openapi
+        url: 'https://github.com/mermade/aws2openapi'
         version: 1.0.0
       x-apisguru-direct: true
   x-apiClientRegistration:
-    url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
   x-preferred: true
 externalDocs:
   description: Amazon Web Services documentation
-  url: https://docs.aws.amazon.com/ram/
+  url: 'https://docs.aws.amazon.com/ram/'
 host: ram.amazonaws.com
 basePath: /
 schemes:
@@ -105,42 +93,42 @@ paths:
       operationId: AcceptResourceShareInvitation
       description: Accepts an invitation to a resource share from another AWS account.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/AcceptResourceShareInvitationResponse"
-        "480":
+            $ref: '#/definitions/AcceptResourceShareInvitationResponse'
+        '480':
           description: MalformedArnException
           schema:
-            $ref: "#/definitions/MalformedArnException"
-        "481":
+            $ref: '#/definitions/MalformedArnException'
+        '481':
           description: OperationNotPermittedException
           schema:
-            $ref: "#/definitions/OperationNotPermittedException"
-        "482":
+            $ref: '#/definitions/OperationNotPermittedException'
+        '482':
           description: ResourceShareInvitationArnNotFoundException
           schema:
-            $ref: "#/definitions/ResourceShareInvitationArnNotFoundException"
-        "483":
+            $ref: '#/definitions/ResourceShareInvitationArnNotFoundException'
+        '483':
           description: ResourceShareInvitationAlreadyAcceptedException
           schema:
-            $ref: "#/definitions/ResourceShareInvitationAlreadyAcceptedException"
-        "484":
+            $ref: '#/definitions/ResourceShareInvitationAlreadyAcceptedException'
+        '484':
           description: ResourceShareInvitationAlreadyRejectedException
           schema:
-            $ref: "#/definitions/ResourceShareInvitationAlreadyRejectedException"
-        "485":
+            $ref: '#/definitions/ResourceShareInvitationAlreadyRejectedException'
+        '485':
           description: ResourceShareInvitationExpiredException
           schema:
-            $ref: "#/definitions/ResourceShareInvitationExpiredException"
-        "486":
+            $ref: '#/definitions/ResourceShareInvitationExpiredException'
+        '486':
           description: ServerInternalException
           schema:
-            $ref: "#/definitions/ServerInternalException"
-        "487":
+            $ref: '#/definitions/ServerInternalException'
+        '487':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
+            $ref: '#/definitions/ServiceUnavailableException'
       parameters:
         - name: body
           in: body
@@ -154,75 +142,73 @@ paths:
                 description: The Amazon Resource Name (ARN) of the invitation.
                 type: string
               clientToken:
-                description: A unique, case-sensitive identifier that you provide to ensure
-                  the idempotency of the request.
+                description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
                 type: string
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /associateresourceshare:
     post:
       operationId: AssociateResourceShare
-      description: Associates the specified resource share with the specified principals
-        and resources.
+      description: Associates the specified resource share with the specified principals and resources.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/AssociateResourceShareResponse"
-        "480":
+            $ref: '#/definitions/AssociateResourceShareResponse'
+        '480':
           description: IdempotentParameterMismatchException
           schema:
-            $ref: "#/definitions/IdempotentParameterMismatchException"
-        "481":
+            $ref: '#/definitions/IdempotentParameterMismatchException'
+        '481':
           description: UnknownResourceException
           schema:
-            $ref: "#/definitions/UnknownResourceException"
-        "482":
+            $ref: '#/definitions/UnknownResourceException'
+        '482':
           description: InvalidStateTransitionException
           schema:
-            $ref: "#/definitions/InvalidStateTransitionException"
-        "483":
+            $ref: '#/definitions/InvalidStateTransitionException'
+        '483':
           description: ResourceShareLimitExceededException
           schema:
-            $ref: "#/definitions/ResourceShareLimitExceededException"
-        "484":
+            $ref: '#/definitions/ResourceShareLimitExceededException'
+        '484':
           description: MalformedArnException
           schema:
-            $ref: "#/definitions/MalformedArnException"
-        "485":
+            $ref: '#/definitions/MalformedArnException'
+        '485':
           description: InvalidStateTransitionException
           schema:
-            $ref: "#/definitions/InvalidStateTransitionException"
-        "486":
+            $ref: '#/definitions/InvalidStateTransitionException'
+        '486':
           description: InvalidClientTokenException
           schema:
-            $ref: "#/definitions/InvalidClientTokenException"
-        "487":
+            $ref: '#/definitions/InvalidClientTokenException'
+        '487':
           description: InvalidParameterException
           schema:
-            $ref: "#/definitions/InvalidParameterException"
-        "488":
+            $ref: '#/definitions/InvalidParameterException'
+        '488':
           description: OperationNotPermittedException
           schema:
-            $ref: "#/definitions/OperationNotPermittedException"
-        "489":
+            $ref: '#/definitions/OperationNotPermittedException'
+        '489':
           description: ServerInternalException
           schema:
-            $ref: "#/definitions/ServerInternalException"
-        "490":
+            $ref: '#/definitions/ServerInternalException'
+        '490':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "491":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '491':
           description: UnknownResourceException
           schema:
-            $ref: "#/definitions/UnknownResourceException"
+            $ref: '#/definitions/UnknownResourceException'
       parameters:
         - name: body
           in: body
@@ -239,73 +225,72 @@ paths:
                 description: The Amazon Resource Names (ARN) of the resources.
                 type: array
                 items:
-                  $ref: "#/definitions/String"
+                  $ref: '#/definitions/String'
               principals:
                 description: The principals.
                 type: array
                 items:
-                  $ref: "#/definitions/String"
+                  $ref: '#/definitions/String'
               clientToken:
-                description: A unique, case-sensitive identifier that you provide to ensure
-                  the idempotency of the request.
+                description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
                 type: string
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /createresourceshare:
     post:
       operationId: CreateResourceShare
       description: Creates a resource share.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/CreateResourceShareResponse"
-        "480":
+            $ref: '#/definitions/CreateResourceShareResponse'
+        '480':
           description: IdempotentParameterMismatchException
           schema:
-            $ref: "#/definitions/IdempotentParameterMismatchException"
-        "481":
+            $ref: '#/definitions/IdempotentParameterMismatchException'
+        '481':
           description: InvalidStateTransitionException
           schema:
-            $ref: "#/definitions/InvalidStateTransitionException"
-        "482":
+            $ref: '#/definitions/InvalidStateTransitionException'
+        '482':
           description: UnknownResourceException
           schema:
-            $ref: "#/definitions/UnknownResourceException"
-        "483":
+            $ref: '#/definitions/UnknownResourceException'
+        '483':
           description: MalformedArnException
           schema:
-            $ref: "#/definitions/MalformedArnException"
-        "484":
+            $ref: '#/definitions/MalformedArnException'
+        '484':
           description: InvalidClientTokenException
           schema:
-            $ref: "#/definitions/InvalidClientTokenException"
-        "485":
+            $ref: '#/definitions/InvalidClientTokenException'
+        '485':
           description: InvalidParameterException
           schema:
-            $ref: "#/definitions/InvalidParameterException"
-        "486":
+            $ref: '#/definitions/InvalidParameterException'
+        '486':
           description: OperationNotPermittedException
           schema:
-            $ref: "#/definitions/OperationNotPermittedException"
-        "487":
+            $ref: '#/definitions/OperationNotPermittedException'
+        '487':
           description: ResourceShareLimitExceededException
           schema:
-            $ref: "#/definitions/ResourceShareLimitExceededException"
-        "488":
+            $ref: '#/definitions/ResourceShareLimitExceededException'
+        '488':
           description: ServerInternalException
           schema:
-            $ref: "#/definitions/ServerInternalException"
-        "489":
+            $ref: '#/definitions/ServerInternalException'
+        '489':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
+            $ref: '#/definitions/ServiceUnavailableException'
       parameters:
         - name: body
           in: body
@@ -319,84 +304,79 @@ paths:
                 description: The name of the resource share.
                 type: string
               resourceArns:
-                description: The Amazon Resource Names (ARN) of the resources to associate
-                  with the resource share.
+                description: The Amazon Resource Names (ARN) of the resources to associate with the resource share.
                 type: array
                 items:
-                  $ref: "#/definitions/String"
+                  $ref: '#/definitions/String'
               principals:
-                description: The principals to associate with the resource share. The
-                  possible values are IDs of AWS accounts, the ARN of an OU or
-                  organization from AWS Organizations.
+                description: 'The principals to associate with the resource share. The possible values are IDs of AWS accounts, the ARN of an OU or organization from AWS Organizations.'
                 type: array
                 items:
-                  $ref: "#/definitions/String"
+                  $ref: '#/definitions/String'
               tags:
                 description: One or more tags.
                 type: array
                 items:
-                  $ref: "#/definitions/Tag"
+                  $ref: '#/definitions/Tag'
               allowExternalPrincipals:
-                description: Indicates whether principals outside your organization can be
-                  associated with a resource share.
+                description: Indicates whether principals outside your organization can be associated with a resource share.
                 type: boolean
               clientToken:
-                description: A unique, case-sensitive identifier that you provide to ensure
-                  the idempotency of the request.
+                description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
                 type: string
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /deleteresourceshare#resourceShareArn:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/deleteresourceshare#resourceShareArn':
     delete:
       operationId: DeleteResourceShare
       description: Deletes the specified resource share.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DeleteResourceShareResponse"
-        "480":
+            $ref: '#/definitions/DeleteResourceShareResponse'
+        '480':
           description: OperationNotPermittedException
           schema:
-            $ref: "#/definitions/OperationNotPermittedException"
-        "481":
+            $ref: '#/definitions/OperationNotPermittedException'
+        '481':
           description: IdempotentParameterMismatchException
           schema:
-            $ref: "#/definitions/IdempotentParameterMismatchException"
-        "482":
+            $ref: '#/definitions/IdempotentParameterMismatchException'
+        '482':
           description: InvalidStateTransitionException
           schema:
-            $ref: "#/definitions/InvalidStateTransitionException"
-        "483":
+            $ref: '#/definitions/InvalidStateTransitionException'
+        '483':
           description: UnknownResourceException
           schema:
-            $ref: "#/definitions/UnknownResourceException"
-        "484":
+            $ref: '#/definitions/UnknownResourceException'
+        '484':
           description: MalformedArnException
           schema:
-            $ref: "#/definitions/MalformedArnException"
-        "485":
+            $ref: '#/definitions/MalformedArnException'
+        '485':
           description: InvalidClientTokenException
           schema:
-            $ref: "#/definitions/InvalidClientTokenException"
-        "486":
+            $ref: '#/definitions/InvalidClientTokenException'
+        '486':
           description: InvalidParameterException
           schema:
-            $ref: "#/definitions/InvalidParameterException"
-        "487":
+            $ref: '#/definitions/InvalidParameterException'
+        '487':
           description: ServerInternalException
           schema:
-            $ref: "#/definitions/ServerInternalException"
-        "488":
+            $ref: '#/definitions/ServerInternalException'
+        '488':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
+            $ref: '#/definitions/ServiceUnavailableException'
       parameters:
         - name: resourceShareArn
           in: query
@@ -406,67 +386,65 @@ paths:
         - name: clientToken
           in: query
           required: false
-          description: A unique, case-sensitive identifier that you provide to ensure the
-            idempotency of the request.
+          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
           type: string
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /disassociateresourceshare:
     post:
       operationId: DisassociateResourceShare
-      description: Disassociates the specified principals or resources from the specified
-        resource share.
+      description: Disassociates the specified principals or resources from the specified resource share.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DisassociateResourceShareResponse"
-        "480":
+            $ref: '#/definitions/DisassociateResourceShareResponse'
+        '480':
           description: IdempotentParameterMismatchException
           schema:
-            $ref: "#/definitions/IdempotentParameterMismatchException"
-        "481":
+            $ref: '#/definitions/IdempotentParameterMismatchException'
+        '481':
           description: ResourceShareLimitExceededException
           schema:
-            $ref: "#/definitions/ResourceShareLimitExceededException"
-        "482":
+            $ref: '#/definitions/ResourceShareLimitExceededException'
+        '482':
           description: MalformedArnException
           schema:
-            $ref: "#/definitions/MalformedArnException"
-        "483":
+            $ref: '#/definitions/MalformedArnException'
+        '483':
           description: InvalidStateTransitionException
           schema:
-            $ref: "#/definitions/InvalidStateTransitionException"
-        "484":
+            $ref: '#/definitions/InvalidStateTransitionException'
+        '484':
           description: InvalidClientTokenException
           schema:
-            $ref: "#/definitions/InvalidClientTokenException"
-        "485":
+            $ref: '#/definitions/InvalidClientTokenException'
+        '485':
           description: InvalidParameterException
           schema:
-            $ref: "#/definitions/InvalidParameterException"
-        "486":
+            $ref: '#/definitions/InvalidParameterException'
+        '486':
           description: OperationNotPermittedException
           schema:
-            $ref: "#/definitions/OperationNotPermittedException"
-        "487":
+            $ref: '#/definitions/OperationNotPermittedException'
+        '487':
           description: ServerInternalException
           schema:
-            $ref: "#/definitions/ServerInternalException"
-        "488":
+            $ref: '#/definitions/ServerInternalException'
+        '488':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "489":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '489':
           description: UnknownResourceException
           schema:
-            $ref: "#/definitions/UnknownResourceException"
+            $ref: '#/definitions/UnknownResourceException'
       parameters:
         - name: body
           in: body
@@ -483,83 +461,82 @@ paths:
                 description: The Amazon Resource Names (ARN) of the resources.
                 type: array
                 items:
-                  $ref: "#/definitions/String"
+                  $ref: '#/definitions/String'
               principals:
                 description: The principals.
                 type: array
                 items:
-                  $ref: "#/definitions/String"
+                  $ref: '#/definitions/String'
               clientToken:
-                description: A unique, case-sensitive identifier that you provide to ensure
-                  the idempotency of the request.
+                description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
                 type: string
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /enablesharingwithawsorganization:
     post:
       operationId: EnableSharingWithAwsOrganization
       description: Enables resource sharing within your organization.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/EnableSharingWithAwsOrganizationResponse"
-        "480":
+            $ref: '#/definitions/EnableSharingWithAwsOrganizationResponse'
+        '480':
           description: OperationNotPermittedException
           schema:
-            $ref: "#/definitions/OperationNotPermittedException"
-        "481":
+            $ref: '#/definitions/OperationNotPermittedException'
+        '481':
           description: ServerInternalException
           schema:
-            $ref: "#/definitions/ServerInternalException"
-        "482":
+            $ref: '#/definitions/ServerInternalException'
+        '482':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
+            $ref: '#/definitions/ServiceUnavailableException'
       parameters: []
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /getresourcepolicies:
     post:
       operationId: GetResourcePolicies
       description: Gets the policies for the specifies resources.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/GetResourcePoliciesResponse"
-        "480":
+            $ref: '#/definitions/GetResourcePoliciesResponse'
+        '480':
           description: MalformedArnException
           schema:
-            $ref: "#/definitions/MalformedArnException"
-        "481":
+            $ref: '#/definitions/MalformedArnException'
+        '481':
           description: InvalidNextTokenException
           schema:
-            $ref: "#/definitions/InvalidNextTokenException"
-        "482":
+            $ref: '#/definitions/InvalidNextTokenException'
+        '482':
           description: InvalidParameterException
           schema:
-            $ref: "#/definitions/InvalidParameterException"
-        "483":
+            $ref: '#/definitions/InvalidParameterException'
+        '483':
           description: ServerInternalException
           schema:
-            $ref: "#/definitions/ServerInternalException"
-        "484":
+            $ref: '#/definitions/ServerInternalException'
+        '484':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
+            $ref: '#/definitions/ServiceUnavailableException'
       parameters:
         - name: body
           in: body
@@ -573,7 +550,7 @@ paths:
                 description: The Amazon Resource Names (ARN) of the resources.
                 type: array
                 items:
-                  $ref: "#/definitions/String"
+                  $ref: '#/definitions/String'
               principal:
                 description: The principal.
                 type: string
@@ -581,9 +558,7 @@ paths:
                 description: The token for the next page of results.
                 type: string
               maxResults:
-                description: The maximum number of results to return with a single call. To
-                  retrieve the remaining results, make another call with the
-                  returned <code>nextToken</code> value.
+                description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
                 type: integer
                 minimum: 1
                 maximum: 500
@@ -598,50 +573,50 @@ paths:
           description: Pagination token
           required: false
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /getresourceshareassociations:
     post:
       operationId: GetResourceShareAssociations
       description: Gets the associations for the specified resource share.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/GetResourceShareAssociationsResponse"
-        "480":
+            $ref: '#/definitions/GetResourceShareAssociationsResponse'
+        '480':
           description: UnknownResourceException
           schema:
-            $ref: "#/definitions/UnknownResourceException"
-        "481":
+            $ref: '#/definitions/UnknownResourceException'
+        '481':
           description: MalformedArnException
           schema:
-            $ref: "#/definitions/MalformedArnException"
-        "482":
+            $ref: '#/definitions/MalformedArnException'
+        '482':
           description: InvalidNextTokenException
           schema:
-            $ref: "#/definitions/InvalidNextTokenException"
-        "483":
+            $ref: '#/definitions/InvalidNextTokenException'
+        '483':
           description: InvalidParameterException
           schema:
-            $ref: "#/definitions/InvalidParameterException"
-        "484":
+            $ref: '#/definitions/InvalidParameterException'
+        '484':
           description: OperationNotPermittedException
           schema:
-            $ref: "#/definitions/OperationNotPermittedException"
-        "485":
+            $ref: '#/definitions/OperationNotPermittedException'
+        '485':
           description: ServerInternalException
           schema:
-            $ref: "#/definitions/ServerInternalException"
-        "486":
+            $ref: '#/definitions/ServerInternalException'
+        '486':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
+            $ref: '#/definitions/ServiceUnavailableException'
       parameters:
         - name: body
           in: body
@@ -661,7 +636,7 @@ paths:
                 description: The Amazon Resource Names (ARN) of the resource shares.
                 type: array
                 items:
-                  $ref: "#/definitions/String"
+                  $ref: '#/definitions/String'
               resourceArn:
                 description: The Amazon Resource Name (ARN) of the resource.
                 type: string
@@ -681,9 +656,7 @@ paths:
                 description: The token for the next page of results.
                 type: string
               maxResults:
-                description: The maximum number of results to return with a single call. To
-                  retrieve the remaining results, make another call with the
-                  returned <code>nextToken</code> value.
+                description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
                 type: integer
                 minimum: 1
                 maximum: 500
@@ -698,50 +671,50 @@ paths:
           description: Pagination token
           required: false
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /getresourceshareinvitations:
     post:
       operationId: GetResourceShareInvitations
       description: Gets the specified invitations for resource sharing.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/GetResourceShareInvitationsResponse"
-        "480":
+            $ref: '#/definitions/GetResourceShareInvitationsResponse'
+        '480':
           description: ResourceShareInvitationArnNotFoundException
           schema:
-            $ref: "#/definitions/ResourceShareInvitationArnNotFoundException"
-        "481":
+            $ref: '#/definitions/ResourceShareInvitationArnNotFoundException'
+        '481':
           description: InvalidMaxResultsException
           schema:
-            $ref: "#/definitions/InvalidMaxResultsException"
-        "482":
+            $ref: '#/definitions/InvalidMaxResultsException'
+        '482':
           description: MalformedArnException
           schema:
-            $ref: "#/definitions/MalformedArnException"
-        "483":
+            $ref: '#/definitions/MalformedArnException'
+        '483':
           description: InvalidNextTokenException
           schema:
-            $ref: "#/definitions/InvalidNextTokenException"
-        "484":
+            $ref: '#/definitions/InvalidNextTokenException'
+        '484':
           description: InvalidParameterException
           schema:
-            $ref: "#/definitions/InvalidParameterException"
-        "485":
+            $ref: '#/definitions/InvalidParameterException'
+        '485':
           description: ServerInternalException
           schema:
-            $ref: "#/definitions/ServerInternalException"
-        "486":
+            $ref: '#/definitions/ServerInternalException'
+        '486':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
+            $ref: '#/definitions/ServiceUnavailableException'
       parameters:
         - name: body
           in: body
@@ -753,19 +726,17 @@ paths:
                 description: The Amazon Resource Names (ARN) of the invitations.
                 type: array
                 items:
-                  $ref: "#/definitions/String"
+                  $ref: '#/definitions/String'
               resourceShareArns:
                 description: The Amazon Resource Names (ARN) of the resource shares.
                 type: array
                 items:
-                  $ref: "#/definitions/String"
+                  $ref: '#/definitions/String'
               nextToken:
                 description: The token for the next page of results.
                 type: string
               maxResults:
-                description: The maximum number of results to return with a single call. To
-                  retrieve the remaining results, make another call with the
-                  returned <code>nextToken</code> value.
+                description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
                 type: integer
                 minimum: 1
                 maximum: 500
@@ -780,46 +751,46 @@ paths:
           description: Pagination token
           required: false
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /getresourceshares:
     post:
       operationId: GetResourceShares
       description: Gets the specified resource shares or all of your resource shares.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/GetResourceSharesResponse"
-        "480":
+            $ref: '#/definitions/GetResourceSharesResponse'
+        '480':
           description: UnknownResourceException
           schema:
-            $ref: "#/definitions/UnknownResourceException"
-        "481":
+            $ref: '#/definitions/UnknownResourceException'
+        '481':
           description: MalformedArnException
           schema:
-            $ref: "#/definitions/MalformedArnException"
-        "482":
+            $ref: '#/definitions/MalformedArnException'
+        '482':
           description: InvalidNextTokenException
           schema:
-            $ref: "#/definitions/InvalidNextTokenException"
-        "483":
+            $ref: '#/definitions/InvalidNextTokenException'
+        '483':
           description: InvalidParameterException
           schema:
-            $ref: "#/definitions/InvalidParameterException"
-        "484":
+            $ref: '#/definitions/InvalidParameterException'
+        '484':
           description: ServerInternalException
           schema:
-            $ref: "#/definitions/ServerInternalException"
-        "485":
+            $ref: '#/definitions/ServerInternalException'
+        '485':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
+            $ref: '#/definitions/ServiceUnavailableException'
       parameters:
         - name: body
           in: body
@@ -833,7 +804,7 @@ paths:
                 description: The Amazon Resource Names (ARN) of the resource shares.
                 type: array
                 items:
-                  $ref: "#/definitions/String"
+                  $ref: '#/definitions/String'
               resourceShareStatus:
                 description: The status of the resource share.
                 type: string
@@ -856,14 +827,12 @@ paths:
                 description: One or more tag filters.
                 type: array
                 items:
-                  $ref: "#/definitions/TagFilter"
+                  $ref: '#/definitions/TagFilter'
               nextToken:
                 description: The token for the next page of results.
                 type: string
               maxResults:
-                description: The maximum number of results to return with a single call. To
-                  retrieve the remaining results, make another call with the
-                  returned <code>nextToken</code> value.
+                description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
                 type: integer
                 minimum: 1
                 maximum: 500
@@ -878,46 +847,46 @@ paths:
           description: Pagination token
           required: false
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /listprincipals:
     post:
       operationId: ListPrincipals
       description: Lists the principals with access to the specified resource.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/ListPrincipalsResponse"
-        "480":
+            $ref: '#/definitions/ListPrincipalsResponse'
+        '480':
           description: MalformedArnException
           schema:
-            $ref: "#/definitions/MalformedArnException"
-        "481":
+            $ref: '#/definitions/MalformedArnException'
+        '481':
           description: UnknownResourceException
           schema:
-            $ref: "#/definitions/UnknownResourceException"
-        "482":
+            $ref: '#/definitions/UnknownResourceException'
+        '482':
           description: InvalidNextTokenException
           schema:
-            $ref: "#/definitions/InvalidNextTokenException"
-        "483":
+            $ref: '#/definitions/InvalidNextTokenException'
+        '483':
           description: InvalidParameterException
           schema:
-            $ref: "#/definitions/InvalidParameterException"
-        "484":
+            $ref: '#/definitions/InvalidParameterException'
+        '484':
           description: ServerInternalException
           schema:
-            $ref: "#/definitions/ServerInternalException"
-        "485":
+            $ref: '#/definitions/ServerInternalException'
+        '485':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
+            $ref: '#/definitions/ServiceUnavailableException'
       parameters:
         - name: body
           in: body
@@ -940,7 +909,7 @@ paths:
                 description: The principals.
                 type: array
                 items:
-                  $ref: "#/definitions/String"
+                  $ref: '#/definitions/String'
               resourceType:
                 description: The resource type.
                 type: string
@@ -948,14 +917,12 @@ paths:
                 description: The Amazon Resource Names (ARN) of the resource shares.
                 type: array
                 items:
-                  $ref: "#/definitions/String"
+                  $ref: '#/definitions/String'
               nextToken:
                 description: The token for the next page of results.
                 type: string
               maxResults:
-                description: The maximum number of results to return with a single call. To
-                  retrieve the remaining results, make another call with the
-                  returned <code>nextToken</code> value.
+                description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
                 type: integer
                 minimum: 1
                 maximum: 500
@@ -970,50 +937,50 @@ paths:
           description: Pagination token
           required: false
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /listresources:
     post:
       operationId: ListResources
       description: Lists the resources that the specified principal can access.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/ListResourcesResponse"
-        "480":
+            $ref: '#/definitions/ListResourcesResponse'
+        '480':
           description: InvalidResourceTypeException
           schema:
-            $ref: "#/definitions/InvalidResourceTypeException"
-        "481":
+            $ref: '#/definitions/InvalidResourceTypeException'
+        '481':
           description: UnknownResourceException
           schema:
-            $ref: "#/definitions/UnknownResourceException"
-        "482":
+            $ref: '#/definitions/UnknownResourceException'
+        '482':
           description: MalformedArnException
           schema:
-            $ref: "#/definitions/MalformedArnException"
-        "483":
+            $ref: '#/definitions/MalformedArnException'
+        '483':
           description: InvalidNextTokenException
           schema:
-            $ref: "#/definitions/InvalidNextTokenException"
-        "484":
+            $ref: '#/definitions/InvalidNextTokenException'
+        '484':
           description: InvalidParameterException
           schema:
-            $ref: "#/definitions/InvalidParameterException"
-        "485":
+            $ref: '#/definitions/InvalidParameterException'
+        '485':
           description: ServerInternalException
           schema:
-            $ref: "#/definitions/ServerInternalException"
-        "486":
+            $ref: '#/definitions/ServerInternalException'
+        '486':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
+            $ref: '#/definitions/ServiceUnavailableException'
       parameters:
         - name: body
           in: body
@@ -1039,19 +1006,17 @@ paths:
                 description: The Amazon Resource Names (ARN) of the resources.
                 type: array
                 items:
-                  $ref: "#/definitions/String"
+                  $ref: '#/definitions/String'
               resourceShareArns:
                 description: The Amazon Resource Names (ARN) of the resource shares.
                 type: array
                 items:
-                  $ref: "#/definitions/String"
+                  $ref: '#/definitions/String'
               nextToken:
                 description: The token for the next page of results.
                 type: string
               maxResults:
-                description: The maximum number of results to return with a single call. To
-                  retrieve the remaining results, make another call with the
-                  returned <code>nextToken</code> value.
+                description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
                 type: integer
                 minimum: 1
                 maximum: 500
@@ -1066,54 +1031,54 @@ paths:
           description: Pagination token
           required: false
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /rejectresourceshareinvitation:
     post:
       operationId: RejectResourceShareInvitation
       description: Rejects an invitation to a resource share from another AWS account.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/RejectResourceShareInvitationResponse"
-        "480":
+            $ref: '#/definitions/RejectResourceShareInvitationResponse'
+        '480':
           description: MalformedArnException
           schema:
-            $ref: "#/definitions/MalformedArnException"
-        "481":
+            $ref: '#/definitions/MalformedArnException'
+        '481':
           description: OperationNotPermittedException
           schema:
-            $ref: "#/definitions/OperationNotPermittedException"
-        "482":
+            $ref: '#/definitions/OperationNotPermittedException'
+        '482':
           description: ResourceShareInvitationArnNotFoundException
           schema:
-            $ref: "#/definitions/ResourceShareInvitationArnNotFoundException"
-        "483":
+            $ref: '#/definitions/ResourceShareInvitationArnNotFoundException'
+        '483':
           description: ResourceShareInvitationAlreadyAcceptedException
           schema:
-            $ref: "#/definitions/ResourceShareInvitationAlreadyAcceptedException"
-        "484":
+            $ref: '#/definitions/ResourceShareInvitationAlreadyAcceptedException'
+        '484':
           description: ResourceShareInvitationAlreadyRejectedException
           schema:
-            $ref: "#/definitions/ResourceShareInvitationAlreadyRejectedException"
-        "485":
+            $ref: '#/definitions/ResourceShareInvitationAlreadyRejectedException'
+        '485':
           description: ResourceShareInvitationExpiredException
           schema:
-            $ref: "#/definitions/ResourceShareInvitationExpiredException"
-        "486":
+            $ref: '#/definitions/ResourceShareInvitationExpiredException'
+        '486':
           description: ServerInternalException
           schema:
-            $ref: "#/definitions/ServerInternalException"
-        "487":
+            $ref: '#/definitions/ServerInternalException'
+        '487':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
+            $ref: '#/definitions/ServiceUnavailableException'
       parameters:
         - name: body
           in: body
@@ -1127,50 +1092,49 @@ paths:
                 description: The Amazon Resource Name (ARN) of the invitation.
                 type: string
               clientToken:
-                description: A unique, case-sensitive identifier that you provide to ensure
-                  the idempotency of the request.
+                description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
                 type: string
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /tagresource:
     post:
       operationId: TagResource
       description: Adds the specified tags to the specified resource share.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/TagResourceResponse"
-        "480":
+            $ref: '#/definitions/TagResourceResponse'
+        '480':
           description: InvalidParameterException
           schema:
-            $ref: "#/definitions/InvalidParameterException"
-        "481":
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
           description: MalformedArnException
           schema:
-            $ref: "#/definitions/MalformedArnException"
-        "482":
+            $ref: '#/definitions/MalformedArnException'
+        '482':
           description: TagLimitExceededException
           schema:
-            $ref: "#/definitions/TagLimitExceededException"
-        "483":
+            $ref: '#/definitions/TagLimitExceededException'
+        '483':
           description: ResourceArnNotFoundException
           schema:
-            $ref: "#/definitions/ResourceArnNotFoundException"
-        "484":
+            $ref: '#/definitions/ResourceArnNotFoundException'
+        '484':
           description: ServerInternalException
           schema:
-            $ref: "#/definitions/ServerInternalException"
-        "485":
+            $ref: '#/definitions/ServerInternalException'
+        '485':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
+            $ref: '#/definitions/ServiceUnavailableException'
       parameters:
         - name: body
           in: body
@@ -1188,36 +1152,36 @@ paths:
                 description: One or more tags.
                 type: array
                 items:
-                  $ref: "#/definitions/Tag"
+                  $ref: '#/definitions/Tag'
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /untagresource:
     post:
       operationId: UntagResource
       description: Removes the specified tags from the specified resource share.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/UntagResourceResponse"
-        "480":
+            $ref: '#/definitions/UntagResourceResponse'
+        '480':
           description: InvalidParameterException
           schema:
-            $ref: "#/definitions/InvalidParameterException"
-        "481":
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
           description: ServerInternalException
           schema:
-            $ref: "#/definitions/ServerInternalException"
-        "482":
+            $ref: '#/definitions/ServerInternalException'
+        '482':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
+            $ref: '#/definitions/ServiceUnavailableException'
       parameters:
         - name: body
           in: body
@@ -1235,60 +1199,60 @@ paths:
                 description: The tag keys of the tags to remove.
                 type: array
                 items:
-                  $ref: "#/definitions/TagKey"
+                  $ref: '#/definitions/TagKey'
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /updateresourceshare:
     post:
       operationId: UpdateResourceShare
       description: Updates the specified resource share.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/UpdateResourceShareResponse"
-        "480":
+            $ref: '#/definitions/UpdateResourceShareResponse'
+        '480':
           description: IdempotentParameterMismatchException
           schema:
-            $ref: "#/definitions/IdempotentParameterMismatchException"
-        "481":
+            $ref: '#/definitions/IdempotentParameterMismatchException'
+        '481':
           description: MissingRequiredParameterException
           schema:
-            $ref: "#/definitions/MissingRequiredParameterException"
-        "482":
+            $ref: '#/definitions/MissingRequiredParameterException'
+        '482':
           description: UnknownResourceException
           schema:
-            $ref: "#/definitions/UnknownResourceException"
-        "483":
+            $ref: '#/definitions/UnknownResourceException'
+        '483':
           description: MalformedArnException
           schema:
-            $ref: "#/definitions/MalformedArnException"
-        "484":
+            $ref: '#/definitions/MalformedArnException'
+        '484':
           description: InvalidClientTokenException
           schema:
-            $ref: "#/definitions/InvalidClientTokenException"
-        "485":
+            $ref: '#/definitions/InvalidClientTokenException'
+        '485':
           description: InvalidParameterException
           schema:
-            $ref: "#/definitions/InvalidParameterException"
-        "486":
+            $ref: '#/definitions/InvalidParameterException'
+        '486':
           description: OperationNotPermittedException
           schema:
-            $ref: "#/definitions/OperationNotPermittedException"
-        "487":
+            $ref: '#/definitions/OperationNotPermittedException'
+        '487':
           description: ServerInternalException
           schema:
-            $ref: "#/definitions/ServerInternalException"
-        "488":
+            $ref: '#/definitions/ServerInternalException'
+        '488':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
+            $ref: '#/definitions/ServiceUnavailableException'
       parameters:
         - name: body
           in: body
@@ -1305,32 +1269,29 @@ paths:
                 description: The name of the resource share.
                 type: string
               allowExternalPrincipals:
-                description: Indicates whether principals outside your organization can be
-                  associated with a resource share.
+                description: Indicates whether principals outside your organization can be associated with a resource share.
                 type: boolean
               clientToken:
-                description: A unique, case-sensitive identifier that you provide to ensure
-                  the idempotency of the request.
+                description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
                 type: string
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
   AcceptResourceShareInvitationResponse:
     type: object
     properties:
       resourceShareInvitation:
-        $ref: "#/definitions/ResourceShareInvitation"
+        $ref: '#/definitions/ResourceShareInvitation'
         description: Information about the invitation.
       clientToken:
-        $ref: "#/definitions/String"
-        description: A unique, case-sensitive identifier that you provide to ensure the
-          idempotency of the request.
+        $ref: '#/definitions/String'
+        description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
   MalformedArnException: {}
   OperationNotPermittedException: {}
   ResourceShareInvitationArnNotFoundException: {}
@@ -1343,12 +1304,11 @@ definitions:
     type: object
     properties:
       resourceShareAssociations:
-        $ref: "#/definitions/ResourceShareAssociationList"
+        $ref: '#/definitions/ResourceShareAssociationList'
         description: Information about the associations.
       clientToken:
-        $ref: "#/definitions/String"
-        description: A unique, case-sensitive identifier that you provide to ensure the
-          idempotency of the request.
+        $ref: '#/definitions/String'
+        description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
   String:
     type: string
   IdempotentParameterMismatchException: {}
@@ -1361,131 +1321,121 @@ definitions:
     type: object
     properties:
       resourceShare:
-        $ref: "#/definitions/ResourceShare"
+        $ref: '#/definitions/ResourceShare'
         description: Information about the resource share.
       clientToken:
-        $ref: "#/definitions/String"
-        description: A unique, case-sensitive identifier that you provide to ensure the
-          idempotency of the request.
+        $ref: '#/definitions/String'
+        description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
   Tag:
     type: object
     properties:
       key:
-        $ref: "#/definitions/TagKey"
+        $ref: '#/definitions/TagKey'
         description: The key of the tag.
       value:
-        $ref: "#/definitions/TagValue"
+        $ref: '#/definitions/TagValue'
         description: The value of the tag.
     description: Information about a tag.
   DeleteResourceShareResponse:
     type: object
     properties:
       returnValue:
-        $ref: "#/definitions/Boolean"
+        $ref: '#/definitions/Boolean'
         description: Indicates whether the request succeeded.
       clientToken:
-        $ref: "#/definitions/String"
-        description: A unique, case-sensitive identifier that you provide to ensure the
-          idempotency of the request.
+        $ref: '#/definitions/String'
+        description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
   DisassociateResourceShareResponse:
     type: object
     properties:
       resourceShareAssociations:
-        $ref: "#/definitions/ResourceShareAssociationList"
+        $ref: '#/definitions/ResourceShareAssociationList'
         description: Information about the associations.
       clientToken:
-        $ref: "#/definitions/String"
-        description: A unique, case-sensitive identifier that you provide to ensure the
-          idempotency of the request.
+        $ref: '#/definitions/String'
+        description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
   EnableSharingWithAwsOrganizationResponse:
     type: object
     properties:
       returnValue:
-        $ref: "#/definitions/Boolean"
+        $ref: '#/definitions/Boolean'
         description: Indicates whether the request succeeded.
   GetResourcePoliciesResponse:
     type: object
     properties:
       policies:
-        $ref: "#/definitions/PolicyList"
-        description: A key policy document, in JSON format.
+        $ref: '#/definitions/PolicyList'
+        description: 'A key policy document, in JSON format.'
       nextToken:
-        $ref: "#/definitions/String"
-        description: The token to use to retrieve the next page of results. This value is
-          <code>null</code> when there are no more results to return.
+        $ref: '#/definitions/String'
+        description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
   InvalidNextTokenException: {}
   GetResourceShareAssociationsResponse:
     type: object
     properties:
       resourceShareAssociations:
-        $ref: "#/definitions/ResourceShareAssociationList"
+        $ref: '#/definitions/ResourceShareAssociationList'
         description: Information about the association.
       nextToken:
-        $ref: "#/definitions/String"
-        description: The token to use to retrieve the next page of results. This value is
-          <code>null</code> when there are no more results to return.
+        $ref: '#/definitions/String'
+        description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
   GetResourceShareInvitationsResponse:
     type: object
     properties:
       resourceShareInvitations:
-        $ref: "#/definitions/ResourceShareInvitationList"
+        $ref: '#/definitions/ResourceShareInvitationList'
         description: Information about the invitations.
       nextToken:
-        $ref: "#/definitions/String"
-        description: The token to use to retrieve the next page of results. This value is
-          <code>null</code> when there are no more results to return.
+        $ref: '#/definitions/String'
+        description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
   InvalidMaxResultsException: {}
   GetResourceSharesResponse:
     type: object
     properties:
       resourceShares:
-        $ref: "#/definitions/ResourceShareList"
+        $ref: '#/definitions/ResourceShareList'
         description: Information about the resource shares.
       nextToken:
-        $ref: "#/definitions/String"
-        description: The token to use to retrieve the next page of results. This value is
-          <code>null</code> when there are no more results to return.
+        $ref: '#/definitions/String'
+        description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
   TagFilter:
     type: object
     properties:
       tagKey:
-        $ref: "#/definitions/TagKey"
+        $ref: '#/definitions/TagKey'
         description: The tag key.
       tagValues:
-        $ref: "#/definitions/TagValueList"
+        $ref: '#/definitions/TagValueList'
         description: The tag values.
     description: Used to filter information based on tags.
   ListPrincipalsResponse:
     type: object
     properties:
       principals:
-        $ref: "#/definitions/PrincipalList"
+        $ref: '#/definitions/PrincipalList'
         description: The principals.
       nextToken:
-        $ref: "#/definitions/String"
-        description: The token to use to retrieve the next page of results. This value is
-          <code>null</code> when there are no more results to return.
+        $ref: '#/definitions/String'
+        description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
   ListResourcesResponse:
     type: object
     properties:
       resources:
-        $ref: "#/definitions/ResourceList"
+        $ref: '#/definitions/ResourceList'
         description: Information about the resources.
       nextToken:
-        $ref: "#/definitions/String"
-        description: The token to use to retrieve the next page of results. This value is
-          <code>null</code> when there are no more results to return.
+        $ref: '#/definitions/String'
+        description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
   InvalidResourceTypeException: {}
   RejectResourceShareInvitationResponse:
     type: object
     properties:
       resourceShareInvitation:
-        $ref: "#/definitions/ResourceShareInvitation"
+        $ref: '#/definitions/ResourceShareInvitation'
         description: Information about the invitation.
       clientToken:
-        $ref: "#/definitions/String"
-        description: A unique, case-sensitive identifier that you provide to ensure the
-          idempotency of the request.
+        $ref: '#/definitions/String'
+        description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
   TagResourceResponse:
     type: object
     properties: {}
@@ -1500,12 +1450,11 @@ definitions:
     type: object
     properties:
       resourceShare:
-        $ref: "#/definitions/ResourceShare"
+        $ref: '#/definitions/ResourceShare'
         description: Information about the resource share.
       clientToken:
-        $ref: "#/definitions/String"
-        description: A unique, case-sensitive identifier that you provide to ensure the
-          idempotency of the request.
+        $ref: '#/definitions/String'
+        description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
   MissingRequiredParameterException: {}
   AcceptResourceShareInvitationRequest:
     type: object
@@ -1513,134 +1462,126 @@ definitions:
       - resourceShareInvitationArn
     properties:
       resourceShareInvitationArn:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: The Amazon Resource Name (ARN) of the invitation.
       clientToken:
-        $ref: "#/definitions/String"
-        description: A unique, case-sensitive identifier that you provide to ensure the
-          idempotency of the request.
+        $ref: '#/definitions/String'
+        description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
   ResourceShareInvitation:
     type: object
     properties:
       resourceShareInvitationArn:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: The Amazon Resource Name (ARN) of the invitation.
       resourceShareName:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: The name of the resource share.
       resourceShareArn:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: The Amazon Resource Name (ARN) of the resource share.
       senderAccountId:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: The ID of the AWS account that sent the invitation.
       receiverAccountId:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: The ID of the AWS account that received the invitation.
       invitationTimestamp:
-        $ref: "#/definitions/DateTime"
+        $ref: '#/definitions/DateTime'
         description: The date and time when the invitation was sent.
       status:
-        $ref: "#/definitions/ResourceShareInvitationStatus"
+        $ref: '#/definitions/ResourceShareInvitationStatus'
         description: The status of the invitation.
       resourceShareAssociations:
-        $ref: "#/definitions/ResourceShareAssociationList"
+        $ref: '#/definitions/ResourceShareAssociationList'
         description: The resources associated with the resource share.
     description: Describes an invitation to join a resource share.
   ResourceArnList:
     type: array
     items:
-      $ref: "#/definitions/String"
+      $ref: '#/definitions/String'
   PrincipalArnOrIdList:
     type: array
     items:
-      $ref: "#/definitions/String"
+      $ref: '#/definitions/String'
   AssociateResourceShareRequest:
     type: object
     required:
       - resourceShareArn
     properties:
       resourceShareArn:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: The Amazon Resource Name (ARN) of the resource share.
       resourceArns:
-        $ref: "#/definitions/ResourceArnList"
+        $ref: '#/definitions/ResourceArnList'
         description: The Amazon Resource Names (ARN) of the resources.
       principals:
-        $ref: "#/definitions/PrincipalArnOrIdList"
+        $ref: '#/definitions/PrincipalArnOrIdList'
         description: The principals.
       clientToken:
-        $ref: "#/definitions/String"
-        description: A unique, case-sensitive identifier that you provide to ensure the
-          idempotency of the request.
+        $ref: '#/definitions/String'
+        description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
   ResourceShareAssociationList:
     type: array
     items:
-      $ref: "#/definitions/ResourceShareAssociation"
+      $ref: '#/definitions/ResourceShareAssociation'
   Boolean:
     type: boolean
   TagList:
     type: array
     items:
-      $ref: "#/definitions/Tag"
+      $ref: '#/definitions/Tag'
   CreateResourceShareRequest:
     type: object
     required:
       - name
     properties:
       name:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: The name of the resource share.
       resourceArns:
-        $ref: "#/definitions/ResourceArnList"
-        description: The Amazon Resource Names (ARN) of the resources to associate with the
-          resource share.
+        $ref: '#/definitions/ResourceArnList'
+        description: The Amazon Resource Names (ARN) of the resources to associate with the resource share.
       principals:
-        $ref: "#/definitions/PrincipalArnOrIdList"
-        description: The principals to associate with the resource share. The possible
-          values are IDs of AWS accounts, the ARN of an OU or organization from
-          AWS Organizations.
+        $ref: '#/definitions/PrincipalArnOrIdList'
+        description: 'The principals to associate with the resource share. The possible values are IDs of AWS accounts, the ARN of an OU or organization from AWS Organizations.'
       tags:
-        $ref: "#/definitions/TagList"
+        $ref: '#/definitions/TagList'
         description: One or more tags.
       allowExternalPrincipals:
-        $ref: "#/definitions/Boolean"
-        description: Indicates whether principals outside your organization can be
-          associated with a resource share.
+        $ref: '#/definitions/Boolean'
+        description: Indicates whether principals outside your organization can be associated with a resource share.
       clientToken:
-        $ref: "#/definitions/String"
-        description: A unique, case-sensitive identifier that you provide to ensure the
-          idempotency of the request.
+        $ref: '#/definitions/String'
+        description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
   ResourceShare:
     type: object
     properties:
       resourceShareArn:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: The Amazon Resource Name (ARN) of the resource share.
       name:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: The name of the resource share.
       owningAccountId:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: The ID of the AWS account that owns the resource share.
       allowExternalPrincipals:
-        $ref: "#/definitions/Boolean"
-        description: Indicates whether principals outside your organization can be
-          associated with a resource share.
+        $ref: '#/definitions/Boolean'
+        description: Indicates whether principals outside your organization can be associated with a resource share.
       status:
-        $ref: "#/definitions/ResourceShareStatus"
+        $ref: '#/definitions/ResourceShareStatus'
         description: The status of the resource share.
       statusMessage:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: A message about the status of the resource share.
       tags:
-        $ref: "#/definitions/TagList"
+        $ref: '#/definitions/TagList'
         description: The tags for the resource share.
       creationTime:
-        $ref: "#/definitions/DateTime"
+        $ref: '#/definitions/DateTime'
         description: The time when the resource share was created.
       lastUpdatedTime:
-        $ref: "#/definitions/DateTime"
+        $ref: '#/definitions/DateTime'
         description: The time when the resource share was last updated.
     description: Describes a resource share.
   DateTime:
@@ -1655,18 +1596,17 @@ definitions:
       - resourceShareArn
     properties:
       resourceShareArn:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: The Amazon Resource Name (ARN) of the resource share.
       resourceArns:
-        $ref: "#/definitions/ResourceArnList"
+        $ref: '#/definitions/ResourceArnList'
         description: The Amazon Resource Names (ARN) of the resources.
       principals:
-        $ref: "#/definitions/PrincipalArnOrIdList"
+        $ref: '#/definitions/PrincipalArnOrIdList'
         description: The principals.
       clientToken:
-        $ref: "#/definitions/String"
-        description: A unique, case-sensitive identifier that you provide to ensure the
-          idempotency of the request.
+        $ref: '#/definitions/String'
+        description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
   EnableSharingWithAwsOrganizationRequest:
     type: object
     properties: {}
@@ -1680,23 +1620,21 @@ definitions:
       - resourceArns
     properties:
       resourceArns:
-        $ref: "#/definitions/ResourceArnList"
+        $ref: '#/definitions/ResourceArnList'
         description: The Amazon Resource Names (ARN) of the resources.
       principal:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: The principal.
       nextToken:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: The token for the next page of results.
       maxResults:
-        $ref: "#/definitions/MaxResults"
-        description: The maximum number of results to return with a single call. To
-          retrieve the remaining results, make another call with the returned
-          <code>nextToken</code> value.
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
   PolicyList:
     type: array
     items:
-      $ref: "#/definitions/Policy"
+      $ref: '#/definitions/Policy'
   ResourceShareAssociationType:
     type: string
     enum:
@@ -1705,7 +1643,7 @@ definitions:
   ResourceShareArnList:
     type: array
     items:
-      $ref: "#/definitions/String"
+      $ref: '#/definitions/String'
   ResourceShareAssociationStatus:
     type: string
     enum:
@@ -1720,53 +1658,49 @@ definitions:
       - associationType
     properties:
       associationType:
-        $ref: "#/definitions/ResourceShareAssociationType"
+        $ref: '#/definitions/ResourceShareAssociationType'
         description: The association type.
       resourceShareArns:
-        $ref: "#/definitions/ResourceShareArnList"
+        $ref: '#/definitions/ResourceShareArnList'
         description: The Amazon Resource Names (ARN) of the resource shares.
       resourceArn:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: The Amazon Resource Name (ARN) of the resource.
       principal:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: The principal.
       associationStatus:
-        $ref: "#/definitions/ResourceShareAssociationStatus"
+        $ref: '#/definitions/ResourceShareAssociationStatus'
         description: The status of the association.
       nextToken:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: The token for the next page of results.
       maxResults:
-        $ref: "#/definitions/MaxResults"
-        description: The maximum number of results to return with a single call. To
-          retrieve the remaining results, make another call with the returned
-          <code>nextToken</code> value.
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
   ResourceShareInvitationArnList:
     type: array
     items:
-      $ref: "#/definitions/String"
+      $ref: '#/definitions/String'
   GetResourceShareInvitationsRequest:
     type: object
     properties:
       resourceShareInvitationArns:
-        $ref: "#/definitions/ResourceShareInvitationArnList"
+        $ref: '#/definitions/ResourceShareInvitationArnList'
         description: The Amazon Resource Names (ARN) of the invitations.
       resourceShareArns:
-        $ref: "#/definitions/ResourceShareArnList"
+        $ref: '#/definitions/ResourceShareArnList'
         description: The Amazon Resource Names (ARN) of the resource shares.
       nextToken:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: The token for the next page of results.
       maxResults:
-        $ref: "#/definitions/MaxResults"
-        description: The maximum number of results to return with a single call. To
-          retrieve the remaining results, make another call with the returned
-          <code>nextToken</code> value.
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
   ResourceShareInvitationList:
     type: array
     items:
-      $ref: "#/definitions/ResourceShareInvitation"
+      $ref: '#/definitions/ResourceShareInvitation'
   ResourceShareStatus:
     type: string
     enum:
@@ -1783,124 +1717,117 @@ definitions:
   TagFilters:
     type: array
     items:
-      $ref: "#/definitions/TagFilter"
+      $ref: '#/definitions/TagFilter'
   GetResourceSharesRequest:
     type: object
     required:
       - resourceOwner
     properties:
       resourceShareArns:
-        $ref: "#/definitions/ResourceShareArnList"
+        $ref: '#/definitions/ResourceShareArnList'
         description: The Amazon Resource Names (ARN) of the resource shares.
       resourceShareStatus:
-        $ref: "#/definitions/ResourceShareStatus"
+        $ref: '#/definitions/ResourceShareStatus'
         description: The status of the resource share.
       resourceOwner:
-        $ref: "#/definitions/ResourceOwner"
+        $ref: '#/definitions/ResourceOwner'
         description: The type of owner.
       name:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: The name of the resource share.
       tagFilters:
-        $ref: "#/definitions/TagFilters"
+        $ref: '#/definitions/TagFilters'
         description: One or more tag filters.
       nextToken:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: The token for the next page of results.
       maxResults:
-        $ref: "#/definitions/MaxResults"
-        description: The maximum number of results to return with a single call. To
-          retrieve the remaining results, make another call with the returned
-          <code>nextToken</code> value.
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
   ResourceShareList:
     type: array
     items:
-      $ref: "#/definitions/ResourceShare"
+      $ref: '#/definitions/ResourceShare'
   ListPrincipalsRequest:
     type: object
     required:
       - resourceOwner
     properties:
       resourceOwner:
-        $ref: "#/definitions/ResourceOwner"
+        $ref: '#/definitions/ResourceOwner'
         description: The type of owner.
       resourceArn:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: The Amazon Resource Name (ARN) of the resource.
       principals:
-        $ref: "#/definitions/PrincipalArnOrIdList"
+        $ref: '#/definitions/PrincipalArnOrIdList'
         description: The principals.
       resourceType:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: The resource type.
       resourceShareArns:
-        $ref: "#/definitions/ResourceShareArnList"
+        $ref: '#/definitions/ResourceShareArnList'
         description: The Amazon Resource Names (ARN) of the resource shares.
       nextToken:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: The token for the next page of results.
       maxResults:
-        $ref: "#/definitions/MaxResults"
-        description: The maximum number of results to return with a single call. To
-          retrieve the remaining results, make another call with the returned
-          <code>nextToken</code> value.
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
   PrincipalList:
     type: array
     items:
-      $ref: "#/definitions/Principal"
+      $ref: '#/definitions/Principal'
   ListResourcesRequest:
     type: object
     required:
       - resourceOwner
     properties:
       resourceOwner:
-        $ref: "#/definitions/ResourceOwner"
+        $ref: '#/definitions/ResourceOwner'
         description: The type of owner.
       principal:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: The principal.
       resourceType:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: The resource type.
       resourceArns:
-        $ref: "#/definitions/ResourceArnList"
+        $ref: '#/definitions/ResourceArnList'
         description: The Amazon Resource Names (ARN) of the resources.
       resourceShareArns:
-        $ref: "#/definitions/ResourceShareArnList"
+        $ref: '#/definitions/ResourceShareArnList'
         description: The Amazon Resource Names (ARN) of the resource shares.
       nextToken:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: The token for the next page of results.
       maxResults:
-        $ref: "#/definitions/MaxResults"
-        description: The maximum number of results to return with a single call. To
-          retrieve the remaining results, make another call with the returned
-          <code>nextToken</code> value.
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
   ResourceList:
     type: array
     items:
-      $ref: "#/definitions/Resource"
+      $ref: '#/definitions/Resource'
   Policy:
     type: string
   Principal:
     type: object
     properties:
       id:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: The ID of the principal.
       resourceShareArn:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: The Amazon Resource Name (ARN) of the resource share.
       creationTime:
-        $ref: "#/definitions/DateTime"
+        $ref: '#/definitions/DateTime'
         description: The time when the principal was associated with the resource share.
       lastUpdatedTime:
-        $ref: "#/definitions/DateTime"
+        $ref: '#/definitions/DateTime'
         description: The time when the association was last updated.
       external:
-        $ref: "#/definitions/Boolean"
-        description: Indicates whether the principal belongs to the same organization as
-          the AWS account that owns the resource share.
+        $ref: '#/definitions/Boolean'
+        description: Indicates whether the principal belongs to the same organization as the AWS account that owns the resource share.
     description: Describes a principal for use with AWS Resource Access Manager.
   RejectResourceShareInvitationRequest:
     type: object
@@ -1908,12 +1835,11 @@ definitions:
       - resourceShareInvitationArn
     properties:
       resourceShareInvitationArn:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: The Amazon Resource Name (ARN) of the invitation.
       clientToken:
-        $ref: "#/definitions/String"
-        description: A unique, case-sensitive identifier that you provide to ensure the
-          idempotency of the request.
+        $ref: '#/definitions/String'
+        description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
   ResourceStatus:
     type: string
     enum:
@@ -1925,57 +1851,54 @@ definitions:
     type: object
     properties:
       arn:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: The Amazon Resource Name (ARN) of the resource.
       type:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: The resource type.
       resourceShareArn:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: The Amazon Resource Name (ARN) of the resource share.
       status:
-        $ref: "#/definitions/ResourceStatus"
+        $ref: '#/definitions/ResourceStatus'
         description: The status of the resource.
       statusMessage:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: A message about the status of the resource.
       creationTime:
-        $ref: "#/definitions/DateTime"
+        $ref: '#/definitions/DateTime'
         description: The time when the resource was associated with the resource share.
       lastUpdatedTime:
-        $ref: "#/definitions/DateTime"
+        $ref: '#/definitions/DateTime'
         description: The time when the association was last updated.
     description: Describes a resource associated with a resource share.
   ResourceShareAssociation:
     type: object
     properties:
       resourceShareArn:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: The Amazon Resource Name (ARN) of the resource share.
       associatedEntity:
-        $ref: "#/definitions/String"
-        description: The associated entity. For resource associations, this is the ARN of
-          the resource. For principal associations, this is the ID of an AWS
-          account or the ARN of an OU or organization from AWS Organizations.
+        $ref: '#/definitions/String'
+        description: 'The associated entity. For resource associations, this is the ARN of the resource. For principal associations, this is the ID of an AWS account or the ARN of an OU or organization from AWS Organizations.'
       associationType:
-        $ref: "#/definitions/ResourceShareAssociationType"
+        $ref: '#/definitions/ResourceShareAssociationType'
         description: The association type.
       status:
-        $ref: "#/definitions/ResourceShareAssociationStatus"
+        $ref: '#/definitions/ResourceShareAssociationStatus'
         description: The status of the association.
       statusMessage:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: A message about the status of the association.
       creationTime:
-        $ref: "#/definitions/DateTime"
+        $ref: '#/definitions/DateTime'
         description: The time when the association was created.
       lastUpdatedTime:
-        $ref: "#/definitions/DateTime"
+        $ref: '#/definitions/DateTime'
         description: The time when the association was last updated.
       external:
-        $ref: "#/definitions/Boolean"
-        description: Indicates whether the principal belongs to the same organization as
-          the AWS account that owns the resource share.
+        $ref: '#/definitions/Boolean'
+        description: Indicates whether the principal belongs to the same organization as the AWS account that owns the resource share.
     description: Describes an association with a resource share.
   ResourceShareInvitationStatus:
     type: string
@@ -1989,11 +1912,11 @@ definitions:
   TagValueList:
     type: array
     items:
-      $ref: "#/definitions/TagValue"
+      $ref: '#/definitions/TagValue'
   TagKeyList:
     type: array
     items:
-      $ref: "#/definitions/TagKey"
+      $ref: '#/definitions/TagKey'
   TagResourceRequest:
     type: object
     required:
@@ -2001,10 +1924,10 @@ definitions:
       - tags
     properties:
       resourceShareArn:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: The Amazon Resource Name (ARN) of the resource share.
       tags:
-        $ref: "#/definitions/TagList"
+        $ref: '#/definitions/TagList'
         description: One or more tags.
   UntagResourceRequest:
     type: object
@@ -2013,10 +1936,10 @@ definitions:
       - tagKeys
     properties:
       resourceShareArn:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: The Amazon Resource Name (ARN) of the resource share.
       tagKeys:
-        $ref: "#/definitions/TagKeyList"
+        $ref: '#/definitions/TagKeyList'
         description: The tag keys of the tags to remove.
   UpdateResourceShareRequest:
     type: object
@@ -2024,16 +1947,14 @@ definitions:
       - resourceShareArn
     properties:
       resourceShareArn:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: The Amazon Resource Name (ARN) of the resource share.
       name:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: The name of the resource share.
       allowExternalPrincipals:
-        $ref: "#/definitions/Boolean"
-        description: Indicates whether principals outside your organization can be
-          associated with a resource share.
+        $ref: '#/definitions/Boolean'
+        description: Indicates whether principals outside your organization can be associated with a resource share.
       clientToken:
-        $ref: "#/definitions/String"
-        description: A unique, case-sensitive identifier that you provide to ensure the
-          idempotency of the request.
+        $ref: '#/definitions/String'
+        description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'

@@ -1,39 +1,38 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  version: 2014-06-05
+  version: '2014-06-05'
   x-release: v4
   title: Amazon Mobile Analytics
-  description: Amazon Mobile Analytics is a service for collecting, visualizing, and
-    understanding app usage data at scale.
+  description: 'Amazon Mobile Analytics is a service for collecting, visualizing, and understanding app usage data at scale.'
   x-logo:
-    url: https://twitter.com/awscloud/profile_image?size=original
-    backgroundColor: "#FFFFFF"
-  termsOfService: https://aws.amazon.com/service-terms/
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
     name: Mike Ralphson
     email: mike.ralphson@gmail.com
-    url: https://github.com/mermade/aws2openapi
+    url: 'https://github.com/mermade/aws2openapi'
     x-twitter: PermittedSoc
   license:
     name: Apache 2.0 License
-    url: http://www.apache.org/licenses/
+    url: 'http://www.apache.org/licenses/'
   x-providerName: amazonaws.com
   x-serviceName: mobileanalytics
   x-origin:
     - contentType: application/json
-      url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/mobileanalytics-2014-06-05.normal.json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/mobileanalytics-2014-06-05.normal.json'
       converter:
-        url: https://github.com/mermade/aws2openapi
+        url: 'https://github.com/mermade/aws2openapi'
         version: 1.0.0
       x-apisguru-direct: true
   x-apiClientRegistration:
-    url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
   x-preferred: true
 externalDocs:
   description: Amazon Web Services documentation
-  url: https://docs.aws.amazon.com/mobileanalytics/
+  url: 'https://docs.aws.amazon.com/mobileanalytics/'
 host: mobileanalytics.amazonaws.com
 basePath: /
 schemes:
@@ -89,27 +88,23 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /2014-06-05/events#x-amz-Client-Context:
+  '/2014-06-05/events#x-amz-Client-Context':
     post:
       operationId: PutEvents
-      description: The PutEvents operation records one or more events. You can have up to
-        1,500 unique custom events per app, any combination of up to 40
-        attributes and metrics per custom event, and any number of attribute or
-        metric values.
+      description: 'The PutEvents operation records one or more events. You can have up to 1,500 unique custom events per app, any combination of up to 40 attributes and metrics per custom event, and any number of attribute or metric values.'
       responses:
-        "202":
+        '202':
           description: Success
-        "400":
+        '400':
           description: BadRequestException
           x-aws-exception: true
           schema:
-            $ref: "#/definitions/BadRequestException"
+            $ref: '#/definitions/BadRequestException'
       parameters:
         - name: x-amz-Client-Context
           in: header
           required: true
-          description: The client context including the client ID, app title, app version
-            and package name.
+          description: 'The client context including the client ID, app title, app version and package name.'
           type: string
         - name: x-amz-Client-Context-Encoding
           in: header
@@ -128,15 +123,15 @@ paths:
                 description: An array of Event JSON objects
                 type: array
                 items:
-                  $ref: "#/definitions/Event"
+                  $ref: '#/definitions/Event'
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
   Event:
     type: object
@@ -145,36 +140,29 @@ definitions:
       - timestamp
     properties:
       eventType:
-        $ref: "#/definitions/String50Chars"
-        description: A name signifying an event that occurred in your app. This is used for
-          grouping and aggregating like events together for reporting purposes.
+        $ref: '#/definitions/String50Chars'
+        description: A name signifying an event that occurred in your app. This is used for grouping and aggregating like events together for reporting purposes.
       timestamp:
-        $ref: "#/definitions/ISO8601Timestamp"
-        description: The time the event occurred in ISO 8601 standard date time format. For
-          example, 2014-06-30T19:07:47.885Z
+        $ref: '#/definitions/ISO8601Timestamp'
+        description: 'The time the event occurred in ISO 8601 standard date time format. For example, 2014-06-30T19:07:47.885Z'
       session:
-        $ref: "#/definitions/Session"
-        description: "The session the event occured within. "
+        $ref: '#/definitions/Session'
+        description: 'The session the event occured within. '
       version:
-        $ref: "#/definitions/String10Chars"
+        $ref: '#/definitions/String10Chars'
         description: The version of the event.
       attributes:
-        $ref: "#/definitions/MapOfStringToString"
-        description: <p>A collection of key-value pairs that give additional context to the
-          event. The key-value pairs are specified by the developer.</p> <p>This
-          collection can be empty or the attribute object can be omitted.</p>
+        $ref: '#/definitions/MapOfStringToString'
+        description: <p>A collection of key-value pairs that give additional context to the event. The key-value pairs are specified by the developer.</p> <p>This collection can be empty or the attribute object can be omitted.</p>
       metrics:
-        $ref: "#/definitions/MapOfStringToNumber"
-        description: <p>A collection of key-value pairs that gives additional, measurable
-          context to the event. The key-value pairs are specified by the
-          developer.</p> <p>This collection can be empty or the attribute object
-          can be omitted.</p>
+        $ref: '#/definitions/MapOfStringToNumber'
+        description: '<p>A collection of key-value pairs that gives additional, measurable context to the event. The key-value pairs are specified by the developer.</p> <p>This collection can be empty or the attribute object can be omitted.</p>'
     description: A JSON object representing a batch of unique event occurrences in your app.
   BadRequestException:
     type: object
     properties:
       message:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: A text description associated with the BadRequestException object.
     description: An exception object returned when a request fails.
   String:
@@ -192,19 +180,17 @@ definitions:
     type: object
     properties:
       id:
-        $ref: "#/definitions/String50Chars"
+        $ref: '#/definitions/String50Chars'
         description: A unique identifier for the session
       duration:
-        $ref: "#/definitions/Long"
+        $ref: '#/definitions/Long'
         description: The duration of the session.
       startTimestamp:
-        $ref: "#/definitions/ISO8601Timestamp"
-        description: The time the event started in ISO 8601 standard date time format. For
-          example, 2014-06-30T19:07:47.885Z
+        $ref: '#/definitions/ISO8601Timestamp'
+        description: 'The time the event started in ISO 8601 standard date time format. For example, 2014-06-30T19:07:47.885Z'
       stopTimestamp:
-        $ref: "#/definitions/ISO8601Timestamp"
-        description: The time the event terminated in ISO 8601 standard date time format.
-          For example, 2014-06-30T19:07:47.885Z
+        $ref: '#/definitions/ISO8601Timestamp'
+        description: 'The time the event terminated in ISO 8601 standard date time format. For example, 2014-06-30T19:07:47.885Z'
     description: Describes the session. Session information is required on ALL events.
   String10Chars:
     type: string
@@ -215,17 +201,17 @@ definitions:
     minProperties: 0
     maxProperties: 50
     additionalProperties:
-      $ref: "#/definitions/String0to1000Chars"
+      $ref: '#/definitions/String0to1000Chars'
   MapOfStringToNumber:
     type: object
     minProperties: 0
     maxProperties: 50
     additionalProperties:
-      $ref: "#/definitions/Double"
+      $ref: '#/definitions/Double'
   EventListDefinition:
     type: array
     items:
-      $ref: "#/definitions/Event"
+      $ref: '#/definitions/Event'
   Long:
     type: integer
   String0to1000Chars:
@@ -238,6 +224,6 @@ definitions:
       - events
     properties:
       events:
-        $ref: "#/definitions/EventListDefinition"
+        $ref: '#/definitions/EventListDefinition'
         description: An array of Event JSON objects
     description: A container for the data needed for a PutEvent operation

@@ -1,11 +1,10 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  version: 2017-09-08
+  version: '2017-09-08'
   x-release: v4
   title: AWSServerlessApplicationRepository
-  description: >-
-    <p>The AWS Serverless Application Repository makes it easy for developers
-    and enterprises to quickly find
+  description: |-
+    <p>The AWS Serverless Application Repository makes it easy for developers and enterprises to quickly find
      and deploy serverless applications in the AWS Cloud. For more information about serverless applications,
      see Serverless Computing and Applications on the AWS website.</p><p>The AWS Serverless Application Repository is deeply integrated with the AWS Lambda console, so that developers of 
      all levels can get started with serverless computing without needing to learn anything new. You can use category 
@@ -26,34 +25,34 @@ info:
      </li>
      </ul>
   x-logo:
-    url: https://twitter.com/awscloud/profile_image?size=original
-    backgroundColor: "#FFFFFF"
-  termsOfService: https://aws.amazon.com/service-terms/
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
     name: Mike Ralphson
     email: mike.ralphson@gmail.com
-    url: https://github.com/mermade/aws2openapi
+    url: 'https://github.com/mermade/aws2openapi'
     x-twitter: PermittedSoc
   license:
     name: Apache 2.0 License
-    url: http://www.apache.org/licenses/
+    url: 'http://www.apache.org/licenses/'
   x-providerName: amazonaws.com
   x-serviceName: serverlessrepo
   x-origin:
     - contentType: application/json
-      url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/serverlessrepo-2017-09-08.normal.json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/serverlessrepo-2017-09-08.normal.json'
       converter:
-        url: https://github.com/mermade/aws2openapi
+        url: 'https://github.com/mermade/aws2openapi'
         version: 1.0.0
       x-apisguru-direct: true
   x-apiClientRegistration:
-    url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
   x-preferred: true
 externalDocs:
   description: Amazon Web Services documentation
-  url: https://docs.aws.amazon.com/serverlessrepo/
+  url: 'https://docs.aws.amazon.com/serverlessrepo/'
 host: serverlessrepo.amazonaws.com
 basePath: /
 schemes:
@@ -112,33 +111,32 @@ paths:
   /applications:
     post:
       operationId: CreateApplication
-      description: Creates an application, optionally including an AWS SAM file to create
-        the first application version in the same call.
+      description: 'Creates an application, optionally including an AWS SAM file to create the first application version in the same call.'
       responses:
-        "201":
+        '201':
           description: Success
           schema:
-            $ref: "#/definitions/CreateApplicationResponse"
-        "480":
+            $ref: '#/definitions/CreateApplicationResponse'
+        '480':
           description: TooManyRequestsException
           schema:
-            $ref: "#/definitions/TooManyRequestsException"
-        "481":
+            $ref: '#/definitions/TooManyRequestsException'
+        '481':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "482":
+            $ref: '#/definitions/BadRequestException'
+        '482':
           description: InternalServerErrorException
           schema:
-            $ref: "#/definitions/InternalServerErrorException"
-        "483":
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
           description: ConflictException
           schema:
-            $ref: "#/definitions/ConflictException"
-        "484":
+            $ref: '#/definitions/ConflictException'
+        '484':
           description: ForbiddenException
           schema:
-            $ref: "#/definitions/ForbiddenException"
+            $ref: '#/definitions/ForbiddenException'
       parameters:
         - name: body
           in: body
@@ -151,56 +149,37 @@ paths:
               - name
             properties:
               author:
-                description: <p>The name of the author publishing the app.</p><p>Minimum
-                  length=1. Maximum length=127.</p><p>Pattern
-                  "^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$";</p>
+                description: '<p>The name of the author publishing the app.</p><p>Minimum length=1. Maximum length=127.</p><p>Pattern "^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$";</p>'
                 type: string
               description:
-                description: <p>The description of the application.</p><p>Minimum length=1.
-                  Maximum length=256</p>
+                description: <p>The description of the application.</p><p>Minimum length=1. Maximum length=256</p>
                 type: string
               homePageUrl:
-                description: A URL with more information about the application, for example
-                  the location of your GitHub repository for the application.
+                description: 'A URL with more information about the application, for example the location of your GitHub repository for the application.'
                 type: string
               labels:
-                description: '<p>Labels to improve discovery of apps in search
-                  results.</p><p>Minimum length=1. Maximum length=127. Maximum
-                  number of labels: 10</p><p>Pattern:
-                  "^[a-zA-Z0-9+\\-_:\\/@]+$";</p>'
+                description: '<p>Labels to improve discovery of apps in search results.</p><p>Minimum length=1. Maximum length=127. Maximum number of labels: 10</p><p>Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";</p>'
                 type: array
                 items:
-                  $ref: "#/definitions/__string"
+                  $ref: '#/definitions/__string'
               licenseBody:
-                description: >-
-                  <p>A local text file that contains the license of the app that
-                  matches the spdxLicenseID value of your application.
+                description: |-
+                  <p>A local text file that contains the license of the app that matches the spdxLicenseID value of your application.
                    The file has the format file://&lt;path>/&lt;filename>.</p><p>Maximum size 5 MB</p><p>You can specify only one of licenseBody and licenseUrl; otherwise, an error results.</p>
                 type: string
               licenseUrl:
-                description: <p>A link to the S3 object that contains the license of the
-                  app that matches the spdxLicenseID value of your
-                  application.</p><p>Maximum size 5 MB</p><p>You can specify
-                  only one of licenseBody and licenseUrl; otherwise, an error
-                  results.</p>
+                description: '<p>A link to the S3 object that contains the license of the app that matches the spdxLicenseID value of your application.</p><p>Maximum size 5 MB</p><p>You can specify only one of licenseBody and licenseUrl; otherwise, an error results.</p>'
                 type: string
               name:
-                description: '<p>The name of the application that you want to
-                  publish.</p><p>Minimum length=1. Maximum
-                  length=140</p><p>Pattern: "[a-zA-Z0-9\\-]+";</p>'
+                description: '<p>The name of the application that you want to publish.</p><p>Minimum length=1. Maximum length=140</p><p>Pattern: "[a-zA-Z0-9\\-]+";</p>'
                 type: string
               readmeBody:
-                description: >-
-                  <p>A local text readme file in Markdown language that contains
-                  a more detailed description of the application and how it
-                  works.
+                description: |-
+                  <p>A local text readme file in Markdown language that contains a more detailed description of the application and how it works.
                    The file has the format file://&lt;path>/&lt;filename>.</p><p>Maximum size 5 MB</p><p>You can specify only one of readmeBody and readmeUrl; otherwise, an error results.</p>
                 type: string
               readmeUrl:
-                description: <p>A link to the S3 object in Markdown language that contains
-                  a more detailed description of the application and how it
-                  works.</p><p>Maximum size 5 MB</p><p>You can specify only one
-                  of readmeBody and readmeUrl; otherwise, an error results.</p>
+                description: '<p>A link to the S3 object in Markdown language that contains a more detailed description of the application and how it works.</p><p>Maximum size 5 MB</p><p>You can specify only one of readmeBody and readmeUrl; otherwise, an error results.</p>'
                 type: string
               semanticVersion:
                 description: |-
@@ -209,62 +188,54 @@ paths:
                    </p>
                 type: string
               sourceCodeArchiveUrl:
-                description: <p>A link to the S3 object that contains the ZIP archive of
-                  the source code for this version of your
-                  application.</p><p>Maximum size 50 MB</p>
+                description: <p>A link to the S3 object that contains the ZIP archive of the source code for this version of your application.</p><p>Maximum size 50 MB</p>
                 type: string
               sourceCodeUrl:
-                description: A link to a public repository for the source code of your
-                  application, for example the URL of a specific GitHub commit.
+                description: 'A link to a public repository for the source code of your application, for example the URL of a specific GitHub commit.'
                 type: string
               spdxLicenseId:
-                description: A valid identifier from <a
-                  href="https://spdx.org/licenses/">https://spdx.org/licenses/</a>.
+                description: 'A valid identifier from <a href="https://spdx.org/licenses/">https://spdx.org/licenses/</a>.'
                 type: string
               templateBody:
-                description: >-
-                  <p>The local raw packaged AWS SAM template file of your
-                  application.
+                description: |-
+                  <p>The local raw packaged AWS SAM template file of your application.
                    The file has the format file://&lt;path>/&lt;filename>.</p><p>You can specify only one of templateBody and templateUrl; otherwise an error results.</p>
                 type: string
               templateUrl:
-                description: <p>A link to the S3 object containing the packaged AWS SAM
-                  template of your application.</p><p>You can specify only one
-                  of templateBody and templateUrl; otherwise an error
-                  results.</p>
+                description: <p>A link to the S3 object containing the packaged AWS SAM template of your application.</p><p>You can specify only one of templateBody and templateUrl; otherwise an error results.</p>
                 type: string
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListApplications
       description: Lists applications owned by the requester.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/ListApplicationsResponse"
-        "480":
+            $ref: '#/definitions/ListApplicationsResponse'
+        '480':
           description: NotFoundException
           schema:
-            $ref: "#/definitions/NotFoundException"
-        "481":
+            $ref: '#/definitions/NotFoundException'
+        '481':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "482":
+            $ref: '#/definitions/BadRequestException'
+        '482':
           description: InternalServerErrorException
           schema:
-            $ref: "#/definitions/InternalServerErrorException"
-        "483":
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
           description: ForbiddenException
           schema:
-            $ref: "#/definitions/ForbiddenException"
+            $ref: '#/definitions/ForbiddenException'
       parameters:
         - name: maxItems
           in: query
@@ -288,35 +259,35 @@ paths:
           in: query
           description: Pagination token
           required: false
-  "/applications/{applicationId}/versions/{semanticVersion}":
+  '/applications/{applicationId}/versions/{semanticVersion}':
     put:
       operationId: CreateApplicationVersion
       description: Creates an application version.
       responses:
-        "201":
+        '201':
           description: Success
           schema:
-            $ref: "#/definitions/CreateApplicationVersionResponse"
-        "480":
+            $ref: '#/definitions/CreateApplicationVersionResponse'
+        '480':
           description: TooManyRequestsException
           schema:
-            $ref: "#/definitions/TooManyRequestsException"
-        "481":
+            $ref: '#/definitions/TooManyRequestsException'
+        '481':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "482":
+            $ref: '#/definitions/BadRequestException'
+        '482':
           description: InternalServerErrorException
           schema:
-            $ref: "#/definitions/InternalServerErrorException"
-        "483":
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
           description: ConflictException
           schema:
-            $ref: "#/definitions/ConflictException"
-        "484":
+            $ref: '#/definitions/ConflictException'
+        '484':
           description: ForbiddenException
           schema:
-            $ref: "#/definitions/ForbiddenException"
+            $ref: '#/definitions/ForbiddenException'
       parameters:
         - name: applicationId
           in: path
@@ -335,13 +306,10 @@ paths:
             type: object
             properties:
               sourceCodeArchiveUrl:
-                description: <p>A link to the S3 object that contains the ZIP archive of
-                  the source code for this version of your
-                  application.</p><p>Maximum size 50 MB</p>
+                description: <p>A link to the S3 object that contains the ZIP archive of the source code for this version of your application.</p><p>Maximum size 50 MB</p>
                 type: string
               sourceCodeUrl:
-                description: A link to a public repository for the source code of your
-                  application, for example the URL of a specific GitHub commit.
+                description: 'A link to a public repository for the source code of your application, for example the URL of a specific GitHub commit.'
                 type: string
               templateBody:
                 description: The raw packaged AWS SAM template of your application.
@@ -350,38 +318,38 @@ paths:
                 description: A link to the packaged AWS SAM template of your application.
                 type: string
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  "/applications/{applicationId}/changesets":
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/applications/{applicationId}/changesets':
     post:
       operationId: CreateCloudFormationChangeSet
       description: Creates an AWS CloudFormation change set for the given application.
       responses:
-        "201":
+        '201':
           description: Success
           schema:
-            $ref: "#/definitions/CreateCloudFormationChangeSetResponse"
-        "480":
+            $ref: '#/definitions/CreateCloudFormationChangeSetResponse'
+        '480':
           description: TooManyRequestsException
           schema:
-            $ref: "#/definitions/TooManyRequestsException"
-        "481":
+            $ref: '#/definitions/TooManyRequestsException'
+        '481':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "482":
+            $ref: '#/definitions/BadRequestException'
+        '482':
           description: InternalServerErrorException
           schema:
-            $ref: "#/definitions/InternalServerErrorException"
-        "483":
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
           description: ForbiddenException
           schema:
-            $ref: "#/definitions/ForbiddenException"
+            $ref: '#/definitions/ForbiddenException'
       parameters:
         - name: applicationId
           in: path
@@ -397,9 +365,8 @@ paths:
               - stackName
             properties:
               capabilities:
-                description: >-
-                  <p>A list of values that you must specify before you can
-                  deploy certain applications.
+                description: |-
+                  <p>A list of values that you must specify before you can deploy certain applications.
                    Some applications might include resources that can affect permissions in your AWS
                    account, for example, by creating new AWS Identity and Access Management (IAM) users.
                    For those applications, you must explicitly acknowledge their capabilities by
@@ -424,72 +391,56 @@ paths:
                    this parameter for an application that requires capabilities, the call will fail.</p>
                 type: array
                 items:
-                  $ref: "#/definitions/__string"
+                  $ref: '#/definitions/__string'
               changeSetName:
-                description: >-
-                  This property corresponds to the parameter of the same name
-                  for the <i>AWS CloudFormation <a
-                  href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
+                description: |-
+                  This property corresponds to the parameter of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
                    </i> API.
                 type: string
               clientToken:
-                description: >-
-                  This property corresponds to the parameter of the same name
-                  for the <i>AWS CloudFormation <a
-                  href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
+                description: |-
+                  This property corresponds to the parameter of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
                    </i> API.
                 type: string
               description:
-                description: >-
-                  This property corresponds to the parameter of the same name
-                  for the <i>AWS CloudFormation <a
-                  href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
+                description: |-
+                  This property corresponds to the parameter of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
                    </i> API.
                 type: string
               notificationArns:
-                description: >-
-                  This property corresponds to the parameter of the same name
-                  for the <i>AWS CloudFormation <a
-                  href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
+                description: |-
+                  This property corresponds to the parameter of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
                    </i> API.
                 type: array
                 items:
-                  $ref: "#/definitions/__string"
+                  $ref: '#/definitions/__string'
               parameterOverrides:
-                description: A list of parameter values for the parameters of the
-                  application.
+                description: A list of parameter values for the parameters of the application.
                 type: array
                 items:
-                  $ref: "#/definitions/ParameterValue"
+                  $ref: '#/definitions/ParameterValue'
               resourceTypes:
-                description: >-
-                  This property corresponds to the parameter of the same name
-                  for the <i>AWS CloudFormation <a
-                  href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
+                description: |-
+                  This property corresponds to the parameter of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
                    </i> API.
                 type: array
                 items:
-                  $ref: "#/definitions/__string"
+                  $ref: '#/definitions/__string'
               rollbackConfiguration:
-                description: >-
-                  This property corresponds to the <i>AWS CloudFormation <a
-                  href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a>
+                description: |-
+                  This property corresponds to the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a>
                    </i> Data Type.
                 type: object
                 properties:
                   MonitoringTimeInMinutes:
-                    $ref: "#/definitions/__integer"
-                    description: >-
-                      This property corresponds to the content of the same name
-                      for the <i>AWS CloudFormation <a
-                      href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a>
+                    $ref: '#/definitions/__integer'
+                    description: |-
+                      This property corresponds to the content of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a>
                        </i> Data Type.
                   RollbackTriggers:
-                    $ref: "#/definitions/__listOfRollbackTrigger"
-                    description: >-
-                      This property corresponds to the content of the same name
-                      for the <i>AWS CloudFormation <a
-                      href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a>
+                    $ref: '#/definitions/__listOfRollbackTrigger'
+                    description: |-
+                      This property corresponds to the content of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a>
                        </i> Data Type.
               semanticVersion:
                 description: |-
@@ -498,64 +449,57 @@ paths:
                    </p>
                 type: string
               stackName:
-                description: >-
-                  This property corresponds to the parameter of the same name
-                  for the <i>AWS CloudFormation <a
-                  href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
+                description: |-
+                  This property corresponds to the parameter of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
                    </i> API.
                 type: string
               tags:
-                description: >-
-                  This property corresponds to the parameter of the same name
-                  for the <i>AWS CloudFormation <a
-                  href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
+                description: |-
+                  This property corresponds to the parameter of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
                    </i> API.
                 type: array
                 items:
-                  $ref: "#/definitions/Tag"
+                  $ref: '#/definitions/Tag'
               templateId:
-                description: "<p>The UUID returned by
-                  CreateCloudFormationTemplate.</p><p>Pattern:
-                  [0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F\
-                  ]{4}\\-[0-9a-fA-F]{12}</p>"
+                description: '<p>The UUID returned by CreateCloudFormationTemplate.</p><p>Pattern: [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}</p>'
                 type: string
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  "/applications/{applicationId}/templates":
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/applications/{applicationId}/templates':
     post:
       operationId: CreateCloudFormationTemplate
       description: Creates an AWS CloudFormation template.
       responses:
-        "201":
+        '201':
           description: Success
           schema:
-            $ref: "#/definitions/CreateCloudFormationTemplateResponse"
-        "480":
+            $ref: '#/definitions/CreateCloudFormationTemplateResponse'
+        '480':
           description: NotFoundException
           schema:
-            $ref: "#/definitions/NotFoundException"
-        "481":
+            $ref: '#/definitions/NotFoundException'
+        '481':
           description: TooManyRequestsException
           schema:
-            $ref: "#/definitions/TooManyRequestsException"
-        "482":
+            $ref: '#/definitions/TooManyRequestsException'
+        '482':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "483":
+            $ref: '#/definitions/BadRequestException'
+        '483':
           description: InternalServerErrorException
           schema:
-            $ref: "#/definitions/InternalServerErrorException"
-        "484":
+            $ref: '#/definitions/InternalServerErrorException'
+        '484':
           description: ForbiddenException
           schema:
-            $ref: "#/definitions/ForbiddenException"
+            $ref: '#/definitions/ForbiddenException'
       parameters:
         - name: applicationId
           in: path
@@ -575,44 +519,44 @@ paths:
                    </p>
                 type: string
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  "/applications/{applicationId}":
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/applications/{applicationId}':
     delete:
       operationId: DeleteApplication
       description: Deletes the specified application.
       responses:
-        "204":
+        '204':
           description: Success
-        "480":
+        '480':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "481":
+            $ref: '#/definitions/BadRequestException'
+        '481':
           description: InternalServerErrorException
           schema:
-            $ref: "#/definitions/InternalServerErrorException"
-        "482":
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
           description: ForbiddenException
           schema:
-            $ref: "#/definitions/ForbiddenException"
-        "483":
+            $ref: '#/definitions/ForbiddenException'
+        '483':
           description: NotFoundException
           schema:
-            $ref: "#/definitions/NotFoundException"
-        "484":
+            $ref: '#/definitions/NotFoundException'
+        '484':
           description: TooManyRequestsException
           schema:
-            $ref: "#/definitions/TooManyRequestsException"
-        "485":
+            $ref: '#/definitions/TooManyRequestsException'
+        '485':
           description: ConflictException
           schema:
-            $ref: "#/definitions/ConflictException"
+            $ref: '#/definitions/ConflictException'
       parameters:
         - name: applicationId
           in: path
@@ -620,41 +564,41 @@ paths:
           description: The Amazon Resource Name (ARN) of the application.
           type: string
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetApplication
       description: Gets the specified application.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/GetApplicationResponse"
-        "480":
+            $ref: '#/definitions/GetApplicationResponse'
+        '480':
           description: NotFoundException
           schema:
-            $ref: "#/definitions/NotFoundException"
-        "481":
+            $ref: '#/definitions/NotFoundException'
+        '481':
           description: TooManyRequestsException
           schema:
-            $ref: "#/definitions/TooManyRequestsException"
-        "482":
+            $ref: '#/definitions/TooManyRequestsException'
+        '482':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "483":
+            $ref: '#/definitions/BadRequestException'
+        '483':
           description: InternalServerErrorException
           schema:
-            $ref: "#/definitions/InternalServerErrorException"
-        "484":
+            $ref: '#/definitions/InternalServerErrorException'
+        '484':
           description: ForbiddenException
           schema:
-            $ref: "#/definitions/ForbiddenException"
+            $ref: '#/definitions/ForbiddenException'
       parameters:
         - name: applicationId
           in: path
@@ -670,34 +614,34 @@ paths:
       operationId: UpdateApplication
       description: Updates the specified application.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/UpdateApplicationResponse"
-        "480":
+            $ref: '#/definitions/UpdateApplicationResponse'
+        '480':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "481":
+            $ref: '#/definitions/BadRequestException'
+        '481':
           description: InternalServerErrorException
           schema:
-            $ref: "#/definitions/InternalServerErrorException"
-        "482":
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
           description: ForbiddenException
           schema:
-            $ref: "#/definitions/ForbiddenException"
-        "483":
+            $ref: '#/definitions/ForbiddenException'
+        '483':
           description: NotFoundException
           schema:
-            $ref: "#/definitions/NotFoundException"
-        "484":
+            $ref: '#/definitions/NotFoundException'
+        '484':
           description: TooManyRequestsException
           schema:
-            $ref: "#/definitions/TooManyRequestsException"
-        "485":
+            $ref: '#/definitions/TooManyRequestsException'
+        '485':
           description: ConflictException
           schema:
-            $ref: "#/definitions/ConflictException"
+            $ref: '#/definitions/ConflictException'
       parameters:
         - name: applicationId
           in: path
@@ -711,65 +655,54 @@ paths:
             type: object
             properties:
               author:
-                description: <p>The name of the author publishing the app.</p><p>Minimum
-                  length=1. Maximum length=127.</p><p>Pattern
-                  "^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$";</p>
+                description: '<p>The name of the author publishing the app.</p><p>Minimum length=1. Maximum length=127.</p><p>Pattern "^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$";</p>'
                 type: string
               description:
-                description: <p>The description of the application.</p><p>Minimum length=1.
-                  Maximum length=256</p>
+                description: <p>The description of the application.</p><p>Minimum length=1. Maximum length=256</p>
                 type: string
               homePageUrl:
-                description: A URL with more information about the application, for example
-                  the location of your GitHub repository for the application.
+                description: 'A URL with more information about the application, for example the location of your GitHub repository for the application.'
                 type: string
               labels:
-                description: '<p>Labels to improve discovery of apps in search
-                  results.</p><p>Minimum length=1. Maximum length=127. Maximum
-                  number of labels: 10</p><p>Pattern:
-                  "^[a-zA-Z0-9+\\-_:\\/@]+$";</p>'
+                description: '<p>Labels to improve discovery of apps in search results.</p><p>Minimum length=1. Maximum length=127. Maximum number of labels: 10</p><p>Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";</p>'
                 type: array
                 items:
-                  $ref: "#/definitions/__string"
+                  $ref: '#/definitions/__string'
               readmeBody:
-                description: <p>A text readme file in Markdown language that contains a
-                  more detailed description of the application and how it
-                  works.</p><p>Maximum size 5 MB</p>
+                description: <p>A text readme file in Markdown language that contains a more detailed description of the application and how it works.</p><p>Maximum size 5 MB</p>
                 type: string
               readmeUrl:
-                description: <p>A link to the readme file in Markdown language that
-                  contains a more detailed description of the application and
-                  how it works.</p><p>Maximum size 5 MB</p>
+                description: <p>A link to the readme file in Markdown language that contains a more detailed description of the application and how it works.</p><p>Maximum size 5 MB</p>
                 type: string
-  "/applications/{applicationId}/policy":
+  '/applications/{applicationId}/policy':
     get:
       operationId: GetApplicationPolicy
       description: Retrieves the policy for the application.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/GetApplicationPolicyResponse"
-        "480":
+            $ref: '#/definitions/GetApplicationPolicyResponse'
+        '480':
           description: NotFoundException
           schema:
-            $ref: "#/definitions/NotFoundException"
-        "481":
+            $ref: '#/definitions/NotFoundException'
+        '481':
           description: TooManyRequestsException
           schema:
-            $ref: "#/definitions/TooManyRequestsException"
-        "482":
+            $ref: '#/definitions/TooManyRequestsException'
+        '482':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "483":
+            $ref: '#/definitions/BadRequestException'
+        '483':
           description: InternalServerErrorException
           schema:
-            $ref: "#/definitions/InternalServerErrorException"
-        "484":
+            $ref: '#/definitions/InternalServerErrorException'
+        '484':
           description: ForbiddenException
           schema:
-            $ref: "#/definitions/ForbiddenException"
+            $ref: '#/definitions/ForbiddenException'
       parameters:
         - name: applicationId
           in: path
@@ -777,46 +710,45 @@ paths:
           description: The Amazon Resource Name (ARN) of the application.
           type: string
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     put:
       operationId: PutApplicationPolicy
-      description: >-
-        Sets the permission policy for an application. For the list of actions
-        supported for this operation, see
+      description: |-
+        Sets the permission policy for an application. For the list of actions supported for this operation, see
          <a href="https://docs.aws.amazon.com/serverlessrepo/latest/devguide/access-control-resource-based.html#application-permissions">Application 
          Permissions</a>
          .
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/PutApplicationPolicyResponse"
-        "480":
+            $ref: '#/definitions/PutApplicationPolicyResponse'
+        '480':
           description: NotFoundException
           schema:
-            $ref: "#/definitions/NotFoundException"
-        "481":
+            $ref: '#/definitions/NotFoundException'
+        '481':
           description: TooManyRequestsException
           schema:
-            $ref: "#/definitions/TooManyRequestsException"
-        "482":
+            $ref: '#/definitions/TooManyRequestsException'
+        '482':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "483":
+            $ref: '#/definitions/BadRequestException'
+        '483':
           description: InternalServerErrorException
           schema:
-            $ref: "#/definitions/InternalServerErrorException"
-        "484":
+            $ref: '#/definitions/InternalServerErrorException'
+        '484':
           description: ForbiddenException
           schema:
-            $ref: "#/definitions/ForbiddenException"
+            $ref: '#/definitions/ForbiddenException'
       parameters:
         - name: applicationId
           in: path
@@ -835,36 +767,36 @@ paths:
                 description: An array of policy statements applied to the application.
                 type: array
                 items:
-                  $ref: "#/definitions/ApplicationPolicyStatement"
-  "/applications/{applicationId}/templates/{templateId}":
+                  $ref: '#/definitions/ApplicationPolicyStatement'
+  '/applications/{applicationId}/templates/{templateId}':
     get:
       operationId: GetCloudFormationTemplate
       description: Gets the specified AWS CloudFormation template.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/GetCloudFormationTemplateResponse"
-        "480":
+            $ref: '#/definitions/GetCloudFormationTemplateResponse'
+        '480':
           description: NotFoundException
           schema:
-            $ref: "#/definitions/NotFoundException"
-        "481":
+            $ref: '#/definitions/NotFoundException'
+        '481':
           description: TooManyRequestsException
           schema:
-            $ref: "#/definitions/TooManyRequestsException"
-        "482":
+            $ref: '#/definitions/TooManyRequestsException'
+        '482':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "483":
+            $ref: '#/definitions/BadRequestException'
+        '483':
           description: InternalServerErrorException
           schema:
-            $ref: "#/definitions/InternalServerErrorException"
-        "484":
+            $ref: '#/definitions/InternalServerErrorException'
+        '484':
           description: ForbiddenException
           schema:
-            $ref: "#/definitions/ForbiddenException"
+            $ref: '#/definitions/ForbiddenException'
       parameters:
         - name: applicationId
           in: path
@@ -874,48 +806,45 @@ paths:
         - name: templateId
           in: path
           required: true
-          description: "<p>The UUID returned by
-            CreateCloudFormationTemplate.</p><p>Pattern:
-            [0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\\
-            -[0-9a-fA-F]{12}</p>"
+          description: '<p>The UUID returned by CreateCloudFormationTemplate.</p><p>Pattern: [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}</p>'
           type: string
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  "/applications/{applicationId}/dependencies":
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/applications/{applicationId}/dependencies':
     get:
       operationId: ListApplicationDependencies
       description: Retrieves the list of applications nested in the containing application.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/ListApplicationDependenciesResponse"
-        "480":
+            $ref: '#/definitions/ListApplicationDependenciesResponse'
+        '480':
           description: NotFoundException
           schema:
-            $ref: "#/definitions/NotFoundException"
-        "481":
+            $ref: '#/definitions/NotFoundException'
+        '481':
           description: TooManyRequestsException
           schema:
-            $ref: "#/definitions/TooManyRequestsException"
-        "482":
+            $ref: '#/definitions/TooManyRequestsException'
+        '482':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "483":
+            $ref: '#/definitions/BadRequestException'
+        '483':
           description: InternalServerErrorException
           schema:
-            $ref: "#/definitions/InternalServerErrorException"
-        "484":
+            $ref: '#/definitions/InternalServerErrorException'
+        '484':
           description: ForbiddenException
           schema:
-            $ref: "#/definitions/ForbiddenException"
+            $ref: '#/definitions/ForbiddenException'
       parameters:
         - name: applicationId
           in: path
@@ -950,42 +879,42 @@ paths:
           description: Pagination token
           required: false
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  "/applications/{applicationId}/versions":
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/applications/{applicationId}/versions':
     get:
       operationId: ListApplicationVersions
       description: Lists versions for the specified application.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/ListApplicationVersionsResponse"
-        "480":
+            $ref: '#/definitions/ListApplicationVersionsResponse'
+        '480':
           description: NotFoundException
           schema:
-            $ref: "#/definitions/NotFoundException"
-        "481":
+            $ref: '#/definitions/NotFoundException'
+        '481':
           description: TooManyRequestsException
           schema:
-            $ref: "#/definitions/TooManyRequestsException"
-        "482":
+            $ref: '#/definitions/TooManyRequestsException'
+        '482':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "483":
+            $ref: '#/definitions/BadRequestException'
+        '483':
           description: InternalServerErrorException
           schema:
-            $ref: "#/definitions/InternalServerErrorException"
-        "484":
+            $ref: '#/definitions/InternalServerErrorException'
+        '484':
           description: ForbiddenException
           schema:
-            $ref: "#/definitions/ForbiddenException"
+            $ref: '#/definitions/ForbiddenException'
       parameters:
         - name: applicationId
           in: path
@@ -1015,59 +944,49 @@ paths:
           description: Pagination token
           required: false
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
   CreateApplicationResponse:
     type: object
     properties:
       ApplicationId:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: The application Amazon Resource Name (ARN).
       Author:
-        $ref: "#/definitions/__string"
-        description: <p>The name of the author publishing the app.</p><p>Minimum length=1.
-          Maximum length=127.</p><p>Pattern
-          "^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$";</p>
+        $ref: '#/definitions/__string'
+        description: '<p>The name of the author publishing the app.</p><p>Minimum length=1. Maximum length=127.</p><p>Pattern "^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$";</p>'
       CreationTime:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: The date and time this resource was created.
       Description:
-        $ref: "#/definitions/__string"
-        description: <p>The description of the application.</p><p>Minimum length=1. Maximum
-          length=256</p>
+        $ref: '#/definitions/__string'
+        description: <p>The description of the application.</p><p>Minimum length=1. Maximum length=256</p>
       HomePageUrl:
-        $ref: "#/definitions/__string"
-        description: A URL with more information about the application, for example the
-          location of your GitHub repository for the application.
+        $ref: '#/definitions/__string'
+        description: 'A URL with more information about the application, for example the location of your GitHub repository for the application.'
       Labels:
-        $ref: "#/definitions/__listOf__string"
-        description: '<p>Labels to improve discovery of apps in search
-          results.</p><p>Minimum length=1. Maximum length=127. Maximum number of
-          labels: 10</p><p>Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";</p>'
+        $ref: '#/definitions/__listOf__string'
+        description: '<p>Labels to improve discovery of apps in search results.</p><p>Minimum length=1. Maximum length=127. Maximum number of labels: 10</p><p>Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";</p>'
       LicenseUrl:
-        $ref: "#/definitions/__string"
-        description: <p>A link to a license file of the app that matches the spdxLicenseID
-          value of your application.</p><p>Maximum size 5 MB</p>
+        $ref: '#/definitions/__string'
+        description: <p>A link to a license file of the app that matches the spdxLicenseID value of your application.</p><p>Maximum size 5 MB</p>
       Name:
-        $ref: "#/definitions/__string"
-        description: '<p>The name of the application.</p><p>Minimum length=1. Maximum
-          length=140</p><p>Pattern: "[a-zA-Z0-9\\-]+";</p>'
+        $ref: '#/definitions/__string'
+        description: '<p>The name of the application.</p><p>Minimum length=1. Maximum length=140</p><p>Pattern: "[a-zA-Z0-9\\-]+";</p>'
       ReadmeUrl:
-        $ref: "#/definitions/__string"
-        description: <p>A link to the readme file in Markdown language that contains a more
-          detailed description of the application and how it
-          works.</p><p>Maximum size 5 MB</p>
+        $ref: '#/definitions/__string'
+        description: <p>A link to the readme file in Markdown language that contains a more detailed description of the application and how it works.</p><p>Maximum size 5 MB</p>
       SpdxLicenseId:
-        $ref: "#/definitions/__string"
-        description: A valid identifier from https://spdx.org/licenses/.
+        $ref: '#/definitions/__string'
+        description: 'A valid identifier from https://spdx.org/licenses/.'
       Version:
-        $ref: "#/definitions/Version"
+        $ref: '#/definitions/Version'
         description: Version information about the application.
   __string:
     type: string
@@ -1080,19 +999,18 @@ definitions:
     type: object
     properties:
       ApplicationId:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: The application Amazon Resource Name (ARN).
       CreationTime:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: The date and time this resource was created.
       ParameterDefinitions:
-        $ref: "#/definitions/__listOfParameterDefinition"
+        $ref: '#/definitions/__listOfParameterDefinition'
         description: An array of parameter types supported by the application.
       RequiredCapabilities:
-        $ref: "#/definitions/__listOfCapability"
-        description: >-
-          <p>A list of values that you must specify before you can deploy
-          certain applications.
+        $ref: '#/definitions/__listOfCapability'
+        description: |-
+          <p>A list of values that you must specify before you can deploy certain applications.
            Some applications might include resources that can affect permissions in your AWS
            account, for example, by creating new AWS Identity and Access Management (IAM) users.
            For those applications, you must explicitly acknowledge their capabilities by
@@ -1116,48 +1034,42 @@ definitions:
            all permissions associated with the application before deploying. If you don't specify
            this parameter for an application that requires capabilities, the call will fail.</p>
       ResourcesSupported:
-        $ref: "#/definitions/__boolean"
-        description: >-
-          Whether all of the AWS resources contained in this application are
-          supported in the region
+        $ref: '#/definitions/__boolean'
+        description: |-
+          Whether all of the AWS resources contained in this application are supported in the region
            in which it is being retrieved.
       SemanticVersion:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: |-
           <p>The semantic version of the application:</p><p>
            <a href="https://semver.org/">https://semver.org/</a>
            </p>
       SourceCodeArchiveUrl:
-        $ref: "#/definitions/__string"
-        description: <p>A link to the S3 object that contains the ZIP archive of the source
-          code for this version of your application.</p><p>Maximum size 50
-          MB</p>
+        $ref: '#/definitions/__string'
+        description: <p>A link to the S3 object that contains the ZIP archive of the source code for this version of your application.</p><p>Maximum size 50 MB</p>
       SourceCodeUrl:
-        $ref: "#/definitions/__string"
-        description: A link to a public repository for the source code of your application,
-          for example the URL of a specific GitHub commit.
+        $ref: '#/definitions/__string'
+        description: 'A link to a public repository for the source code of your application, for example the URL of a specific GitHub commit.'
       TemplateUrl:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: A link to the packaged AWS SAM template of your application.
   CreateCloudFormationChangeSetResponse:
     type: object
     properties:
       ApplicationId:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: The application Amazon Resource Name (ARN).
       ChangeSetId:
-        $ref: "#/definitions/__string"
-        description: "<p>The Amazon Resource Name (ARN) of the change set.</p><p>Length
-          constraints: Minimum length of 1.</p><p>Pattern:
-          ARN:[-a-zA-Z0-9:/]*</p>"
+        $ref: '#/definitions/__string'
+        description: '<p>The Amazon Resource Name (ARN) of the change set.</p><p>Length constraints: Minimum length of 1.</p><p>Pattern: ARN:[-a-zA-Z0-9:/]*</p>'
       SemanticVersion:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: |-
           <p>The semantic version of the application:</p><p>
            <a href="https://semver.org/">https://semver.org/</a>
            </p>
       StackId:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: The unique ID of the stack.
   ParameterValue:
     type: object
@@ -1166,13 +1078,12 @@ definitions:
       - Name
     properties:
       Name:
-        $ref: "#/definitions/__string"
-        description: >-
-          The key associated with the parameter. If you don't specify a key and
-          value for a particular parameter, AWS CloudFormation
+        $ref: '#/definitions/__string'
+        description: |-
+          The key associated with the parameter. If you don't specify a key and value for a particular parameter, AWS CloudFormation
            uses the default value that is specified in your template.
       Value:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: The input value associated with the parameter.
     description: Parameter value of the application.
   __integer:
@@ -1180,7 +1091,7 @@ definitions:
   __listOfRollbackTrigger:
     type: array
     items:
-      $ref: "#/definitions/RollbackTrigger"
+      $ref: '#/definitions/RollbackTrigger'
   Tag:
     type: object
     required:
@@ -1188,184 +1099,161 @@ definitions:
       - Key
     properties:
       Key:
-        $ref: "#/definitions/__string"
-        description: >-
-          This property corresponds to the content of the same name for the
-          <i>AWS CloudFormation <a
-          href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag">Tag</a>
+        $ref: '#/definitions/__string'
+        description: |-
+          This property corresponds to the content of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag">Tag</a>
            </i> Data Type.
       Value:
-        $ref: "#/definitions/__string"
-        description: >-
-          This property corresponds to the content of the same name for the
-          <i>AWS CloudFormation <a
-          href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag">
+        $ref: '#/definitions/__string'
+        description: |-
+          This property corresponds to the content of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag">
            Tag</a>
            </i>
            Data Type.
-    description: >-
-      This property corresponds to the <i>AWS CloudFormation <a
-      href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag">Tag</a>
+    description: |-
+      This property corresponds to the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag">Tag</a>
        </i> Data Type.
   CreateCloudFormationTemplateResponse:
     type: object
     properties:
       ApplicationId:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: The application Amazon Resource Name (ARN).
       CreationTime:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: The date and time this resource was created.
       ExpirationTime:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: |-
           The date and time this template expires. Templates
            expire 1 hour after creation.
       SemanticVersion:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: |-
           <p>The semantic version of the application:</p><p>
            <a href="https://semver.org/">https://semver.org/</a>
            </p>
       Status:
-        $ref: "#/definitions/Status"
-        description: >-
-          <p>Status of the template creation workflow.</p><p>Possible values:
-          PREPARING | ACTIVE | EXPIRED
+        $ref: '#/definitions/Status'
+        description: |-
+          <p>Status of the template creation workflow.</p><p>Possible values: PREPARING | ACTIVE | EXPIRED
            </p>
       TemplateId:
-        $ref: "#/definitions/__string"
-        description: "<p>The UUID returned by CreateCloudFormationTemplate.</p><p>Pattern:
-          [0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[\
-          0-9a-fA-F]{12}</p>"
+        $ref: '#/definitions/__string'
+        description: '<p>The UUID returned by CreateCloudFormationTemplate.</p><p>Pattern: [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}</p>'
       TemplateUrl:
-        $ref: "#/definitions/__string"
-        description: >-
-          A link to the template that can be used to deploy the application
-          using
+        $ref: '#/definitions/__string'
+        description: |-
+          A link to the template that can be used to deploy the application using
            AWS CloudFormation.
   NotFoundException: {}
   GetApplicationResponse:
     type: object
     properties:
       ApplicationId:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: The application Amazon Resource Name (ARN).
       Author:
-        $ref: "#/definitions/__string"
-        description: <p>The name of the author publishing the app.</p><p>Minimum length=1.
-          Maximum length=127.</p><p>Pattern
-          "^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$";</p>
+        $ref: '#/definitions/__string'
+        description: '<p>The name of the author publishing the app.</p><p>Minimum length=1. Maximum length=127.</p><p>Pattern "^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$";</p>'
       CreationTime:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: The date and time this resource was created.
       Description:
-        $ref: "#/definitions/__string"
-        description: <p>The description of the application.</p><p>Minimum length=1. Maximum
-          length=256</p>
+        $ref: '#/definitions/__string'
+        description: <p>The description of the application.</p><p>Minimum length=1. Maximum length=256</p>
       HomePageUrl:
-        $ref: "#/definitions/__string"
-        description: A URL with more information about the application, for example the
-          location of your GitHub repository for the application.
+        $ref: '#/definitions/__string'
+        description: 'A URL with more information about the application, for example the location of your GitHub repository for the application.'
       Labels:
-        $ref: "#/definitions/__listOf__string"
-        description: '<p>Labels to improve discovery of apps in search
-          results.</p><p>Minimum length=1. Maximum length=127. Maximum number of
-          labels: 10</p><p>Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";</p>'
+        $ref: '#/definitions/__listOf__string'
+        description: '<p>Labels to improve discovery of apps in search results.</p><p>Minimum length=1. Maximum length=127. Maximum number of labels: 10</p><p>Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";</p>'
       LicenseUrl:
-        $ref: "#/definitions/__string"
-        description: <p>A link to a license file of the app that matches the spdxLicenseID
-          value of your application.</p><p>Maximum size 5 MB</p>
+        $ref: '#/definitions/__string'
+        description: <p>A link to a license file of the app that matches the spdxLicenseID value of your application.</p><p>Maximum size 5 MB</p>
       Name:
-        $ref: "#/definitions/__string"
-        description: '<p>The name of the application.</p><p>Minimum length=1. Maximum
-          length=140</p><p>Pattern: "[a-zA-Z0-9\\-]+";</p>'
+        $ref: '#/definitions/__string'
+        description: '<p>The name of the application.</p><p>Minimum length=1. Maximum length=140</p><p>Pattern: "[a-zA-Z0-9\\-]+";</p>'
       ReadmeUrl:
-        $ref: "#/definitions/__string"
-        description: <p>A link to the readme file in Markdown language that contains a more
-          detailed description of the application and how it
-          works.</p><p>Maximum size 5 MB</p>
+        $ref: '#/definitions/__string'
+        description: <p>A link to the readme file in Markdown language that contains a more detailed description of the application and how it works.</p><p>Maximum size 5 MB</p>
       SpdxLicenseId:
-        $ref: "#/definitions/__string"
-        description: A valid identifier from https://spdx.org/licenses/.
+        $ref: '#/definitions/__string'
+        description: 'A valid identifier from https://spdx.org/licenses/.'
       Version:
-        $ref: "#/definitions/Version"
+        $ref: '#/definitions/Version'
         description: Version information about the application.
   GetApplicationPolicyResponse:
     type: object
     properties:
       Statements:
-        $ref: "#/definitions/__listOfApplicationPolicyStatement"
+        $ref: '#/definitions/__listOfApplicationPolicyStatement'
         description: An array of policy statements applied to the application.
   GetCloudFormationTemplateResponse:
     type: object
     properties:
       ApplicationId:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: The application Amazon Resource Name (ARN).
       CreationTime:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: The date and time this resource was created.
       ExpirationTime:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: |-
           The date and time this template expires. Templates
            expire 1 hour after creation.
       SemanticVersion:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: |-
           <p>The semantic version of the application:</p><p>
            <a href="https://semver.org/">https://semver.org/</a>
            </p>
       Status:
-        $ref: "#/definitions/Status"
-        description: >-
-          <p>Status of the template creation workflow.</p><p>Possible values:
-          PREPARING | ACTIVE | EXPIRED
+        $ref: '#/definitions/Status'
+        description: |-
+          <p>Status of the template creation workflow.</p><p>Possible values: PREPARING | ACTIVE | EXPIRED
            </p>
       TemplateId:
-        $ref: "#/definitions/__string"
-        description: "<p>The UUID returned by CreateCloudFormationTemplate.</p><p>Pattern:
-          [0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[\
-          0-9a-fA-F]{12}</p>"
+        $ref: '#/definitions/__string'
+        description: '<p>The UUID returned by CreateCloudFormationTemplate.</p><p>Pattern: [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}</p>'
       TemplateUrl:
-        $ref: "#/definitions/__string"
-        description: >-
-          A link to the template that can be used to deploy the application
-          using
+        $ref: '#/definitions/__string'
+        description: |-
+          A link to the template that can be used to deploy the application using
            AWS CloudFormation.
   ListApplicationDependenciesResponse:
     type: object
     properties:
       Dependencies:
-        $ref: "#/definitions/__listOfApplicationDependencySummary"
+        $ref: '#/definitions/__listOfApplicationDependencySummary'
         description: An array of application summaries nested in the application.
       NextToken:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: The token to request the next page of results.
   ListApplicationVersionsResponse:
     type: object
     properties:
       NextToken:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: The token to request the next page of results.
       Versions:
-        $ref: "#/definitions/__listOfVersionSummary"
+        $ref: '#/definitions/__listOfVersionSummary'
         description: An array of version summaries for the application.
   ListApplicationsResponse:
     type: object
     properties:
       Applications:
-        $ref: "#/definitions/__listOfApplicationSummary"
+        $ref: '#/definitions/__listOfApplicationSummary'
         description: An array of application summaries.
       NextToken:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: The token to request the next page of results.
   PutApplicationPolicyResponse:
     type: object
     properties:
       Statements:
-        $ref: "#/definitions/__listOfApplicationPolicyStatement"
+        $ref: '#/definitions/__listOfApplicationPolicyStatement'
         description: An array of policy statements applied to the application.
   ApplicationPolicyStatement:
     type: object
@@ -1374,63 +1262,52 @@ definitions:
       - Actions
     properties:
       Actions:
-        $ref: "#/definitions/__listOf__string"
-        description: >-
-          For the list of actions supported for this operation, see <a
-          href="https://docs.aws.amazon.com/serverlessrepo/latest/devguide/access-control-resource-based.html#application-permissions">Application 
+        $ref: '#/definitions/__listOf__string'
+        description: |-
+          For the list of actions supported for this operation, see <a href="https://docs.aws.amazon.com/serverlessrepo/latest/devguide/access-control-resource-based.html#application-permissions">Application 
            Permissions</a>.
       Principals:
-        $ref: "#/definitions/__listOf__string"
-        description: An array of AWS account IDs, or * to make the application public.
+        $ref: '#/definitions/__listOf__string'
+        description: 'An array of AWS account IDs, or * to make the application public.'
       StatementId:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: A unique ID for the statement.
     description: Policy statement applied to the application.
   UpdateApplicationResponse:
     type: object
     properties:
       ApplicationId:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: The application Amazon Resource Name (ARN).
       Author:
-        $ref: "#/definitions/__string"
-        description: <p>The name of the author publishing the app.</p><p>Minimum length=1.
-          Maximum length=127.</p><p>Pattern
-          "^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$";</p>
+        $ref: '#/definitions/__string'
+        description: '<p>The name of the author publishing the app.</p><p>Minimum length=1. Maximum length=127.</p><p>Pattern "^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$";</p>'
       CreationTime:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: The date and time this resource was created.
       Description:
-        $ref: "#/definitions/__string"
-        description: <p>The description of the application.</p><p>Minimum length=1. Maximum
-          length=256</p>
+        $ref: '#/definitions/__string'
+        description: <p>The description of the application.</p><p>Minimum length=1. Maximum length=256</p>
       HomePageUrl:
-        $ref: "#/definitions/__string"
-        description: A URL with more information about the application, for example the
-          location of your GitHub repository for the application.
+        $ref: '#/definitions/__string'
+        description: 'A URL with more information about the application, for example the location of your GitHub repository for the application.'
       Labels:
-        $ref: "#/definitions/__listOf__string"
-        description: '<p>Labels to improve discovery of apps in search
-          results.</p><p>Minimum length=1. Maximum length=127. Maximum number of
-          labels: 10</p><p>Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";</p>'
+        $ref: '#/definitions/__listOf__string'
+        description: '<p>Labels to improve discovery of apps in search results.</p><p>Minimum length=1. Maximum length=127. Maximum number of labels: 10</p><p>Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";</p>'
       LicenseUrl:
-        $ref: "#/definitions/__string"
-        description: <p>A link to a license file of the app that matches the spdxLicenseID
-          value of your application.</p><p>Maximum size 5 MB</p>
+        $ref: '#/definitions/__string'
+        description: <p>A link to a license file of the app that matches the spdxLicenseID value of your application.</p><p>Maximum size 5 MB</p>
       Name:
-        $ref: "#/definitions/__string"
-        description: '<p>The name of the application.</p><p>Minimum length=1. Maximum
-          length=140</p><p>Pattern: "[a-zA-Z0-9\\-]+";</p>'
+        $ref: '#/definitions/__string'
+        description: '<p>The name of the application.</p><p>Minimum length=1. Maximum length=140</p><p>Pattern: "[a-zA-Z0-9\\-]+";</p>'
       ReadmeUrl:
-        $ref: "#/definitions/__string"
-        description: <p>A link to the readme file in Markdown language that contains a more
-          detailed description of the application and how it
-          works.</p><p>Maximum size 5 MB</p>
+        $ref: '#/definitions/__string'
+        description: <p>A link to the readme file in Markdown language that contains a more detailed description of the application and how it works.</p><p>Maximum size 5 MB</p>
       SpdxLicenseId:
-        $ref: "#/definitions/__string"
-        description: A valid identifier from https://spdx.org/licenses/.
+        $ref: '#/definitions/__string'
+        description: 'A valid identifier from https://spdx.org/licenses/.'
       Version:
-        $ref: "#/definitions/Version"
+        $ref: '#/definitions/Version'
         description: Version information about the application.
   ApplicationDependencySummary:
     type: object
@@ -1439,16 +1316,16 @@ definitions:
       - SemanticVersion
     properties:
       ApplicationId:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: The Amazon Resource Name (ARN) of the nested application.
       SemanticVersion:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: The semantic version of the nested application.
     description: A nested application summary.
   __listOf__string:
     type: array
     items:
-      $ref: "#/definitions/__string"
+      $ref: '#/definitions/__string'
   ApplicationSummary:
     type: object
     required:
@@ -1458,37 +1335,29 @@ definitions:
       - Name
     properties:
       ApplicationId:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: The application Amazon Resource Name (ARN).
       Author:
-        $ref: "#/definitions/__string"
-        description: <p>The name of the author publishing the app.</p><p>Minimum length=1.
-          Maximum length=127.</p><p>Pattern
-          "^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$";</p>
+        $ref: '#/definitions/__string'
+        description: '<p>The name of the author publishing the app.</p><p>Minimum length=1. Maximum length=127.</p><p>Pattern "^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$";</p>'
       CreationTime:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: The date and time this resource was created.
       Description:
-        $ref: "#/definitions/__string"
-        description: <p>The description of the application.</p><p>Minimum length=1. Maximum
-          length=256</p>
+        $ref: '#/definitions/__string'
+        description: <p>The description of the application.</p><p>Minimum length=1. Maximum length=256</p>
       HomePageUrl:
-        $ref: "#/definitions/__string"
-        description: A URL with more information about the application, for example the
-          location of your GitHub repository for the application.
+        $ref: '#/definitions/__string'
+        description: 'A URL with more information about the application, for example the location of your GitHub repository for the application.'
       Labels:
-        $ref: "#/definitions/__listOf__string"
-        description: '<p>Labels to improve discovery of apps in search
-          results.</p><p>Minimum length=1. Maximum length=127. Maximum number of
-          labels: 10</p><p>Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";</p>'
+        $ref: '#/definitions/__listOf__string'
+        description: '<p>Labels to improve discovery of apps in search results.</p><p>Minimum length=1. Maximum length=127. Maximum number of labels: 10</p><p>Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";</p>'
       Name:
-        $ref: "#/definitions/__string"
-        description: '<p>The name of the application.</p><p>Minimum length=1. Maximum
-          length=140</p><p>Pattern: "[a-zA-Z0-9\\-]+";</p>'
+        $ref: '#/definitions/__string'
+        description: '<p>The name of the application.</p><p>Minimum length=1. Maximum length=140</p><p>Pattern: "[a-zA-Z0-9\\-]+";</p>'
       SpdxLicenseId:
-        $ref: "#/definitions/__string"
-        description: A valid identifier from <a
-          href="https://spdx.org/licenses/">https://spdx.org/licenses/</a>.
+        $ref: '#/definitions/__string'
+        description: 'A valid identifier from <a href="https://spdx.org/licenses/">https://spdx.org/licenses/</a>.'
     description: Summary of details about the application.
   Capability:
     type: string
@@ -1506,81 +1375,59 @@ definitions:
       - Author
     properties:
       Author:
-        $ref: "#/definitions/__string"
-        description: <p>The name of the author publishing the app.</p><p>Minimum length=1.
-          Maximum length=127.</p><p>Pattern
-          "^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$";</p>
+        $ref: '#/definitions/__string'
+        description: '<p>The name of the author publishing the app.</p><p>Minimum length=1. Maximum length=127.</p><p>Pattern "^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$";</p>'
       Description:
-        $ref: "#/definitions/__string"
-        description: <p>The description of the application.</p><p>Minimum length=1. Maximum
-          length=256</p>
+        $ref: '#/definitions/__string'
+        description: <p>The description of the application.</p><p>Minimum length=1. Maximum length=256</p>
       HomePageUrl:
-        $ref: "#/definitions/__string"
-        description: A URL with more information about the application, for example the
-          location of your GitHub repository for the application.
+        $ref: '#/definitions/__string'
+        description: 'A URL with more information about the application, for example the location of your GitHub repository for the application.'
       Labels:
-        $ref: "#/definitions/__listOf__string"
-        description: '<p>Labels to improve discovery of apps in search
-          results.</p><p>Minimum length=1. Maximum length=127. Maximum number of
-          labels: 10</p><p>Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";</p>'
+        $ref: '#/definitions/__listOf__string'
+        description: '<p>Labels to improve discovery of apps in search results.</p><p>Minimum length=1. Maximum length=127. Maximum number of labels: 10</p><p>Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";</p>'
       LicenseBody:
-        $ref: "#/definitions/__string"
-        description: >-
-          <p>A local text file that contains the license of the app that matches
-          the spdxLicenseID value of your application.
+        $ref: '#/definitions/__string'
+        description: |-
+          <p>A local text file that contains the license of the app that matches the spdxLicenseID value of your application.
            The file has the format file://&lt;path>/&lt;filename>.</p><p>Maximum size 5 MB</p><p>You can specify only one of licenseBody and licenseUrl; otherwise, an error results.</p>
       LicenseUrl:
-        $ref: "#/definitions/__string"
-        description: <p>A link to the S3 object that contains the license of the app that
-          matches the spdxLicenseID value of your application.</p><p>Maximum
-          size 5 MB</p><p>You can specify only one of licenseBody and
-          licenseUrl; otherwise, an error results.</p>
+        $ref: '#/definitions/__string'
+        description: '<p>A link to the S3 object that contains the license of the app that matches the spdxLicenseID value of your application.</p><p>Maximum size 5 MB</p><p>You can specify only one of licenseBody and licenseUrl; otherwise, an error results.</p>'
       Name:
-        $ref: "#/definitions/__string"
-        description: '<p>The name of the application that you want to
-          publish.</p><p>Minimum length=1. Maximum length=140</p><p>Pattern:
-          "[a-zA-Z0-9\\-]+";</p>'
+        $ref: '#/definitions/__string'
+        description: '<p>The name of the application that you want to publish.</p><p>Minimum length=1. Maximum length=140</p><p>Pattern: "[a-zA-Z0-9\\-]+";</p>'
       ReadmeBody:
-        $ref: "#/definitions/__string"
-        description: >-
-          <p>A local text readme file in Markdown language that contains a more
-          detailed description of the application and how it works.
+        $ref: '#/definitions/__string'
+        description: |-
+          <p>A local text readme file in Markdown language that contains a more detailed description of the application and how it works.
            The file has the format file://&lt;path>/&lt;filename>.</p><p>Maximum size 5 MB</p><p>You can specify only one of readmeBody and readmeUrl; otherwise, an error results.</p>
       ReadmeUrl:
-        $ref: "#/definitions/__string"
-        description: <p>A link to the S3 object in Markdown language that contains a more
-          detailed description of the application and how it
-          works.</p><p>Maximum size 5 MB</p><p>You can specify only one of
-          readmeBody and readmeUrl; otherwise, an error results.</p>
+        $ref: '#/definitions/__string'
+        description: '<p>A link to the S3 object in Markdown language that contains a more detailed description of the application and how it works.</p><p>Maximum size 5 MB</p><p>You can specify only one of readmeBody and readmeUrl; otherwise, an error results.</p>'
       SemanticVersion:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: |-
           <p>The semantic version of the application:</p><p>
            <a href="https://semver.org/">https://semver.org/</a>
            </p>
       SourceCodeArchiveUrl:
-        $ref: "#/definitions/__string"
-        description: <p>A link to the S3 object that contains the ZIP archive of the source
-          code for this version of your application.</p><p>Maximum size 50
-          MB</p>
+        $ref: '#/definitions/__string'
+        description: <p>A link to the S3 object that contains the ZIP archive of the source code for this version of your application.</p><p>Maximum size 50 MB</p>
       SourceCodeUrl:
-        $ref: "#/definitions/__string"
-        description: A link to a public repository for the source code of your application,
-          for example the URL of a specific GitHub commit.
+        $ref: '#/definitions/__string'
+        description: 'A link to a public repository for the source code of your application, for example the URL of a specific GitHub commit.'
       SpdxLicenseId:
-        $ref: "#/definitions/__string"
-        description: A valid identifier from <a
-          href="https://spdx.org/licenses/">https://spdx.org/licenses/</a>.
+        $ref: '#/definitions/__string'
+        description: 'A valid identifier from <a href="https://spdx.org/licenses/">https://spdx.org/licenses/</a>.'
       TemplateBody:
-        $ref: "#/definitions/__string"
-        description: >-
+        $ref: '#/definitions/__string'
+        description: |-
           <p>The local raw packaged AWS SAM template file of your application.
            The file has the format file://&lt;path>/&lt;filename>.</p><p>You can specify only one of templateBody and templateUrl; otherwise an error results.</p>
       TemplateUrl:
-        $ref: "#/definitions/__string"
-        description: <p>A link to the S3 object containing the packaged AWS SAM template of
-          your application.</p><p>You can specify only one of templateBody and
-          templateUrl; otherwise an error results.</p>
+        $ref: '#/definitions/__string'
+        description: <p>A link to the S3 object containing the packaged AWS SAM template of your application.</p><p>You can specify only one of templateBody and templateUrl; otherwise an error results.</p>
   Version:
     type: object
     required:
@@ -1593,19 +1440,18 @@ definitions:
       - SemanticVersion
     properties:
       ApplicationId:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: The application Amazon Resource Name (ARN).
       CreationTime:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: The date and time this resource was created.
       ParameterDefinitions:
-        $ref: "#/definitions/__listOfParameterDefinition"
+        $ref: '#/definitions/__listOfParameterDefinition'
         description: An array of parameter types supported by the application.
       RequiredCapabilities:
-        $ref: "#/definitions/__listOfCapability"
-        description: >-
-          <p>A list of values that you must specify before you can deploy
-          certain applications.
+        $ref: '#/definitions/__listOfCapability'
+        description: |-
+          <p>A list of values that you must specify before you can deploy certain applications.
            Some applications might include resources that can affect permissions in your AWS
            account, for example, by creating new AWS Identity and Access Management (IAM) users.
            For those applications, you must explicitly acknowledge their capabilities by
@@ -1629,97 +1475,84 @@ definitions:
            all permissions associated with the application before deploying. If you don't specify
            this parameter for an application that requires capabilities, the call will fail.</p>
       ResourcesSupported:
-        $ref: "#/definitions/__boolean"
-        description: >-
-          Whether all of the AWS resources contained in this application are
-          supported in the region
+        $ref: '#/definitions/__boolean'
+        description: |-
+          Whether all of the AWS resources contained in this application are supported in the region
            in which it is being retrieved.
       SemanticVersion:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: |-
           <p>The semantic version of the application:</p><p>
            <a href="https://semver.org/">https://semver.org/</a>
            </p>
       SourceCodeArchiveUrl:
-        $ref: "#/definitions/__string"
-        description: <p>A link to the S3 object that contains the ZIP archive of the source
-          code for this version of your application.</p><p>Maximum size 50
-          MB</p>
+        $ref: '#/definitions/__string'
+        description: <p>A link to the S3 object that contains the ZIP archive of the source code for this version of your application.</p><p>Maximum size 50 MB</p>
       SourceCodeUrl:
-        $ref: "#/definitions/__string"
-        description: A link to a public repository for the source code of your application,
-          for example the URL of a specific GitHub commit.
+        $ref: '#/definitions/__string'
+        description: 'A link to a public repository for the source code of your application, for example the URL of a specific GitHub commit.'
       TemplateUrl:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: A link to the packaged AWS SAM template of your application.
     description: Application version details.
   CreateApplicationVersionRequest:
     type: object
     properties:
       SourceCodeArchiveUrl:
-        $ref: "#/definitions/__string"
-        description: <p>A link to the S3 object that contains the ZIP archive of the source
-          code for this version of your application.</p><p>Maximum size 50
-          MB</p>
+        $ref: '#/definitions/__string'
+        description: <p>A link to the S3 object that contains the ZIP archive of the source code for this version of your application.</p><p>Maximum size 50 MB</p>
       SourceCodeUrl:
-        $ref: "#/definitions/__string"
-        description: A link to a public repository for the source code of your application,
-          for example the URL of a specific GitHub commit.
+        $ref: '#/definitions/__string'
+        description: 'A link to a public repository for the source code of your application, for example the URL of a specific GitHub commit.'
       TemplateBody:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: The raw packaged AWS SAM template of your application.
       TemplateUrl:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: A link to the packaged AWS SAM template of your application.
   __listOfParameterDefinition:
     type: array
     items:
-      $ref: "#/definitions/ParameterDefinition"
+      $ref: '#/definitions/ParameterDefinition'
   __listOfCapability:
     type: array
     items:
-      $ref: "#/definitions/Capability"
+      $ref: '#/definitions/Capability'
   __boolean:
     type: boolean
   __listOfParameterValue:
     type: array
     items:
-      $ref: "#/definitions/ParameterValue"
+      $ref: '#/definitions/ParameterValue'
   RollbackConfiguration:
     type: object
     properties:
       MonitoringTimeInMinutes:
-        $ref: "#/definitions/__integer"
-        description: >-
-          This property corresponds to the content of the same name for the
-          <i>AWS CloudFormation <a
-          href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a>
+        $ref: '#/definitions/__integer'
+        description: |-
+          This property corresponds to the content of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a>
            </i> Data Type.
       RollbackTriggers:
-        $ref: "#/definitions/__listOfRollbackTrigger"
-        description: >-
-          This property corresponds to the content of the same name for the
-          <i>AWS CloudFormation <a
-          href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a>
+        $ref: '#/definitions/__listOfRollbackTrigger'
+        description: |-
+          This property corresponds to the content of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a>
            </i> Data Type.
-    description: >-
-      This property corresponds to the <i>AWS CloudFormation <a
-      href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a>
+    description: |-
+      This property corresponds to the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a>
        </i> Data Type.
   __listOfTag:
     type: array
     items:
-      $ref: "#/definitions/Tag"
+      $ref: '#/definitions/Tag'
   CreateCloudFormationChangeSetRequest:
     type: object
     required:
       - StackName
     properties:
       Capabilities:
-        $ref: "#/definitions/__listOf__string"
-        description: >-
-          <p>A list of values that you must specify before you can deploy
-          certain applications.
+        $ref: '#/definitions/__listOf__string'
+        description: |-
+          <p>A list of values that you must specify before you can deploy certain applications.
            Some applications might include resources that can affect permissions in your AWS
            account, for example, by creating new AWS Identity and Access Management (IAM) users.
            For those applications, you must explicitly acknowledge their capabilities by
@@ -1743,80 +1576,62 @@ definitions:
            all permissions associated with the application before deploying. If you don't specify
            this parameter for an application that requires capabilities, the call will fail.</p>
       ChangeSetName:
-        $ref: "#/definitions/__string"
-        description: >-
-          This property corresponds to the parameter of the same name for the
-          <i>AWS CloudFormation <a
-          href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
+        $ref: '#/definitions/__string'
+        description: |-
+          This property corresponds to the parameter of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
            </i> API.
       ClientToken:
-        $ref: "#/definitions/__string"
-        description: >-
-          This property corresponds to the parameter of the same name for the
-          <i>AWS CloudFormation <a
-          href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
+        $ref: '#/definitions/__string'
+        description: |-
+          This property corresponds to the parameter of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
            </i> API.
       Description:
-        $ref: "#/definitions/__string"
-        description: >-
-          This property corresponds to the parameter of the same name for the
-          <i>AWS CloudFormation <a
-          href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
+        $ref: '#/definitions/__string'
+        description: |-
+          This property corresponds to the parameter of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
            </i> API.
       NotificationArns:
-        $ref: "#/definitions/__listOf__string"
-        description: >-
-          This property corresponds to the parameter of the same name for the
-          <i>AWS CloudFormation <a
-          href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
+        $ref: '#/definitions/__listOf__string'
+        description: |-
+          This property corresponds to the parameter of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
            </i> API.
       ParameterOverrides:
-        $ref: "#/definitions/__listOfParameterValue"
+        $ref: '#/definitions/__listOfParameterValue'
         description: A list of parameter values for the parameters of the application.
       ResourceTypes:
-        $ref: "#/definitions/__listOf__string"
-        description: >-
-          This property corresponds to the parameter of the same name for the
-          <i>AWS CloudFormation <a
-          href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
+        $ref: '#/definitions/__listOf__string'
+        description: |-
+          This property corresponds to the parameter of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
            </i> API.
       RollbackConfiguration:
-        $ref: "#/definitions/RollbackConfiguration"
-        description: >-
-          This property corresponds to the parameter of the same name for the
-          <i>AWS CloudFormation <a
-          href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
+        $ref: '#/definitions/RollbackConfiguration'
+        description: |-
+          This property corresponds to the parameter of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
            </i> API.
       SemanticVersion:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: |-
           <p>The semantic version of the application:</p><p>
            <a href="https://semver.org/">https://semver.org/</a>
            </p>
       StackName:
-        $ref: "#/definitions/__string"
-        description: >-
-          This property corresponds to the parameter of the same name for the
-          <i>AWS CloudFormation <a
-          href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
+        $ref: '#/definitions/__string'
+        description: |-
+          This property corresponds to the parameter of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
            </i> API.
       Tags:
-        $ref: "#/definitions/__listOfTag"
-        description: >-
-          This property corresponds to the parameter of the same name for the
-          <i>AWS CloudFormation <a
-          href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
+        $ref: '#/definitions/__listOfTag'
+        description: |-
+          This property corresponds to the parameter of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
            </i> API.
       TemplateId:
-        $ref: "#/definitions/__string"
-        description: "<p>The UUID returned by CreateCloudFormationTemplate.</p><p>Pattern:
-          [0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[\
-          0-9a-fA-F]{12}</p>"
+        $ref: '#/definitions/__string'
+        description: '<p>The UUID returned by CreateCloudFormationTemplate.</p><p>Pattern: [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}</p>'
   CreateCloudFormationTemplateRequest:
     type: object
     properties:
       SemanticVersion:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: |-
           <p>The semantic version of the application:</p><p>
            <a href="https://semver.org/">https://semver.org/</a>
@@ -1836,7 +1651,7 @@ definitions:
   __listOfApplicationPolicyStatement:
     type: array
     items:
-      $ref: "#/definitions/ApplicationPolicyStatement"
+      $ref: '#/definitions/ApplicationPolicyStatement'
   GetApplicationRequest:
     type: object
     properties: {}
@@ -1853,21 +1668,21 @@ definitions:
   __listOfApplicationDependencySummary:
     type: array
     items:
-      $ref: "#/definitions/ApplicationDependencySummary"
+      $ref: '#/definitions/ApplicationDependencySummary'
   ListApplicationVersionsRequest:
     type: object
     properties: {}
   __listOfVersionSummary:
     type: array
     items:
-      $ref: "#/definitions/VersionSummary"
+      $ref: '#/definitions/VersionSummary'
   ListApplicationsRequest:
     type: object
     properties: {}
   __listOfApplicationSummary:
     type: array
     items:
-      $ref: "#/definitions/ApplicationSummary"
+      $ref: '#/definitions/ApplicationSummary'
   ParameterDefinition:
     type: object
     required:
@@ -1875,17 +1690,15 @@ definitions:
       - Name
     properties:
       AllowedPattern:
-        $ref: "#/definitions/__string"
-        description: A regular expression that represents the patterns to allow for String
-          types.
+        $ref: '#/definitions/__string'
+        description: A regular expression that represents the patterns to allow for String types.
       AllowedValues:
-        $ref: "#/definitions/__listOf__string"
+        $ref: '#/definitions/__listOf__string'
         description: An array containing the list of values allowed for the parameter.
       ConstraintDescription:
-        $ref: "#/definitions/__string"
-        description: >-
-          <p>A string that explains a constraint when the constraint is
-          violated. For example, without a constraint description,
+        $ref: '#/definitions/__string'
+        description: |-
+          <p>A string that explains a constraint when the constraint is violated. For example, without a constraint description,
            a parameter that has an allowed pattern of [A-Za-z0-9]+ displays the following error message when the user
            specifies an invalid value:</p><p>
            Malformed input-Parameter MyParameter must match pattern [A-Za-z0-9]+
@@ -1894,47 +1707,40 @@ definitions:
            Malformed input-Parameter MyParameter must contain only uppercase and lowercase letters and numbers.
            </p>
       DefaultValue:
-        $ref: "#/definitions/__string"
-        description: >-
-          A value of the appropriate type for the template to use if no value is
-          specified when a stack is created.
+        $ref: '#/definitions/__string'
+        description: |-
+          A value of the appropriate type for the template to use if no value is specified when a stack is created.
            If you define constraints for the parameter, you must specify a value that adheres to those constraints.
       Description:
-        $ref: "#/definitions/__string"
-        description: A string of up to 4,000 characters that describes the parameter.
+        $ref: '#/definitions/__string'
+        description: 'A string of up to 4,000 characters that describes the parameter.'
       MaxLength:
-        $ref: "#/definitions/__integer"
-        description: An integer value that determines the largest number of characters that
-          you want to allow for String types.
+        $ref: '#/definitions/__integer'
+        description: An integer value that determines the largest number of characters that you want to allow for String types.
       MaxValue:
-        $ref: "#/definitions/__integer"
-        description: A numeric value that determines the largest numeric value that you
-          want to allow for Number types.
+        $ref: '#/definitions/__integer'
+        description: A numeric value that determines the largest numeric value that you want to allow for Number types.
       MinLength:
-        $ref: "#/definitions/__integer"
-        description: An integer value that determines the smallest number of characters
-          that you want to allow for String types.
+        $ref: '#/definitions/__integer'
+        description: An integer value that determines the smallest number of characters that you want to allow for String types.
       MinValue:
-        $ref: "#/definitions/__integer"
-        description: A numeric value that determines the smallest numeric value that you
-          want to allow for Number types.
+        $ref: '#/definitions/__integer'
+        description: A numeric value that determines the smallest numeric value that you want to allow for Number types.
       Name:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: The name of the parameter.
       NoEcho:
-        $ref: "#/definitions/__boolean"
-        description: >-
-          Whether to mask the parameter value whenever anyone makes a call that
-          describes the stack. If you set the
+        $ref: '#/definitions/__boolean'
+        description: |-
+          Whether to mask the parameter value whenever anyone makes a call that describes the stack. If you set the
            value to true, the parameter value is masked with asterisks (*****).
       ReferencedByResources:
-        $ref: "#/definitions/__listOf__string"
+        $ref: '#/definitions/__listOf__string'
         description: A list of AWS SAM resources that use this parameter.
       Type:
-        $ref: "#/definitions/__string"
-        description: >-
-          <p>The type of the parameter.</p><p>Valid values: String | Number |
-          List&lt;Number> | CommaDelimitedList
+        $ref: '#/definitions/__string'
+        description: |-
+          <p>The type of the parameter.</p><p>Valid values: String | Number | List&lt;Number> | CommaDelimitedList
            </p><p>
            String: A literal string.</p><p>For example, users can specify "MyUserName".</p><p>
            Number: An integer or float. AWS CloudFormation validates the parameter value as a number. However, when you use the
@@ -1950,7 +1756,7 @@ definitions:
       - Statements
     properties:
       Statements:
-        $ref: "#/definitions/__listOfApplicationPolicyStatement"
+        $ref: '#/definitions/__listOfApplicationPolicyStatement'
         description: An array of policy statements applied to the application.
   RollbackTrigger:
     type: object
@@ -1959,54 +1765,39 @@ definitions:
       - Arn
     properties:
       Arn:
-        $ref: "#/definitions/__string"
-        description: >-
-          This property corresponds to the content of the same name for the
-          <i>AWS CloudFormation <a
-          href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger">RollbackTrigger</a>
+        $ref: '#/definitions/__string'
+        description: |-
+          This property corresponds to the content of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger">RollbackTrigger</a>
            </i> Data Type.
       Type:
-        $ref: "#/definitions/__string"
-        description: >-
-          This property corresponds to the content of the same name for the
-          <i>AWS CloudFormation <a
-          href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger">RollbackTrigger</a>
+        $ref: '#/definitions/__string'
+        description: |-
+          This property corresponds to the content of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger">RollbackTrigger</a>
            </i> Data Type.
-    description: >-
-      This property corresponds to the <i>AWS CloudFormation <a
-      href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger">RollbackTrigger</a>
+    description: |-
+      This property corresponds to the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger">RollbackTrigger</a>
        </i> Data Type.
   UpdateApplicationRequest:
     type: object
     properties:
       Author:
-        $ref: "#/definitions/__string"
-        description: <p>The name of the author publishing the app.</p><p>Minimum length=1.
-          Maximum length=127.</p><p>Pattern
-          "^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$";</p>
+        $ref: '#/definitions/__string'
+        description: '<p>The name of the author publishing the app.</p><p>Minimum length=1. Maximum length=127.</p><p>Pattern "^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$";</p>'
       Description:
-        $ref: "#/definitions/__string"
-        description: <p>The description of the application.</p><p>Minimum length=1. Maximum
-          length=256</p>
+        $ref: '#/definitions/__string'
+        description: <p>The description of the application.</p><p>Minimum length=1. Maximum length=256</p>
       HomePageUrl:
-        $ref: "#/definitions/__string"
-        description: A URL with more information about the application, for example the
-          location of your GitHub repository for the application.
+        $ref: '#/definitions/__string'
+        description: 'A URL with more information about the application, for example the location of your GitHub repository for the application.'
       Labels:
-        $ref: "#/definitions/__listOf__string"
-        description: '<p>Labels to improve discovery of apps in search
-          results.</p><p>Minimum length=1. Maximum length=127. Maximum number of
-          labels: 10</p><p>Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";</p>'
+        $ref: '#/definitions/__listOf__string'
+        description: '<p>Labels to improve discovery of apps in search results.</p><p>Minimum length=1. Maximum length=127. Maximum number of labels: 10</p><p>Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";</p>'
       ReadmeBody:
-        $ref: "#/definitions/__string"
-        description: <p>A text readme file in Markdown language that contains a more
-          detailed description of the application and how it
-          works.</p><p>Maximum size 5 MB</p>
+        $ref: '#/definitions/__string'
+        description: <p>A text readme file in Markdown language that contains a more detailed description of the application and how it works.</p><p>Maximum size 5 MB</p>
       ReadmeUrl:
-        $ref: "#/definitions/__string"
-        description: <p>A link to the readme file in Markdown language that contains a more
-          detailed description of the application and how it
-          works.</p><p>Maximum size 5 MB</p>
+        $ref: '#/definitions/__string'
+        description: <p>A link to the readme file in Markdown language that contains a more detailed description of the application and how it works.</p><p>Maximum size 5 MB</p>
   VersionSummary:
     type: object
     required:
@@ -2015,19 +1806,18 @@ definitions:
       - SemanticVersion
     properties:
       ApplicationId:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: The application Amazon Resource Name (ARN).
       CreationTime:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: The date and time this resource was created.
       SemanticVersion:
-        $ref: "#/definitions/__string"
+        $ref: '#/definitions/__string'
         description: |-
           <p>The semantic version of the application:</p><p>
            <a href="https://semver.org/">https://semver.org/</a>
            </p>
       SourceCodeUrl:
-        $ref: "#/definitions/__string"
-        description: A link to a public repository for the source code of your application,
-          for example the URL of a specific GitHub commit.
+        $ref: '#/definitions/__string'
+        description: 'A link to a public repository for the source code of your application, for example the URL of a specific GitHub commit.'
     description: An application version summary.

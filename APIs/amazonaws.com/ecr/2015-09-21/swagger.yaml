@@ -1,44 +1,38 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  version: 2015-09-21
+  version: '2015-09-21'
   x-release: v4
   title: Amazon EC2 Container Registry
-  description: Amazon Elastic Container Registry (Amazon ECR) is a managed Docker registry
-    service. Customers can use the familiar Docker CLI to push, pull, and manage
-    images. Amazon ECR provides a secure, scalable, and reliable registry.
-    Amazon ECR supports private Docker repositories with resource-based
-    permissions using IAM so that specific users or Amazon EC2 instances can
-    access repositories and images. Developers can use the Docker CLI to author
-    and manage images.
+  description: 'Amazon Elastic Container Registry (Amazon ECR) is a managed Docker registry service. Customers can use the familiar Docker CLI to push, pull, and manage images. Amazon ECR provides a secure, scalable, and reliable registry. Amazon ECR supports private Docker repositories with resource-based permissions using IAM so that specific users or Amazon EC2 instances can access repositories and images. Developers can use the Docker CLI to author and manage images.'
   x-logo:
-    url: https://twitter.com/awscloud/profile_image?size=original
-    backgroundColor: "#FFFFFF"
-  termsOfService: https://aws.amazon.com/service-terms/
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
     name: Mike Ralphson
     email: mike.ralphson@gmail.com
-    url: https://github.com/mermade/aws2openapi
+    url: 'https://github.com/mermade/aws2openapi'
     x-twitter: PermittedSoc
   license:
     name: Apache 2.0 License
-    url: http://www.apache.org/licenses/
+    url: 'http://www.apache.org/licenses/'
   x-providerName: amazonaws.com
   x-serviceName: ecr
   x-origin:
     - contentType: application/json
-      url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/ecr-2015-09-21.normal.json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/ecr-2015-09-21.normal.json'
       converter:
-        url: https://github.com/mermade/aws2openapi
+        url: 'https://github.com/mermade/aws2openapi'
         version: 1.0.0
       x-apisguru-direct: true
   x-apiClientRegistration:
-    url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
   x-preferred: true
 externalDocs:
   description: Amazon Web Services documentation
-  url: https://docs.aws.amazon.com/ecr/
+  url: 'https://docs.aws.amazon.com/ecr/'
 host: api.ecr.amazonaws.com
 basePath: /
 x-hasEquivalentPaths: true
@@ -95,37 +89,33 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.BatchCheckLayerAvailability:
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.BatchCheckLayerAvailability':
     post:
       operationId: BatchCheckLayerAvailability
-      description: <p>Check the availability of multiple image layers in a specified
-        registry and repository.</p> <note> <p>This operation is used by the
-        Amazon ECR proxy, and it is not intended for general use by customers
-        for pulling and pushing images. In most cases, you should use the
-        <code>docker</code> CLI to pull, tag, and push images.</p> </note>
+      description: '<p>Check the availability of multiple image layers in a specified registry and repository.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/BatchCheckLayerAvailabilityResponse"
-        "480":
+            $ref: '#/definitions/BatchCheckLayerAvailabilityResponse'
+        '480':
           description: RepositoryNotFoundException
           schema:
-            $ref: "#/definitions/RepositoryNotFoundException"
-        "481":
+            $ref: '#/definitions/RepositoryNotFoundException'
+        '481':
           description: InvalidParameterException
           schema:
-            $ref: "#/definitions/InvalidParameterException"
-        "482":
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
           description: ServerException
           schema:
-            $ref: "#/definitions/ServerException"
+            $ref: '#/definitions/ServerException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/BatchCheckLayerAvailabilityRequest"
+            $ref: '#/definitions/BatchCheckLayerAvailabilityRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -133,46 +123,40 @@ paths:
           enum:
             - AmazonEC2ContainerRegistry_V20150921.BatchCheckLayerAvailability
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.BatchDeleteImage:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.BatchDeleteImage':
     post:
       operationId: BatchDeleteImage
-      description: <p>Deletes a list of specified images within a specified repository.
-        Images are specified with either <code>imageTag</code> or
-        <code>imageDigest</code>.</p> <p>You can remove a tag from an image by
-        specifying the image's tag in your request. When you remove the last tag
-        from an image, the image is deleted from your repository.</p> <p>You can
-        completely delete an image (and all of its tags) by specifying the
-        image's digest in your request.</p>
+      description: '<p>Deletes a list of specified images within a specified repository. Images are specified with either <code>imageTag</code> or <code>imageDigest</code>.</p> <p>You can remove a tag from an image by specifying the image''s tag in your request. When you remove the last tag from an image, the image is deleted from your repository.</p> <p>You can completely delete an image (and all of its tags) by specifying the image''s digest in your request.</p>'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/BatchDeleteImageResponse"
-        "480":
+            $ref: '#/definitions/BatchDeleteImageResponse'
+        '480':
           description: ServerException
           schema:
-            $ref: "#/definitions/ServerException"
-        "481":
+            $ref: '#/definitions/ServerException'
+        '481':
           description: InvalidParameterException
           schema:
-            $ref: "#/definitions/InvalidParameterException"
-        "482":
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
           description: RepositoryNotFoundException
           schema:
-            $ref: "#/definitions/RepositoryNotFoundException"
+            $ref: '#/definitions/RepositoryNotFoundException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/BatchDeleteImageRequest"
+            $ref: '#/definitions/BatchDeleteImageRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -180,42 +164,40 @@ paths:
           enum:
             - AmazonEC2ContainerRegistry_V20150921.BatchDeleteImage
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.BatchGetImage:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.BatchGetImage':
     post:
       operationId: BatchGetImage
-      description: Gets detailed information for specified images within a specified
-        repository. Images are specified with either <code>imageTag</code> or
-        <code>imageDigest</code>.
+      description: Gets detailed information for specified images within a specified repository. Images are specified with either <code>imageTag</code> or <code>imageDigest</code>.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/BatchGetImageResponse"
-        "480":
+            $ref: '#/definitions/BatchGetImageResponse'
+        '480':
           description: ServerException
           schema:
-            $ref: "#/definitions/ServerException"
-        "481":
+            $ref: '#/definitions/ServerException'
+        '481':
           description: InvalidParameterException
           schema:
-            $ref: "#/definitions/InvalidParameterException"
-        "482":
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
           description: RepositoryNotFoundException
           schema:
-            $ref: "#/definitions/RepositoryNotFoundException"
+            $ref: '#/definitions/RepositoryNotFoundException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/BatchGetImageRequest"
+            $ref: '#/definitions/BatchGetImageRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -223,66 +205,60 @@ paths:
           enum:
             - AmazonEC2ContainerRegistry_V20150921.BatchGetImage
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.CompleteLayerUpload:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.CompleteLayerUpload':
     post:
       operationId: CompleteLayerUpload
-      description: <p>Informs Amazon ECR that the image layer upload has completed for a
-        specified registry, repository name, and upload ID. You can optionally
-        provide a <code>sha256</code> digest of the image layer for data
-        validation purposes.</p> <note> <p>This operation is used by the Amazon
-        ECR proxy, and it is not intended for general use by customers for
-        pulling and pushing images. In most cases, you should use the
-        <code>docker</code> CLI to pull, tag, and push images.</p> </note>
+      description: '<p>Informs Amazon ECR that the image layer upload has completed for a specified registry, repository name, and upload ID. You can optionally provide a <code>sha256</code> digest of the image layer for data validation purposes.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/CompleteLayerUploadResponse"
-        "480":
+            $ref: '#/definitions/CompleteLayerUploadResponse'
+        '480':
           description: ServerException
           schema:
-            $ref: "#/definitions/ServerException"
-        "481":
+            $ref: '#/definitions/ServerException'
+        '481':
           description: InvalidParameterException
           schema:
-            $ref: "#/definitions/InvalidParameterException"
-        "482":
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
           description: RepositoryNotFoundException
           schema:
-            $ref: "#/definitions/RepositoryNotFoundException"
-        "483":
+            $ref: '#/definitions/RepositoryNotFoundException'
+        '483':
           description: UploadNotFoundException
           schema:
-            $ref: "#/definitions/UploadNotFoundException"
-        "484":
+            $ref: '#/definitions/UploadNotFoundException'
+        '484':
           description: InvalidLayerException
           schema:
-            $ref: "#/definitions/InvalidLayerException"
-        "485":
+            $ref: '#/definitions/InvalidLayerException'
+        '485':
           description: LayerPartTooSmallException
           schema:
-            $ref: "#/definitions/LayerPartTooSmallException"
-        "486":
+            $ref: '#/definitions/LayerPartTooSmallException'
+        '486':
           description: LayerAlreadyExistsException
           schema:
-            $ref: "#/definitions/LayerAlreadyExistsException"
-        "487":
+            $ref: '#/definitions/LayerAlreadyExistsException'
+        '487':
           description: EmptyUploadException
           schema:
-            $ref: "#/definitions/EmptyUploadException"
+            $ref: '#/definitions/EmptyUploadException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/CompleteLayerUploadRequest"
+            $ref: '#/definitions/CompleteLayerUploadRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -290,52 +266,52 @@ paths:
           enum:
             - AmazonEC2ContainerRegistry_V20150921.CompleteLayerUpload
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.CreateRepository:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.CreateRepository':
     post:
       operationId: CreateRepository
       description: Creates an image repository.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/CreateRepositoryResponse"
-        "480":
+            $ref: '#/definitions/CreateRepositoryResponse'
+        '480':
           description: ServerException
           schema:
-            $ref: "#/definitions/ServerException"
-        "481":
+            $ref: '#/definitions/ServerException'
+        '481':
           description: InvalidParameterException
           schema:
-            $ref: "#/definitions/InvalidParameterException"
-        "482":
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
           description: InvalidTagParameterException
           schema:
-            $ref: "#/definitions/InvalidTagParameterException"
-        "483":
+            $ref: '#/definitions/InvalidTagParameterException'
+        '483':
           description: TooManyTagsException
           schema:
-            $ref: "#/definitions/TooManyTagsException"
-        "484":
+            $ref: '#/definitions/TooManyTagsException'
+        '484':
           description: RepositoryAlreadyExistsException
           schema:
-            $ref: "#/definitions/RepositoryAlreadyExistsException"
-        "485":
+            $ref: '#/definitions/RepositoryAlreadyExistsException'
+        '485':
           description: LimitExceededException
           schema:
-            $ref: "#/definitions/LimitExceededException"
+            $ref: '#/definitions/LimitExceededException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/CreateRepositoryRequest"
+            $ref: '#/definitions/CreateRepositoryRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -343,44 +319,44 @@ paths:
           enum:
             - AmazonEC2ContainerRegistry_V20150921.CreateRepository
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.DeleteLifecyclePolicy:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.DeleteLifecyclePolicy':
     post:
       operationId: DeleteLifecyclePolicy
       description: Deletes the specified lifecycle policy.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DeleteLifecyclePolicyResponse"
-        "480":
+            $ref: '#/definitions/DeleteLifecyclePolicyResponse'
+        '480':
           description: ServerException
           schema:
-            $ref: "#/definitions/ServerException"
-        "481":
+            $ref: '#/definitions/ServerException'
+        '481':
           description: InvalidParameterException
           schema:
-            $ref: "#/definitions/InvalidParameterException"
-        "482":
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
           description: RepositoryNotFoundException
           schema:
-            $ref: "#/definitions/RepositoryNotFoundException"
-        "483":
+            $ref: '#/definitions/RepositoryNotFoundException'
+        '483':
           description: LifecyclePolicyNotFoundException
           schema:
-            $ref: "#/definitions/LifecyclePolicyNotFoundException"
+            $ref: '#/definitions/LifecyclePolicyNotFoundException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/DeleteLifecyclePolicyRequest"
+            $ref: '#/definitions/DeleteLifecyclePolicyRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -388,45 +364,44 @@ paths:
           enum:
             - AmazonEC2ContainerRegistry_V20150921.DeleteLifecyclePolicy
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.DeleteRepository:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.DeleteRepository':
     post:
       operationId: DeleteRepository
-      description: Deletes an existing image repository. If a repository contains images,
-        you must use the <code>force</code> option to delete it.
+      description: 'Deletes an existing image repository. If a repository contains images, you must use the <code>force</code> option to delete it.'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DeleteRepositoryResponse"
-        "480":
+            $ref: '#/definitions/DeleteRepositoryResponse'
+        '480':
           description: ServerException
           schema:
-            $ref: "#/definitions/ServerException"
-        "481":
+            $ref: '#/definitions/ServerException'
+        '481':
           description: InvalidParameterException
           schema:
-            $ref: "#/definitions/InvalidParameterException"
-        "482":
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
           description: RepositoryNotFoundException
           schema:
-            $ref: "#/definitions/RepositoryNotFoundException"
-        "483":
+            $ref: '#/definitions/RepositoryNotFoundException'
+        '483':
           description: RepositoryNotEmptyException
           schema:
-            $ref: "#/definitions/RepositoryNotEmptyException"
+            $ref: '#/definitions/RepositoryNotEmptyException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/DeleteRepositoryRequest"
+            $ref: '#/definitions/DeleteRepositoryRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -434,44 +409,44 @@ paths:
           enum:
             - AmazonEC2ContainerRegistry_V20150921.DeleteRepository
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.DeleteRepositoryPolicy:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.DeleteRepositoryPolicy':
     post:
       operationId: DeleteRepositoryPolicy
       description: Deletes the repository policy from a specified repository.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DeleteRepositoryPolicyResponse"
-        "480":
+            $ref: '#/definitions/DeleteRepositoryPolicyResponse'
+        '480':
           description: ServerException
           schema:
-            $ref: "#/definitions/ServerException"
-        "481":
+            $ref: '#/definitions/ServerException'
+        '481':
           description: InvalidParameterException
           schema:
-            $ref: "#/definitions/InvalidParameterException"
-        "482":
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
           description: RepositoryNotFoundException
           schema:
-            $ref: "#/definitions/RepositoryNotFoundException"
-        "483":
+            $ref: '#/definitions/RepositoryNotFoundException'
+        '483':
           description: RepositoryPolicyNotFoundException
           schema:
-            $ref: "#/definitions/RepositoryPolicyNotFoundException"
+            $ref: '#/definitions/RepositoryPolicyNotFoundException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/DeleteRepositoryPolicyRequest"
+            $ref: '#/definitions/DeleteRepositoryPolicyRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -479,50 +454,44 @@ paths:
           enum:
             - AmazonEC2ContainerRegistry_V20150921.DeleteRepositoryPolicy
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.DescribeImages:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.DescribeImages':
     post:
       operationId: DescribeImages
-      description: <p>Returns metadata about the images in a repository, including image
-        size, image tags, and creation date.</p> <note> <p>Beginning with Docker
-        version 1.9, the Docker client compresses image layers before pushing
-        them to a V2 Docker registry. The output of the <code>docker
-        images</code> command shows the uncompressed image size, so it may
-        return a larger image size than the image sizes returned by
-        <a>DescribeImages</a>.</p> </note>
+      description: '<p>Returns metadata about the images in a repository, including image size, image tags, and creation date.</p> <note> <p>Beginning with Docker version 1.9, the Docker client compresses image layers before pushing them to a V2 Docker registry. The output of the <code>docker images</code> command shows the uncompressed image size, so it may return a larger image size than the image sizes returned by <a>DescribeImages</a>.</p> </note>'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DescribeImagesResponse"
-        "480":
+            $ref: '#/definitions/DescribeImagesResponse'
+        '480':
           description: ServerException
           schema:
-            $ref: "#/definitions/ServerException"
-        "481":
+            $ref: '#/definitions/ServerException'
+        '481':
           description: InvalidParameterException
           schema:
-            $ref: "#/definitions/InvalidParameterException"
-        "482":
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
           description: RepositoryNotFoundException
           schema:
-            $ref: "#/definitions/RepositoryNotFoundException"
-        "483":
+            $ref: '#/definitions/RepositoryNotFoundException'
+        '483':
           description: ImageNotFoundException
           schema:
-            $ref: "#/definitions/ImageNotFoundException"
+            $ref: '#/definitions/ImageNotFoundException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/DescribeImagesRequest"
+            $ref: '#/definitions/DescribeImagesRequest'
         - name: maxResults
           type: string
           in: query
@@ -540,40 +509,40 @@ paths:
           enum:
             - AmazonEC2ContainerRegistry_V20150921.DescribeImages
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.DescribeRepositories:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.DescribeRepositories':
     post:
       operationId: DescribeRepositories
       description: Describes image repositories in a registry.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DescribeRepositoriesResponse"
-        "480":
+            $ref: '#/definitions/DescribeRepositoriesResponse'
+        '480':
           description: ServerException
           schema:
-            $ref: "#/definitions/ServerException"
-        "481":
+            $ref: '#/definitions/ServerException'
+        '481':
           description: InvalidParameterException
           schema:
-            $ref: "#/definitions/InvalidParameterException"
-        "482":
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
           description: RepositoryNotFoundException
           schema:
-            $ref: "#/definitions/RepositoryNotFoundException"
+            $ref: '#/definitions/RepositoryNotFoundException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/DescribeRepositoriesRequest"
+            $ref: '#/definitions/DescribeRepositoriesRequest'
         - name: maxResults
           type: string
           in: query
@@ -591,44 +560,36 @@ paths:
           enum:
             - AmazonEC2ContainerRegistry_V20150921.DescribeRepositories
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.GetAuthorizationToken:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.GetAuthorizationToken':
     post:
       operationId: GetAuthorizationToken
-      description: <p>Retrieves a token that is valid for a specified registry for 12
-        hours. This command allows you to use the <code>docker</code> CLI to
-        push and pull images with Amazon ECR. If you do not specify a registry,
-        the default registry is assumed.</p> <p>The
-        <code>authorizationToken</code> returned for each registry specified is
-        a base64 encoded string that can be decoded and used in a <code>docker
-        login</code> command to authenticate to a registry. The AWS CLI offers
-        an <code>aws ecr get-login</code> command that simplifies the login
-        process.</p>
+      description: '<p>Retrieves a token that is valid for a specified registry for 12 hours. This command allows you to use the <code>docker</code> CLI to push and pull images with Amazon ECR. If you do not specify a registry, the default registry is assumed.</p> <p>The <code>authorizationToken</code> returned for each registry specified is a base64 encoded string that can be decoded and used in a <code>docker login</code> command to authenticate to a registry. The AWS CLI offers an <code>aws ecr get-login</code> command that simplifies the login process.</p>'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/GetAuthorizationTokenResponse"
-        "480":
+            $ref: '#/definitions/GetAuthorizationTokenResponse'
+        '480':
           description: ServerException
           schema:
-            $ref: "#/definitions/ServerException"
-        "481":
+            $ref: '#/definitions/ServerException'
+        '481':
           description: InvalidParameterException
           schema:
-            $ref: "#/definitions/InvalidParameterException"
+            $ref: '#/definitions/InvalidParameterException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/GetAuthorizationTokenRequest"
+            $ref: '#/definitions/GetAuthorizationTokenRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -636,53 +597,48 @@ paths:
           enum:
             - AmazonEC2ContainerRegistry_V20150921.GetAuthorizationToken
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.GetDownloadUrlForLayer:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.GetDownloadUrlForLayer':
     post:
       operationId: GetDownloadUrlForLayer
-      description: <p>Retrieves the pre-signed Amazon S3 download URL corresponding to an
-        image layer. You can only get URLs for image layers that are referenced
-        in an image.</p> <note> <p>This operation is used by the Amazon ECR
-        proxy, and it is not intended for general use by customers for pulling
-        and pushing images. In most cases, you should use the
-        <code>docker</code> CLI to pull, tag, and push images.</p> </note>
+      description: '<p>Retrieves the pre-signed Amazon S3 download URL corresponding to an image layer. You can only get URLs for image layers that are referenced in an image.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/GetDownloadUrlForLayerResponse"
-        "480":
+            $ref: '#/definitions/GetDownloadUrlForLayerResponse'
+        '480':
           description: ServerException
           schema:
-            $ref: "#/definitions/ServerException"
-        "481":
+            $ref: '#/definitions/ServerException'
+        '481':
           description: InvalidParameterException
           schema:
-            $ref: "#/definitions/InvalidParameterException"
-        "482":
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
           description: LayersNotFoundException
           schema:
-            $ref: "#/definitions/LayersNotFoundException"
-        "483":
+            $ref: '#/definitions/LayersNotFoundException'
+        '483':
           description: LayerInaccessibleException
           schema:
-            $ref: "#/definitions/LayerInaccessibleException"
-        "484":
+            $ref: '#/definitions/LayerInaccessibleException'
+        '484':
           description: RepositoryNotFoundException
           schema:
-            $ref: "#/definitions/RepositoryNotFoundException"
+            $ref: '#/definitions/RepositoryNotFoundException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/GetDownloadUrlForLayerRequest"
+            $ref: '#/definitions/GetDownloadUrlForLayerRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -690,44 +646,44 @@ paths:
           enum:
             - AmazonEC2ContainerRegistry_V20150921.GetDownloadUrlForLayer
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.GetLifecyclePolicy:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.GetLifecyclePolicy':
     post:
       operationId: GetLifecyclePolicy
       description: Retrieves the specified lifecycle policy.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/GetLifecyclePolicyResponse"
-        "480":
+            $ref: '#/definitions/GetLifecyclePolicyResponse'
+        '480':
           description: ServerException
           schema:
-            $ref: "#/definitions/ServerException"
-        "481":
+            $ref: '#/definitions/ServerException'
+        '481':
           description: InvalidParameterException
           schema:
-            $ref: "#/definitions/InvalidParameterException"
-        "482":
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
           description: RepositoryNotFoundException
           schema:
-            $ref: "#/definitions/RepositoryNotFoundException"
-        "483":
+            $ref: '#/definitions/RepositoryNotFoundException'
+        '483':
           description: LifecyclePolicyNotFoundException
           schema:
-            $ref: "#/definitions/LifecyclePolicyNotFoundException"
+            $ref: '#/definitions/LifecyclePolicyNotFoundException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/GetLifecyclePolicyRequest"
+            $ref: '#/definitions/GetLifecyclePolicyRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -735,44 +691,44 @@ paths:
           enum:
             - AmazonEC2ContainerRegistry_V20150921.GetLifecyclePolicy
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.GetLifecyclePolicyPreview:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.GetLifecyclePolicyPreview':
     post:
       operationId: GetLifecyclePolicyPreview
       description: Retrieves the results of the specified lifecycle policy preview request.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/GetLifecyclePolicyPreviewResponse"
-        "480":
+            $ref: '#/definitions/GetLifecyclePolicyPreviewResponse'
+        '480':
           description: ServerException
           schema:
-            $ref: "#/definitions/ServerException"
-        "481":
+            $ref: '#/definitions/ServerException'
+        '481':
           description: InvalidParameterException
           schema:
-            $ref: "#/definitions/InvalidParameterException"
-        "482":
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
           description: RepositoryNotFoundException
           schema:
-            $ref: "#/definitions/RepositoryNotFoundException"
-        "483":
+            $ref: '#/definitions/RepositoryNotFoundException'
+        '483':
           description: LifecyclePolicyPreviewNotFoundException
           schema:
-            $ref: "#/definitions/LifecyclePolicyPreviewNotFoundException"
+            $ref: '#/definitions/LifecyclePolicyPreviewNotFoundException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/GetLifecyclePolicyPreviewRequest"
+            $ref: '#/definitions/GetLifecyclePolicyPreviewRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -780,44 +736,44 @@ paths:
           enum:
             - AmazonEC2ContainerRegistry_V20150921.GetLifecyclePolicyPreview
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.GetRepositoryPolicy:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.GetRepositoryPolicy':
     post:
       operationId: GetRepositoryPolicy
       description: Retrieves the repository policy for a specified repository.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/GetRepositoryPolicyResponse"
-        "480":
+            $ref: '#/definitions/GetRepositoryPolicyResponse'
+        '480':
           description: ServerException
           schema:
-            $ref: "#/definitions/ServerException"
-        "481":
+            $ref: '#/definitions/ServerException'
+        '481':
           description: InvalidParameterException
           schema:
-            $ref: "#/definitions/InvalidParameterException"
-        "482":
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
           description: RepositoryNotFoundException
           schema:
-            $ref: "#/definitions/RepositoryNotFoundException"
-        "483":
+            $ref: '#/definitions/RepositoryNotFoundException'
+        '483':
           description: RepositoryPolicyNotFoundException
           schema:
-            $ref: "#/definitions/RepositoryPolicyNotFoundException"
+            $ref: '#/definitions/RepositoryPolicyNotFoundException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/GetRepositoryPolicyRequest"
+            $ref: '#/definitions/GetRepositoryPolicyRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -825,44 +781,40 @@ paths:
           enum:
             - AmazonEC2ContainerRegistry_V20150921.GetRepositoryPolicy
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.InitiateLayerUpload:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.InitiateLayerUpload':
     post:
       operationId: InitiateLayerUpload
-      description: <p>Notify Amazon ECR that you intend to upload an image layer.</p>
-        <note> <p>This operation is used by the Amazon ECR proxy, and it is not
-        intended for general use by customers for pulling and pushing images. In
-        most cases, you should use the <code>docker</code> CLI to pull, tag, and
-        push images.</p> </note>
+      description: '<p>Notify Amazon ECR that you intend to upload an image layer.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/InitiateLayerUploadResponse"
-        "480":
+            $ref: '#/definitions/InitiateLayerUploadResponse'
+        '480':
           description: ServerException
           schema:
-            $ref: "#/definitions/ServerException"
-        "481":
+            $ref: '#/definitions/ServerException'
+        '481':
           description: InvalidParameterException
           schema:
-            $ref: "#/definitions/InvalidParameterException"
-        "482":
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
           description: RepositoryNotFoundException
           schema:
-            $ref: "#/definitions/RepositoryNotFoundException"
+            $ref: '#/definitions/RepositoryNotFoundException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/InitiateLayerUploadRequest"
+            $ref: '#/definitions/InitiateLayerUploadRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -870,47 +822,40 @@ paths:
           enum:
             - AmazonEC2ContainerRegistry_V20150921.InitiateLayerUpload
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.ListImages:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.ListImages':
     post:
       operationId: ListImages
-      description: <p>Lists all the image IDs for a given repository.</p> <p>You can filter
-        images based on whether or not they are tagged by setting the
-        <code>tagStatus</code> parameter to <code>TAGGED</code> or
-        <code>UNTAGGED</code>. For example, you can filter your results to
-        return only <code>UNTAGGED</code> images and then pipe that result to a
-        <a>BatchDeleteImage</a> operation to delete them. Or, you can filter
-        your results to return only <code>TAGGED</code> images to list all of
-        the tags in your repository.</p>
+      description: '<p>Lists all the image IDs for a given repository.</p> <p>You can filter images based on whether or not they are tagged by setting the <code>tagStatus</code> parameter to <code>TAGGED</code> or <code>UNTAGGED</code>. For example, you can filter your results to return only <code>UNTAGGED</code> images and then pipe that result to a <a>BatchDeleteImage</a> operation to delete them. Or, you can filter your results to return only <code>TAGGED</code> images to list all of the tags in your repository.</p>'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/ListImagesResponse"
-        "480":
+            $ref: '#/definitions/ListImagesResponse'
+        '480':
           description: ServerException
           schema:
-            $ref: "#/definitions/ServerException"
-        "481":
+            $ref: '#/definitions/ServerException'
+        '481':
           description: InvalidParameterException
           schema:
-            $ref: "#/definitions/InvalidParameterException"
-        "482":
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
           description: RepositoryNotFoundException
           schema:
-            $ref: "#/definitions/RepositoryNotFoundException"
+            $ref: '#/definitions/RepositoryNotFoundException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/ListImagesRequest"
+            $ref: '#/definitions/ListImagesRequest'
         - name: maxResults
           type: string
           in: query
@@ -928,40 +873,40 @@ paths:
           enum:
             - AmazonEC2ContainerRegistry_V20150921.ListImages
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.ListTagsForResource:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.ListTagsForResource':
     post:
       operationId: ListTagsForResource
       description: List the tags for an Amazon ECR resource.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/ListTagsForResourceResponse"
-        "480":
+            $ref: '#/definitions/ListTagsForResourceResponse'
+        '480':
           description: InvalidParameterException
           schema:
-            $ref: "#/definitions/InvalidParameterException"
-        "481":
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
           description: RepositoryNotFoundException
           schema:
-            $ref: "#/definitions/RepositoryNotFoundException"
-        "482":
+            $ref: '#/definitions/RepositoryNotFoundException'
+        '482':
           description: ServerException
           schema:
-            $ref: "#/definitions/ServerException"
+            $ref: '#/definitions/ServerException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/ListTagsForResourceRequest"
+            $ref: '#/definitions/ListTagsForResourceRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -969,56 +914,52 @@ paths:
           enum:
             - AmazonEC2ContainerRegistry_V20150921.ListTagsForResource
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.PutImage:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.PutImage':
     post:
       operationId: PutImage
-      description: <p>Creates or updates the image manifest and tags associated with an
-        image.</p> <note> <p>This operation is used by the Amazon ECR proxy, and
-        it is not intended for general use by customers for pulling and pushing
-        images. In most cases, you should use the <code>docker</code> CLI to
-        pull, tag, and push images.</p> </note>
+      description: '<p>Creates or updates the image manifest and tags associated with an image.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/PutImageResponse"
-        "480":
+            $ref: '#/definitions/PutImageResponse'
+        '480':
           description: ServerException
           schema:
-            $ref: "#/definitions/ServerException"
-        "481":
+            $ref: '#/definitions/ServerException'
+        '481':
           description: InvalidParameterException
           schema:
-            $ref: "#/definitions/InvalidParameterException"
-        "482":
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
           description: RepositoryNotFoundException
           schema:
-            $ref: "#/definitions/RepositoryNotFoundException"
-        "483":
+            $ref: '#/definitions/RepositoryNotFoundException'
+        '483':
           description: ImageAlreadyExistsException
           schema:
-            $ref: "#/definitions/ImageAlreadyExistsException"
-        "484":
+            $ref: '#/definitions/ImageAlreadyExistsException'
+        '484':
           description: LayersNotFoundException
           schema:
-            $ref: "#/definitions/LayersNotFoundException"
-        "485":
+            $ref: '#/definitions/LayersNotFoundException'
+        '485':
           description: LimitExceededException
           schema:
-            $ref: "#/definitions/LimitExceededException"
+            $ref: '#/definitions/LimitExceededException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/PutImageRequest"
+            $ref: '#/definitions/PutImageRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -1026,43 +967,40 @@ paths:
           enum:
             - AmazonEC2ContainerRegistry_V20150921.PutImage
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.PutLifecyclePolicy:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.PutLifecyclePolicy':
     post:
       operationId: PutLifecyclePolicy
-      description: Creates or updates a lifecycle policy. For information about lifecycle
-        policy syntax, see <a
-        href="http://docs.aws.amazon.com/AmazonECR/latest/userguide/LifecyclePolicies.html">Lifecycle
-        Policy Template</a>.
+      description: 'Creates or updates a lifecycle policy. For information about lifecycle policy syntax, see <a href="http://docs.aws.amazon.com/AmazonECR/latest/userguide/LifecyclePolicies.html">Lifecycle Policy Template</a>.'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/PutLifecyclePolicyResponse"
-        "480":
+            $ref: '#/definitions/PutLifecyclePolicyResponse'
+        '480':
           description: ServerException
           schema:
-            $ref: "#/definitions/ServerException"
-        "481":
+            $ref: '#/definitions/ServerException'
+        '481':
           description: InvalidParameterException
           schema:
-            $ref: "#/definitions/InvalidParameterException"
-        "482":
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
           description: RepositoryNotFoundException
           schema:
-            $ref: "#/definitions/RepositoryNotFoundException"
+            $ref: '#/definitions/RepositoryNotFoundException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/PutLifecyclePolicyRequest"
+            $ref: '#/definitions/PutLifecyclePolicyRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -1070,41 +1008,40 @@ paths:
           enum:
             - AmazonEC2ContainerRegistry_V20150921.PutLifecyclePolicy
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.SetRepositoryPolicy:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.SetRepositoryPolicy':
     post:
       operationId: SetRepositoryPolicy
-      description: Applies a repository policy on a specified repository to control access
-        permissions.
+      description: Applies a repository policy on a specified repository to control access permissions.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/SetRepositoryPolicyResponse"
-        "480":
+            $ref: '#/definitions/SetRepositoryPolicyResponse'
+        '480':
           description: ServerException
           schema:
-            $ref: "#/definitions/ServerException"
-        "481":
+            $ref: '#/definitions/ServerException'
+        '481':
           description: InvalidParameterException
           schema:
-            $ref: "#/definitions/InvalidParameterException"
-        "482":
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
           description: RepositoryNotFoundException
           schema:
-            $ref: "#/definitions/RepositoryNotFoundException"
+            $ref: '#/definitions/RepositoryNotFoundException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/SetRepositoryPolicyRequest"
+            $ref: '#/definitions/SetRepositoryPolicyRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -1112,49 +1049,48 @@ paths:
           enum:
             - AmazonEC2ContainerRegistry_V20150921.SetRepositoryPolicy
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.StartLifecyclePolicyPreview:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.StartLifecyclePolicyPreview':
     post:
       operationId: StartLifecyclePolicyPreview
-      description: Starts a preview of the specified lifecycle policy. This allows you to
-        see the results before creating the lifecycle policy.
+      description: Starts a preview of the specified lifecycle policy. This allows you to see the results before creating the lifecycle policy.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/StartLifecyclePolicyPreviewResponse"
-        "480":
+            $ref: '#/definitions/StartLifecyclePolicyPreviewResponse'
+        '480':
           description: ServerException
           schema:
-            $ref: "#/definitions/ServerException"
-        "481":
+            $ref: '#/definitions/ServerException'
+        '481':
           description: InvalidParameterException
           schema:
-            $ref: "#/definitions/InvalidParameterException"
-        "482":
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
           description: RepositoryNotFoundException
           schema:
-            $ref: "#/definitions/RepositoryNotFoundException"
-        "483":
+            $ref: '#/definitions/RepositoryNotFoundException'
+        '483':
           description: LifecyclePolicyNotFoundException
           schema:
-            $ref: "#/definitions/LifecyclePolicyNotFoundException"
-        "484":
+            $ref: '#/definitions/LifecyclePolicyNotFoundException'
+        '484':
           description: LifecyclePolicyPreviewInProgressException
           schema:
-            $ref: "#/definitions/LifecyclePolicyPreviewInProgressException"
+            $ref: '#/definitions/LifecyclePolicyPreviewInProgressException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/StartLifecyclePolicyPreviewRequest"
+            $ref: '#/definitions/StartLifecyclePolicyPreviewRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -1162,50 +1098,48 @@ paths:
           enum:
             - AmazonEC2ContainerRegistry_V20150921.StartLifecyclePolicyPreview
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.TagResource:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.TagResource':
     post:
       operationId: TagResource
-      description: Adds specified tags to a resource with the specified ARN. Existing tags
-        on a resource are not changed if they are not specified in the request
-        parameters.
+      description: Adds specified tags to a resource with the specified ARN. Existing tags on a resource are not changed if they are not specified in the request parameters.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/TagResourceResponse"
-        "480":
+            $ref: '#/definitions/TagResourceResponse'
+        '480':
           description: InvalidParameterException
           schema:
-            $ref: "#/definitions/InvalidParameterException"
-        "481":
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
           description: InvalidTagParameterException
           schema:
-            $ref: "#/definitions/InvalidTagParameterException"
-        "482":
+            $ref: '#/definitions/InvalidTagParameterException'
+        '482':
           description: TooManyTagsException
           schema:
-            $ref: "#/definitions/TooManyTagsException"
-        "483":
+            $ref: '#/definitions/TooManyTagsException'
+        '483':
           description: RepositoryNotFoundException
           schema:
-            $ref: "#/definitions/RepositoryNotFoundException"
-        "484":
+            $ref: '#/definitions/RepositoryNotFoundException'
+        '484':
           description: ServerException
           schema:
-            $ref: "#/definitions/ServerException"
+            $ref: '#/definitions/ServerException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/TagResourceRequest"
+            $ref: '#/definitions/TagResourceRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -1213,48 +1147,48 @@ paths:
           enum:
             - AmazonEC2ContainerRegistry_V20150921.TagResource
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.UntagResource:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.UntagResource':
     post:
       operationId: UntagResource
       description: Deletes specified tags from a resource.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/UntagResourceResponse"
-        "480":
+            $ref: '#/definitions/UntagResourceResponse'
+        '480':
           description: InvalidParameterException
           schema:
-            $ref: "#/definitions/InvalidParameterException"
-        "481":
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
           description: InvalidTagParameterException
           schema:
-            $ref: "#/definitions/InvalidTagParameterException"
-        "482":
+            $ref: '#/definitions/InvalidTagParameterException'
+        '482':
           description: TooManyTagsException
           schema:
-            $ref: "#/definitions/TooManyTagsException"
-        "483":
+            $ref: '#/definitions/TooManyTagsException'
+        '483':
           description: RepositoryNotFoundException
           schema:
-            $ref: "#/definitions/RepositoryNotFoundException"
-        "484":
+            $ref: '#/definitions/RepositoryNotFoundException'
+        '484':
           description: ServerException
           schema:
-            $ref: "#/definitions/ServerException"
+            $ref: '#/definitions/ServerException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/UntagResourceRequest"
+            $ref: '#/definitions/UntagResourceRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -1262,56 +1196,52 @@ paths:
           enum:
             - AmazonEC2ContainerRegistry_V20150921.UntagResource
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.UploadLayerPart:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.UploadLayerPart':
     post:
       operationId: UploadLayerPart
-      description: <p>Uploads an image layer part to Amazon ECR.</p> <note> <p>This
-        operation is used by the Amazon ECR proxy, and it is not intended for
-        general use by customers for pulling and pushing images. In most cases,
-        you should use the <code>docker</code> CLI to pull, tag, and push
-        images.</p> </note>
+      description: '<p>Uploads an image layer part to Amazon ECR.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/UploadLayerPartResponse"
-        "480":
+            $ref: '#/definitions/UploadLayerPartResponse'
+        '480':
           description: ServerException
           schema:
-            $ref: "#/definitions/ServerException"
-        "481":
+            $ref: '#/definitions/ServerException'
+        '481':
           description: InvalidParameterException
           schema:
-            $ref: "#/definitions/InvalidParameterException"
-        "482":
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
           description: InvalidLayerPartException
           schema:
-            $ref: "#/definitions/InvalidLayerPartException"
-        "483":
+            $ref: '#/definitions/InvalidLayerPartException'
+        '483':
           description: RepositoryNotFoundException
           schema:
-            $ref: "#/definitions/RepositoryNotFoundException"
-        "484":
+            $ref: '#/definitions/RepositoryNotFoundException'
+        '484':
           description: UploadNotFoundException
           schema:
-            $ref: "#/definitions/UploadNotFoundException"
-        "485":
+            $ref: '#/definitions/UploadNotFoundException'
+        '485':
           description: LimitExceededException
           schema:
-            $ref: "#/definitions/LimitExceededException"
+            $ref: '#/definitions/LimitExceededException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/UploadLayerPartRequest"
+            $ref: '#/definitions/UploadLayerPartRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -1319,23 +1249,22 @@ paths:
           enum:
             - AmazonEC2ContainerRegistry_V20150921.UploadLayerPart
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
   BatchCheckLayerAvailabilityResponse:
     type: object
     properties:
       layers:
-        $ref: "#/definitions/LayerList"
-        description: A list of image layer objects corresponding to the image layer
-          references in the request.
+        $ref: '#/definitions/LayerList'
+        description: A list of image layer objects corresponding to the image layer references in the request.
       failures:
-        $ref: "#/definitions/LayerFailureList"
+        $ref: '#/definitions/LayerFailureList'
         description: Any failures associated with the call.
   BatchCheckLayerAvailabilityRequest:
     type: object
@@ -1344,16 +1273,13 @@ definitions:
       - layerDigests
     properties:
       registryId:
-        $ref: "#/definitions/RegistryId"
-        description: The AWS account ID associated with the registry that contains the
-          image layers to check. If you do not specify a registry, the default
-          registry is assumed.
+        $ref: '#/definitions/RegistryId'
+        description: 'The AWS account ID associated with the registry that contains the image layers to check. If you do not specify a registry, the default registry is assumed.'
       repositoryName:
-        $ref: "#/definitions/RepositoryName"
-        description: The name of the repository that is associated with the image layers to
-          check.
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository that is associated with the image layers to check.
       layerDigests:
-        $ref: "#/definitions/BatchedOperationLayerDigestList"
+        $ref: '#/definitions/BatchedOperationLayerDigestList'
         description: The digests of the image layers to check.
   RepositoryNotFoundException: {}
   InvalidParameterException: {}
@@ -1363,14 +1289,14 @@ definitions:
     example:
       failures: []
       imageIds:
-        - imageDigest: sha256:examplee6d1e504117a17000003d3753086354a38375961f2e665416ef4b1b2f
+        - imageDigest: 'sha256:examplee6d1e504117a17000003d3753086354a38375961f2e665416ef4b1b2f'
           imageTag: precise
     properties:
       imageIds:
-        $ref: "#/definitions/ImageIdentifierList"
+        $ref: '#/definitions/ImageIdentifierList'
         description: The image IDs of the deleted images.
       failures:
-        $ref: "#/definitions/ImageFailureList"
+        $ref: '#/definitions/ImageFailureList'
         description: Any failures associated with the call.
   BatchDeleteImageRequest:
     type: object
@@ -1379,28 +1305,22 @@ definitions:
       - imageIds
     properties:
       registryId:
-        $ref: "#/definitions/RegistryId"
-        description: The AWS account ID associated with the registry that contains the
-          image to delete. If you do not specify a registry, the default
-          registry is assumed.
+        $ref: '#/definitions/RegistryId'
+        description: 'The AWS account ID associated with the registry that contains the image to delete. If you do not specify a registry, the default registry is assumed.'
       repositoryName:
-        $ref: "#/definitions/RepositoryName"
+        $ref: '#/definitions/RepositoryName'
         description: The repository that contains the image to delete.
       imageIds:
-        $ref: "#/definitions/ImageIdentifierList"
-        description: A list of image ID references that correspond to images to delete. The
-          format of the <code>imageIds</code> reference is
-          <code>imageTag=tag</code> or <code>imageDigest=digest</code>.
-    description: Deletes specified images within a specified repository. Images are
-      specified with either the <code>imageTag</code> or
-      <code>imageDigest</code>.
+        $ref: '#/definitions/ImageIdentifierList'
+        description: A list of image ID references that correspond to images to delete. The format of the <code>imageIds</code> reference is <code>imageTag=tag</code> or <code>imageDigest=digest</code>.
+    description: Deletes specified images within a specified repository. Images are specified with either the <code>imageTag</code> or <code>imageDigest</code>.
   BatchGetImageResponse:
     type: object
     example:
       failures: []
       images:
         - imageId:
-            imageDigest: sha256:example76bdff6d83a09ba2a818f0d00000063724a9ac3ba5019c56f74ebf42a
+            imageDigest: 'sha256:example76bdff6d83a09ba2a818f0d00000063724a9ac3ba5019c56f74ebf42a'
             imageTag: precise
           imageManifest: |-
             {
@@ -1408,15 +1328,14 @@ definitions:
              "name": "ubuntu",
              "tag": "precise",
             ...
-          registryId: "244698725403"
+          registryId: '244698725403'
           repositoryName: ubuntu
     properties:
       images:
-        $ref: "#/definitions/ImageList"
-        description: A list of image objects corresponding to the image references in the
-          request.
+        $ref: '#/definitions/ImageList'
+        description: A list of image objects corresponding to the image references in the request.
       failures:
-        $ref: "#/definitions/ImageFailureList"
+        $ref: '#/definitions/ImageFailureList'
         description: Any failures associated with the call.
   BatchGetImageRequest:
     type: object
@@ -1425,38 +1344,31 @@ definitions:
       - imageIds
     properties:
       registryId:
-        $ref: "#/definitions/RegistryId"
-        description: The AWS account ID associated with the registry that contains the
-          images to describe. If you do not specify a registry, the default
-          registry is assumed.
+        $ref: '#/definitions/RegistryId'
+        description: 'The AWS account ID associated with the registry that contains the images to describe. If you do not specify a registry, the default registry is assumed.'
       repositoryName:
-        $ref: "#/definitions/RepositoryName"
+        $ref: '#/definitions/RepositoryName'
         description: The repository that contains the images to describe.
       imageIds:
-        $ref: "#/definitions/ImageIdentifierList"
-        description: A list of image ID references that correspond to images to describe.
-          The format of the <code>imageIds</code> reference is
-          <code>imageTag=tag</code> or <code>imageDigest=digest</code>.
+        $ref: '#/definitions/ImageIdentifierList'
+        description: A list of image ID references that correspond to images to describe. The format of the <code>imageIds</code> reference is <code>imageTag=tag</code> or <code>imageDigest=digest</code>.
       acceptedMediaTypes:
-        $ref: "#/definitions/MediaTypeList"
-        description: "<p>The accepted media types for the request.</p> <p>Valid values:
-          <code>application/vnd.docker.distribution.manifest.v1+json</code> |
-          <code>application/vnd.docker.distribution.manifest.v2+json</code> |
-          <code>application/vnd.oci.image.manifest.v1+json</code> </p>"
+        $ref: '#/definitions/MediaTypeList'
+        description: '<p>The accepted media types for the request.</p> <p>Valid values: <code>application/vnd.docker.distribution.manifest.v1+json</code> | <code>application/vnd.docker.distribution.manifest.v2+json</code> | <code>application/vnd.oci.image.manifest.v1+json</code> </p>'
   CompleteLayerUploadResponse:
     type: object
     properties:
       registryId:
-        $ref: "#/definitions/RegistryId"
+        $ref: '#/definitions/RegistryId'
         description: The registry ID associated with the request.
       repositoryName:
-        $ref: "#/definitions/RepositoryName"
+        $ref: '#/definitions/RepositoryName'
         description: The repository name associated with the request.
       uploadId:
-        $ref: "#/definitions/UploadId"
+        $ref: '#/definitions/UploadId'
         description: The upload ID associated with the layer.
       layerDigest:
-        $ref: "#/definitions/LayerDigest"
+        $ref: '#/definitions/LayerDigest'
         description: The <code>sha256</code> digest of the image layer.
   CompleteLayerUploadRequest:
     type: object
@@ -1466,19 +1378,16 @@ definitions:
       - layerDigests
     properties:
       registryId:
-        $ref: "#/definitions/RegistryId"
-        description: The AWS account ID associated with the registry to which to upload
-          layers. If you do not specify a registry, the default registry is
-          assumed.
+        $ref: '#/definitions/RegistryId'
+        description: 'The AWS account ID associated with the registry to which to upload layers. If you do not specify a registry, the default registry is assumed.'
       repositoryName:
-        $ref: "#/definitions/RepositoryName"
+        $ref: '#/definitions/RepositoryName'
         description: The name of the repository to associate with the image layer.
       uploadId:
-        $ref: "#/definitions/UploadId"
-        description: The upload ID from a previous <a>InitiateLayerUpload</a> operation to
-          associate with the image layer.
+        $ref: '#/definitions/UploadId'
+        description: The upload ID from a previous <a>InitiateLayerUpload</a> operation to associate with the image layer.
       layerDigests:
-        $ref: "#/definitions/LayerDigestList"
+        $ref: '#/definitions/LayerDigestList'
         description: The <code>sha256</code> digest of the image layer.
   UploadNotFoundException: {}
   InvalidLayerException: {}
@@ -1489,12 +1398,12 @@ definitions:
     type: object
     example:
       repository:
-        registryId: "012345678901"
-        repositoryArn: arn:aws:ecr:us-west-2:012345678901:repository/project-a/nginx-web-app
+        registryId: 012345678901
+        repositoryArn: 'arn:aws:ecr:us-west-2:012345678901:repository/project-a/nginx-web-app'
         repositoryName: project-a/nginx-web-app
     properties:
       repository:
-        $ref: "#/definitions/Repository"
+        $ref: '#/definitions/Repository'
         description: The repository that was created.
   CreateRepositoryRequest:
     type: object
@@ -1502,13 +1411,10 @@ definitions:
       - repositoryName
     properties:
       repositoryName:
-        $ref: "#/definitions/RepositoryName"
-        description: The name to use for the repository. The repository name may be
-          specified on its own (such as <code>nginx-web-app</code>) or it can be
-          prepended with a namespace to group the repository into a category
-          (such as <code>project-a/nginx-web-app</code>).
+        $ref: '#/definitions/RepositoryName'
+        description: The name to use for the repository. The repository name may be specified on its own (such as <code>nginx-web-app</code>) or it can be prepended with a namespace to group the repository into a category (such as <code>project-a/nginx-web-app</code>).
       tags:
-        $ref: "#/definitions/TagList"
+        $ref: '#/definitions/TagList'
         description: <p/>
   InvalidTagParameterException: {}
   TooManyTagsException: {}
@@ -1518,16 +1424,16 @@ definitions:
     type: object
     properties:
       registryId:
-        $ref: "#/definitions/RegistryId"
+        $ref: '#/definitions/RegistryId'
         description: The registry ID associated with the request.
       repositoryName:
-        $ref: "#/definitions/RepositoryName"
+        $ref: '#/definitions/RepositoryName'
         description: The repository name associated with the request.
       lifecyclePolicyText:
-        $ref: "#/definitions/LifecyclePolicyText"
+        $ref: '#/definitions/LifecyclePolicyText'
         description: The JSON lifecycle policy text.
       lastEvaluatedAt:
-        $ref: "#/definitions/EvaluationTimestamp"
+        $ref: '#/definitions/EvaluationTimestamp'
         description: The time stamp of the last time that the lifecycle policy was run.
   DeleteLifecyclePolicyRequest:
     type: object
@@ -1535,24 +1441,22 @@ definitions:
       - repositoryName
     properties:
       registryId:
-        $ref: "#/definitions/RegistryId"
-        description: The AWS account ID associated with the registry that contains the
-          repository. If you do not specify a registry, the default registry is
-          assumed.
+        $ref: '#/definitions/RegistryId'
+        description: 'The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.'
       repositoryName:
-        $ref: "#/definitions/RepositoryName"
+        $ref: '#/definitions/RepositoryName'
         description: The name of the repository.
   LifecyclePolicyNotFoundException: {}
   DeleteRepositoryResponse:
     type: object
     example:
       repository:
-        registryId: "012345678901"
-        repositoryArn: arn:aws:ecr:us-west-2:012345678901:repository/ubuntu
+        registryId: 012345678901
+        repositoryArn: 'arn:aws:ecr:us-west-2:012345678901:repository/ubuntu'
         repositoryName: ubuntu
     properties:
       repository:
-        $ref: "#/definitions/Repository"
+        $ref: '#/definitions/Repository'
         description: The repository that was deleted.
   DeleteRepositoryRequest:
     type: object
@@ -1560,32 +1464,30 @@ definitions:
       - repositoryName
     properties:
       registryId:
-        $ref: "#/definitions/RegistryId"
-        description: The AWS account ID associated with the registry that contains the
-          repository to delete. If you do not specify a registry, the default
-          registry is assumed.
+        $ref: '#/definitions/RegistryId'
+        description: 'The AWS account ID associated with the registry that contains the repository to delete. If you do not specify a registry, the default registry is assumed.'
       repositoryName:
-        $ref: "#/definitions/RepositoryName"
+        $ref: '#/definitions/RepositoryName'
         description: The name of the repository to delete.
       force:
-        $ref: "#/definitions/ForceFlag"
-        description: " If a repository contains images, forces the deletion."
+        $ref: '#/definitions/ForceFlag'
+        description: ' If a repository contains images, forces the deletion.'
   RepositoryNotEmptyException: {}
   DeleteRepositoryPolicyResponse:
     type: object
     example:
-      policyText: "{ ... }"
-      registryId: "012345678901"
+      policyText: '{ ... }'
+      registryId: 012345678901
       repositoryName: ubuntu
     properties:
       registryId:
-        $ref: "#/definitions/RegistryId"
+        $ref: '#/definitions/RegistryId'
         description: The registry ID associated with the request.
       repositoryName:
-        $ref: "#/definitions/RepositoryName"
+        $ref: '#/definitions/RepositoryName'
         description: The repository name associated with the request.
       policyText:
-        $ref: "#/definitions/RepositoryPolicyText"
+        $ref: '#/definitions/RepositoryPolicyText'
         description: The JSON repository policy that was deleted from the repository.
   DeleteRepositoryPolicyRequest:
     type: object
@@ -1593,160 +1495,102 @@ definitions:
       - repositoryName
     properties:
       registryId:
-        $ref: "#/definitions/RegistryId"
-        description: The AWS account ID associated with the registry that contains the
-          repository policy to delete. If you do not specify a registry, the
-          default registry is assumed.
+        $ref: '#/definitions/RegistryId'
+        description: 'The AWS account ID associated with the registry that contains the repository policy to delete. If you do not specify a registry, the default registry is assumed.'
       repositoryName:
-        $ref: "#/definitions/RepositoryName"
-        description: The name of the repository that is associated with the repository
-          policy to delete.
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository that is associated with the repository policy to delete.
   RepositoryPolicyNotFoundException: {}
   DescribeImagesResponse:
     type: object
     properties:
       imageDetails:
-        $ref: "#/definitions/ImageDetailList"
+        $ref: '#/definitions/ImageDetailList'
         description: A list of <a>ImageDetail</a> objects that contain data about the image.
       nextToken:
-        $ref: "#/definitions/NextToken"
-        description: The <code>nextToken</code> value to include in a future
-          <code>DescribeImages</code> request. When the results of a
-          <code>DescribeImages</code> request exceed <code>maxResults</code>,
-          this value can be used to retrieve the next page of results. This
-          value is <code>null</code> when there are no more results to return.
+        $ref: '#/definitions/NextToken'
+        description: 'The <code>nextToken</code> value to include in a future <code>DescribeImages</code> request. When the results of a <code>DescribeImages</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
   DescribeImagesRequest:
     type: object
     required:
       - repositoryName
     properties:
       registryId:
-        $ref: "#/definitions/RegistryId"
-        description: The AWS account ID associated with the registry that contains the
-          repository in which to describe images. If you do not specify a
-          registry, the default registry is assumed.
+        $ref: '#/definitions/RegistryId'
+        description: 'The AWS account ID associated with the registry that contains the repository in which to describe images. If you do not specify a registry, the default registry is assumed.'
       repositoryName:
-        $ref: "#/definitions/RepositoryName"
+        $ref: '#/definitions/RepositoryName'
         description: A list of repositories to describe.
       imageIds:
-        $ref: "#/definitions/ImageIdentifierList"
+        $ref: '#/definitions/ImageIdentifierList'
         description: The list of image IDs for the requested repository.
       nextToken:
-        $ref: "#/definitions/NextToken"
-        description: The <code>nextToken</code> value returned from a previous paginated
-          <code>DescribeImages</code> request where <code>maxResults</code> was
-          used and the results exceeded the value of that parameter. Pagination
-          continues from the end of the previous results that returned the
-          <code>nextToken</code> value. This value is <code>null</code> when
-          there are no more results to return. This option cannot be used when
-          you specify images with <code>imageIds</code>.
+        $ref: '#/definitions/NextToken'
+        description: The <code>nextToken</code> value returned from a previous paginated <code>DescribeImages</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when there are no more results to return. This option cannot be used when you specify images with <code>imageIds</code>.
       maxResults:
-        $ref: "#/definitions/MaxResults"
-        description: The maximum number of repository results returned by
-          <code>DescribeImages</code> in paginated output. When this parameter
-          is used, <code>DescribeImages</code> only returns
-          <code>maxResults</code> results in a single page along with a
-          <code>nextToken</code> response element. The remaining results of the
-          initial request can be seen by sending another
-          <code>DescribeImages</code> request with the returned
-          <code>nextToken</code> value. This value can be between 1 and 1000. If
-          this parameter is not used, then <code>DescribeImages</code> returns
-          up to 100 results and a <code>nextToken</code> value, if applicable.
-          This option cannot be used when you specify images with
-          <code>imageIds</code>.
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of repository results returned by <code>DescribeImages</code> in paginated output. When this parameter is used, <code>DescribeImages</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeImages</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 1000. If this parameter is not used, then <code>DescribeImages</code> returns up to 100 results and a <code>nextToken</code> value, if applicable. This option cannot be used when you specify images with <code>imageIds</code>.'
       filter:
-        $ref: "#/definitions/DescribeImagesFilter"
-        description: The filter key and value with which to filter your
-          <code>DescribeImages</code> results.
+        $ref: '#/definitions/DescribeImagesFilter'
+        description: The filter key and value with which to filter your <code>DescribeImages</code> results.
   ImageNotFoundException: {}
   DescribeRepositoriesResponse:
     type: object
     example:
       repositories:
-        - registryId: "012345678910"
-          repositoryArn: arn:aws:ecr:us-west-2:012345678910:repository/ubuntu
+        - registryId: 012345678910
+          repositoryArn: 'arn:aws:ecr:us-west-2:012345678910:repository/ubuntu'
           repositoryName: ubuntu
-        - registryId: "012345678910"
-          repositoryArn: arn:aws:ecr:us-west-2:012345678910:repository/test
+        - registryId: 012345678910
+          repositoryArn: 'arn:aws:ecr:us-west-2:012345678910:repository/test'
           repositoryName: test
     properties:
       repositories:
-        $ref: "#/definitions/RepositoryList"
+        $ref: '#/definitions/RepositoryList'
         description: A list of repository objects corresponding to valid repositories.
       nextToken:
-        $ref: "#/definitions/NextToken"
-        description: The <code>nextToken</code> value to include in a future
-          <code>DescribeRepositories</code> request. When the results of a
-          <code>DescribeRepositories</code> request exceed
-          <code>maxResults</code>, this value can be used to retrieve the next
-          page of results. This value is <code>null</code> when there are no
-          more results to return.
+        $ref: '#/definitions/NextToken'
+        description: 'The <code>nextToken</code> value to include in a future <code>DescribeRepositories</code> request. When the results of a <code>DescribeRepositories</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
   DescribeRepositoriesRequest:
     type: object
     properties:
       registryId:
-        $ref: "#/definitions/RegistryId"
-        description: The AWS account ID associated with the registry that contains the
-          repositories to be described. If you do not specify a registry, the
-          default registry is assumed.
+        $ref: '#/definitions/RegistryId'
+        description: 'The AWS account ID associated with the registry that contains the repositories to be described. If you do not specify a registry, the default registry is assumed.'
       repositoryNames:
-        $ref: "#/definitions/RepositoryNameList"
-        description: A list of repositories to describe. If this parameter is omitted, then
-          all repositories in a registry are described.
+        $ref: '#/definitions/RepositoryNameList'
+        description: 'A list of repositories to describe. If this parameter is omitted, then all repositories in a registry are described.'
       nextToken:
-        $ref: "#/definitions/NextToken"
-        description: <p>The <code>nextToken</code> value returned from a previous paginated
-          <code>DescribeRepositories</code> request where
-          <code>maxResults</code> was used and the results exceeded the value of
-          that parameter. Pagination continues from the end of the previous
-          results that returned the <code>nextToken</code> value. This value is
-          <code>null</code> when there are no more results to return. This
-          option cannot be used when you specify repositories with
-          <code>repositoryNames</code>.</p> <note> <p>This token should be
-          treated as an opaque identifier that is only used to retrieve the next
-          items in a list and not for other programmatic purposes.</p> </note>
+        $ref: '#/definitions/NextToken'
+        description: <p>The <code>nextToken</code> value returned from a previous paginated <code>DescribeRepositories</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when there are no more results to return. This option cannot be used when you specify repositories with <code>repositoryNames</code>.</p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
       maxResults:
-        $ref: "#/definitions/MaxResults"
-        description: The maximum number of repository results returned by
-          <code>DescribeRepositories</code> in paginated output. When this
-          parameter is used, <code>DescribeRepositories</code> only returns
-          <code>maxResults</code> results in a single page along with a
-          <code>nextToken</code> response element. The remaining results of the
-          initial request can be seen by sending another
-          <code>DescribeRepositories</code> request with the returned
-          <code>nextToken</code> value. This value can be between 1 and 1000. If
-          this parameter is not used, then <code>DescribeRepositories</code>
-          returns up to 100 results and a <code>nextToken</code> value, if
-          applicable. This option cannot be used when you specify repositories
-          with <code>repositoryNames</code>.
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of repository results returned by <code>DescribeRepositories</code> in paginated output. When this parameter is used, <code>DescribeRepositories</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeRepositories</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 1000. If this parameter is not used, then <code>DescribeRepositories</code> returns up to 100 results and a <code>nextToken</code> value, if applicable. This option cannot be used when you specify repositories with <code>repositoryNames</code>.'
   GetAuthorizationTokenResponse:
     type: object
     example:
       authorizationData:
         - authorizationToken: QVdTOkN...
-          expiresAt: "1470951892432"
-          proxyEndpoint: https://012345678901.dkr.ecr.us-west-2.amazonaws.com
+          expiresAt: '1470951892432'
+          proxyEndpoint: 'https://012345678901.dkr.ecr.us-west-2.amazonaws.com'
     properties:
       authorizationData:
-        $ref: "#/definitions/AuthorizationDataList"
-        description: A list of authorization token data objects that correspond to the
-          <code>registryIds</code> values in the request.
+        $ref: '#/definitions/AuthorizationDataList'
+        description: A list of authorization token data objects that correspond to the <code>registryIds</code> values in the request.
   GetAuthorizationTokenRequest:
     type: object
     properties:
       registryIds:
-        $ref: "#/definitions/GetAuthorizationTokenRegistryIdList"
-        description: A list of AWS account IDs that are associated with the registries for
-          which to get authorization tokens. If you do not specify a registry,
-          the default registry is assumed.
+        $ref: '#/definitions/GetAuthorizationTokenRegistryIdList'
+        description: 'A list of AWS account IDs that are associated with the registries for which to get authorization tokens. If you do not specify a registry, the default registry is assumed.'
   GetDownloadUrlForLayerResponse:
     type: object
     properties:
       downloadUrl:
-        $ref: "#/definitions/Url"
+        $ref: '#/definitions/Url'
         description: The pre-signed Amazon S3 download URL for the requested layer.
       layerDigest:
-        $ref: "#/definitions/LayerDigest"
+        $ref: '#/definitions/LayerDigest'
         description: The digest of the image layer to download.
   GetDownloadUrlForLayerRequest:
     type: object
@@ -1755,16 +1599,13 @@ definitions:
       - layerDigest
     properties:
       registryId:
-        $ref: "#/definitions/RegistryId"
-        description: The AWS account ID associated with the registry that contains the
-          image layer to download. If you do not specify a registry, the default
-          registry is assumed.
+        $ref: '#/definitions/RegistryId'
+        description: 'The AWS account ID associated with the registry that contains the image layer to download. If you do not specify a registry, the default registry is assumed.'
       repositoryName:
-        $ref: "#/definitions/RepositoryName"
-        description: The name of the repository that is associated with the image layer to
-          download.
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository that is associated with the image layer to download.
       layerDigest:
-        $ref: "#/definitions/LayerDigest"
+        $ref: '#/definitions/LayerDigest'
         description: The digest of the image layer to download.
   LayersNotFoundException: {}
   LayerInaccessibleException: {}
@@ -1772,16 +1613,16 @@ definitions:
     type: object
     properties:
       registryId:
-        $ref: "#/definitions/RegistryId"
+        $ref: '#/definitions/RegistryId'
         description: The registry ID associated with the request.
       repositoryName:
-        $ref: "#/definitions/RepositoryName"
+        $ref: '#/definitions/RepositoryName'
         description: The repository name associated with the request.
       lifecyclePolicyText:
-        $ref: "#/definitions/LifecyclePolicyText"
+        $ref: '#/definitions/LifecyclePolicyText'
         description: The JSON lifecycle policy text.
       lastEvaluatedAt:
-        $ref: "#/definitions/EvaluationTimestamp"
+        $ref: '#/definitions/EvaluationTimestamp'
         description: The time stamp of the last time that the lifecycle policy was run.
   GetLifecyclePolicyRequest:
     type: object
@@ -1789,41 +1630,34 @@ definitions:
       - repositoryName
     properties:
       registryId:
-        $ref: "#/definitions/RegistryId"
-        description: The AWS account ID associated with the registry that contains the
-          repository. If you do not specify a registry, the default registry is
-          assumed.
+        $ref: '#/definitions/RegistryId'
+        description: 'The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.'
       repositoryName:
-        $ref: "#/definitions/RepositoryName"
+        $ref: '#/definitions/RepositoryName'
         description: The name of the repository.
   GetLifecyclePolicyPreviewResponse:
     type: object
     properties:
       registryId:
-        $ref: "#/definitions/RegistryId"
+        $ref: '#/definitions/RegistryId'
         description: The registry ID associated with the request.
       repositoryName:
-        $ref: "#/definitions/RepositoryName"
+        $ref: '#/definitions/RepositoryName'
         description: The repository name associated with the request.
       lifecyclePolicyText:
-        $ref: "#/definitions/LifecyclePolicyText"
+        $ref: '#/definitions/LifecyclePolicyText'
         description: The JSON lifecycle policy text.
       status:
-        $ref: "#/definitions/LifecyclePolicyPreviewStatus"
+        $ref: '#/definitions/LifecyclePolicyPreviewStatus'
         description: The status of the lifecycle policy preview request.
       nextToken:
-        $ref: "#/definitions/NextToken"
-        description: The <code>nextToken</code> value to include in a future
-          <code>GetLifecyclePolicyPreview</code> request. When the results of a
-          <code>GetLifecyclePolicyPreview</code> request exceed
-          <code>maxResults</code>, this value can be used to retrieve the next
-          page of results. This value is <code>null</code> when there are no
-          more results to return.
+        $ref: '#/definitions/NextToken'
+        description: 'The <code>nextToken</code> value to include in a future <code>GetLifecyclePolicyPreview</code> request. When the results of a <code>GetLifecyclePolicyPreview</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
       previewResults:
-        $ref: "#/definitions/LifecyclePolicyPreviewResultList"
+        $ref: '#/definitions/LifecyclePolicyPreviewResultList'
         description: The results of the lifecycle policy preview request.
       summary:
-        $ref: "#/definitions/LifecyclePolicyPreviewSummary"
+        $ref: '#/definitions/LifecyclePolicyPreviewSummary'
         description: The list of images that is returned as a result of the action.
   GetLifecyclePolicyPreviewRequest:
     type: object
@@ -1831,51 +1665,28 @@ definitions:
       - repositoryName
     properties:
       registryId:
-        $ref: "#/definitions/RegistryId"
-        description: The AWS account ID associated with the registry that contains the
-          repository. If you do not specify a registry, the default registry is
-          assumed.
+        $ref: '#/definitions/RegistryId'
+        description: 'The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.'
       repositoryName:
-        $ref: "#/definitions/RepositoryName"
+        $ref: '#/definitions/RepositoryName'
         description: The name of the repository.
       imageIds:
-        $ref: "#/definitions/ImageIdentifierList"
+        $ref: '#/definitions/ImageIdentifierList'
         description: The list of imageIDs to be included.
       nextToken:
-        $ref: "#/definitions/NextToken"
-        description: The <code>nextToken</code> value returned from a previous
-          paginated&#x2028; <code>GetLifecyclePolicyPreviewRequest</code>
-          request where <code>maxResults</code> was used and the&#x2028; results
-          exceeded the value of that parameter. Pagination continues from the
-          end of the&#x2028; previous results that returned the
-          <code>nextToken</code> value. This value is&#x2028; <code>null</code>
-          when there are no more results to return. This option cannot be used
-          when you specify images with <code>imageIds</code>.
+        $ref: '#/definitions/NextToken'
+        description: 'The <code>nextToken</code> value returned from a previous paginated&#x2028; <code>GetLifecyclePolicyPreviewRequest</code> request where <code>maxResults</code> was used and the&#x2028; results exceeded the value of that parameter. Pagination continues from the end of the&#x2028; previous results that returned the <code>nextToken</code> value. This value is&#x2028; <code>null</code> when there are no more results to return. This option cannot be used when you specify images with <code>imageIds</code>.'
       maxResults:
-        $ref: "#/definitions/LifecyclePreviewMaxResults"
-        description: The maximum number of repository results returned by
-          <code>GetLifecyclePolicyPreviewRequest</code> in&#x2028; paginated
-          output. When this parameter is used,
-          <code>GetLifecyclePolicyPreviewRequest</code> only returns&#x2028;
-          <code>maxResults</code> results in a single page along with a
-          <code>nextToken</code>&#x2028; response element. The remaining results
-          of the initial request can be seen by sending&#x2028; another
-          <code>GetLifecyclePolicyPreviewRequest</code> request with the
-          returned <code>nextToken</code>&#x2028; value. This value can be
-          between 1 and 1000. If this&#x2028; parameter is not used, then
-          <code>GetLifecyclePolicyPreviewRequest</code> returns up to&#x2028;
-          100 results and a <code>nextToken</code> value, if&#x2028; applicable.
-          This option cannot be used when you specify images with
-          <code>imageIds</code>.
+        $ref: '#/definitions/LifecyclePreviewMaxResults'
+        description: 'The maximum number of repository results returned by <code>GetLifecyclePolicyPreviewRequest</code> in&#x2028; paginated output. When this parameter is used, <code>GetLifecyclePolicyPreviewRequest</code> only returns&#x2028; <code>maxResults</code> results in a single page along with a <code>nextToken</code>&#x2028; response element. The remaining results of the initial request can be seen by sending&#x2028; another <code>GetLifecyclePolicyPreviewRequest</code> request with the returned <code>nextToken</code>&#x2028; value. This value can be between 1 and 1000. If this&#x2028; parameter is not used, then <code>GetLifecyclePolicyPreviewRequest</code> returns up to&#x2028; 100 results and a <code>nextToken</code> value, if&#x2028; applicable. This option cannot be used when you specify images with <code>imageIds</code>.'
       filter:
-        $ref: "#/definitions/LifecyclePolicyPreviewFilter"
-        description: An optional parameter that filters results based on image tag status
-          and all tags, if tagged.
+        $ref: '#/definitions/LifecyclePolicyPreviewFilter'
+        description: 'An optional parameter that filters results based on image tag status and all tags, if tagged.'
   LifecyclePolicyPreviewNotFoundException: {}
   GetRepositoryPolicyResponse:
     type: object
     example:
-      policyText: >-
+      policyText: |-
         {
           "Version" : "2008-10-17",
           "Statement" : [ {
@@ -1887,17 +1698,17 @@ definitions:
         "Action" : [ "ecr:GetDownloadUrlForLayer", "ecr:BatchGetImage", "ecr:BatchCheckLayerAvailability" ]
          } ]
         }
-      registryId: "012345678901"
+      registryId: 012345678901
       repositoryName: ubuntu
     properties:
       registryId:
-        $ref: "#/definitions/RegistryId"
+        $ref: '#/definitions/RegistryId'
         description: The registry ID associated with the request.
       repositoryName:
-        $ref: "#/definitions/RepositoryName"
+        $ref: '#/definitions/RepositoryName'
         description: The repository name associated with the request.
       policyText:
-        $ref: "#/definitions/RepositoryPolicyText"
+        $ref: '#/definitions/RepositoryPolicyText'
         description: The JSON repository policy text associated with the repository.
   GetRepositoryPolicyRequest:
     type: object
@@ -1905,99 +1716,69 @@ definitions:
       - repositoryName
     properties:
       registryId:
-        $ref: "#/definitions/RegistryId"
-        description: The AWS account ID associated with the registry that contains the
-          repository. If you do not specify a registry, the default registry is
-          assumed.
+        $ref: '#/definitions/RegistryId'
+        description: 'The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.'
       repositoryName:
-        $ref: "#/definitions/RepositoryName"
+        $ref: '#/definitions/RepositoryName'
         description: The name of the repository with the policy to retrieve.
   InitiateLayerUploadResponse:
     type: object
     properties:
       uploadId:
-        $ref: "#/definitions/UploadId"
-        description: The upload ID for the layer upload. This parameter is passed to
-          further <a>UploadLayerPart</a> and <a>CompleteLayerUpload</a>
-          operations.
+        $ref: '#/definitions/UploadId'
+        description: The upload ID for the layer upload. This parameter is passed to further <a>UploadLayerPart</a> and <a>CompleteLayerUpload</a> operations.
       partSize:
-        $ref: "#/definitions/PartSize"
-        description: The size, in bytes, that Amazon ECR expects future layer part uploads
-          to be.
+        $ref: '#/definitions/PartSize'
+        description: 'The size, in bytes, that Amazon ECR expects future layer part uploads to be.'
   InitiateLayerUploadRequest:
     type: object
     required:
       - repositoryName
     properties:
       registryId:
-        $ref: "#/definitions/RegistryId"
-        description: The AWS account ID associated with the registry to which you intend to
-          upload layers. If you do not specify a registry, the default registry
-          is assumed.
+        $ref: '#/definitions/RegistryId'
+        description: 'The AWS account ID associated with the registry to which you intend to upload layers. If you do not specify a registry, the default registry is assumed.'
       repositoryName:
-        $ref: "#/definitions/RepositoryName"
+        $ref: '#/definitions/RepositoryName'
         description: The name of the repository to which you intend to upload layers.
   ListImagesResponse:
     type: object
     example:
       imageIds:
-        - imageDigest: sha256:764f63476bdff6d83a09ba2a818f0d35757063724a9ac3ba5019c56f74ebf42a
+        - imageDigest: 'sha256:764f63476bdff6d83a09ba2a818f0d35757063724a9ac3ba5019c56f74ebf42a'
           imageTag: precise
     properties:
       imageIds:
-        $ref: "#/definitions/ImageIdentifierList"
+        $ref: '#/definitions/ImageIdentifierList'
         description: The list of image IDs for the requested repository.
       nextToken:
-        $ref: "#/definitions/NextToken"
-        description: The <code>nextToken</code> value to include in a future
-          <code>ListImages</code> request. When the results of a
-          <code>ListImages</code> request exceed <code>maxResults</code>, this
-          value can be used to retrieve the next page of results. This value is
-          <code>null</code> when there are no more results to return.
+        $ref: '#/definitions/NextToken'
+        description: 'The <code>nextToken</code> value to include in a future <code>ListImages</code> request. When the results of a <code>ListImages</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
   ListImagesRequest:
     type: object
     required:
       - repositoryName
     properties:
       registryId:
-        $ref: "#/definitions/RegistryId"
-        description: The AWS account ID associated with the registry that contains the
-          repository in which to list images. If you do not specify a registry,
-          the default registry is assumed.
+        $ref: '#/definitions/RegistryId'
+        description: 'The AWS account ID associated with the registry that contains the repository in which to list images. If you do not specify a registry, the default registry is assumed.'
       repositoryName:
-        $ref: "#/definitions/RepositoryName"
+        $ref: '#/definitions/RepositoryName'
         description: The repository with image IDs to be listed.
       nextToken:
-        $ref: "#/definitions/NextToken"
-        description: <p>The <code>nextToken</code> value returned from a previous paginated
-          <code>ListImages</code> request where <code>maxResults</code> was used
-          and the results exceeded the value of that parameter. Pagination
-          continues from the end of the previous results that returned the
-          <code>nextToken</code> value. This value is <code>null</code> when
-          there are no more results to return.</p> <note> <p>This token should
-          be treated as an opaque identifier that is only used to retrieve the
-          next items in a list and not for other programmatic purposes.</p>
-          </note>
+        $ref: '#/definitions/NextToken'
+        description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListImages</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when there are no more results to return.</p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
       maxResults:
-        $ref: "#/definitions/MaxResults"
-        description: The maximum number of image results returned by
-          <code>ListImages</code> in paginated output. When this parameter is
-          used, <code>ListImages</code> only returns <code>maxResults</code>
-          results in a single page along with a <code>nextToken</code> response
-          element. The remaining results of the initial request can be seen by
-          sending another <code>ListImages</code> request with the returned
-          <code>nextToken</code> value. This value can be between 1 and 1000. If
-          this parameter is not used, then <code>ListImages</code> returns up to
-          100 results and a <code>nextToken</code> value, if applicable.
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of image results returned by <code>ListImages</code> in paginated output. When this parameter is used, <code>ListImages</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListImages</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 1000. If this parameter is not used, then <code>ListImages</code> returns up to 100 results and a <code>nextToken</code> value, if applicable.'
       filter:
-        $ref: "#/definitions/ListImagesFilter"
-        description: The filter key and value with which to filter your
-          <code>ListImages</code> results.
+        $ref: '#/definitions/ListImagesFilter'
+        description: The filter key and value with which to filter your <code>ListImages</code> results.
   ListTagsForResourceResponse:
     type: object
     properties:
       tags:
-        $ref: "#/definitions/TagList"
+        $ref: '#/definitions/TagList'
         description: The tags for the resource.
   ListTagsForResourceRequest:
     type: object
@@ -2005,15 +1786,13 @@ definitions:
       - resourceArn
     properties:
       resourceArn:
-        $ref: "#/definitions/Arn"
-        description: The Amazon Resource Name (ARN) that identifies the resource for which
-          to list the tags. Currently, the only supported resource is an Amazon
-          ECR repository.
+        $ref: '#/definitions/Arn'
+        description: 'The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. Currently, the only supported resource is an Amazon ECR repository.'
   PutImageResponse:
     type: object
     properties:
       image:
-        $ref: "#/definitions/Image"
+        $ref: '#/definitions/Image'
         description: Details of the image uploaded.
   PutImageRequest:
     type: object
@@ -2022,32 +1801,29 @@ definitions:
       - imageManifest
     properties:
       registryId:
-        $ref: "#/definitions/RegistryId"
-        description: The AWS account ID associated with the registry that contains the
-          repository in which to put the image. If you do not specify a
-          registry, the default registry is assumed.
+        $ref: '#/definitions/RegistryId'
+        description: 'The AWS account ID associated with the registry that contains the repository in which to put the image. If you do not specify a registry, the default registry is assumed.'
       repositoryName:
-        $ref: "#/definitions/RepositoryName"
+        $ref: '#/definitions/RepositoryName'
         description: The name of the repository in which to put the image.
       imageManifest:
-        $ref: "#/definitions/ImageManifest"
+        $ref: '#/definitions/ImageManifest'
         description: The image manifest corresponding to the image to be uploaded.
       imageTag:
-        $ref: "#/definitions/ImageTag"
-        description: The tag to associate with the image. This parameter is required for
-          images that use the Docker Image Manifest V2 Schema 2 or OCI formats.
+        $ref: '#/definitions/ImageTag'
+        description: The tag to associate with the image. This parameter is required for images that use the Docker Image Manifest V2 Schema 2 or OCI formats.
   ImageAlreadyExistsException: {}
   PutLifecyclePolicyResponse:
     type: object
     properties:
       registryId:
-        $ref: "#/definitions/RegistryId"
+        $ref: '#/definitions/RegistryId'
         description: The registry ID associated with the request.
       repositoryName:
-        $ref: "#/definitions/RepositoryName"
+        $ref: '#/definitions/RepositoryName'
         description: The repository name associated with the request.
       lifecyclePolicyText:
-        $ref: "#/definitions/LifecyclePolicyText"
+        $ref: '#/definitions/LifecyclePolicyText'
         description: The JSON repository policy text.
   PutLifecyclePolicyRequest:
     type: object
@@ -2056,27 +1832,25 @@ definitions:
       - lifecyclePolicyText
     properties:
       registryId:
-        $ref: "#/definitions/RegistryId"
-        description: The AWS account ID associated with the registry that contains the
-          repository. If you do&#x2028; not specify a registry, the default
-          registry is assumed.
+        $ref: '#/definitions/RegistryId'
+        description: 'The AWS account ID associated with the registry that contains the repository. If you do&#x2028; not specify a registry, the default registry is assumed.'
       repositoryName:
-        $ref: "#/definitions/RepositoryName"
+        $ref: '#/definitions/RepositoryName'
         description: The name of the repository to receive the policy.
       lifecyclePolicyText:
-        $ref: "#/definitions/LifecyclePolicyText"
+        $ref: '#/definitions/LifecyclePolicyText'
         description: The JSON repository policy text to apply to the repository.
   SetRepositoryPolicyResponse:
     type: object
     properties:
       registryId:
-        $ref: "#/definitions/RegistryId"
+        $ref: '#/definitions/RegistryId'
         description: The registry ID associated with the request.
       repositoryName:
-        $ref: "#/definitions/RepositoryName"
+        $ref: '#/definitions/RepositoryName'
         description: The repository name associated with the request.
       policyText:
-        $ref: "#/definitions/RepositoryPolicyText"
+        $ref: '#/definitions/RepositoryPolicyText'
         description: The JSON repository policy text applied to the repository.
   SetRepositoryPolicyRequest:
     type: object
@@ -2085,36 +1859,31 @@ definitions:
       - policyText
     properties:
       registryId:
-        $ref: "#/definitions/RegistryId"
-        description: The AWS account ID associated with the registry that contains the
-          repository. If you do not specify a registry, the default registry is
-          assumed.
+        $ref: '#/definitions/RegistryId'
+        description: 'The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.'
       repositoryName:
-        $ref: "#/definitions/RepositoryName"
+        $ref: '#/definitions/RepositoryName'
         description: The name of the repository to receive the policy.
       policyText:
-        $ref: "#/definitions/RepositoryPolicyText"
+        $ref: '#/definitions/RepositoryPolicyText'
         description: The JSON repository policy text to apply to the repository.
       force:
-        $ref: "#/definitions/ForceFlag"
-        description: If the policy you are attempting to set on a repository policy would
-          prevent you from setting another policy in the future, you must force
-          the <a>SetRepositoryPolicy</a> operation. This is intended to prevent
-          accidental repository lock outs.
+        $ref: '#/definitions/ForceFlag'
+        description: 'If the policy you are attempting to set on a repository policy would prevent you from setting another policy in the future, you must force the <a>SetRepositoryPolicy</a> operation. This is intended to prevent accidental repository lock outs.'
   StartLifecyclePolicyPreviewResponse:
     type: object
     properties:
       registryId:
-        $ref: "#/definitions/RegistryId"
+        $ref: '#/definitions/RegistryId'
         description: The registry ID associated with the request.
       repositoryName:
-        $ref: "#/definitions/RepositoryName"
+        $ref: '#/definitions/RepositoryName'
         description: The repository name associated with the request.
       lifecyclePolicyText:
-        $ref: "#/definitions/LifecyclePolicyText"
+        $ref: '#/definitions/LifecyclePolicyText'
         description: The JSON repository policy text.
       status:
-        $ref: "#/definitions/LifecyclePolicyPreviewStatus"
+        $ref: '#/definitions/LifecyclePolicyPreviewStatus'
         description: The status of the lifecycle policy preview request.
   StartLifecyclePolicyPreviewRequest:
     type: object
@@ -2122,17 +1891,14 @@ definitions:
       - repositoryName
     properties:
       registryId:
-        $ref: "#/definitions/RegistryId"
-        description: The AWS account ID associated with the registry that contains the
-          repository. If you do not specify a registry, the default registry is
-          assumed.
+        $ref: '#/definitions/RegistryId'
+        description: 'The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.'
       repositoryName:
-        $ref: "#/definitions/RepositoryName"
+        $ref: '#/definitions/RepositoryName'
         description: The name of the repository to be evaluated.
       lifecyclePolicyText:
-        $ref: "#/definitions/LifecyclePolicyText"
-        description: The policy to be evaluated against. If you do not specify a policy,
-          the current policy for the repository is used.
+        $ref: '#/definitions/LifecyclePolicyText'
+        description: 'The policy to be evaluated against. If you do not specify a policy, the current policy for the repository is used.'
   LifecyclePolicyPreviewInProgressException: {}
   TagResourceResponse:
     type: object
@@ -2144,15 +1910,11 @@ definitions:
       - tags
     properties:
       resourceArn:
-        $ref: "#/definitions/Arn"
-        description: The Amazon Resource Name (ARN) of the the resource to which to add
-          tags. Currently, the only supported resource is an Amazon ECR
-          repository.
+        $ref: '#/definitions/Arn'
+        description: 'The Amazon Resource Name (ARN) of the the resource to which to add tags. Currently, the only supported resource is an Amazon ECR repository.'
       tags:
-        $ref: "#/definitions/TagList"
-        description: The tags to add to the resource. A tag is an array of key-value pairs.
-          Tag keys can have a maximum character length of 128 characters, and
-          tag values can have a maximum length of 256 characters.
+        $ref: '#/definitions/TagList'
+        description: 'The tags to add to the resource. A tag is an array of key-value pairs. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
   UntagResourceResponse:
     type: object
     properties: {}
@@ -2163,27 +1925,25 @@ definitions:
       - tagKeys
     properties:
       resourceArn:
-        $ref: "#/definitions/Arn"
-        description: The Amazon Resource Name (ARN) of the resource from which to remove
-          tags. Currently, the only supported resource is an Amazon ECR
-          repository.
+        $ref: '#/definitions/Arn'
+        description: 'The Amazon Resource Name (ARN) of the resource from which to remove tags. Currently, the only supported resource is an Amazon ECR repository.'
       tagKeys:
-        $ref: "#/definitions/TagKeyList"
+        $ref: '#/definitions/TagKeyList'
         description: The keys of the tags to be removed.
   UploadLayerPartResponse:
     type: object
     properties:
       registryId:
-        $ref: "#/definitions/RegistryId"
+        $ref: '#/definitions/RegistryId'
         description: The registry ID associated with the request.
       repositoryName:
-        $ref: "#/definitions/RepositoryName"
+        $ref: '#/definitions/RepositoryName'
         description: The repository name associated with the request.
       uploadId:
-        $ref: "#/definitions/UploadId"
+        $ref: '#/definitions/UploadId'
         description: The upload ID associated with the request.
       lastByteReceived:
-        $ref: "#/definitions/PartSize"
+        $ref: '#/definitions/PartSize'
         description: The integer value of the last byte received in the request.
   UploadLayerPartRequest:
     type: object
@@ -2195,25 +1955,22 @@ definitions:
       - layerPartBlob
     properties:
       registryId:
-        $ref: "#/definitions/RegistryId"
-        description: The AWS account ID associated with the registry to which you are
-          uploading layer parts. If you do not specify a registry, the default
-          registry is assumed.
+        $ref: '#/definitions/RegistryId'
+        description: 'The AWS account ID associated with the registry to which you are uploading layer parts. If you do not specify a registry, the default registry is assumed.'
       repositoryName:
-        $ref: "#/definitions/RepositoryName"
+        $ref: '#/definitions/RepositoryName'
         description: The name of the repository to which you are uploading layer parts.
       uploadId:
-        $ref: "#/definitions/UploadId"
-        description: The upload ID from a previous <a>InitiateLayerUpload</a> operation to
-          associate with the layer part upload.
+        $ref: '#/definitions/UploadId'
+        description: The upload ID from a previous <a>InitiateLayerUpload</a> operation to associate with the layer part upload.
       partFirstByte:
-        $ref: "#/definitions/PartSize"
+        $ref: '#/definitions/PartSize'
         description: The integer value of the first byte of the layer part.
       partLastByte:
-        $ref: "#/definitions/PartSize"
+        $ref: '#/definitions/PartSize'
         description: The integer value of the last byte of the layer part.
       layerPartBlob:
-        $ref: "#/definitions/LayerPartBlob"
+        $ref: '#/definitions/LayerPartBlob'
         description: The base64-encoded layer part payload.
   InvalidLayerPartException: {}
   Arn:
@@ -2230,115 +1987,99 @@ definitions:
     type: object
     properties:
       authorizationToken:
-        $ref: "#/definitions/Base64"
-        description: A base64-encoded string that contains authorization data for the
-          specified Amazon ECR registry. When the string is decoded, it is
-          presented in the format <code>user:password</code> for private
-          registry authentication using <code>docker login</code>.
+        $ref: '#/definitions/Base64'
+        description: 'A base64-encoded string that contains authorization data for the specified Amazon ECR registry. When the string is decoded, it is presented in the format <code>user:password</code> for private registry authentication using <code>docker login</code>.'
       expiresAt:
-        $ref: "#/definitions/ExpirationTimestamp"
-        description: The Unix time in seconds and milliseconds when the authorization token
-          expires. Authorization tokens are valid for 12 hours.
+        $ref: '#/definitions/ExpirationTimestamp'
+        description: The Unix time in seconds and milliseconds when the authorization token expires. Authorization tokens are valid for 12 hours.
       proxyEndpoint:
-        $ref: "#/definitions/ProxyEndpoint"
-        description: "The registry URL to use for this authorization token in a
-          <code>docker login</code> command. The Amazon ECR registry URL format
-          is <code>https://aws_account_id.dkr.ecr.region.amazonaws.com</code>.
-          For example,
-          <code>https://012345678910.dkr.ecr.us-east-1.amazonaws.com</code>.. "
+        $ref: '#/definitions/ProxyEndpoint'
+        description: 'The registry URL to use for this authorization token in a <code>docker login</code> command. The Amazon ECR registry URL format is <code>https://aws_account_id.dkr.ecr.region.amazonaws.com</code>. For example, <code>https://012345678910.dkr.ecr.us-east-1.amazonaws.com</code>.. '
     description: An object representing authorization data for an Amazon ECR registry.
   AuthorizationDataList:
     type: array
     items:
-      $ref: "#/definitions/AuthorizationData"
+      $ref: '#/definitions/AuthorizationData'
   RegistryId:
     type: string
-    pattern: "[0-9]{12}"
+    pattern: '[0-9]{12}'
   RepositoryName:
     type: string
-    pattern: (?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*
+    pattern: '(?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*'
     minLength: 2
     maxLength: 256
   BatchedOperationLayerDigestList:
     type: array
     items:
-      $ref: "#/definitions/BatchedOperationLayerDigest"
+      $ref: '#/definitions/BatchedOperationLayerDigest'
     minItems: 1
     maxItems: 100
   LayerList:
     type: array
     items:
-      $ref: "#/definitions/Layer"
+      $ref: '#/definitions/Layer'
   LayerFailureList:
     type: array
     items:
-      $ref: "#/definitions/LayerFailure"
+      $ref: '#/definitions/LayerFailure'
   ImageIdentifierList:
     type: array
     items:
-      $ref: "#/definitions/ImageIdentifier"
+      $ref: '#/definitions/ImageIdentifier'
     minItems: 1
     maxItems: 100
   ImageFailureList:
     type: array
     items:
-      $ref: "#/definitions/ImageFailure"
+      $ref: '#/definitions/ImageFailure'
   MediaTypeList:
     type: array
     items:
-      $ref: "#/definitions/MediaType"
+      $ref: '#/definitions/MediaType'
     minItems: 1
     maxItems: 100
   ImageList:
     type: array
     items:
-      $ref: "#/definitions/Image"
+      $ref: '#/definitions/Image'
   BatchedOperationLayerDigest:
     type: string
     minLength: 0
     maxLength: 1000
   UploadId:
     type: string
-    pattern: "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{\
-      12}"
+    pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
   LayerDigestList:
     type: array
     items:
-      $ref: "#/definitions/LayerDigest"
+      $ref: '#/definitions/LayerDigest'
     minItems: 1
     maxItems: 100
   LayerDigest:
     type: string
-    pattern: "[a-zA-Z0-9-_+.]+:[a-fA-F0-9]+"
+    pattern: '[a-zA-Z0-9-_+.]+:[a-fA-F0-9]+'
   TagList:
     type: array
     items:
-      $ref: "#/definitions/Tag"
+      $ref: '#/definitions/Tag'
   Repository:
     type: object
     properties:
       repositoryArn:
-        $ref: "#/definitions/Arn"
-        description: The Amazon Resource Name (ARN) that identifies the repository. The ARN
-          contains the <code>arn:aws:ecr</code> namespace, followed by the
-          region of the repository, AWS account ID of the repository owner,
-          repository namespace, and repository name. For example,
-          <code>arn:aws:ecr:region:012345678910:repository/test</code>.
+        $ref: '#/definitions/Arn'
+        description: 'The Amazon Resource Name (ARN) that identifies the repository. The ARN contains the <code>arn:aws:ecr</code> namespace, followed by the region of the repository, AWS account ID of the repository owner, repository namespace, and repository name. For example, <code>arn:aws:ecr:region:012345678910:repository/test</code>.'
       registryId:
-        $ref: "#/definitions/RegistryId"
-        description: The AWS account ID associated with the registry that contains the
-          repository.
+        $ref: '#/definitions/RegistryId'
+        description: The AWS account ID associated with the registry that contains the repository.
       repositoryName:
-        $ref: "#/definitions/RepositoryName"
+        $ref: '#/definitions/RepositoryName'
         description: The name of the repository.
       repositoryUri:
-        $ref: "#/definitions/Url"
-        description: The URI for the repository. You can use this URI for Docker
-          <code>push</code> or <code>pull</code> operations.
+        $ref: '#/definitions/Url'
+        description: The URI for the repository. You can use this URI for Docker <code>push</code> or <code>pull</code> operations.
       createdAt:
-        $ref: "#/definitions/CreationTimestamp"
-        description: The date and time, in JavaScript date format, when the repository was
-          created.
+        $ref: '#/definitions/CreationTimestamp'
+        description: 'The date and time, in JavaScript date format, when the repository was created.'
     description: An object representing a repository.
   CreationTimestamp:
     type: string
@@ -2366,10 +2107,8 @@ definitions:
     type: object
     properties:
       tagStatus:
-        $ref: "#/definitions/TagStatus"
-        description: The tag status with which to filter your <a>DescribeImages</a>
-          results. You can filter results based on whether they are
-          <code>TAGGED</code> or <code>UNTAGGED</code>.
+        $ref: '#/definitions/TagStatus'
+        description: The tag status with which to filter your <a>DescribeImages</a> results. You can filter results based on whether they are <code>TAGGED</code> or <code>UNTAGGED</code>.
     description: An object representing a filter on a <a>DescribeImages</a> operation.
   NextToken:
     type: string
@@ -2380,21 +2119,21 @@ definitions:
   ImageDetailList:
     type: array
     items:
-      $ref: "#/definitions/ImageDetail"
+      $ref: '#/definitions/ImageDetail'
   RepositoryNameList:
     type: array
     items:
-      $ref: "#/definitions/RepositoryName"
+      $ref: '#/definitions/RepositoryName'
     minItems: 1
     maxItems: 100
   RepositoryList:
     type: array
     items:
-      $ref: "#/definitions/Repository"
+      $ref: '#/definitions/Repository'
   GetAuthorizationTokenRegistryIdList:
     type: array
     items:
-      $ref: "#/definitions/RegistryId"
+      $ref: '#/definitions/RegistryId'
     minItems: 1
     maxItems: 10
   Url:
@@ -2407,7 +2146,7 @@ definitions:
     type: object
     properties:
       tagStatus:
-        $ref: "#/definitions/TagStatus"
+        $ref: '#/definitions/TagStatus'
         description: The tag status of the image.
     description: The filter for the lifecycle policy preview.
   LifecyclePolicyPreviewStatus:
@@ -2420,22 +2159,22 @@ definitions:
   LifecyclePolicyPreviewResultList:
     type: array
     items:
-      $ref: "#/definitions/LifecyclePolicyPreviewResult"
+      $ref: '#/definitions/LifecyclePolicyPreviewResult'
   LifecyclePolicyPreviewSummary:
     type: object
     properties:
       expiringImageTotalCount:
-        $ref: "#/definitions/ImageCount"
+        $ref: '#/definitions/ImageCount'
         description: The number of expiring images.
     description: The summary of the lifecycle policy preview request.
   ImageIdentifier:
     type: object
     properties:
       imageDigest:
-        $ref: "#/definitions/ImageDigest"
+        $ref: '#/definitions/ImageDigest'
         description: The <code>sha256</code> digest of the image manifest.
       imageTag:
-        $ref: "#/definitions/ImageTag"
+        $ref: '#/definitions/ImageTag'
         description: The tag used for the image.
     description: An object with identifying information for an Amazon ECR image.
   ImageManifest:
@@ -2444,17 +2183,16 @@ definitions:
     type: object
     properties:
       registryId:
-        $ref: "#/definitions/RegistryId"
+        $ref: '#/definitions/RegistryId'
         description: The AWS account ID associated with the registry containing the image.
       repositoryName:
-        $ref: "#/definitions/RepositoryName"
+        $ref: '#/definitions/RepositoryName'
         description: The name of the repository associated with the image.
       imageId:
-        $ref: "#/definitions/ImageIdentifier"
-        description: An object containing the image tag and image digest associated with an
-          image.
+        $ref: '#/definitions/ImageIdentifier'
+        description: An object containing the image tag and image digest associated with an image.
       imageManifest:
-        $ref: "#/definitions/ImageManifest"
+        $ref: '#/definitions/ImageManifest'
         description: The image manifest associated with the image.
     description: An object representing an Amazon ECR image.
   ImageActionType:
@@ -2469,7 +2207,7 @@ definitions:
   ImageTagList:
     type: array
     items:
-      $ref: "#/definitions/ImageTag"
+      $ref: '#/definitions/ImageTag'
   ImageSizeInBytes:
     type: integer
   PushTimestamp:
@@ -2479,32 +2217,24 @@ definitions:
     type: object
     properties:
       registryId:
-        $ref: "#/definitions/RegistryId"
-        description: The AWS account ID associated with the registry to which this image
-          belongs.
+        $ref: '#/definitions/RegistryId'
+        description: The AWS account ID associated with the registry to which this image belongs.
       repositoryName:
-        $ref: "#/definitions/RepositoryName"
+        $ref: '#/definitions/RepositoryName'
         description: The name of the repository to which this image belongs.
       imageDigest:
-        $ref: "#/definitions/ImageDigest"
+        $ref: '#/definitions/ImageDigest'
         description: The <code>sha256</code> digest of the image manifest.
       imageTags:
-        $ref: "#/definitions/ImageTagList"
+        $ref: '#/definitions/ImageTagList'
         description: The list of tags associated with this image.
       imageSizeInBytes:
-        $ref: "#/definitions/ImageSizeInBytes"
-        description: <p>The size, in bytes, of the image in the repository.</p> <note>
-          <p>Beginning with Docker version 1.9, the Docker client compresses
-          image layers before pushing them to a V2 Docker registry. The output
-          of the <code>docker images</code> command shows the uncompressed image
-          size, so it may return a larger image size than the image sizes
-          returned by <a>DescribeImages</a>.</p> </note>
+        $ref: '#/definitions/ImageSizeInBytes'
+        description: '<p>The size, in bytes, of the image in the repository.</p> <note> <p>Beginning with Docker version 1.9, the Docker client compresses image layers before pushing them to a V2 Docker registry. The output of the <code>docker images</code> command shows the uncompressed image size, so it may return a larger image size than the image sizes returned by <a>DescribeImages</a>.</p> </note>'
       imagePushedAt:
-        $ref: "#/definitions/PushTimestamp"
-        description: "The date and time, expressed in standard JavaScript date format, at
-          which the current image was pushed to the repository. "
-    description: An object that describes an image returned by a <a>DescribeImages</a>
-      operation.
+        $ref: '#/definitions/PushTimestamp'
+        description: 'The date and time, expressed in standard JavaScript date format, at which the current image was pushed to the repository. '
+    description: An object that describes an image returned by a <a>DescribeImages</a> operation.
   ImageFailureCode:
     type: string
     enum:
@@ -2519,13 +2249,13 @@ definitions:
     type: object
     properties:
       imageId:
-        $ref: "#/definitions/ImageIdentifier"
+        $ref: '#/definitions/ImageIdentifier'
         description: The image ID associated with the failure.
       failureCode:
-        $ref: "#/definitions/ImageFailureCode"
+        $ref: '#/definitions/ImageFailureCode'
         description: The code associated with the failure.
       failureReason:
-        $ref: "#/definitions/ImageFailureReason"
+        $ref: '#/definitions/ImageFailureReason'
         description: The reason for the failure.
     description: An object representing an Amazon ECR image failure.
   ImageTag:
@@ -2546,19 +2276,17 @@ definitions:
     type: object
     properties:
       layerDigest:
-        $ref: "#/definitions/LayerDigest"
+        $ref: '#/definitions/LayerDigest'
         description: The <code>sha256</code> digest of the image layer.
       layerAvailability:
-        $ref: "#/definitions/LayerAvailability"
+        $ref: '#/definitions/LayerAvailability'
         description: The availability status of the image layer.
       layerSize:
-        $ref: "#/definitions/LayerSizeInBytes"
-        description: The size, in bytes, of the image layer.
+        $ref: '#/definitions/LayerSizeInBytes'
+        description: 'The size, in bytes, of the image layer.'
       mediaType:
-        $ref: "#/definitions/MediaType"
-        description: The media type of the layer, such as
-          <code>application/vnd.docker.image.rootfs.diff.tar.gzip</code> or
-          <code>application/vnd.oci.image.layer.v1.tar+gzip</code>.
+        $ref: '#/definitions/MediaType'
+        description: 'The media type of the layer, such as <code>application/vnd.docker.image.rootfs.diff.tar.gzip</code> or <code>application/vnd.oci.image.layer.v1.tar+gzip</code>.'
     description: An object representing an Amazon ECR image layer.
   LayerFailureCode:
     type: string
@@ -2571,13 +2299,13 @@ definitions:
     type: object
     properties:
       layerDigest:
-        $ref: "#/definitions/BatchedOperationLayerDigest"
+        $ref: '#/definitions/BatchedOperationLayerDigest'
         description: The layer digest associated with the failure.
       failureCode:
-        $ref: "#/definitions/LayerFailureCode"
+        $ref: '#/definitions/LayerFailureCode'
         description: The failure code associated with the failure.
       failureReason:
-        $ref: "#/definitions/LayerFailureReason"
+        $ref: '#/definitions/LayerFailureReason'
         description: The reason for the failure.
     description: An object representing an Amazon ECR image layer failure.
   LayerPartBlob:
@@ -2586,7 +2314,7 @@ definitions:
     type: object
     properties:
       type:
-        $ref: "#/definitions/ImageActionType"
+        $ref: '#/definitions/ImageActionType'
         description: The type of action to be taken.
     description: The type of action to be taken.
   LifecyclePolicyRulePriority:
@@ -2596,30 +2324,27 @@ definitions:
     type: object
     properties:
       imageTags:
-        $ref: "#/definitions/ImageTagList"
+        $ref: '#/definitions/ImageTagList'
         description: The list of tags associated with this image.
       imageDigest:
-        $ref: "#/definitions/ImageDigest"
+        $ref: '#/definitions/ImageDigest'
         description: The <code>sha256</code> digest of the image manifest.
       imagePushedAt:
-        $ref: "#/definitions/PushTimestamp"
-        description: The date and time, expressed in standard JavaScript date format, at
-          which the current image was pushed to the repository.
+        $ref: '#/definitions/PushTimestamp'
+        description: 'The date and time, expressed in standard JavaScript date format, at which the current image was pushed to the repository.'
       action:
-        $ref: "#/definitions/LifecyclePolicyRuleAction"
+        $ref: '#/definitions/LifecyclePolicyRuleAction'
         description: The type of action to be taken.
       appliedRulePriority:
-        $ref: "#/definitions/LifecyclePolicyRulePriority"
+        $ref: '#/definitions/LifecyclePolicyRulePriority'
         description: The priority of the applied rule.
     description: The result of the lifecycle policy preview.
   ListImagesFilter:
     type: object
     properties:
       tagStatus:
-        $ref: "#/definitions/TagStatus"
-        description: The tag status with which to filter your <a>ListImages</a> results.
-          You can filter results based on whether they are <code>TAGGED</code>
-          or <code>UNTAGGED</code>.
+        $ref: '#/definitions/TagStatus'
+        description: The tag status with which to filter your <a>ListImages</a> results. You can filter results based on whether they are <code>TAGGED</code> or <code>UNTAGGED</code>.
     description: An object representing a filter on a <a>ListImages</a> operation.
   TagKey:
     type: string
@@ -2629,19 +2354,13 @@ definitions:
     type: object
     properties:
       Key:
-        $ref: "#/definitions/TagKey"
-        description: One part of a key-value pair that make up a tag. A <code>key</code> is
-          a general label that acts like a category for more specific tag
-          values.
+        $ref: '#/definitions/TagKey'
+        description: One part of a key-value pair that make up a tag. A <code>key</code> is a general label that acts like a category for more specific tag values.
       Value:
-        $ref: "#/definitions/TagValue"
-        description: The optional part of a key-value pair that make up a tag. A
-          <code>value</code> acts as a descriptor within a tag category (key).
-    description: The metadata that you apply to a resource to help you categorize and
-      organize them. Each tag consists of a key and an optional value, both of
-      which you define. Tag keys can have a maximum character length of 128
-      characters, and tag values can have a maximum length of 256 characters.
+        $ref: '#/definitions/TagValue'
+        description: The optional part of a key-value pair that make up a tag. A <code>value</code> acts as a descriptor within a tag category (key).
+    description: 'The metadata that you apply to a resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
   TagKeyList:
     type: array
     items:
-      $ref: "#/definitions/TagKey"
+      $ref: '#/definitions/TagKey'

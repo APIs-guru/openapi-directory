@@ -1,46 +1,38 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  version: 2017-08-25
+  version: '2017-08-25'
   x-release: v4
   title: AWS Signer
-  description: You can use Code Signing for Amazon FreeRTOS (AWS Signer) to sign code that
-    you created for any of the IoT devices that Amazon Web Services supports.
-    AWS Signer is integrated with Amazon FreeRTOS, AWS Certificate Manager, and
-    AWS CloudTrail. Amazon FreeRTOS customers can use AWS Signer to sign code
-    images before making them available for microcontrollers. You can use ACM to
-    import third-party certificates to be used by AWS Signer. For general
-    information about using AWS Signer, see the <a
-    href="http://docs.aws.amazon.com/signer/latest/developerguide/Welcome.html">Code
-    Signing for Amazon FreeRTOS Developer Guide</a>.
+  description: 'You can use Code Signing for Amazon FreeRTOS (AWS Signer) to sign code that you created for any of the IoT devices that Amazon Web Services supports. AWS Signer is integrated with Amazon FreeRTOS, AWS Certificate Manager, and AWS CloudTrail. Amazon FreeRTOS customers can use AWS Signer to sign code images before making them available for microcontrollers. You can use ACM to import third-party certificates to be used by AWS Signer. For general information about using AWS Signer, see the <a href="http://docs.aws.amazon.com/signer/latest/developerguide/Welcome.html">Code Signing for Amazon FreeRTOS Developer Guide</a>.'
   x-logo:
-    url: https://twitter.com/awscloud/profile_image?size=original
-    backgroundColor: "#FFFFFF"
-  termsOfService: https://aws.amazon.com/service-terms/
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
     name: Mike Ralphson
     email: mike.ralphson@gmail.com
-    url: https://github.com/mermade/aws2openapi
+    url: 'https://github.com/mermade/aws2openapi'
     x-twitter: PermittedSoc
   license:
     name: Apache 2.0 License
-    url: http://www.apache.org/licenses/
+    url: 'http://www.apache.org/licenses/'
   x-providerName: amazonaws.com
   x-serviceName: signer
   x-origin:
     - contentType: application/json
-      url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/signer-2017-08-25.normal.json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/signer-2017-08-25.normal.json'
       converter:
-        url: https://github.com/mermade/aws2openapi
+        url: 'https://github.com/mermade/aws2openapi'
         version: 1.0.0
       x-apisguru-direct: true
   x-apiClientRegistration:
-    url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
   x-preferred: true
 externalDocs:
   description: Amazon Web Services documentation
-  url: https://docs.aws.amazon.com/signer/
+  url: 'https://docs.aws.amazon.com/signer/'
 host: signer.amazonaws.com
 basePath: /
 schemes:
@@ -96,121 +88,114 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  "/signing-profiles/{profileName}":
+  '/signing-profiles/{profileName}':
     delete:
       operationId: CancelSigningProfile
-      description: Changes the state of an <code>ACTIVE</code> signing profile to
-        <code>CANCELED</code>. A canceled profile is still viewable with the
-        <code>ListSigningProfiles</code> operation, but it cannot perform new
-        signing jobs, and is deleted two years after cancelation.
+      description: 'Changes the state of an <code>ACTIVE</code> signing profile to <code>CANCELED</code>. A canceled profile is still viewable with the <code>ListSigningProfiles</code> operation, but it cannot perform new signing jobs, and is deleted two years after cancelation.'
       responses:
-        "200":
+        '200':
           description: Success
-        "480":
+        '480':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
-        "481":
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
           description: AccessDeniedException
           schema:
-            $ref: "#/definitions/AccessDeniedException"
-        "482":
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
           description: ThrottlingException
           schema:
-            $ref: "#/definitions/ThrottlingException"
-        "483":
+            $ref: '#/definitions/ThrottlingException'
+        '483':
           description: InternalServiceErrorException
           schema:
-            $ref: "#/definitions/InternalServiceErrorException"
+            $ref: '#/definitions/InternalServiceErrorException'
       parameters:
         - name: profileName
           in: path
           required: true
           description: The name of the signing profile to be canceled.
           type: string
-          pattern: ^[a-zA-Z0-9_]{2,}
+          pattern: '^[a-zA-Z0-9_]{2,}'
           minLength: 2
           maxLength: 20
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetSigningProfile
       description: Returns information on a specific signing profile.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/GetSigningProfileResponse"
-        "480":
+            $ref: '#/definitions/GetSigningProfileResponse'
+        '480':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
-        "481":
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
           description: AccessDeniedException
           schema:
-            $ref: "#/definitions/AccessDeniedException"
-        "482":
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
           description: ThrottlingException
           schema:
-            $ref: "#/definitions/ThrottlingException"
-        "483":
+            $ref: '#/definitions/ThrottlingException'
+        '483':
           description: InternalServiceErrorException
           schema:
-            $ref: "#/definitions/InternalServiceErrorException"
+            $ref: '#/definitions/InternalServiceErrorException'
       parameters:
         - name: profileName
           in: path
           required: true
           description: The name of the target signing profile.
           type: string
-          pattern: ^[a-zA-Z0-9_]{2,}
+          pattern: '^[a-zA-Z0-9_]{2,}'
           minLength: 2
           maxLength: 20
     put:
       operationId: PutSigningProfile
-      description: 'Creates a signing profile. A signing profile is an AWS Signer template
-        that can be used to carry out a pre-defined signing job. For more
-        information, see <a
-        href="http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html">http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html</a>
-        '
+      description: 'Creates a signing profile. A signing profile is an AWS Signer template that can be used to carry out a pre-defined signing job. For more information, see <a href="http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html">http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html</a> '
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/PutSigningProfileResponse"
-        "480":
+            $ref: '#/definitions/PutSigningProfileResponse'
+        '480':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
-        "481":
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
           description: AccessDeniedException
           schema:
-            $ref: "#/definitions/AccessDeniedException"
-        "482":
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
           description: ValidationException
           schema:
-            $ref: "#/definitions/ValidationException"
-        "483":
+            $ref: '#/definitions/ValidationException'
+        '483':
           description: ThrottlingException
           schema:
-            $ref: "#/definitions/ThrottlingException"
-        "484":
+            $ref: '#/definitions/ThrottlingException'
+        '484':
           description: InternalServiceErrorException
           schema:
-            $ref: "#/definitions/InternalServiceErrorException"
+            $ref: '#/definitions/InternalServiceErrorException'
       parameters:
         - name: profileName
           in: path
           required: true
           description: The name of the signing profile to be created.
           type: string
-          pattern: ^[a-zA-Z0-9_]{2,}
+          pattern: '^[a-zA-Z0-9_]{2,}'
           minLength: 2
           maxLength: 20
         - name: body
@@ -227,48 +212,43 @@ paths:
                 type: object
                 properties:
                   certificateArn:
-                    $ref: "#/definitions/CertificateArn"
-                    description: The Amazon Resource Name (ARN) of the certificates that is
-                      used to sign your code.
+                    $ref: '#/definitions/CertificateArn'
+                    description: The Amazon Resource Name (ARN) of the certificates that is used to sign your code.
               platformId:
                 description: The ID of the signing profile to be created.
                 type: string
               overrides:
-                description: Any overrides that are applied to the signing configuration of
-                  an AWS Signer platform.
+                description: Any overrides that are applied to the signing configuration of an AWS Signer platform.
                 type: object
                 properties:
                   signingConfiguration:
-                    $ref: "#/definitions/SigningConfigurationOverrides"
+                    $ref: '#/definitions/SigningConfigurationOverrides'
               signingParameters:
-                description: Map of key-value pairs for signing. These can include any
-                  information that you want to use during signing.
+                description: Map of key-value pairs for signing. These can include any information that you want to use during signing.
                 type: object
                 additionalProperties:
-                  $ref: "#/definitions/SigningParameterValue"
-  "/signing-jobs/{jobId}":
+                  $ref: '#/definitions/SigningParameterValue'
+  '/signing-jobs/{jobId}':
     get:
       operationId: DescribeSigningJob
-      description: "Returns information about a specific code signing job. You specify the
-        job by using the <code>jobId</code> value that is returned by the
-        <a>StartSigningJob</a> operation. "
+      description: 'Returns information about a specific code signing job. You specify the job by using the <code>jobId</code> value that is returned by the <a>StartSigningJob</a> operation. '
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DescribeSigningJobResponse"
-        "480":
+            $ref: '#/definitions/DescribeSigningJobResponse'
+        '480':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
-        "481":
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
           description: AccessDeniedException
           schema:
-            $ref: "#/definitions/AccessDeniedException"
-        "482":
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
           description: InternalServiceErrorException
           schema:
-            $ref: "#/definitions/InternalServiceErrorException"
+            $ref: '#/definitions/InternalServiceErrorException'
       parameters:
         - name: jobId
           in: path
@@ -276,34 +256,34 @@ paths:
           description: The ID of the signing job on input.
           type: string
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  "/signing-platforms/{platformId}":
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/signing-platforms/{platformId}':
     get:
       operationId: GetSigningPlatform
       description: Returns information on a specific signing platform.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/GetSigningPlatformResponse"
-        "480":
+            $ref: '#/definitions/GetSigningPlatformResponse'
+        '480':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
-        "481":
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
           description: AccessDeniedException
           schema:
-            $ref: "#/definitions/AccessDeniedException"
-        "482":
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
           description: InternalServiceErrorException
           schema:
-            $ref: "#/definitions/InternalServiceErrorException"
+            $ref: '#/definitions/InternalServiceErrorException'
       parameters:
         - name: platformId
           in: path
@@ -311,46 +291,38 @@ paths:
           description: The ID of the target signing platform.
           type: string
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /signing-jobs:
     get:
       operationId: ListSigningJobs
-      description: "Lists all your signing jobs. You can use the <code>maxResults</code>
-        parameter to limit the number of signing jobs that are returned in the
-        response. If additional jobs remain to be listed, AWS Signer returns a
-        <code>nextToken</code> value. Use this value in subsequent calls to
-        <code>ListSigningJobs</code> to fetch the remaining values. You can
-        continue calling <code>ListSigningJobs</code> with your
-        <code>maxResults</code> parameter and with new values that AWS Signer
-        returns in the <code>nextToken</code> parameter until all of your
-        signing jobs have been returned. "
+      description: 'Lists all your signing jobs. You can use the <code>maxResults</code> parameter to limit the number of signing jobs that are returned in the response. If additional jobs remain to be listed, AWS Signer returns a <code>nextToken</code> value. Use this value in subsequent calls to <code>ListSigningJobs</code> to fetch the remaining values. You can continue calling <code>ListSigningJobs</code> with your <code>maxResults</code> parameter and with new values that AWS Signer returns in the <code>nextToken</code> parameter until all of your signing jobs have been returned. '
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/ListSigningJobsResponse"
-        "480":
+            $ref: '#/definitions/ListSigningJobsResponse'
+        '480':
           description: ValidationException
           schema:
-            $ref: "#/definitions/ValidationException"
-        "481":
+            $ref: '#/definitions/ValidationException'
+        '481':
           description: AccessDeniedException
           schema:
-            $ref: "#/definitions/AccessDeniedException"
-        "482":
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
           description: ThrottlingException
           schema:
-            $ref: "#/definitions/ThrottlingException"
-        "483":
+            $ref: '#/definitions/ThrottlingException'
+        '483':
           description: InternalServiceErrorException
           schema:
-            $ref: "#/definitions/InternalServiceErrorException"
+            $ref: '#/definitions/InternalServiceErrorException'
       parameters:
         - name: status
           in: query
@@ -364,8 +336,7 @@ paths:
         - name: platformId
           in: query
           required: false
-          description: The ID of microcontroller platform that you specified for the
-            distribution of your code image.
+          description: The ID of microcontroller platform that you specified for the distribution of your code image.
           type: string
         - name: requestedBy
           in: query
@@ -375,76 +346,51 @@ paths:
         - name: maxResults
           in: query
           required: false
-          description: "Specifies the maximum number of items to return in the response.
-            Use this parameter when paginating results. If additional items
-            exist beyond the number you specify, the <code>nextToken</code>
-            element is set in the response. Use the <code>nextToken</code> value
-            in a subsequent request to retrieve additional items. "
+          description: 'Specifies the maximum number of items to return in the response. Use this parameter when paginating results. If additional items exist beyond the number you specify, the <code>nextToken</code> element is set in the response. Use the <code>nextToken</code> value in a subsequent request to retrieve additional items. '
           type: integer
           minimum: 1
           maximum: 25
         - name: nextToken
           in: query
           required: false
-          description: String for specifying the next set of paginated results to return.
-            After you receive a response with truncated results, use this
-            parameter in a subsequent request. Set it to the value of
-            <code>nextToken</code> from the response that you just received.
+          description: 'String for specifying the next set of paginated results to return. After you receive a response with truncated results, use this parameter in a subsequent request. Set it to the value of <code>nextToken</code> from the response that you just received.'
           type: string
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
       operationId: StartSigningJob
-      description: '<p>Initiates a signing job to be performed on the code provided.
-        Signing jobs are viewable by the <code>ListSigningJobs</code> operation
-        for two years after they are performed. Note the following requirements:
-        </p> <ul> <li> <p> You must create an Amazon S3 source bucket. For more
-        information, see <a
-        href="http://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html">Create
-        a Bucket</a> in the <i>Amazon S3 Getting Started Guide</i>. </p> </li>
-        <li> <p>Your S3 source bucket must be version enabled.</p> </li> <li>
-        <p>You must create an S3 destination bucket. AWS Signer uses your S3
-        destination bucket to write your signed code.</p> </li> <li> <p>You
-        specify the name of the source and destination buckets when calling the
-        <code>StartSigningJob</code> operation.</p> </li> <li> <p>You must also
-        specify a request token that identifies your request to AWS Signer. </p>
-        </li> </ul> <p>You can call the <a>DescribeSigningJob</a> and the
-        <a>ListSigningJobs</a> actions after you call
-        <code>StartSigningJob</code>.</p> <p>For a Java example that shows how
-        to use this action, see <a
-        href="http://docs.aws.amazon.com/acm/latest/userguide/">http://docs.aws.amazon.com/acm/latest/userguide/</a>
-        </p>'
+      description: '<p>Initiates a signing job to be performed on the code provided. Signing jobs are viewable by the <code>ListSigningJobs</code> operation for two years after they are performed. Note the following requirements: </p> <ul> <li> <p> You must create an Amazon S3 source bucket. For more information, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html">Create a Bucket</a> in the <i>Amazon S3 Getting Started Guide</i>. </p> </li> <li> <p>Your S3 source bucket must be version enabled.</p> </li> <li> <p>You must create an S3 destination bucket. AWS Signer uses your S3 destination bucket to write your signed code.</p> </li> <li> <p>You specify the name of the source and destination buckets when calling the <code>StartSigningJob</code> operation.</p> </li> <li> <p>You must also specify a request token that identifies your request to AWS Signer. </p> </li> </ul> <p>You can call the <a>DescribeSigningJob</a> and the <a>ListSigningJobs</a> actions after you call <code>StartSigningJob</code>.</p> <p>For a Java example that shows how to use this action, see <a href="http://docs.aws.amazon.com/acm/latest/userguide/">http://docs.aws.amazon.com/acm/latest/userguide/</a> </p>'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/StartSigningJobResponse"
-        "480":
+            $ref: '#/definitions/StartSigningJobResponse'
+        '480':
           description: ValidationException
           schema:
-            $ref: "#/definitions/ValidationException"
-        "481":
+            $ref: '#/definitions/ValidationException'
+        '481':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
-        "482":
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
           description: AccessDeniedException
           schema:
-            $ref: "#/definitions/AccessDeniedException"
-        "483":
+            $ref: '#/definitions/AccessDeniedException'
+        '483':
           description: ThrottlingException
           schema:
-            $ref: "#/definitions/ThrottlingException"
-        "484":
+            $ref: '#/definitions/ThrottlingException'
+        '484':
           description: InternalServiceErrorException
           schema:
-            $ref: "#/definitions/InternalServiceErrorException"
+            $ref: '#/definitions/InternalServiceErrorException'
       parameters:
         - name: body
           in: body
@@ -457,64 +403,53 @@ paths:
               - clientRequestToken
             properties:
               source:
-                description: An <code>S3Source</code> object that contains information
-                  about the S3 bucket where you saved your unsigned code.
+                description: An <code>S3Source</code> object that contains information about the S3 bucket where you saved your unsigned code.
                 type: object
                 properties:
                   s3:
-                    $ref: "#/definitions/S3Source"
+                    $ref: '#/definitions/S3Source'
                     description: The <code>S3Source</code> object.
               destination:
-                description: Points to an <code>S3Destination</code> object that contains
-                  information about your S3 bucket.
+                description: Points to an <code>S3Destination</code> object that contains information about your S3 bucket.
                 type: object
                 properties:
                   s3:
-                    $ref: "#/definitions/S3Destination"
+                    $ref: '#/definitions/S3Destination'
                     description: The <code>S3Destination</code> object.
               profileName:
                 description: The name of the signing profile.
                 type: string
-                pattern: ^[a-zA-Z0-9_]{2,}
+                pattern: '^[a-zA-Z0-9_]{2,}'
                 minLength: 2
                 maxLength: 20
               clientRequestToken:
-                description: String that identifies the signing request. All calls after
-                  the first that use this token return the same response as the
-                  first call.
+                description: String that identifies the signing request. All calls after the first that use this token return the same response as the first call.
                 type: string
   /signing-platforms:
     get:
       operationId: ListSigningPlatforms
-      description: Lists all signing platforms available in AWS Signer that match the
-        request parameters. If additional jobs remain to be listed, AWS Signer
-        returns a <code>nextToken</code> value. Use this value in subsequent
-        calls to <code>ListSigningJobs</code> to fetch the remaining values. You
-        can continue calling <code>ListSigningJobs</code> with your
-        <code>maxResults</code> parameter and with new values that AWS Signer
-        returns in the <code>nextToken</code> parameter until all of your
-        signing jobs have been returned.
+      description: 'Lists all signing platforms available in AWS Signer that match the request parameters. If additional jobs remain to be listed, AWS Signer returns a <code>nextToken</code> value. Use this value in subsequent calls to <code>ListSigningJobs</code> to fetch the remaining values. You can continue calling <code>ListSigningJobs</code> with your <code>maxResults</code> parameter and with new values that AWS Signer returns in the <code>nextToken</code> parameter until all of your signing jobs have been returned.'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/ListSigningPlatformsResponse"
-        "480":
+            $ref: '#/definitions/ListSigningPlatformsResponse'
+        '480':
           description: ValidationException
           schema:
-            $ref: "#/definitions/ValidationException"
-        "481":
+            $ref: '#/definitions/ValidationException'
+        '481':
           description: AccessDeniedException
           schema:
-            $ref: "#/definitions/AccessDeniedException"
-        "482":
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
           description: ThrottlingException
           schema:
-            $ref: "#/definitions/ThrottlingException"
-        "483":
+            $ref: '#/definitions/ThrottlingException'
+        '483':
           description: InternalServiceErrorException
           schema:
-            $ref: "#/definitions/InternalServiceErrorException"
+            $ref: '#/definitions/InternalServiceErrorException'
       parameters:
         - name: category
           in: query
@@ -541,55 +476,42 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: Value for specifying the next set of paginated results to return.
-            After you receive a response with truncated results, use this
-            parameter in a subsequent request. Set it to the value of
-            <code>nextToken</code> from the response that you just received.
+          description: 'Value for specifying the next set of paginated results to return. After you receive a response with truncated results, use this parameter in a subsequent request. Set it to the value of <code>nextToken</code> from the response that you just received.'
           type: string
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /signing-profiles:
     get:
       operationId: ListSigningProfiles
-      description: Lists all available signing profiles in your AWS account. Returns only
-        profiles with an <code>ACTIVE</code> status unless the
-        <code>includeCanceled</code> request field is set to <code>true</code>.
-        If additional jobs remain to be listed, AWS Signer returns a
-        <code>nextToken</code> value. Use this value in subsequent calls to
-        <code>ListSigningJobs</code> to fetch the remaining values. You can
-        continue calling <code>ListSigningJobs</code> with your
-        <code>maxResults</code> parameter and with new values that AWS Signer
-        returns in the <code>nextToken</code> parameter until all of your
-        signing jobs have been returned.
+      description: 'Lists all available signing profiles in your AWS account. Returns only profiles with an <code>ACTIVE</code> status unless the <code>includeCanceled</code> request field is set to <code>true</code>. If additional jobs remain to be listed, AWS Signer returns a <code>nextToken</code> value. Use this value in subsequent calls to <code>ListSigningJobs</code> to fetch the remaining values. You can continue calling <code>ListSigningJobs</code> with your <code>maxResults</code> parameter and with new values that AWS Signer returns in the <code>nextToken</code> parameter until all of your signing jobs have been returned.'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/ListSigningProfilesResponse"
-        "480":
+            $ref: '#/definitions/ListSigningProfilesResponse'
+        '480':
           description: AccessDeniedException
           schema:
-            $ref: "#/definitions/AccessDeniedException"
-        "481":
+            $ref: '#/definitions/AccessDeniedException'
+        '481':
           description: ThrottlingException
           schema:
-            $ref: "#/definitions/ThrottlingException"
-        "482":
+            $ref: '#/definitions/ThrottlingException'
+        '482':
           description: InternalServiceErrorException
           schema:
-            $ref: "#/definitions/InternalServiceErrorException"
+            $ref: '#/definitions/InternalServiceErrorException'
       parameters:
         - name: includeCanceled
           in: query
           required: false
-          description: Designates whether to include profiles with the status of
-            <code>CANCELED</code>.
+          description: Designates whether to include profiles with the status of <code>CANCELED</code>.
           type: boolean
         - name: maxResults
           in: query
@@ -601,19 +523,16 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: Value for specifying the next set of paginated results to return.
-            After you receive a response with truncated results, use this
-            parameter in a subsequent request. Set it to the value of
-            <code>nextToken</code> from the response that you just received.
+          description: 'Value for specifying the next set of paginated results to return. After you receive a response with truncated results, use this parameter in a subsequent request. Set it to the value of <code>nextToken</code> from the response that you just received.'
           type: string
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
   ResourceNotFoundException: {}
   AccessDeniedException: {}
@@ -623,135 +542,125 @@ definitions:
     type: object
     properties:
       jobId:
-        $ref: "#/definitions/JobId"
+        $ref: '#/definitions/JobId'
         description: The ID of the signing job on output.
       source:
-        $ref: "#/definitions/Source"
+        $ref: '#/definitions/Source'
         description: The object that contains the name of your S3 bucket or your raw code.
       signingMaterial:
-        $ref: "#/definitions/SigningMaterial"
+        $ref: '#/definitions/SigningMaterial'
         description: Amazon Resource Name (ARN) of your code signing certificate.
       platformId:
-        $ref: "#/definitions/PlatformId"
-        description: The microcontroller platform to which your signed code image will be
-          distributed.
+        $ref: '#/definitions/PlatformId'
+        description: The microcontroller platform to which your signed code image will be distributed.
       profileName:
-        $ref: "#/definitions/ProfileName"
+        $ref: '#/definitions/ProfileName'
         description: The name of the profile that initiated the signing operation.
       overrides:
-        $ref: "#/definitions/SigningPlatformOverrides"
+        $ref: '#/definitions/SigningPlatformOverrides'
         description: A list of any overrides that were applied to the signing operation.
       signingParameters:
-        $ref: "#/definitions/SigningParameters"
-        description: "Map of user-assigned key-value pairs used during signing. These
-          values contain any information that you specified for use in your
-          signing job. "
+        $ref: '#/definitions/SigningParameters'
+        description: 'Map of user-assigned key-value pairs used during signing. These values contain any information that you specified for use in your signing job. '
       createdAt:
-        $ref: "#/definitions/CreatedAt"
+        $ref: '#/definitions/CreatedAt'
         description: Date and time that the signing job was created.
       completedAt:
-        $ref: "#/definitions/CompletedAt"
+        $ref: '#/definitions/CompletedAt'
         description: Date and time that the signing job was completed.
       requestedBy:
-        $ref: "#/definitions/RequestedBy"
+        $ref: '#/definitions/RequestedBy'
         description: The IAM principal that requested the signing job.
       status:
-        $ref: "#/definitions/SigningStatus"
+        $ref: '#/definitions/SigningStatus'
         description: Status of the signing job.
       statusReason:
-        $ref: "#/definitions/StatusReason"
+        $ref: '#/definitions/StatusReason'
         description: String value that contains the status reason.
       signedObject:
-        $ref: "#/definitions/SignedObject"
-        description: Name of the S3 bucket where the signed code image is saved by AWS
-          Signer.
+        $ref: '#/definitions/SignedObject'
+        description: Name of the S3 bucket where the signed code image is saved by AWS Signer.
   GetSigningPlatformResponse:
     type: object
     properties:
       platformId:
-        $ref: "#/definitions/PlatformId"
+        $ref: '#/definitions/PlatformId'
         description: The ID of the target signing platform.
       displayName:
-        $ref: "#/definitions/DisplayName"
+        $ref: '#/definitions/DisplayName'
         description: The display name of the target signing platform.
       partner:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: A list of partner entities that use the target signing platform.
       target:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: The validation template that is used by the target signing platform.
       category:
-        $ref: "#/definitions/Category"
+        $ref: '#/definitions/Category'
         description: The category type of the target signing platform.
       signingConfiguration:
-        $ref: "#/definitions/SigningConfiguration"
+        $ref: '#/definitions/SigningConfiguration'
         description: A list of configurations applied to the target platform at signing.
       signingImageFormat:
-        $ref: "#/definitions/SigningImageFormat"
+        $ref: '#/definitions/SigningImageFormat'
         description: The format of the target platform's signing image.
       maxSizeInMB:
-        $ref: "#/definitions/MaxSizeInMB"
-        description: The maximum size (in MB) of the payload that can be signed by the
-          target platform.
+        $ref: '#/definitions/MaxSizeInMB'
+        description: The maximum size (in MB) of the payload that can be signed by the target platform.
   GetSigningProfileResponse:
     type: object
     properties:
       profileName:
-        $ref: "#/definitions/ProfileName"
+        $ref: '#/definitions/ProfileName'
         description: The name of the target signing profile.
       signingMaterial:
-        $ref: "#/definitions/SigningMaterial"
-        description: The ARN of the certificate that the target profile uses for signing
-          operations.
+        $ref: '#/definitions/SigningMaterial'
+        description: The ARN of the certificate that the target profile uses for signing operations.
       platformId:
-        $ref: "#/definitions/PlatformId"
+        $ref: '#/definitions/PlatformId'
         description: The ID of the platform that is used by the target signing profile.
       overrides:
-        $ref: "#/definitions/SigningPlatformOverrides"
-        description: A list of overrides applied by the target signing profile for signing
-          operations.
+        $ref: '#/definitions/SigningPlatformOverrides'
+        description: A list of overrides applied by the target signing profile for signing operations.
       signingParameters:
-        $ref: "#/definitions/SigningParameters"
-        description: A map of key-value pairs for signing operations that is attached to
-          the target signing profile.
+        $ref: '#/definitions/SigningParameters'
+        description: A map of key-value pairs for signing operations that is attached to the target signing profile.
       status:
-        $ref: "#/definitions/SigningProfileStatus"
+        $ref: '#/definitions/SigningProfileStatus'
         description: The status of the target signing profile.
   ListSigningJobsResponse:
     type: object
     properties:
       jobs:
-        $ref: "#/definitions/SigningJobs"
+        $ref: '#/definitions/SigningJobs'
         description: A list of your signing jobs.
       nextToken:
-        $ref: "#/definitions/NextToken"
+        $ref: '#/definitions/NextToken'
         description: String for specifying the next set of paginated results.
   ValidationException: {}
   ListSigningPlatformsResponse:
     type: object
     properties:
       platforms:
-        $ref: "#/definitions/SigningPlatforms"
+        $ref: '#/definitions/SigningPlatforms'
         description: A list of all platforms that match the request parameters.
       nextToken:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: Value for specifying the next set of paginated results to return.
   ListSigningProfilesResponse:
     type: object
     properties:
       profiles:
-        $ref: "#/definitions/SigningProfiles"
-        description: A list of profiles that are available in the AWS account. This
-          includes profiles with the status of <code>CANCELED</code> if the
-          <code>includeCanceled</code> parameter is set to <code>true</code>.
+        $ref: '#/definitions/SigningProfiles'
+        description: A list of profiles that are available in the AWS account. This includes profiles with the status of <code>CANCELED</code> if the <code>includeCanceled</code> parameter is set to <code>true</code>.
       nextToken:
-        $ref: "#/definitions/NextToken"
+        $ref: '#/definitions/NextToken'
         description: Value for specifying the next set of paginated results to return.
   PutSigningProfileResponse:
     type: object
     properties:
       arn:
-        $ref: "#/definitions/string"
+        $ref: '#/definitions/string'
         description: The Amazon Resource Name (ARN) of the signing profile created.
   CertificateArn:
     type: string
@@ -759,22 +668,19 @@ definitions:
     type: object
     properties:
       encryptionAlgorithm:
-        $ref: "#/definitions/EncryptionAlgorithm"
-        description: A specified override of the default encryption algorithm that is used
-          in an AWS Signer job.
+        $ref: '#/definitions/EncryptionAlgorithm'
+        description: A specified override of the default encryption algorithm that is used in an AWS Signer job.
       hashAlgorithm:
-        $ref: "#/definitions/HashAlgorithm"
-        description: A specified override of the default hash algorithm that is used in an
-          AWS Signer job.
-    description: A signing configuration that overrides the default encryption or hash
-      algorithm of a signing job.
+        $ref: '#/definitions/HashAlgorithm'
+        description: A specified override of the default hash algorithm that is used in an AWS Signer job.
+    description: A signing configuration that overrides the default encryption or hash algorithm of a signing job.
   SigningParameterValue:
     type: string
   StartSigningJobResponse:
     type: object
     properties:
       jobId:
-        $ref: "#/definitions/JobId"
+        $ref: '#/definitions/JobId'
         description: The ID of your signing job.
   S3Source:
     type: object
@@ -784,34 +690,32 @@ definitions:
       - version
     properties:
       bucketName:
-        $ref: "#/definitions/BucketName"
+        $ref: '#/definitions/BucketName'
         description: Name of the S3 bucket.
       key:
-        $ref: "#/definitions/Key"
+        $ref: '#/definitions/Key'
         description: Key name of the bucket object that contains your unsigned code.
       version:
-        $ref: "#/definitions/Version"
+        $ref: '#/definitions/Version'
         description: Version of your source image in your version enabled S3 bucket.
     description: Information about the S3 bucket where you saved your unsigned code.
   S3Destination:
     type: object
     properties:
       bucketName:
-        $ref: "#/definitions/BucketName"
+        $ref: '#/definitions/BucketName'
         description: Name of the S3 bucket.
       prefix:
-        $ref: "#/definitions/Prefix"
-        description: An Amazon S3 prefix that you can use to limit responses to those that
-          begin with the specified prefix.
-    description: The name and prefix of the S3 bucket where AWS Signer saves your signed
-      objects.
+        $ref: '#/definitions/Prefix'
+        description: An Amazon S3 prefix that you can use to limit responses to those that begin with the specified prefix.
+    description: The name and prefix of the S3 bucket where AWS Signer saves your signed objects.
   key:
     type: string
   BucketName:
     type: string
   ProfileName:
     type: string
-    pattern: ^[a-zA-Z0-9_]{2,}
+    pattern: '^[a-zA-Z0-9_]{2,}'
     minLength: 2
     maxLength: 20
   CancelSigningProfileRequest:
@@ -838,19 +742,17 @@ definitions:
     type: object
     properties:
       s3:
-        $ref: "#/definitions/S3Source"
+        $ref: '#/definitions/S3Source'
         description: The <code>S3Source</code> object.
-    description: An <code>S3Source</code> object that contains information about the S3
-      bucket where you saved your unsigned code.
+    description: An <code>S3Source</code> object that contains information about the S3 bucket where you saved your unsigned code.
   SigningMaterial:
     type: object
     required:
       - certificateArn
     properties:
       certificateArn:
-        $ref: "#/definitions/CertificateArn"
-        description: The Amazon Resource Name (ARN) of the certificates that is used to
-          sign your code.
+        $ref: '#/definitions/CertificateArn'
+        description: The Amazon Resource Name (ARN) of the certificates that is used to sign your code.
     description: The ACM certificate that is used to sign your code.
   PlatformId:
     type: string
@@ -858,13 +760,12 @@ definitions:
     type: object
     properties:
       signingConfiguration:
-        $ref: "#/definitions/SigningConfigurationOverrides"
-    description: Any overrides that are applied to the signing configuration of an AWS
-      Signer platform.
+        $ref: '#/definitions/SigningConfigurationOverrides'
+    description: Any overrides that are applied to the signing configuration of an AWS Signer platform.
   SigningParameters:
     type: object
     additionalProperties:
-      $ref: "#/definitions/SigningParameterValue"
+      $ref: '#/definitions/SigningParameterValue'
   RequestedBy:
     type: string
   SigningStatus:
@@ -879,18 +780,16 @@ definitions:
     type: object
     properties:
       s3:
-        $ref: "#/definitions/S3SignedObject"
+        $ref: '#/definitions/S3SignedObject'
         description: The <code>S3SignedObject</code>.
-    description: Points to an <code>S3SignedObject</code> object that contains information
-      about your signed code image.
+    description: Points to an <code>S3SignedObject</code> object that contains information about your signed code image.
   Destination:
     type: object
     properties:
       s3:
-        $ref: "#/definitions/S3Destination"
+        $ref: '#/definitions/S3Destination'
         description: The <code>S3Destination</code> object.
-    description: Points to an <code>S3Destination</code> object that contains information
-      about your S3 bucket.
+    description: Points to an <code>S3Destination</code> object that contains information about your S3 bucket.
   DisplayName:
     type: string
   EncryptionAlgorithm:
@@ -901,7 +800,7 @@ definitions:
   EncryptionAlgorithms:
     type: array
     items:
-      $ref: "#/definitions/EncryptionAlgorithm"
+      $ref: '#/definitions/EncryptionAlgorithm'
   EncryptionAlgorithmOptions:
     type: object
     required:
@@ -909,11 +808,10 @@ definitions:
       - defaultValue
     properties:
       allowedValues:
-        $ref: "#/definitions/EncryptionAlgorithms"
-        description: The set of accepted encryption algorithms that are allowed in an AWS
-          Signer job.
+        $ref: '#/definitions/EncryptionAlgorithms'
+        description: The set of accepted encryption algorithms that are allowed in an AWS Signer job.
       defaultValue:
-        $ref: "#/definitions/EncryptionAlgorithm"
+        $ref: '#/definitions/EncryptionAlgorithm'
         description: The default encryption algorithm that is used by an AWS Signer job.
     description: The encryption algorithm options that are available to an AWS Signer job.
   GetSigningPlatformRequest:
@@ -928,11 +826,10 @@ definitions:
       - hashAlgorithmOptions
     properties:
       encryptionAlgorithmOptions:
-        $ref: "#/definitions/EncryptionAlgorithmOptions"
-        description: The encryption algorithm options that are available for an AWS Signer
-          job.
+        $ref: '#/definitions/EncryptionAlgorithmOptions'
+        description: The encryption algorithm options that are available for an AWS Signer job.
       hashAlgorithmOptions:
-        $ref: "#/definitions/HashAlgorithmOptions"
+        $ref: '#/definitions/HashAlgorithmOptions'
         description: The hash algorithm options that are available for an AWS Signer job.
     description: The configuration of an AWS Signer operation.
   SigningImageFormat:
@@ -942,10 +839,10 @@ definitions:
       - defaultFormat
     properties:
       supportedFormats:
-        $ref: "#/definitions/ImageFormats"
+        $ref: '#/definitions/ImageFormats'
         description: The supported formats of an AWS Signer signing image.
       defaultFormat:
-        $ref: "#/definitions/ImageFormat"
+        $ref: '#/definitions/ImageFormat'
         description: The default format of an AWS Signer signing image.
     description: The image format of an AWS Signer platform or profile.
   MaxSizeInMB:
@@ -966,7 +863,7 @@ definitions:
   HashAlgorithms:
     type: array
     items:
-      $ref: "#/definitions/HashAlgorithm"
+      $ref: '#/definitions/HashAlgorithm'
   HashAlgorithmOptions:
     type: object
     required:
@@ -974,10 +871,10 @@ definitions:
       - defaultValue
     properties:
       allowedValues:
-        $ref: "#/definitions/HashAlgorithms"
+        $ref: '#/definitions/HashAlgorithms'
         description: The set of accepted hash algorithms allowed in an AWS Signer job.
       defaultValue:
-        $ref: "#/definitions/HashAlgorithm"
+        $ref: '#/definitions/HashAlgorithm'
         description: The default hash algorithm that is used in an AWS Signer job.
     description: The hash algorithms that are available to an AWS Signer job.
   ImageFormat:
@@ -987,7 +884,7 @@ definitions:
   ImageFormats:
     type: array
     items:
-      $ref: "#/definitions/ImageFormat"
+      $ref: '#/definitions/ImageFormat'
   Key:
     type: string
   MaxResults:
@@ -1002,14 +899,14 @@ definitions:
   SigningJobs:
     type: array
     items:
-      $ref: "#/definitions/SigningJob"
+      $ref: '#/definitions/SigningJob'
   ListSigningPlatformsRequest:
     type: object
     properties: {}
   SigningPlatforms:
     type: array
     items:
-      $ref: "#/definitions/SigningPlatform"
+      $ref: '#/definitions/SigningPlatform'
   bool:
     type: boolean
   ListSigningProfilesRequest:
@@ -1018,7 +915,7 @@ definitions:
   SigningProfiles:
     type: array
     items:
-      $ref: "#/definitions/SigningProfile"
+      $ref: '#/definitions/SigningProfile'
   Prefix:
     type: string
   PutSigningProfileRequest:
@@ -1028,32 +925,27 @@ definitions:
       - platformId
     properties:
       signingMaterial:
-        $ref: "#/definitions/SigningMaterial"
-        description: The AWS Certificate Manager certificate that will be used to sign code
-          with the new signing profile.
+        $ref: '#/definitions/SigningMaterial'
+        description: The AWS Certificate Manager certificate that will be used to sign code with the new signing profile.
       platformId:
-        $ref: "#/definitions/PlatformId"
+        $ref: '#/definitions/PlatformId'
         description: The ID of the signing profile to be created.
       overrides:
-        $ref: "#/definitions/SigningPlatformOverrides"
-        description: A subfield of <code>platform</code>. This specifies any different
-          configuration options that you want to apply to the chosen platform
-          (such as a different <code>hash-algorithm</code> or
-          <code>signing-algorithm</code>).
+        $ref: '#/definitions/SigningPlatformOverrides'
+        description: A subfield of <code>platform</code>. This specifies any different configuration options that you want to apply to the chosen platform (such as a different <code>hash-algorithm</code> or <code>signing-algorithm</code>).
       signingParameters:
-        $ref: "#/definitions/SigningParameters"
-        description: Map of key-value pairs for signing. These can include any information
-          that you want to use during signing.
+        $ref: '#/definitions/SigningParameters'
+        description: Map of key-value pairs for signing. These can include any information that you want to use during signing.
   string:
     type: string
   S3SignedObject:
     type: object
     properties:
       bucketName:
-        $ref: "#/definitions/BucketName"
+        $ref: '#/definitions/BucketName'
         description: Name of the S3 bucket.
       key:
-        $ref: "#/definitions/key"
+        $ref: '#/definitions/key'
         description: Key name that uniquely identifies a signed code image in your bucket.
     description: The S3 bucket name and key where AWS Signer saved your signed code image.
   Version:
@@ -1062,25 +954,22 @@ definitions:
     type: object
     properties:
       jobId:
-        $ref: "#/definitions/JobId"
+        $ref: '#/definitions/JobId'
         description: The ID of the signing job.
       source:
-        $ref: "#/definitions/Source"
-        description: A <code>Source</code> that contains information about a signing job's
-          code image source.
+        $ref: '#/definitions/Source'
+        description: A <code>Source</code> that contains information about a signing job's code image source.
       signedObject:
-        $ref: "#/definitions/SignedObject"
-        description: A <code>SignedObject</code> structure that contains information about
-          a signing job's signed code image.
+        $ref: '#/definitions/SignedObject'
+        description: A <code>SignedObject</code> structure that contains information about a signing job's signed code image.
       signingMaterial:
-        $ref: "#/definitions/SigningMaterial"
-        description: A <code>SigningMaterial</code> object that contains the Amazon
-          Resource Name (ARN) of the certificate used for the signing job.
+        $ref: '#/definitions/SigningMaterial'
+        description: A <code>SigningMaterial</code> object that contains the Amazon Resource Name (ARN) of the certificate used for the signing job.
       createdAt:
-        $ref: "#/definitions/CreatedAt"
+        $ref: '#/definitions/CreatedAt'
         description: The date and time that the signing job was created.
       status:
-        $ref: "#/definitions/SigningStatus"
+        $ref: '#/definitions/SigningStatus'
         description: The status of the signing job.
     description: Contains information about a signing job.
   SigningParameterKey:
@@ -1089,54 +978,49 @@ definitions:
     type: object
     properties:
       platformId:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: The ID of an AWS Signer platform.
       displayName:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: The display name of an AWS Signer platform.
       partner:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: Any partner entities linked to an AWS Signer platform.
       target:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: The types of targets that can be signed by an AWS Signer platform.
       category:
-        $ref: "#/definitions/Category"
+        $ref: '#/definitions/Category'
         description: The category of an AWS Signer platform.
       signingConfiguration:
-        $ref: "#/definitions/SigningConfiguration"
-        description: The configuration of an AWS Signer platform. This includes the
-          designated hash algorithm and encryption algorithm of a signing
-          platform.
+        $ref: '#/definitions/SigningConfiguration'
+        description: The configuration of an AWS Signer platform. This includes the designated hash algorithm and encryption algorithm of a signing platform.
       signingImageFormat:
-        $ref: "#/definitions/SigningImageFormat"
+        $ref: '#/definitions/SigningImageFormat'
         description: The signing image format that is used by an AWS Signer platform.
       maxSizeInMB:
-        $ref: "#/definitions/MaxSizeInMB"
-        description: The maximum size (in MB) of code that can be signed by a AWS Signer
-          platform.
-    description: Contains information about the signing configurations and parameters that
-      is used to perform an AWS Signer job.
+        $ref: '#/definitions/MaxSizeInMB'
+        description: The maximum size (in MB) of code that can be signed by a AWS Signer platform.
+    description: Contains information about the signing configurations and parameters that is used to perform an AWS Signer job.
   SigningProfile:
     type: object
     properties:
       profileName:
-        $ref: "#/definitions/ProfileName"
+        $ref: '#/definitions/ProfileName'
         description: The name of the AWS Signer profile.
       signingMaterial:
-        $ref: "#/definitions/SigningMaterial"
+        $ref: '#/definitions/SigningMaterial'
         description: The ACM certificate that is available for use by a signing profile.
       platformId:
-        $ref: "#/definitions/PlatformId"
+        $ref: '#/definitions/PlatformId'
         description: The ID of a platform that is available for use by a signing profile.
       signingParameters:
-        $ref: "#/definitions/SigningParameters"
+        $ref: '#/definitions/SigningParameters'
         description: The parameters that are available for use by an AWS Signer user.
       status:
-        $ref: "#/definitions/SigningProfileStatus"
+        $ref: '#/definitions/SigningProfileStatus'
         description: The status of an AWS Signer profile.
-    description: Contains information about the ACM certificates and AWS Signer
-      configuration parameters that can be used by a given AWS Signer user.
+    description: Contains information about the ACM certificates and AWS Signer configuration parameters that can be used by a given AWS Signer user.
   StartSigningJobRequest:
     type: object
     required:
@@ -1145,17 +1029,14 @@ definitions:
       - clientRequestToken
     properties:
       source:
-        $ref: "#/definitions/Source"
-        description: The S3 bucket that contains the object to sign or a BLOB that contains
-          your raw code.
+        $ref: '#/definitions/Source'
+        description: The S3 bucket that contains the object to sign or a BLOB that contains your raw code.
       destination:
-        $ref: "#/definitions/Destination"
-        description: The S3 bucket in which to save your signed object. The destination
-          contains the name of your bucket and an optional prefix.
+        $ref: '#/definitions/Destination'
+        description: The S3 bucket in which to save your signed object. The destination contains the name of your bucket and an optional prefix.
       profileName:
-        $ref: "#/definitions/ProfileName"
+        $ref: '#/definitions/ProfileName'
         description: The name of the signing profile.
       clientRequestToken:
-        $ref: "#/definitions/ClientRequestToken"
-        description: String that identifies the signing request. All calls after the first
-          that use this token return the same response as the first call.
+        $ref: '#/definitions/ClientRequestToken'
+        description: String that identifies the signing request. All calls after the first that use this token return the same response as the first call.

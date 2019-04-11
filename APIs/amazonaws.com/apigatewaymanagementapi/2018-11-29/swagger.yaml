@@ -1,43 +1,38 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  version: 2018-11-29
+  version: '2018-11-29'
   x-release: v4
   title: AmazonApiGatewayManagementApi
-  description: The Amazon API Gateway Management API allows you to directly manage runtime
-    aspects of your deployed APIs. To use it, you must explicitly set the SDK's
-    endpoint to point to the endpoint of your deployed API. The endpoint will be
-    of the form https://{api-id}.execute-api.{region}.amazonaws.com/{stage}, or
-    will be the endpoint corresponding to your API's custom domain and base
-    path, if applicable.
+  description: 'The Amazon API Gateway Management API allows you to directly manage runtime aspects of your deployed APIs. To use it, you must explicitly set the SDK''s endpoint to point to the endpoint of your deployed API. The endpoint will be of the form https://{api-id}.execute-api.{region}.amazonaws.com/{stage}, or will be the endpoint corresponding to your API''s custom domain and base path, if applicable.'
   x-logo:
-    url: https://twitter.com/awscloud/profile_image?size=original
-    backgroundColor: "#FFFFFF"
-  termsOfService: https://aws.amazon.com/service-terms/
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
     name: Mike Ralphson
     email: mike.ralphson@gmail.com
-    url: https://github.com/mermade/aws2openapi
+    url: 'https://github.com/mermade/aws2openapi'
     x-twitter: PermittedSoc
   license:
     name: Apache 2.0 License
-    url: http://www.apache.org/licenses/
+    url: 'http://www.apache.org/licenses/'
   x-providerName: amazonaws.com
   x-serviceName: apigatewaymanagementapi
   x-origin:
     - contentType: application/json
-      url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/apigatewaymanagementapi-2018-11-29.normal.json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/apigatewaymanagementapi-2018-11-29.normal.json'
       converter:
-        url: https://github.com/mermade/aws2openapi
+        url: 'https://github.com/mermade/aws2openapi'
         version: 1.0.0
       x-apisguru-direct: true
   x-apiClientRegistration:
-    url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
   x-preferred: true
 externalDocs:
   description: Amazon Web Services documentation
-  url: https://docs.aws.amazon.com/execute-api/
+  url: 'https://docs.aws.amazon.com/execute-api/'
 host: execute-api.amazonaws.com
 basePath: /
 schemes:
@@ -93,29 +88,29 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  "/@connections/{connectionId}":
+  '/@connections/{connectionId}':
     post:
       operationId: PostToConnection
       description: Sends the provided data to the specified connection.
       responses:
-        "200":
+        '200':
           description: Success
-        "480":
+        '480':
           description: GoneException
           schema:
-            $ref: "#/definitions/GoneException"
-        "481":
+            $ref: '#/definitions/GoneException'
+        '481':
           description: LimitExceededException
           schema:
-            $ref: "#/definitions/LimitExceededException"
-        "482":
+            $ref: '#/definitions/LimitExceededException'
+        '482':
           description: PayloadTooLargeException
           schema:
-            $ref: "#/definitions/PayloadTooLargeException"
-        "483":
+            $ref: '#/definitions/PayloadTooLargeException'
+        '483':
           description: ForbiddenException
           schema:
-            $ref: "#/definitions/ForbiddenException"
+            $ref: '#/definitions/ForbiddenException'
       parameters:
         - name: connectionId
           in: path
@@ -131,18 +126,17 @@ paths:
               - Data
             properties:
               Data:
-                description: The data to be sent to the client specified by its connection
-                  id.
+                description: The data to be sent to the client specified by its connection id.
                 type: string
                 maxLength: 131072
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
   GoneException: {}
   LimitExceededException: {}
@@ -160,5 +154,5 @@ definitions:
       - Data
     properties:
       Data:
-        $ref: "#/definitions/Data"
+        $ref: '#/definitions/Data'
         description: The data to be sent to the client specified by its connection id.

@@ -1,11 +1,10 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  version: 2019-01-25
+  version: '2019-01-25'
   x-release: v4
   title: AWS App Mesh
-  description: >-
-    <p>AWS App Mesh is a service mesh based on the Envoy proxy that makes it
-    easy to monitor and
+  description: |-
+    <p>AWS App Mesh is a service mesh based on the Envoy proxy that makes it easy to monitor and
              control microservices. App Mesh standardizes how your microservices communicate, giving you
              end-to-end visibility and helping to ensure high availability for your applications.</p>
              <p>App Mesh gives you consistent visibility and network traffic controls for every
@@ -22,34 +21,34 @@ info:
                    for Services and Pods</a> in the Kubernetes documentation.</p>
              </note>
   x-logo:
-    url: https://twitter.com/awscloud/profile_image?size=original
-    backgroundColor: "#FFFFFF"
-  termsOfService: https://aws.amazon.com/service-terms/
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
     name: Mike Ralphson
     email: mike.ralphson@gmail.com
-    url: https://github.com/mermade/aws2openapi
+    url: 'https://github.com/mermade/aws2openapi'
     x-twitter: PermittedSoc
   license:
     name: Apache 2.0 License
-    url: http://www.apache.org/licenses/
+    url: 'http://www.apache.org/licenses/'
   x-providerName: amazonaws.com
   x-serviceName: appmesh
   x-origin:
     - contentType: application/json
-      url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/appmesh-2019-01-25.normal.json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/appmesh-2019-01-25.normal.json'
       converter:
-        url: https://github.com/mermade/aws2openapi
+        url: 'https://github.com/mermade/aws2openapi'
         version: 1.0.0
       x-apisguru-direct: true
   x-apiClientRegistration:
-    url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
   x-preferred: true
 externalDocs:
   description: Amazon Web Services documentation
-  url: https://docs.aws.amazon.com/appmesh/
+  url: 'https://docs.aws.amazon.com/appmesh/'
 host: appmesh.amazonaws.com
 basePath: /
 schemes:
@@ -108,50 +107,49 @@ paths:
   /v20190125/meshes:
     put:
       operationId: CreateMesh
-      description: >-
-        <p>Creates a service mesh. A service mesh is a logical boundary for
-        network traffic
+      description: |-
+        <p>Creates a service mesh. A service mesh is a logical boundary for network traffic
                  between the services that reside within it.</p>
                  <p>After you create your service mesh, you can create virtual services, virtual nodes,
                  virtual routers, and routes to distribute traffic between the applications in your
                  mesh.</p>
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/CreateMeshOutput"
-        "480":
+            $ref: '#/definitions/CreateMeshOutput'
+        '480':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "481":
+            $ref: '#/definitions/BadRequestException'
+        '481':
           description: ConflictException
           schema:
-            $ref: "#/definitions/ConflictException"
-        "482":
+            $ref: '#/definitions/ConflictException'
+        '482':
           description: ForbiddenException
           schema:
-            $ref: "#/definitions/ForbiddenException"
-        "483":
+            $ref: '#/definitions/ForbiddenException'
+        '483':
           description: InternalServerErrorException
           schema:
-            $ref: "#/definitions/InternalServerErrorException"
-        "484":
+            $ref: '#/definitions/InternalServerErrorException'
+        '484':
           description: LimitExceededException
           schema:
-            $ref: "#/definitions/LimitExceededException"
-        "485":
+            $ref: '#/definitions/LimitExceededException'
+        '485':
           description: NotFoundException
           schema:
-            $ref: "#/definitions/NotFoundException"
-        "486":
+            $ref: '#/definitions/NotFoundException'
+        '486':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "487":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '487':
           description: TooManyRequestsException
           schema:
-            $ref: "#/definitions/TooManyRequestsException"
+            $ref: '#/definitions/TooManyRequestsException'
       parameters:
         - name: body
           in: body
@@ -162,10 +160,8 @@ paths:
               - meshName
             properties:
               clientToken:
-                description: >-
-                  Unique, case-sensitive identifier that you provide to ensure
-                  the idempotency of the
-
+                description: |-
+                  Unique, case-sensitive identifier that you provide to ensure the idempotency of the
                   request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
                 type: string
               meshName:
@@ -178,67 +174,65 @@ paths:
                 type: object
                 properties:
                   egressFilter:
-                    $ref: "#/definitions/EgressFilter"
+                    $ref: '#/definitions/EgressFilter'
                     description: The egress filter rules for the service mesh.
               tags:
-                description: >-
-                  Optional metadata that you can apply to the service mesh to
-                  assist with categorization and organization.
+                description: |-
+                  Optional metadata that you can apply to the service mesh to assist with categorization and organization.
                            Each tag consists of a key and an optional value, both of which you define.
                            Tag keys can have a maximum character length of 128 characters, and tag values can have
                               a maximum length of 256 characters.
                 type: array
                 items:
-                  $ref: "#/definitions/TagRef"
+                  $ref: '#/definitions/TagRef'
                 minItems: 0
                 maxItems: 50
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListMeshes
       description: Returns a list of existing service meshes.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/ListMeshesOutput"
-        "480":
+            $ref: '#/definitions/ListMeshesOutput'
+        '480':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "481":
+            $ref: '#/definitions/BadRequestException'
+        '481':
           description: ForbiddenException
           schema:
-            $ref: "#/definitions/ForbiddenException"
-        "482":
+            $ref: '#/definitions/ForbiddenException'
+        '482':
           description: InternalServerErrorException
           schema:
-            $ref: "#/definitions/InternalServerErrorException"
-        "483":
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
           description: NotFoundException
           schema:
-            $ref: "#/definitions/NotFoundException"
-        "484":
+            $ref: '#/definitions/NotFoundException'
+        '484':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "485":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
           description: TooManyRequestsException
           schema:
-            $ref: "#/definitions/TooManyRequestsException"
+            $ref: '#/definitions/TooManyRequestsException'
       parameters:
         - name: limit
           in: query
           required: false
-          description: >-
-            The maximum number of results returned by <code>ListMeshes</code> in
-            paginated output.
+          description: |-
+            The maximum number of results returned by <code>ListMeshes</code> in paginated output.
                      When you use this parameter, <code>ListMeshes</code> returns only <code>limit</code>
                      results in a single page along with a <code>nextToken</code> response element. You can see the
                      remaining results of the initial request by sending another
@@ -252,9 +246,8 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: >-
-            <p>The <code>nextToken</code> value returned from a previous
-            paginated
+          description: |-
+            <p>The <code>nextToken</code> value returned from a previous paginated
                      <code>ListMeshes</code> request where <code>limit</code> was used and the
                      results exceeded the value of that parameter. Pagination continues from the end of the
                      previous results that returned the <code>nextToken</code> value.</p>
@@ -263,10 +256,10 @@ paths:
                             retrieve the next items in a list and not for other programmatic purposes.</p>
                     </note>
           type: string
-  "/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes":
+  '/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes':
     put:
       operationId: CreateRoute
-      description: >-
+      description: |-
         <p>Creates a route that is associated with a virtual router.</p>
                  <p>You can use the <code>prefix</code> parameter in your route specification for path-based
                  routing of requests. For example, if your virtual service name is
@@ -276,42 +269,42 @@ paths:
                  <p>If your route matches a request, you can distribute traffic to one or more target
                  virtual nodes with relative weighting.</p>
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/CreateRouteOutput"
-        "480":
+            $ref: '#/definitions/CreateRouteOutput'
+        '480':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "481":
+            $ref: '#/definitions/BadRequestException'
+        '481':
           description: ConflictException
           schema:
-            $ref: "#/definitions/ConflictException"
-        "482":
+            $ref: '#/definitions/ConflictException'
+        '482':
           description: ForbiddenException
           schema:
-            $ref: "#/definitions/ForbiddenException"
-        "483":
+            $ref: '#/definitions/ForbiddenException'
+        '483':
           description: InternalServerErrorException
           schema:
-            $ref: "#/definitions/InternalServerErrorException"
-        "484":
+            $ref: '#/definitions/InternalServerErrorException'
+        '484':
           description: LimitExceededException
           schema:
-            $ref: "#/definitions/LimitExceededException"
-        "485":
+            $ref: '#/definitions/LimitExceededException'
+        '485':
           description: NotFoundException
           schema:
-            $ref: "#/definitions/NotFoundException"
-        "486":
+            $ref: '#/definitions/NotFoundException'
+        '486':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "487":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '487':
           description: TooManyRequestsException
           schema:
-            $ref: "#/definitions/TooManyRequestsException"
+            $ref: '#/definitions/TooManyRequestsException'
       parameters:
         - name: meshName
           in: path
@@ -337,10 +330,8 @@ paths:
               - spec
             properties:
               clientToken:
-                description: >-
-                  Unique, case-sensitive identifier that you provide to ensure
-                  the idempotency of the
-
+                description: |-
+                  Unique, case-sensitive identifier that you provide to ensure the idempotency of the
                   request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
                 type: string
               routeName:
@@ -353,70 +344,68 @@ paths:
                 type: object
                 properties:
                   httpRoute:
-                    $ref: "#/definitions/HttpRoute"
+                    $ref: '#/definitions/HttpRoute'
                     description: The HTTP routing information for the route.
                   tcpRoute:
-                    $ref: "#/definitions/TcpRoute"
+                    $ref: '#/definitions/TcpRoute'
                     description: The TCP routing information for the route.
               tags:
-                description: >-
-                  Optional metadata that you can apply to the route to assist
-                  with categorization and organization.
+                description: |-
+                  Optional metadata that you can apply to the route to assist with categorization and organization.
                            Each tag consists of a key and an optional value, both of which you define.
                            Tag keys can have a maximum character length of 128 characters, and tag values can have
                               a maximum length of 256 characters.
                 type: array
                 items:
-                  $ref: "#/definitions/TagRef"
+                  $ref: '#/definitions/TagRef'
                 minItems: 0
                 maxItems: 50
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListRoutes
       description: Returns a list of existing routes in a service mesh.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/ListRoutesOutput"
-        "480":
+            $ref: '#/definitions/ListRoutesOutput'
+        '480':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "481":
+            $ref: '#/definitions/BadRequestException'
+        '481':
           description: ForbiddenException
           schema:
-            $ref: "#/definitions/ForbiddenException"
-        "482":
+            $ref: '#/definitions/ForbiddenException'
+        '482':
           description: InternalServerErrorException
           schema:
-            $ref: "#/definitions/InternalServerErrorException"
-        "483":
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
           description: NotFoundException
           schema:
-            $ref: "#/definitions/NotFoundException"
-        "484":
+            $ref: '#/definitions/NotFoundException'
+        '484':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "485":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
           description: TooManyRequestsException
           schema:
-            $ref: "#/definitions/TooManyRequestsException"
+            $ref: '#/definitions/TooManyRequestsException'
       parameters:
         - name: limit
           in: query
           required: false
-          description: >-
-            The maximum number of results returned by <code>ListRoutes</code> in
-            paginated output.
+          description: |-
+            The maximum number of results returned by <code>ListRoutes</code> in paginated output.
                      When you use this parameter, <code>ListRoutes</code> returns only <code>limit</code>
                      results in a single page along with a <code>nextToken</code> response element. You can see the
                      remaining results of the initial request by sending another
@@ -437,7 +426,7 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: >-
+          description: |-
             The <code>nextToken</code> value returned from a previous paginated
                      <code>ListRoutes</code> request where <code>limit</code> was used and the
                      results exceeded the value of that parameter. Pagination continues from the end of the
@@ -450,10 +439,10 @@ paths:
           type: string
           minLength: 1
           maxLength: 255
-  "/v20190125/meshes/{meshName}/virtualNodes":
+  '/v20190125/meshes/{meshName}/virtualNodes':
     put:
       operationId: CreateVirtualNode
-      description: >-
+      description: |-
         <p>Creates a virtual node within a service mesh.</p>
                  <p>A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS
                  service or a Kubernetes deployment. When you create a virtual node, you must specify the
@@ -474,42 +463,42 @@ paths:
                        <code>APPMESH_VIRTUAL_NODE_CLUSTER</code> environment variable.</p>
                  </note>
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/CreateVirtualNodeOutput"
-        "480":
+            $ref: '#/definitions/CreateVirtualNodeOutput'
+        '480':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "481":
+            $ref: '#/definitions/BadRequestException'
+        '481':
           description: ConflictException
           schema:
-            $ref: "#/definitions/ConflictException"
-        "482":
+            $ref: '#/definitions/ConflictException'
+        '482':
           description: ForbiddenException
           schema:
-            $ref: "#/definitions/ForbiddenException"
-        "483":
+            $ref: '#/definitions/ForbiddenException'
+        '483':
           description: InternalServerErrorException
           schema:
-            $ref: "#/definitions/InternalServerErrorException"
-        "484":
+            $ref: '#/definitions/InternalServerErrorException'
+        '484':
           description: LimitExceededException
           schema:
-            $ref: "#/definitions/LimitExceededException"
-        "485":
+            $ref: '#/definitions/LimitExceededException'
+        '485':
           description: NotFoundException
           schema:
-            $ref: "#/definitions/NotFoundException"
-        "486":
+            $ref: '#/definitions/NotFoundException'
+        '486':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "487":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '487':
           description: TooManyRequestsException
           schema:
-            $ref: "#/definitions/TooManyRequestsException"
+            $ref: '#/definitions/TooManyRequestsException'
       parameters:
         - name: meshName
           in: path
@@ -528,10 +517,8 @@ paths:
               - virtualNodeName
             properties:
               clientToken:
-                description: >-
-                  Unique, case-sensitive identifier that you provide to ensure
-                  the idempotency of the
-
+                description: |-
+                  Unique, case-sensitive identifier that you provide to ensure the idempotency of the
                   request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
                 type: string
               spec:
@@ -539,34 +526,28 @@ paths:
                 type: object
                 properties:
                   backends:
-                    $ref: "#/definitions/Backends"
-                    description: The backends that the virtual node is expected to send
-                      outbound traffic to.
+                    $ref: '#/definitions/Backends'
+                    description: The backends that the virtual node is expected to send outbound traffic to.
                   listeners:
-                    $ref: "#/definitions/Listeners"
-                    description: The listeners that the virtual node is expected to receive
-                      inbound traffic from. Currently only one listener is
-                      supported per virtual node.
+                    $ref: '#/definitions/Listeners'
+                    description: The listeners that the virtual node is expected to receive inbound traffic from. Currently only one listener is supported per virtual node.
                   logging:
-                    $ref: "#/definitions/Logging"
-                    description: The inbound and outbound access logging information for
-                      the virtual node.
+                    $ref: '#/definitions/Logging'
+                    description: The inbound and outbound access logging information for the virtual node.
                   serviceDiscovery:
-                    $ref: "#/definitions/ServiceDiscovery"
-                    description: >-
-                      The service discovery information for the virtual node. If
-                      your virtual node does not
+                    $ref: '#/definitions/ServiceDiscovery'
+                    description: |-
+                      The service discovery information for the virtual node. If your virtual node does not
                                expect ingress traffic, you can omit this parameter.
               tags:
-                description: >-
-                  Optional metadata that you can apply to the virtual node to
-                  assist with categorization and organization.
+                description: |-
+                  Optional metadata that you can apply to the virtual node to assist with categorization and organization.
                            Each tag consists of a key and an optional value, both of which you define.
                            Tag keys can have a maximum character length of 128 characters, and tag values can have
                               a maximum length of 256 characters.
                 type: array
                 items:
-                  $ref: "#/definitions/TagRef"
+                  $ref: '#/definitions/TagRef'
                 minItems: 0
                 maxItems: 50
               virtualNodeName:
@@ -575,52 +556,51 @@ paths:
                 minLength: 1
                 maxLength: 255
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListVirtualNodes
       description: Returns a list of existing virtual nodes.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/ListVirtualNodesOutput"
-        "480":
+            $ref: '#/definitions/ListVirtualNodesOutput'
+        '480':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "481":
+            $ref: '#/definitions/BadRequestException'
+        '481':
           description: ForbiddenException
           schema:
-            $ref: "#/definitions/ForbiddenException"
-        "482":
+            $ref: '#/definitions/ForbiddenException'
+        '482':
           description: InternalServerErrorException
           schema:
-            $ref: "#/definitions/InternalServerErrorException"
-        "483":
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
           description: NotFoundException
           schema:
-            $ref: "#/definitions/NotFoundException"
-        "484":
+            $ref: '#/definitions/NotFoundException'
+        '484':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "485":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
           description: TooManyRequestsException
           schema:
-            $ref: "#/definitions/TooManyRequestsException"
+            $ref: '#/definitions/TooManyRequestsException'
       parameters:
         - name: limit
           in: query
           required: false
-          description: >-
-            The maximum number of results returned by
-            <code>ListVirtualNodes</code> in paginated
+          description: |-
+            The maximum number of results returned by <code>ListVirtualNodes</code> in paginated
                      output. When you use this parameter, <code>ListVirtualNodes</code> returns only
                         <code>limit</code> results in a single page along with a <code>nextToken</code> response
                      element. You can see the remaining results of the initial request by sending another
@@ -641,16 +621,16 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: >-
+          description: |-
             The <code>nextToken</code> value returned from a previous paginated
                      <code>ListVirtualNodes</code> request where <code>limit</code> was used and the
                      results exceeded the value of that parameter. Pagination continues from the end of the
                      previous results that returned the <code>nextToken</code> value.
           type: string
-  "/v20190125/meshes/{meshName}/virtualRouters":
+  '/v20190125/meshes/{meshName}/virtualRouters':
     put:
       operationId: CreateVirtualRouter
-      description: >-
+      description: |-
         <p>Creates a virtual router within a service mesh.</p>
                  <p>Any inbound traffic that your virtual router expects should be specified as a
                     <code>listener</code>. </p>
@@ -658,42 +638,42 @@ paths:
                  you create your virtual router, create and associate routes for your virtual router that
                  direct incoming requests to different virtual nodes.</p>
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/CreateVirtualRouterOutput"
-        "480":
+            $ref: '#/definitions/CreateVirtualRouterOutput'
+        '480':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "481":
+            $ref: '#/definitions/BadRequestException'
+        '481':
           description: ConflictException
           schema:
-            $ref: "#/definitions/ConflictException"
-        "482":
+            $ref: '#/definitions/ConflictException'
+        '482':
           description: ForbiddenException
           schema:
-            $ref: "#/definitions/ForbiddenException"
-        "483":
+            $ref: '#/definitions/ForbiddenException'
+        '483':
           description: InternalServerErrorException
           schema:
-            $ref: "#/definitions/InternalServerErrorException"
-        "484":
+            $ref: '#/definitions/InternalServerErrorException'
+        '484':
           description: LimitExceededException
           schema:
-            $ref: "#/definitions/LimitExceededException"
-        "485":
+            $ref: '#/definitions/LimitExceededException'
+        '485':
           description: NotFoundException
           schema:
-            $ref: "#/definitions/NotFoundException"
-        "486":
+            $ref: '#/definitions/NotFoundException'
+        '486':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "487":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '487':
           description: TooManyRequestsException
           schema:
-            $ref: "#/definitions/TooManyRequestsException"
+            $ref: '#/definitions/TooManyRequestsException'
       parameters:
         - name: meshName
           in: path
@@ -712,10 +692,8 @@ paths:
               - virtualRouterName
             properties:
               clientToken:
-                description: >-
-                  Unique, case-sensitive identifier that you provide to ensure
-                  the idempotency of the
-
+                description: |-
+                  Unique, case-sensitive identifier that you provide to ensure the idempotency of the
                   request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
                 type: string
               spec:
@@ -723,20 +701,17 @@ paths:
                 type: object
                 properties:
                   listeners:
-                    $ref: "#/definitions/VirtualRouterListeners"
-                    description: The listeners that the virtual router is expected to
-                      receive inbound traffic from. Currently only one listener
-                      is supported per virtual router.
+                    $ref: '#/definitions/VirtualRouterListeners'
+                    description: The listeners that the virtual router is expected to receive inbound traffic from. Currently only one listener is supported per virtual router.
               tags:
-                description: >-
-                  Optional metadata that you can apply to the virtual router to
-                  assist with categorization and organization.
+                description: |-
+                  Optional metadata that you can apply to the virtual router to assist with categorization and organization.
                            Each tag consists of a key and an optional value, both of which you define.
                            Tag keys can have a maximum character length of 128 characters, and tag values can have
                               a maximum length of 256 characters.
                 type: array
                 items:
-                  $ref: "#/definitions/TagRef"
+                  $ref: '#/definitions/TagRef'
                 minItems: 0
                 maxItems: 50
               virtualRouterName:
@@ -745,52 +720,51 @@ paths:
                 minLength: 1
                 maxLength: 255
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListVirtualRouters
       description: Returns a list of existing virtual routers in a service mesh.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/ListVirtualRoutersOutput"
-        "480":
+            $ref: '#/definitions/ListVirtualRoutersOutput'
+        '480':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "481":
+            $ref: '#/definitions/BadRequestException'
+        '481':
           description: ForbiddenException
           schema:
-            $ref: "#/definitions/ForbiddenException"
-        "482":
+            $ref: '#/definitions/ForbiddenException'
+        '482':
           description: InternalServerErrorException
           schema:
-            $ref: "#/definitions/InternalServerErrorException"
-        "483":
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
           description: NotFoundException
           schema:
-            $ref: "#/definitions/NotFoundException"
-        "484":
+            $ref: '#/definitions/NotFoundException'
+        '484':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "485":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
           description: TooManyRequestsException
           schema:
-            $ref: "#/definitions/TooManyRequestsException"
+            $ref: '#/definitions/TooManyRequestsException'
       parameters:
         - name: limit
           in: query
           required: false
-          description: >-
-            The maximum number of results returned by
-            <code>ListVirtualRouters</code> in paginated
+          description: |-
+            The maximum number of results returned by <code>ListVirtualRouters</code> in paginated
                      output. When you use this parameter, <code>ListVirtualRouters</code> returns only
                         <code>limit</code> results in a single page along with a <code>nextToken</code> response
                      element. You can see the remaining results of the initial request by sending another
@@ -811,16 +785,16 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: >-
+          description: |-
             The <code>nextToken</code> value returned from a previous paginated
                      <code>ListVirtualRouters</code> request where <code>limit</code> was used and the
                      results exceeded the value of that parameter. Pagination continues from the end of the
                      previous results that returned the <code>nextToken</code> value.
           type: string
-  "/v20190125/meshes/{meshName}/virtualServices":
+  '/v20190125/meshes/{meshName}/virtualServices':
     put:
       operationId: CreateVirtualService
-      description: >-
+      description: |-
         <p>Creates a virtual service within a service mesh.</p>
                  <p>A virtual service is an abstraction of a real service that is provided by a
                  virtual node directly or indirectly by means of a virtual router. Dependent services call
@@ -828,42 +802,42 @@ paths:
                  to the virtual node or virtual router that is specified as the provider for the virtual
                  service.</p>
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/CreateVirtualServiceOutput"
-        "480":
+            $ref: '#/definitions/CreateVirtualServiceOutput'
+        '480':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "481":
+            $ref: '#/definitions/BadRequestException'
+        '481':
           description: ConflictException
           schema:
-            $ref: "#/definitions/ConflictException"
-        "482":
+            $ref: '#/definitions/ConflictException'
+        '482':
           description: ForbiddenException
           schema:
-            $ref: "#/definitions/ForbiddenException"
-        "483":
+            $ref: '#/definitions/ForbiddenException'
+        '483':
           description: InternalServerErrorException
           schema:
-            $ref: "#/definitions/InternalServerErrorException"
-        "484":
+            $ref: '#/definitions/InternalServerErrorException'
+        '484':
           description: LimitExceededException
           schema:
-            $ref: "#/definitions/LimitExceededException"
-        "485":
+            $ref: '#/definitions/LimitExceededException'
+        '485':
           description: NotFoundException
           schema:
-            $ref: "#/definitions/NotFoundException"
-        "486":
+            $ref: '#/definitions/NotFoundException'
+        '486':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "487":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '487':
           description: TooManyRequestsException
           schema:
-            $ref: "#/definitions/TooManyRequestsException"
+            $ref: '#/definitions/TooManyRequestsException'
       parameters:
         - name: meshName
           in: path
@@ -882,10 +856,8 @@ paths:
               - virtualServiceName
             properties:
               clientToken:
-                description: >-
-                  Unique, case-sensitive identifier that you provide to ensure
-                  the idempotency of the
-
+                description: |-
+                  Unique, case-sensitive identifier that you provide to ensure the idempotency of the
                   request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
                 type: string
               spec:
@@ -893,73 +865,70 @@ paths:
                 type: object
                 properties:
                   provider:
-                    $ref: "#/definitions/VirtualServiceProvider"
-                    description: >-
-                      The App Mesh object that is acting as the provider for a
-                      virtual service. You can specify
+                    $ref: '#/definitions/VirtualServiceProvider'
+                    description: |-
+                      The App Mesh object that is acting as the provider for a virtual service. You can specify
                                a single virtual node or virtual router.
               tags:
-                description: >-
-                  Optional metadata that you can apply to the virtual service to
-                  assist with categorization and organization.
+                description: |-
+                  Optional metadata that you can apply to the virtual service to assist with categorization and organization.
                            Each tag consists of a key and an optional value, both of which you define.
                            Tag keys can have a maximum character length of 128 characters, and tag values can have
                               a maximum length of 256 characters.
                 type: array
                 items:
-                  $ref: "#/definitions/TagRef"
+                  $ref: '#/definitions/TagRef'
                 minItems: 0
                 maxItems: 50
               virtualServiceName:
                 description: The name to use for the virtual service.
                 type: string
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListVirtualServices
       description: Returns a list of existing virtual services in a service mesh.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/ListVirtualServicesOutput"
-        "480":
+            $ref: '#/definitions/ListVirtualServicesOutput'
+        '480':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "481":
+            $ref: '#/definitions/BadRequestException'
+        '481':
           description: ForbiddenException
           schema:
-            $ref: "#/definitions/ForbiddenException"
-        "482":
+            $ref: '#/definitions/ForbiddenException'
+        '482':
           description: InternalServerErrorException
           schema:
-            $ref: "#/definitions/InternalServerErrorException"
-        "483":
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
           description: NotFoundException
           schema:
-            $ref: "#/definitions/NotFoundException"
-        "484":
+            $ref: '#/definitions/NotFoundException'
+        '484':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "485":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
           description: TooManyRequestsException
           schema:
-            $ref: "#/definitions/TooManyRequestsException"
+            $ref: '#/definitions/TooManyRequestsException'
       parameters:
         - name: limit
           in: query
           required: false
-          description: >-
-            The maximum number of results returned by
-            <code>ListVirtualServices</code> in paginated
+          description: |-
+            The maximum number of results returned by <code>ListVirtualServices</code> in paginated
                      output. When you use this parameter, <code>ListVirtualServices</code> returns only
                         <code>limit</code> results in a single page along with a <code>nextToken</code> response
                      element. You can see the remaining results of the initial request by sending another
@@ -980,52 +949,52 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: >-
+          description: |-
             The <code>nextToken</code> value returned from a previous paginated
                         <code>ListVirtualServices</code> request where <code>limit</code> was used and the
                      results exceeded the value of that parameter. Pagination continues from the end of the
                      previous results that returned the <code>nextToken</code> value.
           type: string
-  "/v20190125/meshes/{meshName}":
+  '/v20190125/meshes/{meshName}':
     delete:
       operationId: DeleteMesh
-      description: >-
+      description: |-
         <p>Deletes an existing service mesh.</p>
                  <p>You must delete all resources (virtual services, routes, virtual routers, and virtual nodes)
                  in the service mesh before you can delete the mesh itself.</p>
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DeleteMeshOutput"
-        "480":
+            $ref: '#/definitions/DeleteMeshOutput'
+        '480':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "481":
+            $ref: '#/definitions/BadRequestException'
+        '481':
           description: ForbiddenException
           schema:
-            $ref: "#/definitions/ForbiddenException"
-        "482":
+            $ref: '#/definitions/ForbiddenException'
+        '482':
           description: InternalServerErrorException
           schema:
-            $ref: "#/definitions/InternalServerErrorException"
-        "483":
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
           description: NotFoundException
           schema:
-            $ref: "#/definitions/NotFoundException"
-        "484":
+            $ref: '#/definitions/NotFoundException'
+        '484':
           description: ResourceInUseException
           schema:
-            $ref: "#/definitions/ResourceInUseException"
-        "485":
+            $ref: '#/definitions/ResourceInUseException'
+        '485':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "486":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
           description: TooManyRequestsException
           schema:
-            $ref: "#/definitions/TooManyRequestsException"
+            $ref: '#/definitions/TooManyRequestsException'
       parameters:
         - name: meshName
           in: path
@@ -1035,45 +1004,45 @@ paths:
           minLength: 1
           maxLength: 255
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: DescribeMesh
       description: Describes an existing service mesh.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DescribeMeshOutput"
-        "480":
+            $ref: '#/definitions/DescribeMeshOutput'
+        '480':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "481":
+            $ref: '#/definitions/BadRequestException'
+        '481':
           description: ForbiddenException
           schema:
-            $ref: "#/definitions/ForbiddenException"
-        "482":
+            $ref: '#/definitions/ForbiddenException'
+        '482':
           description: InternalServerErrorException
           schema:
-            $ref: "#/definitions/InternalServerErrorException"
-        "483":
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
           description: NotFoundException
           schema:
-            $ref: "#/definitions/NotFoundException"
-        "484":
+            $ref: '#/definitions/NotFoundException'
+        '484':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "485":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
           description: TooManyRequestsException
           schema:
-            $ref: "#/definitions/TooManyRequestsException"
+            $ref: '#/definitions/TooManyRequestsException'
       parameters:
         - name: meshName
           in: path
@@ -1086,38 +1055,38 @@ paths:
       operationId: UpdateMesh
       description: Updates an existing service mesh.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/UpdateMeshOutput"
-        "480":
+            $ref: '#/definitions/UpdateMeshOutput'
+        '480':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "481":
+            $ref: '#/definitions/BadRequestException'
+        '481':
           description: ConflictException
           schema:
-            $ref: "#/definitions/ConflictException"
-        "482":
+            $ref: '#/definitions/ConflictException'
+        '482':
           description: ForbiddenException
           schema:
-            $ref: "#/definitions/ForbiddenException"
-        "483":
+            $ref: '#/definitions/ForbiddenException'
+        '483':
           description: InternalServerErrorException
           schema:
-            $ref: "#/definitions/InternalServerErrorException"
-        "484":
+            $ref: '#/definitions/InternalServerErrorException'
+        '484':
           description: NotFoundException
           schema:
-            $ref: "#/definitions/NotFoundException"
-        "485":
+            $ref: '#/definitions/NotFoundException'
+        '485':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "486":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
           description: TooManyRequestsException
           schema:
-            $ref: "#/definitions/TooManyRequestsException"
+            $ref: '#/definitions/TooManyRequestsException'
       parameters:
         - name: meshName
           in: path
@@ -1133,10 +1102,8 @@ paths:
             type: object
             properties:
               clientToken:
-                description: >-
-                  Unique, case-sensitive identifier that you provide to ensure
-                  the idempotency of the
-
+                description: |-
+                  Unique, case-sensitive identifier that you provide to ensure the idempotency of the
                   request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
                 type: string
               spec:
@@ -1144,45 +1111,45 @@ paths:
                 type: object
                 properties:
                   egressFilter:
-                    $ref: "#/definitions/EgressFilter"
+                    $ref: '#/definitions/EgressFilter'
                     description: The egress filter rules for the service mesh.
-  "/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes/{routeName}":
+  '/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes/{routeName}':
     delete:
       operationId: DeleteRoute
       description: Deletes an existing route.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DeleteRouteOutput"
-        "480":
+            $ref: '#/definitions/DeleteRouteOutput'
+        '480':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "481":
+            $ref: '#/definitions/BadRequestException'
+        '481':
           description: ForbiddenException
           schema:
-            $ref: "#/definitions/ForbiddenException"
-        "482":
+            $ref: '#/definitions/ForbiddenException'
+        '482':
           description: InternalServerErrorException
           schema:
-            $ref: "#/definitions/InternalServerErrorException"
-        "483":
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
           description: NotFoundException
           schema:
-            $ref: "#/definitions/NotFoundException"
-        "484":
+            $ref: '#/definitions/NotFoundException'
+        '484':
           description: ResourceInUseException
           schema:
-            $ref: "#/definitions/ResourceInUseException"
-        "485":
+            $ref: '#/definitions/ResourceInUseException'
+        '485':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "486":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
           description: TooManyRequestsException
           schema:
-            $ref: "#/definitions/TooManyRequestsException"
+            $ref: '#/definitions/TooManyRequestsException'
       parameters:
         - name: meshName
           in: path
@@ -1206,45 +1173,45 @@ paths:
           minLength: 1
           maxLength: 255
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: DescribeRoute
       description: Describes an existing route.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DescribeRouteOutput"
-        "480":
+            $ref: '#/definitions/DescribeRouteOutput'
+        '480':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "481":
+            $ref: '#/definitions/BadRequestException'
+        '481':
           description: ForbiddenException
           schema:
-            $ref: "#/definitions/ForbiddenException"
-        "482":
+            $ref: '#/definitions/ForbiddenException'
+        '482':
           description: InternalServerErrorException
           schema:
-            $ref: "#/definitions/InternalServerErrorException"
-        "483":
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
           description: NotFoundException
           schema:
-            $ref: "#/definitions/NotFoundException"
-        "484":
+            $ref: '#/definitions/NotFoundException'
+        '484':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "485":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
           description: TooManyRequestsException
           schema:
-            $ref: "#/definitions/TooManyRequestsException"
+            $ref: '#/definitions/TooManyRequestsException'
       parameters:
         - name: meshName
           in: path
@@ -1269,45 +1236,44 @@ paths:
           maxLength: 255
     put:
       operationId: UpdateRoute
-      description: Updates an existing route for a specified service mesh and virtual
-        router.
+      description: Updates an existing route for a specified service mesh and virtual router.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/UpdateRouteOutput"
-        "480":
+            $ref: '#/definitions/UpdateRouteOutput'
+        '480':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "481":
+            $ref: '#/definitions/BadRequestException'
+        '481':
           description: ConflictException
           schema:
-            $ref: "#/definitions/ConflictException"
-        "482":
+            $ref: '#/definitions/ConflictException'
+        '482':
           description: ForbiddenException
           schema:
-            $ref: "#/definitions/ForbiddenException"
-        "483":
+            $ref: '#/definitions/ForbiddenException'
+        '483':
           description: InternalServerErrorException
           schema:
-            $ref: "#/definitions/InternalServerErrorException"
-        "484":
+            $ref: '#/definitions/InternalServerErrorException'
+        '484':
           description: LimitExceededException
           schema:
-            $ref: "#/definitions/LimitExceededException"
-        "485":
+            $ref: '#/definitions/LimitExceededException'
+        '485':
           description: NotFoundException
           schema:
-            $ref: "#/definitions/NotFoundException"
-        "486":
+            $ref: '#/definitions/NotFoundException'
+        '486':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "487":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '487':
           description: TooManyRequestsException
           schema:
-            $ref: "#/definitions/TooManyRequestsException"
+            $ref: '#/definitions/TooManyRequestsException'
       parameters:
         - name: meshName
           in: path
@@ -1339,10 +1305,8 @@ paths:
               - spec
             properties:
               clientToken:
-                description: >-
-                  Unique, case-sensitive identifier that you provide to ensure
-                  the idempotency of the
-
+                description: |-
+                  Unique, case-sensitive identifier that you provide to ensure the idempotency of the
                   request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
                 type: string
               spec:
@@ -1350,51 +1314,51 @@ paths:
                 type: object
                 properties:
                   httpRoute:
-                    $ref: "#/definitions/HttpRoute"
+                    $ref: '#/definitions/HttpRoute'
                     description: The HTTP routing information for the route.
                   tcpRoute:
-                    $ref: "#/definitions/TcpRoute"
+                    $ref: '#/definitions/TcpRoute'
                     description: The TCP routing information for the route.
-  "/v20190125/meshes/{meshName}/virtualNodes/{virtualNodeName}":
+  '/v20190125/meshes/{meshName}/virtualNodes/{virtualNodeName}':
     delete:
       operationId: DeleteVirtualNode
-      description: >-
+      description: |-
         <p>Deletes an existing virtual node.</p>
                  <p>You must delete any virtual services that list a virtual node as a service provider
                  before you can delete the virtual node itself.</p>
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DeleteVirtualNodeOutput"
-        "480":
+            $ref: '#/definitions/DeleteVirtualNodeOutput'
+        '480':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "481":
+            $ref: '#/definitions/BadRequestException'
+        '481':
           description: ForbiddenException
           schema:
-            $ref: "#/definitions/ForbiddenException"
-        "482":
+            $ref: '#/definitions/ForbiddenException'
+        '482':
           description: InternalServerErrorException
           schema:
-            $ref: "#/definitions/InternalServerErrorException"
-        "483":
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
           description: NotFoundException
           schema:
-            $ref: "#/definitions/NotFoundException"
-        "484":
+            $ref: '#/definitions/NotFoundException'
+        '484':
           description: ResourceInUseException
           schema:
-            $ref: "#/definitions/ResourceInUseException"
-        "485":
+            $ref: '#/definitions/ResourceInUseException'
+        '485':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "486":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
           description: TooManyRequestsException
           schema:
-            $ref: "#/definitions/TooManyRequestsException"
+            $ref: '#/definitions/TooManyRequestsException'
       parameters:
         - name: meshName
           in: path
@@ -1411,45 +1375,45 @@ paths:
           minLength: 1
           maxLength: 255
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: DescribeVirtualNode
       description: Describes an existing virtual node.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DescribeVirtualNodeOutput"
-        "480":
+            $ref: '#/definitions/DescribeVirtualNodeOutput'
+        '480':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "481":
+            $ref: '#/definitions/BadRequestException'
+        '481':
           description: ForbiddenException
           schema:
-            $ref: "#/definitions/ForbiddenException"
-        "482":
+            $ref: '#/definitions/ForbiddenException'
+        '482':
           description: InternalServerErrorException
           schema:
-            $ref: "#/definitions/InternalServerErrorException"
-        "483":
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
           description: NotFoundException
           schema:
-            $ref: "#/definitions/NotFoundException"
-        "484":
+            $ref: '#/definitions/NotFoundException'
+        '484':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "485":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
           description: TooManyRequestsException
           schema:
-            $ref: "#/definitions/TooManyRequestsException"
+            $ref: '#/definitions/TooManyRequestsException'
       parameters:
         - name: meshName
           in: path
@@ -1469,42 +1433,42 @@ paths:
       operationId: UpdateVirtualNode
       description: Updates an existing virtual node in a specified service mesh.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/UpdateVirtualNodeOutput"
-        "480":
+            $ref: '#/definitions/UpdateVirtualNodeOutput'
+        '480':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "481":
+            $ref: '#/definitions/BadRequestException'
+        '481':
           description: ConflictException
           schema:
-            $ref: "#/definitions/ConflictException"
-        "482":
+            $ref: '#/definitions/ConflictException'
+        '482':
           description: ForbiddenException
           schema:
-            $ref: "#/definitions/ForbiddenException"
-        "483":
+            $ref: '#/definitions/ForbiddenException'
+        '483':
           description: InternalServerErrorException
           schema:
-            $ref: "#/definitions/InternalServerErrorException"
-        "484":
+            $ref: '#/definitions/InternalServerErrorException'
+        '484':
           description: LimitExceededException
           schema:
-            $ref: "#/definitions/LimitExceededException"
-        "485":
+            $ref: '#/definitions/LimitExceededException'
+        '485':
           description: NotFoundException
           schema:
-            $ref: "#/definitions/NotFoundException"
-        "486":
+            $ref: '#/definitions/NotFoundException'
+        '486':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "487":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '487':
           description: TooManyRequestsException
           schema:
-            $ref: "#/definitions/TooManyRequestsException"
+            $ref: '#/definitions/TooManyRequestsException'
       parameters:
         - name: meshName
           in: path
@@ -1529,10 +1493,8 @@ paths:
               - spec
             properties:
               clientToken:
-                description: >-
-                  Unique, case-sensitive identifier that you provide to ensure
-                  the idempotency of the
-
+                description: |-
+                  Unique, case-sensitive identifier that you provide to ensure the idempotency of the
                   request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
                 type: string
               spec:
@@ -1540,64 +1502,59 @@ paths:
                 type: object
                 properties:
                   backends:
-                    $ref: "#/definitions/Backends"
-                    description: The backends that the virtual node is expected to send
-                      outbound traffic to.
+                    $ref: '#/definitions/Backends'
+                    description: The backends that the virtual node is expected to send outbound traffic to.
                   listeners:
-                    $ref: "#/definitions/Listeners"
-                    description: The listeners that the virtual node is expected to receive
-                      inbound traffic from. Currently only one listener is
-                      supported per virtual node.
+                    $ref: '#/definitions/Listeners'
+                    description: The listeners that the virtual node is expected to receive inbound traffic from. Currently only one listener is supported per virtual node.
                   logging:
-                    $ref: "#/definitions/Logging"
-                    description: The inbound and outbound access logging information for
-                      the virtual node.
+                    $ref: '#/definitions/Logging'
+                    description: The inbound and outbound access logging information for the virtual node.
                   serviceDiscovery:
-                    $ref: "#/definitions/ServiceDiscovery"
-                    description: >-
-                      The service discovery information for the virtual node. If
-                      your virtual node does not
+                    $ref: '#/definitions/ServiceDiscovery'
+                    description: |-
+                      The service discovery information for the virtual node. If your virtual node does not
                                expect ingress traffic, you can omit this parameter.
-  "/v20190125/meshes/{meshName}/virtualRouters/{virtualRouterName}":
+  '/v20190125/meshes/{meshName}/virtualRouters/{virtualRouterName}':
     delete:
       operationId: DeleteVirtualRouter
-      description: >-
+      description: |-
         <p>Deletes an existing virtual router.</p>
                  <p>You must delete any routes associated with the virtual router before you can delete the
                  router itself.</p>
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DeleteVirtualRouterOutput"
-        "480":
+            $ref: '#/definitions/DeleteVirtualRouterOutput'
+        '480':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "481":
+            $ref: '#/definitions/BadRequestException'
+        '481':
           description: ForbiddenException
           schema:
-            $ref: "#/definitions/ForbiddenException"
-        "482":
+            $ref: '#/definitions/ForbiddenException'
+        '482':
           description: InternalServerErrorException
           schema:
-            $ref: "#/definitions/InternalServerErrorException"
-        "483":
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
           description: NotFoundException
           schema:
-            $ref: "#/definitions/NotFoundException"
-        "484":
+            $ref: '#/definitions/NotFoundException'
+        '484':
           description: ResourceInUseException
           schema:
-            $ref: "#/definitions/ResourceInUseException"
-        "485":
+            $ref: '#/definitions/ResourceInUseException'
+        '485':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "486":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
           description: TooManyRequestsException
           schema:
-            $ref: "#/definitions/TooManyRequestsException"
+            $ref: '#/definitions/TooManyRequestsException'
       parameters:
         - name: meshName
           in: path
@@ -1614,45 +1571,45 @@ paths:
           minLength: 1
           maxLength: 255
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: DescribeVirtualRouter
       description: Describes an existing virtual router.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DescribeVirtualRouterOutput"
-        "480":
+            $ref: '#/definitions/DescribeVirtualRouterOutput'
+        '480':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "481":
+            $ref: '#/definitions/BadRequestException'
+        '481':
           description: ForbiddenException
           schema:
-            $ref: "#/definitions/ForbiddenException"
-        "482":
+            $ref: '#/definitions/ForbiddenException'
+        '482':
           description: InternalServerErrorException
           schema:
-            $ref: "#/definitions/InternalServerErrorException"
-        "483":
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
           description: NotFoundException
           schema:
-            $ref: "#/definitions/NotFoundException"
-        "484":
+            $ref: '#/definitions/NotFoundException'
+        '484':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "485":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
           description: TooManyRequestsException
           schema:
-            $ref: "#/definitions/TooManyRequestsException"
+            $ref: '#/definitions/TooManyRequestsException'
       parameters:
         - name: meshName
           in: path
@@ -1672,42 +1629,42 @@ paths:
       operationId: UpdateVirtualRouter
       description: Updates an existing virtual router in a specified service mesh.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/UpdateVirtualRouterOutput"
-        "480":
+            $ref: '#/definitions/UpdateVirtualRouterOutput'
+        '480':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "481":
+            $ref: '#/definitions/BadRequestException'
+        '481':
           description: ConflictException
           schema:
-            $ref: "#/definitions/ConflictException"
-        "482":
+            $ref: '#/definitions/ConflictException'
+        '482':
           description: ForbiddenException
           schema:
-            $ref: "#/definitions/ForbiddenException"
-        "483":
+            $ref: '#/definitions/ForbiddenException'
+        '483':
           description: InternalServerErrorException
           schema:
-            $ref: "#/definitions/InternalServerErrorException"
-        "484":
+            $ref: '#/definitions/InternalServerErrorException'
+        '484':
           description: LimitExceededException
           schema:
-            $ref: "#/definitions/LimitExceededException"
-        "485":
+            $ref: '#/definitions/LimitExceededException'
+        '485':
           description: NotFoundException
           schema:
-            $ref: "#/definitions/NotFoundException"
-        "486":
+            $ref: '#/definitions/NotFoundException'
+        '486':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "487":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '487':
           description: TooManyRequestsException
           schema:
-            $ref: "#/definitions/TooManyRequestsException"
+            $ref: '#/definitions/TooManyRequestsException'
       parameters:
         - name: meshName
           in: path
@@ -1732,10 +1689,8 @@ paths:
               - spec
             properties:
               clientToken:
-                description: >-
-                  Unique, case-sensitive identifier that you provide to ensure
-                  the idempotency of the
-
+                description: |-
+                  Unique, case-sensitive identifier that you provide to ensure the idempotency of the
                   request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
                 type: string
               spec:
@@ -1743,43 +1698,41 @@ paths:
                 type: object
                 properties:
                   listeners:
-                    $ref: "#/definitions/VirtualRouterListeners"
-                    description: The listeners that the virtual router is expected to
-                      receive inbound traffic from. Currently only one listener
-                      is supported per virtual router.
-  "/v20190125/meshes/{meshName}/virtualServices/{virtualServiceName}":
+                    $ref: '#/definitions/VirtualRouterListeners'
+                    description: The listeners that the virtual router is expected to receive inbound traffic from. Currently only one listener is supported per virtual router.
+  '/v20190125/meshes/{meshName}/virtualServices/{virtualServiceName}':
     delete:
       operationId: DeleteVirtualService
       description: Deletes an existing virtual service.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DeleteVirtualServiceOutput"
-        "480":
+            $ref: '#/definitions/DeleteVirtualServiceOutput'
+        '480':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "481":
+            $ref: '#/definitions/BadRequestException'
+        '481':
           description: ForbiddenException
           schema:
-            $ref: "#/definitions/ForbiddenException"
-        "482":
+            $ref: '#/definitions/ForbiddenException'
+        '482':
           description: InternalServerErrorException
           schema:
-            $ref: "#/definitions/InternalServerErrorException"
-        "483":
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
           description: NotFoundException
           schema:
-            $ref: "#/definitions/NotFoundException"
-        "484":
+            $ref: '#/definitions/NotFoundException'
+        '484':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "485":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
           description: TooManyRequestsException
           schema:
-            $ref: "#/definitions/TooManyRequestsException"
+            $ref: '#/definitions/TooManyRequestsException'
       parameters:
         - name: meshName
           in: path
@@ -1794,45 +1747,45 @@ paths:
           description: The name of the virtual service to delete.
           type: string
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: DescribeVirtualService
       description: Describes an existing virtual service.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DescribeVirtualServiceOutput"
-        "480":
+            $ref: '#/definitions/DescribeVirtualServiceOutput'
+        '480':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "481":
+            $ref: '#/definitions/BadRequestException'
+        '481':
           description: ForbiddenException
           schema:
-            $ref: "#/definitions/ForbiddenException"
-        "482":
+            $ref: '#/definitions/ForbiddenException'
+        '482':
           description: InternalServerErrorException
           schema:
-            $ref: "#/definitions/InternalServerErrorException"
-        "483":
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
           description: NotFoundException
           schema:
-            $ref: "#/definitions/NotFoundException"
-        "484":
+            $ref: '#/definitions/NotFoundException'
+        '484':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "485":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
           description: TooManyRequestsException
           schema:
-            $ref: "#/definitions/TooManyRequestsException"
+            $ref: '#/definitions/TooManyRequestsException'
       parameters:
         - name: meshName
           in: path
@@ -1850,42 +1803,42 @@ paths:
       operationId: UpdateVirtualService
       description: Updates an existing virtual service in a specified service mesh.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/UpdateVirtualServiceOutput"
-        "480":
+            $ref: '#/definitions/UpdateVirtualServiceOutput'
+        '480':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "481":
+            $ref: '#/definitions/BadRequestException'
+        '481':
           description: ConflictException
           schema:
-            $ref: "#/definitions/ConflictException"
-        "482":
+            $ref: '#/definitions/ConflictException'
+        '482':
           description: ForbiddenException
           schema:
-            $ref: "#/definitions/ForbiddenException"
-        "483":
+            $ref: '#/definitions/ForbiddenException'
+        '483':
           description: InternalServerErrorException
           schema:
-            $ref: "#/definitions/InternalServerErrorException"
-        "484":
+            $ref: '#/definitions/InternalServerErrorException'
+        '484':
           description: LimitExceededException
           schema:
-            $ref: "#/definitions/LimitExceededException"
-        "485":
+            $ref: '#/definitions/LimitExceededException'
+        '485':
           description: NotFoundException
           schema:
-            $ref: "#/definitions/NotFoundException"
-        "486":
+            $ref: '#/definitions/NotFoundException'
+        '486':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "487":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '487':
           description: TooManyRequestsException
           schema:
-            $ref: "#/definitions/TooManyRequestsException"
+            $ref: '#/definitions/TooManyRequestsException'
       parameters:
         - name: meshName
           in: path
@@ -1908,10 +1861,8 @@ paths:
               - spec
             properties:
               clientToken:
-                description: >-
-                  Unique, case-sensitive identifier that you provide to ensure
-                  the idempotency of the
-
+                description: |-
+                  Unique, case-sensitive identifier that you provide to ensure the idempotency of the
                   request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
                 type: string
               spec:
@@ -1919,43 +1870,41 @@ paths:
                 type: object
                 properties:
                   provider:
-                    $ref: "#/definitions/VirtualServiceProvider"
-                    description: >-
-                      The App Mesh object that is acting as the provider for a
-                      virtual service. You can specify
+                    $ref: '#/definitions/VirtualServiceProvider'
+                    description: |-
+                      The App Mesh object that is acting as the provider for a virtual service. You can specify
                                a single virtual node or virtual router.
-  /v20190125/tags#resourceArn:
+  '/v20190125/tags#resourceArn':
     get:
       operationId: ListTagsForResource
       description: List the tags for an App Mesh resource.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/ListTagsForResourceOutput"
-        "480":
+            $ref: '#/definitions/ListTagsForResourceOutput'
+        '480':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "481":
+            $ref: '#/definitions/BadRequestException'
+        '481':
           description: InternalServerErrorException
           schema:
-            $ref: "#/definitions/InternalServerErrorException"
-        "482":
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
           description: NotFoundException
           schema:
-            $ref: "#/definitions/NotFoundException"
-        "483":
+            $ref: '#/definitions/NotFoundException'
+        '483':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
+            $ref: '#/definitions/ServiceUnavailableException'
       parameters:
         - name: limit
           in: query
           required: false
-          description: >-
-            The maximum number of tag results returned by
-            <code>ListTagsForResource</code> in
+          description: |-
+            The maximum number of tag results returned by <code>ListTagsForResource</code> in
                      paginated output. When this parameter is used, <code>ListTagsForResource</code> returns only
                      <code>limit</code> results in a single page along with a <code>nextToken</code>
                      response element. You can see the remaining results of the initial request by sending
@@ -1969,7 +1918,7 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: >-
+          description: |-
             The <code>nextToken</code> value returned from a previous paginated
                      <code>ListTagsForResource</code> request where <code>limit</code> was used and the
                      results exceeded the value of that parameter. Pagination continues from the end of the
@@ -1978,50 +1927,49 @@ paths:
         - name: resourceArn
           in: query
           required: true
-          description: The Amazon Resource Name (ARN) that identifies the resource to list
-            the tags for.
+          description: The Amazon Resource Name (ARN) that identifies the resource to list the tags for.
           type: string
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /v20190125/tag#resourceArn:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v20190125/tag#resourceArn':
     put:
       operationId: TagResource
-      description: >-
+      description: |-
         Associates the specified tags to a resource with the specified
                  <code>resourceArn</code>. If existing tags on a resource aren't specified in the
                  request parameters, they aren't changed. When a resource is deleted, the tags
                  associated with that resource are also deleted.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/TagResourceOutput"
-        "480":
+            $ref: '#/definitions/TagResourceOutput'
+        '480':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "481":
+            $ref: '#/definitions/BadRequestException'
+        '481':
           description: InternalServerErrorException
           schema:
-            $ref: "#/definitions/InternalServerErrorException"
-        "482":
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
           description: NotFoundException
           schema:
-            $ref: "#/definitions/NotFoundException"
-        "483":
+            $ref: '#/definitions/NotFoundException'
+        '483':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "484":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '484':
           description: TooManyTagsException
           schema:
-            $ref: "#/definitions/TooManyTagsException"
+            $ref: '#/definitions/TooManyTagsException'
       parameters:
         - name: resourceArn
           in: query
@@ -2037,49 +1985,48 @@ paths:
               - tags
             properties:
               tags:
-                description: >-
-                  The tags to add to the resource. A tag is an array of
-                  key-value pairs.
+                description: |-
+                  The tags to add to the resource. A tag is an array of key-value pairs.
                            Tag keys can have a maximum character length of 128 characters, and tag values can have
                               a maximum length of 256 characters.
                 type: array
                 items:
-                  $ref: "#/definitions/TagRef"
+                  $ref: '#/definitions/TagRef'
                 minItems: 0
                 maxItems: 50
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /v20190125/untag#resourceArn:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v20190125/untag#resourceArn':
     put:
       operationId: UntagResource
       description: Deletes specified tags from a resource.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/UntagResourceOutput"
-        "480":
+            $ref: '#/definitions/UntagResourceOutput'
+        '480':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "481":
+            $ref: '#/definitions/BadRequestException'
+        '481':
           description: InternalServerErrorException
           schema:
-            $ref: "#/definitions/InternalServerErrorException"
-        "482":
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
           description: NotFoundException
           schema:
-            $ref: "#/definitions/NotFoundException"
-        "483":
+            $ref: '#/definitions/NotFoundException'
+        '483':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
+            $ref: '#/definitions/ServiceUnavailableException'
       parameters:
         - name: resourceArn
           in: query
@@ -2098,17 +2045,17 @@ paths:
                 description: The keys of the tags to be removed.
                 type: array
                 items:
-                  $ref: "#/definitions/TagKey"
+                  $ref: '#/definitions/TagKey'
                 minItems: 0
                 maxItems: 50
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
   CreateMeshOutput:
     type: object
@@ -2116,19 +2063,18 @@ definitions:
       - mesh
     properties:
       mesh:
-        $ref: "#/definitions/MeshData"
+        $ref: '#/definitions/MeshData'
         description: The full description of your service mesh following the create call.
-    description: ""
+    description: ''
   EgressFilter:
     type: object
     required:
       - type
     properties:
       type:
-        $ref: "#/definitions/EgressFilterType"
-        description: >-
-          The egress filter type. By default, the type is <code>DROP_ALL</code>,
-          which allows
+        $ref: '#/definitions/EgressFilterType'
+        description: |-
+          The egress filter type. By default, the type is <code>DROP_ALL</code>, which allows
                    egress only from virtual nodes to other defined resources in the service mesh (and any traffic
                    to <code>*.amazonaws.com</code> for AWS API calls). You can set the egress filter type to
                       <code>ALLOW_ALL</code> to allow egress to any endpoint inside or outside of the service
@@ -2140,20 +2086,17 @@ definitions:
       - key
     properties:
       key:
-        $ref: "#/definitions/TagKey"
-        description: >-
-          One part of a key-value pair that make up a tag. A <code>key</code> is
-          a general label
+        $ref: '#/definitions/TagKey'
+        description: |-
+          One part of a key-value pair that make up a tag. A <code>key</code> is a general label
                    that acts like a category for more specific tag values.
       value:
-        $ref: "#/definitions/TagValue"
-        description: >-
-          The optional part of a key-value pair that make up a tag. A
-          <code>value</code> acts as
+        $ref: '#/definitions/TagValue'
+        description: |-
+          The optional part of a key-value pair that make up a tag. A <code>value</code> acts as
                    a descriptor within a tag category (key).
-    description: >-
-      Optional metadata that you apply to a resource to assist with
-      categorization and organization.
+    description: |-
+      Optional metadata that you apply to a resource to assist with categorization and organization.
                Each tag consists of a key and an optional value, both of which you define.
                Tag keys can have a maximum character length of 128 characters, and tag values can have
                   a maximum length of 256 characters.
@@ -2171,9 +2114,9 @@ definitions:
       - route
     properties:
       route:
-        $ref: "#/definitions/RouteData"
+        $ref: '#/definitions/RouteData'
         description: The full description of your mesh following the create call.
-    description: ""
+    description: ''
   HttpRoute:
     type: object
     required:
@@ -2181,10 +2124,10 @@ definitions:
       - match
     properties:
       action:
-        $ref: "#/definitions/HttpRouteAction"
+        $ref: '#/definitions/HttpRouteAction'
         description: The action to take if a match is determined.
       match:
-        $ref: "#/definitions/HttpRouteMatch"
+        $ref: '#/definitions/HttpRouteMatch'
         description: The criteria for determining an HTTP request match.
     description: An object representing the HTTP routing specification for a route.
   TcpRoute:
@@ -2193,7 +2136,7 @@ definitions:
       - action
     properties:
       action:
-        $ref: "#/definitions/TcpRouteAction"
+        $ref: '#/definitions/TcpRouteAction'
         description: The action to take if a match is determined.
     description: An object representing the TCP routing specification for a route.
   CreateVirtualNodeOutput:
@@ -2202,49 +2145,48 @@ definitions:
       - virtualNode
     properties:
       virtualNode:
-        $ref: "#/definitions/VirtualNodeData"
+        $ref: '#/definitions/VirtualNodeData'
         description: The full description of your virtual node following the create call.
-    description: ""
+    description: ''
   Backends:
     type: array
     items:
-      $ref: "#/definitions/Backend"
+      $ref: '#/definitions/Backend'
     minItems: 0
     maxItems: 25
   Listeners:
     type: array
     items:
-      $ref: "#/definitions/Listener"
+      $ref: '#/definitions/Listener'
     minItems: 0
     maxItems: 1
   Logging:
     type: object
     properties:
       accessLog:
-        $ref: "#/definitions/AccessLog"
+        $ref: '#/definitions/AccessLog'
         description: The access log configuration for a virtual node.
     description: An object representing the logging information for a virtual node.
   ServiceDiscovery:
     type: object
     properties:
       dns:
-        $ref: "#/definitions/DnsServiceDiscovery"
+        $ref: '#/definitions/DnsServiceDiscovery'
         description: Specifies the DNS information for the virtual node.
-    description: An object representing the service discovery information for a virtual
-      node.
+    description: An object representing the service discovery information for a virtual node.
   CreateVirtualRouterOutput:
     type: object
     required:
       - virtualRouter
     properties:
       virtualRouter:
-        $ref: "#/definitions/VirtualRouterData"
+        $ref: '#/definitions/VirtualRouterData'
         description: The full description of your virtual router following the create call.
-    description: ""
+    description: ''
   VirtualRouterListeners:
     type: array
     items:
-      $ref: "#/definitions/VirtualRouterListener"
+      $ref: '#/definitions/VirtualRouterListener'
     minItems: 1
     maxItems: 1
   CreateVirtualServiceOutput:
@@ -2253,17 +2195,17 @@ definitions:
       - virtualService
     properties:
       virtualService:
-        $ref: "#/definitions/VirtualServiceData"
+        $ref: '#/definitions/VirtualServiceData'
         description: The full description of your virtual service following the create call.
-    description: ""
+    description: ''
   VirtualServiceProvider:
     type: object
     properties:
       virtualNode:
-        $ref: "#/definitions/VirtualNodeServiceProvider"
+        $ref: '#/definitions/VirtualNodeServiceProvider'
         description: The virtual node associated with a virtual service.
       virtualRouter:
-        $ref: "#/definitions/VirtualRouterServiceProvider"
+        $ref: '#/definitions/VirtualRouterServiceProvider'
         description: The virtual router associated with a virtual service.
     description: An object representing the provider for a virtual service.
   DeleteMeshOutput:
@@ -2272,9 +2214,9 @@ definitions:
       - mesh
     properties:
       mesh:
-        $ref: "#/definitions/MeshData"
+        $ref: '#/definitions/MeshData'
         description: The service mesh that was deleted.
-    description: ""
+    description: ''
   ResourceInUseException: {}
   DeleteRouteOutput:
     type: object
@@ -2282,198 +2224,191 @@ definitions:
       - route
     properties:
       route:
-        $ref: "#/definitions/RouteData"
+        $ref: '#/definitions/RouteData'
         description: The route that was deleted.
-    description: ""
+    description: ''
   DeleteVirtualNodeOutput:
     type: object
     required:
       - virtualNode
     properties:
       virtualNode:
-        $ref: "#/definitions/VirtualNodeData"
+        $ref: '#/definitions/VirtualNodeData'
         description: The virtual node that was deleted.
-    description: ""
+    description: ''
   DeleteVirtualRouterOutput:
     type: object
     required:
       - virtualRouter
     properties:
       virtualRouter:
-        $ref: "#/definitions/VirtualRouterData"
+        $ref: '#/definitions/VirtualRouterData'
         description: The virtual router that was deleted.
-    description: ""
+    description: ''
   DeleteVirtualServiceOutput:
     type: object
     required:
       - virtualService
     properties:
       virtualService:
-        $ref: "#/definitions/VirtualServiceData"
+        $ref: '#/definitions/VirtualServiceData'
         description: The virtual service that was deleted.
-    description: ""
+    description: ''
   DescribeMeshOutput:
     type: object
     required:
       - mesh
     properties:
       mesh:
-        $ref: "#/definitions/MeshData"
+        $ref: '#/definitions/MeshData'
         description: The full description of your service mesh.
-    description: ""
+    description: ''
   DescribeRouteOutput:
     type: object
     required:
       - route
     properties:
       route:
-        $ref: "#/definitions/RouteData"
+        $ref: '#/definitions/RouteData'
         description: The full description of your route.
-    description: ""
+    description: ''
   DescribeVirtualNodeOutput:
     type: object
     required:
       - virtualNode
     properties:
       virtualNode:
-        $ref: "#/definitions/VirtualNodeData"
+        $ref: '#/definitions/VirtualNodeData'
         description: The full description of your virtual node.
-    description: ""
+    description: ''
   DescribeVirtualRouterOutput:
     type: object
     required:
       - virtualRouter
     properties:
       virtualRouter:
-        $ref: "#/definitions/VirtualRouterData"
+        $ref: '#/definitions/VirtualRouterData'
         description: The full description of your virtual router.
-    description: ""
+    description: ''
   DescribeVirtualServiceOutput:
     type: object
     required:
       - virtualService
     properties:
       virtualService:
-        $ref: "#/definitions/VirtualServiceData"
+        $ref: '#/definitions/VirtualServiceData'
         description: The full description of your virtual service.
-    description: ""
+    description: ''
   ListMeshesOutput:
     type: object
     required:
       - meshes
     properties:
       meshes:
-        $ref: "#/definitions/MeshList"
+        $ref: '#/definitions/MeshList'
         description: The list of existing service meshes.
       nextToken:
-        $ref: "#/definitions/String"
-        description: >-
-          The <code>nextToken</code> value to include in a future
-          <code>ListMeshes</code>
+        $ref: '#/definitions/String'
+        description: |-
+          The <code>nextToken</code> value to include in a future <code>ListMeshes</code>
                    request. When the results of a <code>ListMeshes</code> request exceed
                    <code>limit</code>, you can use this value to retrieve the next page of
                    results. This value is <code>null</code> when there are no more results to
                    return.
-    description: ""
+    description: ''
   ListRoutesOutput:
     type: object
     required:
       - routes
     properties:
       nextToken:
-        $ref: "#/definitions/String"
-        description: >-
-          The <code>nextToken</code> value to include in a future
-          <code>ListRoutes</code>
+        $ref: '#/definitions/String'
+        description: |-
+          The <code>nextToken</code> value to include in a future <code>ListRoutes</code>
                    request. When the results of a <code>ListRoutes</code> request exceed
                    <code>limit</code>, you can use this value to retrieve the next page of
                    results. This value is <code>null</code> when there are no more results to
                    return.
       routes:
-        $ref: "#/definitions/RouteList"
-        description: The list of existing routes for the specified service mesh and virtual
-          router.
-    description: ""
+        $ref: '#/definitions/RouteList'
+        description: The list of existing routes for the specified service mesh and virtual router.
+    description: ''
   ListTagsForResourceOutput:
     type: object
     required:
       - tags
     properties:
       nextToken:
-        $ref: "#/definitions/String"
-        description: >-
-          The <code>nextToken</code> value to include in a future
-          <code>ListTagsForResource</code>
+        $ref: '#/definitions/String'
+        description: |-
+          The <code>nextToken</code> value to include in a future <code>ListTagsForResource</code>
                    request. When the results of a <code>ListTagsForResource</code> request exceed
                    <code>limit</code>, you can use this value to retrieve the next page of
                    results. This value is <code>null</code> when there are no more results to
                    return.
       tags:
-        $ref: "#/definitions/TagList"
+        $ref: '#/definitions/TagList'
         description: The tags for the resource.
-    description: ""
+    description: ''
   ListVirtualNodesOutput:
     type: object
     required:
       - virtualNodes
     properties:
       nextToken:
-        $ref: "#/definitions/String"
-        description: >-
-          The <code>nextToken</code> value to include in a future
-          <code>ListVirtualNodes</code>
+        $ref: '#/definitions/String'
+        description: |-
+          The <code>nextToken</code> value to include in a future <code>ListVirtualNodes</code>
                    request. When the results of a <code>ListVirtualNodes</code> request exceed
                    <code>limit</code>, you can use this value to retrieve the next page of
                    results. This value is <code>null</code> when there are no more results to
                    return.
       virtualNodes:
-        $ref: "#/definitions/VirtualNodeList"
+        $ref: '#/definitions/VirtualNodeList'
         description: The list of existing virtual nodes for the specified service mesh.
-    description: ""
+    description: ''
   ListVirtualRoutersOutput:
     type: object
     required:
       - virtualRouters
     properties:
       nextToken:
-        $ref: "#/definitions/String"
-        description: >-
-          The <code>nextToken</code> value to include in a future
-          <code>ListVirtualRouters</code>
+        $ref: '#/definitions/String'
+        description: |-
+          The <code>nextToken</code> value to include in a future <code>ListVirtualRouters</code>
                    request. When the results of a <code>ListVirtualRouters</code> request exceed
                    <code>limit</code>, you can use this value to retrieve the next page of
                    results. This value is <code>null</code> when there are no more results to
                    return.
       virtualRouters:
-        $ref: "#/definitions/VirtualRouterList"
+        $ref: '#/definitions/VirtualRouterList'
         description: The list of existing virtual routers for the specified service mesh.
-    description: ""
+    description: ''
   ListVirtualServicesOutput:
     type: object
     required:
       - virtualServices
     properties:
       nextToken:
-        $ref: "#/definitions/String"
-        description: >-
-          The <code>nextToken</code> value to include in a future
-          <code>ListVirtualServices</code>
+        $ref: '#/definitions/String'
+        description: |-
+          The <code>nextToken</code> value to include in a future <code>ListVirtualServices</code>
                    request. When the results of a <code>ListVirtualServices</code> request exceed
                       <code>limit</code>, you can use this value to retrieve the next page of results. This
                    value is <code>null</code> when there are no more results to return.
       virtualServices:
-        $ref: "#/definitions/VirtualServiceList"
+        $ref: '#/definitions/VirtualServiceList'
         description: The list of existing virtual services for the specified service mesh.
-    description: ""
+    description: ''
   TagResourceOutput:
     type: object
     properties: {}
-    description: ""
+    description: ''
   TooManyTagsException: {}
   UntagResourceOutput:
     type: object
     properties: {}
-    description: ""
+    description: ''
   TagKey:
     type: string
     minLength: 1
@@ -2484,44 +2419,44 @@ definitions:
       - mesh
     properties:
       mesh:
-        $ref: "#/definitions/MeshData"
-    description: ""
+        $ref: '#/definitions/MeshData'
+    description: ''
   UpdateRouteOutput:
     type: object
     required:
       - route
     properties:
       route:
-        $ref: "#/definitions/RouteData"
+        $ref: '#/definitions/RouteData'
         description: A full description of the route that was updated.
-    description: ""
+    description: ''
   UpdateVirtualNodeOutput:
     type: object
     required:
       - virtualNode
     properties:
       virtualNode:
-        $ref: "#/definitions/VirtualNodeData"
+        $ref: '#/definitions/VirtualNodeData'
         description: A full description of the virtual node that was updated.
-    description: ""
+    description: ''
   UpdateVirtualRouterOutput:
     type: object
     required:
       - virtualRouter
     properties:
       virtualRouter:
-        $ref: "#/definitions/VirtualRouterData"
+        $ref: '#/definitions/VirtualRouterData'
         description: A full description of the virtual router that was updated.
-    description: ""
+    description: ''
   UpdateVirtualServiceOutput:
     type: object
     required:
       - virtualService
     properties:
       virtualService:
-        $ref: "#/definitions/VirtualServiceData"
+        $ref: '#/definitions/VirtualServiceData'
         description: A full description of the virtual service that was updated.
-    description: ""
+    description: ''
   PortMapping:
     type: object
     required:
@@ -2529,20 +2464,19 @@ definitions:
       - protocol
     properties:
       port:
-        $ref: "#/definitions/PortNumber"
+        $ref: '#/definitions/PortNumber'
         description: The port used for the port mapping.
       protocol:
-        $ref: "#/definitions/PortProtocol"
+        $ref: '#/definitions/PortProtocol'
         description: The protocol used for the port mapping.
-    description: An object representing a virtual node or virtual router listener port
-      mapping.
+    description: An object representing a virtual node or virtual router listener port mapping.
   VirtualRouterListener:
     type: object
     required:
       - portMapping
     properties:
       portMapping:
-        $ref: "#/definitions/PortMapping"
+        $ref: '#/definitions/PortMapping'
     description: An object representing a virtual router listener.
   String:
     type: string
@@ -2554,23 +2488,18 @@ definitions:
     type: object
     properties:
       backends:
-        $ref: "#/definitions/Backends"
-        description: The backends that the virtual node is expected to send outbound
-          traffic to.
+        $ref: '#/definitions/Backends'
+        description: The backends that the virtual node is expected to send outbound traffic to.
       listeners:
-        $ref: "#/definitions/Listeners"
-        description: The listeners that the virtual node is expected to receive inbound
-          traffic from. Currently only one listener is supported per virtual
-          node.
+        $ref: '#/definitions/Listeners'
+        description: The listeners that the virtual node is expected to receive inbound traffic from. Currently only one listener is supported per virtual node.
       logging:
-        $ref: "#/definitions/Logging"
-        description: The inbound and outbound access logging information for the virtual
-          node.
+        $ref: '#/definitions/Logging'
+        description: The inbound and outbound access logging information for the virtual node.
       serviceDiscovery:
-        $ref: "#/definitions/ServiceDiscovery"
-        description: >-
-          The service discovery information for the virtual node. If your
-          virtual node does not
+        $ref: '#/definitions/ServiceDiscovery'
+        description: |-
+          The service discovery information for the virtual node. If your virtual node does not
                    expect ingress traffic, you can omit this parameter.
     description: An object representing the specification of a virtual node.
   UpdateVirtualNodeInput:
@@ -2579,35 +2508,31 @@ definitions:
       - spec
     properties:
       clientToken:
-        $ref: "#/definitions/String"
-        description: >-
-          Unique, case-sensitive identifier that you provide to ensure the
-          idempotency of the
-
+        $ref: '#/definitions/String'
+        description: |-
+          Unique, case-sensitive identifier that you provide to ensure the idempotency of the
           request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
       spec:
-        $ref: "#/definitions/VirtualNodeSpec"
-        description: The new virtual node specification to apply. This overwrites the
-          existing data.
-    description: ""
+        $ref: '#/definitions/VirtualNodeSpec'
+        description: The new virtual node specification to apply. This overwrites the existing data.
+    description: ''
   DeleteMeshInput:
     type: object
     properties: {}
-    description: ""
+    description: ''
   VirtualServiceSpec:
     type: object
     properties:
       provider:
-        $ref: "#/definitions/VirtualServiceProvider"
-        description: >-
-          The App Mesh object that is acting as the provider for a virtual
-          service. You can specify
+        $ref: '#/definitions/VirtualServiceProvider'
+        description: |-
+          The App Mesh object that is acting as the provider for a virtual service. You can specify
                    a single virtual node or virtual router.
     description: An object representing the specification of a virtual service.
   TagList:
     type: array
     items:
-      $ref: "#/definitions/TagRef"
+      $ref: '#/definitions/TagRef'
     minItems: 0
     maxItems: 50
   ServiceName:
@@ -2619,27 +2544,24 @@ definitions:
       - virtualServiceName
     properties:
       clientToken:
-        $ref: "#/definitions/String"
-        description: >-
-          Unique, case-sensitive identifier that you provide to ensure the
-          idempotency of the
-
+        $ref: '#/definitions/String'
+        description: |-
+          Unique, case-sensitive identifier that you provide to ensure the idempotency of the
           request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
       spec:
-        $ref: "#/definitions/VirtualServiceSpec"
+        $ref: '#/definitions/VirtualServiceSpec'
         description: The virtual service specification to apply.
       tags:
-        $ref: "#/definitions/TagList"
-        description: >-
-          Optional metadata that you can apply to the virtual service to assist
-          with categorization and organization.
+        $ref: '#/definitions/TagList'
+        description: |-
+          Optional metadata that you can apply to the virtual service to assist with categorization and organization.
                    Each tag consists of a key and an optional value, both of which you define.
                    Tag keys can have a maximum character length of 128 characters, and tag values can have
                       a maximum length of 256 characters.
       virtualServiceName:
-        $ref: "#/definitions/ServiceName"
+        $ref: '#/definitions/ServiceName'
         description: The name to use for the virtual service.
-    description: ""
+    description: ''
   VirtualRouterStatusCode:
     type: string
     enum:
@@ -2652,10 +2574,8 @@ definitions:
       - listeners
     properties:
       listeners:
-        $ref: "#/definitions/VirtualRouterListeners"
-        description: The listeners that the virtual router is expected to receive inbound
-          traffic from. Currently only one listener is supported per virtual
-          router.
+        $ref: '#/definitions/VirtualRouterListeners'
+        description: The listeners that the virtual router is expected to receive inbound traffic from. Currently only one listener is supported per virtual router.
     description: An object representing the specification of a virtual router.
   UpdateVirtualRouterInput:
     type: object
@@ -2663,21 +2583,18 @@ definitions:
       - spec
     properties:
       clientToken:
-        $ref: "#/definitions/String"
-        description: >-
-          Unique, case-sensitive identifier that you provide to ensure the
-          idempotency of the
-
+        $ref: '#/definitions/String'
+        description: |-
+          Unique, case-sensitive identifier that you provide to ensure the idempotency of the
           request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
       spec:
-        $ref: "#/definitions/VirtualRouterSpec"
-        description: The new virtual router specification to apply. This overwrites the
-          existing data.
-    description: ""
+        $ref: '#/definitions/VirtualRouterSpec'
+        description: The new virtual router specification to apply. This overwrites the existing data.
+    description: ''
   TagKeyList:
     type: array
     items:
-      $ref: "#/definitions/TagKey"
+      $ref: '#/definitions/TagKey'
     minItems: 0
     maxItems: 50
   TagsLimit:
@@ -2689,7 +2606,7 @@ definitions:
   ListTagsForResourceInput:
     type: object
     properties: {}
-    description: ""
+    description: ''
   VirtualNodeData:
     type: object
     required:
@@ -2700,26 +2617,26 @@ definitions:
       - virtualNodeName
     properties:
       meshName:
-        $ref: "#/definitions/ResourceName"
+        $ref: '#/definitions/ResourceName'
         description: The name of the service mesh that the virtual node resides in.
       metadata:
-        $ref: "#/definitions/ResourceMetadata"
+        $ref: '#/definitions/ResourceMetadata'
         description: The associated metadata for the virtual node.
       spec:
-        $ref: "#/definitions/VirtualNodeSpec"
+        $ref: '#/definitions/VirtualNodeSpec'
         description: The specifications of the virtual node.
       status:
-        $ref: "#/definitions/VirtualNodeStatus"
+        $ref: '#/definitions/VirtualNodeStatus'
         description: The current status for the virtual node.
       virtualNodeName:
-        $ref: "#/definitions/ResourceName"
+        $ref: '#/definitions/ResourceName'
         description: The name of the virtual node.
     description: An object representing a virtual node returned by a describe operation.
   AccessLog:
     type: object
     properties:
       file:
-        $ref: "#/definitions/FileAccessLog"
+        $ref: '#/definitions/FileAccessLog'
         description: The file object to send virtual node access logs to.
     description: An object representing the access logging information for a virtual node.
   Long:
@@ -2734,19 +2651,19 @@ definitions:
       - virtualRouterName
     properties:
       meshName:
-        $ref: "#/definitions/ResourceName"
+        $ref: '#/definitions/ResourceName'
         description: The name of the service mesh that the virtual router resides in.
       metadata:
-        $ref: "#/definitions/ResourceMetadata"
+        $ref: '#/definitions/ResourceMetadata'
         description: The associated metadata for the virtual router.
       spec:
-        $ref: "#/definitions/VirtualRouterSpec"
+        $ref: '#/definitions/VirtualRouterSpec'
         description: The specifications of the virtual router.
       status:
-        $ref: "#/definitions/VirtualRouterStatus"
+        $ref: '#/definitions/VirtualRouterStatus'
         description: The current status of the virtual router.
       virtualRouterName:
-        $ref: "#/definitions/ResourceName"
+        $ref: '#/definitions/ResourceName'
         description: The name of the virtual router.
     description: An object representing a virtual router returned by a describe operation.
   MeshData:
@@ -2758,30 +2675,30 @@ definitions:
       - status
     properties:
       meshName:
-        $ref: "#/definitions/ResourceName"
+        $ref: '#/definitions/ResourceName'
         description: The name of the service mesh.
       metadata:
-        $ref: "#/definitions/ResourceMetadata"
+        $ref: '#/definitions/ResourceMetadata'
         description: The associated metadata for the service mesh.
       spec:
-        $ref: "#/definitions/MeshSpec"
+        $ref: '#/definitions/MeshSpec'
         description: The associated specification for the service mesh.
       status:
-        $ref: "#/definitions/MeshStatus"
+        $ref: '#/definitions/MeshStatus'
         description: The status of the service mesh.
     description: An object representing a service mesh returned by a describe operation.
   DeleteVirtualRouterInput:
     type: object
     properties: {}
-    description: ""
+    description: ''
   VirtualRouterList:
     type: array
     items:
-      $ref: "#/definitions/VirtualRouterRef"
+      $ref: '#/definitions/VirtualRouterRef'
   DescribeRouteInput:
     type: object
     properties: {}
-    description: ""
+    description: ''
   RouteData:
     type: object
     required:
@@ -2793,22 +2710,22 @@ definitions:
       - virtualRouterName
     properties:
       meshName:
-        $ref: "#/definitions/ResourceName"
+        $ref: '#/definitions/ResourceName'
         description: The name of the service mesh that the route resides in.
       metadata:
-        $ref: "#/definitions/ResourceMetadata"
+        $ref: '#/definitions/ResourceMetadata'
         description: The associated metadata for the route.
       routeName:
-        $ref: "#/definitions/ResourceName"
+        $ref: '#/definitions/ResourceName'
         description: The name of the route.
       spec:
-        $ref: "#/definitions/RouteSpec"
+        $ref: '#/definitions/RouteSpec'
         description: The specifications of the route.
       status:
-        $ref: "#/definitions/RouteStatus"
+        $ref: '#/definitions/RouteStatus'
         description: The status of the route.
       virtualRouterName:
-        $ref: "#/definitions/ResourceName"
+        $ref: '#/definitions/ResourceName'
         description: The virtual router that the route is associated with.
     description: An object representing a route returned by a describe operation.
   Timestamp:
@@ -2824,23 +2741,21 @@ definitions:
       - version
     properties:
       arn:
-        $ref: "#/definitions/Arn"
+        $ref: '#/definitions/Arn'
         description: The full Amazon Resource Name (ARN) for the resource.
       createdAt:
-        $ref: "#/definitions/Timestamp"
+        $ref: '#/definitions/Timestamp'
         description: The Unix epoch timestamp in seconds for when the resource was created.
       lastUpdatedAt:
-        $ref: "#/definitions/Timestamp"
-        description: The Unix epoch timestamp in seconds for when the resource was last
-          updated.
+        $ref: '#/definitions/Timestamp'
+        description: The Unix epoch timestamp in seconds for when the resource was last updated.
       uid:
-        $ref: "#/definitions/String"
+        $ref: '#/definitions/String'
         description: The unique identifier for the resource.
       version:
-        $ref: "#/definitions/Long"
-        description: >-
-          The version of the resource. Resources are created at version 1, and
-          this version is
+        $ref: '#/definitions/Long'
+        description: |-
+          The version of the resource. Resources are created at version 1, and this version is
                    incremented each time that they're updated.
     description: An object representing metadata for a resource.
   Listener:
@@ -2849,21 +2764,20 @@ definitions:
       - portMapping
     properties:
       healthCheck:
-        $ref: "#/definitions/HealthCheckPolicy"
+        $ref: '#/definitions/HealthCheckPolicy'
         description: The health check information for the listener.
       portMapping:
-        $ref: "#/definitions/PortMapping"
+        $ref: '#/definitions/PortMapping'
         description: The port mapping information for the listener.
     description: An object representing a listener for a virtual node.
   Backend:
     type: object
     properties:
       virtualService:
-        $ref: "#/definitions/VirtualServiceBackend"
-        description: "Specifies a virtual service to use as a backend for a virtual node. "
-    description: >-
-      An object representing the backends that a virtual node is expected to
-      send outbound
+        $ref: '#/definitions/VirtualServiceBackend'
+        description: 'Specifies a virtual service to use as a backend for a virtual node. '
+    description: |-
+      An object representing the backends that a virtual node is expected to send outbound
                traffic to. 
   PortProtocol:
     type: string
@@ -2873,16 +2787,15 @@ definitions:
   RouteList:
     type: array
     items:
-      $ref: "#/definitions/RouteRef"
+      $ref: '#/definitions/RouteRef'
   VirtualServiceBackend:
     type: object
     required:
       - virtualServiceName
     properties:
       virtualServiceName:
-        $ref: "#/definitions/ServiceName"
-        description: The name of the virtual service that is acting as a virtual node
-          backend.
+        $ref: '#/definitions/ServiceName'
+        description: The name of the virtual service that is acting as a virtual node backend.
     description: An object representing a virtual service backend for a virtual node.
   VirtualNodeStatusCode:
     type: string
@@ -2896,19 +2809,16 @@ definitions:
       - spec
     properties:
       clientToken:
-        $ref: "#/definitions/String"
-        description: >-
-          Unique, case-sensitive identifier that you provide to ensure the
-          idempotency of the
-
+        $ref: '#/definitions/String'
+        description: |-
+          Unique, case-sensitive identifier that you provide to ensure the idempotency of the
           request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
       spec:
-        $ref: "#/definitions/VirtualServiceSpec"
-        description: >-
-          The new virtual service specification to apply. This overwrites the
-          existing
+        $ref: '#/definitions/VirtualServiceSpec'
+        description: |-
+          The new virtual service specification to apply. This overwrites the existing
                    data.
-    description: ""
+    description: ''
   HealthCheckThreshold:
     type: integer
     minimum: 2
@@ -2924,7 +2834,7 @@ definitions:
   WeightedTargets:
     type: array
     items:
-      $ref: "#/definitions/WeightedTarget"
+      $ref: '#/definitions/WeightedTarget'
     minItems: 1
     maxItems: 10
   HttpRouteAction:
@@ -2933,14 +2843,12 @@ definitions:
       - weightedTargets
     properties:
       weightedTargets:
-        $ref: "#/definitions/WeightedTargets"
-        description: >-
-          The targets that traffic is routed to when a request matches the
-          route. You can specify
+        $ref: '#/definitions/WeightedTargets'
+        description: |-
+          The targets that traffic is routed to when a request matches the route. You can specify
                    one or more targets and their relative weights to distribute traffic with.
-    description: >-
-      An object representing the traffic distribution requirements for matched
-      HTTP
+    description: |-
+      An object representing the traffic distribution requirements for matched HTTP
                requests.
   ListRoutesLimit:
     type: integer
@@ -2949,7 +2857,7 @@ definitions:
   ListRoutesInput:
     type: object
     properties: {}
-    description: ""
+    description: ''
   HealthCheckIntervalMillis:
     type: integer
     minimum: 5000
@@ -2972,43 +2880,37 @@ definitions:
       - unhealthyThreshold
     properties:
       healthyThreshold:
-        $ref: "#/definitions/HealthCheckThreshold"
-        description: >-
-          The number of consecutive successful health checks that must occur
-          before declaring
+        $ref: '#/definitions/HealthCheckThreshold'
+        description: |-
+          The number of consecutive successful health checks that must occur before declaring
                    listener healthy.
       intervalMillis:
-        $ref: "#/definitions/HealthCheckIntervalMillis"
+        $ref: '#/definitions/HealthCheckIntervalMillis'
         description: The time period in milliseconds between each health check execution.
       path:
-        $ref: "#/definitions/String"
-        description: >-
-          The destination path for the health check request. This is required
-          only if the
+        $ref: '#/definitions/String'
+        description: |-
+          The destination path for the health check request. This is required only if the
                    specified protocol is HTTP. If the protocol is TCP, this parameter is ignored.
       port:
-        $ref: "#/definitions/PortNumber"
-        description: >-
-          The destination port for the health check request. This port must
-          match the port defined
+        $ref: '#/definitions/PortNumber'
+        description: |-
+          The destination port for the health check request. This port must match the port defined
                    in the <a>PortMapping</a> for the listener.
       protocol:
-        $ref: "#/definitions/PortProtocol"
+        $ref: '#/definitions/PortProtocol'
         description: The protocol for the health check request.
       timeoutMillis:
-        $ref: "#/definitions/HealthCheckTimeoutMillis"
-        description: >-
-          The amount of time to wait when receiving a response from the health
-          check, in
+        $ref: '#/definitions/HealthCheckTimeoutMillis'
+        description: |-
+          The amount of time to wait when receiving a response from the health check, in
                    milliseconds.
       unhealthyThreshold:
-        $ref: "#/definitions/HealthCheckThreshold"
-        description: >-
-          The number of consecutive failed health checks that must occur before
-          declaring a
+        $ref: '#/definitions/HealthCheckThreshold'
+        description: |-
+          The number of consecutive failed health checks that must occur before declaring a
                    virtual node unhealthy. 
-    description: An object representing the health check policy for a virtual node's
-      listener.
+    description: An object representing the health check policy for a virtual node's listener.
   VirtualServiceRef:
     type: object
     required:
@@ -3017,13 +2919,13 @@ definitions:
       - virtualServiceName
     properties:
       arn:
-        $ref: "#/definitions/Arn"
+        $ref: '#/definitions/Arn'
         description: The full Amazon Resource Name (ARN) for the virtual service.
       meshName:
-        $ref: "#/definitions/ResourceName"
+        $ref: '#/definitions/ResourceName'
         description: The name of the service mesh that the virtual service resides in.
       virtualServiceName:
-        $ref: "#/definitions/ServiceName"
+        $ref: '#/definitions/ServiceName'
         description: The name of the virtual service.
     description: An object representing a virtual service returned by a list operation.
   EgressFilterType:
@@ -3034,14 +2936,14 @@ definitions:
   VirtualServiceList:
     type: array
     items:
-      $ref: "#/definitions/VirtualServiceRef"
+      $ref: '#/definitions/VirtualServiceRef'
   VirtualNodeStatus:
     type: object
     required:
       - status
     properties:
       status:
-        $ref: "#/definitions/VirtualNodeStatusCode"
+        $ref: '#/definitions/VirtualNodeStatusCode'
         description: The current status of the virtual node.
     description: An object representing the current status of the virtual node.
   VirtualRouterRef:
@@ -3052,13 +2954,13 @@ definitions:
       - virtualRouterName
     properties:
       arn:
-        $ref: "#/definitions/Arn"
+        $ref: '#/definitions/Arn'
         description: The full Amazon Resource Name (ARN) for the virtual router.
       meshName:
-        $ref: "#/definitions/ResourceName"
+        $ref: '#/definitions/ResourceName'
         description: The name of the service mesh that the virtual router resides in.
       virtualRouterName:
-        $ref: "#/definitions/ResourceName"
+        $ref: '#/definitions/ResourceName'
         description: The name of the virtual router.
     description: An object representing a virtual router returned by a list operation.
   VirtualServiceStatus:
@@ -3067,7 +2969,7 @@ definitions:
       - status
     properties:
       status:
-        $ref: "#/definitions/VirtualServiceStatusCode"
+        $ref: '#/definitions/VirtualServiceStatusCode'
         description: The current status of the virtual service.
     description: An object representing the status of a virtual service.
   VirtualServiceData:
@@ -3080,18 +2982,18 @@ definitions:
       - virtualServiceName
     properties:
       meshName:
-        $ref: "#/definitions/ResourceName"
+        $ref: '#/definitions/ResourceName'
         description: The name of the service mesh that the virtual service resides in.
       metadata:
-        $ref: "#/definitions/ResourceMetadata"
+        $ref: '#/definitions/ResourceMetadata'
       spec:
-        $ref: "#/definitions/VirtualServiceSpec"
+        $ref: '#/definitions/VirtualServiceSpec'
         description: The specifications of the virtual service.
       status:
-        $ref: "#/definitions/VirtualServiceStatus"
+        $ref: '#/definitions/VirtualServiceStatus'
         description: The current status of the virtual service.
       virtualServiceName:
-        $ref: "#/definitions/ServiceName"
+        $ref: '#/definitions/ServiceName'
         description: The name of the virtual service.
     description: An object representing a virtual service returned by a describe operation.
   FilePath:
@@ -3106,20 +3008,20 @@ definitions:
       - virtualNodeName
     properties:
       arn:
-        $ref: "#/definitions/Arn"
+        $ref: '#/definitions/Arn'
         description: The full Amazon Resource Name (ARN) for the virtual node.
       meshName:
-        $ref: "#/definitions/ResourceName"
+        $ref: '#/definitions/ResourceName'
         description: The name of the service mesh that the virtual node resides in.
       virtualNodeName:
-        $ref: "#/definitions/ResourceName"
+        $ref: '#/definitions/ResourceName'
         description: The name of the virtual node.
     description: An object representing a virtual node returned by a list operation.
   MeshSpec:
     type: object
     properties:
       egressFilter:
-        $ref: "#/definitions/EgressFilter"
+        $ref: '#/definitions/EgressFilter'
         description: The egress filter rules for the service mesh.
     description: An object representing the specification of a service mesh.
   CreateMeshInput:
@@ -3128,27 +3030,24 @@ definitions:
       - meshName
     properties:
       clientToken:
-        $ref: "#/definitions/String"
-        description: >-
-          Unique, case-sensitive identifier that you provide to ensure the
-          idempotency of the
-
+        $ref: '#/definitions/String'
+        description: |-
+          Unique, case-sensitive identifier that you provide to ensure the idempotency of the
           request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
       meshName:
-        $ref: "#/definitions/ResourceName"
+        $ref: '#/definitions/ResourceName'
         description: The name to use for the service mesh.
       spec:
-        $ref: "#/definitions/MeshSpec"
+        $ref: '#/definitions/MeshSpec'
         description: The service mesh specification to apply.
       tags:
-        $ref: "#/definitions/TagList"
-        description: >-
-          Optional metadata that you can apply to the service mesh to assist
-          with categorization and organization.
+        $ref: '#/definitions/TagList'
+        description: |-
+          Optional metadata that you can apply to the service mesh to assist with categorization and organization.
                    Each tag consists of a key and an optional value, both of which you define.
                    Tag keys can have a maximum character length of 128 characters, and tag values can have
                       a maximum length of 256 characters.
-    description: ""
+    description: ''
   Hostname:
     type: string
   DnsServiceDiscovery:
@@ -3157,16 +3056,15 @@ definitions:
       - hostname
     properties:
       hostname:
-        $ref: "#/definitions/Hostname"
-        description: "Specifies the DNS service discovery hostname for the virtual node. "
-    description: >-
-      An object representing the DNS service discovery information for your
-      virtual
+        $ref: '#/definitions/Hostname'
+        description: 'Specifies the DNS service discovery hostname for the virtual node. '
+    description: |-
+      An object representing the DNS service discovery information for your virtual
                node.
   DescribeVirtualServiceInput:
     type: object
     properties: {}
-    description: ""
+    description: ''
   ListVirtualServicesLimit:
     type: integer
     minimum: 1
@@ -3174,7 +3072,7 @@ definitions:
   DeleteRouteInput:
     type: object
     properties: {}
-    description: ""
+    description: ''
   ListVirtualRoutersLimit:
     type: integer
     minimum: 1
@@ -3186,57 +3084,53 @@ definitions:
   ListMeshesInput:
     type: object
     properties: {}
-    description: ""
+    description: ''
   TcpRouteAction:
     type: object
     required:
       - weightedTargets
     properties:
       weightedTargets:
-        $ref: "#/definitions/WeightedTargets"
-        description: >-
-          The targets that traffic is routed to when a request matches the
-          route. You can specify
+        $ref: '#/definitions/WeightedTargets'
+        description: |-
+          The targets that traffic is routed to when a request matches the route. You can specify
                    one or more targets and their relative weights to distribute traffic with.
-    description: >-
-      An object representing the traffic distribution requirements for matched
-      TCP
+    description: |-
+      An object representing the traffic distribution requirements for matched TCP
                requests.
   VirtualNodeList:
     type: array
     items:
-      $ref: "#/definitions/VirtualNodeRef"
+      $ref: '#/definitions/VirtualNodeRef'
   ListVirtualRoutersInput:
     type: object
     properties: {}
-    description: ""
+    description: ''
   VirtualRouterStatus:
     type: object
     required:
       - status
     properties:
       status:
-        $ref: "#/definitions/VirtualRouterStatusCode"
+        $ref: '#/definitions/VirtualRouterStatusCode'
         description: The current status of the virtual router.
-    description: "An object representing the status of a virtual router. "
+    description: 'An object representing the status of a virtual router. '
   UpdateMeshInput:
     type: object
     properties:
       clientToken:
-        $ref: "#/definitions/String"
-        description: >-
-          Unique, case-sensitive identifier that you provide to ensure the
-          idempotency of the
-
+        $ref: '#/definitions/String'
+        description: |-
+          Unique, case-sensitive identifier that you provide to ensure the idempotency of the
           request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
       spec:
-        $ref: "#/definitions/MeshSpec"
+        $ref: '#/definitions/MeshSpec'
         description: The service mesh specification to apply.
-    description: ""
+    description: ''
   ListVirtualServicesInput:
     type: object
     properties: {}
-    description: ""
+    description: ''
   CreateVirtualRouterInput:
     type: object
     required:
@@ -3244,37 +3138,33 @@ definitions:
       - virtualRouterName
     properties:
       clientToken:
-        $ref: "#/definitions/String"
-        description: >-
-          Unique, case-sensitive identifier that you provide to ensure the
-          idempotency of the
-
+        $ref: '#/definitions/String'
+        description: |-
+          Unique, case-sensitive identifier that you provide to ensure the idempotency of the
           request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
       spec:
-        $ref: "#/definitions/VirtualRouterSpec"
+        $ref: '#/definitions/VirtualRouterSpec'
         description: The virtual router specification to apply.
       tags:
-        $ref: "#/definitions/TagList"
-        description: >-
-          Optional metadata that you can apply to the virtual router to assist
-          with categorization and organization.
+        $ref: '#/definitions/TagList'
+        description: |-
+          Optional metadata that you can apply to the virtual router to assist with categorization and organization.
                    Each tag consists of a key and an optional value, both of which you define.
                    Tag keys can have a maximum character length of 128 characters, and tag values can have
                       a maximum length of 256 characters.
       virtualRouterName:
-        $ref: "#/definitions/ResourceName"
+        $ref: '#/definitions/ResourceName'
         description: The name to use for the virtual router.
-    description: ""
+    description: ''
   FileAccessLog:
     type: object
     required:
       - path
     properties:
       path:
-        $ref: "#/definitions/FilePath"
-        description: >-
-          <p>The file path to write access logs to. You can use
-          <code>/dev/stdout</code> to send
+        $ref: '#/definitions/FilePath'
+        description: |-
+          <p>The file path to write access logs to. You can use <code>/dev/stdout</code> to send
                    access logs to standard out and configure your Envoy container to use a log driver, such as
                       <code>awslogs</code>, to export the access logs to a log storage service such as Amazon CloudWatch
                    Logs. You can also specify a path in the Envoy container's file system to write the files
@@ -3291,7 +3181,7 @@ definitions:
   ListVirtualNodesInput:
     type: object
     properties: {}
-    description: ""
+    description: ''
   VirtualServiceStatusCode:
     type: string
     enum:
@@ -3301,25 +3191,23 @@ definitions:
   MeshList:
     type: array
     items:
-      $ref: "#/definitions/MeshRef"
+      $ref: '#/definitions/MeshRef'
   HttpRouteMatch:
     type: object
     required:
       - prefix
     properties:
       prefix:
-        $ref: "#/definitions/String"
-        description: >-
-          Specifies the path to match requests with. This parameter must always
-          start with
+        $ref: '#/definitions/String'
+        description: |-
+          Specifies the path to match requests with. This parameter must always start with
                       <code>/</code>, which by itself matches all requests to the virtual service name. You
                    can also match for path-based routing of requests. For example, if your virtual service
                    name is <code>my-service.local</code> and you want the route to match requests to
                       <code>my-service.local/metrics</code>, your prefix should be
                    <code>/metrics</code>.
-    description: >-
-      An object representing the requirements for a route to match HTTP requests
-      for a virtual
+    description: |-
+      An object representing the requirements for a route to match HTTP requests for a virtual
                router.
   MeshRef:
     type: object
@@ -3328,10 +3216,10 @@ definitions:
       - meshName
     properties:
       arn:
-        $ref: "#/definitions/Arn"
+        $ref: '#/definitions/Arn'
         description: The full Amazon Resource Name (ARN) of the service mesh.
       meshName:
-        $ref: "#/definitions/ResourceName"
+        $ref: '#/definitions/ResourceName'
         description: The name of the service mesh.
     description: An object representing a service mesh returned by a list operation.
   MeshStatusCode:
@@ -3344,7 +3232,7 @@ definitions:
     type: object
     properties:
       status:
-        $ref: "#/definitions/MeshStatusCode"
+        $ref: '#/definitions/MeshStatusCode'
         description: The current mesh status.
     description: An object representing the status of a service mesh.
   WeightedTarget:
@@ -3354,21 +3242,20 @@ definitions:
       - weight
     properties:
       virtualNode:
-        $ref: "#/definitions/ResourceName"
+        $ref: '#/definitions/ResourceName'
         description: The virtual node to associate with the weighted target.
       weight:
-        $ref: "#/definitions/PercentInt"
+        $ref: '#/definitions/PercentInt'
         description: The relative weight of the weighted target.
-    description: >-
-      An object representing a target and its relative weight. Traffic is
-      distributed across
+    description: |-
+      An object representing a target and its relative weight. Traffic is distributed across
                targets according to their relative weight. For example, a weighted target with a relative
                weight of 50 receives five times as much traffic as one with a relative weight of
                10.
   DescribeVirtualNodeInput:
     type: object
     properties: {}
-    description: ""
+    description: ''
   RouteStatusCode:
     type: string
     enum:
@@ -3381,7 +3268,7 @@ definitions:
       - status
     properties:
       status:
-        $ref: "#/definitions/RouteStatusCode"
+        $ref: '#/definitions/RouteStatusCode'
         description: The current status for the route.
     description: An object representing the current status of a route.
   RouteRef:
@@ -3393,30 +3280,30 @@ definitions:
       - virtualRouterName
     properties:
       arn:
-        $ref: "#/definitions/Arn"
+        $ref: '#/definitions/Arn'
         description: The full Amazon Resource Name (ARN) for the route.
       meshName:
-        $ref: "#/definitions/ResourceName"
+        $ref: '#/definitions/ResourceName'
         description: The name of the service mesh that the route resides in.
       routeName:
-        $ref: "#/definitions/ResourceName"
+        $ref: '#/definitions/ResourceName'
         description: The name of the route.
       virtualRouterName:
-        $ref: "#/definitions/ResourceName"
+        $ref: '#/definitions/ResourceName'
         description: The virtual router that the route is associated with.
     description: An object representing a route returned by a list operation.
   DeleteVirtualNodeInput:
     type: object
     properties: {}
-    description: ""
+    description: ''
   RouteSpec:
     type: object
     properties:
       httpRoute:
-        $ref: "#/definitions/HttpRoute"
+        $ref: '#/definitions/HttpRoute'
         description: The HTTP routing information for the route.
       tcpRoute:
-        $ref: "#/definitions/TcpRoute"
+        $ref: '#/definitions/TcpRoute'
         description: The TCP routing information for the route.
     description: An object representing the specification of a route.
   VirtualNodeServiceProvider:
@@ -3425,25 +3312,25 @@ definitions:
       - virtualNodeName
     properties:
       virtualNodeName:
-        $ref: "#/definitions/ResourceName"
+        $ref: '#/definitions/ResourceName'
         description: The name of the virtual node that is acting as a service provider.
     description: An object representing a virtual node service provider.
   DescribeVirtualRouterInput:
     type: object
     properties: {}
-    description: ""
+    description: ''
   TagResourceInput:
     type: object
     required:
       - tags
     properties:
       tags:
-        $ref: "#/definitions/TagList"
-        description: >-
+        $ref: '#/definitions/TagList'
+        description: |-
           The tags to add to the resource. A tag is an array of key-value pairs.
                    Tag keys can have a maximum character length of 128 characters, and tag values can have
                       a maximum length of 256 characters.
-    description: ""
+    description: ''
   CreateRouteInput:
     type: object
     required:
@@ -3451,34 +3338,31 @@ definitions:
       - spec
     properties:
       clientToken:
-        $ref: "#/definitions/String"
-        description: >-
-          Unique, case-sensitive identifier that you provide to ensure the
-          idempotency of the
-
+        $ref: '#/definitions/String'
+        description: |-
+          Unique, case-sensitive identifier that you provide to ensure the idempotency of the
           request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
       routeName:
-        $ref: "#/definitions/ResourceName"
+        $ref: '#/definitions/ResourceName'
         description: The name to use for the route.
       spec:
-        $ref: "#/definitions/RouteSpec"
+        $ref: '#/definitions/RouteSpec'
         description: The route specification to apply.
       tags:
-        $ref: "#/definitions/TagList"
-        description: >-
-          Optional metadata that you can apply to the route to assist with
-          categorization and organization.
+        $ref: '#/definitions/TagList'
+        description: |-
+          Optional metadata that you can apply to the route to assist with categorization and organization.
                    Each tag consists of a key and an optional value, both of which you define.
                    Tag keys can have a maximum character length of 128 characters, and tag values can have
                       a maximum length of 256 characters.
-    description: ""
+    description: ''
   VirtualRouterServiceProvider:
     type: object
     required:
       - virtualRouterName
     properties:
       virtualRouterName:
-        $ref: "#/definitions/ResourceName"
+        $ref: '#/definitions/ResourceName'
         description: The name of the virtual router that is acting as a service provider.
     description: An object representing a virtual node service provider.
   UpdateRouteInput:
@@ -3487,17 +3371,14 @@ definitions:
       - spec
     properties:
       clientToken:
-        $ref: "#/definitions/String"
-        description: >-
-          Unique, case-sensitive identifier that you provide to ensure the
-          idempotency of the
-
+        $ref: '#/definitions/String'
+        description: |-
+          Unique, case-sensitive identifier that you provide to ensure the idempotency of the
           request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
       spec:
-        $ref: "#/definitions/RouteSpec"
-        description: The new route specification to apply. This overwrites the existing
-          data.
-    description: ""
+        $ref: '#/definitions/RouteSpec'
+        description: The new route specification to apply. This overwrites the existing data.
+    description: ''
   CreateVirtualNodeInput:
     type: object
     required:
@@ -3505,41 +3386,38 @@ definitions:
       - virtualNodeName
     properties:
       clientToken:
-        $ref: "#/definitions/String"
-        description: >-
-          Unique, case-sensitive identifier that you provide to ensure the
-          idempotency of the
-
+        $ref: '#/definitions/String'
+        description: |-
+          Unique, case-sensitive identifier that you provide to ensure the idempotency of the
           request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
       spec:
-        $ref: "#/definitions/VirtualNodeSpec"
+        $ref: '#/definitions/VirtualNodeSpec'
         description: The virtual node specification to apply.
       tags:
-        $ref: "#/definitions/TagList"
-        description: >-
-          Optional metadata that you can apply to the virtual node to assist
-          with categorization and organization.
+        $ref: '#/definitions/TagList'
+        description: |-
+          Optional metadata that you can apply to the virtual node to assist with categorization and organization.
                    Each tag consists of a key and an optional value, both of which you define.
                    Tag keys can have a maximum character length of 128 characters, and tag values can have
                       a maximum length of 256 characters.
       virtualNodeName:
-        $ref: "#/definitions/ResourceName"
+        $ref: '#/definitions/ResourceName'
         description: The name to use for the virtual node.
-    description: ""
+    description: ''
   DescribeMeshInput:
     type: object
     properties: {}
-    description: ""
+    description: ''
   DeleteVirtualServiceInput:
     type: object
     properties: {}
-    description: ""
+    description: ''
   UntagResourceInput:
     type: object
     required:
       - tagKeys
     properties:
       tagKeys:
-        $ref: "#/definitions/TagKeyList"
+        $ref: '#/definitions/TagKeyList'
         description: The keys of the tags to be removed.
-    description: ""
+    description: ''

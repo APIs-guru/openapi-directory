@@ -1,47 +1,38 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  version: 2018-11-05
+  version: '2018-11-05'
   x-release: v4
   title: AWS Transfer for SFTP
-  description: "AWS Transfer for SFTP is a fully managed service that enables the transfer
-    of files directly into and out of Amazon S3 using the Secure File Transfer
-    Protocol (SFTP)—also known as Secure Shell (SSH) File Transfer Protocol. AWS
-    helps you seamlessly migrate your file transfer workflows to AWS Transfer
-    for SFTP—by integrating with existing authentication systems, and providing
-    DNS routing with Amazon Route 53—so nothing changes for your customers and
-    partners, or their applications. With your data in S3, you can use it with
-    AWS services for processing, analytics, machine learning, and archiving.
-    Getting started with AWS Transfer for SFTP (AWS SFTP) is easy; there is no
-    infrastructure to buy and setup. "
+  description: 'AWS Transfer for SFTP is a fully managed service that enables the transfer of files directly into and out of Amazon S3 using the Secure File Transfer Protocol (SFTP)—also known as Secure Shell (SSH) File Transfer Protocol. AWS helps you seamlessly migrate your file transfer workflows to AWS Transfer for SFTP—by integrating with existing authentication systems, and providing DNS routing with Amazon Route 53—so nothing changes for your customers and partners, or their applications. With your data in S3, you can use it with AWS services for processing, analytics, machine learning, and archiving. Getting started with AWS Transfer for SFTP (AWS SFTP) is easy; there is no infrastructure to buy and setup. '
   x-logo:
-    url: https://twitter.com/awscloud/profile_image?size=original
-    backgroundColor: "#FFFFFF"
-  termsOfService: https://aws.amazon.com/service-terms/
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
     name: Mike Ralphson
     email: mike.ralphson@gmail.com
-    url: https://github.com/mermade/aws2openapi
+    url: 'https://github.com/mermade/aws2openapi'
     x-twitter: PermittedSoc
   license:
     name: Apache 2.0 License
-    url: http://www.apache.org/licenses/
+    url: 'http://www.apache.org/licenses/'
   x-providerName: amazonaws.com
   x-serviceName: transfer
   x-origin:
     - contentType: application/json
-      url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/transfer-2018-11-05.normal.json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/transfer-2018-11-05.normal.json'
       converter:
-        url: https://github.com/mermade/aws2openapi
+        url: 'https://github.com/mermade/aws2openapi'
         version: 1.0.0
       x-apisguru-direct: true
   x-apiClientRegistration:
-    url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
   x-preferred: true
 externalDocs:
   description: Amazon Web Services documentation
-  url: https://docs.aws.amazon.com/transfer/
+  url: 'https://docs.aws.amazon.com/transfer/'
 host: transfer.amazonaws.com
 basePath: /
 x-hasEquivalentPaths: true
@@ -98,39 +89,33 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /#X-Amz-Target=TransferService.CreateServer:
+  '/#X-Amz-Target=TransferService.CreateServer':
     post:
       operationId: CreateServer
-      description: <p>Instantiates an autoscaling virtual server based on Secure File
-        Transfer Protocol (SFTP) in AWS. The call returns the
-        <code>ServerId</code> property assigned by the service to the newly
-        created server. Reference this <code>ServerId</code> property when you
-        make updates to your server, or work with users.</p> <p>The response
-        returns the <code>ServerId</code> value for the newly created
-        server.</p>
+      description: '<p>Instantiates an autoscaling virtual server based on Secure File Transfer Protocol (SFTP) in AWS. The call returns the <code>ServerId</code> property assigned by the service to the newly created server. Reference this <code>ServerId</code> property when you make updates to your server, or work with users.</p> <p>The response returns the <code>ServerId</code> value for the newly created server.</p>'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/CreateServerResponse"
-        "480":
+            $ref: '#/definitions/CreateServerResponse'
+        '480':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "481":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '481':
           description: InternalServiceError
           schema:
-            $ref: "#/definitions/InternalServiceError"
-        "482":
+            $ref: '#/definitions/InternalServiceError'
+        '482':
           description: InvalidRequestException
           schema:
-            $ref: "#/definitions/InvalidRequestException"
+            $ref: '#/definitions/InvalidRequestException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/CreateServerRequest"
+            $ref: '#/definitions/CreateServerRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -138,55 +123,48 @@ paths:
           enum:
             - TransferService.CreateServer
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=TransferService.CreateUser:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=TransferService.CreateUser':
     post:
       operationId: CreateUser
-      description: <p>Adds a user and associate them with an existing Secure File Transfer
-        Protocol (SFTP) server. Using parameters for <code>CreateUser</code>,
-        you can specify the user name, set the home directory, store the user's
-        public key, and assign the user's AWS Identity and Access Management
-        (IAM) role. You can also optionally add a scope-down policy, and assign
-        metadata with tags that can be used to group and search for users.</p>
-        <p>The response returns the <code>UserName</code> and
-        <code>ServerId</code> values of the new user for that server.</p>
+      description: '<p>Adds a user and associate them with an existing Secure File Transfer Protocol (SFTP) server. Using parameters for <code>CreateUser</code>, you can specify the user name, set the home directory, store the user''s public key, and assign the user''s AWS Identity and Access Management (IAM) role. You can also optionally add a scope-down policy, and assign metadata with tags that can be used to group and search for users.</p> <p>The response returns the <code>UserName</code> and <code>ServerId</code> values of the new user for that server.</p>'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/CreateUserResponse"
-        "480":
+            $ref: '#/definitions/CreateUserResponse'
+        '480':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "481":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '481':
           description: InternalServiceError
           schema:
-            $ref: "#/definitions/InternalServiceError"
-        "482":
+            $ref: '#/definitions/InternalServiceError'
+        '482':
           description: InvalidRequestException
           schema:
-            $ref: "#/definitions/InvalidRequestException"
-        "483":
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
           description: ResourceExistsException
           schema:
-            $ref: "#/definitions/ResourceExistsException"
-        "484":
+            $ref: '#/definitions/ResourceExistsException'
+        '484':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/CreateUserRequest"
+            $ref: '#/definitions/CreateUserRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -194,46 +172,42 @@ paths:
           enum:
             - TransferService.CreateUser
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=TransferService.DeleteServer:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=TransferService.DeleteServer':
     post:
       operationId: DeleteServer
-      description: <p>Deletes the Secure File Transfer Protocol (SFTP) server that you
-        specify. If you used <code>SERVICE_MANAGED</code> as your
-        <code>IdentityProviderType</code>, you need to delete all users
-        associated with this server before deleting the server itself</p> <p>No
-        response returns from this call.</p>
+      description: '<p>Deletes the Secure File Transfer Protocol (SFTP) server that you specify. If you used <code>SERVICE_MANAGED</code> as your <code>IdentityProviderType</code>, you need to delete all users associated with this server before deleting the server itself</p> <p>No response returns from this call.</p>'
       responses:
-        "200":
+        '200':
           description: Success
-        "480":
+        '480':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "481":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '481':
           description: InternalServiceError
           schema:
-            $ref: "#/definitions/InternalServiceError"
-        "482":
+            $ref: '#/definitions/InternalServiceError'
+        '482':
           description: InvalidRequestException
           schema:
-            $ref: "#/definitions/InvalidRequestException"
-        "483":
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/DeleteServerRequest"
+            $ref: '#/definitions/DeleteServerRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -241,43 +215,42 @@ paths:
           enum:
             - TransferService.DeleteServer
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=TransferService.DeleteSshPublicKey:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=TransferService.DeleteSshPublicKey':
     post:
       operationId: DeleteSshPublicKey
-      description: <p>Deletes a user's Secure Shell (SSH) public key.</p> <p>No response is
-        returned from this call.</p>
+      description: <p>Deletes a user's Secure Shell (SSH) public key.</p> <p>No response is returned from this call.</p>
       responses:
-        "200":
+        '200':
           description: Success
-        "480":
+        '480':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "481":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '481':
           description: InternalServiceError
           schema:
-            $ref: "#/definitions/InternalServiceError"
-        "482":
+            $ref: '#/definitions/InternalServiceError'
+        '482':
           description: InvalidRequestException
           schema:
-            $ref: "#/definitions/InvalidRequestException"
-        "483":
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/DeleteSshPublicKeyRequest"
+            $ref: '#/definitions/DeleteSshPublicKeyRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -285,44 +258,42 @@ paths:
           enum:
             - TransferService.DeleteSshPublicKey
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=TransferService.DeleteUser:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=TransferService.DeleteUser':
     post:
       operationId: DeleteUser
-      description: <p>Deletes the user belonging to the server you specify.</p> <p>No
-        response returns from this call.</p> <note> <p>When you delete a user
-        from a server, the user's information is lost.</p> </note>
+      description: '<p>Deletes the user belonging to the server you specify.</p> <p>No response returns from this call.</p> <note> <p>When you delete a user from a server, the user''s information is lost.</p> </note>'
       responses:
-        "200":
+        '200':
           description: Success
-        "480":
+        '480':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "481":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '481':
           description: InternalServiceError
           schema:
-            $ref: "#/definitions/InternalServiceError"
-        "482":
+            $ref: '#/definitions/InternalServiceError'
+        '482':
           description: InvalidRequestException
           schema:
-            $ref: "#/definitions/InvalidRequestException"
-        "483":
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/DeleteUserRequest"
+            $ref: '#/definitions/DeleteUserRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -330,46 +301,44 @@ paths:
           enum:
             - TransferService.DeleteUser
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=TransferService.DescribeServer:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=TransferService.DescribeServer':
     post:
       operationId: DescribeServer
-      description: <p>Describes the server that you specify by passing the
-        <code>ServerId</code> parameter.</p> <p>The response contains a
-        description of the server's properties.</p>
+      description: <p>Describes the server that you specify by passing the <code>ServerId</code> parameter.</p> <p>The response contains a description of the server's properties.</p>
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DescribeServerResponse"
-        "480":
+            $ref: '#/definitions/DescribeServerResponse'
+        '480':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "481":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '481':
           description: InternalServiceError
           schema:
-            $ref: "#/definitions/InternalServiceError"
-        "482":
+            $ref: '#/definitions/InternalServiceError'
+        '482':
           description: InvalidRequestException
           schema:
-            $ref: "#/definitions/InvalidRequestException"
-        "483":
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/DescribeServerRequest"
+            $ref: '#/definitions/DescribeServerRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -377,47 +346,44 @@ paths:
           enum:
             - TransferService.DescribeServer
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=TransferService.DescribeUser:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=TransferService.DescribeUser':
     post:
       operationId: DescribeUser
-      description: <p>Describes the user assigned to a specific server, as identified by
-        its <code>ServerId</code> property.</p> <p>The response from this call
-        returns the properties of the user associated with the
-        <code>ServerId</code> value that was specified.</p>
+      description: '<p>Describes the user assigned to a specific server, as identified by its <code>ServerId</code> property.</p> <p>The response from this call returns the properties of the user associated with the <code>ServerId</code> value that was specified.</p>'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DescribeUserResponse"
-        "480":
+            $ref: '#/definitions/DescribeUserResponse'
+        '480':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "481":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '481':
           description: InternalServiceError
           schema:
-            $ref: "#/definitions/InternalServiceError"
-        "482":
+            $ref: '#/definitions/InternalServiceError'
+        '482':
           description: InvalidRequestException
           schema:
-            $ref: "#/definitions/InvalidRequestException"
-        "483":
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/DescribeUserRequest"
+            $ref: '#/definitions/DescribeUserRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -425,52 +391,48 @@ paths:
           enum:
             - TransferService.DescribeUser
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=TransferService.ImportSshPublicKey:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=TransferService.ImportSshPublicKey':
     post:
       operationId: ImportSshPublicKey
-      description: <p>Adds a Secure Shell (SSH) public key to a user account identified by
-        a <code>UserName</code> value assigned to a specific server, identified
-        by <code>ServerId</code>.</p> <p>The response returns the
-        <code>UserName</code> value, the <code>ServerId</code> value, and the
-        name of the <code>SshPublicKeyId</code>.</p>
+      description: '<p>Adds a Secure Shell (SSH) public key to a user account identified by a <code>UserName</code> value assigned to a specific server, identified by <code>ServerId</code>.</p> <p>The response returns the <code>UserName</code> value, the <code>ServerId</code> value, and the name of the <code>SshPublicKeyId</code>.</p>'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/ImportSshPublicKeyResponse"
-        "480":
+            $ref: '#/definitions/ImportSshPublicKeyResponse'
+        '480':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "481":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '481':
           description: InternalServiceError
           schema:
-            $ref: "#/definitions/InternalServiceError"
-        "482":
+            $ref: '#/definitions/InternalServiceError'
+        '482':
           description: InvalidRequestException
           schema:
-            $ref: "#/definitions/InvalidRequestException"
-        "483":
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
           description: ResourceExistsException
           schema:
-            $ref: "#/definitions/ResourceExistsException"
-        "484":
+            $ref: '#/definitions/ResourceExistsException'
+        '484':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/ImportSshPublicKeyRequest"
+            $ref: '#/definitions/ImportSshPublicKeyRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -478,45 +440,44 @@ paths:
           enum:
             - TransferService.ImportSshPublicKey
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=TransferService.ListServers:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=TransferService.ListServers':
     post:
       operationId: ListServers
-      description: Lists the Secure File Transfer Protocol (SFTP) servers that are
-        associated with your AWS account.
+      description: Lists the Secure File Transfer Protocol (SFTP) servers that are associated with your AWS account.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/ListServersResponse"
-        "480":
+            $ref: '#/definitions/ListServersResponse'
+        '480':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "481":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '481':
           description: InternalServiceError
           schema:
-            $ref: "#/definitions/InternalServiceError"
-        "482":
+            $ref: '#/definitions/InternalServiceError'
+        '482':
           description: InvalidNextTokenException
           schema:
-            $ref: "#/definitions/InvalidNextTokenException"
-        "483":
+            $ref: '#/definitions/InvalidNextTokenException'
+        '483':
           description: InvalidRequestException
           schema:
-            $ref: "#/definitions/InvalidRequestException"
+            $ref: '#/definitions/InvalidRequestException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/ListServersRequest"
+            $ref: '#/definitions/ListServersRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -524,45 +485,44 @@ paths:
           enum:
             - TransferService.ListServers
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=TransferService.ListTagsForResource:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=TransferService.ListTagsForResource':
     post:
       operationId: ListTagsForResource
-      description: Lists all of the tags associated with the Amazon Resource Number (ARN)
-        you specify. The resource can be a user, server, or role.
+      description: 'Lists all of the tags associated with the Amazon Resource Number (ARN) you specify. The resource can be a user, server, or role.'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/ListTagsForResourceResponse"
-        "480":
+            $ref: '#/definitions/ListTagsForResourceResponse'
+        '480':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "481":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '481':
           description: InternalServiceError
           schema:
-            $ref: "#/definitions/InternalServiceError"
-        "482":
+            $ref: '#/definitions/InternalServiceError'
+        '482':
           description: InvalidNextTokenException
           schema:
-            $ref: "#/definitions/InvalidNextTokenException"
-        "483":
+            $ref: '#/definitions/InvalidNextTokenException'
+        '483':
           description: InvalidRequestException
           schema:
-            $ref: "#/definitions/InvalidRequestException"
+            $ref: '#/definitions/InvalidRequestException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/ListTagsForResourceRequest"
+            $ref: '#/definitions/ListTagsForResourceRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -570,49 +530,48 @@ paths:
           enum:
             - TransferService.ListTagsForResource
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=TransferService.ListUsers:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=TransferService.ListUsers':
     post:
       operationId: ListUsers
-      description: Lists the users for the server that you specify by passing the
-        <code>ServerId</code> parameter.
+      description: Lists the users for the server that you specify by passing the <code>ServerId</code> parameter.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/ListUsersResponse"
-        "480":
+            $ref: '#/definitions/ListUsersResponse'
+        '480':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "481":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '481':
           description: InternalServiceError
           schema:
-            $ref: "#/definitions/InternalServiceError"
-        "482":
+            $ref: '#/definitions/InternalServiceError'
+        '482':
           description: InvalidNextTokenException
           schema:
-            $ref: "#/definitions/InvalidNextTokenException"
-        "483":
+            $ref: '#/definitions/InvalidNextTokenException'
+        '483':
           description: InvalidRequestException
           schema:
-            $ref: "#/definitions/InvalidRequestException"
-        "484":
+            $ref: '#/definitions/InvalidRequestException'
+        '484':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/ListUsersRequest"
+            $ref: '#/definitions/ListUsersRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -620,49 +579,42 @@ paths:
           enum:
             - TransferService.ListUsers
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=TransferService.StartServer:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=TransferService.StartServer':
     post:
       operationId: StartServer
-      description: <p>Changes the state of a Secure File Transfer Protocol (SFTP) server
-        from <code>OFFLINE</code> to <code>ONLINE</code>. It has no impact on an
-        SFTP server that is already <code>ONLINE</code>. An <code>ONLINE</code>
-        server can accept and process file transfer jobs.</p> <p>The state of
-        <code>STARTING</code> indicates that the server is in an intermediate
-        state, either not fully able to respond, or not fully online. The values
-        of <code>START_FAILED</code> can indicate an error condition. </p> <p>No
-        response is returned from this call.</p>
+      description: '<p>Changes the state of a Secure File Transfer Protocol (SFTP) server from <code>OFFLINE</code> to <code>ONLINE</code>. It has no impact on an SFTP server that is already <code>ONLINE</code>. An <code>ONLINE</code> server can accept and process file transfer jobs.</p> <p>The state of <code>STARTING</code> indicates that the server is in an intermediate state, either not fully able to respond, or not fully online. The values of <code>START_FAILED</code> can indicate an error condition. </p> <p>No response is returned from this call.</p>'
       responses:
-        "200":
+        '200':
           description: Success
-        "480":
+        '480':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "481":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '481':
           description: InternalServiceError
           schema:
-            $ref: "#/definitions/InternalServiceError"
-        "482":
+            $ref: '#/definitions/InternalServiceError'
+        '482':
           description: InvalidRequestException
           schema:
-            $ref: "#/definitions/InvalidRequestException"
-        "483":
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/StartServerRequest"
+            $ref: '#/definitions/StartServerRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -670,51 +622,42 @@ paths:
           enum:
             - TransferService.StartServer
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=TransferService.StopServer:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=TransferService.StopServer':
     post:
       operationId: StopServer
-      description: <p>Changes the state of an SFTP server from <code>ONLINE</code> to
-        <code>OFFLINE</code>. An <code>OFFLINE</code> server cannot accept and
-        process file transfer jobs. Information tied to your server such as
-        server and user properties are not affected by stopping your server.
-        Stopping a server will not reduce or impact your Secure File Transfer
-        Protocol (SFTP) endpoint billing.</p> <p>The states of
-        <code>STOPPING</code> indicates that the server is in an intermediate
-        state, either not fully able to respond, or not fully offline. The
-        values of <code>STOP_FAILED</code> can indicate an error condition.</p>
-        <p>No response is returned from this call.</p>
+      description: '<p>Changes the state of an SFTP server from <code>ONLINE</code> to <code>OFFLINE</code>. An <code>OFFLINE</code> server cannot accept and process file transfer jobs. Information tied to your server such as server and user properties are not affected by stopping your server. Stopping a server will not reduce or impact your Secure File Transfer Protocol (SFTP) endpoint billing.</p> <p>The states of <code>STOPPING</code> indicates that the server is in an intermediate state, either not fully able to respond, or not fully offline. The values of <code>STOP_FAILED</code> can indicate an error condition.</p> <p>No response is returned from this call.</p>'
       responses:
-        "200":
+        '200':
           description: Success
-        "480":
+        '480':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "481":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '481':
           description: InternalServiceError
           schema:
-            $ref: "#/definitions/InternalServiceError"
-        "482":
+            $ref: '#/definitions/InternalServiceError'
+        '482':
           description: InvalidRequestException
           schema:
-            $ref: "#/definitions/InvalidRequestException"
-        "483":
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/StopServerRequest"
+            $ref: '#/definitions/StopServerRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -722,40 +665,38 @@ paths:
           enum:
             - TransferService.StopServer
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=TransferService.TagResource:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=TransferService.TagResource':
     post:
       operationId: TagResource
-      description: <p>Attaches a key-value pair to a resource, as identified by its Amazon
-        Resource Name (ARN). Resources are users, servers, roles, and other
-        entities.</p> <p>There is no response returned from this call.</p>
+      description: '<p>Attaches a key-value pair to a resource, as identified by its Amazon Resource Name (ARN). Resources are users, servers, roles, and other entities.</p> <p>There is no response returned from this call.</p>'
       responses:
-        "200":
+        '200':
           description: Success
-        "480":
+        '480':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "481":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '481':
           description: InternalServiceError
           schema:
-            $ref: "#/definitions/InternalServiceError"
-        "482":
+            $ref: '#/definitions/InternalServiceError'
+        '482':
           description: InvalidRequestException
           schema:
-            $ref: "#/definitions/InvalidRequestException"
+            $ref: '#/definitions/InvalidRequestException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/TagResourceRequest"
+            $ref: '#/definitions/TagResourceRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -763,49 +704,44 @@ paths:
           enum:
             - TransferService.TagResource
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=TransferService.TestIdentityProvider:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=TransferService.TestIdentityProvider':
     post:
       operationId: TestIdentityProvider
-      description: If the <code>IdentityProviderType</code> of the server is
-        <code>API_Gateway</code>, tests whether your API Gateway is set up
-        successfully. We highly recommend that you call this method to test your
-        authentication method as soon as you create your server. By doing so,
-        you can troubleshoot issues with the API Gateway integration to ensure
-        that your users can successfully use the service.
+      description: 'If the <code>IdentityProviderType</code> of the server is <code>API_Gateway</code>, tests whether your API Gateway is set up successfully. We highly recommend that you call this method to test your authentication method as soon as you create your server. By doing so, you can troubleshoot issues with the API Gateway integration to ensure that your users can successfully use the service.'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/TestIdentityProviderResponse"
-        "480":
+            $ref: '#/definitions/TestIdentityProviderResponse'
+        '480':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "481":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '481':
           description: InternalServiceError
           schema:
-            $ref: "#/definitions/InternalServiceError"
-        "482":
+            $ref: '#/definitions/InternalServiceError'
+        '482':
           description: InvalidRequestException
           schema:
-            $ref: "#/definitions/InvalidRequestException"
-        "483":
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/TestIdentityProviderRequest"
+            $ref: '#/definitions/TestIdentityProviderRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -813,40 +749,38 @@ paths:
           enum:
             - TransferService.TestIdentityProvider
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=TransferService.UntagResource:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=TransferService.UntagResource':
     post:
       operationId: UntagResource
-      description: <p>Detaches a key-value pair from a resource, as identified by its
-        Amazon Resource Name (ARN). Resources are users, servers, roles, and
-        other entities.</p> <p>No response is returned from this call.</p>
+      description: '<p>Detaches a key-value pair from a resource, as identified by its Amazon Resource Name (ARN). Resources are users, servers, roles, and other entities.</p> <p>No response is returned from this call.</p>'
       responses:
-        "200":
+        '200':
           description: Success
-        "480":
+        '480':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "481":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '481':
           description: InternalServiceError
           schema:
-            $ref: "#/definitions/InternalServiceError"
-        "482":
+            $ref: '#/definitions/InternalServiceError'
+        '482':
           description: InvalidRequestException
           schema:
-            $ref: "#/definitions/InvalidRequestException"
+            $ref: '#/definitions/InvalidRequestException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/UntagResourceRequest"
+            $ref: '#/definitions/UntagResourceRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -854,46 +788,44 @@ paths:
           enum:
             - TransferService.UntagResource
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=TransferService.UpdateServer:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=TransferService.UpdateServer':
     post:
       operationId: UpdateServer
-      description: <p>Updates the server properties after that server has been created.</p>
-        <p>The <code>UpdateServer</code> call returns the <code>ServerId</code>
-        of the Secure File Transfer Protocol (SFTP) server you updated.</p>
+      description: <p>Updates the server properties after that server has been created.</p> <p>The <code>UpdateServer</code> call returns the <code>ServerId</code> of the Secure File Transfer Protocol (SFTP) server you updated.</p>
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/UpdateServerResponse"
-        "480":
+            $ref: '#/definitions/UpdateServerResponse'
+        '480':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "481":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '481':
           description: InternalServiceError
           schema:
-            $ref: "#/definitions/InternalServiceError"
-        "482":
+            $ref: '#/definitions/InternalServiceError'
+        '482':
           description: InvalidRequestException
           schema:
-            $ref: "#/definitions/InvalidRequestException"
-        "483":
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/UpdateServerRequest"
+            $ref: '#/definitions/UpdateServerRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -901,48 +833,44 @@ paths:
           enum:
             - TransferService.UpdateServer
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=TransferService.UpdateUser:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=TransferService.UpdateUser':
     post:
       operationId: UpdateUser
-      description: "<p>Assigns new properties to a user. Parameters you pass modify any or
-        all of the following: the home directory, role, and policy for the
-        <code>UserName</code> and <code>ServerId</code> you specify.</p> <p>The
-        response returns the <code>ServerId</code> and the <code>UserName</code>
-        for the updated user.</p>"
+      description: '<p>Assigns new properties to a user. Parameters you pass modify any or all of the following: the home directory, role, and policy for the <code>UserName</code> and <code>ServerId</code> you specify.</p> <p>The response returns the <code>ServerId</code> and the <code>UserName</code> for the updated user.</p>'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/UpdateUserResponse"
-        "480":
+            $ref: '#/definitions/UpdateUserResponse'
+        '480':
           description: ServiceUnavailableException
           schema:
-            $ref: "#/definitions/ServiceUnavailableException"
-        "481":
+            $ref: '#/definitions/ServiceUnavailableException'
+        '481':
           description: InternalServiceError
           schema:
-            $ref: "#/definitions/InternalServiceError"
-        "482":
+            $ref: '#/definitions/InternalServiceError'
+        '482':
           description: InvalidRequestException
           schema:
-            $ref: "#/definitions/InvalidRequestException"
-        "483":
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/UpdateUserRequest"
+            $ref: '#/definitions/UpdateUserRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -950,13 +878,13 @@ paths:
           enum:
             - TransferService.UpdateUser
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
   CreateServerResponse:
     type: object
@@ -964,36 +892,26 @@ definitions:
       - ServerId
     properties:
       ServerId:
-        $ref: "#/definitions/ServerId"
+        $ref: '#/definitions/ServerId'
         description: The service-assigned ID of the SFTP server that is created.
   CreateServerRequest:
     type: object
     properties:
       EndpointDetails:
-        $ref: "#/definitions/EndpointDetails"
+        $ref: '#/definitions/EndpointDetails'
       EndpointType:
-        $ref: "#/definitions/EndpointType"
+        $ref: '#/definitions/EndpointType'
       IdentityProviderDetails:
-        $ref: "#/definitions/IdentityProviderDetails"
-        description: An array containing all of the information required to call a
-          customer-supplied authentication API. This parameter is not required
-          when the <code>IdentityProviderType</code> value of server that is
-          created uses the <code>SERVICE_MANAGED</code> authentication method.
+        $ref: '#/definitions/IdentityProviderDetails'
+        description: An array containing all of the information required to call a customer-supplied authentication API. This parameter is not required when the <code>IdentityProviderType</code> value of server that is created uses the <code>SERVICE_MANAGED</code> authentication method.
       IdentityProviderType:
-        $ref: "#/definitions/IdentityProviderType"
-        description: The mode of authentication enabled for this service. The default value
-          is <code>SERVICE_MANAGED</code>, which allows you to store and access
-          SFTP user credentials within the service. An
-          <code>IdentityProviderType</code> value of <code>API_GATEWAY</code>
-          indicates that user authentication requires a call to an API Gateway
-          endpoint URL provided by you to integrate an identity provider of your
-          choice.
+        $ref: '#/definitions/IdentityProviderType'
+        description: 'The mode of authentication enabled for this service. The default value is <code>SERVICE_MANAGED</code>, which allows you to store and access SFTP user credentials within the service. An <code>IdentityProviderType</code> value of <code>API_GATEWAY</code> indicates that user authentication requires a call to an API Gateway endpoint URL provided by you to integrate an identity provider of your choice.'
       LoggingRole:
-        $ref: "#/definitions/Role"
-        description: A value that allows the service to write your SFTP users' activity to
-          your Amazon CloudWatch logs for monitoring and auditing purposes.
+        $ref: '#/definitions/Role'
+        description: A value that allows the service to write your SFTP users' activity to your Amazon CloudWatch logs for monitoring and auditing purposes.
       Tags:
-        $ref: "#/definitions/Tags"
+        $ref: '#/definitions/Tags'
         description: Key-value pairs that can be used to group and search for servers.
   ServiceUnavailableException: {}
   InternalServiceError: {}
@@ -1005,12 +923,11 @@ definitions:
       - UserName
     properties:
       ServerId:
-        $ref: "#/definitions/ServerId"
+        $ref: '#/definitions/ServerId'
         description: The ID of the SFTP server that the user is attached to.
       UserName:
-        $ref: "#/definitions/UserName"
-        description: A unique string that identifies a user account associated with an SFTP
-          server.
+        $ref: '#/definitions/UserName'
+        description: A unique string that identifies a user account associated with an SFTP server.
   CreateUserRequest:
     type: object
     required:
@@ -1019,42 +936,26 @@ definitions:
       - UserName
     properties:
       HomeDirectory:
-        $ref: "#/definitions/HomeDirectory"
-        description: The landing directory (folder) for a user when they log in to the
-          server using their SFTP client. An example is
-          <code>/home/<i>username</i> </code>.
+        $ref: '#/definitions/HomeDirectory'
+        description: The landing directory (folder) for a user when they log in to the server using their SFTP client. An example is <code>/home/<i>username</i> </code>.
       Policy:
-        $ref: "#/definitions/Policy"
-        description: A scope-down policy for your user so you can use the same IAM role
-          across multiple users. This policy scopes down user access to portions
-          of their Amazon S3 bucket. Variables you can use inside this policy
-          include <code>${Transfer:UserName}</code>,
-          <code>${Transfer:HomeDirectory}</code>, and
-          <code>${Transfer:HomeBucket}</code>.
+        $ref: '#/definitions/Policy'
+        description: 'A scope-down policy for your user so you can use the same IAM role across multiple users. This policy scopes down user access to portions of their Amazon S3 bucket. Variables you can use inside this policy include <code>${Transfer:UserName}</code>, <code>${Transfer:HomeDirectory}</code>, and <code>${Transfer:HomeBucket}</code>.'
       Role:
-        $ref: "#/definitions/Role"
-        description: The IAM role that controls your user's access to your Amazon S3
-          bucket. The policies attached to this role will determine the level of
-          access you want to provide your users when transferring files into and
-          out of your Amazon S3 bucket or buckets. The IAM role should also
-          contain a trust relationship that allows the SFTP server to access
-          your resources when servicing your SFTP user's transfer requests.
+        $ref: '#/definitions/Role'
+        description: The IAM role that controls your user's access to your Amazon S3 bucket. The policies attached to this role will determine the level of access you want to provide your users when transferring files into and out of your Amazon S3 bucket or buckets. The IAM role should also contain a trust relationship that allows the SFTP server to access your resources when servicing your SFTP user's transfer requests.
       ServerId:
-        $ref: "#/definitions/ServerId"
-        description: A system-assigned unique identifier for an SFTP server instance. This
-          is the specific SFTP server that you added your user to.
+        $ref: '#/definitions/ServerId'
+        description: A system-assigned unique identifier for an SFTP server instance. This is the specific SFTP server that you added your user to.
       SshPublicKeyBody:
-        $ref: "#/definitions/SshPublicKeyBody"
-        description: The public portion of the Secure Shall (SSH) key used to authenticate
-          the user to the SFTP server.
+        $ref: '#/definitions/SshPublicKeyBody'
+        description: The public portion of the Secure Shall (SSH) key used to authenticate the user to the SFTP server.
       Tags:
-        $ref: "#/definitions/Tags"
-        description: Key-value pairs that can be used to group and search for users. Tags
-          are metadata attached to users for any purpose.
+        $ref: '#/definitions/Tags'
+        description: Key-value pairs that can be used to group and search for users. Tags are metadata attached to users for any purpose.
       UserName:
-        $ref: "#/definitions/UserName"
-        description: A unique string that identifies a user and is associated with a server
-          as specified by the <code>ServerId</code>.
+        $ref: '#/definitions/UserName'
+        description: A unique string that identifies a user and is associated with a server as specified by the <code>ServerId</code>.
   ResourceExistsException: {}
   ResourceNotFoundException: {}
   DeleteServerRequest:
@@ -1063,7 +964,7 @@ definitions:
       - ServerId
     properties:
       ServerId:
-        $ref: "#/definitions/ServerId"
+        $ref: '#/definitions/ServerId'
         description: A unique system-assigned identifier for an SFTP server instance.
   DeleteSshPublicKeyRequest:
     type: object
@@ -1073,16 +974,14 @@ definitions:
       - UserName
     properties:
       ServerId:
-        $ref: "#/definitions/ServerId"
-        description: A system-assigned unique identifier for a Secure File Transfer
-          Protocol (SFTP) server instance that has the user assigned to it.
+        $ref: '#/definitions/ServerId'
+        description: A system-assigned unique identifier for a Secure File Transfer Protocol (SFTP) server instance that has the user assigned to it.
       SshPublicKeyId:
-        $ref: "#/definitions/SshPublicKeyId"
+        $ref: '#/definitions/SshPublicKeyId'
         description: A unique identifier used to reference your user's specific SSH key.
       UserName:
-        $ref: "#/definitions/UserName"
-        description: A unique string that identifies a user whose public key is being
-          deleted.
+        $ref: '#/definitions/UserName'
+        description: A unique string that identifies a user whose public key is being deleted.
   DeleteUserRequest:
     type: object
     required:
@@ -1090,29 +989,26 @@ definitions:
       - UserName
     properties:
       ServerId:
-        $ref: "#/definitions/ServerId"
-        description: A system-assigned unique identifier for an SFTP server instance that
-          has the user assigned to it.
+        $ref: '#/definitions/ServerId'
+        description: A system-assigned unique identifier for an SFTP server instance that has the user assigned to it.
       UserName:
-        $ref: "#/definitions/UserName"
-        description: A unique string that identifies a user that is being deleted from the
-          server.
+        $ref: '#/definitions/UserName'
+        description: A unique string that identifies a user that is being deleted from the server.
   DescribeServerResponse:
     type: object
     required:
       - Server
     properties:
       Server:
-        $ref: "#/definitions/DescribedServer"
-        description: An array containing the properties of the server with the
-          <code>ServerID</code> you specified.
+        $ref: '#/definitions/DescribedServer'
+        description: An array containing the properties of the server with the <code>ServerID</code> you specified.
   DescribeServerRequest:
     type: object
     required:
       - ServerId
     properties:
       ServerId:
-        $ref: "#/definitions/ServerId"
+        $ref: '#/definitions/ServerId'
         description: A system-assigned unique identifier for an SFTP server.
   DescribeUserResponse:
     type: object
@@ -1121,13 +1017,11 @@ definitions:
       - User
     properties:
       ServerId:
-        $ref: "#/definitions/ServerId"
-        description: A system-assigned unique identifier for an SFTP server that has this
-          user assigned.
+        $ref: '#/definitions/ServerId'
+        description: A system-assigned unique identifier for an SFTP server that has this user assigned.
       User:
-        $ref: "#/definitions/DescribedUser"
-        description: An array containing the properties of the user account for the
-          <code>ServerID</code> value that you specified.
+        $ref: '#/definitions/DescribedUser'
+        description: An array containing the properties of the user account for the <code>ServerID</code> value that you specified.
   DescribeUserRequest:
     type: object
     required:
@@ -1135,14 +1029,11 @@ definitions:
       - UserName
     properties:
       ServerId:
-        $ref: "#/definitions/ServerId"
-        description: A system-assigned unique identifier for an SFTP server that has this
-          user assigned.
+        $ref: '#/definitions/ServerId'
+        description: A system-assigned unique identifier for an SFTP server that has this user assigned.
       UserName:
-        $ref: "#/definitions/UserName"
-        description: The name of the user assigned to one or more servers. User names are
-          part of the sign-in credentials to use the AWS Transfer service and
-          perform file transfer tasks.
+        $ref: '#/definitions/UserName'
+        description: The name of the user assigned to one or more servers. User names are part of the sign-in credentials to use the AWS Transfer service and perform file transfer tasks.
   ImportSshPublicKeyResponse:
     type: object
     required:
@@ -1151,19 +1042,15 @@ definitions:
       - UserName
     properties:
       ServerId:
-        $ref: "#/definitions/ServerId"
+        $ref: '#/definitions/ServerId'
         description: A system-assigned unique identifier for an SFTP server.
       SshPublicKeyId:
-        $ref: "#/definitions/SshPublicKeyId"
-        description: This identifier is the name given to a public key by the system that
-          was imported.
+        $ref: '#/definitions/SshPublicKeyId'
+        description: This identifier is the name given to a public key by the system that was imported.
       UserName:
-        $ref: "#/definitions/UserName"
-        description: A user name assigned to the <code>ServerID</code> value that you
-          specified.
-    description: This response identifies the user, server they belong to, and the
-      identifier of the SSH public key associated with that user. A user can
-      have more than one key on each server that they are associate with.
+        $ref: '#/definitions/UserName'
+        description: A user name assigned to the <code>ServerID</code> value that you specified.
+    description: 'This response identifies the user, server they belong to, and the identifier of the SSH public key associated with that user. A user can have more than one key on each server that they are associate with.'
   ImportSshPublicKeyRequest:
     type: object
     required:
@@ -1172,13 +1059,13 @@ definitions:
       - UserName
     properties:
       ServerId:
-        $ref: "#/definitions/ServerId"
+        $ref: '#/definitions/ServerId'
         description: A system-assigned unique identifier for an SFTP server.
       SshPublicKeyBody:
-        $ref: "#/definitions/SshPublicKeyBody"
+        $ref: '#/definitions/SshPublicKeyBody'
         description: The public key portion of an SSH key pair.
       UserName:
-        $ref: "#/definitions/UserName"
+        $ref: '#/definitions/UserName'
         description: The name of the user account that is assigned to one or more servers.
   ListServersResponse:
     type: object
@@ -1186,68 +1073,47 @@ definitions:
       - Servers
     properties:
       NextToken:
-        $ref: "#/definitions/NextToken"
-        description: When you can get additional results from the <code>ListServers</code>
-          operation, a <code>NextToken</code> parameter is returned in the
-          output. In a following command, you can pass in the
-          <code>NextToken</code> parameter to continue listing additional
-          servers.
+        $ref: '#/definitions/NextToken'
+        description: 'When you can get additional results from the <code>ListServers</code> operation, a <code>NextToken</code> parameter is returned in the output. In a following command, you can pass in the <code>NextToken</code> parameter to continue listing additional servers.'
       Servers:
-        $ref: "#/definitions/ListedServers"
+        $ref: '#/definitions/ListedServers'
         description: An array of servers that were listed.
   ListServersRequest:
     type: object
     properties:
       MaxResults:
-        $ref: "#/definitions/MaxResults"
-        description: Specifies the number of servers to return as a response to the
-          <code>ListServers</code> query.
+        $ref: '#/definitions/MaxResults'
+        description: Specifies the number of servers to return as a response to the <code>ListServers</code> query.
       NextToken:
-        $ref: "#/definitions/NextToken"
-        description: When additional results are obtained from the ListServers command, a
-          <code>NextToken</code> parameter is returned in the output. You can
-          then pass the <code>NextToken</code> parameter in a subsequent command
-          to continue listing additional servers.
+        $ref: '#/definitions/NextToken'
+        description: 'When additional results are obtained from the ListServers command, a <code>NextToken</code> parameter is returned in the output. You can then pass the <code>NextToken</code> parameter in a subsequent command to continue listing additional servers.'
   InvalidNextTokenException: {}
   ListTagsForResourceResponse:
     type: object
     properties:
       Arn:
-        $ref: "#/definitions/Arn"
+        $ref: '#/definitions/Arn'
         description: This value is the ARN you specified to list the tags of.
       NextToken:
-        $ref: "#/definitions/NextToken"
-        description: When you can get additional results from the
-          <code>ListTagsForResource</code> call, a <code>NextToken</code>
-          parameter is returned in the output. You can then pass in a subsequent
-          command the <code>NextToken</code> parameter to continue listing
-          additional tags.
+        $ref: '#/definitions/NextToken'
+        description: 'When you can get additional results from the <code>ListTagsForResource</code> call, a <code>NextToken</code> parameter is returned in the output. You can then pass in a subsequent command the <code>NextToken</code> parameter to continue listing additional tags.'
       Tags:
-        $ref: "#/definitions/Tags"
-        description: Key-value pairs that are assigned to a resource, usually for the
-          purpose of grouping and searching for items. Tags are metadata that
-          you define that you can use for any purpose.
+        $ref: '#/definitions/Tags'
+        description: 'Key-value pairs that are assigned to a resource, usually for the purpose of grouping and searching for items. Tags are metadata that you define that you can use for any purpose.'
   ListTagsForResourceRequest:
     type: object
     required:
       - Arn
     properties:
       Arn:
-        $ref: "#/definitions/Arn"
-        description: Requests the tags associated with a particular Amazon Resource Name
-          (ARN). An ARN is an identifier for a specific AWS resource, such as a
-          server, user, or role.
+        $ref: '#/definitions/Arn'
+        description: 'Requests the tags associated with a particular Amazon Resource Name (ARN). An ARN is an identifier for a specific AWS resource, such as a server, user, or role.'
       MaxResults:
-        $ref: "#/definitions/MaxResults"
-        description: Specifies the number of tags to return as a response to the
-          <code>ListTagsForResource</code> request.
+        $ref: '#/definitions/MaxResults'
+        description: Specifies the number of tags to return as a response to the <code>ListTagsForResource</code> request.
       NextToken:
-        $ref: "#/definitions/NextToken"
-        description: When you request additional results from the
-          <code>ListTagsForResource</code> call, a <code>NextToken</code>
-          parameter is returned in the input. You can then pass in a subsequent
-          command the <code>NextToken</code> parameter to continue listing
-          additional tags.
+        $ref: '#/definitions/NextToken'
+        description: 'When you request additional results from the <code>ListTagsForResource</code> call, a <code>NextToken</code> parameter is returned in the input. You can then pass in a subsequent command the <code>NextToken</code> parameter to continue listing additional tags.'
   ListUsersResponse:
     type: object
     required:
@@ -1255,45 +1121,35 @@ definitions:
       - Users
     properties:
       NextToken:
-        $ref: "#/definitions/NextToken"
-        description: When you can get additional results from the <code>ListUsers</code>
-          call, a <code>NextToken</code> parameter is returned in the output.
-          You can then pass in a subsequent command the <code>NextToken</code>
-          parameter to continue listing additional users.
+        $ref: '#/definitions/NextToken'
+        description: 'When you can get additional results from the <code>ListUsers</code> call, a <code>NextToken</code> parameter is returned in the output. You can then pass in a subsequent command the <code>NextToken</code> parameter to continue listing additional users.'
       ServerId:
-        $ref: "#/definitions/ServerId"
-        description: A system-assigned unique identifier for an SFTP server that the users
-          are assigned to.
+        $ref: '#/definitions/ServerId'
+        description: A system-assigned unique identifier for an SFTP server that the users are assigned to.
       Users:
-        $ref: "#/definitions/ListedUsers"
-        description: Returns the user accounts and their properties for the
-          <code>ServerId</code> value that you specify.
+        $ref: '#/definitions/ListedUsers'
+        description: Returns the user accounts and their properties for the <code>ServerId</code> value that you specify.
   ListUsersRequest:
     type: object
     required:
       - ServerId
     properties:
       MaxResults:
-        $ref: "#/definitions/MaxResults"
-        description: Specifies the number of users to return as a response to the
-          <code>ListUsers</code> request.
+        $ref: '#/definitions/MaxResults'
+        description: Specifies the number of users to return as a response to the <code>ListUsers</code> request.
       NextToken:
-        $ref: "#/definitions/NextToken"
-        description: When you can get additional results from the <code>ListUsers</code>
-          call, a <code>NextToken</code> parameter is returned in the output.
-          You can then pass in a subsequent command the <code>NextToken</code>
-          parameter to continue listing additional users.
+        $ref: '#/definitions/NextToken'
+        description: 'When you can get additional results from the <code>ListUsers</code> call, a <code>NextToken</code> parameter is returned in the output. You can then pass in a subsequent command the <code>NextToken</code> parameter to continue listing additional users.'
       ServerId:
-        $ref: "#/definitions/ServerId"
-        description: A system-assigned unique identifier for a Secure File Transfer
-          Protocol (SFTP) server that has users are assigned to it.
+        $ref: '#/definitions/ServerId'
+        description: A system-assigned unique identifier for a Secure File Transfer Protocol (SFTP) server that has users are assigned to it.
   StartServerRequest:
     type: object
     required:
       - ServerId
     properties:
       ServerId:
-        $ref: "#/definitions/ServerId"
+        $ref: '#/definitions/ServerId'
         description: A system-assigned unique identifier for an SFTP server that you start.
   StopServerRequest:
     type: object
@@ -1301,9 +1157,8 @@ definitions:
       - ServerId
     properties:
       ServerId:
-        $ref: "#/definitions/ServerId"
-        description: A system-assigned unique identifier for an SFTP server that you
-          stopped.
+        $ref: '#/definitions/ServerId'
+        description: A system-assigned unique identifier for an SFTP server that you stopped.
   TagResourceRequest:
     type: object
     required:
@@ -1311,14 +1166,11 @@ definitions:
       - Tags
     properties:
       Arn:
-        $ref: "#/definitions/Arn"
-        description: An Amazon Resource Name (ARN) for a specific AWS resource, such as a
-          server, user, or role.
+        $ref: '#/definitions/Arn'
+        description: 'An Amazon Resource Name (ARN) for a specific AWS resource, such as a server, user, or role.'
       Tags:
-        $ref: "#/definitions/Tags"
-        description: Key-value pairs assigned to ARNs that you can use to group and search
-          for resources by type. You can attach this metadata to user accounts
-          for any purpose.
+        $ref: '#/definitions/Tags'
+        description: Key-value pairs assigned to ARNs that you can use to group and search for resources by type. You can attach this metadata to user accounts for any purpose.
   TestIdentityProviderResponse:
     type: object
     required:
@@ -1326,13 +1178,13 @@ definitions:
       - Url
     properties:
       Message:
-        $ref: "#/definitions/Message"
-        description: "The result of the authorization test as a message. "
+        $ref: '#/definitions/Message'
+        description: 'The result of the authorization test as a message. '
       StatusCode:
-        $ref: "#/definitions/StatusCode"
+        $ref: '#/definitions/StatusCode'
         description: The HTTP status code that is the response from your API Gateway.
       Url:
-        $ref: "#/definitions/Url"
+        $ref: '#/definitions/Url'
         description: The endpoint of the service used to authenticate a user.
   TestIdentityProviderRequest:
     type: object
@@ -1341,14 +1193,13 @@ definitions:
       - UserName
     properties:
       ServerId:
-        $ref: "#/definitions/ServerId"
-        description: A system assigned identifier for a specific server. That server's user
-          authentication method is tested with a user name and password.
+        $ref: '#/definitions/ServerId'
+        description: A system assigned identifier for a specific server. That server's user authentication method is tested with a user name and password.
       UserName:
-        $ref: "#/definitions/UserName"
+        $ref: '#/definitions/UserName'
         description: This request parameter is name of the user account to be tested.
       UserPassword:
-        $ref: "#/definitions/UserPassword"
+        $ref: '#/definitions/UserPassword'
         description: The password of the user account to be tested.
   UntagResourceRequest:
     type: object
@@ -1357,46 +1208,37 @@ definitions:
       - TagKeys
     properties:
       Arn:
-        $ref: "#/definitions/Arn"
-        description: This is the value of the resource that will have the tag removed. An
-          Amazon Resource Name (ARN) is an identifier for a specific AWS
-          resource, such as a server, user, or role.
+        $ref: '#/definitions/Arn'
+        description: 'This is the value of the resource that will have the tag removed. An Amazon Resource Name (ARN) is an identifier for a specific AWS resource, such as a server, user, or role.'
       TagKeys:
-        $ref: "#/definitions/TagKeys"
-        description: TagKeys are key-value pairs assigned to ARNs that can be used to group
-          and search for resources by type. This metadata can be attached to
-          resources for any purpose.
+        $ref: '#/definitions/TagKeys'
+        description: TagKeys are key-value pairs assigned to ARNs that can be used to group and search for resources by type. This metadata can be attached to resources for any purpose.
   UpdateServerResponse:
     type: object
     required:
       - ServerId
     properties:
       ServerId:
-        $ref: "#/definitions/ServerId"
-        description: A system-assigned unique identifier for an SFTP server that the user
-          account is assigned to.
+        $ref: '#/definitions/ServerId'
+        description: A system-assigned unique identifier for an SFTP server that the user account is assigned to.
   UpdateServerRequest:
     type: object
     required:
       - ServerId
     properties:
       EndpointDetails:
-        $ref: "#/definitions/EndpointDetails"
+        $ref: '#/definitions/EndpointDetails'
       EndpointType:
-        $ref: "#/definitions/EndpointType"
+        $ref: '#/definitions/EndpointType'
       IdentityProviderDetails:
-        $ref: "#/definitions/IdentityProviderDetails"
-        description: This response parameter is an array containing all of the information
-          required to call a customer's authentication API method.
+        $ref: '#/definitions/IdentityProviderDetails'
+        description: This response parameter is an array containing all of the information required to call a customer's authentication API method.
       LoggingRole:
-        $ref: "#/definitions/NullableRole"
-        description: Changes the AWS Identity and Access Management (IAM) role that allows
-          Amazon S3 events to be logged in Amazon CloudWatch, turning logging on
-          or off.
+        $ref: '#/definitions/NullableRole'
+        description: 'Changes the AWS Identity and Access Management (IAM) role that allows Amazon S3 events to be logged in Amazon CloudWatch, turning logging on or off.'
       ServerId:
-        $ref: "#/definitions/ServerId"
-        description: A system-assigned unique identifier for an SFTP server instance that
-          the user account is assigned to.
+        $ref: '#/definitions/ServerId'
+        description: A system-assigned unique identifier for an SFTP server instance that the user account is assigned to.
   UpdateUserResponse:
     type: object
     required:
@@ -1404,15 +1246,12 @@ definitions:
       - UserName
     properties:
       ServerId:
-        $ref: "#/definitions/ServerId"
-        description: A system-assigned unique identifier for an SFTP server instance that
-          the user account is assigned to.
+        $ref: '#/definitions/ServerId'
+        description: A system-assigned unique identifier for an SFTP server instance that the user account is assigned to.
       UserName:
-        $ref: "#/definitions/UserName"
-        description: The unique identifier for a user that is assigned to the SFTP server
-          instance that was specified in the request.
-    description: " <code>UpdateUserResponse</code> returns the user name and server
-      identifier for the request to update a user's properties."
+        $ref: '#/definitions/UserName'
+        description: The unique identifier for a user that is assigned to the SFTP server instance that was specified in the request.
+    description: ' <code>UpdateUserResponse</code> returns the user name and server identifier for the request to update a user''s properties.'
   UpdateUserRequest:
     type: object
     required:
@@ -1420,37 +1259,20 @@ definitions:
       - UserName
     properties:
       HomeDirectory:
-        $ref: "#/definitions/HomeDirectory"
-        description: "The HomeDirectory parameter specifies the landing directory (folder)
-          for a user when they log in to the server using their client. An
-          example would be: <code>/home/<i>username</i> </code>."
+        $ref: '#/definitions/HomeDirectory'
+        description: 'The HomeDirectory parameter specifies the landing directory (folder) for a user when they log in to the server using their client. An example would be: <code>/home/<i>username</i> </code>.'
       Policy:
-        $ref: "#/definitions/Policy"
-        description: Allows you to supply a scope-down policy for your user so you can use
-          the same AWS Identity and Access Management (IAM) role across multiple
-          users. The policy scopes down users access to portions of your Amazon
-          S3 bucket. Variables you can use inside this policy include
-          <code>${Transfer:UserName}</code>,
-          <code>${Transfer:HomeDirectory}</code>, and
-          <code>${Transfer:HomeBucket}</code>.
+        $ref: '#/definitions/Policy'
+        description: 'Allows you to supply a scope-down policy for your user so you can use the same AWS Identity and Access Management (IAM) role across multiple users. The policy scopes down users access to portions of your Amazon S3 bucket. Variables you can use inside this policy include <code>${Transfer:UserName}</code>, <code>${Transfer:HomeDirectory}</code>, and <code>${Transfer:HomeBucket}</code>.'
       Role:
-        $ref: "#/definitions/Role"
-        description: The IAM role that controls your user's access to your Amazon S3
-          bucket. The policies attached to this role will determine the level of
-          access you want to provide your users when transferring files into and
-          out of your Amazon S3 bucket or buckets. The IAM role should also
-          contain a trust relationship that allows the Secure File Transfer
-          Protocol (SFTP) server to access your resources when servicing your
-          SFTP user's transfer requests.
+        $ref: '#/definitions/Role'
+        description: The IAM role that controls your user's access to your Amazon S3 bucket. The policies attached to this role will determine the level of access you want to provide your users when transferring files into and out of your Amazon S3 bucket or buckets. The IAM role should also contain a trust relationship that allows the Secure File Transfer Protocol (SFTP) server to access your resources when servicing your SFTP user's transfer requests.
       ServerId:
-        $ref: "#/definitions/ServerId"
-        description: A system-assigned unique identifier for an SFTP server instance that
-          the user account is assigned to.
+        $ref: '#/definitions/ServerId'
+        description: A system-assigned unique identifier for an SFTP server instance that the user account is assigned to.
       UserName:
-        $ref: "#/definitions/UserName"
-        description: A unique string that identifies a user and is associated with a server
-          as specified by the ServerId. This is the string that will be used by
-          your user when they log in to your SFTP server.
+        $ref: '#/definitions/UserName'
+        description: A unique string that identifies a user and is associated with a server as specified by the ServerId. This is the string that will be used by your user when they log in to your SFTP server.
   Arn:
     type: string
     minLength: 20
@@ -1459,7 +1281,7 @@ definitions:
     type: object
     properties:
       VpcEndpointId:
-        $ref: "#/definitions/VpcEndpointId"
+        $ref: '#/definitions/VpcEndpointId'
   EndpointType:
     type: string
     enum:
@@ -1469,39 +1291,30 @@ definitions:
     type: object
     properties:
       Url:
-        $ref: "#/definitions/Url"
-        description: The <code>IdentityProviderDetail</code> parameter contains the
-          location of the service endpoint used to authenticate users.
+        $ref: '#/definitions/Url'
+        description: The <code>IdentityProviderDetail</code> parameter contains the location of the service endpoint used to authenticate users.
       InvocationRole:
-        $ref: "#/definitions/Role"
-        description: The <code>Role</code> parameter provides the type of
-          <code>InvocationRole</code> used to authenticate the user account.
-    description: Returns information related to the type of user authentication that is in
-      use for a server's users. A server can only have one method of
-      authentication.
+        $ref: '#/definitions/Role'
+        description: The <code>Role</code> parameter provides the type of <code>InvocationRole</code> used to authenticate the user account.
+    description: Returns information related to the type of user authentication that is in use for a server's users. A server can only have one method of authentication.
   IdentityProviderType:
     type: string
     enum:
       - SERVICE_MANAGED
       - API_GATEWAY
-    description: Returns information related to the type of user authentication that is in
-      use for a server's users. For <code>SERVICE_MANAGED</code> authentication,
-      the Secure Shell (SSH) public keys are stored with a user on an SFTP
-      server instance. For <code>API_GATEWAY</code> authentication, your custom
-      authentication method is implemented by using an API call. A server can
-      only have one method of authentication.
+    description: 'Returns information related to the type of user authentication that is in use for a server''s users. For <code>SERVICE_MANAGED</code> authentication, the Secure Shell (SSH) public keys are stored with a user on an SFTP server instance. For <code>API_GATEWAY</code> authentication, your custom authentication method is implemented by using an API call. A server can only have one method of authentication.'
   Role:
     type: string
-    pattern: arn:.*role/.*
+    pattern: 'arn:.*role/.*'
   Tags:
     type: array
     items:
-      $ref: "#/definitions/Tag"
+      $ref: '#/definitions/Tag'
     minItems: 1
     maxItems: 50
   ServerId:
     type: string
-    pattern: ^s-([0-9a-f]{17})$
+    pattern: '^s-([0-9a-f]{17})$'
   HomeDirectory:
     type: string
     pattern: ^$|/.*
@@ -1510,118 +1323,77 @@ definitions:
     type: string
   SshPublicKeyBody:
     type: string
-    pattern: ^ssh-rsa\s+[A-Za-z0-9+/]+[=]{0,3}(\s+.+)?\s*$
+    pattern: '^ssh-rsa\s+[A-Za-z0-9+/]+[=]{0,3}(\s+.+)?\s*$'
     maxLength: 2048
   UserName:
     type: string
-    pattern: ^[a-zA-Z0-9_][a-zA-Z0-9_-]{2,31}$
+    pattern: '^[a-zA-Z0-9_][a-zA-Z0-9_-]{2,31}$'
   DateImported:
     type: string
     format: date-time
   SshPublicKeyId:
     type: string
-    pattern: ^key-[0-9a-f]{17}$
+    pattern: '^key-[0-9a-f]{17}$'
   DescribedServer:
     type: object
     required:
       - Arn
     properties:
       Arn:
-        $ref: "#/definitions/Arn"
-        description: Specifies the unique Amazon Resource Name (ARN) for the server to be
-          described.
+        $ref: '#/definitions/Arn'
+        description: Specifies the unique Amazon Resource Name (ARN) for the server to be described.
       EndpointDetails:
-        $ref: "#/definitions/EndpointDetails"
+        $ref: '#/definitions/EndpointDetails'
       EndpointType:
-        $ref: "#/definitions/EndpointType"
+        $ref: '#/definitions/EndpointType'
       IdentityProviderDetails:
-        $ref: "#/definitions/IdentityProviderDetails"
-        description: Specifies information to call a customer-supplied authentication API.
-          This field is not populated when the <code>IdentityProviderType</code>
-          of the server is <code>SERVICE_MANAGED</code>&gt;.
+        $ref: '#/definitions/IdentityProviderDetails'
+        description: Specifies information to call a customer-supplied authentication API. This field is not populated when the <code>IdentityProviderType</code> of the server is <code>SERVICE_MANAGED</code>&gt;.
       IdentityProviderType:
-        $ref: "#/definitions/IdentityProviderType"
-        description: This property defines the mode of authentication method enabled for
-          this service. A value of <code>SERVICE_MANAGED</code>, means that you
-          are using this Server to store and access SFTP user credentials within
-          the service. A value of <code>API_GATEWAY</code> indicates that you
-          have integrated an API Gateway endpoint that will be invoked for
-          authenticating your user into the service.
+        $ref: '#/definitions/IdentityProviderType'
+        description: 'This property defines the mode of authentication method enabled for this service. A value of <code>SERVICE_MANAGED</code>, means that you are using this Server to store and access SFTP user credentials within the service. A value of <code>API_GATEWAY</code> indicates that you have integrated an API Gateway endpoint that will be invoked for authenticating your user into the service.'
       LoggingRole:
-        $ref: "#/definitions/Role"
-        description: This property is an AWS Identity and Access Management (IAM) entity
-          that allows the server to turn on Amazon CloudWatch logging for Amazon
-          S3 events. When set, user activity can be view in your CloudWatch
-          logs.
+        $ref: '#/definitions/Role'
+        description: 'This property is an AWS Identity and Access Management (IAM) entity that allows the server to turn on Amazon CloudWatch logging for Amazon S3 events. When set, user activity can be view in your CloudWatch logs.'
       ServerId:
-        $ref: "#/definitions/ServerId"
-        description: This property is a unique system assigned identifier for the SFTP
-          server that you instantiate.
+        $ref: '#/definitions/ServerId'
+        description: This property is a unique system assigned identifier for the SFTP server that you instantiate.
       State:
-        $ref: "#/definitions/State"
-        description: <p>The condition of the SFTP server for the server that was described.
-          A value of <code>ONLINE</code> indicates that the server can accept
-          jobs and transfer files. A <code>State</code> value of
-          <code>OFFLINE</code> means that the server cannot perform file
-          transfer operations.</p> <p>The states of <code>STARTING</code> and
-          <code>STOPPING</code> indicated that the server is in an intermediate
-          state, either not fully able to respond, or not fully offline. The
-          values of <code>START_FAILED</code> or <code>STOP_FAILED</code> can
-          indicate an error condition.</p>
+        $ref: '#/definitions/State'
+        description: '<p>The condition of the SFTP server for the server that was described. A value of <code>ONLINE</code> indicates that the server can accept jobs and transfer files. A <code>State</code> value of <code>OFFLINE</code> means that the server cannot perform file transfer operations.</p> <p>The states of <code>STARTING</code> and <code>STOPPING</code> indicated that the server is in an intermediate state, either not fully able to respond, or not fully offline. The values of <code>START_FAILED</code> or <code>STOP_FAILED</code> can indicate an error condition.</p>'
       Tags:
-        $ref: "#/definitions/Tags"
-        description: This property contains the key-value pairs that you can use to search
-          for and group servers that were assigned to the server that was
-          described.
+        $ref: '#/definitions/Tags'
+        description: This property contains the key-value pairs that you can use to search for and group servers that were assigned to the server that was described.
       UserCount:
-        $ref: "#/definitions/UserCount"
-        description: The number of users that are assigned to the SFTP server you specified
-          with the <code>ServerId</code>.
-    description: "Describe the properties of the server that was specified. Information
-      returned includes: the server Amazon Resource Name (ARN), the
-      authentication configuration and type, the logging role, server Id and
-      state, and assigned tags or metadata. "
+        $ref: '#/definitions/UserCount'
+        description: The number of users that are assigned to the SFTP server you specified with the <code>ServerId</code>.
+    description: 'Describe the properties of the server that was specified. Information returned includes: the server Amazon Resource Name (ARN), the authentication configuration and type, the logging role, server Id and state, and assigned tags or metadata. '
   DescribedUser:
     type: object
     required:
       - Arn
     properties:
       Arn:
-        $ref: "#/definitions/Arn"
-        description: This property contains the unique Amazon Resource Name (ARN) for the
-          user that was requested to be described.
+        $ref: '#/definitions/Arn'
+        description: This property contains the unique Amazon Resource Name (ARN) for the user that was requested to be described.
       HomeDirectory:
-        $ref: "#/definitions/HomeDirectory"
-        description: "This property specifies the landing directory (or folder) which is
-          the location that files are written to or read from in an Amazon S3
-          bucket for the described user. An example would be:
-          <code>/<i>bucket_name</i>/home/<i>username</i> </code>."
+        $ref: '#/definitions/HomeDirectory'
+        description: 'This property specifies the landing directory (or folder) which is the location that files are written to or read from in an Amazon S3 bucket for the described user. An example would be: <code>/<i>bucket_name</i>/home/<i>username</i> </code>.'
       Policy:
-        $ref: "#/definitions/Policy"
+        $ref: '#/definitions/Policy'
         description: Specifies the name of the policy in use for the described user.
       Role:
-        $ref: "#/definitions/Role"
-        description: This property specifies the IAM role that controls your user's access
-          to your Amazon S3 bucket. The policies attached to this role will
-          determine the level of access you want to provide your users when
-          transferring files into and out of your Amazon S3 bucket or buckets.
-          The IAM role should also contain a trust relationship that allows the
-          SFTP server to access your resources when servicing your SFTP user's
-          transfer requests.
+        $ref: '#/definitions/Role'
+        description: This property specifies the IAM role that controls your user's access to your Amazon S3 bucket. The policies attached to this role will determine the level of access you want to provide your users when transferring files into and out of your Amazon S3 bucket or buckets. The IAM role should also contain a trust relationship that allows the SFTP server to access your resources when servicing your SFTP user's transfer requests.
       SshPublicKeys:
-        $ref: "#/definitions/SshPublicKeys"
-        description: This property contains the public key portion of the Secure Shell
-          (SSH) keys stored for the described user.
+        $ref: '#/definitions/SshPublicKeys'
+        description: This property contains the public key portion of the Secure Shell (SSH) keys stored for the described user.
       Tags:
-        $ref: "#/definitions/Tags"
-        description: This property contains the key-value pairs for the user requested. Tag
-          can be used to search for and group users for a variety of purposes.
+        $ref: '#/definitions/Tags'
+        description: This property contains the key-value pairs for the user requested. Tag can be used to search for and group users for a variety of purposes.
       UserName:
-        $ref: "#/definitions/UserName"
-        description: This property is the name of the user that was requested to be
-          described. User names are used for authentication purposes. This is
-          the string that will be used by your user when they log in to your
-          SFTP server.
+        $ref: '#/definitions/UserName'
+        description: This property is the name of the user that was requested to be described. User names are used for authentication purposes. This is the string that will be used by your user when they log in to your SFTP server.
     description: Returns properties of the user that you wish to describe.
   State:
     type: string
@@ -1632,29 +1404,17 @@ definitions:
       - STOPPING
       - START_FAILED
       - STOP_FAILED
-    description: "<p>Describes the condition of the SFTP server with respect to its ability
-      to perform file operations. There are six possible states:
-      <code>OFFLINE</code>, <code>ONLINE</code>, <code>STARTING</code>,
-      <code>STOPPING</code>, <code>START_FAILED</code>, and
-      <code>STOP_FAILED</code>.</p> <p> <code>OFFLINE</code> indicates that the
-      SFTP server exists, but that it is not available for file operations.
-      <code>ONLINE</code> indicates that the SFTP server is available to perform
-      file operations. <code>STARTING</code> indicates that the SFTP server's
-      was instantiated, but the server is not yet available to perform file
-      operations. Under normal conditions, it can take a couple of minutes for
-      an SFTP server to be completely operational. Both
-      <code>START_FAILED</code> and <code>STOP_FAILED</code> are error
-      conditions.</p>"
+    description: '<p>Describes the condition of the SFTP server with respect to its ability to perform file operations. There are six possible states: <code>OFFLINE</code>, <code>ONLINE</code>, <code>STARTING</code>, <code>STOPPING</code>, <code>START_FAILED</code>, and <code>STOP_FAILED</code>.</p> <p> <code>OFFLINE</code> indicates that the SFTP server exists, but that it is not available for file operations. <code>ONLINE</code> indicates that the SFTP server is available to perform file operations. <code>STARTING</code> indicates that the SFTP server''s was instantiated, but the server is not yet available to perform file operations. Under normal conditions, it can take a couple of minutes for an SFTP server to be completely operational. Both <code>START_FAILED</code> and <code>STOP_FAILED</code> are error conditions.</p>'
   UserCount:
     type: integer
   SshPublicKeys:
     type: array
     items:
-      $ref: "#/definitions/SshPublicKey"
+      $ref: '#/definitions/SshPublicKey'
     maxItems: 5
   VpcEndpointId:
     type: string
-    pattern: ^vpce-[0-9a-f]{17}$
+    pattern: '^vpce-[0-9a-f]{17}$'
   Url:
     type: string
   MaxResults:
@@ -1668,52 +1428,36 @@ definitions:
   ListedServers:
     type: array
     items:
-      $ref: "#/definitions/ListedServer"
+      $ref: '#/definitions/ListedServer'
   ListedUsers:
     type: array
     items:
-      $ref: "#/definitions/ListedUser"
+      $ref: '#/definitions/ListedUser'
   ListedServer:
     type: object
     required:
       - Arn
     properties:
       Arn:
-        $ref: "#/definitions/Arn"
+        $ref: '#/definitions/Arn'
         description: The unique Amazon Resource Name (ARN) for the server to be listed.
       IdentityProviderType:
-        $ref: "#/definitions/IdentityProviderType"
-        description: The authentication method used to validate a user for the server that
-          was specified. listed. This can include Secure Shell (SSH), user name
-          and password combinations, or your own custom authentication method.
-          Valid values include <code>SERVICE_MANAGED</code> or
-          <code>API_GATEWAY</code>.
+        $ref: '#/definitions/IdentityProviderType'
+        description: 'The authentication method used to validate a user for the server that was specified. listed. This can include Secure Shell (SSH), user name and password combinations, or your own custom authentication method. Valid values include <code>SERVICE_MANAGED</code> or <code>API_GATEWAY</code>.'
       EndpointType:
-        $ref: "#/definitions/EndpointType"
+        $ref: '#/definitions/EndpointType'
       LoggingRole:
-        $ref: "#/definitions/Role"
-        description: The AWS Identity and Access Management entity that allows the server
-          to turn on Amazon CloudWatch logging.
+        $ref: '#/definitions/Role'
+        description: The AWS Identity and Access Management entity that allows the server to turn on Amazon CloudWatch logging.
       ServerId:
-        $ref: "#/definitions/ServerId"
-        description: This value is the unique system assigned identifier for the SFTP
-          servers that were listed.
+        $ref: '#/definitions/ServerId'
+        description: This value is the unique system assigned identifier for the SFTP servers that were listed.
       State:
-        $ref: "#/definitions/State"
-        description: <p>This property describes the condition of the SFTP server for the
-          server that was described. A value of <code>ONLINE</code>&gt;
-          indicates that the server can accept jobs and transfer files. A
-          <code>State</code> value of <code>OFFLINE</code> means that the server
-          cannot perform file transfer operations.</p> <p>The states of
-          <code>STARTING</code> and <code>STOPPING</code> indicated that the
-          server is in an intermediate state, either not fully able to respond,
-          or not fully offline. The values of <code>START_FAILED</code> or
-          <code>STOP_FAILED</code> can indicate an error condition.</p>
+        $ref: '#/definitions/State'
+        description: '<p>This property describes the condition of the SFTP server for the server that was described. A value of <code>ONLINE</code>&gt; indicates that the server can accept jobs and transfer files. A <code>State</code> value of <code>OFFLINE</code> means that the server cannot perform file transfer operations.</p> <p>The states of <code>STARTING</code> and <code>STOPPING</code> indicated that the server is in an intermediate state, either not fully able to respond, or not fully offline. The values of <code>START_FAILED</code> or <code>STOP_FAILED</code> can indicate an error condition.</p>'
       UserCount:
-        $ref: "#/definitions/UserCount"
-        description: This property is a numeric value that indicates the number of users
-          that are assigned to the SFTP server you specified with the
-          <code>ServerId</code>.
+        $ref: '#/definitions/UserCount'
+        description: This property is a numeric value that indicates the number of users that are assigned to the SFTP server you specified with the <code>ServerId</code>.
     description: Returns properties of the server that was specified.
   SshPublicKeyCount:
     type: integer
@@ -1723,34 +1467,26 @@ definitions:
       - Arn
     properties:
       Arn:
-        $ref: "#/definitions/Arn"
-        description: This property is the unique Amazon Resource Name (ARN) for the user
-          that you wish to learn about.
+        $ref: '#/definitions/Arn'
+        description: This property is the unique Amazon Resource Name (ARN) for the user that you wish to learn about.
       HomeDirectory:
-        $ref: "#/definitions/HomeDirectory"
-        description: This value specifies the location that files are written to or read
-          from an Amazon S3 bucket for the user you specify by their ARN.
+        $ref: '#/definitions/HomeDirectory'
+        description: This value specifies the location that files are written to or read from an Amazon S3 bucket for the user you specify by their ARN.
       Role:
-        $ref: "#/definitions/Role"
-        description: The role in use by this user. A <i>role</i> is an AWS Identity and
-          Access Management (IAM) entity that in this case allows the SFTP
-          server to act on a user's behalf. It allows the server to inherit the
-          trust relationship that enables that user to perform file operations
-          to their Amazon S3 bucket.
+        $ref: '#/definitions/Role'
+        description: The role in use by this user. A <i>role</i> is an AWS Identity and Access Management (IAM) entity that in this case allows the SFTP server to act on a user's behalf. It allows the server to inherit the trust relationship that enables that user to perform file operations to their Amazon S3 bucket.
       SshPublicKeyCount:
-        $ref: "#/definitions/SshPublicKeyCount"
-        description: This value is the number of SSH public keys stored for the user you
-          specified.
+        $ref: '#/definitions/SshPublicKeyCount'
+        description: This value is the number of SSH public keys stored for the user you specified.
       UserName:
-        $ref: "#/definitions/UserName"
-        description: The name of the user whose ARN was specified. User names are used for
-          authentication purposes.
+        $ref: '#/definitions/UserName'
+        description: The name of the user whose ARN was specified. User names are used for authentication purposes.
     description: Returns properties of the user that you specify.
   Message:
     type: string
   NullableRole:
     type: string
-    pattern: ^$|arn:.*role/.*
+    pattern: '^$|arn:.*role/.*'
   SshPublicKey:
     type: object
     required:
@@ -1759,22 +1495,15 @@ definitions:
       - SshPublicKeyId
     properties:
       DateImported:
-        $ref: "#/definitions/DateImported"
+        $ref: '#/definitions/DateImported'
         description: The date that the public key was added to the user account.
       SshPublicKeyBody:
-        $ref: "#/definitions/SshPublicKeyBody"
-        description: The content of the SSH public key as specified by the
-          <code>PublicKeyId</code>.
+        $ref: '#/definitions/SshPublicKeyBody'
+        description: The content of the SSH public key as specified by the <code>PublicKeyId</code>.
       SshPublicKeyId:
-        $ref: "#/definitions/SshPublicKeyId"
-        description: The <code>SshPublicKeyId</code> parameter contains the identifier of
-          the public key.
-    description: Provides information about the public Secure Shell (SSH) key that is
-      associated with a user account for a specific server (as identified by
-      <code>ServerId</code>). The information returned includes the date the key
-      was imported, the public key contents, and the public key ID. A user can
-      store more than one SSH public key associated with their user name on a
-      specific SFTP server.
+        $ref: '#/definitions/SshPublicKeyId'
+        description: The <code>SshPublicKeyId</code> parameter contains the identifier of the public key.
+    description: 'Provides information about the public Secure Shell (SSH) key that is associated with a user account for a specific server (as identified by <code>ServerId</code>). The information returned includes the date the key was imported, the public key contents, and the public key ID. A user can store more than one SSH public key associated with their user name on a specific SFTP server.'
   StatusCode:
     type: integer
   TagKey:
@@ -1788,22 +1517,16 @@ definitions:
       - Value
     properties:
       Key:
-        $ref: "#/definitions/TagKey"
+        $ref: '#/definitions/TagKey'
         description: The name assigned to the tag that you create.
       Value:
-        $ref: "#/definitions/TagValue"
-        description: This property contains one or more values that you assigned to the key
-          name you create.
-    description: Creates a key-value pair for a specific resource. Tags are metadata that
-      you can use to search for and group a resource for various purposes. You
-      can apply tags to servers, users, and roles. A tag key can take more than
-      one value. For example, to group servers for accounting purposes, you
-      might create a tag called <code>Group</code> and assign the values
-      <code>Research</code> and <code>Accounting</code> to that group.
+        $ref: '#/definitions/TagValue'
+        description: This property contains one or more values that you assigned to the key name you create.
+    description: 'Creates a key-value pair for a specific resource. Tags are metadata that you can use to search for and group a resource for various purposes. You can apply tags to servers, users, and roles. A tag key can take more than one value. For example, to group servers for accounting purposes, you might create a tag called <code>Group</code> and assign the values <code>Research</code> and <code>Accounting</code> to that group.'
   TagKeys:
     type: array
     items:
-      $ref: "#/definitions/TagKey"
+      $ref: '#/definitions/TagKey'
     minItems: 1
     maxItems: 50
   UserPassword:

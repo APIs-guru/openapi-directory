@@ -1,40 +1,38 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  version: 2017-09-01
+  version: '2017-09-01'
   x-release: v4
   title: AWS Elemental MediaStore Data Plane
-  description: An AWS Elemental MediaStore asset is an object, similar to an object in the
-    Amazon S3 service. Objects are the fundamental entities that are stored in
-    AWS Elemental MediaStore.
+  description: 'An AWS Elemental MediaStore asset is an object, similar to an object in the Amazon S3 service. Objects are the fundamental entities that are stored in AWS Elemental MediaStore.'
   x-logo:
-    url: https://twitter.com/awscloud/profile_image?size=original
-    backgroundColor: "#FFFFFF"
-  termsOfService: https://aws.amazon.com/service-terms/
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
     name: Mike Ralphson
     email: mike.ralphson@gmail.com
-    url: https://github.com/mermade/aws2openapi
+    url: 'https://github.com/mermade/aws2openapi'
     x-twitter: PermittedSoc
   license:
     name: Apache 2.0 License
-    url: http://www.apache.org/licenses/
+    url: 'http://www.apache.org/licenses/'
   x-providerName: amazonaws.com
   x-serviceName: mediastore-data
   x-origin:
     - contentType: application/json
-      url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/mediastore-data-2017-09-01.normal.json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/mediastore-data-2017-09-01.normal.json'
       converter:
-        url: https://github.com/mermade/aws2openapi
+        url: 'https://github.com/mermade/aws2openapi'
         version: 1.0.0
       x-apisguru-direct: true
   x-apiClientRegistration:
-    url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
   x-preferred: true
 externalDocs:
   description: Amazon Web Services documentation
-  url: https://docs.aws.amazon.com/mediastore/
+  url: 'https://docs.aws.amazon.com/mediastore/'
 host: data.mediastore.amazonaws.com
 basePath: /
 schemes:
@@ -90,186 +88,135 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  "/{Path}":
+  '/{Path}':
     delete:
       operationId: DeleteObject
       description: Deletes an object at the specified path.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DeleteObjectResponse"
-        "480":
+            $ref: '#/definitions/DeleteObjectResponse'
+        '480':
           description: ContainerNotFoundException
           schema:
-            $ref: "#/definitions/ContainerNotFoundException"
-        "481":
+            $ref: '#/definitions/ContainerNotFoundException'
+        '481':
           description: ObjectNotFoundException
           schema:
-            $ref: "#/definitions/ObjectNotFoundException"
-        "482":
+            $ref: '#/definitions/ObjectNotFoundException'
+        '482':
           description: InternalServerError
           schema:
-            $ref: "#/definitions/InternalServerError"
+            $ref: '#/definitions/InternalServerError'
       parameters:
         - name: Path
           in: path
           required: true
-          description: "The path (including the file name) where the object is stored in
-            the container. Format: &lt;folder name&gt;/&lt;folder
-            name&gt;/&lt;file name&gt;"
+          description: 'The path (including the file name) where the object is stored in the container. Format: &lt;folder name&gt;/&lt;folder name&gt;/&lt;file name&gt;'
           type: string
-          pattern: (?:[A-Za-z0-9_\.\-\~]+/){0,10}[A-Za-z0-9_\.\-\~]+
+          pattern: '(?:[A-Za-z0-9_\.\-\~]+/){0,10}[A-Za-z0-9_\.\-\~]+'
           minLength: 1
           maxLength: 900
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     head:
       operationId: DescribeObject
       description: Gets the headers for an object at the specified path.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DescribeObjectResponse"
-        "480":
+            $ref: '#/definitions/DescribeObjectResponse'
+        '480':
           description: ContainerNotFoundException
           schema:
-            $ref: "#/definitions/ContainerNotFoundException"
-        "481":
+            $ref: '#/definitions/ContainerNotFoundException'
+        '481':
           description: ObjectNotFoundException
           schema:
-            $ref: "#/definitions/ObjectNotFoundException"
-        "482":
+            $ref: '#/definitions/ObjectNotFoundException'
+        '482':
           description: InternalServerError
           schema:
-            $ref: "#/definitions/InternalServerError"
+            $ref: '#/definitions/InternalServerError'
       parameters:
         - name: Path
           in: path
           required: true
-          description: "The path (including the file name) where the object is stored in
-            the container. Format: &lt;folder name&gt;/&lt;folder
-            name&gt;/&lt;file name&gt;"
+          description: 'The path (including the file name) where the object is stored in the container. Format: &lt;folder name&gt;/&lt;folder name&gt;/&lt;file name&gt;'
           type: string
-          pattern: (?:[A-Za-z0-9_\.\-\~]+/){0,10}[A-Za-z0-9_\.\-\~]+
+          pattern: '(?:[A-Za-z0-9_\.\-\~]+/){0,10}[A-Za-z0-9_\.\-\~]+'
           minLength: 1
           maxLength: 900
     get:
       operationId: GetObject
       description: Downloads the object at the specified path.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/GetObjectResponse"
-        "480":
+            $ref: '#/definitions/GetObjectResponse'
+        '480':
           description: ContainerNotFoundException
           schema:
-            $ref: "#/definitions/ContainerNotFoundException"
-        "481":
+            $ref: '#/definitions/ContainerNotFoundException'
+        '481':
           description: ObjectNotFoundException
           schema:
-            $ref: "#/definitions/ObjectNotFoundException"
-        "482":
+            $ref: '#/definitions/ObjectNotFoundException'
+        '482':
           description: RequestedRangeNotSatisfiableException
           schema:
-            $ref: "#/definitions/RequestedRangeNotSatisfiableException"
-        "483":
+            $ref: '#/definitions/RequestedRangeNotSatisfiableException'
+        '483':
           description: InternalServerError
           schema:
-            $ref: "#/definitions/InternalServerError"
+            $ref: '#/definitions/InternalServerError'
       parameters:
         - name: Path
           in: path
           required: true
-          description: "<p>The path (including the file name) where the object is stored in
-            the container. Format: &lt;folder name&gt;/&lt;folder
-            name&gt;/&lt;file name&gt;</p> <p>For example, to upload the file
-            <code>mlaw.avi</code> to the folder path
-            <code>premium\\canada</code> in the container <code>movies</code>,
-            enter the path <code>premium/canada/mlaw.avi</code>.</p> <p>Do not
-            include the container name in this path.</p> <p>If the path includes
-            any folders that don't exist yet, the service creates them. For
-            example, suppose you have an existing <code>premium/usa</code>
-            subfolder. If you specify <code>premium/canada</code>, the service
-            creates a <code>canada</code> subfolder in the <code>premium</code>
-            folder. You then have two subfolders, <code>usa</code> and
-            <code>canada</code>, in the <code>premium</code> folder. </p>
-            <p>There is no correlation between the path to the source and the
-            path (folders) in the container in AWS Elemental MediaStore.</p>
-            <p>For more information about folders and how they exist in a
-            container, see the <a
-            href=\"http://docs.aws.amazon.com/mediastore/latest/ug/\">AWS
-            Elemental MediaStore User Guide</a>.</p> <p>The file name is the
-            name that is assigned to the file that you upload. The file can have
-            the same name inside and outside of AWS Elemental MediaStore, or it
-            can have the same name. The file name can include or omit an
-            extension. </p>"
+          description: '<p>The path (including the file name) where the object is stored in the container. Format: &lt;folder name&gt;/&lt;folder name&gt;/&lt;file name&gt;</p> <p>For example, to upload the file <code>mlaw.avi</code> to the folder path <code>premium\canada</code> in the container <code>movies</code>, enter the path <code>premium/canada/mlaw.avi</code>.</p> <p>Do not include the container name in this path.</p> <p>If the path includes any folders that don''t exist yet, the service creates them. For example, suppose you have an existing <code>premium/usa</code> subfolder. If you specify <code>premium/canada</code>, the service creates a <code>canada</code> subfolder in the <code>premium</code> folder. You then have two subfolders, <code>usa</code> and <code>canada</code>, in the <code>premium</code> folder. </p> <p>There is no correlation between the path to the source and the path (folders) in the container in AWS Elemental MediaStore.</p> <p>For more information about folders and how they exist in a container, see the <a href="http://docs.aws.amazon.com/mediastore/latest/ug/">AWS Elemental MediaStore User Guide</a>.</p> <p>The file name is the name that is assigned to the file that you upload. The file can have the same name inside and outside of AWS Elemental MediaStore, or it can have the same name. The file name can include or omit an extension. </p>'
           type: string
-          pattern: (?:[A-Za-z0-9_\.\-\~]+/){0,10}[A-Za-z0-9_\.\-\~]+
+          pattern: '(?:[A-Za-z0-9_\.\-\~]+/){0,10}[A-Za-z0-9_\.\-\~]+'
           minLength: 1
           maxLength: 900
         - name: Range
           in: header
           required: false
-          description: The range bytes of an object to retrieve. For more information about
-            the <code>Range</code> header, go to <a
-            href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35">http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35</a>.
+          description: 'The range bytes of an object to retrieve. For more information about the <code>Range</code> header, go to <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35">http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35</a>.'
           type: string
-          pattern: ^bytes=(?:\d+\-\d*|\d*\-\d+)$
+          pattern: '^bytes=(?:\d+\-\d*|\d*\-\d+)$'
     put:
       operationId: PutObject
-      description: Uploads an object to the specified path. Object sizes are limited to 25
-        MB.
+      description: Uploads an object to the specified path. Object sizes are limited to 25 MB.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/PutObjectResponse"
-        "480":
+            $ref: '#/definitions/PutObjectResponse'
+        '480':
           description: ContainerNotFoundException
           schema:
-            $ref: "#/definitions/ContainerNotFoundException"
-        "481":
+            $ref: '#/definitions/ContainerNotFoundException'
+        '481':
           description: InternalServerError
           schema:
-            $ref: "#/definitions/InternalServerError"
+            $ref: '#/definitions/InternalServerError'
       parameters:
         - name: Path
           in: path
           required: true
-          description: "<p>The path (including the file name) where the object is stored in
-            the container. Format: &lt;folder name&gt;/&lt;folder
-            name&gt;/&lt;file name&gt;</p> <p>For example, to upload the file
-            <code>mlaw.avi</code> to the folder path
-            <code>premium\\canada</code> in the container <code>movies</code>,
-            enter the path <code>premium/canada/mlaw.avi</code>.</p> <p>Do not
-            include the container name in this path.</p> <p>If the path includes
-            any folders that don't exist yet, the service creates them. For
-            example, suppose you have an existing <code>premium/usa</code>
-            subfolder. If you specify <code>premium/canada</code>, the service
-            creates a <code>canada</code> subfolder in the <code>premium</code>
-            folder. You then have two subfolders, <code>usa</code> and
-            <code>canada</code>, in the <code>premium</code> folder. </p>
-            <p>There is no correlation between the path to the source and the
-            path (folders) in the container in AWS Elemental MediaStore.</p>
-            <p>For more information about folders and how they exist in a
-            container, see the <a
-            href=\"http://docs.aws.amazon.com/mediastore/latest/ug/\">AWS
-            Elemental MediaStore User Guide</a>.</p> <p>The file name is the
-            name that is assigned to the file that you upload. The file can have
-            the same name inside and outside of AWS Elemental MediaStore, or it
-            can have the same name. The file name can include or omit an
-            extension. </p>"
+          description: '<p>The path (including the file name) where the object is stored in the container. Format: &lt;folder name&gt;/&lt;folder name&gt;/&lt;file name&gt;</p> <p>For example, to upload the file <code>mlaw.avi</code> to the folder path <code>premium\canada</code> in the container <code>movies</code>, enter the path <code>premium/canada/mlaw.avi</code>.</p> <p>Do not include the container name in this path.</p> <p>If the path includes any folders that don''t exist yet, the service creates them. For example, suppose you have an existing <code>premium/usa</code> subfolder. If you specify <code>premium/canada</code>, the service creates a <code>canada</code> subfolder in the <code>premium</code> folder. You then have two subfolders, <code>usa</code> and <code>canada</code>, in the <code>premium</code> folder. </p> <p>There is no correlation between the path to the source and the path (folders) in the container in AWS Elemental MediaStore.</p> <p>For more information about folders and how they exist in a container, see the <a href="http://docs.aws.amazon.com/mediastore/latest/ug/">AWS Elemental MediaStore User Guide</a>.</p> <p>The file name is the name that is assigned to the file that you upload. The file can have the same name inside and outside of AWS Elemental MediaStore, or it can have the same name. The file name can include or omit an extension. </p>'
           type: string
-          pattern: (?:[A-Za-z0-9_\.\-\~]+/){0,10}[A-Za-z0-9_\.\-\~]+
+          pattern: '(?:[A-Za-z0-9_\.\-\~]+/){0,10}[A-Za-z0-9_\.\-\~]+'
           minLength: 1
           maxLength: 900
         - name: Content-Type
@@ -277,22 +224,16 @@ paths:
           required: false
           description: The content type of the object.
           type: string
-          pattern: ^[\w\-\/\.\+]{1,255}$
+          pattern: '^[\w\-\/\.\+]{1,255}$'
         - name: Cache-Control
           in: header
           required: false
-          description: <p>An optional <code>CacheControl</code> header that allows the
-            caller to control the object's cache behavior. Headers can be passed
-            in as specified in the HTTP at <a
-            href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9">https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9</a>.</p>
-            <p>Headers with a custom user-defined value are also accepted.</p>
+          description: '<p>An optional <code>CacheControl</code> header that allows the caller to control the object''s cache behavior. Headers can be passed in as specified in the HTTP at <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9">https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9</a>.</p> <p>Headers with a custom user-defined value are also accepted.</p>'
           type: string
         - name: x-amz-storage-class
           in: header
           required: false
-          description: Indicates the storage class of a <code>Put</code> request. Defaults
-            to high-performance temporal storage class, and objects are
-            persisted into durable storage shortly after being received.
+          description: 'Indicates the storage class of a <code>Put</code> request. Defaults to high-performance temporal storage class, and objects are persisted into durable storage shortly after being received.'
           type: string
           enum:
             - TEMPORAL
@@ -307,71 +248,54 @@ paths:
               - Body
             properties:
               Body:
-                description: "The bytes to be stored. "
+                description: 'The bytes to be stored. '
                 type: string
   /:
     get:
       operationId: ListItems
-      description: Provides a list of metadata entries about folders and objects in the
-        specified folder.
+      description: Provides a list of metadata entries about folders and objects in the specified folder.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/ListItemsResponse"
-        "480":
+            $ref: '#/definitions/ListItemsResponse'
+        '480':
           description: ContainerNotFoundException
           schema:
-            $ref: "#/definitions/ContainerNotFoundException"
-        "481":
+            $ref: '#/definitions/ContainerNotFoundException'
+        '481':
           description: InternalServerError
           schema:
-            $ref: "#/definitions/InternalServerError"
+            $ref: '#/definitions/InternalServerError'
       parameters:
         - name: Path
           in: query
           required: false
-          description: "The path in the container from which to retrieve items. Format:
-            &lt;folder name&gt;/&lt;folder name&gt;/&lt;file name&gt;"
+          description: 'The path in the container from which to retrieve items. Format: &lt;folder name&gt;/&lt;folder name&gt;/&lt;file name&gt;'
           type: string
-          pattern: /?(?:[A-Za-z0-9_\.\-\~]+/){0,10}(?:[A-Za-z0-9_\.\-\~]+)?/?
+          pattern: '/?(?:[A-Za-z0-9_\.\-\~]+/){0,10}(?:[A-Za-z0-9_\.\-\~]+)?/?'
           minLength: 0
           maxLength: 900
         - name: MaxResults
           in: query
           required: false
-          description: <p>The maximum number of results to return per API request. For
-            example, you submit a <code>ListItems</code> request with
-            <code>MaxResults</code> set at 500. Although 2,000 items match your
-            request, the service returns no more than the first 500 items. (The
-            service also returns a <code>NextToken</code> value that you can use
-            to fetch the next batch of results.) The service might return fewer
-            results than the <code>MaxResults</code> value.</p> <p>If
-            <code>MaxResults</code> is not included in the request, the service
-            defaults to pagination with a maximum of 1,000 results per page.</p>
+          description: '<p>The maximum number of results to return per API request. For example, you submit a <code>ListItems</code> request with <code>MaxResults</code> set at 500. Although 2,000 items match your request, the service returns no more than the first 500 items. (The service also returns a <code>NextToken</code> value that you can use to fetch the next batch of results.) The service might return fewer results than the <code>MaxResults</code> value.</p> <p>If <code>MaxResults</code> is not included in the request, the service defaults to pagination with a maximum of 1,000 results per page.</p>'
           type: integer
           minimum: 1
           maximum: 1000
         - name: NextToken
           in: query
           required: false
-          description: <p>The token that identifies which batch of results that you want to
-            see. For example, you submit a <code>ListItems</code> request with
-            <code>MaxResults</code> set at 500. The service returns the first
-            batch of results (up to 500) and a <code>NextToken</code> value. To
-            see the next batch of results, you can submit the
-            <code>ListItems</code> request a second time and specify the
-            <code>NextToken</code> value.</p> <p>Tokens expire after 15
-            minutes.</p>
+          description: '<p>The token that identifies which batch of results that you want to see. For example, you submit a <code>ListItems</code> request with <code>MaxResults</code> set at 500. The service returns the first batch of results (up to 500) and a <code>NextToken</code> value. To see the next batch of results, you can submit the <code>ListItems</code> request a second time and specify the <code>NextToken</code> value.</p> <p>Tokens expire after 15 minutes.</p>'
           type: string
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
   DeleteObjectResponse:
     type: object
@@ -386,50 +310,42 @@ definitions:
     type: object
     properties:
       Body:
-        $ref: "#/definitions/PayloadBlob"
-        description: "The bytes of the object. "
+        $ref: '#/definitions/PayloadBlob'
+        description: 'The bytes of the object. '
       StatusCode:
-        $ref: "#/definitions/statusCode"
-        description: The HTML status code of the request. Status codes ranging from 200 to
-          299 indicate success. All other status codes indicate the type of
-          error that occurred.
+        $ref: '#/definitions/statusCode'
+        description: The HTML status code of the request. Status codes ranging from 200 to 299 indicate success. All other status codes indicate the type of error that occurred.
   RequestedRangeNotSatisfiableException: {}
   ListItemsResponse:
     type: object
     properties:
       Items:
-        $ref: "#/definitions/ItemList"
+        $ref: '#/definitions/ItemList'
         description: The metadata entries for the folders and objects at the requested path.
       NextToken:
-        $ref: "#/definitions/PaginationToken"
-        description: The token that can be used in a request to view the next set of
-          results. For example, you submit a <code>ListItems</code> request that
-          matches 2,000 items with <code>MaxResults</code> set at 500. The
-          service returns the first batch of results (up to 500) and a
-          <code>NextToken</code> value that can be used to fetch the next batch
-          of results.
+        $ref: '#/definitions/PaginationToken'
+        description: 'The token that can be used in a request to view the next set of results. For example, you submit a <code>ListItems</code> request that matches 2,000 items with <code>MaxResults</code> set at 500. The service returns the first batch of results (up to 500) and a <code>NextToken</code> value that can be used to fetch the next batch of results.'
   PutObjectResponse:
     type: object
     properties:
       ContentSHA256:
-        $ref: "#/definitions/SHA256Hash"
+        $ref: '#/definitions/SHA256Hash'
         description: The SHA256 digest of the object that is persisted.
       ETag:
-        $ref: "#/definitions/ETag"
+        $ref: '#/definitions/ETag'
         description: Unique identifier of the object in the container.
       StorageClass:
-        $ref: "#/definitions/StorageClass"
-        description: The storage class where the object was persisted. The class should be
-          “Temporal”.
+        $ref: '#/definitions/StorageClass'
+        description: The storage class where the object was persisted. The class should be “Temporal”.
   ContentRangePattern:
     type: string
     pattern: ^bytes=\d+\-\d+/\d+$
   ContentType:
     type: string
-    pattern: ^[\w\-\/\.\+]{1,255}$
+    pattern: '^[\w\-\/\.\+]{1,255}$'
   PathNaming:
     type: string
-    pattern: (?:[A-Za-z0-9_\.\-\~]+/){0,10}[A-Za-z0-9_\.\-\~]+
+    pattern: '(?:[A-Za-z0-9_\.\-\~]+/){0,10}[A-Za-z0-9_\.\-\~]+'
     minLength: 1
     maxLength: 900
   DeleteObjectRequest:
@@ -440,7 +356,7 @@ definitions:
     properties: {}
   ETag:
     type: string
-    pattern: "[0-9A-Fa-f]+"
+    pattern: '[0-9A-Fa-f]+'
     minLength: 1
     maxLength: 64
   NonNegativeLong:
@@ -453,7 +369,7 @@ definitions:
     format: date-time
   RangePattern:
     type: string
-    pattern: ^bytes=(?:\d+\-\d*|\d*\-\d+)$
+    pattern: '^bytes=(?:\d+\-\d*|\d*\-\d+)$'
   GetObjectRequest:
     type: object
     properties: {}
@@ -463,7 +379,7 @@ definitions:
     type: integer
   ItemName:
     type: string
-    pattern: "[A-Za-z0-9_\\.\\-\\~]+"
+    pattern: '[A-Za-z0-9_\.\-\~]+'
   ItemType:
     type: string
     enum:
@@ -473,31 +389,31 @@ definitions:
     type: object
     properties:
       Name:
-        $ref: "#/definitions/ItemName"
+        $ref: '#/definitions/ItemName'
         description: The name of the item.
       Type:
-        $ref: "#/definitions/ItemType"
+        $ref: '#/definitions/ItemType'
         description: The item type (folder or object).
       ETag:
-        $ref: "#/definitions/ETag"
+        $ref: '#/definitions/ETag'
         description: The ETag that represents a unique instance of the item.
       LastModified:
-        $ref: "#/definitions/TimeStamp"
+        $ref: '#/definitions/TimeStamp'
         description: The date and time that the item was last modified.
       ContentType:
-        $ref: "#/definitions/ContentType"
+        $ref: '#/definitions/ContentType'
         description: The content type of the item.
       ContentLength:
-        $ref: "#/definitions/NonNegativeLong"
+        $ref: '#/definitions/NonNegativeLong'
         description: The length of the item in bytes.
     description: A metadata entry for a folder or object.
   ItemList:
     type: array
     items:
-      $ref: "#/definitions/Item"
+      $ref: '#/definitions/Item'
   ListPathNaming:
     type: string
-    pattern: /?(?:[A-Za-z0-9_\.\-\~]+/){0,10}(?:[A-Za-z0-9_\.\-\~]+)?/?
+    pattern: '/?(?:[A-Za-z0-9_\.\-\~]+/){0,10}(?:[A-Za-z0-9_\.\-\~]+)?/?'
     minLength: 0
     maxLength: 900
   ListLimit:
@@ -521,10 +437,10 @@ definitions:
       - Body
     properties:
       Body:
-        $ref: "#/definitions/PayloadBlob"
-        description: "The bytes to be stored. "
+        $ref: '#/definitions/PayloadBlob'
+        description: 'The bytes to be stored. '
   SHA256Hash:
     type: string
-    pattern: "[0-9A-Fa-f]{64}"
+    pattern: '[0-9A-Fa-f]{64}'
     minLength: 64
     maxLength: 64

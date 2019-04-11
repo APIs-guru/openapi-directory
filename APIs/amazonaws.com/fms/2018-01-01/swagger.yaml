@@ -1,44 +1,38 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  version: 2018-01-01
+  version: '2018-01-01'
   x-release: v4
   title: Firewall Management Service
-  description: <fullname>AWS Firewall Manager</fullname> <p>This is the <i>AWS Firewall
-    Manager API Reference</i>. This guide is for developers who need detailed
-    information about the AWS Firewall Manager API actions, data types, and
-    errors. For detailed information about AWS Firewall Manager features, see
-    the <a
-    href="https://docs.aws.amazon.com/waf/latest/developerguide/fms-chapter.html">AWS
-    Firewall Manager Developer Guide</a>.</p>
+  description: '<fullname>AWS Firewall Manager</fullname> <p>This is the <i>AWS Firewall Manager API Reference</i>. This guide is for developers who need detailed information about the AWS Firewall Manager API actions, data types, and errors. For detailed information about AWS Firewall Manager features, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/fms-chapter.html">AWS Firewall Manager Developer Guide</a>.</p>'
   x-logo:
-    url: https://twitter.com/awscloud/profile_image?size=original
-    backgroundColor: "#FFFFFF"
-  termsOfService: https://aws.amazon.com/service-terms/
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
     name: Mike Ralphson
     email: mike.ralphson@gmail.com
-    url: https://github.com/mermade/aws2openapi
+    url: 'https://github.com/mermade/aws2openapi'
     x-twitter: PermittedSoc
   license:
     name: Apache 2.0 License
-    url: http://www.apache.org/licenses/
+    url: 'http://www.apache.org/licenses/'
   x-providerName: amazonaws.com
   x-serviceName: fms
   x-origin:
     - contentType: application/json
-      url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/fms-2018-01-01.normal.json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/fms-2018-01-01.normal.json'
       converter:
-        url: https://github.com/mermade/aws2openapi
+        url: 'https://github.com/mermade/aws2openapi'
         version: 1.0.0
       x-apisguru-direct: true
   x-apiClientRegistration:
-    url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
   x-preferred: true
 externalDocs:
   description: Amazon Web Services documentation
-  url: https://docs.aws.amazon.com/fms/
+  url: 'https://docs.aws.amazon.com/fms/'
 host: fms.amazonaws.com
 basePath: /
 x-hasEquivalentPaths: true
@@ -95,42 +89,35 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /#X-Amz-Target=AWSFMS_20180101.AssociateAdminAccount:
+  '/#X-Amz-Target=AWSFMS_20180101.AssociateAdminAccount':
     post:
       operationId: AssociateAdminAccount
-      description: <p>Sets the AWS Firewall Manager administrator account. AWS Firewall
-        Manager must be associated with the master account your AWS organization
-        or associated with a member account that has the appropriate
-        permissions. If the account ID that you submit is not an AWS
-        Organizations master account, AWS Firewall Manager will set the
-        appropriate permissions for the given member account.</p> <p>The account
-        that you associate with AWS Firewall Manager is called the AWS Firewall
-        Manager administrator account. </p>
+      description: '<p>Sets the AWS Firewall Manager administrator account. AWS Firewall Manager must be associated with the master account your AWS organization or associated with a member account that has the appropriate permissions. If the account ID that you submit is not an AWS Organizations master account, AWS Firewall Manager will set the appropriate permissions for the given member account.</p> <p>The account that you associate with AWS Firewall Manager is called the AWS Firewall Manager administrator account. </p>'
       responses:
-        "200":
+        '200':
           description: Success
-        "480":
+        '480':
           description: InvalidOperationException
           schema:
-            $ref: "#/definitions/InvalidOperationException"
-        "481":
+            $ref: '#/definitions/InvalidOperationException'
+        '481':
           description: InvalidInputException
           schema:
-            $ref: "#/definitions/InvalidInputException"
-        "482":
+            $ref: '#/definitions/InvalidInputException'
+        '482':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
-        "483":
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
           description: InternalErrorException
           schema:
-            $ref: "#/definitions/InternalErrorException"
+            $ref: '#/definitions/InternalErrorException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/AssociateAdminAccountRequest"
+            $ref: '#/definitions/AssociateAdminAccountRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -138,40 +125,38 @@ paths:
           enum:
             - AWSFMS_20180101.AssociateAdminAccount
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AWSFMS_20180101.DeleteNotificationChannel:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSFMS_20180101.DeleteNotificationChannel':
     post:
       operationId: DeleteNotificationChannel
-      description: Deletes an AWS Firewall Manager association with the IAM role and the
-        Amazon Simple Notification Service (SNS) topic that is used to record
-        AWS Firewall Manager SNS logs.
+      description: Deletes an AWS Firewall Manager association with the IAM role and the Amazon Simple Notification Service (SNS) topic that is used to record AWS Firewall Manager SNS logs.
       responses:
-        "200":
+        '200':
           description: Success
-        "480":
+        '480':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
-        "481":
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
           description: InvalidOperationException
           schema:
-            $ref: "#/definitions/InvalidOperationException"
-        "482":
+            $ref: '#/definitions/InvalidOperationException'
+        '482':
           description: InternalErrorException
           schema:
-            $ref: "#/definitions/InternalErrorException"
+            $ref: '#/definitions/InternalErrorException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/DeleteNotificationChannelRequest"
+            $ref: '#/definitions/DeleteNotificationChannelRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -179,38 +164,38 @@ paths:
           enum:
             - AWSFMS_20180101.DeleteNotificationChannel
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AWSFMS_20180101.DeletePolicy:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSFMS_20180101.DeletePolicy':
     post:
       operationId: DeletePolicy
-      description: "Permanently deletes an AWS Firewall Manager policy. "
+      description: 'Permanently deletes an AWS Firewall Manager policy. '
       responses:
-        "200":
+        '200':
           description: Success
-        "480":
+        '480':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
-        "481":
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
           description: InvalidOperationException
           schema:
-            $ref: "#/definitions/InvalidOperationException"
-        "482":
+            $ref: '#/definitions/InvalidOperationException'
+        '482':
           description: InternalErrorException
           schema:
-            $ref: "#/definitions/InternalErrorException"
+            $ref: '#/definitions/InternalErrorException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/DeletePolicyRequest"
+            $ref: '#/definitions/DeletePolicyRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -218,40 +203,38 @@ paths:
           enum:
             - AWSFMS_20180101.DeletePolicy
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AWSFMS_20180101.DisassociateAdminAccount:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSFMS_20180101.DisassociateAdminAccount':
     post:
       operationId: DisassociateAdminAccount
-      description: Disassociates the account that has been set as the AWS Firewall Manager
-        administrator account. To set a different account as the administrator
-        account, you must submit an <code>AssociateAdminAccount</code> request .
+      description: 'Disassociates the account that has been set as the AWS Firewall Manager administrator account. To set a different account as the administrator account, you must submit an <code>AssociateAdminAccount</code> request .'
       responses:
-        "200":
+        '200':
           description: Success
-        "480":
+        '480':
           description: InvalidOperationException
           schema:
-            $ref: "#/definitions/InvalidOperationException"
-        "481":
+            $ref: '#/definitions/InvalidOperationException'
+        '481':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
-        "482":
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
           description: InternalErrorException
           schema:
-            $ref: "#/definitions/InternalErrorException"
+            $ref: '#/definitions/InternalErrorException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/DisassociateAdminAccountRequest"
+            $ref: '#/definitions/DisassociateAdminAccountRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -259,41 +242,40 @@ paths:
           enum:
             - AWSFMS_20180101.DisassociateAdminAccount
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AWSFMS_20180101.GetAdminAccount:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSFMS_20180101.GetAdminAccount':
     post:
       operationId: GetAdminAccount
-      description: Returns the AWS Organizations master account that is associated with AWS
-        Firewall Manager as the AWS Firewall Manager administrator.
+      description: Returns the AWS Organizations master account that is associated with AWS Firewall Manager as the AWS Firewall Manager administrator.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/GetAdminAccountResponse"
-        "480":
+            $ref: '#/definitions/GetAdminAccountResponse'
+        '480':
           description: InvalidOperationException
           schema:
-            $ref: "#/definitions/InvalidOperationException"
-        "481":
+            $ref: '#/definitions/InvalidOperationException'
+        '481':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
-        "482":
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
           description: InternalErrorException
           schema:
-            $ref: "#/definitions/InternalErrorException"
+            $ref: '#/definitions/InternalErrorException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/GetAdminAccountRequest"
+            $ref: '#/definitions/GetAdminAccountRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -301,39 +283,36 @@ paths:
           enum:
             - AWSFMS_20180101.GetAdminAccount
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AWSFMS_20180101.GetComplianceDetail:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSFMS_20180101.GetComplianceDetail':
     post:
       operationId: GetComplianceDetail
-      description: Returns detailed compliance information about the specified member
-        account. Details include resources that are in and out of compliance
-        with the specified policy. Resources are considered non-compliant if the
-        specified policy has not been applied to them.
+      description: Returns detailed compliance information about the specified member account. Details include resources that are in and out of compliance with the specified policy. Resources are considered non-compliant if the specified policy has not been applied to them.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/GetComplianceDetailResponse"
-        "480":
+            $ref: '#/definitions/GetComplianceDetailResponse'
+        '480':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
-        "481":
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
           description: InternalErrorException
           schema:
-            $ref: "#/definitions/InternalErrorException"
+            $ref: '#/definitions/InternalErrorException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/GetComplianceDetailRequest"
+            $ref: '#/definitions/GetComplianceDetailRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -341,41 +320,40 @@ paths:
           enum:
             - AWSFMS_20180101.GetComplianceDetail
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AWSFMS_20180101.GetNotificationChannel:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSFMS_20180101.GetNotificationChannel':
     post:
       operationId: GetNotificationChannel
-      description: Returns information about the Amazon Simple Notification Service (SNS)
-        topic that is used to record AWS Firewall Manager SNS logs.
+      description: Returns information about the Amazon Simple Notification Service (SNS) topic that is used to record AWS Firewall Manager SNS logs.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/GetNotificationChannelResponse"
-        "480":
+            $ref: '#/definitions/GetNotificationChannelResponse'
+        '480':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
-        "481":
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
           description: InvalidOperationException
           schema:
-            $ref: "#/definitions/InvalidOperationException"
-        "482":
+            $ref: '#/definitions/InvalidOperationException'
+        '482':
           description: InternalErrorException
           schema:
-            $ref: "#/definitions/InternalErrorException"
+            $ref: '#/definitions/InternalErrorException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/GetNotificationChannelRequest"
+            $ref: '#/definitions/GetNotificationChannelRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -383,44 +361,44 @@ paths:
           enum:
             - AWSFMS_20180101.GetNotificationChannel
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AWSFMS_20180101.GetPolicy:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSFMS_20180101.GetPolicy':
     post:
       operationId: GetPolicy
       description: Returns information about the specified AWS Firewall Manager policy.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/GetPolicyResponse"
-        "480":
+            $ref: '#/definitions/GetPolicyResponse'
+        '480':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
-        "481":
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
           description: InvalidOperationException
           schema:
-            $ref: "#/definitions/InvalidOperationException"
-        "482":
+            $ref: '#/definitions/InvalidOperationException'
+        '482':
           description: InternalErrorException
           schema:
-            $ref: "#/definitions/InternalErrorException"
-        "483":
+            $ref: '#/definitions/InternalErrorException'
+        '483':
           description: InvalidTypeException
           schema:
-            $ref: "#/definitions/InvalidTypeException"
+            $ref: '#/definitions/InvalidTypeException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/GetPolicyRequest"
+            $ref: '#/definitions/GetPolicyRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -428,41 +406,40 @@ paths:
           enum:
             - AWSFMS_20180101.GetPolicy
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AWSFMS_20180101.GetProtectionStatus:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSFMS_20180101.GetProtectionStatus':
     post:
       operationId: GetProtectionStatus
-      description: If you created a Shield Advanced policy, returns policy-level attack
-        summary information in the event of a potential DDoS attack.
+      description: 'If you created a Shield Advanced policy, returns policy-level attack summary information in the event of a potential DDoS attack.'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/GetProtectionStatusResponse"
-        "480":
+            $ref: '#/definitions/GetProtectionStatusResponse'
+        '480':
           description: InvalidInputException
           schema:
-            $ref: "#/definitions/InvalidInputException"
-        "481":
+            $ref: '#/definitions/InvalidInputException'
+        '481':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
-        "482":
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
           description: InternalErrorException
           schema:
-            $ref: "#/definitions/InternalErrorException"
+            $ref: '#/definitions/InternalErrorException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/GetProtectionStatusRequest"
+            $ref: '#/definitions/GetProtectionStatusRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -470,38 +447,36 @@ paths:
           enum:
             - AWSFMS_20180101.GetProtectionStatus
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AWSFMS_20180101.ListComplianceStatus:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSFMS_20180101.ListComplianceStatus':
     post:
       operationId: ListComplianceStatus
-      description: "Returns an array of <code>PolicyComplianceStatus</code> objects in the
-        response. Use <code>PolicyComplianceStatus</code> to get a summary of
-        which member accounts are protected by the specified policy. "
+      description: 'Returns an array of <code>PolicyComplianceStatus</code> objects in the response. Use <code>PolicyComplianceStatus</code> to get a summary of which member accounts are protected by the specified policy. '
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/ListComplianceStatusResponse"
-        "480":
+            $ref: '#/definitions/ListComplianceStatusResponse'
+        '480':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
-        "481":
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
           description: InternalErrorException
           schema:
-            $ref: "#/definitions/InternalErrorException"
+            $ref: '#/definitions/InternalErrorException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/ListComplianceStatusRequest"
+            $ref: '#/definitions/ListComplianceStatusRequest'
         - name: MaxResults
           type: string
           in: query
@@ -519,39 +494,36 @@ paths:
           enum:
             - AWSFMS_20180101.ListComplianceStatus
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AWSFMS_20180101.ListMemberAccounts:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSFMS_20180101.ListMemberAccounts':
     post:
       operationId: ListMemberAccounts
-      description: <p>Returns a <code>MemberAccounts</code> object that lists the member
-        accounts in the administrator's AWS organization.</p> <p>The
-        <code>ListMemberAccounts</code> must be submitted by the account that is
-        set as the AWS Firewall Manager administrator.</p>
+      description: <p>Returns a <code>MemberAccounts</code> object that lists the member accounts in the administrator's AWS organization.</p> <p>The <code>ListMemberAccounts</code> must be submitted by the account that is set as the AWS Firewall Manager administrator.</p>
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/ListMemberAccountsResponse"
-        "480":
+            $ref: '#/definitions/ListMemberAccountsResponse'
+        '480':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
-        "481":
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
           description: InternalErrorException
           schema:
-            $ref: "#/definitions/InternalErrorException"
+            $ref: '#/definitions/InternalErrorException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/ListMemberAccountsRequest"
+            $ref: '#/definitions/ListMemberAccountsRequest'
         - name: MaxResults
           type: string
           in: query
@@ -569,44 +541,44 @@ paths:
           enum:
             - AWSFMS_20180101.ListMemberAccounts
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AWSFMS_20180101.ListPolicies:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSFMS_20180101.ListPolicies':
     post:
       operationId: ListPolicies
       description: Returns an array of <code>PolicySummary</code> objects in the response.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/ListPoliciesResponse"
-        "480":
+            $ref: '#/definitions/ListPoliciesResponse'
+        '480':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
-        "481":
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
           description: InvalidOperationException
           schema:
-            $ref: "#/definitions/InvalidOperationException"
-        "482":
+            $ref: '#/definitions/InvalidOperationException'
+        '482':
           description: LimitExceededException
           schema:
-            $ref: "#/definitions/LimitExceededException"
-        "483":
+            $ref: '#/definitions/LimitExceededException'
+        '483':
           description: InternalErrorException
           schema:
-            $ref: "#/definitions/InternalErrorException"
+            $ref: '#/definitions/InternalErrorException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/ListPoliciesRequest"
+            $ref: '#/definitions/ListPoliciesRequest'
         - name: MaxResults
           type: string
           in: query
@@ -624,39 +596,38 @@ paths:
           enum:
             - AWSFMS_20180101.ListPolicies
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AWSFMS_20180101.PutNotificationChannel:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSFMS_20180101.PutNotificationChannel':
     post:
       operationId: PutNotificationChannel
-      description: Designates the IAM role and Amazon Simple Notification Service (SNS)
-        topic that AWS Firewall Manager uses to record SNS logs.
+      description: Designates the IAM role and Amazon Simple Notification Service (SNS) topic that AWS Firewall Manager uses to record SNS logs.
       responses:
-        "200":
+        '200':
           description: Success
-        "480":
+        '480':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
-        "481":
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
           description: InvalidOperationException
           schema:
-            $ref: "#/definitions/InvalidOperationException"
-        "482":
+            $ref: '#/definitions/InvalidOperationException'
+        '482':
           description: InternalErrorException
           schema:
-            $ref: "#/definitions/InternalErrorException"
+            $ref: '#/definitions/InternalErrorException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/PutNotificationChannelRequest"
+            $ref: '#/definitions/PutNotificationChannelRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -664,63 +635,52 @@ paths:
           enum:
             - AWSFMS_20180101.PutNotificationChannel
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AWSFMS_20180101.PutPolicy:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSFMS_20180101.PutPolicy':
     post:
       operationId: PutPolicy
-      description: '<p>Creates an AWS Firewall Manager policy.</p> <p>Firewall Manager
-        provides two types of policies: A Shield Advanced policy, which applies
-        Shield Advanced protection to specified accounts and resources, or a WAF
-        policy, which contains a rule group and defines which resources are to
-        be protected by that rule group. A policy is specific to either WAF or
-        Shield Advanced. If you want to enforce both WAF rules and Shield
-        Advanced protection across accounts, you can create multiple policies.
-        You can create one or more policies for WAF rules, and one or more
-        policies for Shield Advanced.</p> <p>You must be subscribed to Shield
-        Advanced to create a Shield Advanced policy. For more information on
-        subscribing to Shield Advanced, see <a
-        href="https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_CreateSubscription.html">CreateSubscription</a>.</p>'
+      description: '<p>Creates an AWS Firewall Manager policy.</p> <p>Firewall Manager provides two types of policies: A Shield Advanced policy, which applies Shield Advanced protection to specified accounts and resources, or a WAF policy, which contains a rule group and defines which resources are to be protected by that rule group. A policy is specific to either WAF or Shield Advanced. If you want to enforce both WAF rules and Shield Advanced protection across accounts, you can create multiple policies. You can create one or more policies for WAF rules, and one or more policies for Shield Advanced.</p> <p>You must be subscribed to Shield Advanced to create a Shield Advanced policy. For more information on subscribing to Shield Advanced, see <a href="https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_CreateSubscription.html">CreateSubscription</a>.</p>'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/PutPolicyResponse"
-        "480":
+            $ref: '#/definitions/PutPolicyResponse'
+        '480':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
-        "481":
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
           description: InvalidOperationException
           schema:
-            $ref: "#/definitions/InvalidOperationException"
-        "482":
+            $ref: '#/definitions/InvalidOperationException'
+        '482':
           description: InvalidInputException
           schema:
-            $ref: "#/definitions/InvalidInputException"
-        "483":
+            $ref: '#/definitions/InvalidInputException'
+        '483':
           description: LimitExceededException
           schema:
-            $ref: "#/definitions/LimitExceededException"
-        "484":
+            $ref: '#/definitions/LimitExceededException'
+        '484':
           description: InternalErrorException
           schema:
-            $ref: "#/definitions/InternalErrorException"
-        "485":
+            $ref: '#/definitions/InternalErrorException'
+        '485':
           description: InvalidTypeException
           schema:
-            $ref: "#/definitions/InvalidTypeException"
+            $ref: '#/definitions/InvalidTypeException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/PutPolicyRequest"
+            $ref: '#/definitions/PutPolicyRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -728,13 +688,13 @@ paths:
           enum:
             - AWSFMS_20180101.PutPolicy
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
   AssociateAdminAccountRequest:
     type: object
@@ -742,13 +702,8 @@ definitions:
       - AdminAccount
     properties:
       AdminAccount:
-        $ref: "#/definitions/AWSAccountId"
-        description: The AWS account ID to associate with AWS Firewall Manager as the AWS
-          Firewall Manager administrator account. This can be an AWS
-          Organizations master account or a member account. For more information
-          about AWS Organizations and master accounts, see <a
-          href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts.html">Managing
-          the AWS Accounts in Your Organization</a>.
+        $ref: '#/definitions/AWSAccountId'
+        description: 'The AWS account ID to associate with AWS Firewall Manager as the AWS Firewall Manager administrator account. This can be an AWS Organizations master account or a member account. For more information about AWS Organizations and master accounts, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts.html">Managing the AWS Accounts in Your Organization</a>.'
   InvalidOperationException: {}
   InvalidInputException: {}
   ResourceNotFoundException: {}
@@ -762,23 +717,11 @@ definitions:
       - PolicyId
     properties:
       PolicyId:
-        $ref: "#/definitions/PolicyId"
-        description: The ID of the policy that you want to delete. <code>PolicyId</code> is
-          returned by <code>PutPolicy</code> and by <code>ListPolicies</code>.
+        $ref: '#/definitions/PolicyId'
+        description: The ID of the policy that you want to delete. <code>PolicyId</code> is returned by <code>PutPolicy</code> and by <code>ListPolicies</code>.
       DeleteAllPolicyResources:
-        $ref: "#/definitions/Boolean"
-        description: <p>If <code>True</code>, the request will also perform a clean-up
-          process that will:</p> <ul> <li> <p>Delete rule groups created by AWS
-          Firewall Manager</p> </li> <li> <p>Remove web ACLs from in-scope
-          resources</p> </li> <li> <p>Delete web ACLs that contain no rules or
-          rule groups</p> </li> </ul> <p>After the cleanup, in-scope resources
-          will no longer be protected by web ACLs in this policy. Protection of
-          out-of-scope resources will remain unchanged. Scope is determined by
-          tags and accounts associated with the policy. When creating the
-          policy, if you specified that only resources in specific accounts or
-          with specific tags be protected by the policy, those resources are
-          in-scope. All others are out of scope. If you did not specify tags or
-          accounts, all resources are in-scope. </p>
+        $ref: '#/definitions/Boolean'
+        description: '<p>If <code>True</code>, the request will also perform a clean-up process that will:</p> <ul> <li> <p>Delete rule groups created by AWS Firewall Manager</p> </li> <li> <p>Remove web ACLs from in-scope resources</p> </li> <li> <p>Delete web ACLs that contain no rules or rule groups</p> </li> </ul> <p>After the cleanup, in-scope resources will no longer be protected by web ACLs in this policy. Protection of out-of-scope resources will remain unchanged. Scope is determined by tags and accounts associated with the policy. When creating the policy, if you specified that only resources in specific accounts or with specific tags be protected by the policy, those resources are in-scope. All others are out of scope. If you did not specify tags or accounts, all resources are in-scope. </p>'
   DisassociateAdminAccountRequest:
     type: object
     properties: {}
@@ -786,12 +729,11 @@ definitions:
     type: object
     properties:
       AdminAccount:
-        $ref: "#/definitions/AWSAccountId"
+        $ref: '#/definitions/AWSAccountId'
         description: The AWS account that is set as the AWS Firewall Manager administrator.
       RoleStatus:
-        $ref: "#/definitions/AccountRoleStatus"
-        description: The status of the AWS account that you set as the AWS Firewall Manager
-          administrator.
+        $ref: '#/definitions/AccountRoleStatus'
+        description: The status of the AWS account that you set as the AWS Firewall Manager administrator.
   GetAdminAccountRequest:
     type: object
     properties: {}
@@ -799,9 +741,8 @@ definitions:
     type: object
     properties:
       PolicyComplianceDetail:
-        $ref: "#/definitions/PolicyComplianceDetail"
-        description: Information about the resources and the policy that you specified in
-          the <code>GetComplianceDetail</code> request.
+        $ref: '#/definitions/PolicyComplianceDetail'
+        description: Information about the resources and the policy that you specified in the <code>GetComplianceDetail</code> request.
   GetComplianceDetailRequest:
     type: object
     required:
@@ -809,24 +750,20 @@ definitions:
       - MemberAccount
     properties:
       PolicyId:
-        $ref: "#/definitions/PolicyId"
-        description: The ID of the policy that you want to get the details for.
-          <code>PolicyId</code> is returned by <code>PutPolicy</code> and by
-          <code>ListPolicies</code>.
+        $ref: '#/definitions/PolicyId'
+        description: The ID of the policy that you want to get the details for. <code>PolicyId</code> is returned by <code>PutPolicy</code> and by <code>ListPolicies</code>.
       MemberAccount:
-        $ref: "#/definitions/AWSAccountId"
-        description: The AWS account that owns the resources that you want to get the
-          details for.
+        $ref: '#/definitions/AWSAccountId'
+        description: The AWS account that owns the resources that you want to get the details for.
   GetNotificationChannelResponse:
     type: object
     properties:
       SnsTopicArn:
-        $ref: "#/definitions/ResourceArn"
-        description: "The SNS topic that records AWS Firewall Manager activity. "
+        $ref: '#/definitions/ResourceArn'
+        description: 'The SNS topic that records AWS Firewall Manager activity. '
       SnsRoleName:
-        $ref: "#/definitions/ResourceArn"
-        description: The IAM role that is used by AWS Firewall Manager to record activity
-          to SNS.
+        $ref: '#/definitions/ResourceArn'
+        description: The IAM role that is used by AWS Firewall Manager to record activity to SNS.
   GetNotificationChannelRequest:
     type: object
     properties: {}
@@ -834,10 +771,10 @@ definitions:
     type: object
     properties:
       Policy:
-        $ref: "#/definitions/Policy"
+        $ref: '#/definitions/Policy'
         description: Information about the specified AWS Firewall Manager policy.
       PolicyArn:
-        $ref: "#/definitions/ResourceArn"
+        $ref: '#/definitions/ResourceArn'
         description: The Amazon Resource Name (ARN) of the specified policy.
   GetPolicyRequest:
     type: object
@@ -845,196 +782,106 @@ definitions:
       - PolicyId
     properties:
       PolicyId:
-        $ref: "#/definitions/PolicyId"
-        description: The ID of the AWS Firewall Manager policy that you want the details
-          for.
+        $ref: '#/definitions/PolicyId'
+        description: The ID of the AWS Firewall Manager policy that you want the details for.
   InvalidTypeException: {}
   GetProtectionStatusResponse:
     type: object
     properties:
       AdminAccountId:
-        $ref: "#/definitions/AWSAccountId"
+        $ref: '#/definitions/AWSAccountId'
         description: The ID of the AWS Firewall administrator account for this policy.
       ServiceType:
-        $ref: "#/definitions/SecurityServiceType"
-        description: The service type that is protected by the policy. Currently, this is
-          always <code>SHIELD_ADVANCED</code>.
+        $ref: '#/definitions/SecurityServiceType'
+        description: 'The service type that is protected by the policy. Currently, this is always <code>SHIELD_ADVANCED</code>.'
       Data:
-        $ref: "#/definitions/ProtectionData"
-        description: <p>Details about the attack, including the following:</p> <ul> <li>
-          <p>Attack type</p> </li> <li> <p>Account ID</p> </li> <li> <p>ARN of
-          the resource attacked</p> </li> <li> <p>Start time of the attack</p>
-          </li> <li> <p>End time of the attack (ongoing attacks will not have an
-          end time)</p> </li> </ul> <p>The details are in JSON format. An
-          example is shown in the Examples section below.</p>
+        $ref: '#/definitions/ProtectionData'
+        description: '<p>Details about the attack, including the following:</p> <ul> <li> <p>Attack type</p> </li> <li> <p>Account ID</p> </li> <li> <p>ARN of the resource attacked</p> </li> <li> <p>Start time of the attack</p> </li> <li> <p>End time of the attack (ongoing attacks will not have an end time)</p> </li> </ul> <p>The details are in JSON format. An example is shown in the Examples section below.</p>'
       NextToken:
-        $ref: "#/definitions/PaginationToken"
-        description: <p>If you have more objects than the number that you specified for
-          <code>MaxResults</code> in the request, the response includes a
-          <code>NextToken</code> value. To list more objects, submit another
-          <code>GetProtectionStatus</code> request, and specify the
-          <code>NextToken</code> value from the response in the
-          <code>NextToken</code> value in the next request.</p> <p>AWS SDKs
-          provide auto-pagination that identify <code>NextToken</code> in a
-          response and make subsequent request calls automatically on your
-          behalf. However, this feature is not supported by
-          <code>GetProtectionStatus</code>. You must submit subsequent requests
-          with <code>NextToken</code> using your own processes. </p>
+        $ref: '#/definitions/PaginationToken'
+        description: '<p>If you have more objects than the number that you specified for <code>MaxResults</code> in the request, the response includes a <code>NextToken</code> value. To list more objects, submit another <code>GetProtectionStatus</code> request, and specify the <code>NextToken</code> value from the response in the <code>NextToken</code> value in the next request.</p> <p>AWS SDKs provide auto-pagination that identify <code>NextToken</code> in a response and make subsequent request calls automatically on your behalf. However, this feature is not supported by <code>GetProtectionStatus</code>. You must submit subsequent requests with <code>NextToken</code> using your own processes. </p>'
   GetProtectionStatusRequest:
     type: object
     required:
       - PolicyId
     properties:
       PolicyId:
-        $ref: "#/definitions/PolicyId"
+        $ref: '#/definitions/PolicyId'
         description: The ID of the policy for which you want to get the attack information.
       MemberAccountId:
-        $ref: "#/definitions/AWSAccountId"
-        description: The AWS account that is in scope of the policy that you want to get
-          the details for.
+        $ref: '#/definitions/AWSAccountId'
+        description: The AWS account that is in scope of the policy that you want to get the details for.
       StartTime:
-        $ref: "#/definitions/TimeStamp"
-        description: The start of the time period to query for the attacks. This is a
-          <code>timestamp</code> type. The sample request above indicates a
-          number type because the default used by AWS Firewall Manager is Unix
-          time in seconds. However, any valid <code>timestamp</code> format is
-          allowed.
+        $ref: '#/definitions/TimeStamp'
+        description: 'The start of the time period to query for the attacks. This is a <code>timestamp</code> type. The sample request above indicates a number type because the default used by AWS Firewall Manager is Unix time in seconds. However, any valid <code>timestamp</code> format is allowed.'
       EndTime:
-        $ref: "#/definitions/TimeStamp"
-        description: The end of the time period to query for the attacks. This is a
-          <code>timestamp</code> type. The sample request above indicates a
-          number type because the default used by AWS Firewall Manager is Unix
-          time in seconds. However, any valid <code>timestamp</code> format is
-          allowed.
+        $ref: '#/definitions/TimeStamp'
+        description: 'The end of the time period to query for the attacks. This is a <code>timestamp</code> type. The sample request above indicates a number type because the default used by AWS Firewall Manager is Unix time in seconds. However, any valid <code>timestamp</code> format is allowed.'
       NextToken:
-        $ref: "#/definitions/PaginationToken"
-        description: If you specify a value for <code>MaxResults</code> and you have more
-          objects than the number that you specify for <code>MaxResults</code>,
-          AWS Firewall Manager returns a <code>NextToken</code> value in the
-          response that allows you to list another group of objects. For the
-          second and subsequent <code>GetProtectionStatus</code> requests,
-          specify the value of <code>NextToken</code> from the previous response
-          to get information about another batch of objects.
+        $ref: '#/definitions/PaginationToken'
+        description: 'If you specify a value for <code>MaxResults</code> and you have more objects than the number that you specify for <code>MaxResults</code>, AWS Firewall Manager returns a <code>NextToken</code> value in the response that allows you to list another group of objects. For the second and subsequent <code>GetProtectionStatus</code> requests, specify the value of <code>NextToken</code> from the previous response to get information about another batch of objects.'
       MaxResults:
-        $ref: "#/definitions/PaginationMaxResults"
-        description: Specifies the number of objects that you want AWS Firewall Manager to
-          return for this request. If you have more objects than the number that
-          you specify for <code>MaxResults</code>, the response includes a
-          <code>NextToken</code> value that you can use to get another batch of
-          objects.
+        $ref: '#/definitions/PaginationMaxResults'
+        description: 'Specifies the number of objects that you want AWS Firewall Manager to return for this request. If you have more objects than the number that you specify for <code>MaxResults</code>, the response includes a <code>NextToken</code> value that you can use to get another batch of objects.'
   ListComplianceStatusResponse:
     type: object
     properties:
       PolicyComplianceStatusList:
-        $ref: "#/definitions/PolicyComplianceStatusList"
+        $ref: '#/definitions/PolicyComplianceStatusList'
         description: An array of <code>PolicyComplianceStatus</code> objects.
       NextToken:
-        $ref: "#/definitions/PaginationToken"
-        description: If you have more <code>PolicyComplianceStatus</code> objects than the
-          number that you specified for <code>MaxResults</code> in the request,
-          the response includes a <code>NextToken</code> value. To list more
-          <code>PolicyComplianceStatus</code> objects, submit another
-          <code>ListComplianceStatus</code> request, and specify the
-          <code>NextToken</code> value from the response in the
-          <code>NextToken</code> value in the next request.
+        $ref: '#/definitions/PaginationToken'
+        description: 'If you have more <code>PolicyComplianceStatus</code> objects than the number that you specified for <code>MaxResults</code> in the request, the response includes a <code>NextToken</code> value. To list more <code>PolicyComplianceStatus</code> objects, submit another <code>ListComplianceStatus</code> request, and specify the <code>NextToken</code> value from the response in the <code>NextToken</code> value in the next request.'
   ListComplianceStatusRequest:
     type: object
     required:
       - PolicyId
     properties:
       PolicyId:
-        $ref: "#/definitions/PolicyId"
-        description: The ID of the AWS Firewall Manager policy that you want the details
-          for.
+        $ref: '#/definitions/PolicyId'
+        description: The ID of the AWS Firewall Manager policy that you want the details for.
       NextToken:
-        $ref: "#/definitions/PaginationToken"
-        description: If you specify a value for <code>MaxResults</code> and you have more
-          <code>PolicyComplianceStatus</code> objects than the number that you
-          specify for <code>MaxResults</code>, AWS Firewall Manager returns a
-          <code>NextToken</code> value in the response that allows you to list
-          another group of <code>PolicyComplianceStatus</code> objects. For the
-          second and subsequent <code>ListComplianceStatus</code> requests,
-          specify the value of <code>NextToken</code> from the previous response
-          to get information about another batch of
-          <code>PolicyComplianceStatus</code> objects.
+        $ref: '#/definitions/PaginationToken'
+        description: 'If you specify a value for <code>MaxResults</code> and you have more <code>PolicyComplianceStatus</code> objects than the number that you specify for <code>MaxResults</code>, AWS Firewall Manager returns a <code>NextToken</code> value in the response that allows you to list another group of <code>PolicyComplianceStatus</code> objects. For the second and subsequent <code>ListComplianceStatus</code> requests, specify the value of <code>NextToken</code> from the previous response to get information about another batch of <code>PolicyComplianceStatus</code> objects.'
       MaxResults:
-        $ref: "#/definitions/PaginationMaxResults"
-        description: Specifies the number of <code>PolicyComplianceStatus</code> objects
-          that you want AWS Firewall Manager to return for this request. If you
-          have more <code>PolicyComplianceStatus</code> objects than the number
-          that you specify for <code>MaxResults</code>, the response includes a
-          <code>NextToken</code> value that you can use to get another batch of
-          <code>PolicyComplianceStatus</code> objects.
+        $ref: '#/definitions/PaginationMaxResults'
+        description: 'Specifies the number of <code>PolicyComplianceStatus</code> objects that you want AWS Firewall Manager to return for this request. If you have more <code>PolicyComplianceStatus</code> objects than the number that you specify for <code>MaxResults</code>, the response includes a <code>NextToken</code> value that you can use to get another batch of <code>PolicyComplianceStatus</code> objects.'
   ListMemberAccountsResponse:
     type: object
     properties:
       MemberAccounts:
-        $ref: "#/definitions/MemberAccounts"
+        $ref: '#/definitions/MemberAccounts'
         description: An array of account IDs.
       NextToken:
-        $ref: "#/definitions/PaginationToken"
-        description: If you have more member account IDs than the number that you specified
-          for <code>MaxResults</code> in the request, the response includes a
-          <code>NextToken</code> value. To list more IDs, submit another
-          <code>ListMemberAccounts</code> request, and specify the
-          <code>NextToken</code> value from the response in the
-          <code>NextToken</code> value in the next request.
+        $ref: '#/definitions/PaginationToken'
+        description: 'If you have more member account IDs than the number that you specified for <code>MaxResults</code> in the request, the response includes a <code>NextToken</code> value. To list more IDs, submit another <code>ListMemberAccounts</code> request, and specify the <code>NextToken</code> value from the response in the <code>NextToken</code> value in the next request.'
   ListMemberAccountsRequest:
     type: object
     properties:
       NextToken:
-        $ref: "#/definitions/PaginationToken"
-        description: If you specify a value for <code>MaxResults</code> and you have more
-          account IDs than the number that you specify for
-          <code>MaxResults</code>, AWS Firewall Manager returns a
-          <code>NextToken</code> value in the response that allows you to list
-          another group of IDs. For the second and subsequent
-          <code>ListMemberAccountsRequest</code> requests, specify the value of
-          <code>NextToken</code> from the previous response to get information
-          about another batch of member account IDs.
+        $ref: '#/definitions/PaginationToken'
+        description: 'If you specify a value for <code>MaxResults</code> and you have more account IDs than the number that you specify for <code>MaxResults</code>, AWS Firewall Manager returns a <code>NextToken</code> value in the response that allows you to list another group of IDs. For the second and subsequent <code>ListMemberAccountsRequest</code> requests, specify the value of <code>NextToken</code> from the previous response to get information about another batch of member account IDs.'
       MaxResults:
-        $ref: "#/definitions/PaginationMaxResults"
-        description: Specifies the number of member account IDs that you want AWS Firewall
-          Manager to return for this request. If you have more IDs than the
-          number that you specify for <code>MaxResults</code>, the response
-          includes a <code>NextToken</code> value that you can use to get
-          another batch of member account IDs.
+        $ref: '#/definitions/PaginationMaxResults'
+        description: 'Specifies the number of member account IDs that you want AWS Firewall Manager to return for this request. If you have more IDs than the number that you specify for <code>MaxResults</code>, the response includes a <code>NextToken</code> value that you can use to get another batch of member account IDs.'
   ListPoliciesResponse:
     type: object
     properties:
       PolicyList:
-        $ref: "#/definitions/PolicySummaryList"
+        $ref: '#/definitions/PolicySummaryList'
         description: An array of <code>PolicySummary</code> objects.
       NextToken:
-        $ref: "#/definitions/PaginationToken"
-        description: If you have more <code>PolicySummary</code> objects than the number
-          that you specified for <code>MaxResults</code> in the request, the
-          response includes a <code>NextToken</code> value. To list more
-          <code>PolicySummary</code> objects, submit another
-          <code>ListPolicies</code> request, and specify the
-          <code>NextToken</code> value from the response in the
-          <code>NextToken</code> value in the next request.
+        $ref: '#/definitions/PaginationToken'
+        description: 'If you have more <code>PolicySummary</code> objects than the number that you specified for <code>MaxResults</code> in the request, the response includes a <code>NextToken</code> value. To list more <code>PolicySummary</code> objects, submit another <code>ListPolicies</code> request, and specify the <code>NextToken</code> value from the response in the <code>NextToken</code> value in the next request.'
   ListPoliciesRequest:
     type: object
     properties:
       NextToken:
-        $ref: "#/definitions/PaginationToken"
-        description: If you specify a value for <code>MaxResults</code> and you have more
-          <code>PolicySummary</code> objects than the number that you specify
-          for <code>MaxResults</code>, AWS Firewall Manager returns a
-          <code>NextToken</code> value in the response that allows you to list
-          another group of <code>PolicySummary</code> objects. For the second
-          and subsequent <code>ListPolicies</code> requests, specify the value
-          of <code>NextToken</code> from the previous response to get
-          information about another batch of <code>PolicySummary</code> objects.
+        $ref: '#/definitions/PaginationToken'
+        description: 'If you specify a value for <code>MaxResults</code> and you have more <code>PolicySummary</code> objects than the number that you specify for <code>MaxResults</code>, AWS Firewall Manager returns a <code>NextToken</code> value in the response that allows you to list another group of <code>PolicySummary</code> objects. For the second and subsequent <code>ListPolicies</code> requests, specify the value of <code>NextToken</code> from the previous response to get information about another batch of <code>PolicySummary</code> objects.'
       MaxResults:
-        $ref: "#/definitions/PaginationMaxResults"
-        description: Specifies the number of <code>PolicySummary</code> objects that you
-          want AWS Firewall Manager to return for this request. If you have more
-          <code>PolicySummary</code> objects than the number that you specify
-          for <code>MaxResults</code>, the response includes a
-          <code>NextToken</code> value that you can use to get another batch of
-          <code>PolicySummary</code> objects.
+        $ref: '#/definitions/PaginationMaxResults'
+        description: 'Specifies the number of <code>PolicySummary</code> objects that you want AWS Firewall Manager to return for this request. If you have more <code>PolicySummary</code> objects than the number that you specify for <code>MaxResults</code>, the response includes a <code>NextToken</code> value that you can use to get another batch of <code>PolicySummary</code> objects.'
   LimitExceededException: {}
   PutNotificationChannelRequest:
     type: object
@@ -1043,21 +890,19 @@ definitions:
       - SnsRoleName
     properties:
       SnsTopicArn:
-        $ref: "#/definitions/ResourceArn"
-        description: The Amazon Resource Name (ARN) of the SNS topic that collects
-          notifications from AWS Firewall Manager.
+        $ref: '#/definitions/ResourceArn'
+        description: The Amazon Resource Name (ARN) of the SNS topic that collects notifications from AWS Firewall Manager.
       SnsRoleName:
-        $ref: "#/definitions/ResourceArn"
-        description: "The Amazon Resource Name (ARN) of the IAM role that allows Amazon SNS
-          to record AWS Firewall Manager activity. "
+        $ref: '#/definitions/ResourceArn'
+        description: 'The Amazon Resource Name (ARN) of the IAM role that allows Amazon SNS to record AWS Firewall Manager activity. '
   PutPolicyResponse:
     type: object
     properties:
       Policy:
-        $ref: "#/definitions/Policy"
+        $ref: '#/definitions/Policy'
         description: The details of the AWS Firewall Manager policy that was created.
       PolicyArn:
-        $ref: "#/definitions/ResourceArn"
+        $ref: '#/definitions/ResourceArn'
         description: The Amazon Resource Name (ARN) of the policy that was created.
   PutPolicyRequest:
     type: object
@@ -1065,11 +910,11 @@ definitions:
       - Policy
     properties:
       Policy:
-        $ref: "#/definitions/Policy"
+        $ref: '#/definitions/Policy'
         description: The details of the AWS Firewall Manager policy to be created.
   AWSAccountId:
     type: string
-    pattern: ^[0-9]+$
+    pattern: '^[0-9]+$'
     minLength: 1
     maxLength: 1024
   AccountRoleStatus:
@@ -1084,7 +929,7 @@ definitions:
     type: boolean
   ResourceId:
     type: string
-    pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
     minLength: 1
     maxLength: 1024
   ViolationReason:
@@ -1096,39 +941,35 @@ definitions:
       - RESOURCE_MISSING_SHIELD_PROTECTION
   ResourceType:
     type: string
-    pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
     minLength: 1
     maxLength: 128
   ComplianceViolator:
     type: object
     properties:
       ResourceId:
-        $ref: "#/definitions/ResourceId"
+        $ref: '#/definitions/ResourceId'
         description: The resource ID.
       ViolationReason:
-        $ref: "#/definitions/ViolationReason"
+        $ref: '#/definitions/ViolationReason'
         description: The reason that the resource is not protected by the policy.
       ResourceType:
-        $ref: "#/definitions/ResourceType"
-        description: 'The resource type. This is in the format shown in <a
-          href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html">AWS
-          Resource Types Reference</a>. For example:
-          <code>AWS::ElasticLoadBalancingV2::LoadBalancer</code> or
-          <code>AWS::CloudFront::Distribution</code>.'
+        $ref: '#/definitions/ResourceType'
+        description: 'The resource type. This is in the format shown in <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html">AWS Resource Types Reference</a>. For example: <code>AWS::ElasticLoadBalancingV2::LoadBalancer</code> or <code>AWS::CloudFront::Distribution</code>.'
     description: Details of the resource that is not protected by the policy.
   ComplianceViolators:
     type: array
     items:
-      $ref: "#/definitions/ComplianceViolator"
+      $ref: '#/definitions/ComplianceViolator'
   CustomerPolicyScopeId:
     type: string
-    pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
     minLength: 1
     maxLength: 1024
   CustomerPolicyScopeIdList:
     type: array
     items:
-      $ref: "#/definitions/CustomerPolicyScopeId"
+      $ref: '#/definitions/CustomerPolicyScopeId'
   CustomerPolicyScopeIdType:
     type: string
     enum:
@@ -1136,10 +977,10 @@ definitions:
   CustomerPolicyScopeMap:
     type: object
     additionalProperties:
-      $ref: "#/definitions/CustomerPolicyScopeIdList"
+      $ref: '#/definitions/CustomerPolicyScopeIdList'
   PolicyId:
     type: string
-    pattern: ^[a-z0-9A-Z-]{36}$
+    pattern: '^[a-z0-9A-Z-]{36}$'
     minLength: 36
     maxLength: 36
   DependentServiceName:
@@ -1150,7 +991,7 @@ definitions:
       - AWSSHIELD_ADVANCED
   DetailedInfo:
     type: string
-    pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
     minLength: 1
     maxLength: 1024
   PolicyComplianceStatusType:
@@ -1165,61 +1006,47 @@ definitions:
     type: object
     properties:
       ComplianceStatus:
-        $ref: "#/definitions/PolicyComplianceStatusType"
-        description: Describes an AWS account's compliance with the AWS Firewall Manager
-          policy.
+        $ref: '#/definitions/PolicyComplianceStatusType'
+        description: Describes an AWS account's compliance with the AWS Firewall Manager policy.
       ViolatorCount:
-        $ref: "#/definitions/ResourceCount"
-        description: Number of resources that are non-compliant with the specified policy.
-          A resource is considered non-compliant if it is not associated with
-          the specified policy.
+        $ref: '#/definitions/ResourceCount'
+        description: Number of resources that are non-compliant with the specified policy. A resource is considered non-compliant if it is not associated with the specified policy.
       EvaluationLimitExceeded:
-        $ref: "#/definitions/Boolean"
-        description: Indicates that over 100 resources are non-compliant with the AWS
-          Firewall Manager policy.
-    description: Describes the compliance status for the account. An account is considered
-      non-compliant if it includes resources that are not protected by the
-      specified policy.
+        $ref: '#/definitions/Boolean'
+        description: Indicates that over 100 resources are non-compliant with the AWS Firewall Manager policy.
+    description: Describes the compliance status for the account. An account is considered non-compliant if it includes resources that are not protected by the specified policy.
   EvaluationResults:
     type: array
     items:
-      $ref: "#/definitions/EvaluationResult"
+      $ref: '#/definitions/EvaluationResult'
   PolicyComplianceDetail:
     type: object
     properties:
       PolicyOwner:
-        $ref: "#/definitions/AWSAccountId"
+        $ref: '#/definitions/AWSAccountId'
         description: The AWS account that created the AWS Firewall Manager policy.
       PolicyId:
-        $ref: "#/definitions/PolicyId"
+        $ref: '#/definitions/PolicyId'
         description: The ID of the AWS Firewall Manager policy.
       MemberAccount:
-        $ref: "#/definitions/AWSAccountId"
+        $ref: '#/definitions/AWSAccountId'
         description: The AWS account ID.
       Violators:
-        $ref: "#/definitions/ComplianceViolators"
+        $ref: '#/definitions/ComplianceViolators'
         description: An array of resources that are not protected by the policy.
       EvaluationLimitExceeded:
-        $ref: "#/definitions/Boolean"
-        description: Indicates if over 100 resources are non-compliant with the AWS
-          Firewall Manager policy.
+        $ref: '#/definitions/Boolean'
+        description: Indicates if over 100 resources are non-compliant with the AWS Firewall Manager policy.
       ExpiredAt:
-        $ref: "#/definitions/TimeStamp"
-        description: A time stamp that indicates when the returned information should be
-          considered out-of-date.
+        $ref: '#/definitions/TimeStamp'
+        description: A time stamp that indicates when the returned information should be considered out-of-date.
       IssueInfoMap:
-        $ref: "#/definitions/IssueInfoMap"
-        description: Details about problems with dependent services, such as AWS WAF or AWS
-          Config, that are causing a resource to be non-compliant. The details
-          include the name of the dependent service and the error message
-          received that indicates the problem with the service.
-    description: Describes the non-compliant resources in a member account for a specific
-      AWS Firewall Manager policy. A maximum of 100 entries are displayed. If
-      more than 100 resources are non-compliant,
-      <code>EvaluationLimitExceeded</code> is set to <code>True</code>.
+        $ref: '#/definitions/IssueInfoMap'
+        description: 'Details about problems with dependent services, such as AWS WAF or AWS Config, that are causing a resource to be non-compliant. The details include the name of the dependent service and the error message received that indicates the problem with the service.'
+    description: 'Describes the non-compliant resources in a member account for a specific AWS Firewall Manager policy. A maximum of 100 entries are displayed. If more than 100 resources are non-compliant, <code>EvaluationLimitExceeded</code> is set to <code>True</code>.'
   ResourceArn:
     type: string
-    pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
     minLength: 1
     maxLength: 1024
   Policy:
@@ -1232,73 +1059,45 @@ definitions:
       - RemediationEnabled
     properties:
       PolicyId:
-        $ref: "#/definitions/PolicyId"
+        $ref: '#/definitions/PolicyId'
         description: The ID of the AWS Firewall Manager policy.
       PolicyName:
-        $ref: "#/definitions/ResourceName"
+        $ref: '#/definitions/ResourceName'
         description: The friendly name of the AWS Firewall Manager policy.
       PolicyUpdateToken:
-        $ref: "#/definitions/PolicyUpdateToken"
-        description: A unique identifier for each update to the policy. When issuing a
-          <code>PutPolicy</code> request, the <code>PolicyUpdateToken</code> in
-          the request must match the <code>PolicyUpdateToken</code> of the
-          current policy version. To get the <code>PolicyUpdateToken</code> of
-          the current policy version, use a <code>GetPolicy</code> request.
+        $ref: '#/definitions/PolicyUpdateToken'
+        description: 'A unique identifier for each update to the policy. When issuing a <code>PutPolicy</code> request, the <code>PolicyUpdateToken</code> in the request must match the <code>PolicyUpdateToken</code> of the current policy version. To get the <code>PolicyUpdateToken</code> of the current policy version, use a <code>GetPolicy</code> request.'
       SecurityServicePolicyData:
-        $ref: "#/definitions/SecurityServicePolicyData"
-        description: Details about the security service that is being used to protect the
-          resources.
+        $ref: '#/definitions/SecurityServicePolicyData'
+        description: Details about the security service that is being used to protect the resources.
       ResourceType:
-        $ref: "#/definitions/ResourceType"
-        description: 'The type of resource to protect with the policy. This is in the
-          format shown in <a
-          href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html">AWS
-          Resource Types Reference</a>. For example:
-          <code>AWS::ElasticLoadBalancingV2::LoadBalancer</code> or
-          <code>AWS::CloudFront::Distribution</code>.'
+        $ref: '#/definitions/ResourceType'
+        description: 'The type of resource to protect with the policy. This is in the format shown in <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html">AWS Resource Types Reference</a>. For example: <code>AWS::ElasticLoadBalancingV2::LoadBalancer</code> or <code>AWS::CloudFront::Distribution</code>.'
       ResourceTypeList:
-        $ref: "#/definitions/ResourceTypeList"
+        $ref: '#/definitions/ResourceTypeList'
         description: An array of <code>ResourceType</code>.
       ResourceTags:
-        $ref: "#/definitions/ResourceTags"
+        $ref: '#/definitions/ResourceTags'
         description: An array of <code>ResourceTag</code> objects.
       ExcludeResourceTags:
-        $ref: "#/definitions/Boolean"
-        description: If set to <code>True</code>, resources with the tags that are
-          specified in the <code>ResourceTag</code> array are not protected by
-          the policy. If set to <code>False</code>, and the
-          <code>ResourceTag</code> array is not null, only resources with the
-          specified tags are associated with the policy.
+        $ref: '#/definitions/Boolean'
+        description: 'If set to <code>True</code>, resources with the tags that are specified in the <code>ResourceTag</code> array are not protected by the policy. If set to <code>False</code>, and the <code>ResourceTag</code> array is not null, only resources with the specified tags are associated with the policy.'
       RemediationEnabled:
-        $ref: "#/definitions/Boolean"
-        description: Indicates if the policy should be automatically applied to new
-          resources.
+        $ref: '#/definitions/Boolean'
+        description: Indicates if the policy should be automatically applied to new resources.
       IncludeMap:
-        $ref: "#/definitions/CustomerPolicyScopeMap"
-        description: "<p>Specifies the AWS account IDs to include in the policy. If
-          <code>IncludeMap</code> is null, all accounts in the organization in
-          AWS Organizations are included in the policy. If
-          <code>IncludeMap</code> is not null, only values listed in
-          <code>IncludeMap</code> are included in the policy.</p> <p>The key to
-          the map is <code>ACCOUNT</code>. For example, a valid
-          <code>IncludeMap</code> would be <code>{“ACCOUNT” : [“accountID1”,
-          “accountID2”]}</code>.</p>"
+        $ref: '#/definitions/CustomerPolicyScopeMap'
+        description: '<p>Specifies the AWS account IDs to include in the policy. If <code>IncludeMap</code> is null, all accounts in the organization in AWS Organizations are included in the policy. If <code>IncludeMap</code> is not null, only values listed in <code>IncludeMap</code> are included in the policy.</p> <p>The key to the map is <code>ACCOUNT</code>. For example, a valid <code>IncludeMap</code> would be <code>{“ACCOUNT” : [“accountID1”, “accountID2”]}</code>.</p>'
       ExcludeMap:
-        $ref: "#/definitions/CustomerPolicyScopeMap"
-        description: "<p>Specifies the AWS account IDs to exclude from the policy. The
-          <code>IncludeMap</code> values are evaluated first, with all the
-          appropriate account IDs added to the policy. Then the accounts listed
-          in <code>ExcludeMap</code> are removed, resulting in the final list of
-          accounts to add to the policy.</p> <p>The key to the map is
-          <code>ACCOUNT</code>. For example, a valid <code>ExcludeMap</code>
-          would be <code>{“ACCOUNT” : [“accountID1”, “accountID2”]}</code>.</p>"
+        $ref: '#/definitions/CustomerPolicyScopeMap'
+        description: '<p>Specifies the AWS account IDs to exclude from the policy. The <code>IncludeMap</code> values are evaluated first, with all the appropriate account IDs added to the policy. Then the accounts listed in <code>ExcludeMap</code> are removed, resulting in the final list of accounts to add to the policy.</p> <p>The key to the map is <code>ACCOUNT</code>. For example, a valid <code>ExcludeMap</code> would be <code>{“ACCOUNT” : [“accountID1”, “accountID2”]}</code>.</p>'
     description: An AWS Firewall Manager policy.
   TimeStamp:
     type: string
     format: date-time
   PaginationToken:
     type: string
-    pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
     minLength: 1
   PaginationMaxResults:
     type: integer
@@ -1314,31 +1113,31 @@ definitions:
   IssueInfoMap:
     type: object
     additionalProperties:
-      $ref: "#/definitions/DetailedInfo"
+      $ref: '#/definitions/DetailedInfo'
   PolicyComplianceStatusList:
     type: array
     items:
-      $ref: "#/definitions/PolicyComplianceStatus"
+      $ref: '#/definitions/PolicyComplianceStatus'
   MemberAccounts:
     type: array
     items:
-      $ref: "#/definitions/AWSAccountId"
+      $ref: '#/definitions/AWSAccountId'
   PolicySummaryList:
     type: array
     items:
-      $ref: "#/definitions/PolicySummary"
+      $ref: '#/definitions/PolicySummary'
   ManagedServiceData:
     type: string
     minLength: 1
     maxLength: 1024
   ResourceName:
     type: string
-    pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
     minLength: 1
     maxLength: 128
   PolicyUpdateToken:
     type: string
-    pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
     minLength: 1
     maxLength: 1024
   SecurityServicePolicyData:
@@ -1347,100 +1146,77 @@ definitions:
       - Type
     properties:
       Type:
-        $ref: "#/definitions/SecurityServiceType"
-        description: The service that the policy is using to protect the resources. This
-          specifies the type of policy that is created, either a WAF policy or
-          Shield Advanced policy.
+        $ref: '#/definitions/SecurityServiceType'
+        description: 'The service that the policy is using to protect the resources. This specifies the type of policy that is created, either a WAF policy or Shield Advanced policy.'
       ManagedServiceData:
-        $ref: "#/definitions/ManagedServiceData"
-        description: '<p>Details about the service. This contains <code>WAF</code> data in
-          JSON format, as shown in the following example:</p> <p>
-          <code>ManagedServiceData": "{\"type\": \"WAF\", \"ruleGroups\":
-          [{\"id\": \"12345678-1bcd-9012-efga-0987654321ab\", \"overrideAction\"
-          : {\"type\": \"COUNT\"}}], \"defaultAction\": {\"type\":
-          \"BLOCK\"}}</code> </p> <p>If this is a Shield Advanced policy, this
-          string will be empty.</p>'
-    description: Details about the security service that is being used to protect the
-      resources.
+        $ref: '#/definitions/ManagedServiceData'
+        description: '<p>Details about the service. This contains <code>WAF</code> data in JSON format, as shown in the following example:</p> <p> <code>ManagedServiceData": "{\"type\": \"WAF\", \"ruleGroups\": [{\"id\": \"12345678-1bcd-9012-efga-0987654321ab\", \"overrideAction\" : {\"type\": \"COUNT\"}}], \"defaultAction\": {\"type\": \"BLOCK\"}}</code> </p> <p>If this is a Shield Advanced policy, this string will be empty.</p>'
+    description: Details about the security service that is being used to protect the resources.
   ResourceTypeList:
     type: array
     items:
-      $ref: "#/definitions/ResourceType"
+      $ref: '#/definitions/ResourceType'
   ResourceTags:
     type: array
     items:
-      $ref: "#/definitions/ResourceTag"
+      $ref: '#/definitions/ResourceTag'
     minItems: 0
     maxItems: 8
   PolicyComplianceStatus:
     type: object
     properties:
       PolicyOwner:
-        $ref: "#/definitions/AWSAccountId"
+        $ref: '#/definitions/AWSAccountId'
         description: The AWS account that created the AWS Firewall Manager policy.
       PolicyId:
-        $ref: "#/definitions/PolicyId"
+        $ref: '#/definitions/PolicyId'
         description: The ID of the AWS Firewall Manager policy.
       PolicyName:
-        $ref: "#/definitions/ResourceName"
+        $ref: '#/definitions/ResourceName'
         description: The friendly name of the AWS Firewall Manager policy.
       MemberAccount:
-        $ref: "#/definitions/AWSAccountId"
+        $ref: '#/definitions/AWSAccountId'
         description: The member account ID.
       EvaluationResults:
-        $ref: "#/definitions/EvaluationResults"
+        $ref: '#/definitions/EvaluationResults'
         description: An array of <code>EvaluationResult</code> objects.
       LastUpdated:
-        $ref: "#/definitions/TimeStamp"
-        description: Time stamp of the last update to the <code>EvaluationResult</code>
-          objects.
+        $ref: '#/definitions/TimeStamp'
+        description: Time stamp of the last update to the <code>EvaluationResult</code> objects.
       IssueInfoMap:
-        $ref: "#/definitions/IssueInfoMap"
-        description: Details about problems with dependent services, such as AWS WAF or AWS
-          Config, that are causing a resource to be non-compliant. The details
-          include the name of the dependent service and the error message
-          received that indicates the problem with the service.
-    description: Indicates whether the account is compliant with the specified policy. An
-      account is considered non-compliant if it includes resources that are not
-      protected by the policy.
+        $ref: '#/definitions/IssueInfoMap'
+        description: 'Details about problems with dependent services, such as AWS WAF or AWS Config, that are causing a resource to be non-compliant. The details include the name of the dependent service and the error message received that indicates the problem with the service.'
+    description: Indicates whether the account is compliant with the specified policy. An account is considered non-compliant if it includes resources that are not protected by the policy.
   PolicySummary:
     type: object
     properties:
       PolicyArn:
-        $ref: "#/definitions/ResourceArn"
+        $ref: '#/definitions/ResourceArn'
         description: The Amazon Resource Name (ARN) of the specified policy.
       PolicyId:
-        $ref: "#/definitions/PolicyId"
+        $ref: '#/definitions/PolicyId'
         description: The ID of the specified policy.
       PolicyName:
-        $ref: "#/definitions/ResourceName"
+        $ref: '#/definitions/ResourceName'
         description: The friendly name of the specified policy.
       ResourceType:
-        $ref: "#/definitions/ResourceType"
-        description: 'The type of resource to protect with the policy. This is in the
-          format shown in <a
-          href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html">AWS
-          Resource Types Reference</a>. For example:
-          <code>AWS::ElasticLoadBalancingV2::LoadBalancer</code> or
-          <code>AWS::CloudFront::Distribution</code>.'
+        $ref: '#/definitions/ResourceType'
+        description: 'The type of resource to protect with the policy. This is in the format shown in <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html">AWS Resource Types Reference</a>. For example: <code>AWS::ElasticLoadBalancingV2::LoadBalancer</code> or <code>AWS::CloudFront::Distribution</code>.'
       SecurityServiceType:
-        $ref: "#/definitions/SecurityServiceType"
-        description: The service that the policy is using to protect the resources. This
-          specifies the type of policy that is created, either a WAF policy or
-          Shield Advanced policy.
+        $ref: '#/definitions/SecurityServiceType'
+        description: 'The service that the policy is using to protect the resources. This specifies the type of policy that is created, either a WAF policy or Shield Advanced policy.'
       RemediationEnabled:
-        $ref: "#/definitions/Boolean"
-        description: Indicates if the policy should be automatically applied to new
-          resources.
-    description: "Details of the AWS Firewall Manager policy. "
+        $ref: '#/definitions/Boolean'
+        description: Indicates if the policy should be automatically applied to new resources.
+    description: 'Details of the AWS Firewall Manager policy. '
   TagKey:
     type: string
-    pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
     minLength: 1
     maxLength: 128
   TagValue:
     type: string
-    pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
     maxLength: 256
   ResourceTag:
     type: object
@@ -1448,18 +1224,9 @@ definitions:
       - Key
     properties:
       Key:
-        $ref: "#/definitions/TagKey"
+        $ref: '#/definitions/TagKey'
         description: The resource tag key.
       Value:
-        $ref: "#/definitions/TagValue"
+        $ref: '#/definitions/TagValue'
         description: The resource tag value.
-    description: The resource tags that AWS Firewall Manager uses to determine if a
-      particular resource should be included or excluded from protection by the
-      AWS Firewall Manager policy. Tags enable you to categorize your AWS
-      resources in different ways, for example, by purpose, owner, or
-      environment. Each tag consists of a key and an optional value, both of
-      which you define. Tags are combined with an "OR." That is, if you add more
-      than one tag, if any of the tags matches, the resource is considered a
-      match for the include or exclude. <a
-      href="https://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/tag-editor.html">Working
-      with Tag Editor</a>.
+    description: 'The resource tags that AWS Firewall Manager uses to determine if a particular resource should be included or excluded from protection by the AWS Firewall Manager policy. Tags enable you to categorize your AWS resources in different ways, for example, by purpose, owner, or environment. Each tag consists of a key and an optional value, both of which you define. Tags are combined with an "OR." That is, if you add more than one tag, if any of the tags matches, the resource is considered a match for the include or exclude. <a href="https://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/tag-editor.html">Working with Tag Editor</a>.'

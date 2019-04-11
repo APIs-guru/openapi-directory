@@ -1,38 +1,38 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  version: 2017-10-26
+  version: '2017-10-26'
   x-release: v4
   title: Amazon Transcribe Service
   description: Operations and objects for transcribing speech to text.
   x-logo:
-    url: https://twitter.com/awscloud/profile_image?size=original
-    backgroundColor: "#FFFFFF"
-  termsOfService: https://aws.amazon.com/service-terms/
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
     name: Mike Ralphson
     email: mike.ralphson@gmail.com
-    url: https://github.com/mermade/aws2openapi
+    url: 'https://github.com/mermade/aws2openapi'
     x-twitter: PermittedSoc
   license:
     name: Apache 2.0 License
-    url: http://www.apache.org/licenses/
+    url: 'http://www.apache.org/licenses/'
   x-providerName: amazonaws.com
   x-serviceName: transcribe
   x-origin:
     - contentType: application/json
-      url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/transcribe-2017-10-26.normal.json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/transcribe-2017-10-26.normal.json'
       converter:
-        url: https://github.com/mermade/aws2openapi
+        url: 'https://github.com/mermade/aws2openapi'
         version: 1.0.0
       x-apisguru-direct: true
   x-apiClientRegistration:
-    url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
   x-preferred: true
 externalDocs:
   description: Amazon Web Services documentation
-  url: https://docs.aws.amazon.com/transcribe/
+  url: 'https://docs.aws.amazon.com/transcribe/'
 host: transcribe.amazonaws.com
 basePath: /
 x-hasEquivalentPaths: true
@@ -89,38 +89,37 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /#X-Amz-Target=Transcribe.CreateVocabulary:
+  '/#X-Amz-Target=Transcribe.CreateVocabulary':
     post:
       operationId: CreateVocabulary
-      description: "Creates a new custom vocabulary that you can use to change the way
-        Amazon Transcribe handles transcription of an audio file. "
+      description: 'Creates a new custom vocabulary that you can use to change the way Amazon Transcribe handles transcription of an audio file. '
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/CreateVocabularyResponse"
-        "480":
+            $ref: '#/definitions/CreateVocabularyResponse'
+        '480':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "481":
+            $ref: '#/definitions/BadRequestException'
+        '481':
           description: LimitExceededException
           schema:
-            $ref: "#/definitions/LimitExceededException"
-        "482":
+            $ref: '#/definitions/LimitExceededException'
+        '482':
           description: InternalFailureException
           schema:
-            $ref: "#/definitions/InternalFailureException"
-        "483":
+            $ref: '#/definitions/InternalFailureException'
+        '483':
           description: ConflictException
           schema:
-            $ref: "#/definitions/ConflictException"
+            $ref: '#/definitions/ConflictException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/CreateVocabularyRequest"
+            $ref: '#/definitions/CreateVocabularyRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -128,39 +127,38 @@ paths:
           enum:
             - Transcribe.CreateVocabulary
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=Transcribe.DeleteTranscriptionJob:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=Transcribe.DeleteTranscriptionJob':
     post:
       operationId: DeleteTranscriptionJob
-      description: Deletes a previously submitted transcription job along with any other
-        generated results such as the transcription, models, and so on.
+      description: 'Deletes a previously submitted transcription job along with any other generated results such as the transcription, models, and so on.'
       responses:
-        "200":
+        '200':
           description: Success
-        "480":
+        '480':
           description: LimitExceededException
           schema:
-            $ref: "#/definitions/LimitExceededException"
-        "481":
+            $ref: '#/definitions/LimitExceededException'
+        '481':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "482":
+            $ref: '#/definitions/BadRequestException'
+        '482':
           description: InternalFailureException
           schema:
-            $ref: "#/definitions/InternalFailureException"
+            $ref: '#/definitions/InternalFailureException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/DeleteTranscriptionJobRequest"
+            $ref: '#/definitions/DeleteTranscriptionJobRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -168,42 +166,42 @@ paths:
           enum:
             - Transcribe.DeleteTranscriptionJob
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=Transcribe.DeleteVocabulary:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=Transcribe.DeleteVocabulary':
     post:
       operationId: DeleteVocabulary
-      description: "Deletes a vocabulary from Amazon Transcribe. "
+      description: 'Deletes a vocabulary from Amazon Transcribe. '
       responses:
-        "200":
+        '200':
           description: Success
-        "480":
+        '480':
           description: NotFoundException
           schema:
-            $ref: "#/definitions/NotFoundException"
-        "481":
+            $ref: '#/definitions/NotFoundException'
+        '481':
           description: LimitExceededException
           schema:
-            $ref: "#/definitions/LimitExceededException"
-        "482":
+            $ref: '#/definitions/LimitExceededException'
+        '482':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "483":
+            $ref: '#/definitions/BadRequestException'
+        '483':
           description: InternalFailureException
           schema:
-            $ref: "#/definitions/InternalFailureException"
+            $ref: '#/definitions/InternalFailureException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/DeleteVocabularyRequest"
+            $ref: '#/definitions/DeleteVocabularyRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -211,48 +209,44 @@ paths:
           enum:
             - Transcribe.DeleteVocabulary
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=Transcribe.GetTranscriptionJob:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=Transcribe.GetTranscriptionJob':
     post:
       operationId: GetTranscriptionJob
-      description: Returns information about a transcription job. To see the status of the
-        job, check the <code>TranscriptionJobStatus</code> field. If the status
-        is <code>COMPLETED</code>, the job is finished and you can find the
-        results at the location specified in the
-        <code>TranscriptionFileUri</code> field.
+      description: 'Returns information about a transcription job. To see the status of the job, check the <code>TranscriptionJobStatus</code> field. If the status is <code>COMPLETED</code>, the job is finished and you can find the results at the location specified in the <code>TranscriptionFileUri</code> field.'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/GetTranscriptionJobResponse"
-        "480":
+            $ref: '#/definitions/GetTranscriptionJobResponse'
+        '480':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "481":
+            $ref: '#/definitions/BadRequestException'
+        '481':
           description: LimitExceededException
           schema:
-            $ref: "#/definitions/LimitExceededException"
-        "482":
+            $ref: '#/definitions/LimitExceededException'
+        '482':
           description: InternalFailureException
           schema:
-            $ref: "#/definitions/InternalFailureException"
-        "483":
+            $ref: '#/definitions/InternalFailureException'
+        '483':
           description: NotFoundException
           schema:
-            $ref: "#/definitions/NotFoundException"
+            $ref: '#/definitions/NotFoundException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/GetTranscriptionJobRequest"
+            $ref: '#/definitions/GetTranscriptionJobRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -260,44 +254,44 @@ paths:
           enum:
             - Transcribe.GetTranscriptionJob
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=Transcribe.GetVocabulary:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=Transcribe.GetVocabulary':
     post:
       operationId: GetVocabulary
-      description: "Gets information about a vocabulary. "
+      description: 'Gets information about a vocabulary. '
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/GetVocabularyResponse"
-        "480":
+            $ref: '#/definitions/GetVocabularyResponse'
+        '480':
           description: NotFoundException
           schema:
-            $ref: "#/definitions/NotFoundException"
-        "481":
+            $ref: '#/definitions/NotFoundException'
+        '481':
           description: LimitExceededException
           schema:
-            $ref: "#/definitions/LimitExceededException"
-        "482":
+            $ref: '#/definitions/LimitExceededException'
+        '482':
           description: InternalFailureException
           schema:
-            $ref: "#/definitions/InternalFailureException"
-        "483":
+            $ref: '#/definitions/InternalFailureException'
+        '483':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
+            $ref: '#/definitions/BadRequestException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/GetVocabularyRequest"
+            $ref: '#/definitions/GetVocabularyRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -305,40 +299,40 @@ paths:
           enum:
             - Transcribe.GetVocabulary
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=Transcribe.ListTranscriptionJobs:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=Transcribe.ListTranscriptionJobs':
     post:
       operationId: ListTranscriptionJobs
       description: Lists transcription jobs with the specified status.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/ListTranscriptionJobsResponse"
-        "480":
+            $ref: '#/definitions/ListTranscriptionJobsResponse'
+        '480':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "481":
+            $ref: '#/definitions/BadRequestException'
+        '481':
           description: LimitExceededException
           schema:
-            $ref: "#/definitions/LimitExceededException"
-        "482":
+            $ref: '#/definitions/LimitExceededException'
+        '482':
           description: InternalFailureException
           schema:
-            $ref: "#/definitions/InternalFailureException"
+            $ref: '#/definitions/InternalFailureException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/ListTranscriptionJobsRequest"
+            $ref: '#/definitions/ListTranscriptionJobsRequest'
         - name: MaxResults
           type: string
           in: query
@@ -356,41 +350,40 @@ paths:
           enum:
             - Transcribe.ListTranscriptionJobs
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=Transcribe.ListVocabularies:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=Transcribe.ListVocabularies':
     post:
       operationId: ListVocabularies
-      description: Returns a list of vocabularies that match the specified criteria. If no
-        criteria are specified, returns the entire list of vocabularies.
+      description: 'Returns a list of vocabularies that match the specified criteria. If no criteria are specified, returns the entire list of vocabularies.'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/ListVocabulariesResponse"
-        "480":
+            $ref: '#/definitions/ListVocabulariesResponse'
+        '480':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "481":
+            $ref: '#/definitions/BadRequestException'
+        '481':
           description: LimitExceededException
           schema:
-            $ref: "#/definitions/LimitExceededException"
-        "482":
+            $ref: '#/definitions/LimitExceededException'
+        '482':
           description: InternalFailureException
           schema:
-            $ref: "#/definitions/InternalFailureException"
+            $ref: '#/definitions/InternalFailureException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/ListVocabulariesRequest"
+            $ref: '#/definitions/ListVocabulariesRequest'
         - name: MaxResults
           type: string
           in: query
@@ -408,44 +401,44 @@ paths:
           enum:
             - Transcribe.ListVocabularies
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=Transcribe.StartTranscriptionJob:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=Transcribe.StartTranscriptionJob':
     post:
       operationId: StartTranscriptionJob
-      description: "Starts an asynchronous job to transcribe speech to text. "
+      description: 'Starts an asynchronous job to transcribe speech to text. '
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/StartTranscriptionJobResponse"
-        "480":
+            $ref: '#/definitions/StartTranscriptionJobResponse'
+        '480':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "481":
+            $ref: '#/definitions/BadRequestException'
+        '481':
           description: LimitExceededException
           schema:
-            $ref: "#/definitions/LimitExceededException"
-        "482":
+            $ref: '#/definitions/LimitExceededException'
+        '482':
           description: InternalFailureException
           schema:
-            $ref: "#/definitions/InternalFailureException"
-        "483":
+            $ref: '#/definitions/InternalFailureException'
+        '483':
           description: ConflictException
           schema:
-            $ref: "#/definitions/ConflictException"
+            $ref: '#/definitions/ConflictException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/StartTranscriptionJobRequest"
+            $ref: '#/definitions/StartTranscriptionJobRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -453,50 +446,48 @@ paths:
           enum:
             - Transcribe.StartTranscriptionJob
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=Transcribe.UpdateVocabulary:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=Transcribe.UpdateVocabulary':
     post:
       operationId: UpdateVocabulary
-      description: "Updates an existing vocabulary with new values. The
-        <code>UpdateVocabulary</code> operation overwrites all of the existing
-        information with the values that you provide in the request. "
+      description: 'Updates an existing vocabulary with new values. The <code>UpdateVocabulary</code> operation overwrites all of the existing information with the values that you provide in the request. '
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/UpdateVocabularyResponse"
-        "480":
+            $ref: '#/definitions/UpdateVocabularyResponse'
+        '480':
           description: BadRequestException
           schema:
-            $ref: "#/definitions/BadRequestException"
-        "481":
+            $ref: '#/definitions/BadRequestException'
+        '481':
           description: LimitExceededException
           schema:
-            $ref: "#/definitions/LimitExceededException"
-        "482":
+            $ref: '#/definitions/LimitExceededException'
+        '482':
           description: InternalFailureException
           schema:
-            $ref: "#/definitions/InternalFailureException"
-        "483":
+            $ref: '#/definitions/InternalFailureException'
+        '483':
           description: NotFoundException
           schema:
-            $ref: "#/definitions/NotFoundException"
-        "484":
+            $ref: '#/definitions/NotFoundException'
+        '484':
           description: ConflictException
           schema:
-            $ref: "#/definitions/ConflictException"
+            $ref: '#/definitions/ConflictException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/UpdateVocabularyRequest"
+            $ref: '#/definitions/UpdateVocabularyRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -504,36 +495,32 @@ paths:
           enum:
             - Transcribe.UpdateVocabulary
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
   CreateVocabularyResponse:
     type: object
     properties:
       VocabularyName:
-        $ref: "#/definitions/VocabularyName"
+        $ref: '#/definitions/VocabularyName'
         description: The name of the vocabulary.
       LanguageCode:
-        $ref: "#/definitions/LanguageCode"
+        $ref: '#/definitions/LanguageCode'
         description: The language code of the vocabulary entries.
       VocabularyState:
-        $ref: "#/definitions/VocabularyState"
-        description: The processing state of the vocabulary. When the
-          <code>VocabularyState</code> field contains <code>READY</code> the
-          vocabulary is ready to be used in a <code>StartTranscriptionJob</code>
-          request.
+        $ref: '#/definitions/VocabularyState'
+        description: The processing state of the vocabulary. When the <code>VocabularyState</code> field contains <code>READY</code> the vocabulary is ready to be used in a <code>StartTranscriptionJob</code> request.
       LastModifiedTime:
-        $ref: "#/definitions/DateTime"
+        $ref: '#/definitions/DateTime'
         description: The date and time that the vocabulary was created.
       FailureReason:
-        $ref: "#/definitions/FailureReason"
-        description: If the <code>VocabularyState</code> field is <code>FAILED</code>, this
-          field contains information about why the job failed.
+        $ref: '#/definitions/FailureReason'
+        description: 'If the <code>VocabularyState</code> field is <code>FAILED</code>, this field contains information about why the job failed.'
   CreateVocabularyRequest:
     type: object
     required:
@@ -541,29 +528,17 @@ definitions:
       - LanguageCode
     properties:
       VocabularyName:
-        $ref: "#/definitions/VocabularyName"
-        description: The name of the vocabulary. The name must be unique within an AWS
-          account. The name is case-sensitive.
+        $ref: '#/definitions/VocabularyName'
+        description: The name of the vocabulary. The name must be unique within an AWS account. The name is case-sensitive.
       LanguageCode:
-        $ref: "#/definitions/LanguageCode"
+        $ref: '#/definitions/LanguageCode'
         description: The language code of the vocabulary entries.
       Phrases:
-        $ref: "#/definitions/Phrases"
-        description: "An array of strings that contains the vocabulary entries. "
+        $ref: '#/definitions/Phrases'
+        description: 'An array of strings that contains the vocabulary entries. '
       VocabularyFileUri:
-        $ref: "#/definitions/Uri"
-        description: <p>The S3 location of the text file that contains the definition of
-          the custom vocabulary. The URI must be in the same region as the API
-          endpoint that you are calling. The general form is </p> <p> <code>
-          https://s3-&lt;aws-region&gt;.amazonaws.com/&lt;bucket-name&gt;/&lt;keyprefix&gt;/&lt;objectkey&gt;
-          </code> </p> <p>For example:</p> <p>
-          <code>https://s3-us-east-1.amazonaws.com/examplebucket/vocab.txt</code>
-          </p> <p>For more information about S3 object names, see <a
-          href="http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys">Object
-          Keys</a> in the <i>Amazon S3 Developer Guide</i>.</p> <p>For more
-          information about custom vocabularies, see <a
-          href="http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary">Custom
-          Vocabularies</a>.</p>
+        $ref: '#/definitions/Uri'
+        description: '<p>The S3 location of the text file that contains the definition of the custom vocabulary. The URI must be in the same region as the API endpoint that you are calling. The general form is </p> <p> <code> https://s3-&lt;aws-region&gt;.amazonaws.com/&lt;bucket-name&gt;/&lt;keyprefix&gt;/&lt;objectkey&gt; </code> </p> <p>For example:</p> <p> <code>https://s3-us-east-1.amazonaws.com/examplebucket/vocab.txt</code> </p> <p>For more information about S3 object names, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys">Object Keys</a> in the <i>Amazon S3 Developer Guide</i>.</p> <p>For more information about custom vocabularies, see <a href="http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary">Custom Vocabularies</a>.</p>'
   BadRequestException: {}
   LimitExceededException: {}
   InternalFailureException: {}
@@ -574,7 +549,7 @@ definitions:
       - TranscriptionJobName
     properties:
       TranscriptionJobName:
-        $ref: "#/definitions/TranscriptionJobName"
+        $ref: '#/definitions/TranscriptionJobName'
         description: The name of the transcription job to be deleted.
   DeleteVocabularyRequest:
     type: object
@@ -582,14 +557,14 @@ definitions:
       - VocabularyName
     properties:
       VocabularyName:
-        $ref: "#/definitions/VocabularyName"
-        description: "The name of the vocabulary to delete. "
+        $ref: '#/definitions/VocabularyName'
+        description: 'The name of the vocabulary to delete. '
   NotFoundException: {}
   GetTranscriptionJobResponse:
     type: object
     properties:
       TranscriptionJob:
-        $ref: "#/definitions/TranscriptionJob"
+        $ref: '#/definitions/TranscriptionJob'
         description: An object that contains the results of the transcription job.
   GetTranscriptionJobRequest:
     type: object
@@ -597,130 +572,96 @@ definitions:
       - TranscriptionJobName
     properties:
       TranscriptionJobName:
-        $ref: "#/definitions/TranscriptionJobName"
+        $ref: '#/definitions/TranscriptionJobName'
         description: The name of the job.
   GetVocabularyResponse:
     type: object
     properties:
       VocabularyName:
-        $ref: "#/definitions/VocabularyName"
+        $ref: '#/definitions/VocabularyName'
         description: The name of the vocabulary to return.
       LanguageCode:
-        $ref: "#/definitions/LanguageCode"
+        $ref: '#/definitions/LanguageCode'
         description: The language code of the vocabulary entries.
       VocabularyState:
-        $ref: "#/definitions/VocabularyState"
+        $ref: '#/definitions/VocabularyState'
         description: The processing state of the vocabulary.
       LastModifiedTime:
-        $ref: "#/definitions/DateTime"
+        $ref: '#/definitions/DateTime'
         description: The date and time that the vocabulary was last modified.
       FailureReason:
-        $ref: "#/definitions/FailureReason"
-        description: If the <code>VocabularyState</code> field is <code>FAILED</code>, this
-          field contains information about why the job failed.
+        $ref: '#/definitions/FailureReason'
+        description: 'If the <code>VocabularyState</code> field is <code>FAILED</code>, this field contains information about why the job failed.'
       DownloadUri:
-        $ref: "#/definitions/Uri"
-        description: The S3 location where the vocabulary is stored. Use this URI to get
-          the contents of the vocabulary. The URI is available for a limited
-          time.
+        $ref: '#/definitions/Uri'
+        description: The S3 location where the vocabulary is stored. Use this URI to get the contents of the vocabulary. The URI is available for a limited time.
   GetVocabularyRequest:
     type: object
     required:
       - VocabularyName
     properties:
       VocabularyName:
-        $ref: "#/definitions/VocabularyName"
-        description: The name of the vocabulary to return information about. The name is
-          case-sensitive.
+        $ref: '#/definitions/VocabularyName'
+        description: The name of the vocabulary to return information about. The name is case-sensitive.
   ListTranscriptionJobsResponse:
     type: object
     properties:
       Status:
-        $ref: "#/definitions/TranscriptionJobStatus"
+        $ref: '#/definitions/TranscriptionJobStatus'
         description: The requested status of the jobs returned.
       NextToken:
-        $ref: "#/definitions/NextToken"
-        description: The <code>ListTranscriptionJobs</code> operation returns a page of
-          jobs at a time. The maximum size of the page is set by the
-          <code>MaxResults</code> parameter. If there are more jobs in the list
-          than the page size, Amazon Transcribe returns the
-          <code>NextPage</code> token. Include the token in the next request to
-          the <code>ListTranscriptionJobs</code> operation to return in the next
-          page of jobs.
+        $ref: '#/definitions/NextToken'
+        description: 'The <code>ListTranscriptionJobs</code> operation returns a page of jobs at a time. The maximum size of the page is set by the <code>MaxResults</code> parameter. If there are more jobs in the list than the page size, Amazon Transcribe returns the <code>NextPage</code> token. Include the token in the next request to the <code>ListTranscriptionJobs</code> operation to return in the next page of jobs.'
       TranscriptionJobSummaries:
-        $ref: "#/definitions/TranscriptionJobSummaries"
-        description: A list of objects containing summary information for a transcription
-          job.
+        $ref: '#/definitions/TranscriptionJobSummaries'
+        description: A list of objects containing summary information for a transcription job.
   ListTranscriptionJobsRequest:
     type: object
     properties:
       Status:
-        $ref: "#/definitions/TranscriptionJobStatus"
-        description: "When specified, returns only transcription jobs with the specified
-          status. Jobs are ordered by creation date, with the newest jobs
-          returned first. If you don’t specify a status, Amazon Transcribe
-          returns all transcription jobs ordered by creation date. "
+        $ref: '#/definitions/TranscriptionJobStatus'
+        description: 'When specified, returns only transcription jobs with the specified status. Jobs are ordered by creation date, with the newest jobs returned first. If you don’t specify a status, Amazon Transcribe returns all transcription jobs ordered by creation date. '
       JobNameContains:
-        $ref: "#/definitions/TranscriptionJobName"
-        description: When specified, the jobs returned in the list are limited to jobs
-          whose name contains the specified string.
+        $ref: '#/definitions/TranscriptionJobName'
+        description: 'When specified, the jobs returned in the list are limited to jobs whose name contains the specified string.'
       NextToken:
-        $ref: "#/definitions/NextToken"
-        description: If the result of the previous request to
-          <code>ListTranscriptionJobs</code> was truncated, include the
-          <code>NextToken</code> to fetch the next set of jobs.
+        $ref: '#/definitions/NextToken'
+        description: 'If the result of the previous request to <code>ListTranscriptionJobs</code> was truncated, include the <code>NextToken</code> to fetch the next set of jobs.'
       MaxResults:
-        $ref: "#/definitions/MaxResults"
-        description: The maximum number of jobs to return in the response. If there are
-          fewer results in the list, this response contains only the actual
-          results.
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of jobs to return in the response. If there are fewer results in the list, this response contains only the actual results.'
   ListVocabulariesResponse:
     type: object
     properties:
       Status:
-        $ref: "#/definitions/TranscriptionJobStatus"
+        $ref: '#/definitions/TranscriptionJobStatus'
         description: The requested vocabulary state.
       NextToken:
-        $ref: "#/definitions/NextToken"
-        description: The <code>ListVocabularies</code> operation returns a page of
-          vocabularies at a time. The maximum size of the page is set by the
-          <code>MaxResults</code> parameter. If there are more jobs in the list
-          than the page size, Amazon Transcribe returns the
-          <code>NextPage</code> token. Include the token in the next request to
-          the <code>ListVocabularies</code> operation to return in the next page
-          of jobs.
+        $ref: '#/definitions/NextToken'
+        description: 'The <code>ListVocabularies</code> operation returns a page of vocabularies at a time. The maximum size of the page is set by the <code>MaxResults</code> parameter. If there are more jobs in the list than the page size, Amazon Transcribe returns the <code>NextPage</code> token. Include the token in the next request to the <code>ListVocabularies</code> operation to return in the next page of jobs.'
       Vocabularies:
-        $ref: "#/definitions/Vocabularies"
-        description: A list of objects that describe the vocabularies that match the search
-          criteria in the request.
+        $ref: '#/definitions/Vocabularies'
+        description: A list of objects that describe the vocabularies that match the search criteria in the request.
   ListVocabulariesRequest:
     type: object
     properties:
       NextToken:
-        $ref: "#/definitions/NextToken"
-        description: If the result of the previous request to <code>ListVocabularies</code>
-          was truncated, include the <code>NextToken</code> to fetch the next
-          set of jobs.
+        $ref: '#/definitions/NextToken'
+        description: 'If the result of the previous request to <code>ListVocabularies</code> was truncated, include the <code>NextToken</code> to fetch the next set of jobs.'
       MaxResults:
-        $ref: "#/definitions/MaxResults"
-        description: The maximum number of vocabularies to return in the response. If there
-          are fewer results in the list, this response contains only the actual
-          results.
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of vocabularies to return in the response. If there are fewer results in the list, this response contains only the actual results.'
       StateEquals:
-        $ref: "#/definitions/VocabularyState"
-        description: When specified, only returns vocabularies with the
-          <code>VocabularyState</code> field equal to the specified state.
+        $ref: '#/definitions/VocabularyState'
+        description: 'When specified, only returns vocabularies with the <code>VocabularyState</code> field equal to the specified state.'
       NameContains:
-        $ref: "#/definitions/VocabularyName"
-        description: When specified, the vocabularies returned in the list are limited to
-          vocabularies whose name contains the specified string. The search is
-          case-insensitive, <code>ListVocabularies</code> will return both
-          "vocabularyname" and "VocabularyName" in the response list.
+        $ref: '#/definitions/VocabularyName'
+        description: 'When specified, the vocabularies returned in the list are limited to vocabularies whose name contains the specified string. The search is case-insensitive, <code>ListVocabularies</code> will return both "vocabularyname" and "VocabularyName" in the response list.'
   StartTranscriptionJobResponse:
     type: object
     properties:
       TranscriptionJob:
-        $ref: "#/definitions/TranscriptionJob"
+        $ref: '#/definitions/TranscriptionJob'
         description: An object containing details of the asynchronous transcription job.
   StartTranscriptionJobRequest:
     type: object
@@ -731,63 +672,41 @@ definitions:
       - Media
     properties:
       TranscriptionJobName:
-        $ref: "#/definitions/TranscriptionJobName"
-        description: The name of the job. Note that you can't use the strings "." or ".."
-          by themselves as the job name. The name must also be unique within an
-          AWS account.
+        $ref: '#/definitions/TranscriptionJobName'
+        description: The name of the job. Note that you can't use the strings "." or ".." by themselves as the job name. The name must also be unique within an AWS account.
       LanguageCode:
-        $ref: "#/definitions/LanguageCode"
+        $ref: '#/definitions/LanguageCode'
         description: The language code for the language used in the input media file.
       MediaSampleRateHertz:
-        $ref: "#/definitions/MediaSampleRateHertz"
-        description: "The sample rate, in Hertz, of the audio track in the input media
-          file. "
+        $ref: '#/definitions/MediaSampleRateHertz'
+        description: 'The sample rate, in Hertz, of the audio track in the input media file. '
       MediaFormat:
-        $ref: "#/definitions/MediaFormat"
+        $ref: '#/definitions/MediaFormat'
         description: The format of the input media file.
       Media:
-        $ref: "#/definitions/Media"
+        $ref: '#/definitions/Media'
         description: An object that describes the input media for a transcription job.
       OutputBucketName:
-        $ref: "#/definitions/OutputBucketName"
-        description: <p>The location where the transcription is stored.</p> <p>If you set
-          the <code>OutputBucketName</code>, Amazon Transcribe puts the
-          transcription in the specified S3 bucket. When you call the
-          <a>GetTranscriptionJob</a> operation, the operation returns this
-          location in the <code>TranscriptFileUri</code> field. The S3 bucket
-          must have permissions that allow Amazon Transcribe to put files in the
-          bucket. For more information, see <a
-          href="https://docs.aws.amazon.com/transcribe/latest/dg/access-control-managing-permissions.html#auth-role-iam-user">Permissions
-          Required for IAM User Roles</a>.</p> <p>Amazon Transcribe uses the
-          default Amazon S3 key for server-side encryption of transcripts that
-          are placed in your S3 bucket. You can't specify your own encryption
-          key.</p> <p>If you don't set the <code>OutputBucketName</code>, Amazon
-          Transcribe generates a pre-signed URL, a shareable URL that provides
-          secure access to your transcription, and returns it in the
-          <code>TranscriptFileUri</code> field. Use this URL to download the
-          transcription.</p>
+        $ref: '#/definitions/OutputBucketName'
+        description: '<p>The location where the transcription is stored.</p> <p>If you set the <code>OutputBucketName</code>, Amazon Transcribe puts the transcription in the specified S3 bucket. When you call the <a>GetTranscriptionJob</a> operation, the operation returns this location in the <code>TranscriptFileUri</code> field. The S3 bucket must have permissions that allow Amazon Transcribe to put files in the bucket. For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/access-control-managing-permissions.html#auth-role-iam-user">Permissions Required for IAM User Roles</a>.</p> <p>Amazon Transcribe uses the default Amazon S3 key for server-side encryption of transcripts that are placed in your S3 bucket. You can''t specify your own encryption key.</p> <p>If you don''t set the <code>OutputBucketName</code>, Amazon Transcribe generates a pre-signed URL, a shareable URL that provides secure access to your transcription, and returns it in the <code>TranscriptFileUri</code> field. Use this URL to download the transcription.</p>'
       Settings:
-        $ref: "#/definitions/Settings"
-        description: A <code>Settings</code> object that provides optional settings for a
-          transcription job.
+        $ref: '#/definitions/Settings'
+        description: A <code>Settings</code> object that provides optional settings for a transcription job.
   UpdateVocabularyResponse:
     type: object
     properties:
       VocabularyName:
-        $ref: "#/definitions/VocabularyName"
+        $ref: '#/definitions/VocabularyName'
         description: The name of the vocabulary that was updated.
       LanguageCode:
-        $ref: "#/definitions/LanguageCode"
+        $ref: '#/definitions/LanguageCode'
         description: The language code of the vocabulary entries.
       LastModifiedTime:
-        $ref: "#/definitions/DateTime"
+        $ref: '#/definitions/DateTime'
         description: The date and time that the vocabulary was updated.
       VocabularyState:
-        $ref: "#/definitions/VocabularyState"
-        description: The processing state of the vocabulary. When the
-          <code>VocabularyState</code> field contains <code>READY</code> the
-          vocabulary is ready to be used in a <code>StartTranscriptionJob</code>
-          request.
+        $ref: '#/definitions/VocabularyState'
+        description: The processing state of the vocabulary. When the <code>VocabularyState</code> field contains <code>READY</code> the vocabulary is ready to be used in a <code>StartTranscriptionJob</code> request.
   UpdateVocabularyRequest:
     type: object
     required:
@@ -795,33 +714,22 @@ definitions:
       - LanguageCode
     properties:
       VocabularyName:
-        $ref: "#/definitions/VocabularyName"
+        $ref: '#/definitions/VocabularyName'
         description: The name of the vocabulary to update. The name is case-sensitive.
       LanguageCode:
-        $ref: "#/definitions/LanguageCode"
+        $ref: '#/definitions/LanguageCode'
         description: The language code of the vocabulary entries.
       Phrases:
-        $ref: "#/definitions/Phrases"
+        $ref: '#/definitions/Phrases'
         description: An array of strings containing the vocabulary entries.
       VocabularyFileUri:
-        $ref: "#/definitions/Uri"
-        description: <p>The S3 location of the text file that contains the definition of
-          the custom vocabulary. The URI must be in the same region as the API
-          endpoint that you are calling. The general form is </p> <p> <code>
-          https://s3-&lt;aws-region&gt;.amazonaws.com/&lt;bucket-name&gt;/&lt;keyprefix&gt;/&lt;objectkey&gt;
-          </code> </p> <p>For example:</p> <p>
-          <code>https://s3-us-east-1.amazonaws.com/examplebucket/vocab.txt</code>
-          </p> <p>For more information about S3 object names, see <a
-          href="http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys">Object
-          Keys</a> in the <i>Amazon S3 Developer Guide</i>.</p> <p>For more
-          information about custom vocabularies, see <a
-          href="http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary">Custom
-          Vocabularies</a>.</p>
+        $ref: '#/definitions/Uri'
+        description: '<p>The S3 location of the text file that contains the definition of the custom vocabulary. The URI must be in the same region as the API endpoint that you are calling. The general form is </p> <p> <code> https://s3-&lt;aws-region&gt;.amazonaws.com/&lt;bucket-name&gt;/&lt;keyprefix&gt;/&lt;objectkey&gt; </code> </p> <p>For example:</p> <p> <code>https://s3-us-east-1.amazonaws.com/examplebucket/vocab.txt</code> </p> <p>For more information about S3 object names, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys">Object Keys</a> in the <i>Amazon S3 Developer Guide</i>.</p> <p>For more information about custom vocabularies, see <a href="http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary">Custom Vocabularies</a>.</p>'
   Boolean:
     type: boolean
   VocabularyName:
     type: string
-    pattern: ^[0-9a-zA-Z._-]+
+    pattern: '^[0-9a-zA-Z._-]+'
     minLength: 1
     maxLength: 200
   LanguageCode:
@@ -840,7 +748,7 @@ definitions:
   Phrases:
     type: array
     items:
-      $ref: "#/definitions/Phrase"
+      $ref: '#/definitions/Phrase'
   Uri:
     type: string
     minLength: 1
@@ -858,82 +766,46 @@ definitions:
     type: string
   TranscriptionJobName:
     type: string
-    pattern: ^[0-9a-zA-Z._-]+
+    pattern: '^[0-9a-zA-Z._-]+'
     minLength: 1
     maxLength: 200
   TranscriptionJob:
     type: object
     properties:
       TranscriptionJobName:
-        $ref: "#/definitions/TranscriptionJobName"
+        $ref: '#/definitions/TranscriptionJobName'
         description: The name of the transcription job.
       TranscriptionJobStatus:
-        $ref: "#/definitions/TranscriptionJobStatus"
+        $ref: '#/definitions/TranscriptionJobStatus'
         description: The status of the transcription job.
       LanguageCode:
-        $ref: "#/definitions/LanguageCode"
+        $ref: '#/definitions/LanguageCode'
         description: The language code for the input speech.
       MediaSampleRateHertz:
-        $ref: "#/definitions/MediaSampleRateHertz"
-        description: "The sample rate, in Hertz, of the audio track in the input media
-          file. "
+        $ref: '#/definitions/MediaSampleRateHertz'
+        description: 'The sample rate, in Hertz, of the audio track in the input media file. '
       MediaFormat:
-        $ref: "#/definitions/MediaFormat"
+        $ref: '#/definitions/MediaFormat'
         description: The format of the input media file.
       Media:
-        $ref: "#/definitions/Media"
+        $ref: '#/definitions/Media'
         description: An object that describes the input media for the transcription job.
       Transcript:
-        $ref: "#/definitions/Transcript"
+        $ref: '#/definitions/Transcript'
         description: An object that describes the output of the transcription job.
       CreationTime:
-        $ref: "#/definitions/DateTime"
+        $ref: '#/definitions/DateTime'
         description: A timestamp that shows when the job was created.
       CompletionTime:
-        $ref: "#/definitions/DateTime"
+        $ref: '#/definitions/DateTime'
         description: A timestamp that shows when the job was completed.
       FailureReason:
-        $ref: "#/definitions/FailureReason"
-        description: "<p>If the <code>TranscriptionJobStatus</code> field is
-          <code>FAILED</code>, this field contains information about why the job
-          failed.</p> <p>The <code>FailureReason</code> field can contain one of
-          the following values:</p> <ul> <li> <p> <code>Unsupported media
-          format</code> - The media format specified in the
-          <code>MediaFormat</code> field of the request isn't valid. See the
-          description of the <code>MediaFormat</code> field for a list of valid
-          values.</p> </li> <li> <p> <code>The media format provided does not
-          match the detected media format</code> - The media format of the audio
-          file doesn't match the format specified in the
-          <code>MediaFormat</code> field in the request. Check the media format
-          of your media file and make sure that the two values match.</p> </li>
-          <li> <p> <code>Invalid sample rate for audio file</code> - The sample
-          rate specified in the <code>MediaSampleRateHertz</code> of the request
-          isn't valid. The sample rate must be between 8000 and 48000 Hertz.</p>
-          </li> <li> <p> <code>The sample rate provided does not match the
-          detected sample rate</code> - The sample rate in the audio file
-          doesn't match the sample rate specified in the
-          <code>MediaSampleRateHertz</code> field in the request. Check the
-          sample rate of your media file and make sure that the two values
-          match.</p> </li> <li> <p> <code>Invalid file size: file size too
-          large</code> - The size of your audio file is larger than Amazon
-          Transcribe can process. For more information, see <a
-          href=\"https://docs.aws.amazon.com/transcribe/latest/dg/limits-guidel\
-          ines.html#limits\">Limits</a> in the <i>Amazon Transcribe Developer
-          Guide</i>.</p> </li> <li> <p> <code>Invalid number of channels: number
-          of channels too large</code> - Your audio contains more channels than
-          Amazon Transcribe is configured to process. To request additional
-          channels, see <a
-          href=\"https://docs.aws.amazon.com/general/latest/gr/aws_service_limi\
-          ts.html#limits-amazon-transcribe\">Amazon Transcribe Limits</a> in the
-          <i>Amazon Web Services General Reference</i>.</p> </li> </ul>"
+        $ref: '#/definitions/FailureReason'
+        description: '<p>If the <code>TranscriptionJobStatus</code> field is <code>FAILED</code>, this field contains information about why the job failed.</p> <p>The <code>FailureReason</code> field can contain one of the following values:</p> <ul> <li> <p> <code>Unsupported media format</code> - The media format specified in the <code>MediaFormat</code> field of the request isn''t valid. See the description of the <code>MediaFormat</code> field for a list of valid values.</p> </li> <li> <p> <code>The media format provided does not match the detected media format</code> - The media format of the audio file doesn''t match the format specified in the <code>MediaFormat</code> field in the request. Check the media format of your media file and make sure that the two values match.</p> </li> <li> <p> <code>Invalid sample rate for audio file</code> - The sample rate specified in the <code>MediaSampleRateHertz</code> of the request isn''t valid. The sample rate must be between 8000 and 48000 Hertz.</p> </li> <li> <p> <code>The sample rate provided does not match the detected sample rate</code> - The sample rate in the audio file doesn''t match the sample rate specified in the <code>MediaSampleRateHertz</code> field in the request. Check the sample rate of your media file and make sure that the two values match.</p> </li> <li> <p> <code>Invalid file size: file size too large</code> - The size of your audio file is larger than Amazon Transcribe can process. For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/limits-guidelines.html#limits">Limits</a> in the <i>Amazon Transcribe Developer Guide</i>.</p> </li> <li> <p> <code>Invalid number of channels: number of channels too large</code> - Your audio contains more channels than Amazon Transcribe is configured to process. To request additional channels, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits-amazon-transcribe">Amazon Transcribe Limits</a> in the <i>Amazon Web Services General Reference</i>.</p> </li> </ul>'
       Settings:
-        $ref: "#/definitions/Settings"
-        description: Optional settings for the transcription job. Use these settings to
-          turn on speaker recognition, to set the maximum number of speakers
-          that should be identified and to specify a custom vocabulary to use
-          when processing the transcription job.
-    description: "Describes an asynchronous transcription job that was created with the
-      <code>StartTranscriptionJob</code> operation. "
+        $ref: '#/definitions/Settings'
+        description: 'Optional settings for the transcription job. Use these settings to turn on speaker recognition, to set the maximum number of speakers that should be identified and to specify a custom vocabulary to use when processing the transcription job.'
+    description: 'Describes an asynchronous transcription job that was created with the <code>StartTranscriptionJob</code> operation. '
   TranscriptionJobStatus:
     type: string
     enum:
@@ -950,11 +822,11 @@ definitions:
   TranscriptionJobSummaries:
     type: array
     items:
-      $ref: "#/definitions/TranscriptionJobSummary"
+      $ref: '#/definitions/TranscriptionJobSummary'
   Vocabularies:
     type: array
     items:
-      $ref: "#/definitions/VocabularyInfo"
+      $ref: '#/definitions/VocabularyInfo'
   MaxSpeakers:
     type: integer
     minimum: 2
@@ -963,18 +835,8 @@ definitions:
     type: object
     properties:
       MediaFileUri:
-        $ref: "#/definitions/Uri"
-        description: <p>The S3 location of the input media file. The URI must be in the
-          same region as the API endpoint that you are calling. The general form
-          is:</p> <p> <code>
-          https://s3-&lt;aws-region&gt;.amazonaws.com/&lt;bucket-name&gt;/&lt;keyprefix&gt;/&lt;objectkey&gt;
-          </code> </p> <p>For example:</p> <p>
-          <code>https://s3-us-east-1.amazonaws.com/examplebucket/example.mp4</code>
-          </p> <p>
-          <code>https://s3-us-east-1.amazonaws.com/examplebucket/mediadocs/example.mp4</code>
-          </p> <p>For more information about S3 object names, see <a
-          href="http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys">Object
-          Keys</a> in the <i>Amazon S3 Developer Guide</i>.</p>
+        $ref: '#/definitions/Uri'
+        description: '<p>The S3 location of the input media file. The URI must be in the same region as the API endpoint that you are calling. The general form is:</p> <p> <code> https://s3-&lt;aws-region&gt;.amazonaws.com/&lt;bucket-name&gt;/&lt;keyprefix&gt;/&lt;objectkey&gt; </code> </p> <p>For example:</p> <p> <code>https://s3-us-east-1.amazonaws.com/examplebucket/example.mp4</code> </p> <p> <code>https://s3-us-east-1.amazonaws.com/examplebucket/mediadocs/example.mp4</code> </p> <p>For more information about S3 object names, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys">Object Keys</a> in the <i>Amazon S3 Developer Guide</i>.</p>'
     description: Describes the input media file in a transcription request.
   MediaFormat:
     type: string
@@ -989,7 +851,7 @@ definitions:
     maximum: 48000
   OutputBucketName:
     type: string
-    pattern: "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]"
+    pattern: '[a-z0-9][\.\-a-z0-9]{1,61}[a-z0-9]'
   OutputLocationType:
     type: string
     enum:
@@ -1003,102 +865,63 @@ definitions:
     type: object
     properties:
       VocabularyName:
-        $ref: "#/definitions/VocabularyName"
+        $ref: '#/definitions/VocabularyName'
         description: The name of a vocabulary to use when processing the transcription job.
       ShowSpeakerLabels:
-        $ref: "#/definitions/Boolean"
-        description: <p>Determines whether the transcription job uses speaker recognition
-          to identify different speakers in the input audio. Speaker recognition
-          labels individual speakers in the audio file. If you set the
-          <code>ShowSpeakerLabels</code> field to true, you must also set the
-          maximum number of speaker labels <code>MaxSpeakerLabels</code>
-          field.</p> <p>You can't set both <code>ShowSpeakerLabels</code> and
-          <code>ChannelIdentification</code> in the same request. If you set
-          both, your request returns a <code>BadRequestException</code>.</p>
+        $ref: '#/definitions/Boolean'
+        description: '<p>Determines whether the transcription job uses speaker recognition to identify different speakers in the input audio. Speaker recognition labels individual speakers in the audio file. If you set the <code>ShowSpeakerLabels</code> field to true, you must also set the maximum number of speaker labels <code>MaxSpeakerLabels</code> field.</p> <p>You can''t set both <code>ShowSpeakerLabels</code> and <code>ChannelIdentification</code> in the same request. If you set both, your request returns a <code>BadRequestException</code>.</p>'
       MaxSpeakerLabels:
-        $ref: "#/definitions/MaxSpeakers"
-        description: The maximum number of speakers to identify in the input audio. If
-          there are more speakers in the audio than this number, multiple
-          speakers will be identified as a single speaker. If you specify the
-          <code>MaxSpeakerLabels</code> field, you must set the
-          <code>ShowSpeakerLabels</code> field to true.
+        $ref: '#/definitions/MaxSpeakers'
+        description: 'The maximum number of speakers to identify in the input audio. If there are more speakers in the audio than this number, multiple speakers will be identified as a single speaker. If you specify the <code>MaxSpeakerLabels</code> field, you must set the <code>ShowSpeakerLabels</code> field to true.'
       ChannelIdentification:
-        $ref: "#/definitions/Boolean"
-        description: <p>Instructs Amazon Transcribe to process each audio channel
-          separately and then merge the transcription output of each channel
-          into a single transcription. </p> <p>Amazon Transcribe also produces a
-          transcription of each item detected on an audio channel, including the
-          start time and end time of the item and alternative transcriptions of
-          the item including the confidence that Amazon Transcribe has in the
-          transcription.</p> <p>You can't set both
-          <code>ShowSpeakerLabels</code> and <code>ChannelIdentification</code>
-          in the same request. If you set both, your request returns a
-          <code>BadRequestException</code>.</p>
-    description: Provides optional settings for the <code>StartTranscriptionJob</code>
-      operation.
+        $ref: '#/definitions/Boolean'
+        description: '<p>Instructs Amazon Transcribe to process each audio channel separately and then merge the transcription output of each channel into a single transcription. </p> <p>Amazon Transcribe also produces a transcription of each item detected on an audio channel, including the start time and end time of the item and alternative transcriptions of the item including the confidence that Amazon Transcribe has in the transcription.</p> <p>You can''t set both <code>ShowSpeakerLabels</code> and <code>ChannelIdentification</code> in the same request. If you set both, your request returns a <code>BadRequestException</code>.</p>'
+    description: Provides optional settings for the <code>StartTranscriptionJob</code> operation.
   Transcript:
     type: object
     properties:
       TranscriptFileUri:
-        $ref: "#/definitions/Uri"
-        description: <p>The location where the transcription is stored.</p> <p>Use this URI
-          to access the transcription. If you specified an S3 bucket in the
-          <code>OutputBucketName</code> field when you created the job, this is
-          the URI of that bucket. If you chose to store the transcription in
-          Amazon Transcribe, this is a shareable URL that provides secure access
-          to that location.</p>
+        $ref: '#/definitions/Uri'
+        description: '<p>The location where the transcription is stored.</p> <p>Use this URI to access the transcription. If you specified an S3 bucket in the <code>OutputBucketName</code> field when you created the job, this is the URI of that bucket. If you chose to store the transcription in Amazon Transcribe, this is a shareable URL that provides secure access to that location.</p>'
     description: Identifies the location of a transcription.
   TranscriptionJobSummary:
     type: object
     properties:
       TranscriptionJobName:
-        $ref: "#/definitions/TranscriptionJobName"
+        $ref: '#/definitions/TranscriptionJobName'
         description: The name of the transcription job.
       CreationTime:
-        $ref: "#/definitions/DateTime"
+        $ref: '#/definitions/DateTime'
         description: A timestamp that shows when the job was created.
       CompletionTime:
-        $ref: "#/definitions/DateTime"
+        $ref: '#/definitions/DateTime'
         description: A timestamp that shows when the job was completed.
       LanguageCode:
-        $ref: "#/definitions/LanguageCode"
+        $ref: '#/definitions/LanguageCode'
         description: The language code for the input speech.
       TranscriptionJobStatus:
-        $ref: "#/definitions/TranscriptionJobStatus"
-        description: The status of the transcription job. When the status is
-          <code>COMPLETED</code>, use the <code>GetTranscriptionJob</code>
-          operation to get the results of the transcription.
+        $ref: '#/definitions/TranscriptionJobStatus'
+        description: 'The status of the transcription job. When the status is <code>COMPLETED</code>, use the <code>GetTranscriptionJob</code> operation to get the results of the transcription.'
       FailureReason:
-        $ref: "#/definitions/FailureReason"
-        description: If the <code>TranscriptionJobStatus</code> field is
-          <code>FAILED</code>, a description of the error.
+        $ref: '#/definitions/FailureReason'
+        description: 'If the <code>TranscriptionJobStatus</code> field is <code>FAILED</code>, a description of the error.'
       OutputLocationType:
-        $ref: "#/definitions/OutputLocationType"
-        description: <p>Indicates the location of the output of the transcription job.</p>
-          <p>If the value is <code>CUSTOMER_BUCKET</code> then the location is
-          the S3 bucket specified in the <code>outputBucketName</code> field
-          when the transcription job was started with the
-          <code>StartTranscriptionJob</code> operation.</p> <p>If the value is
-          <code>SERVICE_BUCKET</code> then the output is stored by Amazon
-          Transcribe and can be retrieved using the URI in the
-          <code>GetTranscriptionJob</code> response's
-          <code>TranscriptFileUri</code> field.</p>
+        $ref: '#/definitions/OutputLocationType'
+        description: <p>Indicates the location of the output of the transcription job.</p> <p>If the value is <code>CUSTOMER_BUCKET</code> then the location is the S3 bucket specified in the <code>outputBucketName</code> field when the transcription job was started with the <code>StartTranscriptionJob</code> operation.</p> <p>If the value is <code>SERVICE_BUCKET</code> then the output is stored by Amazon Transcribe and can be retrieved using the URI in the <code>GetTranscriptionJob</code> response's <code>TranscriptFileUri</code> field.</p>
     description: Provides a summary of information about a transcription job. .
   VocabularyInfo:
     type: object
     properties:
       VocabularyName:
-        $ref: "#/definitions/VocabularyName"
+        $ref: '#/definitions/VocabularyName'
         description: The name of the vocabulary.
       LanguageCode:
-        $ref: "#/definitions/LanguageCode"
+        $ref: '#/definitions/LanguageCode'
         description: The language code of the vocabulary entries.
       LastModifiedTime:
-        $ref: "#/definitions/DateTime"
+        $ref: '#/definitions/DateTime'
         description: The date and time that the vocabulary was last modified.
       VocabularyState:
-        $ref: "#/definitions/VocabularyState"
-        description: The processing state of the vocabulary. If the state is
-          <code>READY</code> you can use the vocabulary in a
-          <code>StartTranscriptionJob</code> request.
-    description: "Provides information about a custom vocabulary. "
+        $ref: '#/definitions/VocabularyState'
+        description: The processing state of the vocabulary. If the state is <code>READY</code> you can use the vocabulary in a <code>StartTranscriptionJob</code> request.
+    description: 'Provides information about a custom vocabulary. '

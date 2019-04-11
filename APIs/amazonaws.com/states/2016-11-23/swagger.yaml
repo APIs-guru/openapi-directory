@@ -1,55 +1,38 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  version: 2016-11-23
+  version: '2016-11-23'
   x-release: v4
   title: AWS Step Functions
-  description: <fullname>AWS Step Functions</fullname> <p>AWS Step Functions is a service
-    that lets you coordinate the components of distributed applications and
-    microservices using visual workflows.</p> <p>You can use Step Functions to
-    build applications from individual components, each of which performs a
-    discrete function, or <i>task</i>, allowing you to scale and change
-    applications quickly. Step Functions provides a console that helps visualize
-    the components of your application as a series of steps. Step Functions
-    automatically triggers and tracks each step, and retries steps when there
-    are errors, so your application executes predictably and in the right order
-    every time. Step Functions logs the state of each step, so you can quickly
-    diagnose and debug any issues.</p> <p>Step Functions manages operations and
-    underlying infrastructure to ensure your application is available at any
-    scale. You can run tasks on AWS, your own servers, or any system that has
-    access to AWS. You can access and use Step Functions using the console, the
-    AWS SDKs, or an HTTP API. For more information about Step Functions, see the
-    <i> <a
-    href="https://docs.aws.amazon.com/step-functions/latest/dg/welcome.html">AWS
-    Step Functions Developer Guide</a> </i>.</p>
+  description: '<fullname>AWS Step Functions</fullname> <p>AWS Step Functions is a service that lets you coordinate the components of distributed applications and microservices using visual workflows.</p> <p>You can use Step Functions to build applications from individual components, each of which performs a discrete function, or <i>task</i>, allowing you to scale and change applications quickly. Step Functions provides a console that helps visualize the components of your application as a series of steps. Step Functions automatically triggers and tracks each step, and retries steps when there are errors, so your application executes predictably and in the right order every time. Step Functions logs the state of each step, so you can quickly diagnose and debug any issues.</p> <p>Step Functions manages operations and underlying infrastructure to ensure your application is available at any scale. You can run tasks on AWS, your own servers, or any system that has access to AWS. You can access and use Step Functions using the console, the AWS SDKs, or an HTTP API. For more information about Step Functions, see the <i> <a href="https://docs.aws.amazon.com/step-functions/latest/dg/welcome.html">AWS Step Functions Developer Guide</a> </i>.</p>'
   x-logo:
-    url: https://twitter.com/awscloud/profile_image?size=original
-    backgroundColor: "#FFFFFF"
-  termsOfService: https://aws.amazon.com/service-terms/
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
     name: Mike Ralphson
     email: mike.ralphson@gmail.com
-    url: https://github.com/mermade/aws2openapi
+    url: 'https://github.com/mermade/aws2openapi'
     x-twitter: PermittedSoc
   license:
     name: Apache 2.0 License
-    url: http://www.apache.org/licenses/
+    url: 'http://www.apache.org/licenses/'
   x-providerName: amazonaws.com
   x-serviceName: states
   x-origin:
     - contentType: application/json
-      url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/states-2016-11-23.normal.json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/states-2016-11-23.normal.json'
       converter:
-        url: https://github.com/mermade/aws2openapi
+        url: 'https://github.com/mermade/aws2openapi'
         version: 1.0.0
       x-apisguru-direct: true
   x-apiClientRegistration:
-    url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
   x-preferred: true
 externalDocs:
   description: Amazon Web Services documentation
-  url: https://docs.aws.amazon.com/states/
+  url: 'https://docs.aws.amazon.com/states/'
 host: states.amazonaws.com
 basePath: /
 x-hasEquivalentPaths: true
@@ -106,41 +89,33 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /#X-Amz-Target=AWSStepFunctions.CreateActivity:
+  '/#X-Amz-Target=AWSStepFunctions.CreateActivity':
     post:
       operationId: CreateActivity
-      description: <p>Creates an activity. An activity is a task that you write in any
-        programming language and host on any machine that has access to AWS Step
-        Functions. Activities must poll Step Functions using the
-        <code>GetActivityTask</code> API action and respond using
-        <code>SendTask*</code> API actions. This function lets Step Functions
-        know the existence of your activity and returns an identifier for use in
-        a state machine and when polling from the activity.</p> <note> <p>This
-        operation is eventually consistent. The results are best effort and may
-        not reflect very recent updates and changes.</p> </note>
+      description: <p>Creates an activity. An activity is a task that you write in any programming language and host on any machine that has access to AWS Step Functions. Activities must poll Step Functions using the <code>GetActivityTask</code> API action and respond using <code>SendTask*</code> API actions. This function lets Step Functions know the existence of your activity and returns an identifier for use in a state machine and when polling from the activity.</p> <note> <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p> </note>
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/CreateActivityOutput"
-        "480":
+            $ref: '#/definitions/CreateActivityOutput'
+        '480':
           description: ActivityLimitExceeded
           schema:
-            $ref: "#/definitions/ActivityLimitExceeded"
-        "481":
+            $ref: '#/definitions/ActivityLimitExceeded'
+        '481':
           description: InvalidName
           schema:
-            $ref: "#/definitions/InvalidName"
-        "482":
+            $ref: '#/definitions/InvalidName'
+        '482':
           description: TooManyTags
           schema:
-            $ref: "#/definitions/TooManyTags"
+            $ref: '#/definitions/TooManyTags'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/CreateActivityInput"
+            $ref: '#/definitions/CreateActivityInput'
         - name: X-Amz-Target
           in: header
           required: true
@@ -148,62 +123,56 @@ paths:
           enum:
             - AWSStepFunctions.CreateActivity
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AWSStepFunctions.CreateStateMachine:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSStepFunctions.CreateStateMachine':
     post:
       operationId: CreateStateMachine
-      description: <p>Creates a state machine. A state machine consists of a collection of
-        states that can do work (<code>Task</code> states), determine to which
-        states to transition next (<code>Choice</code> states), stop an
-        execution with an error (<code>Fail</code> states), and so on. State
-        machines are specified using a JSON-based, structured language.</p>
-        <note> <p>This operation is eventually consistent. The results are best
-        effort and may not reflect very recent updates and changes.</p> </note>
+      description: '<p>Creates a state machine. A state machine consists of a collection of states that can do work (<code>Task</code> states), determine to which states to transition next (<code>Choice</code> states), stop an execution with an error (<code>Fail</code> states), and so on. State machines are specified using a JSON-based, structured language.</p> <note> <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p> </note>'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/CreateStateMachineOutput"
-        "480":
+            $ref: '#/definitions/CreateStateMachineOutput'
+        '480':
           description: InvalidArn
           schema:
-            $ref: "#/definitions/InvalidArn"
-        "481":
+            $ref: '#/definitions/InvalidArn'
+        '481':
           description: InvalidDefinition
           schema:
-            $ref: "#/definitions/InvalidDefinition"
-        "482":
+            $ref: '#/definitions/InvalidDefinition'
+        '482':
           description: InvalidName
           schema:
-            $ref: "#/definitions/InvalidName"
-        "483":
+            $ref: '#/definitions/InvalidName'
+        '483':
           description: StateMachineAlreadyExists
           schema:
-            $ref: "#/definitions/StateMachineAlreadyExists"
-        "484":
+            $ref: '#/definitions/StateMachineAlreadyExists'
+        '484':
           description: StateMachineDeleting
           schema:
-            $ref: "#/definitions/StateMachineDeleting"
-        "485":
+            $ref: '#/definitions/StateMachineDeleting'
+        '485':
           description: StateMachineLimitExceeded
           schema:
-            $ref: "#/definitions/StateMachineLimitExceeded"
-        "486":
+            $ref: '#/definitions/StateMachineLimitExceeded'
+        '486':
           description: TooManyTags
           schema:
-            $ref: "#/definitions/TooManyTags"
+            $ref: '#/definitions/TooManyTags'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/CreateStateMachineInput"
+            $ref: '#/definitions/CreateStateMachineInput'
         - name: X-Amz-Target
           in: header
           required: true
@@ -211,32 +180,32 @@ paths:
           enum:
             - AWSStepFunctions.CreateStateMachine
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AWSStepFunctions.DeleteActivity:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSStepFunctions.DeleteActivity':
     post:
       operationId: DeleteActivity
       description: Deletes an activity.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DeleteActivityOutput"
-        "480":
+            $ref: '#/definitions/DeleteActivityOutput'
+        '480':
           description: InvalidArn
           schema:
-            $ref: "#/definitions/InvalidArn"
+            $ref: '#/definitions/InvalidArn'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/DeleteActivityInput"
+            $ref: '#/definitions/DeleteActivityInput'
         - name: X-Amz-Target
           in: header
           required: true
@@ -244,36 +213,32 @@ paths:
           enum:
             - AWSStepFunctions.DeleteActivity
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AWSStepFunctions.DeleteStateMachine:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSStepFunctions.DeleteStateMachine':
     post:
       operationId: DeleteStateMachine
-      description: "<p>Deletes a state machine. This is an asynchronous operation: It sets
-        the state machine's status to <code>DELETING</code> and begins the
-        deletion process. Each state machine execution is deleted the next time
-        it makes a state transition.</p> <note> <p>The state machine itself is
-        deleted after all executions are completed or deleted.</p> </note>"
+      description: '<p>Deletes a state machine. This is an asynchronous operation: It sets the state machine''s status to <code>DELETING</code> and begins the deletion process. Each state machine execution is deleted the next time it makes a state transition.</p> <note> <p>The state machine itself is deleted after all executions are completed or deleted.</p> </note>'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DeleteStateMachineOutput"
-        "480":
+            $ref: '#/definitions/DeleteStateMachineOutput'
+        '480':
           description: InvalidArn
           schema:
-            $ref: "#/definitions/InvalidArn"
+            $ref: '#/definitions/InvalidArn'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/DeleteStateMachineInput"
+            $ref: '#/definitions/DeleteStateMachineInput'
         - name: X-Amz-Target
           in: header
           required: true
@@ -281,38 +246,36 @@ paths:
           enum:
             - AWSStepFunctions.DeleteStateMachine
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AWSStepFunctions.DescribeActivity:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSStepFunctions.DescribeActivity':
     post:
       operationId: DescribeActivity
-      description: <p>Describes an activity.</p> <note> <p>This operation is eventually
-        consistent. The results are best effort and may not reflect very recent
-        updates and changes.</p> </note>
+      description: <p>Describes an activity.</p> <note> <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p> </note>
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DescribeActivityOutput"
-        "480":
+            $ref: '#/definitions/DescribeActivityOutput'
+        '480':
           description: ActivityDoesNotExist
           schema:
-            $ref: "#/definitions/ActivityDoesNotExist"
-        "481":
+            $ref: '#/definitions/ActivityDoesNotExist'
+        '481':
           description: InvalidArn
           schema:
-            $ref: "#/definitions/InvalidArn"
+            $ref: '#/definitions/InvalidArn'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/DescribeActivityInput"
+            $ref: '#/definitions/DescribeActivityInput'
         - name: X-Amz-Target
           in: header
           required: true
@@ -320,38 +283,36 @@ paths:
           enum:
             - AWSStepFunctions.DescribeActivity
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AWSStepFunctions.DescribeExecution:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSStepFunctions.DescribeExecution':
     post:
       operationId: DescribeExecution
-      description: <p>Describes an execution.</p> <note> <p>This operation is eventually
-        consistent. The results are best effort and may not reflect very recent
-        updates and changes.</p> </note>
+      description: <p>Describes an execution.</p> <note> <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p> </note>
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DescribeExecutionOutput"
-        "480":
+            $ref: '#/definitions/DescribeExecutionOutput'
+        '480':
           description: ExecutionDoesNotExist
           schema:
-            $ref: "#/definitions/ExecutionDoesNotExist"
-        "481":
+            $ref: '#/definitions/ExecutionDoesNotExist'
+        '481':
           description: InvalidArn
           schema:
-            $ref: "#/definitions/InvalidArn"
+            $ref: '#/definitions/InvalidArn'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/DescribeExecutionInput"
+            $ref: '#/definitions/DescribeExecutionInput'
         - name: X-Amz-Target
           in: header
           required: true
@@ -359,38 +320,36 @@ paths:
           enum:
             - AWSStepFunctions.DescribeExecution
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AWSStepFunctions.DescribeStateMachine:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSStepFunctions.DescribeStateMachine':
     post:
       operationId: DescribeStateMachine
-      description: <p>Describes a state machine.</p> <note> <p>This operation is eventually
-        consistent. The results are best effort and may not reflect very recent
-        updates and changes.</p> </note>
+      description: <p>Describes a state machine.</p> <note> <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p> </note>
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DescribeStateMachineOutput"
-        "480":
+            $ref: '#/definitions/DescribeStateMachineOutput'
+        '480':
           description: InvalidArn
           schema:
-            $ref: "#/definitions/InvalidArn"
-        "481":
+            $ref: '#/definitions/InvalidArn'
+        '481':
           description: StateMachineDoesNotExist
           schema:
-            $ref: "#/definitions/StateMachineDoesNotExist"
+            $ref: '#/definitions/StateMachineDoesNotExist'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/DescribeStateMachineInput"
+            $ref: '#/definitions/DescribeStateMachineInput'
         - name: X-Amz-Target
           in: header
           required: true
@@ -398,38 +357,36 @@ paths:
           enum:
             - AWSStepFunctions.DescribeStateMachine
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AWSStepFunctions.DescribeStateMachineForExecution:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSStepFunctions.DescribeStateMachineForExecution':
     post:
       operationId: DescribeStateMachineForExecution
-      description: <p>Describes the state machine associated with a specific execution.</p>
-        <note> <p>This operation is eventually consistent. The results are best
-        effort and may not reflect very recent updates and changes.</p> </note>
+      description: <p>Describes the state machine associated with a specific execution.</p> <note> <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p> </note>
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DescribeStateMachineForExecutionOutput"
-        "480":
+            $ref: '#/definitions/DescribeStateMachineForExecutionOutput'
+        '480':
           description: ExecutionDoesNotExist
           schema:
-            $ref: "#/definitions/ExecutionDoesNotExist"
-        "481":
+            $ref: '#/definitions/ExecutionDoesNotExist'
+        '481':
           description: InvalidArn
           schema:
-            $ref: "#/definitions/InvalidArn"
+            $ref: '#/definitions/InvalidArn'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/DescribeStateMachineForExecutionInput"
+            $ref: '#/definitions/DescribeStateMachineForExecutionInput'
         - name: X-Amz-Target
           in: header
           required: true
@@ -437,54 +394,40 @@ paths:
           enum:
             - AWSStepFunctions.DescribeStateMachineForExecution
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AWSStepFunctions.GetActivityTask:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSStepFunctions.GetActivityTask':
     post:
       operationId: GetActivityTask
-      description: <p>Used by workers to retrieve a task (with the specified activity ARN)
-        which has been scheduled for execution by a running state machine. This
-        initiates a long poll, where the service holds the HTTP connection open
-        and responds as soon as a task becomes available (i.e. an execution of a
-        task of this type is needed.) The maximum time the service holds on to
-        the request before responding is 60 seconds. If no task is available
-        within 60 seconds, the poll returns a <code>taskToken</code> with a null
-        string.</p> <important> <p>Workers should set their client side socket
-        timeout to at least 65 seconds (5 seconds higher than the maximum time
-        the service may hold the poll request).</p> <p>Polling with
-        <code>GetActivityTask</code> can cause latency in some implementations.
-        See <a
-        href="https://docs.aws.amazon.com/step-functions/latest/dg/bp-activity-pollers.html">Avoid
-        Latency When Polling for Activity Tasks</a> in the Step Functions
-        Developer Guide.</p> </important>
+      description: '<p>Used by workers to retrieve a task (with the specified activity ARN) which has been scheduled for execution by a running state machine. This initiates a long poll, where the service holds the HTTP connection open and responds as soon as a task becomes available (i.e. an execution of a task of this type is needed.) The maximum time the service holds on to the request before responding is 60 seconds. If no task is available within 60 seconds, the poll returns a <code>taskToken</code> with a null string.</p> <important> <p>Workers should set their client side socket timeout to at least 65 seconds (5 seconds higher than the maximum time the service may hold the poll request).</p> <p>Polling with <code>GetActivityTask</code> can cause latency in some implementations. See <a href="https://docs.aws.amazon.com/step-functions/latest/dg/bp-activity-pollers.html">Avoid Latency When Polling for Activity Tasks</a> in the Step Functions Developer Guide.</p> </important>'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/GetActivityTaskOutput"
-        "480":
+            $ref: '#/definitions/GetActivityTaskOutput'
+        '480':
           description: ActivityDoesNotExist
           schema:
-            $ref: "#/definitions/ActivityDoesNotExist"
-        "481":
+            $ref: '#/definitions/ActivityDoesNotExist'
+        '481':
           description: ActivityWorkerLimitExceeded
           schema:
-            $ref: "#/definitions/ActivityWorkerLimitExceeded"
-        "482":
+            $ref: '#/definitions/ActivityWorkerLimitExceeded'
+        '482':
           description: InvalidArn
           schema:
-            $ref: "#/definitions/InvalidArn"
+            $ref: '#/definitions/InvalidArn'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/GetActivityTaskInput"
+            $ref: '#/definitions/GetActivityTaskInput'
         - name: X-Amz-Target
           in: header
           required: true
@@ -492,49 +435,40 @@ paths:
           enum:
             - AWSStepFunctions.GetActivityTask
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AWSStepFunctions.GetExecutionHistory:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSStepFunctions.GetExecutionHistory':
     post:
       operationId: GetExecutionHistory
-      description: <p>Returns the history of the specified execution as a list of events.
-        By default, the results are returned in ascending order of the
-        <code>timeStamp</code> of the events. Use the <code>reverseOrder</code>
-        parameter to get the latest events first.</p> <p>If
-        <code>nextToken</code> is returned, there are more results available.
-        The value of <code>nextToken</code> is a unique pagination token for
-        each page. Make the call again using the returned token to retrieve the
-        next page. Keep all other arguments unchanged. Each pagination token
-        expires after 24 hours. Using an expired pagination token will return an
-        <i>HTTP 400 InvalidToken</i> error.</p>
+      description: '<p>Returns the history of the specified execution as a list of events. By default, the results are returned in ascending order of the <code>timeStamp</code> of the events. Use the <code>reverseOrder</code> parameter to get the latest events first.</p> <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/GetExecutionHistoryOutput"
-        "480":
+            $ref: '#/definitions/GetExecutionHistoryOutput'
+        '480':
           description: ExecutionDoesNotExist
           schema:
-            $ref: "#/definitions/ExecutionDoesNotExist"
-        "481":
+            $ref: '#/definitions/ExecutionDoesNotExist'
+        '481':
           description: InvalidArn
           schema:
-            $ref: "#/definitions/InvalidArn"
-        "482":
+            $ref: '#/definitions/InvalidArn'
+        '482':
           description: InvalidToken
           schema:
-            $ref: "#/definitions/InvalidToken"
+            $ref: '#/definitions/InvalidToken'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/GetExecutionHistoryInput"
+            $ref: '#/definitions/GetExecutionHistoryInput'
         - name: maxResults
           type: string
           in: query
@@ -552,40 +486,32 @@ paths:
           enum:
             - AWSStepFunctions.GetExecutionHistory
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AWSStepFunctions.ListActivities:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSStepFunctions.ListActivities':
     post:
       operationId: ListActivities
-      description: <p>Lists the existing activities.</p> <p>If <code>nextToken</code> is
-        returned, there are more results available. The value of
-        <code>nextToken</code> is a unique pagination token for each page. Make
-        the call again using the returned token to retrieve the next page. Keep
-        all other arguments unchanged. Each pagination token expires after 24
-        hours. Using an expired pagination token will return an <i>HTTP 400
-        InvalidToken</i> error.</p> <note> <p>This operation is eventually
-        consistent. The results are best effort and may not reflect very recent
-        updates and changes.</p> </note>
+      description: '<p>Lists the existing activities.</p> <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p> <note> <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p> </note>'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/ListActivitiesOutput"
-        "480":
+            $ref: '#/definitions/ListActivitiesOutput'
+        '480':
           description: InvalidToken
           schema:
-            $ref: "#/definitions/InvalidToken"
+            $ref: '#/definitions/InvalidToken'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/ListActivitiesInput"
+            $ref: '#/definitions/ListActivitiesInput'
         - name: maxResults
           type: string
           in: query
@@ -603,49 +529,40 @@ paths:
           enum:
             - AWSStepFunctions.ListActivities
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AWSStepFunctions.ListExecutions:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSStepFunctions.ListExecutions':
     post:
       operationId: ListExecutions
-      description: <p>Lists the executions of a state machine that meet the filtering
-        criteria. Results are sorted by time, with the most recent execution
-        first.</p> <p>If <code>nextToken</code> is returned, there are more
-        results available. The value of <code>nextToken</code> is a unique
-        pagination token for each page. Make the call again using the returned
-        token to retrieve the next page. Keep all other arguments unchanged.
-        Each pagination token expires after 24 hours. Using an expired
-        pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>
-        <note> <p>This operation is eventually consistent. The results are best
-        effort and may not reflect very recent updates and changes.</p> </note>
+      description: '<p>Lists the executions of a state machine that meet the filtering criteria. Results are sorted by time, with the most recent execution first.</p> <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p> <note> <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p> </note>'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/ListExecutionsOutput"
-        "480":
+            $ref: '#/definitions/ListExecutionsOutput'
+        '480':
           description: InvalidArn
           schema:
-            $ref: "#/definitions/InvalidArn"
-        "481":
+            $ref: '#/definitions/InvalidArn'
+        '481':
           description: InvalidToken
           schema:
-            $ref: "#/definitions/InvalidToken"
-        "482":
+            $ref: '#/definitions/InvalidToken'
+        '482':
           description: StateMachineDoesNotExist
           schema:
-            $ref: "#/definitions/StateMachineDoesNotExist"
+            $ref: '#/definitions/StateMachineDoesNotExist'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/ListExecutionsInput"
+            $ref: '#/definitions/ListExecutionsInput'
         - name: maxResults
           type: string
           in: query
@@ -663,40 +580,32 @@ paths:
           enum:
             - AWSStepFunctions.ListExecutions
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AWSStepFunctions.ListStateMachines:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSStepFunctions.ListStateMachines':
     post:
       operationId: ListStateMachines
-      description: <p>Lists the existing state machines.</p> <p>If <code>nextToken</code>
-        is returned, there are more results available. The value of
-        <code>nextToken</code> is a unique pagination token for each page. Make
-        the call again using the returned token to retrieve the next page. Keep
-        all other arguments unchanged. Each pagination token expires after 24
-        hours. Using an expired pagination token will return an <i>HTTP 400
-        InvalidToken</i> error.</p> <note> <p>This operation is eventually
-        consistent. The results are best effort and may not reflect very recent
-        updates and changes.</p> </note>
+      description: '<p>Lists the existing state machines.</p> <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p> <note> <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p> </note>'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/ListStateMachinesOutput"
-        "480":
+            $ref: '#/definitions/ListStateMachinesOutput'
+        '480':
           description: InvalidToken
           schema:
-            $ref: "#/definitions/InvalidToken"
+            $ref: '#/definitions/InvalidToken'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/ListStateMachinesInput"
+            $ref: '#/definitions/ListStateMachinesInput'
         - name: maxResults
           type: string
           in: query
@@ -714,36 +623,36 @@ paths:
           enum:
             - AWSStepFunctions.ListStateMachines
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AWSStepFunctions.ListTagsForResource:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSStepFunctions.ListTagsForResource':
     post:
       operationId: ListTagsForResource
       description: List tags for a given resource.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/ListTagsForResourceOutput"
-        "480":
+            $ref: '#/definitions/ListTagsForResourceOutput'
+        '480':
           description: InvalidArn
           schema:
-            $ref: "#/definitions/InvalidArn"
-        "481":
+            $ref: '#/definitions/InvalidArn'
+        '481':
           description: ResourceNotFound
           schema:
-            $ref: "#/definitions/ResourceNotFound"
+            $ref: '#/definitions/ResourceNotFound'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/ListTagsForResourceInput"
+            $ref: '#/definitions/ListTagsForResourceInput'
         - name: X-Amz-Target
           in: header
           required: true
@@ -751,41 +660,40 @@ paths:
           enum:
             - AWSStepFunctions.ListTagsForResource
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AWSStepFunctions.SendTaskFailure:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSStepFunctions.SendTaskFailure':
     post:
       operationId: SendTaskFailure
-      description: Used by workers to report that the task identified by the
-        <code>taskToken</code> failed.
+      description: Used by workers to report that the task identified by the <code>taskToken</code> failed.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/SendTaskFailureOutput"
-        "480":
+            $ref: '#/definitions/SendTaskFailureOutput'
+        '480':
           description: TaskDoesNotExist
           schema:
-            $ref: "#/definitions/TaskDoesNotExist"
-        "481":
+            $ref: '#/definitions/TaskDoesNotExist'
+        '481':
           description: InvalidToken
           schema:
-            $ref: "#/definitions/InvalidToken"
-        "482":
+            $ref: '#/definitions/InvalidToken'
+        '482':
           description: TaskTimedOut
           schema:
-            $ref: "#/definitions/TaskTimedOut"
+            $ref: '#/definitions/TaskTimedOut'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/SendTaskFailureInput"
+            $ref: '#/definitions/SendTaskFailureInput'
         - name: X-Amz-Target
           in: header
           required: true
@@ -793,51 +701,40 @@ paths:
           enum:
             - AWSStepFunctions.SendTaskFailure
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AWSStepFunctions.SendTaskHeartbeat:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSStepFunctions.SendTaskHeartbeat':
     post:
       operationId: SendTaskHeartbeat
-      description: <p>Used by workers to report to the service that the task represented by
-        the specified <code>taskToken</code> is still making progress. This
-        action resets the <code>Heartbeat</code> clock. The
-        <code>Heartbeat</code> threshold is specified in the state machine's
-        Amazon States Language definition. This action does not in itself create
-        an event in the execution history. However, if the task times out, the
-        execution history contains an <code>ActivityTimedOut</code> event.</p>
-        <note> <p>The <code>Timeout</code> of a task, defined in the state
-        machine's Amazon States Language definition, is its maximum allowed
-        duration, regardless of the number of <a>SendTaskHeartbeat</a> requests
-        received.</p> </note> <note> <p>This operation is only useful for
-        long-lived tasks to report the liveliness of the task.</p> </note>
+      description: '<p>Used by workers to report to the service that the task represented by the specified <code>taskToken</code> is still making progress. This action resets the <code>Heartbeat</code> clock. The <code>Heartbeat</code> threshold is specified in the state machine''s Amazon States Language definition. This action does not in itself create an event in the execution history. However, if the task times out, the execution history contains an <code>ActivityTimedOut</code> event.</p> <note> <p>The <code>Timeout</code> of a task, defined in the state machine''s Amazon States Language definition, is its maximum allowed duration, regardless of the number of <a>SendTaskHeartbeat</a> requests received.</p> </note> <note> <p>This operation is only useful for long-lived tasks to report the liveliness of the task.</p> </note>'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/SendTaskHeartbeatOutput"
-        "480":
+            $ref: '#/definitions/SendTaskHeartbeatOutput'
+        '480':
           description: TaskDoesNotExist
           schema:
-            $ref: "#/definitions/TaskDoesNotExist"
-        "481":
+            $ref: '#/definitions/TaskDoesNotExist'
+        '481':
           description: InvalidToken
           schema:
-            $ref: "#/definitions/InvalidToken"
-        "482":
+            $ref: '#/definitions/InvalidToken'
+        '482':
           description: TaskTimedOut
           schema:
-            $ref: "#/definitions/TaskTimedOut"
+            $ref: '#/definitions/TaskTimedOut'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/SendTaskHeartbeatInput"
+            $ref: '#/definitions/SendTaskHeartbeatInput'
         - name: X-Amz-Target
           in: header
           required: true
@@ -845,45 +742,44 @@ paths:
           enum:
             - AWSStepFunctions.SendTaskHeartbeat
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AWSStepFunctions.SendTaskSuccess:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSStepFunctions.SendTaskSuccess':
     post:
       operationId: SendTaskSuccess
-      description: Used by workers to report that the task identified by the
-        <code>taskToken</code> completed successfully.
+      description: Used by workers to report that the task identified by the <code>taskToken</code> completed successfully.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/SendTaskSuccessOutput"
-        "480":
+            $ref: '#/definitions/SendTaskSuccessOutput'
+        '480':
           description: TaskDoesNotExist
           schema:
-            $ref: "#/definitions/TaskDoesNotExist"
-        "481":
+            $ref: '#/definitions/TaskDoesNotExist'
+        '481':
           description: InvalidOutput
           schema:
-            $ref: "#/definitions/InvalidOutput"
-        "482":
+            $ref: '#/definitions/InvalidOutput'
+        '482':
           description: InvalidToken
           schema:
-            $ref: "#/definitions/InvalidToken"
-        "483":
+            $ref: '#/definitions/InvalidToken'
+        '483':
           description: TaskTimedOut
           schema:
-            $ref: "#/definitions/TaskTimedOut"
+            $ref: '#/definitions/TaskTimedOut'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/SendTaskSuccessInput"
+            $ref: '#/definitions/SendTaskSuccessInput'
         - name: X-Amz-Target
           in: header
           required: true
@@ -891,62 +787,56 @@ paths:
           enum:
             - AWSStepFunctions.SendTaskSuccess
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AWSStepFunctions.StartExecution:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSStepFunctions.StartExecution':
     post:
       operationId: StartExecution
-      description: <p>Starts a state machine execution.</p> <note> <p>
-        <code>StartExecution</code> is idempotent. If
-        <code>StartExecution</code> is called with the same name and input as a
-        running execution, the call will succeed and return the same response as
-        the original request. If the execution is closed or if the input is
-        different, it will return a 400 <code>ExecutionAlreadyExists</code>
-        error. Names can be reused after 90 days. </p> </note>
+      description: '<p>Starts a state machine execution.</p> <note> <p> <code>StartExecution</code> is idempotent. If <code>StartExecution</code> is called with the same name and input as a running execution, the call will succeed and return the same response as the original request. If the execution is closed or if the input is different, it will return a 400 <code>ExecutionAlreadyExists</code> error. Names can be reused after 90 days. </p> </note>'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/StartExecutionOutput"
-        "480":
+            $ref: '#/definitions/StartExecutionOutput'
+        '480':
           description: ExecutionLimitExceeded
           schema:
-            $ref: "#/definitions/ExecutionLimitExceeded"
-        "481":
+            $ref: '#/definitions/ExecutionLimitExceeded'
+        '481':
           description: ExecutionAlreadyExists
           schema:
-            $ref: "#/definitions/ExecutionAlreadyExists"
-        "482":
+            $ref: '#/definitions/ExecutionAlreadyExists'
+        '482':
           description: InvalidArn
           schema:
-            $ref: "#/definitions/InvalidArn"
-        "483":
+            $ref: '#/definitions/InvalidArn'
+        '483':
           description: InvalidExecutionInput
           schema:
-            $ref: "#/definitions/InvalidExecutionInput"
-        "484":
+            $ref: '#/definitions/InvalidExecutionInput'
+        '484':
           description: InvalidName
           schema:
-            $ref: "#/definitions/InvalidName"
-        "485":
+            $ref: '#/definitions/InvalidName'
+        '485':
           description: StateMachineDoesNotExist
           schema:
-            $ref: "#/definitions/StateMachineDoesNotExist"
-        "486":
+            $ref: '#/definitions/StateMachineDoesNotExist'
+        '486':
           description: StateMachineDeleting
           schema:
-            $ref: "#/definitions/StateMachineDeleting"
+            $ref: '#/definitions/StateMachineDeleting'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/StartExecutionInput"
+            $ref: '#/definitions/StartExecutionInput'
         - name: X-Amz-Target
           in: header
           required: true
@@ -954,36 +844,36 @@ paths:
           enum:
             - AWSStepFunctions.StartExecution
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AWSStepFunctions.StopExecution:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSStepFunctions.StopExecution':
     post:
       operationId: StopExecution
       description: Stops an execution.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/StopExecutionOutput"
-        "480":
+            $ref: '#/definitions/StopExecutionOutput'
+        '480':
           description: ExecutionDoesNotExist
           schema:
-            $ref: "#/definitions/ExecutionDoesNotExist"
-        "481":
+            $ref: '#/definitions/ExecutionDoesNotExist'
+        '481':
           description: InvalidArn
           schema:
-            $ref: "#/definitions/InvalidArn"
+            $ref: '#/definitions/InvalidArn'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/StopExecutionInput"
+            $ref: '#/definitions/StopExecutionInput'
         - name: X-Amz-Target
           in: header
           required: true
@@ -991,40 +881,40 @@ paths:
           enum:
             - AWSStepFunctions.StopExecution
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AWSStepFunctions.TagResource:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSStepFunctions.TagResource':
     post:
       operationId: TagResource
       description: Add a tag to a Step Functions resource.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/TagResourceOutput"
-        "480":
+            $ref: '#/definitions/TagResourceOutput'
+        '480':
           description: InvalidArn
           schema:
-            $ref: "#/definitions/InvalidArn"
-        "481":
+            $ref: '#/definitions/InvalidArn'
+        '481':
           description: ResourceNotFound
           schema:
-            $ref: "#/definitions/ResourceNotFound"
-        "482":
+            $ref: '#/definitions/ResourceNotFound'
+        '482':
           description: TooManyTags
           schema:
-            $ref: "#/definitions/TooManyTags"
+            $ref: '#/definitions/TooManyTags'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/TagResourceInput"
+            $ref: '#/definitions/TagResourceInput'
         - name: X-Amz-Target
           in: header
           required: true
@@ -1032,36 +922,36 @@ paths:
           enum:
             - AWSStepFunctions.TagResource
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AWSStepFunctions.UntagResource:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSStepFunctions.UntagResource':
     post:
       operationId: UntagResource
       description: Remove a tag from a Step Functions resource
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/UntagResourceOutput"
-        "480":
+            $ref: '#/definitions/UntagResourceOutput'
+        '480':
           description: InvalidArn
           schema:
-            $ref: "#/definitions/InvalidArn"
-        "481":
+            $ref: '#/definitions/InvalidArn'
+        '481':
           description: ResourceNotFound
           schema:
-            $ref: "#/definitions/ResourceNotFound"
+            $ref: '#/definitions/ResourceNotFound'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/UntagResourceInput"
+            $ref: '#/definitions/UntagResourceInput'
         - name: X-Amz-Target
           in: header
           required: true
@@ -1069,58 +959,48 @@ paths:
           enum:
             - AWSStepFunctions.UntagResource
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=AWSStepFunctions.UpdateStateMachine:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSStepFunctions.UpdateStateMachine':
     post:
       operationId: UpdateStateMachine
-      description: <p>Updates an existing state machine by modifying its
-        <code>definition</code> and/or <code>roleArn</code>. Running executions
-        will continue to use the previous <code>definition</code> and
-        <code>roleArn</code>. You must include at least one of
-        <code>definition</code> or <code>roleArn</code> or you will receive a
-        <code>MissingRequiredParameter</code> error.</p> <note> <p>All
-        <code>StartExecution</code> calls within a few seconds will use the
-        updated <code>definition</code> and <code>roleArn</code>. Executions
-        started immediately after calling <code>UpdateStateMachine</code> may
-        use the previous state machine <code>definition</code> and
-        <code>roleArn</code>. </p> </note>
+      description: <p>Updates an existing state machine by modifying its <code>definition</code> and/or <code>roleArn</code>. Running executions will continue to use the previous <code>definition</code> and <code>roleArn</code>. You must include at least one of <code>definition</code> or <code>roleArn</code> or you will receive a <code>MissingRequiredParameter</code> error.</p> <note> <p>All <code>StartExecution</code> calls within a few seconds will use the updated <code>definition</code> and <code>roleArn</code>. Executions started immediately after calling <code>UpdateStateMachine</code> may use the previous state machine <code>definition</code> and <code>roleArn</code>. </p> </note>
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/UpdateStateMachineOutput"
-        "480":
+            $ref: '#/definitions/UpdateStateMachineOutput'
+        '480':
           description: InvalidArn
           schema:
-            $ref: "#/definitions/InvalidArn"
-        "481":
+            $ref: '#/definitions/InvalidArn'
+        '481':
           description: InvalidDefinition
           schema:
-            $ref: "#/definitions/InvalidDefinition"
-        "482":
+            $ref: '#/definitions/InvalidDefinition'
+        '482':
           description: MissingRequiredParameter
           schema:
-            $ref: "#/definitions/MissingRequiredParameter"
-        "483":
+            $ref: '#/definitions/MissingRequiredParameter'
+        '483':
           description: StateMachineDeleting
           schema:
-            $ref: "#/definitions/StateMachineDeleting"
-        "484":
+            $ref: '#/definitions/StateMachineDeleting'
+        '484':
           description: StateMachineDoesNotExist
           schema:
-            $ref: "#/definitions/StateMachineDoesNotExist"
+            $ref: '#/definitions/StateMachineDoesNotExist'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/UpdateStateMachineInput"
+            $ref: '#/definitions/UpdateStateMachineInput'
         - name: X-Amz-Target
           in: header
           required: true
@@ -1128,13 +1008,13 @@ paths:
           enum:
             - AWSStepFunctions.UpdateStateMachine
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
   CreateActivityOutput:
     type: object
@@ -1143,10 +1023,10 @@ definitions:
       - creationDate
     properties:
       activityArn:
-        $ref: "#/definitions/Arn"
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) that identifies the created activity.
       creationDate:
-        $ref: "#/definitions/Timestamp"
+        $ref: '#/definitions/Timestamp'
         description: The date the activity is created.
   CreateActivityInput:
     type: object
@@ -1154,19 +1034,10 @@ definitions:
       - name
     properties:
       name:
-        $ref: "#/definitions/Name"
-        description: '<p>The name of the activity to create. This name must be unique for
-          your AWS account and region for 90 days. For more information, see <a
-          href="https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions">
-          Limits Related to State Machine Executions</a> in the <i>AWS Step
-          Functions Developer Guide</i>.</p> <p>A name must <i>not</i>
-          contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets
-          <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters
-          <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^
-          | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters
-          (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
+        $ref: '#/definitions/Name'
+        description: '<p>The name of the activity to create. This name must be unique for your AWS account and region for 90 days. For more information, see <a href="https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions"> Limits Related to State Machine Executions</a> in the <i>AWS Step Functions Developer Guide</i>.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
       tags:
-        $ref: "#/definitions/TagList"
+        $ref: '#/definitions/TagList'
         description: The list of tags to add to a resource.
   ActivityLimitExceeded: {}
   InvalidName: {}
@@ -1178,11 +1049,10 @@ definitions:
       - creationDate
     properties:
       stateMachineArn:
-        $ref: "#/definitions/Arn"
-        description: The Amazon Resource Name (ARN) that identifies the created state
-          machine.
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) that identifies the created state machine.
       creationDate:
-        $ref: "#/definitions/Timestamp"
+        $ref: '#/definitions/Timestamp'
         description: The date the state machine is created.
   CreateStateMachineInput:
     type: object
@@ -1192,24 +1062,16 @@ definitions:
       - roleArn
     properties:
       name:
-        $ref: "#/definitions/Name"
-        description: '<p>The name of the state machine. </p> <p>A name must <i>not</i>
-          contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets
-          <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters
-          <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^
-          | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters
-          (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
+        $ref: '#/definitions/Name'
+        description: '<p>The name of the state machine. </p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
       definition:
-        $ref: "#/definitions/Definition"
-        description: The Amazon States Language definition of the state machine. See <a
-          href="https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html">Amazon
-          States Language</a>.
+        $ref: '#/definitions/Definition'
+        description: 'The Amazon States Language definition of the state machine. See <a href="https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html">Amazon States Language</a>.'
       roleArn:
-        $ref: "#/definitions/Arn"
-        description: The Amazon Resource Name (ARN) of the IAM role to use for this state
-          machine.
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the IAM role to use for this state machine.
       tags:
-        $ref: "#/definitions/TagList"
+        $ref: '#/definitions/TagList'
         description: Tags to be added when creating a state machine.
   InvalidArn: {}
   InvalidDefinition: {}
@@ -1225,7 +1087,7 @@ definitions:
       - activityArn
     properties:
       activityArn:
-        $ref: "#/definitions/Arn"
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the activity to delete.
   DeleteStateMachineOutput:
     type: object
@@ -1236,7 +1098,7 @@ definitions:
       - stateMachineArn
     properties:
       stateMachineArn:
-        $ref: "#/definitions/Arn"
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the state machine to delete.
   DescribeActivityOutput:
     type: object
@@ -1246,18 +1108,13 @@ definitions:
       - creationDate
     properties:
       activityArn:
-        $ref: "#/definitions/Arn"
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) that identifies the activity.
       name:
-        $ref: "#/definitions/Name"
-        description: '<p>The name of the activity.</p> <p>A name must <i>not</i>
-          contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets
-          <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters
-          <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^
-          | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters
-          (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
+        $ref: '#/definitions/Name'
+        description: '<p>The name of the activity.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
       creationDate:
-        $ref: "#/definitions/Timestamp"
+        $ref: '#/definitions/Timestamp'
         description: The date the activity is created.
   DescribeActivityInput:
     type: object
@@ -1265,7 +1122,7 @@ definitions:
       - activityArn
     properties:
       activityArn:
-        $ref: "#/definitions/Arn"
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the activity to describe.
   ActivityDoesNotExist: {}
   DescribeExecutionOutput:
@@ -1278,43 +1135,36 @@ definitions:
       - input
     properties:
       executionArn:
-        $ref: "#/definitions/Arn"
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) that identifies the execution.
       stateMachineArn:
-        $ref: "#/definitions/Arn"
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the executed stated machine.
       name:
-        $ref: "#/definitions/Name"
-        description: '<p>The name of the execution.</p> <p>A name must <i>not</i>
-          contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets
-          <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters
-          <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^
-          | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters
-          (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
+        $ref: '#/definitions/Name'
+        description: '<p>The name of the execution.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
       status:
-        $ref: "#/definitions/ExecutionStatus"
+        $ref: '#/definitions/ExecutionStatus'
         description: The current status of the execution.
       startDate:
-        $ref: "#/definitions/Timestamp"
+        $ref: '#/definitions/Timestamp'
         description: The date the execution is started.
       stopDate:
-        $ref: "#/definitions/Timestamp"
-        description: If the execution has already ended, the date the execution stopped.
+        $ref: '#/definitions/Timestamp'
+        description: 'If the execution has already ended, the date the execution stopped.'
       input:
-        $ref: "#/definitions/SensitiveData"
+        $ref: '#/definitions/SensitiveData'
         description: The string that contains the JSON input data of the execution.
       output:
-        $ref: "#/definitions/SensitiveData"
-        description: <p>The JSON output data of the execution.</p> <note> <p>This field is
-          set only if the execution succeeds. If the execution fails, this field
-          is null.</p> </note>
+        $ref: '#/definitions/SensitiveData'
+        description: '<p>The JSON output data of the execution.</p> <note> <p>This field is set only if the execution succeeds. If the execution fails, this field is null.</p> </note>'
   DescribeExecutionInput:
     type: object
     required:
       - executionArn
     properties:
       executionArn:
-        $ref: "#/definitions/Arn"
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the execution to describe.
   ExecutionDoesNotExist: {}
   DescribeStateMachineOutput:
@@ -1327,31 +1177,22 @@ definitions:
       - creationDate
     properties:
       stateMachineArn:
-        $ref: "#/definitions/Arn"
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) that identifies the state machine.
       name:
-        $ref: "#/definitions/Name"
-        description: '<p>The name of the state machine.</p> <p>A name must <i>not</i>
-          contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets
-          <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters
-          <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^
-          | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters
-          (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
+        $ref: '#/definitions/Name'
+        description: '<p>The name of the state machine.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
       status:
-        $ref: "#/definitions/StateMachineStatus"
+        $ref: '#/definitions/StateMachineStatus'
         description: The current status of the state machine.
       definition:
-        $ref: "#/definitions/Definition"
-        description: The Amazon States Language definition of the state machine. See <a
-          href="https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html">Amazon
-          States Language</a>.
+        $ref: '#/definitions/Definition'
+        description: 'The Amazon States Language definition of the state machine. See <a href="https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html">Amazon States Language</a>.'
       roleArn:
-        $ref: "#/definitions/Arn"
-        description: The Amazon Resource Name (ARN) of the IAM role used when creating this
-          state machine. (The IAM role maintains security by granting Step
-          Functions access to AWS resources.)
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the IAM role used when creating this state machine. (The IAM role maintains security by granting Step Functions access to AWS resources.)
       creationDate:
-        $ref: "#/definitions/Timestamp"
+        $ref: '#/definitions/Timestamp'
         description: The date the state machine is created.
   DescribeStateMachineInput:
     type: object
@@ -1359,7 +1200,7 @@ definitions:
       - stateMachineArn
     properties:
       stateMachineArn:
-        $ref: "#/definitions/Arn"
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the state machine to describe.
   StateMachineDoesNotExist: {}
   DescribeStateMachineForExecutionOutput:
@@ -1372,45 +1213,36 @@ definitions:
       - updateDate
     properties:
       stateMachineArn:
-        $ref: "#/definitions/Arn"
-        description: The Amazon Resource Name (ARN) of the state machine associated with
-          the execution.
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the state machine associated with the execution.
       name:
-        $ref: "#/definitions/Name"
+        $ref: '#/definitions/Name'
         description: The name of the state machine associated with the execution.
       definition:
-        $ref: "#/definitions/Definition"
-        description: The Amazon States Language definition of the state machine. See <a
-          href="https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html">Amazon
-          States Language</a>.
+        $ref: '#/definitions/Definition'
+        description: 'The Amazon States Language definition of the state machine. See <a href="https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html">Amazon States Language</a>.'
       roleArn:
-        $ref: "#/definitions/Arn"
-        description: "The Amazon Resource Name (ARN) of the IAM role of the State Machine
-          for the execution. "
+        $ref: '#/definitions/Arn'
+        description: 'The Amazon Resource Name (ARN) of the IAM role of the State Machine for the execution. '
       updateDate:
-        $ref: "#/definitions/Timestamp"
-        description: The date and time the state machine associated with an execution was
-          updated. For a newly created state machine, this is the creation date.
+        $ref: '#/definitions/Timestamp'
+        description: 'The date and time the state machine associated with an execution was updated. For a newly created state machine, this is the creation date.'
   DescribeStateMachineForExecutionInput:
     type: object
     required:
       - executionArn
     properties:
       executionArn:
-        $ref: "#/definitions/Arn"
-        description: The Amazon Resource Name (ARN) of the execution you want state machine
-          information for.
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the execution you want state machine information for.
   GetActivityTaskOutput:
     type: object
     properties:
       taskToken:
-        $ref: "#/definitions/TaskToken"
-        description: A token that identifies the scheduled task. This token must be copied
-          and included in subsequent calls to <a>SendTaskHeartbeat</a>,
-          <a>SendTaskSuccess</a> or <a>SendTaskFailure</a> in order to report
-          the progress or completion of the task.
+        $ref: '#/definitions/TaskToken'
+        description: 'A token that identifies the scheduled task. This token must be copied and included in subsequent calls to <a>SendTaskHeartbeat</a>, <a>SendTaskSuccess</a> or <a>SendTaskFailure</a> in order to report the progress or completion of the task.'
       input:
-        $ref: "#/definitions/SensitiveDataJobInput"
+        $ref: '#/definitions/SensitiveDataJobInput'
         description: The string that contains the JSON input data for the task.
   GetActivityTaskInput:
     type: object
@@ -1418,14 +1250,11 @@ definitions:
       - activityArn
     properties:
       activityArn:
-        $ref: "#/definitions/Arn"
-        description: The Amazon Resource Name (ARN) of the activity to retrieve tasks from
-          (assigned when you create the task using <a>CreateActivity</a>.)
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the activity to retrieve tasks from (assigned when you create the task using <a>CreateActivity</a>.)
       workerName:
-        $ref: "#/definitions/Name"
-        description: You can provide an arbitrary name in order to identify the worker that
-          the task is assigned to. This name is used when it is logged in the
-          execution history.
+        $ref: '#/definitions/Name'
+        description: You can provide an arbitrary name in order to identify the worker that the task is assigned to. This name is used when it is logged in the execution history.
   ActivityWorkerLimitExceeded: {}
   GetExecutionHistoryOutput:
     type: object
@@ -1433,43 +1262,28 @@ definitions:
       - events
     properties:
       events:
-        $ref: "#/definitions/HistoryEventList"
+        $ref: '#/definitions/HistoryEventList'
         description: The list of events that occurred in the execution.
       nextToken:
-        $ref: "#/definitions/PageToken"
-        description: If <code>nextToken</code> is returned, there are more results
-          available. The value of <code>nextToken</code> is a unique pagination
-          token for each page. Make the call again using the returned token to
-          retrieve the next page. Keep all other arguments unchanged. Each
-          pagination token expires after 24 hours. Using an expired pagination
-          token will return an <i>HTTP 400 InvalidToken</i> error.
+        $ref: '#/definitions/PageToken'
+        description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
   GetExecutionHistoryInput:
     type: object
     required:
       - executionArn
     properties:
       executionArn:
-        $ref: "#/definitions/Arn"
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the execution.
       maxResults:
-        $ref: "#/definitions/PageSize"
-        description: <p>The maximum number of results that are returned per call. You can
-          use <code>nextToken</code> to obtain further pages of results. The
-          default is 100 and the maximum allowed page size is 1000. A value of 0
-          uses the default.</p> <p>This is only an upper limit. The actual
-          number of results returned per call might be fewer than the specified
-          maximum.</p>
+        $ref: '#/definitions/PageSize'
+        description: <p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>
       reverseOrder:
-        $ref: "#/definitions/ReverseOrder"
+        $ref: '#/definitions/ReverseOrder'
         description: Lists events in descending order of their <code>timeStamp</code>.
       nextToken:
-        $ref: "#/definitions/PageToken"
-        description: If <code>nextToken</code> is returned, there are more results
-          available. The value of <code>nextToken</code> is a unique pagination
-          token for each page. Make the call again using the returned token to
-          retrieve the next page. Keep all other arguments unchanged. Each
-          pagination token expires after 24 hours. Using an expired pagination
-          token will return an <i>HTTP 400 InvalidToken</i> error.
+        $ref: '#/definitions/PageToken'
+        description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
   InvalidToken: {}
   ListActivitiesOutput:
     type: object
@@ -1477,119 +1291,72 @@ definitions:
       - activities
     properties:
       activities:
-        $ref: "#/definitions/ActivityList"
+        $ref: '#/definitions/ActivityList'
         description: The list of activities.
       nextToken:
-        $ref: "#/definitions/PageToken"
-        description: If <code>nextToken</code> is returned, there are more results
-          available. The value of <code>nextToken</code> is a unique pagination
-          token for each page. Make the call again using the returned token to
-          retrieve the next page. Keep all other arguments unchanged. Each
-          pagination token expires after 24 hours. Using an expired pagination
-          token will return an <i>HTTP 400 InvalidToken</i> error.
+        $ref: '#/definitions/PageToken'
+        description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
   ListActivitiesInput:
     type: object
     properties:
       maxResults:
-        $ref: "#/definitions/PageSize"
-        description: <p>The maximum number of results that are returned per call. You can
-          use <code>nextToken</code> to obtain further pages of results. The
-          default is 100 and the maximum allowed page size is 1000. A value of 0
-          uses the default.</p> <p>This is only an upper limit. The actual
-          number of results returned per call might be fewer than the specified
-          maximum.</p>
+        $ref: '#/definitions/PageSize'
+        description: <p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>
       nextToken:
-        $ref: "#/definitions/PageToken"
-        description: If <code>nextToken</code> is returned, there are more results
-          available. The value of <code>nextToken</code> is a unique pagination
-          token for each page. Make the call again using the returned token to
-          retrieve the next page. Keep all other arguments unchanged. Each
-          pagination token expires after 24 hours. Using an expired pagination
-          token will return an <i>HTTP 400 InvalidToken</i> error.
+        $ref: '#/definitions/PageToken'
+        description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
   ListExecutionsOutput:
     type: object
     required:
       - executions
     properties:
       executions:
-        $ref: "#/definitions/ExecutionList"
+        $ref: '#/definitions/ExecutionList'
         description: The list of matching executions.
       nextToken:
-        $ref: "#/definitions/PageToken"
-        description: If <code>nextToken</code> is returned, there are more results
-          available. The value of <code>nextToken</code> is a unique pagination
-          token for each page. Make the call again using the returned token to
-          retrieve the next page. Keep all other arguments unchanged. Each
-          pagination token expires after 24 hours. Using an expired pagination
-          token will return an <i>HTTP 400 InvalidToken</i> error.
+        $ref: '#/definitions/PageToken'
+        description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
   ListExecutionsInput:
     type: object
     required:
       - stateMachineArn
     properties:
       stateMachineArn:
-        $ref: "#/definitions/Arn"
-        description: The Amazon Resource Name (ARN) of the state machine whose executions
-          is listed.
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the state machine whose executions is listed.
       statusFilter:
-        $ref: "#/definitions/ExecutionStatus"
-        description: If specified, only list the executions whose current execution status
-          matches the given filter.
+        $ref: '#/definitions/ExecutionStatus'
+        description: 'If specified, only list the executions whose current execution status matches the given filter.'
       maxResults:
-        $ref: "#/definitions/PageSize"
-        description: <p>The maximum number of results that are returned per call. You can
-          use <code>nextToken</code> to obtain further pages of results. The
-          default is 100 and the maximum allowed page size is 1000. A value of 0
-          uses the default.</p> <p>This is only an upper limit. The actual
-          number of results returned per call might be fewer than the specified
-          maximum.</p>
+        $ref: '#/definitions/PageSize'
+        description: <p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>
       nextToken:
-        $ref: "#/definitions/PageToken"
-        description: If <code>nextToken</code> is returned, there are more results
-          available. The value of <code>nextToken</code> is a unique pagination
-          token for each page. Make the call again using the returned token to
-          retrieve the next page. Keep all other arguments unchanged. Each
-          pagination token expires after 24 hours. Using an expired pagination
-          token will return an <i>HTTP 400 InvalidToken</i> error.
+        $ref: '#/definitions/PageToken'
+        description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
   ListStateMachinesOutput:
     type: object
     required:
       - stateMachines
     properties:
       stateMachines:
-        $ref: "#/definitions/StateMachineList"
+        $ref: '#/definitions/StateMachineList'
       nextToken:
-        $ref: "#/definitions/PageToken"
-        description: If <code>nextToken</code> is returned, there are more results
-          available. The value of <code>nextToken</code> is a unique pagination
-          token for each page. Make the call again using the returned token to
-          retrieve the next page. Keep all other arguments unchanged. Each
-          pagination token expires after 24 hours. Using an expired pagination
-          token will return an <i>HTTP 400 InvalidToken</i> error.
+        $ref: '#/definitions/PageToken'
+        description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
   ListStateMachinesInput:
     type: object
     properties:
       maxResults:
-        $ref: "#/definitions/PageSize"
-        description: <p>The maximum number of results that are returned per call. You can
-          use <code>nextToken</code> to obtain further pages of results. The
-          default is 100 and the maximum allowed page size is 1000. A value of 0
-          uses the default.</p> <p>This is only an upper limit. The actual
-          number of results returned per call might be fewer than the specified
-          maximum.</p>
+        $ref: '#/definitions/PageSize'
+        description: <p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>
       nextToken:
-        $ref: "#/definitions/PageToken"
-        description: If <code>nextToken</code> is returned, there are more results
-          available. The value of <code>nextToken</code> is a unique pagination
-          token for each page. Make the call again using the returned token to
-          retrieve the next page. Keep all other arguments unchanged. Each
-          pagination token expires after 24 hours. Using an expired pagination
-          token will return an <i>HTTP 400 InvalidToken</i> error.
+        $ref: '#/definitions/PageToken'
+        description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
   ListTagsForResourceOutput:
     type: object
     properties:
       tags:
-        $ref: "#/definitions/TagList"
+        $ref: '#/definitions/TagList'
         description: An array of tags associated with the resource.
   ListTagsForResourceInput:
     type: object
@@ -1597,9 +1364,8 @@ definitions:
       - resourceArn
     properties:
       resourceArn:
-        $ref: "#/definitions/Arn"
-        description: The Amazon Resource Name (ARN) for the Step Functions state machine or
-          activity.
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) for the Step Functions state machine or activity.
   ResourceNotFound: {}
   SendTaskFailureOutput:
     type: object
@@ -1610,15 +1376,13 @@ definitions:
       - taskToken
     properties:
       taskToken:
-        $ref: "#/definitions/TaskToken"
-        description: The token that represents this task. Task tokens are generated by the
-          service when the tasks are assigned to a worker (see
-          GetActivityTask::taskToken).
+        $ref: '#/definitions/TaskToken'
+        description: 'The token that represents this task. Task tokens are generated by the service when the tasks are assigned to a worker (see GetActivityTask::taskToken).'
       error:
-        $ref: "#/definitions/SensitiveError"
+        $ref: '#/definitions/SensitiveError'
         description: The error code of the failure.
       cause:
-        $ref: "#/definitions/SensitiveCause"
+        $ref: '#/definitions/SensitiveCause'
         description: A more detailed explanation of the cause of the failure.
   TaskDoesNotExist: {}
   TaskTimedOut: {}
@@ -1631,10 +1395,8 @@ definitions:
       - taskToken
     properties:
       taskToken:
-        $ref: "#/definitions/TaskToken"
-        description: The token that represents this task. Task tokens are generated by the
-          service when the tasks are assigned to a worker (see
-          <a>GetActivityTaskOutput$taskToken</a>).
+        $ref: '#/definitions/TaskToken'
+        description: The token that represents this task. Task tokens are generated by the service when the tasks are assigned to a worker (see <a>GetActivityTaskOutput$taskToken</a>).
   SendTaskSuccessOutput:
     type: object
     properties: {}
@@ -1645,12 +1407,10 @@ definitions:
       - output
     properties:
       taskToken:
-        $ref: "#/definitions/TaskToken"
-        description: The token that represents this task. Task tokens are generated by the
-          service when the tasks are assigned to a worker (see
-          <a>GetActivityTaskOutput$taskToken</a>).
+        $ref: '#/definitions/TaskToken'
+        description: The token that represents this task. Task tokens are generated by the service when the tasks are assigned to a worker (see <a>GetActivityTaskOutput$taskToken</a>).
       output:
-        $ref: "#/definitions/SensitiveData"
+        $ref: '#/definitions/SensitiveData'
         description: The JSON output of the task.
   InvalidOutput: {}
   StartExecutionOutput:
@@ -1660,10 +1420,10 @@ definitions:
       - startDate
     properties:
       executionArn:
-        $ref: "#/definitions/Arn"
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) that identifies the execution.
       startDate:
-        $ref: "#/definitions/Timestamp"
+        $ref: '#/definitions/Timestamp'
         description: The date the execution is started.
   StartExecutionInput:
     type: object
@@ -1671,28 +1431,14 @@ definitions:
       - stateMachineArn
     properties:
       stateMachineArn:
-        $ref: "#/definitions/Arn"
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the state machine to execute.
       name:
-        $ref: "#/definitions/Name"
-        description: '<p>The name of the execution. This name must be unique for your AWS
-          account, region, and state machine for 90 days. For more information,
-          see <a
-          href="https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions">
-          Limits Related to State Machine Executions</a> in the <i>AWS Step
-          Functions Developer Guide</i>.</p> <p>A name must <i>not</i>
-          contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets
-          <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters
-          <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^
-          | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters
-          (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
+        $ref: '#/definitions/Name'
+        description: '<p>The name of the execution. This name must be unique for your AWS account, region, and state machine for 90 days. For more information, see <a href="https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions"> Limits Related to State Machine Executions</a> in the <i>AWS Step Functions Developer Guide</i>.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
       input:
-        $ref: "#/definitions/SensitiveData"
-        description: "<p>The string that contains the JSON input data for the execution,
-          for example:</p> <p> <code>\"input\": \"{\\\"first_name\\\" :
-          \\\"test\\\"}\"</code> </p> <note> <p>If you don't include any JSON
-          input data, you still must include the two braces, for example:
-          <code>\"input\": \"{}\"</code> </p> </note>"
+        $ref: '#/definitions/SensitiveData'
+        description: '<p>The string that contains the JSON input data for the execution, for example:</p> <p> <code>"input": "{\"first_name\" : \"test\"}"</code> </p> <note> <p>If you don''t include any JSON input data, you still must include the two braces, for example: <code>"input": "{}"</code> </p> </note>'
   ExecutionLimitExceeded: {}
   ExecutionAlreadyExists: {}
   InvalidExecutionInput: {}
@@ -1702,7 +1448,7 @@ definitions:
       - stopDate
     properties:
       stopDate:
-        $ref: "#/definitions/Timestamp"
+        $ref: '#/definitions/Timestamp'
         description: The date the execution is stopped.
   StopExecutionInput:
     type: object
@@ -1710,13 +1456,13 @@ definitions:
       - executionArn
     properties:
       executionArn:
-        $ref: "#/definitions/Arn"
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the execution to stop.
       error:
-        $ref: "#/definitions/SensitiveError"
+        $ref: '#/definitions/SensitiveError'
         description: The error code of the failure.
       cause:
-        $ref: "#/definitions/SensitiveCause"
+        $ref: '#/definitions/SensitiveCause'
         description: A more detailed explanation of the cause of the failure.
   TagResourceOutput:
     type: object
@@ -1728,14 +1474,11 @@ definitions:
       - tags
     properties:
       resourceArn:
-        $ref: "#/definitions/Arn"
-        description: The Amazon Resource Name (ARN) for the Step Functions state machine or
-          activity.
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) for the Step Functions state machine or activity.
       tags:
-        $ref: "#/definitions/TagList"
-        description: "<p>The list of tags to add to a resource.</p> <p>Tags may only
-          contain unicode letters, digits, whitespace, or these symbols: <code>_
-          . : / = + - @</code>.</p>"
+        $ref: '#/definitions/TagList'
+        description: '<p>The list of tags to add to a resource.</p> <p>Tags may only contain unicode letters, digits, whitespace, or these symbols: <code>_ . : / = + - @</code>.</p>'
   UntagResourceOutput:
     type: object
     properties: {}
@@ -1746,11 +1489,10 @@ definitions:
       - tagKeys
     properties:
       resourceArn:
-        $ref: "#/definitions/Arn"
-        description: The Amazon Resource Name (ARN) for the Step Functions state machine or
-          activity.
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) for the Step Functions state machine or activity.
       tagKeys:
-        $ref: "#/definitions/TagKeyList"
+        $ref: '#/definitions/TagKeyList'
         description: The list of tags to remove from the resource.
   UpdateStateMachineOutput:
     type: object
@@ -1758,7 +1500,7 @@ definitions:
       - updateDate
     properties:
       updateDate:
-        $ref: "#/definitions/Timestamp"
+        $ref: '#/definitions/Timestamp'
         description: The date and time the state machine was updated.
   UpdateStateMachineInput:
     type: object
@@ -1766,15 +1508,13 @@ definitions:
       - stateMachineArn
     properties:
       stateMachineArn:
-        $ref: "#/definitions/Arn"
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the state machine.
       definition:
-        $ref: "#/definitions/Definition"
-        description: The Amazon States Language definition of the state machine. See <a
-          href="https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html">Amazon
-          States Language</a>.
+        $ref: '#/definitions/Definition'
+        description: 'The Amazon States Language definition of the state machine. See <a href="https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html">Amazon States Language</a>.'
       roleArn:
-        $ref: "#/definitions/Arn"
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the IAM role of the state machine.
   MissingRequiredParameter: {}
   SensitiveError:
@@ -1791,10 +1531,10 @@ definitions:
     type: object
     properties:
       error:
-        $ref: "#/definitions/SensitiveError"
+        $ref: '#/definitions/SensitiveError'
         description: The error code of the failure.
       cause:
-        $ref: "#/definitions/SensitiveCause"
+        $ref: '#/definitions/SensitiveCause'
         description: A more detailed explanation of the cause of the failure.
     description: Contains details about an activity that failed during an execution.
   ActivityListItem:
@@ -1805,24 +1545,19 @@ definitions:
       - creationDate
     properties:
       activityArn:
-        $ref: "#/definitions/Arn"
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) that identifies the activity.
       name:
-        $ref: "#/definitions/Name"
-        description: '<p>The name of the activity.</p> <p>A name must <i>not</i>
-          contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets
-          <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters
-          <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^
-          | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters
-          (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
+        $ref: '#/definitions/Name'
+        description: '<p>The name of the activity.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
       creationDate:
-        $ref: "#/definitions/Timestamp"
+        $ref: '#/definitions/Timestamp'
         description: The date the activity is created.
     description: Contains details about an activity.
   ActivityList:
     type: array
     items:
-      $ref: "#/definitions/ActivityListItem"
+      $ref: '#/definitions/ActivityListItem'
   Arn:
     type: string
     minLength: 1
@@ -1838,13 +1573,12 @@ definitions:
     type: object
     properties:
       error:
-        $ref: "#/definitions/SensitiveError"
+        $ref: '#/definitions/SensitiveError'
         description: The error code of the failure.
       cause:
-        $ref: "#/definitions/SensitiveCause"
+        $ref: '#/definitions/SensitiveCause'
         description: A more detailed explanation of the cause of the failure.
-    description: Contains details about an activity schedule failure that occurred during
-      an execution.
+    description: Contains details about an activity schedule failure that occurred during an execution.
   SensitiveData:
     type: string
     maxLength: 32768
@@ -1857,18 +1591,17 @@ definitions:
       - resource
     properties:
       resource:
-        $ref: "#/definitions/Arn"
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the scheduled activity.
       input:
-        $ref: "#/definitions/SensitiveData"
+        $ref: '#/definitions/SensitiveData'
         description: The JSON data input to the activity task.
       timeoutInSeconds:
-        $ref: "#/definitions/TimeoutInSeconds"
+        $ref: '#/definitions/TimeoutInSeconds'
         description: The maximum allowed duration of the activity task.
       heartbeatInSeconds:
-        $ref: "#/definitions/TimeoutInSeconds"
-        description: The maximum allowed duration between two heartbeats for the activity
-          task.
+        $ref: '#/definitions/TimeoutInSeconds'
+        description: The maximum allowed duration between two heartbeats for the activity task.
     description: Contains details about an activity scheduled during an execution.
   Identity:
     type: string
@@ -1877,29 +1610,26 @@ definitions:
     type: object
     properties:
       workerName:
-        $ref: "#/definitions/Identity"
-        description: The name of the worker that the task is assigned to. These names are
-          provided by the workers when calling <a>GetActivityTask</a>.
+        $ref: '#/definitions/Identity'
+        description: The name of the worker that the task is assigned to. These names are provided by the workers when calling <a>GetActivityTask</a>.
     description: Contains details about the start of an activity during an execution.
   ActivitySucceededEventDetails:
     type: object
     properties:
       output:
-        $ref: "#/definitions/SensitiveData"
+        $ref: '#/definitions/SensitiveData'
         description: The JSON data output by the activity task.
-    description: Contains details about an activity that successfully terminated during an
-      execution.
+    description: Contains details about an activity that successfully terminated during an execution.
   ActivityTimedOutEventDetails:
     type: object
     properties:
       error:
-        $ref: "#/definitions/SensitiveError"
+        $ref: '#/definitions/SensitiveError'
         description: The error code of the failure.
       cause:
-        $ref: "#/definitions/SensitiveCause"
+        $ref: '#/definitions/SensitiveCause'
         description: A more detailed explanation of the cause of the timeout.
-    description: Contains details about an activity timeout that occurred during an
-      execution.
+    description: Contains details about an activity timeout that occurred during an execution.
   ConnectorParameters:
     type: string
     minLength: 0
@@ -1908,7 +1638,7 @@ definitions:
   TagList:
     type: array
     items:
-      $ref: "#/definitions/Tag"
+      $ref: '#/definitions/Tag'
   Definition:
     type: string
     minLength: 1
@@ -1933,20 +1663,20 @@ definitions:
     type: object
     properties:
       error:
-        $ref: "#/definitions/SensitiveError"
+        $ref: '#/definitions/SensitiveError'
         description: The error code of the failure.
       cause:
-        $ref: "#/definitions/SensitiveCause"
+        $ref: '#/definitions/SensitiveCause'
         description: A more detailed explanation of the cause of the failure.
     description: Contains details about an abort of an execution.
   ExecutionFailedEventDetails:
     type: object
     properties:
       error:
-        $ref: "#/definitions/SensitiveError"
+        $ref: '#/definitions/SensitiveError'
         description: The error code of the failure.
       cause:
-        $ref: "#/definitions/SensitiveCause"
+        $ref: '#/definitions/SensitiveCause'
         description: A more detailed explanation of the cause of the failure.
     description: Contains details about an execution failure event.
   ExecutionListItem:
@@ -1959,62 +1689,55 @@ definitions:
       - startDate
     properties:
       executionArn:
-        $ref: "#/definitions/Arn"
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) that identifies the execution.
       stateMachineArn:
-        $ref: "#/definitions/Arn"
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the executed state machine.
       name:
-        $ref: "#/definitions/Name"
-        description: '<p>The name of the execution.</p> <p>A name must <i>not</i>
-          contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets
-          <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters
-          <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^
-          | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters
-          (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
+        $ref: '#/definitions/Name'
+        description: '<p>The name of the execution.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
       status:
-        $ref: "#/definitions/ExecutionStatus"
+        $ref: '#/definitions/ExecutionStatus'
         description: The current status of the execution.
       startDate:
-        $ref: "#/definitions/Timestamp"
+        $ref: '#/definitions/Timestamp'
         description: The date the execution started.
       stopDate:
-        $ref: "#/definitions/Timestamp"
-        description: If the execution already ended, the date the execution stopped.
+        $ref: '#/definitions/Timestamp'
+        description: 'If the execution already ended, the date the execution stopped.'
     description: Contains details about an execution.
   ExecutionList:
     type: array
     items:
-      $ref: "#/definitions/ExecutionListItem"
+      $ref: '#/definitions/ExecutionListItem'
   ExecutionStartedEventDetails:
     type: object
     properties:
       input:
-        $ref: "#/definitions/SensitiveData"
+        $ref: '#/definitions/SensitiveData'
         description: The JSON data input to the execution.
       roleArn:
-        $ref: "#/definitions/Arn"
-        description: The Amazon Resource Name (ARN) of the IAM role used for executing AWS
-          Lambda tasks.
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the IAM role used for executing AWS Lambda tasks.
     description: Contains details about the start of the execution.
   ExecutionSucceededEventDetails:
     type: object
     properties:
       output:
-        $ref: "#/definitions/SensitiveData"
+        $ref: '#/definitions/SensitiveData'
         description: The JSON data output by the execution.
     description: Contains details about the successful termination of the execution.
   ExecutionTimedOutEventDetails:
     type: object
     properties:
       error:
-        $ref: "#/definitions/SensitiveError"
+        $ref: '#/definitions/SensitiveError'
         description: The error code of the failure.
       cause:
-        $ref: "#/definitions/SensitiveCause"
+        $ref: '#/definitions/SensitiveCause'
         description: A more detailed explanation of the cause of the timeout.
-    description: Contains details about the execution timeout that occurred during the
-      execution.
+    description: Contains details about the execution timeout that occurred during the execution.
   TaskToken:
     type: string
     minLength: 1
@@ -2037,7 +1760,7 @@ definitions:
     type: array
     description: Contains details about the events that occurred during an execution.
     items:
-      $ref: "#/definitions/HistoryEvent"
+      $ref: '#/definitions/HistoryEvent'
   HistoryEventType:
     type: string
     enum:
@@ -2093,16 +1816,16 @@ definitions:
       - resource
     properties:
       resourceType:
-        $ref: "#/definitions/Name"
+        $ref: '#/definitions/Name'
         description: The action of the resource called by a task state.
       resource:
-        $ref: "#/definitions/Name"
+        $ref: '#/definitions/Name'
         description: The service name of the resource in a task state.
       error:
-        $ref: "#/definitions/SensitiveError"
+        $ref: '#/definitions/SensitiveError'
         description: The error code of the failure.
       cause:
-        $ref: "#/definitions/SensitiveCause"
+        $ref: '#/definitions/SensitiveCause'
         description: A more detailed explanation of the cause of the failure.
     description: Contains details about a task failure event.
   TaskScheduledEventDetails:
@@ -2114,19 +1837,19 @@ definitions:
       - parameters
     properties:
       resourceType:
-        $ref: "#/definitions/Name"
+        $ref: '#/definitions/Name'
         description: The action of the resource called by a task state.
       resource:
-        $ref: "#/definitions/Name"
+        $ref: '#/definitions/Name'
         description: The service name of the resource in a task state.
       region:
-        $ref: "#/definitions/Name"
+        $ref: '#/definitions/Name'
         description: The region of the scheduled task
       parameters:
-        $ref: "#/definitions/ConnectorParameters"
+        $ref: '#/definitions/ConnectorParameters'
         description: The JSON data passed to the resource referenced in a task state.
       timeoutInSeconds:
-        $ref: "#/definitions/TimeoutInSeconds"
+        $ref: '#/definitions/TimeoutInSeconds'
         description: The maximum allowed duration of the task.
     description: Contains details about a task scheduled during an execution.
   TaskStartFailedEventDetails:
@@ -2136,16 +1859,16 @@ definitions:
       - resource
     properties:
       resourceType:
-        $ref: "#/definitions/Name"
+        $ref: '#/definitions/Name'
         description: The action of the resource called by a task state.
       resource:
-        $ref: "#/definitions/Name"
+        $ref: '#/definitions/Name'
         description: The service name of the resource in a task state.
       error:
-        $ref: "#/definitions/SensitiveError"
+        $ref: '#/definitions/SensitiveError'
         description: The error code of the failure.
       cause:
-        $ref: "#/definitions/SensitiveCause"
+        $ref: '#/definitions/SensitiveCause'
         description: A more detailed explanation of the cause of the failure.
     description: Contains details about a task that failed to start during an execution.
   TaskStartedEventDetails:
@@ -2155,10 +1878,10 @@ definitions:
       - resource
     properties:
       resourceType:
-        $ref: "#/definitions/Name"
+        $ref: '#/definitions/Name'
         description: The action of the resource called by a task state.
       resource:
-        $ref: "#/definitions/Name"
+        $ref: '#/definitions/Name'
         description: The service name of the resource in a task state.
     description: Contains details about the start of a task during an execution.
   TaskSubmitFailedEventDetails:
@@ -2168,16 +1891,16 @@ definitions:
       - resource
     properties:
       resourceType:
-        $ref: "#/definitions/Name"
+        $ref: '#/definitions/Name'
         description: The action of the resource called by a task state.
       resource:
-        $ref: "#/definitions/Name"
+        $ref: '#/definitions/Name'
         description: The service name of the resource in a task state.
       error:
-        $ref: "#/definitions/SensitiveError"
+        $ref: '#/definitions/SensitiveError'
         description: The error code of the failure.
       cause:
-        $ref: "#/definitions/SensitiveCause"
+        $ref: '#/definitions/SensitiveCause'
         description: A more detailed explanation of the cause of the failure.
     description: Contains details about a task that failed to submit during an execution.
   TaskSubmittedEventDetails:
@@ -2187,13 +1910,13 @@ definitions:
       - resource
     properties:
       resourceType:
-        $ref: "#/definitions/Name"
+        $ref: '#/definitions/Name'
         description: The action of the resource called by a task state.
       resource:
-        $ref: "#/definitions/Name"
+        $ref: '#/definitions/Name'
         description: The service name of the resource in a task state.
       output:
-        $ref: "#/definitions/SensitiveData"
+        $ref: '#/definitions/SensitiveData'
         description: The response from a resource when a task has started.
     description: Contains details about a task submitted to a resource .
   TaskSucceededEventDetails:
@@ -2203,15 +1926,14 @@ definitions:
       - resource
     properties:
       resourceType:
-        $ref: "#/definitions/Name"
+        $ref: '#/definitions/Name'
         description: The action of the resource called by a task state.
       resource:
-        $ref: "#/definitions/Name"
+        $ref: '#/definitions/Name'
         description: The service name of the resource in a task state.
       output:
-        $ref: "#/definitions/SensitiveData"
-        description: The full JSON response from a resource when a task has succeeded. This
-          response becomes the output of the related task.
+        $ref: '#/definitions/SensitiveData'
+        description: The full JSON response from a resource when a task has succeeded. This response becomes the output of the related task.
     description: Contains details about the successful completion of a task state.
   TaskTimedOutEventDetails:
     type: object
@@ -2220,95 +1942,90 @@ definitions:
       - resource
     properties:
       resourceType:
-        $ref: "#/definitions/Name"
+        $ref: '#/definitions/Name'
         description: The action of the resource called by a task state.
       resource:
-        $ref: "#/definitions/Name"
+        $ref: '#/definitions/Name'
         description: The service name of the resource in a task state.
       error:
-        $ref: "#/definitions/SensitiveError"
+        $ref: '#/definitions/SensitiveError'
         description: The error code of the failure.
       cause:
-        $ref: "#/definitions/SensitiveCause"
+        $ref: '#/definitions/SensitiveCause'
         description: A more detailed explanation of the cause of the failure.
-    description: Contains details about a resource timeout that occurred during an
-      execution.
+    description: Contains details about a resource timeout that occurred during an execution.
   LambdaFunctionFailedEventDetails:
     type: object
     properties:
       error:
-        $ref: "#/definitions/SensitiveError"
+        $ref: '#/definitions/SensitiveError'
         description: The error code of the failure.
       cause:
-        $ref: "#/definitions/SensitiveCause"
+        $ref: '#/definitions/SensitiveCause'
         description: A more detailed explanation of the cause of the failure.
     description: Contains details about a lambda function that failed during an execution.
   LambdaFunctionScheduleFailedEventDetails:
     type: object
     properties:
       error:
-        $ref: "#/definitions/SensitiveError"
+        $ref: '#/definitions/SensitiveError'
         description: The error code of the failure.
       cause:
-        $ref: "#/definitions/SensitiveCause"
+        $ref: '#/definitions/SensitiveCause'
         description: A more detailed explanation of the cause of the failure.
-    description: Contains details about a failed lambda function schedule event that
-      occurred during an execution.
+    description: Contains details about a failed lambda function schedule event that occurred during an execution.
   LambdaFunctionScheduledEventDetails:
     type: object
     required:
       - resource
     properties:
       resource:
-        $ref: "#/definitions/Arn"
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the scheduled lambda function.
       input:
-        $ref: "#/definitions/SensitiveData"
+        $ref: '#/definitions/SensitiveData'
         description: The JSON data input to the lambda function.
       timeoutInSeconds:
-        $ref: "#/definitions/TimeoutInSeconds"
+        $ref: '#/definitions/TimeoutInSeconds'
         description: The maximum allowed duration of the lambda function.
     description: Contains details about a lambda function scheduled during an execution.
   LambdaFunctionStartFailedEventDetails:
     type: object
     properties:
       error:
-        $ref: "#/definitions/SensitiveError"
+        $ref: '#/definitions/SensitiveError'
         description: The error code of the failure.
       cause:
-        $ref: "#/definitions/SensitiveCause"
+        $ref: '#/definitions/SensitiveCause'
         description: A more detailed explanation of the cause of the failure.
-    description: Contains details about a lambda function that failed to start during an
-      execution.
+    description: Contains details about a lambda function that failed to start during an execution.
   LambdaFunctionSucceededEventDetails:
     type: object
     properties:
       output:
-        $ref: "#/definitions/SensitiveData"
+        $ref: '#/definitions/SensitiveData'
         description: The JSON data output by the lambda function.
-    description: Contains details about a lambda function that successfully terminated
-      during an execution.
+    description: Contains details about a lambda function that successfully terminated during an execution.
   LambdaFunctionTimedOutEventDetails:
     type: object
     properties:
       error:
-        $ref: "#/definitions/SensitiveError"
+        $ref: '#/definitions/SensitiveError'
         description: The error code of the failure.
       cause:
-        $ref: "#/definitions/SensitiveCause"
+        $ref: '#/definitions/SensitiveCause'
         description: A more detailed explanation of the cause of the timeout.
-    description: Contains details about a lambda function timeout that occurred during an
-      execution.
+    description: Contains details about a lambda function timeout that occurred during an execution.
   StateEnteredEventDetails:
     type: object
     required:
       - name
     properties:
       name:
-        $ref: "#/definitions/Name"
+        $ref: '#/definitions/Name'
         description: The name of the state.
       input:
-        $ref: "#/definitions/SensitiveData"
+        $ref: '#/definitions/SensitiveData'
         description: The string that contains the JSON input data for the state.
     description: Contains details about a state entered during an execution.
   StateExitedEventDetails:
@@ -2317,15 +2034,10 @@ definitions:
       - name
     properties:
       name:
-        $ref: "#/definitions/Name"
-        description: '<p>The name of the state.</p> <p>A name must <i>not</i> contain:</p>
-          <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { }
-          [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code>
-          </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; ,
-          ; : /</code> </p> </li> <li> <p>control characters
-          (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
+        $ref: '#/definitions/Name'
+        description: '<p>The name of the state.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
       output:
-        $ref: "#/definitions/SensitiveData"
+        $ref: '#/definitions/SensitiveData'
         description: The JSON output data of the state.
     description: Contains details about an exit from a state during an execution.
   HistoryEvent:
@@ -2336,90 +2048,87 @@ definitions:
       - id
     properties:
       timestamp:
-        $ref: "#/definitions/Timestamp"
+        $ref: '#/definitions/Timestamp'
         description: The date and time the event occurred.
       type:
-        $ref: "#/definitions/HistoryEventType"
+        $ref: '#/definitions/HistoryEventType'
         description: The type of the event.
       id:
-        $ref: "#/definitions/EventId"
-        description: The id of the event. Events are numbered sequentially, starting at one.
+        $ref: '#/definitions/EventId'
+        description: 'The id of the event. Events are numbered sequentially, starting at one.'
       previousEventId:
-        $ref: "#/definitions/EventId"
+        $ref: '#/definitions/EventId'
         description: The id of the previous event.
       activityFailedEventDetails:
-        $ref: "#/definitions/ActivityFailedEventDetails"
+        $ref: '#/definitions/ActivityFailedEventDetails'
       activityScheduleFailedEventDetails:
-        $ref: "#/definitions/ActivityScheduleFailedEventDetails"
-        description: Contains details about an activity schedule event that failed during
-          an execution.
+        $ref: '#/definitions/ActivityScheduleFailedEventDetails'
+        description: Contains details about an activity schedule event that failed during an execution.
       activityScheduledEventDetails:
-        $ref: "#/definitions/ActivityScheduledEventDetails"
+        $ref: '#/definitions/ActivityScheduledEventDetails'
       activityStartedEventDetails:
-        $ref: "#/definitions/ActivityStartedEventDetails"
+        $ref: '#/definitions/ActivityStartedEventDetails'
       activitySucceededEventDetails:
-        $ref: "#/definitions/ActivitySucceededEventDetails"
+        $ref: '#/definitions/ActivitySucceededEventDetails'
       activityTimedOutEventDetails:
-        $ref: "#/definitions/ActivityTimedOutEventDetails"
+        $ref: '#/definitions/ActivityTimedOutEventDetails'
       taskFailedEventDetails:
-        $ref: "#/definitions/TaskFailedEventDetails"
+        $ref: '#/definitions/TaskFailedEventDetails'
         description: Contains details about the failure of a task.
       taskScheduledEventDetails:
-        $ref: "#/definitions/TaskScheduledEventDetails"
+        $ref: '#/definitions/TaskScheduledEventDetails'
         description: Contains details about a task that was scheduled.
       taskStartFailedEventDetails:
-        $ref: "#/definitions/TaskStartFailedEventDetails"
+        $ref: '#/definitions/TaskStartFailedEventDetails'
         description: Contains details about a task that failed to start.
       taskStartedEventDetails:
-        $ref: "#/definitions/TaskStartedEventDetails"
+        $ref: '#/definitions/TaskStartedEventDetails'
         description: Contains details about a task that was started.
       taskSubmitFailedEventDetails:
-        $ref: "#/definitions/TaskSubmitFailedEventDetails"
+        $ref: '#/definitions/TaskSubmitFailedEventDetails'
         description: Contains details about a task that where the submit failed.
       taskSubmittedEventDetails:
-        $ref: "#/definitions/TaskSubmittedEventDetails"
+        $ref: '#/definitions/TaskSubmittedEventDetails'
         description: Contains details about a submitted task.
       taskSucceededEventDetails:
-        $ref: "#/definitions/TaskSucceededEventDetails"
+        $ref: '#/definitions/TaskSucceededEventDetails'
         description: Contains details about a task that succeeded.
       taskTimedOutEventDetails:
-        $ref: "#/definitions/TaskTimedOutEventDetails"
+        $ref: '#/definitions/TaskTimedOutEventDetails'
         description: Contains details about a task that timed out.
       executionFailedEventDetails:
-        $ref: "#/definitions/ExecutionFailedEventDetails"
+        $ref: '#/definitions/ExecutionFailedEventDetails'
       executionStartedEventDetails:
-        $ref: "#/definitions/ExecutionStartedEventDetails"
+        $ref: '#/definitions/ExecutionStartedEventDetails'
       executionSucceededEventDetails:
-        $ref: "#/definitions/ExecutionSucceededEventDetails"
+        $ref: '#/definitions/ExecutionSucceededEventDetails'
       executionAbortedEventDetails:
-        $ref: "#/definitions/ExecutionAbortedEventDetails"
+        $ref: '#/definitions/ExecutionAbortedEventDetails'
       executionTimedOutEventDetails:
-        $ref: "#/definitions/ExecutionTimedOutEventDetails"
+        $ref: '#/definitions/ExecutionTimedOutEventDetails'
       lambdaFunctionFailedEventDetails:
-        $ref: "#/definitions/LambdaFunctionFailedEventDetails"
+        $ref: '#/definitions/LambdaFunctionFailedEventDetails'
       lambdaFunctionScheduleFailedEventDetails:
-        $ref: "#/definitions/LambdaFunctionScheduleFailedEventDetails"
+        $ref: '#/definitions/LambdaFunctionScheduleFailedEventDetails'
       lambdaFunctionScheduledEventDetails:
-        $ref: "#/definitions/LambdaFunctionScheduledEventDetails"
+        $ref: '#/definitions/LambdaFunctionScheduledEventDetails'
       lambdaFunctionStartFailedEventDetails:
-        $ref: "#/definitions/LambdaFunctionStartFailedEventDetails"
-        description: Contains details about a lambda function that failed to start during
-          an execution.
+        $ref: '#/definitions/LambdaFunctionStartFailedEventDetails'
+        description: Contains details about a lambda function that failed to start during an execution.
       lambdaFunctionSucceededEventDetails:
-        $ref: "#/definitions/LambdaFunctionSucceededEventDetails"
-        description: Contains details about a lambda function that terminated successfully
-          during an execution.
+        $ref: '#/definitions/LambdaFunctionSucceededEventDetails'
+        description: Contains details about a lambda function that terminated successfully during an execution.
       lambdaFunctionTimedOutEventDetails:
-        $ref: "#/definitions/LambdaFunctionTimedOutEventDetails"
+        $ref: '#/definitions/LambdaFunctionTimedOutEventDetails'
       stateEnteredEventDetails:
-        $ref: "#/definitions/StateEnteredEventDetails"
+        $ref: '#/definitions/StateEnteredEventDetails'
       stateExitedEventDetails:
-        $ref: "#/definitions/StateExitedEventDetails"
+        $ref: '#/definitions/StateExitedEventDetails'
     description: Contains details about the events of an execution.
   StateMachineList:
     type: array
     items:
-      $ref: "#/definitions/StateMachineListItem"
+      $ref: '#/definitions/StateMachineListItem'
   StateMachineListItem:
     type: object
     required:
@@ -2428,18 +2137,13 @@ definitions:
       - creationDate
     properties:
       stateMachineArn:
-        $ref: "#/definitions/Arn"
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) that identifies the state machine.
       name:
-        $ref: "#/definitions/Name"
-        description: '<p>The name of the state machine.</p> <p>A name must <i>not</i>
-          contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets
-          <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters
-          <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^
-          | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters
-          (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
+        $ref: '#/definitions/Name'
+        description: '<p>The name of the state machine.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
       creationDate:
-        $ref: "#/definitions/Timestamp"
+        $ref: '#/definitions/Timestamp'
         description: The date the state machine is created.
     description: Contains details about the state machine.
   TagKey:
@@ -2454,14 +2158,13 @@ definitions:
     type: object
     properties:
       key:
-        $ref: "#/definitions/TagKey"
+        $ref: '#/definitions/TagKey'
         description: The key of a tag.
       value:
-        $ref: "#/definitions/TagValue"
+        $ref: '#/definitions/TagValue'
         description: The value of a tag.
-    description: Tags are key-value pairs that can be associated with Step Functions state
-      machines and activities.
+    description: Tags are key-value pairs that can be associated with Step Functions state machines and activities.
   TagKeyList:
     type: array
     items:
-      $ref: "#/definitions/TagKey"
+      $ref: '#/definitions/TagKey'

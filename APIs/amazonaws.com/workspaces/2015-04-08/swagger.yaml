@@ -1,40 +1,38 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  version: 2015-04-08
+  version: '2015-04-08'
   x-release: v4
   title: Amazon WorkSpaces
-  description: <fullname>Amazon WorkSpaces Service</fullname> <p>Amazon WorkSpaces enables
-    you to provision virtual, cloud-based Microsoft Windows and Amazon Linux
-    desktops for your users.</p>
+  description: '<fullname>Amazon WorkSpaces Service</fullname> <p>Amazon WorkSpaces enables you to provision virtual, cloud-based Microsoft Windows and Amazon Linux desktops for your users.</p>'
   x-logo:
-    url: https://twitter.com/awscloud/profile_image?size=original
-    backgroundColor: "#FFFFFF"
-  termsOfService: https://aws.amazon.com/service-terms/
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
     name: Mike Ralphson
     email: mike.ralphson@gmail.com
-    url: https://github.com/mermade/aws2openapi
+    url: 'https://github.com/mermade/aws2openapi'
     x-twitter: PermittedSoc
   license:
     name: Apache 2.0 License
-    url: http://www.apache.org/licenses/
+    url: 'http://www.apache.org/licenses/'
   x-providerName: amazonaws.com
   x-serviceName: workspaces
   x-origin:
     - contentType: application/json
-      url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/workspaces-2015-04-08.normal.json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/workspaces-2015-04-08.normal.json'
       converter:
-        url: https://github.com/mermade/aws2openapi
+        url: 'https://github.com/mermade/aws2openapi'
         version: 1.0.0
       x-apisguru-direct: true
   x-apiClientRegistration:
-    url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
   x-preferred: true
 externalDocs:
   description: Amazon Web Services documentation
-  url: https://docs.aws.amazon.com/workspaces/
+  url: 'https://docs.aws.amazon.com/workspaces/'
 host: workspaces.amazonaws.com
 basePath: /
 x-hasEquivalentPaths: true
@@ -91,46 +89,45 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /#X-Amz-Target=WorkspacesService.AssociateIpGroups:
+  '/#X-Amz-Target=WorkspacesService.AssociateIpGroups':
     post:
       operationId: AssociateIpGroups
-      description: Associates the specified IP access control group with the specified
-        directory.
+      description: Associates the specified IP access control group with the specified directory.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/AssociateIpGroupsResult"
-        "480":
+            $ref: '#/definitions/AssociateIpGroupsResult'
+        '480':
           description: InvalidParameterValuesException
           schema:
-            $ref: "#/definitions/InvalidParameterValuesException"
-        "481":
+            $ref: '#/definitions/InvalidParameterValuesException'
+        '481':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
-        "482":
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
           description: ResourceLimitExceededException
           schema:
-            $ref: "#/definitions/ResourceLimitExceededException"
-        "483":
+            $ref: '#/definitions/ResourceLimitExceededException'
+        '483':
           description: InvalidResourceStateException
           schema:
-            $ref: "#/definitions/InvalidResourceStateException"
-        "484":
+            $ref: '#/definitions/InvalidResourceStateException'
+        '484':
           description: AccessDeniedException
           schema:
-            $ref: "#/definitions/AccessDeniedException"
-        "485":
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
           description: OperationNotSupportedException
           schema:
-            $ref: "#/definitions/OperationNotSupportedException"
+            $ref: '#/definitions/OperationNotSupportedException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/AssociateIpGroupsRequest"
+            $ref: '#/definitions/AssociateIpGroupsRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -138,50 +135,48 @@ paths:
           enum:
             - WorkspacesService.AssociateIpGroups
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=WorkspacesService.AuthorizeIpRules:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkspacesService.AuthorizeIpRules':
     post:
       operationId: AuthorizeIpRules
-      description: <p>Adds one or more rules to the specified IP access control group.</p>
-        <p>This action gives users permission to access their WorkSpaces from
-        the CIDR address ranges specified in the rules.</p>
+      description: <p>Adds one or more rules to the specified IP access control group.</p> <p>This action gives users permission to access their WorkSpaces from the CIDR address ranges specified in the rules.</p>
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/AuthorizeIpRulesResult"
-        "480":
+            $ref: '#/definitions/AuthorizeIpRulesResult'
+        '480':
           description: InvalidParameterValuesException
           schema:
-            $ref: "#/definitions/InvalidParameterValuesException"
-        "481":
+            $ref: '#/definitions/InvalidParameterValuesException'
+        '481':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
-        "482":
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
           description: ResourceLimitExceededException
           schema:
-            $ref: "#/definitions/ResourceLimitExceededException"
-        "483":
+            $ref: '#/definitions/ResourceLimitExceededException'
+        '483':
           description: InvalidResourceStateException
           schema:
-            $ref: "#/definitions/InvalidResourceStateException"
-        "484":
+            $ref: '#/definitions/InvalidResourceStateException'
+        '484':
           description: AccessDeniedException
           schema:
-            $ref: "#/definitions/AccessDeniedException"
+            $ref: '#/definitions/AccessDeniedException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/AuthorizeIpRulesRequest"
+            $ref: '#/definitions/AuthorizeIpRulesRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -189,59 +184,48 @@ paths:
           enum:
             - WorkspacesService.AuthorizeIpRules
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=WorkspacesService.CreateIpGroup:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkspacesService.CreateIpGroup':
     post:
       operationId: CreateIpGroup
-      description: <p>Creates an IP access control group.</p> <p>An IP access control group
-        provides you with the ability to control the IP addresses from which
-        users are allowed to access their WorkSpaces. To specify the CIDR
-        address ranges, add rules to your IP access control group and then
-        associate the group with your directory. You can add rules when you
-        create the group or at any time using <a>AuthorizeIpRules</a>.</p>
-        <p>There is a default IP access control group associated with your
-        directory. If you don't associate an IP access control group with your
-        directory, the default group is used. The default group includes a
-        default rule that allows users to access their WorkSpaces from anywhere.
-        You cannot modify the default IP access control group for your
-        directory.</p>
+      description: '<p>Creates an IP access control group.</p> <p>An IP access control group provides you with the ability to control the IP addresses from which users are allowed to access their WorkSpaces. To specify the CIDR address ranges, add rules to your IP access control group and then associate the group with your directory. You can add rules when you create the group or at any time using <a>AuthorizeIpRules</a>.</p> <p>There is a default IP access control group associated with your directory. If you don''t associate an IP access control group with your directory, the default group is used. The default group includes a default rule that allows users to access their WorkSpaces from anywhere. You cannot modify the default IP access control group for your directory.</p>'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/CreateIpGroupResult"
-        "480":
+            $ref: '#/definitions/CreateIpGroupResult'
+        '480':
           description: InvalidParameterValuesException
           schema:
-            $ref: "#/definitions/InvalidParameterValuesException"
-        "481":
+            $ref: '#/definitions/InvalidParameterValuesException'
+        '481':
           description: ResourceLimitExceededException
           schema:
-            $ref: "#/definitions/ResourceLimitExceededException"
-        "482":
+            $ref: '#/definitions/ResourceLimitExceededException'
+        '482':
           description: ResourceAlreadyExistsException
           schema:
-            $ref: "#/definitions/ResourceAlreadyExistsException"
-        "483":
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '483':
           description: ResourceCreationFailedException
           schema:
-            $ref: "#/definitions/ResourceCreationFailedException"
-        "484":
+            $ref: '#/definitions/ResourceCreationFailedException'
+        '484':
           description: AccessDeniedException
           schema:
-            $ref: "#/definitions/AccessDeniedException"
+            $ref: '#/definitions/AccessDeniedException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/CreateIpGroupRequest"
+            $ref: '#/definitions/CreateIpGroupRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -249,40 +233,40 @@ paths:
           enum:
             - WorkspacesService.CreateIpGroup
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=WorkspacesService.CreateTags:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkspacesService.CreateTags':
     post:
       operationId: CreateTags
       description: Creates the specified tags for the specified WorkSpace.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/CreateTagsResult"
-        "480":
+            $ref: '#/definitions/CreateTagsResult'
+        '480':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
-        "481":
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
           description: InvalidParameterValuesException
           schema:
-            $ref: "#/definitions/InvalidParameterValuesException"
-        "482":
+            $ref: '#/definitions/InvalidParameterValuesException'
+        '482':
           description: ResourceLimitExceededException
           schema:
-            $ref: "#/definitions/ResourceLimitExceededException"
+            $ref: '#/definitions/ResourceLimitExceededException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/CreateTagsRequest"
+            $ref: '#/definitions/CreateTagsRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -290,37 +274,36 @@ paths:
           enum:
             - WorkspacesService.CreateTags
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=WorkspacesService.CreateWorkspaces:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkspacesService.CreateWorkspaces':
     post:
       operationId: CreateWorkspaces
-      description: <p>Creates one or more WorkSpaces.</p> <p>This operation is asynchronous
-        and returns before the WorkSpaces are created.</p>
+      description: <p>Creates one or more WorkSpaces.</p> <p>This operation is asynchronous and returns before the WorkSpaces are created.</p>
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/CreateWorkspacesResult"
-        "480":
+            $ref: '#/definitions/CreateWorkspacesResult'
+        '480':
           description: ResourceLimitExceededException
           schema:
-            $ref: "#/definitions/ResourceLimitExceededException"
-        "481":
+            $ref: '#/definitions/ResourceLimitExceededException'
+        '481':
           description: InvalidParameterValuesException
           schema:
-            $ref: "#/definitions/InvalidParameterValuesException"
+            $ref: '#/definitions/InvalidParameterValuesException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/CreateWorkspacesRequest"
+            $ref: '#/definitions/CreateWorkspacesRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -328,46 +311,44 @@ paths:
           enum:
             - WorkspacesService.CreateWorkspaces
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=WorkspacesService.DeleteIpGroup:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkspacesService.DeleteIpGroup':
     post:
       operationId: DeleteIpGroup
-      description: <p>Deletes the specified IP access control group.</p> <p>You cannot
-        delete an IP access control group that is associated with a
-        directory.</p>
+      description: <p>Deletes the specified IP access control group.</p> <p>You cannot delete an IP access control group that is associated with a directory.</p>
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DeleteIpGroupResult"
-        "480":
+            $ref: '#/definitions/DeleteIpGroupResult'
+        '480':
           description: InvalidParameterValuesException
           schema:
-            $ref: "#/definitions/InvalidParameterValuesException"
-        "481":
+            $ref: '#/definitions/InvalidParameterValuesException'
+        '481':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
-        "482":
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
           description: ResourceAssociatedException
           schema:
-            $ref: "#/definitions/ResourceAssociatedException"
-        "483":
+            $ref: '#/definitions/ResourceAssociatedException'
+        '483':
           description: AccessDeniedException
           schema:
-            $ref: "#/definitions/AccessDeniedException"
+            $ref: '#/definitions/AccessDeniedException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/DeleteIpGroupRequest"
+            $ref: '#/definitions/DeleteIpGroupRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -375,36 +356,36 @@ paths:
           enum:
             - WorkspacesService.DeleteIpGroup
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=WorkspacesService.DeleteTags:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkspacesService.DeleteTags':
     post:
       operationId: DeleteTags
       description: Deletes the specified tags from the specified WorkSpace.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DeleteTagsResult"
-        "480":
+            $ref: '#/definitions/DeleteTagsResult'
+        '480':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
-        "481":
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
           description: InvalidParameterValuesException
           schema:
-            $ref: "#/definitions/InvalidParameterValuesException"
+            $ref: '#/definitions/InvalidParameterValuesException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/DeleteTagsRequest"
+            $ref: '#/definitions/DeleteTagsRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -412,41 +393,40 @@ paths:
           enum:
             - WorkspacesService.DeleteTags
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=WorkspacesService.DeleteWorkspaceImage:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkspacesService.DeleteWorkspaceImage':
     post:
       operationId: DeleteWorkspaceImage
-      description: "Deletes the specified image from your account. To delete an image, you
-        must first delete any bundles that are associated with the image. "
+      description: 'Deletes the specified image from your account. To delete an image, you must first delete any bundles that are associated with the image. '
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DeleteWorkspaceImageResult"
-        "480":
+            $ref: '#/definitions/DeleteWorkspaceImageResult'
+        '480':
           description: ResourceAssociatedException
           schema:
-            $ref: "#/definitions/ResourceAssociatedException"
-        "481":
+            $ref: '#/definitions/ResourceAssociatedException'
+        '481':
           description: InvalidResourceStateException
           schema:
-            $ref: "#/definitions/InvalidResourceStateException"
-        "482":
+            $ref: '#/definitions/InvalidResourceStateException'
+        '482':
           description: AccessDeniedException
           schema:
-            $ref: "#/definitions/AccessDeniedException"
+            $ref: '#/definitions/AccessDeniedException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/DeleteWorkspaceImageRequest"
+            $ref: '#/definitions/DeleteWorkspaceImageRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -454,33 +434,32 @@ paths:
           enum:
             - WorkspacesService.DeleteWorkspaceImage
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=WorkspacesService.DescribeAccount:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkspacesService.DescribeAccount':
     post:
       operationId: DescribeAccount
-      description: Retrieves a list that describes the configuration of bring your own
-        license (BYOL) for the specified account.
+      description: Retrieves a list that describes the configuration of bring your own license (BYOL) for the specified account.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DescribeAccountResult"
-        "480":
+            $ref: '#/definitions/DescribeAccountResult'
+        '480':
           description: AccessDeniedException
           schema:
-            $ref: "#/definitions/AccessDeniedException"
+            $ref: '#/definitions/AccessDeniedException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/DescribeAccountRequest"
+            $ref: '#/definitions/DescribeAccountRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -488,33 +467,32 @@ paths:
           enum:
             - WorkspacesService.DescribeAccount
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=WorkspacesService.DescribeAccountModifications:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkspacesService.DescribeAccountModifications':
     post:
       operationId: DescribeAccountModifications
-      description: Retrieves a list that describes modifications to the configuration of
-        bring your own license (BYOL) for the specified account.
+      description: Retrieves a list that describes modifications to the configuration of bring your own license (BYOL) for the specified account.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DescribeAccountModificationsResult"
-        "480":
+            $ref: '#/definitions/DescribeAccountModificationsResult'
+        '480':
           description: AccessDeniedException
           schema:
-            $ref: "#/definitions/AccessDeniedException"
+            $ref: '#/definitions/AccessDeniedException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/DescribeAccountModificationsRequest"
+            $ref: '#/definitions/DescribeAccountModificationsRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -522,41 +500,40 @@ paths:
           enum:
             - WorkspacesService.DescribeAccountModifications
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=WorkspacesService.DescribeClientProperties:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkspacesService.DescribeClientProperties':
     post:
       operationId: DescribeClientProperties
-      description: Retrieves a list that describes one or more specified Amazon WorkSpaces
-        clients.
+      description: Retrieves a list that describes one or more specified Amazon WorkSpaces clients.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DescribeClientPropertiesResult"
-        "480":
+            $ref: '#/definitions/DescribeClientPropertiesResult'
+        '480':
           description: InvalidParameterValuesException
           schema:
-            $ref: "#/definitions/InvalidParameterValuesException"
-        "481":
+            $ref: '#/definitions/InvalidParameterValuesException'
+        '481':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
-        "482":
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
           description: AccessDeniedException
           schema:
-            $ref: "#/definitions/AccessDeniedException"
+            $ref: '#/definitions/AccessDeniedException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/DescribeClientPropertiesRequest"
+            $ref: '#/definitions/DescribeClientPropertiesRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -564,36 +541,36 @@ paths:
           enum:
             - WorkspacesService.DescribeClientProperties
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=WorkspacesService.DescribeIpGroups:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkspacesService.DescribeIpGroups':
     post:
       operationId: DescribeIpGroups
       description: Describes one or more of your IP access control groups.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DescribeIpGroupsResult"
-        "480":
+            $ref: '#/definitions/DescribeIpGroupsResult'
+        '480':
           description: InvalidParameterValuesException
           schema:
-            $ref: "#/definitions/InvalidParameterValuesException"
-        "481":
+            $ref: '#/definitions/InvalidParameterValuesException'
+        '481':
           description: AccessDeniedException
           schema:
-            $ref: "#/definitions/AccessDeniedException"
+            $ref: '#/definitions/AccessDeniedException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/DescribeIpGroupsRequest"
+            $ref: '#/definitions/DescribeIpGroupsRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -601,32 +578,32 @@ paths:
           enum:
             - WorkspacesService.DescribeIpGroups
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=WorkspacesService.DescribeTags:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkspacesService.DescribeTags':
     post:
       operationId: DescribeTags
       description: Describes the specified tags for the specified WorkSpace.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DescribeTagsResult"
-        "480":
+            $ref: '#/definitions/DescribeTagsResult'
+        '480':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/DescribeTagsRequest"
+            $ref: '#/definitions/DescribeTagsRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -634,34 +611,32 @@ paths:
           enum:
             - WorkspacesService.DescribeTags
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=WorkspacesService.DescribeWorkspaceBundles:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkspacesService.DescribeWorkspaceBundles':
     post:
       operationId: DescribeWorkspaceBundles
-      description: <p>Retrieves a list that describes the available WorkSpace bundles.</p>
-        <p>You can filter the results using either bundle ID or owner, but not
-        both.</p>
+      description: '<p>Retrieves a list that describes the available WorkSpace bundles.</p> <p>You can filter the results using either bundle ID or owner, but not both.</p>'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DescribeWorkspaceBundlesResult"
-        "480":
+            $ref: '#/definitions/DescribeWorkspaceBundlesResult'
+        '480':
           description: InvalidParameterValuesException
           schema:
-            $ref: "#/definitions/InvalidParameterValuesException"
+            $ref: '#/definitions/InvalidParameterValuesException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/DescribeWorkspaceBundlesRequest"
+            $ref: '#/definitions/DescribeWorkspaceBundlesRequest'
         - name: NextToken
           type: string
           in: query
@@ -674,33 +649,32 @@ paths:
           enum:
             - WorkspacesService.DescribeWorkspaceBundles
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=WorkspacesService.DescribeWorkspaceDirectories:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkspacesService.DescribeWorkspaceDirectories':
     post:
       operationId: DescribeWorkspaceDirectories
-      description: Describes the available AWS Directory Service directories that are
-        registered with Amazon WorkSpaces.
+      description: Describes the available AWS Directory Service directories that are registered with Amazon WorkSpaces.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DescribeWorkspaceDirectoriesResult"
-        "480":
+            $ref: '#/definitions/DescribeWorkspaceDirectoriesResult'
+        '480':
           description: InvalidParameterValuesException
           schema:
-            $ref: "#/definitions/InvalidParameterValuesException"
+            $ref: '#/definitions/InvalidParameterValuesException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/DescribeWorkspaceDirectoriesRequest"
+            $ref: '#/definitions/DescribeWorkspaceDirectoriesRequest'
         - name: NextToken
           type: string
           in: query
@@ -713,34 +687,32 @@ paths:
           enum:
             - WorkspacesService.DescribeWorkspaceDirectories
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=WorkspacesService.DescribeWorkspaceImages:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkspacesService.DescribeWorkspaceImages':
     post:
       operationId: DescribeWorkspaceImages
-      description: "Retrieves a list that describes one or more specified images, if the
-        image identifiers are provided. Otherwise, all images in the account are
-        described. "
+      description: 'Retrieves a list that describes one or more specified images, if the image identifiers are provided. Otherwise, all images in the account are described. '
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DescribeWorkspaceImagesResult"
-        "480":
+            $ref: '#/definitions/DescribeWorkspaceImagesResult'
+        '480':
           description: AccessDeniedException
           schema:
-            $ref: "#/definitions/AccessDeniedException"
+            $ref: '#/definitions/AccessDeniedException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/DescribeWorkspaceImagesRequest"
+            $ref: '#/definitions/DescribeWorkspaceImagesRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -748,38 +720,36 @@ paths:
           enum:
             - WorkspacesService.DescribeWorkspaceImages
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=WorkspacesService.DescribeWorkspaces:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkspacesService.DescribeWorkspaces':
     post:
       operationId: DescribeWorkspaces
-      description: <p>Describes the specified WorkSpaces.</p> <p>You can filter the results
-        by using the bundle identifier, directory identifier, or owner, but you
-        can specify only one filter at a time.</p>
+      description: '<p>Describes the specified WorkSpaces.</p> <p>You can filter the results by using the bundle identifier, directory identifier, or owner, but you can specify only one filter at a time.</p>'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DescribeWorkspacesResult"
-        "480":
+            $ref: '#/definitions/DescribeWorkspacesResult'
+        '480':
           description: InvalidParameterValuesException
           schema:
-            $ref: "#/definitions/InvalidParameterValuesException"
-        "481":
+            $ref: '#/definitions/InvalidParameterValuesException'
+        '481':
           description: ResourceUnavailableException
           schema:
-            $ref: "#/definitions/ResourceUnavailableException"
+            $ref: '#/definitions/ResourceUnavailableException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/DescribeWorkspacesRequest"
+            $ref: '#/definitions/DescribeWorkspacesRequest'
         - name: Limit
           type: string
           in: query
@@ -797,32 +767,32 @@ paths:
           enum:
             - WorkspacesService.DescribeWorkspaces
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=WorkspacesService.DescribeWorkspacesConnectionStatus:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkspacesService.DescribeWorkspacesConnectionStatus':
     post:
       operationId: DescribeWorkspacesConnectionStatus
       description: Describes the connection status of the specified WorkSpaces.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DescribeWorkspacesConnectionStatusResult"
-        "480":
+            $ref: '#/definitions/DescribeWorkspacesConnectionStatusResult'
+        '480':
           description: InvalidParameterValuesException
           schema:
-            $ref: "#/definitions/InvalidParameterValuesException"
+            $ref: '#/definitions/InvalidParameterValuesException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/DescribeWorkspacesConnectionStatusRequest"
+            $ref: '#/definitions/DescribeWorkspacesConnectionStatusRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -830,45 +800,44 @@ paths:
           enum:
             - WorkspacesService.DescribeWorkspacesConnectionStatus
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=WorkspacesService.DisassociateIpGroups:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkspacesService.DisassociateIpGroups':
     post:
       operationId: DisassociateIpGroups
-      description: Disassociates the specified IP access control group from the specified
-        directory.
+      description: Disassociates the specified IP access control group from the specified directory.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DisassociateIpGroupsResult"
-        "480":
+            $ref: '#/definitions/DisassociateIpGroupsResult'
+        '480':
           description: InvalidParameterValuesException
           schema:
-            $ref: "#/definitions/InvalidParameterValuesException"
-        "481":
+            $ref: '#/definitions/InvalidParameterValuesException'
+        '481':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
-        "482":
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
           description: InvalidResourceStateException
           schema:
-            $ref: "#/definitions/InvalidResourceStateException"
-        "483":
+            $ref: '#/definitions/InvalidResourceStateException'
+        '483':
           description: AccessDeniedException
           schema:
-            $ref: "#/definitions/AccessDeniedException"
+            $ref: '#/definitions/AccessDeniedException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/DisassociateIpGroupsRequest"
+            $ref: '#/definitions/DisassociateIpGroupsRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -876,51 +845,48 @@ paths:
           enum:
             - WorkspacesService.DisassociateIpGroups
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=WorkspacesService.ImportWorkspaceImage:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkspacesService.ImportWorkspaceImage':
     post:
       operationId: ImportWorkspaceImage
-      description: "Imports the specified Windows 7 or Windows 10 bring your own license
-        (BYOL) image into Amazon WorkSpaces. The image must be an already
-        licensed EC2 image that is in your AWS account, and you must own the
-        image. "
+      description: 'Imports the specified Windows 7 or Windows 10 bring your own license (BYOL) image into Amazon WorkSpaces. The image must be an already licensed EC2 image that is in your AWS account, and you must own the image. '
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/ImportWorkspaceImageResult"
-        "480":
+            $ref: '#/definitions/ImportWorkspaceImageResult'
+        '480':
           description: ResourceLimitExceededException
           schema:
-            $ref: "#/definitions/ResourceLimitExceededException"
-        "481":
+            $ref: '#/definitions/ResourceLimitExceededException'
+        '481':
           description: ResourceAlreadyExistsException
           schema:
-            $ref: "#/definitions/ResourceAlreadyExistsException"
-        "482":
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '482':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
-        "483":
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
           description: OperationNotSupportedException
           schema:
-            $ref: "#/definitions/OperationNotSupportedException"
-        "484":
+            $ref: '#/definitions/OperationNotSupportedException'
+        '484':
           description: AccessDeniedException
           schema:
-            $ref: "#/definitions/AccessDeniedException"
+            $ref: '#/definitions/AccessDeniedException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/ImportWorkspaceImageRequest"
+            $ref: '#/definitions/ImportWorkspaceImageRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -928,42 +894,36 @@ paths:
           enum:
             - WorkspacesService.ImportWorkspaceImage
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=WorkspacesService.ListAvailableManagementCidrRanges:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkspacesService.ListAvailableManagementCidrRanges':
     post:
       operationId: ListAvailableManagementCidrRanges
-      description: <p>Retrieves a list of IP address ranges, specified as IPv4 CIDR blocks,
-        that you can use for the network management interface when you enable
-        bring your own license (BYOL). </p> <p>The management network interface
-        is connected to a secure Amazon WorkSpaces management network. It is
-        used for interactive streaming of the WorkSpace desktop to Amazon
-        WorkSpaces clients, and to allow Amazon WorkSpaces to manage the
-        WorkSpace.</p>
+      description: '<p>Retrieves a list of IP address ranges, specified as IPv4 CIDR blocks, that you can use for the network management interface when you enable bring your own license (BYOL). </p> <p>The management network interface is connected to a secure Amazon WorkSpaces management network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces to manage the WorkSpace.</p>'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/ListAvailableManagementCidrRangesResult"
-        "480":
+            $ref: '#/definitions/ListAvailableManagementCidrRangesResult'
+        '480':
           description: InvalidParameterValuesException
           schema:
-            $ref: "#/definitions/InvalidParameterValuesException"
-        "481":
+            $ref: '#/definitions/InvalidParameterValuesException'
+        '481':
           description: AccessDeniedException
           schema:
-            $ref: "#/definitions/AccessDeniedException"
+            $ref: '#/definitions/AccessDeniedException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/ListAvailableManagementCidrRangesRequest"
+            $ref: '#/definitions/ListAvailableManagementCidrRangesRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -971,49 +931,48 @@ paths:
           enum:
             - WorkspacesService.ListAvailableManagementCidrRanges
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=WorkspacesService.ModifyAccount:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkspacesService.ModifyAccount':
     post:
       operationId: ModifyAccount
-      description: Modifies the configuration of bring your own license (BYOL) for the
-        specified account.
+      description: Modifies the configuration of bring your own license (BYOL) for the specified account.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/ModifyAccountResult"
-        "480":
+            $ref: '#/definitions/ModifyAccountResult'
+        '480':
           description: InvalidParameterValuesException
           schema:
-            $ref: "#/definitions/InvalidParameterValuesException"
-        "481":
+            $ref: '#/definitions/InvalidParameterValuesException'
+        '481':
           description: AccessDeniedException
           schema:
-            $ref: "#/definitions/AccessDeniedException"
-        "482":
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
           description: InvalidResourceStateException
           schema:
-            $ref: "#/definitions/InvalidResourceStateException"
-        "483":
+            $ref: '#/definitions/InvalidResourceStateException'
+        '483':
           description: ResourceUnavailableException
           schema:
-            $ref: "#/definitions/ResourceUnavailableException"
-        "484":
+            $ref: '#/definitions/ResourceUnavailableException'
+        '484':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/ModifyAccountRequest"
+            $ref: '#/definitions/ModifyAccountRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -1021,40 +980,40 @@ paths:
           enum:
             - WorkspacesService.ModifyAccount
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=WorkspacesService.ModifyClientProperties:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkspacesService.ModifyClientProperties':
     post:
       operationId: ModifyClientProperties
       description: Modifies the properties of the specified Amazon WorkSpaces clients.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/ModifyClientPropertiesResult"
-        "480":
+            $ref: '#/definitions/ModifyClientPropertiesResult'
+        '480':
           description: InvalidParameterValuesException
           schema:
-            $ref: "#/definitions/InvalidParameterValuesException"
-        "481":
+            $ref: '#/definitions/InvalidParameterValuesException'
+        '481':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
-        "482":
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
           description: AccessDeniedException
           schema:
-            $ref: "#/definitions/AccessDeniedException"
+            $ref: '#/definitions/AccessDeniedException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/ModifyClientPropertiesRequest"
+            $ref: '#/definitions/ModifyClientPropertiesRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -1062,56 +1021,56 @@ paths:
           enum:
             - WorkspacesService.ModifyClientProperties
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=WorkspacesService.ModifyWorkspaceProperties:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkspacesService.ModifyWorkspaceProperties':
     post:
       operationId: ModifyWorkspaceProperties
       description: Modifies the specified WorkSpace properties.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/ModifyWorkspacePropertiesResult"
-        "480":
+            $ref: '#/definitions/ModifyWorkspacePropertiesResult'
+        '480':
           description: InvalidParameterValuesException
           schema:
-            $ref: "#/definitions/InvalidParameterValuesException"
-        "481":
+            $ref: '#/definitions/InvalidParameterValuesException'
+        '481':
           description: InvalidResourceStateException
           schema:
-            $ref: "#/definitions/InvalidResourceStateException"
-        "482":
+            $ref: '#/definitions/InvalidResourceStateException'
+        '482':
           description: OperationInProgressException
           schema:
-            $ref: "#/definitions/OperationInProgressException"
-        "483":
+            $ref: '#/definitions/OperationInProgressException'
+        '483':
           description: UnsupportedWorkspaceConfigurationException
           schema:
-            $ref: "#/definitions/UnsupportedWorkspaceConfigurationException"
-        "484":
+            $ref: '#/definitions/UnsupportedWorkspaceConfigurationException'
+        '484':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
-        "485":
+            $ref: '#/definitions/ResourceNotFoundException'
+        '485':
           description: AccessDeniedException
           schema:
-            $ref: "#/definitions/AccessDeniedException"
-        "486":
+            $ref: '#/definitions/AccessDeniedException'
+        '486':
           description: ResourceUnavailableException
           schema:
-            $ref: "#/definitions/ResourceUnavailableException"
+            $ref: '#/definitions/ResourceUnavailableException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/ModifyWorkspacePropertiesRequest"
+            $ref: '#/definitions/ModifyWorkspacePropertiesRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -1119,45 +1078,40 @@ paths:
           enum:
             - WorkspacesService.ModifyWorkspaceProperties
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=WorkspacesService.ModifyWorkspaceState:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkspacesService.ModifyWorkspaceState':
     post:
       operationId: ModifyWorkspaceState
-      description: <p>Sets the state of the specified WorkSpace.</p> <p>To maintain a
-        WorkSpace without being interrupted, set the WorkSpace state to
-        <code>ADMIN_MAINTENANCE</code>. WorkSpaces in this state do not respond
-        to requests to reboot, stop, start, or rebuild. An AutoStop WorkSpace in
-        this state is not stopped. Users can log into a WorkSpace in the
-        <code>ADMIN_MAINTENANCE</code> state.</p>
+      description: '<p>Sets the state of the specified WorkSpace.</p> <p>To maintain a WorkSpace without being interrupted, set the WorkSpace state to <code>ADMIN_MAINTENANCE</code>. WorkSpaces in this state do not respond to requests to reboot, stop, start, or rebuild. An AutoStop WorkSpace in this state is not stopped. Users can log into a WorkSpace in the <code>ADMIN_MAINTENANCE</code> state.</p>'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/ModifyWorkspaceStateResult"
-        "480":
+            $ref: '#/definitions/ModifyWorkspaceStateResult'
+        '480':
           description: InvalidParameterValuesException
           schema:
-            $ref: "#/definitions/InvalidParameterValuesException"
-        "481":
+            $ref: '#/definitions/InvalidParameterValuesException'
+        '481':
           description: InvalidResourceStateException
           schema:
-            $ref: "#/definitions/InvalidResourceStateException"
-        "482":
+            $ref: '#/definitions/InvalidResourceStateException'
+        '482':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/ModifyWorkspaceStateRequest"
+            $ref: '#/definitions/ModifyWorkspaceStateRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -1165,31 +1119,28 @@ paths:
           enum:
             - WorkspacesService.ModifyWorkspaceState
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=WorkspacesService.RebootWorkspaces:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkspacesService.RebootWorkspaces':
     post:
       operationId: RebootWorkspaces
-      description: <p>Reboots the specified WorkSpaces.</p> <p>You cannot reboot a
-        WorkSpace unless its state is <code>AVAILABLE</code> or
-        <code>UNHEALTHY</code>.</p> <p>This operation is asynchronous and
-        returns before the WorkSpaces have rebooted.</p>
+      description: <p>Reboots the specified WorkSpaces.</p> <p>You cannot reboot a WorkSpace unless its state is <code>AVAILABLE</code> or <code>UNHEALTHY</code>.</p> <p>This operation is asynchronous and returns before the WorkSpaces have rebooted.</p>
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/RebootWorkspacesResult"
+            $ref: '#/definitions/RebootWorkspacesResult'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/RebootWorkspacesRequest"
+            $ref: '#/definitions/RebootWorkspacesRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -1197,35 +1148,28 @@ paths:
           enum:
             - WorkspacesService.RebootWorkspaces
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=WorkspacesService.RebuildWorkspaces:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkspacesService.RebuildWorkspaces':
     post:
       operationId: RebuildWorkspaces
-      description: <p>Rebuilds the specified WorkSpace.</p> <p>You cannot rebuild a
-        WorkSpace unless its state is <code>AVAILABLE</code>,
-        <code>ERROR</code>, or <code>UNHEALTHY</code>.</p> <p>Rebuilding a
-        WorkSpace is a potentially destructive action that can result in the
-        loss of data. For more information, see <a
-        href="https://docs.aws.amazon.com/workspaces/latest/adminguide/reset-workspace.html">Rebuild
-        a WorkSpace</a>.</p> <p>This operation is asynchronous and returns
-        before the WorkSpaces have been completely rebuilt.</p>
+      description: '<p>Rebuilds the specified WorkSpace.</p> <p>You cannot rebuild a WorkSpace unless its state is <code>AVAILABLE</code>, <code>ERROR</code>, or <code>UNHEALTHY</code>.</p> <p>Rebuilding a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/reset-workspace.html">Rebuild a WorkSpace</a>.</p> <p>This operation is asynchronous and returns before the WorkSpaces have been completely rebuilt.</p>'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/RebuildWorkspacesResult"
+            $ref: '#/definitions/RebuildWorkspacesResult'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/RebuildWorkspacesRequest"
+            $ref: '#/definitions/RebuildWorkspacesRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -1233,44 +1177,44 @@ paths:
           enum:
             - WorkspacesService.RebuildWorkspaces
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=WorkspacesService.RevokeIpRules:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkspacesService.RevokeIpRules':
     post:
       operationId: RevokeIpRules
       description: Removes one or more rules from the specified IP access control group.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/RevokeIpRulesResult"
-        "480":
+            $ref: '#/definitions/RevokeIpRulesResult'
+        '480':
           description: InvalidParameterValuesException
           schema:
-            $ref: "#/definitions/InvalidParameterValuesException"
-        "481":
+            $ref: '#/definitions/InvalidParameterValuesException'
+        '481':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
-        "482":
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
           description: InvalidResourceStateException
           schema:
-            $ref: "#/definitions/InvalidResourceStateException"
-        "483":
+            $ref: '#/definitions/InvalidResourceStateException'
+        '483':
           description: AccessDeniedException
           schema:
-            $ref: "#/definitions/AccessDeniedException"
+            $ref: '#/definitions/AccessDeniedException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/RevokeIpRulesRequest"
+            $ref: '#/definitions/RevokeIpRulesRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -1278,30 +1222,28 @@ paths:
           enum:
             - WorkspacesService.RevokeIpRules
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=WorkspacesService.StartWorkspaces:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkspacesService.StartWorkspaces':
     post:
       operationId: StartWorkspaces
-      description: <p>Starts the specified WorkSpaces.</p> <p>You cannot start a WorkSpace
-        unless it has a running mode of <code>AutoStop</code> and a state of
-        <code>STOPPED</code>.</p>
+      description: <p>Starts the specified WorkSpaces.</p> <p>You cannot start a WorkSpace unless it has a running mode of <code>AutoStop</code> and a state of <code>STOPPED</code>.</p>
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/StartWorkspacesResult"
+            $ref: '#/definitions/StartWorkspacesResult'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/StartWorkspacesRequest"
+            $ref: '#/definitions/StartWorkspacesRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -1309,31 +1251,28 @@ paths:
           enum:
             - WorkspacesService.StartWorkspaces
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=WorkspacesService.StopWorkspaces:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkspacesService.StopWorkspaces':
     post:
       operationId: StopWorkspaces
-      description: <p> Stops the specified WorkSpaces.</p> <p>You cannot stop a WorkSpace
-        unless it has a running mode of <code>AutoStop</code> and a state of
-        <code>AVAILABLE</code>, <code>IMPAIRED</code>, <code>UNHEALTHY</code>,
-        or <code>ERROR</code>.</p>
+      description: '<p> Stops the specified WorkSpaces.</p> <p>You cannot stop a WorkSpace unless it has a running mode of <code>AutoStop</code> and a state of <code>AVAILABLE</code>, <code>IMPAIRED</code>, <code>UNHEALTHY</code>, or <code>ERROR</code>.</p>'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/StopWorkspacesResult"
+            $ref: '#/definitions/StopWorkspacesResult'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/StopWorkspacesRequest"
+            $ref: '#/definitions/StopWorkspacesRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -1341,34 +1280,28 @@ paths:
           enum:
             - WorkspacesService.StopWorkspaces
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=WorkspacesService.TerminateWorkspaces:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkspacesService.TerminateWorkspaces':
     post:
       operationId: TerminateWorkspaces
-      description: <p>Terminates the specified WorkSpaces.</p> <p>Terminating a WorkSpace
-        is a permanent action and cannot be undone. The user's data is
-        destroyed. If you need to archive any user data, contact Amazon Web
-        Services before terminating the WorkSpace.</p> <p>You can terminate a
-        WorkSpace that is in any state except <code>SUSPENDED</code>.</p>
-        <p>This operation is asynchronous and returns before the WorkSpaces have
-        been completely terminated.</p>
+      description: '<p>Terminates the specified WorkSpaces.</p> <p>Terminating a WorkSpace is a permanent action and cannot be undone. The user''s data is destroyed. If you need to archive any user data, contact Amazon Web Services before terminating the WorkSpace.</p> <p>You can terminate a WorkSpace that is in any state except <code>SUSPENDED</code>.</p> <p>This operation is asynchronous and returns before the WorkSpaces have been completely terminated.</p>'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/TerminateWorkspacesResult"
+            $ref: '#/definitions/TerminateWorkspacesResult'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/TerminateWorkspacesRequest"
+            $ref: '#/definitions/TerminateWorkspacesRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -1376,49 +1309,48 @@ paths:
           enum:
             - WorkspacesService.TerminateWorkspaces
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=WorkspacesService.UpdateRulesOfIpGroup:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkspacesService.UpdateRulesOfIpGroup':
     post:
       operationId: UpdateRulesOfIpGroup
-      description: Replaces the current rules of the specified IP access control group with
-        the specified rules.
+      description: Replaces the current rules of the specified IP access control group with the specified rules.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/UpdateRulesOfIpGroupResult"
-        "480":
+            $ref: '#/definitions/UpdateRulesOfIpGroupResult'
+        '480':
           description: InvalidParameterValuesException
           schema:
-            $ref: "#/definitions/InvalidParameterValuesException"
-        "481":
+            $ref: '#/definitions/InvalidParameterValuesException'
+        '481':
           description: ResourceNotFoundException
           schema:
-            $ref: "#/definitions/ResourceNotFoundException"
-        "482":
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
           description: ResourceLimitExceededException
           schema:
-            $ref: "#/definitions/ResourceLimitExceededException"
-        "483":
+            $ref: '#/definitions/ResourceLimitExceededException'
+        '483':
           description: InvalidResourceStateException
           schema:
-            $ref: "#/definitions/InvalidResourceStateException"
-        "484":
+            $ref: '#/definitions/InvalidResourceStateException'
+        '484':
           description: AccessDeniedException
           schema:
-            $ref: "#/definitions/AccessDeniedException"
+            $ref: '#/definitions/AccessDeniedException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/UpdateRulesOfIpGroupRequest"
+            $ref: '#/definitions/UpdateRulesOfIpGroupRequest'
         - name: X-Amz-Target
           in: header
           required: true
@@ -1426,13 +1358,13 @@ paths:
           enum:
             - WorkspacesService.UpdateRulesOfIpGroup
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
   AssociateIpGroupsResult:
     type: object
@@ -1444,10 +1376,10 @@ definitions:
       - GroupIds
     properties:
       DirectoryId:
-        $ref: "#/definitions/DirectoryId"
+        $ref: '#/definitions/DirectoryId'
         description: The identifier of the directory.
       GroupIds:
-        $ref: "#/definitions/IpGroupIdList"
+        $ref: '#/definitions/IpGroupIdList'
         description: The identifiers of one or more IP access control groups.
   InvalidParameterValuesException: {}
   ResourceNotFoundException: {}
@@ -1465,16 +1397,16 @@ definitions:
       - UserRules
     properties:
       GroupId:
-        $ref: "#/definitions/IpGroupId"
+        $ref: '#/definitions/IpGroupId'
         description: The identifier of the group.
       UserRules:
-        $ref: "#/definitions/IpRuleList"
+        $ref: '#/definitions/IpRuleList'
         description: The rules to add to the group.
   CreateIpGroupResult:
     type: object
     properties:
       GroupId:
-        $ref: "#/definitions/IpGroupId"
+        $ref: '#/definitions/IpGroupId'
         description: The identifier of the group.
   CreateIpGroupRequest:
     type: object
@@ -1482,16 +1414,16 @@ definitions:
       - GroupName
     properties:
       GroupName:
-        $ref: "#/definitions/IpGroupName"
+        $ref: '#/definitions/IpGroupName'
         description: The name of the group.
       GroupDesc:
-        $ref: "#/definitions/IpGroupDesc"
+        $ref: '#/definitions/IpGroupDesc'
         description: The description of the group.
       UserRules:
-        $ref: "#/definitions/IpRuleList"
+        $ref: '#/definitions/IpRuleList'
         description: The rules to add to the group.
       Tags:
-        $ref: "#/definitions/TagList"
+        $ref: '#/definitions/TagList'
         description: The tags. Each WorkSpaces resource can have a maximum of 50 tags.
   ResourceAlreadyExistsException: {}
   ResourceCreationFailedException: {}
@@ -1505,32 +1437,27 @@ definitions:
       - Tags
     properties:
       ResourceId:
-        $ref: "#/definitions/NonEmptyString"
-        description: The identifier of the WorkSpace. To find this ID, use
-          <a>DescribeWorkspaces</a>.
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The identifier of the WorkSpace. To find this ID, use <a>DescribeWorkspaces</a>.'
       Tags:
-        $ref: "#/definitions/TagList"
+        $ref: '#/definitions/TagList'
         description: The tags. Each WorkSpace can have a maximum of 50 tags.
   CreateWorkspacesResult:
     type: object
     properties:
       FailedRequests:
-        $ref: "#/definitions/FailedCreateWorkspaceRequests"
+        $ref: '#/definitions/FailedCreateWorkspaceRequests'
         description: Information about the WorkSpaces that could not be created.
       PendingRequests:
-        $ref: "#/definitions/WorkspaceList"
-        description: <p>Information about the WorkSpaces that were created.</p> <p>Because
-          this operation is asynchronous, the identifier returned is not
-          immediately available for use with other operations. For example, if
-          you call <a>DescribeWorkspaces</a> before the WorkSpace is created,
-          the information returned can be incomplete.</p>
+        $ref: '#/definitions/WorkspaceList'
+        description: '<p>Information about the WorkSpaces that were created.</p> <p>Because this operation is asynchronous, the identifier returned is not immediately available for use with other operations. For example, if you call <a>DescribeWorkspaces</a> before the WorkSpace is created, the information returned can be incomplete.</p>'
   CreateWorkspacesRequest:
     type: object
     required:
       - Workspaces
     properties:
       Workspaces:
-        $ref: "#/definitions/WorkspaceRequestList"
+        $ref: '#/definitions/WorkspaceRequestList'
         description: The WorkSpaces to create. You can specify up to 25 WorkSpaces.
   DeleteIpGroupResult:
     type: object
@@ -1541,7 +1468,7 @@ definitions:
       - GroupId
     properties:
       GroupId:
-        $ref: "#/definitions/IpGroupId"
+        $ref: '#/definitions/IpGroupId'
         description: The identifier of the IP access control group.
   ResourceAssociatedException: {}
   DeleteTagsResult:
@@ -1554,11 +1481,10 @@ definitions:
       - TagKeys
     properties:
       ResourceId:
-        $ref: "#/definitions/NonEmptyString"
-        description: The identifier of the WorkSpace. To find this ID, use
-          <a>DescribeWorkspaces</a>.
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The identifier of the WorkSpace. To find this ID, use <a>DescribeWorkspaces</a>.'
       TagKeys:
-        $ref: "#/definitions/TagKeyList"
+        $ref: '#/definitions/TagKeyList'
         description: The tag keys.
   DeleteWorkspaceImageResult:
     type: object
@@ -1569,22 +1495,17 @@ definitions:
       - ImageId
     properties:
       ImageId:
-        $ref: "#/definitions/WorkspaceImageId"
+        $ref: '#/definitions/WorkspaceImageId'
         description: The identifier of the image.
   DescribeAccountResult:
     type: object
     properties:
       DedicatedTenancySupport:
-        $ref: "#/definitions/DedicatedTenancySupportResultEnum"
+        $ref: '#/definitions/DedicatedTenancySupportResultEnum'
         description: The status of BYOL (whether BYOL is enabled or disabled).
       DedicatedTenancyManagementCidrRange:
-        $ref: "#/definitions/DedicatedTenancyManagementCidrRange"
-        description: <p>The IP address range, specified as an IPv4 CIDR block, used for the
-          management network interface.</p> <p>The management network interface
-          is connected to a secure Amazon WorkSpaces management network. It is
-          used for interactive streaming of the WorkSpace desktop to Amazon
-          WorkSpaces clients, and to allow Amazon WorkSpaces to manage the
-          WorkSpace.</p>
+        $ref: '#/definitions/DedicatedTenancyManagementCidrRange'
+        description: '<p>The IP address range, specified as an IPv4 CIDR block, used for the management network interface.</p> <p>The management network interface is connected to a secure Amazon WorkSpaces management network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces to manage the WorkSpace.</p>'
   DescribeAccountRequest:
     type: object
     properties: {}
@@ -1592,24 +1513,22 @@ definitions:
     type: object
     properties:
       AccountModifications:
-        $ref: "#/definitions/AccountModificationList"
+        $ref: '#/definitions/AccountModificationList'
         description: The list of modifications to the configuration of BYOL.
       NextToken:
-        $ref: "#/definitions/PaginationToken"
-        description: The token to use to retrieve the next set of results, or null if no
-          more results are available.
+        $ref: '#/definitions/PaginationToken'
+        description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
   DescribeAccountModificationsRequest:
     type: object
     properties:
       NextToken:
-        $ref: "#/definitions/PaginationToken"
-        description: If you received a <code>NextToken</code> from a previous call that was
-          paginated, provide this token to receive the next set of results.
+        $ref: '#/definitions/PaginationToken'
+        description: 'If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.'
   DescribeClientPropertiesResult:
     type: object
     properties:
       ClientPropertiesList:
-        $ref: "#/definitions/ClientPropertiesList"
+        $ref: '#/definitions/ClientPropertiesList'
         description: Information about the specified Amazon WorkSpaces clients.
   DescribeClientPropertiesRequest:
     type: object
@@ -1617,36 +1536,34 @@ definitions:
       - ResourceIds
     properties:
       ResourceIds:
-        $ref: "#/definitions/ResourceIdList"
-        description: The resource identifier, in the form of directory IDs.
+        $ref: '#/definitions/ResourceIdList'
+        description: 'The resource identifier, in the form of directory IDs.'
   DescribeIpGroupsResult:
     type: object
     properties:
       Result:
-        $ref: "#/definitions/WorkspacesIpGroupsList"
+        $ref: '#/definitions/WorkspacesIpGroupsList'
         description: Information about the IP access control groups.
       NextToken:
-        $ref: "#/definitions/PaginationToken"
-        description: The token to use to retrieve the next set of results, or null if no
-          more results are available.
+        $ref: '#/definitions/PaginationToken'
+        description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
   DescribeIpGroupsRequest:
     type: object
     properties:
       GroupIds:
-        $ref: "#/definitions/IpGroupIdList"
+        $ref: '#/definitions/IpGroupIdList'
         description: The identifiers of one or more IP access control groups.
       NextToken:
-        $ref: "#/definitions/PaginationToken"
-        description: If you received a <code>NextToken</code> from a previous call that was
-          paginated, provide this token to receive the next set of results.
+        $ref: '#/definitions/PaginationToken'
+        description: 'If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.'
       MaxResults:
-        $ref: "#/definitions/Limit"
+        $ref: '#/definitions/Limit'
         description: The maximum number of items to return.
   DescribeTagsResult:
     type: object
     properties:
       TagList:
-        $ref: "#/definitions/TagList"
+        $ref: '#/definitions/TagList'
         description: The tags.
   DescribeTagsRequest:
     type: object
@@ -1654,146 +1571,117 @@ definitions:
       - ResourceId
     properties:
       ResourceId:
-        $ref: "#/definitions/NonEmptyString"
-        description: The identifier of the WorkSpace. To find this ID, use
-          <a>DescribeWorkspaces</a>.
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The identifier of the WorkSpace. To find this ID, use <a>DescribeWorkspaces</a>.'
   DescribeWorkspaceBundlesResult:
     type: object
     properties:
       Bundles:
-        $ref: "#/definitions/BundleList"
+        $ref: '#/definitions/BundleList'
         description: Information about the bundles.
       NextToken:
-        $ref: "#/definitions/PaginationToken"
-        description: The token to use to retrieve the next set of results, or null if there
-          are no more results available. This token is valid for one day and
-          must be used within that time frame.
+        $ref: '#/definitions/PaginationToken'
+        description: 'The token to use to retrieve the next set of results, or null if there are no more results available. This token is valid for one day and must be used within that time frame.'
   DescribeWorkspaceBundlesRequest:
     type: object
     properties:
       BundleIds:
-        $ref: "#/definitions/BundleIdList"
-        description: The identifiers of the bundles. You cannot combine this parameter with
-          any other filter.
+        $ref: '#/definitions/BundleIdList'
+        description: The identifiers of the bundles. You cannot combine this parameter with any other filter.
       Owner:
-        $ref: "#/definitions/BundleOwner"
-        description: <p>The owner of the bundles. You cannot combine this parameter with
-          any other filter.</p> <p>Specify <code>AMAZON</code> to describe the
-          bundles provided by AWS or null to describe the bundles that belong to
-          your account.</p>
+        $ref: '#/definitions/BundleOwner'
+        description: <p>The owner of the bundles. You cannot combine this parameter with any other filter.</p> <p>Specify <code>AMAZON</code> to describe the bundles provided by AWS or null to describe the bundles that belong to your account.</p>
       NextToken:
-        $ref: "#/definitions/PaginationToken"
-        description: The token for the next set of results. (You received this token from a
-          previous call.)
+        $ref: '#/definitions/PaginationToken'
+        description: The token for the next set of results. (You received this token from a previous call.)
   DescribeWorkspaceDirectoriesResult:
     type: object
     properties:
       Directories:
-        $ref: "#/definitions/DirectoryList"
+        $ref: '#/definitions/DirectoryList'
         description: Information about the directories.
       NextToken:
-        $ref: "#/definitions/PaginationToken"
-        description: The token to use to retrieve the next set of results, or null if no
-          more results are available.
+        $ref: '#/definitions/PaginationToken'
+        description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
   DescribeWorkspaceDirectoriesRequest:
     type: object
     properties:
       DirectoryIds:
-        $ref: "#/definitions/DirectoryIdList"
-        description: The identifiers of the directories. If the value is null, all
-          directories are retrieved.
+        $ref: '#/definitions/DirectoryIdList'
+        description: 'The identifiers of the directories. If the value is null, all directories are retrieved.'
       NextToken:
-        $ref: "#/definitions/PaginationToken"
-        description: If you received a <code>NextToken</code> from a previous call that was
-          paginated, provide this token to receive the next set of results.
+        $ref: '#/definitions/PaginationToken'
+        description: 'If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.'
   DescribeWorkspaceImagesResult:
     type: object
     properties:
       Images:
-        $ref: "#/definitions/WorkspaceImageList"
+        $ref: '#/definitions/WorkspaceImageList'
         description: Information about the images.
       NextToken:
-        $ref: "#/definitions/PaginationToken"
-        description: The token to use to retrieve the next set of results, or null if no
-          more results are available.
+        $ref: '#/definitions/PaginationToken'
+        description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
   DescribeWorkspaceImagesRequest:
     type: object
     properties:
       ImageIds:
-        $ref: "#/definitions/WorkspaceImageIdList"
+        $ref: '#/definitions/WorkspaceImageIdList'
         description: The identifier of the image.
       NextToken:
-        $ref: "#/definitions/PaginationToken"
-        description: If you received a <code>NextToken</code> from a previous call that was
-          paginated, provide this token to receive the next set of results.
+        $ref: '#/definitions/PaginationToken'
+        description: 'If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.'
       MaxResults:
-        $ref: "#/definitions/Limit"
+        $ref: '#/definitions/Limit'
         description: The maximum number of items to return.
   DescribeWorkspacesResult:
     type: object
     properties:
       Workspaces:
-        $ref: "#/definitions/WorkspaceList"
-        description: <p>Information about the WorkSpaces.</p> <p>Because
-          <a>CreateWorkspaces</a> is an asynchronous operation, some of the
-          returned information could be incomplete.</p>
+        $ref: '#/definitions/WorkspaceList'
+        description: '<p>Information about the WorkSpaces.</p> <p>Because <a>CreateWorkspaces</a> is an asynchronous operation, some of the returned information could be incomplete.</p>'
       NextToken:
-        $ref: "#/definitions/PaginationToken"
-        description: The token to use to retrieve the next set of results, or null if no
-          more results are available.
+        $ref: '#/definitions/PaginationToken'
+        description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
   DescribeWorkspacesRequest:
     type: object
     properties:
       WorkspaceIds:
-        $ref: "#/definitions/WorkspaceIdList"
-        description: <p>The identifiers of the WorkSpaces. You cannot combine this
-          parameter with any other filter.</p> <p>Because the
-          <a>CreateWorkspaces</a> operation is asynchronous, the identifier it
-          returns is not immediately available. If you immediately call
-          <a>DescribeWorkspaces</a> with this identifier, no information is
-          returned.</p>
+        $ref: '#/definitions/WorkspaceIdList'
+        description: '<p>The identifiers of the WorkSpaces. You cannot combine this parameter with any other filter.</p> <p>Because the <a>CreateWorkspaces</a> operation is asynchronous, the identifier it returns is not immediately available. If you immediately call <a>DescribeWorkspaces</a> with this identifier, no information is returned.</p>'
       DirectoryId:
-        $ref: "#/definitions/DirectoryId"
-        description: The identifier of the directory. In addition, you can optionally
-          specify a specific directory user (see <code>UserName</code>). You
-          cannot combine this parameter with any other filter.
+        $ref: '#/definitions/DirectoryId'
+        description: 'The identifier of the directory. In addition, you can optionally specify a specific directory user (see <code>UserName</code>). You cannot combine this parameter with any other filter.'
       UserName:
-        $ref: "#/definitions/UserName"
-        description: The name of the directory user. You must specify this parameter with
-          <code>DirectoryId</code>.
+        $ref: '#/definitions/UserName'
+        description: The name of the directory user. You must specify this parameter with <code>DirectoryId</code>.
       BundleId:
-        $ref: "#/definitions/BundleId"
-        description: The identifier of the bundle. All WorkSpaces that are created from
-          this bundle are retrieved. You cannot combine this parameter with any
-          other filter.
+        $ref: '#/definitions/BundleId'
+        description: The identifier of the bundle. All WorkSpaces that are created from this bundle are retrieved. You cannot combine this parameter with any other filter.
       Limit:
-        $ref: "#/definitions/Limit"
+        $ref: '#/definitions/Limit'
         description: The maximum number of items to return.
       NextToken:
-        $ref: "#/definitions/PaginationToken"
-        description: If you received a <code>NextToken</code> from a previous call that was
-          paginated, provide this token to receive the next set of results.
+        $ref: '#/definitions/PaginationToken'
+        description: 'If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.'
   ResourceUnavailableException: {}
   DescribeWorkspacesConnectionStatusResult:
     type: object
     properties:
       WorkspacesConnectionStatus:
-        $ref: "#/definitions/WorkspaceConnectionStatusList"
+        $ref: '#/definitions/WorkspaceConnectionStatusList'
         description: Information about the connection status of the WorkSpace.
       NextToken:
-        $ref: "#/definitions/PaginationToken"
-        description: The token to use to retrieve the next set of results, or null if no
-          more results are available.
+        $ref: '#/definitions/PaginationToken'
+        description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
   DescribeWorkspacesConnectionStatusRequest:
     type: object
     properties:
       WorkspaceIds:
-        $ref: "#/definitions/WorkspaceIdList"
+        $ref: '#/definitions/WorkspaceIdList'
         description: The identifiers of the WorkSpaces. You can specify up to 25 WorkSpaces.
       NextToken:
-        $ref: "#/definitions/PaginationToken"
-        description: If you received a <code>NextToken</code> from a previous call that was
-          paginated, provide this token to receive the next set of results.
+        $ref: '#/definitions/PaginationToken'
+        description: 'If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.'
   DisassociateIpGroupsResult:
     type: object
     properties: {}
@@ -1804,16 +1692,16 @@ definitions:
       - GroupIds
     properties:
       DirectoryId:
-        $ref: "#/definitions/DirectoryId"
+        $ref: '#/definitions/DirectoryId'
         description: The identifier of the directory.
       GroupIds:
-        $ref: "#/definitions/IpGroupIdList"
+        $ref: '#/definitions/IpGroupIdList'
         description: The identifiers of one or more IP access control groups.
   ImportWorkspaceImageResult:
     type: object
     properties:
       ImageId:
-        $ref: "#/definitions/WorkspaceImageId"
+        $ref: '#/definitions/WorkspaceImageId'
         description: The identifier of the WorkSpace image.
   ImportWorkspaceImageRequest:
     type: object
@@ -1824,47 +1712,43 @@ definitions:
       - ImageDescription
     properties:
       Ec2ImageId:
-        $ref: "#/definitions/Ec2ImageId"
+        $ref: '#/definitions/Ec2ImageId'
         description: The identifier of the EC2 image.
       IngestionProcess:
-        $ref: "#/definitions/WorkspaceImageIngestionProcess"
+        $ref: '#/definitions/WorkspaceImageIngestionProcess'
         description: The ingestion process to be used when importing the image.
       ImageName:
-        $ref: "#/definitions/WorkspaceImageName"
+        $ref: '#/definitions/WorkspaceImageName'
         description: The name of the WorkSpace image.
       ImageDescription:
-        $ref: "#/definitions/WorkspaceImageDescription"
+        $ref: '#/definitions/WorkspaceImageDescription'
         description: The description of the WorkSpace image.
       Tags:
-        $ref: "#/definitions/TagList"
+        $ref: '#/definitions/TagList'
         description: The tags. Each WorkSpaces resource can have a maximum of 50 tags.
   ListAvailableManagementCidrRangesResult:
     type: object
     properties:
       ManagementCidrRanges:
-        $ref: "#/definitions/DedicatedTenancyCidrRangeList"
-        description: The list of available IP address ranges, specified as IPv4 CIDR blocks.
+        $ref: '#/definitions/DedicatedTenancyCidrRangeList'
+        description: 'The list of available IP address ranges, specified as IPv4 CIDR blocks.'
       NextToken:
-        $ref: "#/definitions/PaginationToken"
-        description: The token to use to retrieve the next set of results, or null if no
-          more results are available.
+        $ref: '#/definitions/PaginationToken'
+        description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
   ListAvailableManagementCidrRangesRequest:
     type: object
     required:
       - ManagementCidrRangeConstraint
     properties:
       ManagementCidrRangeConstraint:
-        $ref: "#/definitions/ManagementCidrRangeConstraint"
-        description: The IP address range to search. Specify an IP address range that is
-          compatible with your network and in CIDR notation (that is, specify
-          the range as an IPv4 CIDR block).
+        $ref: '#/definitions/ManagementCidrRangeConstraint'
+        description: 'The IP address range to search. Specify an IP address range that is compatible with your network and in CIDR notation (that is, specify the range as an IPv4 CIDR block).'
       MaxResults:
-        $ref: "#/definitions/ManagementCidrRangeMaxResults"
+        $ref: '#/definitions/ManagementCidrRangeMaxResults'
         description: The maximum number of items to return.
       NextToken:
-        $ref: "#/definitions/PaginationToken"
-        description: If you received a <code>NextToken</code> from a previous call that was
-          paginated, provide this token to receive the next set of results.
+        $ref: '#/definitions/PaginationToken'
+        description: 'If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.'
   ModifyAccountResult:
     type: object
     properties: {}
@@ -1872,16 +1756,11 @@ definitions:
     type: object
     properties:
       DedicatedTenancySupport:
-        $ref: "#/definitions/DedicatedTenancySupportEnum"
+        $ref: '#/definitions/DedicatedTenancySupportEnum'
         description: The status of BYOL.
       DedicatedTenancyManagementCidrRange:
-        $ref: "#/definitions/DedicatedTenancyManagementCidrRange"
-        description: The IP address range, specified as an IPv4 CIDR block, for the
-          management network interface. Specify an IP address range that is
-          compatible with your network and in CIDR notation (that is, specify
-          the range as an IPv4 CIDR block). The CIDR block size must be /16 (for
-          example, 203.0.113.25/16). It must also be specified as available by
-          the <code>ListAvailableManagementCidrRanges</code> operation.
+        $ref: '#/definitions/DedicatedTenancyManagementCidrRange'
+        description: 'The IP address range, specified as an IPv4 CIDR block, for the management network interface. Specify an IP address range that is compatible with your network and in CIDR notation (that is, specify the range as an IPv4 CIDR block). The CIDR block size must be /16 (for example, 203.0.113.25/16). It must also be specified as available by the <code>ListAvailableManagementCidrRanges</code> operation.'
   ModifyClientPropertiesResult:
     type: object
     properties: {}
@@ -1892,10 +1771,10 @@ definitions:
       - ClientProperties
     properties:
       ResourceId:
-        $ref: "#/definitions/NonEmptyString"
-        description: The resource identifiers, in the form of directory IDs.
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The resource identifiers, in the form of directory IDs.'
       ClientProperties:
-        $ref: "#/definitions/ClientProperties"
+        $ref: '#/definitions/ClientProperties'
         description: Information about the Amazon WorkSpaces client.
   ModifyWorkspacePropertiesResult:
     type: object
@@ -1907,10 +1786,10 @@ definitions:
       - WorkspaceProperties
     properties:
       WorkspaceId:
-        $ref: "#/definitions/WorkspaceId"
+        $ref: '#/definitions/WorkspaceId'
         description: The identifier of the WorkSpace.
       WorkspaceProperties:
-        $ref: "#/definitions/WorkspaceProperties"
+        $ref: '#/definitions/WorkspaceProperties'
         description: The properties of the WorkSpace.
   OperationInProgressException: {}
   UnsupportedWorkspaceConfigurationException: {}
@@ -1924,16 +1803,16 @@ definitions:
       - WorkspaceState
     properties:
       WorkspaceId:
-        $ref: "#/definitions/WorkspaceId"
+        $ref: '#/definitions/WorkspaceId'
         description: The identifier of the WorkSpace.
       WorkspaceState:
-        $ref: "#/definitions/TargetWorkspaceState"
+        $ref: '#/definitions/TargetWorkspaceState'
         description: The WorkSpace state.
   RebootWorkspacesResult:
     type: object
     properties:
       FailedRequests:
-        $ref: "#/definitions/FailedRebootWorkspaceRequests"
+        $ref: '#/definitions/FailedRebootWorkspaceRequests'
         description: Information about the WorkSpaces that could not be rebooted.
   RebootWorkspacesRequest:
     type: object
@@ -1941,13 +1820,13 @@ definitions:
       - RebootWorkspaceRequests
     properties:
       RebootWorkspaceRequests:
-        $ref: "#/definitions/RebootWorkspaceRequests"
+        $ref: '#/definitions/RebootWorkspaceRequests'
         description: The WorkSpaces to reboot. You can specify up to 25 WorkSpaces.
   RebuildWorkspacesResult:
     type: object
     properties:
       FailedRequests:
-        $ref: "#/definitions/FailedRebuildWorkspaceRequests"
+        $ref: '#/definitions/FailedRebuildWorkspaceRequests'
         description: Information about the WorkSpace that could not be rebuilt.
   RebuildWorkspacesRequest:
     type: object
@@ -1955,7 +1834,7 @@ definitions:
       - RebuildWorkspaceRequests
     properties:
       RebuildWorkspaceRequests:
-        $ref: "#/definitions/RebuildWorkspaceRequests"
+        $ref: '#/definitions/RebuildWorkspaceRequests'
         description: The WorkSpace to rebuild. You can specify a single WorkSpace.
   RevokeIpRulesResult:
     type: object
@@ -1967,16 +1846,16 @@ definitions:
       - UserRules
     properties:
       GroupId:
-        $ref: "#/definitions/IpGroupId"
+        $ref: '#/definitions/IpGroupId'
         description: The identifier of the group.
       UserRules:
-        $ref: "#/definitions/IpRevokedRuleList"
+        $ref: '#/definitions/IpRevokedRuleList'
         description: The rules to remove from the group.
   StartWorkspacesResult:
     type: object
     properties:
       FailedRequests:
-        $ref: "#/definitions/FailedStartWorkspaceRequests"
+        $ref: '#/definitions/FailedStartWorkspaceRequests'
         description: Information about the WorkSpaces that could not be started.
   StartWorkspacesRequest:
     type: object
@@ -1984,13 +1863,13 @@ definitions:
       - StartWorkspaceRequests
     properties:
       StartWorkspaceRequests:
-        $ref: "#/definitions/StartWorkspaceRequests"
+        $ref: '#/definitions/StartWorkspaceRequests'
         description: The WorkSpaces to start. You can specify up to 25 WorkSpaces.
   StopWorkspacesResult:
     type: object
     properties:
       FailedRequests:
-        $ref: "#/definitions/FailedStopWorkspaceRequests"
+        $ref: '#/definitions/FailedStopWorkspaceRequests'
         description: Information about the WorkSpaces that could not be stopped.
   StopWorkspacesRequest:
     type: object
@@ -1998,13 +1877,13 @@ definitions:
       - StopWorkspaceRequests
     properties:
       StopWorkspaceRequests:
-        $ref: "#/definitions/StopWorkspaceRequests"
+        $ref: '#/definitions/StopWorkspaceRequests'
         description: The WorkSpaces to stop. You can specify up to 25 WorkSpaces.
   TerminateWorkspacesResult:
     type: object
     properties:
       FailedRequests:
-        $ref: "#/definitions/FailedTerminateWorkspaceRequests"
+        $ref: '#/definitions/FailedTerminateWorkspaceRequests'
         description: Information about the WorkSpaces that could not be terminated.
   TerminateWorkspacesRequest:
     type: object
@@ -2012,7 +1891,7 @@ definitions:
       - TerminateWorkspaceRequests
     properties:
       TerminateWorkspaceRequests:
-        $ref: "#/definitions/TerminateWorkspaceRequests"
+        $ref: '#/definitions/TerminateWorkspaceRequests'
         description: The WorkSpaces to terminate. You can specify up to 25 WorkSpaces.
   UpdateRulesOfIpGroupResult:
     type: object
@@ -2024,14 +1903,14 @@ definitions:
       - UserRules
     properties:
       GroupId:
-        $ref: "#/definitions/IpGroupId"
+        $ref: '#/definitions/IpGroupId'
         description: The identifier of the group.
       UserRules:
-        $ref: "#/definitions/IpRuleList"
+        $ref: '#/definitions/IpRuleList'
         description: One or more rules.
   ARN:
     type: string
-    pattern: ^arn:aws:[A-Za-z0-9][A-za-z0-9_/.-]{0,62}:[A-za-z0-9_/.-]{0,63}:[A-za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-za-z0-9_/.-]{0,127}$
+    pattern: '^arn:aws:[A-Za-z0-9][A-za-z0-9_/.-]{0,62}:[A-za-z0-9_/.-]{0,63}:[A-za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-za-z0-9_/.-]{0,127}$'
   DedicatedTenancyModificationStateEnum:
     type: string
     enum:
@@ -2045,7 +1924,7 @@ definitions:
       - DISABLED
   DedicatedTenancyManagementCidrRange:
     type: string
-    pattern: (^([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.0\.0)(\/(16$))$
+    pattern: '(^([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.0\.0)(\/(16$))$'
   Timestamp:
     type: string
     format: date-time
@@ -2057,92 +1936,84 @@ definitions:
     type: object
     properties:
       ModificationState:
-        $ref: "#/definitions/DedicatedTenancyModificationStateEnum"
+        $ref: '#/definitions/DedicatedTenancyModificationStateEnum'
         description: The state of the modification to the configuration of BYOL.
       DedicatedTenancySupport:
-        $ref: "#/definitions/DedicatedTenancySupportResultEnum"
+        $ref: '#/definitions/DedicatedTenancySupportResultEnum'
         description: The status of BYOL (whether BYOL is being enabled or disabled).
       DedicatedTenancyManagementCidrRange:
-        $ref: "#/definitions/DedicatedTenancyManagementCidrRange"
-        description: The IP address range, specified as an IPv4 CIDR block, for the
-          management network interface used for the account.
+        $ref: '#/definitions/DedicatedTenancyManagementCidrRange'
+        description: 'The IP address range, specified as an IPv4 CIDR block, for the management network interface used for the account.'
       StartTime:
-        $ref: "#/definitions/Timestamp"
-        description: The timestamp when the modification of the BYOL configuration was
-          started.
+        $ref: '#/definitions/Timestamp'
+        description: The timestamp when the modification of the BYOL configuration was started.
       ErrorCode:
-        $ref: "#/definitions/WorkspaceErrorCode"
-        description: The error code that is returned if the configuration of BYOL cannot be
-          modified.
+        $ref: '#/definitions/WorkspaceErrorCode'
+        description: The error code that is returned if the configuration of BYOL cannot be modified.
       ErrorMessage:
-        $ref: "#/definitions/Description"
-        description: The text of the error message that is returned if the configuration of
-          BYOL cannot be modified.
-    description: "Describes a modification to the configuration of bring your own license
-      (BYOL) for the specified account. "
+        $ref: '#/definitions/Description'
+        description: The text of the error message that is returned if the configuration of BYOL cannot be modified.
+    description: 'Describes a modification to the configuration of bring your own license (BYOL) for the specified account. '
   AccountModificationList:
     type: array
     items:
-      $ref: "#/definitions/AccountModification"
+      $ref: '#/definitions/AccountModification'
   Alias:
     type: string
   DirectoryId:
     type: string
-    pattern: ^d-[0-9a-f]{8,63}$
+    pattern: '^d-[0-9a-f]{8,63}$'
   IpGroupIdList:
     type: array
     items:
-      $ref: "#/definitions/IpGroupId"
+      $ref: '#/definitions/IpGroupId'
   IpGroupId:
     type: string
-    pattern: wsipg-[0-9a-z]{8,63}$
+    pattern: 'wsipg-[0-9a-z]{8,63}$'
   IpRuleList:
     type: array
     items:
-      $ref: "#/definitions/IpRuleItem"
+      $ref: '#/definitions/IpRuleItem'
   BooleanObject:
     type: boolean
   BundleId:
     type: string
-    pattern: ^wsb-[0-9a-z]{8,63}$
+    pattern: '^wsb-[0-9a-z]{8,63}$'
   BundleIdList:
     type: array
     items:
-      $ref: "#/definitions/BundleId"
+      $ref: '#/definitions/BundleId'
     minItems: 1
     maxItems: 25
   WorkspaceBundle:
     type: object
     properties:
       BundleId:
-        $ref: "#/definitions/BundleId"
+        $ref: '#/definitions/BundleId'
         description: The bundle identifier.
       Name:
-        $ref: "#/definitions/NonEmptyString"
+        $ref: '#/definitions/NonEmptyString'
         description: The name of the bundle.
       Owner:
-        $ref: "#/definitions/BundleOwner"
-        description: The owner of the bundle. This is the account identifier of the owner,
-          or <code>AMAZON</code> if the bundle is provided by AWS.
+        $ref: '#/definitions/BundleOwner'
+        description: 'The owner of the bundle. This is the account identifier of the owner, or <code>AMAZON</code> if the bundle is provided by AWS.'
       Description:
-        $ref: "#/definitions/Description"
+        $ref: '#/definitions/Description'
         description: A description.
       RootStorage:
-        $ref: "#/definitions/RootStorage"
+        $ref: '#/definitions/RootStorage'
         description: The size of the root volume.
       UserStorage:
-        $ref: "#/definitions/UserStorage"
+        $ref: '#/definitions/UserStorage'
         description: The size of the user storage.
       ComputeType:
-        $ref: "#/definitions/ComputeType"
-        description: The compute type. For more information, see <a
-          href="http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles">Amazon
-          WorkSpaces Bundles</a>.
+        $ref: '#/definitions/ComputeType'
+        description: 'The compute type. For more information, see <a href="http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles">Amazon WorkSpaces Bundles</a>.'
     description: Describes a WorkSpace bundle.
   BundleList:
     type: array
     items:
-      $ref: "#/definitions/WorkspaceBundle"
+      $ref: '#/definitions/WorkspaceBundle'
   BundleOwner:
     type: string
   ReconnectEnum:
@@ -2154,25 +2025,23 @@ definitions:
     type: object
     properties:
       ReconnectEnabled:
-        $ref: "#/definitions/ReconnectEnum"
-        description: "Specifies whether users can cache their credentials on the Amazon
-          WorkSpaces client. When enabled, users can choose to reconnect to
-          their WorkSpaces without re-entering their credentials. "
+        $ref: '#/definitions/ReconnectEnum'
+        description: 'Specifies whether users can cache their credentials on the Amazon WorkSpaces client. When enabled, users can choose to reconnect to their WorkSpaces without re-entering their credentials. '
     description: Describes an Amazon WorkSpaces client.
   ClientPropertiesResult:
     type: object
     properties:
       ResourceId:
-        $ref: "#/definitions/NonEmptyString"
-        description: The resource identifier, in the form of a directory ID.
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The resource identifier, in the form of a directory ID.'
       ClientProperties:
-        $ref: "#/definitions/ClientProperties"
+        $ref: '#/definitions/ClientProperties'
         description: Information about the Amazon WorkSpaces client.
     description: Information about the Amazon WorkSpaces client.
   ClientPropertiesList:
     type: array
     items:
-      $ref: "#/definitions/ClientPropertiesResult"
+      $ref: '#/definitions/ClientPropertiesResult'
   NonEmptyString:
     type: string
     minLength: 1
@@ -2190,7 +2059,7 @@ definitions:
     type: object
     properties:
       Name:
-        $ref: "#/definitions/Compute"
+        $ref: '#/definitions/Compute'
         description: The compute type.
     description: Describes the compute type.
   ComputerName:
@@ -2208,25 +2077,25 @@ definitions:
   TagList:
     type: array
     items:
-      $ref: "#/definitions/Tag"
+      $ref: '#/definitions/Tag'
   WorkspaceRequestList:
     type: array
     items:
-      $ref: "#/definitions/WorkspaceRequest"
+      $ref: '#/definitions/WorkspaceRequest'
     minItems: 1
     maxItems: 25
   FailedCreateWorkspaceRequests:
     type: array
     items:
-      $ref: "#/definitions/FailedCreateWorkspaceRequest"
+      $ref: '#/definitions/FailedCreateWorkspaceRequest'
   WorkspaceList:
     type: array
     items:
-      $ref: "#/definitions/Workspace"
+      $ref: '#/definitions/Workspace'
   DedicatedTenancyCidrRangeList:
     type: array
     items:
-      $ref: "#/definitions/DedicatedTenancyManagementCidrRange"
+      $ref: '#/definitions/DedicatedTenancyManagementCidrRange'
   DedicatedTenancySupportEnum:
     type: string
     enum:
@@ -2235,37 +2104,33 @@ definitions:
     type: string
   SecurityGroupId:
     type: string
-    pattern: ^(sg-[0-9a-f]{8})$
+    pattern: '^(sg-[0-9a-f]{8})$'
   DefaultWorkspaceCreationProperties:
     type: object
     properties:
       EnableWorkDocs:
-        $ref: "#/definitions/BooleanObject"
+        $ref: '#/definitions/BooleanObject'
         description: Specifies whether the directory is enabled for Amazon WorkDocs.
       EnableInternetAccess:
-        $ref: "#/definitions/BooleanObject"
-        description: The public IP address to attach to all WorkSpaces that are created or
-          rebuilt.
+        $ref: '#/definitions/BooleanObject'
+        description: The public IP address to attach to all WorkSpaces that are created or rebuilt.
       DefaultOu:
-        $ref: "#/definitions/DefaultOu"
-        description: The organizational unit (OU) in the directory for the WorkSpace
-          machine accounts.
+        $ref: '#/definitions/DefaultOu'
+        description: The organizational unit (OU) in the directory for the WorkSpace machine accounts.
       CustomSecurityGroupId:
-        $ref: "#/definitions/SecurityGroupId"
-        description: The identifier of any security groups to apply to WorkSpaces when they
-          are created.
+        $ref: '#/definitions/SecurityGroupId'
+        description: The identifier of any security groups to apply to WorkSpaces when they are created.
       UserEnabledAsLocalAdministrator:
-        $ref: "#/definitions/BooleanObject"
-        description: Specifies whether the WorkSpace user is an administrator on the
-          WorkSpace.
+        $ref: '#/definitions/BooleanObject'
+        description: Specifies whether the WorkSpace user is an administrator on the WorkSpace.
     description: Describes the default values used to create a WorkSpace.
   TagKeyList:
     type: array
     items:
-      $ref: "#/definitions/NonEmptyString"
+      $ref: '#/definitions/NonEmptyString'
   WorkspaceImageId:
     type: string
-    pattern: wsi-[0-9a-z]{9,63}$
+    pattern: 'wsi-[0-9a-z]{9,63}$'
   PaginationToken:
     type: string
     minLength: 1
@@ -2273,7 +2138,7 @@ definitions:
   ResourceIdList:
     type: array
     items:
-      $ref: "#/definitions/NonEmptyString"
+      $ref: '#/definitions/NonEmptyString'
     minItems: 1
     maxItems: 25
   Limit:
@@ -2283,37 +2148,37 @@ definitions:
   WorkspacesIpGroupsList:
     type: array
     items:
-      $ref: "#/definitions/WorkspacesIpGroup"
+      $ref: '#/definitions/WorkspacesIpGroup'
   DirectoryIdList:
     type: array
     items:
-      $ref: "#/definitions/DirectoryId"
+      $ref: '#/definitions/DirectoryId'
     minItems: 1
     maxItems: 25
   DirectoryList:
     type: array
     items:
-      $ref: "#/definitions/WorkspaceDirectory"
+      $ref: '#/definitions/WorkspaceDirectory'
   WorkspaceImageIdList:
     type: array
     items:
-      $ref: "#/definitions/WorkspaceImageId"
+      $ref: '#/definitions/WorkspaceImageId'
     minItems: 1
     maxItems: 25
   WorkspaceImageList:
     type: array
     items:
-      $ref: "#/definitions/WorkspaceImage"
+      $ref: '#/definitions/WorkspaceImage'
   WorkspaceIdList:
     type: array
     items:
-      $ref: "#/definitions/WorkspaceId"
+      $ref: '#/definitions/WorkspaceId'
     minItems: 1
     maxItems: 25
   WorkspaceConnectionStatusList:
     type: array
     items:
-      $ref: "#/definitions/WorkspaceConnectionStatus"
+      $ref: '#/definitions/WorkspaceConnectionStatus'
   UserName:
     type: string
     minLength: 1
@@ -2322,52 +2187,45 @@ definitions:
     type: object
     properties:
       DirectoryId:
-        $ref: "#/definitions/DirectoryId"
+        $ref: '#/definitions/DirectoryId'
         description: The directory identifier.
       Alias:
-        $ref: "#/definitions/Alias"
+        $ref: '#/definitions/Alias'
         description: The directory alias.
       DirectoryName:
-        $ref: "#/definitions/DirectoryName"
+        $ref: '#/definitions/DirectoryName'
         description: The name of the directory.
       RegistrationCode:
-        $ref: "#/definitions/RegistrationCode"
-        description: The registration code for the directory. This is the code that users
-          enter in their Amazon WorkSpaces client application to connect to the
-          directory.
+        $ref: '#/definitions/RegistrationCode'
+        description: The registration code for the directory. This is the code that users enter in their Amazon WorkSpaces client application to connect to the directory.
       SubnetIds:
-        $ref: "#/definitions/SubnetIds"
+        $ref: '#/definitions/SubnetIds'
         description: The identifiers of the subnets used with the directory.
       DnsIpAddresses:
-        $ref: "#/definitions/DnsIpAddresses"
+        $ref: '#/definitions/DnsIpAddresses'
         description: The IP addresses of the DNS servers for the directory.
       CustomerUserName:
-        $ref: "#/definitions/UserName"
+        $ref: '#/definitions/UserName'
         description: The user name for the service account.
       IamRoleId:
-        $ref: "#/definitions/ARN"
-        description: The identifier of the IAM role. This is the role that allows Amazon
-          WorkSpaces to make calls to other services, such as Amazon EC2, on
-          your behalf.
+        $ref: '#/definitions/ARN'
+        description: 'The identifier of the IAM role. This is the role that allows Amazon WorkSpaces to make calls to other services, such as Amazon EC2, on your behalf.'
       DirectoryType:
-        $ref: "#/definitions/WorkspaceDirectoryType"
+        $ref: '#/definitions/WorkspaceDirectoryType'
         description: The directory type.
       WorkspaceSecurityGroupId:
-        $ref: "#/definitions/SecurityGroupId"
-        description: The identifier of the security group that is assigned to new
-          WorkSpaces.
+        $ref: '#/definitions/SecurityGroupId'
+        description: The identifier of the security group that is assigned to new WorkSpaces.
       State:
-        $ref: "#/definitions/WorkspaceDirectoryState"
+        $ref: '#/definitions/WorkspaceDirectoryState'
         description: The state of the directory's registration with Amazon WorkSpaces
       WorkspaceCreationProperties:
-        $ref: "#/definitions/DefaultWorkspaceCreationProperties"
+        $ref: '#/definitions/DefaultWorkspaceCreationProperties'
         description: The default creation properties for all WorkSpaces in the directory.
       ipGroupIds:
-        $ref: "#/definitions/IpGroupIdList"
-        description: The identifiers of the IP access control groups associated with the
-          directory.
-    description: Describes an AWS Directory Service directory that is used with Amazon
-      WorkSpaces.
+        $ref: '#/definitions/IpGroupIdList'
+        description: The identifiers of the IP access control groups associated with the directory.
+    description: Describes an AWS Directory Service directory that is used with Amazon WorkSpaces.
   DirectoryName:
     type: string
   IpAddress:
@@ -2375,10 +2233,10 @@ definitions:
   DnsIpAddresses:
     type: array
     items:
-      $ref: "#/definitions/IpAddress"
+      $ref: '#/definitions/IpAddress'
   Ec2ImageId:
     type: string
-    pattern: ^ami\-([a-f0-9]{8}|[a-f0-9]{17})$
+    pattern: '^ami\-([a-f0-9]{8}|[a-f0-9]{17})$'
   ErrorType:
     type: string
   WorkspaceRequest:
@@ -2389,88 +2247,79 @@ definitions:
       - BundleId
     properties:
       DirectoryId:
-        $ref: "#/definitions/DirectoryId"
-        description: The identifier of the AWS Directory Service directory for the
-          WorkSpace. You can use <a>DescribeWorkspaceDirectories</a> to list the
-          available directories.
+        $ref: '#/definitions/DirectoryId'
+        description: The identifier of the AWS Directory Service directory for the WorkSpace. You can use <a>DescribeWorkspaceDirectories</a> to list the available directories.
       UserName:
-        $ref: "#/definitions/UserName"
-        description: The username of the user for the WorkSpace. This username must exist
-          in the AWS Directory Service directory for the WorkSpace.
+        $ref: '#/definitions/UserName'
+        description: The username of the user for the WorkSpace. This username must exist in the AWS Directory Service directory for the WorkSpace.
       BundleId:
-        $ref: "#/definitions/BundleId"
-        description: The identifier of the bundle for the WorkSpace. You can use
-          <a>DescribeWorkspaceBundles</a> to list the available bundles.
+        $ref: '#/definitions/BundleId'
+        description: The identifier of the bundle for the WorkSpace. You can use <a>DescribeWorkspaceBundles</a> to list the available bundles.
       VolumeEncryptionKey:
-        $ref: "#/definitions/VolumeEncryptionKey"
+        $ref: '#/definitions/VolumeEncryptionKey'
         description: The KMS key used to encrypt data stored on your WorkSpace.
       UserVolumeEncryptionEnabled:
-        $ref: "#/definitions/BooleanObject"
+        $ref: '#/definitions/BooleanObject'
         description: Indicates whether the data stored on the user volume is encrypted.
       RootVolumeEncryptionEnabled:
-        $ref: "#/definitions/BooleanObject"
+        $ref: '#/definitions/BooleanObject'
         description: Indicates whether the data stored on the root volume is encrypted.
       WorkspaceProperties:
-        $ref: "#/definitions/WorkspaceProperties"
+        $ref: '#/definitions/WorkspaceProperties'
         description: The WorkSpace properties.
       Tags:
-        $ref: "#/definitions/TagList"
+        $ref: '#/definitions/TagList'
         description: The tags for the WorkSpace.
     description: Describes the information used to create a WorkSpace.
   FailedCreateWorkspaceRequest:
     type: object
     properties:
       WorkspaceRequest:
-        $ref: "#/definitions/WorkspaceRequest"
+        $ref: '#/definitions/WorkspaceRequest'
         description: Information about the WorkSpace.
       ErrorCode:
-        $ref: "#/definitions/ErrorType"
+        $ref: '#/definitions/ErrorType'
         description: The error code that is returned if the WorkSpace cannot be created.
       ErrorMessage:
-        $ref: "#/definitions/Description"
-        description: The text of the error message that is returned if the WorkSpace cannot
-          be created.
+        $ref: '#/definitions/Description'
+        description: The text of the error message that is returned if the WorkSpace cannot be created.
     description: Describes a WorkSpace that cannot be created.
   FailedWorkspaceChangeRequest:
     type: object
     properties:
       WorkspaceId:
-        $ref: "#/definitions/WorkspaceId"
+        $ref: '#/definitions/WorkspaceId'
         description: The identifier of the WorkSpace.
       ErrorCode:
-        $ref: "#/definitions/ErrorType"
+        $ref: '#/definitions/ErrorType'
         description: The error code that is returned if the WorkSpace cannot be rebooted.
       ErrorMessage:
-        $ref: "#/definitions/Description"
-        description: The text of the error message that is returned if the WorkSpace cannot
-          be rebooted.
-    description: Describes a WorkSpace that could not be rebooted.
-      (<a>RebootWorkspaces</a>), rebuilt (<a>RebuildWorkspaces</a>), terminated
-      (<a>TerminateWorkspaces</a>), started (<a>StartWorkspaces</a>), or stopped
-      (<a>StopWorkspaces</a>).
+        $ref: '#/definitions/Description'
+        description: The text of the error message that is returned if the WorkSpace cannot be rebooted.
+    description: 'Describes a WorkSpace that could not be rebooted. (<a>RebootWorkspaces</a>), rebuilt (<a>RebuildWorkspaces</a>), terminated (<a>TerminateWorkspaces</a>), started (<a>StartWorkspaces</a>), or stopped (<a>StopWorkspaces</a>).'
   FailedRebootWorkspaceRequests:
     type: array
     items:
-      $ref: "#/definitions/FailedWorkspaceChangeRequest"
+      $ref: '#/definitions/FailedWorkspaceChangeRequest'
   FailedRebuildWorkspaceRequests:
     type: array
     items:
-      $ref: "#/definitions/FailedWorkspaceChangeRequest"
+      $ref: '#/definitions/FailedWorkspaceChangeRequest'
   FailedStartWorkspaceRequests:
     type: array
     items:
-      $ref: "#/definitions/FailedWorkspaceChangeRequest"
+      $ref: '#/definitions/FailedWorkspaceChangeRequest'
   FailedStopWorkspaceRequests:
     type: array
     items:
-      $ref: "#/definitions/FailedWorkspaceChangeRequest"
+      $ref: '#/definitions/FailedWorkspaceChangeRequest'
   FailedTerminateWorkspaceRequests:
     type: array
     items:
-      $ref: "#/definitions/FailedWorkspaceChangeRequest"
+      $ref: '#/definitions/FailedWorkspaceChangeRequest'
   WorkspaceId:
     type: string
-    pattern: ^ws-[0-9a-z]{8,63}$
+    pattern: '^ws-[0-9a-z]{8,63}$'
   WorkspaceImageIngestionProcess:
     type: string
     enum:
@@ -2479,12 +2328,12 @@ definitions:
       - BYOL_GRAPHICSPRO
   WorkspaceImageName:
     type: string
-    pattern: ^[a-zA-Z0-9_./()\\-]+$
+    pattern: '^[a-zA-Z0-9_./()\\-]+$'
     minLength: 1
     maxLength: 64
   WorkspaceImageDescription:
     type: string
-    pattern: ^[a-zA-Z0-9_./() -]+$
+    pattern: '^[a-zA-Z0-9_./() -]+$'
     minLength: 1
     maxLength: 256
   IpRule:
@@ -2492,22 +2341,22 @@ definitions:
   IpRevokedRuleList:
     type: array
     items:
-      $ref: "#/definitions/IpRule"
+      $ref: '#/definitions/IpRule'
   IpRuleDesc:
     type: string
   IpRuleItem:
     type: object
     properties:
       ipRule:
-        $ref: "#/definitions/IpRule"
-        description: The IP address range, in CIDR notation.
+        $ref: '#/definitions/IpRule'
+        description: 'The IP address range, in CIDR notation.'
       ruleDesc:
-        $ref: "#/definitions/IpRuleDesc"
+        $ref: '#/definitions/IpRuleDesc'
         description: The description.
     description: Describes a rule for an IP access control group.
   ManagementCidrRangeConstraint:
     type: string
-    pattern: ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/(3[0-2]|[1-2][0-9]|[0-9]))$
+    pattern: '^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/(3[0-2]|[1-2][0-9]|[0-9]))$'
   ManagementCidrRangeMaxResults:
     type: integer
     minimum: 1
@@ -2527,39 +2376,34 @@ definitions:
     type: object
     properties:
       Resource:
-        $ref: "#/definitions/ModificationResourceEnum"
+        $ref: '#/definitions/ModificationResourceEnum'
         description: The resource.
       State:
-        $ref: "#/definitions/ModificationStateEnum"
+        $ref: '#/definitions/ModificationStateEnum'
         description: The modification state.
     description: Describes a WorkSpace modification.
   ModificationStateList:
     type: array
     items:
-      $ref: "#/definitions/ModificationState"
+      $ref: '#/definitions/ModificationState'
   WorkspaceProperties:
     type: object
     properties:
       RunningMode:
-        $ref: "#/definitions/RunningMode"
-        description: The running mode. For more information, see <a
-          href="https://docs.aws.amazon.com/workspaces/latest/adminguide/running-mode.html">Manage
-          the WorkSpace Running Mode</a>.
+        $ref: '#/definitions/RunningMode'
+        description: 'The running mode. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/running-mode.html">Manage the WorkSpace Running Mode</a>.'
       RunningModeAutoStopTimeoutInMinutes:
-        $ref: "#/definitions/RunningModeAutoStopTimeoutInMinutes"
-        description: The time after a user logs off when WorkSpaces are automatically
-          stopped. Configured in 60 minute intervals.
+        $ref: '#/definitions/RunningModeAutoStopTimeoutInMinutes'
+        description: The time after a user logs off when WorkSpaces are automatically stopped. Configured in 60 minute intervals.
       RootVolumeSizeGib:
-        $ref: "#/definitions/RootVolumeSizeGib"
+        $ref: '#/definitions/RootVolumeSizeGib'
         description: The size of the root volume.
       UserVolumeSizeGib:
-        $ref: "#/definitions/UserVolumeSizeGib"
+        $ref: '#/definitions/UserVolumeSizeGib'
         description: The size of the user storage.
       ComputeTypeName:
-        $ref: "#/definitions/Compute"
-        description: The compute type. For more information, see <a
-          href="http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles">Amazon
-          WorkSpaces Bundles</a>.
+        $ref: '#/definitions/Compute'
+        description: 'The compute type. For more information, see <a href="http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles">Amazon WorkSpaces Bundles</a>.'
     description: Describes a WorkSpace.
   TargetWorkspaceState:
     type: string
@@ -2575,7 +2419,7 @@ definitions:
     type: object
     properties:
       Type:
-        $ref: "#/definitions/OperatingSystemType"
+        $ref: '#/definitions/OperatingSystemType'
         description: The operating system.
     description: The operating system that the image is running.
   RebootRequest:
@@ -2584,13 +2428,13 @@ definitions:
       - WorkspaceId
     properties:
       WorkspaceId:
-        $ref: "#/definitions/WorkspaceId"
+        $ref: '#/definitions/WorkspaceId'
         description: The identifier of the WorkSpace.
     description: Describes the information used to reboot a WorkSpace.
   RebootWorkspaceRequests:
     type: array
     items:
-      $ref: "#/definitions/RebootRequest"
+      $ref: '#/definitions/RebootRequest'
     minItems: 1
     maxItems: 25
   RebuildRequest:
@@ -2599,13 +2443,13 @@ definitions:
       - WorkspaceId
     properties:
       WorkspaceId:
-        $ref: "#/definitions/WorkspaceId"
+        $ref: '#/definitions/WorkspaceId'
         description: The identifier of the WorkSpace.
     description: Describes the information used to rebuild a WorkSpace.
   RebuildWorkspaceRequests:
     type: array
     items:
-      $ref: "#/definitions/RebuildRequest"
+      $ref: '#/definitions/RebuildRequest'
     minItems: 1
     maxItems: 1
   RegistrationCode:
@@ -2616,7 +2460,7 @@ definitions:
     type: object
     properties:
       Capacity:
-        $ref: "#/definitions/NonEmptyString"
+        $ref: '#/definitions/NonEmptyString'
         description: The size of the root volume.
     description: Describes the root volume for a WorkSpace bundle.
   RootVolumeSizeGib:
@@ -2632,35 +2476,35 @@ definitions:
     type: object
     properties:
       WorkspaceId:
-        $ref: "#/definitions/WorkspaceId"
+        $ref: '#/definitions/WorkspaceId'
         description: The identifier of the WorkSpace.
     description: Information used to start a WorkSpace.
   StartWorkspaceRequests:
     type: array
     items:
-      $ref: "#/definitions/StartRequest"
+      $ref: '#/definitions/StartRequest'
     minItems: 1
     maxItems: 25
   StopRequest:
     type: object
     properties:
       WorkspaceId:
-        $ref: "#/definitions/WorkspaceId"
+        $ref: '#/definitions/WorkspaceId'
         description: The identifier of the WorkSpace.
     description: Describes the information used to stop a WorkSpace.
   StopWorkspaceRequests:
     type: array
     items:
-      $ref: "#/definitions/StopRequest"
+      $ref: '#/definitions/StopRequest'
     minItems: 1
     maxItems: 25
   SubnetId:
     type: string
-    pattern: ^(subnet-[0-9a-f]{8})$
+    pattern: '^(subnet-[0-9a-f]{8})$'
   SubnetIds:
     type: array
     items:
-      $ref: "#/definitions/SubnetId"
+      $ref: '#/definitions/SubnetId'
   TagKey:
     type: string
     minLength: 1
@@ -2674,10 +2518,10 @@ definitions:
       - Key
     properties:
       Key:
-        $ref: "#/definitions/TagKey"
+        $ref: '#/definitions/TagKey'
         description: The key of the tag.
       Value:
-        $ref: "#/definitions/TagValue"
+        $ref: '#/definitions/TagValue'
         description: The value of the tag.
     description: Describes a tag.
   TerminateRequest:
@@ -2686,20 +2530,20 @@ definitions:
       - WorkspaceId
     properties:
       WorkspaceId:
-        $ref: "#/definitions/WorkspaceId"
+        $ref: '#/definitions/WorkspaceId'
         description: The identifier of the WorkSpace.
     description: Describes the information used to terminate a WorkSpace.
   TerminateWorkspaceRequests:
     type: array
     items:
-      $ref: "#/definitions/TerminateRequest"
+      $ref: '#/definitions/TerminateRequest'
     minItems: 1
     maxItems: 25
   UserStorage:
     type: object
     properties:
       Capacity:
-        $ref: "#/definitions/NonEmptyString"
+        $ref: '#/definitions/NonEmptyString'
         description: The size of the user storage.
     description: Describes the user storage for a WorkSpace bundle.
   UserVolumeSizeGib:
@@ -2729,68 +2573,65 @@ definitions:
     type: object
     properties:
       WorkspaceId:
-        $ref: "#/definitions/WorkspaceId"
+        $ref: '#/definitions/WorkspaceId'
         description: The identifier of the WorkSpace.
       DirectoryId:
-        $ref: "#/definitions/DirectoryId"
-        description: The identifier of the AWS Directory Service directory for the
-          WorkSpace.
+        $ref: '#/definitions/DirectoryId'
+        description: The identifier of the AWS Directory Service directory for the WorkSpace.
       UserName:
-        $ref: "#/definitions/UserName"
+        $ref: '#/definitions/UserName'
         description: The user for the WorkSpace.
       IpAddress:
-        $ref: "#/definitions/IpAddress"
+        $ref: '#/definitions/IpAddress'
         description: The IP address of the WorkSpace.
       State:
-        $ref: "#/definitions/WorkspaceState"
+        $ref: '#/definitions/WorkspaceState'
         description: The operational state of the WorkSpace.
       BundleId:
-        $ref: "#/definitions/BundleId"
+        $ref: '#/definitions/BundleId'
         description: The identifier of the bundle used to create the WorkSpace.
       SubnetId:
-        $ref: "#/definitions/SubnetId"
+        $ref: '#/definitions/SubnetId'
         description: The identifier of the subnet for the WorkSpace.
       ErrorMessage:
-        $ref: "#/definitions/Description"
-        description: The text of the error message that is returned if the WorkSpace cannot
-          be created.
+        $ref: '#/definitions/Description'
+        description: The text of the error message that is returned if the WorkSpace cannot be created.
       ErrorCode:
-        $ref: "#/definitions/WorkspaceErrorCode"
+        $ref: '#/definitions/WorkspaceErrorCode'
         description: The error code that is returned if the WorkSpace cannot be created.
       ComputerName:
-        $ref: "#/definitions/ComputerName"
-        description: The name of the WorkSpace, as seen by the operating system.
+        $ref: '#/definitions/ComputerName'
+        description: 'The name of the WorkSpace, as seen by the operating system.'
       VolumeEncryptionKey:
-        $ref: "#/definitions/VolumeEncryptionKey"
+        $ref: '#/definitions/VolumeEncryptionKey'
         description: The KMS key used to encrypt data stored on your WorkSpace.
       UserVolumeEncryptionEnabled:
-        $ref: "#/definitions/BooleanObject"
+        $ref: '#/definitions/BooleanObject'
         description: Indicates whether the data stored on the user volume is encrypted.
       RootVolumeEncryptionEnabled:
-        $ref: "#/definitions/BooleanObject"
+        $ref: '#/definitions/BooleanObject'
         description: Indicates whether the data stored on the root volume is encrypted.
       WorkspaceProperties:
-        $ref: "#/definitions/WorkspaceProperties"
+        $ref: '#/definitions/WorkspaceProperties'
         description: The properties of the WorkSpace.
       ModificationStates:
-        $ref: "#/definitions/ModificationStateList"
+        $ref: '#/definitions/ModificationStateList'
         description: The modification states of the WorkSpace.
     description: Describes a WorkSpace.
   WorkspaceConnectionStatus:
     type: object
     properties:
       WorkspaceId:
-        $ref: "#/definitions/WorkspaceId"
+        $ref: '#/definitions/WorkspaceId'
         description: The identifier of the WorkSpace.
       ConnectionState:
-        $ref: "#/definitions/ConnectionState"
-        description: The connection state of the WorkSpace. The connection state is unknown
-          if the WorkSpace is stopped.
+        $ref: '#/definitions/ConnectionState'
+        description: The connection state of the WorkSpace. The connection state is unknown if the WorkSpace is stopped.
       ConnectionStateCheckTimestamp:
-        $ref: "#/definitions/Timestamp"
+        $ref: '#/definitions/Timestamp'
         description: The timestamp of the connection status check.
       LastKnownUserConnectionTimestamp:
-        $ref: "#/definitions/Timestamp"
+        $ref: '#/definitions/Timestamp'
         description: The timestamp of the last known user connection.
     description: Describes the connection status of a WorkSpace.
   WorkspaceDirectoryType:
@@ -2823,45 +2664,43 @@ definitions:
     type: object
     properties:
       ImageId:
-        $ref: "#/definitions/WorkspaceImageId"
+        $ref: '#/definitions/WorkspaceImageId'
         description: The identifier of the image.
       Name:
-        $ref: "#/definitions/WorkspaceImageName"
+        $ref: '#/definitions/WorkspaceImageName'
         description: The name of the image.
       Description:
-        $ref: "#/definitions/WorkspaceImageDescription"
+        $ref: '#/definitions/WorkspaceImageDescription'
         description: The description of the image.
       OperatingSystem:
-        $ref: "#/definitions/OperatingSystem"
-        description: "The operating system that the image is running. "
+        $ref: '#/definitions/OperatingSystem'
+        description: 'The operating system that the image is running. '
       State:
-        $ref: "#/definitions/WorkspaceImageState"
+        $ref: '#/definitions/WorkspaceImageState'
         description: The status of the image.
       RequiredTenancy:
-        $ref: "#/definitions/WorkspaceImageRequiredTenancy"
-        description: "Specifies whether the image is running on dedicated hardware. When
-          bring your own license (BYOL) is enabled, this value is set to
-          DEDICATED. "
+        $ref: '#/definitions/WorkspaceImageRequiredTenancy'
+        description: 'Specifies whether the image is running on dedicated hardware. When bring your own license (BYOL) is enabled, this value is set to DEDICATED. '
       ErrorCode:
-        $ref: "#/definitions/WorkspaceImageErrorCode"
+        $ref: '#/definitions/WorkspaceImageErrorCode'
         description: The error code that is returned for the image.
       ErrorMessage:
-        $ref: "#/definitions/Description"
+        $ref: '#/definitions/Description'
         description: The text of the error message that is returned for the image.
     description: Describes a WorkSpace image.
   WorkspacesIpGroup:
     type: object
     properties:
       groupId:
-        $ref: "#/definitions/IpGroupId"
+        $ref: '#/definitions/IpGroupId'
         description: The identifier of the group.
       groupName:
-        $ref: "#/definitions/IpGroupName"
+        $ref: '#/definitions/IpGroupName'
         description: The name of the group.
       groupDesc:
-        $ref: "#/definitions/IpGroupDesc"
+        $ref: '#/definitions/IpGroupDesc'
         description: The description of the group.
       userRules:
-        $ref: "#/definitions/IpRuleList"
+        $ref: '#/definitions/IpRuleList'
         description: The rules.
     description: Describes an IP access control group.

@@ -1,39 +1,38 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  version: 2017-09-01
+  version: '2017-09-01'
   x-release: v4
   title: AWS Elemental MediaStore
-  description: "An AWS Elemental MediaStore container is a namespace that holds folders and
-    objects. You use a container endpoint to create, read, and delete objects. "
+  description: 'An AWS Elemental MediaStore container is a namespace that holds folders and objects. You use a container endpoint to create, read, and delete objects. '
   x-logo:
-    url: https://twitter.com/awscloud/profile_image?size=original
-    backgroundColor: "#FFFFFF"
-  termsOfService: https://aws.amazon.com/service-terms/
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
     name: Mike Ralphson
     email: mike.ralphson@gmail.com
-    url: https://github.com/mermade/aws2openapi
+    url: 'https://github.com/mermade/aws2openapi'
     x-twitter: PermittedSoc
   license:
     name: Apache 2.0 License
-    url: http://www.apache.org/licenses/
+    url: 'http://www.apache.org/licenses/'
   x-providerName: amazonaws.com
   x-serviceName: mediastore
   x-origin:
     - contentType: application/json
-      url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/mediastore-2017-09-01.normal.json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/mediastore-2017-09-01.normal.json'
       converter:
-        url: https://github.com/mermade/aws2openapi
+        url: 'https://github.com/mermade/aws2openapi'
         version: 1.0.0
       x-apisguru-direct: true
   x-apiClientRegistration:
-    url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
   x-preferred: true
 externalDocs:
   description: Amazon Web Services documentation
-  url: https://docs.aws.amazon.com/mediastore/
+  url: 'https://docs.aws.amazon.com/mediastore/'
 host: mediastore.amazonaws.com
 basePath: /
 x-hasEquivalentPaths: true
@@ -90,34 +89,33 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  /#X-Amz-Target=MediaStore_20170901.CreateContainer:
+  '/#X-Amz-Target=MediaStore_20170901.CreateContainer':
     post:
       operationId: CreateContainer
-      description: Creates a storage container to hold objects. A container is similar to a
-        bucket in the Amazon S3 service.
+      description: Creates a storage container to hold objects. A container is similar to a bucket in the Amazon S3 service.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/CreateContainerOutput"
-        "480":
+            $ref: '#/definitions/CreateContainerOutput'
+        '480':
           description: ContainerInUseException
           schema:
-            $ref: "#/definitions/ContainerInUseException"
-        "481":
+            $ref: '#/definitions/ContainerInUseException'
+        '481':
           description: LimitExceededException
           schema:
-            $ref: "#/definitions/LimitExceededException"
-        "482":
+            $ref: '#/definitions/LimitExceededException'
+        '482':
           description: InternalServerError
           schema:
-            $ref: "#/definitions/InternalServerError"
+            $ref: '#/definitions/InternalServerError'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/CreateContainerInput"
+            $ref: '#/definitions/CreateContainerInput'
         - name: X-Amz-Target
           in: header
           required: true
@@ -125,43 +123,40 @@ paths:
           enum:
             - MediaStore_20170901.CreateContainer
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=MediaStore_20170901.DeleteContainer:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=MediaStore_20170901.DeleteContainer':
     post:
       operationId: DeleteContainer
-      description: "Deletes the specified container. Before you make a
-        <code>DeleteContainer</code> request, delete any objects in the
-        container or in any folders in the container. You can delete only empty
-        containers. "
+      description: 'Deletes the specified container. Before you make a <code>DeleteContainer</code> request, delete any objects in the container or in any folders in the container. You can delete only empty containers. '
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DeleteContainerOutput"
-        "480":
+            $ref: '#/definitions/DeleteContainerOutput'
+        '480':
           description: ContainerInUseException
           schema:
-            $ref: "#/definitions/ContainerInUseException"
-        "481":
+            $ref: '#/definitions/ContainerInUseException'
+        '481':
           description: ContainerNotFoundException
           schema:
-            $ref: "#/definitions/ContainerNotFoundException"
-        "482":
+            $ref: '#/definitions/ContainerNotFoundException'
+        '482':
           description: InternalServerError
           schema:
-            $ref: "#/definitions/InternalServerError"
+            $ref: '#/definitions/InternalServerError'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/DeleteContainerInput"
+            $ref: '#/definitions/DeleteContainerInput'
         - name: X-Amz-Target
           in: header
           required: true
@@ -169,45 +164,44 @@ paths:
           enum:
             - MediaStore_20170901.DeleteContainer
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=MediaStore_20170901.DeleteContainerPolicy:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=MediaStore_20170901.DeleteContainerPolicy':
     post:
       operationId: DeleteContainerPolicy
-      description: Deletes the access policy that is associated with the specified
-        container.
+      description: Deletes the access policy that is associated with the specified container.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DeleteContainerPolicyOutput"
-        "480":
+            $ref: '#/definitions/DeleteContainerPolicyOutput'
+        '480':
           description: ContainerInUseException
           schema:
-            $ref: "#/definitions/ContainerInUseException"
-        "481":
+            $ref: '#/definitions/ContainerInUseException'
+        '481':
           description: ContainerNotFoundException
           schema:
-            $ref: "#/definitions/ContainerNotFoundException"
-        "482":
+            $ref: '#/definitions/ContainerNotFoundException'
+        '482':
           description: PolicyNotFoundException
           schema:
-            $ref: "#/definitions/PolicyNotFoundException"
-        "483":
+            $ref: '#/definitions/PolicyNotFoundException'
+        '483':
           description: InternalServerError
           schema:
-            $ref: "#/definitions/InternalServerError"
+            $ref: '#/definitions/InternalServerError'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/DeleteContainerPolicyInput"
+            $ref: '#/definitions/DeleteContainerPolicyInput'
         - name: X-Amz-Target
           in: header
           required: true
@@ -215,48 +209,44 @@ paths:
           enum:
             - MediaStore_20170901.DeleteContainerPolicy
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=MediaStore_20170901.DeleteCorsPolicy:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=MediaStore_20170901.DeleteCorsPolicy':
     post:
       operationId: DeleteCorsPolicy
-      description: <p>Deletes the cross-origin resource sharing (CORS) configuration
-        information that is set for the container.</p> <p>To use this operation,
-        you must have permission to perform the
-        <code>MediaStore:DeleteCorsPolicy</code> action. The container owner has
-        this permission by default and can grant this permission to others.</p>
+      description: '<p>Deletes the cross-origin resource sharing (CORS) configuration information that is set for the container.</p> <p>To use this operation, you must have permission to perform the <code>MediaStore:DeleteCorsPolicy</code> action. The container owner has this permission by default and can grant this permission to others.</p>'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DeleteCorsPolicyOutput"
-        "480":
+            $ref: '#/definitions/DeleteCorsPolicyOutput'
+        '480':
           description: ContainerInUseException
           schema:
-            $ref: "#/definitions/ContainerInUseException"
-        "481":
+            $ref: '#/definitions/ContainerInUseException'
+        '481':
           description: ContainerNotFoundException
           schema:
-            $ref: "#/definitions/ContainerNotFoundException"
-        "482":
+            $ref: '#/definitions/ContainerNotFoundException'
+        '482':
           description: CorsPolicyNotFoundException
           schema:
-            $ref: "#/definitions/CorsPolicyNotFoundException"
-        "483":
+            $ref: '#/definitions/CorsPolicyNotFoundException'
+        '483':
           description: InternalServerError
           schema:
-            $ref: "#/definitions/InternalServerError"
+            $ref: '#/definitions/InternalServerError'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/DeleteCorsPolicyInput"
+            $ref: '#/definitions/DeleteCorsPolicyInput'
         - name: X-Amz-Target
           in: header
           required: true
@@ -264,45 +254,44 @@ paths:
           enum:
             - MediaStore_20170901.DeleteCorsPolicy
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=MediaStore_20170901.DeleteLifecyclePolicy:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=MediaStore_20170901.DeleteLifecyclePolicy':
     post:
       operationId: DeleteLifecyclePolicy
-      description: Removes an object lifecycle policy from a container. It takes up to 20
-        minutes for the change to take effect.
+      description: Removes an object lifecycle policy from a container. It takes up to 20 minutes for the change to take effect.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DeleteLifecyclePolicyOutput"
-        "480":
+            $ref: '#/definitions/DeleteLifecyclePolicyOutput'
+        '480':
           description: ContainerInUseException
           schema:
-            $ref: "#/definitions/ContainerInUseException"
-        "481":
+            $ref: '#/definitions/ContainerInUseException'
+        '481':
           description: ContainerNotFoundException
           schema:
-            $ref: "#/definitions/ContainerNotFoundException"
-        "482":
+            $ref: '#/definitions/ContainerNotFoundException'
+        '482':
           description: PolicyNotFoundException
           schema:
-            $ref: "#/definitions/PolicyNotFoundException"
-        "483":
+            $ref: '#/definitions/PolicyNotFoundException'
+        '483':
           description: InternalServerError
           schema:
-            $ref: "#/definitions/InternalServerError"
+            $ref: '#/definitions/InternalServerError'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/DeleteLifecyclePolicyInput"
+            $ref: '#/definitions/DeleteLifecyclePolicyInput'
         - name: X-Amz-Target
           in: header
           required: true
@@ -310,43 +299,36 @@ paths:
           enum:
             - MediaStore_20170901.DeleteLifecyclePolicy
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=MediaStore_20170901.DescribeContainer:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=MediaStore_20170901.DescribeContainer':
     post:
       operationId: DescribeContainer
-      description: Retrieves the properties of the requested container. This request is
-        commonly used to retrieve the endpoint of a container. An endpoint is a
-        value assigned by the service when a new container is created. A
-        container's endpoint does not change after it has been assigned. The
-        <code>DescribeContainer</code> request returns a single
-        <code>Container</code> object based on <code>ContainerName</code>. To
-        return all <code>Container</code> objects that are associated with a
-        specified AWS account, use <a>ListContainers</a>.
+      description: 'Retrieves the properties of the requested container. This request is commonly used to retrieve the endpoint of a container. An endpoint is a value assigned by the service when a new container is created. A container''s endpoint does not change after it has been assigned. The <code>DescribeContainer</code> request returns a single <code>Container</code> object based on <code>ContainerName</code>. To return all <code>Container</code> objects that are associated with a specified AWS account, use <a>ListContainers</a>.'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/DescribeContainerOutput"
-        "480":
+            $ref: '#/definitions/DescribeContainerOutput'
+        '480':
           description: ContainerNotFoundException
           schema:
-            $ref: "#/definitions/ContainerNotFoundException"
-        "481":
+            $ref: '#/definitions/ContainerNotFoundException'
+        '481':
           description: InternalServerError
           schema:
-            $ref: "#/definitions/InternalServerError"
+            $ref: '#/definitions/InternalServerError'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/DescribeContainerInput"
+            $ref: '#/definitions/DescribeContainerInput'
         - name: X-Amz-Target
           in: header
           required: true
@@ -354,47 +336,44 @@ paths:
           enum:
             - MediaStore_20170901.DescribeContainer
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=MediaStore_20170901.GetContainerPolicy:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=MediaStore_20170901.GetContainerPolicy':
     post:
       operationId: GetContainerPolicy
-      description: Retrieves the access policy for the specified container. For information
-        about the data that is included in an access policy, see the <a
-        href="https://aws.amazon.com/documentation/iam/">AWS Identity and Access
-        Management User Guide</a>.
+      description: 'Retrieves the access policy for the specified container. For information about the data that is included in an access policy, see the <a href="https://aws.amazon.com/documentation/iam/">AWS Identity and Access Management User Guide</a>.'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/GetContainerPolicyOutput"
-        "480":
+            $ref: '#/definitions/GetContainerPolicyOutput'
+        '480':
           description: ContainerInUseException
           schema:
-            $ref: "#/definitions/ContainerInUseException"
-        "481":
+            $ref: '#/definitions/ContainerInUseException'
+        '481':
           description: ContainerNotFoundException
           schema:
-            $ref: "#/definitions/ContainerNotFoundException"
-        "482":
+            $ref: '#/definitions/ContainerNotFoundException'
+        '482':
           description: PolicyNotFoundException
           schema:
-            $ref: "#/definitions/PolicyNotFoundException"
-        "483":
+            $ref: '#/definitions/PolicyNotFoundException'
+        '483':
           description: InternalServerError
           schema:
-            $ref: "#/definitions/InternalServerError"
+            $ref: '#/definitions/InternalServerError'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/GetContainerPolicyInput"
+            $ref: '#/definitions/GetContainerPolicyInput'
         - name: X-Amz-Target
           in: header
           required: true
@@ -402,48 +381,44 @@ paths:
           enum:
             - MediaStore_20170901.GetContainerPolicy
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=MediaStore_20170901.GetCorsPolicy:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=MediaStore_20170901.GetCorsPolicy':
     post:
       operationId: GetCorsPolicy
-      description: <p>Returns the cross-origin resource sharing (CORS) configuration
-        information that is set for the container.</p> <p>To use this operation,
-        you must have permission to perform the
-        <code>MediaStore:GetCorsPolicy</code> action. By default, the container
-        owner has this permission and can grant it to others.</p>
+      description: '<p>Returns the cross-origin resource sharing (CORS) configuration information that is set for the container.</p> <p>To use this operation, you must have permission to perform the <code>MediaStore:GetCorsPolicy</code> action. By default, the container owner has this permission and can grant it to others.</p>'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/GetCorsPolicyOutput"
-        "480":
+            $ref: '#/definitions/GetCorsPolicyOutput'
+        '480':
           description: ContainerInUseException
           schema:
-            $ref: "#/definitions/ContainerInUseException"
-        "481":
+            $ref: '#/definitions/ContainerInUseException'
+        '481':
           description: ContainerNotFoundException
           schema:
-            $ref: "#/definitions/ContainerNotFoundException"
-        "482":
+            $ref: '#/definitions/ContainerNotFoundException'
+        '482':
           description: CorsPolicyNotFoundException
           schema:
-            $ref: "#/definitions/CorsPolicyNotFoundException"
-        "483":
+            $ref: '#/definitions/CorsPolicyNotFoundException'
+        '483':
           description: InternalServerError
           schema:
-            $ref: "#/definitions/InternalServerError"
+            $ref: '#/definitions/InternalServerError'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/GetCorsPolicyInput"
+            $ref: '#/definitions/GetCorsPolicyInput'
         - name: X-Amz-Target
           in: header
           required: true
@@ -451,44 +426,44 @@ paths:
           enum:
             - MediaStore_20170901.GetCorsPolicy
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=MediaStore_20170901.GetLifecyclePolicy:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=MediaStore_20170901.GetLifecyclePolicy':
     post:
       operationId: GetLifecyclePolicy
       description: Retrieves the object lifecycle policy that is assigned to a container.
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/GetLifecyclePolicyOutput"
-        "480":
+            $ref: '#/definitions/GetLifecyclePolicyOutput'
+        '480':
           description: ContainerInUseException
           schema:
-            $ref: "#/definitions/ContainerInUseException"
-        "481":
+            $ref: '#/definitions/ContainerInUseException'
+        '481':
           description: ContainerNotFoundException
           schema:
-            $ref: "#/definitions/ContainerNotFoundException"
-        "482":
+            $ref: '#/definitions/ContainerNotFoundException'
+        '482':
           description: PolicyNotFoundException
           schema:
-            $ref: "#/definitions/PolicyNotFoundException"
-        "483":
+            $ref: '#/definitions/PolicyNotFoundException'
+        '483':
           description: InternalServerError
           schema:
-            $ref: "#/definitions/InternalServerError"
+            $ref: '#/definitions/InternalServerError'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/GetLifecyclePolicyInput"
+            $ref: '#/definitions/GetLifecyclePolicyInput'
         - name: X-Amz-Target
           in: header
           required: true
@@ -496,41 +471,32 @@ paths:
           enum:
             - MediaStore_20170901.GetLifecyclePolicy
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=MediaStore_20170901.ListContainers:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=MediaStore_20170901.ListContainers':
     post:
       operationId: ListContainers
-      description: <p>Lists the properties of all containers in AWS Elemental MediaStore.
-        </p> <p>You can query to receive all the containers in one response. Or
-        you can include the <code>MaxResults</code> parameter to receive a
-        limited number of containers in each response. In this case, the
-        response includes a token. To get the next set of containers, send the
-        command again, this time with the <code>NextToken</code> parameter (with
-        the returned token as its value). The next set of responses appears,
-        with a token if there are still more containers to receive. </p> <p>See
-        also <a>DescribeContainer</a>, which gets the properties of one
-        container. </p>
+      description: '<p>Lists the properties of all containers in AWS Elemental MediaStore. </p> <p>You can query to receive all the containers in one response. Or you can include the <code>MaxResults</code> parameter to receive a limited number of containers in each response. In this case, the response includes a token. To get the next set of containers, send the command again, this time with the <code>NextToken</code> parameter (with the returned token as its value). The next set of responses appears, with a token if there are still more containers to receive. </p> <p>See also <a>DescribeContainer</a>, which gets the properties of one container. </p>'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/ListContainersOutput"
-        "480":
+            $ref: '#/definitions/ListContainersOutput'
+        '480':
           description: InternalServerError
           schema:
-            $ref: "#/definitions/InternalServerError"
+            $ref: '#/definitions/InternalServerError'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/ListContainersInput"
+            $ref: '#/definitions/ListContainersInput'
         - name: X-Amz-Target
           in: header
           required: true
@@ -538,47 +504,40 @@ paths:
           enum:
             - MediaStore_20170901.ListContainers
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=MediaStore_20170901.PutContainerPolicy:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=MediaStore_20170901.PutContainerPolicy':
     post:
       operationId: PutContainerPolicy
-      description: <p>Creates an access policy for the specified container to restrict the
-        users and clients that can access it. For information about the data
-        that is included in an access policy, see the <a
-        href="https://aws.amazon.com/documentation/iam/">AWS Identity and Access
-        Management User Guide</a>.</p> <p>For this release of the REST API, you
-        can create only one policy for a container. If you enter
-        <code>PutContainerPolicy</code> twice, the second command modifies the
-        existing policy. </p>
+      description: '<p>Creates an access policy for the specified container to restrict the users and clients that can access it. For information about the data that is included in an access policy, see the <a href="https://aws.amazon.com/documentation/iam/">AWS Identity and Access Management User Guide</a>.</p> <p>For this release of the REST API, you can create only one policy for a container. If you enter <code>PutContainerPolicy</code> twice, the second command modifies the existing policy. </p>'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/PutContainerPolicyOutput"
-        "480":
+            $ref: '#/definitions/PutContainerPolicyOutput'
+        '480':
           description: ContainerNotFoundException
           schema:
-            $ref: "#/definitions/ContainerNotFoundException"
-        "481":
+            $ref: '#/definitions/ContainerNotFoundException'
+        '481':
           description: ContainerInUseException
           schema:
-            $ref: "#/definitions/ContainerInUseException"
-        "482":
+            $ref: '#/definitions/ContainerInUseException'
+        '482':
           description: InternalServerError
           schema:
-            $ref: "#/definitions/InternalServerError"
+            $ref: '#/definitions/InternalServerError'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/PutContainerPolicyInput"
+            $ref: '#/definitions/PutContainerPolicyInput'
         - name: X-Amz-Target
           in: header
           required: true
@@ -586,53 +545,40 @@ paths:
           enum:
             - MediaStore_20170901.PutContainerPolicy
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=MediaStore_20170901.PutCorsPolicy:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=MediaStore_20170901.PutCorsPolicy':
     post:
       operationId: PutCorsPolicy
-      description: <p>Sets the cross-origin resource sharing (CORS) configuration on a
-        container so that the container can service cross-origin requests. For
-        example, you might want to enable a request whose origin is
-        http://www.example.com to access your AWS Elemental MediaStore container
-        at my.example.container.com by using the browser's XMLHttpRequest
-        capability.</p> <p>To enable CORS on a container, you attach a CORS
-        policy to the container. In the CORS policy, you configure rules that
-        identify origins and the HTTP methods that can be executed on your
-        container. The policy can contain up to 398,000 characters. You can add
-        up to 100 rules to a CORS policy. If more than one rule applies, the
-        service uses the first applicable rule listed.</p> <p>To learn more
-        about CORS, see <a
-        href="https://docs.aws.amazon.com/mediastore/latest/ug/cors-policy.html">Cross-Origin
-        Resource Sharing (CORS) in AWS Elemental MediaStore</a>.</p>
+      description: '<p>Sets the cross-origin resource sharing (CORS) configuration on a container so that the container can service cross-origin requests. For example, you might want to enable a request whose origin is http://www.example.com to access your AWS Elemental MediaStore container at my.example.container.com by using the browser''s XMLHttpRequest capability.</p> <p>To enable CORS on a container, you attach a CORS policy to the container. In the CORS policy, you configure rules that identify origins and the HTTP methods that can be executed on your container. The policy can contain up to 398,000 characters. You can add up to 100 rules to a CORS policy. If more than one rule applies, the service uses the first applicable rule listed.</p> <p>To learn more about CORS, see <a href="https://docs.aws.amazon.com/mediastore/latest/ug/cors-policy.html">Cross-Origin Resource Sharing (CORS) in AWS Elemental MediaStore</a>.</p>'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/PutCorsPolicyOutput"
-        "480":
+            $ref: '#/definitions/PutCorsPolicyOutput'
+        '480':
           description: ContainerNotFoundException
           schema:
-            $ref: "#/definitions/ContainerNotFoundException"
-        "481":
+            $ref: '#/definitions/ContainerNotFoundException'
+        '481':
           description: ContainerInUseException
           schema:
-            $ref: "#/definitions/ContainerInUseException"
-        "482":
+            $ref: '#/definitions/ContainerInUseException'
+        '482':
           description: InternalServerError
           schema:
-            $ref: "#/definitions/InternalServerError"
+            $ref: '#/definitions/InternalServerError'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/PutCorsPolicyInput"
+            $ref: '#/definitions/PutCorsPolicyInput'
         - name: X-Amz-Target
           in: header
           required: true
@@ -640,46 +586,40 @@ paths:
           enum:
             - MediaStore_20170901.PutCorsPolicy
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=MediaStore_20170901.PutLifecyclePolicy:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=MediaStore_20170901.PutLifecyclePolicy':
     post:
       operationId: PutLifecyclePolicy
-      description: <p>Writes an object lifecycle policy to a container. If the container
-        already has an object lifecycle policy, the service replaces the
-        existing policy with the new policy. It takes up to 20 minutes for the
-        change to take effect.</p> <p>For information about how to construct an
-        object lifecycle policy, see <a
-        href="https://docs.aws.amazon.com/mediastore/latest/ug/policies-object-lifecycle-components.html">Components
-        of an Object Lifecycle Policy</a>.</p>
+      description: '<p>Writes an object lifecycle policy to a container. If the container already has an object lifecycle policy, the service replaces the existing policy with the new policy. It takes up to 20 minutes for the change to take effect.</p> <p>For information about how to construct an object lifecycle policy, see <a href="https://docs.aws.amazon.com/mediastore/latest/ug/policies-object-lifecycle-components.html">Components of an Object Lifecycle Policy</a>.</p>'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/PutLifecyclePolicyOutput"
-        "480":
+            $ref: '#/definitions/PutLifecyclePolicyOutput'
+        '480':
           description: ContainerInUseException
           schema:
-            $ref: "#/definitions/ContainerInUseException"
-        "481":
+            $ref: '#/definitions/ContainerInUseException'
+        '481':
           description: ContainerNotFoundException
           schema:
-            $ref: "#/definitions/ContainerNotFoundException"
-        "482":
+            $ref: '#/definitions/ContainerNotFoundException'
+        '482':
           description: InternalServerError
           schema:
-            $ref: "#/definitions/InternalServerError"
+            $ref: '#/definitions/InternalServerError'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/PutLifecyclePolicyInput"
+            $ref: '#/definitions/PutLifecyclePolicyInput'
         - name: X-Amz-Target
           in: header
           required: true
@@ -687,42 +627,40 @@ paths:
           enum:
             - MediaStore_20170901.PutLifecyclePolicy
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=MediaStore_20170901.StartAccessLogging:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=MediaStore_20170901.StartAccessLogging':
     post:
       operationId: StartAccessLogging
-      description: Starts access logging on the specified container. When you enable access
-        logging on a container, MediaStore delivers access logs for objects
-        stored in that container to Amazon CloudWatch Logs.
+      description: 'Starts access logging on the specified container. When you enable access logging on a container, MediaStore delivers access logs for objects stored in that container to Amazon CloudWatch Logs.'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/StartAccessLoggingOutput"
-        "480":
+            $ref: '#/definitions/StartAccessLoggingOutput'
+        '480':
           description: ContainerInUseException
           schema:
-            $ref: "#/definitions/ContainerInUseException"
-        "481":
+            $ref: '#/definitions/ContainerInUseException'
+        '481':
           description: ContainerNotFoundException
           schema:
-            $ref: "#/definitions/ContainerNotFoundException"
-        "482":
+            $ref: '#/definitions/ContainerNotFoundException'
+        '482':
           description: InternalServerError
           schema:
-            $ref: "#/definitions/InternalServerError"
+            $ref: '#/definitions/InternalServerError'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/StartAccessLoggingInput"
+            $ref: '#/definitions/StartAccessLoggingInput'
         - name: X-Amz-Target
           in: header
           required: true
@@ -730,43 +668,40 @@ paths:
           enum:
             - MediaStore_20170901.StartAccessLogging
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
-  /#X-Amz-Target=MediaStore_20170901.StopAccessLogging:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=MediaStore_20170901.StopAccessLogging':
     post:
       operationId: StopAccessLogging
-      description: Stops access logging on the specified container. When you stop access
-        logging on a container, MediaStore stops sending access logs to Amazon
-        CloudWatch Logs. These access logs are not saved and are not
-        retrievable.
+      description: 'Stops access logging on the specified container. When you stop access logging on a container, MediaStore stops sending access logs to Amazon CloudWatch Logs. These access logs are not saved and are not retrievable.'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/StopAccessLoggingOutput"
-        "480":
+            $ref: '#/definitions/StopAccessLoggingOutput'
+        '480':
           description: ContainerInUseException
           schema:
-            $ref: "#/definitions/ContainerInUseException"
-        "481":
+            $ref: '#/definitions/ContainerInUseException'
+        '481':
           description: ContainerNotFoundException
           schema:
-            $ref: "#/definitions/ContainerNotFoundException"
-        "482":
+            $ref: '#/definitions/ContainerNotFoundException'
+        '482':
           description: InternalServerError
           schema:
-            $ref: "#/definitions/InternalServerError"
+            $ref: '#/definitions/InternalServerError'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/StopAccessLoggingInput"
+            $ref: '#/definitions/StopAccessLoggingInput'
         - name: X-Amz-Target
           in: header
           required: true
@@ -774,13 +709,13 @@ paths:
           enum:
             - MediaStore_20170901.StopAccessLogging
     parameters:
-      - $ref: "#/parameters/X-Amz-Content-Sha256"
-      - $ref: "#/parameters/X-Amz-Date"
-      - $ref: "#/parameters/X-Amz-Algorithm"
-      - $ref: "#/parameters/X-Amz-Credential"
-      - $ref: "#/parameters/X-Amz-Security-Token"
-      - $ref: "#/parameters/X-Amz-Signature"
-      - $ref: "#/parameters/X-Amz-SignedHeaders"
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
   CreateContainerOutput:
     type: object
@@ -788,34 +723,16 @@ definitions:
       - Container
     properties:
       Container:
-        $ref: "#/definitions/Container"
-        description: "<p>ContainerARN: The Amazon Resource Name (ARN) of the newly created
-          container. The ARN has the following format:
-          arn:aws:&lt;region&gt;:&lt;account that owns this
-          container&gt;:container/&lt;name of container&gt;. For example:
-          arn:aws:mediastore:us-west-2:111122223333:container/movies </p>
-          <p>ContainerName: The container name as specified in the request.</p>
-          <p>CreationTime: Unix time stamp.</p> <p>Status: The status of
-          container creation or deletion. The status is one of the following:
-          <code>CREATING</code>, <code>ACTIVE</code>, or <code>DELETING</code>.
-          While the service is creating the container, the status is
-          <code>CREATING</code>. When an endpoint is available, the status
-          changes to <code>ACTIVE</code>.</p> <p>The return value does not
-          include the container's endpoint. To make downstream requests, you
-          must obtain this value by using <a>DescribeContainer</a> or
-          <a>ListContainers</a>.</p>"
+        $ref: '#/definitions/Container'
+        description: '<p>ContainerARN: The Amazon Resource Name (ARN) of the newly created container. The ARN has the following format: arn:aws:&lt;region&gt;:&lt;account that owns this container&gt;:container/&lt;name of container&gt;. For example: arn:aws:mediastore:us-west-2:111122223333:container/movies </p> <p>ContainerName: The container name as specified in the request.</p> <p>CreationTime: Unix time stamp.</p> <p>Status: The status of container creation or deletion. The status is one of the following: <code>CREATING</code>, <code>ACTIVE</code>, or <code>DELETING</code>. While the service is creating the container, the status is <code>CREATING</code>. When an endpoint is available, the status changes to <code>ACTIVE</code>.</p> <p>The return value does not include the container''s endpoint. To make downstream requests, you must obtain this value by using <a>DescribeContainer</a> or <a>ListContainers</a>.</p>'
   CreateContainerInput:
     type: object
     required:
       - ContainerName
     properties:
       ContainerName:
-        $ref: "#/definitions/ContainerName"
-        description: The name for the container. The name must be from 1 to 255 characters.
-          Container names must be unique to your AWS account within a specific
-          region. As an example, you could create a container named
-          <code>movies</code> in every region, as long as you don’t have an
-          existing container with that name.
+        $ref: '#/definitions/ContainerName'
+        description: 'The name for the container. The name must be from 1 to 255 characters. Container names must be unique to your AWS account within a specific region. As an example, you could create a container named <code>movies</code> in every region, as long as you don’t have an existing container with that name.'
   ContainerInUseException: {}
   LimitExceededException: {}
   InternalServerError: {}
@@ -828,8 +745,8 @@ definitions:
       - ContainerName
     properties:
       ContainerName:
-        $ref: "#/definitions/ContainerName"
-        description: "The name of the container to delete. "
+        $ref: '#/definitions/ContainerName'
+        description: 'The name of the container to delete. '
   ContainerNotFoundException: {}
   DeleteContainerPolicyOutput:
     type: object
@@ -840,7 +757,7 @@ definitions:
       - ContainerName
     properties:
       ContainerName:
-        $ref: "#/definitions/ContainerName"
+        $ref: '#/definitions/ContainerName'
         description: The name of the container that holds the policy.
   PolicyNotFoundException: {}
   DeleteCorsPolicyOutput:
@@ -852,7 +769,7 @@ definitions:
       - ContainerName
     properties:
       ContainerName:
-        $ref: "#/definitions/ContainerName"
+        $ref: '#/definitions/ContainerName'
         description: The name of the container to remove the policy from.
   CorsPolicyNotFoundException: {}
   DeleteLifecyclePolicyOutput:
@@ -864,19 +781,19 @@ definitions:
       - ContainerName
     properties:
       ContainerName:
-        $ref: "#/definitions/ContainerName"
+        $ref: '#/definitions/ContainerName'
         description: The name of the container that holds the object lifecycle policy.
   DescribeContainerOutput:
     type: object
     properties:
       Container:
-        $ref: "#/definitions/Container"
+        $ref: '#/definitions/Container'
         description: The name of the queried container.
   DescribeContainerInput:
     type: object
     properties:
       ContainerName:
-        $ref: "#/definitions/ContainerName"
+        $ref: '#/definitions/ContainerName'
         description: The name of the container to query.
   GetContainerPolicyOutput:
     type: object
@@ -884,7 +801,7 @@ definitions:
       - Policy
     properties:
       Policy:
-        $ref: "#/definitions/ContainerPolicy"
+        $ref: '#/definitions/ContainerPolicy'
         description: The contents of the access policy.
   GetContainerPolicyInput:
     type: object
@@ -892,15 +809,15 @@ definitions:
       - ContainerName
     properties:
       ContainerName:
-        $ref: "#/definitions/ContainerName"
-        description: "The name of the container. "
+        $ref: '#/definitions/ContainerName'
+        description: 'The name of the container. '
   GetCorsPolicyOutput:
     type: object
     required:
       - CorsPolicy
     properties:
       CorsPolicy:
-        $ref: "#/definitions/CorsPolicy"
+        $ref: '#/definitions/CorsPolicy'
         description: The CORS policy assigned to the container.
   GetCorsPolicyInput:
     type: object
@@ -908,7 +825,7 @@ definitions:
       - ContainerName
     properties:
       ContainerName:
-        $ref: "#/definitions/ContainerName"
+        $ref: '#/definitions/ContainerName'
         description: The name of the container that the policy is assigned to.
   GetLifecyclePolicyOutput:
     type: object
@@ -916,7 +833,7 @@ definitions:
       - LifecyclePolicy
     properties:
       LifecyclePolicy:
-        $ref: "#/definitions/LifecyclePolicy"
+        $ref: '#/definitions/LifecyclePolicy'
         description: The object lifecycle policy that is assigned to the container.
   GetLifecyclePolicyInput:
     type: object
@@ -924,36 +841,28 @@ definitions:
       - ContainerName
     properties:
       ContainerName:
-        $ref: "#/definitions/ContainerName"
-        description: The name of the container that the object lifecycle policy is assigned
-          to.
+        $ref: '#/definitions/ContainerName'
+        description: The name of the container that the object lifecycle policy is assigned to.
   ListContainersOutput:
     type: object
     required:
       - Containers
     properties:
       Containers:
-        $ref: "#/definitions/ContainerList"
+        $ref: '#/definitions/ContainerList'
         description: The names of the containers.
       NextToken:
-        $ref: "#/definitions/PaginationToken"
-        description: " <code>NextToken</code> is the token to use in the next call to
-          <code>ListContainers</code>. This token is returned only if you
-          included the <code>MaxResults</code> tag in the original command, and
-          only if there are still containers to return. "
+        $ref: '#/definitions/PaginationToken'
+        description: ' <code>NextToken</code> is the token to use in the next call to <code>ListContainers</code>. This token is returned only if you included the <code>MaxResults</code> tag in the original command, and only if there are still containers to return. '
   ListContainersInput:
     type: object
     properties:
       NextToken:
-        $ref: "#/definitions/PaginationToken"
-        description: Only if you used <code>MaxResults</code> in the first command, enter
-          the token (which was included in the previous response) to obtain the
-          next set of containers. This token is included in a response only if
-          there actually are more containers to list.
+        $ref: '#/definitions/PaginationToken'
+        description: 'Only if you used <code>MaxResults</code> in the first command, enter the token (which was included in the previous response) to obtain the next set of containers. This token is included in a response only if there actually are more containers to list.'
       MaxResults:
-        $ref: "#/definitions/ContainerListLimit"
-        description: "Enter the maximum number of containers in the response. Use from 1 to
-          255 characters. "
+        $ref: '#/definitions/ContainerListLimit'
+        description: 'Enter the maximum number of containers in the response. Use from 1 to 255 characters. '
   PutContainerPolicyOutput:
     type: object
     properties: {}
@@ -964,14 +873,11 @@ definitions:
       - Policy
     properties:
       ContainerName:
-        $ref: "#/definitions/ContainerName"
+        $ref: '#/definitions/ContainerName'
         description: The name of the container.
       Policy:
-        $ref: "#/definitions/ContainerPolicy"
-        description: "<p>The contents of the policy, which includes the following: </p>
-          <ul> <li> <p>One <code>Version</code> tag</p> </li> <li> <p>One
-          <code>Statement</code> tag that contains the standard tags for the
-          policy.</p> </li> </ul>"
+        $ref: '#/definitions/ContainerPolicy'
+        description: '<p>The contents of the policy, which includes the following: </p> <ul> <li> <p>One <code>Version</code> tag</p> </li> <li> <p>One <code>Statement</code> tag that contains the standard tags for the policy.</p> </li> </ul>'
   PutCorsPolicyOutput:
     type: object
     properties: {}
@@ -982,11 +888,11 @@ definitions:
       - CorsPolicy
     properties:
       ContainerName:
-        $ref: "#/definitions/ContainerName"
+        $ref: '#/definitions/ContainerName'
         description: The name of the container that you want to assign the CORS policy to.
       CorsPolicy:
-        $ref: "#/definitions/CorsPolicy"
-        description: "The CORS policy to apply to the container. "
+        $ref: '#/definitions/CorsPolicy'
+        description: 'The CORS policy to apply to the container. '
   PutLifecyclePolicyOutput:
     type: object
     properties: {}
@@ -997,11 +903,10 @@ definitions:
       - LifecyclePolicy
     properties:
       ContainerName:
-        $ref: "#/definitions/ContainerName"
-        description: The name of the container that you want to assign the object lifecycle
-          policy to.
+        $ref: '#/definitions/ContainerName'
+        description: The name of the container that you want to assign the object lifecycle policy to.
       LifecyclePolicy:
-        $ref: "#/definitions/LifecyclePolicy"
+        $ref: '#/definitions/LifecyclePolicy'
         description: The object lifecycle policy to apply to the container.
   StartAccessLoggingOutput:
     type: object
@@ -1012,7 +917,7 @@ definitions:
       - ContainerName
     properties:
       ContainerName:
-        $ref: "#/definitions/ContainerName"
+        $ref: '#/definitions/ContainerName'
         description: The name of the container that you want to start access logging on.
   StopAccessLoggingOutput:
     type: object
@@ -1023,17 +928,17 @@ definitions:
       - ContainerName
     properties:
       ContainerName:
-        $ref: "#/definitions/ContainerName"
+        $ref: '#/definitions/ContainerName'
         description: The name of the container that you want to stop access logging on.
   Header:
     type: string
-    pattern: "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+"
+    pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
     minLength: 1
     maxLength: 8192
   AllowedHeaders:
     type: array
     items:
-      $ref: "#/definitions/Header"
+      $ref: '#/definitions/Header'
     minItems: 0
     maxItems: 100
   MethodName:
@@ -1046,18 +951,18 @@ definitions:
   AllowedMethods:
     type: array
     items:
-      $ref: "#/definitions/MethodName"
+      $ref: '#/definitions/MethodName'
     minItems: 1
     maxItems: 4
   Origin:
     type: string
-    pattern: "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+"
+    pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
     minLength: 1
     maxLength: 2048
   AllowedOrigins:
     type: array
     items:
-      $ref: "#/definitions/Origin"
+      $ref: '#/definitions/Origin'
     minItems: 1
     maxItems: 100
   Endpoint:
@@ -1069,12 +974,12 @@ definitions:
     format: date-time
   ContainerARN:
     type: string
-    pattern: arn:aws:mediastore:[a-z]+-[a-z]+-\d:\d{12}:container/\w{1,255}
+    pattern: 'arn:aws:mediastore:[a-z]+-[a-z]+-\d:\d{12}:container/\w{1,255}'
     minLength: 1
     maxLength: 1024
   ContainerName:
     type: string
-    pattern: "[\\w-]+"
+    pattern: '[\w-]+'
     minLength: 1
     maxLength: 255
   ContainerStatus:
@@ -1091,52 +996,35 @@ definitions:
     type: object
     properties:
       Endpoint:
-        $ref: "#/definitions/Endpoint"
-        description: The DNS endpoint of the container. Use the endpoint to identify the
-          specific container when sending requests to the data plane. The
-          service assigns this value when the container is created. Once the
-          value has been assigned, it does not change.
+        $ref: '#/definitions/Endpoint'
+        description: 'The DNS endpoint of the container. Use the endpoint to identify the specific container when sending requests to the data plane. The service assigns this value when the container is created. Once the value has been assigned, it does not change.'
       CreationTime:
-        $ref: "#/definitions/TimeStamp"
+        $ref: '#/definitions/TimeStamp'
         description: Unix timestamp.
       ARN:
-        $ref: "#/definitions/ContainerARN"
-        description: "<p>The Amazon Resource Name (ARN) of the container. The ARN has the
-          following format:</p> <p>arn:aws:&lt;region&gt;:&lt;account that owns
-          this container&gt;:container/&lt;name of container&gt; </p> <p>For
-          example: arn:aws:mediastore:us-west-2:111122223333:container/movies
-          </p>"
+        $ref: '#/definitions/ContainerARN'
+        description: '<p>The Amazon Resource Name (ARN) of the container. The ARN has the following format:</p> <p>arn:aws:&lt;region&gt;:&lt;account that owns this container&gt;:container/&lt;name of container&gt; </p> <p>For example: arn:aws:mediastore:us-west-2:111122223333:container/movies </p>'
       Name:
-        $ref: "#/definitions/ContainerName"
+        $ref: '#/definitions/ContainerName'
         description: The name of the container.
       Status:
-        $ref: "#/definitions/ContainerStatus"
-        description: "The status of container creation or deletion. The status is one of
-          the following: <code>CREATING</code>, <code>ACTIVE</code>, or
-          <code>DELETING</code>. While the service is creating the container,
-          the status is <code>CREATING</code>. When the endpoint is available,
-          the status changes to <code>ACTIVE</code>."
+        $ref: '#/definitions/ContainerStatus'
+        description: 'The status of container creation or deletion. The status is one of the following: <code>CREATING</code>, <code>ACTIVE</code>, or <code>DELETING</code>. While the service is creating the container, the status is <code>CREATING</code>. When the endpoint is available, the status changes to <code>ACTIVE</code>.'
       AccessLoggingEnabled:
-        $ref: "#/definitions/ContainerAccessLoggingEnabled"
-        description: The state of access logging on the container. This value is
-          <code>false</code> by default, indicating that AWS Elemental
-          MediaStore does not send access logs to Amazon CloudWatch Logs. When
-          you enable access logging on the container, MediaStore changes this
-          value to <code>true</code>, indicating that the service delivers
-          access logs for objects stored in that container to CloudWatch Logs.
-    description: This section describes operations that you can perform on an AWS Elemental
-      MediaStore container.
+        $ref: '#/definitions/ContainerAccessLoggingEnabled'
+        description: 'The state of access logging on the container. This value is <code>false</code> by default, indicating that AWS Elemental MediaStore does not send access logs to Amazon CloudWatch Logs. When you enable access logging on the container, MediaStore changes this value to <code>true</code>, indicating that the service delivers access logs for objects stored in that container to CloudWatch Logs.'
+    description: This section describes operations that you can perform on an AWS Elemental MediaStore container.
   ContainerList:
     type: array
     items:
-      $ref: "#/definitions/Container"
+      $ref: '#/definitions/Container'
   ContainerListLimit:
     type: integer
     minimum: 1
     maximum: 100
   ContainerPolicy:
     type: string
-    pattern: "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+"
+    pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
     minLength: 1
     maxLength: 8192
   CorsRule:
@@ -1146,48 +1034,26 @@ definitions:
       - AllowedHeaders
     properties:
       AllowedOrigins:
-        $ref: "#/definitions/AllowedOrigins"
-        description: <p>One or more response headers that you want users to be able to
-          access from their applications (for example, from a JavaScript
-          <code>XMLHttpRequest</code> object).</p> <p>Each CORS rule must have
-          at least one <code>AllowedOrigins</code> element. The string value can
-          include only one wildcard character (*), for example,
-          http://*.example.com. Additionally, you can specify only one wildcard
-          character to allow cross-origin access for all origins.</p>
+        $ref: '#/definitions/AllowedOrigins'
+        description: '<p>One or more response headers that you want users to be able to access from their applications (for example, from a JavaScript <code>XMLHttpRequest</code> object).</p> <p>Each CORS rule must have at least one <code>AllowedOrigins</code> element. The string value can include only one wildcard character (*), for example, http://*.example.com. Additionally, you can specify only one wildcard character to allow cross-origin access for all origins.</p>'
       AllowedMethods:
-        $ref: "#/definitions/AllowedMethods"
-        description: <p>Identifies an HTTP method that the origin that is specified in the
-          rule is allowed to execute.</p> <p>Each CORS rule must contain at
-          least one <code>AllowedMethods</code> and one
-          <code>AllowedOrigins</code> element.</p>
+        $ref: '#/definitions/AllowedMethods'
+        description: <p>Identifies an HTTP method that the origin that is specified in the rule is allowed to execute.</p> <p>Each CORS rule must contain at least one <code>AllowedMethods</code> and one <code>AllowedOrigins</code> element.</p>
       AllowedHeaders:
-        $ref: "#/definitions/AllowedHeaders"
-        description: <p>Specifies which headers are allowed in a preflight
-          <code>OPTIONS</code> request through the
-          <code>Access-Control-Request-Headers</code> header. Each header name
-          that is specified in <code>Access-Control-Request-Headers</code> must
-          have a corresponding entry in the rule. Only the headers that were
-          requested are sent back. </p> <p>This element can contain only one
-          wildcard character (*).</p>
+        $ref: '#/definitions/AllowedHeaders'
+        description: <p>Specifies which headers are allowed in a preflight <code>OPTIONS</code> request through the <code>Access-Control-Request-Headers</code> header. Each header name that is specified in <code>Access-Control-Request-Headers</code> must have a corresponding entry in the rule. Only the headers that were requested are sent back. </p> <p>This element can contain only one wildcard character (*).</p>
       MaxAgeSeconds:
-        $ref: "#/definitions/MaxAgeSeconds"
-        description: <p>The time in seconds that your browser caches the preflight response
-          for the specified resource.</p> <p>A CORS rule can have only one
-          <code>MaxAgeSeconds</code> element.</p>
+        $ref: '#/definitions/MaxAgeSeconds'
+        description: <p>The time in seconds that your browser caches the preflight response for the specified resource.</p> <p>A CORS rule can have only one <code>MaxAgeSeconds</code> element.</p>
       ExposeHeaders:
-        $ref: "#/definitions/ExposeHeaders"
-        description: <p>One or more headers in the response that you want users to be able
-          to access from their applications (for example, from a JavaScript
-          <code>XMLHttpRequest</code> object).</p> <p>This element is optional
-          for each rule.</p>
-    description: A rule for a CORS policy. You can add up to 100 rules to a CORS policy. If
-      more than one rule applies, the service uses the first applicable rule
-      listed.
+        $ref: '#/definitions/ExposeHeaders'
+        description: '<p>One or more headers in the response that you want users to be able to access from their applications (for example, from a JavaScript <code>XMLHttpRequest</code> object).</p> <p>This element is optional for each rule.</p>'
+    description: 'A rule for a CORS policy. You can add up to 100 rules to a CORS policy. If more than one rule applies, the service uses the first applicable rule listed.'
   CorsPolicy:
     type: array
-    description: "The CORS policy of the container. "
+    description: 'The CORS policy of the container. '
     items:
-      $ref: "#/definitions/CorsRule"
+      $ref: '#/definitions/CorsRule'
     minItems: 1
     maxItems: 100
   MaxAgeSeconds:
@@ -1197,16 +1063,16 @@ definitions:
   ExposeHeaders:
     type: array
     items:
-      $ref: "#/definitions/Header"
+      $ref: '#/definitions/Header'
     minItems: 0
     maxItems: 100
   LifecyclePolicy:
     type: string
-    pattern: "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+"
+    pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
     minLength: 0
     maxLength: 8192
   PaginationToken:
     type: string
-    pattern: "[0-9A-Za-z=/+]+"
+    pattern: '[0-9A-Za-z=/+]+'
     minLength: 1
     maxLength: 1024
