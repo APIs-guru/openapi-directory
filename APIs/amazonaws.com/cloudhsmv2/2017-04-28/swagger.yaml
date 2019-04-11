@@ -1,38 +1,41 @@
-swagger: '2.0'
+swagger: "2.0"
 info:
-  version: '2017-04-28'
+  version: 2017-04-28
   x-release: v4
   title: AWS CloudHSM V2
-  description: 'For more information about AWS CloudHSM, see <a href="http://aws.amazon.com/cloudhsm/">AWS CloudHSM</a> and the <a href="http://docs.aws.amazon.com/cloudhsm/latest/userguide/">AWS CloudHSM User Guide</a>.'
+  description: For more information about AWS CloudHSM, see <a
+    href="http://aws.amazon.com/cloudhsm/">AWS CloudHSM</a> and the <a
+    href="http://docs.aws.amazon.com/cloudhsm/latest/userguide/">AWS CloudHSM
+    User Guide</a>.
   x-logo:
-    url: 'https://twitter.com/awscloud/profile_image?size=original'
-    backgroundColor: '#FFFFFF'
-  termsOfService: 'https://aws.amazon.com/service-terms/'
+    url: https://twitter.com/awscloud/profile_image?size=original
+    backgroundColor: "#FFFFFF"
+  termsOfService: https://aws.amazon.com/service-terms/
   contact:
     name: Mike Ralphson
     email: mike.ralphson@gmail.com
-    url: 'https://github.com/mermade/aws2openapi'
+    url: https://github.com/mermade/aws2openapi
     x-twitter: PermittedSoc
   license:
     name: Apache 2.0 License
-    url: 'http://www.apache.org/licenses/'
+    url: http://www.apache.org/licenses/
   x-providerName: amazonaws.com
   x-serviceName: cloudhsmv2
   x-origin:
     - contentType: application/json
-      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/cloudhsmv2-2017-04-28.normal.json'
+      url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/cloudhsmv2-2017-04-28.normal.json
       converter:
-        url: 'https://github.com/mermade/aws2openapi'
+        url: https://github.com/mermade/aws2openapi
         version: 1.0.0
       x-apisguru-direct: true
   x-apiClientRegistration:
-    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+    url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
   x-apisguru-categories:
     - cloud
   x-preferred: true
 externalDocs:
   description: Amazon Web Services documentation
-  url: 'https://docs.aws.amazon.com/cloudhsmv2/'
+  url: https://docs.aws.amazon.com/cloudhsmv2/
 host: cloudhsmv2.amazonaws.com
 basePath: /
 x-hasEquivalentPaths: true
@@ -89,41 +92,41 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  '/#X-Amz-Target=BaldrApiService.CopyBackupToRegion':
+  /#X-Amz-Target=BaldrApiService.CopyBackupToRegion:
     post:
       operationId: CopyBackupToRegion
       description: Copy an AWS CloudHSM cluster backup to a different region.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/CopyBackupToRegionResponse'
-        '480':
+            $ref: "#/definitions/CopyBackupToRegionResponse"
+        "480":
           description: CloudHsmInternalFailureException
           schema:
-            $ref: '#/definitions/CloudHsmInternalFailureException'
-        '481':
+            $ref: "#/definitions/CloudHsmInternalFailureException"
+        "481":
           description: CloudHsmServiceException
           schema:
-            $ref: '#/definitions/CloudHsmServiceException'
-        '482':
+            $ref: "#/definitions/CloudHsmServiceException"
+        "482":
           description: CloudHsmResourceNotFoundException
           schema:
-            $ref: '#/definitions/CloudHsmResourceNotFoundException'
-        '483':
+            $ref: "#/definitions/CloudHsmResourceNotFoundException"
+        "483":
           description: CloudHsmInvalidRequestException
           schema:
-            $ref: '#/definitions/CloudHsmInvalidRequestException'
-        '484':
+            $ref: "#/definitions/CloudHsmInvalidRequestException"
+        "484":
           description: CloudHsmAccessDeniedException
           schema:
-            $ref: '#/definitions/CloudHsmAccessDeniedException'
+            $ref: "#/definitions/CloudHsmAccessDeniedException"
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CopyBackupToRegionRequest'
+            $ref: "#/definitions/CopyBackupToRegionRequest"
         - name: X-Amz-Target
           in: header
           required: true
@@ -131,48 +134,48 @@ paths:
           enum:
             - BaldrApiService.CopyBackupToRegion
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=BaldrApiService.CreateCluster':
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=BaldrApiService.CreateCluster:
     post:
       operationId: CreateCluster
       description: Creates a new AWS CloudHSM cluster.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/CreateClusterResponse'
-        '480':
+            $ref: "#/definitions/CreateClusterResponse"
+        "480":
           description: CloudHsmInternalFailureException
           schema:
-            $ref: '#/definitions/CloudHsmInternalFailureException'
-        '481':
+            $ref: "#/definitions/CloudHsmInternalFailureException"
+        "481":
           description: CloudHsmServiceException
           schema:
-            $ref: '#/definitions/CloudHsmServiceException'
-        '482':
+            $ref: "#/definitions/CloudHsmServiceException"
+        "482":
           description: CloudHsmResourceNotFoundException
           schema:
-            $ref: '#/definitions/CloudHsmResourceNotFoundException'
-        '483':
+            $ref: "#/definitions/CloudHsmResourceNotFoundException"
+        "483":
           description: CloudHsmInvalidRequestException
           schema:
-            $ref: '#/definitions/CloudHsmInvalidRequestException'
-        '484':
+            $ref: "#/definitions/CloudHsmInvalidRequestException"
+        "484":
           description: CloudHsmAccessDeniedException
           schema:
-            $ref: '#/definitions/CloudHsmAccessDeniedException'
+            $ref: "#/definitions/CloudHsmAccessDeniedException"
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateClusterRequest'
+            $ref: "#/definitions/CreateClusterRequest"
         - name: X-Amz-Target
           in: header
           required: true
@@ -180,48 +183,49 @@ paths:
           enum:
             - BaldrApiService.CreateCluster
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=BaldrApiService.CreateHsm':
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=BaldrApiService.CreateHsm:
     post:
       operationId: CreateHsm
-      description: Creates a new hardware security module (HSM) in the specified AWS CloudHSM cluster.
+      description: Creates a new hardware security module (HSM) in the specified AWS
+        CloudHSM cluster.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/CreateHsmResponse'
-        '480':
+            $ref: "#/definitions/CreateHsmResponse"
+        "480":
           description: CloudHsmInternalFailureException
           schema:
-            $ref: '#/definitions/CloudHsmInternalFailureException'
-        '481':
+            $ref: "#/definitions/CloudHsmInternalFailureException"
+        "481":
           description: CloudHsmServiceException
           schema:
-            $ref: '#/definitions/CloudHsmServiceException'
-        '482':
+            $ref: "#/definitions/CloudHsmServiceException"
+        "482":
           description: CloudHsmInvalidRequestException
           schema:
-            $ref: '#/definitions/CloudHsmInvalidRequestException'
-        '483':
+            $ref: "#/definitions/CloudHsmInvalidRequestException"
+        "483":
           description: CloudHsmResourceNotFoundException
           schema:
-            $ref: '#/definitions/CloudHsmResourceNotFoundException'
-        '484':
+            $ref: "#/definitions/CloudHsmResourceNotFoundException"
+        "484":
           description: CloudHsmAccessDeniedException
           schema:
-            $ref: '#/definitions/CloudHsmAccessDeniedException'
+            $ref: "#/definitions/CloudHsmAccessDeniedException"
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateHsmRequest'
+            $ref: "#/definitions/CreateHsmRequest"
         - name: X-Amz-Target
           in: header
           required: true
@@ -229,48 +233,50 @@ paths:
           enum:
             - BaldrApiService.CreateHsm
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=BaldrApiService.DeleteBackup':
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=BaldrApiService.DeleteBackup:
     post:
       operationId: DeleteBackup
-      description: 'Deletes a specified AWS CloudHSM backup. A backup can be restored up to 7 days after the DeleteBackup request. For more information on restoring a backup, see <a>RestoreBackup</a> '
+      description: "Deletes a specified AWS CloudHSM backup. A backup can be restored up to
+        7 days after the DeleteBackup request. For more information on restoring
+        a backup, see <a>RestoreBackup</a> "
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/DeleteBackupResponse'
-        '480':
+            $ref: "#/definitions/DeleteBackupResponse"
+        "480":
           description: CloudHsmInternalFailureException
           schema:
-            $ref: '#/definitions/CloudHsmInternalFailureException'
-        '481':
+            $ref: "#/definitions/CloudHsmInternalFailureException"
+        "481":
           description: CloudHsmServiceException
           schema:
-            $ref: '#/definitions/CloudHsmServiceException'
-        '482':
+            $ref: "#/definitions/CloudHsmServiceException"
+        "482":
           description: CloudHsmResourceNotFoundException
           schema:
-            $ref: '#/definitions/CloudHsmResourceNotFoundException'
-        '483':
+            $ref: "#/definitions/CloudHsmResourceNotFoundException"
+        "483":
           description: CloudHsmInvalidRequestException
           schema:
-            $ref: '#/definitions/CloudHsmInvalidRequestException'
-        '484':
+            $ref: "#/definitions/CloudHsmInvalidRequestException"
+        "484":
           description: CloudHsmAccessDeniedException
           schema:
-            $ref: '#/definitions/CloudHsmAccessDeniedException'
+            $ref: "#/definitions/CloudHsmAccessDeniedException"
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/DeleteBackupRequest'
+            $ref: "#/definitions/DeleteBackupRequest"
         - name: X-Amz-Target
           in: header
           required: true
@@ -278,48 +284,51 @@ paths:
           enum:
             - BaldrApiService.DeleteBackup
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=BaldrApiService.DeleteCluster':
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=BaldrApiService.DeleteCluster:
     post:
       operationId: DeleteCluster
-      description: 'Deletes the specified AWS CloudHSM cluster. Before you can delete a cluster, you must delete all HSMs in the cluster. To see if the cluster contains any HSMs, use <a>DescribeClusters</a>. To delete an HSM, use <a>DeleteHsm</a>.'
+      description: Deletes the specified AWS CloudHSM cluster. Before you can delete a
+        cluster, you must delete all HSMs in the cluster. To see if the cluster
+        contains any HSMs, use <a>DescribeClusters</a>. To delete an HSM, use
+        <a>DeleteHsm</a>.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/DeleteClusterResponse'
-        '480':
+            $ref: "#/definitions/DeleteClusterResponse"
+        "480":
           description: CloudHsmInternalFailureException
           schema:
-            $ref: '#/definitions/CloudHsmInternalFailureException'
-        '481':
+            $ref: "#/definitions/CloudHsmInternalFailureException"
+        "481":
           description: CloudHsmServiceException
           schema:
-            $ref: '#/definitions/CloudHsmServiceException'
-        '482':
+            $ref: "#/definitions/CloudHsmServiceException"
+        "482":
           description: CloudHsmResourceNotFoundException
           schema:
-            $ref: '#/definitions/CloudHsmResourceNotFoundException'
-        '483':
+            $ref: "#/definitions/CloudHsmResourceNotFoundException"
+        "483":
           description: CloudHsmInvalidRequestException
           schema:
-            $ref: '#/definitions/CloudHsmInvalidRequestException'
-        '484':
+            $ref: "#/definitions/CloudHsmInvalidRequestException"
+        "484":
           description: CloudHsmAccessDeniedException
           schema:
-            $ref: '#/definitions/CloudHsmAccessDeniedException'
+            $ref: "#/definitions/CloudHsmAccessDeniedException"
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/DeleteClusterRequest'
+            $ref: "#/definitions/DeleteClusterRequest"
         - name: X-Amz-Target
           in: header
           required: true
@@ -327,48 +336,51 @@ paths:
           enum:
             - BaldrApiService.DeleteCluster
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=BaldrApiService.DeleteHsm':
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=BaldrApiService.DeleteHsm:
     post:
       operationId: DeleteHsm
-      description: 'Deletes the specified HSM. To specify an HSM, you can use its identifier (ID), the IP address of the HSM''s elastic network interface (ENI), or the ID of the HSM''s ENI. You need to specify only one of these values. To find these values, use <a>DescribeClusters</a>.'
+      description: Deletes the specified HSM. To specify an HSM, you can use its identifier
+        (ID), the IP address of the HSM's elastic network interface (ENI), or
+        the ID of the HSM's ENI. You need to specify only one of these values.
+        To find these values, use <a>DescribeClusters</a>.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/DeleteHsmResponse'
-        '480':
+            $ref: "#/definitions/DeleteHsmResponse"
+        "480":
           description: CloudHsmInternalFailureException
           schema:
-            $ref: '#/definitions/CloudHsmInternalFailureException'
-        '481':
+            $ref: "#/definitions/CloudHsmInternalFailureException"
+        "481":
           description: CloudHsmServiceException
           schema:
-            $ref: '#/definitions/CloudHsmServiceException'
-        '482':
+            $ref: "#/definitions/CloudHsmServiceException"
+        "482":
           description: CloudHsmResourceNotFoundException
           schema:
-            $ref: '#/definitions/CloudHsmResourceNotFoundException'
-        '483':
+            $ref: "#/definitions/CloudHsmResourceNotFoundException"
+        "483":
           description: CloudHsmInvalidRequestException
           schema:
-            $ref: '#/definitions/CloudHsmInvalidRequestException'
-        '484':
+            $ref: "#/definitions/CloudHsmInvalidRequestException"
+        "484":
           description: CloudHsmAccessDeniedException
           schema:
-            $ref: '#/definitions/CloudHsmAccessDeniedException'
+            $ref: "#/definitions/CloudHsmAccessDeniedException"
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/DeleteHsmRequest'
+            $ref: "#/definitions/DeleteHsmRequest"
         - name: X-Amz-Target
           in: header
           required: true
@@ -376,48 +388,55 @@ paths:
           enum:
             - BaldrApiService.DeleteHsm
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=BaldrApiService.DescribeBackups':
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=BaldrApiService.DescribeBackups:
     post:
       operationId: DescribeBackups
-      description: '<p>Gets information about backups of AWS CloudHSM clusters.</p> <p>This is a paginated operation, which means that each response might contain only a subset of all the backups. When the response contains only a subset of backups, it includes a <code>NextToken</code> value. Use this value in a subsequent <code>DescribeBackups</code> request to get more backups. When you receive a response with no <code>NextToken</code> (or an empty or null value), that means there are no more backups to get.</p>'
+      description: <p>Gets information about backups of AWS CloudHSM clusters.</p> <p>This
+        is a paginated operation, which means that each response might contain
+        only a subset of all the backups. When the response contains only a
+        subset of backups, it includes a <code>NextToken</code> value. Use this
+        value in a subsequent <code>DescribeBackups</code> request to get more
+        backups. When you receive a response with no <code>NextToken</code> (or
+        an empty or null value), that means there are no more backups to
+        get.</p>
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/DescribeBackupsResponse'
-        '480':
+            $ref: "#/definitions/DescribeBackupsResponse"
+        "480":
           description: CloudHsmInternalFailureException
           schema:
-            $ref: '#/definitions/CloudHsmInternalFailureException'
-        '481':
+            $ref: "#/definitions/CloudHsmInternalFailureException"
+        "481":
           description: CloudHsmServiceException
           schema:
-            $ref: '#/definitions/CloudHsmServiceException'
-        '482':
+            $ref: "#/definitions/CloudHsmServiceException"
+        "482":
           description: CloudHsmResourceNotFoundException
           schema:
-            $ref: '#/definitions/CloudHsmResourceNotFoundException'
-        '483':
+            $ref: "#/definitions/CloudHsmResourceNotFoundException"
+        "483":
           description: CloudHsmInvalidRequestException
           schema:
-            $ref: '#/definitions/CloudHsmInvalidRequestException'
-        '484':
+            $ref: "#/definitions/CloudHsmInvalidRequestException"
+        "484":
           description: CloudHsmAccessDeniedException
           schema:
-            $ref: '#/definitions/CloudHsmAccessDeniedException'
+            $ref: "#/definitions/CloudHsmAccessDeniedException"
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/DescribeBackupsRequest'
+            $ref: "#/definitions/DescribeBackupsRequest"
         - name: MaxResults
           type: string
           in: query
@@ -435,44 +454,50 @@ paths:
           enum:
             - BaldrApiService.DescribeBackups
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=BaldrApiService.DescribeClusters':
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=BaldrApiService.DescribeClusters:
     post:
       operationId: DescribeClusters
-      description: '<p>Gets information about AWS CloudHSM clusters.</p> <p>This is a paginated operation, which means that each response might contain only a subset of all the clusters. When the response contains only a subset of clusters, it includes a <code>NextToken</code> value. Use this value in a subsequent <code>DescribeClusters</code> request to get more clusters. When you receive a response with no <code>NextToken</code> (or an empty or null value), that means there are no more clusters to get.</p>'
+      description: <p>Gets information about AWS CloudHSM clusters.</p> <p>This is a
+        paginated operation, which means that each response might contain only a
+        subset of all the clusters. When the response contains only a subset of
+        clusters, it includes a <code>NextToken</code> value. Use this value in
+        a subsequent <code>DescribeClusters</code> request to get more clusters.
+        When you receive a response with no <code>NextToken</code> (or an empty
+        or null value), that means there are no more clusters to get.</p>
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/DescribeClustersResponse'
-        '480':
+            $ref: "#/definitions/DescribeClustersResponse"
+        "480":
           description: CloudHsmInternalFailureException
           schema:
-            $ref: '#/definitions/CloudHsmInternalFailureException'
-        '481':
+            $ref: "#/definitions/CloudHsmInternalFailureException"
+        "481":
           description: CloudHsmServiceException
           schema:
-            $ref: '#/definitions/CloudHsmServiceException'
-        '482':
+            $ref: "#/definitions/CloudHsmServiceException"
+        "482":
           description: CloudHsmInvalidRequestException
           schema:
-            $ref: '#/definitions/CloudHsmInvalidRequestException'
-        '483':
+            $ref: "#/definitions/CloudHsmInvalidRequestException"
+        "483":
           description: CloudHsmAccessDeniedException
           schema:
-            $ref: '#/definitions/CloudHsmAccessDeniedException'
+            $ref: "#/definitions/CloudHsmAccessDeniedException"
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/DescribeClustersRequest'
+            $ref: "#/definitions/DescribeClustersRequest"
         - name: MaxResults
           type: string
           in: query
@@ -490,48 +515,52 @@ paths:
           enum:
             - BaldrApiService.DescribeClusters
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=BaldrApiService.InitializeCluster':
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=BaldrApiService.InitializeCluster:
     post:
       operationId: InitializeCluster
-      description: 'Claims an AWS CloudHSM cluster by submitting the cluster certificate issued by your issuing certificate authority (CA) and the CA''s root certificate. Before you can claim a cluster, you must sign the cluster''s certificate signing request (CSR) with your issuing CA. To get the cluster''s CSR, use <a>DescribeClusters</a>.'
+      description: Claims an AWS CloudHSM cluster by submitting the cluster certificate
+        issued by your issuing certificate authority (CA) and the CA's root
+        certificate. Before you can claim a cluster, you must sign the cluster's
+        certificate signing request (CSR) with your issuing CA. To get the
+        cluster's CSR, use <a>DescribeClusters</a>.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/InitializeClusterResponse'
-        '480':
+            $ref: "#/definitions/InitializeClusterResponse"
+        "480":
           description: CloudHsmInternalFailureException
           schema:
-            $ref: '#/definitions/CloudHsmInternalFailureException'
-        '481':
+            $ref: "#/definitions/CloudHsmInternalFailureException"
+        "481":
           description: CloudHsmServiceException
           schema:
-            $ref: '#/definitions/CloudHsmServiceException'
-        '482':
+            $ref: "#/definitions/CloudHsmServiceException"
+        "482":
           description: CloudHsmResourceNotFoundException
           schema:
-            $ref: '#/definitions/CloudHsmResourceNotFoundException'
-        '483':
+            $ref: "#/definitions/CloudHsmResourceNotFoundException"
+        "483":
           description: CloudHsmInvalidRequestException
           schema:
-            $ref: '#/definitions/CloudHsmInvalidRequestException'
-        '484':
+            $ref: "#/definitions/CloudHsmInvalidRequestException"
+        "484":
           description: CloudHsmAccessDeniedException
           schema:
-            $ref: '#/definitions/CloudHsmAccessDeniedException'
+            $ref: "#/definitions/CloudHsmAccessDeniedException"
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/InitializeClusterRequest'
+            $ref: "#/definitions/InitializeClusterRequest"
         - name: X-Amz-Target
           in: header
           required: true
@@ -539,48 +568,54 @@ paths:
           enum:
             - BaldrApiService.InitializeCluster
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=BaldrApiService.ListTags':
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=BaldrApiService.ListTags:
     post:
       operationId: ListTags
-      description: '<p>Gets a list of tags for the specified AWS CloudHSM cluster.</p> <p>This is a paginated operation, which means that each response might contain only a subset of all the tags. When the response contains only a subset of tags, it includes a <code>NextToken</code> value. Use this value in a subsequent <code>ListTags</code> request to get more tags. When you receive a response with no <code>NextToken</code> (or an empty or null value), that means there are no more tags to get.</p>'
+      description: <p>Gets a list of tags for the specified AWS CloudHSM cluster.</p>
+        <p>This is a paginated operation, which means that each response might
+        contain only a subset of all the tags. When the response contains only a
+        subset of tags, it includes a <code>NextToken</code> value. Use this
+        value in a subsequent <code>ListTags</code> request to get more tags.
+        When you receive a response with no <code>NextToken</code> (or an empty
+        or null value), that means there are no more tags to get.</p>
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/ListTagsResponse'
-        '480':
+            $ref: "#/definitions/ListTagsResponse"
+        "480":
           description: CloudHsmInternalFailureException
           schema:
-            $ref: '#/definitions/CloudHsmInternalFailureException'
-        '481':
+            $ref: "#/definitions/CloudHsmInternalFailureException"
+        "481":
           description: CloudHsmServiceException
           schema:
-            $ref: '#/definitions/CloudHsmServiceException'
-        '482':
+            $ref: "#/definitions/CloudHsmServiceException"
+        "482":
           description: CloudHsmResourceNotFoundException
           schema:
-            $ref: '#/definitions/CloudHsmResourceNotFoundException'
-        '483':
+            $ref: "#/definitions/CloudHsmResourceNotFoundException"
+        "483":
           description: CloudHsmInvalidRequestException
           schema:
-            $ref: '#/definitions/CloudHsmInvalidRequestException'
-        '484':
+            $ref: "#/definitions/CloudHsmInvalidRequestException"
+        "484":
           description: CloudHsmAccessDeniedException
           schema:
-            $ref: '#/definitions/CloudHsmAccessDeniedException'
+            $ref: "#/definitions/CloudHsmAccessDeniedException"
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/ListTagsRequest'
+            $ref: "#/definitions/ListTagsRequest"
         - name: MaxResults
           type: string
           in: query
@@ -598,48 +633,50 @@ paths:
           enum:
             - BaldrApiService.ListTags
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=BaldrApiService.RestoreBackup':
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=BaldrApiService.RestoreBackup:
     post:
       operationId: RestoreBackup
-      description: 'Restores a specified AWS CloudHSM backup that is in the <code>PENDING_DELETION</code> state. For more information on deleting a backup, see <a>DeleteBackup</a>.'
+      description: Restores a specified AWS CloudHSM backup that is in the
+        <code>PENDING_DELETION</code> state. For more information on deleting a
+        backup, see <a>DeleteBackup</a>.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/RestoreBackupResponse'
-        '480':
+            $ref: "#/definitions/RestoreBackupResponse"
+        "480":
           description: CloudHsmInternalFailureException
           schema:
-            $ref: '#/definitions/CloudHsmInternalFailureException'
-        '481':
+            $ref: "#/definitions/CloudHsmInternalFailureException"
+        "481":
           description: CloudHsmServiceException
           schema:
-            $ref: '#/definitions/CloudHsmServiceException'
-        '482':
+            $ref: "#/definitions/CloudHsmServiceException"
+        "482":
           description: CloudHsmResourceNotFoundException
           schema:
-            $ref: '#/definitions/CloudHsmResourceNotFoundException'
-        '483':
+            $ref: "#/definitions/CloudHsmResourceNotFoundException"
+        "483":
           description: CloudHsmInvalidRequestException
           schema:
-            $ref: '#/definitions/CloudHsmInvalidRequestException'
-        '484':
+            $ref: "#/definitions/CloudHsmInvalidRequestException"
+        "484":
           description: CloudHsmAccessDeniedException
           schema:
-            $ref: '#/definitions/CloudHsmAccessDeniedException'
+            $ref: "#/definitions/CloudHsmAccessDeniedException"
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/RestoreBackupRequest'
+            $ref: "#/definitions/RestoreBackupRequest"
         - name: X-Amz-Target
           in: header
           required: true
@@ -647,48 +684,49 @@ paths:
           enum:
             - BaldrApiService.RestoreBackup
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=BaldrApiService.TagResource':
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=BaldrApiService.TagResource:
     post:
       operationId: TagResource
-      description: Adds or overwrites one or more tags for the specified AWS CloudHSM cluster.
+      description: Adds or overwrites one or more tags for the specified AWS CloudHSM
+        cluster.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/TagResourceResponse'
-        '480':
+            $ref: "#/definitions/TagResourceResponse"
+        "480":
           description: CloudHsmInternalFailureException
           schema:
-            $ref: '#/definitions/CloudHsmInternalFailureException'
-        '481':
+            $ref: "#/definitions/CloudHsmInternalFailureException"
+        "481":
           description: CloudHsmServiceException
           schema:
-            $ref: '#/definitions/CloudHsmServiceException'
-        '482':
+            $ref: "#/definitions/CloudHsmServiceException"
+        "482":
           description: CloudHsmResourceNotFoundException
           schema:
-            $ref: '#/definitions/CloudHsmResourceNotFoundException'
-        '483':
+            $ref: "#/definitions/CloudHsmResourceNotFoundException"
+        "483":
           description: CloudHsmInvalidRequestException
           schema:
-            $ref: '#/definitions/CloudHsmInvalidRequestException'
-        '484':
+            $ref: "#/definitions/CloudHsmInvalidRequestException"
+        "484":
           description: CloudHsmAccessDeniedException
           schema:
-            $ref: '#/definitions/CloudHsmAccessDeniedException'
+            $ref: "#/definitions/CloudHsmAccessDeniedException"
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/TagResourceRequest'
+            $ref: "#/definitions/TagResourceRequest"
         - name: X-Amz-Target
           in: header
           required: true
@@ -696,48 +734,49 @@ paths:
           enum:
             - BaldrApiService.TagResource
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=BaldrApiService.UntagResource':
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=BaldrApiService.UntagResource:
     post:
       operationId: UntagResource
-      description: Removes the specified tag or tags from the specified AWS CloudHSM cluster.
+      description: Removes the specified tag or tags from the specified AWS CloudHSM
+        cluster.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/UntagResourceResponse'
-        '480':
+            $ref: "#/definitions/UntagResourceResponse"
+        "480":
           description: CloudHsmInternalFailureException
           schema:
-            $ref: '#/definitions/CloudHsmInternalFailureException'
-        '481':
+            $ref: "#/definitions/CloudHsmInternalFailureException"
+        "481":
           description: CloudHsmServiceException
           schema:
-            $ref: '#/definitions/CloudHsmServiceException'
-        '482':
+            $ref: "#/definitions/CloudHsmServiceException"
+        "482":
           description: CloudHsmResourceNotFoundException
           schema:
-            $ref: '#/definitions/CloudHsmResourceNotFoundException'
-        '483':
+            $ref: "#/definitions/CloudHsmResourceNotFoundException"
+        "483":
           description: CloudHsmInvalidRequestException
           schema:
-            $ref: '#/definitions/CloudHsmInvalidRequestException'
-        '484':
+            $ref: "#/definitions/CloudHsmInvalidRequestException"
+        "484":
           description: CloudHsmAccessDeniedException
           schema:
-            $ref: '#/definitions/CloudHsmAccessDeniedException'
+            $ref: "#/definitions/CloudHsmAccessDeniedException"
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UntagResourceRequest'
+            $ref: "#/definitions/UntagResourceRequest"
         - name: X-Amz-Target
           in: header
           required: true
@@ -745,20 +784,26 @@ paths:
           enum:
             - BaldrApiService.UntagResource
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
 definitions:
   CopyBackupToRegionResponse:
     type: object
     properties:
       DestinationBackup:
-        $ref: '#/definitions/DestinationBackup'
-        description: '<p>Information on the backup that will be copied to the destination region, including CreateTimestamp, SourceBackup, SourceCluster, and Source Region. CreateTimestamp of the destination backup will be the same as that of the source backup.</p> <p>You will need to use the <code>sourceBackupID</code> returned in this operation to use the <a>DescribeBackups</a> operation on the backup that will be copied to the destination region.</p>'
+        $ref: "#/definitions/DestinationBackup"
+        description: <p>Information on the backup that will be copied to the destination
+          region, including CreateTimestamp, SourceBackup, SourceCluster, and
+          Source Region. CreateTimestamp of the destination backup will be the
+          same as that of the source backup.</p> <p>You will need to use the
+          <code>sourceBackupID</code> returned in this operation to use the
+          <a>DescribeBackups</a> operation on the backup that will be copied to
+          the destination region.</p>
   CopyBackupToRegionRequest:
     type: object
     required:
@@ -766,11 +811,11 @@ definitions:
       - BackupId
     properties:
       DestinationRegion:
-        $ref: '#/definitions/Region'
+        $ref: "#/definitions/Region"
         description: The AWS region that will contain your copied CloudHSM cluster backup.
       BackupId:
-        $ref: '#/definitions/BackupId'
-        description: 'The ID of the backup that will be copied to the destination region. '
+        $ref: "#/definitions/BackupId"
+        description: "The ID of the backup that will be copied to the destination region. "
   CloudHsmInternalFailureException: {}
   CloudHsmServiceException: {}
   CloudHsmResourceNotFoundException: {}
@@ -780,7 +825,7 @@ definitions:
     type: object
     properties:
       Cluster:
-        $ref: '#/definitions/Cluster'
+        $ref: "#/definitions/Cluster"
         description: Information about the cluster that was created.
   CreateClusterRequest:
     type: object
@@ -789,19 +834,27 @@ definitions:
       - HsmType
     properties:
       SubnetIds:
-        $ref: '#/definitions/SubnetIds'
-        description: '<p>The identifiers (IDs) of the subnets where you are creating the cluster. You must specify at least one subnet. If you specify multiple subnets, they must meet the following criteria:</p> <ul> <li> <p>All subnets must be in the same virtual private cloud (VPC).</p> </li> <li> <p>You can specify only one subnet per Availability Zone.</p> </li> </ul>'
+        $ref: "#/definitions/SubnetIds"
+        description: <p>The identifiers (IDs) of the subnets where you are creating the
+          cluster. You must specify at least one subnet. If you specify multiple
+          subnets, they must meet the following criteria:</p> <ul> <li> <p>All
+          subnets must be in the same virtual private cloud (VPC).</p> </li>
+          <li> <p>You can specify only one subnet per Availability Zone.</p>
+          </li> </ul>
       HsmType:
-        $ref: '#/definitions/HsmType'
-        description: The type of HSM to use in the cluster. Currently the only allowed value is <code>hsm1.medium</code>.
+        $ref: "#/definitions/HsmType"
+        description: The type of HSM to use in the cluster. Currently the only allowed
+          value is <code>hsm1.medium</code>.
       SourceBackupId:
-        $ref: '#/definitions/BackupId'
-        description: 'The identifier (ID) of the cluster backup to restore. Use this value to restore the cluster from a backup instead of creating a new cluster. To find the backup ID, use <a>DescribeBackups</a>.'
+        $ref: "#/definitions/BackupId"
+        description: The identifier (ID) of the cluster backup to restore. Use this value
+          to restore the cluster from a backup instead of creating a new
+          cluster. To find the backup ID, use <a>DescribeBackups</a>.
   CreateHsmResponse:
     type: object
     properties:
       Hsm:
-        $ref: '#/definitions/Hsm'
+        $ref: "#/definitions/Hsm"
         description: Information about the HSM that was created.
   CreateHsmRequest:
     type: object
@@ -810,19 +863,24 @@ definitions:
       - AvailabilityZone
     properties:
       ClusterId:
-        $ref: '#/definitions/ClusterId'
-        description: 'The identifier (ID) of the HSM''s cluster. To find the cluster ID, use <a>DescribeClusters</a>.'
+        $ref: "#/definitions/ClusterId"
+        description: The identifier (ID) of the HSM's cluster. To find the cluster ID, use
+          <a>DescribeClusters</a>.
       AvailabilityZone:
-        $ref: '#/definitions/ExternalAz'
-        description: 'The Availability Zone where you are creating the HSM. To find the cluster''s Availability Zones, use <a>DescribeClusters</a>.'
+        $ref: "#/definitions/ExternalAz"
+        description: The Availability Zone where you are creating the HSM. To find the
+          cluster's Availability Zones, use <a>DescribeClusters</a>.
       IpAddress:
-        $ref: '#/definitions/IpAddress'
-        description: 'The HSM''s IP address. If you specify an IP address, use an available address from the subnet that maps to the Availability Zone where you are creating the HSM. If you don''t specify an IP address, one is chosen for you from that subnet.'
+        $ref: "#/definitions/IpAddress"
+        description: The HSM's IP address. If you specify an IP address, use an available
+          address from the subnet that maps to the Availability Zone where you
+          are creating the HSM. If you don't specify an IP address, one is
+          chosen for you from that subnet.
   DeleteBackupResponse:
     type: object
     properties:
       Backup:
-        $ref: '#/definitions/Backup'
+        $ref: "#/definitions/Backup"
         description: Information on the <code>Backup</code> object deleted.
   DeleteBackupRequest:
     type: object
@@ -830,13 +888,14 @@ definitions:
       - BackupId
     properties:
       BackupId:
-        $ref: '#/definitions/BackupId'
-        description: 'The ID of the backup to be deleted. To find the ID of a backup, use the <a>DescribeBackups</a> operation.'
+        $ref: "#/definitions/BackupId"
+        description: The ID of the backup to be deleted. To find the ID of a backup, use
+          the <a>DescribeBackups</a> operation.
   DeleteClusterResponse:
     type: object
     properties:
       Cluster:
-        $ref: '#/definitions/Cluster'
+        $ref: "#/definitions/Cluster"
         description: Information about the cluster that was deleted.
   DeleteClusterRequest:
     type: object
@@ -844,13 +903,14 @@ definitions:
       - ClusterId
     properties:
       ClusterId:
-        $ref: '#/definitions/ClusterId'
-        description: 'The identifier (ID) of the cluster that you are deleting. To find the cluster ID, use <a>DescribeClusters</a>.'
+        $ref: "#/definitions/ClusterId"
+        description: The identifier (ID) of the cluster that you are deleting. To find the
+          cluster ID, use <a>DescribeClusters</a>.
   DeleteHsmResponse:
     type: object
     properties:
       HsmId:
-        $ref: '#/definitions/HsmId'
+        $ref: "#/definitions/HsmId"
         description: The identifier (ID) of the HSM that was deleted.
   DeleteHsmRequest:
     type: object
@@ -858,69 +918,98 @@ definitions:
       - ClusterId
     properties:
       ClusterId:
-        $ref: '#/definitions/ClusterId'
-        description: The identifier (ID) of the cluster that contains the HSM that you are deleting.
+        $ref: "#/definitions/ClusterId"
+        description: The identifier (ID) of the cluster that contains the HSM that you are
+          deleting.
       HsmId:
-        $ref: '#/definitions/HsmId'
+        $ref: "#/definitions/HsmId"
         description: The identifier (ID) of the HSM that you are deleting.
       EniId:
-        $ref: '#/definitions/EniId'
-        description: The identifier (ID) of the elastic network interface (ENI) of the HSM that you are deleting.
+        $ref: "#/definitions/EniId"
+        description: The identifier (ID) of the elastic network interface (ENI) of the HSM
+          that you are deleting.
       EniIp:
-        $ref: '#/definitions/IpAddress'
-        description: The IP address of the elastic network interface (ENI) of the HSM that you are deleting.
+        $ref: "#/definitions/IpAddress"
+        description: The IP address of the elastic network interface (ENI) of the HSM that
+          you are deleting.
   DescribeBackupsResponse:
     type: object
     properties:
       Backups:
-        $ref: '#/definitions/Backups'
+        $ref: "#/definitions/Backups"
         description: A list of backups.
       NextToken:
-        $ref: '#/definitions/NextToken'
-        description: An opaque string that indicates that the response contains only a subset of backups. Use this value in a subsequent <code>DescribeBackups</code> request to get more backups.
+        $ref: "#/definitions/NextToken"
+        description: An opaque string that indicates that the response contains only a
+          subset of backups. Use this value in a subsequent
+          <code>DescribeBackups</code> request to get more backups.
   DescribeBackupsRequest:
     type: object
     properties:
       NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The <code>NextToken</code> value that you received in the previous response. Use this value to get more backups.
+        $ref: "#/definitions/NextToken"
+        description: The <code>NextToken</code> value that you received in the previous
+          response. Use this value to get more backups.
       MaxResults:
-        $ref: '#/definitions/MaxSize'
-        description: 'The maximum number of backups to return in the response. When there are more backups than the number you specify, the response contains a <code>NextToken</code> value.'
+        $ref: "#/definitions/MaxSize"
+        description: The maximum number of backups to return in the response. When there
+          are more backups than the number you specify, the response contains a
+          <code>NextToken</code> value.
       Filters:
-        $ref: '#/definitions/Filters'
-        description: <p>One or more filters to limit the items returned in the response.</p> <p>Use the <code>backupIds</code> filter to return only the specified backups. Specify backups by their backup identifier (ID).</p> <p>Use the <code>sourceBackupIds</code> filter to return only the backups created from a source backup. The <code>sourceBackupID</code> of a source backup is returned by the <a>CopyBackupToRegion</a> operation.</p> <p>Use the <code>clusterIds</code> filter to return only the backups for the specified clusters. Specify clusters by their cluster identifier (ID).</p> <p>Use the <code>states</code> filter to return only backups that match the specified state.</p>
+        $ref: "#/definitions/Filters"
+        description: <p>One or more filters to limit the items returned in the
+          response.</p> <p>Use the <code>backupIds</code> filter to return only
+          the specified backups. Specify backups by their backup identifier
+          (ID).</p> <p>Use the <code>sourceBackupIds</code> filter to return
+          only the backups created from a source backup. The
+          <code>sourceBackupID</code> of a source backup is returned by the
+          <a>CopyBackupToRegion</a> operation.</p> <p>Use the
+          <code>clusterIds</code> filter to return only the backups for the
+          specified clusters. Specify clusters by their cluster identifier
+          (ID).</p> <p>Use the <code>states</code> filter to return only backups
+          that match the specified state.</p>
       SortAscending:
-        $ref: '#/definitions/Boolean'
+        $ref: "#/definitions/Boolean"
   DescribeClustersResponse:
     type: object
     properties:
       Clusters:
-        $ref: '#/definitions/Clusters'
+        $ref: "#/definitions/Clusters"
         description: A list of clusters.
       NextToken:
-        $ref: '#/definitions/NextToken'
-        description: An opaque string that indicates that the response contains only a subset of clusters. Use this value in a subsequent <code>DescribeClusters</code> request to get more clusters.
+        $ref: "#/definitions/NextToken"
+        description: An opaque string that indicates that the response contains only a
+          subset of clusters. Use this value in a subsequent
+          <code>DescribeClusters</code> request to get more clusters.
   DescribeClustersRequest:
     type: object
     properties:
       Filters:
-        $ref: '#/definitions/Filters'
-        description: <p>One or more filters to limit the items returned in the response.</p> <p>Use the <code>clusterIds</code> filter to return only the specified clusters. Specify clusters by their cluster identifier (ID).</p> <p>Use the <code>vpcIds</code> filter to return only the clusters in the specified virtual private clouds (VPCs). Specify VPCs by their VPC identifier (ID).</p> <p>Use the <code>states</code> filter to return only clusters that match the specified state.</p>
+        $ref: "#/definitions/Filters"
+        description: <p>One or more filters to limit the items returned in the
+          response.</p> <p>Use the <code>clusterIds</code> filter to return only
+          the specified clusters. Specify clusters by their cluster identifier
+          (ID).</p> <p>Use the <code>vpcIds</code> filter to return only the
+          clusters in the specified virtual private clouds (VPCs). Specify VPCs
+          by their VPC identifier (ID).</p> <p>Use the <code>states</code>
+          filter to return only clusters that match the specified state.</p>
       NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The <code>NextToken</code> value that you received in the previous response. Use this value to get more clusters.
+        $ref: "#/definitions/NextToken"
+        description: The <code>NextToken</code> value that you received in the previous
+          response. Use this value to get more clusters.
       MaxResults:
-        $ref: '#/definitions/MaxSize'
-        description: 'The maximum number of clusters to return in the response. When there are more clusters than the number you specify, the response contains a <code>NextToken</code> value.'
+        $ref: "#/definitions/MaxSize"
+        description: The maximum number of clusters to return in the response. When there
+          are more clusters than the number you specify, the response contains a
+          <code>NextToken</code> value.
   InitializeClusterResponse:
     type: object
     properties:
       State:
-        $ref: '#/definitions/ClusterState'
+        $ref: "#/definitions/ClusterState"
         description: The cluster's state.
       StateMessage:
-        $ref: '#/definitions/StateMessage'
+        $ref: "#/definitions/StateMessage"
         description: A description of the cluster's state.
   InitializeClusterRequest:
     type: object
@@ -930,44 +1019,58 @@ definitions:
       - TrustAnchor
     properties:
       ClusterId:
-        $ref: '#/definitions/ClusterId'
-        description: 'The identifier (ID) of the cluster that you are claiming. To find the cluster ID, use <a>DescribeClusters</a>.'
+        $ref: "#/definitions/ClusterId"
+        description: The identifier (ID) of the cluster that you are claiming. To find the
+          cluster ID, use <a>DescribeClusters</a>.
       SignedCert:
-        $ref: '#/definitions/Cert'
-        description: The cluster certificate issued (signed) by your issuing certificate authority (CA). The certificate must be in PEM format and can contain a maximum of 5000 characters.
+        $ref: "#/definitions/Cert"
+        description: The cluster certificate issued (signed) by your issuing certificate
+          authority (CA). The certificate must be in PEM format and can contain
+          a maximum of 5000 characters.
       TrustAnchor:
-        $ref: '#/definitions/Cert'
-        description: The issuing certificate of the issuing certificate authority (CA) that issued (signed) the cluster certificate. This can be a root (self-signed) certificate or a certificate chain that begins with the certificate that issued the cluster certificate and ends with a root certificate. The certificate or certificate chain must be in PEM format and can contain a maximum of 5000 characters.
+        $ref: "#/definitions/Cert"
+        description: The issuing certificate of the issuing certificate authority (CA) that
+          issued (signed) the cluster certificate. This can be a root
+          (self-signed) certificate or a certificate chain that begins with the
+          certificate that issued the cluster certificate and ends with a root
+          certificate. The certificate or certificate chain must be in PEM
+          format and can contain a maximum of 5000 characters.
   ListTagsResponse:
     type: object
     required:
       - TagList
     properties:
       TagList:
-        $ref: '#/definitions/TagList'
+        $ref: "#/definitions/TagList"
         description: A list of tags.
       NextToken:
-        $ref: '#/definitions/NextToken'
-        description: An opaque string that indicates that the response contains only a subset of tags. Use this value in a subsequent <code>ListTags</code> request to get more tags.
+        $ref: "#/definitions/NextToken"
+        description: An opaque string that indicates that the response contains only a
+          subset of tags. Use this value in a subsequent <code>ListTags</code>
+          request to get more tags.
   ListTagsRequest:
     type: object
     required:
       - ResourceId
     properties:
       ResourceId:
-        $ref: '#/definitions/ClusterId'
-        description: 'The cluster identifier (ID) for the cluster whose tags you are getting. To find the cluster ID, use <a>DescribeClusters</a>.'
+        $ref: "#/definitions/ClusterId"
+        description: The cluster identifier (ID) for the cluster whose tags you are
+          getting. To find the cluster ID, use <a>DescribeClusters</a>.
       NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The <code>NextToken</code> value that you received in the previous response. Use this value to get more tags.
+        $ref: "#/definitions/NextToken"
+        description: The <code>NextToken</code> value that you received in the previous
+          response. Use this value to get more tags.
       MaxResults:
-        $ref: '#/definitions/MaxSize'
-        description: 'The maximum number of tags to return in the response. When there are more tags than the number you specify, the response contains a <code>NextToken</code> value.'
+        $ref: "#/definitions/MaxSize"
+        description: The maximum number of tags to return in the response. When there are
+          more tags than the number you specify, the response contains a
+          <code>NextToken</code> value.
   RestoreBackupResponse:
     type: object
     properties:
       Backup:
-        $ref: '#/definitions/Backup'
+        $ref: "#/definitions/Backup"
         description: Information on the <code>Backup</code> object created.
   RestoreBackupRequest:
     type: object
@@ -975,8 +1078,9 @@ definitions:
       - BackupId
     properties:
       BackupId:
-        $ref: '#/definitions/BackupId'
-        description: 'The ID of the backup to be restored. To find the ID of a backup, use the <a>DescribeBackups</a> operation.'
+        $ref: "#/definitions/BackupId"
+        description: The ID of the backup to be restored. To find the ID of a backup, use
+          the <a>DescribeBackups</a> operation.
   TagResourceResponse:
     type: object
     properties: {}
@@ -987,10 +1091,11 @@ definitions:
       - TagList
     properties:
       ResourceId:
-        $ref: '#/definitions/ClusterId'
-        description: 'The cluster identifier (ID) for the cluster that you are tagging. To find the cluster ID, use <a>DescribeClusters</a>.'
+        $ref: "#/definitions/ClusterId"
+        description: The cluster identifier (ID) for the cluster that you are tagging. To
+          find the cluster ID, use <a>DescribeClusters</a>.
       TagList:
-        $ref: '#/definitions/TagList'
+        $ref: "#/definitions/TagList"
         description: A list of one or more tags.
   UntagResourceResponse:
     type: object
@@ -1002,14 +1107,16 @@ definitions:
       - TagKeyList
     properties:
       ResourceId:
-        $ref: '#/definitions/ClusterId'
-        description: 'The cluster identifier (ID) for the cluster whose tags you are removing. To find the cluster ID, use <a>DescribeClusters</a>.'
+        $ref: "#/definitions/ClusterId"
+        description: The cluster identifier (ID) for the cluster whose tags you are
+          removing. To find the cluster ID, use <a>DescribeClusters</a>.
       TagKeyList:
-        $ref: '#/definitions/TagKeyList'
-        description: 'A list of one or more tag keys for the tags that you are removing. Specify only the tag keys, not the tag values.'
+        $ref: "#/definitions/TagKeyList"
+        description: A list of one or more tag keys for the tags that you are removing.
+          Specify only the tag keys, not the tag values.
   BackupId:
     type: string
-    pattern: 'backup-[2-7a-zA-Z]{11,16}'
+    pattern: backup-[2-7a-zA-Z]{11,16}
   BackupState:
     type: string
     enum:
@@ -1019,40 +1126,40 @@ definitions:
       - PENDING_DELETION
   ClusterId:
     type: string
-    pattern: 'cluster-[2-7a-zA-Z]{11,16}'
+    pattern: cluster-[2-7a-zA-Z]{11,16}
   Timestamp:
     type: string
     format: date-time
   Region:
     type: string
-    pattern: '[a-z]{2}(-(gov))?-(east|west|north|south|central){1,2}-\d'
+    pattern: "[a-z]{2}(-(gov))?-(east|west|north|south|central){1,2}-\\d"
   Backup:
     type: object
     required:
       - BackupId
     properties:
       BackupId:
-        $ref: '#/definitions/BackupId'
+        $ref: "#/definitions/BackupId"
         description: The identifier (ID) of the backup.
       BackupState:
-        $ref: '#/definitions/BackupState'
+        $ref: "#/definitions/BackupState"
         description: The state of the backup.
       ClusterId:
-        $ref: '#/definitions/ClusterId'
+        $ref: "#/definitions/ClusterId"
         description: The identifier (ID) of the cluster that was backed up.
       CreateTimestamp:
-        $ref: '#/definitions/Timestamp'
+        $ref: "#/definitions/Timestamp"
         description: The date and time when the backup was created.
       CopyTimestamp:
-        $ref: '#/definitions/Timestamp'
+        $ref: "#/definitions/Timestamp"
       SourceRegion:
-        $ref: '#/definitions/Region'
+        $ref: "#/definitions/Region"
       SourceBackup:
-        $ref: '#/definitions/BackupId'
+        $ref: "#/definitions/BackupId"
       SourceCluster:
-        $ref: '#/definitions/ClusterId'
+        $ref: "#/definitions/ClusterId"
       DeleteTimestamp:
-        $ref: '#/definitions/Timestamp'
+        $ref: "#/definitions/Timestamp"
         description: The date and time when the backup will be permanently deleted.
     description: Contains information about a backup of an AWS CloudHSM cluster.
   BackupPolicy:
@@ -1062,36 +1169,39 @@ definitions:
   Backups:
     type: array
     items:
-      $ref: '#/definitions/Backup'
+      $ref: "#/definitions/Backup"
   Boolean:
     type: boolean
   Cert:
     type: string
-    pattern: '[a-zA-Z0-9+-/=\s]*'
+    pattern: "[a-zA-Z0-9+-/=\\s]*"
     maxLength: 5000
   Certificates:
     type: object
     properties:
       ClusterCsr:
-        $ref: '#/definitions/Cert'
-        description: The cluster's certificate signing request (CSR). The CSR exists only when the cluster's state is <code>UNINITIALIZED</code>.
+        $ref: "#/definitions/Cert"
+        description: The cluster's certificate signing request (CSR). The CSR exists only
+          when the cluster's state is <code>UNINITIALIZED</code>.
       HsmCertificate:
-        $ref: '#/definitions/Cert'
+        $ref: "#/definitions/Cert"
         description: The HSM certificate issued (signed) by the HSM hardware.
       AwsHardwareCertificate:
-        $ref: '#/definitions/Cert'
+        $ref: "#/definitions/Cert"
         description: The HSM hardware certificate issued (signed) by AWS CloudHSM.
       ManufacturerHardwareCertificate:
-        $ref: '#/definitions/Cert'
-        description: The HSM hardware certificate issued (signed) by the hardware manufacturer.
+        $ref: "#/definitions/Cert"
+        description: The HSM hardware certificate issued (signed) by the hardware
+          manufacturer.
       ClusterCertificate:
-        $ref: '#/definitions/Cert'
-        description: The cluster certificate issued (signed) by the issuing certificate authority (CA) of the cluster's owner.
+        $ref: "#/definitions/Cert"
+        description: The cluster certificate issued (signed) by the issuing certificate
+          authority (CA) of the cluster's owner.
     description: Contains one or more certificates or a certificate signing request (CSR).
   Hsms:
     type: array
     items:
-      $ref: '#/definitions/Hsm'
+      $ref: "#/definitions/Hsm"
   HsmType:
     type: string
     pattern: (hsm1\.medium)
@@ -1101,7 +1211,7 @@ definitions:
     maxLength: 32
   SecurityGroup:
     type: string
-    pattern: 'sg-[0-9a-fA-F]'
+    pattern: sg-[0-9a-fA-F]
   ClusterState:
     type: string
     enum:
@@ -1121,116 +1231,121 @@ definitions:
   ExternalSubnetMapping:
     type: object
     additionalProperties:
-      $ref: '#/definitions/SubnetId'
+      $ref: "#/definitions/SubnetId"
   VpcId:
     type: string
-    pattern: 'vpc-[0-9a-fA-F]'
+    pattern: vpc-[0-9a-fA-F]
   Cluster:
     type: object
     properties:
       BackupPolicy:
-        $ref: '#/definitions/BackupPolicy'
+        $ref: "#/definitions/BackupPolicy"
         description: The cluster's backup policy.
       ClusterId:
-        $ref: '#/definitions/ClusterId'
+        $ref: "#/definitions/ClusterId"
         description: The cluster's identifier (ID).
       CreateTimestamp:
-        $ref: '#/definitions/Timestamp'
+        $ref: "#/definitions/Timestamp"
         description: The date and time when the cluster was created.
       Hsms:
-        $ref: '#/definitions/Hsms'
+        $ref: "#/definitions/Hsms"
         description: Contains information about the HSMs in the cluster.
       HsmType:
-        $ref: '#/definitions/HsmType'
+        $ref: "#/definitions/HsmType"
         description: The type of HSM that the cluster contains.
       PreCoPassword:
-        $ref: '#/definitions/PreCoPassword'
+        $ref: "#/definitions/PreCoPassword"
         description: The default password for the cluster's Pre-Crypto Officer (PRECO) user.
       SecurityGroup:
-        $ref: '#/definitions/SecurityGroup'
+        $ref: "#/definitions/SecurityGroup"
         description: The identifier (ID) of the cluster's security group.
       SourceBackupId:
-        $ref: '#/definitions/BackupId'
-        description: The identifier (ID) of the backup used to create the cluster. This value exists only when the cluster was created from a backup.
+        $ref: "#/definitions/BackupId"
+        description: The identifier (ID) of the backup used to create the cluster. This
+          value exists only when the cluster was created from a backup.
       State:
-        $ref: '#/definitions/ClusterState'
+        $ref: "#/definitions/ClusterState"
         description: The cluster's state.
       StateMessage:
-        $ref: '#/definitions/StateMessage'
+        $ref: "#/definitions/StateMessage"
         description: A description of the cluster's state.
       SubnetMapping:
-        $ref: '#/definitions/ExternalSubnetMapping'
-        description: A map of the cluster's subnets and their corresponding Availability Zones.
+        $ref: "#/definitions/ExternalSubnetMapping"
+        description: A map of the cluster's subnets and their corresponding Availability
+          Zones.
       VpcId:
-        $ref: '#/definitions/VpcId'
-        description: The identifier (ID) of the virtual private cloud (VPC) that contains the cluster.
+        $ref: "#/definitions/VpcId"
+        description: The identifier (ID) of the virtual private cloud (VPC) that contains
+          the cluster.
       Certificates:
-        $ref: '#/definitions/Certificates'
-        description: Contains one or more certificates or a certificate signing request (CSR).
+        $ref: "#/definitions/Certificates"
+        description: Contains one or more certificates or a certificate signing request
+          (CSR).
     description: Contains information about an AWS CloudHSM cluster.
   Clusters:
     type: array
     items:
-      $ref: '#/definitions/Cluster'
+      $ref: "#/definitions/Cluster"
   DestinationBackup:
     type: object
     properties:
       CreateTimestamp:
-        $ref: '#/definitions/Timestamp'
+        $ref: "#/definitions/Timestamp"
       SourceRegion:
-        $ref: '#/definitions/Region'
+        $ref: "#/definitions/Region"
       SourceBackup:
-        $ref: '#/definitions/BackupId'
+        $ref: "#/definitions/BackupId"
       SourceCluster:
-        $ref: '#/definitions/ClusterId'
+        $ref: "#/definitions/ClusterId"
   SubnetIds:
     type: array
     items:
-      $ref: '#/definitions/SubnetId'
+      $ref: "#/definitions/SubnetId"
     minItems: 1
     maxItems: 10
   ExternalAz:
     type: string
-    pattern: '[a-z]{2}(-(gov))?-(east|west|north|south|central){1,2}-\d[a-z]'
+    pattern: "[a-z]{2}(-(gov))?-(east|west|north|south|central){1,2}-\\d[a-z]"
   IpAddress:
     type: string
-    pattern: '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}'
+    pattern: \d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}
   Hsm:
     type: object
     required:
       - HsmId
     properties:
       AvailabilityZone:
-        $ref: '#/definitions/ExternalAz'
+        $ref: "#/definitions/ExternalAz"
         description: The Availability Zone that contains the HSM.
       ClusterId:
-        $ref: '#/definitions/ClusterId'
+        $ref: "#/definitions/ClusterId"
         description: The identifier (ID) of the cluster that contains the HSM.
       SubnetId:
-        $ref: '#/definitions/SubnetId'
+        $ref: "#/definitions/SubnetId"
         description: The subnet that contains the HSM's elastic network interface (ENI).
       EniId:
-        $ref: '#/definitions/EniId'
+        $ref: "#/definitions/EniId"
         description: The identifier (ID) of the HSM's elastic network interface (ENI).
       EniIp:
-        $ref: '#/definitions/IpAddress'
+        $ref: "#/definitions/IpAddress"
         description: The IP address of the HSM's elastic network interface (ENI).
       HsmId:
-        $ref: '#/definitions/HsmId'
+        $ref: "#/definitions/HsmId"
         description: The HSM's identifier (ID).
       State:
-        $ref: '#/definitions/HsmState'
+        $ref: "#/definitions/HsmState"
         description: The HSM's state.
       StateMessage:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: A description of the HSM's state.
-    description: Contains information about a hardware security module (HSM) in an AWS CloudHSM cluster.
+    description: Contains information about a hardware security module (HSM) in an AWS
+      CloudHSM cluster.
   HsmId:
     type: string
-    pattern: 'hsm-[2-7a-zA-Z]{11,16}'
+    pattern: hsm-[2-7a-zA-Z]{11,16}
   EniId:
     type: string
-    pattern: 'eni-[0-9a-fA-F]{8,17}'
+    pattern: eni-[0-9a-fA-F]{8,17}
   NextToken:
     type: string
     pattern: .*
@@ -1242,17 +1357,17 @@ definitions:
   Filters:
     type: object
     additionalProperties:
-      $ref: '#/definitions/Strings'
+      $ref: "#/definitions/Strings"
   SubnetId:
     type: string
-    pattern: 'subnet-[0-9a-fA-F]{8,17}'
+    pattern: subnet-[0-9a-fA-F]{8,17}
   Field:
     type: string
-    pattern: '[a-zA-Z0-9_-]+'
+    pattern: "[a-zA-Z0-9_-]+"
   Strings:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: "#/definitions/String"
   HsmState:
     type: string
     enum:
@@ -1266,17 +1381,17 @@ definitions:
   TagList:
     type: array
     items:
-      $ref: '#/definitions/Tag'
+      $ref: "#/definitions/Tag"
     minItems: 1
     maxItems: 50
   TagKey:
     type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$
     minLength: 1
     maxLength: 128
   TagValue:
     type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$
     minLength: 0
     maxLength: 256
   Tag:
@@ -1286,15 +1401,15 @@ definitions:
       - Value
     properties:
       Key:
-        $ref: '#/definitions/TagKey'
+        $ref: "#/definitions/TagKey"
         description: The key of the tag.
       Value:
-        $ref: '#/definitions/TagValue'
+        $ref: "#/definitions/TagValue"
         description: The value of the tag.
     description: Contains a tag. A tag is a key-value pair.
   TagKeyList:
     type: array
     items:
-      $ref: '#/definitions/TagKey'
+      $ref: "#/definitions/TagKey"
     minItems: 1
     maxItems: 50

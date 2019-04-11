@@ -1,38 +1,39 @@
-swagger: '2.0'
+swagger: "2.0"
 info:
-  version: '2017-07-25'
+  version: 2017-07-25
   x-release: v4
   title: AWS Amplify
-  description: ' Amplify is a fully managed continuous deployment and hosting service for modern web apps. '
+  description: " Amplify is a fully managed continuous deployment and hosting service for
+    modern web apps. "
   x-logo:
-    url: 'https://twitter.com/awscloud/profile_image?size=original'
-    backgroundColor: '#FFFFFF'
-  termsOfService: 'https://aws.amazon.com/service-terms/'
+    url: https://twitter.com/awscloud/profile_image?size=original
+    backgroundColor: "#FFFFFF"
+  termsOfService: https://aws.amazon.com/service-terms/
   contact:
     name: Mike Ralphson
     email: mike.ralphson@gmail.com
-    url: 'https://github.com/mermade/aws2openapi'
+    url: https://github.com/mermade/aws2openapi
     x-twitter: PermittedSoc
   license:
     name: Apache 2.0 License
-    url: 'http://www.apache.org/licenses/'
+    url: http://www.apache.org/licenses/
   x-providerName: amazonaws.com
   x-serviceName: amplify
   x-origin:
     - contentType: application/json
-      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/amplify-2017-07-25.normal.json'
+      url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/amplify-2017-07-25.normal.json
       converter:
-        url: 'https://github.com/mermade/aws2openapi'
+        url: https://github.com/mermade/aws2openapi
         version: 1.0.0
       x-apisguru-direct: true
   x-apiClientRegistration:
-    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+    url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
   x-apisguru-categories:
     - cloud
   x-preferred: true
 externalDocs:
   description: Amazon Web Services documentation
-  url: 'https://docs.aws.amazon.com/amplify/'
+  url: https://docs.aws.amazon.com/amplify/
 host: amplify.amazonaws.com
 basePath: /
 schemes:
@@ -91,32 +92,32 @@ paths:
   /apps:
     post:
       operationId: CreateApp
-      description: ' Creates a new Amplify App. '
+      description: " Creates a new Amplify App. "
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/CreateAppResult'
-        '480':
+            $ref: "#/definitions/CreateAppResult"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '482':
+            $ref: "#/definitions/UnauthorizedException"
+        "482":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '483':
+            $ref: "#/definitions/InternalFailureException"
+        "483":
           description: LimitExceededException
           schema:
-            $ref: '#/definitions/LimitExceededException'
-        '484':
+            $ref: "#/definitions/LimitExceededException"
+        "484":
           description: DependentServiceFailureException
           schema:
-            $ref: '#/definitions/DependentServiceFailureException'
+            $ref: "#/definitions/DependentServiceFailureException"
       parameters:
         - name: body
           in: body
@@ -130,20 +131,20 @@ paths:
               - oauthToken
             properties:
               name:
-                description: ' Name for the Amplify App '
+                description: " Name for the Amplify App "
                 type: string
                 minLength: 1
                 maxLength: 255
               description:
-                description: ' Description for an Amplify App '
+                description: " Description for an Amplify App "
                 type: string
                 maxLength: 1000
               repository:
-                description: ' Repository for an Amplify App '
+                description: " Repository for an Amplify App "
                 type: string
                 maxLength: 1000
               platform:
-                description: ' Platform / framework for an Amplify App '
+                description: " Platform / framework for an Amplify App "
                 type: string
                 enum:
                   - IOS
@@ -151,124 +152,129 @@ paths:
                   - WEB
                   - REACT_NATIVE
               iamServiceRoleArn:
-                description: ' AWS IAM service role for an Amplify App '
+                description: " AWS IAM service role for an Amplify App "
                 type: string
                 minLength: 1
                 maxLength: 1000
               oauthToken:
-                description: ' OAuth token for 3rd party source control system for an Amplify App, used to create webhook and read-only deploy key. OAuth token is not stored. '
+                description: " OAuth token for 3rd party source control system for an
+                  Amplify App, used to create webhook and read-only deploy key.
+                  OAuth token is not stored. "
                 type: string
                 maxLength: 100
               environmentVariables:
-                description: ' Environment variables map for an Amplify App. '
+                description: " Environment variables map for an Amplify App. "
                 type: object
                 additionalProperties:
-                  $ref: '#/definitions/EnvValue'
+                  $ref: "#/definitions/EnvValue"
               enableBranchAutoBuild:
-                description: ' Enable the auto building of branches for an Amplify App. '
+                description: " Enable the auto building of branches for an Amplify App. "
                 type: boolean
               enableBasicAuth:
-                description: ' Enable Basic Authorization for an Amplify App, this will apply to all branches part of this App. '
+                description: " Enable Basic Authorization for an Amplify App, this will
+                  apply to all branches part of this App. "
                 type: boolean
               basicAuthCredentials:
-                description: ' Credentials for Basic Authorization for an Amplify App. '
+                description: " Credentials for Basic Authorization for an Amplify App. "
                 type: string
                 maxLength: 2000
               customRules:
-                description: ' Custom rewrite / redirect rules for an Amplify App. '
+                description: " Custom rewrite / redirect rules for an Amplify App. "
                 type: array
                 items:
-                  $ref: '#/definitions/CustomRule'
+                  $ref: "#/definitions/CustomRule"
               tags:
-                description: ' Tag for an Amplify App '
+                description: " Tag for an Amplify App "
                 type: object
                 additionalProperties:
-                  $ref: '#/definitions/TagValue'
+                  $ref: "#/definitions/TagValue"
               buildSpec:
-                description: ' BuildSpec file for Amplify app build. '
+                description: " BuildSpec file for Amplify app build. "
                 type: string
                 minLength: 1
                 maxLength: 25000
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
     get:
       operationId: ListApps
-      description: ' Lists existing Amplify Apps. '
+      description: " Lists existing Amplify Apps. "
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/ListAppsResult'
-        '480':
+            $ref: "#/definitions/ListAppsResult"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '482':
+            $ref: "#/definitions/UnauthorizedException"
+        "482":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
+            $ref: "#/definitions/InternalFailureException"
       parameters:
         - name: nextToken
           in: query
           required: false
-          description: ' Pagination token. If non-null pagination token is returned in a result, then pass its value in another request to fetch more entries. '
+          description: " Pagination token. If non-null pagination token is returned in a
+            result, then pass its value in another request to fetch more
+            entries. "
           type: string
           maxLength: 2000
         - name: maxResults
           in: query
           required: false
-          description: ' Maximum number of records to list in a single response. '
+          description: " Maximum number of records to list in a single response. "
           type: integer
           minimum: 1
           maximum: 100
-  '/apps/{appId}/branches':
+  "/apps/{appId}/branches":
     post:
       operationId: CreateBranch
-      description: ' Creates a new Branch for an Amplify App. '
+      description: " Creates a new Branch for an Amplify App. "
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/CreateBranchResult'
-        '480':
+            $ref: "#/definitions/CreateBranchResult"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '482':
+            $ref: "#/definitions/UnauthorizedException"
+        "482":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '483':
+            $ref: "#/definitions/NotFoundException"
+        "483":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '484':
+            $ref: "#/definitions/InternalFailureException"
+        "484":
           description: LimitExceededException
           schema:
-            $ref: '#/definitions/LimitExceededException'
-        '485':
+            $ref: "#/definitions/LimitExceededException"
+        "485":
           description: DependentServiceFailureException
           schema:
-            $ref: '#/definitions/DependentServiceFailureException'
+            $ref: "#/definitions/DependentServiceFailureException"
       parameters:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: " Unique Id for an Amplify App. "
           type: string
           minLength: 1
           maxLength: 255
@@ -281,16 +287,16 @@ paths:
               - branchName
             properties:
               branchName:
-                description: ' Name for the branch. '
+                description: " Name for the branch. "
                 type: string
                 minLength: 1
                 maxLength: 255
               description:
-                description: ' Description for the branch. '
+                description: " Description for the branch. "
                 type: string
                 maxLength: 1000
               stage:
-                description: ' Stage for the branch. '
+                description: " Stage for the branch. "
                 type: string
                 enum:
                   - PRODUCTION
@@ -298,127 +304,129 @@ paths:
                   - DEVELOPMENT
                   - EXPERIMENTAL
               framework:
-                description: ' Framework for the branch. '
+                description: " Framework for the branch. "
                 type: string
                 maxLength: 255
               enableNotification:
-                description: ' Enables notifications for the branch. '
+                description: " Enables notifications for the branch. "
                 type: boolean
               enableAutoBuild:
-                description: ' Enables auto building for the branch. '
+                description: " Enables auto building for the branch. "
                 type: boolean
               environmentVariables:
-                description: ' Environment Variables for the branch. '
+                description: " Environment Variables for the branch. "
                 type: object
                 additionalProperties:
-                  $ref: '#/definitions/EnvValue'
+                  $ref: "#/definitions/EnvValue"
               basicAuthCredentials:
-                description: ' Basic Authorization credentials for the branch. '
+                description: " Basic Authorization credentials for the branch. "
                 type: string
                 maxLength: 2000
               enableBasicAuth:
-                description: ' Enables Basic Auth for the branch. '
+                description: " Enables Basic Auth for the branch. "
                 type: boolean
               tags:
-                description: ' Tag for the branch. '
+                description: " Tag for the branch. "
                 type: object
                 additionalProperties:
-                  $ref: '#/definitions/TagValue'
+                  $ref: "#/definitions/TagValue"
               buildSpec:
-                description: ' BuildSpec file for Amplify app build. '
+                description: " BuildSpec file for Amplify app build. "
                 type: string
                 minLength: 1
                 maxLength: 25000
               ttl:
-                description: ' The content TTL for the website in seconds. '
+                description: " The content TTL for the website in seconds. "
                 type: string
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
     get:
       operationId: ListBranches
-      description: ' Lists branches for an Amplify App. '
+      description: " Lists branches for an Amplify App. "
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/ListBranchesResult'
-        '480':
+            $ref: "#/definitions/ListBranchesResult"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '482':
+            $ref: "#/definitions/UnauthorizedException"
+        "482":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
+            $ref: "#/definitions/InternalFailureException"
       parameters:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: " Unique Id for an Amplify App. "
           type: string
           minLength: 1
           maxLength: 255
         - name: nextToken
           in: query
           required: false
-          description: ' Pagination token. Set to null to start listing branches from start. If a non-null pagination token is returned in a result, then pass its value in here to list more branches. '
+          description: " Pagination token. Set to null to start listing branches from
+            start. If a non-null pagination token is returned in a result, then
+            pass its value in here to list more branches. "
           type: string
           maxLength: 2000
         - name: maxResults
           in: query
           required: false
-          description: ' Maximum number of records to list in a single response. '
+          description: " Maximum number of records to list in a single response. "
           type: integer
           minimum: 1
           maximum: 100
-  '/apps/{appId}/domains':
+  "/apps/{appId}/domains":
     post:
       operationId: CreateDomainAssociation
-      description: ' Create a new DomainAssociation on an App '
+      description: " Create a new DomainAssociation on an App "
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/CreateDomainAssociationResult'
-        '480':
+            $ref: "#/definitions/CreateDomainAssociationResult"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '482':
+            $ref: "#/definitions/UnauthorizedException"
+        "482":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '483':
+            $ref: "#/definitions/NotFoundException"
+        "483":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '484':
+            $ref: "#/definitions/InternalFailureException"
+        "484":
           description: LimitExceededException
           schema:
-            $ref: '#/definitions/LimitExceededException'
-        '485':
+            $ref: "#/definitions/LimitExceededException"
+        "485":
           description: DependentServiceFailureException
           schema:
-            $ref: '#/definitions/DependentServiceFailureException'
+            $ref: "#/definitions/DependentServiceFailureException"
       parameters:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: " Unique Id for an Amplify App. "
           type: string
           minLength: 1
           maxLength: 255
@@ -432,173 +440,175 @@ paths:
               - subDomainSettings
             properties:
               domainName:
-                description: ' Domain name for the Domain Association. '
+                description: " Domain name for the Domain Association. "
                 type: string
                 maxLength: 255
               enableAutoSubDomain:
-                description: ' Enables automated creation of Subdomains for branches. '
+                description: " Enables automated creation of Subdomains for branches. "
                 type: boolean
               subDomainSettings:
-                description: ' Setting structure for the Subdomain. '
+                description: " Setting structure for the Subdomain. "
                 type: array
                 items:
-                  $ref: '#/definitions/SubDomainSetting'
+                  $ref: "#/definitions/SubDomainSetting"
                 maxItems: 255
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
     get:
       operationId: ListDomainAssociations
-      description: ' List domains with an app '
+      description: " List domains with an app "
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/ListDomainAssociationsResult'
-        '480':
+            $ref: "#/definitions/ListDomainAssociationsResult"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '482':
+            $ref: "#/definitions/UnauthorizedException"
+        "482":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
+            $ref: "#/definitions/InternalFailureException"
       parameters:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: " Unique Id for an Amplify App. "
           type: string
           minLength: 1
           maxLength: 255
         - name: nextToken
           in: query
           required: false
-          description: ' Pagination token. Set to null to start listing Apps from start. If non-null pagination token is returned in a result, then pass its value in here to list more projects. '
+          description: " Pagination token. Set to null to start listing Apps from start. If
+            non-null pagination token is returned in a result, then pass its
+            value in here to list more projects. "
           type: string
           maxLength: 2000
         - name: maxResults
           in: query
           required: false
-          description: ' Maximum number of records to list in a single response. '
+          description: " Maximum number of records to list in a single response. "
           type: integer
           minimum: 1
           maximum: 100
-  '/apps/{appId}':
+  "/apps/{appId}":
     delete:
       operationId: DeleteApp
-      description: ' Delete an existing Amplify App by appId. '
+      description: " Delete an existing Amplify App by appId. "
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/DeleteAppResult'
-        '480':
+            $ref: "#/definitions/DeleteAppResult"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
+            $ref: "#/definitions/NotFoundException"
+        "482":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '483':
+            $ref: "#/definitions/UnauthorizedException"
+        "483":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '484':
+            $ref: "#/definitions/InternalFailureException"
+        "484":
           description: DependentServiceFailureException
           schema:
-            $ref: '#/definitions/DependentServiceFailureException'
+            $ref: "#/definitions/DependentServiceFailureException"
       parameters:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: " Unique Id for an Amplify App. "
           type: string
           minLength: 1
           maxLength: 255
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
     get:
       operationId: GetApp
-      description: ' Retrieves an existing Amplify App by appId. '
+      description: " Retrieves an existing Amplify App by appId. "
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/GetAppResult'
-        '480':
+            $ref: "#/definitions/GetAppResult"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
+            $ref: "#/definitions/NotFoundException"
+        "482":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '483':
+            $ref: "#/definitions/UnauthorizedException"
+        "483":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
+            $ref: "#/definitions/InternalFailureException"
       parameters:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: " Unique Id for an Amplify App. "
           type: string
           minLength: 1
           maxLength: 255
     post:
       operationId: UpdateApp
-      description: ' Updates an existing Amplify App. '
+      description: " Updates an existing Amplify App. "
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/UpdateAppResult'
-        '480':
+            $ref: "#/definitions/UpdateAppResult"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
+            $ref: "#/definitions/NotFoundException"
+        "482":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '483':
+            $ref: "#/definitions/UnauthorizedException"
+        "483":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
+            $ref: "#/definitions/InternalFailureException"
       parameters:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: " Unique Id for an Amplify App. "
           type: string
           minLength: 1
           maxLength: 255
@@ -609,16 +619,16 @@ paths:
             type: object
             properties:
               name:
-                description: ' Name for an Amplify App. '
+                description: " Name for an Amplify App. "
                 type: string
                 minLength: 1
                 maxLength: 255
               description:
-                description: ' Description for an Amplify App. '
+                description: " Description for an Amplify App. "
                 type: string
                 maxLength: 1000
               platform:
-                description: ' Platform for an Amplify App. '
+                description: " Platform for an Amplify App. "
                 type: string
                 enum:
                   - IOS
@@ -626,166 +636,166 @@ paths:
                   - WEB
                   - REACT_NATIVE
               iamServiceRoleArn:
-                description: ' IAM service role for an Amplify App. '
+                description: " IAM service role for an Amplify App. "
                 type: string
                 minLength: 1
                 maxLength: 1000
               environmentVariables:
-                description: ' Environment Variables for an Amplify App. '
+                description: " Environment Variables for an Amplify App. "
                 type: object
                 additionalProperties:
-                  $ref: '#/definitions/EnvValue'
+                  $ref: "#/definitions/EnvValue"
               enableBranchAutoBuild:
-                description: ' Enables branch auto-building for an Amplify App. '
+                description: " Enables branch auto-building for an Amplify App. "
                 type: boolean
               enableBasicAuth:
-                description: ' Enables Basic Authorization for an Amplify App. '
+                description: " Enables Basic Authorization for an Amplify App. "
                 type: boolean
               basicAuthCredentials:
-                description: ' Basic Authorization credentials for an Amplify App. '
+                description: " Basic Authorization credentials for an Amplify App. "
                 type: string
                 maxLength: 2000
               customRules:
-                description: ' Custom redirect / rewrite rules for an Amplify App. '
+                description: " Custom redirect / rewrite rules for an Amplify App. "
                 type: array
                 items:
-                  $ref: '#/definitions/CustomRule'
+                  $ref: "#/definitions/CustomRule"
               buildSpec:
-                description: ' BuildSpec file for Amplify app build. '
+                description: " BuildSpec file for Amplify app build. "
                 type: string
                 minLength: 1
                 maxLength: 25000
-  '/apps/{appId}/branches/{branchName}':
+  "/apps/{appId}/branches/{branchName}":
     delete:
       operationId: DeleteBranch
-      description: ' Deletes a branch for an Amplify App. '
+      description: " Deletes a branch for an Amplify App. "
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/DeleteBranchResult'
-        '480':
+            $ref: "#/definitions/DeleteBranchResult"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '482':
+            $ref: "#/definitions/UnauthorizedException"
+        "482":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '483':
+            $ref: "#/definitions/NotFoundException"
+        "483":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '484':
+            $ref: "#/definitions/InternalFailureException"
+        "484":
           description: DependentServiceFailureException
           schema:
-            $ref: '#/definitions/DependentServiceFailureException'
+            $ref: "#/definitions/DependentServiceFailureException"
       parameters:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: " Unique Id for an Amplify App. "
           type: string
           minLength: 1
           maxLength: 255
         - name: branchName
           in: path
           required: true
-          description: ' Name for the branch. '
+          description: " Name for the branch. "
           type: string
           minLength: 1
           maxLength: 255
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
     get:
       operationId: GetBranch
-      description: ' Retrieves a branch for an Amplify App. '
+      description: " Retrieves a branch for an Amplify App. "
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/GetBranchResult'
-        '480':
+            $ref: "#/definitions/GetBranchResult"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '482':
+            $ref: "#/definitions/UnauthorizedException"
+        "482":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '483':
+            $ref: "#/definitions/NotFoundException"
+        "483":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
+            $ref: "#/definitions/InternalFailureException"
       parameters:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: " Unique Id for an Amplify App. "
           type: string
           minLength: 1
           maxLength: 255
         - name: branchName
           in: path
           required: true
-          description: ' Name for the branch. '
+          description: " Name for the branch. "
           type: string
           minLength: 1
           maxLength: 255
     post:
       operationId: UpdateBranch
-      description: ' Updates a branch for an Amplify App. '
+      description: " Updates a branch for an Amplify App. "
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/UpdateBranchResult'
-        '480':
+            $ref: "#/definitions/UpdateBranchResult"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '482':
+            $ref: "#/definitions/UnauthorizedException"
+        "482":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '483':
+            $ref: "#/definitions/NotFoundException"
+        "483":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '484':
+            $ref: "#/definitions/InternalFailureException"
+        "484":
           description: DependentServiceFailureException
           schema:
-            $ref: '#/definitions/DependentServiceFailureException'
+            $ref: "#/definitions/DependentServiceFailureException"
       parameters:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: " Unique Id for an Amplify App. "
           type: string
           minLength: 1
           maxLength: 255
         - name: branchName
           in: path
           required: true
-          description: ' Name for the branch. '
+          description: " Name for the branch. "
           type: string
           minLength: 1
           maxLength: 255
@@ -796,15 +806,15 @@ paths:
             type: object
             properties:
               description:
-                description: ' Description for the branch. '
+                description: " Description for the branch. "
                 type: string
                 maxLength: 1000
               framework:
-                description: ' Framework for the branch. '
+                description: " Framework for the branch. "
                 type: string
                 maxLength: 255
               stage:
-                description: ' Stage for the branch. '
+                description: " Stage for the branch. "
                 type: string
                 enum:
                   - PRODUCTION
@@ -812,160 +822,160 @@ paths:
                   - DEVELOPMENT
                   - EXPERIMENTAL
               enableNotification:
-                description: ' Enables notifications for the branch. '
+                description: " Enables notifications for the branch. "
                 type: boolean
               enableAutoBuild:
-                description: ' Enables auto building for the branch. '
+                description: " Enables auto building for the branch. "
                 type: boolean
               environmentVariables:
-                description: ' Environment Variables for the branch. '
+                description: " Environment Variables for the branch. "
                 type: object
                 additionalProperties:
-                  $ref: '#/definitions/EnvValue'
+                  $ref: "#/definitions/EnvValue"
               basicAuthCredentials:
-                description: ' Basic Authorization credentials for the branch. '
+                description: " Basic Authorization credentials for the branch. "
                 type: string
                 maxLength: 2000
               enableBasicAuth:
-                description: ' Enables Basic Auth for the branch. '
+                description: " Enables Basic Auth for the branch. "
                 type: boolean
               buildSpec:
-                description: ' BuildSpec file for Amplify app build. '
+                description: " BuildSpec file for Amplify app build. "
                 type: string
                 minLength: 1
                 maxLength: 25000
               ttl:
-                description: ' The content TTL for the website in seconds. '
+                description: " The content TTL for the website in seconds. "
                 type: string
-  '/apps/{appId}/domains/{domainName}':
+  "/apps/{appId}/domains/{domainName}":
     delete:
       operationId: DeleteDomainAssociation
-      description: ' Deletes a DomainAssociation. '
+      description: " Deletes a DomainAssociation. "
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/DeleteDomainAssociationResult'
-        '480':
+            $ref: "#/definitions/DeleteDomainAssociationResult"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '482':
+            $ref: "#/definitions/UnauthorizedException"
+        "482":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '483':
+            $ref: "#/definitions/NotFoundException"
+        "483":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '484':
+            $ref: "#/definitions/InternalFailureException"
+        "484":
           description: DependentServiceFailureException
           schema:
-            $ref: '#/definitions/DependentServiceFailureException'
+            $ref: "#/definitions/DependentServiceFailureException"
       parameters:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: " Unique Id for an Amplify App. "
           type: string
           minLength: 1
           maxLength: 255
         - name: domainName
           in: path
           required: true
-          description: ' Name of the domain. '
+          description: " Name of the domain. "
           type: string
           maxLength: 255
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
     get:
       operationId: GetDomainAssociation
-      description: ' Retrieves domain info that corresponds to an appId and domainName. '
+      description: " Retrieves domain info that corresponds to an appId and domainName. "
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/GetDomainAssociationResult'
-        '480':
+            $ref: "#/definitions/GetDomainAssociationResult"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '482':
+            $ref: "#/definitions/UnauthorizedException"
+        "482":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '483':
+            $ref: "#/definitions/NotFoundException"
+        "483":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
+            $ref: "#/definitions/InternalFailureException"
       parameters:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: " Unique Id for an Amplify App. "
           type: string
           minLength: 1
           maxLength: 255
         - name: domainName
           in: path
           required: true
-          description: ' Name of the domain. '
+          description: " Name of the domain. "
           type: string
           maxLength: 255
     post:
       operationId: UpdateDomainAssociation
-      description: ' Create a new DomainAssociation on an App '
+      description: " Create a new DomainAssociation on an App "
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/UpdateDomainAssociationResult'
-        '480':
+            $ref: "#/definitions/UpdateDomainAssociationResult"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '482':
+            $ref: "#/definitions/UnauthorizedException"
+        "482":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '483':
+            $ref: "#/definitions/NotFoundException"
+        "483":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '484':
+            $ref: "#/definitions/InternalFailureException"
+        "484":
           description: DependentServiceFailureException
           schema:
-            $ref: '#/definitions/DependentServiceFailureException'
+            $ref: "#/definitions/DependentServiceFailureException"
       parameters:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: " Unique Id for an Amplify App. "
           type: string
           minLength: 1
           maxLength: 255
         - name: domainName
           in: path
           required: true
-          description: ' Name of the domain. '
+          description: " Name of the domain. "
           type: string
           maxLength: 255
         - name: body
@@ -977,222 +987,224 @@ paths:
               - subDomainSettings
             properties:
               enableAutoSubDomain:
-                description: ' Enables automated creation of Subdomains for branches. '
+                description: " Enables automated creation of Subdomains for branches. "
                 type: boolean
               subDomainSettings:
-                description: ' Setting structure for the Subdomain. '
+                description: " Setting structure for the Subdomain. "
                 type: array
                 items:
-                  $ref: '#/definitions/SubDomainSetting'
+                  $ref: "#/definitions/SubDomainSetting"
                 maxItems: 255
-  '/apps/{appId}/branches/{branchName}/jobs/{jobId}':
+  "/apps/{appId}/branches/{branchName}/jobs/{jobId}":
     delete:
       operationId: DeleteJob
-      description: ' Delete a job, for an Amplify branch, part of Amplify App. '
+      description: " Delete a job, for an Amplify branch, part of Amplify App. "
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/DeleteJobResult'
-        '480':
+            $ref: "#/definitions/DeleteJobResult"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '482':
+            $ref: "#/definitions/UnauthorizedException"
+        "482":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '483':
+            $ref: "#/definitions/InternalFailureException"
+        "483":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '484':
+            $ref: "#/definitions/NotFoundException"
+        "484":
           description: LimitExceededException
           schema:
-            $ref: '#/definitions/LimitExceededException'
+            $ref: "#/definitions/LimitExceededException"
       parameters:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: " Unique Id for an Amplify App. "
           type: string
           minLength: 1
           maxLength: 255
         - name: branchName
           in: path
           required: true
-          description: ' Name for the branch, for the Job. '
+          description: " Name for the branch, for the Job. "
           type: string
           minLength: 1
           maxLength: 255
         - name: jobId
           in: path
           required: true
-          description: ' Unique Id for the Job. '
+          description: " Unique Id for the Job. "
           type: string
           maxLength: 255
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
     get:
       operationId: GetJob
-      description: ' Get a job for a branch, part of an Amplify App. '
+      description: " Get a job for a branch, part of an Amplify App. "
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/GetJobResult'
-        '480':
+            $ref: "#/definitions/GetJobResult"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '482':
+            $ref: "#/definitions/UnauthorizedException"
+        "482":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '483':
+            $ref: "#/definitions/InternalFailureException"
+        "483":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '484':
+            $ref: "#/definitions/NotFoundException"
+        "484":
           description: LimitExceededException
           schema:
-            $ref: '#/definitions/LimitExceededException'
+            $ref: "#/definitions/LimitExceededException"
       parameters:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: " Unique Id for an Amplify App. "
           type: string
           minLength: 1
           maxLength: 255
         - name: branchName
           in: path
           required: true
-          description: ' Name for the branch, for the Job. '
+          description: " Name for the branch, for the Job. "
           type: string
           minLength: 1
           maxLength: 255
         - name: jobId
           in: path
           required: true
-          description: ' Unique Id for the Job. '
+          description: " Unique Id for the Job. "
           type: string
           maxLength: 255
-  '/apps/{appId}/branches/{branchName}/jobs':
+  "/apps/{appId}/branches/{branchName}/jobs":
     get:
       operationId: ListJobs
-      description: ' List Jobs for a branch, part of an Amplify App. '
+      description: " List Jobs for a branch, part of an Amplify App. "
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/ListJobsResult'
-        '480':
+            $ref: "#/definitions/ListJobsResult"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '482':
+            $ref: "#/definitions/UnauthorizedException"
+        "482":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '483':
+            $ref: "#/definitions/InternalFailureException"
+        "483":
           description: LimitExceededException
           schema:
-            $ref: '#/definitions/LimitExceededException'
+            $ref: "#/definitions/LimitExceededException"
       parameters:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: " Unique Id for an Amplify App. "
           type: string
           minLength: 1
           maxLength: 255
         - name: branchName
           in: path
           required: true
-          description: ' Name for a branch. '
+          description: " Name for a branch. "
           type: string
           minLength: 1
           maxLength: 255
         - name: nextToken
           in: query
           required: false
-          description: ' Pagination token. Set to null to start listing steps from start. If a non-null pagination token is returned in a result, then pass its value in here to list more steps. '
+          description: " Pagination token. Set to null to start listing steps from start.
+            If a non-null pagination token is returned in a result, then pass
+            its value in here to list more steps. "
           type: string
           maxLength: 2000
         - name: maxResults
           in: query
           required: false
-          description: ' Maximum number of records to list in a single response. '
+          description: " Maximum number of records to list in a single response. "
           type: integer
           minimum: 1
           maximum: 100
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
     post:
       operationId: StartJob
-      description: ' Starts a new job for a branch, part of an Amplify App. '
+      description: " Starts a new job for a branch, part of an Amplify App. "
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/StartJobResult'
-        '480':
+            $ref: "#/definitions/StartJobResult"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '482':
+            $ref: "#/definitions/UnauthorizedException"
+        "482":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '483':
+            $ref: "#/definitions/InternalFailureException"
+        "483":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '484':
+            $ref: "#/definitions/NotFoundException"
+        "484":
           description: LimitExceededException
           schema:
-            $ref: '#/definitions/LimitExceededException'
+            $ref: "#/definitions/LimitExceededException"
       parameters:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: " Unique Id for an Amplify App. "
           type: string
           minLength: 1
           maxLength: 255
         - name: branchName
           in: path
           required: true
-          description: ' Name for the branch, for the Job. '
+          description: " Name for the branch, for the Job. "
           type: string
           minLength: 1
           maxLength: 255
@@ -1205,11 +1217,11 @@ paths:
               - jobType
             properties:
               jobId:
-                description: ' Unique Id for the Job. '
+                description: " Unique Id for the Job. "
                 type: string
                 maxLength: 255
               jobType:
-                description: ' Type for the Job. '
+                description: " Type for the Job. "
                 type: string
                 enum:
                   - RELEASE
@@ -1217,79 +1229,81 @@ paths:
                   - WEB_HOOK
                 maxLength: 10
               jobReason:
-                description: ' Reason for the Job. '
+                description: " Reason for the Job. "
                 type: string
                 maxLength: 255
               commitId:
-                description: ' Commit Id from 3rd party repository provider for the Job. '
+                description: " Commit Id from 3rd party repository provider for the Job. "
                 type: string
                 maxLength: 255
               commitMessage:
-                description: ' Commit message from 3rd party repository provider for the Job. '
+                description: " Commit message from 3rd party repository provider for the
+                  Job. "
                 type: string
                 maxLength: 10000
               commitTime:
-                description: ' Commit date / time for the Job. '
+                description: " Commit date / time for the Job. "
                 type: string
                 format: date-time
-  '/apps/{appId}/branches/{branchName}/jobs/{jobId}/stop':
+  "/apps/{appId}/branches/{branchName}/jobs/{jobId}/stop":
     delete:
       operationId: StopJob
-      description: ' Stop a job that is in progress, for an Amplify branch, part of Amplify App. '
+      description: " Stop a job that is in progress, for an Amplify branch, part of Amplify
+        App. "
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/StopJobResult'
-        '480':
+            $ref: "#/definitions/StopJobResult"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '482':
+            $ref: "#/definitions/UnauthorizedException"
+        "482":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '483':
+            $ref: "#/definitions/InternalFailureException"
+        "483":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '484':
+            $ref: "#/definitions/NotFoundException"
+        "484":
           description: LimitExceededException
           schema:
-            $ref: '#/definitions/LimitExceededException'
+            $ref: "#/definitions/LimitExceededException"
       parameters:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: " Unique Id for an Amplify App. "
           type: string
           minLength: 1
           maxLength: 255
         - name: branchName
           in: path
           required: true
-          description: ' Name for the branch, for the Job. '
+          description: " Name for the branch, for the Job. "
           type: string
           minLength: 1
           maxLength: 255
         - name: jobId
           in: path
           required: true
-          description: ' Unique Id for the Job. '
+          description: " Unique Id for the Job. "
           type: string
           maxLength: 255
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
 definitions:
   CreateAppResult:
     type: object
@@ -1297,7 +1311,7 @@ definitions:
       - app
     properties:
       app:
-        $ref: '#/definitions/App'
+        $ref: "#/definitions/App"
   EnvValue:
     type: string
     maxLength: 1000
@@ -1308,18 +1322,19 @@ definitions:
       - target
     properties:
       source:
-        $ref: '#/definitions/Source'
-        description: ' The source pattern for a URL rewrite or redirect rule. '
+        $ref: "#/definitions/Source"
+        description: " The source pattern for a URL rewrite or redirect rule. "
       target:
-        $ref: '#/definitions/Target'
-        description: ' The target pattern for a URL rewrite or redirect rule. '
+        $ref: "#/definitions/Target"
+        description: " The target pattern for a URL rewrite or redirect rule. "
       status:
-        $ref: '#/definitions/Status'
-        description: ' The status code for a URL rewrite or redirect rule. '
+        $ref: "#/definitions/Status"
+        description: " The status code for a URL rewrite or redirect rule. "
       condition:
-        $ref: '#/definitions/Condition'
-        description: ' The condition for a URL rewrite or redirect rule, e.g. country code. '
-    description: ' Custom rewrite / redirect rule. '
+        $ref: "#/definitions/Condition"
+        description: " The condition for a URL rewrite or redirect rule, e.g. country code.
+          "
+    description: " Custom rewrite / redirect rule. "
   TagValue:
     type: string
     maxLength: 1000
@@ -1334,9 +1349,9 @@ definitions:
       - branch
     properties:
       branch:
-        $ref: '#/definitions/Branch'
-        description: ' Branch structure for an Amplify App. '
-    description: ' Result structure for create branch request. '
+        $ref: "#/definitions/Branch"
+        description: " Branch structure for an Amplify App. "
+    description: " Result structure for create branch request. "
   NotFoundException: {}
   CreateDomainAssociationResult:
     type: object
@@ -1344,9 +1359,9 @@ definitions:
       - domainAssociation
     properties:
       domainAssociation:
-        $ref: '#/definitions/DomainAssociation'
-        description: ' Domain Association structure. '
-    description: ' Result structure for the create Domain Association request. '
+        $ref: "#/definitions/DomainAssociation"
+        description: " Domain Association structure. "
+    description: " Result structure for the create Domain Association request. "
   SubDomainSetting:
     type: object
     required:
@@ -1354,167 +1369,175 @@ definitions:
       - branchName
     properties:
       prefix:
-        $ref: '#/definitions/DomainPrefix'
-        description: ' Prefix setting for the Subdomain. '
+        $ref: "#/definitions/DomainPrefix"
+        description: " Prefix setting for the Subdomain. "
       branchName:
-        $ref: '#/definitions/BranchName'
-        description: ' Branch name setting for the Subdomain. '
-    description: ' Setting for the Subdomain. '
+        $ref: "#/definitions/BranchName"
+        description: " Branch name setting for the Subdomain. "
+    description: " Setting for the Subdomain. "
   DeleteAppResult:
     type: object
     required:
       - app
     properties:
       app:
-        $ref: '#/definitions/App'
-    description: ' Result structure for an Amplify App delete request. '
+        $ref: "#/definitions/App"
+    description: " Result structure for an Amplify App delete request. "
   DeleteBranchResult:
     type: object
     required:
       - branch
     properties:
       branch:
-        $ref: '#/definitions/Branch'
-        description: ' Branch structure for an Amplify App. '
-    description: ' Result structure for delete branch request. '
+        $ref: "#/definitions/Branch"
+        description: " Branch structure for an Amplify App. "
+    description: " Result structure for delete branch request. "
   DeleteDomainAssociationResult:
     type: object
     required:
       - domainAssociation
     properties:
       domainAssociation:
-        $ref: '#/definitions/DomainAssociation'
+        $ref: "#/definitions/DomainAssociation"
   DeleteJobResult:
     type: object
     required:
       - jobSummary
     properties:
       jobSummary:
-        $ref: '#/definitions/JobSummary'
-    description: ' Result structure for the delete job request. '
+        $ref: "#/definitions/JobSummary"
+    description: " Result structure for the delete job request. "
   GetAppResult:
     type: object
     required:
       - app
     properties:
       app:
-        $ref: '#/definitions/App'
+        $ref: "#/definitions/App"
   GetBranchResult:
     type: object
     required:
       - branch
     properties:
       branch:
-        $ref: '#/definitions/Branch'
+        $ref: "#/definitions/Branch"
   GetDomainAssociationResult:
     type: object
     required:
       - domainAssociation
     properties:
       domainAssociation:
-        $ref: '#/definitions/DomainAssociation'
-        description: ' Domain Association structure. '
-    description: ' Result structure for the get Domain Association request. '
+        $ref: "#/definitions/DomainAssociation"
+        description: " Domain Association structure. "
+    description: " Result structure for the get Domain Association request. "
   GetJobResult:
     type: object
     required:
       - job
     properties:
       job:
-        $ref: '#/definitions/Job'
+        $ref: "#/definitions/Job"
   ListAppsResult:
     type: object
     required:
       - apps
     properties:
       apps:
-        $ref: '#/definitions/Apps'
-        description: ' List of Amplify Apps. '
+        $ref: "#/definitions/Apps"
+        description: " List of Amplify Apps. "
       nextToken:
-        $ref: '#/definitions/NextToken'
-        description: ' Pagination token. Set to null to start listing Apps from start. If non-null pagination token is returned in a result, then pass its value in here to list more projects. '
-    description: ' Result structure for an Amplify App list request. '
+        $ref: "#/definitions/NextToken"
+        description: " Pagination token. Set to null to start listing Apps from start. If
+          non-null pagination token is returned in a result, then pass its value
+          in here to list more projects. "
+    description: " Result structure for an Amplify App list request. "
   ListBranchesResult:
     type: object
     required:
       - branches
     properties:
       branches:
-        $ref: '#/definitions/Branches'
-        description: ' List of branches for an Amplify App. '
+        $ref: "#/definitions/Branches"
+        description: " List of branches for an Amplify App. "
       nextToken:
-        $ref: '#/definitions/NextToken'
-        description: ' Pagination token. If non-null pagination token is returned in a result, then pass its value in another request to fetch more entries. '
-    description: ' Result structure for list branches request. '
+        $ref: "#/definitions/NextToken"
+        description: " Pagination token. If non-null pagination token is returned in a
+          result, then pass its value in another request to fetch more entries.
+          "
+    description: " Result structure for list branches request. "
   ListDomainAssociationsResult:
     type: object
     required:
       - domainAssociations
     properties:
       domainAssociations:
-        $ref: '#/definitions/DomainAssociations'
-        description: ' List of Domain Associations. '
+        $ref: "#/definitions/DomainAssociations"
+        description: " List of Domain Associations. "
       nextToken:
-        $ref: '#/definitions/NextToken'
-        description: ' Pagination token. If non-null pagination token is returned in a result, then pass its value in another request to fetch more entries. '
-    description: ' Result structure for the list Domain Association request. '
+        $ref: "#/definitions/NextToken"
+        description: " Pagination token. If non-null pagination token is returned in a
+          result, then pass its value in another request to fetch more entries.
+          "
+    description: " Result structure for the list Domain Association request. "
   ListJobsResult:
     type: object
     required:
       - jobSummaries
     properties:
       jobSummaries:
-        $ref: '#/definitions/JobSummaries'
-        description: ' Result structure for list job result request. '
+        $ref: "#/definitions/JobSummaries"
+        description: " Result structure for list job result request. "
       nextToken:
-        $ref: '#/definitions/NextToken'
-        description: ' Pagination token. If non-null pagination token is returned in a result, then pass its value in another request to fetch more entries. '
-    description: ' Maximum number of records to list in a single response. '
+        $ref: "#/definitions/NextToken"
+        description: " Pagination token. If non-null pagination token is returned in a
+          result, then pass its value in another request to fetch more entries.
+          "
+    description: " Maximum number of records to list in a single response. "
   StartJobResult:
     type: object
     required:
       - jobSummary
     properties:
       jobSummary:
-        $ref: '#/definitions/JobSummary'
-        description: ' Summary for the Job. '
-    description: ' Result structure for run job request. '
+        $ref: "#/definitions/JobSummary"
+        description: " Summary for the Job. "
+    description: " Result structure for run job request. "
   StopJobResult:
     type: object
     required:
       - jobSummary
     properties:
       jobSummary:
-        $ref: '#/definitions/JobSummary'
-        description: ' Summary for the Job. '
-    description: ' Result structure for the stop job request. '
+        $ref: "#/definitions/JobSummary"
+        description: " Summary for the Job. "
+    description: " Result structure for the stop job request. "
   UpdateAppResult:
     type: object
     required:
       - app
     properties:
       app:
-        $ref: '#/definitions/App'
-        description: ' App structure for the updated App. '
-    description: ' Result structure for an Amplify App update request. '
+        $ref: "#/definitions/App"
+        description: " App structure for the updated App. "
+    description: " Result structure for an Amplify App update request. "
   UpdateBranchResult:
     type: object
     required:
       - branch
     properties:
       branch:
-        $ref: '#/definitions/Branch'
-        description: ' Branch structure for an Amplify App. '
-    description: ' Result structure for update branch request. '
+        $ref: "#/definitions/Branch"
+        description: " Branch structure for an Amplify App. "
+    description: " Result structure for update branch request. "
   UpdateDomainAssociationResult:
     type: object
     required:
       - domainAssociation
     properties:
       domainAssociation:
-        $ref: '#/definitions/DomainAssociation'
-        description: ' Domain Association structure. '
-    description: ' Result structure for the update Domain Association request. '
+        $ref: "#/definitions/DomainAssociation"
+        description: " Domain Association structure. "
+    description: " Result structure for the update Domain Association request. "
   ActiveJobId:
     type: string
     maxLength: 1000
@@ -1532,7 +1555,7 @@ definitions:
   Tags:
     type: object
     additionalProperties:
-      $ref: '#/definitions/TagValue'
+      $ref: "#/definitions/TagValue"
   Description:
     type: string
     maxLength: 1000
@@ -1559,7 +1582,7 @@ definitions:
   EnvironmentVariables:
     type: object
     additionalProperties:
-      $ref: '#/definitions/EnvValue'
+      $ref: "#/definitions/EnvValue"
   DefaultDomain:
     type: string
     minLength: 1
@@ -1574,26 +1597,26 @@ definitions:
   CustomRules:
     type: array
     items:
-      $ref: '#/definitions/CustomRule'
+      $ref: "#/definitions/CustomRule"
   ProductionBranch:
     type: object
     properties:
       lastDeployTime:
-        $ref: '#/definitions/LastDeployTime'
-        description: ' Last Deploy Time of Production Branch. '
+        $ref: "#/definitions/LastDeployTime"
+        description: " Last Deploy Time of Production Branch. "
       status:
-        $ref: '#/definitions/Status'
-        description: ' Status of Production Branch. '
+        $ref: "#/definitions/Status"
+        description: " Status of Production Branch. "
       thumbnailUrl:
-        $ref: '#/definitions/ThumbnailUrl'
-        description: ' Thumbnail Url for Production Branch. '
+        $ref: "#/definitions/ThumbnailUrl"
+        description: " Thumbnail Url for Production Branch. "
       branchName:
-        $ref: '#/definitions/BranchName'
-        description: ' Branch Name for Production Branch. '
-    description: ' Structure with Production Branch information. '
+        $ref: "#/definitions/BranchName"
+        description: " Branch Name for Production Branch. "
+    description: " Structure with Production Branch information. "
   BuildSpec:
     type: string
-    description: ' BuildSpec file for Amplify app build. '
+    description: " BuildSpec file for Amplify app build. "
     minLength: 1
     maxLength: 25000
   App:
@@ -1613,64 +1636,65 @@ definitions:
       - enableBasicAuth
     properties:
       appId:
-        $ref: '#/definitions/AppId'
-        description: ' Unique Id for the Amplify App. '
+        $ref: "#/definitions/AppId"
+        description: " Unique Id for the Amplify App. "
       appArn:
-        $ref: '#/definitions/AppArn'
-        description: ' ARN for the Amplify App. '
+        $ref: "#/definitions/AppArn"
+        description: " ARN for the Amplify App. "
       name:
-        $ref: '#/definitions/Name'
-        description: ' Name for the Amplify App. '
+        $ref: "#/definitions/Name"
+        description: " Name for the Amplify App. "
       tags:
-        $ref: '#/definitions/Tags'
-        description: ' Tag for Amplify App. '
+        $ref: "#/definitions/Tags"
+        description: " Tag for Amplify App. "
       description:
-        $ref: '#/definitions/Description'
-        description: ' Description for the Amplify App. '
+        $ref: "#/definitions/Description"
+        description: " Description for the Amplify App. "
       repository:
-        $ref: '#/definitions/Repository'
-        description: ' Repository for the Amplify App. '
+        $ref: "#/definitions/Repository"
+        description: " Repository for the Amplify App. "
       platform:
-        $ref: '#/definitions/Platform'
-        description: ' Platform for the Amplify App. '
+        $ref: "#/definitions/Platform"
+        description: " Platform for the Amplify App. "
       createTime:
-        $ref: '#/definitions/CreateTime'
-        description: ' Create date / time for the Amplify App. '
+        $ref: "#/definitions/CreateTime"
+        description: " Create date / time for the Amplify App. "
       updateTime:
-        $ref: '#/definitions/UpdateTime'
-        description: ' Update date / time for the Amplify App. '
+        $ref: "#/definitions/UpdateTime"
+        description: " Update date / time for the Amplify App. "
       iamServiceRoleArn:
-        $ref: '#/definitions/ServiceRoleArn'
-        description: ' IAM service role ARN for the Amplify App. '
+        $ref: "#/definitions/ServiceRoleArn"
+        description: " IAM service role ARN for the Amplify App. "
       environmentVariables:
-        $ref: '#/definitions/EnvironmentVariables'
-        description: ' Environment Variables for the Amplify App. '
+        $ref: "#/definitions/EnvironmentVariables"
+        description: " Environment Variables for the Amplify App. "
       defaultDomain:
-        $ref: '#/definitions/DefaultDomain'
-        description: ' Default domain for the Amplify App. '
+        $ref: "#/definitions/DefaultDomain"
+        description: " Default domain for the Amplify App. "
       enableBranchAutoBuild:
-        $ref: '#/definitions/EnableBranchAutoBuild'
-        description: ' Enables auto-building of branches for the Amplify App. '
+        $ref: "#/definitions/EnableBranchAutoBuild"
+        description: " Enables auto-building of branches for the Amplify App. "
       enableBasicAuth:
-        $ref: '#/definitions/EnableBasicAuth'
-        description: ' Enables Basic Authorization for branches for the Amplify App. '
+        $ref: "#/definitions/EnableBasicAuth"
+        description: " Enables Basic Authorization for branches for the Amplify App. "
       basicAuthCredentials:
-        $ref: '#/definitions/BasicAuthCredentials'
-        description: ' Basic Authorization credentials for branches for the Amplify App. '
+        $ref: "#/definitions/BasicAuthCredentials"
+        description: " Basic Authorization credentials for branches for the Amplify App. "
       customRules:
-        $ref: '#/definitions/CustomRules'
-        description: ' Custom redirect / rewrite rules for the Amplify App. '
+        $ref: "#/definitions/CustomRules"
+        description: " Custom redirect / rewrite rules for the Amplify App. "
       productionBranch:
-        $ref: '#/definitions/ProductionBranch'
-        description: ' Structure with Production Branch information. '
+        $ref: "#/definitions/ProductionBranch"
+        description: " Structure with Production Branch information. "
       buildSpec:
-        $ref: '#/definitions/BuildSpec'
-        description: ' BuildSpec content for Amplify App. '
-    description: ' Amplify App represents different branches of a repository for building, deploying, and hosting. '
+        $ref: "#/definitions/BuildSpec"
+        description: " BuildSpec content for Amplify App. "
+    description: " Amplify App represents different branches of a repository for building,
+      deploying, and hosting. "
   Apps:
     type: array
     items:
-      $ref: '#/definitions/App'
+      $ref: "#/definitions/App"
   ArtifactsUrl:
     type: string
     maxLength: 1000
@@ -1698,7 +1722,7 @@ definitions:
   CustomDomains:
     type: array
     items:
-      $ref: '#/definitions/CustomDomain'
+      $ref: "#/definitions/CustomDomain"
     maxItems: 255
   Framework:
     type: string
@@ -1712,7 +1736,7 @@ definitions:
     maxLength: 2000
   TTL:
     type: string
-    description: ' The content TTL for the website in seconds. '
+    description: " The content TTL for the website in seconds. "
   Branch:
     type: object
     required:
@@ -1733,70 +1757,71 @@ definitions:
       - ttl
     properties:
       branchArn:
-        $ref: '#/definitions/BranchArn'
-        description: ' ARN for a branch, part of an Amplify App. '
+        $ref: "#/definitions/BranchArn"
+        description: " ARN for a branch, part of an Amplify App. "
       branchName:
-        $ref: '#/definitions/BranchName'
-        description: ' Name for a branch, part of an Amplify App. '
+        $ref: "#/definitions/BranchName"
+        description: " Name for a branch, part of an Amplify App. "
       description:
-        $ref: '#/definitions/Description'
-        description: ' Description for a branch, part of an Amplify App. '
+        $ref: "#/definitions/Description"
+        description: " Description for a branch, part of an Amplify App. "
       tags:
-        $ref: '#/definitions/Tags'
-        description: ' Tag for branch for Amplify App. '
+        $ref: "#/definitions/Tags"
+        description: " Tag for branch for Amplify App. "
       stage:
-        $ref: '#/definitions/Stage'
-        description: ' Stage for a branch, part of an Amplify App. '
+        $ref: "#/definitions/Stage"
+        description: " Stage for a branch, part of an Amplify App. "
       displayName:
-        $ref: '#/definitions/DisplayName'
-        description: ' Display name for a branch, part of an Amplify App. '
+        $ref: "#/definitions/DisplayName"
+        description: " Display name for a branch, part of an Amplify App. "
       enableNotification:
-        $ref: '#/definitions/EnableNotification'
-        description: ' Enables notifications for a branch, part of an Amplify App. '
+        $ref: "#/definitions/EnableNotification"
+        description: " Enables notifications for a branch, part of an Amplify App. "
       createTime:
-        $ref: '#/definitions/CreateTime'
-        description: ' Creation date and time for a branch, part of an Amplify App. '
+        $ref: "#/definitions/CreateTime"
+        description: " Creation date and time for a branch, part of an Amplify App. "
       updateTime:
-        $ref: '#/definitions/UpdateTime'
-        description: ' Last updated date and time for a branch, part of an Amplify App. '
+        $ref: "#/definitions/UpdateTime"
+        description: " Last updated date and time for a branch, part of an Amplify App. "
       environmentVariables:
-        $ref: '#/definitions/EnvironmentVariables'
-        description: ' Environment Variables specific to a branch, part of an Amplify App. '
+        $ref: "#/definitions/EnvironmentVariables"
+        description: " Environment Variables specific to a branch, part of an Amplify App. "
       enableAutoBuild:
-        $ref: '#/definitions/EnableAutoBuild'
-        description: ' Enables auto-building on push for a branch, part of an Amplify App. '
+        $ref: "#/definitions/EnableAutoBuild"
+        description: " Enables auto-building on push for a branch, part of an Amplify App. "
       customDomains:
-        $ref: '#/definitions/CustomDomains'
-        description: ' Custom domains for a branch, part of an Amplify App. '
+        $ref: "#/definitions/CustomDomains"
+        description: " Custom domains for a branch, part of an Amplify App. "
       framework:
-        $ref: '#/definitions/Framework'
-        description: ' Framework for a branch, part of an Amplify App. '
+        $ref: "#/definitions/Framework"
+        description: " Framework for a branch, part of an Amplify App. "
       activeJobId:
-        $ref: '#/definitions/ActiveJobId'
-        description: ' Id of the active job for a branch, part of an Amplify App. '
+        $ref: "#/definitions/ActiveJobId"
+        description: " Id of the active job for a branch, part of an Amplify App. "
       totalNumberOfJobs:
-        $ref: '#/definitions/TotalNumberOfJobs'
-        description: ' Total number of Jobs part of an Amplify App. '
+        $ref: "#/definitions/TotalNumberOfJobs"
+        description: " Total number of Jobs part of an Amplify App. "
       enableBasicAuth:
-        $ref: '#/definitions/EnableBasicAuth'
-        description: ' Enables Basic Authorization for a branch, part of an Amplify App. '
+        $ref: "#/definitions/EnableBasicAuth"
+        description: " Enables Basic Authorization for a branch, part of an Amplify App. "
       thumbnailUrl:
-        $ref: '#/definitions/ThumbnailUrl'
-        description: ' Thumbnail Url for the branch. '
+        $ref: "#/definitions/ThumbnailUrl"
+        description: " Thumbnail Url for the branch. "
       basicAuthCredentials:
-        $ref: '#/definitions/BasicAuthCredentials'
-        description: ' Basic Authorization credentials for a branch, part of an Amplify App. '
+        $ref: "#/definitions/BasicAuthCredentials"
+        description: " Basic Authorization credentials for a branch, part of an Amplify
+          App. "
       buildSpec:
-        $ref: '#/definitions/BuildSpec'
-        description: ' BuildSpec content for branch for Amplify App. '
+        $ref: "#/definitions/BuildSpec"
+        description: " BuildSpec content for branch for Amplify App. "
       ttl:
-        $ref: '#/definitions/TTL'
-        description: ' The content TTL for the website in seconds. '
-    description: ' Branch for an Amplify App, which maps to a 3rd party repository branch. '
+        $ref: "#/definitions/TTL"
+        description: " The content TTL for the website in seconds. "
+    description: " Branch for an Amplify App, which maps to a 3rd party repository branch. "
   Branches:
     type: array
     items:
-      $ref: '#/definitions/Branch'
+      $ref: "#/definitions/Branch"
     maxItems: 255
   CertificateVerificationDNSRecord:
     type: string
@@ -1826,87 +1851,90 @@ definitions:
       - oauthToken
     properties:
       name:
-        $ref: '#/definitions/Name'
-        description: ' Name for the Amplify App '
+        $ref: "#/definitions/Name"
+        description: " Name for the Amplify App "
       description:
-        $ref: '#/definitions/Description'
-        description: ' Description for an Amplify App '
+        $ref: "#/definitions/Description"
+        description: " Description for an Amplify App "
       repository:
-        $ref: '#/definitions/Repository'
-        description: ' Repository for an Amplify App '
+        $ref: "#/definitions/Repository"
+        description: " Repository for an Amplify App "
       platform:
-        $ref: '#/definitions/Platform'
-        description: ' Platform / framework for an Amplify App '
+        $ref: "#/definitions/Platform"
+        description: " Platform / framework for an Amplify App "
       iamServiceRoleArn:
-        $ref: '#/definitions/ServiceRoleArn'
-        description: ' AWS IAM service role for an Amplify App '
+        $ref: "#/definitions/ServiceRoleArn"
+        description: " AWS IAM service role for an Amplify App "
       oauthToken:
-        $ref: '#/definitions/OauthToken'
-        description: ' OAuth token for 3rd party source control system for an Amplify App, used to create webhook and read-only deploy key. OAuth token is not stored. '
+        $ref: "#/definitions/OauthToken"
+        description: " OAuth token for 3rd party source control system for an Amplify App,
+          used to create webhook and read-only deploy key. OAuth token is not
+          stored. "
       environmentVariables:
-        $ref: '#/definitions/EnvironmentVariables'
-        description: ' Environment variables map for an Amplify App. '
+        $ref: "#/definitions/EnvironmentVariables"
+        description: " Environment variables map for an Amplify App. "
       enableBranchAutoBuild:
-        $ref: '#/definitions/EnableBranchAutoBuild'
-        description: ' Enable the auto building of branches for an Amplify App. '
+        $ref: "#/definitions/EnableBranchAutoBuild"
+        description: " Enable the auto building of branches for an Amplify App. "
       enableBasicAuth:
-        $ref: '#/definitions/EnableBasicAuth'
-        description: ' Enable Basic Authorization for an Amplify App, this will apply to all branches part of this App. '
+        $ref: "#/definitions/EnableBasicAuth"
+        description: " Enable Basic Authorization for an Amplify App, this will apply to
+          all branches part of this App. "
       basicAuthCredentials:
-        $ref: '#/definitions/BasicAuthCredentials'
-        description: ' Credentials for Basic Authorization for an Amplify App. '
+        $ref: "#/definitions/BasicAuthCredentials"
+        description: " Credentials for Basic Authorization for an Amplify App. "
       customRules:
-        $ref: '#/definitions/CustomRules'
-        description: ' Custom rewrite / redirect rules for an Amplify App. '
+        $ref: "#/definitions/CustomRules"
+        description: " Custom rewrite / redirect rules for an Amplify App. "
       tags:
-        $ref: '#/definitions/Tags'
-        description: ' Tag for an Amplify App '
+        $ref: "#/definitions/Tags"
+        description: " Tag for an Amplify App "
       buildSpec:
-        $ref: '#/definitions/BuildSpec'
-        description: ' BuildSpec for an Amplify App '
-    description: ' Request structure used to create Apps in Amplify. '
+        $ref: "#/definitions/BuildSpec"
+        description: " BuildSpec for an Amplify App "
+    description: " Request structure used to create Apps in Amplify. "
   CreateBranchRequest:
     type: object
     required:
       - branchName
     properties:
       branchName:
-        $ref: '#/definitions/BranchName'
-        description: ' Name for the branch. '
+        $ref: "#/definitions/BranchName"
+        description: " Name for the branch. "
       description:
-        $ref: '#/definitions/Description'
-        description: ' Description for the branch. '
+        $ref: "#/definitions/Description"
+        description: " Description for the branch. "
       stage:
-        $ref: '#/definitions/Stage'
-        description: ' Stage for the branch. '
+        $ref: "#/definitions/Stage"
+        description: " Stage for the branch. "
       framework:
-        $ref: '#/definitions/Framework'
-        description: ' Framework for the branch. '
+        $ref: "#/definitions/Framework"
+        description: " Framework for the branch. "
       enableNotification:
-        $ref: '#/definitions/EnableNotification'
-        description: ' Enables notifications for the branch. '
+        $ref: "#/definitions/EnableNotification"
+        description: " Enables notifications for the branch. "
       enableAutoBuild:
-        $ref: '#/definitions/EnableAutoBuild'
-        description: ' Enables auto building for the branch. '
+        $ref: "#/definitions/EnableAutoBuild"
+        description: " Enables auto building for the branch. "
       environmentVariables:
-        $ref: '#/definitions/EnvironmentVariables'
-        description: ' Environment Variables for the branch. '
+        $ref: "#/definitions/EnvironmentVariables"
+        description: " Environment Variables for the branch. "
       basicAuthCredentials:
-        $ref: '#/definitions/BasicAuthCredentials'
-        description: ' Basic Authorization credentials for the branch. '
+        $ref: "#/definitions/BasicAuthCredentials"
+        description: " Basic Authorization credentials for the branch. "
       enableBasicAuth:
-        $ref: '#/definitions/EnableBasicAuth'
-        description: ' Enables Basic Auth for the branch. '
+        $ref: "#/definitions/EnableBasicAuth"
+        description: " Enables Basic Auth for the branch. "
       tags:
-        $ref: '#/definitions/Tags'
-        description: ' Tag for the branch. '
+        $ref: "#/definitions/Tags"
+        description: " Tag for the branch. "
       buildSpec:
-        $ref: '#/definitions/BuildSpec'
-        description: ' BuildSpec for the branch. '
+        $ref: "#/definitions/BuildSpec"
+        description: " BuildSpec for the branch. "
       ttl:
-        $ref: '#/definitions/TTL'
-        description: ' The content TTL for the website in seconds. '
-    description: ' Request structure for a branch create request. '
+        $ref: "#/definitions/TTL"
+        description: " The content TTL for the website in seconds. "
+    description: " Request structure for a branch create request. "
   DomainName:
     type: string
     maxLength: 255
@@ -1915,7 +1943,7 @@ definitions:
   SubDomainSettings:
     type: array
     items:
-      $ref: '#/definitions/SubDomainSetting'
+      $ref: "#/definitions/SubDomainSetting"
     maxItems: 255
   CreateDomainAssociationRequest:
     type: object
@@ -1924,15 +1952,15 @@ definitions:
       - subDomainSettings
     properties:
       domainName:
-        $ref: '#/definitions/DomainName'
-        description: ' Domain name for the Domain Association. '
+        $ref: "#/definitions/DomainName"
+        description: " Domain name for the Domain Association. "
       enableAutoSubDomain:
-        $ref: '#/definitions/EnableAutoSubDomain'
-        description: ' Enables automated creation of Subdomains for branches. '
+        $ref: "#/definitions/EnableAutoSubDomain"
+        description: " Enables automated creation of Subdomains for branches. "
       subDomainSettings:
-        $ref: '#/definitions/SubDomainSettings'
-        description: ' Setting structure for the Subdomain. '
-    description: ' Request structure for create Domain Association request. '
+        $ref: "#/definitions/SubDomainSettings"
+        description: " Setting structure for the Subdomain. "
+    description: " Request structure for create Domain Association request. "
   DomainAssociation:
     type: object
     required:
@@ -1945,27 +1973,28 @@ definitions:
       - subDomains
     properties:
       domainAssociationArn:
-        $ref: '#/definitions/DomainAssociationArn'
-        description: ' ARN for the Domain Association. '
+        $ref: "#/definitions/DomainAssociationArn"
+        description: " ARN for the Domain Association. "
       domainName:
-        $ref: '#/definitions/DomainName'
-        description: ' Name of the domain. '
+        $ref: "#/definitions/DomainName"
+        description: " Name of the domain. "
       enableAutoSubDomain:
-        $ref: '#/definitions/EnableAutoSubDomain'
-        description: ' Enables automated creation of Subdomains for branches. '
+        $ref: "#/definitions/EnableAutoSubDomain"
+        description: " Enables automated creation of Subdomains for branches. "
       domainStatus:
-        $ref: '#/definitions/DomainStatus'
-        description: ' Status fo the Domain Association. '
+        $ref: "#/definitions/DomainStatus"
+        description: " Status fo the Domain Association. "
       statusReason:
-        $ref: '#/definitions/StatusReason'
-        description: ' Reason for the current status of the Domain Association. '
+        $ref: "#/definitions/StatusReason"
+        description: " Reason for the current status of the Domain Association. "
       certificateVerificationDNSRecord:
-        $ref: '#/definitions/CertificateVerificationDNSRecord'
-        description: ' DNS Record for certificate verification. '
+        $ref: "#/definitions/CertificateVerificationDNSRecord"
+        description: " DNS Record for certificate verification. "
       subDomains:
-        $ref: '#/definitions/SubDomains'
-        description: ' Subdomains for the Domain Association. '
-    description: ' Structure for Domain Association, which associates a custom domain with an Amplify App. '
+        $ref: "#/definitions/SubDomains"
+        description: " Subdomains for the Domain Association. "
+    description: " Structure for Domain Association, which associates a custom domain with
+      an Amplify App. "
   CustomDomain:
     type: string
     maxLength: 255
@@ -1987,22 +2016,22 @@ definitions:
   DeleteAppRequest:
     type: object
     properties: {}
-    description: ' Request structure for an Amplify App delete request. '
+    description: " Request structure for an Amplify App delete request. "
   DeleteBranchRequest:
     type: object
     properties: {}
-    description: ' Request structure for delete branch request. '
+    description: " Request structure for delete branch request. "
   DeleteDomainAssociationRequest:
     type: object
     properties: {}
-    description: ' Request structure for the delete Domain Association request. '
+    description: " Request structure for the delete Domain Association request. "
   JobId:
     type: string
     maxLength: 255
   DeleteJobRequest:
     type: object
     properties: {}
-    description: ' Request structure for delete job request. '
+    description: " Request structure for delete job request. "
   JobSummary:
     type: object
     required:
@@ -2016,33 +2045,33 @@ definitions:
       - jobType
     properties:
       jobArn:
-        $ref: '#/definitions/JobArn'
-        description: ' Arn for the Job. '
+        $ref: "#/definitions/JobArn"
+        description: " Arn for the Job. "
       jobId:
-        $ref: '#/definitions/JobId'
-        description: ' Unique Id for the Job. '
+        $ref: "#/definitions/JobId"
+        description: " Unique Id for the Job. "
       commitId:
-        $ref: '#/definitions/CommitId'
-        description: ' Commit Id from 3rd party repository provider for the Job. '
+        $ref: "#/definitions/CommitId"
+        description: " Commit Id from 3rd party repository provider for the Job. "
       commitMessage:
-        $ref: '#/definitions/CommitMessage'
-        description: ' Commit message from 3rd party repository provider for the Job. '
+        $ref: "#/definitions/CommitMessage"
+        description: " Commit message from 3rd party repository provider for the Job. "
       commitTime:
-        $ref: '#/definitions/CommitTime'
-        description: ' Commit date / time for the Job. '
+        $ref: "#/definitions/CommitTime"
+        description: " Commit date / time for the Job. "
       startTime:
-        $ref: '#/definitions/StartTime'
-        description: ' Start date / time for the Job. '
+        $ref: "#/definitions/StartTime"
+        description: " Start date / time for the Job. "
       status:
-        $ref: '#/definitions/JobStatus'
-        description: ' Status for the Job. '
+        $ref: "#/definitions/JobStatus"
+        description: " Status for the Job. "
       endTime:
-        $ref: '#/definitions/EndTime'
-        description: ' End date / time for the Job. '
+        $ref: "#/definitions/EndTime"
+        description: " End date / time for the Job. "
       jobType:
-        $ref: '#/definitions/JobType'
-        description: ' Type for the Job. '
-    description: ' Structure for the summary of a Job. '
+        $ref: "#/definitions/JobType"
+        description: " Type for the Job. "
+    description: " Structure for the summary of a Job. "
   DomainAssociationArn:
     type: string
     maxLength: 1000
@@ -2060,12 +2089,12 @@ definitions:
   SubDomains:
     type: array
     items:
-      $ref: '#/definitions/SubDomain'
+      $ref: "#/definitions/SubDomain"
     maxItems: 255
   DomainAssociations:
     type: array
     items:
-      $ref: '#/definitions/DomainAssociation'
+      $ref: "#/definitions/DomainAssociation"
     maxItems: 255
   DomainPrefix:
     type: string
@@ -2079,19 +2108,19 @@ definitions:
   GetAppRequest:
     type: object
     properties: {}
-    description: ' Request structure for get App request. '
+    description: " Request structure for get App request. "
   GetBranchRequest:
     type: object
     properties: {}
-    description: ' Result structure for get branch request. '
+    description: " Result structure for get branch request. "
   GetDomainAssociationRequest:
     type: object
     properties: {}
-    description: ' Request structure for the get Domain Association request. '
+    description: " Request structure for the get Domain Association request. "
   GetJobRequest:
     type: object
     properties: {}
-    description: ' Request structure for get job request. '
+    description: " Request structure for get job request. "
   Job:
     type: object
     required:
@@ -2099,16 +2128,16 @@ definitions:
       - steps
     properties:
       summary:
-        $ref: '#/definitions/JobSummary'
-        description: ' Summary for an execution job for an Amplify App. '
+        $ref: "#/definitions/JobSummary"
+        description: " Summary for an execution job for an Amplify App. "
       steps:
-        $ref: '#/definitions/Steps'
-        description: ' Execution steps for an execution job, for an Amplify App. '
-    description: ' Structure for an execution job for an Amplify App. '
+        $ref: "#/definitions/Steps"
+        description: " Execution steps for an execution job, for an Amplify App. "
+    description: " Structure for an execution job for an Amplify App. "
   Steps:
     type: array
     items:
-      $ref: '#/definitions/Step'
+      $ref: "#/definitions/Step"
   JobArn:
     type: string
     maxLength: 1000
@@ -2128,7 +2157,7 @@ definitions:
   JobSummaries:
     type: array
     items:
-      $ref: '#/definitions/JobSummary'
+      $ref: "#/definitions/JobSummary"
   StartTime:
     type: string
     format: date-time
@@ -2152,50 +2181,50 @@ definitions:
   ListAppsRequest:
     type: object
     properties: {}
-    description: ' Request structure for an Amplify App list request. '
+    description: " Request structure for an Amplify App list request. "
   ListBranchesRequest:
     type: object
     properties: {}
-    description: ' Request structure for list branches request. '
+    description: " Request structure for list branches request. "
   ListDomainAssociationsRequest:
     type: object
     properties: {}
-    description: ' Request structure for the list Domain Associations request. '
+    description: " Request structure for the list Domain Associations request. "
   ListJobsRequest:
     type: object
     properties: {}
-    description: ' Request structure for list job request. '
+    description: " Request structure for list job request. "
   LogUrl:
     type: string
     maxLength: 1000
   Screenshots:
     type: object
     additionalProperties:
-      $ref: '#/definitions/ThumbnailUrl'
+      $ref: "#/definitions/ThumbnailUrl"
   StartJobRequest:
     type: object
     required:
       - jobType
     properties:
       jobId:
-        $ref: '#/definitions/JobId'
-        description: ' Unique Id for the Job. '
+        $ref: "#/definitions/JobId"
+        description: " Unique Id for the Job. "
       jobType:
-        $ref: '#/definitions/JobType'
-        description: ' Type for the Job. '
+        $ref: "#/definitions/JobType"
+        description: " Type for the Job. "
       jobReason:
-        $ref: '#/definitions/JobReason'
-        description: ' Reason for the Job. '
+        $ref: "#/definitions/JobReason"
+        description: " Reason for the Job. "
       commitId:
-        $ref: '#/definitions/CommitId'
-        description: ' Commit Id from 3rd party repository provider for the Job. '
+        $ref: "#/definitions/CommitId"
+        description: " Commit Id from 3rd party repository provider for the Job. "
       commitMessage:
-        $ref: '#/definitions/CommitMessage'
-        description: ' Commit message from 3rd party repository provider for the Job. '
+        $ref: "#/definitions/CommitMessage"
+        description: " Commit message from 3rd party repository provider for the Job. "
       commitTime:
-        $ref: '#/definitions/CommitTime'
-        description: ' Commit date / time for the Job. '
-    description: ' Request structure for Start job request. '
+        $ref: "#/definitions/CommitTime"
+        description: " Commit date / time for the Job. "
+    description: " Request structure for Start job request. "
   StepName:
     type: string
     maxLength: 255
@@ -2208,31 +2237,32 @@ definitions:
       - endTime
     properties:
       stepName:
-        $ref: '#/definitions/StepName'
-        description: ' Name of the execution step. '
+        $ref: "#/definitions/StepName"
+        description: " Name of the execution step. "
       startTime:
-        $ref: '#/definitions/StartTime'
-        description: ' Start date/ time of the execution step. '
+        $ref: "#/definitions/StartTime"
+        description: " Start date/ time of the execution step. "
       status:
-        $ref: '#/definitions/JobStatus'
-        description: ' Status of the execution step. '
+        $ref: "#/definitions/JobStatus"
+        description: " Status of the execution step. "
       endTime:
-        $ref: '#/definitions/EndTime'
-        description: ' End date/ time of the execution step. '
+        $ref: "#/definitions/EndTime"
+        description: " End date/ time of the execution step. "
       logUrl:
-        $ref: '#/definitions/LogUrl'
-        description: ' Url to the logs for the execution step. '
+        $ref: "#/definitions/LogUrl"
+        description: " Url to the logs for the execution step. "
       artifactsUrl:
-        $ref: '#/definitions/ArtifactsUrl'
-        description: ' Url to teh artifact for the execution step. '
+        $ref: "#/definitions/ArtifactsUrl"
+        description: " Url to teh artifact for the execution step. "
       screenshots:
-        $ref: '#/definitions/Screenshots'
-        description: ' List of screenshot Urls for the execution step, if relevant. '
-    description: ' Structure for an execution step for an execution job, for an Amplify App. '
+        $ref: "#/definitions/Screenshots"
+        description: " List of screenshot Urls for the execution step, if relevant. "
+    description: " Structure for an execution step for an execution job, for an Amplify
+      App. "
   StopJobRequest:
     type: object
     properties: {}
-    description: ' Request structure for stop job request. '
+    description: " Request structure for stop job request. "
   Verified:
     type: boolean
   SubDomain:
@@ -2243,15 +2273,15 @@ definitions:
       - dnsRecord
     properties:
       subDomainSetting:
-        $ref: '#/definitions/SubDomainSetting'
-        description: ' Setting structure for the Subdomain. '
+        $ref: "#/definitions/SubDomainSetting"
+        description: " Setting structure for the Subdomain. "
       verified:
-        $ref: '#/definitions/Verified'
-        description: ' Verified status of the Subdomain '
+        $ref: "#/definitions/Verified"
+        description: " Verified status of the Subdomain "
       dnsRecord:
-        $ref: '#/definitions/DNSRecord'
-        description: ' DNS record for the Subdomain. '
-    description: ' Subdomain for the Domain Association. '
+        $ref: "#/definitions/DNSRecord"
+        description: " DNS record for the Subdomain. "
+    description: " Subdomain for the Domain Association. "
   TagKey:
     type: string
     maxLength: 1000
@@ -2262,79 +2292,79 @@ definitions:
     type: object
     properties:
       name:
-        $ref: '#/definitions/Name'
-        description: ' Name for an Amplify App. '
+        $ref: "#/definitions/Name"
+        description: " Name for an Amplify App. "
       description:
-        $ref: '#/definitions/Description'
-        description: ' Description for an Amplify App. '
+        $ref: "#/definitions/Description"
+        description: " Description for an Amplify App. "
       platform:
-        $ref: '#/definitions/Platform'
-        description: ' Platform for an Amplify App. '
+        $ref: "#/definitions/Platform"
+        description: " Platform for an Amplify App. "
       iamServiceRoleArn:
-        $ref: '#/definitions/ServiceRoleArn'
-        description: ' IAM service role for an Amplify App. '
+        $ref: "#/definitions/ServiceRoleArn"
+        description: " IAM service role for an Amplify App. "
       environmentVariables:
-        $ref: '#/definitions/EnvironmentVariables'
-        description: ' Environment Variables for an Amplify App. '
+        $ref: "#/definitions/EnvironmentVariables"
+        description: " Environment Variables for an Amplify App. "
       enableBranchAutoBuild:
-        $ref: '#/definitions/EnableAutoBuild'
-        description: ' Enables branch auto-building for an Amplify App. '
+        $ref: "#/definitions/EnableAutoBuild"
+        description: " Enables branch auto-building for an Amplify App. "
       enableBasicAuth:
-        $ref: '#/definitions/EnableBasicAuth'
-        description: ' Enables Basic Authorization for an Amplify App. '
+        $ref: "#/definitions/EnableBasicAuth"
+        description: " Enables Basic Authorization for an Amplify App. "
       basicAuthCredentials:
-        $ref: '#/definitions/BasicAuthCredentials'
-        description: ' Basic Authorization credentials for an Amplify App. '
+        $ref: "#/definitions/BasicAuthCredentials"
+        description: " Basic Authorization credentials for an Amplify App. "
       customRules:
-        $ref: '#/definitions/CustomRules'
-        description: ' Custom redirect / rewrite rules for an Amplify App. '
+        $ref: "#/definitions/CustomRules"
+        description: " Custom redirect / rewrite rules for an Amplify App. "
       buildSpec:
-        $ref: '#/definitions/BuildSpec'
-        description: ' BuildSpec for an Amplify App. '
-    description: ' Request structure for update App request. '
+        $ref: "#/definitions/BuildSpec"
+        description: " BuildSpec for an Amplify App. "
+    description: " Request structure for update App request. "
   UpdateBranchRequest:
     type: object
     properties:
       description:
-        $ref: '#/definitions/Description'
-        description: ' Description for the branch. '
+        $ref: "#/definitions/Description"
+        description: " Description for the branch. "
       framework:
-        $ref: '#/definitions/Framework'
-        description: ' Framework for the branch. '
+        $ref: "#/definitions/Framework"
+        description: " Framework for the branch. "
       stage:
-        $ref: '#/definitions/Stage'
-        description: ' Stage for the branch. '
+        $ref: "#/definitions/Stage"
+        description: " Stage for the branch. "
       enableNotification:
-        $ref: '#/definitions/EnableNotification'
-        description: ' Enables notifications for the branch. '
+        $ref: "#/definitions/EnableNotification"
+        description: " Enables notifications for the branch. "
       enableAutoBuild:
-        $ref: '#/definitions/EnableAutoBuild'
-        description: ' Enables auto building for the branch. '
+        $ref: "#/definitions/EnableAutoBuild"
+        description: " Enables auto building for the branch. "
       environmentVariables:
-        $ref: '#/definitions/EnvironmentVariables'
-        description: ' Environment Variables for the branch. '
+        $ref: "#/definitions/EnvironmentVariables"
+        description: " Environment Variables for the branch. "
       basicAuthCredentials:
-        $ref: '#/definitions/BasicAuthCredentials'
-        description: ' Basic Authorization credentials for the branch. '
+        $ref: "#/definitions/BasicAuthCredentials"
+        description: " Basic Authorization credentials for the branch. "
       enableBasicAuth:
-        $ref: '#/definitions/EnableBasicAuth'
-        description: ' Enables Basic Auth for the branch. '
+        $ref: "#/definitions/EnableBasicAuth"
+        description: " Enables Basic Auth for the branch. "
       buildSpec:
-        $ref: '#/definitions/BuildSpec'
-        description: ' BuildSpec for the branch. '
+        $ref: "#/definitions/BuildSpec"
+        description: " BuildSpec for the branch. "
       ttl:
-        $ref: '#/definitions/TTL'
-        description: ' The content TTL for the website in seconds. '
-    description: ' Request structure for update branch request. '
+        $ref: "#/definitions/TTL"
+        description: " The content TTL for the website in seconds. "
+    description: " Request structure for update branch request. "
   UpdateDomainAssociationRequest:
     type: object
     required:
       - subDomainSettings
     properties:
       enableAutoSubDomain:
-        $ref: '#/definitions/EnableAutoSubDomain'
-        description: ' Enables automated creation of Subdomains for branches. '
+        $ref: "#/definitions/EnableAutoSubDomain"
+        description: " Enables automated creation of Subdomains for branches. "
       subDomainSettings:
-        $ref: '#/definitions/SubDomainSettings'
-        description: ' Setting structure for the Subdomain. '
-    description: ' Request structure for update Domain Association request. '
+        $ref: "#/definitions/SubDomainSettings"
+        description: " Setting structure for the Subdomain. "
+    description: " Request structure for update Domain Association request. "

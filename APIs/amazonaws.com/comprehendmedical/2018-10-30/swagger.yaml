@@ -1,38 +1,39 @@
-swagger: '2.0'
+swagger: "2.0"
 info:
-  version: '2018-10-30'
+  version: 2018-10-30
   x-release: v4
   title: AWS Comprehend Medical
-  description: ' Comprehend Medical extracts structured information from unstructured clinical text. Use these actions to gain insight in your documents. '
+  description: " Comprehend Medical extracts structured information from unstructured
+    clinical text. Use these actions to gain insight in your documents. "
   x-logo:
-    url: 'https://twitter.com/awscloud/profile_image?size=original'
-    backgroundColor: '#FFFFFF'
-  termsOfService: 'https://aws.amazon.com/service-terms/'
+    url: https://twitter.com/awscloud/profile_image?size=original
+    backgroundColor: "#FFFFFF"
+  termsOfService: https://aws.amazon.com/service-terms/
   contact:
     name: Mike Ralphson
     email: mike.ralphson@gmail.com
-    url: 'https://github.com/mermade/aws2openapi'
+    url: https://github.com/mermade/aws2openapi
     x-twitter: PermittedSoc
   license:
     name: Apache 2.0 License
-    url: 'http://www.apache.org/licenses/'
+    url: http://www.apache.org/licenses/
   x-providerName: amazonaws.com
   x-serviceName: comprehendmedical
   x-origin:
     - contentType: application/json
-      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/comprehendmedical-2018-10-30.normal.json'
+      url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/comprehendmedical-2018-10-30.normal.json
       converter:
-        url: 'https://github.com/mermade/aws2openapi'
+        url: https://github.com/mermade/aws2openapi
         version: 1.0.0
       x-apisguru-direct: true
   x-apiClientRegistration:
-    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+    url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
   x-apisguru-categories:
     - cloud
   x-preferred: true
 externalDocs:
   description: Amazon Web Services documentation
-  url: 'https://docs.aws.amazon.com/comprehendmedical/'
+  url: https://docs.aws.amazon.com/comprehendmedical/
 host: comprehendmedical.amazonaws.com
 basePath: /
 x-hasEquivalentPaths: true
@@ -89,45 +90,47 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  '/#X-Amz-Target=ComprehendMedical_20181030.DetectEntities':
+  /#X-Amz-Target=ComprehendMedical_20181030.DetectEntities:
     post:
       operationId: DetectEntities
-      description: ' Inspects the clinical text for a variety of medical entities and returns specific information about them such as entity category, location, and confidence score on that information .'
+      description: " Inspects the clinical text for a variety of medical entities and
+        returns specific information about them such as entity category,
+        location, and confidence score on that information ."
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/DetectEntitiesResponse'
-        '480':
+            $ref: "#/definitions/DetectEntitiesResponse"
+        "480":
           description: InternalServerException
           schema:
-            $ref: '#/definitions/InternalServerException'
-        '481':
+            $ref: "#/definitions/InternalServerException"
+        "481":
           description: ServiceUnavailableException
           schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '482':
+            $ref: "#/definitions/ServiceUnavailableException"
+        "482":
           description: TooManyRequestsException
           schema:
-            $ref: '#/definitions/TooManyRequestsException'
-        '483':
+            $ref: "#/definitions/TooManyRequestsException"
+        "483":
           description: InvalidRequestException
           schema:
-            $ref: '#/definitions/InvalidRequestException'
-        '484':
+            $ref: "#/definitions/InvalidRequestException"
+        "484":
           description: InvalidEncodingException
           schema:
-            $ref: '#/definitions/InvalidEncodingException'
-        '485':
+            $ref: "#/definitions/InvalidEncodingException"
+        "485":
           description: TextSizeLimitExceededException
           schema:
-            $ref: '#/definitions/TextSizeLimitExceededException'
+            $ref: "#/definitions/TextSizeLimitExceededException"
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/DetectEntitiesRequest'
+            $ref: "#/definitions/DetectEntitiesRequest"
         - name: X-Amz-Target
           in: header
           required: true
@@ -135,52 +138,54 @@ paths:
           enum:
             - ComprehendMedical_20181030.DetectEntities
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ComprehendMedical_20181030.DetectPHI':
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=ComprehendMedical_20181030.DetectPHI:
     post:
       operationId: DetectPHI
-      description: ' Inspects the clinical text for personal health information (PHI) entities and entity category, location, and confidence score on that information.'
+      description: " Inspects the clinical text for personal health information (PHI)
+        entities and entity category, location, and confidence score on that
+        information."
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/DetectPHIResponse'
-        '480':
+            $ref: "#/definitions/DetectPHIResponse"
+        "480":
           description: InternalServerException
           schema:
-            $ref: '#/definitions/InternalServerException'
-        '481':
+            $ref: "#/definitions/InternalServerException"
+        "481":
           description: ServiceUnavailableException
           schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '482':
+            $ref: "#/definitions/ServiceUnavailableException"
+        "482":
           description: TooManyRequestsException
           schema:
-            $ref: '#/definitions/TooManyRequestsException'
-        '483':
+            $ref: "#/definitions/TooManyRequestsException"
+        "483":
           description: InvalidRequestException
           schema:
-            $ref: '#/definitions/InvalidRequestException'
-        '484':
+            $ref: "#/definitions/InvalidRequestException"
+        "484":
           description: InvalidEncodingException
           schema:
-            $ref: '#/definitions/InvalidEncodingException'
-        '485':
+            $ref: "#/definitions/InvalidEncodingException"
+        "485":
           description: TextSizeLimitExceededException
           schema:
-            $ref: '#/definitions/TextSizeLimitExceededException'
+            $ref: "#/definitions/TextSizeLimitExceededException"
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/DetectPHIRequest'
+            $ref: "#/definitions/DetectPHIRequest"
         - name: X-Amz-Target
           in: header
           required: true
@@ -188,13 +193,13 @@ paths:
           enum:
             - ComprehendMedical_20181030.DetectPHI
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
 definitions:
   DetectEntitiesResponse:
     type: object
@@ -202,22 +207,32 @@ definitions:
       - Entities
     properties:
       Entities:
-        $ref: '#/definitions/EntityList'
-        description: ' The collection of medical entities extracted from the input text and their associated information. For each entity, the response provides the entity text, the entity category, where the entity text begins and ends, and the level of confidence that Comprehend Medical has in the detection and analysis. Attributes and traits of the entity are also returned.'
+        $ref: "#/definitions/EntityList"
+        description: " The collection of medical entities extracted from the input text and
+          their associated information. For each entity, the response provides
+          the entity text, the entity category, where the entity text begins and
+          ends, and the level of confidence that Comprehend Medical has in the
+          detection and analysis. Attributes and traits of the entity are also
+          returned."
       UnmappedAttributes:
-        $ref: '#/definitions/UnmappedAttributeList'
-        description: ' Attributes extracted from the input text that we were unable to relate to an entity.'
+        $ref: "#/definitions/UnmappedAttributeList"
+        description: " Attributes extracted from the input text that we were unable to
+          relate to an entity."
       PaginationToken:
-        $ref: '#/definitions/String'
-        description: ' If the result of the previous request to DetectEntities was truncated, include the Paginationtoken to fetch the next page of entities.'
+        $ref: "#/definitions/String"
+        description: " If the result of the previous request to DetectEntities was
+          truncated, include the Paginationtoken to fetch the next page of
+          entities."
   DetectEntitiesRequest:
     type: object
     required:
       - Text
     properties:
       Text:
-        $ref: '#/definitions/BoundedLengthString'
-        description: ' A UTF-8 text string containing the clinical content being examined for entities. Each string must contain fewer than 20,000 bytes of characters.'
+        $ref: "#/definitions/BoundedLengthString"
+        description: " A UTF-8 text string containing the clinical content being examined
+          for entities. Each string must contain fewer than 20,000 bytes of
+          characters."
   InternalServerException: {}
   ServiceUnavailableException: {}
   TooManyRequestsException: {}
@@ -230,19 +245,26 @@ definitions:
       - Entities
     properties:
       Entities:
-        $ref: '#/definitions/EntityList'
-        description: ' The collection of PHI entities extracted from the input text and their associated information. For each entity, the response provides the entity text, the entity category, where the entity text begins and ends, and the level of confidence that Comprehend Medical has in its detection. '
+        $ref: "#/definitions/EntityList"
+        description: " The collection of PHI entities extracted from the input text and
+          their associated information. For each entity, the response provides
+          the entity text, the entity category, where the entity text begins and
+          ends, and the level of confidence that Comprehend Medical has in its
+          detection. "
       PaginationToken:
-        $ref: '#/definitions/String'
-        description: ' If the result of the previous request to DetectPHI was truncated, include the Paginationtoken to fetch the next page of PHI entities. '
+        $ref: "#/definitions/String"
+        description: " If the result of the previous request to DetectPHI was truncated,
+          include the Paginationtoken to fetch the next page of PHI entities. "
   DetectPHIRequest:
     type: object
     required:
       - Text
     properties:
       Text:
-        $ref: '#/definitions/BoundedLengthString'
-        description: ' A UTF-8 text string containing the clinical content being examined for PHI entities. Each string must contain fewer than 20,000 bytes of characters. '
+        $ref: "#/definitions/BoundedLengthString"
+        description: " A UTF-8 text string containing the clinical content being examined
+          for PHI entities. Each string must contain fewer than 20,000 bytes of
+          characters. "
   EntitySubType:
     type: string
     enum:
@@ -285,39 +307,50 @@ definitions:
   TraitList:
     type: array
     items:
-      $ref: '#/definitions/Trait'
+      $ref: "#/definitions/Trait"
   Attribute:
     type: object
     properties:
       Type:
-        $ref: '#/definitions/EntitySubType'
-        description: ' The type of attribute. '
+        $ref: "#/definitions/EntitySubType"
+        description: " The type of attribute. "
       Score:
-        $ref: '#/definitions/Float'
-        description: ' The level of confidence that Comprehend Medical has that the segment of text is correctly recognized as an attribute. '
+        $ref: "#/definitions/Float"
+        description: " The level of confidence that Comprehend Medical has that the segment
+          of text is correctly recognized as an attribute. "
       RelationshipScore:
-        $ref: '#/definitions/Float'
-        description: ' The level of confidence that Comprehend Medical has that this attribute is correctly related to this entity. '
+        $ref: "#/definitions/Float"
+        description: " The level of confidence that Comprehend Medical has that this
+          attribute is correctly related to this entity. "
       Id:
-        $ref: '#/definitions/Integer'
-        description: ' The numeric identifier for this attribute. This is a monotonically increasing id unique within this response rather than a global unique identifier. '
+        $ref: "#/definitions/Integer"
+        description: " The numeric identifier for this attribute. This is a monotonically
+          increasing id unique within this response rather than a global unique
+          identifier. "
       BeginOffset:
-        $ref: '#/definitions/Integer'
-        description: ' The 0-based character offset in the input text that shows where the attribute begins. The offset returns the UTF-8 code point in the string. '
+        $ref: "#/definitions/Integer"
+        description: " The 0-based character offset in the input text that shows where the
+          attribute begins. The offset returns the UTF-8 code point in the
+          string. "
       EndOffset:
-        $ref: '#/definitions/Integer'
-        description: ' The 0-based character offset in the input text that shows where the attribute ends. The offset returns the UTF-8 code point in the string. '
+        $ref: "#/definitions/Integer"
+        description: " The 0-based character offset in the input text that shows where the
+          attribute ends. The offset returns the UTF-8 code point in the string.
+          "
       Text:
-        $ref: '#/definitions/String'
-        description: ' The segment of input text extracted as this attribute.'
+        $ref: "#/definitions/String"
+        description: " The segment of input text extracted as this attribute."
       Traits:
-        $ref: '#/definitions/TraitList'
-        description: ' Contextual information for this attribute. '
-    description: ' An extracted segment of the text that is an attribute of an entity, or otherwise related to an entity, such as the dosage of a medication taken. It contains information about the attribute such as id, begin and end offset within the input text, and the segment of the input text. '
+        $ref: "#/definitions/TraitList"
+        description: " Contextual information for this attribute. "
+    description: " An extracted segment of the text that is an attribute of an entity, or
+      otherwise related to an entity, such as the dosage of a medication taken.
+      It contains information about the attribute such as id, begin and end
+      offset within the input text, and the segment of the input text. "
   AttributeList:
     type: array
     items:
-      $ref: '#/definitions/Attribute'
+      $ref: "#/definitions/Attribute"
   AttributeName:
     type: string
     enum:
@@ -332,11 +365,11 @@ definitions:
   EntityList:
     type: array
     items:
-      $ref: '#/definitions/Entity'
+      $ref: "#/definitions/Entity"
   UnmappedAttributeList:
     type: array
     items:
-      $ref: '#/definitions/UnmappedAttribute'
+      $ref: "#/definitions/UnmappedAttribute"
   EntityType:
     type: string
     enum:
@@ -349,50 +382,60 @@ definitions:
     type: object
     properties:
       Id:
-        $ref: '#/definitions/Integer'
-        description: ' The numeric identifier for the entity. This is a monotonically increasing id unique within this response rather than a global unique identifier. '
+        $ref: "#/definitions/Integer"
+        description: " The numeric identifier for the entity. This is a monotonically
+          increasing id unique within this response rather than a global unique
+          identifier. "
       BeginOffset:
-        $ref: '#/definitions/Integer'
-        description: ' The 0-based character offset in the input text that shows where the entity begins. The offset returns the UTF-8 code point in the string. '
+        $ref: "#/definitions/Integer"
+        description: " The 0-based character offset in the input text that shows where the
+          entity begins. The offset returns the UTF-8 code point in the string.
+          "
       EndOffset:
-        $ref: '#/definitions/Integer'
-        description: ' The 0-based character offset in the input text that shows where the entity ends. The offset returns the UTF-8 code point in the string. '
+        $ref: "#/definitions/Integer"
+        description: " The 0-based character offset in the input text that shows where the
+          entity ends. The offset returns the UTF-8 code point in the string. "
       Score:
-        $ref: '#/definitions/Float'
-        description: The level of confidence that Comprehend Medical has in the accuracy of the detection.
+        $ref: "#/definitions/Float"
+        description: The level of confidence that Comprehend Medical has in the accuracy of
+          the detection.
       Text:
-        $ref: '#/definitions/String'
-        description: ' The segment of input text extracted as this entity.'
+        $ref: "#/definitions/String"
+        description: " The segment of input text extracted as this entity."
       Category:
-        $ref: '#/definitions/EntityType'
-        description: ' The category of the entity.'
+        $ref: "#/definitions/EntityType"
+        description: " The category of the entity."
       Type:
-        $ref: '#/definitions/EntitySubType'
-        description: ' Describes the specific type of entity with category of entities. '
+        $ref: "#/definitions/EntitySubType"
+        description: " Describes the specific type of entity with category of entities. "
       Traits:
-        $ref: '#/definitions/TraitList'
+        $ref: "#/definitions/TraitList"
         description: Contextual information for the entity
       Attributes:
-        $ref: '#/definitions/AttributeList'
-        description: ' The extracted attributes that relate to this entity.'
-    description: ' Provides information about an extracted medical entity.'
+        $ref: "#/definitions/AttributeList"
+        description: " The extracted attributes that relate to this entity."
+    description: " Provides information about an extracted medical entity."
   Trait:
     type: object
     properties:
       Name:
-        $ref: '#/definitions/AttributeName'
-        description: ' Provides a name or contextual description about the trait. '
+        $ref: "#/definitions/AttributeName"
+        description: " Provides a name or contextual description about the trait. "
       Score:
-        $ref: '#/definitions/Float'
-        description: ' The level of confidence that Comprehend Medical has in the accuracy of this trait.'
-    description: ' Provides contextual information about the extracted entity. '
+        $ref: "#/definitions/Float"
+        description: " The level of confidence that Comprehend Medical has in the accuracy
+          of this trait."
+    description: " Provides contextual information about the extracted entity. "
   UnmappedAttribute:
     type: object
     properties:
       Type:
-        $ref: '#/definitions/EntityType'
-        description: ' The type of the attribute, could be one of the following values: "MEDICATION", "MEDICAL_CONDITION", "ANATOMY", "TEST_AND_TREATMENT_PROCEDURE" or "PERSONAL_HEALTH_INFORMATION". '
+        $ref: "#/definitions/EntityType"
+        description: ' The type of the attribute, could be one of the following values:
+          "MEDICATION", "MEDICAL_CONDITION", "ANATOMY",
+          "TEST_AND_TREATMENT_PROCEDURE" or "PERSONAL_HEALTH_INFORMATION". '
       Attribute:
-        $ref: '#/definitions/Attribute'
-        description: ' The specific attribute that has been extracted but not mapped to an entity. '
-    description: ' An attribute that we extracted, but were unable to relate to an entity. '
+        $ref: "#/definitions/Attribute"
+        description: " The specific attribute that has been extracted but not mapped to an
+          entity. "
+    description: " An attribute that we extracted, but were unable to relate to an entity. "

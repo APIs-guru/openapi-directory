@@ -1,38 +1,72 @@
-swagger: '2.0'
+swagger: "2.0"
 info:
-  version: '2017-01-26'
+  version: 2017-01-26
   x-release: v4
   title: AWS Resource Groups Tagging API
-  description: '<fullname>Resource Groups Tagging API</fullname> <p>This guide describes the API operations for the resource groups tagging.</p> <p>A tag is a label that you assign to an AWS resource. A tag consists of a key and a value, both of which you define. For example, if you have two Amazon EC2 instances, you might assign both a tag key of "Stack." But the value of "Stack" might be "Testing" for one and "Production" for the other.</p> <p>Tagging can help you organize your resources and enables you to simplify resource management, access management and cost allocation. For more information about tagging, see <a href="http://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/tag-editor.html">Working with Tag Editor</a> and <a href="http://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/resource-groups.html">Working with Resource Groups</a>. For more information about permissions you need to use the resource groups tagging APIs, see <a href="http://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/obtaining-permissions-for-resource-groups.html">Obtaining Permissions for Resource Groups </a> and <a href="http://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/obtaining-permissions-for-tagging.html">Obtaining Permissions for Tagging </a>.</p> <p>You can use the resource groups tagging APIs to complete the following tasks:</p> <ul> <li> <p>Tag and untag supported resources located in the specified region for the AWS account</p> </li> <li> <p>Use tag-based filters to search for resources located in the specified region for the AWS account</p> </li> <li> <p>List all existing tag keys in the specified region for the AWS account</p> </li> <li> <p>List all existing values for the specified key in the specified region for the AWS account</p> </li> </ul> <p>Not all resources can have tags. For a lists of resources that you can tag, see <a href="http://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/supported-resources.html">Supported Resources</a> in the <i>AWS Resource Groups and Tag Editor User Guide</i>.</p> <p>To make full use of the resource groups tagging APIs, you might need additional IAM permissions, including permission to access the resources of individual services as well as permission to view and apply tags to those resources. For more information, see <a href="http://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/obtaining-permissions-for-tagging.html">Obtaining Permissions for Tagging</a> in the <i>AWS Resource Groups and Tag Editor User Guide</i>.</p>'
+  description: <fullname>Resource Groups Tagging API</fullname> <p>This guide describes the
+    API operations for the resource groups tagging.</p> <p>A tag is a label that
+    you assign to an AWS resource. A tag consists of a key and a value, both of
+    which you define. For example, if you have two Amazon EC2 instances, you
+    might assign both a tag key of "Stack." But the value of "Stack" might be
+    "Testing" for one and "Production" for the other.</p> <p>Tagging can help
+    you organize your resources and enables you to simplify resource management,
+    access management and cost allocation. For more information about tagging,
+    see <a
+    href="http://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/tag-editor.html">Working
+    with Tag Editor</a> and <a
+    href="http://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/resource-groups.html">Working
+    with Resource Groups</a>. For more information about permissions you need to
+    use the resource groups tagging APIs, see <a
+    href="http://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/obtaining-permissions-for-resource-groups.html">Obtaining
+    Permissions for Resource Groups </a> and <a
+    href="http://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/obtaining-permissions-for-tagging.html">Obtaining
+    Permissions for Tagging </a>.</p> <p>You can use the resource groups tagging
+    APIs to complete the following tasks:</p> <ul> <li> <p>Tag and untag
+    supported resources located in the specified region for the AWS account</p>
+    </li> <li> <p>Use tag-based filters to search for resources located in the
+    specified region for the AWS account</p> </li> <li> <p>List all existing tag
+    keys in the specified region for the AWS account</p> </li> <li> <p>List all
+    existing values for the specified key in the specified region for the AWS
+    account</p> </li> </ul> <p>Not all resources can have tags. For a lists of
+    resources that you can tag, see <a
+    href="http://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/supported-resources.html">Supported
+    Resources</a> in the <i>AWS Resource Groups and Tag Editor User
+    Guide</i>.</p> <p>To make full use of the resource groups tagging APIs, you
+    might need additional IAM permissions, including permission to access the
+    resources of individual services as well as permission to view and apply
+    tags to those resources. For more information, see <a
+    href="http://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/obtaining-permissions-for-tagging.html">Obtaining
+    Permissions for Tagging</a> in the <i>AWS Resource Groups and Tag Editor
+    User Guide</i>.</p>
   x-logo:
-    url: 'https://twitter.com/awscloud/profile_image?size=original'
-    backgroundColor: '#FFFFFF'
-  termsOfService: 'https://aws.amazon.com/service-terms/'
+    url: https://twitter.com/awscloud/profile_image?size=original
+    backgroundColor: "#FFFFFF"
+  termsOfService: https://aws.amazon.com/service-terms/
   contact:
     name: Mike Ralphson
     email: mike.ralphson@gmail.com
-    url: 'https://github.com/mermade/aws2openapi'
+    url: https://github.com/mermade/aws2openapi
     x-twitter: PermittedSoc
   license:
     name: Apache 2.0 License
-    url: 'http://www.apache.org/licenses/'
+    url: http://www.apache.org/licenses/
   x-providerName: amazonaws.com
   x-serviceName: resourcegroupstaggingapi
   x-origin:
     - contentType: application/json
-      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/resourcegroupstaggingapi-2017-01-26.normal.json'
+      url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/resourcegroupstaggingapi-2017-01-26.normal.json
       converter:
-        url: 'https://github.com/mermade/aws2openapi'
+        url: https://github.com/mermade/aws2openapi
         version: 1.0.0
       x-apisguru-direct: true
   x-apiClientRegistration:
-    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+    url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
   x-apisguru-categories:
     - cloud
   x-preferred: true
 externalDocs:
   description: Amazon Web Services documentation
-  url: 'https://docs.aws.amazon.com/tagging/'
+  url: https://docs.aws.amazon.com/tagging/
 host: tagging.amazonaws.com
 basePath: /
 x-hasEquivalentPaths: true
@@ -89,37 +123,42 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  '/#X-Amz-Target=ResourceGroupsTaggingAPI_20170126.GetResources':
+  /#X-Amz-Target=ResourceGroupsTaggingAPI_20170126.GetResources:
     post:
       operationId: GetResources
-      description: 'Returns all the tagged resources that are associated with the specified tags (keys and values) located in the specified region for the AWS account. The tags and the resource types that you specify in the request are known as <i>filters</i>. The response includes all tags that are associated with the requested resources. If no filter is provided, this action returns a paginated resource list with the associated tags.'
+      description: Returns all the tagged resources that are associated with the specified
+        tags (keys and values) located in the specified region for the AWS
+        account. The tags and the resource types that you specify in the request
+        are known as <i>filters</i>. The response includes all tags that are
+        associated with the requested resources. If no filter is provided, this
+        action returns a paginated resource list with the associated tags.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/GetResourcesOutput'
-        '480':
+            $ref: "#/definitions/GetResourcesOutput"
+        "480":
           description: InvalidParameterException
           schema:
-            $ref: '#/definitions/InvalidParameterException'
-        '481':
+            $ref: "#/definitions/InvalidParameterException"
+        "481":
           description: ThrottledException
           schema:
-            $ref: '#/definitions/ThrottledException'
-        '482':
+            $ref: "#/definitions/ThrottledException"
+        "482":
           description: InternalServiceException
           schema:
-            $ref: '#/definitions/InternalServiceException'
-        '483':
+            $ref: "#/definitions/InternalServiceException"
+        "483":
           description: PaginationTokenExpiredException
           schema:
-            $ref: '#/definitions/PaginationTokenExpiredException'
+            $ref: "#/definitions/PaginationTokenExpiredException"
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/GetResourcesInput'
+            $ref: "#/definitions/GetResourcesInput"
         - name: ResourcesPerPage
           type: string
           in: query
@@ -137,44 +176,44 @@ paths:
           enum:
             - ResourceGroupsTaggingAPI_20170126.GetResources
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ResourceGroupsTaggingAPI_20170126.GetTagKeys':
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=ResourceGroupsTaggingAPI_20170126.GetTagKeys:
     post:
       operationId: GetTagKeys
       description: Returns all tag keys in the specified region for the AWS account.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/GetTagKeysOutput'
-        '480':
+            $ref: "#/definitions/GetTagKeysOutput"
+        "480":
           description: InvalidParameterException
           schema:
-            $ref: '#/definitions/InvalidParameterException'
-        '481':
+            $ref: "#/definitions/InvalidParameterException"
+        "481":
           description: ThrottledException
           schema:
-            $ref: '#/definitions/ThrottledException'
-        '482':
+            $ref: "#/definitions/ThrottledException"
+        "482":
           description: InternalServiceException
           schema:
-            $ref: '#/definitions/InternalServiceException'
-        '483':
+            $ref: "#/definitions/InternalServiceException"
+        "483":
           description: PaginationTokenExpiredException
           schema:
-            $ref: '#/definitions/PaginationTokenExpiredException'
+            $ref: "#/definitions/PaginationTokenExpiredException"
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/GetTagKeysInput'
+            $ref: "#/definitions/GetTagKeysInput"
         - name: PaginationToken
           type: string
           in: query
@@ -187,44 +226,45 @@ paths:
           enum:
             - ResourceGroupsTaggingAPI_20170126.GetTagKeys
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ResourceGroupsTaggingAPI_20170126.GetTagValues':
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=ResourceGroupsTaggingAPI_20170126.GetTagValues:
     post:
       operationId: GetTagValues
-      description: Returns all tag values for the specified key in the specified region for the AWS account.
+      description: Returns all tag values for the specified key in the specified region for
+        the AWS account.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/GetTagValuesOutput'
-        '480':
+            $ref: "#/definitions/GetTagValuesOutput"
+        "480":
           description: InvalidParameterException
           schema:
-            $ref: '#/definitions/InvalidParameterException'
-        '481':
+            $ref: "#/definitions/InvalidParameterException"
+        "481":
           description: ThrottledException
           schema:
-            $ref: '#/definitions/ThrottledException'
-        '482':
+            $ref: "#/definitions/ThrottledException"
+        "482":
           description: InternalServiceException
           schema:
-            $ref: '#/definitions/InternalServiceException'
-        '483':
+            $ref: "#/definitions/InternalServiceException"
+        "483":
           description: PaginationTokenExpiredException
           schema:
-            $ref: '#/definitions/PaginationTokenExpiredException'
+            $ref: "#/definitions/PaginationTokenExpiredException"
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/GetTagValuesInput'
+            $ref: "#/definitions/GetTagValuesInput"
         - name: PaginationToken
           type: string
           in: query
@@ -237,40 +277,56 @@ paths:
           enum:
             - ResourceGroupsTaggingAPI_20170126.GetTagValues
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ResourceGroupsTaggingAPI_20170126.TagResources':
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=ResourceGroupsTaggingAPI_20170126.TagResources:
     post:
       operationId: TagResources
-      description: '<p>Applies one or more tags to the specified resources. Note the following:</p> <ul> <li> <p>Not all resources can have tags. For a list of resources that support tagging, see <a href="http://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/supported-resources.html">Supported Resources</a> in the <i>AWS Resource Groups and Tag Editor User Guide</i>.</p> </li> <li> <p>Each resource can have up to 50 tags. For other limits, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-restrictions">Tag Restrictions</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p> </li> <li> <p>You can only tag resources that are located in the specified region for the AWS account.</p> </li> <li> <p>To add tags to a resource, you need the necessary permissions for the service that the resource belongs to as well as permissions for adding tags. For more information, see <a href="http://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/obtaining-permissions-for-tagging.html">Obtaining Permissions for Tagging</a> in the <i>AWS Resource Groups and Tag Editor User Guide</i>.</p> </li> </ul>'
+      description: <p>Applies one or more tags to the specified resources. Note the
+        following:</p> <ul> <li> <p>Not all resources can have tags. For a list
+        of resources that support tagging, see <a
+        href="http://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/supported-resources.html">Supported
+        Resources</a> in the <i>AWS Resource Groups and Tag Editor User
+        Guide</i>.</p> </li> <li> <p>Each resource can have up to 50 tags. For
+        other limits, see <a
+        href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-restrictions">Tag
+        Restrictions</a> in the <i>Amazon EC2 User Guide for Linux
+        Instances</i>.</p> </li> <li> <p>You can only tag resources that are
+        located in the specified region for the AWS account.</p> </li> <li>
+        <p>To add tags to a resource, you need the necessary permissions for the
+        service that the resource belongs to as well as permissions for adding
+        tags. For more information, see <a
+        href="http://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/obtaining-permissions-for-tagging.html">Obtaining
+        Permissions for Tagging</a> in the <i>AWS Resource Groups and Tag Editor
+        User Guide</i>.</p> </li> </ul>
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/TagResourcesOutput'
-        '480':
+            $ref: "#/definitions/TagResourcesOutput"
+        "480":
           description: InvalidParameterException
           schema:
-            $ref: '#/definitions/InvalidParameterException'
-        '481':
+            $ref: "#/definitions/InvalidParameterException"
+        "481":
           description: ThrottledException
           schema:
-            $ref: '#/definitions/ThrottledException'
-        '482':
+            $ref: "#/definitions/ThrottledException"
+        "482":
           description: InternalServiceException
           schema:
-            $ref: '#/definitions/InternalServiceException'
+            $ref: "#/definitions/InternalServiceException"
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/TagResourcesInput'
+            $ref: "#/definitions/TagResourcesInput"
         - name: X-Amz-Target
           in: header
           required: true
@@ -278,40 +334,50 @@ paths:
           enum:
             - ResourceGroupsTaggingAPI_20170126.TagResources
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ResourceGroupsTaggingAPI_20170126.UntagResources':
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=ResourceGroupsTaggingAPI_20170126.UntagResources:
     post:
       operationId: UntagResources
-      description: '<p>Removes the specified tags from the specified resources. When you specify a tag key, the action removes both that key and its associated value. The operation succeeds even if you attempt to remove tags from a resource that were already removed. Note the following:</p> <ul> <li> <p>To remove tags from a resource, you need the necessary permissions for the service that the resource belongs to as well as permissions for removing tags. For more information, see <a href="http://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/obtaining-permissions-for-tagging.html">Obtaining Permissions for Tagging</a> in the <i>AWS Resource Groups and Tag Editor User Guide</i>.</p> </li> <li> <p>You can only tag resources that are located in the specified region for the AWS account.</p> </li> </ul>'
+      description: <p>Removes the specified tags from the specified resources. When you
+        specify a tag key, the action removes both that key and its associated
+        value. The operation succeeds even if you attempt to remove tags from a
+        resource that were already removed. Note the following:</p> <ul> <li>
+        <p>To remove tags from a resource, you need the necessary permissions
+        for the service that the resource belongs to as well as permissions for
+        removing tags. For more information, see <a
+        href="http://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/obtaining-permissions-for-tagging.html">Obtaining
+        Permissions for Tagging</a> in the <i>AWS Resource Groups and Tag Editor
+        User Guide</i>.</p> </li> <li> <p>You can only tag resources that are
+        located in the specified region for the AWS account.</p> </li> </ul>
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/UntagResourcesOutput'
-        '480':
+            $ref: "#/definitions/UntagResourcesOutput"
+        "480":
           description: InvalidParameterException
           schema:
-            $ref: '#/definitions/InvalidParameterException'
-        '481':
+            $ref: "#/definitions/InvalidParameterException"
+        "481":
           description: ThrottledException
           schema:
-            $ref: '#/definitions/ThrottledException'
-        '482':
+            $ref: "#/definitions/ThrottledException"
+        "482":
           description: InternalServiceException
           schema:
-            $ref: '#/definitions/InternalServiceException'
+            $ref: "#/definitions/InternalServiceException"
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/UntagResourcesInput'
+            $ref: "#/definitions/UntagResourcesInput"
         - name: X-Amz-Target
           in: header
           required: true
@@ -319,88 +385,147 @@ paths:
           enum:
             - ResourceGroupsTaggingAPI_20170126.UntagResources
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
 definitions:
   GetResourcesOutput:
     type: object
     properties:
       PaginationToken:
-        $ref: '#/definitions/PaginationToken'
-        description: 'A string that indicates that the response contains more data than can be returned in a single response. To receive additional data, specify this string for the <code>PaginationToken</code> value in a subsequent request.'
+        $ref: "#/definitions/PaginationToken"
+        description: A string that indicates that the response contains more data than can
+          be returned in a single response. To receive additional data, specify
+          this string for the <code>PaginationToken</code> value in a subsequent
+          request.
       ResourceTagMappingList:
-        $ref: '#/definitions/ResourceTagMappingList'
-        description: A list of resource ARNs and the tags (keys and values) associated with each.
+        $ref: "#/definitions/ResourceTagMappingList"
+        description: A list of resource ARNs and the tags (keys and values) associated with
+          each.
   GetResourcesInput:
     type: object
     properties:
       PaginationToken:
-        $ref: '#/definitions/PaginationToken'
-        description: 'A string that indicates that additional data is available. Leave this value empty for your initial request. If the response includes a <code>PaginationToken</code>, use that string for this value to request an additional page of data.'
+        $ref: "#/definitions/PaginationToken"
+        description: A string that indicates that additional data is available. Leave this
+          value empty for your initial request. If the response includes a
+          <code>PaginationToken</code>, use that string for this value to
+          request an additional page of data.
       TagFilters:
-        $ref: '#/definitions/TagFilterList'
-        description: '<p>A list of tags (keys and values). A request can include up to 50 keys, and each key can include up to 20 values.</p> <p>If you specify multiple filters connected by an AND operator in a single request, the response returns only those resources that are associated with every specified filter.</p> <p>If you specify multiple filters connected by an OR operator in a single request, the response returns all resources that are associated with at least one or possibly more of the specified filters.</p>'
+        $ref: "#/definitions/TagFilterList"
+        description: <p>A list of tags (keys and values). A request can include up to 50
+          keys, and each key can include up to 20 values.</p> <p>If you specify
+          multiple filters connected by an AND operator in a single request, the
+          response returns only those resources that are associated with every
+          specified filter.</p> <p>If you specify multiple filters connected by
+          an OR operator in a single request, the response returns all resources
+          that are associated with at least one or possibly more of the
+          specified filters.</p>
       ResourcesPerPage:
-        $ref: '#/definitions/ResourcesPerPage'
-        description: 'A limit that restricts the number of resources returned by GetResources in paginated output. You can set ResourcesPerPage to a minimum of 1 item and the maximum of 50 items. '
+        $ref: "#/definitions/ResourcesPerPage"
+        description: "A limit that restricts the number of resources returned by
+          GetResources in paginated output. You can set ResourcesPerPage to a
+          minimum of 1 item and the maximum of 50 items. "
       TagsPerPage:
-        $ref: '#/definitions/TagsPerPage'
-        description: '<p>A limit that restricts the number of tags (key and value pairs) returned by GetResources in paginated output. A resource with no tags is counted as having one tag (one key and value pair).</p> <p> <code>GetResources</code> does not split a resource and its associated tags across pages. If the specified <code>TagsPerPage</code> would cause such a break, a <code>PaginationToken</code> is returned in place of the affected resource and its tags. Use that token in another request to get the remaining data. For example, if you specify a <code>TagsPerPage</code> of <code>100</code> and the account has 22 resources with 10 tags each (meaning that each resource has 10 key and value pairs), the output will consist of 3 pages, with the first page displaying the first 10 resources, each with its 10 tags, the second page displaying the next 10 resources each with its 10 tags, and the third page displaying the remaining 2 resources, each with its 10 tags.</p> <p/> <p>You can set <code>TagsPerPage</code> to a minimum of 100 items and the maximum of 500 items.</p>'
+        $ref: "#/definitions/TagsPerPage"
+        description: <p>A limit that restricts the number of tags (key and value pairs)
+          returned by GetResources in paginated output. A resource with no tags
+          is counted as having one tag (one key and value pair).</p> <p>
+          <code>GetResources</code> does not split a resource and its associated
+          tags across pages. If the specified <code>TagsPerPage</code> would
+          cause such a break, a <code>PaginationToken</code> is returned in
+          place of the affected resource and its tags. Use that token in another
+          request to get the remaining data. For example, if you specify a
+          <code>TagsPerPage</code> of <code>100</code> and the account has 22
+          resources with 10 tags each (meaning that each resource has 10 key and
+          value pairs), the output will consist of 3 pages, with the first page
+          displaying the first 10 resources, each with its 10 tags, the second
+          page displaying the next 10 resources each with its 10 tags, and the
+          third page displaying the remaining 2 resources, each with its 10
+          tags.</p> <p/> <p>You can set <code>TagsPerPage</code> to a minimum of
+          100 items and the maximum of 500 items.</p>
       ResourceTypeFilters:
-        $ref: '#/definitions/ResourceTypeFilterList'
-        description: '<p>The constraints on the resources that you want returned. The format of each resource type is <code>service[:resourceType]</code>. For example, specifying a resource type of <code>ec2</code> returns all tagged Amazon EC2 resources (which includes tagged EC2 instances). Specifying a resource type of <code>ec2:instance</code> returns only EC2 instances. </p> <p>The string for each service name and resource type is the same as that embedded in a resource''s Amazon Resource Name (ARN). Consult the <i>AWS General Reference</i> for the following:</p> <ul> <li> <p>For a list of service name strings, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces">AWS Service Namespaces</a>.</p> </li> <li> <p>For resource type strings, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arns-syntax">Example ARNs</a>.</p> </li> <li> <p>For more information about ARNs, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p> </li> </ul>'
+        $ref: "#/definitions/ResourceTypeFilterList"
+        description: <p>The constraints on the resources that you want returned. The format
+          of each resource type is <code>service[:resourceType]</code>. For
+          example, specifying a resource type of <code>ec2</code> returns all
+          tagged Amazon EC2 resources (which includes tagged EC2 instances).
+          Specifying a resource type of <code>ec2:instance</code> returns only
+          EC2 instances. </p> <p>The string for each service name and resource
+          type is the same as that embedded in a resource's Amazon Resource Name
+          (ARN). Consult the <i>AWS General Reference</i> for the following:</p>
+          <ul> <li> <p>For a list of service name strings, see <a
+          href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces">AWS
+          Service Namespaces</a>.</p> </li> <li> <p>For resource type strings,
+          see <a
+          href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arns-syntax">Example
+          ARNs</a>.</p> </li> <li> <p>For more information about ARNs, see <a
+          href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon
+          Resource Names (ARNs) and AWS Service Namespaces</a>.</p> </li> </ul>
   InvalidParameterException:
     type: object
     properties:
       Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: A parameter is missing or a malformed string or invalid or out-of-range value was supplied for the request parameter.
+        $ref: "#/definitions/ExceptionMessage"
+    description: A parameter is missing or a malformed string or invalid or out-of-range
+      value was supplied for the request parameter.
   ThrottledException:
     type: object
     properties:
       Message:
-        $ref: '#/definitions/ExceptionMessage'
+        $ref: "#/definitions/ExceptionMessage"
     description: The request was denied to limit the frequency of submitted requests.
   InternalServiceException:
     type: object
     properties:
       Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: 'The request processing failed because of an unknown error, exception, or failure. You can retry the request.'
+        $ref: "#/definitions/ExceptionMessage"
+    description: The request processing failed because of an unknown error, exception, or
+      failure. You can retry the request.
   PaginationTokenExpiredException:
     type: object
     properties:
       Message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: A <code>PaginationToken</code> is valid for a maximum of 15 minutes. Your request was denied because the specified <code>PaginationToken</code> has expired.
+        $ref: "#/definitions/ExceptionMessage"
+    description: A <code>PaginationToken</code> is valid for a maximum of 15 minutes. Your
+      request was denied because the specified <code>PaginationToken</code> has
+      expired.
   GetTagKeysOutput:
     type: object
     properties:
       PaginationToken:
-        $ref: '#/definitions/PaginationToken'
-        description: 'A string that indicates that the response contains more data than can be returned in a single response. To receive additional data, specify this string for the <code>PaginationToken</code> value in a subsequent request.'
+        $ref: "#/definitions/PaginationToken"
+        description: A string that indicates that the response contains more data than can
+          be returned in a single response. To receive additional data, specify
+          this string for the <code>PaginationToken</code> value in a subsequent
+          request.
       TagKeys:
-        $ref: '#/definitions/TagKeyList'
+        $ref: "#/definitions/TagKeyList"
         description: A list of all tag keys in the AWS account.
   GetTagKeysInput:
     type: object
     properties:
       PaginationToken:
-        $ref: '#/definitions/PaginationToken'
-        description: 'A string that indicates that additional data is available. Leave this value empty for your initial request. If the response includes a PaginationToken, use that string for this value to request an additional page of data.'
+        $ref: "#/definitions/PaginationToken"
+        description: A string that indicates that additional data is available. Leave this
+          value empty for your initial request. If the response includes a
+          PaginationToken, use that string for this value to request an
+          additional page of data.
   GetTagValuesOutput:
     type: object
     properties:
       PaginationToken:
-        $ref: '#/definitions/PaginationToken'
-        description: 'A string that indicates that the response contains more data than can be returned in a single response. To receive additional data, specify this string for the <code>PaginationToken</code> value in a subsequent request.'
+        $ref: "#/definitions/PaginationToken"
+        description: A string that indicates that the response contains more data than can
+          be returned in a single response. To receive additional data, specify
+          this string for the <code>PaginationToken</code> value in a subsequent
+          request.
       TagValues:
-        $ref: '#/definitions/TagValuesOutputList'
+        $ref: "#/definitions/TagValuesOutputList"
         description: A list of all tag values for the specified key in the AWS account.
   GetTagValuesInput:
     type: object
@@ -408,17 +533,22 @@ definitions:
       - Key
     properties:
       PaginationToken:
-        $ref: '#/definitions/PaginationToken'
-        description: 'A string that indicates that additional data is available. Leave this value empty for your initial request. If the response includes a PaginationToken, use that string for this value to request an additional page of data.'
+        $ref: "#/definitions/PaginationToken"
+        description: A string that indicates that additional data is available. Leave this
+          value empty for your initial request. If the response includes a
+          PaginationToken, use that string for this value to request an
+          additional page of data.
       Key:
-        $ref: '#/definitions/TagKey'
-        description: The key for which you want to list all existing values in the specified region for the AWS account.
+        $ref: "#/definitions/TagKey"
+        description: The key for which you want to list all existing values in the
+          specified region for the AWS account.
   TagResourcesOutput:
     type: object
     properties:
       FailedResourcesMap:
-        $ref: '#/definitions/FailedResourcesMap'
-        description: 'Details of resources that could not be tagged. An error code, status code, and error message are returned for each failed item.'
+        $ref: "#/definitions/FailedResourcesMap"
+        description: Details of resources that could not be tagged. An error code, status
+          code, and error message are returned for each failed item.
   TagResourcesInput:
     type: object
     required:
@@ -426,17 +556,25 @@ definitions:
       - Tags
     properties:
       ResourceARNList:
-        $ref: '#/definitions/ResourceARNList'
-        description: 'A list of ARNs. An ARN (Amazon Resource Name) uniquely identifies a resource. You can specify a minimum of 1 and a maximum of 20 ARNs (resources) to tag. An ARN can be set to a maximum of 1600 characters. For more information, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
+        $ref: "#/definitions/ResourceARNList"
+        description: A list of ARNs. An ARN (Amazon Resource Name) uniquely identifies a
+          resource. You can specify a minimum of 1 and a maximum of 20 ARNs
+          (resources) to tag. An ARN can be set to a maximum of 1600 characters.
+          For more information, see <a
+          href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon
+          Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS
+          General Reference</i>.
       Tags:
-        $ref: '#/definitions/TagMap'
-        description: The tags that you want to add to the specified resources. A tag consists of a key and a value that you define.
+        $ref: "#/definitions/TagMap"
+        description: The tags that you want to add to the specified resources. A tag
+          consists of a key and a value that you define.
   UntagResourcesOutput:
     type: object
     properties:
       FailedResourcesMap:
-        $ref: '#/definitions/FailedResourcesMap'
-        description: 'Details of resources that could not be untagged. An error code, status code, and error message are returned for each failed item.'
+        $ref: "#/definitions/FailedResourcesMap"
+        description: Details of resources that could not be untagged. An error code, status
+          code, and error message are returned for each failed item.
   UntagResourcesInput:
     type: object
     required:
@@ -444,11 +582,18 @@ definitions:
       - TagKeys
     properties:
       ResourceARNList:
-        $ref: '#/definitions/ResourceARNList'
-        description: 'A list of ARNs. An ARN (Amazon Resource Name) uniquely identifies a resource. You can specify a minimum of 1 and a maximum of 20 ARNs (resources) to untag. An ARN can be set to a maximum of 1600 characters. For more information, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
+        $ref: "#/definitions/ResourceARNList"
+        description: A list of ARNs. An ARN (Amazon Resource Name) uniquely identifies a
+          resource. You can specify a minimum of 1 and a maximum of 20 ARNs
+          (resources) to untag. An ARN can be set to a maximum of 1600
+          characters. For more information, see <a
+          href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon
+          Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS
+          General Reference</i>.
       TagKeys:
-        $ref: '#/definitions/TagKeyListForUntag'
-        description: A list of the tag keys that you want to remove from the specified resources.
+        $ref: "#/definitions/TagKeyListForUntag"
+        description: A list of the tag keys that you want to remove from the specified
+          resources.
   AmazonResourceType:
     type: string
     minLength: 0
@@ -468,19 +613,23 @@ definitions:
     type: object
     properties:
       StatusCode:
-        $ref: '#/definitions/StatusCode'
+        $ref: "#/definitions/StatusCode"
         description: The HTTP status code of the common error.
       ErrorCode:
-        $ref: '#/definitions/ErrorCode'
-        description: 'The code of the common error. Valid values include <code>InternalServiceException</code>, <code>InvalidParameterException</code>, and any valid error code returned by the AWS service that hosts the resource that you want to tag.'
+        $ref: "#/definitions/ErrorCode"
+        description: The code of the common error. Valid values include
+          <code>InternalServiceException</code>,
+          <code>InvalidParameterException</code>, and any valid error code
+          returned by the AWS service that hosts the resource that you want to
+          tag.
       ErrorMessage:
-        $ref: '#/definitions/ErrorMessage'
+        $ref: "#/definitions/ErrorMessage"
         description: The message of the common error.
     description: Details of the common errors that all actions return.
   FailedResourcesMap:
     type: object
     additionalProperties:
-      $ref: '#/definitions/FailureInfo'
+      $ref: "#/definitions/FailureInfo"
   StatusCode:
     type: integer
   PaginationToken:
@@ -490,7 +639,7 @@ definitions:
   TagFilterList:
     type: array
     items:
-      $ref: '#/definitions/TagFilter'
+      $ref: "#/definitions/TagFilter"
     minItems: 0
     maxItems: 50
   ResourcesPerPage:
@@ -500,15 +649,15 @@ definitions:
   ResourceTypeFilterList:
     type: array
     items:
-      $ref: '#/definitions/AmazonResourceType'
+      $ref: "#/definitions/AmazonResourceType"
   ResourceTagMappingList:
     type: array
     items:
-      $ref: '#/definitions/ResourceTagMapping'
+      $ref: "#/definitions/ResourceTagMapping"
   TagKeyList:
     type: array
     items:
-      $ref: '#/definitions/TagKey'
+      $ref: "#/definitions/TagKey"
   TagKey:
     type: string
     minLength: 1
@@ -516,7 +665,7 @@ definitions:
   TagValuesOutputList:
     type: array
     items:
-      $ref: '#/definitions/TagValue'
+      $ref: "#/definitions/TagValue"
   ResourceARN:
     type: string
     minLength: 1
@@ -524,23 +673,24 @@ definitions:
   ResourceARNList:
     type: array
     items:
-      $ref: '#/definitions/ResourceARN'
+      $ref: "#/definitions/ResourceARN"
     minItems: 1
     maxItems: 20
   TagList:
     type: array
     items:
-      $ref: '#/definitions/Tag'
+      $ref: "#/definitions/Tag"
   ResourceTagMapping:
     type: object
     properties:
       ResourceARN:
-        $ref: '#/definitions/ResourceARN'
+        $ref: "#/definitions/ResourceARN"
         description: An array of resource ARN(s).
       Tags:
-        $ref: '#/definitions/TagList'
+        $ref: "#/definitions/TagList"
         description: The tags that have been applied to one or more AWS resources.
-    description: A list of resource ARNs and the tags (keys and values) that are associated with each.
+    description: A list of resource ARNs and the tags (keys and values) that are associated
+      with each.
   TagValue:
     type: string
     minLength: 0
@@ -552,32 +702,41 @@ definitions:
       - Value
     properties:
       Key:
-        $ref: '#/definitions/TagKey'
-        description: One part of a key-value pair that make up a tag. A key is a general label that acts like a category for more specific tag values.
+        $ref: "#/definitions/TagKey"
+        description: One part of a key-value pair that make up a tag. A key is a general
+          label that acts like a category for more specific tag values.
       Value:
-        $ref: '#/definitions/TagValue'
-        description: The optional part of a key-value pair that make up a tag. A value acts as a descriptor within a tag category (key).
-    description: 'The metadata that you apply to AWS resources to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-basics">Tag Basics</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.'
+        $ref: "#/definitions/TagValue"
+        description: The optional part of a key-value pair that make up a tag. A value acts
+          as a descriptor within a tag category (key).
+    description: The metadata that you apply to AWS resources to help you categorize and
+      organize them. Each tag consists of a key and an optional value, both of
+      which you define. For more information, see <a
+      href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-basics">Tag
+      Basics</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.
   TagValueList:
     type: array
     items:
-      $ref: '#/definitions/TagValue'
+      $ref: "#/definitions/TagValue"
     minItems: 0
     maxItems: 20
   TagFilter:
     type: object
     properties:
       Key:
-        $ref: '#/definitions/TagKey'
-        description: One part of a key-value pair that make up a tag. A key is a general label that acts like a category for more specific tag values.
+        $ref: "#/definitions/TagKey"
+        description: One part of a key-value pair that make up a tag. A key is a general
+          label that acts like a category for more specific tag values.
       Values:
-        $ref: '#/definitions/TagValueList'
-        description: The optional part of a key-value pair that make up a tag. A value acts as a descriptor within a tag category (key).
-    description: A list of tags (keys and values) that are used to specify the associated resources.
+        $ref: "#/definitions/TagValueList"
+        description: The optional part of a key-value pair that make up a tag. A value acts
+          as a descriptor within a tag category (key).
+    description: A list of tags (keys and values) that are used to specify the associated
+      resources.
   TagKeyListForUntag:
     type: array
     items:
-      $ref: '#/definitions/TagKey'
+      $ref: "#/definitions/TagKey"
     minItems: 1
     maxItems: 50
   TagMap:
@@ -585,4 +744,4 @@ definitions:
     minProperties: 1
     maxProperties: 50
     additionalProperties:
-      $ref: '#/definitions/TagValue'
+      $ref: "#/definitions/TagValue"

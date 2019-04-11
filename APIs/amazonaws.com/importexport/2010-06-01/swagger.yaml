@@ -1,38 +1,44 @@
-swagger: '2.0'
+swagger: "2.0"
 info:
-  version: '2010-06-01'
+  version: 2010-06-01
   x-release: v2
   title: AWS Import/Export
-  description: '<fullname>AWS Import/Export Service</fullname> AWS Import/Export accelerates transferring large amounts of data between the AWS cloud and portable storage devices that you mail to us. AWS Import/Export transfers data directly onto and off of your storage devices using Amazon''s high-speed internal network and bypassing the Internet. For large data sets, AWS Import/Export is often faster than Internet transfer and more cost effective than upgrading your connectivity.'
+  description: <fullname>AWS Import/Export Service</fullname> AWS Import/Export accelerates
+    transferring large amounts of data between the AWS cloud and portable
+    storage devices that you mail to us. AWS Import/Export transfers data
+    directly onto and off of your storage devices using Amazon's high-speed
+    internal network and bypassing the Internet. For large data sets, AWS
+    Import/Export is often faster than Internet transfer and more cost effective
+    than upgrading your connectivity.
   x-logo:
-    url: 'https://twitter.com/awscloud/profile_image?size=original'
-    backgroundColor: '#FFFFFF'
-  termsOfService: 'https://aws.amazon.com/service-terms/'
+    url: https://twitter.com/awscloud/profile_image?size=original
+    backgroundColor: "#FFFFFF"
+  termsOfService: https://aws.amazon.com/service-terms/
   contact:
     name: Mike Ralphson
     email: mike.ralphson@gmail.com
-    url: 'https://github.com/mermade/aws2openapi'
+    url: https://github.com/mermade/aws2openapi
     x-twitter: PermittedSoc
   license:
     name: Apache 2.0 License
-    url: 'http://www.apache.org/licenses/'
+    url: http://www.apache.org/licenses/
   x-providerName: amazonaws.com
   x-serviceName: importexport
   x-origin:
     - contentType: application/json
-      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/importexport-2010-06-01.normal.json'
+      url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/importexport-2010-06-01.normal.json
       converter:
-        url: 'https://github.com/mermade/aws2openapi'
+        url: https://github.com/mermade/aws2openapi
         version: 1.0.0
       x-apisguru-direct: true
   x-apiClientRegistration:
-    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+    url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
   x-apisguru-categories:
     - cloud
   x-preferred: true
 externalDocs:
   description: Amazon Web Services documentation
-  url: 'https://docs.aws.amazon.com/importexport/'
+  url: https://docs.aws.amazon.com/importexport/
 host: importexport.amazonaws.com
 basePath: /
 x-hasEquivalentPaths: true
@@ -89,45 +95,46 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  '/#Operation=CancelJob&Action=CancelJob':
+  /#Operation=CancelJob&Action=CancelJob:
     post:
       operationId: CancelJob
-      description: This operation cancels a specified job. Only the job owner can cancel it. The operation fails if the job has already started or is complete.
+      description: This operation cancels a specified job. Only the job owner can cancel
+        it. The operation fails if the job has already started or is complete.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/CancelJobOutput'
-        '480':
+            $ref: "#/definitions/CancelJobOutput"
+        "480":
           description: InvalidJobIdException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/InvalidJobIdException'
-        '481':
+            $ref: "#/definitions/InvalidJobIdException"
+        "481":
           description: ExpiredJobIdException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/ExpiredJobIdException'
-        '482':
+            $ref: "#/definitions/ExpiredJobIdException"
+        "482":
           description: CanceledJobIdException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/CanceledJobIdException'
-        '483':
+            $ref: "#/definitions/CanceledJobIdException"
+        "483":
           description: UnableToCancelJobIdException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/UnableToCancelJobIdException'
-        '484':
+            $ref: "#/definitions/UnableToCancelJobIdException"
+        "484":
           description: InvalidAccessKeyIdException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/InvalidAccessKeyIdException'
-        '485':
+            $ref: "#/definitions/InvalidAccessKeyIdException"
+        "485":
           description: InvalidVersionException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/InvalidVersionException'
+            $ref: "#/definitions/InvalidVersionException"
       parameters:
         - name: JobId
           in: query
@@ -156,104 +163,109 @@ paths:
           required: true
           type: string
           enum:
-            - '2010-06-01'
+            - 2010-06-01
     parameters:
-      - $ref: '#/parameters/AWSAccessKeyId'
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/SignatureMethod'
-      - $ref: '#/parameters/SignatureVersion'
-      - $ref: '#/parameters/Timestamp'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/Signature'
-  '/#Operation=CreateJob&Action=CreateJob':
+      - $ref: "#/parameters/AWSAccessKeyId"
+      - $ref: "#/parameters/Action"
+      - $ref: "#/parameters/SignatureMethod"
+      - $ref: "#/parameters/SignatureVersion"
+      - $ref: "#/parameters/Timestamp"
+      - $ref: "#/parameters/Version"
+      - $ref: "#/parameters/Signature"
+  /#Operation=CreateJob&Action=CreateJob:
     post:
       operationId: CreateJob
-      description: 'This operation initiates the process of scheduling an upload or download of your data. You include in the request a manifest that describes the data transfer specifics. The response to the request includes a job ID, which you can use in other operations, a signature that you use to identify your storage device, and the address where you should ship your storage device.'
+      description: This operation initiates the process of scheduling an upload or download
+        of your data. You include in the request a manifest that describes the
+        data transfer specifics. The response to the request includes a job ID,
+        which you can use in other operations, a signature that you use to
+        identify your storage device, and the address where you should ship your
+        storage device.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/CreateJobOutput'
-        '480':
+            $ref: "#/definitions/CreateJobOutput"
+        "480":
           description: MissingParameterException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/MissingParameterException'
-        '481':
+            $ref: "#/definitions/MissingParameterException"
+        "481":
           description: InvalidParameterException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/InvalidParameterException'
-        '482':
+            $ref: "#/definitions/InvalidParameterException"
+        "482":
           description: InvalidAccessKeyIdException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/InvalidAccessKeyIdException'
-        '483':
+            $ref: "#/definitions/InvalidAccessKeyIdException"
+        "483":
           description: InvalidAddressException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/InvalidAddressException'
-        '484':
+            $ref: "#/definitions/InvalidAddressException"
+        "484":
           description: InvalidManifestFieldException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/InvalidManifestFieldException'
-        '485':
+            $ref: "#/definitions/InvalidManifestFieldException"
+        "485":
           description: MissingManifestFieldException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/MissingManifestFieldException'
-        '486':
+            $ref: "#/definitions/MissingManifestFieldException"
+        "486":
           description: NoSuchBucketException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/NoSuchBucketException'
-        '487':
+            $ref: "#/definitions/NoSuchBucketException"
+        "487":
           description: MissingCustomsException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/MissingCustomsException'
-        '488':
+            $ref: "#/definitions/MissingCustomsException"
+        "488":
           description: InvalidCustomsException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/InvalidCustomsException'
-        '489':
+            $ref: "#/definitions/InvalidCustomsException"
+        "489":
           description: InvalidFileSystemException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/InvalidFileSystemException'
-        '490':
+            $ref: "#/definitions/InvalidFileSystemException"
+        "490":
           description: MultipleRegionsException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/MultipleRegionsException'
-        '491':
+            $ref: "#/definitions/MultipleRegionsException"
+        "491":
           description: BucketPermissionException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/BucketPermissionException'
-        '492':
+            $ref: "#/definitions/BucketPermissionException"
+        "492":
           description: MalformedManifestException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/MalformedManifestException'
-        '493':
+            $ref: "#/definitions/MalformedManifestException"
+        "493":
           description: CreateJobQuotaExceededException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/CreateJobQuotaExceededException'
-        '494':
+            $ref: "#/definitions/CreateJobQuotaExceededException"
+        "494":
           description: InvalidJobIdException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/InvalidJobIdException'
-        '495':
+            $ref: "#/definitions/InvalidJobIdException"
+        "495":
           description: InvalidVersionException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/InvalidVersionException'
+            $ref: "#/definitions/InvalidVersionException"
       parameters:
         - name: JobType
           in: query
@@ -276,7 +288,8 @@ paths:
         - name: ValidateOnly
           in: query
           required: true
-          description: Validate the manifest and parameter values in the request but do not actually create a job.
+          description: Validate the manifest and parameter values in the request but do not
+            actually create a job.
           type: boolean
         - name: APIVersion
           in: query
@@ -300,71 +313,73 @@ paths:
           required: true
           type: string
           enum:
-            - '2010-06-01'
+            - 2010-06-01
     parameters:
-      - $ref: '#/parameters/AWSAccessKeyId'
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/SignatureMethod'
-      - $ref: '#/parameters/SignatureVersion'
-      - $ref: '#/parameters/Timestamp'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/Signature'
-  '/#Operation=GetShippingLabel&Action=GetShippingLabel':
+      - $ref: "#/parameters/AWSAccessKeyId"
+      - $ref: "#/parameters/Action"
+      - $ref: "#/parameters/SignatureMethod"
+      - $ref: "#/parameters/SignatureVersion"
+      - $ref: "#/parameters/Timestamp"
+      - $ref: "#/parameters/Version"
+      - $ref: "#/parameters/Signature"
+  /#Operation=GetShippingLabel&Action=GetShippingLabel:
     post:
       operationId: GetShippingLabel
-      description: This operation generates a pre-paid UPS shipping label that you will use to ship your device to AWS for processing.
+      description: This operation generates a pre-paid UPS shipping label that you will use
+        to ship your device to AWS for processing.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/GetShippingLabelOutput'
-        '480':
+            $ref: "#/definitions/GetShippingLabelOutput"
+        "480":
           description: InvalidJobIdException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/InvalidJobIdException'
-        '481':
+            $ref: "#/definitions/InvalidJobIdException"
+        "481":
           description: ExpiredJobIdException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/ExpiredJobIdException'
-        '482':
+            $ref: "#/definitions/ExpiredJobIdException"
+        "482":
           description: CanceledJobIdException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/CanceledJobIdException'
-        '483':
+            $ref: "#/definitions/CanceledJobIdException"
+        "483":
           description: InvalidAccessKeyIdException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/InvalidAccessKeyIdException'
-        '484':
+            $ref: "#/definitions/InvalidAccessKeyIdException"
+        "484":
           description: InvalidAddressException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/InvalidAddressException'
-        '485':
+            $ref: "#/definitions/InvalidAddressException"
+        "485":
           description: InvalidVersionException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/InvalidVersionException'
-        '486':
+            $ref: "#/definitions/InvalidVersionException"
+        "486":
           description: InvalidParameterException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/InvalidParameterException'
+            $ref: "#/definitions/InvalidParameterException"
       parameters:
         - name: jobIds
           in: query
           required: true
-          description: ''
+          description: ""
           type: array
           items:
             type: string
         - name: name
           in: query
           required: false
-          description: Specifies the name of the person responsible for shipping this package.
+          description: Specifies the name of the person responsible for shipping this
+            package.
           type: string
         - name: company
           in: query
@@ -374,7 +389,8 @@ paths:
         - name: phoneNumber
           in: query
           required: false
-          description: Specifies the phone number of the person responsible for shipping this package.
+          description: Specifies the phone number of the person responsible for shipping
+            this package.
           type: string
         - name: country
           in: query
@@ -384,7 +400,8 @@ paths:
         - name: stateOrProvince
           in: query
           required: false
-          description: Specifies the name of your state or your province for the return address.
+          description: Specifies the name of your state or your province for the return
+            address.
           type: string
         - name: city
           in: query
@@ -399,17 +416,20 @@ paths:
         - name: street1
           in: query
           required: false
-          description: 'Specifies the first part of the street address for the return address, for example 1234 Main Street.'
+          description: Specifies the first part of the street address for the return
+            address, for example 1234 Main Street.
           type: string
         - name: street2
           in: query
           required: false
-          description: 'Specifies the optional second part of the street address for the return address, for example Suite 100.'
+          description: Specifies the optional second part of the street address for the
+            return address, for example Suite 100.
           type: string
         - name: street3
           in: query
           required: false
-          description: 'Specifies the optional third part of the street address for the return address, for example c/o Jane Doe.'
+          description: Specifies the optional third part of the street address for the
+            return address, for example c/o Jane Doe.
           type: string
         - name: APIVersion
           in: query
@@ -433,49 +453,52 @@ paths:
           required: true
           type: string
           enum:
-            - '2010-06-01'
+            - 2010-06-01
     parameters:
-      - $ref: '#/parameters/AWSAccessKeyId'
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/SignatureMethod'
-      - $ref: '#/parameters/SignatureVersion'
-      - $ref: '#/parameters/Timestamp'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/Signature'
-  '/#Operation=GetStatus&Action=GetStatus':
+      - $ref: "#/parameters/AWSAccessKeyId"
+      - $ref: "#/parameters/Action"
+      - $ref: "#/parameters/SignatureMethod"
+      - $ref: "#/parameters/SignatureVersion"
+      - $ref: "#/parameters/Timestamp"
+      - $ref: "#/parameters/Version"
+      - $ref: "#/parameters/Signature"
+  /#Operation=GetStatus&Action=GetStatus:
     post:
       operationId: GetStatus
-      description: 'This operation returns information about a job, including where the job is in the processing pipeline, the status of the results, and the signature value associated with the job. You can only return information about jobs you own.'
+      description: This operation returns information about a job, including where the job
+        is in the processing pipeline, the status of the results, and the
+        signature value associated with the job. You can only return information
+        about jobs you own.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/GetStatusOutput'
-        '480':
+            $ref: "#/definitions/GetStatusOutput"
+        "480":
           description: InvalidJobIdException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/InvalidJobIdException'
-        '481':
+            $ref: "#/definitions/InvalidJobIdException"
+        "481":
           description: ExpiredJobIdException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/ExpiredJobIdException'
-        '482':
+            $ref: "#/definitions/ExpiredJobIdException"
+        "482":
           description: CanceledJobIdException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/CanceledJobIdException'
-        '483':
+            $ref: "#/definitions/CanceledJobIdException"
+        "483":
           description: InvalidAccessKeyIdException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/InvalidAccessKeyIdException'
-        '484':
+            $ref: "#/definitions/InvalidAccessKeyIdException"
+        "484":
           description: InvalidVersionException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/InvalidVersionException'
+            $ref: "#/definitions/InvalidVersionException"
       parameters:
         - name: JobId
           in: query
@@ -504,49 +527,59 @@ paths:
           required: true
           type: string
           enum:
-            - '2010-06-01'
+            - 2010-06-01
     parameters:
-      - $ref: '#/parameters/AWSAccessKeyId'
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/SignatureMethod'
-      - $ref: '#/parameters/SignatureVersion'
-      - $ref: '#/parameters/Timestamp'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/Signature'
-  '/#Operation=ListJobs&Action=ListJobs':
+      - $ref: "#/parameters/AWSAccessKeyId"
+      - $ref: "#/parameters/Action"
+      - $ref: "#/parameters/SignatureMethod"
+      - $ref: "#/parameters/SignatureVersion"
+      - $ref: "#/parameters/Timestamp"
+      - $ref: "#/parameters/Version"
+      - $ref: "#/parameters/Signature"
+  /#Operation=ListJobs&Action=ListJobs:
     post:
       operationId: ListJobs
-      description: 'This operation returns the jobs associated with the requester. AWS Import/Export lists the jobs in reverse chronological order based on the date of creation. For example if Job Test1 was created 2009Dec30 and Test2 was created 2010Feb05, the ListJobs operation would return Test2 followed by Test1.'
+      description: This operation returns the jobs associated with the requester. AWS
+        Import/Export lists the jobs in reverse chronological order based on the
+        date of creation. For example if Job Test1 was created 2009Dec30 and
+        Test2 was created 2010Feb05, the ListJobs operation would return Test2
+        followed by Test1.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/ListJobsOutput'
-        '480':
+            $ref: "#/definitions/ListJobsOutput"
+        "480":
           description: InvalidParameterException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/InvalidParameterException'
-        '481':
+            $ref: "#/definitions/InvalidParameterException"
+        "481":
           description: InvalidAccessKeyIdException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/InvalidAccessKeyIdException'
-        '482':
+            $ref: "#/definitions/InvalidAccessKeyIdException"
+        "482":
           description: InvalidVersionException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/InvalidVersionException'
+            $ref: "#/definitions/InvalidVersionException"
       parameters:
         - name: MaxJobs
           in: query
           required: false
-          description: 'Sets the maximum number of jobs returned in the response. If there are additional jobs that were not returned because MaxJobs was exceeded, the response contains &lt;IsTruncated&gt;true&lt;/IsTruncated&gt;. To return the additional jobs, see Marker.'
+          description: Sets the maximum number of jobs returned in the response. If there
+            are additional jobs that were not returned because MaxJobs was
+            exceeded, the response contains
+            &lt;IsTruncated&gt;true&lt;/IsTruncated&gt;. To return the
+            additional jobs, see Marker.
           type: integer
         - name: Marker
           in: query
           required: false
-          description: Specifies the JOBID to start after when listing the jobs created with your account. AWS Import/Export lists your jobs in reverse chronological order. See MaxJobs.
+          description: Specifies the JOBID to start after when listing the jobs created
+            with your account. AWS Import/Export lists your jobs in reverse
+            chronological order. See MaxJobs.
           type: string
         - name: APIVersion
           in: query
@@ -570,114 +603,118 @@ paths:
           required: true
           type: string
           enum:
-            - '2010-06-01'
+            - 2010-06-01
     parameters:
-      - $ref: '#/parameters/AWSAccessKeyId'
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/SignatureMethod'
-      - $ref: '#/parameters/SignatureVersion'
-      - $ref: '#/parameters/Timestamp'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/Signature'
-  '/#Operation=UpdateJob&Action=UpdateJob':
+      - $ref: "#/parameters/AWSAccessKeyId"
+      - $ref: "#/parameters/Action"
+      - $ref: "#/parameters/SignatureMethod"
+      - $ref: "#/parameters/SignatureVersion"
+      - $ref: "#/parameters/Timestamp"
+      - $ref: "#/parameters/Version"
+      - $ref: "#/parameters/Signature"
+  /#Operation=UpdateJob&Action=UpdateJob:
     post:
       operationId: UpdateJob
-      description: You use this operation to change the parameters specified in the original manifest file by supplying a new manifest file. The manifest file attached to this request replaces the original manifest file. You can only use the operation after a CreateJob request but before the data transfer starts and you can only use it on jobs you own.
+      description: You use this operation to change the parameters specified in the
+        original manifest file by supplying a new manifest file. The manifest
+        file attached to this request replaces the original manifest file. You
+        can only use the operation after a CreateJob request but before the data
+        transfer starts and you can only use it on jobs you own.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/UpdateJobOutput'
-        '480':
+            $ref: "#/definitions/UpdateJobOutput"
+        "480":
           description: MissingParameterException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/MissingParameterException'
-        '481':
+            $ref: "#/definitions/MissingParameterException"
+        "481":
           description: InvalidParameterException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/InvalidParameterException'
-        '482':
+            $ref: "#/definitions/InvalidParameterException"
+        "482":
           description: InvalidAccessKeyIdException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/InvalidAccessKeyIdException'
-        '483':
+            $ref: "#/definitions/InvalidAccessKeyIdException"
+        "483":
           description: InvalidAddressException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/InvalidAddressException'
-        '484':
+            $ref: "#/definitions/InvalidAddressException"
+        "484":
           description: InvalidManifestFieldException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/InvalidManifestFieldException'
-        '485':
+            $ref: "#/definitions/InvalidManifestFieldException"
+        "485":
           description: InvalidJobIdException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/InvalidJobIdException'
-        '486':
+            $ref: "#/definitions/InvalidJobIdException"
+        "486":
           description: MissingManifestFieldException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/MissingManifestFieldException'
-        '487':
+            $ref: "#/definitions/MissingManifestFieldException"
+        "487":
           description: NoSuchBucketException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/NoSuchBucketException'
-        '488':
+            $ref: "#/definitions/NoSuchBucketException"
+        "488":
           description: ExpiredJobIdException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/ExpiredJobIdException'
-        '489':
+            $ref: "#/definitions/ExpiredJobIdException"
+        "489":
           description: CanceledJobIdException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/CanceledJobIdException'
-        '490':
+            $ref: "#/definitions/CanceledJobIdException"
+        "490":
           description: MissingCustomsException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/MissingCustomsException'
-        '491':
+            $ref: "#/definitions/MissingCustomsException"
+        "491":
           description: InvalidCustomsException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/InvalidCustomsException'
-        '492':
+            $ref: "#/definitions/InvalidCustomsException"
+        "492":
           description: InvalidFileSystemException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/InvalidFileSystemException'
-        '493':
+            $ref: "#/definitions/InvalidFileSystemException"
+        "493":
           description: MultipleRegionsException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/MultipleRegionsException'
-        '494':
+            $ref: "#/definitions/MultipleRegionsException"
+        "494":
           description: BucketPermissionException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/BucketPermissionException'
-        '495':
+            $ref: "#/definitions/BucketPermissionException"
+        "495":
           description: MalformedManifestException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/MalformedManifestException'
-        '496':
+            $ref: "#/definitions/MalformedManifestException"
+        "496":
           description: UnableToUpdateJobIdException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/UnableToUpdateJobIdException'
-        '497':
+            $ref: "#/definitions/UnableToUpdateJobIdException"
+        "497":
           description: InvalidVersionException
           x-aws-exception: true
           schema:
-            $ref: '#/definitions/InvalidVersionException'
+            $ref: "#/definitions/InvalidVersionException"
       parameters:
         - name: JobId
           in: query
@@ -700,7 +737,8 @@ paths:
         - name: ValidateOnly
           in: query
           required: true
-          description: Validate the manifest and parameter values in the request but do not actually create a job.
+          description: Validate the manifest and parameter values in the request but do not
+            actually create a job.
           type: boolean
         - name: APIVersion
           in: query
@@ -724,220 +762,229 @@ paths:
           required: true
           type: string
           enum:
-            - '2010-06-01'
+            - 2010-06-01
     parameters:
-      - $ref: '#/parameters/AWSAccessKeyId'
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/SignatureMethod'
-      - $ref: '#/parameters/SignatureVersion'
-      - $ref: '#/parameters/Timestamp'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/Signature'
+      - $ref: "#/parameters/AWSAccessKeyId"
+      - $ref: "#/parameters/Action"
+      - $ref: "#/parameters/SignatureMethod"
+      - $ref: "#/parameters/SignatureVersion"
+      - $ref: "#/parameters/Timestamp"
+      - $ref: "#/parameters/Version"
+      - $ref: "#/parameters/Signature"
 definitions:
   CancelJobOutput:
     type: object
     properties:
       Success:
-        $ref: '#/definitions/Success'
+        $ref: "#/definitions/Success"
     description: Output structure for the CancelJob operation.
   InvalidJobIdException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'The JOBID was missing, not found, or not associated with the AWS account.'
+        $ref: "#/definitions/ErrorMessage"
+    description: The JOBID was missing, not found, or not associated with the AWS account.
   ExpiredJobIdException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ErrorMessage'
+        $ref: "#/definitions/ErrorMessage"
     description: Indicates that the specified job has expired out of the system.
   CanceledJobIdException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ErrorMessage'
+        $ref: "#/definitions/ErrorMessage"
     description: The specified job ID has been canceled and is no longer valid.
   UnableToCancelJobIdException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ErrorMessage'
+        $ref: "#/definitions/ErrorMessage"
     description: AWS Import/Export cannot cancel the job
   InvalidAccessKeyIdException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The AWS Access Key ID specified in the request did not match the manifest's accessKeyId value. The manifest and the request authentication must use the same AWS Access Key ID.
+        $ref: "#/definitions/ErrorMessage"
+    description: The AWS Access Key ID specified in the request did not match the
+      manifest's accessKeyId value. The manifest and the request authentication
+      must use the same AWS Access Key ID.
   InvalidVersionException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ErrorMessage'
+        $ref: "#/definitions/ErrorMessage"
     description: The client tool version is invalid.
   CreateJobOutput:
     type: object
     properties:
       JobId:
-        $ref: '#/definitions/JobId'
+        $ref: "#/definitions/JobId"
       JobType:
-        $ref: '#/definitions/JobType'
+        $ref: "#/definitions/JobType"
       Signature:
-        $ref: '#/definitions/Signature'
+        $ref: "#/definitions/Signature"
       SignatureFileContents:
-        $ref: '#/definitions/SignatureFileContents'
+        $ref: "#/definitions/SignatureFileContents"
       WarningMessage:
-        $ref: '#/definitions/WarningMessage'
+        $ref: "#/definitions/WarningMessage"
       ArtifactList:
-        $ref: '#/definitions/ArtifactList'
+        $ref: "#/definitions/ArtifactList"
     description: Output structure for the CreateJob operation.
   MissingParameterException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ErrorMessage'
+        $ref: "#/definitions/ErrorMessage"
     description: One or more required parameters was missing from the request.
   InvalidParameterException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ErrorMessage'
+        $ref: "#/definitions/ErrorMessage"
     description: One or more parameters had an invalid value.
   InvalidAddressException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ErrorMessage'
+        $ref: "#/definitions/ErrorMessage"
     description: The address specified in the manifest is invalid.
   InvalidManifestFieldException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ErrorMessage'
+        $ref: "#/definitions/ErrorMessage"
     description: One or more manifest fields was invalid. Please correct and resubmit.
   MissingManifestFieldException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ErrorMessage'
-    description: One or more required fields were missing from the manifest file. Please correct and resubmit.
+        $ref: "#/definitions/ErrorMessage"
+    description: One or more required fields were missing from the manifest file. Please
+      correct and resubmit.
   NoSuchBucketException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'The specified bucket does not exist. Create the specified bucket or change the manifest''s bucket, exportBucket, or logBucket field to a bucket that the account, as specified by the manifest''s Access Key ID, has write permissions to.'
+        $ref: "#/definitions/ErrorMessage"
+    description: The specified bucket does not exist. Create the specified bucket or change
+      the manifest's bucket, exportBucket, or logBucket field to a bucket that
+      the account, as specified by the manifest's Access Key ID, has write
+      permissions to.
   MissingCustomsException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ErrorMessage'
+        $ref: "#/definitions/ErrorMessage"
     description: One or more required customs parameters was missing from the manifest.
   InvalidCustomsException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ErrorMessage'
+        $ref: "#/definitions/ErrorMessage"
     description: One or more customs parameters was invalid. Please correct and resubmit.
   InvalidFileSystemException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ErrorMessage'
+        $ref: "#/definitions/ErrorMessage"
     description: File system specified in export manifest is invalid.
   MultipleRegionsException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ErrorMessage'
-    description: Your manifest file contained buckets from multiple regions. A job is restricted to buckets from one region. Please correct and resubmit.
+        $ref: "#/definitions/ErrorMessage"
+    description: Your manifest file contained buckets from multiple regions. A job is
+      restricted to buckets from one region. Please correct and resubmit.
   BucketPermissionException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ErrorMessage'
+        $ref: "#/definitions/ErrorMessage"
     description: The account specified does not have the appropriate bucket permissions.
   MalformedManifestException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ErrorMessage'
+        $ref: "#/definitions/ErrorMessage"
     description: Your manifest is not well-formed.
   CreateJobQuotaExceededException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'Each account can create only a certain number of jobs per day. If you need to create more than this, please contact awsimportexport@amazon.com to explain your particular use case.'
+        $ref: "#/definitions/ErrorMessage"
+    description: Each account can create only a certain number of jobs per day. If you need
+      to create more than this, please contact awsimportexport@amazon.com to
+      explain your particular use case.
   GetShippingLabelOutput:
     type: object
     properties:
       ShippingLabelURL:
-        $ref: '#/definitions/GenericString'
+        $ref: "#/definitions/GenericString"
       Warning:
-        $ref: '#/definitions/GenericString'
+        $ref: "#/definitions/GenericString"
   GenericString:
     type: string
   GetStatusOutput:
     type: object
     properties:
       JobId:
-        $ref: '#/definitions/JobId'
+        $ref: "#/definitions/JobId"
       JobType:
-        $ref: '#/definitions/JobType'
+        $ref: "#/definitions/JobType"
       LocationCode:
-        $ref: '#/definitions/LocationCode'
+        $ref: "#/definitions/LocationCode"
       LocationMessage:
-        $ref: '#/definitions/LocationMessage'
+        $ref: "#/definitions/LocationMessage"
       ProgressCode:
-        $ref: '#/definitions/ProgressCode'
+        $ref: "#/definitions/ProgressCode"
       ProgressMessage:
-        $ref: '#/definitions/ProgressMessage'
+        $ref: "#/definitions/ProgressMessage"
       Carrier:
-        $ref: '#/definitions/Carrier'
+        $ref: "#/definitions/Carrier"
       TrackingNumber:
-        $ref: '#/definitions/TrackingNumber'
+        $ref: "#/definitions/TrackingNumber"
       LogBucket:
-        $ref: '#/definitions/LogBucket'
+        $ref: "#/definitions/LogBucket"
       LogKey:
-        $ref: '#/definitions/LogKey'
+        $ref: "#/definitions/LogKey"
       ErrorCount:
-        $ref: '#/definitions/ErrorCount'
+        $ref: "#/definitions/ErrorCount"
       Signature:
-        $ref: '#/definitions/Signature'
+        $ref: "#/definitions/Signature"
       SignatureFileContents:
-        $ref: '#/definitions/Signature'
+        $ref: "#/definitions/Signature"
       CurrentManifest:
-        $ref: '#/definitions/CurrentManifest'
+        $ref: "#/definitions/CurrentManifest"
       CreationDate:
-        $ref: '#/definitions/CreationDate'
+        $ref: "#/definitions/CreationDate"
       ArtifactList:
-        $ref: '#/definitions/ArtifactList'
+        $ref: "#/definitions/ArtifactList"
     description: Output structure for the GetStatus operation.
   ListJobsOutput:
     type: object
     properties:
       Jobs:
-        $ref: '#/definitions/JobsList'
+        $ref: "#/definitions/JobsList"
       IsTruncated:
-        $ref: '#/definitions/IsTruncated'
+        $ref: "#/definitions/IsTruncated"
     description: Output structure for the ListJobs operation.
   UpdateJobOutput:
     type: object
     properties:
       Success:
-        $ref: '#/definitions/Success'
+        $ref: "#/definitions/Success"
       WarningMessage:
-        $ref: '#/definitions/WarningMessage'
+        $ref: "#/definitions/WarningMessage"
       ArtifactList:
-        $ref: '#/definitions/ArtifactList'
+        $ref: "#/definitions/ArtifactList"
     description: Output structure for the UpateJob operation.
   UnableToUpdateJobIdException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ErrorMessage'
+        $ref: "#/definitions/ErrorMessage"
     description: AWS Import/Export cannot update the job
   APIVersion:
     type: string
@@ -952,15 +999,16 @@ definitions:
     type: object
     properties:
       Description:
-        $ref: '#/definitions/Description'
+        $ref: "#/definitions/Description"
       URL:
-        $ref: '#/definitions/URL'
-    description: A discrete item that contains the description and URL of an artifact (such as a PDF).
+        $ref: "#/definitions/URL"
+    description: A discrete item that contains the description and URL of an artifact (such
+      as a PDF).
   ArtifactList:
     type: array
     description: A collection of artifacts.
     items:
-      $ref: '#/definitions/Artifact'
+      $ref: "#/definitions/Artifact"
   ErrorMessage:
     type: string
     description: The human-readable description of a particular error.
@@ -973,16 +1021,17 @@ definitions:
       - JobId
     properties:
       JobId:
-        $ref: '#/definitions/JobId'
+        $ref: "#/definitions/JobId"
       APIVersion:
-        $ref: '#/definitions/APIVersion'
+        $ref: "#/definitions/APIVersion"
     description: Input structure for the CancelJob operation.
   Success:
     type: boolean
     description: Specifies whether (true) or not (false) AWS Import/Export updated your job.
   Carrier:
     type: string
-    description: Name of the shipping company. This value is included when the LocationCode is "Returned".
+    description: Name of the shipping company. This value is included when the LocationCode
+      is "Returned".
   JobType:
     type: string
     enum:
@@ -997,7 +1046,8 @@ definitions:
     description: For internal use only.
   ValidateOnly:
     type: boolean
-    description: Validate the manifest and parameter values in the request but do not actually create a job.
+    description: Validate the manifest and parameter values in the request but do not
+      actually create a job.
   CreateJobInput:
     type: object
     required:
@@ -1006,39 +1056,45 @@ definitions:
       - ValidateOnly
     properties:
       JobType:
-        $ref: '#/definitions/JobType'
+        $ref: "#/definitions/JobType"
       Manifest:
-        $ref: '#/definitions/Manifest'
+        $ref: "#/definitions/Manifest"
       ManifestAddendum:
-        $ref: '#/definitions/ManifestAddendum'
+        $ref: "#/definitions/ManifestAddendum"
       ValidateOnly:
-        $ref: '#/definitions/ValidateOnly'
+        $ref: "#/definitions/ValidateOnly"
       APIVersion:
-        $ref: '#/definitions/APIVersion'
+        $ref: "#/definitions/APIVersion"
     description: Input structure for the CreateJob operation.
   Signature:
     type: string
-    description: 'An encrypted code used to authenticate the request and response, for example, "DV+TpDfx1/TdSE9ktyK9k/bDTVI=". Only use this value is you want to create the signature file yourself. Generally you should use the SignatureFileContents value.'
+    description: An encrypted code used to authenticate the request and response, for
+      example, "DV+TpDfx1/TdSE9ktyK9k/bDTVI=". Only use this value is you want
+      to create the signature file yourself. Generally you should use the
+      SignatureFileContents value.
   SignatureFileContents:
     type: string
     description: The actual text of the SIGNATURE file to be written to disk.
   WarningMessage:
     type: string
-    description: 'An optional message notifying you of non-fatal issues with the job, such as use of an incompatible Amazon S3 bucket name.'
+    description: An optional message notifying you of non-fatal issues with the job, such
+      as use of an incompatible Amazon S3 bucket name.
   CreationDate:
     type: string
-    description: 'Timestamp of the CreateJob request in ISO8601 date format. For example "2010-03-28T20:27:35Z".'
+    description: Timestamp of the CreateJob request in ISO8601 date format. For example
+      "2010-03-28T20:27:35Z".
     format: date-time
   CurrentManifest:
     type: string
-    description: 'The last manifest submitted, which will be used to process the job.'
+    description: The last manifest submitted, which will be used to process the job.
   ErrorCount:
     type: integer
-    description: Number of errors. We return this value when the ProgressCode is Success or SuccessWithErrors.
+    description: Number of errors. We return this value when the ProgressCode is Success or
+      SuccessWithErrors.
   JobIdList:
     type: array
     items:
-      $ref: '#/definitions/GenericString'
+      $ref: "#/definitions/GenericString"
   name:
     type: string
     description: Specifies the name of the person responsible for shipping this package.
@@ -1047,7 +1103,8 @@ definitions:
     description: Specifies the name of the company that will ship this package.
   phoneNumber:
     type: string
-    description: Specifies the phone number of the person responsible for shipping this package.
+    description: Specifies the phone number of the person responsible for shipping this
+      package.
   country:
     type: string
     description: Specifies the name of your country for the return address.
@@ -1062,67 +1119,72 @@ definitions:
     description: Specifies the postal code for the return address.
   street1:
     type: string
-    description: 'Specifies the first part of the street address for the return address, for example 1234 Main Street.'
+    description: Specifies the first part of the street address for the return address, for
+      example 1234 Main Street.
   street2:
     type: string
-    description: 'Specifies the optional second part of the street address for the return address, for example Suite 100.'
+    description: Specifies the optional second part of the street address for the return
+      address, for example Suite 100.
   street3:
     type: string
-    description: 'Specifies the optional third part of the street address for the return address, for example c/o Jane Doe.'
+    description: Specifies the optional third part of the street address for the return
+      address, for example c/o Jane Doe.
   GetShippingLabelInput:
     type: object
     required:
       - jobIds
     properties:
       jobIds:
-        $ref: '#/definitions/JobIdList'
+        $ref: "#/definitions/JobIdList"
       name:
-        $ref: '#/definitions/name'
+        $ref: "#/definitions/name"
       company:
-        $ref: '#/definitions/company'
+        $ref: "#/definitions/company"
       phoneNumber:
-        $ref: '#/definitions/phoneNumber'
+        $ref: "#/definitions/phoneNumber"
       country:
-        $ref: '#/definitions/country'
+        $ref: "#/definitions/country"
       stateOrProvince:
-        $ref: '#/definitions/stateOrProvince'
+        $ref: "#/definitions/stateOrProvince"
       city:
-        $ref: '#/definitions/city'
+        $ref: "#/definitions/city"
       postalCode:
-        $ref: '#/definitions/postalCode'
+        $ref: "#/definitions/postalCode"
       street1:
-        $ref: '#/definitions/street1'
+        $ref: "#/definitions/street1"
       street2:
-        $ref: '#/definitions/street2'
+        $ref: "#/definitions/street2"
       street3:
-        $ref: '#/definitions/street3'
+        $ref: "#/definitions/street3"
       APIVersion:
-        $ref: '#/definitions/APIVersion'
+        $ref: "#/definitions/APIVersion"
   GetStatusInput:
     type: object
     required:
       - JobId
     properties:
       JobId:
-        $ref: '#/definitions/JobId'
+        $ref: "#/definitions/JobId"
       APIVersion:
-        $ref: '#/definitions/APIVersion'
+        $ref: "#/definitions/APIVersion"
     description: Input structure for the GetStatus operation.
   LocationCode:
     type: string
-    description: 'A token representing the location of the storage device, such as "AtAWS".'
+    description: A token representing the location of the storage device, such as "AtAWS".
   LocationMessage:
     type: string
     description: A more human readable form of the physical location of the storage device.
   ProgressCode:
     type: string
-    description: 'A token representing the state of the job, such as "Started".'
+    description: A token representing the state of the job, such as "Started".
   ProgressMessage:
     type: string
     description: A more human readable form of the job status.
   TrackingNumber:
     type: string
-    description: The shipping tracking number assigned by AWS Import/Export to the storage device when it's returned to you. We return this value when the LocationCode is "Returned".
+    description: The shipping tracking number assigned by AWS Import/Export to the storage
+      device when it's returned to you. We return this value when the
+      LocationCode is "Returned".
   LogBucket:
     type: string
     description: Amazon S3 bucket for user logs.
@@ -1134,39 +1196,45 @@ definitions:
     description: Indicates whether the job was canceled.
   IsTruncated:
     type: boolean
-    description: 'Indicates whether the list of jobs was truncated. If true, then call ListJobs again using the last JobId element as the marker.'
+    description: Indicates whether the list of jobs was truncated. If true, then call
+      ListJobs again using the last JobId element as the marker.
   Job:
     type: object
     properties:
       JobId:
-        $ref: '#/definitions/JobId'
+        $ref: "#/definitions/JobId"
       CreationDate:
-        $ref: '#/definitions/CreationDate'
+        $ref: "#/definitions/CreationDate"
       IsCanceled:
-        $ref: '#/definitions/IsCanceled'
+        $ref: "#/definitions/IsCanceled"
       JobType:
-        $ref: '#/definitions/JobType'
+        $ref: "#/definitions/JobType"
     description: Representation of a job returned by the ListJobs operation.
   JobsList:
     type: array
     description: A list container for Jobs returned by the ListJobs operation.
     items:
-      $ref: '#/definitions/Job'
+      $ref: "#/definitions/Job"
   MaxJobs:
     type: integer
-    description: 'Sets the maximum number of jobs returned in the response. If there are additional jobs that were not returned because MaxJobs was exceeded, the response contains &lt;IsTruncated&gt;true&lt;/IsTruncated&gt;. To return the additional jobs, see Marker.'
+    description: Sets the maximum number of jobs returned in the response. If there are
+      additional jobs that were not returned because MaxJobs was exceeded, the
+      response contains &lt;IsTruncated&gt;true&lt;/IsTruncated&gt;. To return
+      the additional jobs, see Marker.
   Marker:
     type: string
-    description: Specifies the JOBID to start after when listing the jobs created with your account. AWS Import/Export lists your jobs in reverse chronological order. See MaxJobs.
+    description: Specifies the JOBID to start after when listing the jobs created with your
+      account. AWS Import/Export lists your jobs in reverse chronological order.
+      See MaxJobs.
   ListJobsInput:
     type: object
     properties:
       MaxJobs:
-        $ref: '#/definitions/MaxJobs'
+        $ref: "#/definitions/MaxJobs"
       Marker:
-        $ref: '#/definitions/Marker'
+        $ref: "#/definitions/Marker"
       APIVersion:
-        $ref: '#/definitions/APIVersion'
+        $ref: "#/definitions/APIVersion"
     description: Input structure for the ListJobs operation.
   UpdateJobInput:
     type: object
@@ -1177,13 +1245,13 @@ definitions:
       - ValidateOnly
     properties:
       JobId:
-        $ref: '#/definitions/JobId'
+        $ref: "#/definitions/JobId"
       Manifest:
-        $ref: '#/definitions/Manifest'
+        $ref: "#/definitions/Manifest"
       JobType:
-        $ref: '#/definitions/JobType'
+        $ref: "#/definitions/JobType"
       ValidateOnly:
-        $ref: '#/definitions/ValidateOnly'
+        $ref: "#/definitions/ValidateOnly"
       APIVersion:
-        $ref: '#/definitions/APIVersion'
+        $ref: "#/definitions/APIVersion"
     description: Input structure for the UpateJob operation.

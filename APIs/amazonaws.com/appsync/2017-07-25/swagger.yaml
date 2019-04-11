@@ -1,38 +1,39 @@
-swagger: '2.0'
+swagger: "2.0"
 info:
-  version: '2017-07-25'
+  version: 2017-07-25
   x-release: v4
   title: AWS AppSync
-  description: AWS AppSync provides API actions for creating and interacting with data sources using GraphQL from your application.
+  description: AWS AppSync provides API actions for creating and interacting with data
+    sources using GraphQL from your application.
   x-logo:
-    url: 'https://twitter.com/awscloud/profile_image?size=original'
-    backgroundColor: '#FFFFFF'
-  termsOfService: 'https://aws.amazon.com/service-terms/'
+    url: https://twitter.com/awscloud/profile_image?size=original
+    backgroundColor: "#FFFFFF"
+  termsOfService: https://aws.amazon.com/service-terms/
   contact:
     name: Mike Ralphson
     email: mike.ralphson@gmail.com
-    url: 'https://github.com/mermade/aws2openapi'
+    url: https://github.com/mermade/aws2openapi
     x-twitter: PermittedSoc
   license:
     name: Apache 2.0 License
-    url: 'http://www.apache.org/licenses/'
+    url: http://www.apache.org/licenses/
   x-providerName: amazonaws.com
   x-serviceName: appsync
   x-origin:
     - contentType: application/json
-      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/appsync-2017-07-25.normal.json'
+      url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/appsync-2017-07-25.normal.json
       converter:
-        url: 'https://github.com/mermade/aws2openapi'
+        url: https://github.com/mermade/aws2openapi
         version: 1.0.0
       x-apisguru-direct: true
   x-apiClientRegistration:
-    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+    url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
   x-apisguru-categories:
     - cloud
   x-preferred: true
 externalDocs:
   description: Amazon Web Services documentation
-  url: 'https://docs.aws.amazon.com/appsync/'
+  url: https://docs.aws.amazon.com/appsync/
 host: appsync.amazonaws.com
 basePath: /
 x-hasEquivalentPaths: true
@@ -89,47 +90,48 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  '/v1/apis/{apiId}/apikeys':
+  "/v1/apis/{apiId}/apikeys":
     post:
       operationId: CreateApiKey
-      description: Creates a unique key that you can distribute to clients who are executing your API.
+      description: Creates a unique key that you can distribute to clients who are
+        executing your API.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/CreateApiKeyResponse'
-        '480':
+            $ref: "#/definitions/CreateApiKeyResponse"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
+            $ref: "#/definitions/NotFoundException"
+        "482":
           description: LimitExceededException
           schema:
-            $ref: '#/definitions/LimitExceededException'
-        '483':
+            $ref: "#/definitions/LimitExceededException"
+        "483":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '484':
+            $ref: "#/definitions/UnauthorizedException"
+        "484":
           description: LimitExceededException
           schema:
-            $ref: '#/definitions/LimitExceededException'
-        '485':
+            $ref: "#/definitions/LimitExceededException"
+        "485":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '486':
+            $ref: "#/definitions/InternalFailureException"
+        "486":
           description: ApiKeyLimitExceededException
           schema:
-            $ref: '#/definitions/ApiKeyLimitExceededException'
-        '487':
+            $ref: "#/definitions/ApiKeyLimitExceededException"
+        "487":
           description: ApiKeyValidityOutOfBoundsException
           schema:
-            $ref: '#/definitions/ApiKeyValidityOutOfBoundsException'
+            $ref: "#/definitions/ApiKeyValidityOutOfBoundsException"
       parameters:
         - name: apiId
           in: path
@@ -146,40 +148,47 @@ paths:
                 description: A description of the purpose of the API key.
                 type: string
               expires:
-                description: 'The time from creation time after which the API key expires. The date is represented as seconds since the epoch, rounded down to the nearest hour. The default value for this parameter is 7 days from creation time. For more information, see .'
+                description: The time from creation time after which the API key expires.
+                  The date is represented as seconds since the epoch, rounded
+                  down to the nearest hour. The default value for this parameter
+                  is 7 days from creation time. For more information, see .
                 type: integer
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
     get:
       operationId: ListApiKeys
-      description: '<p>Lists the API keys for a given API.</p> <note> <p>API keys are deleted automatically sometime after they expire. However, they may still be included in the response until they have actually been deleted. You can safely call <code>DeleteApiKey</code> to manually delete a key before it''s automatically deleted.</p> </note>'
+      description: <p>Lists the API keys for a given API.</p> <note> <p>API keys are
+        deleted automatically sometime after they expire. However, they may
+        still be included in the response until they have actually been deleted.
+        You can safely call <code>DeleteApiKey</code> to manually delete a key
+        before it's automatically deleted.</p> </note>
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/ListApiKeysResponse'
-        '480':
+            $ref: "#/definitions/ListApiKeysResponse"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
+            $ref: "#/definitions/NotFoundException"
+        "482":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '483':
+            $ref: "#/definitions/UnauthorizedException"
+        "483":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
+            $ref: "#/definitions/InternalFailureException"
       parameters:
         - name: apiId
           in: path
@@ -189,9 +198,11 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: 'An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.'
+          description: An identifier that was returned from the previous call to this
+            operation, which can be used to return the next set of items in the
+            list.
           type: string
-          pattern: '[\\S]+'
+          pattern: "[\\\\S]+"
         - name: maxResults
           in: query
           required: false
@@ -199,35 +210,35 @@ paths:
           type: integer
           minimum: 0
           maximum: 25
-  '/v1/apis/{apiId}/datasources':
+  "/v1/apis/{apiId}/datasources":
     post:
       operationId: CreateDataSource
       description: Creates a <code>DataSource</code> object.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/CreateDataSourceResponse'
-        '480':
+            $ref: "#/definitions/CreateDataSourceResponse"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: ConcurrentModificationException
           schema:
-            $ref: '#/definitions/ConcurrentModificationException'
-        '482':
+            $ref: "#/definitions/ConcurrentModificationException"
+        "482":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '483':
+            $ref: "#/definitions/NotFoundException"
+        "483":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '484':
+            $ref: "#/definitions/UnauthorizedException"
+        "484":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
+            $ref: "#/definitions/InternalFailureException"
       parameters:
         - name: apiId
           in: path
@@ -249,7 +260,7 @@ paths:
               name:
                 description: A user-supplied name for the <code>DataSource</code>.
                 type: string
-                pattern: '[_A-Za-z][_0-9A-Za-z]*'
+                pattern: "[_A-Za-z][_0-9A-Za-z]*"
               description:
                 description: A description of the <code>DataSource</code>.
                 type: string
@@ -264,90 +275,100 @@ paths:
                   - HTTP
                   - RELATIONAL_DATABASE
               serviceRoleArn:
-                description: The AWS IAM service role ARN for the data source. The system assumes this role when accessing the data source.
+                description: The AWS IAM service role ARN for the data source. The system
+                  assumes this role when accessing the data source.
                 type: string
               dynamodbConfig:
                 description: Describes an Amazon DynamoDB data source configuration.
                 type: object
                 properties:
                   tableName:
-                    $ref: '#/definitions/String'
+                    $ref: "#/definitions/String"
                     description: The table name.
                   awsRegion:
-                    $ref: '#/definitions/String'
+                    $ref: "#/definitions/String"
                     description: The AWS Region.
                   useCallerCredentials:
-                    $ref: '#/definitions/Boolean'
-                    description: Set to TRUE to use Amazon Cognito credentials with this data source.
+                    $ref: "#/definitions/Boolean"
+                    description: Set to TRUE to use Amazon Cognito credentials with this
+                      data source.
               lambdaConfig:
                 description: Describes an AWS Lambda data source configuration.
                 type: object
                 properties:
                   lambdaFunctionArn:
-                    $ref: '#/definitions/String'
+                    $ref: "#/definitions/String"
                     description: The ARN for the Lambda function.
               elasticsearchConfig:
                 description: Describes an Elasticsearch data source configuration.
                 type: object
                 properties:
                   endpoint:
-                    $ref: '#/definitions/String'
+                    $ref: "#/definitions/String"
                     description: The endpoint.
                   awsRegion:
-                    $ref: '#/definitions/String'
+                    $ref: "#/definitions/String"
                     description: The AWS Region.
               httpConfig:
                 description: Describes an HTTP data source configuration.
                 type: object
                 properties:
                   endpoint:
-                    $ref: '#/definitions/String'
-                    description: 'The HTTP URL endpoint. You can either specify the domain name or IP, and port combination, and the URL scheme must be HTTP or HTTPS. If the port is not specified, AWS AppSync uses the default port 80 for the HTTP endpoint and port 443 for HTTPS endpoints.'
+                    $ref: "#/definitions/String"
+                    description: The HTTP URL endpoint. You can either specify the domain
+                      name or IP, and port combination, and the URL scheme must
+                      be HTTP or HTTPS. If the port is not specified, AWS
+                      AppSync uses the default port 80 for the HTTP endpoint and
+                      port 443 for HTTPS endpoints.
                   authorizationConfig:
-                    $ref: '#/definitions/AuthorizationConfig'
-                    description: The authorization config in case the HTTP endpoint requires authorization.
+                    $ref: "#/definitions/AuthorizationConfig"
+                    description: The authorization config in case the HTTP endpoint
+                      requires authorization.
               relationalDatabaseConfig:
                 description: Describes a relational database data source configuration.
                 type: object
                 properties:
                   relationalDatabaseSourceType:
-                    $ref: '#/definitions/RelationalDatabaseSourceType'
-                    description: '<p>Source type for the relational database.</p> <ul> <li> <p> <b>RDS_HTTP_ENDPOINT</b>: The relational database source type is an Amazon RDS HTTP endpoint.</p> </li> </ul>'
+                    $ref: "#/definitions/RelationalDatabaseSourceType"
+                    description: "<p>Source type for the relational database.</p> <ul> <li>
+                      <p> <b>RDS_HTTP_ENDPOINT</b>: The relational database
+                      source type is an Amazon RDS HTTP endpoint.</p> </li>
+                      </ul>"
                   rdsHttpEndpointConfig:
-                    $ref: '#/definitions/RdsHttpEndpointConfig'
+                    $ref: "#/definitions/RdsHttpEndpointConfig"
                     description: Amazon RDS HTTP endpoint settings.
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
     get:
       operationId: ListDataSources
       description: Lists the data sources for a given API.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/ListDataSourcesResponse'
-        '480':
+            $ref: "#/definitions/ListDataSourcesResponse"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
+            $ref: "#/definitions/NotFoundException"
+        "482":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '483':
+            $ref: "#/definitions/UnauthorizedException"
+        "483":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
+            $ref: "#/definitions/InternalFailureException"
       parameters:
         - name: apiId
           in: path
@@ -357,9 +378,11 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: 'An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list. '
+          description: "An identifier that was returned from the previous call to this
+            operation, which can be used to return the next set of items in the
+            list. "
           type: string
-          pattern: '[\\S]+'
+          pattern: "[\\\\S]+"
         - name: maxResults
           in: query
           required: false
@@ -367,31 +390,33 @@ paths:
           type: integer
           minimum: 0
           maximum: 25
-  '/v1/apis/{apiId}/functions':
+  "/v1/apis/{apiId}/functions":
     post:
       operationId: CreateFunction
-      description: <p>Creates a <code>Function</code> object.</p> <p>A function is a reusable entity. Multiple functions can be used to compose the resolver logic.</p>
+      description: <p>Creates a <code>Function</code> object.</p> <p>A function is a
+        reusable entity. Multiple functions can be used to compose the resolver
+        logic.</p>
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/CreateFunctionResponse'
-        '480':
+            $ref: "#/definitions/CreateFunctionResponse"
+        "480":
           description: ConcurrentModificationException
           schema:
-            $ref: '#/definitions/ConcurrentModificationException'
-        '481':
+            $ref: "#/definitions/ConcurrentModificationException"
+        "481":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
+            $ref: "#/definitions/NotFoundException"
+        "482":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '483':
+            $ref: "#/definitions/UnauthorizedException"
+        "483":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
+            $ref: "#/definitions/InternalFailureException"
       parameters:
         - name: apiId
           in: path
@@ -410,61 +435,65 @@ paths:
               - functionVersion
             properties:
               name:
-                description: The <code>Function</code> name. The function name does not have to be unique.
+                description: The <code>Function</code> name. The function name does not
+                  have to be unique.
                 type: string
-                pattern: '[_A-Za-z][_0-9A-Za-z]*'
+                pattern: "[_A-Za-z][_0-9A-Za-z]*"
               description:
                 description: The <code>Function</code> description.
                 type: string
               dataSourceName:
                 description: The <code>Function</code> <code>DataSource</code> name.
                 type: string
-                pattern: '[_A-Za-z][_0-9A-Za-z]*'
+                pattern: "[_A-Za-z][_0-9A-Za-z]*"
               requestMappingTemplate:
-                description: The <code>Function</code> request mapping template. Functions support only the 2018-05-29 version of the request mapping template.
+                description: The <code>Function</code> request mapping template. Functions
+                  support only the 2018-05-29 version of the request mapping
+                  template.
                 type: string
                 minLength: 1
                 maxLength: 65536
               responseMappingTemplate:
-                description: 'The <code>Function</code> response mapping template. '
+                description: "The <code>Function</code> response mapping template. "
                 type: string
                 minLength: 1
                 maxLength: 65536
               functionVersion:
-                description: 'The <code>version</code> of the request mapping template. Currently the supported value is 2018-05-29. '
+                description: "The <code>version</code> of the request mapping template.
+                  Currently the supported value is 2018-05-29. "
                 type: string
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
     get:
       operationId: ListFunctions
       description: List multiple functions.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/ListFunctionsResponse'
-        '480':
+            $ref: "#/definitions/ListFunctionsResponse"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
+            $ref: "#/definitions/NotFoundException"
+        "482":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '483':
+            $ref: "#/definitions/UnauthorizedException"
+        "483":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
+            $ref: "#/definitions/InternalFailureException"
       parameters:
         - name: apiId
           in: path
@@ -474,9 +503,11 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: 'An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.'
+          description: An identifier that was returned from the previous call to this
+            operation, which can be used to return the next set of items in the
+            list.
           type: string
-          pattern: '[\\S]+'
+          pattern: "[\\\\S]+"
         - name: maxResults
           in: query
           required: false
@@ -489,34 +520,34 @@ paths:
       operationId: CreateGraphqlApi
       description: Creates a <code>GraphqlApi</code> object.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/CreateGraphqlApiResponse'
-        '480':
+            $ref: "#/definitions/CreateGraphqlApiResponse"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: LimitExceededException
           schema:
-            $ref: '#/definitions/LimitExceededException'
-        '482':
+            $ref: "#/definitions/LimitExceededException"
+        "482":
           description: ConcurrentModificationException
           schema:
-            $ref: '#/definitions/ConcurrentModificationException'
-        '483':
+            $ref: "#/definitions/ConcurrentModificationException"
+        "483":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '484':
+            $ref: "#/definitions/UnauthorizedException"
+        "484":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '485':
+            $ref: "#/definitions/InternalFailureException"
+        "485":
           description: ApiLimitExceededException
           schema:
-            $ref: '#/definitions/ApiLimitExceededException'
+            $ref: "#/definitions/ApiLimitExceededException"
       parameters:
         - name: body
           in: body
@@ -538,13 +569,27 @@ paths:
                 type: object
                 properties:
                   fieldLogLevel:
-                    $ref: '#/definitions/FieldLogLevel'
-                    description: '<p>The field logging level. Values can be NONE, ERROR, or ALL. </p> <ul> <li> <p> <b>NONE</b>: No field-level logs are captured.</p> </li> <li> <p> <b>ERROR</b>: Logs the following information only for the fields that are in error:</p> <ul> <li> <p>The error section in the server response.</p> </li> <li> <p>Field-level errors.</p> </li> <li> <p>The generated request/response functions that got resolved for error fields.</p> </li> </ul> </li> <li> <p> <b>ALL</b>: The following information is logged for all fields in the query:</p> <ul> <li> <p>Field-level tracing information.</p> </li> <li> <p>The generated request/response functions that got resolved for each field.</p> </li> </ul> </li> </ul>'
+                    $ref: "#/definitions/FieldLogLevel"
+                    description: "<p>The field logging level. Values can be NONE, ERROR, or
+                      ALL. </p> <ul> <li> <p> <b>NONE</b>: No field-level logs
+                      are captured.</p> </li> <li> <p> <b>ERROR</b>: Logs the
+                      following information only for the fields that are in
+                      error:</p> <ul> <li> <p>The error section in the server
+                      response.</p> </li> <li> <p>Field-level errors.</p> </li>
+                      <li> <p>The generated request/response functions that got
+                      resolved for error fields.</p> </li> </ul> </li> <li> <p>
+                      <b>ALL</b>: The following information is logged for all
+                      fields in the query:</p> <ul> <li> <p>Field-level tracing
+                      information.</p> </li> <li> <p>The generated
+                      request/response functions that got resolved for each
+                      field.</p> </li> </ul> </li> </ul>"
                   cloudWatchLogsRoleArn:
-                    $ref: '#/definitions/String'
-                    description: 'The service role that AWS AppSync will assume to publish to Amazon CloudWatch logs in your account. '
+                    $ref: "#/definitions/String"
+                    description: "The service role that AWS AppSync will assume to publish
+                      to Amazon CloudWatch logs in your account. "
               authenticationType:
-                description: 'The authentication type: API key, AWS IAM, or Amazon Cognito user pools.'
+                description: "The authentication type: API key, AWS IAM, or Amazon Cognito
+                  user pools."
                 type: string
                 enum:
                   - API_KEY
@@ -556,68 +601,82 @@ paths:
                 type: object
                 properties:
                   userPoolId:
-                    $ref: '#/definitions/String'
+                    $ref: "#/definitions/String"
                     description: The user pool ID.
                   awsRegion:
-                    $ref: '#/definitions/String'
+                    $ref: "#/definitions/String"
                     description: The AWS Region in which the user pool was created.
                   defaultAction:
-                    $ref: '#/definitions/DefaultAction'
-                    description: The action that you want your GraphQL API to take when a request that uses Amazon Cognito user pool authentication doesn't match the Amazon Cognito user pool configuration.
+                    $ref: "#/definitions/DefaultAction"
+                    description: The action that you want your GraphQL API to take when a
+                      request that uses Amazon Cognito user pool authentication
+                      doesn't match the Amazon Cognito user pool configuration.
                   appIdClientRegex:
-                    $ref: '#/definitions/String'
-                    description: A regular expression for validating the incoming Amazon Cognito user pool app client ID.
+                    $ref: "#/definitions/String"
+                    description: A regular expression for validating the incoming Amazon
+                      Cognito user pool app client ID.
               openIDConnectConfig:
                 description: Describes an OpenID Connect configuration.
                 type: object
                 properties:
                   issuer:
-                    $ref: '#/definitions/String'
-                    description: The issuer for the OpenID Connect configuration. The issuer returned by discovery must exactly match the value of <code>iss</code> in the ID token.
+                    $ref: "#/definitions/String"
+                    description: The issuer for the OpenID Connect configuration. The
+                      issuer returned by discovery must exactly match the value
+                      of <code>iss</code> in the ID token.
                   clientId:
-                    $ref: '#/definitions/String'
-                    description: The client identifier of the Relying party at the OpenID identity provider. This identifier is typically obtained when the Relying party is registered with the OpenID identity provider. You can specify a regular expression so the AWS AppSync can validate against multiple client identifiers at a time.
+                    $ref: "#/definitions/String"
+                    description: The client identifier of the Relying party at the OpenID
+                      identity provider. This identifier is typically obtained
+                      when the Relying party is registered with the OpenID
+                      identity provider. You can specify a regular expression so
+                      the AWS AppSync can validate against multiple client
+                      identifiers at a time.
                   iatTTL:
-                    $ref: '#/definitions/Long'
-                    description: The number of milliseconds a token is valid after being issued to a user.
+                    $ref: "#/definitions/Long"
+                    description: The number of milliseconds a token is valid after being
+                      issued to a user.
                   authTTL:
-                    $ref: '#/definitions/Long'
-                    description: The number of milliseconds a token is valid after being authenticated.
+                    $ref: "#/definitions/Long"
+                    description: The number of milliseconds a token is valid after being
+                      authenticated.
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
     get:
       operationId: ListGraphqlApis
       description: Lists your GraphQL APIs.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/ListGraphqlApisResponse'
-        '480':
+            $ref: "#/definitions/ListGraphqlApisResponse"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '482':
+            $ref: "#/definitions/UnauthorizedException"
+        "482":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
+            $ref: "#/definitions/InternalFailureException"
       parameters:
         - name: nextToken
           in: query
           required: false
-          description: 'An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list. '
+          description: "An identifier that was returned from the previous call to this
+            operation, which can be used to return the next set of items in the
+            list. "
           type: string
-          pattern: '[\\S]+'
+          pattern: "[\\\\S]+"
         - name: maxResults
           in: query
           required: false
@@ -625,31 +684,33 @@ paths:
           type: integer
           minimum: 0
           maximum: 25
-  '/v1/apis/{apiId}/types/{typeName}/resolvers':
+  "/v1/apis/{apiId}/types/{typeName}/resolvers":
     post:
       operationId: CreateResolver
-      description: <p>Creates a <code>Resolver</code> object.</p> <p>A resolver converts incoming requests into a format that a data source can understand and converts the data source's responses into GraphQL.</p>
+      description: <p>Creates a <code>Resolver</code> object.</p> <p>A resolver converts
+        incoming requests into a format that a data source can understand and
+        converts the data source's responses into GraphQL.</p>
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/CreateResolverResponse'
-        '480':
+            $ref: "#/definitions/CreateResolverResponse"
+        "480":
           description: ConcurrentModificationException
           schema:
-            $ref: '#/definitions/ConcurrentModificationException'
-        '481':
+            $ref: "#/definitions/ConcurrentModificationException"
+        "481":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
+            $ref: "#/definitions/NotFoundException"
+        "482":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '483':
+            $ref: "#/definitions/UnauthorizedException"
+        "483":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
+            $ref: "#/definitions/InternalFailureException"
       parameters:
         - name: apiId
           in: path
@@ -661,7 +722,7 @@ paths:
           required: true
           description: The name of the <code>Type</code>.
           type: string
-          pattern: '[_A-Za-z][_0-9A-Za-z]*'
+          pattern: "[_A-Za-z][_0-9A-Za-z]*"
         - name: body
           in: body
           required: true
@@ -674,66 +735,80 @@ paths:
               fieldName:
                 description: The name of the field to attach the resolver to.
                 type: string
-                pattern: '[_A-Za-z][_0-9A-Za-z]*'
+                pattern: "[_A-Za-z][_0-9A-Za-z]*"
               dataSourceName:
-                description: The name of the data source for which the resolver is being created.
+                description: The name of the data source for which the resolver is being
+                  created.
                 type: string
-                pattern: '[_A-Za-z][_0-9A-Za-z]*'
+                pattern: "[_A-Za-z][_0-9A-Za-z]*"
               requestMappingTemplate:
-                description: <p>The mapping template to be used for requests.</p> <p>A resolver uses a request mapping template to convert a GraphQL expression into a format that a data source can understand. Mapping templates are written in Apache Velocity Template Language (VTL).</p>
+                description: <p>The mapping template to be used for requests.</p> <p>A
+                  resolver uses a request mapping template to convert a GraphQL
+                  expression into a format that a data source can understand.
+                  Mapping templates are written in Apache Velocity Template
+                  Language (VTL).</p>
                 type: string
                 minLength: 1
                 maxLength: 65536
               responseMappingTemplate:
-                description: The mapping template to be used for responses from the data source.
+                description: The mapping template to be used for responses from the data
+                  source.
                 type: string
                 minLength: 1
                 maxLength: 65536
               kind:
-                description: '<p>The resolver type.</p> <ul> <li> <p> <b>UNIT</b>: A UNIT resolver type. A UNIT resolver is the default resolver type. A UNIT resolver enables you to execute a GraphQL query against a single data source.</p> </li> <li> <p> <b>PIPELINE</b>: A PIPELINE resolver type. A PIPELINE resolver enables you to execute a series of <code>Function</code> in a serial manner. You can use a pipeline resolver to execute a GraphQL query against multiple data sources.</p> </li> </ul>'
+                description: "<p>The resolver type.</p> <ul> <li> <p> <b>UNIT</b>: A UNIT
+                  resolver type. A UNIT resolver is the default resolver type. A
+                  UNIT resolver enables you to execute a GraphQL query against a
+                  single data source.</p> </li> <li> <p> <b>PIPELINE</b>: A
+                  PIPELINE resolver type. A PIPELINE resolver enables you to
+                  execute a series of <code>Function</code> in a serial manner.
+                  You can use a pipeline resolver to execute a GraphQL query
+                  against multiple data sources.</p> </li> </ul>"
                 type: string
                 enum:
                   - UNIT
                   - PIPELINE
               pipelineConfig:
-                description: The pipeline configuration for a resolver of kind <code>PIPELINE</code>.
+                description: The pipeline configuration for a resolver of kind
+                  <code>PIPELINE</code>.
                 type: object
                 properties:
                   functions:
-                    $ref: '#/definitions/FunctionsIds'
+                    $ref: "#/definitions/FunctionsIds"
                     description: A list of <code>Function</code> objects.
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
     get:
       operationId: ListResolvers
       description: Lists the resolvers for a given API and type.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/ListResolversResponse'
-        '480':
+            $ref: "#/definitions/ListResolversResponse"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
+            $ref: "#/definitions/NotFoundException"
+        "482":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '483':
+            $ref: "#/definitions/UnauthorizedException"
+        "483":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
+            $ref: "#/definitions/InternalFailureException"
       parameters:
         - name: apiId
           in: path
@@ -748,9 +823,11 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: 'An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list. '
+          description: "An identifier that was returned from the previous call to this
+            operation, which can be used to return the next set of items in the
+            list. "
           type: string
-          pattern: '[\\S]+'
+          pattern: "[\\\\S]+"
         - name: maxResults
           in: query
           required: false
@@ -758,35 +835,35 @@ paths:
           type: integer
           minimum: 0
           maximum: 25
-  '/v1/apis/{apiId}/types':
+  "/v1/apis/{apiId}/types":
     post:
       operationId: CreateType
       description: Creates a <code>Type</code> object.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/CreateTypeResponse'
-        '480':
+            $ref: "#/definitions/CreateTypeResponse"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: ConcurrentModificationException
           schema:
-            $ref: '#/definitions/ConcurrentModificationException'
-        '482':
+            $ref: "#/definitions/ConcurrentModificationException"
+        "482":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '483':
+            $ref: "#/definitions/NotFoundException"
+        "483":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '484':
+            $ref: "#/definitions/UnauthorizedException"
+        "484":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
+            $ref: "#/definitions/InternalFailureException"
       parameters:
         - name: apiId
           in: path
@@ -803,47 +880,50 @@ paths:
               - format
             properties:
               definition:
-                description: '<p>The type definition, in GraphQL Schema Definition Language (SDL) format.</p> <p>For more information, see the <a href="http://graphql.org/learn/schema/">GraphQL SDL documentation</a>.</p>'
+                description: <p>The type definition, in GraphQL Schema Definition Language
+                  (SDL) format.</p> <p>For more information, see the <a
+                  href="http://graphql.org/learn/schema/">GraphQL SDL
+                  documentation</a>.</p>
                 type: string
               format:
-                description: 'The type format: SDL or JSON.'
+                description: "The type format: SDL or JSON."
                 type: string
                 enum:
                   - SDL
                   - JSON
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/v1/apis/{apiId}/apikeys/{id}':
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
+  "/v1/apis/{apiId}/apikeys/{id}":
     delete:
       operationId: DeleteApiKey
       description: Deletes an API key.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/DeleteApiKeyResponse'
-        '480':
+            $ref: "#/definitions/DeleteApiKeyResponse"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
+            $ref: "#/definitions/NotFoundException"
+        "482":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '483':
+            $ref: "#/definitions/UnauthorizedException"
+        "483":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
+            $ref: "#/definitions/InternalFailureException"
       parameters:
         - name: apiId
           in: path
@@ -856,45 +936,45 @@ paths:
           description: The ID for the API key.
           type: string
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
     post:
       operationId: UpdateApiKey
       description: Updates an API key.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/UpdateApiKeyResponse'
-        '480':
+            $ref: "#/definitions/UpdateApiKeyResponse"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
+            $ref: "#/definitions/NotFoundException"
+        "482":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '483':
+            $ref: "#/definitions/UnauthorizedException"
+        "483":
           description: LimitExceededException
           schema:
-            $ref: '#/definitions/LimitExceededException'
-        '484':
+            $ref: "#/definitions/LimitExceededException"
+        "484":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '485':
+            $ref: "#/definitions/InternalFailureException"
+        "485":
           description: ApiKeyValidityOutOfBoundsException
           schema:
-            $ref: '#/definitions/ApiKeyValidityOutOfBoundsException'
+            $ref: "#/definitions/ApiKeyValidityOutOfBoundsException"
       parameters:
         - name: apiId
           in: path
@@ -916,37 +996,39 @@ paths:
                 description: A description of the purpose of the API key.
                 type: string
               expires:
-                description: 'The time from update time after which the API key expires. The date is represented as seconds since the epoch. For more information, see .'
+                description: The time from update time after which the API key expires. The
+                  date is represented as seconds since the epoch. For more
+                  information, see .
                 type: integer
-  '/v1/apis/{apiId}/datasources/{name}':
+  "/v1/apis/{apiId}/datasources/{name}":
     delete:
       operationId: DeleteDataSource
       description: Deletes a <code>DataSource</code> object.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/DeleteDataSourceResponse'
-        '480':
+            $ref: "#/definitions/DeleteDataSourceResponse"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: ConcurrentModificationException
           schema:
-            $ref: '#/definitions/ConcurrentModificationException'
-        '482':
+            $ref: "#/definitions/ConcurrentModificationException"
+        "482":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '483':
+            $ref: "#/definitions/NotFoundException"
+        "483":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '484':
+            $ref: "#/definitions/UnauthorizedException"
+        "484":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
+            $ref: "#/definitions/InternalFailureException"
       parameters:
         - name: apiId
           in: path
@@ -958,43 +1040,43 @@ paths:
           required: true
           description: The name of the data source.
           type: string
-          pattern: '[_A-Za-z][_0-9A-Za-z]*'
+          pattern: "[_A-Za-z][_0-9A-Za-z]*"
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
     get:
       operationId: GetDataSource
       description: Retrieves a <code>DataSource</code> object.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/GetDataSourceResponse'
-        '480':
+            $ref: "#/definitions/GetDataSourceResponse"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: ConcurrentModificationException
           schema:
-            $ref: '#/definitions/ConcurrentModificationException'
-        '482':
+            $ref: "#/definitions/ConcurrentModificationException"
+        "482":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '483':
+            $ref: "#/definitions/NotFoundException"
+        "483":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '484':
+            $ref: "#/definitions/UnauthorizedException"
+        "484":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
+            $ref: "#/definitions/InternalFailureException"
       parameters:
         - name: apiId
           in: path
@@ -1006,35 +1088,35 @@ paths:
           required: true
           description: The name of the data source.
           type: string
-          pattern: '[_A-Za-z][_0-9A-Za-z]*'
+          pattern: "[_A-Za-z][_0-9A-Za-z]*"
     post:
       operationId: UpdateDataSource
       description: Updates a <code>DataSource</code> object.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/UpdateDataSourceResponse'
-        '480':
+            $ref: "#/definitions/UpdateDataSourceResponse"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: ConcurrentModificationException
           schema:
-            $ref: '#/definitions/ConcurrentModificationException'
-        '482':
+            $ref: "#/definitions/ConcurrentModificationException"
+        "482":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '483':
+            $ref: "#/definitions/NotFoundException"
+        "483":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '484':
+            $ref: "#/definitions/UnauthorizedException"
+        "484":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
+            $ref: "#/definitions/InternalFailureException"
       parameters:
         - name: apiId
           in: path
@@ -1046,7 +1128,7 @@ paths:
           required: true
           description: The new name for the data source.
           type: string
-          pattern: '[_A-Za-z][_0-9A-Za-z]*'
+          pattern: "[_A-Za-z][_0-9A-Za-z]*"
         - name: body
           in: body
           required: true
@@ -1079,76 +1161,85 @@ paths:
                 type: object
                 properties:
                   tableName:
-                    $ref: '#/definitions/String'
+                    $ref: "#/definitions/String"
                     description: The table name.
                   awsRegion:
-                    $ref: '#/definitions/String'
+                    $ref: "#/definitions/String"
                     description: The AWS Region.
                   useCallerCredentials:
-                    $ref: '#/definitions/Boolean'
-                    description: Set to TRUE to use Amazon Cognito credentials with this data source.
+                    $ref: "#/definitions/Boolean"
+                    description: Set to TRUE to use Amazon Cognito credentials with this
+                      data source.
               lambdaConfig:
                 description: Describes an AWS Lambda data source configuration.
                 type: object
                 properties:
                   lambdaFunctionArn:
-                    $ref: '#/definitions/String'
+                    $ref: "#/definitions/String"
                     description: The ARN for the Lambda function.
               elasticsearchConfig:
                 description: Describes an Elasticsearch data source configuration.
                 type: object
                 properties:
                   endpoint:
-                    $ref: '#/definitions/String'
+                    $ref: "#/definitions/String"
                     description: The endpoint.
                   awsRegion:
-                    $ref: '#/definitions/String'
+                    $ref: "#/definitions/String"
                     description: The AWS Region.
               httpConfig:
                 description: Describes an HTTP data source configuration.
                 type: object
                 properties:
                   endpoint:
-                    $ref: '#/definitions/String'
-                    description: 'The HTTP URL endpoint. You can either specify the domain name or IP, and port combination, and the URL scheme must be HTTP or HTTPS. If the port is not specified, AWS AppSync uses the default port 80 for the HTTP endpoint and port 443 for HTTPS endpoints.'
+                    $ref: "#/definitions/String"
+                    description: The HTTP URL endpoint. You can either specify the domain
+                      name or IP, and port combination, and the URL scheme must
+                      be HTTP or HTTPS. If the port is not specified, AWS
+                      AppSync uses the default port 80 for the HTTP endpoint and
+                      port 443 for HTTPS endpoints.
                   authorizationConfig:
-                    $ref: '#/definitions/AuthorizationConfig'
-                    description: The authorization config in case the HTTP endpoint requires authorization.
+                    $ref: "#/definitions/AuthorizationConfig"
+                    description: The authorization config in case the HTTP endpoint
+                      requires authorization.
               relationalDatabaseConfig:
                 description: Describes a relational database data source configuration.
                 type: object
                 properties:
                   relationalDatabaseSourceType:
-                    $ref: '#/definitions/RelationalDatabaseSourceType'
-                    description: '<p>Source type for the relational database.</p> <ul> <li> <p> <b>RDS_HTTP_ENDPOINT</b>: The relational database source type is an Amazon RDS HTTP endpoint.</p> </li> </ul>'
+                    $ref: "#/definitions/RelationalDatabaseSourceType"
+                    description: "<p>Source type for the relational database.</p> <ul> <li>
+                      <p> <b>RDS_HTTP_ENDPOINT</b>: The relational database
+                      source type is an Amazon RDS HTTP endpoint.</p> </li>
+                      </ul>"
                   rdsHttpEndpointConfig:
-                    $ref: '#/definitions/RdsHttpEndpointConfig'
+                    $ref: "#/definitions/RdsHttpEndpointConfig"
                     description: Amazon RDS HTTP endpoint settings.
-  '/v1/apis/{apiId}/functions/{functionId}':
+  "/v1/apis/{apiId}/functions/{functionId}":
     delete:
       operationId: DeleteFunction
       description: Deletes a <code>Function</code>.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/DeleteFunctionResponse'
-        '480':
+            $ref: "#/definitions/DeleteFunctionResponse"
+        "480":
           description: ConcurrentModificationException
           schema:
-            $ref: '#/definitions/ConcurrentModificationException'
-        '481':
+            $ref: "#/definitions/ConcurrentModificationException"
+        "481":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
+            $ref: "#/definitions/NotFoundException"
+        "482":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '483':
+            $ref: "#/definitions/UnauthorizedException"
+        "483":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
+            $ref: "#/definitions/InternalFailureException"
       parameters:
         - name: apiId
           in: path
@@ -1160,35 +1251,35 @@ paths:
           required: true
           description: The <code>Function</code> ID.
           type: string
-          pattern: '[_A-Za-z][_0-9A-Za-z]*'
+          pattern: "[_A-Za-z][_0-9A-Za-z]*"
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
     get:
       operationId: GetFunction
       description: Get a <code>Function</code>.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/GetFunctionResponse'
-        '480':
+            $ref: "#/definitions/GetFunctionResponse"
+        "480":
           description: ConcurrentModificationException
           schema:
-            $ref: '#/definitions/ConcurrentModificationException'
-        '481':
+            $ref: "#/definitions/ConcurrentModificationException"
+        "481":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
+            $ref: "#/definitions/NotFoundException"
+        "482":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
+            $ref: "#/definitions/UnauthorizedException"
       parameters:
         - name: apiId
           in: path
@@ -1200,31 +1291,31 @@ paths:
           required: true
           description: The <code>Function</code> ID.
           type: string
-          pattern: '[_A-Za-z][_0-9A-Za-z]*'
+          pattern: "[_A-Za-z][_0-9A-Za-z]*"
     post:
       operationId: UpdateFunction
       description: Updates a <code>Function</code> object.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/UpdateFunctionResponse'
-        '480':
+            $ref: "#/definitions/UpdateFunctionResponse"
+        "480":
           description: ConcurrentModificationException
           schema:
-            $ref: '#/definitions/ConcurrentModificationException'
-        '481':
+            $ref: "#/definitions/ConcurrentModificationException"
+        "481":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
+            $ref: "#/definitions/NotFoundException"
+        "482":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '483':
+            $ref: "#/definitions/UnauthorizedException"
+        "483":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
+            $ref: "#/definitions/InternalFailureException"
       parameters:
         - name: apiId
           in: path
@@ -1236,7 +1327,7 @@ paths:
           required: true
           description: The function ID.
           type: string
-          pattern: '[_A-Za-z][_0-9A-Za-z]*'
+          pattern: "[_A-Za-z][_0-9A-Za-z]*"
         - name: body
           in: body
           required: true
@@ -1251,56 +1342,59 @@ paths:
               name:
                 description: The <code>Function</code> name.
                 type: string
-                pattern: '[_A-Za-z][_0-9A-Za-z]*'
+                pattern: "[_A-Za-z][_0-9A-Za-z]*"
               description:
                 description: The <code>Function</code> description.
                 type: string
               dataSourceName:
                 description: The <code>Function</code> <code>DataSource</code> name.
                 type: string
-                pattern: '[_A-Za-z][_0-9A-Za-z]*'
+                pattern: "[_A-Za-z][_0-9A-Za-z]*"
               requestMappingTemplate:
-                description: The <code>Function</code> request mapping template. Functions support only the 2018-05-29 version of the request mapping template.
+                description: The <code>Function</code> request mapping template. Functions
+                  support only the 2018-05-29 version of the request mapping
+                  template.
                 type: string
                 minLength: 1
                 maxLength: 65536
               responseMappingTemplate:
-                description: 'The <code>Function</code> request mapping template. '
+                description: "The <code>Function</code> request mapping template. "
                 type: string
                 minLength: 1
                 maxLength: 65536
               functionVersion:
-                description: 'The <code>version</code> of the request mapping template. Currently the supported value is 2018-05-29. '
+                description: "The <code>version</code> of the request mapping template.
+                  Currently the supported value is 2018-05-29. "
                 type: string
-  '/v1/apis/{apiId}':
+  "/v1/apis/{apiId}":
     delete:
       operationId: DeleteGraphqlApi
       description: Deletes a <code>GraphqlApi</code> object.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/DeleteGraphqlApiResponse'
-        '480':
+            $ref: "#/definitions/DeleteGraphqlApiResponse"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: ConcurrentModificationException
           schema:
-            $ref: '#/definitions/ConcurrentModificationException'
-        '482':
+            $ref: "#/definitions/ConcurrentModificationException"
+        "482":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '483':
+            $ref: "#/definitions/NotFoundException"
+        "483":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '484':
+            $ref: "#/definitions/UnauthorizedException"
+        "484":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
+            $ref: "#/definitions/InternalFailureException"
       parameters:
         - name: apiId
           in: path
@@ -1308,37 +1402,37 @@ paths:
           description: The API ID.
           type: string
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
     get:
       operationId: GetGraphqlApi
       description: Retrieves a <code>GraphqlApi</code> object.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/GetGraphqlApiResponse'
-        '480':
+            $ref: "#/definitions/GetGraphqlApiResponse"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
+            $ref: "#/definitions/NotFoundException"
+        "482":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '483':
+            $ref: "#/definitions/UnauthorizedException"
+        "483":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
+            $ref: "#/definitions/InternalFailureException"
       parameters:
         - name: apiId
           in: path
@@ -1349,30 +1443,30 @@ paths:
       operationId: UpdateGraphqlApi
       description: Updates a <code>GraphqlApi</code> object.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/UpdateGraphqlApiResponse'
-        '480':
+            $ref: "#/definitions/UpdateGraphqlApiResponse"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: ConcurrentModificationException
           schema:
-            $ref: '#/definitions/ConcurrentModificationException'
-        '482':
+            $ref: "#/definitions/ConcurrentModificationException"
+        "482":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '483':
+            $ref: "#/definitions/NotFoundException"
+        "483":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '484':
+            $ref: "#/definitions/UnauthorizedException"
+        "484":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
+            $ref: "#/definitions/InternalFailureException"
       parameters:
         - name: apiId
           in: path
@@ -1398,13 +1492,27 @@ paths:
                 type: object
                 properties:
                   fieldLogLevel:
-                    $ref: '#/definitions/FieldLogLevel'
-                    description: '<p>The field logging level. Values can be NONE, ERROR, or ALL. </p> <ul> <li> <p> <b>NONE</b>: No field-level logs are captured.</p> </li> <li> <p> <b>ERROR</b>: Logs the following information only for the fields that are in error:</p> <ul> <li> <p>The error section in the server response.</p> </li> <li> <p>Field-level errors.</p> </li> <li> <p>The generated request/response functions that got resolved for error fields.</p> </li> </ul> </li> <li> <p> <b>ALL</b>: The following information is logged for all fields in the query:</p> <ul> <li> <p>Field-level tracing information.</p> </li> <li> <p>The generated request/response functions that got resolved for each field.</p> </li> </ul> </li> </ul>'
+                    $ref: "#/definitions/FieldLogLevel"
+                    description: "<p>The field logging level. Values can be NONE, ERROR, or
+                      ALL. </p> <ul> <li> <p> <b>NONE</b>: No field-level logs
+                      are captured.</p> </li> <li> <p> <b>ERROR</b>: Logs the
+                      following information only for the fields that are in
+                      error:</p> <ul> <li> <p>The error section in the server
+                      response.</p> </li> <li> <p>Field-level errors.</p> </li>
+                      <li> <p>The generated request/response functions that got
+                      resolved for error fields.</p> </li> </ul> </li> <li> <p>
+                      <b>ALL</b>: The following information is logged for all
+                      fields in the query:</p> <ul> <li> <p>Field-level tracing
+                      information.</p> </li> <li> <p>The generated
+                      request/response functions that got resolved for each
+                      field.</p> </li> </ul> </li> </ul>"
                   cloudWatchLogsRoleArn:
-                    $ref: '#/definitions/String'
-                    description: 'The service role that AWS AppSync will assume to publish to Amazon CloudWatch logs in your account. '
+                    $ref: "#/definitions/String"
+                    description: "The service role that AWS AppSync will assume to publish
+                      to Amazon CloudWatch logs in your account. "
               authenticationType:
-                description: The new authentication type for the <code>GraphqlApi</code> object.
+                description: The new authentication type for the <code>GraphqlApi</code>
+                  object.
                 type: string
                 enum:
                   - API_KEY
@@ -1416,58 +1524,70 @@ paths:
                 type: object
                 properties:
                   userPoolId:
-                    $ref: '#/definitions/String'
+                    $ref: "#/definitions/String"
                     description: The user pool ID.
                   awsRegion:
-                    $ref: '#/definitions/String'
+                    $ref: "#/definitions/String"
                     description: The AWS Region in which the user pool was created.
                   defaultAction:
-                    $ref: '#/definitions/DefaultAction'
-                    description: The action that you want your GraphQL API to take when a request that uses Amazon Cognito user pool authentication doesn't match the Amazon Cognito user pool configuration.
+                    $ref: "#/definitions/DefaultAction"
+                    description: The action that you want your GraphQL API to take when a
+                      request that uses Amazon Cognito user pool authentication
+                      doesn't match the Amazon Cognito user pool configuration.
                   appIdClientRegex:
-                    $ref: '#/definitions/String'
-                    description: A regular expression for validating the incoming Amazon Cognito user pool app client ID.
+                    $ref: "#/definitions/String"
+                    description: A regular expression for validating the incoming Amazon
+                      Cognito user pool app client ID.
               openIDConnectConfig:
                 description: Describes an OpenID Connect configuration.
                 type: object
                 properties:
                   issuer:
-                    $ref: '#/definitions/String'
-                    description: The issuer for the OpenID Connect configuration. The issuer returned by discovery must exactly match the value of <code>iss</code> in the ID token.
+                    $ref: "#/definitions/String"
+                    description: The issuer for the OpenID Connect configuration. The
+                      issuer returned by discovery must exactly match the value
+                      of <code>iss</code> in the ID token.
                   clientId:
-                    $ref: '#/definitions/String'
-                    description: The client identifier of the Relying party at the OpenID identity provider. This identifier is typically obtained when the Relying party is registered with the OpenID identity provider. You can specify a regular expression so the AWS AppSync can validate against multiple client identifiers at a time.
+                    $ref: "#/definitions/String"
+                    description: The client identifier of the Relying party at the OpenID
+                      identity provider. This identifier is typically obtained
+                      when the Relying party is registered with the OpenID
+                      identity provider. You can specify a regular expression so
+                      the AWS AppSync can validate against multiple client
+                      identifiers at a time.
                   iatTTL:
-                    $ref: '#/definitions/Long'
-                    description: The number of milliseconds a token is valid after being issued to a user.
+                    $ref: "#/definitions/Long"
+                    description: The number of milliseconds a token is valid after being
+                      issued to a user.
                   authTTL:
-                    $ref: '#/definitions/Long'
-                    description: The number of milliseconds a token is valid after being authenticated.
-  '/v1/apis/{apiId}/types/{typeName}/resolvers/{fieldName}':
+                    $ref: "#/definitions/Long"
+                    description: The number of milliseconds a token is valid after being
+                      authenticated.
+  "/v1/apis/{apiId}/types/{typeName}/resolvers/{fieldName}":
     delete:
       operationId: DeleteResolver
       description: Deletes a <code>Resolver</code> object.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/DeleteResolverResponse'
-        '480':
+            $ref: "#/definitions/DeleteResolverResponse"
+        "480":
           description: ConcurrentModificationException
           schema:
-            $ref: '#/definitions/ConcurrentModificationException'
-        '481':
+            $ref: "#/definitions/ConcurrentModificationException"
+        "481":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
+            $ref: "#/definitions/NotFoundException"
+        "482":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '483':
+            $ref: "#/definitions/UnauthorizedException"
+        "483":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
+            $ref: "#/definitions/InternalFailureException"
       parameters:
         - name: apiId
           in: path
@@ -1479,41 +1599,41 @@ paths:
           required: true
           description: The name of the resolver type.
           type: string
-          pattern: '[_A-Za-z][_0-9A-Za-z]*'
+          pattern: "[_A-Za-z][_0-9A-Za-z]*"
         - name: fieldName
           in: path
           required: true
           description: The resolver field name.
           type: string
-          pattern: '[_A-Za-z][_0-9A-Za-z]*'
+          pattern: "[_A-Za-z][_0-9A-Za-z]*"
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
     get:
       operationId: GetResolver
       description: Retrieves a <code>Resolver</code> object.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/GetResolverResponse'
-        '480':
+            $ref: "#/definitions/GetResolverResponse"
+        "480":
           description: ConcurrentModificationException
           schema:
-            $ref: '#/definitions/ConcurrentModificationException'
-        '481':
+            $ref: "#/definitions/ConcurrentModificationException"
+        "481":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
+            $ref: "#/definitions/NotFoundException"
+        "482":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
+            $ref: "#/definitions/UnauthorizedException"
       parameters:
         - name: apiId
           in: path
@@ -1525,37 +1645,37 @@ paths:
           required: true
           description: The resolver type name.
           type: string
-          pattern: '[_A-Za-z][_0-9A-Za-z]*'
+          pattern: "[_A-Za-z][_0-9A-Za-z]*"
         - name: fieldName
           in: path
           required: true
           description: The resolver field name.
           type: string
-          pattern: '[_A-Za-z][_0-9A-Za-z]*'
+          pattern: "[_A-Za-z][_0-9A-Za-z]*"
     post:
       operationId: UpdateResolver
       description: Updates a <code>Resolver</code> object.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/UpdateResolverResponse'
-        '480':
+            $ref: "#/definitions/UpdateResolverResponse"
+        "480":
           description: ConcurrentModificationException
           schema:
-            $ref: '#/definitions/ConcurrentModificationException'
-        '481':
+            $ref: "#/definitions/ConcurrentModificationException"
+        "481":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
+            $ref: "#/definitions/NotFoundException"
+        "482":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '483':
+            $ref: "#/definitions/UnauthorizedException"
+        "483":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
+            $ref: "#/definitions/InternalFailureException"
       parameters:
         - name: apiId
           in: path
@@ -1567,13 +1687,13 @@ paths:
           required: true
           description: The new type name.
           type: string
-          pattern: '[_A-Za-z][_0-9A-Za-z]*'
+          pattern: "[_A-Za-z][_0-9A-Za-z]*"
         - name: fieldName
           in: path
           required: true
           description: The new field name.
           type: string
-          pattern: '[_A-Za-z][_0-9A-Za-z]*'
+          pattern: "[_A-Za-z][_0-9A-Za-z]*"
         - name: body
           in: body
           required: true
@@ -1585,7 +1705,7 @@ paths:
               dataSourceName:
                 description: The new data source name.
                 type: string
-                pattern: '[_A-Za-z][_0-9A-Za-z]*'
+                pattern: "[_A-Za-z][_0-9A-Za-z]*"
               requestMappingTemplate:
                 description: The new request mapping template.
                 type: string
@@ -1597,47 +1717,55 @@ paths:
                 minLength: 1
                 maxLength: 65536
               kind:
-                description: '<p>The resolver type.</p> <ul> <li> <p> <b>UNIT</b>: A UNIT resolver type. A UNIT resolver is the default resolver type. A UNIT resolver enables you to execute a GraphQL query against a single data source.</p> </li> <li> <p> <b>PIPELINE</b>: A PIPELINE resolver type. A PIPELINE resolver enables you to execute a series of <code>Function</code> in a serial manner. You can use a pipeline resolver to execute a GraphQL query against multiple data sources.</p> </li> </ul>'
+                description: "<p>The resolver type.</p> <ul> <li> <p> <b>UNIT</b>: A UNIT
+                  resolver type. A UNIT resolver is the default resolver type. A
+                  UNIT resolver enables you to execute a GraphQL query against a
+                  single data source.</p> </li> <li> <p> <b>PIPELINE</b>: A
+                  PIPELINE resolver type. A PIPELINE resolver enables you to
+                  execute a series of <code>Function</code> in a serial manner.
+                  You can use a pipeline resolver to execute a GraphQL query
+                  against multiple data sources.</p> </li> </ul>"
                 type: string
                 enum:
                   - UNIT
                   - PIPELINE
               pipelineConfig:
-                description: The pipeline configuration for a resolver of kind <code>PIPELINE</code>.
+                description: The pipeline configuration for a resolver of kind
+                  <code>PIPELINE</code>.
                 type: object
                 properties:
                   functions:
-                    $ref: '#/definitions/FunctionsIds'
+                    $ref: "#/definitions/FunctionsIds"
                     description: A list of <code>Function</code> objects.
-  '/v1/apis/{apiId}/types/{typeName}':
+  "/v1/apis/{apiId}/types/{typeName}":
     delete:
       operationId: DeleteType
       description: Deletes a <code>Type</code> object.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/DeleteTypeResponse'
-        '480':
+            $ref: "#/definitions/DeleteTypeResponse"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: ConcurrentModificationException
           schema:
-            $ref: '#/definitions/ConcurrentModificationException'
-        '482':
+            $ref: "#/definitions/ConcurrentModificationException"
+        "482":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '483':
+            $ref: "#/definitions/NotFoundException"
+        "483":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '484':
+            $ref: "#/definitions/UnauthorizedException"
+        "484":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
+            $ref: "#/definitions/InternalFailureException"
       parameters:
         - name: apiId
           in: path
@@ -1649,43 +1777,43 @@ paths:
           required: true
           description: The type name.
           type: string
-          pattern: '[_A-Za-z][_0-9A-Za-z]*'
+          pattern: "[_A-Za-z][_0-9A-Za-z]*"
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
     post:
       operationId: UpdateType
       description: Updates a <code>Type</code> object.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/UpdateTypeResponse'
-        '480':
+            $ref: "#/definitions/UpdateTypeResponse"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: ConcurrentModificationException
           schema:
-            $ref: '#/definitions/ConcurrentModificationException'
-        '482':
+            $ref: "#/definitions/ConcurrentModificationException"
+        "482":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '483':
+            $ref: "#/definitions/NotFoundException"
+        "483":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '484':
+            $ref: "#/definitions/UnauthorizedException"
+        "484":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
+            $ref: "#/definitions/InternalFailureException"
       parameters:
         - name: apiId
           in: path
@@ -1697,7 +1825,7 @@ paths:
           required: true
           description: The new type name.
           type: string
-          pattern: '[_A-Za-z][_0-9A-Za-z]*'
+          pattern: "[_A-Za-z][_0-9A-Za-z]*"
         - name: body
           in: body
           required: true
@@ -1710,36 +1838,36 @@ paths:
                 description: The new definition.
                 type: string
               format:
-                description: 'The new type format: SDL or JSON.'
+                description: "The new type format: SDL or JSON."
                 type: string
                 enum:
                   - SDL
                   - JSON
-  '/v1/apis/{apiId}/schema#format':
+  "/v1/apis/{apiId}/schema#format":
     get:
       operationId: GetIntrospectionSchema
       description: Retrieves the introspection schema for a GraphQL API.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/GetIntrospectionSchemaResponse'
-        '480':
+            $ref: "#/definitions/GetIntrospectionSchemaResponse"
+        "480":
           description: GraphQLSchemaException
           schema:
-            $ref: '#/definitions/GraphQLSchemaException'
-        '481':
+            $ref: "#/definitions/GraphQLSchemaException"
+        "481":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
+            $ref: "#/definitions/NotFoundException"
+        "482":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '483':
+            $ref: "#/definitions/UnauthorizedException"
+        "483":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
+            $ref: "#/definitions/InternalFailureException"
       parameters:
         - name: apiId
           in: path
@@ -1749,44 +1877,44 @@ paths:
         - name: format
           in: query
           required: true
-          description: 'The schema format: SDL or JSON.'
+          description: "The schema format: SDL or JSON."
           type: string
           enum:
             - SDL
             - JSON
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/v1/apis/{apiId}/schemacreation':
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
+  "/v1/apis/{apiId}/schemacreation":
     get:
       operationId: GetSchemaCreationStatus
       description: Retrieves the current status of a schema creation operation.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/GetSchemaCreationStatusResponse'
-        '480':
+            $ref: "#/definitions/GetSchemaCreationStatusResponse"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
+            $ref: "#/definitions/NotFoundException"
+        "482":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '483':
+            $ref: "#/definitions/UnauthorizedException"
+        "483":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
+            $ref: "#/definitions/InternalFailureException"
       parameters:
         - name: apiId
           in: path
@@ -1794,41 +1922,42 @@ paths:
           description: The API ID.
           type: string
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
     post:
       operationId: StartSchemaCreation
-      description: <p>Adds a new schema to your GraphQL API.</p> <p>This operation is asynchronous. Use to determine when it has completed.</p>
+      description: <p>Adds a new schema to your GraphQL API.</p> <p>This operation is
+        asynchronous. Use to determine when it has completed.</p>
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/StartSchemaCreationResponse'
-        '480':
+            $ref: "#/definitions/StartSchemaCreationResponse"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: ConcurrentModificationException
           schema:
-            $ref: '#/definitions/ConcurrentModificationException'
-        '482':
+            $ref: "#/definitions/ConcurrentModificationException"
+        "482":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '483':
+            $ref: "#/definitions/NotFoundException"
+        "483":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '484':
+            $ref: "#/definitions/UnauthorizedException"
+        "484":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
+            $ref: "#/definitions/InternalFailureException"
       parameters:
         - name: apiId
           in: path
@@ -1844,37 +1973,37 @@ paths:
               - definition
             properties:
               definition:
-                description: 'The schema definition, in GraphQL schema language format.'
+                description: The schema definition, in GraphQL schema language format.
                 type: string
-  '/v1/apis/{apiId}/types/{typeName}#format':
+  "/v1/apis/{apiId}/types/{typeName}#format":
     get:
       operationId: GetType
       description: Retrieves a <code>Type</code> object.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/GetTypeResponse'
-        '480':
+            $ref: "#/definitions/GetTypeResponse"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: ConcurrentModificationException
           schema:
-            $ref: '#/definitions/ConcurrentModificationException'
-        '482':
+            $ref: "#/definitions/ConcurrentModificationException"
+        "482":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '483':
+            $ref: "#/definitions/NotFoundException"
+        "483":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '484':
+            $ref: "#/definitions/UnauthorizedException"
+        "484":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
+            $ref: "#/definitions/InternalFailureException"
       parameters:
         - name: apiId
           in: path
@@ -1886,48 +2015,48 @@ paths:
           required: true
           description: The type name.
           type: string
-          pattern: '[_A-Za-z][_0-9A-Za-z]*'
+          pattern: "[_A-Za-z][_0-9A-Za-z]*"
         - name: format
           in: query
           required: true
-          description: 'The type format: SDL or JSON.'
+          description: "The type format: SDL or JSON."
           type: string
           enum:
             - SDL
             - JSON
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/v1/apis/{apiId}/functions/{functionId}/resolvers':
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
+  "/v1/apis/{apiId}/functions/{functionId}/resolvers":
     get:
       operationId: ListResolversByFunction
       description: List the resolvers that are associated with a specific function.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/ListResolversByFunctionResponse'
-        '480':
+            $ref: "#/definitions/ListResolversByFunctionResponse"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
+            $ref: "#/definitions/NotFoundException"
+        "482":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '483':
+            $ref: "#/definitions/UnauthorizedException"
+        "483":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
+            $ref: "#/definitions/InternalFailureException"
       parameters:
         - name: apiId
           in: path
@@ -1942,9 +2071,11 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: 'An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.'
+          description: An identifier that was returned from the previous call to this
+            operation, which you can use to return the next set of items in the
+            list.
           type: string
-          pattern: '[\\S]+'
+          pattern: "[\\\\S]+"
         - name: maxResults
           in: query
           required: false
@@ -1953,42 +2084,42 @@ paths:
           minimum: 0
           maximum: 25
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/v1/apis/{apiId}/types#format':
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
+  "/v1/apis/{apiId}/types#format":
     get:
       operationId: ListTypes
       description: Lists the types for a given API.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/ListTypesResponse'
-        '480':
+            $ref: "#/definitions/ListTypesResponse"
+        "480":
           description: BadRequestException
           schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
+            $ref: "#/definitions/BadRequestException"
+        "481":
           description: ConcurrentModificationException
           schema:
-            $ref: '#/definitions/ConcurrentModificationException'
-        '482':
+            $ref: "#/definitions/ConcurrentModificationException"
+        "482":
           description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
-        '483':
+            $ref: "#/definitions/NotFoundException"
+        "483":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '484':
+            $ref: "#/definitions/UnauthorizedException"
+        "484":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
+            $ref: "#/definitions/InternalFailureException"
       parameters:
         - name: apiId
           in: path
@@ -1998,7 +2129,7 @@ paths:
         - name: format
           in: query
           required: true
-          description: 'The type format: SDL or JSON.'
+          description: "The type format: SDL or JSON."
           type: string
           enum:
             - SDL
@@ -2006,9 +2137,11 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: 'An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list. '
+          description: "An identifier that was returned from the previous call to this
+            operation, which can be used to return the next set of items in the
+            list. "
           type: string
-          pattern: '[\\S]+'
+          pattern: "[\\\\S]+"
         - name: maxResults
           in: query
           required: false
@@ -2017,19 +2150,19 @@ paths:
           minimum: 0
           maximum: 25
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
 definitions:
   CreateApiKeyResponse:
     type: object
     properties:
       apiKey:
-        $ref: '#/definitions/ApiKey'
+        $ref: "#/definitions/ApiKey"
         description: The API key.
   BadRequestException: {}
   NotFoundException: {}
@@ -2042,7 +2175,7 @@ definitions:
     type: object
     properties:
       dataSource:
-        $ref: '#/definitions/DataSource'
+        $ref: "#/definitions/DataSource"
         description: The <code>DataSource</code> object.
   String:
     type: string
@@ -2054,10 +2187,12 @@ definitions:
       - authorizationType
     properties:
       authorizationType:
-        $ref: '#/definitions/AuthorizationType'
-        description: '<p>The authorization type required by the HTTP endpoint.</p> <ul> <li> <p> <b>AWS_IAM</b>: The authorization type is Sigv4.</p> </li> </ul>'
+        $ref: "#/definitions/AuthorizationType"
+        description: "<p>The authorization type required by the HTTP endpoint.</p> <ul>
+          <li> <p> <b>AWS_IAM</b>: The authorization type is Sigv4.</p> </li>
+          </ul>"
       awsIamConfig:
-        $ref: '#/definitions/AwsIamConfig'
+        $ref: "#/definitions/AwsIamConfig"
         description: The AWS IAM settings.
     description: The authorization config in case the HTTP endpoint requires authorization.
   RelationalDatabaseSourceType:
@@ -2068,19 +2203,19 @@ definitions:
     type: object
     properties:
       awsRegion:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: AWS Region for RDS HTTP endpoint.
       dbClusterIdentifier:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: Amazon RDS cluster identifier.
       databaseName:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: Logical database name.
       schema:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: Logical schema name.
       awsSecretStoreArn:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: AWS secret store ARN for database credentials.
     description: The Amazon RDS HTTP endpoint configuration.
   ConcurrentModificationException: {}
@@ -2088,13 +2223,13 @@ definitions:
     type: object
     properties:
       functionConfiguration:
-        $ref: '#/definitions/FunctionConfiguration'
+        $ref: "#/definitions/FunctionConfiguration"
         description: The <code>Function</code> object.
   CreateGraphqlApiResponse:
     type: object
     properties:
       graphqlApi:
-        $ref: '#/definitions/GraphqlApi'
+        $ref: "#/definitions/GraphqlApi"
         description: The <code>GraphqlApi</code>.
   FieldLogLevel:
     type: string
@@ -2114,17 +2249,17 @@ definitions:
     type: object
     properties:
       resolver:
-        $ref: '#/definitions/Resolver'
+        $ref: "#/definitions/Resolver"
         description: The <code>Resolver</code> object.
   FunctionsIds:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: "#/definitions/String"
   CreateTypeResponse:
     type: object
     properties:
       type:
-        $ref: '#/definitions/Type'
+        $ref: "#/definitions/Type"
         description: The <code>Type</code> object.
   DeleteApiKeyResponse:
     type: object
@@ -2148,170 +2283,208 @@ definitions:
     type: object
     properties:
       dataSource:
-        $ref: '#/definitions/DataSource'
+        $ref: "#/definitions/DataSource"
         description: The <code>DataSource</code> object.
   GetFunctionResponse:
     type: object
     properties:
       functionConfiguration:
-        $ref: '#/definitions/FunctionConfiguration'
+        $ref: "#/definitions/FunctionConfiguration"
         description: The <code>Function</code> object.
   GetGraphqlApiResponse:
     type: object
     properties:
       graphqlApi:
-        $ref: '#/definitions/GraphqlApi'
+        $ref: "#/definitions/GraphqlApi"
         description: The <code>GraphqlApi</code> object.
   GetIntrospectionSchemaResponse:
     type: object
     properties:
       schema:
-        $ref: '#/definitions/Blob'
-        description: '<p>The schema, in GraphQL Schema Definition Language (SDL) format.</p> <p>For more information, see the <a href="http://graphql.org/learn/schema/">GraphQL SDL documentation</a>.</p>'
+        $ref: "#/definitions/Blob"
+        description: <p>The schema, in GraphQL Schema Definition Language (SDL) format.</p>
+          <p>For more information, see the <a
+          href="http://graphql.org/learn/schema/">GraphQL SDL
+          documentation</a>.</p>
   GraphQLSchemaException: {}
   GetResolverResponse:
     type: object
     properties:
       resolver:
-        $ref: '#/definitions/Resolver'
+        $ref: "#/definitions/Resolver"
         description: The <code>Resolver</code> object.
   GetSchemaCreationStatusResponse:
     type: object
     properties:
       status:
-        $ref: '#/definitions/SchemaStatus'
-        description: 'The current state of the schema (PROCESSING, ACTIVE, or DELETING). Once the schema is in the ACTIVE state, you can add data.'
+        $ref: "#/definitions/SchemaStatus"
+        description: The current state of the schema (PROCESSING, ACTIVE, or DELETING).
+          Once the schema is in the ACTIVE state, you can add data.
       details:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: Detailed information about the status of the schema creation operation.
   GetTypeResponse:
     type: object
     properties:
       type:
-        $ref: '#/definitions/Type'
+        $ref: "#/definitions/Type"
         description: The <code>Type</code> object.
   ListApiKeysResponse:
     type: object
     properties:
       apiKeys:
-        $ref: '#/definitions/ApiKeys'
+        $ref: "#/definitions/ApiKeys"
         description: The <code>ApiKey</code> objects.
       nextToken:
-        $ref: '#/definitions/PaginationToken'
-        description: An identifier to be passed in the next request to this operation to return the next set of items in the list.
+        $ref: "#/definitions/PaginationToken"
+        description: An identifier to be passed in the next request to this operation to
+          return the next set of items in the list.
   ListDataSourcesResponse:
     type: object
     properties:
       dataSources:
-        $ref: '#/definitions/DataSources'
+        $ref: "#/definitions/DataSources"
         description: The <code>DataSource</code> objects.
       nextToken:
-        $ref: '#/definitions/PaginationToken'
-        description: An identifier to be passed in the next request to this operation to return the next set of items in the list.
+        $ref: "#/definitions/PaginationToken"
+        description: An identifier to be passed in the next request to this operation to
+          return the next set of items in the list.
   ListFunctionsResponse:
     type: object
     properties:
       functions:
-        $ref: '#/definitions/Functions'
+        $ref: "#/definitions/Functions"
         description: A list of <code>Function</code> objects.
       nextToken:
-        $ref: '#/definitions/PaginationToken'
-        description: 'An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.'
+        $ref: "#/definitions/PaginationToken"
+        description: An identifier that was returned from the previous call to this
+          operation, which can be used to return the next set of items in the
+          list.
   ListGraphqlApisResponse:
     type: object
     properties:
       graphqlApis:
-        $ref: '#/definitions/GraphqlApis'
+        $ref: "#/definitions/GraphqlApis"
         description: The <code>GraphqlApi</code> objects.
       nextToken:
-        $ref: '#/definitions/PaginationToken'
-        description: An identifier to be passed in the next request to this operation to return the next set of items in the list.
+        $ref: "#/definitions/PaginationToken"
+        description: An identifier to be passed in the next request to this operation to
+          return the next set of items in the list.
   ListResolversResponse:
     type: object
     properties:
       resolvers:
-        $ref: '#/definitions/Resolvers'
+        $ref: "#/definitions/Resolvers"
         description: The <code>Resolver</code> objects.
       nextToken:
-        $ref: '#/definitions/PaginationToken'
-        description: An identifier to be passed in the next request to this operation to return the next set of items in the list.
+        $ref: "#/definitions/PaginationToken"
+        description: An identifier to be passed in the next request to this operation to
+          return the next set of items in the list.
   ListResolversByFunctionResponse:
     type: object
     properties:
       resolvers:
-        $ref: '#/definitions/Resolvers'
+        $ref: "#/definitions/Resolvers"
         description: The list of resolvers.
       nextToken:
-        $ref: '#/definitions/PaginationToken'
-        description: An identifier that can be used to return the next set of items in the list.
+        $ref: "#/definitions/PaginationToken"
+        description: An identifier that can be used to return the next set of items in the
+          list.
   ListTypesResponse:
     type: object
     properties:
       types:
-        $ref: '#/definitions/TypeList'
+        $ref: "#/definitions/TypeList"
         description: The <code>Type</code> objects.
       nextToken:
-        $ref: '#/definitions/PaginationToken'
-        description: An identifier to be passed in the next request to this operation to return the next set of items in the list.
+        $ref: "#/definitions/PaginationToken"
+        description: An identifier to be passed in the next request to this operation to
+          return the next set of items in the list.
   StartSchemaCreationResponse:
     type: object
     properties:
       status:
-        $ref: '#/definitions/SchemaStatus'
-        description: 'The current state of the schema (PROCESSING, ACTIVE, or DELETING). When the schema is in the ACTIVE state, you can add data.'
+        $ref: "#/definitions/SchemaStatus"
+        description: The current state of the schema (PROCESSING, ACTIVE, or DELETING).
+          When the schema is in the ACTIVE state, you can add data.
   UpdateApiKeyResponse:
     type: object
     properties:
       apiKey:
-        $ref: '#/definitions/ApiKey'
+        $ref: "#/definitions/ApiKey"
         description: The API key.
   UpdateDataSourceResponse:
     type: object
     properties:
       dataSource:
-        $ref: '#/definitions/DataSource'
+        $ref: "#/definitions/DataSource"
         description: The updated <code>DataSource</code> object.
   UpdateFunctionResponse:
     type: object
     properties:
       functionConfiguration:
-        $ref: '#/definitions/FunctionConfiguration'
+        $ref: "#/definitions/FunctionConfiguration"
         description: The <code>Function</code> object.
   UpdateGraphqlApiResponse:
     type: object
     properties:
       graphqlApi:
-        $ref: '#/definitions/GraphqlApi'
+        $ref: "#/definitions/GraphqlApi"
         description: The updated <code>GraphqlApi</code> object.
   UpdateResolverResponse:
     type: object
     properties:
       resolver:
-        $ref: '#/definitions/Resolver'
+        $ref: "#/definitions/Resolver"
         description: The updated <code>Resolver</code> object.
   UpdateTypeResponse:
     type: object
     properties:
       type:
-        $ref: '#/definitions/Type'
+        $ref: "#/definitions/Type"
         description: The updated <code>Type</code> object.
   ApiKey:
     type: object
     properties:
       id:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: The API key ID.
       description:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: A description of the purpose of the API key.
       expires:
-        $ref: '#/definitions/Long'
-        description: 'The time after which the API key expires. The date is represented as seconds since the epoch, rounded down to the nearest hour.'
-    description: '<p>Describes an API key.</p> <p>Customers invoke AWS AppSync GraphQL API operations with API keys as an identity mechanism. There are two key versions:</p> <p> <b>da1</b>: This version was introduced at launch in November 2017. These keys always expire after 7 days. Key expiration is managed by Amazon DynamoDB TTL. The keys ceased to be valid after February 21, 2018 and should not be used after that date.</p> <ul> <li> <p> <code>ListApiKeys</code> returns the expiration time in milliseconds.</p> </li> <li> <p> <code>CreateApiKey</code> returns the expiration time in milliseconds.</p> </li> <li> <p> <code>UpdateApiKey</code> is not available for this key version.</p> </li> <li> <p> <code>DeleteApiKey</code> deletes the item from the table.</p> </li> <li> <p>Expiration is stored in Amazon DynamoDB as milliseconds. This results in a bug where keys are not automatically deleted because DynamoDB expects the TTL to be stored in seconds. As a one-time action, we will delete these keys from the table after February 21, 2018.</p> </li> </ul> <p> <b>da2</b>: This version was introduced in February 2018 when AppSync added support to extend key expiration.</p> <ul> <li> <p> <code>ListApiKeys</code> returns the expiration time in seconds.</p> </li> <li> <p> <code>CreateApiKey</code> returns the expiration time in seconds and accepts a user-provided expiration time in seconds.</p> </li> <li> <p> <code>UpdateApiKey</code> returns the expiration time in seconds and accepts a user-provided expiration time in seconds. Key expiration can only be updated while the key has not expired.</p> </li> <li> <p> <code>DeleteApiKey</code> deletes the item from the table.</p> </li> <li> <p>Expiration is stored in Amazon DynamoDB as seconds.</p> </li> </ul>'
+        $ref: "#/definitions/Long"
+        description: The time after which the API key expires. The date is represented as
+          seconds since the epoch, rounded down to the nearest hour.
+    description: "<p>Describes an API key.</p> <p>Customers invoke AWS AppSync GraphQL API
+      operations with API keys as an identity mechanism. There are two key
+      versions:</p> <p> <b>da1</b>: This version was introduced at launch in
+      November 2017. These keys always expire after 7 days. Key expiration is
+      managed by Amazon DynamoDB TTL. The keys ceased to be valid after February
+      21, 2018 and should not be used after that date.</p> <ul> <li> <p>
+      <code>ListApiKeys</code> returns the expiration time in milliseconds.</p>
+      </li> <li> <p> <code>CreateApiKey</code> returns the expiration time in
+      milliseconds.</p> </li> <li> <p> <code>UpdateApiKey</code> is not
+      available for this key version.</p> </li> <li> <p>
+      <code>DeleteApiKey</code> deletes the item from the table.</p> </li> <li>
+      <p>Expiration is stored in Amazon DynamoDB as milliseconds. This results
+      in a bug where keys are not automatically deleted because DynamoDB expects
+      the TTL to be stored in seconds. As a one-time action, we will delete
+      these keys from the table after February 21, 2018.</p> </li> </ul> <p>
+      <b>da2</b>: This version was introduced in February 2018 when AppSync
+      added support to extend key expiration.</p> <ul> <li> <p>
+      <code>ListApiKeys</code> returns the expiration time in seconds.</p> </li>
+      <li> <p> <code>CreateApiKey</code> returns the expiration time in seconds
+      and accepts a user-provided expiration time in seconds.</p> </li> <li> <p>
+      <code>UpdateApiKey</code> returns the expiration time in seconds and
+      accepts a user-provided expiration time in seconds. Key expiration can
+      only be updated while the key has not expired.</p> </li> <li> <p>
+      <code>DeleteApiKey</code> deletes the item from the table.</p> </li> <li>
+      <p>Expiration is stored in Amazon DynamoDB as seconds.</p> </li> </ul>"
   ApiKeys:
     type: array
     items:
-      $ref: '#/definitions/ApiKey'
+      $ref: "#/definitions/ApiKey"
   AuthenticationType:
     type: string
     enum:
@@ -2327,10 +2500,10 @@ definitions:
     type: object
     properties:
       signingRegion:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: The signing region for AWS IAM authorization.
       signingServiceName:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: The signing service name for AWS IAM authorization.
     description: The AWS IAM configuration.
   Blob:
@@ -2339,14 +2512,17 @@ definitions:
     type: object
     properties:
       description:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: A description of the purpose of the API key.
       expires:
-        $ref: '#/definitions/Long'
-        description: 'The time from creation time after which the API key expires. The date is represented as seconds since the epoch, rounded down to the nearest hour. The default value for this parameter is 7 days from creation time. For more information, see .'
+        $ref: "#/definitions/Long"
+        description: The time from creation time after which the API key expires. The date
+          is represented as seconds since the epoch, rounded down to the nearest
+          hour. The default value for this parameter is 7 days from creation
+          time. For more information, see .
   ResourceName:
     type: string
-    pattern: '[_A-Za-z][_0-9A-Za-z]*'
+    pattern: "[_A-Za-z][_0-9A-Za-z]*"
   DataSourceType:
     type: string
     enum:
@@ -2363,13 +2539,13 @@ definitions:
       - awsRegion
     properties:
       tableName:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: The table name.
       awsRegion:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: The AWS Region.
       useCallerCredentials:
-        $ref: '#/definitions/Boolean'
+        $ref: "#/definitions/Boolean"
         description: Set to TRUE to use Amazon Cognito credentials with this data source.
     description: Describes an Amazon DynamoDB data source configuration.
   LambdaDataSourceConfig:
@@ -2378,7 +2554,7 @@ definitions:
       - lambdaFunctionArn
     properties:
       lambdaFunctionArn:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: The ARN for the Lambda function.
     description: Describes an AWS Lambda data source configuration.
   ElasticsearchDataSourceConfig:
@@ -2388,30 +2564,36 @@ definitions:
       - awsRegion
     properties:
       endpoint:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: The endpoint.
       awsRegion:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: The AWS Region.
     description: Describes an Elasticsearch data source configuration.
   HttpDataSourceConfig:
     type: object
     properties:
       endpoint:
-        $ref: '#/definitions/String'
-        description: 'The HTTP URL endpoint. You can either specify the domain name or IP, and port combination, and the URL scheme must be HTTP or HTTPS. If the port is not specified, AWS AppSync uses the default port 80 for the HTTP endpoint and port 443 for HTTPS endpoints.'
+        $ref: "#/definitions/String"
+        description: The HTTP URL endpoint. You can either specify the domain name or IP,
+          and port combination, and the URL scheme must be HTTP or HTTPS. If the
+          port is not specified, AWS AppSync uses the default port 80 for the
+          HTTP endpoint and port 443 for HTTPS endpoints.
       authorizationConfig:
-        $ref: '#/definitions/AuthorizationConfig'
-        description: The authorization config in case the HTTP endpoint requires authorization.
+        $ref: "#/definitions/AuthorizationConfig"
+        description: The authorization config in case the HTTP endpoint requires
+          authorization.
     description: Describes an HTTP data source configuration.
   RelationalDatabaseDataSourceConfig:
     type: object
     properties:
       relationalDatabaseSourceType:
-        $ref: '#/definitions/RelationalDatabaseSourceType'
-        description: '<p>Source type for the relational database.</p> <ul> <li> <p> <b>RDS_HTTP_ENDPOINT</b>: The relational database source type is an Amazon RDS HTTP endpoint.</p> </li> </ul>'
+        $ref: "#/definitions/RelationalDatabaseSourceType"
+        description: "<p>Source type for the relational database.</p> <ul> <li> <p>
+          <b>RDS_HTTP_ENDPOINT</b>: The relational database source type is an
+          Amazon RDS HTTP endpoint.</p> </li> </ul>"
       rdsHttpEndpointConfig:
-        $ref: '#/definitions/RdsHttpEndpointConfig'
+        $ref: "#/definitions/RdsHttpEndpointConfig"
         description: Amazon RDS HTTP endpoint settings.
     description: Describes a relational database data source configuration.
   CreateDataSourceRequest:
@@ -2421,64 +2603,77 @@ definitions:
       - type
     properties:
       name:
-        $ref: '#/definitions/ResourceName'
+        $ref: "#/definitions/ResourceName"
         description: A user-supplied name for the <code>DataSource</code>.
       description:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: A description of the <code>DataSource</code>.
       type:
-        $ref: '#/definitions/DataSourceType'
+        $ref: "#/definitions/DataSourceType"
         description: The type of the <code>DataSource</code>.
       serviceRoleArn:
-        $ref: '#/definitions/String'
-        description: The AWS IAM service role ARN for the data source. The system assumes this role when accessing the data source.
+        $ref: "#/definitions/String"
+        description: The AWS IAM service role ARN for the data source. The system assumes
+          this role when accessing the data source.
       dynamodbConfig:
-        $ref: '#/definitions/DynamodbDataSourceConfig'
+        $ref: "#/definitions/DynamodbDataSourceConfig"
         description: Amazon DynamoDB settings.
       lambdaConfig:
-        $ref: '#/definitions/LambdaDataSourceConfig'
+        $ref: "#/definitions/LambdaDataSourceConfig"
         description: AWS Lambda settings.
       elasticsearchConfig:
-        $ref: '#/definitions/ElasticsearchDataSourceConfig'
+        $ref: "#/definitions/ElasticsearchDataSourceConfig"
         description: Amazon Elasticsearch Service settings.
       httpConfig:
-        $ref: '#/definitions/HttpDataSourceConfig'
+        $ref: "#/definitions/HttpDataSourceConfig"
         description: HTTP endpoint settings.
       relationalDatabaseConfig:
-        $ref: '#/definitions/RelationalDatabaseDataSourceConfig'
+        $ref: "#/definitions/RelationalDatabaseDataSourceConfig"
         description: Relational database settings.
   DataSource:
     type: object
     properties:
       dataSourceArn:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: The data source ARN.
       name:
-        $ref: '#/definitions/ResourceName'
+        $ref: "#/definitions/ResourceName"
         description: The name of the data source.
       description:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: The description of the data source.
       type:
-        $ref: '#/definitions/DataSourceType'
-        description: '<p>The type of the data source.</p> <ul> <li> <p> <b>AMAZON_DYNAMODB</b>: The data source is an Amazon DynamoDB table.</p> </li> <li> <p> <b>AMAZON_ELASTICSEARCH</b>: The data source is an Amazon Elasticsearch Service domain.</p> </li> <li> <p> <b>AWS_LAMBDA</b>: The data source is an AWS Lambda function.</p> </li> <li> <p> <b>NONE</b>: There is no data source. This type is used when you wish to invoke a GraphQL operation without connecting to a data source, such as performing data transformation with resolvers or triggering a subscription to be invoked from a mutation.</p> </li> <li> <p> <b>HTTP</b>: The data source is an HTTP endpoint.</p> </li> <li> <p> <b>RELATIONAL_DATABASE</b>: The data source is a relational database.</p> </li> </ul>'
+        $ref: "#/definitions/DataSourceType"
+        description: "<p>The type of the data source.</p> <ul> <li> <p>
+          <b>AMAZON_DYNAMODB</b>: The data source is an Amazon DynamoDB
+          table.</p> </li> <li> <p> <b>AMAZON_ELASTICSEARCH</b>: The data source
+          is an Amazon Elasticsearch Service domain.</p> </li> <li> <p>
+          <b>AWS_LAMBDA</b>: The data source is an AWS Lambda function.</p>
+          </li> <li> <p> <b>NONE</b>: There is no data source. This type is used
+          when you wish to invoke a GraphQL operation without connecting to a
+          data source, such as performing data transformation with resolvers or
+          triggering a subscription to be invoked from a mutation.</p> </li>
+          <li> <p> <b>HTTP</b>: The data source is an HTTP endpoint.</p> </li>
+          <li> <p> <b>RELATIONAL_DATABASE</b>: The data source is a relational
+          database.</p> </li> </ul>"
       serviceRoleArn:
-        $ref: '#/definitions/String'
-        description: The AWS IAM service role ARN for the data source. The system assumes this role when accessing the data source.
+        $ref: "#/definitions/String"
+        description: The AWS IAM service role ARN for the data source. The system assumes
+          this role when accessing the data source.
       dynamodbConfig:
-        $ref: '#/definitions/DynamodbDataSourceConfig'
+        $ref: "#/definitions/DynamodbDataSourceConfig"
         description: Amazon DynamoDB settings.
       lambdaConfig:
-        $ref: '#/definitions/LambdaDataSourceConfig'
+        $ref: "#/definitions/LambdaDataSourceConfig"
         description: AWS Lambda settings.
       elasticsearchConfig:
-        $ref: '#/definitions/ElasticsearchDataSourceConfig'
+        $ref: "#/definitions/ElasticsearchDataSourceConfig"
         description: Amazon Elasticsearch Service settings.
       httpConfig:
-        $ref: '#/definitions/HttpDataSourceConfig'
+        $ref: "#/definitions/HttpDataSourceConfig"
         description: HTTP endpoint settings.
       relationalDatabaseConfig:
-        $ref: '#/definitions/RelationalDatabaseDataSourceConfig'
+        $ref: "#/definitions/RelationalDatabaseDataSourceConfig"
         description: Relational database settings.
     description: Describes a data source.
   MappingTemplate:
@@ -2494,51 +2689,57 @@ definitions:
       - functionVersion
     properties:
       name:
-        $ref: '#/definitions/ResourceName'
-        description: The <code>Function</code> name. The function name does not have to be unique.
+        $ref: "#/definitions/ResourceName"
+        description: The <code>Function</code> name. The function name does not have to be
+          unique.
       description:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: The <code>Function</code> description.
       dataSourceName:
-        $ref: '#/definitions/ResourceName'
+        $ref: "#/definitions/ResourceName"
         description: The <code>Function</code> <code>DataSource</code> name.
       requestMappingTemplate:
-        $ref: '#/definitions/MappingTemplate'
-        description: The <code>Function</code> request mapping template. Functions support only the 2018-05-29 version of the request mapping template.
+        $ref: "#/definitions/MappingTemplate"
+        description: The <code>Function</code> request mapping template. Functions support
+          only the 2018-05-29 version of the request mapping template.
       responseMappingTemplate:
-        $ref: '#/definitions/MappingTemplate'
-        description: 'The <code>Function</code> response mapping template. '
+        $ref: "#/definitions/MappingTemplate"
+        description: "The <code>Function</code> response mapping template. "
       functionVersion:
-        $ref: '#/definitions/String'
-        description: 'The <code>version</code> of the request mapping template. Currently the supported value is 2018-05-29. '
+        $ref: "#/definitions/String"
+        description: "The <code>version</code> of the request mapping template. Currently
+          the supported value is 2018-05-29. "
   FunctionConfiguration:
     type: object
     properties:
       functionId:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: A unique ID representing the <code>Function</code> object.
       functionArn:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: The ARN of the <code>Function</code> object.
       name:
-        $ref: '#/definitions/ResourceName'
+        $ref: "#/definitions/ResourceName"
         description: The name of the <code>Function</code> object.
       description:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: The <code>Function</code> description.
       dataSourceName:
-        $ref: '#/definitions/ResourceName'
+        $ref: "#/definitions/ResourceName"
         description: The name of the <code>DataSource</code>.
       requestMappingTemplate:
-        $ref: '#/definitions/MappingTemplate'
-        description: The <code>Function</code> request mapping template. Functions support only the 2018-05-29 version of the request mapping template.
+        $ref: "#/definitions/MappingTemplate"
+        description: The <code>Function</code> request mapping template. Functions support
+          only the 2018-05-29 version of the request mapping template.
       responseMappingTemplate:
-        $ref: '#/definitions/MappingTemplate'
+        $ref: "#/definitions/MappingTemplate"
         description: The <code>Function</code> response mapping template.
       functionVersion:
-        $ref: '#/definitions/String'
-        description: The version of the request mapping template. Currently only the 2018-05-29 version of the template is supported.
-    description: A function is a reusable entity. Multiple functions can be used to compose the resolver logic.
+        $ref: "#/definitions/String"
+        description: The version of the request mapping template. Currently only the
+          2018-05-29 version of the template is supported.
+    description: A function is a reusable entity. Multiple functions can be used to compose
+      the resolver logic.
   LogConfig:
     type: object
     required:
@@ -2546,11 +2747,22 @@ definitions:
       - cloudWatchLogsRoleArn
     properties:
       fieldLogLevel:
-        $ref: '#/definitions/FieldLogLevel'
-        description: '<p>The field logging level. Values can be NONE, ERROR, or ALL. </p> <ul> <li> <p> <b>NONE</b>: No field-level logs are captured.</p> </li> <li> <p> <b>ERROR</b>: Logs the following information only for the fields that are in error:</p> <ul> <li> <p>The error section in the server response.</p> </li> <li> <p>Field-level errors.</p> </li> <li> <p>The generated request/response functions that got resolved for error fields.</p> </li> </ul> </li> <li> <p> <b>ALL</b>: The following information is logged for all fields in the query:</p> <ul> <li> <p>Field-level tracing information.</p> </li> <li> <p>The generated request/response functions that got resolved for each field.</p> </li> </ul> </li> </ul>'
+        $ref: "#/definitions/FieldLogLevel"
+        description: "<p>The field logging level. Values can be NONE, ERROR, or ALL. </p>
+          <ul> <li> <p> <b>NONE</b>: No field-level logs are captured.</p> </li>
+          <li> <p> <b>ERROR</b>: Logs the following information only for the
+          fields that are in error:</p> <ul> <li> <p>The error section in the
+          server response.</p> </li> <li> <p>Field-level errors.</p> </li> <li>
+          <p>The generated request/response functions that got resolved for
+          error fields.</p> </li> </ul> </li> <li> <p> <b>ALL</b>: The following
+          information is logged for all fields in the query:</p> <ul> <li>
+          <p>Field-level tracing information.</p> </li> <li> <p>The generated
+          request/response functions that got resolved for each field.</p> </li>
+          </ul> </li> </ul>"
       cloudWatchLogsRoleArn:
-        $ref: '#/definitions/String'
-        description: 'The service role that AWS AppSync will assume to publish to Amazon CloudWatch logs in your account. '
+        $ref: "#/definitions/String"
+        description: "The service role that AWS AppSync will assume to publish to Amazon
+          CloudWatch logs in your account. "
     description: The CloudWatch Logs configuration.
   UserPoolConfig:
     type: object
@@ -2560,17 +2772,20 @@ definitions:
       - defaultAction
     properties:
       userPoolId:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: The user pool ID.
       awsRegion:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: The AWS Region in which the user pool was created.
       defaultAction:
-        $ref: '#/definitions/DefaultAction'
-        description: The action that you want your GraphQL API to take when a request that uses Amazon Cognito user pool authentication doesn't match the Amazon Cognito user pool configuration.
+        $ref: "#/definitions/DefaultAction"
+        description: The action that you want your GraphQL API to take when a request that
+          uses Amazon Cognito user pool authentication doesn't match the Amazon
+          Cognito user pool configuration.
       appIdClientRegex:
-        $ref: '#/definitions/String'
-        description: A regular expression for validating the incoming Amazon Cognito user pool app client ID.
+        $ref: "#/definitions/String"
+        description: A regular expression for validating the incoming Amazon Cognito user
+          pool app client ID.
     description: Describes an Amazon Cognito user pool configuration.
   OpenIDConnectConfig:
     type: object
@@ -2578,16 +2793,23 @@ definitions:
       - issuer
     properties:
       issuer:
-        $ref: '#/definitions/String'
-        description: The issuer for the OpenID Connect configuration. The issuer returned by discovery must exactly match the value of <code>iss</code> in the ID token.
+        $ref: "#/definitions/String"
+        description: The issuer for the OpenID Connect configuration. The issuer returned
+          by discovery must exactly match the value of <code>iss</code> in the
+          ID token.
       clientId:
-        $ref: '#/definitions/String'
-        description: The client identifier of the Relying party at the OpenID identity provider. This identifier is typically obtained when the Relying party is registered with the OpenID identity provider. You can specify a regular expression so the AWS AppSync can validate against multiple client identifiers at a time.
+        $ref: "#/definitions/String"
+        description: The client identifier of the Relying party at the OpenID identity
+          provider. This identifier is typically obtained when the Relying party
+          is registered with the OpenID identity provider. You can specify a
+          regular expression so the AWS AppSync can validate against multiple
+          client identifiers at a time.
       iatTTL:
-        $ref: '#/definitions/Long'
-        description: The number of milliseconds a token is valid after being issued to a user.
+        $ref: "#/definitions/Long"
+        description: The number of milliseconds a token is valid after being issued to a
+          user.
       authTTL:
-        $ref: '#/definitions/Long'
+        $ref: "#/definitions/Long"
         description: The number of milliseconds a token is valid after being authenticated.
     description: Describes an OpenID Connect configuration.
   CreateGraphqlApiRequest:
@@ -2597,46 +2819,47 @@ definitions:
       - authenticationType
     properties:
       name:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: A user-supplied name for the <code>GraphqlApi</code>.
       logConfig:
-        $ref: '#/definitions/LogConfig'
+        $ref: "#/definitions/LogConfig"
         description: The Amazon CloudWatch Logs configuration.
       authenticationType:
-        $ref: '#/definitions/AuthenticationType'
-        description: 'The authentication type: API key, AWS IAM, or Amazon Cognito user pools.'
+        $ref: "#/definitions/AuthenticationType"
+        description: "The authentication type: API key, AWS IAM, or Amazon Cognito user
+          pools."
       userPoolConfig:
-        $ref: '#/definitions/UserPoolConfig'
+        $ref: "#/definitions/UserPoolConfig"
         description: The Amazon Cognito user pool configuration.
       openIDConnectConfig:
-        $ref: '#/definitions/OpenIDConnectConfig'
+        $ref: "#/definitions/OpenIDConnectConfig"
         description: The OpenID Connect configuration.
   GraphqlApi:
     type: object
     properties:
       name:
-        $ref: '#/definitions/ResourceName'
+        $ref: "#/definitions/ResourceName"
         description: The API name.
       apiId:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: The API ID.
       authenticationType:
-        $ref: '#/definitions/AuthenticationType'
+        $ref: "#/definitions/AuthenticationType"
         description: The authentication type.
       logConfig:
-        $ref: '#/definitions/LogConfig'
+        $ref: "#/definitions/LogConfig"
         description: The Amazon CloudWatch Logs configuration.
       userPoolConfig:
-        $ref: '#/definitions/UserPoolConfig'
+        $ref: "#/definitions/UserPoolConfig"
         description: The Amazon Cognito user pool configuration.
       openIDConnectConfig:
-        $ref: '#/definitions/OpenIDConnectConfig'
+        $ref: "#/definitions/OpenIDConnectConfig"
         description: The OpenID Connect configuration.
       arn:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: The ARN.
       uris:
-        $ref: '#/definitions/MapOfStringToString'
+        $ref: "#/definitions/MapOfStringToString"
         description: The URIs.
     description: Describes a GraphQL API.
   ResolverKind:
@@ -2648,7 +2871,7 @@ definitions:
     type: object
     properties:
       functions:
-        $ref: '#/definitions/FunctionsIds'
+        $ref: "#/definitions/FunctionsIds"
         description: A list of <code>Function</code> objects.
     description: The pipeline configuration for a resolver of kind <code>PIPELINE</code>.
   CreateResolverRequest:
@@ -2658,49 +2881,66 @@ definitions:
       - requestMappingTemplate
     properties:
       fieldName:
-        $ref: '#/definitions/ResourceName'
+        $ref: "#/definitions/ResourceName"
         description: The name of the field to attach the resolver to.
       dataSourceName:
-        $ref: '#/definitions/ResourceName'
+        $ref: "#/definitions/ResourceName"
         description: The name of the data source for which the resolver is being created.
       requestMappingTemplate:
-        $ref: '#/definitions/MappingTemplate'
-        description: <p>The mapping template to be used for requests.</p> <p>A resolver uses a request mapping template to convert a GraphQL expression into a format that a data source can understand. Mapping templates are written in Apache Velocity Template Language (VTL).</p>
+        $ref: "#/definitions/MappingTemplate"
+        description: <p>The mapping template to be used for requests.</p> <p>A resolver
+          uses a request mapping template to convert a GraphQL expression into a
+          format that a data source can understand. Mapping templates are
+          written in Apache Velocity Template Language (VTL).</p>
       responseMappingTemplate:
-        $ref: '#/definitions/MappingTemplate'
+        $ref: "#/definitions/MappingTemplate"
         description: The mapping template to be used for responses from the data source.
       kind:
-        $ref: '#/definitions/ResolverKind'
-        description: '<p>The resolver type.</p> <ul> <li> <p> <b>UNIT</b>: A UNIT resolver type. A UNIT resolver is the default resolver type. A UNIT resolver enables you to execute a GraphQL query against a single data source.</p> </li> <li> <p> <b>PIPELINE</b>: A PIPELINE resolver type. A PIPELINE resolver enables you to execute a series of <code>Function</code> in a serial manner. You can use a pipeline resolver to execute a GraphQL query against multiple data sources.</p> </li> </ul>'
+        $ref: "#/definitions/ResolverKind"
+        description: "<p>The resolver type.</p> <ul> <li> <p> <b>UNIT</b>: A UNIT resolver
+          type. A UNIT resolver is the default resolver type. A UNIT resolver
+          enables you to execute a GraphQL query against a single data
+          source.</p> </li> <li> <p> <b>PIPELINE</b>: A PIPELINE resolver type.
+          A PIPELINE resolver enables you to execute a series of
+          <code>Function</code> in a serial manner. You can use a pipeline
+          resolver to execute a GraphQL query against multiple data sources.</p>
+          </li> </ul>"
       pipelineConfig:
-        $ref: '#/definitions/PipelineConfig'
+        $ref: "#/definitions/PipelineConfig"
         description: The <code>PipelineConfig</code>.
   Resolver:
     type: object
     properties:
       typeName:
-        $ref: '#/definitions/ResourceName'
+        $ref: "#/definitions/ResourceName"
         description: The resolver type name.
       fieldName:
-        $ref: '#/definitions/ResourceName'
+        $ref: "#/definitions/ResourceName"
         description: The resolver field name.
       dataSourceName:
-        $ref: '#/definitions/ResourceName'
+        $ref: "#/definitions/ResourceName"
         description: The resolver data source name.
       resolverArn:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: The resolver ARN.
       requestMappingTemplate:
-        $ref: '#/definitions/MappingTemplate'
+        $ref: "#/definitions/MappingTemplate"
         description: The request mapping template.
       responseMappingTemplate:
-        $ref: '#/definitions/MappingTemplate'
+        $ref: "#/definitions/MappingTemplate"
         description: The response mapping template.
       kind:
-        $ref: '#/definitions/ResolverKind'
-        description: '<p>The resolver type.</p> <ul> <li> <p> <b>UNIT</b>: A UNIT resolver type. A UNIT resolver is the default resolver type. A UNIT resolver enables you to execute a GraphQL query against a single data source.</p> </li> <li> <p> <b>PIPELINE</b>: A PIPELINE resolver type. A PIPELINE resolver enables you to execute a series of <code>Function</code> in a serial manner. You can use a pipeline resolver to execute a GraphQL query against multiple data sources.</p> </li> </ul>'
+        $ref: "#/definitions/ResolverKind"
+        description: "<p>The resolver type.</p> <ul> <li> <p> <b>UNIT</b>: A UNIT resolver
+          type. A UNIT resolver is the default resolver type. A UNIT resolver
+          enables you to execute a GraphQL query against a single data
+          source.</p> </li> <li> <p> <b>PIPELINE</b>: A PIPELINE resolver type.
+          A PIPELINE resolver enables you to execute a series of
+          <code>Function</code> in a serial manner. You can use a pipeline
+          resolver to execute a GraphQL query against multiple data sources.</p>
+          </li> </ul>"
       pipelineConfig:
-        $ref: '#/definitions/PipelineConfig'
+        $ref: "#/definitions/PipelineConfig"
         description: The <code>PipelineConfig</code>.
     description: Describes a resolver.
   TypeDefinitionFormat:
@@ -2715,34 +2955,37 @@ definitions:
       - format
     properties:
       definition:
-        $ref: '#/definitions/String'
-        description: '<p>The type definition, in GraphQL Schema Definition Language (SDL) format.</p> <p>For more information, see the <a href="http://graphql.org/learn/schema/">GraphQL SDL documentation</a>.</p>'
+        $ref: "#/definitions/String"
+        description: <p>The type definition, in GraphQL Schema Definition Language (SDL)
+          format.</p> <p>For more information, see the <a
+          href="http://graphql.org/learn/schema/">GraphQL SDL
+          documentation</a>.</p>
       format:
-        $ref: '#/definitions/TypeDefinitionFormat'
-        description: 'The type format: SDL or JSON.'
+        $ref: "#/definitions/TypeDefinitionFormat"
+        description: "The type format: SDL or JSON."
   Type:
     type: object
     properties:
       name:
-        $ref: '#/definitions/ResourceName'
+        $ref: "#/definitions/ResourceName"
         description: The type name.
       description:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: The type description.
       arn:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: The type ARN.
       definition:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: The type definition.
       format:
-        $ref: '#/definitions/TypeDefinitionFormat'
-        description: 'The type format: SDL or JSON.'
+        $ref: "#/definitions/TypeDefinitionFormat"
+        description: "The type format: SDL or JSON."
     description: Describes a type.
   DataSources:
     type: array
     items:
-      $ref: '#/definitions/DataSource'
+      $ref: "#/definitions/DataSource"
   DeleteApiKeyRequest:
     type: object
     properties: {}
@@ -2764,7 +3007,7 @@ definitions:
   Functions:
     type: array
     items:
-      $ref: '#/definitions/FunctionConfiguration'
+      $ref: "#/definitions/FunctionConfiguration"
   GetDataSourceRequest:
     type: object
     properties: {}
@@ -2800,14 +3043,14 @@ definitions:
   MapOfStringToString:
     type: object
     additionalProperties:
-      $ref: '#/definitions/String'
+      $ref: "#/definitions/String"
   GraphqlApis:
     type: array
     items:
-      $ref: '#/definitions/GraphqlApi'
+      $ref: "#/definitions/GraphqlApi"
   PaginationToken:
     type: string
-    pattern: '[\\S]+'
+    pattern: "[\\\\S]+"
   MaxResults:
     type: integer
     minimum: 0
@@ -2830,7 +3073,7 @@ definitions:
   Resolvers:
     type: array
     items:
-      $ref: '#/definitions/Resolver'
+      $ref: "#/definitions/Resolver"
   ListResolversRequest:
     type: object
     properties: {}
@@ -2840,52 +3083,53 @@ definitions:
   TypeList:
     type: array
     items:
-      $ref: '#/definitions/Type'
+      $ref: "#/definitions/Type"
   StartSchemaCreationRequest:
     type: object
     required:
       - definition
     properties:
       definition:
-        $ref: '#/definitions/Blob'
-        description: 'The schema definition, in GraphQL schema language format.'
+        $ref: "#/definitions/Blob"
+        description: The schema definition, in GraphQL schema language format.
   UpdateApiKeyRequest:
     type: object
     properties:
       description:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: A description of the purpose of the API key.
       expires:
-        $ref: '#/definitions/Long'
-        description: 'The time from update time after which the API key expires. The date is represented as seconds since the epoch. For more information, see .'
+        $ref: "#/definitions/Long"
+        description: The time from update time after which the API key expires. The date is
+          represented as seconds since the epoch. For more information, see .
   UpdateDataSourceRequest:
     type: object
     required:
       - type
     properties:
       description:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: The new description for the data source.
       type:
-        $ref: '#/definitions/DataSourceType'
+        $ref: "#/definitions/DataSourceType"
         description: The new data source type.
       serviceRoleArn:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: The new service role ARN for the data source.
       dynamodbConfig:
-        $ref: '#/definitions/DynamodbDataSourceConfig'
+        $ref: "#/definitions/DynamodbDataSourceConfig"
         description: The new Amazon DynamoDB configuration.
       lambdaConfig:
-        $ref: '#/definitions/LambdaDataSourceConfig'
+        $ref: "#/definitions/LambdaDataSourceConfig"
         description: The new AWS Lambda configuration.
       elasticsearchConfig:
-        $ref: '#/definitions/ElasticsearchDataSourceConfig'
+        $ref: "#/definitions/ElasticsearchDataSourceConfig"
         description: The new Elasticsearch Service configuration.
       httpConfig:
-        $ref: '#/definitions/HttpDataSourceConfig'
+        $ref: "#/definitions/HttpDataSourceConfig"
         description: The new HTTP endpoint configuration.
       relationalDatabaseConfig:
-        $ref: '#/definitions/RelationalDatabaseDataSourceConfig'
+        $ref: "#/definitions/RelationalDatabaseDataSourceConfig"
         description: The new relational database configuration.
   UpdateFunctionRequest:
     type: object
@@ -2896,62 +3140,74 @@ definitions:
       - functionVersion
     properties:
       name:
-        $ref: '#/definitions/ResourceName'
+        $ref: "#/definitions/ResourceName"
         description: The <code>Function</code> name.
       description:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: The <code>Function</code> description.
       dataSourceName:
-        $ref: '#/definitions/ResourceName'
+        $ref: "#/definitions/ResourceName"
         description: The <code>Function</code> <code>DataSource</code> name.
       requestMappingTemplate:
-        $ref: '#/definitions/MappingTemplate'
-        description: The <code>Function</code> request mapping template. Functions support only the 2018-05-29 version of the request mapping template.
+        $ref: "#/definitions/MappingTemplate"
+        description: The <code>Function</code> request mapping template. Functions support
+          only the 2018-05-29 version of the request mapping template.
       responseMappingTemplate:
-        $ref: '#/definitions/MappingTemplate'
-        description: 'The <code>Function</code> request mapping template. '
+        $ref: "#/definitions/MappingTemplate"
+        description: "The <code>Function</code> request mapping template. "
       functionVersion:
-        $ref: '#/definitions/String'
-        description: 'The <code>version</code> of the request mapping template. Currently the supported value is 2018-05-29. '
+        $ref: "#/definitions/String"
+        description: "The <code>version</code> of the request mapping template. Currently
+          the supported value is 2018-05-29. "
   UpdateGraphqlApiRequest:
     type: object
     required:
       - name
     properties:
       name:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: The new name for the <code>GraphqlApi</code> object.
       logConfig:
-        $ref: '#/definitions/LogConfig'
-        description: The Amazon CloudWatch Logs configuration for the <code>GraphqlApi</code> object.
+        $ref: "#/definitions/LogConfig"
+        description: The Amazon CloudWatch Logs configuration for the
+          <code>GraphqlApi</code> object.
       authenticationType:
-        $ref: '#/definitions/AuthenticationType'
+        $ref: "#/definitions/AuthenticationType"
         description: The new authentication type for the <code>GraphqlApi</code> object.
       userPoolConfig:
-        $ref: '#/definitions/UserPoolConfig'
-        description: The new Amazon Cognito user pool configuration for the <code>GraphqlApi</code> object.
+        $ref: "#/definitions/UserPoolConfig"
+        description: The new Amazon Cognito user pool configuration for the
+          <code>GraphqlApi</code> object.
       openIDConnectConfig:
-        $ref: '#/definitions/OpenIDConnectConfig'
-        description: The OpenID Connect configuration for the <code>GraphqlApi</code> object.
+        $ref: "#/definitions/OpenIDConnectConfig"
+        description: The OpenID Connect configuration for the <code>GraphqlApi</code>
+          object.
   UpdateResolverRequest:
     type: object
     required:
       - requestMappingTemplate
     properties:
       dataSourceName:
-        $ref: '#/definitions/ResourceName'
+        $ref: "#/definitions/ResourceName"
         description: The new data source name.
       requestMappingTemplate:
-        $ref: '#/definitions/MappingTemplate'
+        $ref: "#/definitions/MappingTemplate"
         description: The new request mapping template.
       responseMappingTemplate:
-        $ref: '#/definitions/MappingTemplate'
+        $ref: "#/definitions/MappingTemplate"
         description: The new response mapping template.
       kind:
-        $ref: '#/definitions/ResolverKind'
-        description: '<p>The resolver type.</p> <ul> <li> <p> <b>UNIT</b>: A UNIT resolver type. A UNIT resolver is the default resolver type. A UNIT resolver enables you to execute a GraphQL query against a single data source.</p> </li> <li> <p> <b>PIPELINE</b>: A PIPELINE resolver type. A PIPELINE resolver enables you to execute a series of <code>Function</code> in a serial manner. You can use a pipeline resolver to execute a GraphQL query against multiple data sources.</p> </li> </ul>'
+        $ref: "#/definitions/ResolverKind"
+        description: "<p>The resolver type.</p> <ul> <li> <p> <b>UNIT</b>: A UNIT resolver
+          type. A UNIT resolver is the default resolver type. A UNIT resolver
+          enables you to execute a GraphQL query against a single data
+          source.</p> </li> <li> <p> <b>PIPELINE</b>: A PIPELINE resolver type.
+          A PIPELINE resolver enables you to execute a series of
+          <code>Function</code> in a serial manner. You can use a pipeline
+          resolver to execute a GraphQL query against multiple data sources.</p>
+          </li> </ul>"
       pipelineConfig:
-        $ref: '#/definitions/PipelineConfig'
+        $ref: "#/definitions/PipelineConfig"
         description: The <code>PipelineConfig</code>.
   UpdateTypeRequest:
     type: object
@@ -2959,8 +3215,8 @@ definitions:
       - format
     properties:
       definition:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: The new definition.
       format:
-        $ref: '#/definitions/TypeDefinitionFormat'
-        description: 'The new type format: SDL or JSON.'
+        $ref: "#/definitions/TypeDefinitionFormat"
+        description: "The new type format: SDL or JSON."

@@ -1,38 +1,44 @@
-swagger: '2.0'
+swagger: "2.0"
 info:
-  version: '2015-05-28'
+  version: 2015-05-28
   x-release: v4
   title: AWS IoT Data Plane
-  description: '<fullname>AWS IoT</fullname> <p>AWS IoT-Data enables secure, bi-directional communication between Internet-connected things (such as sensors, actuators, embedded devices, or smart appliances) and the AWS cloud. It implements a broker for applications and things to publish messages over HTTP (Publish) and retrieve, update, and delete thing shadows. A thing shadow is a persistent representation of your things and their state in the AWS cloud.</p>'
+  description: <fullname>AWS IoT</fullname> <p>AWS IoT-Data enables secure, bi-directional
+    communication between Internet-connected things (such as sensors, actuators,
+    embedded devices, or smart appliances) and the AWS cloud. It implements a
+    broker for applications and things to publish messages over HTTP (Publish)
+    and retrieve, update, and delete thing shadows. A thing shadow is a
+    persistent representation of your things and their state in the AWS
+    cloud.</p>
   x-logo:
-    url: 'https://twitter.com/awscloud/profile_image?size=original'
-    backgroundColor: '#FFFFFF'
-  termsOfService: 'https://aws.amazon.com/service-terms/'
+    url: https://twitter.com/awscloud/profile_image?size=original
+    backgroundColor: "#FFFFFF"
+  termsOfService: https://aws.amazon.com/service-terms/
   contact:
     name: Mike Ralphson
     email: mike.ralphson@gmail.com
-    url: 'https://github.com/mermade/aws2openapi'
+    url: https://github.com/mermade/aws2openapi
     x-twitter: PermittedSoc
   license:
     name: Apache 2.0 License
-    url: 'http://www.apache.org/licenses/'
+    url: http://www.apache.org/licenses/
   x-providerName: amazonaws.com
   x-serviceName: iot-data
   x-origin:
     - contentType: application/json
-      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/iot-data-2015-05-28.normal.json'
+      url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/iot-data-2015-05-28.normal.json
       converter:
-        url: 'https://github.com/mermade/aws2openapi'
+        url: https://github.com/mermade/aws2openapi
         version: 1.0.0
       x-apisguru-direct: true
   x-apiClientRegistration:
-    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+    url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
   x-apisguru-categories:
     - cloud
   x-preferred: true
 externalDocs:
   description: Amazon Web Services documentation
-  url: 'https://docs.aws.amazon.com/iot/'
+  url: https://docs.aws.amazon.com/iot/
 host: data.iot.amazonaws.com
 basePath: /
 schemes:
@@ -88,164 +94,173 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  '/things/{thingName}/shadow':
+  "/things/{thingName}/shadow":
     delete:
       operationId: DeleteThingShadow
-      description: '<p>Deletes the thing shadow for the specified thing.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/iot/latest/developerguide/API_DeleteThingShadow.html">DeleteThingShadow</a> in the <i>AWS IoT Developer Guide</i>.</p>'
+      description: <p>Deletes the thing shadow for the specified thing.</p> <p>For more
+        information, see <a
+        href="http://docs.aws.amazon.com/iot/latest/developerguide/API_DeleteThingShadow.html">DeleteThingShadow</a>
+        in the <i>AWS IoT Developer Guide</i>.</p>
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/DeleteThingShadowResponse'
-        '480':
+            $ref: "#/definitions/DeleteThingShadowResponse"
+        "480":
           description: ResourceNotFoundException
           schema:
-            $ref: '#/definitions/ResourceNotFoundException'
-        '481':
+            $ref: "#/definitions/ResourceNotFoundException"
+        "481":
           description: InvalidRequestException
           schema:
-            $ref: '#/definitions/InvalidRequestException'
-        '482':
+            $ref: "#/definitions/InvalidRequestException"
+        "482":
           description: ThrottlingException
           schema:
-            $ref: '#/definitions/ThrottlingException'
-        '483':
+            $ref: "#/definitions/ThrottlingException"
+        "483":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '484':
+            $ref: "#/definitions/UnauthorizedException"
+        "484":
           description: ServiceUnavailableException
           schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '485':
+            $ref: "#/definitions/ServiceUnavailableException"
+        "485":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '486':
+            $ref: "#/definitions/InternalFailureException"
+        "486":
           description: MethodNotAllowedException
           schema:
-            $ref: '#/definitions/MethodNotAllowedException'
-        '487':
+            $ref: "#/definitions/MethodNotAllowedException"
+        "487":
           description: UnsupportedDocumentEncodingException
           schema:
-            $ref: '#/definitions/UnsupportedDocumentEncodingException'
+            $ref: "#/definitions/UnsupportedDocumentEncodingException"
       parameters:
         - name: thingName
           in: path
           required: true
           description: The name of the thing.
           type: string
-          pattern: '[a-zA-Z0-9_-]+'
+          pattern: "[a-zA-Z0-9_-]+"
           minLength: 1
           maxLength: 128
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
     get:
       operationId: GetThingShadow
-      description: '<p>Gets the thing shadow for the specified thing.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/iot/latest/developerguide/API_GetThingShadow.html">GetThingShadow</a> in the <i>AWS IoT Developer Guide</i>.</p>'
+      description: <p>Gets the thing shadow for the specified thing.</p> <p>For more
+        information, see <a
+        href="http://docs.aws.amazon.com/iot/latest/developerguide/API_GetThingShadow.html">GetThingShadow</a>
+        in the <i>AWS IoT Developer Guide</i>.</p>
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/GetThingShadowResponse'
-        '480':
+            $ref: "#/definitions/GetThingShadowResponse"
+        "480":
           description: InvalidRequestException
           schema:
-            $ref: '#/definitions/InvalidRequestException'
-        '481':
+            $ref: "#/definitions/InvalidRequestException"
+        "481":
           description: ResourceNotFoundException
           schema:
-            $ref: '#/definitions/ResourceNotFoundException'
-        '482':
+            $ref: "#/definitions/ResourceNotFoundException"
+        "482":
           description: ThrottlingException
           schema:
-            $ref: '#/definitions/ThrottlingException'
-        '483':
+            $ref: "#/definitions/ThrottlingException"
+        "483":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '484':
+            $ref: "#/definitions/UnauthorizedException"
+        "484":
           description: ServiceUnavailableException
           schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '485':
+            $ref: "#/definitions/ServiceUnavailableException"
+        "485":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '486':
+            $ref: "#/definitions/InternalFailureException"
+        "486":
           description: MethodNotAllowedException
           schema:
-            $ref: '#/definitions/MethodNotAllowedException'
-        '487':
+            $ref: "#/definitions/MethodNotAllowedException"
+        "487":
           description: UnsupportedDocumentEncodingException
           schema:
-            $ref: '#/definitions/UnsupportedDocumentEncodingException'
+            $ref: "#/definitions/UnsupportedDocumentEncodingException"
       parameters:
         - name: thingName
           in: path
           required: true
           description: The name of the thing.
           type: string
-          pattern: '[a-zA-Z0-9_-]+'
+          pattern: "[a-zA-Z0-9_-]+"
           minLength: 1
           maxLength: 128
     post:
       operationId: UpdateThingShadow
-      description: '<p>Updates the thing shadow for the specified thing.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/iot/latest/developerguide/API_UpdateThingShadow.html">UpdateThingShadow</a> in the <i>AWS IoT Developer Guide</i>.</p>'
+      description: <p>Updates the thing shadow for the specified thing.</p> <p>For more
+        information, see <a
+        href="http://docs.aws.amazon.com/iot/latest/developerguide/API_UpdateThingShadow.html">UpdateThingShadow</a>
+        in the <i>AWS IoT Developer Guide</i>.</p>
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/UpdateThingShadowResponse'
-        '480':
+            $ref: "#/definitions/UpdateThingShadowResponse"
+        "480":
           description: ConflictException
           schema:
-            $ref: '#/definitions/ConflictException'
-        '481':
+            $ref: "#/definitions/ConflictException"
+        "481":
           description: RequestEntityTooLargeException
           schema:
-            $ref: '#/definitions/RequestEntityTooLargeException'
-        '482':
+            $ref: "#/definitions/RequestEntityTooLargeException"
+        "482":
           description: InvalidRequestException
           schema:
-            $ref: '#/definitions/InvalidRequestException'
-        '483':
+            $ref: "#/definitions/InvalidRequestException"
+        "483":
           description: ThrottlingException
           schema:
-            $ref: '#/definitions/ThrottlingException'
-        '484':
+            $ref: "#/definitions/ThrottlingException"
+        "484":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '485':
+            $ref: "#/definitions/UnauthorizedException"
+        "485":
           description: ServiceUnavailableException
           schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '486':
+            $ref: "#/definitions/ServiceUnavailableException"
+        "486":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '487':
+            $ref: "#/definitions/InternalFailureException"
+        "487":
           description: MethodNotAllowedException
           schema:
-            $ref: '#/definitions/MethodNotAllowedException'
-        '488':
+            $ref: "#/definitions/MethodNotAllowedException"
+        "488":
           description: UnsupportedDocumentEncodingException
           schema:
-            $ref: '#/definitions/UnsupportedDocumentEncodingException'
+            $ref: "#/definitions/UnsupportedDocumentEncodingException"
       parameters:
         - name: thingName
           in: path
           required: true
           description: The name of the thing.
           type: string
-          pattern: '[a-zA-Z0-9_-]+'
+          pattern: "[a-zA-Z0-9_-]+"
           minLength: 1
           maxLength: 128
         - name: body
@@ -257,31 +272,33 @@ paths:
               - payload
             properties:
               payload:
-                description: 'The state information, in JSON format.'
+                description: The state information, in JSON format.
                 type: string
-  '/topics/{topic}':
+  "/topics/{topic}":
     post:
       operationId: Publish
-      description: '<p>Publishes state information.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/iot/latest/developerguide/protocols.html#http">HTTP Protocol</a> in the <i>AWS IoT Developer Guide</i>.</p>'
+      description: <p>Publishes state information.</p> <p>For more information, see <a
+        href="http://docs.aws.amazon.com/iot/latest/developerguide/protocols.html#http">HTTP
+        Protocol</a> in the <i>AWS IoT Developer Guide</i>.</p>
       responses:
-        '200':
+        "200":
           description: Success
-        '480':
+        "480":
           description: InternalFailureException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '481':
+            $ref: "#/definitions/InternalFailureException"
+        "481":
           description: InvalidRequestException
           schema:
-            $ref: '#/definitions/InvalidRequestException'
-        '482':
+            $ref: "#/definitions/InvalidRequestException"
+        "482":
           description: UnauthorizedException
           schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '483':
+            $ref: "#/definitions/UnauthorizedException"
+        "483":
           description: MethodNotAllowedException
           schema:
-            $ref: '#/definitions/MethodNotAllowedException'
+            $ref: "#/definitions/MethodNotAllowedException"
       parameters:
         - name: topic
           in: path
@@ -302,16 +319,16 @@ paths:
             type: object
             properties:
               payload:
-                description: 'The state information, in JSON format.'
+                description: The state information, in JSON format.
                 type: string
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
 definitions:
   DeleteThingShadowResponse:
     type: object
@@ -319,98 +336,98 @@ definitions:
       - payload
     properties:
       payload:
-        $ref: '#/definitions/JsonDocument'
-        description: 'The state information, in JSON format.'
+        $ref: "#/definitions/JsonDocument"
+        description: The state information, in JSON format.
     description: The output from the DeleteThingShadow operation.
   ResourceNotFoundException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/errorMessage'
+        $ref: "#/definitions/errorMessage"
         description: The message for the exception.
     description: The specified resource does not exist.
   InvalidRequestException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/errorMessage'
+        $ref: "#/definitions/errorMessage"
         description: The message for the exception.
     description: The request is not valid.
   ThrottlingException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/errorMessage'
+        $ref: "#/definitions/errorMessage"
         description: The message for the exception.
     description: The rate exceeds the limit.
   UnauthorizedException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/errorMessage'
+        $ref: "#/definitions/errorMessage"
         description: The message for the exception.
     description: You are not authorized to perform this operation.
   ServiceUnavailableException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/errorMessage'
+        $ref: "#/definitions/errorMessage"
         description: The message for the exception.
     description: The service is temporarily unavailable.
   InternalFailureException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/errorMessage'
+        $ref: "#/definitions/errorMessage"
         description: The message for the exception.
     description: An unexpected error has occurred.
   MethodNotAllowedException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ErrorMessage'
+        $ref: "#/definitions/ErrorMessage"
         description: The message for the exception.
     description: The specified combination of HTTP verb and URI is not supported.
   UnsupportedDocumentEncodingException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/errorMessage'
+        $ref: "#/definitions/errorMessage"
         description: The message for the exception.
     description: The document encoding is not supported.
   GetThingShadowResponse:
     type: object
     properties:
       payload:
-        $ref: '#/definitions/JsonDocument'
-        description: 'The state information, in JSON format.'
+        $ref: "#/definitions/JsonDocument"
+        description: The state information, in JSON format.
     description: The output from the GetThingShadow operation.
   UpdateThingShadowResponse:
     type: object
     properties:
       payload:
-        $ref: '#/definitions/JsonDocument'
-        description: 'The state information, in JSON format.'
+        $ref: "#/definitions/JsonDocument"
+        description: The state information, in JSON format.
     description: The output from the UpdateThingShadow operation.
   ConflictException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ErrorMessage'
+        $ref: "#/definitions/ErrorMessage"
         description: The message for the exception.
     description: The specified version does not match the version of the document.
   RequestEntityTooLargeException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ErrorMessage'
+        $ref: "#/definitions/ErrorMessage"
         description: The message for the exception.
     description: The payload exceeds the maximum size allowed.
   ErrorMessage:
     type: string
   ThingName:
     type: string
-    pattern: '[a-zA-Z0-9_-]+'
+    pattern: "[a-zA-Z0-9_-]+"
     minLength: 1
     maxLength: 128
   DeleteThingShadowRequest:
@@ -437,8 +454,8 @@ definitions:
     type: object
     properties:
       payload:
-        $ref: '#/definitions/Payload'
-        description: 'The state information, in JSON format.'
+        $ref: "#/definitions/Payload"
+        description: The state information, in JSON format.
     description: The input for the Publish operation.
   UpdateThingShadowRequest:
     type: object
@@ -446,6 +463,6 @@ definitions:
       - payload
     properties:
       payload:
-        $ref: '#/definitions/JsonDocument'
-        description: 'The state information, in JSON format.'
+        $ref: "#/definitions/JsonDocument"
+        description: The state information, in JSON format.
     description: The input for the UpdateThingShadow operation.

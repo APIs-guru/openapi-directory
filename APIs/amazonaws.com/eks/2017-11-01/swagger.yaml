@@ -1,38 +1,49 @@
-swagger: '2.0'
+swagger: "2.0"
 info:
-  version: '2017-11-01'
+  version: 2017-11-01
   x-release: v4
   title: Amazon Elastic Container Service for Kubernetes
-  description: '<p>Amazon Elastic Container Service for Kubernetes (Amazon EKS) is a managed service that makes it easy for you to run Kubernetes on AWS without needing to stand up or maintain your own Kubernetes control plane. Kubernetes is an open-source system for automating the deployment, scaling, and management of containerized applications. </p> <p>Amazon EKS runs up-to-date versions of the open-source Kubernetes software, so you can use all the existing plugins and tooling from the Kubernetes community. Applications running on Amazon EKS are fully compatible with applications running on any standard Kubernetes environment, whether running in on-premises data centers or public clouds. This means that you can easily migrate any standard Kubernetes application to Amazon EKS without any code modification required.</p>'
+  description: <p>Amazon Elastic Container Service for Kubernetes (Amazon EKS) is a managed
+    service that makes it easy for you to run Kubernetes on AWS without needing
+    to stand up or maintain your own Kubernetes control plane. Kubernetes is an
+    open-source system for automating the deployment, scaling, and management of
+    containerized applications. </p> <p>Amazon EKS runs up-to-date versions of
+    the open-source Kubernetes software, so you can use all the existing plugins
+    and tooling from the Kubernetes community. Applications running on Amazon
+    EKS are fully compatible with applications running on any standard
+    Kubernetes environment, whether running in on-premises data centers or
+    public clouds. This means that you can easily migrate any standard
+    Kubernetes application to Amazon EKS without any code modification
+    required.</p>
   x-logo:
-    url: 'https://twitter.com/awscloud/profile_image?size=original'
-    backgroundColor: '#FFFFFF'
-  termsOfService: 'https://aws.amazon.com/service-terms/'
+    url: https://twitter.com/awscloud/profile_image?size=original
+    backgroundColor: "#FFFFFF"
+  termsOfService: https://aws.amazon.com/service-terms/
   contact:
     name: Mike Ralphson
     email: mike.ralphson@gmail.com
-    url: 'https://github.com/mermade/aws2openapi'
+    url: https://github.com/mermade/aws2openapi
     x-twitter: PermittedSoc
   license:
     name: Apache 2.0 License
-    url: 'http://www.apache.org/licenses/'
+    url: http://www.apache.org/licenses/
   x-providerName: amazonaws.com
   x-serviceName: eks
   x-origin:
     - contentType: application/json
-      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/eks-2017-11-01.normal.json'
+      url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/eks-2017-11-01.normal.json
       converter:
-        url: 'https://github.com/mermade/aws2openapi'
+        url: https://github.com/mermade/aws2openapi
         version: 1.0.0
       x-apisguru-direct: true
   x-apiClientRegistration:
-    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+    url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
   x-apisguru-categories:
     - cloud
   x-preferred: true
 externalDocs:
   description: Amazon Web Services documentation
-  url: 'https://docs.aws.amazon.com/eks/'
+  url: https://docs.aws.amazon.com/eks/
 host: eks.amazonaws.com
 basePath: /
 schemes:
@@ -91,40 +102,79 @@ paths:
   /clusters:
     post:
       operationId: CreateCluster
-      description: '<p>Creates an Amazon EKS control plane. </p> <p>The Amazon EKS control plane consists of control plane instances that run the Kubernetes software, like <code>etcd</code> and the API server. The control plane runs in an account managed by AWS, and the Kubernetes API is exposed via the Amazon EKS API server endpoint.</p> <p>Amazon EKS worker nodes run in your AWS account and connect to your cluster''s control plane via the Kubernetes API server endpoint and a certificate file that is created for your cluster.</p> <p>The cluster control plane is provisioned across multiple Availability Zones and fronted by an Elastic Load Balancing Network Load Balancer. Amazon EKS also provisions elastic network interfaces in your VPC subnets to provide connectivity from the control plane instances to the worker nodes (for example, to support <code>kubectl exec</code>, <code>logs</code>, and <code>proxy</code> data flows).</p> <p>After you create an Amazon EKS cluster, you must configure your Kubernetes tooling to communicate with the API server and launch worker nodes into your cluster. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/managing-auth.html">Managing Cluster Authentication</a> and <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-workers.html">Launching Amazon EKS Worker Nodes</a>in the <i>Amazon EKS User Guide</i>.</p>'
+      description: <p>Creates an Amazon EKS control plane. </p> <p>The Amazon EKS control
+        plane consists of control plane instances that run the Kubernetes
+        software, like <code>etcd</code> and the API server. The control plane
+        runs in an account managed by AWS, and the Kubernetes API is exposed via
+        the Amazon EKS API server endpoint. Each Amazon EKS cluster control
+        plane is single-tenant and unique, and runs on its own set of Amazon EC2
+        instances.</p> <p>The cluster control plane is provisioned across
+        multiple Availability Zones and fronted by an Elastic Load Balancing
+        Network Load Balancer. Amazon EKS also provisions elastic network
+        interfaces in your VPC subnets to provide connectivity from the control
+        plane instances to the worker nodes (for example, to support
+        <code>kubectl exec</code>, <code>logs</code>, and <code>proxy</code>
+        data flows).</p> <p>Amazon EKS worker nodes run in your AWS account and
+        connect to your cluster's control plane via the Kubernetes API server
+        endpoint and a certificate file that is created for your cluster.</p>
+        <p>You can use the <code>endpointPublicAccess</code> and
+        <code>endpointPrivateAccess</code> parameters to enable or disable
+        public and private access to your cluster's Kubernetes API server
+        endpoint. By default, public access is enabled and private access is
+        disabled. For more information, see <a
+        href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon
+        EKS Cluster Endpoint Access Control</a> in the <i> <i>Amazon EKS User
+        Guide</i> </i>. </p> <p>You can use the <code>logging</code> parameter
+        to enable or disable exporting the Kubernetes control plane logs for
+        your cluster to CloudWatch Logs. By default, cluster control plane logs
+        are not exported to CloudWatch Logs. For more information, see <a
+        href="https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html">Amazon
+        EKS Cluster Control Plane Logs</a> in the <i> <i>Amazon EKS User
+        Guide</i> </i>.</p> <note> <p>CloudWatch Logs ingestion, archive
+        storage, and data scanning rates apply to exported control plane logs.
+        For more information, see <a
+        href="http://aws.amazon.com/cloudwatch/pricing/">Amazon CloudWatch
+        Pricing</a>.</p> </note> <p>Cluster creation typically takes between 10
+        and 15 minutes. After you create an Amazon EKS cluster, you must
+        configure your Kubernetes tooling to communicate with the API server and
+        launch worker nodes into your cluster. For more information, see <a
+        href="https://docs.aws.amazon.com/eks/latest/userguide/managing-auth.html">Managing
+        Cluster Authentication</a> and <a
+        href="https://docs.aws.amazon.com/eks/latest/userguide/launch-workers.html">Launching
+        Amazon EKS Worker Nodes</a> in the <i>Amazon EKS User Guide</i>.</p>
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/CreateClusterResponse'
-        '480':
+            $ref: "#/definitions/CreateClusterResponse"
+        "480":
           description: ResourceInUseException
           schema:
-            $ref: '#/definitions/ResourceInUseException'
-        '481':
+            $ref: "#/definitions/ResourceInUseException"
+        "481":
           description: ResourceLimitExceededException
           schema:
-            $ref: '#/definitions/ResourceLimitExceededException'
-        '482':
+            $ref: "#/definitions/ResourceLimitExceededException"
+        "482":
           description: InvalidParameterException
           schema:
-            $ref: '#/definitions/InvalidParameterException'
-        '483':
+            $ref: "#/definitions/InvalidParameterException"
+        "483":
           description: ClientException
           schema:
-            $ref: '#/definitions/ClientException'
-        '484':
+            $ref: "#/definitions/ClientException"
+        "484":
           description: ServerException
           schema:
-            $ref: '#/definitions/ServerException'
-        '485':
+            $ref: "#/definitions/ServerException"
+        "485":
           description: ServiceUnavailableException
           schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '486':
+            $ref: "#/definitions/ServiceUnavailableException"
+        "486":
           description: UnsupportedAvailabilityZoneException
           schema:
-            $ref: '#/definitions/UnsupportedAvailabilityZoneException'
+            $ref: "#/definitions/UnsupportedAvailabilityZoneException"
       parameters:
         - name: body
           in: body
@@ -139,108 +189,176 @@ paths:
               name:
                 description: The unique name to give to your cluster.
                 type: string
-                pattern: '^[0-9A-Za-z][A-Za-z0-9\-_]*'
+                pattern: ^[0-9A-Za-z][A-Za-z0-9\-_]*
                 minLength: 1
                 maxLength: 100
               version:
-                description: 'The desired Kubernetes version for your cluster. If you do not specify a value here, the latest version available in Amazon EKS is used.'
+                description: The desired Kubernetes version for your cluster. If you do not
+                  specify a value here, the latest version available in Amazon
+                  EKS is used.
                 type: string
               roleArn:
-                description: 'The Amazon Resource Name (ARN) of the IAM role that provides permissions for Amazon EKS to make calls to other AWS API operations on your behalf. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html">Amazon EKS Service IAM Role</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
+                description: The Amazon Resource Name (ARN) of the IAM role that provides
+                  permissions for Amazon EKS to make calls to other AWS API
+                  operations on your behalf. For more information, see <a
+                  href="https://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html">Amazon
+                  EKS Service IAM Role</a> in the <i> <i>Amazon EKS User
+                  Guide</i> </i>.
                 type: string
               resourcesVpcConfig:
-                description: An object representing an Amazon EKS cluster VPC configuration request.
+                description: An object representing the VPC configuration to use for an
+                  Amazon EKS cluster.
                 type: object
                 properties:
                   subnetIds:
-                    $ref: '#/definitions/StringList'
-                    description: Specify subnets for your Amazon EKS worker nodes. Amazon EKS creates cross-account elastic network interfaces in these subnets to allow communication between your worker nodes and the Kubernetes control plane.
+                    $ref: "#/definitions/StringList"
+                    description: Specify subnets for your Amazon EKS worker nodes. Amazon
+                      EKS creates cross-account elastic network interfaces in
+                      these subnets to allow communication between your worker
+                      nodes and the Kubernetes control plane.
                   securityGroupIds:
-                    $ref: '#/definitions/StringList'
-                    description: 'Specify one or more security groups for the cross-account elastic network interfaces that Amazon EKS creates to use to allow communication between your worker nodes and the Kubernetes control plane. If you do not specify a security group, the default security group for your VPC is used.'
+                    $ref: "#/definitions/StringList"
+                    description: Specify one or more security groups for the cross-account
+                      elastic network interfaces that Amazon EKS creates to use
+                      to allow communication between your worker nodes and the
+                      Kubernetes control plane. If you do not specify a security
+                      group, the default security group for your VPC is used.
                   endpointPublicAccess:
-                    $ref: '#/definitions/BoxedBoolean'
-                    description: 'Set this value to <code>false</code> to disable public access for your cluster''s Kubernetes API server endpoint. If you disable public access, your cluster''s Kubernetes API server can only receive requests from within the cluster VPC. The default value for this parameter is <code>true</code>, which enables public access for your Kubernetes API server. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon EKS Cluster Endpoint Access Control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
+                    $ref: "#/definitions/BoxedBoolean"
+                    description: Set this value to <code>false</code> to disable public
+                      access for your cluster's Kubernetes API server endpoint.
+                      If you disable public access, your cluster's Kubernetes
+                      API server can only receive requests from within the
+                      cluster VPC. The default value for this parameter is
+                      <code>true</code>, which enables public access for your
+                      Kubernetes API server. For more information, see <a
+                      href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon
+                      EKS Cluster Endpoint Access Control</a> in the <i>
+                      <i>Amazon EKS User Guide</i> </i>.
                   endpointPrivateAccess:
-                    $ref: '#/definitions/BoxedBoolean'
-                    description: 'Set this value to <code>true</code> to enable private access for your cluster''s Kubernetes API server endpoint. If you enable private access, Kubernetes API requests from within your cluster''s VPC will use the private VPC endpoint. The default value for this parameter is <code>false</code>, which disables private access for your Kubernetes API server. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon EKS Cluster Endpoint Access Control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
+                    $ref: "#/definitions/BoxedBoolean"
+                    description: Set this value to <code>true</code> to enable private
+                      access for your cluster's Kubernetes API server endpoint.
+                      If you enable private access, Kubernetes API requests from
+                      within your cluster's VPC will use the private VPC
+                      endpoint. The default value for this parameter is
+                      <code>false</code>, which disables private access for your
+                      Kubernetes API server. For more information, see <a
+                      href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon
+                      EKS Cluster Endpoint Access Control</a> in the <i>
+                      <i>Amazon EKS User Guide</i> </i>.
+              logging:
+                description: An object representing the logging configuration for resources
+                  in your cluster.
+                type: object
+                properties:
+                  clusterLogging:
+                    $ref: "#/definitions/LogSetups"
+                    description: The cluster control plane logging configuration for your
+                      cluster.
               clientRequestToken:
-                description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+                description: Unique, case-sensitive identifier that you provide to ensure
+                  the idempotency of the request.
                 type: string
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
     get:
       operationId: ListClusters
-      description: Lists the Amazon EKS clusters in your AWS account in the specified Region.
+      description: Lists the Amazon EKS clusters in your AWS account in the specified
+        Region.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/ListClustersResponse'
-        '480':
+            $ref: "#/definitions/ListClustersResponse"
+        "480":
           description: InvalidParameterException
           schema:
-            $ref: '#/definitions/InvalidParameterException'
-        '481':
+            $ref: "#/definitions/InvalidParameterException"
+        "481":
           description: ClientException
           schema:
-            $ref: '#/definitions/ClientException'
-        '482':
+            $ref: "#/definitions/ClientException"
+        "482":
           description: ServerException
           schema:
-            $ref: '#/definitions/ServerException'
-        '483':
+            $ref: "#/definitions/ServerException"
+        "483":
           description: ServiceUnavailableException
           schema:
-            $ref: '#/definitions/ServiceUnavailableException'
+            $ref: "#/definitions/ServiceUnavailableException"
       parameters:
         - name: maxResults
           in: query
           required: false
-          description: 'The maximum number of cluster results returned by <code>ListClusters</code> in paginated output. When this parameter is used, <code>ListClusters</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListClusters</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListClusters</code> returns up to 100 results and a <code>nextToken</code> value if applicable.'
+          description: The maximum number of cluster results returned by
+            <code>ListClusters</code> in paginated output. When this parameter
+            is used, <code>ListClusters</code> only returns
+            <code>maxResults</code> results in a single page along with a
+            <code>nextToken</code> response element. The remaining results of
+            the initial request can be seen by sending another
+            <code>ListClusters</code> request with the returned
+            <code>nextToken</code> value. This value can be between 1 and 100.
+            If this parameter is not used, then <code>ListClusters</code>
+            returns up to 100 results and a <code>nextToken</code> value if
+            applicable.
           type: integer
           minimum: 1
           maximum: 100
         - name: nextToken
           in: query
           required: false
-          description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListClusters</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value.</p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+          description: <p>The <code>nextToken</code> value returned from a previous
+            paginated <code>ListClusters</code> request where
+            <code>maxResults</code> was used and the results exceeded the value
+            of that parameter. Pagination continues from the end of the previous
+            results that returned the <code>nextToken</code> value.</p> <note>
+            <p>This token should be treated as an opaque identifier that is only
+            used to retrieve the next items in a list and not for other
+            programmatic purposes.</p> </note>
           type: string
-  '/clusters/{name}':
+  "/clusters/{name}":
     delete:
       operationId: DeleteCluster
-      description: '<p>Deletes the Amazon EKS cluster control plane. </p> <note> <p>If you have active services in your cluster that are associated with a load balancer, you must delete those services before deleting the cluster so that the load balancers are deleted properly. Otherwise, you can have orphaned resources in your VPC that prevent you from being able to delete the VPC. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/delete-cluster.html">Deleting a Cluster</a> in the <i>Amazon EKS User Guide</i>.</p> </note>'
+      description: <p>Deletes the Amazon EKS cluster control plane. </p> <note> <p>If you
+        have active services in your cluster that are associated with a load
+        balancer, you must delete those services before deleting the cluster so
+        that the load balancers are deleted properly. Otherwise, you can have
+        orphaned resources in your VPC that prevent you from being able to
+        delete the VPC. For more information, see <a
+        href="https://docs.aws.amazon.com/eks/latest/userguide/delete-cluster.html">Deleting
+        a Cluster</a> in the <i>Amazon EKS User Guide</i>.</p> </note>
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/DeleteClusterResponse'
-        '480':
+            $ref: "#/definitions/DeleteClusterResponse"
+        "480":
           description: ResourceInUseException
           schema:
-            $ref: '#/definitions/ResourceInUseException'
-        '481':
+            $ref: "#/definitions/ResourceInUseException"
+        "481":
           description: ResourceNotFoundException
           schema:
-            $ref: '#/definitions/ResourceNotFoundException'
-        '482':
+            $ref: "#/definitions/ResourceNotFoundException"
+        "482":
           description: ClientException
           schema:
-            $ref: '#/definitions/ClientException'
-        '483':
+            $ref: "#/definitions/ClientException"
+        "483":
           description: ServerException
           schema:
-            $ref: '#/definitions/ServerException'
-        '484':
+            $ref: "#/definitions/ServerException"
+        "484":
           description: ServiceUnavailableException
           schema:
-            $ref: '#/definitions/ServiceUnavailableException'
+            $ref: "#/definitions/ServiceUnavailableException"
       parameters:
         - name: name
           in: path
@@ -248,68 +366,80 @@ paths:
           description: The name of the cluster to delete.
           type: string
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
     get:
       operationId: DescribeCluster
-      description: '<p>Returns descriptive information about an Amazon EKS cluster.</p> <p>The API server endpoint and certificate authority data returned by this operation are required for <code>kubelet</code> and <code>kubectl</code> to communicate with your Kubernetes API server. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html">Create a kubeconfig for Amazon EKS</a>.</p> <note> <p>The API server endpoint and certificate authority data are not available until the cluster reaches the <code>ACTIVE</code> state.</p> </note>'
+      description: <p>Returns descriptive information about an Amazon EKS cluster.</p>
+        <p>The API server endpoint and certificate authority data returned by
+        this operation are required for <code>kubelet</code> and
+        <code>kubectl</code> to communicate with your Kubernetes API server. For
+        more information, see <a
+        href="https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html">Create
+        a kubeconfig for Amazon EKS</a>.</p> <note> <p>The API server endpoint
+        and certificate authority data are not available until the cluster
+        reaches the <code>ACTIVE</code> state.</p> </note>
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/DescribeClusterResponse'
-        '480':
+            $ref: "#/definitions/DescribeClusterResponse"
+        "480":
           description: ResourceNotFoundException
           schema:
-            $ref: '#/definitions/ResourceNotFoundException'
-        '481':
+            $ref: "#/definitions/ResourceNotFoundException"
+        "481":
           description: ClientException
           schema:
-            $ref: '#/definitions/ClientException'
-        '482':
+            $ref: "#/definitions/ClientException"
+        "482":
           description: ServerException
           schema:
-            $ref: '#/definitions/ServerException'
-        '483':
+            $ref: "#/definitions/ServerException"
+        "483":
           description: ServiceUnavailableException
           schema:
-            $ref: '#/definitions/ServiceUnavailableException'
+            $ref: "#/definitions/ServiceUnavailableException"
       parameters:
         - name: name
           in: path
           required: true
           description: The name of the cluster to describe.
           type: string
-  '/clusters/{name}/updates/{updateId}':
+  "/clusters/{name}/updates/{updateId}":
     get:
       operationId: DescribeUpdate
-      description: '<p>Returns descriptive information about an update against your Amazon EKS cluster.</p> <p>When the status of the update is <code>Succeeded</code>, the update is complete. If an update fails, the status is <code>Failed</code>, and an error detail explains the reason for the failure.</p>'
+      description: <p>Returns descriptive information about an update against your Amazon
+        EKS cluster.</p> <p>When the status of the update is
+        <code>Succeeded</code>, the update is complete. If an update fails, the
+        status is <code>Failed</code>, and an error detail explains the reason
+        for the failure.</p>
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/DescribeUpdateResponse'
-        '480':
+            $ref: "#/definitions/DescribeUpdateResponse"
+        "480":
           description: InvalidParameterException
           schema:
-            $ref: '#/definitions/InvalidParameterException'
-        '481':
+            $ref: "#/definitions/InvalidParameterException"
+        "481":
           description: ClientException
           schema:
-            $ref: '#/definitions/ClientException'
-        '482':
+            $ref: "#/definitions/ClientException"
+        "482":
           description: ServerException
           schema:
-            $ref: '#/definitions/ServerException'
-        '483':
+            $ref: "#/definitions/ServerException"
+        "483":
           description: ResourceNotFoundException
           schema:
-            $ref: '#/definitions/ResourceNotFoundException'
+            $ref: "#/definitions/ResourceNotFoundException"
       parameters:
         - name: name
           in: path
@@ -322,38 +452,39 @@ paths:
           description: The ID of the update to describe.
           type: string
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/clusters/{name}/updates':
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
+  "/clusters/{name}/updates":
     get:
       operationId: ListUpdates
-      description: 'Lists the updates associated with an Amazon EKS cluster in your AWS account, in the specified Region.'
+      description: Lists the updates associated with an Amazon EKS cluster in your AWS
+        account, in the specified Region.
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/ListUpdatesResponse'
-        '480':
+            $ref: "#/definitions/ListUpdatesResponse"
+        "480":
           description: InvalidParameterException
           schema:
-            $ref: '#/definitions/InvalidParameterException'
-        '481':
+            $ref: "#/definitions/InvalidParameterException"
+        "481":
           description: ClientException
           schema:
-            $ref: '#/definitions/ClientException'
-        '482':
+            $ref: "#/definitions/ClientException"
+        "482":
           description: ServerException
           schema:
-            $ref: '#/definitions/ServerException'
-        '483':
+            $ref: "#/definitions/ServerException"
+        "483":
           description: ResourceNotFoundException
           schema:
-            $ref: '#/definitions/ResourceNotFoundException'
+            $ref: "#/definitions/ResourceNotFoundException"
       parameters:
         - name: name
           in: path
@@ -363,55 +494,77 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: The <code>nextToken</code> value returned from a previous paginated <code>ListUpdates</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value.
+          description: The <code>nextToken</code> value returned from a previous paginated
+            <code>ListUpdates</code> request where <code>maxResults</code> was
+            used and the results exceeded the value of that parameter.
+            Pagination continues from the end of the previous results that
+            returned the <code>nextToken</code> value.
           type: string
         - name: maxResults
           in: query
           required: false
-          description: 'The maximum number of update results returned by <code>ListUpdates</code> in paginated output. When this parameter is used, <code>ListUpdates</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListUpdates</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListUpdates</code> returns up to 100 results and a <code>nextToken</code> value if applicable.'
+          description: The maximum number of update results returned by
+            <code>ListUpdates</code> in paginated output. When this parameter is
+            used, <code>ListUpdates</code> only returns <code>maxResults</code>
+            results in a single page along with a <code>nextToken</code>
+            response element. The remaining results of the initial request can
+            be seen by sending another <code>ListUpdates</code> request with the
+            returned <code>nextToken</code> value. This value can be between 1
+            and 100. If this parameter is not used, then
+            <code>ListUpdates</code> returns up to 100 results and a
+            <code>nextToken</code> value if applicable.
           type: integer
           minimum: 1
           maximum: 100
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
     post:
       operationId: UpdateClusterVersion
-      description: '<p>Updates an Amazon EKS cluster to the specified Kubernetes version. Your cluster continues to function during the update. The response output includes an update ID that you can use to track the status of your cluster update with the <a>DescribeUpdate</a> API operation.</p> <p>Cluster updates are asynchronous, and they should finish within a few minutes. During an update, the cluster status moves to <code>UPDATING</code> (this status transition is eventually consistent). When the update is complete (either <code>Failed</code> or <code>Successful</code>), the cluster status moves to <code>Active</code>.</p>'
+      description: <p>Updates an Amazon EKS cluster to the specified Kubernetes version.
+        Your cluster continues to function during the update. The response
+        output includes an update ID that you can use to track the status of
+        your cluster update with the <a>DescribeUpdate</a> API operation.</p>
+        <p>Cluster updates are asynchronous, and they should finish within a few
+        minutes. During an update, the cluster status moves to
+        <code>UPDATING</code> (this status transition is eventually consistent).
+        When the update is complete (either <code>Failed</code> or
+        <code>Successful</code>), the cluster status moves to
+        <code>Active</code>.</p>
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/UpdateClusterVersionResponse'
-        '480':
+            $ref: "#/definitions/UpdateClusterVersionResponse"
+        "480":
           description: InvalidParameterException
           schema:
-            $ref: '#/definitions/InvalidParameterException'
-        '481':
+            $ref: "#/definitions/InvalidParameterException"
+        "481":
           description: ClientException
           schema:
-            $ref: '#/definitions/ClientException'
-        '482':
+            $ref: "#/definitions/ClientException"
+        "482":
           description: ServerException
           schema:
-            $ref: '#/definitions/ServerException'
-        '483':
+            $ref: "#/definitions/ServerException"
+        "483":
           description: ResourceInUseException
           schema:
-            $ref: '#/definitions/ResourceInUseException'
-        '484':
+            $ref: "#/definitions/ResourceInUseException"
+        "484":
           description: ResourceNotFoundException
           schema:
-            $ref: '#/definitions/ResourceNotFoundException'
-        '485':
+            $ref: "#/definitions/ResourceNotFoundException"
+        "485":
           description: InvalidRequestException
           schema:
-            $ref: '#/definitions/InvalidRequestException'
+            $ref: "#/definitions/InvalidRequestException"
       parameters:
         - name: name
           in: path
@@ -430,41 +583,66 @@ paths:
                 description: The desired Kubernetes version following a successful update.
                 type: string
               clientRequestToken:
-                description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+                description: Unique, case-sensitive identifier that you provide to ensure
+                  the idempotency of the request.
                 type: string
-  '/clusters/{name}/update-config':
+  "/clusters/{name}/update-config":
     post:
       operationId: UpdateClusterConfig
-      description: '<p>Updates an Amazon EKS cluster configuration. Your cluster continues to function during the update. The response output includes an update ID that you can use to track the status of your cluster update with the <a>DescribeUpdate</a> API operation.</p> <p>Currently, the only cluster configuration changes supported are to enable or disable Amazon EKS public and private API server endpoints. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon EKS Cluster Endpoint Access Control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p> <p>Cluster updates are asynchronous, and they should finish within a few minutes. During an update, the cluster status moves to <code>UPDATING</code> (this status transition is eventually consistent). When the update is complete (either <code>Failed</code> or <code>Successful</code>), the cluster status moves to <code>Active</code>.</p>'
+      description: <p>Updates an Amazon EKS cluster configuration. Your cluster continues
+        to function during the update. The response output includes an update ID
+        that you can use to track the status of your cluster update with the
+        <a>DescribeUpdate</a> API operation.</p> <p>You can use this API
+        operation to enable or disable public and private access to your
+        cluster's Kubernetes API server endpoint. By default, public access is
+        enabled and private access is disabled. For more information, see <a
+        href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon
+        EKS Cluster Endpoint Access Control</a> in the <i> <i>Amazon EKS User
+        Guide</i> </i>. </p> <p>You can also use this API operation to enable or
+        disable exporting the Kubernetes control plane logs for your cluster to
+        CloudWatch Logs. By default, cluster control plane logs are not exported
+        to CloudWatch Logs. For more information, see <a
+        href="https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html">Amazon
+        EKS Cluster Control Plane Logs</a> in the <i> <i>Amazon EKS User
+        Guide</i> </i>.</p> <note> <p>CloudWatch Logs ingestion, archive
+        storage, and data scanning rates apply to exported control plane logs.
+        For more information, see <a
+        href="http://aws.amazon.com/cloudwatch/pricing/">Amazon CloudWatch
+        Pricing</a>.</p> </note> <p>Cluster updates are asynchronous, and they
+        should finish within a few minutes. During an update, the cluster status
+        moves to <code>UPDATING</code> (this status transition is eventually
+        consistent). When the update is complete (either <code>Failed</code> or
+        <code>Successful</code>), the cluster status moves to
+        <code>Active</code>.</p>
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/UpdateClusterConfigResponse'
-        '480':
+            $ref: "#/definitions/UpdateClusterConfigResponse"
+        "480":
           description: InvalidParameterException
           schema:
-            $ref: '#/definitions/InvalidParameterException'
-        '481':
+            $ref: "#/definitions/InvalidParameterException"
+        "481":
           description: ClientException
           schema:
-            $ref: '#/definitions/ClientException'
-        '482':
+            $ref: "#/definitions/ClientException"
+        "482":
           description: ServerException
           schema:
-            $ref: '#/definitions/ServerException'
-        '483':
+            $ref: "#/definitions/ServerException"
+        "483":
           description: ResourceInUseException
           schema:
-            $ref: '#/definitions/ResourceInUseException'
-        '484':
+            $ref: "#/definitions/ResourceInUseException"
+        "484":
           description: ResourceNotFoundException
           schema:
-            $ref: '#/definitions/ResourceNotFoundException'
-        '485':
+            $ref: "#/definitions/ResourceNotFoundException"
+        "485":
           description: InvalidRequestException
           schema:
-            $ref: '#/definitions/InvalidRequestException'
+            $ref: "#/definitions/InvalidRequestException"
       parameters:
         - name: name
           in: path
@@ -478,46 +656,86 @@ paths:
             type: object
             properties:
               resourcesVpcConfig:
-                description: An object representing an Amazon EKS cluster VPC configuration request.
+                description: An object representing the VPC configuration to use for an
+                  Amazon EKS cluster.
                 type: object
                 properties:
                   subnetIds:
-                    $ref: '#/definitions/StringList'
-                    description: Specify subnets for your Amazon EKS worker nodes. Amazon EKS creates cross-account elastic network interfaces in these subnets to allow communication between your worker nodes and the Kubernetes control plane.
+                    $ref: "#/definitions/StringList"
+                    description: Specify subnets for your Amazon EKS worker nodes. Amazon
+                      EKS creates cross-account elastic network interfaces in
+                      these subnets to allow communication between your worker
+                      nodes and the Kubernetes control plane.
                   securityGroupIds:
-                    $ref: '#/definitions/StringList'
-                    description: 'Specify one or more security groups for the cross-account elastic network interfaces that Amazon EKS creates to use to allow communication between your worker nodes and the Kubernetes control plane. If you do not specify a security group, the default security group for your VPC is used.'
+                    $ref: "#/definitions/StringList"
+                    description: Specify one or more security groups for the cross-account
+                      elastic network interfaces that Amazon EKS creates to use
+                      to allow communication between your worker nodes and the
+                      Kubernetes control plane. If you do not specify a security
+                      group, the default security group for your VPC is used.
                   endpointPublicAccess:
-                    $ref: '#/definitions/BoxedBoolean'
-                    description: 'Set this value to <code>false</code> to disable public access for your cluster''s Kubernetes API server endpoint. If you disable public access, your cluster''s Kubernetes API server can only receive requests from within the cluster VPC. The default value for this parameter is <code>true</code>, which enables public access for your Kubernetes API server. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon EKS Cluster Endpoint Access Control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
+                    $ref: "#/definitions/BoxedBoolean"
+                    description: Set this value to <code>false</code> to disable public
+                      access for your cluster's Kubernetes API server endpoint.
+                      If you disable public access, your cluster's Kubernetes
+                      API server can only receive requests from within the
+                      cluster VPC. The default value for this parameter is
+                      <code>true</code>, which enables public access for your
+                      Kubernetes API server. For more information, see <a
+                      href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon
+                      EKS Cluster Endpoint Access Control</a> in the <i>
+                      <i>Amazon EKS User Guide</i> </i>.
                   endpointPrivateAccess:
-                    $ref: '#/definitions/BoxedBoolean'
-                    description: 'Set this value to <code>true</code> to enable private access for your cluster''s Kubernetes API server endpoint. If you enable private access, Kubernetes API requests from within your cluster''s VPC will use the private VPC endpoint. The default value for this parameter is <code>false</code>, which disables private access for your Kubernetes API server. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon EKS Cluster Endpoint Access Control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
+                    $ref: "#/definitions/BoxedBoolean"
+                    description: Set this value to <code>true</code> to enable private
+                      access for your cluster's Kubernetes API server endpoint.
+                      If you enable private access, Kubernetes API requests from
+                      within your cluster's VPC will use the private VPC
+                      endpoint. The default value for this parameter is
+                      <code>false</code>, which disables private access for your
+                      Kubernetes API server. For more information, see <a
+                      href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon
+                      EKS Cluster Endpoint Access Control</a> in the <i>
+                      <i>Amazon EKS User Guide</i> </i>.
+              logging:
+                description: An object representing the logging configuration for resources
+                  in your cluster.
+                type: object
+                properties:
+                  clusterLogging:
+                    $ref: "#/definitions/LogSetups"
+                    description: The cluster control plane logging configuration for your
+                      cluster.
               clientRequestToken:
-                description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+                description: Unique, case-sensitive identifier that you provide to ensure
+                  the idempotency of the request.
                 type: string
     parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
+      - $ref: "#/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/parameters/X-Amz-Date"
+      - $ref: "#/parameters/X-Amz-Algorithm"
+      - $ref: "#/parameters/X-Amz-Credential"
+      - $ref: "#/parameters/X-Amz-Security-Token"
+      - $ref: "#/parameters/X-Amz-Signature"
+      - $ref: "#/parameters/X-Amz-SignedHeaders"
 definitions:
   CreateClusterResponse:
     type: object
     example: {}
     properties:
       cluster:
-        $ref: '#/definitions/Cluster'
+        $ref: "#/definitions/Cluster"
         description: The full description of your new cluster.
   StringList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: "#/definitions/String"
   BoxedBoolean:
     type: boolean
+  LogSetups:
+    type: array
+    items:
+      $ref: "#/definitions/LogSetup"
   ResourceInUseException: {}
   ResourceLimitExceededException: {}
   InvalidParameterException: {}
@@ -530,20 +748,20 @@ definitions:
     example: {}
     properties:
       cluster:
-        $ref: '#/definitions/Cluster'
+        $ref: "#/definitions/Cluster"
         description: The full description of the cluster to delete.
   ResourceNotFoundException: {}
   DescribeClusterResponse:
     type: object
     example:
       cluster:
-        version: '1.10'
+        version: "1.10"
         name: devel
-        arn: 'arn:aws:eks:us-west-2:012345678910:cluster/devel'
+        arn: arn:aws:eks:us-west-2:012345678910:cluster/devel
         certificateAuthority:
           data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUN5RENDQWJDZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRFNE1EVXpNVEl6TVRFek1Wb1hEVEk0TURVeU9ESXpNVEV6TVZvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTTZWCjVUaG4rdFcySm9Xa2hQMzRlVUZMNitaRXJOZGIvWVdrTmtDdWNGS2RaaXl2TjlMVmdvUmV2MjlFVFZlN1ZGbSsKUTJ3ZURyRXJiQyt0dVlibkFuN1ZLYmE3ay9hb1BHekZMdmVnb0t6b0M1N2NUdGVwZzRIazRlK2tIWHNaME10MApyb3NzcjhFM1ROeExETnNJTThGL1cwdjhsTGNCbWRPcjQyV2VuTjFHZXJnaDNSZ2wzR3JIazBnNTU0SjFWenJZCm9hTi8zODFUczlOTFF2QTBXb0xIcjBFRlZpTFdSZEoyZ3lXaC9ybDVyOFNDOHZaQXg1YW1BU0hVd01aTFpWRC8KTDBpOW4wRVM0MkpVdzQyQmxHOEdpd3NhTkJWV3lUTHZKclNhRXlDSHFtVVZaUTFDZkFXUjl0L3JleVVOVXM3TApWV1FqM3BFbk9RMitMSWJrc0RzQ0F3RUFBYU1qTUNFd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0RRWUpLb1pJaHZjTkFRRUxCUUFEZ2dFQkFNZ3RsQ1dIQ2U2YzVHMXl2YlFTS0Q4K2hUalkKSm1NSG56L2EvRGt0WG9YUjFVQzIrZUgzT1BZWmVjRVZZZHVaSlZCckNNQ2VWR0ZkeWdBYlNLc1FxWDg0S2RXbAp1MU5QaERDSmEyRHliN2pVMUV6VThTQjFGZUZ5ZFE3a0hNS1E1blpBRVFQOTY4S01hSGUrSm0yQ2x1UFJWbEJVCjF4WlhTS1gzTVZ0K1Q0SU1EV2d6c3JRSjVuQkRjdEtLcUZtM3pKdVVubHo5ZEpVckdscEltMjVJWXJDckxYUFgKWkUwRUtRNWEzMHhkVWNrTHRGQkQrOEtBdFdqSS9yZUZPNzM1YnBMdVoyOTBaNm42QlF3elRrS0p4cnhVc3QvOAppNGsxcnlsaUdWMm5SSjBUYjNORkczNHgrYWdzYTRoSTFPbU90TFM0TmgvRXJxT3lIUXNDc2hEQUtKUT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
         createdAt: 1527807879.988
-        endpoint: 'https://A0DCCD80A04F01705DD065655C30CC3D.yl4.us-west-2.eks.amazonaws.com'
+        endpoint: https://A0DCCD80A04F01705DD065655C30CC3D.yl4.us-west-2.eks.amazonaws.com
         resourcesVpcConfig:
           securityGroupIds:
             - sg-6979fe18
@@ -551,17 +769,17 @@ definitions:
             - subnet-6782e71e
             - subnet-e7e761ac
           vpcId: vpc-950809ec
-        roleArn: 'arn:aws:iam::012345678910:role/eks-service-role-AWSServiceRoleForAmazonEKS-J7ONKE3BQ4PI'
+        roleArn: arn:aws:iam::012345678910:role/eks-service-role-AWSServiceRoleForAmazonEKS-J7ONKE3BQ4PI
         status: ACTIVE
     properties:
       cluster:
-        $ref: '#/definitions/Cluster'
+        $ref: "#/definitions/Cluster"
         description: The full description of your specified cluster.
   DescribeUpdateResponse:
     type: object
     properties:
       update:
-        $ref: '#/definitions/Update'
+        $ref: "#/definitions/Update"
         description: The full description of the specified update.
   ListClustersResponse:
     type: object
@@ -571,31 +789,39 @@ definitions:
         - prod
     properties:
       clusters:
-        $ref: '#/definitions/StringList'
+        $ref: "#/definitions/StringList"
         description: A list of all of the clusters for your account in the specified Region.
       nextToken:
-        $ref: '#/definitions/String'
-        description: 'The <code>nextToken</code> value to include in a future <code>ListClusters</code> request. When the results of a <code>ListClusters</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
+        $ref: "#/definitions/String"
+        description: The <code>nextToken</code> value to include in a future
+          <code>ListClusters</code> request. When the results of a
+          <code>ListClusters</code> request exceed <code>maxResults</code>, this
+          value can be used to retrieve the next page of results. This value is
+          <code>null</code> when there are no more results to return.
   ListUpdatesResponse:
     type: object
     properties:
       updateIds:
-        $ref: '#/definitions/StringList'
+        $ref: "#/definitions/StringList"
         description: A list of all the updates for the specified cluster and Region.
       nextToken:
-        $ref: '#/definitions/String'
-        description: 'The <code>nextToken</code> value to include in a future <code>ListUpdates</code> request. When the results of a <code>ListUpdates</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
+        $ref: "#/definitions/String"
+        description: The <code>nextToken</code> value to include in a future
+          <code>ListUpdates</code> request. When the results of a
+          <code>ListUpdates</code> request exceed <code>maxResults</code>, this
+          value can be used to retrieve the next page of results. This value is
+          <code>null</code> when there are no more results to return.
   UpdateClusterConfigResponse:
     type: object
     properties:
       update:
-        $ref: '#/definitions/Update'
+        $ref: "#/definitions/Update"
   InvalidRequestException: {}
   UpdateClusterVersionResponse:
     type: object
     properties:
       update:
-        $ref: '#/definitions/Update'
+        $ref: "#/definitions/Update"
         description: The full description of the specified update
   Boolean:
     type: boolean
@@ -605,9 +831,12 @@ definitions:
     type: object
     properties:
       data:
-        $ref: '#/definitions/String'
-        description: The base64 encoded certificate data required to communicate with your cluster. Add this to the <code>certificate-authority-data</code> section of the <code>kubeconfig</code> file for your cluster.
-    description: An object representing the <code>certificate-authority-data</code> for your cluster.
+        $ref: "#/definitions/String"
+        description: The base64 encoded certificate data required to communicate with your
+          cluster. Add this to the <code>certificate-authority-data</code>
+          section of the <code>kubeconfig</code> file for your cluster.
+    description: An object representing the <code>certificate-authority-data</code> for
+      your cluster.
   Timestamp:
     type: string
     format: date-time
@@ -615,21 +844,38 @@ definitions:
     type: object
     properties:
       subnetIds:
-        $ref: '#/definitions/StringList'
+        $ref: "#/definitions/StringList"
         description: The subnets associated with your cluster.
       securityGroupIds:
-        $ref: '#/definitions/StringList'
-        description: The security groups associated with the cross-account elastic network interfaces that are used to allow communication between your worker nodes and the Kubernetes control plane.
+        $ref: "#/definitions/StringList"
+        description: The security groups associated with the cross-account elastic network
+          interfaces that are used to allow communication between your worker
+          nodes and the Kubernetes control plane.
       vpcId:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: The VPC associated with your cluster.
       endpointPublicAccess:
-        $ref: '#/definitions/Boolean'
-        description: 'This parameter indicates whether the Amazon EKS public API server endpoint is enabled. If the Amazon EKS public API server endpoint is disabled, your cluster''s Kubernetes API server can only receive requests that originate from within the cluster VPC. '
+        $ref: "#/definitions/Boolean"
+        description: "This parameter indicates whether the Amazon EKS public API server
+          endpoint is enabled. If the Amazon EKS public API server endpoint is
+          disabled, your cluster's Kubernetes API server can only receive
+          requests that originate from within the cluster VPC. "
       endpointPrivateAccess:
-        $ref: '#/definitions/Boolean'
-        description: 'This parameter indicates whether the Amazon EKS private API server endpoint is enabled. If the Amazon EKS private API server endpoint is enabled, Kubernetes API requests that originate from within your cluster''s VPC will use the private VPC endpoint instead of traversing the internet.'
+        $ref: "#/definitions/Boolean"
+        description: This parameter indicates whether the Amazon EKS private API server
+          endpoint is enabled. If the Amazon EKS private API server endpoint is
+          enabled, Kubernetes API requests that originate from within your
+          cluster's VPC will use the private VPC endpoint instead of traversing
+          the internet.
     description: An object representing an Amazon EKS cluster VPC configuration response.
+  Logging:
+    type: object
+    properties:
+      clusterLogging:
+        $ref: "#/definitions/LogSetups"
+        description: The cluster control plane logging configuration for your cluster.
+    description: An object representing the logging configuration for resources in your
+      cluster.
   ClusterStatus:
     type: string
     enum:
@@ -641,60 +887,99 @@ definitions:
     type: object
     properties:
       name:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: The name of the cluster.
       arn:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: The Amazon Resource Name (ARN) of the cluster.
       createdAt:
-        $ref: '#/definitions/Timestamp'
+        $ref: "#/definitions/Timestamp"
         description: The Unix epoch timestamp in seconds for when the cluster was created.
       version:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: The Kubernetes server version for the cluster.
       endpoint:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: The endpoint for your Kubernetes API server.
       roleArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the IAM role that provides permissions for the Kubernetes control plane to make calls to AWS API operations on your behalf.
+        $ref: "#/definitions/String"
+        description: The Amazon Resource Name (ARN) of the IAM role that provides
+          permissions for the Kubernetes control plane to make calls to AWS API
+          operations on your behalf.
       resourcesVpcConfig:
-        $ref: '#/definitions/VpcConfigResponse'
-        description: 'The VPC configuration used by the cluster control plane. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html">Cluster VPC Considerations</a> and <a href="https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html">Cluster Security Group Considerations</a> in the <i>Amazon EKS User Guide</i>.'
+        $ref: "#/definitions/VpcConfigResponse"
+        description: The VPC configuration used by the cluster control plane. Amazon EKS
+          VPC resources have specific requirements to work properly with
+          Kubernetes. For more information, see <a
+          href="https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html">Cluster
+          VPC Considerations</a> and <a
+          href="https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html">Cluster
+          Security Group Considerations</a> in the <i>Amazon EKS User Guide</i>.
+      logging:
+        $ref: "#/definitions/Logging"
+        description: The logging configuration for your cluster.
       status:
-        $ref: '#/definitions/ClusterStatus'
+        $ref: "#/definitions/ClusterStatus"
         description: The current status of the cluster.
       certificateAuthority:
-        $ref: '#/definitions/Certificate'
+        $ref: "#/definitions/Certificate"
         description: The <code>certificate-authority-data</code> for your cluster.
       clientRequestToken:
-        $ref: '#/definitions/String'
-        description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+        $ref: "#/definitions/String"
+        description: Unique, case-sensitive identifier that you provide to ensure the
+          idempotency of the request.
       platformVersion:
-        $ref: '#/definitions/String'
-        description: 'The platform version of your Amazon EKS cluster. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/platform-versions.html">Platform Versions</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
+        $ref: "#/definitions/String"
+        description: The platform version of your Amazon EKS cluster. For more information,
+          see <a
+          href="https://docs.aws.amazon.com/eks/latest/userguide/platform-versions.html">Platform
+          Versions</a> in the <i> <i>Amazon EKS User Guide</i> </i>.
     description: An object representing an Amazon EKS cluster.
   ClusterName:
     type: string
-    pattern: '^[0-9A-Za-z][A-Za-z0-9\-_]*'
+    pattern: ^[0-9A-Za-z][A-Za-z0-9\-_]*
     minLength: 1
     maxLength: 100
   VpcConfigRequest:
     type: object
     properties:
       subnetIds:
-        $ref: '#/definitions/StringList'
-        description: Specify subnets for your Amazon EKS worker nodes. Amazon EKS creates cross-account elastic network interfaces in these subnets to allow communication between your worker nodes and the Kubernetes control plane.
+        $ref: "#/definitions/StringList"
+        description: Specify subnets for your Amazon EKS worker nodes. Amazon EKS creates
+          cross-account elastic network interfaces in these subnets to allow
+          communication between your worker nodes and the Kubernetes control
+          plane.
       securityGroupIds:
-        $ref: '#/definitions/StringList'
-        description: 'Specify one or more security groups for the cross-account elastic network interfaces that Amazon EKS creates to use to allow communication between your worker nodes and the Kubernetes control plane. If you do not specify a security group, the default security group for your VPC is used.'
+        $ref: "#/definitions/StringList"
+        description: Specify one or more security groups for the cross-account elastic
+          network interfaces that Amazon EKS creates to use to allow
+          communication between your worker nodes and the Kubernetes control
+          plane. If you do not specify a security group, the default security
+          group for your VPC is used.
       endpointPublicAccess:
-        $ref: '#/definitions/BoxedBoolean'
-        description: 'Set this value to <code>false</code> to disable public access for your cluster''s Kubernetes API server endpoint. If you disable public access, your cluster''s Kubernetes API server can only receive requests from within the cluster VPC. The default value for this parameter is <code>true</code>, which enables public access for your Kubernetes API server. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon EKS Cluster Endpoint Access Control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
+        $ref: "#/definitions/BoxedBoolean"
+        description: Set this value to <code>false</code> to disable public access for your
+          cluster's Kubernetes API server endpoint. If you disable public
+          access, your cluster's Kubernetes API server can only receive requests
+          from within the cluster VPC. The default value for this parameter is
+          <code>true</code>, which enables public access for your Kubernetes API
+          server. For more information, see <a
+          href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon
+          EKS Cluster Endpoint Access Control</a> in the <i> <i>Amazon EKS User
+          Guide</i> </i>.
       endpointPrivateAccess:
-        $ref: '#/definitions/BoxedBoolean'
-        description: 'Set this value to <code>true</code> to enable private access for your cluster''s Kubernetes API server endpoint. If you enable private access, Kubernetes API requests from within your cluster''s VPC will use the private VPC endpoint. The default value for this parameter is <code>false</code>, which disables private access for your Kubernetes API server. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon EKS Cluster Endpoint Access Control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
-    description: An object representing an Amazon EKS cluster VPC configuration request.
+        $ref: "#/definitions/BoxedBoolean"
+        description: Set this value to <code>true</code> to enable private access for your
+          cluster's Kubernetes API server endpoint. If you enable private
+          access, Kubernetes API requests from within your cluster's VPC will
+          use the private VPC endpoint. The default value for this parameter is
+          <code>false</code>, which disables private access for your Kubernetes
+          API server. For more information, see <a
+          href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon
+          EKS Cluster Endpoint Access Control</a> in the <i> <i>Amazon EKS User
+          Guide</i> </i>.
+    description: An object representing the VPC configuration to use for an Amazon EKS
+      cluster.
   CreateClusterRequest:
     type: object
     required:
@@ -703,20 +988,47 @@ definitions:
       - resourcesVpcConfig
     properties:
       name:
-        $ref: '#/definitions/ClusterName'
+        $ref: "#/definitions/ClusterName"
         description: The unique name to give to your cluster.
       version:
-        $ref: '#/definitions/String'
-        description: 'The desired Kubernetes version for your cluster. If you do not specify a value here, the latest version available in Amazon EKS is used.'
+        $ref: "#/definitions/String"
+        description: The desired Kubernetes version for your cluster. If you do not specify
+          a value here, the latest version available in Amazon EKS is used.
       roleArn:
-        $ref: '#/definitions/String'
-        description: 'The Amazon Resource Name (ARN) of the IAM role that provides permissions for Amazon EKS to make calls to other AWS API operations on your behalf. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html">Amazon EKS Service IAM Role</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
+        $ref: "#/definitions/String"
+        description: The Amazon Resource Name (ARN) of the IAM role that provides
+          permissions for Amazon EKS to make calls to other AWS API operations
+          on your behalf. For more information, see <a
+          href="https://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html">Amazon
+          EKS Service IAM Role</a> in the <i> <i>Amazon EKS User Guide</i> </i>.
       resourcesVpcConfig:
-        $ref: '#/definitions/VpcConfigRequest'
-        description: 'The VPC configuration used by the cluster control plane. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html">Cluster VPC Considerations</a> and <a href="https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html">Cluster Security Group Considerations</a> in the <i>Amazon EKS User Guide</i>. You must specify at least two subnets. You may specify up to five security groups, but we recommend that you use a dedicated security group for your cluster control plane.'
+        $ref: "#/definitions/VpcConfigRequest"
+        description: The VPC configuration used by the cluster control plane. Amazon EKS
+          VPC resources have specific requirements to work properly with
+          Kubernetes. For more information, see <a
+          href="https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html">Cluster
+          VPC Considerations</a> and <a
+          href="https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html">Cluster
+          Security Group Considerations</a> in the <i>Amazon EKS User Guide</i>.
+          You must specify at least two subnets. You may specify up to five
+          security groups, but we recommend that you use a dedicated security
+          group for your cluster control plane.
+      logging:
+        $ref: "#/definitions/Logging"
+        description: <p>Enable or disable exporting the Kubernetes control plane logs for
+          your cluster to CloudWatch Logs. By default, cluster control plane
+          logs are not exported to CloudWatch Logs. For more information, see <a
+          href="https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html">Amazon
+          EKS Cluster Control Plane Logs</a> in the <i> <i>Amazon EKS User
+          Guide</i> </i>.</p> <note> <p>CloudWatch Logs ingestion, archive
+          storage, and data scanning rates apply to exported control plane logs.
+          For more information, see <a
+          href="http://aws.amazon.com/cloudwatch/pricing/">Amazon CloudWatch
+          Pricing</a>.</p> </note>
       clientRequestToken:
-        $ref: '#/definitions/String'
-        description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+        $ref: "#/definitions/String"
+        description: Unique, case-sensitive identifier that you provide to ensure the
+          idempotency of the request.
   DeleteClusterRequest:
     type: object
     properties: {}
@@ -730,22 +1042,23 @@ definitions:
     type: object
     properties:
       id:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: A UUID that is used to track the update.
       status:
-        $ref: '#/definitions/UpdateStatus'
+        $ref: "#/definitions/UpdateStatus"
         description: The current status of the update.
       type:
-        $ref: '#/definitions/UpdateType'
+        $ref: "#/definitions/UpdateType"
         description: The type of the update.
       params:
-        $ref: '#/definitions/UpdateParams'
-        description: A key-value map that contains the parameters associated with the update.
+        $ref: "#/definitions/UpdateParams"
+        description: A key-value map that contains the parameters associated with the
+          update.
       createdAt:
-        $ref: '#/definitions/Timestamp'
+        $ref: "#/definitions/Timestamp"
         description: The Unix epoch timestamp in seconds for when the update was created.
       errors:
-        $ref: '#/definitions/ErrorDetails'
+        $ref: "#/definitions/ErrorDetails"
         description: Any errors associated with a <code>Failed</code> update.
     description: An object representing an asynchronous update.
   ErrorCode:
@@ -763,19 +1076,33 @@ definitions:
     type: object
     properties:
       errorCode:
-        $ref: '#/definitions/ErrorCode'
-        description: '<p>A brief description of the error. </p> <ul> <li> <p> <b>SubnetNotFound</b>: One of the subnets associated with the cluster could not be found.</p> </li> <li> <p> <b>SecurityGroupNotFound</b>: One of the security groups associated with the cluster could not be found.</p> </li> <li> <p> <b>EniLimitReached</b>: You have reached the elastic network interface limit for your account.</p> </li> <li> <p> <b>IpNotAvailable</b>: A subnet associated with the cluster does not have any free IP addresses.</p> </li> <li> <p> <b>AccessDenied</b>: You do not have permissions to perform the specified operation.</p> </li> <li> <p> <b>OperationNotPermitted</b>: The service role associated with the cluster does not have the required access permissions for Amazon EKS.</p> </li> <li> <p> <b>VpcIdNotFound</b>: The VPC associated with the cluster could not be found.</p> </li> </ul>'
+        $ref: "#/definitions/ErrorCode"
+        description: "<p>A brief description of the error. </p> <ul> <li> <p>
+          <b>SubnetNotFound</b>: One of the subnets associated with the cluster
+          could not be found.</p> </li> <li> <p> <b>SecurityGroupNotFound</b>:
+          One of the security groups associated with the cluster could not be
+          found.</p> </li> <li> <p> <b>EniLimitReached</b>: You have reached the
+          elastic network interface limit for your account.</p> </li> <li> <p>
+          <b>IpNotAvailable</b>: A subnet associated with the cluster does not
+          have any free IP addresses.</p> </li> <li> <p> <b>AccessDenied</b>:
+          You do not have permissions to perform the specified operation.</p>
+          </li> <li> <p> <b>OperationNotPermitted</b>: The service role
+          associated with the cluster does not have the required access
+          permissions for Amazon EKS.</p> </li> <li> <p> <b>VpcIdNotFound</b>:
+          The VPC associated with the cluster could not be found.</p> </li>
+          </ul>"
       errorMessage:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: A more complete description of the error.
       resourceIds:
-        $ref: '#/definitions/StringList'
-        description: An optional field that contains the resource IDs associated with the error.
+        $ref: "#/definitions/StringList"
+        description: An optional field that contains the resource IDs associated with the
+          error.
     description: An object representing an error when an asynchronous operation fails.
   ErrorDetails:
     type: array
     items:
-      $ref: '#/definitions/ErrorDetail'
+      $ref: "#/definitions/ErrorDetail"
   ListClustersRequestMaxResults:
     type: integer
     minimum: 1
@@ -790,6 +1117,32 @@ definitions:
   ListUpdatesRequest:
     type: object
     properties: {}
+  LogTypes:
+    type: array
+    items:
+      $ref: "#/definitions/LogType"
+  LogSetup:
+    type: object
+    properties:
+      types:
+        $ref: "#/definitions/LogTypes"
+        description: The available cluster control plane log types.
+      enabled:
+        $ref: "#/definitions/BoxedBoolean"
+        description: If a log type is enabled, then that log type exports its control plane
+          logs to CloudWatch Logs. If a log type is not enabled, then that log
+          type does not export its control plane logs. Each individual log type
+          can be enabled or disabled independently.
+    description: An object representing the enabled or disabled Kubernetes control plane
+      logs for your cluster.
+  LogType:
+    type: string
+    enum:
+      - api
+      - audit
+      - authenticator
+      - controllerManager
+      - scheduler
   UpdateStatus:
     type: string
     enum:
@@ -802,29 +1155,44 @@ definitions:
     enum:
       - VersionUpdate
       - EndpointAccessUpdate
+      - LoggingUpdate
   UpdateParams:
     type: array
     items:
-      $ref: '#/definitions/UpdateParam'
+      $ref: "#/definitions/UpdateParam"
   UpdateClusterConfigRequest:
     type: object
     properties:
       resourcesVpcConfig:
-        $ref: '#/definitions/VpcConfigRequest'
+        $ref: "#/definitions/VpcConfigRequest"
+      logging:
+        $ref: "#/definitions/Logging"
+        description: <p>Enable or disable exporting the Kubernetes control plane logs for
+          your cluster to CloudWatch Logs. By default, cluster control plane
+          logs are not exported to CloudWatch Logs. For more information, see <a
+          href="https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html">Amazon
+          EKS Cluster Control Plane Logs</a> in the <i> <i>Amazon EKS User
+          Guide</i> </i>.</p> <note> <p>CloudWatch Logs ingestion, archive
+          storage, and data scanning rates apply to exported control plane logs.
+          For more information, see <a
+          href="http://aws.amazon.com/cloudwatch/pricing/">Amazon CloudWatch
+          Pricing</a>.</p> </note>
       clientRequestToken:
-        $ref: '#/definitions/String'
-        description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+        $ref: "#/definitions/String"
+        description: Unique, case-sensitive identifier that you provide to ensure the
+          idempotency of the request.
   UpdateClusterVersionRequest:
     type: object
     required:
       - version
     properties:
       version:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: The desired Kubernetes version following a successful update.
       clientRequestToken:
-        $ref: '#/definitions/String'
-        description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+        $ref: "#/definitions/String"
+        description: Unique, case-sensitive identifier that you provide to ensure the
+          idempotency of the request.
   UpdateParamType:
     type: string
     enum:
@@ -832,13 +1200,14 @@ definitions:
       - PlatformVersion
       - EndpointPrivateAccess
       - EndpointPublicAccess
+      - ClusterLogging
   UpdateParam:
     type: object
     properties:
       type:
-        $ref: '#/definitions/UpdateParamType'
+        $ref: "#/definitions/UpdateParamType"
         description: The keys associated with an update request.
       value:
-        $ref: '#/definitions/String'
+        $ref: "#/definitions/String"
         description: The value of the keys submitted as part of an update request.
     description: An object representing the details of an update request.
