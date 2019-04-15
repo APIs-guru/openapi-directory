@@ -14,9 +14,9 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.31
       format: openapi
-      url: 'https://raw.githubusercontent.com/adyen/adyen-openapi/master/specs/3.0/RecurringService-V18.json'
+      url: 'https://raw.githubusercontent.com/adyen/adyen-openapi/master/specs/3.0/RecurringService-v18.json'
       version: '3.0'
   x-preferred: false
   x-providerName: adyen.com
@@ -183,7 +183,7 @@ components:
         expiryYear:
           description: |-
             The card expiry year.
-            Format: 4 digits. For example: 2018
+            Format: 4 digits. For example: 2020
           maxLength: 4
           minLength: 4
           type: string

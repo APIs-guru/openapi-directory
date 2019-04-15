@@ -3,8 +3,34 @@ servers:
   - url: 'https://pal-test.adyen.com/pal/servlet/Payment/v30'
 info:
   contact:
+    email: support@adyen.com
+    name: Adyen Support
+    url: 'https://support.adyen.com/'
     x-twitter: Adyen
-  description: 'A set of API endpoints that allow you to initiate, settle, and modify payments on the Adyen payments platform. You can use the API to accept card payments (including One-Click and 3D Secure), bank transfers, ewallets, and many other payment methods. For more information, refer to [Ecommerce integration](https://docs.adyen.com/developers/ecommerce-integration).'
+  description: |-
+    A set of API endpoints that allow you to initiate, settle, and modify payments on the Adyen payments platform. You can use the API to accept card payments (including One-Click and 3D Secure), bank transfers, ewallets, and many other payment methods.
+
+    To learn more about the API, visit [Classic integration](https://docs.adyen.com/developers/classic-integration).
+
+    ## Authentication
+    To connect to the Payments API, you must use your basic authentication credentials. For this, create your web service user, as described in [How to get the WS user password](https://docs.adyen.com/developers/user-management/how-to-get-the-web-service-ws-user-password). Then use its credentials to authenticate your request, for example:
+
+    ```
+    curl
+    -U "ws@Company.YourCompany":"YourWsPassword" \
+    -H "Content-Type: application/json" \
+    ...
+    ```
+    Note that when going live, you need to generate new web service user credentials to access the [live endpoints](https://docs.adyen.com/developers/development-resources/live-endpoints).
+
+    ## Versioning
+    Payments API supports versioning of its endpoints through a version suffix in the endpoint URL. This suffix has the following format: "vXX", where XX is the version number.
+
+    For example:
+    ```
+    https://pal-test.adyen.com/pal/servlet/Payment/v30/authorise
+    ```
+  termsOfService: 'https://www.adyen.com/legal/terms-and-conditions'
   title: Adyen Payment Service
   version: '30'
   x-apisguru-categories:
@@ -14,11 +40,11 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.31
       format: openapi
-      url: 'https://raw.githubusercontent.com/adyen/adyen-openapi/master/specs/3.0/PaymentService-V30.json'
+      url: 'https://raw.githubusercontent.com/adyen/adyen-openapi/master/specs/3.0/PaymentService-v30.json'
       version: '3.0'
-  x-preferred: true
+  x-preferred: false
   x-providerName: adyen.com
   x-serviceName: PaymentService
 paths:
@@ -27,7 +53,7 @@ paths:
       description: |-
         Allows you to increase or decrease the authorised amount after the initial authorisation has taken place. This functionality enables tipping, improving the chances your authorisation will be valid, charging the shopper when they have already left the merchant premises, etc.
 
-        For more information, refer to [Adjust Authorisation](https://docs.adyen.com/developers/payment-modifications#adjustauthorisation).
+        For more information, refer to [Adjust Authorisation](https://docs.adyen.com/developers/payment-modifications/adjust-authorisation).
       requestBody:
         content:
           application/json:
@@ -50,15 +76,15 @@ paths:
           description: Unprocessable Entity - a request validation error.
         '500':
           description: Internal Server Error - the server could not process the request.
-      summary: Adjust the authorised amount
+      summary: Increases or decreases the authorised amount.
       x-groupName: Modifications
-      x-sortIndex: 5
+      x-sortIndex: 6
   /authorise:
     post:
       description: |-
         Creates a payment with a unique reference (`pspReference`) and attempts to obtain an authorisation hold. For cards, this amount can be captured or cancelled later. Non-card payment methods typically don't support this and will automatically capture as part of the authorisation.
 
-        For more information, refer to [Ecommerce quick integration](https://docs.adyen.com/developers/ecommerce-integration).
+        For more information, refer to [Classic integration](https://docs.adyen.com/developers/classic-integration).
       requestBody:
         content:
           application/json:
@@ -81,7 +107,7 @@ paths:
           description: Unprocessable Entity - a request validation error.
         '500':
           description: Internal Server Error - the server could not process the request.
-      summary: Create a payment authorisation
+      summary: Creates a payment authorisation.
       x-groupName: General
       x-sortIndex: 1
   /authorise3d:
@@ -112,7 +138,7 @@ paths:
           description: Unprocessable Entity - a request validation error.
         '500':
           description: Internal Server Error - the server could not process the request.
-      summary: Complete a 3D Secure payment authorisation
+      summary: Completes a 3D Secure payment authorisation.
       x-groupName: General
       x-sortIndex: 2
   /cancel:
@@ -120,7 +146,7 @@ paths:
       description: |-
         Cancels the authorisation hold on a payment, returning a unique reference for this request. You can cancel payments after authorisation only for payment methods that support distinct authorisations and captures.
 
-        For more information, refer to [Cancel](https://docs.adyen.com/developers/payment-modifications#cancel).
+        For more information, refer to [Cancel](https://docs.adyen.com/developers/payment-modifications/cancel).
       requestBody:
         content:
           application/json:
@@ -143,15 +169,17 @@ paths:
           description: Unprocessable Entity - a request validation error.
         '500':
           description: Internal Server Error - the server could not process the request.
-      summary: Cancel a payment authorisation
+      summary: Cancels an authorised payment.
       x-groupName: Modifications
       x-sortIndex: 2
   /cancelOrRefund:
     post:
       description: |-
-        Cancels a payment if it has not yet been captured yet, or refunds it if it has already been captured. This is useful when it is not certain if the payment has been captured or not (for example, when using auto-capture).
+        Cancels a payment if it has not been captured yet, or refunds it if it has already been captured. This is useful when it is not certain if the payment has been captured or not (for example, when using auto-capture).
 
-        For more information, refer to [Cancel or refund](https://docs.adyen.com/developers/payment-modifications#cancelorrefund).
+        > Do not use this request for payments that involve (multiple) partial captures.
+
+        For more information, refer to [Cancel or refund](https://docs.adyen.com/developers/payment-modifications/cancel-or-refund).
       requestBody:
         content:
           application/json:
@@ -172,7 +200,7 @@ paths:
           description: Unprocessable Entity - a request validation error.
         '500':
           description: Internal Server Error - the server could not process the request.
-      summary: Cancel or refund a payment
+      summary: Cancels or refunds a payment.
       x-groupName: Modifications
       x-sortIndex: 4
   /capture:
@@ -182,7 +210,7 @@ paths:
 
         Payment methods, which automatically capture as part of authorisation, don't need to be captured, but submitting a capture request on these transactions will not result in double charges. If immediate or delayed auto-capture is enabled, calling the capture method is not neccessary.
 
-        For more information, refer to [Capture](https://docs.adyen.com/developers/payment-modifications#capture).
+        For more information, refer to [Capture](https://docs.adyen.com/developers/payment-modifications/capture).
       requestBody:
         content:
           application/json:
@@ -205,7 +233,7 @@ paths:
           description: Unprocessable Entity - a request validation error.
         '500':
           description: Internal Server Error - the server could not process the request.
-      summary: Capture a payment authorisation
+      summary: Captures an authorised payment.
       x-groupName: Modifications
       x-sortIndex: 1
   /refund:
@@ -216,7 +244,7 @@ paths:
         > Some payment methods/gateways do not support partial/multiple refunds.
         > A margin above the captured limit can be configured to cover shipping/handling costs.
 
-        For more information, refer to [Refund](https://docs.adyen.com/developers/payment-modifications#refund).
+        For more information, refer to [Refund](https://docs.adyen.com/developers/payment-modifications/refund).
       requestBody:
         content:
           application/json:
@@ -237,42 +265,81 @@ paths:
           description: Unprocessable Entity - a request validation error.
         '500':
           description: Internal Server Error - the server could not process the request.
-      summary: Refund a payment
+      summary: Refunds a captured payment.
       x-groupName: Modifications
       x-sortIndex: 3
+  /technicalCancel:
+    post:
+      description: |-
+        Cancels a previously authorised payment using a custom reference value, that you submitted as a `reference` parameter in the original `/authorise` request.
+
+        For more information, refer to [Technical Cancel](https://docs.adyen.com/developers/payment-modifications/technical-cancel).
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModificationRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModificationResult'
+          description: OK - the request has succeeded.
+        '400':
+          description: Bad Request - a problem reading or understanding the request.
+        '401':
+          description: Unauthorized - authentication required.
+        '403':
+          description: Forbidden - insufficient permissions to process the request.
+        '422':
+          description: Unprocessable Entity - a request validation error.
+        '500':
+          description: Internal Server Error - the server could not process the request.
+      summary: Cancels an authorised payment using a custom reference.
+      x-groupName: Modifications
+      x-sortIndex: 5
 components:
   schemas:
     Address:
       properties:
         city:
-          description: The city name.
+          description: |-
+            The name of the city.
+            >Required if either houseNumberOrName, street, postalCode, or stateOrProvince are provided.
           type: string
         country:
-          description: A valid value is an ISO two-character country code (e.g. 'NL').
+          description: |-
+            The two-character country code of the address
+            >The permitted country codes are defined in ISO-3166-1 alpha-2 (e.g. 'NL').
           type: string
         houseNumberOrName:
-          description: The house number or name.
+          description: The number or name of the house.
           type: string
         postalCode:
-          description: The postal code with a maximum of 5 characters for USA and maximum of 10 characters for any other country.
+          description: |-
+            The postal code.
+            >A maximum of five (5) digits for an address in the USA, or a maximum of ten (10) characters for an address in all other countries.
+            >Required if either houseNumberOrName, street, city, or stateOrProvince are provided.
           type: string
         stateOrProvince:
-          description: 'For USA or Canada, a valid 2-character abbreviation for the state or province respectively. For other countries any abbreviation with maximum 3 characters for the state or province.'
+          description: |-
+            The abbreviation of the state or province.
+            >Two (2) characters for an address in the USA or Canada, or a maximum of three (3) characters for an address in all other countries.
+            >Required for an address in the USA or Canada if either houseNumberOrName, street, city, or postalCode are provided.
           type: string
         street:
-          description: |
-            The street name.
-            > Don't append the house number to this field. Instead, pass the house number separately as `houseNumberOrName`.
+          description: |-
+            The name of the street.
+            >The house number should not be included in this field; it should be separately provided via `houseNumberOrName`.
+            >Required if either houseNumberOrName, city, postalCode, or stateOrProvince are provided.
           type: string
       required:
-        - street
-        - houseNumberOrName
-        - city
         - country
     Amount:
       properties:
         currency:
-          description: 'The three-character [ISO currency code](https://docs.adyen.com/developers/currency-codes).'
+          description: 'The three-character [ISO currency code](https://docs.adyen.com/developers/development-resources/currency-codes).'
           maxLength: 3
           minLength: 3
           type: string
@@ -280,7 +347,7 @@ components:
           description: |-
             The payable amount that can be charged for the transaction.
 
-            The transaction amount needs to be represented in minor units according to the [following table](https://docs.adyen.com/developers/currency-codes).
+            The transaction amount needs to be represented in minor units according to the [following table](https://docs.adyen.com/developers/development-resources/currency-codes).
           format: int64
           type: integer
       required:
@@ -351,8 +418,8 @@ components:
             The [card verification code](https://docs.adyen.com/developers/payment-glossary#cardsecuritycodecvccvvcid) (1-20 characters). Depending on the card brand, it is known also as:
             * CVV2/CVC2 – length: 3 digits
             * CID – length: 4 digits
-            > If you are using [Client-Side Encryption](https://docs.adyen.com/developers/ecommerce-integration), the CVC code is present in the encrypted data. You must never post the card details to the server.
-            > This field must be always present in a [one-click payment request](https://docs.adyen.com/developers/features/recurring-payments).
+            > If you are using [Client-Side Encryption](https://docs.adyen.com/developers/features/client-side-encryption), the CVC code is present in the encrypted data. You must never post the card details to the server.
+            > This field must be always present in a [one-click payment request](https://docs.adyen.com/developers/classic-integration/recurring-payments).
             > When this value is returned in a response, it is always empty because it is not stored.
           maxLength: 20
           minLength: 1
@@ -369,7 +436,7 @@ components:
         expiryYear:
           description: |-
             The card expiry year.
-            Format: 4 digits. For example: 2018
+            Format: 4 digits. For example: 2020
           maxLength: 4
           minLength: 4
           type: string
@@ -405,7 +472,6 @@ components:
         - expiryMonth
         - expiryYear
         - holderName
-    Collection: {}
     ForexQuote:
       properties:
         account:
@@ -449,6 +515,23 @@ components:
       required:
         - validTill
         - basePoints
+    FraudCheckResult:
+      properties:
+        accountScore:
+          description: The fraud score generated by the risk check.
+          format: int32
+          type: integer
+        checkId:
+          description: The ID of the risk check.
+          format: int32
+          type: integer
+        name:
+          description: The name of the risk check.
+          type: string
+      required:
+        - checkId
+        - name
+        - accountScore
     FraudResult:
       properties:
         accountScore:
@@ -456,8 +539,10 @@ components:
           format: int32
           type: integer
         results:
-          $ref: '#/components/schemas/Collection'
           description: The result of the individual risk checks.
+          items:
+            $ref: '#/components/schemas/FraudCheckResult'
+          type: array
       required:
         - accountScore
     Installments:
@@ -474,13 +559,11 @@ components:
     ModificationRequest:
       properties:
         additionalData:
-          additionalProperties:
-            type: string
-          description: 'This field contains additional data, which may be required for a particular payment request.'
+          description: |-
+            This field contains additional data, which may be required for a particular modification request.
+
+            The additionalData object consists of entries, each of which includes the key and value. For more information on possible key-value pairs, refer to the [ModificationRequest.additionalData](https://docs.adyen.com/developers/api-reference/payments-api/modificationrequest/modificationrequest-additionaldata) section.
           type: object
-        authorisationCode:
-          description: The authorisation code of the payment (only required for the "authoriseReferral" method).
-          type: string
         merchantAccount:
           description: The merchant account that is used to process the payment.
           type: string
@@ -514,12 +597,10 @@ components:
     ModificationResult:
       properties:
         additionalData:
-          additionalProperties:
-            type: string
           description: 'This field contains additional data, which may be returned in a particular modification response.'
           type: object
         pspReference:
-          description: Adyen's 16-digit unique reference associated with the transaction/the request. This value is globally unique; quote it when communicating with us about this request.
+          description: Adyen's 16-character string reference associated with the transaction/request. This value is globally unique; quote it when communicating with us about this request.
           type: string
         response:
           description: Indicates if the modification request has been received for processing.
@@ -532,10 +613,12 @@ components:
     Name:
       properties:
         firstName:
-          description: A person's first name.
+          description: The first name.
           type: string
         gender:
-          description: A person's gender (can be unknown).
+          description: |-
+            The gender.
+            >The following values are permitted: `MALE`, `FEMALE`, `UNKNOWN`.
           enum:
             - MALE
             - FEMALE
@@ -544,10 +627,12 @@ components:
           minLength: 1
           type: string
         infix:
-          description: 'A person name''s infix, if applicable. Maximum length: 20 characters.'
+          description: |-
+            The name's infix, if applicable.
+            >A maximum length of twenty (20) characters is imposed.
           type: string
         lastName:
-          description: A person's last name.
+          description: The last name.
           type: string
       required:
         - firstName
@@ -558,11 +643,9 @@ components:
         additionalAmount:
           $ref: '#/components/schemas/Amount'
           description: |-
-            If you want a [BIN or card verification](https://docs.adyen.com/developers/ecommerce-integration/cards/bin-data-and-card-verification) request to use a non-zero value, assign this value to `additionalAmount` (while the amount must be still set to 0 to trigger BIN or card verification).
-            Required to be in the same currency as the `amount`.
+            If you want a [BIN or card verification](https://docs.adyen.com/developers/payment-methods/cards/bin-data-and-card-verification) request to use a non-zero value, assign this value to `additionalAmount` (while the amount must be still set to 0 to trigger BIN or card verification).
+            Required to be in the same currency as the `amount`. 
         additionalData:
-          additionalProperties:
-            type: string
           description: |-
             This field contains additional data, which may be required for a particular payment request.
 
@@ -570,7 +653,7 @@ components:
           type: object
         amount:
           $ref: '#/components/schemas/Amount'
-          description: 'The amount information for the transaction. For [BIN or card verification](https://docs.adyen.com/developers/ecommerce-integration/cards/bin-data-and-card-verification) requests, set amount to 0 (zero).'
+          description: 'The amount information for the transaction. For [BIN or card verification](https://docs.adyen.com/developers/payment-methods/cards/bin-data-and-card-verification) requests, set amount to 0 (zero).'
         bankAccount:
           $ref: '#/components/schemas/BankAccount'
           description: |-
@@ -638,11 +721,9 @@ components:
         merchantOrderReference:
           description: |-
             This reference allows linking multiple transactions to each other.
-            > When providing the `merchantOrderReference` value, we also recommend you submit `retry.orderAttemptNumber`, `retry.chainAttemptNumber`, and `retry.skipRetry` values.
+            > We strongly recommend you send the `merchantOrderReference` value to benefit from linking payment requests when authorisation retries take place. In addition, we recommend you provide `retry.orderAttemptNumber`, `retry.chainAttemptNumber`, and `retry.skipRetry` values in `PaymentRequest.additionalData`.
           type: string
         metadata:
-          additionalProperties:
-            type: string
           description: |-
             Metadata consists of entries, each of which includes a key and a value.
             Limitations: Error "177", "Metadata size exceeds limit"
@@ -696,7 +777,7 @@ components:
         shopperIP:
           description: |-
             The shopper's IP address. We recommend that you provide this data, as it is used in a number of risk checks (for instance, number of payment attempts or location-based checks).
-            > This field is mandatory for some merchants depending on your business model. Contact Adyen Support for more information.
+            > This field is mandatory for some merchants depending on your business model. For more information, [contact Support](https://support.adyen.com/hc/en-us/requests/new).
           type: string
         shopperInteraction:
           description: |-
@@ -753,11 +834,9 @@ components:
         additionalAmount:
           $ref: '#/components/schemas/Amount'
           description: |-
-            If you want a [BIN or card verification](https://docs.adyen.com/developers/ecommerce-integration/cards/bin-data-and-card-verification) request to use a non-zero value, assign this value to `additionalAmount` (while the amount must be still set to 0 to trigger BIN or card verification).
-            Required to be in the same currency as the `amount`.
+            If you want a [BIN or card verification](https://docs.adyen.com/developers/payment-methods/cards/bin-data-and-card-verification) request to use a non-zero value, assign this value to `additionalAmount` (while the amount must be still set to 0 to trigger BIN or card verification).
+            Required to be in the same currency as the `amount`. 
         additionalData:
-          additionalProperties:
-            type: string
           description: |-
             This field contains additional data, which may be required for a particular payment request.
 
@@ -765,7 +844,7 @@ components:
           type: object
         amount:
           $ref: '#/components/schemas/Amount'
-          description: 'The amount information for the transaction. For [BIN or card verification](https://docs.adyen.com/developers/ecommerce-integration/cards/bin-data-and-card-verification) requests, set amount to 0 (zero).'
+          description: 'The amount information for the transaction. For [BIN or card verification](https://docs.adyen.com/developers/payment-methods/cards/bin-data-and-card-verification) requests, set amount to 0 (zero).'
         billingAddress:
           $ref: '#/components/schemas/Address'
           description: The address where to send the invoice.
@@ -820,11 +899,9 @@ components:
         merchantOrderReference:
           description: |-
             This reference allows linking multiple transactions to each other.
-            > When providing the `merchantOrderReference` value, we also recommend you submit `retry.orderAttemptNumber`, `retry.chainAttemptNumber`, and `retry.skipRetry` values.
+            > We strongly recommend you send the `merchantOrderReference` value to benefit from linking payment requests when authorisation retries take place. In addition, we recommend you provide `retry.orderAttemptNumber`, `retry.chainAttemptNumber`, and `retry.skipRetry` values in `PaymentRequest.additionalData`.
           type: string
         metadata:
-          additionalProperties:
-            type: string
           description: |-
             Metadata consists of entries, each of which includes a key and a value.
             Limitations: Error "177", "Metadata size exceeds limit"
@@ -874,7 +951,7 @@ components:
         shopperIP:
           description: |-
             The shopper's IP address. We recommend that you provide this data, as it is used in a number of risk checks (for instance, number of payment attempts or location-based checks).
-            > This field is mandatory for some merchants depending on your business model. Contact Adyen Support for more information.
+            > This field is mandatory for some merchants depending on your business model. For more information, [contact Support](https://support.adyen.com/hc/en-us/requests/new).
           type: string
         shopperInteraction:
           description: |-
@@ -924,16 +1001,12 @@ components:
           type: string
       required:
         - merchantAccount
-        - reference
-        - amount
         - paResponse
         - md
     PaymentResult:
       properties:
         additionalData:
-          additionalProperties:
-            type: string
-          description: 'This field contains additional data, which may be required to return in a particular payment response. To choose data fields to be returned, go to **Customer Area** > **Settings** > **API and Response**.'
+          description: 'This field contains additional data, which may be required to return in a particular payment response. To choose data fields to be returned, go to **Customer Area** > **Account** > **API URLs**.'
           type: object
         authCode:
           description: |-
@@ -945,11 +1018,11 @@ components:
           $ref: '#/components/schemas/Amount'
           description: |-
             Includes the currency of the conversion and the value of the transaction.
-            > This value only applies if you have implemented Dynamic Currency Conversion. For more information, contact Support.
+            > This value only applies if you have implemented Dynamic Currency Conversion. For more information, [contact Support](https://support.adyen.com/hc/en-us/requests/new).
         dccSignature:
           description: |-
             Cryptographic signature used to verify `dccQuote`.
-            > This value only applies if you have implemented Dynamic Currency Conversion. For more information, contact Support.
+            > This value only applies if you have implemented Dynamic Currency Conversion. For more information, [contact Support](https://support.adyen.com/hc/en-us/requests/new).
           type: string
         fraudResult:
           $ref: '#/components/schemas/FraudResult'
@@ -969,7 +1042,10 @@ components:
             If the value is **CUPSecurePlus-CollectSMSVerificationCode**, collect an SMS code from the shopper and pass it in the `/authorise3D` request. For more information, see [3D Secure](https://docs.adyen.com/developers/risk-management/3d-secure).
           type: string
         pspReference:
-          description: Adyen's 16-digit unique reference associated with the transaction/the request. This value is globally unique; quote it when communicating with us about this request.
+          description: |-
+            Adyen's 16-character string reference associated with the transaction/request. This value is globally unique; quote it when communicating with us about this request.
+
+            > `pspReference` is returned only for non-redirect payment methods.
           type: string
         refusalReason:
           description: |-
@@ -978,7 +1054,16 @@ components:
             When a transaction fails, the authorisation response includes `resultCode` and `refusalReason` values.
           type: string
         resultCode:
-          description: The result of the payment.
+          description: |-
+            The result of the payment. Possible values:
+
+            * **Authorised** – Indicates the payment authorisation was successfully completed. This state serves as an indicator to proceed with the delivery of goods and services. This is a final state.
+            * **Refused** – Indicates the payment was refused. The reason is given in the `refusalReason` field. This is a final state.
+            * **RedirectShopper** – Indicates the shopper should be redirected to an external web page or app to complete the authorisation.
+            * **Received** – Indicates the payment has successfully been received by Adyen, and will be processed. This is the initial state for all payments.
+            * **Cancelled** – Indicates the payment has been cancelled (either by the shopper or the merchant) before processing was completed. This is a final state.
+            * **Pending** – Indicates that it is not possible to obtain the final status of the payment. This can happen if the systems providing final status information for the payment are unavailable, or if the shopper needs to take further action to complete the payment. For more information on handling a pending payment, refer to [Payments with pending status](https://docs.adyen.com/developers/development-resources/payments-with-pending-status).
+            * **Error** – Indicates an error occurred during processing of the payment. The reason is given in the `refusalReason` field. This is a final state.
           enum:
             - Authorised
             - PartiallyAuthorised
@@ -994,9 +1079,10 @@ components:
           description: |-
             The type of recurring contract to be used.
             Possible values:
-            * `ONECLICK` – The shopper opts to store their card details for future use. The shopper is present for the subsequent transaction, for cards the security code (CVC/CVV) is required.
-            * `RECURRING` – Payment details are stored for future use. For cards, the security code (CVC/CVV) is not required for subsequent payments. This is used for shopper not present transactions.
-            * `ONECLICK,RECURRING` – Payment details are stored for future use. This allows the use of the stored payment details regardless of whether the shopper is on your site or not.
+            * `ONECLICK` – Payment details can be used to initiate a one-click payment, where the shopper enters the [card security code (CVC/CVV)](https://docs.adyen.com/developers/payment-glossary#cardsecuritycodecvccvvcid).
+            * `RECURRING` – Payment details can be used without the card security code to initiate [card-not-present transactions](https://docs.adyen.com/developers/payment-glossary#cardnotpresentcnp).
+            * `ONECLICK,RECURRING` – Payment details can be used regardless of whether the shopper is on your site or not.
+            * `PAYOUT` – Payment details can be used to [make a payout](https://docs.adyen.com/developers/features/third-party-payouts).
           enum:
             - ONECLICK
             - RECURRING
@@ -1009,6 +1095,7 @@ components:
           description: The name of the token service.
           enum:
             - VISATOKENSERVICE
+            - MCTOKENSERVICE
           type: string
     ThreeDSecureData:
       properties:
