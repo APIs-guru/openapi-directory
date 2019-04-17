@@ -15,9 +15,9 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/servicefabric/data-plane/Microsoft.ServiceFabric/stable/5.6/servicefabric.json'
       version: '2.0'
+  x-preferred: false
   x-providerName: azure.com
   x-serviceName: servicefabric
-  x-preferred: false
   x-tags:
     - Azure
     - Microsoft
@@ -5705,7 +5705,6 @@ definitions:
           - "FABRIC_E_COMMUNICATION_ERROR"
           - "FABRIC_E_OPERATION_NOT_COMPLETE"
           - "FABRIC_E_TIMEOUT"
-
     enum:
       - FABRIC_E_INVALID_PARTITION_KEY
       - FABRIC_E_IMAGEBUILDER_VALIDATION_ERROR
@@ -6343,7 +6342,6 @@ definitions:
         - SafetyCheckInProgress - When a node is deactivated Service Fabric performs checks to ensure that the operation is safe to proceed to ensure avaiablity of the service and reliability of the state. This value indicates that one or more safety checks are in progress. The value is 1.
         - SafetyCheckComplete - When a node is deactivated Service Fabric performs checks to ensure that the operation is safe to proceed to ensure avaiablity of the service and reliability of the state. This value indicates that all safety checks have been completed. The value is 2.
         - Completed - The task is completed. The value is 3.
-
     enum:
       - None
       - SafetyCheckInProgress

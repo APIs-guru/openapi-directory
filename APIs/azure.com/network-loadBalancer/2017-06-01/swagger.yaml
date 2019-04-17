@@ -2044,6 +2044,7 @@ definitions:
     required:
       - protocol
       - frontendPort
+  NetworkInterfacePropertiesFormat: {}
   OutboundNatRule:
     allOf:
       - description: Reference to another subresource.
@@ -2157,3 +2158,5 @@ definitions:
     required:
       - protocol
       - port
+  PublicIPAddressPropertiesFormat: {}
+  SubnetPropertiesFormat: {}
