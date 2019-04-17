@@ -12,7 +12,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/resources/resource-manager/Microsoft.Resources/stable/2016-06-01/subscriptions.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/resources/resource-manager/Microsoft.Resources/stable/2018-06-01/subscriptions.json'
       version: '2.0'
   x-preferred: true
   x-providerName: azure.com
@@ -229,6 +229,10 @@ definitions:
       subscriptionPolicies:
         $ref: '#/definitions/SubscriptionPolicies'
         description: The subscription policies.
+      tenantId:
+        description: The subscription tenant ID.
+        readOnly: true
+        type: string
   SubscriptionListResult:
     description: Subscription list operation response.
     properties:

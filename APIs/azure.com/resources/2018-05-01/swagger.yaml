@@ -12,7 +12,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/resources/resource-manager/Microsoft.Resources/stable/2018-05-01/resources.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/resources/resource-manager/Microsoft.Resources/stable/2019-03-01/resources.json'
       version: '2.0'
   x-preferred: true
   x-providerName: azure.com
@@ -958,6 +958,88 @@ paths:
       summary: Deploys resources to a resource group.
       tags:
         - Deployments
+      x-ms-examples:
+        Create a deployment that will redeploy another deployment on failure:
+          parameters:
+            api-version: '2018-05-01'
+            deploymentName: exampleDeploymentName
+            parameters:
+              properties:
+                mode: Complete
+                onErrorDeployment:
+                  deploymentName: '{nameOfDeploymentToUse}'
+                  type: SpecificDeployment
+                parameters: {}
+                templateLink: '{templateUri}'
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscriptionId}'
+          responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscriptionId}/resourcegroups/myResourceGroup/providers/Microsoft.Resources/deployments/exampleDeploymentName'
+                name: exampleDeploymentName
+                properties:
+                  correlationId: '{correlationId}'
+                  mode: Complete
+                  onErrorDeployment:
+                    deploymentName: '{nameOfDeploymentToUse}'
+                    type: SpecificDeployment
+                  provisioningState: Accepted
+                  timestamp: '2019-03-01T00:00:00.0000000Z'
+                type: Microsoft.Resources/deployments
+            '201':
+              body:
+                id: '/subscriptions/{subscriptionId}/resourcegroups/myResourceGroup/providers/Microsoft.Resources/deployments/exampleDeploymentName'
+                name: exampleDeploymentName
+                properties:
+                  correlationId: '{correlationId}'
+                  mode: Complete
+                  onErrorDeployment:
+                    deploymentName: '{nameOfDeploymentToUse}'
+                    type: SpecificDeployment
+                  provisioningState: Accepted
+                  timestamp: '2019-03-01T00:00:00.0000000Z'
+                type: Microsoft.Resources/deployments
+        Create a deployment that will redeploy the last successful deployment on failure:
+          parameters:
+            api-version: '2018-05-01'
+            deploymentName: exampleDeploymentName
+            parameters:
+              properties:
+                mode: Complete
+                onErrorDeployment:
+                  type: LastSuccessful
+                parameters: {}
+                templateLink: '{templateUri}'
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscriptionId}'
+          responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscriptionId}/resourcegroups/myResourceGroup/providers/Microsoft.Resources/deployments/exampleDeploymentName'
+                name: exampleDeploymentName
+                properties:
+                  correlationId: '{correlationId}'
+                  mode: Complete
+                  onErrorDeployment:
+                    deploymentName: '{nameOfLastSuccesfulDeployment}'
+                    type: LastSuccessful
+                  provisioningState: Accepted
+                  timestamp: '2019-03-01T00:00:00.0000000Z'
+                type: Microsoft.Resources/deployments
+            '201':
+              body:
+                id: '/subscriptions/{subscriptionId}/resourcegroups/myResourceGroup/providers/Microsoft.Resources/deployments/exampleDeploymentName'
+                name: exampleDeploymentName
+                properties:
+                  correlationId: '{correlationId}'
+                  mode: Complete
+                  onErrorDeployment:
+                    deploymentName: '{nameOfLastSuccesfulDeployment}'
+                    type: LastSuccessful
+                  provisioningState: Accepted
+                  timestamp: '2019-03-01T00:00:00.0000000Z'
+                type: Microsoft.Resources/deployments
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/{deploymentName}/cancel':
     post:
@@ -2066,8 +2148,12 @@ definitions:
       namespace:
         description: The namespace of the resource provider.
         type: string
+      registrationPolicy:
+        description: The registration policy of the resource provider.
+        readOnly: true
+        type: string
       registrationState:
-        description: The registration state of the provider.
+        description: The registration state of the resource provider.
         readOnly: true
         type: string
       resourceTypes:
@@ -2101,6 +2187,9 @@ definitions:
         items:
           type: string
         type: array
+      capabilities:
+        description: The additional capabilities offered by this resource type.
+        type: string
       locations:
         description: The collection of locations where this resource type can be created.
         items:

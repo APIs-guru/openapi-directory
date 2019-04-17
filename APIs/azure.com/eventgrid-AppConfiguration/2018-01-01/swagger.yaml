@@ -1,0 +1,49 @@
+swagger: '2.0'
+schemes:
+  - https
+host: azure.local
+info:
+  description: Describes the schema of the Azure App Configuration events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.
+  title: Schema of Azure App Configuration events published to Azure Event Grid
+  version: '2018-01-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/eventgrid/data-plane/Microsoft.AppConfiguration/stable/2018-01-01/AppConfiguration.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: eventgrid-AppConfiguration
+  x-tags:
+    - Azure
+    - Microsoft
+paths: {}
+definitions:
+  AppConfigurationKeyValueDeletedEventData:
+    description: Schema of the Data property of an EventGridEvent for an Microsoft.AppConfiguration.KeyValueDeleted event.
+    properties:
+      etag:
+        description: The etag representing the key-value that was deleted.
+        type: string
+      key:
+        description: The key used to identify the key-value that was deleted.
+        type: string
+      label:
+        description: 'The label, if any, used to identify the key-value that was deleted.'
+        type: string
+    type: object
+  AppConfigurationKeyValueModifiedEventData:
+    description: Schema of the Data property of an EventGridEvent for an Microsoft.AppConfiguration.KeyValueModified event.
+    properties:
+      etag:
+        description: The etag representing the new state of the key-value.
+        type: string
+      key:
+        description: The key used to identify the key-value that was modified.
+        type: string
+      label:
+        description: 'The label, if any, used to identify the key-value that was modified.'
+        type: string
+    type: object

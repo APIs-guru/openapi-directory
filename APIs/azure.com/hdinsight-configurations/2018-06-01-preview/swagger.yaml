@@ -12,7 +12,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/hdinsight/resource-manager/Microsoft.HDInsight/preview/2018-06-01-preview/configurations.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/hdinsight/resource-manager/Microsoft.HDInsight/stable/2018-06-01-preview/configurations.json'
       version: '2.0'
   x-preferred: true
   x-providerName: azure.com
@@ -70,9 +70,55 @@ parameters:
     required: true
     type: string
 paths:
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/configurations':
+    post:
+      description: Gets all configuration information for an HDI cluster.
+      operationId: Configurations_List
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ClusterNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: OK response definition.
+          schema:
+            $ref: '#/definitions/ClusterConfigurations'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Describes the format of Error response.
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
+      tags:
+        - Configurations
+      x-ms-examples:
+        Get all configuration information:
+          parameters:
+            api-version: 2018-06-01-preview
+            clusterName: cluster1
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                configurations:
+                  core-site:
+                    fs.azure.account.key.test.blob.core.windows.net: accountKey
+                    fs.defaultFS: 'wasb://test.blob.core.windows.net'
+                  gateway:
+                    restAuthCredential.isEnabled: 'true'
+                    restAuthCredential.password: '**********'
+                    restAuthCredential.username: admin
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/configurations/{configurationName}':
     get:
-      description: The configuration object for the specified cluster.
+      description: The configuration object for the specified cluster. This API is not recommended and might be removed in the future. Please consider using List configurations API instead.
       operationId: Configurations_Get
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
@@ -100,21 +146,21 @@ paths:
       tags:
         - Configurations
       x-ms-examples:
-        Get HTTP settings:
+        Get Core site settings:
           parameters:
             api-version: 2018-06-01-preview
             clusterName: cluster1
-            configurationName: gateway
+            configurationName: core-site
             resourceGroupName: rg1
             subscriptionId: subid
           responses:
             '200':
               body:
-                restAuthCredential.isEnabled: 'true'
-                restAuthCredential.password: '**********'
-                restAuthCredential.username: hadoop
+                fs.azure.account.key.test.blob.core.windows.net: accountKey
+                fs.defaultFS: 'wasb://test.blob.core.windows.net'
     post:
-      description: Configures the configuration on the specified cluster.
+      deprecated: true
+      description: 'Configures the HTTP settings on the specified cluster. This API is deprecated, please use UpdateGatewaySettings in cluster endpoint instead.'
       operationId: Configurations_Update
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
@@ -189,3 +235,11 @@ definitions:
       type: string
     description: The configuration object for the specified configuration for the specified cluster.
     type: object
+  ClusterConfigurations:
+    description: The configuration object for the specified cluster.
+    properties:
+      configurations:
+        additionalProperties:
+          $ref: '#/definitions/ClusterConfiguration'
+        description: The configuration object for the specified configuration for the specified cluster.
+        type: object

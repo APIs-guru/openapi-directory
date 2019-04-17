@@ -1,0 +1,895 @@
+swagger: '2.0'
+schemes:
+  - https
+host: management.azure.com
+info:
+  description: The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.
+  title: NetworkManagementClient
+  version: '2015-06-15'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2015-06-15/applicationGateway.json'
+      version: '2.0'
+  x-preferred: false
+  x-providerName: azure.com
+  x-serviceName: network-applicationGateway
+  x-tags:
+    - Azure
+    - Microsoft
+consumes:
+  - application/json
+  - text/json
+produces:
+  - application/json
+  - text/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+parameters:
+  ApiVersionParameter:
+    description: Client API version.
+    in: query
+    name: api-version
+    required: true
+    type: string
+  SubscriptionIdParameter:
+    description: The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+    in: path
+    name: subscriptionId
+    required: true
+    type: string
+paths:
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGateways':
+    get:
+      description: Gets all the application gateways in a subscription.
+      operationId: ApplicationGateways_ListAll
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Success. The operation returns a list of ApplicationGateway resources.
+          schema:
+            $ref: '#/definitions/ApplicationGatewayListResult'
+      tags:
+        - ApplicationGateways
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways':
+    get:
+      description: Lists all application gateways in a resource group.
+      operationId: ApplicationGateways_List
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Success. The operation returns a list of ApplicationGateway resources.
+          schema:
+            $ref: '#/definitions/ApplicationGatewayListResult'
+      tags:
+        - ApplicationGateways
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}':
+    delete:
+      description: Deletes the specified application gateway.
+      operationId: ApplicationGateways_Delete
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the application gateway.
+          in: path
+          name: applicationGatewayName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Delete successful.
+        '202':
+          description: Accepted and the operation will complete asynchronously.
+        '204':
+          description: Request successful. Resource with the specified name does not exist
+      tags:
+        - ApplicationGateways
+      x-ms-long-running-operation: true
+    get:
+      description: Gets the specified application gateway.
+      operationId: ApplicationGateways_Get
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the application gateway.
+          in: path
+          name: applicationGatewayName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Request successful. The operation returns an ApplicationGateway resource.
+          schema:
+            $ref: '#/definitions/ApplicationGateway'
+      tags:
+        - ApplicationGateways
+    put:
+      description: Creates or updates the specified application gateway.
+      operationId: ApplicationGateways_CreateOrUpdate
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the application gateway.
+          in: path
+          name: applicationGatewayName
+          required: true
+          type: string
+        - description: Parameters supplied to the create or update application gateway operation.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/ApplicationGateway'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Update successful. The operation returns the resulting ApplicationGateway resource.
+          schema:
+            $ref: '#/definitions/ApplicationGateway'
+        '201':
+          description: Create successful. The operation returns the resulting ApplicationGateway resource.
+          schema:
+            $ref: '#/definitions/ApplicationGateway'
+      tags:
+        - ApplicationGateways
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}/start':
+    post:
+      description: Starts the specified application gateway.
+      operationId: ApplicationGateways_Start
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the application gateway.
+          in: path
+          name: applicationGatewayName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Request successful. The operation starts the ApplicationGateway resource.
+        '202':
+          description: Accepted and the operation will complete asynchronously.
+      tags:
+        - ApplicationGateways
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}/stop':
+    post:
+      description: Stops the specified application gateway in a resource group.
+      operationId: ApplicationGateways_Stop
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the application gateway.
+          in: path
+          name: applicationGatewayName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Request successful. The operation stops the ApplicationGateway resource.
+        '202':
+          description: Accepted and the operation will complete asynchronously.
+      tags:
+        - ApplicationGateways
+      x-ms-long-running-operation: true
+definitions:
+  ApplicationGateway:
+    allOf:
+      - description: Azure resource manager resource properties.
+        properties:
+          id:
+            description: Resource Identifier.
+            type: string
+          location:
+            description: Resource location.
+            type: string
+          name:
+            description: Resource name.
+            readOnly: true
+            type: string
+          tags:
+            additionalProperties:
+              type: string
+            description: Resource tags.
+            type: object
+          type:
+            description: Resource type.
+            readOnly: true
+            type: string
+        x-ms-azure-resource: true
+    description: Application gateway resource
+    properties:
+      etag:
+        description: A unique read-only string that changes whenever the resource is updated.
+        type: string
+      properties:
+        $ref: '#/definitions/ApplicationGatewayPropertiesFormat'
+        x-ms-client-flatten: true
+  ApplicationGatewayBackendAddress:
+    description: Backend address of an application gateway.
+    properties:
+      fqdn:
+        description: Fully qualified domain name (FQDN).
+        type: string
+      ipAddress:
+        description: IP address
+        type: string
+  ApplicationGatewayBackendAddressPool:
+    allOf:
+      - description: Azure resource manager sub resource properties.
+        properties:
+          id:
+            description: Resource Identifier.
+            type: string
+        x-ms-azure-resource: true
+    description: Backend Address Pool of an application gateway.
+    properties:
+      etag:
+        description: A unique read-only string that changes whenever the resource is updated.
+        type: string
+      name:
+        description: Resource that is unique within a resource group. This name can be used to access the resource.
+        type: string
+      properties:
+        $ref: '#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat'
+        x-ms-client-flatten: true
+  ApplicationGatewayBackendAddressPoolPropertiesFormat:
+    description: Properties of Backend Address Pool of an application gateway.
+    properties:
+      backendAddresses:
+        description: Backend addresses
+        items:
+          $ref: '#/definitions/ApplicationGatewayBackendAddress'
+        type: array
+      backendIPConfigurations:
+        description: Collection of references to IPs defined in network interfaces.
+        items:
+          allOf:
+            - description: Azure resource manager sub resource properties.
+              properties:
+                id:
+                  description: Resource Identifier.
+                  type: string
+              x-ms-azure-resource: true
+          description: IPConfiguration in a network interface.
+          properties:
+            etag:
+              description: A unique read-only string that changes whenever the resource is updated.
+              type: string
+            name:
+              description: The name of the resource that is unique within a resource group. This name can be used to access the resource.
+              type: string
+            properties:
+              $ref: '#/definitions/NetworkInterfaceIPConfigurationPropertiesFormat'
+              x-ms-client-flatten: true
+        type: array
+      provisioningState:
+        description: 'Provisioning state of the backend address pool resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
+        type: string
+  ApplicationGatewayBackendHttpSettings:
+    allOf:
+      - description: Azure resource manager sub resource properties.
+        properties:
+          id:
+            description: Resource Identifier.
+            type: string
+        x-ms-azure-resource: true
+    description: Backend address pool settings of an application gateway.
+    properties:
+      etag:
+        description: A unique read-only string that changes whenever the resource is updated.
+        type: string
+      name:
+        description: Name of the resource that is unique within a resource group. This name can be used to access the resource.
+        type: string
+      properties:
+        $ref: '#/definitions/ApplicationGatewayBackendHttpSettingsPropertiesFormat'
+        x-ms-client-flatten: true
+  ApplicationGatewayBackendHttpSettingsPropertiesFormat:
+    description: Properties of Backend address pool settings of an application gateway.
+    properties:
+      cookieBasedAffinity:
+        description: 'Cookie based affinity. Possible values are: ''Enabled'' and ''Disabled''.'
+        enum:
+          - Enabled
+          - Disabled
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ApplicationGatewayCookieBasedAffinity
+      port:
+        description: Port
+        format: int32
+        type: integer
+      probe:
+        description: Azure resource manager sub resource properties.
+        properties:
+          id:
+            description: Resource Identifier.
+            type: string
+        x-ms-azure-resource: true
+      protocol:
+        description: 'Protocol. Possible values are: ''Http'' and ''Https''.'
+        enum:
+          - Http
+          - Https
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ApplicationGatewayProtocol
+      provisioningState:
+        description: Gets or sets Provisioning state of the backend http settings resource Updating/Deleting/Failed
+        type: string
+      requestTimeout:
+        description: Request timeout in seconds. Application Gateway will fail the request if response is not received within RequestTimeout. Acceptable values are from 1 second to 86400 seconds.
+        format: int32
+        type: integer
+  ApplicationGatewayFrontendIPConfiguration:
+    allOf:
+      - description: Azure resource manager sub resource properties.
+        properties:
+          id:
+            description: Resource Identifier.
+            type: string
+        x-ms-azure-resource: true
+    description: Frontend IP configuration of an application gateway.
+    properties:
+      etag:
+        description: A unique read-only string that changes whenever the resource is updated.
+        type: string
+      name:
+        description: Name of the resource that is unique within a resource group. This name can be used to access the resource.
+        type: string
+      properties:
+        $ref: '#/definitions/ApplicationGatewayFrontendIPConfigurationPropertiesFormat'
+        x-ms-client-flatten: true
+  ApplicationGatewayFrontendIPConfigurationPropertiesFormat:
+    description: Properties of Frontend IP configuration of an application gateway.
+    properties:
+      privateIPAddress:
+        description: PrivateIPAddress of the network interface IP Configuration.
+        type: string
+      privateIPAllocationMethod:
+        description: 'PrivateIP allocation method. Possible values are: ''Static'' and ''Dynamic''.'
+        enum:
+          - Static
+          - Dynamic
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: IPAllocationMethod
+      provisioningState:
+        description: 'Provisioning state of the public IP resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
+        type: string
+      publicIPAddress:
+        description: Azure resource manager sub resource properties.
+        properties:
+          id:
+            description: Resource Identifier.
+            type: string
+        x-ms-azure-resource: true
+      subnet:
+        description: Azure resource manager sub resource properties.
+        properties:
+          id:
+            description: Resource Identifier.
+            type: string
+        x-ms-azure-resource: true
+  ApplicationGatewayFrontendPort:
+    allOf:
+      - description: Azure resource manager sub resource properties.
+        properties:
+          id:
+            description: Resource Identifier.
+            type: string
+        x-ms-azure-resource: true
+    description: Frontend port of an application gateway.
+    properties:
+      etag:
+        description: A unique read-only string that changes whenever the resource is updated.
+        type: string
+      name:
+        description: Name of the resource that is unique within a resource group. This name can be used to access the resource.
+        type: string
+      properties:
+        $ref: '#/definitions/ApplicationGatewayFrontendPortPropertiesFormat'
+        x-ms-client-flatten: true
+  ApplicationGatewayFrontendPortPropertiesFormat:
+    description: Properties of Frontend port of an application gateway.
+    properties:
+      port:
+        description: Frontend port
+        format: int32
+        type: integer
+      provisioningState:
+        description: 'Provisioning state of the frontend port resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
+        type: string
+  ApplicationGatewayHttpListener:
+    allOf:
+      - description: Azure resource manager sub resource properties.
+        properties:
+          id:
+            description: Resource Identifier.
+            type: string
+        x-ms-azure-resource: true
+    description: Http listener of an application gateway.
+    properties:
+      etag:
+        description: A unique read-only string that changes whenever the resource is updated.
+        type: string
+      name:
+        description: Name of the resource that is unique within a resource group. This name can be used to access the resource.
+        type: string
+      properties:
+        $ref: '#/definitions/ApplicationGatewayHttpListenerPropertiesFormat'
+        x-ms-client-flatten: true
+  ApplicationGatewayHttpListenerPropertiesFormat:
+    description: Properties of HTTP listener of an application gateway.
+    properties:
+      frontendIPConfiguration:
+        description: Azure resource manager sub resource properties.
+        properties:
+          id:
+            description: Resource Identifier.
+            type: string
+        x-ms-azure-resource: true
+      frontendPort:
+        description: Azure resource manager sub resource properties.
+        properties:
+          id:
+            description: Resource Identifier.
+            type: string
+        x-ms-azure-resource: true
+      hostName:
+        description: Host name of HTTP listener.
+        type: string
+      protocol:
+        description: 'Protocol. Possible values are: ''Http'' and ''Https''.'
+        enum:
+          - Http
+          - Https
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ApplicationGatewayProtocol
+      provisioningState:
+        description: 'Provisioning state of the HTTP listener resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
+        type: string
+      requireServerNameIndication:
+        description: Applicable only if protocol is https. Enables SNI for multi-hosting.
+        type: boolean
+      sslCertificate:
+        description: Azure resource manager sub resource properties.
+        properties:
+          id:
+            description: Resource Identifier.
+            type: string
+        x-ms-azure-resource: true
+  ApplicationGatewayIPConfiguration:
+    allOf:
+      - description: Azure resource manager sub resource properties.
+        properties:
+          id:
+            description: Resource Identifier.
+            type: string
+        x-ms-azure-resource: true
+    description: IP configuration of an application gateway. Currently 1 public and 1 private IP configuration is allowed.
+    properties:
+      etag:
+        description: A unique read-only string that changes whenever the resource is updated.
+        type: string
+      name:
+        description: Name of the resource that is unique within a resource group. This name can be used to access the resource.
+        type: string
+      properties:
+        $ref: '#/definitions/ApplicationGatewayIPConfigurationPropertiesFormat'
+        x-ms-client-flatten: true
+  ApplicationGatewayIPConfigurationPropertiesFormat:
+    description: Properties of IP configuration of an application gateway.
+    properties:
+      provisioningState:
+        description: 'Provisioning state of the application gateway subnet resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
+        type: string
+      subnet:
+        description: Azure resource manager sub resource properties.
+        properties:
+          id:
+            description: Resource Identifier.
+            type: string
+        x-ms-azure-resource: true
+  ApplicationGatewayListResult:
+    description: Response for ListApplicationGateways API service call.
+    properties:
+      nextLink:
+        description: URL to get the next set of results.
+        type: string
+      value:
+        description: List of an application gateways in a resource group.
+        items:
+          $ref: '#/definitions/ApplicationGateway'
+        type: array
+  ApplicationGatewayPathRule:
+    allOf:
+      - description: Azure resource manager sub resource properties.
+        properties:
+          id:
+            description: Resource Identifier.
+            type: string
+        x-ms-azure-resource: true
+    description: Path rule of URL path map of an application gateway.
+    properties:
+      etag:
+        description: A unique read-only string that changes whenever the resource is updated.
+        type: string
+      name:
+        description: Name of the resource that is unique within a resource group. This name can be used to access the resource.
+        type: string
+      properties:
+        $ref: '#/definitions/ApplicationGatewayPathRulePropertiesFormat'
+        x-ms-client-flatten: true
+  ApplicationGatewayPathRulePropertiesFormat:
+    description: Properties of probe of an application gateway.
+    properties:
+      backendAddressPool:
+        description: Azure resource manager sub resource properties.
+        properties:
+          id:
+            description: Resource Identifier.
+            type: string
+        x-ms-azure-resource: true
+      backendHttpSettings:
+        description: Azure resource manager sub resource properties.
+        properties:
+          id:
+            description: Resource Identifier.
+            type: string
+        x-ms-azure-resource: true
+      paths:
+        description: Path rules of URL path map.
+        items:
+          type: string
+        type: array
+      provisioningState:
+        description: 'Path rule of URL path map resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
+        type: string
+  ApplicationGatewayProbe:
+    allOf:
+      - description: Azure resource manager sub resource properties.
+        properties:
+          id:
+            description: Resource Identifier.
+            type: string
+        x-ms-azure-resource: true
+    description: Probe of the application gateway.
+    properties:
+      etag:
+        description: A unique read-only string that changes whenever the resource is updated.
+        type: string
+      name:
+        description: Name of the resource that is unique within a resource group. This name can be used to access the resource.
+        type: string
+      properties:
+        $ref: '#/definitions/ApplicationGatewayProbePropertiesFormat'
+        x-ms-client-flatten: true
+  ApplicationGatewayProbePropertiesFormat:
+    description: Properties of probe of an application gateway.
+    properties:
+      host:
+        description: Host name to send the probe to.
+        type: string
+      interval:
+        description: The probing interval in seconds. This is the time interval between two consecutive probes. Acceptable values are from 1 second to 86400 seconds.
+        format: int32
+        type: integer
+      path:
+        description: 'Relative path of probe. Valid path starts from ''/''. Probe is sent to <Protocol>://<host>:<port><path>'
+        type: string
+      protocol:
+        description: 'Protocol. Possible values are: ''Http'' and ''Https''.'
+        enum:
+          - Http
+          - Https
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ApplicationGatewayProtocol
+      provisioningState:
+        description: 'Provisioning state of the backend http settings resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
+        type: string
+      timeout:
+        description: the probe timeout in seconds. Probe marked as failed if valid response is not received with this timeout period. Acceptable values are from 1 second to 86400 seconds.
+        format: int32
+        type: integer
+      unhealthyThreshold:
+        description: The probe retry count. Backend server is marked down after consecutive probe failure count reaches UnhealthyThreshold. Acceptable values are from 1 second to 20.
+        format: int32
+        type: integer
+  ApplicationGatewayPropertiesFormat:
+    description: Properties of the application gateway.
+    properties:
+      backendAddressPools:
+        description: Backend address pool of the application gateway resource.
+        items:
+          $ref: '#/definitions/ApplicationGatewayBackendAddressPool'
+        type: array
+      backendHttpSettingsCollection:
+        description: Backend http settings of the application gateway resource.
+        items:
+          $ref: '#/definitions/ApplicationGatewayBackendHttpSettings'
+        type: array
+      frontendIPConfigurations:
+        description: Frontend IP addresses of the application gateway resource.
+        items:
+          $ref: '#/definitions/ApplicationGatewayFrontendIPConfiguration'
+        type: array
+      frontendPorts:
+        description: Frontend ports of the application gateway resource.
+        items:
+          $ref: '#/definitions/ApplicationGatewayFrontendPort'
+        type: array
+      gatewayIPConfigurations:
+        description: Gets or sets subnets of application gateway resource
+        items:
+          $ref: '#/definitions/ApplicationGatewayIPConfiguration'
+        type: array
+      httpListeners:
+        description: Http listeners of the application gateway resource.
+        items:
+          $ref: '#/definitions/ApplicationGatewayHttpListener'
+        type: array
+      operationalState:
+        description: 'Operational state of the application gateway resource. Possible values are: ''Stopped'', ''Started'', ''Running'', and ''Stopping''.'
+        enum:
+          - Stopped
+          - Starting
+          - Running
+          - Stopping
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ApplicationGatewayOperationalState
+      probes:
+        description: Probes of the application gateway resource.
+        items:
+          $ref: '#/definitions/ApplicationGatewayProbe'
+        type: array
+      provisioningState:
+        description: 'Provisioning state of the application gateway resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
+        type: string
+      requestRoutingRules:
+        description: Request routing rules of the application gateway resource.
+        items:
+          $ref: '#/definitions/ApplicationGatewayRequestRoutingRule'
+        type: array
+      resourceGuid:
+        description: Resource GUID property of the application gateway resource.
+        type: string
+      sku:
+        $ref: '#/definitions/ApplicationGatewaySku'
+        description: SKU of the application gateway resource.
+      sslCertificates:
+        description: SSL certificates of the application gateway resource.
+        items:
+          $ref: '#/definitions/ApplicationGatewaySslCertificate'
+        type: array
+      urlPathMaps:
+        description: URL path map of the application gateway resource.
+        items:
+          $ref: '#/definitions/ApplicationGatewayUrlPathMap'
+        type: array
+  ApplicationGatewayRequestRoutingRule:
+    allOf:
+      - description: Azure resource manager sub resource properties.
+        properties:
+          id:
+            description: Resource Identifier.
+            type: string
+        x-ms-azure-resource: true
+    description: Request routing rule of an application gateway.
+    properties:
+      etag:
+        description: A unique read-only string that changes whenever the resource is updated.
+        type: string
+      name:
+        description: Name of the resource that is unique within a resource group. This name can be used to access the resource.
+        type: string
+      properties:
+        $ref: '#/definitions/ApplicationGatewayRequestRoutingRulePropertiesFormat'
+        x-ms-client-flatten: true
+  ApplicationGatewayRequestRoutingRulePropertiesFormat:
+    description: Properties of request routing rule of the application gateway.
+    properties:
+      backendAddressPool:
+        description: Azure resource manager sub resource properties.
+        properties:
+          id:
+            description: Resource Identifier.
+            type: string
+        x-ms-azure-resource: true
+      backendHttpSettings:
+        description: Azure resource manager sub resource properties.
+        properties:
+          id:
+            description: Resource Identifier.
+            type: string
+        x-ms-azure-resource: true
+      httpListener:
+        description: Azure resource manager sub resource properties.
+        properties:
+          id:
+            description: Resource Identifier.
+            type: string
+        x-ms-azure-resource: true
+      provisioningState:
+        description: 'Provisioning state of the request routing rule resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
+        type: string
+      ruleType:
+        description: 'Rule type. Possible values are: ''Basic'' and ''PathBasedRouting''.'
+        enum:
+          - Basic
+          - PathBasedRouting
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ApplicationGatewayRequestRoutingRuleType
+      urlPathMap:
+        description: Azure resource manager sub resource properties.
+        properties:
+          id:
+            description: Resource Identifier.
+            type: string
+        x-ms-azure-resource: true
+  ApplicationGatewaySku:
+    description: SKU of application gateway
+    properties:
+      capacity:
+        description: Capacity (instance count) of an application gateway.
+        format: int32
+        type: integer
+      name:
+        description: 'Name of an application gateway SKU. Possible values are: ''Standard_Small'', ''Standard_Medium'', ''Standard_Large'', ''WAF_Medium'', and ''WAF_Large''.'
+        enum:
+          - Standard_Small
+          - Standard_Medium
+          - Standard_Large
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ApplicationGatewaySkuName
+      tier:
+        description: Tier of an application gateway.
+        enum:
+          - Standard
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ApplicationGatewayTier
+  ApplicationGatewaySslCertificate:
+    allOf:
+      - description: Azure resource manager sub resource properties.
+        properties:
+          id:
+            description: Resource Identifier.
+            type: string
+        x-ms-azure-resource: true
+    description: SSL certificates of an application gateway.
+    properties:
+      etag:
+        description: A unique read-only string that changes whenever the resource is updated.
+        type: string
+      name:
+        description: Name of the resource that is unique within a resource group. This name can be used to access the resource.
+        type: string
+      properties:
+        $ref: '#/definitions/ApplicationGatewaySslCertificatePropertiesFormat'
+        x-ms-client-flatten: true
+  ApplicationGatewaySslCertificatePropertiesFormat:
+    description: Properties of SSL certificates of an application gateway.
+    properties:
+      data:
+        description: Base-64 encoded pfx certificate. Only applicable in PUT Request.
+        type: string
+      password:
+        description: Password for the pfx file specified in data. Only applicable in PUT request.
+        type: string
+      provisioningState:
+        description: 'Provisioning state of the SSL certificate resource Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
+        type: string
+      publicCertData:
+        description: Base-64 encoded Public cert data corresponding to pfx specified in data. Only applicable in GET request.
+        type: string
+  ApplicationGatewayUrlPathMap:
+    allOf:
+      - description: Azure resource manager sub resource properties.
+        properties:
+          id:
+            description: Resource Identifier.
+            type: string
+        x-ms-azure-resource: true
+    description: UrlPathMaps give a url path to the backend mapping information for PathBasedRouting.
+    properties:
+      etag:
+        description: A unique read-only string that changes whenever the resource is updated.
+        type: string
+      name:
+        description: Name of the resource that is unique within a resource group. This name can be used to access the resource.
+        type: string
+      properties:
+        $ref: '#/definitions/ApplicationGatewayUrlPathMapPropertiesFormat'
+        x-ms-client-flatten: true
+  ApplicationGatewayUrlPathMapPropertiesFormat:
+    description: Properties of UrlPathMap of the application gateway.
+    properties:
+      defaultBackendAddressPool:
+        description: Azure resource manager sub resource properties.
+        properties:
+          id:
+            description: Resource Identifier.
+            type: string
+        x-ms-azure-resource: true
+      defaultBackendHttpSettings:
+        description: Azure resource manager sub resource properties.
+        properties:
+          id:
+            description: Resource Identifier.
+            type: string
+        x-ms-azure-resource: true
+      pathRules:
+        description: Path rule of URL path map resource.
+        items:
+          $ref: '#/definitions/ApplicationGatewayPathRule'
+        type: array
+      provisioningState:
+        description: 'Provisioning state of the backend http settings resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
+        type: string
