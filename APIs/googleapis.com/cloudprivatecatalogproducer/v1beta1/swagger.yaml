@@ -1,0 +1,1662 @@
+swagger: '2.0'
+schemes:
+  - https
+host: cloudprivatecatalogproducer.googleapis.com
+basePath: /
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: Enables cloud users to manage and share enterprise catalogs intheir organizations.
+  title: Cloud Private Catalog Producer
+  version: v1beta1
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.7.31
+      format: google
+      url: 'https://cloudprivatecatalogproducer.googleapis.com/$discovery/rest?version=v1beta1'
+      version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: cloudprivatecatalogproducer
+externalDocs:
+  url: 'https://sites.google.com/corp/google.com/cloudprivatecatalog'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    type: oauth2
+parameters:
+  $.xgafv:
+    description: V1 error format.
+    enum:
+      - '1'
+      - '2'
+    in: query
+    name: $.xgafv
+    type: string
+  access_token:
+    description: OAuth access token.
+    in: query
+    name: access_token
+    type: string
+  alt:
+    default: json
+    description: Data format for response.
+    enum:
+      - json
+      - media
+      - proto
+    in: query
+    name: alt
+    type: string
+  callback:
+    description: JSONP
+    in: query
+    name: callback
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+    in: query
+    name: quotaUser
+    type: string
+  uploadType:
+    description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+    in: query
+    name: uploadType
+    type: string
+  upload_protocol:
+    description: 'Upload protocol for media (e.g. "raw", "multipart").'
+    in: query
+    name: upload_protocol
+    type: string
+tags:
+  - name: catalogs
+  - name: operations
+paths:
+  /v1beta1/catalogs:
+    get:
+      description: |-
+        Lists Catalog resources that the producer has access to, within the
+        scope of the parent resource.
+      operationId: cloudprivatecatalogproducer.catalogs.list
+      parameters:
+        - description: The maximum number of catalogs to return.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            A pagination token returned from a previous call to ListCatalogs
+            that indicates where this listing should continue from.
+            This field is optional.
+          in: query
+          name: pageToken
+          type: string
+        - description: The resource name of the parent resource.
+          in: query
+          name: parent
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GoogleCloudPrivatecatalogproducerV1beta1ListCatalogsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - catalogs
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Creates a new Catalog resource.
+      operationId: cloudprivatecatalogproducer.catalogs.create
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GoogleCloudPrivatecatalogproducerV1beta1Catalog'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GoogleLongrunningOperation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - catalogs
+  /v1beta1/operations:
+    get:
+      description: |-
+        Lists operations that match the specified filter in the request. If the
+        server doesn't support this method, it returns `UNIMPLEMENTED`.
+
+        NOTE: the `name` binding allows API services to override the binding
+        to use different resource name schemes, such as `users/*/operations`. To
+        override the binding, API services can add a binding such as
+        `"/v1/{name=users/*}/operations"` to their service configuration.
+        For backwards compatibility, the default name includes the operations
+        collection id, however overriding users must ensure the name binding
+        is the parent resource, without the operations collection id.
+      operationId: cloudprivatecatalogproducer.operations.list
+      parameters:
+        - description: The standard list filter.
+          in: query
+          name: filter
+          type: string
+        - description: The name of the operation's parent resource.
+          in: query
+          name: name
+          type: string
+        - description: The standard list page size.
+          in: query
+          name: pageSize
+          type: integer
+        - description: The standard list page token.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GoogleLongrunningListOperationsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - operations
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v1beta1/{name}':
+    delete:
+      description: |-
+        Deletes a long-running operation. This method indicates that the client is
+        no longer interested in the operation result. It does not cancel the
+        operation. If the server doesn't support this method, it returns
+        `google.rpc.Code.UNIMPLEMENTED`.
+      operationId: cloudprivatecatalogproducer.operations.delete
+      parameters:
+        - description: |-
+            Forces deletion of the `Catalog` and its `Association` resources.
+            If the `Catalog` is still associated with other resources and
+            force is not set to true, then the operation fails.
+          in: query
+          name: force
+          type: boolean
+        - description: The name of the operation resource to be deleted.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GoogleProtobufEmpty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - operations
+    get:
+      description: |-
+        Gets the latest state of a long-running operation.  Clients can use this
+        method to poll the operation result at intervals as recommended by the API
+        service.
+      operationId: cloudprivatecatalogproducer.operations.get
+      parameters:
+        - description: The name of the operation resource.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GoogleLongrunningOperation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - operations
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    patch:
+      description: Updates a specific Version resource.
+      operationId: cloudprivatecatalogproducer.catalogs.products.versions.patch
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GoogleCloudPrivatecatalogproducerV1beta1Version'
+        - description: |-
+            Required. The resource name of the version, in the format
+            `catalogs/{catalog_id}/products/{product_id}/versions/a-z*[a-z0-9]'.
+
+            A unique identifier for the version under a product, which can't
+            be changed after the version is created. The final segment of the name must
+            between 1 and 63 characters in length.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: Field mask that controls which fields of the version should be updated.
+          in: query
+          name: updateMask
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GoogleCloudPrivatecatalogproducerV1beta1Version'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - catalogs
+  '/v1beta1/{name}:cancel':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Starts asynchronous cancellation on a long-running operation.  The server
+        makes a best effort to cancel the operation, but success is not
+        guaranteed.  If the server doesn't support this method, it returns
+        `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+        Operations.GetOperation or
+        other methods to check whether the cancellation succeeded or whether the
+        operation completed despite cancellation. On successful cancellation,
+        the operation is not deleted; instead, it becomes an operation with
+        an Operation.error value with a google.rpc.Status.code of 1,
+        corresponding to `Code.CANCELLED`.
+      operationId: cloudprivatecatalogproducer.operations.cancel
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GoogleLongrunningCancelOperationRequest'
+        - description: The name of the operation resource to be cancelled.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GoogleProtobufEmpty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - operations
+  '/v1beta1/{name}:copy':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Copies a Product under another Catalog.
+      operationId: cloudprivatecatalogproducer.catalogs.products.copy
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GoogleCloudPrivatecatalogproducerV1beta1CopyProductRequest'
+        - description: The resource name of the current product that is copied from.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GoogleLongrunningOperation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - catalogs
+  '/v1beta1/{name}:undelete':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Undeletes a deleted Catalog and all resources under it.
+      operationId: cloudprivatecatalogproducer.catalogs.undelete
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GoogleCloudPrivatecatalogproducerV1beta1UndeleteCatalogRequest'
+        - description: The resource name of the catalog.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GoogleCloudPrivatecatalogproducerV1beta1Catalog'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - catalogs
+  '/v1beta1/{parent}/associations':
+    get:
+      description: Lists all Association resources under a catalog.
+      operationId: cloudprivatecatalogproducer.catalogs.associations.list
+      parameters:
+        - description: The maximum number of catalog associations to return.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            A pagination token returned from the previous call to
+            `ListAssociations`.
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
+            The resource name of the `Catalog` whose `Associations` are
+            being retrieved. In the format `catalogs/<catalog>`.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GoogleCloudPrivatecatalogproducerV1beta1ListAssociationsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - catalogs
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Creates an Association instance under a given Catalog.
+      operationId: cloudprivatecatalogproducer.catalogs.associations.create
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GoogleCloudPrivatecatalogproducerV1beta1CreateAssociationRequest'
+        - description: The `Catalog` resource's name.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GoogleCloudPrivatecatalogproducerV1beta1Association'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - catalogs
+  '/v1beta1/{parent}/products':
+    get:
+      description: |-
+        Lists Product resources that the producer has access to, within the
+        scope of the parent catalog.
+      operationId: cloudprivatecatalogproducer.catalogs.products.list
+      parameters:
+        - description: |-
+            A filter expression used to restrict the returned results based
+            upon properties of the product.
+          in: query
+          name: filter
+          type: string
+        - description: The maximum number of products to return.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            A pagination token returned from a previous call to ListProducts
+            that indicates where this listing should continue from.
+            This field is optional.
+          in: query
+          name: pageToken
+          type: string
+        - description: The resource name of the parent resource.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GoogleCloudPrivatecatalogproducerV1beta1ListProductsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - catalogs
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Creates a Product instance under a given Catalog.
+      operationId: cloudprivatecatalogproducer.catalogs.products.create
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GoogleCloudPrivatecatalogproducerV1beta1Product'
+        - description: The catalog name of the new product's parent.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GoogleCloudPrivatecatalogproducerV1beta1Product'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - catalogs
+  '/v1beta1/{parent}/versions':
+    get:
+      description: |-
+        Lists Version resources that the producer has access to, within the
+        scope of the parent Product.
+      operationId: cloudprivatecatalogproducer.catalogs.products.versions.list
+      parameters:
+        - description: The maximum number of versions to return.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            A pagination token returned from a previous call to ListVersions
+            that indicates where this listing should continue from.
+            This field is optional.
+          in: query
+          name: pageToken
+          type: string
+        - description: The resource name of the parent resource.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GoogleCloudPrivatecatalogproducerV1beta1ListVersionsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - catalogs
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Creates a Version instance under a given Product.
+      operationId: cloudprivatecatalogproducer.catalogs.products.versions.create
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GoogleCloudPrivatecatalogproducerV1beta1Version'
+        - description: The product name of the new version's parent.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GoogleLongrunningOperation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - catalogs
+  '/v1beta1/{product}/icons:upload':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Creates an Icon instance under a given Product.
+        If Product only has a default icon, a new Icon
+        instance is created and associated with the given Product.
+        If Product already has a non-default icon, the action creates
+        a new Icon instance, associates the newly created
+        Icon with the given Product and deletes the old icon.
+      operationId: cloudprivatecatalogproducer.catalogs.products.icons.upload
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GoogleCloudPrivatecatalogproducerV1beta1UploadIconRequest'
+        - description: The resource name of the product.
+          in: path
+          name: product
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GoogleProtobufEmpty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - catalogs
+  '/v1beta1/{resource}:getIamPolicy':
+    get:
+      description: Gets IAM policy for the specified Catalog.
+      operationId: cloudprivatecatalogproducer.catalogs.getIamPolicy
+      parameters:
+        - description: |-
+            REQUIRED: The resource for which the policy is being requested.
+            See the operation documentation for the appropriate value for this field.
+          in: path
+          name: resource
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GoogleIamV1Policy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - catalogs
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v1beta1/{resource}:setIamPolicy':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Sets the IAM policy for the specified Catalog.
+      operationId: cloudprivatecatalogproducer.catalogs.setIamPolicy
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GoogleIamV1SetIamPolicyRequest'
+        - description: |-
+            REQUIRED: The resource for which the policy is being specified.
+            See the operation documentation for the appropriate value for this field.
+          in: path
+          name: resource
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GoogleIamV1Policy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - catalogs
+  '/v1beta1/{resource}:testIamPermissions':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Tests the IAM permissions for the specified Catalog.
+      operationId: cloudprivatecatalogproducer.catalogs.testIamPermissions
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GoogleIamV1TestIamPermissionsRequest'
+        - description: |-
+            REQUIRED: The resource for which the policy detail is being requested.
+            See the operation documentation for the appropriate value for this field.
+          in: path
+          name: resource
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GoogleIamV1TestIamPermissionsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - catalogs
+definitions:
+  GoogleCloudPrivatecatalogproducerV1beta1Association:
+    description: |-
+      An association tuple that pairs a `Catalog` to a resource
+      that can use the `Catalog`. After association, a
+      google.cloud.privatecatalog.v1beta1.Catalog becomes available to
+      consumers under specified Association.resource and all of its child
+      nodes.
+      Users who have the `cloudprivatecatalog.targets.get` permission on any of
+      the resource nodes can access the catalog and child products under the node.
+
+      For example, suppose the cloud resource hierarchy is as follows:
+
+      * organizations/example.com
+        * folders/team
+          * projects/test
+
+      After creating an association with `organizations/example.com`, the catalog
+      `catalogs/1`  is accessible from the following paths:
+
+      * organizations/example.com
+      * folders/team
+      * projects/test
+
+      Users can access them by
+      google.cloud.v1beta1.PrivateCatalog.SearchCatalogs action.
+    properties:
+      createTime:
+        description: The creation time of the association.
+        format: google-datetime
+        type: string
+      name:
+        description: |-
+          Output only. The resource name of the catalog association, in the format
+          `catalogs/{catalog_id}/associations/{association_id}'.
+
+          A unique identifier for the catalog association, which is
+          generated by catalog service.
+        type: string
+      resource:
+        description: |-
+          Required. The user-supplied fully qualified name of the `Resource`
+          associated to the `Catalog`. It supports `Organization`, `Folder`,
+          and `Project`. Values are of the form
+
+          * `//cloudresourcemanager.googleapis.com/projects/{product_number}`
+          * `//cloudresourcemanager.googleapis.com/folders/{folder_id}`
+          * `//cloudresourcemanager.googleapis.com/organizations/{organization_id}`
+        type: string
+    type: object
+  GoogleCloudPrivatecatalogproducerV1beta1Catalog:
+    description: |-
+      The producer representation of a catalog which is a curated collection of
+      solutions that can be managed, controlled, and shared by cloud admins.
+    properties:
+      createTime:
+        description: Output only. The time when the catalog was created.
+        format: google-datetime
+        type: string
+      description:
+        description: |-
+          Required. The user-supplied description of the catalog. Maximum of 512
+          characters.
+        type: string
+      displayName:
+        description: |-
+          Required. The user-supplied descriptive name of the catalog as it appears
+          in UIs. Maximum 256 characters in length.
+        type: string
+      name:
+        description: |-
+          Output only. The resource name of the catalog, in the format
+          `catalogs/{catalog_id}'.
+
+          A unique identifier for the catalog, which is generated
+          by catalog service.
+        type: string
+      parent:
+        description: |-
+          Required. The parent resource name of the catalog, which can't be changed
+          after a catalog is created. It can only be an organization. Values are of
+          the form `//cloudresourcemanager.googleapis.com/organizations/<id>`.
+          Maximum 256 characters in length.
+        type: string
+      updateTime:
+        description: Output only. The time when the catalog was last updated.
+        format: google-datetime
+        type: string
+    type: object
+  GoogleCloudPrivatecatalogproducerV1beta1CopyProductRequest:
+    properties:
+      destinationProductName:
+        description: The resource name of the destination product that is copied to.
+        type: string
+    type: object
+  GoogleCloudPrivatecatalogproducerV1beta1CreateAssociationRequest:
+    properties:
+      association:
+        $ref: '#/definitions/GoogleCloudPrivatecatalogproducerV1beta1Association'
+        description: |-
+          The user-supplied `Association` that is going to be created.
+
+          If the `resource` field is set, the
+          `privatecatalogproducer.catalogTargets.associate` permission is checked on
+          the target resource.
+    type: object
+  GoogleCloudPrivatecatalogproducerV1beta1ListAssociationsResponse:
+    properties:
+      associations:
+        description: The returned `Association` resources from the list call.
+        items:
+          $ref: '#/definitions/GoogleCloudPrivatecatalogproducerV1beta1Association'
+        type: array
+      nextPageToken:
+        description: |-
+          A pagination token returned from a previous call to
+          `ListAssociations` that indicates where the listing should continue from.
+          This field is optional.
+        type: string
+    type: object
+  GoogleCloudPrivatecatalogproducerV1beta1ListCatalogsResponse:
+    properties:
+      catalogs:
+        description: The `Catalogs` returned from the list call.
+        items:
+          $ref: '#/definitions/GoogleCloudPrivatecatalogproducerV1beta1Catalog'
+        type: array
+      nextPageToken:
+        description: |-
+          A pagination token returned from a previous call to ListCatalogs
+          that indicates where the listing should continue from.
+          This field is optional.
+        type: string
+    type: object
+  GoogleCloudPrivatecatalogproducerV1beta1ListProductsResponse:
+    properties:
+      nextPageToken:
+        description: |-
+          A pagination token returned from a previous call to ListProducts
+          that indicates where the listing should continue from.
+          This field is optional.
+        type: string
+      products:
+        description: The `Product` returned from the list call.
+        items:
+          $ref: '#/definitions/GoogleCloudPrivatecatalogproducerV1beta1Product'
+        type: array
+    type: object
+  GoogleCloudPrivatecatalogproducerV1beta1ListVersionsResponse:
+    properties:
+      nextPageToken:
+        description: |-
+          A pagination token returned from a previous call to ListProducts
+          that indicates where the listing should continue from.
+          This field is optional.
+        type: string
+      versions:
+        description: The `VersiVersionon` returned from the list call.
+        items:
+          $ref: '#/definitions/GoogleCloudPrivatecatalogproducerV1beta1Version'
+        type: array
+    type: object
+  GoogleCloudPrivatecatalogproducerV1beta1Product:
+    description: |-
+      The producer representation of a product which is a child resource of
+      `Catalog` with display metadata and a list of `Version` resources.
+    properties:
+      assetType:
+        description: |-
+          Required. The type of the product asset, which cannot be changed after the
+          product is created. It supports the values
+          `google.deploymentmanager.Template` and
+          `google.cloudprivatecatalog.ListingOnly`. Other values will be
+          rejected by the server. Read only after creation.
+
+          The following fields or resource types have different validation rules
+          under each `asset_type` values:
+
+          * Product.display_metadata has different validation schema for each
+          asset type value. See its comment for details.
+          * Version resource isn't allowed to be added under the
+          `google.cloudprivatecatalog.ListingOnly` type.
+        type: string
+      createTime:
+        description: Output only. The time when the product was created.
+        format: google-datetime
+        type: string
+      displayMetadata:
+        additionalProperties:
+          description: Properties of the object.
+        description: |-
+          The user-supplied display metadata to describe the product.
+          The JSON schema of the metadata differs by Product.asset_type.
+          When the type is `google.deploymentmanager.Template`, the schema is as
+          follows:
+
+          ```
+          "$schema": http://json-schema.org/draft-04/schema#
+          type: object
+          properties:
+            name:
+              type: string
+              minLength: 1
+              maxLength: 64
+            description:
+              type: string
+              minLength: 1
+              maxLength: 2048
+            tagline:
+              type: string
+              minLength: 1
+              maxLength: 100
+            support_info:
+              type: string
+              minLength: 1
+              maxLength: 2048
+            creator:
+              type: string
+              minLength: 1
+              maxLength: 100
+            documentation:
+              type: array
+              items:
+                type: object
+                properties:
+                  url:
+                    type: string
+                    pattern:
+                    "^(https?)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]"
+                  title:
+                    type: string
+                    minLength: 1
+                    maxLength: 64
+                  description:
+                    type: string
+                    minLength: 1
+                    maxLength: 2048
+          required:
+          - name
+          - description
+          additionalProperties: false
+
+          ```
+
+          When the asset type is `google.cloudprivatecatalog.ListingOnly`, the schema
+          is as follows:
+
+          ```
+          "$schema": http://json-schema.org/draft-04/schema#
+          type: object
+          properties:
+            name:
+              type: string
+              minLength: 1
+              maxLength: 64
+            description:
+              type: string
+              minLength: 1
+              maxLength: 2048
+            tagline:
+              type: string
+              minLength: 1
+              maxLength: 100
+            support_info:
+              type: string
+              minLength: 1
+              maxLength: 2048
+            creator:
+              type: string
+              minLength: 1
+              maxLength: 100
+            documentation:
+              type: array
+              items:
+                type: object
+                properties:
+                  url:
+                    type: string
+                    pattern:
+                    "^(https?)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]"
+                  title:
+                    type: string
+                    minLength: 1
+                    maxLength: 64
+                  description:
+                    type: string
+                    minLength: 1
+                    maxLength: 2048
+            signup_url:
+              type: string
+              pattern:
+              "^(https?)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]"
+          required:
+          - name
+          - description
+          - signup_url
+          additionalProperties: false
+          ```
+        type: object
+      iconUri:
+        description: |-
+          Output only. The public accessible URI of the icon uploaded by
+          PrivateCatalogProducer.UploadIcon.
+
+          If no icon is uploaded, it will be the default icon's URI.
+        type: string
+      name:
+        description: |-
+          Required. The resource name of the product in the format
+          `catalogs/{catalog_id}/products/a-z*[a-z0-9]'.
+
+          A unique identifier for the product under a catalog, which cannot
+          be changed after the product is created. The final
+          segment of the name must between 1 and 256 characters in length.
+        type: string
+      updateTime:
+        description: Output only. The time when the product was last updated.
+        format: google-datetime
+        type: string
+    type: object
+  GoogleCloudPrivatecatalogproducerV1beta1UndeleteCatalogRequest:
+    properties: {}
+    type: object
+  GoogleCloudPrivatecatalogproducerV1beta1UploadIconRequest:
+    properties:
+      icon:
+        description: |-
+          The raw icon bytes user-supplied to be uploaded to the product. The format
+          of the icon can only be PNG or JPEG. The minimum allowed dimensions are
+          130x130 pixels and the maximum dimensions are 10000x10000 pixels.
+          Required.
+        format: byte
+        type: string
+    type: object
+  GoogleCloudPrivatecatalogproducerV1beta1Version:
+    description: |-
+      The producer representation of a version, which is a child resource under a
+      `Product` with asset data.
+    properties:
+      asset:
+        additionalProperties:
+          description: Properties of the object.
+        description: |-
+          Output only. The asset which has been validated and is ready to be
+          provisioned. See Version.original_asset for the schema.
+        type: object
+      createTime:
+        description: Output only. The time when the version was created.
+        format: google-datetime
+        type: string
+      description:
+        description: The user-supplied description of the version. Maximum of 256 characters.
+        type: string
+      name:
+        description: |-
+          Required. The resource name of the version, in the format
+          `catalogs/{catalog_id}/products/{product_id}/versions/a-z*[a-z0-9]'.
+
+          A unique identifier for the version under a product, which can't
+          be changed after the version is created. The final segment of the name must
+          between 1 and 63 characters in length.
+        type: string
+      originalAsset:
+        additionalProperties:
+          description: Properties of the object.
+        description: |-
+          The user-supplied asset payload. The maximum size of the payload is 2MB.
+          The JSON schema of the payload is defined as:
+
+          ```
+          type: object
+          properties:
+            mainTemplate:
+              type: string
+              description: The file name of the main template and name prefix of
+              schema file. The content of the main template should be set in the
+              imports list. The schema file name is expected to be
+              <mainTemplate>.schema in the imports list. required: true
+            imports:
+              type: array
+              description: Import template and schema file contents. Required to have
+              both <mainTemplate> and <mainTemplate>.schema files. required: true
+              minItems: 2
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  content:
+                    type: string
+          ```
+        type: object
+      updateTime:
+        description: Output only. The time when the version was last updated.
+        format: google-datetime
+        type: string
+    type: object
+  GoogleIamV1AuditConfig:
+    description: |-
+      Specifies the audit configuration for a service.
+      The configuration determines which permission types are logged, and what
+      identities, if any, are exempted from logging.
+      An AuditConfig must have one or more AuditLogConfigs.
+
+      If there are AuditConfigs for both `allServices` and a specific service,
+      the union of the two AuditConfigs is used for that service: the log_types
+      specified in each AuditConfig are enabled, and the exempted_members in each
+      AuditLogConfig are exempted.
+
+      Example Policy with multiple AuditConfigs:
+
+          {
+            "audit_configs": [
+              {
+                "service": "allServices"
+                "audit_log_configs": [
+                  {
+                    "log_type": "DATA_READ",
+                    "exempted_members": [
+                      "user:foo@gmail.com"
+                    ]
+                  },
+                  {
+                    "log_type": "DATA_WRITE",
+                  },
+                  {
+                    "log_type": "ADMIN_READ",
+                  }
+                ]
+              },
+              {
+                "service": "fooservice.googleapis.com"
+                "audit_log_configs": [
+                  {
+                    "log_type": "DATA_READ",
+                  },
+                  {
+                    "log_type": "DATA_WRITE",
+                    "exempted_members": [
+                      "user:bar@gmail.com"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+
+      For fooservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ
+      logging. It also exempts foo@gmail.com from DATA_READ logging, and
+      bar@gmail.com from DATA_WRITE logging.
+    properties:
+      auditLogConfigs:
+        description: The configuration for logging of each type of permission.
+        items:
+          $ref: '#/definitions/GoogleIamV1AuditLogConfig'
+        type: array
+      service:
+        description: |-
+          Specifies a service that will be enabled for audit logging.
+          For example, `storage.googleapis.com`, `cloudsql.googleapis.com`.
+          `allServices` is a special value that covers all services.
+        type: string
+    type: object
+  GoogleIamV1AuditLogConfig:
+    description: |-
+      Provides the configuration for logging a type of permissions.
+      Example:
+
+          {
+            "audit_log_configs": [
+              {
+                "log_type": "DATA_READ",
+                "exempted_members": [
+                  "user:foo@gmail.com"
+                ]
+              },
+              {
+                "log_type": "DATA_WRITE",
+              }
+            ]
+          }
+
+      This enables 'DATA_READ' and 'DATA_WRITE' logging, while exempting
+      foo@gmail.com from DATA_READ logging.
+    properties:
+      exemptedMembers:
+        description: |-
+          Specifies the identities that do not cause logging for this type of
+          permission.
+          Follows the same format of Binding.members.
+        items:
+          type: string
+        type: array
+      logType:
+        description: The log type that this config enables.
+        enum:
+          - LOG_TYPE_UNSPECIFIED
+          - ADMIN_READ
+          - DATA_WRITE
+          - DATA_READ
+        type: string
+    type: object
+  GoogleIamV1Binding:
+    description: Associates `members` with a `role`.
+    properties:
+      condition:
+        $ref: '#/definitions/GoogleTypeExpr'
+        description: |-
+          The condition that is associated with this binding.
+          NOTE: an unsatisfied condition will not allow user access via current
+          binding. Different bindings, including their conditions, are examined
+          independently.
+      members:
+        description: |+
+          Specifies the identities requesting access for a Cloud Platform resource.
+          `members` can have the following values:
+
+          * `allUsers`: A special identifier that represents anyone who is
+             on the internet; with or without a Google account.
+
+          * `allAuthenticatedUsers`: A special identifier that represents anyone
+             who is authenticated with a Google account or a service account.
+
+          * `user:{emailid}`: An email address that represents a specific Google
+             account. For example, `alice@gmail.com` .
+
+
+          * `serviceAccount:{emailid}`: An email address that represents a service
+             account. For example, `my-other-app@appspot.gserviceaccount.com`.
+
+          * `group:{emailid}`: An email address that represents a Google group.
+             For example, `admins@example.com`.
+
+
+          * `domain:{domain}`: The G Suite domain (primary) that represents all the
+             users of that domain. For example, `google.com` or `example.com`.
+
+        items:
+          type: string
+        type: array
+      role:
+        description: |-
+          Role that is assigned to `members`.
+          For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
+        type: string
+    type: object
+  GoogleIamV1Policy:
+    description: |-
+      Defines an Identity and Access Management (IAM) policy. It is used to
+      specify access control policies for Cloud Platform resources.
+
+
+      A `Policy` consists of a list of `bindings`. A `binding` binds a list of
+      `members` to a `role`, where the members can be user accounts, Google groups,
+      Google domains, and service accounts. A `role` is a named list of permissions
+      defined by IAM.
+
+      **JSON Example**
+
+          {
+            "bindings": [
+              {
+                "role": "roles/owner",
+                "members": [
+                  "user:mike@example.com",
+                  "group:admins@example.com",
+                  "domain:google.com",
+                  "serviceAccount:my-other-app@appspot.gserviceaccount.com"
+                ]
+              },
+              {
+                "role": "roles/viewer",
+                "members": ["user:sean@example.com"]
+              }
+            ]
+          }
+
+      **YAML Example**
+
+          bindings:
+          - members:
+            - user:mike@example.com
+            - group:admins@example.com
+            - domain:google.com
+            - serviceAccount:my-other-app@appspot.gserviceaccount.com
+            role: roles/owner
+          - members:
+            - user:sean@example.com
+            role: roles/viewer
+
+
+      For a description of IAM and its features, see the
+      [IAM developer's guide](https://cloud.google.com/iam/docs).
+    properties:
+      auditConfigs:
+        description: Specifies cloud audit logging configuration for this policy.
+        items:
+          $ref: '#/definitions/GoogleIamV1AuditConfig'
+        type: array
+      bindings:
+        description: |-
+          Associates a list of `members` to a `role`.
+          `bindings` with no members will result in an error.
+        items:
+          $ref: '#/definitions/GoogleIamV1Binding'
+        type: array
+      etag:
+        description: |-
+          `etag` is used for optimistic concurrency control as a way to help
+          prevent simultaneous updates of a policy from overwriting each other.
+          It is strongly suggested that systems make use of the `etag` in the
+          read-modify-write cycle to perform policy updates in order to avoid race
+          conditions: An `etag` is returned in the response to `getIamPolicy`, and
+          systems are expected to put that etag in the request to `setIamPolicy` to
+          ensure that their change will be applied to the same version of the policy.
+
+          If no `etag` is provided in the call to `setIamPolicy`, then the existing
+          policy is overwritten blindly.
+        format: byte
+        type: string
+      version:
+        description: Deprecated.
+        format: int32
+        type: integer
+    type: object
+  GoogleIamV1SetIamPolicyRequest:
+    description: Request message for `SetIamPolicy` method.
+    properties:
+      policy:
+        $ref: '#/definitions/GoogleIamV1Policy'
+        description: |-
+          REQUIRED: The complete policy to be applied to the `resource`. The size of
+          the policy is limited to a few 10s of KB. An empty policy is a
+          valid policy but certain Cloud Platform services (such as Projects)
+          might reject them.
+      updateMask:
+        description: |-
+          OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+          the fields in the mask will be modified. If no mask is provided, the
+          following default mask is used:
+          paths: "bindings, etag"
+          This field is only used by Cloud IAM.
+        format: google-fieldmask
+        type: string
+    type: object
+  GoogleIamV1TestIamPermissionsRequest:
+    description: Request message for `TestIamPermissions` method.
+    properties:
+      permissions:
+        description: |-
+          The set of permissions to check for the `resource`. Permissions with
+          wildcards (such as '*' or 'storage.*') are not allowed. For more
+          information see
+          [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+        items:
+          type: string
+        type: array
+    type: object
+  GoogleIamV1TestIamPermissionsResponse:
+    description: Response message for `TestIamPermissions` method.
+    properties:
+      permissions:
+        description: |-
+          A subset of `TestPermissionsRequest.permissions` that the caller is
+          allowed.
+        items:
+          type: string
+        type: array
+    type: object
+  GoogleLongrunningCancelOperationRequest:
+    description: The request message for Operations.CancelOperation.
+    properties: {}
+    type: object
+  GoogleLongrunningListOperationsResponse:
+    description: The response message for Operations.ListOperations.
+    properties:
+      nextPageToken:
+        description: The standard List next-page token.
+        type: string
+      operations:
+        description: A list of operations that matches the specified filter in the request.
+        items:
+          $ref: '#/definitions/GoogleLongrunningOperation'
+        type: array
+    type: object
+  GoogleLongrunningOperation:
+    description: |-
+      This resource represents a long-running operation that is the result of a
+      network API call.
+    properties:
+      done:
+        description: |-
+          If the value is `false`, it means the operation is still in progress.
+          If `true`, the operation is completed, and either `error` or `response` is
+          available.
+        type: boolean
+      error:
+        $ref: '#/definitions/GoogleRpcStatus'
+        description: The error result of the operation in case of failure or cancellation.
+      metadata:
+        additionalProperties:
+          description: Properties of the object. Contains field @type with type URL.
+        description: |-
+          Service-specific metadata associated with the operation.  It typically
+          contains progress information and common metadata such as create time.
+          Some services might not provide such metadata.  Any method that returns a
+          long-running operation should document the metadata type, if any.
+        type: object
+      name:
+        description: |-
+          The server-assigned name, which is only unique within the same service that
+          originally returns it. If you use the default HTTP mapping, the
+          `name` should have the format of `operations/some/unique/name`.
+        type: string
+      response:
+        additionalProperties:
+          description: Properties of the object. Contains field @type with type URL.
+        description: |-
+          The normal response of the operation in case of success.  If the original
+          method returns no data on success, such as `Delete`, the response is
+          `google.protobuf.Empty`.  If the original method is standard
+          `Get`/`Create`/`Update`, the response should be the resource.  For other
+          methods, the response should have the type `XxxResponse`, where `Xxx`
+          is the original method name.  For example, if the original method name
+          is `TakeSnapshot()`, the inferred response type is
+          `TakeSnapshotResponse`.
+        type: object
+    type: object
+  GoogleProtobufEmpty:
+    description: |-
+      A generic empty message that you can re-use to avoid defining duplicated
+      empty messages in your APIs. A typical example is to use it as the request
+      or the response type of an API method. For instance:
+
+          service Foo {
+            rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
+          }
+
+      The JSON representation for `Empty` is empty JSON object `{}`.
+    properties: {}
+    type: object
+  GoogleRpcStatus:
+    description: |-
+      The `Status` type defines a logical error model that is suitable for
+      different programming environments, including REST APIs and RPC APIs. It is
+      used by [gRPC](https://github.com/grpc). The error model is designed to be:
+
+      - Simple to use and understand for most users
+      - Flexible enough to meet unexpected needs
+
+      # Overview
+
+      The `Status` message contains three pieces of data: error code, error
+      message, and error details. The error code should be an enum value of
+      google.rpc.Code, but it may accept additional error codes if needed.  The
+      error message should be a developer-facing English message that helps
+      developers *understand* and *resolve* the error. If a localized user-facing
+      error message is needed, put the localized message in the error details or
+      localize it in the client. The optional error details may contain arbitrary
+      information about the error. There is a predefined set of error detail types
+      in the package `google.rpc` that can be used for common error conditions.
+
+      # Language mapping
+
+      The `Status` message is the logical representation of the error model, but it
+      is not necessarily the actual wire format. When the `Status` message is
+      exposed in different client libraries and different wire protocols, it can be
+      mapped differently. For example, it will likely be mapped to some exceptions
+      in Java, but more likely mapped to some error codes in C.
+
+      # Other uses
+
+      The error model and the `Status` message can be used in a variety of
+      environments, either with or without APIs, to provide a
+      consistent developer experience across different environments.
+
+      Example uses of this error model include:
+
+      - Partial errors. If a service needs to return partial errors to the client,
+          it may embed the `Status` in the normal response to indicate the partial
+          errors.
+
+      - Workflow errors. A typical workflow has multiple steps. Each step may
+          have a `Status` message for error reporting.
+
+      - Batch operations. If a client uses batch request and batch response, the
+          `Status` message should be used directly inside batch response, one for
+          each error sub-response.
+
+      - Asynchronous operations. If an API call embeds asynchronous operation
+          results in its response, the status of those operations should be
+          represented directly using the `Status` message.
+
+      - Logging. If some API errors are stored in logs, the message `Status` could
+          be used directly after any stripping needed for security/privacy reasons.
+    properties:
+      code:
+        description: 'The status code, which should be an enum value of google.rpc.Code.'
+        format: int32
+        type: integer
+      details:
+        description: |-
+          A list of messages that carry the error details.  There is a common set of
+          message types for APIs to use.
+        items:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          type: object
+        type: array
+      message:
+        description: |-
+          A developer-facing error message, which should be in English. Any
+          user-facing error message should be localized and sent in the
+          google.rpc.Status.details field, or localized by the client.
+        type: string
+    type: object
+  GoogleTypeExpr:
+    description: |-
+      Represents an expression text. Example:
+
+          title: "User account presence"
+          description: "Determines whether the request has a user account"
+          expression: "size(request.user) > 0"
+    properties:
+      description:
+        description: |-
+          An optional description of the expression. This is a longer text which
+          describes the expression, e.g. when hovered over it in a UI.
+        type: string
+      expression:
+        description: |-
+          Textual representation of an expression in
+          Common Expression Language syntax.
+
+          The application context of the containing message determines which
+          well-known feature set of CEL is supported.
+        type: string
+      location:
+        description: |-
+          An optional string indicating the location of the expression for error
+          reporting, e.g. a file name and a position in the file.
+        type: string
+      title:
+        description: |-
+          An optional title for the expression, i.e. a short string describing
+          its purpose. This can be used e.g. in UIs which allow to enter the
+          expression.
+        type: string
+    type: object

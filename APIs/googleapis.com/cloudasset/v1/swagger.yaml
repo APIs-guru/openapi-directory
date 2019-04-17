@@ -9,7 +9,7 @@ info:
     url: 'https://google.com'
   description: The cloud asset API manages the history and inventory of cloud resources.
   title: Cloud Asset
-  version: v1beta1
+  version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
   x-logo:
@@ -19,13 +19,13 @@ info:
         url: 'https://github.com/lucybot/api-spec-converter'
         version: 2.7.31
       format: google
-      url: 'https://cloudasset.googleapis.com/$discovery/rest?version=v1beta1'
+      url: 'https://cloudasset.googleapis.com/$discovery/rest?version=v1'
       version: v1
-  x-preferred: false
+  x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: cloudasset
 externalDocs:
-  url: 'https://console.cloud.google.com/apis/api/cloudasset.googleapis.com/overview'
+  url: 'https://cloud.google.com/resource-manager/docs/cloud-asset-inventory/quickstart-cloud-asset-inventory'
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
@@ -100,17 +100,16 @@ parameters:
     name: upload_protocol
     type: string
 tags:
-  - name: folders
-  - name: organizations
-  - name: projects
+  - name: operations
+  - name: v1
 paths:
-  '/v1beta1/{name}':
+  '/v1/{name}':
     get:
       description: |-
         Gets the latest state of a long-running operation.  Clients can use this
         method to poll the operation result at intervals as recommended by the API
         service.
-      operationId: cloudasset.projects.operations.get
+      operationId: cloudasset.operations.get
       parameters:
         - description: The name of the operation resource.
           in: path
@@ -127,7 +126,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - operations
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -140,7 +139,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
-  '/v1beta1/{parent}:batchGetAssetsHistory':
+  '/v1/{parent}:batchGetAssetsHistory':
     get:
       description: |-
         Batch gets the update history of assets that overlap a time window.
@@ -150,7 +149,7 @@ paths:
         attached IAM POLICY both exist. This can create gaps in the output history.
         If a specified asset does not exist, this API returns an INVALID_ARGUMENT
         error.
-      operationId: cloudasset.projects.batchGetAssetsHistory
+      operationId: cloudasset.batchGetAssetsHistory
       parameters:
         - collectionFormat: multi
           description: |-
@@ -158,6 +157,7 @@ paths:
             `//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1`.
             See [Resource
             Names](https://cloud.google.com/apis/design/resource_names#full_resource_name)
+            and [Resource Name Format](https://cloud.google.com/resource-manager/docs/cloud-asset-inventory/resource-name-format)
             for more info.
 
             The request becomes a no-op if the asset name list is empty, and the max
@@ -188,15 +188,9 @@ paths:
             End time of the time window (inclusive).
             Current timestamp if not specified.
           in: query
-          items:
-            type: string
           name: readTimeWindow.endTime
           type: string
         - description: Start time of the time window (exclusive).
-          enum:
-            - CONTENT_TYPE_UNSPECIFIED
-            - RESOURCE
-            - IAM_POLICY
           in: query
           name: readTimeWindow.startTime
           type: string
@@ -209,7 +203,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - v1
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -222,7 +216,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
-  '/v1beta1/{parent}:exportAssets':
+  '/v1/{parent}:exportAssets':
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -241,7 +235,7 @@ paths:
         location. The output format is newline-delimited JSON.
         This API implements the google.longrunning.Operation API allowing you
         to keep track of the export.
-      operationId: cloudasset.projects.exportAssets
+      operationId: cloudasset.exportAssets
       parameters:
         - in: body
           name: body
@@ -250,8 +244,8 @@ paths:
         - description: |-
             Required. The relative name of the root asset. This can only be an
             organization number (such as "organizations/123"), a project ID (such as
-            "projects/my-project-id"), a project number (such as "projects/12345"), or
-            a folder number (such as "folders/123").
+            "projects/my-project-id"), or a project number (such as "projects/12345"),
+            or a folder number (such as "folders/123").
           in: path
           name: parent
           required: true
@@ -266,7 +260,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - v1
 definitions:
   Asset:
     description: |-
@@ -274,7 +268,7 @@ definitions:
       Cloud IAM policies, and other non-GCP assets.
     properties:
       assetType:
-        description: 'Type of the asset. Example: "google.compute.Disk".'
+        description: 'Type of the asset. Example: "compute.googleapis.com/Disk".'
         type: string
       iamPolicy:
         $ref: '#/definitions/Policy'
@@ -457,7 +451,7 @@ definitions:
       assetTypes:
         description: |-
           A list of asset types of which to take a snapshot for. For example:
-          "google.compute.Disk". If specified, only matching assets will be returned.
+          "compute.googleapis.com/Disk". If specified, only matching assets will be returned.
           See [Introduction to Cloud Asset
           Inventory](https://cloud.google.com/resource-manager/docs/cloud-asset-inventory/overview)
           for all supported asset types.
