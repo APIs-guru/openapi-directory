@@ -364,7 +364,7 @@ paths:
         - name: resource-arn
           in: path
           required: true
-          description: the Amazon Resource Name (ARN)
+          description: The Amazon Resource Name (ARN) of the resource tag.
           type: string
         - name: body
           in: body
@@ -413,7 +413,7 @@ paths:
         - name: resource-arn
           in: path
           required: true
-          description: the Amazon Resource Name (ARN)
+          description: The Amazon Resource Name (ARN) of the resource tag.
           type: string
   '/v1/brokers/{broker-id}/users/{username}':
     post:
@@ -744,7 +744,7 @@ paths:
   '/v1/tags/{resource-arn}#tagKeys':
     delete:
       operationId: DeleteTags
-      description: Remove a tag from a resource.
+      description: Removes a tag from a resource.
       responses:
         '204':
           description: Success
@@ -768,7 +768,7 @@ paths:
         - name: resource-arn
           in: path
           required: true
-          description: the Amazon Resource Name (ARN)
+          description: The Amazon Resource Name (ARN) of the resource tag.
           type: string
         - name: tagKeys
           in: query
@@ -777,6 +777,105 @@ paths:
           type: array
           items:
             type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /v1/broker-engine-types:
+    get:
+      operationId: DescribeBrokerEngineTypes
+      description: Describe available engine types and versions.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeBrokerEngineTypesResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+      parameters:
+        - name: engineType
+          in: query
+          required: false
+          description: Filter response by engine type.
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of engine types that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
+          type: integer
+          minimum: 1
+          maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: 'The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.'
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /v1/broker-instance-options:
+    get:
+      operationId: DescribeBrokerInstanceOptions
+      description: Describe available broker instance options.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeBrokerInstanceOptionsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+      parameters:
+        - name: engineType
+          in: query
+          required: false
+          description: Filter response by engine type.
+          type: string
+        - name: hostInstanceType
+          in: query
+          required: false
+          description: Filter response by host instance type.
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of instance options that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
+          type: integer
+          minimum: 1
+          maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: 'The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.'
+          type: string
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1196,6 +1295,30 @@ definitions:
       Users:
         $ref: '#/definitions/__listOfUserSummary'
         description: The list of all ActiveMQ usernames for the specified broker.
+  DescribeBrokerEngineTypesResponse:
+    type: object
+    properties:
+      BrokerEngineTypes:
+        $ref: '#/definitions/__listOfBrokerEngineType'
+        description: List of available engine types and versions.
+      MaxResults:
+        $ref: '#/definitions/__integerMin5Max100'
+        description: Required. The maximum number of engine types that can be returned per page (20 by default). This value must be an integer from 5 to 100.
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: 'The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.'
+  DescribeBrokerInstanceOptionsResponse:
+    type: object
+    properties:
+      BrokerInstanceOptions:
+        $ref: '#/definitions/__listOfBrokerInstanceOption'
+        description: List of available broker instance options.
+      MaxResults:
+        $ref: '#/definitions/__integerMin5Max100'
+        description: Required. The maximum number of instance options that can be returned per page (20 by default). This value must be an integer from 5 to 100.
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: 'The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.'
   DescribeConfigurationResponse:
     type: object
     properties:
@@ -1361,6 +1484,32 @@ definitions:
   UpdateUserResponse:
     type: object
     properties: {}
+  AvailabilityZone:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/__string'
+        description: Id for the availability zone.
+    description: Name of the availability zone.
+  EngineType:
+    type: string
+    enum:
+      - ACTIVEMQ
+    description: 'The type of broker engine. Note: Currently, Amazon MQ supports only ActiveMQ.'
+  __listOfEngineVersion:
+    type: array
+    items:
+      $ref: '#/definitions/EngineVersion'
+  BrokerEngineType:
+    type: object
+    properties:
+      EngineType:
+        $ref: '#/definitions/EngineType'
+        description: The type of broker engine.
+      EngineVersions:
+        $ref: '#/definitions/__listOfEngineVersion'
+        description: The list of engine versions.
+    description: Types of broker engines.
   __listOf__string:
     type: array
     items:
@@ -1378,6 +1527,26 @@ definitions:
         $ref: '#/definitions/__string'
         description: The IP address of the Elastic Network Interface (ENI) attached to the broker.
     description: Returns information about all brokers.
+  __listOfAvailabilityZone:
+    type: array
+    items:
+      $ref: '#/definitions/AvailabilityZone'
+  BrokerInstanceOption:
+    type: object
+    properties:
+      AvailabilityZones:
+        $ref: '#/definitions/__listOfAvailabilityZone'
+        description: The list of available az.
+      EngineType:
+        $ref: '#/definitions/EngineType'
+        description: The type of broker engine.
+      HostInstanceType:
+        $ref: '#/definitions/__string'
+        description: The type of broker instance.
+      SupportedEngineVersions:
+        $ref: '#/definitions/__listOf__string'
+        description: The list of supported engine versions.
+    description: Option for host instance type.
   BrokerState:
     type: string
     enum:
@@ -1428,11 +1597,6 @@ definitions:
       - UPDATE
       - DELETE
     description: The type of change pending for the ActiveMQ user.
-  EngineType:
-    type: string
-    enum:
-      - ACTIVEMQ
-    description: 'The type of broker engine. Note: Currently, Amazon MQ supports only ActiveMQ.'
   ConfigurationRevision:
     type: object
     properties:
@@ -1629,6 +1793,28 @@ definitions:
   DeleteUserRequest:
     type: object
     properties: {}
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 100
+  DescribeBrokerEngineTypesRequest:
+    type: object
+    properties: {}
+  __listOfBrokerEngineType:
+    type: array
+    items:
+      $ref: '#/definitions/BrokerEngineType'
+  __integerMin5Max100:
+    type: integer
+    minimum: 5
+    maximum: 100
+  DescribeBrokerInstanceOptionsRequest:
+    type: object
+    properties: {}
+  __listOfBrokerInstanceOption:
+    type: array
+    items:
+      $ref: '#/definitions/BrokerInstanceOption'
   DescribeBrokerRequest:
     type: object
     properties: {}
@@ -1681,10 +1867,13 @@ definitions:
         $ref: '#/definitions/ChangeType'
         description: Required. The type of change pending for the ActiveMQ user.
     description: Returns information about the status of the changes pending for the ActiveMQ user.
-  MaxResults:
-    type: integer
-    minimum: 1
-    maximum: 100
+  EngineVersion:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/__string'
+        description: Id for the version.
+    description: Id of the engine version.
   ListBrokersRequest:
     type: object
     properties: {}
@@ -1712,10 +1901,6 @@ definitions:
   ListUsersRequest:
     type: object
     properties: {}
-  __integerMin5Max100:
-    type: integer
-    minimum: 5
-    maximum: 100
   PendingLogs:
     type: object
     properties:
