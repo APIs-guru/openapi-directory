@@ -914,9 +914,14 @@ function fixSpec(swagger, errors) {
             swagger.definitions[decodeURI(ptr)] = {};
             fixed = true;
           }
+          else if (value.startsWith('./')) {
+            newValue = '#'+value.split('#')[1];
+            fixed = true;
+          }
           else {
             console.warn(swagger.info.title);
             console.warn(path,typeof value,value,newValue);
+
           }
         }
         break;
