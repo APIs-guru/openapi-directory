@@ -89,7 +89,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  '/#Action=AddPermission':
+  '/{AccountNumber}/{QueueName}/#Action=AddPermission':
     post:
       operationId: AddPermission
       description: '<p>Adds a permission to a queue for a specific <a href="http://docs.aws.amazon.com/general/latest/gr/glos-chap.html#P">principal</a>. This allows sharing access to the queue.</p> <p>When you create a queue, you have full control access rights for the queue. Only you, the owner of the queue, can grant or deny permissions to the queue. For more information about these permissions, see <a href="http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-writing-an-sqs-policy.html#write-messages-to-shared-queue">Allow Developers to Write Messages to a Shared Queue</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p> <note> <p> <code>AddPermission</code> writes an Amazon-SQS-generated policy. If you want to write your own policy, use <code> <a>SetQueueAttributes</a> </code> to upload your policy. For more information about writing your own policy, see <a href="http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-creating-custom-policies.html">Using Custom Policies with the Amazon SQS Access Policy Language</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p> <p>An Amazon SQS policy can have a maximum of 7 actions.</p> </note> <p>Some actions take lists of parameters. These lists are specified using the <code>param.n</code> notation. Values of <code>n</code> are integers starting from 1. For example, a parameter list with two elements looks like this:</p> <p> <code>&amp;Attribute.1=first</code> </p> <p> <code>&amp;Attribute.2=second</code> </p> <note> <p>Cross-account permissions don''t apply to this action. For more information, see see <a href="http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name">Grant Cross-Account Permissions to a Role and a User Name</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p> </note>'
@@ -101,11 +101,6 @@ paths:
           schema:
             $ref: '#/definitions/OverLimit'
       parameters:
-        - name: QueueUrl
-          in: query
-          required: true
-          description: <p>The URL of the Amazon SQS queue to which permissions are added.</p> <p>Queue URLs and names are case-sensitive.</p>
-          type: string
         - name: Label
           in: query
           required: true
@@ -125,6 +120,16 @@ paths:
           type: array
           items:
             type: string
+        - in: path
+          name: AccountNumber
+          required: true
+          description: The AWS account number
+          type: integer
+        - in: path
+          name: QueueName
+          required: true
+          description: The name of the queue
+          type: string
         - name: Action
           in: query
           required: true
@@ -145,7 +150,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=ChangeMessageVisibility':
+  '/{AccountNumber}/{QueueName}/#Action=ChangeMessageVisibility':
     post:
       operationId: ChangeMessageVisibility
       description: '<p>Changes the visibility timeout of a specified message in a queue to a new value. The maximum allowed timeout value is 12 hours. For more information, see <a href="http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html">Visibility Timeout</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p> <p>For example, you have a message with a visibility timeout of 5 minutes. After 3 minutes, you call <code>ChangeMessageVisibility</code> with a timeout of 10 minutes. You can continue to call <code>ChangeMessageVisibility</code> to extend the visibility timeout to a maximum of 12 hours. If you try to extend the visibility timeout beyond 12 hours, your request is rejected.</p> <p>A message is considered to be <i>in flight</i> after it''s received from a queue by a consumer, but not yet deleted from the queue.</p> <p>For standard queues, there can be a maximum of 120,000 inflight messages per queue. If you reach this limit, Amazon SQS returns the <code>OverLimit</code> error message. To avoid reaching the limit, you should delete messages from the queue after they''re processed. You can also increase the number of queues you use to process your messages.</p> <p>For FIFO queues, there can be a maximum of 20,000 inflight messages per queue. If you reach this limit, Amazon SQS returns no error messages.</p> <important> <p>If you attempt to set the <code>VisibilityTimeout</code> to a value greater than the maximum time left, Amazon SQS returns an error. Amazon SQS doesn''t automatically recalculate and increase the timeout to the maximum remaining time.</p> <p>Unlike with a queue, when you change the visibility timeout for a specific message the timeout value is applied immediately but isn''t saved in memory for that message. If you don''t delete a message after it is received, the visibility timeout for the message reverts to the original timeout value (not to the value you set using the <code>ChangeMessageVisibility</code> action) the next time the message is received.</p> </important>'
@@ -161,11 +166,6 @@ paths:
           schema:
             $ref: '#/definitions/ReceiptHandleIsInvalid'
       parameters:
-        - name: QueueUrl
-          in: query
-          required: true
-          description: <p>The URL of the Amazon SQS queue whose message's visibility is changed.</p> <p>Queue URLs and names are case-sensitive.</p>
-          type: string
         - name: ReceiptHandle
           in: query
           required: true
@@ -176,6 +176,16 @@ paths:
           required: true
           description: 'The new value for the message''s visibility timeout (in seconds). Values values: <code>0</code> to <code>43200</code>. Maximum: 12 hours.'
           type: integer
+        - in: path
+          name: AccountNumber
+          required: true
+          description: The AWS account number
+          type: integer
+        - in: path
+          name: QueueName
+          required: true
+          description: The name of the queue
+          type: string
         - name: Action
           in: query
           required: true
@@ -196,7 +206,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=ChangeMessageVisibilityBatch':
+  '/{AccountNumber}/{QueueName}/#Action=ChangeMessageVisibilityBatch':
     post:
       operationId: ChangeMessageVisibilityBatch
       description: '<p>Changes the visibility timeout of multiple messages. This is a batch version of <code> <a>ChangeMessageVisibility</a>.</code> The result of the action on each message is reported individually in the response. You can send up to 10 <code> <a>ChangeMessageVisibility</a> </code> requests with each <code>ChangeMessageVisibilityBatch</code> action.</p> <important> <p>Because the batch request can result in a combination of successful and unsuccessful actions, you should check for batch errors even when the call returns an HTTP status code of <code>200</code>.</p> </important> <p>Some actions take lists of parameters. These lists are specified using the <code>param.n</code> notation. Values of <code>n</code> are integers starting from 1. For example, a parameter list with two elements looks like this:</p> <p> <code>&amp;Attribute.1=first</code> </p> <p> <code>&amp;Attribute.2=second</code> </p>'
@@ -222,11 +232,6 @@ paths:
           schema:
             $ref: '#/definitions/InvalidBatchEntryId'
       parameters:
-        - name: QueueUrl
-          in: query
-          required: true
-          description: <p>The URL of the Amazon SQS queue whose messages' visibility is changed.</p> <p>Queue URLs and names are case-sensitive.</p>
-          type: string
         - name: Entries
           in: query
           required: true
@@ -234,6 +239,16 @@ paths:
           type: array
           items:
             type: string
+        - in: path
+          name: AccountNumber
+          required: true
+          description: The AWS account number
+          type: integer
+        - in: path
+          name: QueueName
+          required: true
+          description: The name of the queue
+          type: string
         - name: Action
           in: query
           required: true
@@ -315,7 +330,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DeleteMessage':
+  '/{AccountNumber}/{QueueName}/#Action=DeleteMessage':
     post:
       operationId: DeleteMessage
       description: '<p>Deletes the specified message from the specified queue. To select the message to delete, use the <code>ReceiptHandle</code> of the message (<i>not</i> the <code>MessageId</code> which you receive when you send the message). Amazon SQS can delete a message from a queue even if a visibility timeout setting causes the message to be locked by another consumer. Amazon SQS automatically deletes messages left in a queue longer than the retention period configured for the queue. </p> <note> <p>The <code>ReceiptHandle</code> is associated with a <i>specific instance</i> of receiving a message. If you receive a message more than once, the <code>ReceiptHandle</code> is different each time you receive a message. When you use the <code>DeleteMessage</code> action, you must provide the most recently received <code>ReceiptHandle</code> for the message (otherwise, the request succeeds, but the message might not be deleted).</p> <p>For standard queues, it is possible to receive a message even after you delete it. This might happen on rare occasions if one of the servers which stores a copy of the message is unavailable when you send the request to delete the message. The copy remains on the server and might be returned to you during a subsequent receive request. You should ensure that your application is idempotent, so that receiving a message more than once does not cause issues.</p> </note>'
@@ -331,15 +346,20 @@ paths:
           schema:
             $ref: '#/definitions/ReceiptHandleIsInvalid'
       parameters:
-        - name: QueueUrl
-          in: query
-          required: true
-          description: <p>The URL of the Amazon SQS queue from which messages are deleted.</p> <p>Queue URLs and names are case-sensitive.</p>
-          type: string
         - name: ReceiptHandle
           in: query
           required: true
           description: The receipt handle associated with the message to delete.
+          type: string
+        - in: path
+          name: AccountNumber
+          required: true
+          description: The AWS account number
+          type: integer
+        - in: path
+          name: QueueName
+          required: true
+          description: The name of the queue
           type: string
         - name: Action
           in: query
@@ -361,7 +381,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DeleteMessageBatch':
+  '/{AccountNumber}/{QueueName}/#Action=DeleteMessageBatch':
     post:
       operationId: DeleteMessageBatch
       description: '<p>Deletes up to ten messages from the specified queue. This is a batch version of <code> <a>DeleteMessage</a>.</code> The result of the action on each message is reported individually in the response.</p> <important> <p>Because the batch request can result in a combination of successful and unsuccessful actions, you should check for batch errors even when the call returns an HTTP status code of <code>200</code>.</p> </important> <p>Some actions take lists of parameters. These lists are specified using the <code>param.n</code> notation. Values of <code>n</code> are integers starting from 1. For example, a parameter list with two elements looks like this:</p> <p> <code>&amp;Attribute.1=first</code> </p> <p> <code>&amp;Attribute.2=second</code> </p>'
@@ -387,11 +407,6 @@ paths:
           schema:
             $ref: '#/definitions/InvalidBatchEntryId'
       parameters:
-        - name: QueueUrl
-          in: query
-          required: true
-          description: <p>The URL of the Amazon SQS queue from which messages are deleted.</p> <p>Queue URLs and names are case-sensitive.</p>
-          type: string
         - name: Entries
           in: query
           required: true
@@ -399,6 +414,16 @@ paths:
           type: array
           items:
             type: string
+        - in: path
+          name: AccountNumber
+          required: true
+          description: The AWS account number
+          type: integer
+        - in: path
+          name: QueueName
+          required: true
+          description: The name of the queue
+          type: string
         - name: Action
           in: query
           required: true
@@ -419,7 +444,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DeleteQueue':
+  '/{AccountNumber}/{QueueName}/#Action=DeleteQueue':
     post:
       operationId: DeleteQueue
       description: '<p>Deletes the queue specified by the <code>QueueUrl</code>, regardless of the queue''s contents. If the specified queue doesn''t exist, Amazon SQS returns a successful response.</p> <important> <p>Be careful with the <code>DeleteQueue</code> action: When you delete a queue, any messages in the queue are no longer available. </p> </important> <p>When you delete a queue, the deletion process takes up to 60 seconds. Requests you send involving that queue during the 60 seconds might succeed. For example, a <code> <a>SendMessage</a> </code> request might succeed, but after 60 seconds the queue and the message you sent no longer exist.</p> <p>When you delete a queue, you must wait at least 60 seconds before creating a queue with the same name.</p> <note> <p>Cross-account permissions don''t apply to this action. For more information, see see <a href="http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name">Grant Cross-Account Permissions to a Role and a User Name</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p> </note>'
@@ -427,10 +452,15 @@ paths:
         '200':
           description: Success
       parameters:
-        - name: QueueUrl
-          in: query
+        - in: path
+          name: AccountNumber
           required: true
-          description: <p>The URL of the Amazon SQS queue to delete.</p> <p>Queue URLs and names are case-sensitive.</p>
+          description: The AWS account number
+          type: integer
+        - in: path
+          name: QueueName
+          required: true
+          description: The name of the queue
           type: string
         - name: Action
           in: query
@@ -452,7 +482,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=GetQueueAttributes':
+  '/{AccountNumber}/{QueueName}/#Action=GetQueueAttributes':
     post:
       operationId: GetQueueAttributes
       description: '<p>Gets attributes for the specified queue.</p> <note> <p>To determine whether a queue is <a href="http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html">FIFO</a>, you can check whether <code>QueueName</code> ends with the <code>.fifo</code> suffix.</p> </note> <p>Some actions take lists of parameters. These lists are specified using the <code>param.n</code> notation. Values of <code>n</code> are integers starting from 1. For example, a parameter list with two elements looks like this:</p> <p> <code>&amp;Attribute.1=first</code> </p> <p> <code>&amp;Attribute.2=second</code> </p>'
@@ -466,11 +496,6 @@ paths:
           schema:
             $ref: '#/definitions/InvalidAttributeName'
       parameters:
-        - name: QueueUrl
-          in: query
-          required: true
-          description: <p>The URL of the Amazon SQS queue whose attribute information is retrieved.</p> <p>Queue URLs and names are case-sensitive.</p>
-          type: string
         - name: AttributeNames
           in: query
           required: false
@@ -478,6 +503,16 @@ paths:
           type: array
           items:
             type: string
+        - in: path
+          name: AccountNumber
+          required: true
+          description: The AWS account number
+          type: integer
+        - in: path
+          name: QueueName
+          required: true
+          description: The name of the queue
+          type: string
         - name: Action
           in: query
           required: true
@@ -542,7 +577,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=ListDeadLetterSourceQueues':
+  '/{AccountNumber}/{QueueName}/#Action=ListDeadLetterSourceQueues':
     post:
       operationId: ListDeadLetterSourceQueues
       description: '<p>Returns a list of your queues that have the <code>RedrivePolicy</code> queue attribute configured with a dead-letter queue.</p> <p>For more information about using dead-letter queues, see <a href="http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html">Using Amazon SQS Dead-Letter Queues</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>'
@@ -556,10 +591,15 @@ paths:
           schema:
             $ref: '#/definitions/QueueDoesNotExist'
       parameters:
-        - name: QueueUrl
-          in: query
+        - in: path
+          name: AccountNumber
           required: true
-          description: <p>The URL of a dead-letter queue.</p> <p>Queue URLs and names are case-sensitive.</p>
+          description: The AWS account number
+          type: integer
+        - in: path
+          name: QueueName
+          required: true
+          description: The name of the queue
           type: string
         - name: Action
           in: query
@@ -581,7 +621,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=ListQueueTags':
+  '/{AccountNumber}/{QueueName}/#Action=ListQueueTags':
     post:
       operationId: ListQueueTags
       description: '<p>List all cost allocation tags added to the specified Amazon SQS queue. For an overview, see <a href="http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-queue-tags.html">Tagging Your Amazon SQS Queues</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p> <p>When you use queue tags, keep the following guidelines in mind:</p> <ul> <li> <p>Adding more than 50 tags to a queue isn''t recommended.</p> </li> <li> <p>Tags don''t have any semantic meaning. Amazon SQS interprets tags as character strings.</p> </li> <li> <p>Tags are case-sensitive.</p> </li> <li> <p>A new tag with a key identical to that of an existing tag overwrites the existing tag.</p> </li> <li> <p>Tagging actions are limited to 5 TPS per AWS account. If your application requires a higher throughput, file a <a href="https://console.aws.amazon.com/support/home#/case/create?issueType=technical">technical support request</a>.</p> </li> </ul> <p>For a full list of tag restrictions, see <a href="http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-limits.html#limits-queues">Limits Related to Queues</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p> <note> <p>Cross-account permissions don''t apply to this action. For more information, see see <a href="http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name">Grant Cross-Account Permissions to a Role and a User Name</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p> </note>'
@@ -591,10 +631,15 @@ paths:
           schema:
             $ref: '#/definitions/ListQueueTagsResult'
       parameters:
-        - name: QueueUrl
-          in: query
+        - in: path
+          name: AccountNumber
           required: true
-          description: The URL of the queue.
+          description: The AWS account number
+          type: integer
+        - in: path
+          name: QueueName
+          required: true
+          description: The name of the queue
           type: string
         - name: Action
           in: query
@@ -651,7 +696,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=PurgeQueue':
+  '/{AccountNumber}/{QueueName}/#Action=PurgeQueue':
     post:
       operationId: PurgeQueue
       description: '<p>Deletes the messages in a queue specified by the <code>QueueURL</code> parameter.</p> <important> <p>When you use the <code>PurgeQueue</code> action, you can''t retrieve any messages deleted from a queue.</p> <p>The message deletion process takes up to 60 seconds. We recommend waiting for 60 seconds regardless of your queue''s size. </p> </important> <p>Messages sent to the queue <i>before</i> you call <code>PurgeQueue</code> might be received but are deleted within the next minute.</p> <p>Messages sent to the queue <i>after</i> you call <code>PurgeQueue</code> might be deleted while the queue is being purged.</p>'
@@ -667,10 +712,15 @@ paths:
           schema:
             $ref: '#/definitions/PurgeQueueInProgress'
       parameters:
-        - name: QueueUrl
-          in: query
+        - in: path
+          name: AccountNumber
           required: true
-          description: <p>The URL of the queue from which the <code>PurgeQueue</code> action deletes messages.</p> <p>Queue URLs and names are case-sensitive.</p>
+          description: The AWS account number
+          type: integer
+        - in: path
+          name: QueueName
+          required: true
+          description: The name of the queue
           type: string
         - name: Action
           in: query
@@ -692,7 +742,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=ReceiveMessage':
+  '/{AccountNumber}/{QueueName}/#Action=ReceiveMessage':
     post:
       operationId: ReceiveMessage
       description: '<p>Retrieves one or more messages (up to 10), from the specified queue. Using the <code>WaitTimeSeconds</code> parameter enables long-poll support. For more information, see <a href="http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-long-polling.html">Amazon SQS Long Polling</a> in the <i>Amazon Simple Queue Service Developer Guide</i>. </p> <p>Short poll is the default behavior where a weighted random set of machines is sampled on a <code>ReceiveMessage</code> call. Thus, only the messages on the sampled machines are returned. If the number of messages in the queue is small (fewer than 1,000), you most likely get fewer messages than you requested per <code>ReceiveMessage</code> call. If the number of messages in the queue is extremely small, you might not receive any messages in a particular <code>ReceiveMessage</code> response. If this happens, repeat the request. </p> <p>For each message returned, the response includes the following:</p> <ul> <li> <p>The message body.</p> </li> <li> <p>An MD5 digest of the message body. For information about MD5, see <a href="https://www.ietf.org/rfc/rfc1321.txt">RFC1321</a>.</p> </li> <li> <p>The <code>MessageId</code> you received when you sent the message to the queue.</p> </li> <li> <p>The receipt handle.</p> </li> <li> <p>The message attributes.</p> </li> <li> <p>An MD5 digest of the message attributes.</p> </li> </ul> <p>The receipt handle is the identifier you must provide when deleting the message. For more information, see <a href="http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-queue-message-identifiers.html">Queue and Message Identifiers</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p> <p>You can provide the <code>VisibilityTimeout</code> parameter in your request. The parameter is applied to the messages that Amazon SQS returns in the response. If you don''t include the parameter, the overall visibility timeout for the queue is used for the returned messages. For more information, see <a href="http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html">Visibility Timeout</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p> <p>A message that isn''t deleted or a message whose visibility isn''t extended before the visibility timeout expires counts as a failed receive. Depending on the configuration of the queue, the message might be sent to the dead-letter queue.</p> <note> <p>In the future, new attributes might be added. If you write code that calls this action, we recommend that you structure your code so that it can handle new attributes gracefully.</p> </note>'
@@ -706,11 +756,6 @@ paths:
           schema:
             $ref: '#/definitions/OverLimit'
       parameters:
-        - name: QueueUrl
-          in: query
-          required: true
-          description: <p>The URL of the Amazon SQS queue from which messages are received.</p> <p>Queue URLs and names are case-sensitive.</p>
-          type: string
         - name: AttributeNames
           in: query
           required: false
@@ -745,6 +790,16 @@ paths:
           required: false
           description: '<p>This parameter applies only to FIFO (first-in-first-out) queues.</p> <p>The token used for deduplication of <code>ReceiveMessage</code> calls. If a networking issue occurs after a <code>ReceiveMessage</code> action, and instead of a response you receive a generic error, you can retry the same action with an identical <code>ReceiveRequestAttemptId</code> to retrieve the same set of messages, even if their visibility timeout has not yet expired.</p> <ul> <li> <p>You can use <code>ReceiveRequestAttemptId</code> only for 5 minutes after a <code>ReceiveMessage</code> action.</p> </li> <li> <p>When you set <code>FifoQueue</code>, a caller of the <code>ReceiveMessage</code> action can provide a <code>ReceiveRequestAttemptId</code> explicitly.</p> </li> <li> <p>If a caller of the <code>ReceiveMessage</code> action doesn''t provide a <code>ReceiveRequestAttemptId</code>, Amazon SQS generates a <code>ReceiveRequestAttemptId</code>.</p> </li> <li> <p>You can retry the <code>ReceiveMessage</code> action with the same <code>ReceiveRequestAttemptId</code> if none of the messages have been modified (deleted or had their visibility changes).</p> </li> <li> <p>During a visibility timeout, subsequent calls with the same <code>ReceiveRequestAttemptId</code> return the same messages and receipt handles. If a retry occurs within the deduplication interval, it resets the visibility timeout. For more information, see <a href="http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html">Visibility Timeout</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p> <important> <p>If a caller of the <code>ReceiveMessage</code> action still processes messages when the visibility timeout expires and messages become visible, another worker consuming from the same queue can receive the same messages and therefore process duplicates. Also, if a consumer whose message processing time is longer than the visibility timeout tries to delete the processed messages, the action fails with an error.</p> <p>To mitigate this effect, ensure that your application observes a safe threshold before the visibility timeout expires and extend the visibility timeout as necessary.</p> </important> </li> <li> <p>While messages with a particular <code>MessageGroupId</code> are invisible, no more messages belonging to the same <code>MessageGroupId</code> are returned until the visibility timeout expires. You can still receive messages with another <code>MessageGroupId</code> as long as it is also visible.</p> </li> <li> <p>If a caller of <code>ReceiveMessage</code> can''t track the <code>ReceiveRequestAttemptId</code>, no retries work until the original visibility timeout expires. As a result, delays might occur but the messages in the queue remain in a strict order.</p> </li> </ul> <p>The length of <code>ReceiveRequestAttemptId</code> is 128 characters. <code>ReceiveRequestAttemptId</code> can contain alphanumeric characters (<code>a-z</code>, <code>A-Z</code>, <code>0-9</code>) and punctuation (<code>!"#$%&amp;''()*+,-./:;&lt;=&gt;?@[\]^_`{|}~</code>).</p> <p>For best practices of using <code>ReceiveRequestAttemptId</code>, see <a href="http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-receiverequestattemptid-request-parameter.html">Using the ReceiveRequestAttemptId Request Parameter</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>'
           type: string
+        - in: path
+          name: AccountNumber
+          required: true
+          description: The AWS account number
+          type: integer
+        - in: path
+          name: QueueName
+          required: true
+          description: The name of the queue
+          type: string
         - name: Action
           in: query
           required: true
@@ -765,7 +820,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=RemovePermission':
+  '/{AccountNumber}/{QueueName}/#Action=RemovePermission':
     post:
       operationId: RemovePermission
       description: '<p>Revokes any permissions in the queue policy that matches the specified <code>Label</code> parameter.</p> <note> <p>Only the owner of a queue can remove permissions from it.</p> <p>Cross-account permissions don''t apply to this action. For more information, see see <a href="http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name">Grant Cross-Account Permissions to a Role and a User Name</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p> </note>'
@@ -773,15 +828,20 @@ paths:
         '200':
           description: Success
       parameters:
-        - name: QueueUrl
-          in: query
-          required: true
-          description: <p>The URL of the Amazon SQS queue from which permissions are removed.</p> <p>Queue URLs and names are case-sensitive.</p>
-          type: string
         - name: Label
           in: query
           required: true
           description: The identification of the permission to remove. This is the label added using the <code> <a>AddPermission</a> </code> action.
+          type: string
+        - in: path
+          name: AccountNumber
+          required: true
+          description: The AWS account number
+          type: integer
+        - in: path
+          name: QueueName
+          required: true
+          description: The name of the queue
           type: string
         - name: Action
           in: query
@@ -803,7 +863,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=SendMessage':
+  '/{AccountNumber}/{QueueName}/#Action=SendMessage':
     post:
       operationId: SendMessage
       description: '<p>Delivers a message to the specified queue.</p> <important> <p>A message can include only XML, JSON, and unformatted text. The following Unicode characters are allowed:</p> <p> <code>#x9</code> | <code>#xA</code> | <code>#xD</code> | <code>#x20</code> to <code>#xD7FF</code> | <code>#xE000</code> to <code>#xFFFD</code> | <code>#x10000</code> to <code>#x10FFFF</code> </p> <p>Any characters not included in this list will be rejected. For more information, see the <a href="http://www.w3.org/TR/REC-xml/#charsets">W3C specification for characters</a>.</p> </important>'
@@ -821,11 +881,6 @@ paths:
           schema:
             $ref: '#/definitions/UnsupportedOperation'
       parameters:
-        - name: QueueUrl
-          in: query
-          required: true
-          description: <p>The URL of the Amazon SQS queue to which a message is sent.</p> <p>Queue URLs and names are case-sensitive.</p>
-          type: string
         - name: MessageBody
           in: query
           required: true
@@ -864,6 +919,16 @@ paths:
           required: false
           description: '<p>This parameter applies only to FIFO (first-in-first-out) queues.</p> <p>The tag that specifies that a message belongs to a specific message group. Messages that belong to the same message group are processed in a FIFO manner (however, messages in different message groups might be processed out of order). To interleave multiple ordered streams within a single queue, use <code>MessageGroupId</code> values (for example, session data for multiple users). In this scenario, multiple consumers can process the queue, but the session data of each user is processed in a FIFO fashion.</p> <ul> <li> <p>You must associate a non-empty <code>MessageGroupId</code> with a message. If you don''t provide a <code>MessageGroupId</code>, the action fails.</p> </li> <li> <p> <code>ReceiveMessage</code> might return messages with multiple <code>MessageGroupId</code> values. For each <code>MessageGroupId</code>, the messages are sorted by time sent. The caller can''t specify a <code>MessageGroupId</code>.</p> </li> </ul> <p>The length of <code>MessageGroupId</code> is 128 characters. Valid values: alphanumeric characters and punctuation <code>(!"#$%&amp;''()*+,-./:;&lt;=&gt;?@[\]^_`{|}~)</code>.</p> <p>For best practices of using <code>MessageGroupId</code>, see <a href="http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagegroupid-property.html">Using the MessageGroupId Property</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p> <important> <p> <code>MessageGroupId</code> is required for FIFO queues. You can''t use it for Standard queues.</p> </important>'
           type: string
+        - in: path
+          name: AccountNumber
+          required: true
+          description: The AWS account number
+          type: integer
+        - in: path
+          name: QueueName
+          required: true
+          description: The name of the queue
+          type: string
         - name: Action
           in: query
           required: true
@@ -884,7 +949,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=SendMessageBatch':
+  '/{AccountNumber}/{QueueName}/#Action=SendMessageBatch':
     post:
       operationId: SendMessageBatch
       description: '<p>Delivers up to ten messages to the specified queue. This is a batch version of <code> <a>SendMessage</a>.</code> For a FIFO queue, multiple messages within a single batch are enqueued in the order they are sent.</p> <p>The result of sending each message is reported individually in the response. Because the batch request can result in a combination of successful and unsuccessful actions, you should check for batch errors even when the call returns an HTTP status code of <code>200</code>.</p> <p>The maximum allowed individual message size and the maximum total payload size (the sum of the individual lengths of all of the batched messages) are both 256 KB (262,144 bytes).</p> <important> <p>A message can include only XML, JSON, and unformatted text. The following Unicode characters are allowed:</p> <p> <code>#x9</code> | <code>#xA</code> | <code>#xD</code> | <code>#x20</code> to <code>#xD7FF</code> | <code>#xE000</code> to <code>#xFFFD</code> | <code>#x10000</code> to <code>#x10FFFF</code> </p> <p>Any characters not included in this list will be rejected. For more information, see the <a href="http://www.w3.org/TR/REC-xml/#charsets">W3C specification for characters</a>.</p> </important> <p>If you don''t specify the <code>DelaySeconds</code> parameter for an entry, Amazon SQS uses the default value for the queue.</p> <p>Some actions take lists of parameters. These lists are specified using the <code>param.n</code> notation. Values of <code>n</code> are integers starting from 1. For example, a parameter list with two elements looks like this:</p> <p> <code>&amp;Attribute.1=first</code> </p> <p> <code>&amp;Attribute.2=second</code> </p>'
@@ -918,11 +983,6 @@ paths:
           schema:
             $ref: '#/definitions/UnsupportedOperation'
       parameters:
-        - name: QueueUrl
-          in: query
-          required: true
-          description: <p>The URL of the Amazon SQS queue to which batched messages are sent.</p> <p>Queue URLs and names are case-sensitive.</p>
-          type: string
         - name: Entries
           in: query
           required: true
@@ -930,6 +990,16 @@ paths:
           type: array
           items:
             type: string
+        - in: path
+          name: AccountNumber
+          required: true
+          description: The AWS account number
+          type: integer
+        - in: path
+          name: QueueName
+          required: true
+          description: The name of the queue
+          type: string
         - name: Action
           in: query
           required: true
@@ -950,7 +1020,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=SetQueueAttributes':
+  '/{AccountNumber}/{QueueName}/#Action=SetQueueAttributes':
     post:
       operationId: SetQueueAttributes
       description: '<p>Sets the value of one or more queue attributes. When you change a queue''s attributes, the change can take up to 60 seconds for most of the attributes to propagate throughout the Amazon SQS system. Changes made to the <code>MessageRetentionPeriod</code> attribute can take up to 15 minutes.</p> <note> <p>In the future, new attributes might be added. If you write code that calls this action, we recommend that you structure your code so that it can handle new attributes gracefully.</p> <p>Cross-account permissions don''t apply to this action. For more information, see see <a href="http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name">Grant Cross-Account Permissions to a Role and a User Name</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p> </note>'
@@ -962,11 +1032,6 @@ paths:
           schema:
             $ref: '#/definitions/InvalidAttributeName'
       parameters:
-        - name: QueueUrl
-          in: query
-          required: true
-          description: <p>The URL of the Amazon SQS queue whose attributes are set.</p> <p>Queue URLs and names are case-sensitive.</p>
-          type: string
         - name: Attribute.0.key
           in: query
           type: string
@@ -984,6 +1049,16 @@ paths:
           type: string
         - name: Attribute.2.value
           in: query
+          type: string
+        - in: path
+          name: AccountNumber
+          required: true
+          description: The AWS account number
+          type: integer
+        - in: path
+          name: QueueName
+          required: true
+          description: The name of the queue
           type: string
         - name: Action
           in: query
@@ -1005,7 +1080,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=TagQueue':
+  '/{AccountNumber}/{QueueName}/#Action=TagQueue':
     post:
       operationId: TagQueue
       description: '<p>Add cost allocation tags to the specified Amazon SQS queue. For an overview, see <a href="http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-queue-tags.html">Tagging Your Amazon SQS Queues</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p> <p>When you use queue tags, keep the following guidelines in mind:</p> <ul> <li> <p>Adding more than 50 tags to a queue isn''t recommended.</p> </li> <li> <p>Tags don''t have any semantic meaning. Amazon SQS interprets tags as character strings.</p> </li> <li> <p>Tags are case-sensitive.</p> </li> <li> <p>A new tag with a key identical to that of an existing tag overwrites the existing tag.</p> </li> <li> <p>Tagging actions are limited to 5 TPS per AWS account. If your application requires a higher throughput, file a <a href="https://console.aws.amazon.com/support/home#/case/create?issueType=technical">technical support request</a>.</p> </li> </ul> <p>For a full list of tag restrictions, see <a href="http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-limits.html#limits-queues">Limits Related to Queues</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p> <note> <p>Cross-account permissions don''t apply to this action. For more information, see see <a href="http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name">Grant Cross-Account Permissions to a Role and a User Name</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p> </note>'
@@ -1013,11 +1088,6 @@ paths:
         '200':
           description: Success
       parameters:
-        - name: QueueUrl
-          in: query
-          required: true
-          description: The URL of the queue.
-          type: string
         - name: Tags.0.key
           in: query
           type: string
@@ -1035,6 +1105,16 @@ paths:
           type: string
         - name: Tags.2.value
           in: query
+          type: string
+        - in: path
+          name: AccountNumber
+          required: true
+          description: The AWS account number
+          type: integer
+        - in: path
+          name: QueueName
+          required: true
+          description: The name of the queue
           type: string
         - name: Action
           in: query
@@ -1056,7 +1136,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=UntagQueue':
+  '/{AccountNumber}/{QueueName}/#Action=UntagQueue':
     post:
       operationId: UntagQueue
       description: '<p>Remove cost allocation tags from the specified Amazon SQS queue. For an overview, see <a href="http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-queue-tags.html">Tagging Your Amazon SQS Queues</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p> <p>When you use queue tags, keep the following guidelines in mind:</p> <ul> <li> <p>Adding more than 50 tags to a queue isn''t recommended.</p> </li> <li> <p>Tags don''t have any semantic meaning. Amazon SQS interprets tags as character strings.</p> </li> <li> <p>Tags are case-sensitive.</p> </li> <li> <p>A new tag with a key identical to that of an existing tag overwrites the existing tag.</p> </li> <li> <p>Tagging actions are limited to 5 TPS per AWS account. If your application requires a higher throughput, file a <a href="https://console.aws.amazon.com/support/home#/case/create?issueType=technical">technical support request</a>.</p> </li> </ul> <p>For a full list of tag restrictions, see <a href="http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-limits.html#limits-queues">Limits Related to Queues</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p> <note> <p>Cross-account permissions don''t apply to this action. For more information, see see <a href="http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name">Grant Cross-Account Permissions to a Role and a User Name</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p> </note>'
@@ -1064,11 +1144,6 @@ paths:
         '200':
           description: Success
       parameters:
-        - name: QueueUrl
-          in: query
-          required: true
-          description: The URL of the queue.
-          type: string
         - name: TagKeys
           in: query
           required: true
@@ -1076,6 +1151,16 @@ paths:
           type: array
           items:
             type: string
+        - in: path
+          name: AccountNumber
+          required: true
+          description: The AWS account number
+          type: integer
+        - in: path
+          name: QueueName
+          required: true
+          description: The name of the queue
+          type: string
         - name: Action
           in: query
           required: true

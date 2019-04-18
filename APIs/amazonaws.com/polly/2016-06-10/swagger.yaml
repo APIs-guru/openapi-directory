@@ -224,6 +224,7 @@ paths:
           description: ' The language identification tag (ISO 639 code for the language name-ISO 3166 country code) for filtering the list of voices returned. If you don''t specify this optional parameter, all available voices are returned. '
           type: string
           enum:
+            - arb
             - cmn-CN
             - cy-GB
             - da-DK
@@ -262,6 +263,8 @@ paths:
           required: false
           description: 'An opaque pagination token returned from the previous <code>DescribeVoices</code> operation. If present, this indicates where to continue the listing.'
           type: string
+          minLength: 0
+          maxLength: 4096
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -297,8 +300,7 @@ paths:
           required: true
           description: The Amazon Polly generated identifier for a speech synthesis task.
           type: string
-          minLength: 1
-          maxLength: 128
+          pattern: '^[a-zA-Z0-9_-]{1,100}$'
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -330,6 +332,8 @@ paths:
           required: false
           description: 'An opaque pagination token returned from previous <code>ListLexicons</code> operation. If present, indicates where to continue the list of lexicons.'
           type: string
+          minLength: 0
+          maxLength: 4096
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -368,6 +372,8 @@ paths:
           required: false
           description: 'The pagination token to use in the next request to continue the listing of speech synthesis tasks. '
           type: string
+          minLength: 0
+          maxLength: 4096
         - name: Status
           in: query
           required: false
@@ -478,7 +484,7 @@ paths:
               SnsTopicArn:
                 description: ARN for the SNS topic optionally used for providing status notification for a speech synthesis task.
                 type: string
-                pattern: '^arn:aws(-(cn|iso(-b)?|us-gov))?:sns:.*:\w{12}:.+$'
+                pattern: '^arn:aws(-(cn|iso(-b)?|us-gov))?:sns:[a-z0-9_-]{1,50}:\d{12}:[a-zA-Z0-9_-]{1,256}$'
               SpeechMarkTypes:
                 description: The type of speech marks returned for the input text.
                 type: array
@@ -498,67 +504,69 @@ paths:
                 description: 'Voice ID to use for the synthesis. '
                 type: string
                 enum:
-                  - Geraint
-                  - Gwyneth
-                  - Mads
-                  - Naja
-                  - Hans
-                  - Marlene
-                  - Nicole
-                  - Russell
+                  - Aditi
                   - Amy
+                  - Astrid
+                  - Bianca
                   - Brian
+                  - Carla
+                  - Carmen
+                  - Celine
+                  - Chantal
+                  - Conchita
+                  - Cristiano
+                  - Dora
                   - Emma
-                  - Raveena
+                  - Enrique
+                  - Ewa
+                  - Filiz
+                  - Geraint
+                  - Giorgio
+                  - Gwyneth
+                  - Hans
+                  - Ines
                   - Ivy
+                  - Jacek
+                  - Jan
                   - Joanna
                   - Joey
                   - Justin
+                  - Karl
                   - Kendra
                   - Kimberly
-                  - Matthew
-                  - Salli
-                  - Conchita
-                  - Enrique
-                  - Miguel
-                  - Penelope
-                  - Chantal
-                  - Celine
                   - Lea
-                  - Mathieu
-                  - Dora
-                  - Karl
-                  - Carla
-                  - Giorgio
-                  - Mizuki
                   - Liv
                   - Lotte
-                  - Ruben
-                  - Ewa
-                  - Jacek
-                  - Jan
-                  - Maja
-                  - Ricardo
-                  - Vitoria
-                  - Cristiano
-                  - Ines
-                  - Carmen
-                  - Maxim
-                  - Tatyana
-                  - Astrid
-                  - Filiz
-                  - Vicki
-                  - Takumi
-                  - Seoyeon
-                  - Aditi
-                  - Zhiyu
-                  - Bianca
                   - Lucia
+                  - Mads
+                  - Maja
+                  - Marlene
+                  - Mathieu
+                  - Matthew
+                  - Maxim
                   - Mia
+                  - Miguel
+                  - Mizuki
+                  - Naja
+                  - Nicole
+                  - Penelope
+                  - Raveena
+                  - Ricardo
+                  - Ruben
+                  - Russell
+                  - Salli
+                  - Seoyeon
+                  - Takumi
+                  - Tatyana
+                  - Vicki
+                  - Vitoria
+                  - Zeina
+                  - Zhiyu
               LanguageCode:
                 description: '<p>Optional language code for the Speech Synthesis request. This is only necessary if using a bilingual voice, such as Aditi, which can be used for either Indian English (en-IN) or Hindi (hi-IN). </p> <p>If a bilingual voice is used and no language code is specified, Amazon Polly will use the default language of the bilingual voice. The default language for any voice is the one returned by the <a href="https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html">DescribeVoices</a> operation for the <code>LanguageCode</code> parameter. For example, if no language code is specified, Aditi will use Indian English rather than Hindi.</p>'
                 type: string
                 enum:
+                  - arb
                   - cmn-CN
                   - cy-GB
                   - da-DK
@@ -675,67 +683,69 @@ paths:
                 description: ' Voice ID to use for the synthesis. You can get a list of available voice IDs by calling the <a href="http://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html">DescribeVoices</a> operation. '
                 type: string
                 enum:
-                  - Geraint
-                  - Gwyneth
-                  - Mads
-                  - Naja
-                  - Hans
-                  - Marlene
-                  - Nicole
-                  - Russell
+                  - Aditi
                   - Amy
+                  - Astrid
+                  - Bianca
                   - Brian
+                  - Carla
+                  - Carmen
+                  - Celine
+                  - Chantal
+                  - Conchita
+                  - Cristiano
+                  - Dora
                   - Emma
-                  - Raveena
+                  - Enrique
+                  - Ewa
+                  - Filiz
+                  - Geraint
+                  - Giorgio
+                  - Gwyneth
+                  - Hans
+                  - Ines
                   - Ivy
+                  - Jacek
+                  - Jan
                   - Joanna
                   - Joey
                   - Justin
+                  - Karl
                   - Kendra
                   - Kimberly
-                  - Matthew
-                  - Salli
-                  - Conchita
-                  - Enrique
-                  - Miguel
-                  - Penelope
-                  - Chantal
-                  - Celine
                   - Lea
-                  - Mathieu
-                  - Dora
-                  - Karl
-                  - Carla
-                  - Giorgio
-                  - Mizuki
                   - Liv
                   - Lotte
-                  - Ruben
-                  - Ewa
-                  - Jacek
-                  - Jan
-                  - Maja
-                  - Ricardo
-                  - Vitoria
-                  - Cristiano
-                  - Ines
-                  - Carmen
-                  - Maxim
-                  - Tatyana
-                  - Astrid
-                  - Filiz
-                  - Vicki
-                  - Takumi
-                  - Seoyeon
-                  - Aditi
-                  - Zhiyu
-                  - Bianca
                   - Lucia
+                  - Mads
+                  - Maja
+                  - Marlene
+                  - Mathieu
+                  - Matthew
+                  - Maxim
                   - Mia
+                  - Miguel
+                  - Mizuki
+                  - Naja
+                  - Nicole
+                  - Penelope
+                  - Raveena
+                  - Ricardo
+                  - Ruben
+                  - Russell
+                  - Salli
+                  - Seoyeon
+                  - Takumi
+                  - Tatyana
+                  - Vicki
+                  - Vitoria
+                  - Zeina
+                  - Zhiyu
               LanguageCode:
                 description: '<p>Optional language code for the Synthesize Speech request. This is only necessary if using a bilingual voice, such as Aditi, which can be used for either Indian English (en-IN) or Hindi (hi-IN). </p> <p>If a bilingual voice is used and no language code is specified, Amazon Polly will use the default language of the bilingual voice. The default language for any voice is the one returned by the <a href="https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html">DescribeVoices</a> operation for the <code>LanguageCode</code> parameter. For example, if no language code is specified, Aditi will use Indian English rather than Hindi.</p>'
                 type: string
                 enum:
+                  - arb
                   - cmn-CN
                   - cy-GB
                   - da-DK
@@ -923,6 +933,7 @@ definitions:
   LanguageCode:
     type: string
     enum:
+      - arb
       - cmn-CN
       - cy-GB
       - da-DK
@@ -955,6 +966,8 @@ definitions:
     type: boolean
   NextToken:
     type: string
+    minLength: 0
+    maxLength: 4096
   DescribeVoicesInput:
     type: object
     properties: {}
@@ -1004,8 +1017,7 @@ definitions:
     description: 'Contains metadata describing the lexicon such as the number of lexemes, language code, and so on. For more information, see <a href="http://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html">Managing Lexicons</a>.'
   TaskId:
     type: string
-    minLength: 1
-    maxLength: 128
+    pattern: '^[a-zA-Z0-9_-]{1,100}$'
   GetSpeechSynthesisTaskInput:
     type: object
     properties: {}
@@ -1141,7 +1153,7 @@ definitions:
     type: string
   SnsTopicArn:
     type: string
-    pattern: '^arn:aws(-(cn|iso(-b)?|us-gov))?:sns:.*:\w{12}:.+$'
+    pattern: '^arn:aws(-(cn|iso(-b)?|us-gov))?:sns:[a-z0-9_-]{1,50}:\d{12}:[a-zA-Z0-9_-]{1,256}$'
   SpeechMarkTypeList:
     type: array
     items:
@@ -1157,63 +1169,64 @@ definitions:
   VoiceId:
     type: string
     enum:
-      - Geraint
-      - Gwyneth
-      - Mads
-      - Naja
-      - Hans
-      - Marlene
-      - Nicole
-      - Russell
+      - Aditi
       - Amy
+      - Astrid
+      - Bianca
       - Brian
+      - Carla
+      - Carmen
+      - Celine
+      - Chantal
+      - Conchita
+      - Cristiano
+      - Dora
       - Emma
-      - Raveena
+      - Enrique
+      - Ewa
+      - Filiz
+      - Geraint
+      - Giorgio
+      - Gwyneth
+      - Hans
+      - Ines
       - Ivy
+      - Jacek
+      - Jan
       - Joanna
       - Joey
       - Justin
+      - Karl
       - Kendra
       - Kimberly
-      - Matthew
-      - Salli
-      - Conchita
-      - Enrique
-      - Miguel
-      - Penelope
-      - Chantal
-      - Celine
       - Lea
-      - Mathieu
-      - Dora
-      - Karl
-      - Carla
-      - Giorgio
-      - Mizuki
       - Liv
       - Lotte
-      - Ruben
-      - Ewa
-      - Jacek
-      - Jan
-      - Maja
-      - Ricardo
-      - Vitoria
-      - Cristiano
-      - Ines
-      - Carmen
-      - Maxim
-      - Tatyana
-      - Astrid
-      - Filiz
-      - Vicki
-      - Takumi
-      - Seoyeon
-      - Aditi
-      - Zhiyu
-      - Bianca
       - Lucia
+      - Mads
+      - Maja
+      - Marlene
+      - Mathieu
+      - Matthew
+      - Maxim
       - Mia
+      - Miguel
+      - Mizuki
+      - Naja
+      - Nicole
+      - Penelope
+      - Raveena
+      - Ricardo
+      - Ruben
+      - Russell
+      - Salli
+      - Seoyeon
+      - Takumi
+      - Tatyana
+      - Vicki
+      - Vitoria
+      - Zeina
+      - Zhiyu
   StartSpeechSynthesisTaskInput:
     type: object
     required:
