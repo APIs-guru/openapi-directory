@@ -88,6 +88,77 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
+  /associateDomain:
+    post:
+      operationId: AssociateDomain
+      description: Specifies a domain to be associated to Amazon WorkLink.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AssociateDomainResponse'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - FleetArn
+              - DomainName
+              - AcmCertificateArn
+            properties:
+              FleetArn:
+                description: The Amazon Resource Name (ARN) of the fleet.
+                type: string
+                minLength: 20
+                maxLength: 2048
+              DomainName:
+                description: The fully qualified domain name (FQDN).
+                type: string
+                pattern: '^[a-zA-Z0-9]?((?!-)([A-Za-z0-9-]*[A-Za-z0-9])\.)+[a-zA-Z0-9]+$'
+                minLength: 1
+                maxLength: 64
+              AcmCertificateArn:
+                description: 'The ARN of an issued ACM certificate that is valid for the domain being associated. '
+                type: string
+                pattern: 'arn:[\w+=/,.@-]+:[\w+=/,.@-]+:[\w+=/,.@-]*:[0-9]+:[\w+=,.@-]+(/[\w+=/,.@-]+)*'
+              DisplayName:
+                description: The name to display.
+                type: string
+                maxLength: 100
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /associateWebsiteCertificateAuthority:
     post:
       operationId: AssociateWebsiteCertificateAuthority
@@ -478,6 +549,64 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /describeDomain:
+    post:
+      operationId: DescribeDomain
+      description: Provides information about the domain.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeDomainResponse'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - FleetArn
+              - DomainName
+            properties:
+              FleetArn:
+                description: The ARN of the fleet.
+                type: string
+                minLength: 20
+                maxLength: 2048
+              DomainName:
+                description: The name of the domain.
+                type: string
+                pattern: '^[a-zA-Z0-9]?((?!-)([A-Za-z0-9-]*[A-Za-z0-9])\.)+[a-zA-Z0-9]+$'
+                minLength: 1
+                maxLength: 64
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /describeFleetMetadata:
     post:
       operationId: DescribeFleetMetadata
@@ -637,6 +766,64 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /disassociateDomain:
+    post:
+      operationId: DisassociateDomain
+      description: 'Disassociates a domain from Amazon WorkLink. End users lose the ability to access the domain with Amazon WorkLink. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DisassociateDomainResponse'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - FleetArn
+              - DomainName
+            properties:
+              FleetArn:
+                description: The ARN of the fleet.
+                type: string
+                minLength: 20
+                maxLength: 2048
+              DomainName:
+                description: The name of the domain.
+                type: string
+                pattern: '^[a-zA-Z0-9]?((?!-)([A-Za-z0-9-]*[A-Za-z0-9])\.)+[a-zA-Z0-9]+$'
+                minLength: 1
+                maxLength: 64
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /disassociateWebsiteCertificateAuthority:
     post:
       operationId: DisassociateWebsiteCertificateAuthority
@@ -720,6 +907,73 @@ paths:
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
         '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - FleetArn
+            properties:
+              FleetArn:
+                description: The ARN of the fleet.
+                type: string
+                minLength: 20
+                maxLength: 2048
+              NextToken:
+                description: 'The pagination token used to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+                type: string
+                pattern: '[\w\-]+'
+                minLength: 1
+                maxLength: 4096
+              MaxResults:
+                description: The maximum number of results to be included in the next page.
+                type: integer
+                minimum: 1
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /listDomains:
+    post:
+      operationId: ListDomains
+      description: Retrieves a list of domains associated to a specified fleet.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListDomainsResponse'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
@@ -884,6 +1138,122 @@ paths:
           in: query
           description: Pagination token
           required: false
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /restoreDomainAccess:
+    post:
+      operationId: RestoreDomainAccess
+      description: Moves a domain to ACTIVE status if it was in the INACTIVE status.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RestoreDomainAccessResponse'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - FleetArn
+              - DomainName
+            properties:
+              FleetArn:
+                description: The ARN of the fleet.
+                type: string
+                minLength: 20
+                maxLength: 2048
+              DomainName:
+                description: The name of the domain.
+                type: string
+                pattern: '^[a-zA-Z0-9]?((?!-)([A-Za-z0-9-]*[A-Za-z0-9])\.)+[a-zA-Z0-9]+$'
+                minLength: 1
+                maxLength: 64
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /revokeDomainAccess:
+    post:
+      operationId: RevokeDomainAccess
+      description: Moves a domain to INACTIVE status if it was in the ACTIVE status.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RevokeDomainAccessResponse'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - FleetArn
+              - DomainName
+            properties:
+              FleetArn:
+                description: The ARN of the fleet.
+                type: string
+                minLength: 20
+                maxLength: 2048
+              DomainName:
+                description: The name of the domain.
+                type: string
+                pattern: '^[a-zA-Z0-9]?((?!-)([A-Za-z0-9-]*[A-Za-z0-9])\.)+[a-zA-Z0-9]+$'
+                minLength: 1
+                maxLength: 64
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1128,6 +1498,68 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /updateDomainMetadata:
+    post:
+      operationId: UpdateDomainMetadata
+      description: 'Updates domain metadata, such as DisplayName.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateDomainMetadataResponse'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - FleetArn
+              - DomainName
+            properties:
+              FleetArn:
+                description: The ARN of the fleet.
+                type: string
+                minLength: 20
+                maxLength: 2048
+              DomainName:
+                description: The name of the domain.
+                type: string
+                pattern: '^[a-zA-Z0-9]?((?!-)([A-Za-z0-9-]*[A-Za-z0-9])\.)+[a-zA-Z0-9]+$'
+                minLength: 1
+                maxLength: 64
+              DisplayName:
+                description: The name to display.
+                type: string
+                maxLength: 100
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /UpdateFleetMetadata:
     post:
       operationId: UpdateFleetMetadata
@@ -1249,18 +1681,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  AssociateWebsiteCertificateAuthorityResponse:
+  AssociateDomainResponse:
     type: object
-    properties:
-      WebsiteCaId:
-        $ref: '#/definitions/Id'
-        description: A unique identifier for the CA.
+    properties: {}
   UnauthorizedException: {}
   InternalServerErrorException: {}
   InvalidRequestException: {}
   ResourceNotFoundException: {}
   ResourceAlreadyExistsException: {}
   TooManyRequestsException: {}
+  AssociateWebsiteCertificateAuthorityResponse:
+    type: object
+    properties:
+      WebsiteCaId:
+        $ref: '#/definitions/Id'
+        description: A unique identifier for the CA.
   CreateFleetResponse:
     type: object
     properties:
@@ -1324,6 +1759,18 @@ definitions:
       DeviceCaCertificate:
         $ref: '#/definitions/Certificate'
         description: 'The certificate chain, including intermediate certificates and the root certificate authority certificate used to issue device certificates.'
+  DescribeDomainResponse:
+    type: object
+    properties:
+      DisplayName:
+        $ref: '#/definitions/DisplayName'
+        description: The name to display.
+      CreatedTime:
+        $ref: '#/definitions/DateTime'
+        description: The time that the domain was added.
+      DomainStatus:
+        $ref: '#/definitions/DomainStatus'
+        description: The current state for the domain.
   DescribeFleetMetadataResponse:
     type: object
     properties:
@@ -1372,6 +1819,9 @@ definitions:
       DisplayName:
         $ref: '#/definitions/DisplayName'
         description: The certificate name to display.
+  DisassociateDomainResponse:
+    type: object
+    properties: {}
   DisassociateWebsiteCertificateAuthorityResponse:
     type: object
     properties: {}
@@ -1381,6 +1831,15 @@ definitions:
       Devices:
         $ref: '#/definitions/DeviceSummaryList'
         description: Information about the devices.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The pagination token used to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
+  ListDomainsResponse:
+    type: object
+    properties:
+      Domains:
+        $ref: '#/definitions/DomainSummaryList'
+        description: Information about the domains.
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'The pagination token used to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
@@ -1402,6 +1861,12 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'The pagination token used to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
+  RestoreDomainAccessResponse:
+    type: object
+    properties: {}
+  RevokeDomainAccessResponse:
+    type: object
+    properties: {}
   SignOutUserResponse:
     type: object
     properties: {}
@@ -1420,24 +1885,54 @@ definitions:
   UpdateDevicePolicyConfigurationResponse:
     type: object
     properties: {}
+  UpdateDomainMetadataResponse:
+    type: object
+    properties: {}
   UpdateFleetMetadataResponse:
     type: object
     properties: {}
   UpdateIdentityProviderConfigurationResponse:
     type: object
     properties: {}
+  AcmCertificateArn:
+    type: string
+    pattern: 'arn:[\w+=/,.@-]+:[\w+=/,.@-]+:[\w+=/,.@-]*:[0-9]+:[\w+=,.@-]+(/[\w+=/,.@-]+)*'
   FleetArn:
     type: string
     minLength: 20
     maxLength: 2048
+  DomainName:
+    type: string
+    pattern: '^[a-zA-Z0-9]?((?!-)([A-Za-z0-9-]*[A-Za-z0-9])\.)+[a-zA-Z0-9]+$'
+    minLength: 1
+    maxLength: 64
+  DisplayName:
+    type: string
+    maxLength: 100
+  AssociateDomainRequest:
+    type: object
+    required:
+      - FleetArn
+      - DomainName
+      - AcmCertificateArn
+    properties:
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The Amazon Resource Name (ARN) of the fleet.
+      DomainName:
+        $ref: '#/definitions/DomainName'
+        description: The fully qualified domain name (FQDN).
+      AcmCertificateArn:
+        $ref: '#/definitions/AcmCertificateArn'
+        description: 'The ARN of an issued ACM certificate that is valid for the domain being associated. '
+      DisplayName:
+        $ref: '#/definitions/DisplayName'
+        description: The name to display.
   Certificate:
     type: string
     pattern: '-{5}BEGIN CERTIFICATE-{5}\u000D?\u000A([A-Za-z0-9/+]{64}\u000D?\u000A)*[A-Za-z0-9/+]{1,64}={0,2}\u000D?\u000A-{5}END CERTIFICATE-{5}(\u000D?\u000A)?'
     minLength: 1
     maxLength: 8192
-  DisplayName:
-    type: string
-    maxLength: 100
   AssociateWebsiteCertificateAuthorityRequest:
     type: object
     required:
@@ -1576,6 +2071,29 @@ definitions:
     type: string
     minLength: 1
     maxLength: 256
+  DescribeDomainRequest:
+    type: object
+    required:
+      - FleetArn
+      - DomainName
+    properties:
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+      DomainName:
+        $ref: '#/definitions/DomainName'
+        description: The name of the domain.
+  DomainStatus:
+    type: string
+    enum:
+      - PENDING_VALIDATION
+      - ASSOCIATING
+      - ACTIVE
+      - INACTIVE
+      - DISASSOCIATING
+      - DISASSOCIATED
+      - FAILED_TO_ASSOCIATE
+      - FAILED_TO_DISASSOCIATE
   DescribeFleetMetadataRequest:
     type: object
     required:
@@ -1635,6 +2153,18 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/DeviceSummary'
+  DisassociateDomainRequest:
+    type: object
+    required:
+      - FleetArn
+      - DomainName
+    properties:
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+      DomainName:
+        $ref: '#/definitions/DomainName'
+        description: The name of the domain.
   DisassociateWebsiteCertificateAuthorityRequest:
     type: object
     required:
@@ -1647,6 +2177,30 @@ definitions:
       WebsiteCaId:
         $ref: '#/definitions/Id'
         description: A unique identifier for the CA.
+  DomainSummary:
+    type: object
+    required:
+      - DomainName
+      - CreatedTime
+      - DomainStatus
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+        description: The name of the domain.
+      CreatedTime:
+        $ref: '#/definitions/DateTime'
+        description: The time that the domain was created.
+      DomainStatus:
+        $ref: '#/definitions/DomainStatus'
+        description: The status of the domain.
+      DisplayName:
+        $ref: '#/definitions/DisplayName'
+        description: The name to display.
+    description: The summary of the domain.
+  DomainSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/DomainSummary'
   FleetSummary:
     type: object
     properties:
@@ -1698,6 +2252,20 @@ definitions:
       MaxResults:
         $ref: '#/definitions/MaxResults'
         description: The maximum number of results to be included in the next page.
+  ListDomainsRequest:
+    type: object
+    required:
+      - FleetArn
+    properties:
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The pagination token used to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of results to be included in the next page.
   ListFleetsRequest:
     type: object
     properties:
@@ -1725,6 +2293,30 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/WebsiteCaSummary'
+  RestoreDomainAccessRequest:
+    type: object
+    required:
+      - FleetArn
+      - DomainName
+    properties:
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+      DomainName:
+        $ref: '#/definitions/DomainName'
+        description: The name of the domain.
+  RevokeDomainAccessRequest:
+    type: object
+    required:
+      - FleetArn
+      - DomainName
+    properties:
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+      DomainName:
+        $ref: '#/definitions/DomainName'
+        description: The name of the domain.
   SignOutUserRequest:
     type: object
     required:
@@ -1779,6 +2371,21 @@ definitions:
       DeviceCaCertificate:
         $ref: '#/definitions/CertificateChain'
         description: 'The certificate chain, including intermediate certificates and the root certificate authority certificate used to issue device certificates.'
+  UpdateDomainMetadataRequest:
+    type: object
+    required:
+      - FleetArn
+      - DomainName
+    properties:
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+      DomainName:
+        $ref: '#/definitions/DomainName'
+        description: The name of the domain.
+      DisplayName:
+        $ref: '#/definitions/DisplayName'
+        description: The name to display.
   UpdateFleetMetadataRequest:
     type: object
     required:

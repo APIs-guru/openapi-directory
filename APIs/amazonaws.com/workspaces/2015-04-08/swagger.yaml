@@ -881,6 +881,10 @@ paths:
           description: AccessDeniedException
           schema:
             $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: InvalidParameterValuesException
+          schema:
+            $ref: '#/definitions/InvalidParameterValuesException'
       parameters:
         - name: body
           in: body
@@ -1836,6 +1840,9 @@ definitions:
       RebuildWorkspaceRequests:
         $ref: '#/definitions/RebuildWorkspaceRequests'
         description: The WorkSpace to rebuild. You can specify a single WorkSpace.
+      AdditionalInfo:
+        $ref: '#/definitions/AdditionalInfo'
+        description: Reserved.
   RevokeIpRulesResult:
     type: object
     properties: {}
@@ -1958,6 +1965,8 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/AccountModification'
+  AdditionalInfo:
+    type: string
   Alias:
     type: string
   DirectoryId:

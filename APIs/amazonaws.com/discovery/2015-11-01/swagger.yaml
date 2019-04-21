@@ -1862,6 +1862,7 @@ definitions:
     enum:
       - NOT_FOUND
       - INTERNAL_SERVER_ERROR
+      - OVER_LIMIT
   BatchDeleteImportDataErrorDescription:
     type: string
   BatchDeleteImportDataError:
@@ -2240,6 +2241,7 @@ definitions:
     enum:
       - IMPORT_IN_PROGRESS
       - IMPORT_COMPLETE
+      - IMPORT_COMPLETE_WITH_ERRORS
       - IMPORT_FAILED
       - IMPORT_FAILED_SERVER_LIMIT_EXCEEDED
       - IMPORT_FAILED_RECORD_LIMIT_EXCEEDED
@@ -2247,6 +2249,7 @@ definitions:
       - DELETE_COMPLETE
       - DELETE_FAILED
       - DELETE_FAILED_LIMIT_EXCEEDED
+      - INTERNAL_ERROR
   ImportTaskName:
     type: string
     minLength: 1
