@@ -1258,7 +1258,7 @@ function parseHost(swagger, altSource) {
   return host;
 }
 
-//code is taken from 'json-merge-patch' package and simplify to allow only adding props
+//code is taken from 'json-merge-patch' package and simplified to allow only adding props
 function applyMergePatch(target, patch) {
   assert(_.isPlainObject(target));
 
