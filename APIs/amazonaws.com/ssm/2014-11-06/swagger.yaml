@@ -3993,6 +3993,22 @@ paths:
           description: UnsupportedParameterType
           schema:
             $ref: '#/definitions/UnsupportedParameterType'
+        '491':
+          description: PoliciesLimitExceededException
+          schema:
+            $ref: '#/definitions/PoliciesLimitExceededException'
+        '492':
+          description: InvalidPolicyTypeException
+          schema:
+            $ref: '#/definitions/InvalidPolicyTypeException'
+        '493':
+          description: InvalidPolicyAttributeException
+          schema:
+            $ref: '#/definitions/InvalidPolicyAttributeException'
+        '494':
+          description: IncompatiblePolicyException
+          schema:
+            $ref: '#/definitions/IncompatiblePolicyException'
       parameters:
         - name: body
           in: body
@@ -5234,7 +5250,7 @@ definitions:
         description: The instance ID.
       Parameters:
         $ref: '#/definitions/Parameters'
-        description: 'The parameters for the documents runtime configuration. '
+        description: 'The parameters for the runtime configuration of the document. '
       Targets:
         $ref: '#/definitions/Targets'
         description: The targets (either instances or tags) for the association.
@@ -5401,7 +5417,7 @@ definitions:
         description: A set of rules used to include patches in the baseline.
       ApprovedPatches:
         $ref: '#/definitions/PatchIdList'
-        description: '<p>A list of explicitly approved patches for the baseline.</p> <p>For information about accepted formats for lists of approved patches and rejected patches, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html">Package Name Formats for Approved and Rejected Patch Lists</a> in the <i>AWS Systems Manager User Guide</i>.</p>'
+        description: '<p>A list of explicitly approved patches for the baseline.</p> <p>For information about accepted formats for lists of approved patches and rejected patches, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html">Package Name Formats for Approved and Rejected Patch Lists</a> in the <i>AWS Systems Manager User Guide</i>.</p>'
       ApprovedPatchesComplianceLevel:
         $ref: '#/definitions/PatchComplianceLevel'
         description: 'Defines the compliance level for approved patches. This means that if an approved patch is reported as missing, this is the severity of the compliance violation. The default value is UNSPECIFIED.'
@@ -5410,7 +5426,7 @@ definitions:
         description: Indicates whether the list of approved patches includes non-security updates that should be applied to the instances. The default value is 'false'. Applies to Linux instances only.
       RejectedPatches:
         $ref: '#/definitions/PatchIdList'
-        description: '<p>A list of explicitly rejected patches for the baseline.</p> <p>For information about accepted formats for lists of approved patches and rejected patches, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html">Package Name Formats for Approved and Rejected Patch Lists</a> in the <i>AWS Systems Manager User Guide</i>.</p>'
+        description: '<p>A list of explicitly rejected patches for the baseline.</p> <p>For information about accepted formats for lists of approved patches and rejected patches, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html">Package Name Formats for Approved and Rejected Patch Lists</a> in the <i>AWS Systems Manager User Guide</i>.</p>'
       RejectedPatchesAction:
         $ref: '#/definitions/PatchAction'
         description: '<p>The action for Patch Manager to take on patches included in the RejectedPackages list.</p> <ul> <li> <p> <b>ALLOW_AS_DEPENDENCY</b>: A package in the Rejected patches list is installed only if it is a dependency of another package. It is considered compliant with the patch baseline, and its status is reported as <i>InstalledOther</i>. This is the default action if no option is specified.</p> </li> <li> <p> <b>BLOCK</b>: Packages in the RejectedPatches list, and packages that include them as dependencies, are not installed under any circumstances. If a package was installed before it was added to the Rejected patches list, it is considered non-compliant with the patch baseline, and its status is reported as <i>InstalledRejected</i>.</p> </li> </ul>'
@@ -7518,7 +7534,7 @@ definitions:
         description: <p>Information about the parameter that you want to add to the system. Optional but recommended.</p> <important> <p>Do not enter personally identifiable information in this field.</p> </important>
       Value:
         $ref: '#/definitions/PSParameterValue'
-        description: The parameter value that you want to add to the system.
+        description: The parameter value that you want to add to the system. Standard parameters have a value limit of 4 KB. Advanced parameters have a value limit of 8 KB.
       Type:
         $ref: '#/definitions/ParameterType'
         description: '<p>The type of parameter that you want to add to the system.</p> <p>Items in a <code>StringList</code> must be separated by a comma (,). You can''t use other punctuation or special character to escape items in the list. If you have a parameter value that requires a comma, then use the <code>String</code> data type.</p> <note> <p> <code>SecureString</code> is not currently supported for AWS CloudFormation templates or in the China Regions.</p> </note>'
@@ -7534,6 +7550,12 @@ definitions:
       Tags:
         $ref: '#/definitions/TagList'
         description: '<p>Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag a Systems Manager parameter to identify the type of resource to which it applies, the environment, or the type of configuration data referenced by the parameter. In this case, you could specify the following key name/value pairs:</p> <ul> <li> <p> <code>Key=Resource,Value=S3bucket</code> </p> </li> <li> <p> <code>Key=OS,Value=Windows</code> </p> </li> <li> <p> <code>Key=ParameterType,Value=LicenseKey</code> </p> </li> </ul> <note> <p>To add tags to an existing Systems Manager parameter, use the <a>AddTagsToResource</a> action.</p> </note>'
+      Tier:
+        $ref: '#/definitions/ParameterTier'
+        description: '<p>Parameter Store offers a standard tier and an advanced tier for parameters. Standard parameters have a value limit of 4 KB and can''t be configured to use parameter policies. You can create a maximum of 10,000 standard parameters per account and per Region. Standard parameters are offered at no additional cost.</p> <p>Advanced parameters have a value limit of 8 KB and can be configured to use parameter policies. You can create a maximum of 100,000 advanced parameters per account and per Region. Advanced parameters incur a charge.</p> <p>If you don''t specify a parameter tier when you create a new parameter, the parameter defaults to using the standard tier. You can change a standard parameter to an advanced parameter at any time. But you can''t revert an advanced parameter to a standard parameter. Reverting an advanced parameter to a standard parameter would result in data loss because the system would truncate the size of the parameter from 8 KB to 4 KB. Reverting would also remove any policies attached to the parameter. Lastly, advanced parameters use a different form of encryption than standard parameters.</p> <p>If you no longer need an advanced parameter, or if you no longer want to incur charges for an advanced parameter, you must delete it and recreate it as a new standard parameter. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-advanced-parameters.html">About Advanced Parameters</a> in the <i>AWS Systems Manager User Guide</i>.</p>'
+      Policies:
+        $ref: '#/definitions/ParameterPolicies'
+        description: '<p>One or more policies to apply to a parameter. This action takes a JSON array. Parameter Store supports the following policy types:</p> <p>Expiration: This policy deletes the parameter after it expires. When you create the policy, you specify the expiration date. You can update the expiration date and time by updating the policy. Updating the <i>parameter</i> does not affect the expiration date and time. When the expiration time is reached, Parameter Store deletes the parameter.</p> <p>ExpirationNotification: This policy triggers an event in Amazon CloudWatch Events that notifies you about the expiration. By using this policy, you can receive notification before or after the expiration time is reached, in units of days or hours.</p> <p>NoChangeNotification: This policy triggers a CloudWatch event if a parameter has not been modified for a specified period of time. This policy type is useful when, for example, a secret needs to be changed within a period of time, but it has not been changed.</p> <p>All existing policies are preserved until you send new policies or an empty policy. For more information about parameter policies, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-policies.html">Working with Parameter Policies</a>. </p>'
   ParameterLimitExceeded: {}
   ParameterAlreadyExists: {}
   HierarchyLevelLimitExceededException: {}
@@ -7542,6 +7564,10 @@ definitions:
   ParameterMaxVersionLimitExceeded: {}
   ParameterPatternMismatchException: {}
   UnsupportedParameterType: {}
+  PoliciesLimitExceededException: {}
+  InvalidPolicyTypeException: {}
+  InvalidPolicyAttributeException: {}
+  IncompatiblePolicyException: {}
   RegisterDefaultPatchBaselineResult:
     type: object
     properties:
@@ -8350,7 +8376,7 @@ definitions:
         description: A set of rules used to include patches in the baseline.
       ApprovedPatches:
         $ref: '#/definitions/PatchIdList'
-        description: '<p>A list of explicitly approved patches for the baseline.</p> <p>For information about accepted formats for lists of approved patches and rejected patches, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html">Package Name Formats for Approved and Rejected Patch Lists</a> in the <i>AWS Systems Manager User Guide</i>.</p>'
+        description: '<p>A list of explicitly approved patches for the baseline.</p> <p>For information about accepted formats for lists of approved patches and rejected patches, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html">Package Name Formats for Approved and Rejected Patch Lists</a> in the <i>AWS Systems Manager User Guide</i>.</p>'
       ApprovedPatchesComplianceLevel:
         $ref: '#/definitions/PatchComplianceLevel'
         description: Assigns a new compliance severity level to an existing patch baseline.
@@ -8359,7 +8385,7 @@ definitions:
         description: Indicates whether the list of approved patches includes non-security updates that should be applied to the instances. The default value is 'false'. Applies to Linux instances only.
       RejectedPatches:
         $ref: '#/definitions/PatchIdList'
-        description: '<p>A list of explicitly rejected patches for the baseline.</p> <p>For information about accepted formats for lists of approved patches and rejected patches, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html">Package Name Formats for Approved and Rejected Patch Lists</a> in the <i>AWS Systems Manager User Guide</i>.</p>'
+        description: '<p>A list of explicitly rejected patches for the baseline.</p> <p>For information about accepted formats for lists of approved patches and rejected patches, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html">Package Name Formats for Approved and Rejected Patch Lists</a> in the <i>AWS Systems Manager User Guide</i>.</p>'
       RejectedPatchesAction:
         $ref: '#/definitions/PatchAction'
         description: '<p>The action for Patch Manager to take on patches included in the RejectedPackages list.</p> <ul> <li> <p> <b>ALLOW_AS_DEPENDENCY</b>: A package in the Rejected patches list is installed only if it is a dependency of another package. It is considered compliant with the patch baseline, and its status is reported as <i>InstalledOther</i>. This is the default action if no option is specified.</p> </li> <li> <p> <b>BLOCK</b>: Packages in the RejectedPatches list, and packages that include them as dependencies, are not installed under any circumstances. If a package was installed before it was added to the Rejected patches list, it is considered non-compliant with the patch baseline, and its status is reported as <i>InstalledRejected</i>.</p> </li> </ul>'
@@ -8723,7 +8749,7 @@ definitions:
         description: The association version.
       ExecutionId:
         $ref: '#/definitions/AssociationExecutionId'
-        description: 'The execution ID for the association. If the association does not run at intervals or according to a schedule, then the ExecutionID is the same as the AssociationID.'
+        description: The execution ID for the association.
       Status:
         $ref: '#/definitions/StatusName'
         description: The status of the association execution.
@@ -8806,7 +8832,7 @@ definitions:
         description: The association version.
       ExecutionId:
         $ref: '#/definitions/AssociationExecutionId'
-        description: 'The execution ID. If the association does not run at intervals or according to a schedule, then the ExecutionID is the same as the AssociationID.'
+        description: The execution ID.
       ResourceId:
         $ref: '#/definitions/AssociationResourceId'
         description: 'The resource ID, for example, the instance ID where the association ran.'
@@ -11924,32 +11950,32 @@ definitions:
     properties:
       WindowId:
         $ref: '#/definitions/MaintenanceWindowId'
-        description: The Maintenance Window ID where the target is registered.
+        description: The ID of the Maintenance Window to register the target with.
       WindowTargetId:
         $ref: '#/definitions/MaintenanceWindowTargetId'
         description: The ID of the target.
       ResourceType:
         $ref: '#/definitions/MaintenanceWindowResourceType'
-        description: The type of target.
+        description: The type of target that is being registered with the Maintenance Window.
       Targets:
         $ref: '#/definitions/Targets'
-        description: 'The targets (either instances or tags). Instances are specified using Key=instanceids,Values=&lt;instanceid1&gt;,&lt;instanceid2&gt;. Tags are specified using Key=&lt;tag name&gt;,Values=&lt;tag value&gt;.'
+        description: '<p>The targets, either instances or tags.</p> <p>Specify instances using the following format:</p> <p> <code>Key=instanceids,Values=&lt;instanceid1&gt;,&lt;instanceid2&gt;</code> </p> <p>Tags are specified using the following format:</p> <p> <code>Key=&lt;tag name&gt;,Values=&lt;tag value&gt;</code>.</p>'
       OwnerInformation:
         $ref: '#/definitions/OwnerInformation'
-        description: User-provided value that will be included in any CloudWatch events raised while running tasks for these targets in this Maintenance Window.
+        description: A user-provided value that will be included in any CloudWatch events that are raised while running tasks for these targets in this Maintenance Window.
       Name:
         $ref: '#/definitions/MaintenanceWindowName'
         description: The target name.
       Description:
         $ref: '#/definitions/MaintenanceWindowDescription'
-        description: A description of the target.
+        description: A description for the target.
     description: The target registered with the Maintenance Window.
   MaintenanceWindowTask:
     type: object
     properties:
       WindowId:
         $ref: '#/definitions/MaintenanceWindowId'
-        description: The Maintenance Window ID where the task is registered.
+        description: The ID of the Maintenance Window where the task is registered.
       WindowTaskId:
         $ref: '#/definitions/MaintenanceWindowTaskId'
         description: The task ID.
@@ -11976,7 +12002,7 @@ definitions:
         description: The role that should be assumed when running the task.
       MaxConcurrency:
         $ref: '#/definitions/MaxConcurrency'
-        description: The maximum number of targets this task can be run for in parallel.
+        description: 'The maximum number of targets this task can be run for, in parallel.'
       MaxErrors:
         $ref: '#/definitions/MaxErrors'
         description: The maximum number of errors allowed before this task stops being scheduled.
@@ -12043,8 +12069,6 @@ definitions:
     maxLength: 128
   PSParameterValue:
     type: string
-    minLength: 1
-    maxLength: 4096
   ParameterType:
     type: string
     enum:
@@ -12060,6 +12084,15 @@ definitions:
     pattern: '^([a-zA-Z0-9:/_-]+)$'
     minLength: 1
     maxLength: 256
+  ParameterTier:
+    type: string
+    enum:
+      - Standard
+      - Advanced
+  ParameterPolicyList:
+    type: array
+    items:
+      $ref: '#/definitions/ParameterInlinePolicy'
   ParameterHistory:
     type: object
     properties:
@@ -12093,7 +12126,26 @@ definitions:
       Labels:
         $ref: '#/definitions/ParameterLabelList'
         description: Labels assigned to the parameter version.
+      Tier:
+        $ref: '#/definitions/ParameterTier'
+        description: The parameter tier.
+      Policies:
+        $ref: '#/definitions/ParameterPolicyList'
+        description: Information about the policies assigned to a parameter.
     description: Information about parameter usage.
+  ParameterInlinePolicy:
+    type: object
+    properties:
+      PolicyText:
+        $ref: '#/definitions/String'
+        description: The JSON text of the policy.
+      PolicyType:
+        $ref: '#/definitions/String'
+        description: 'The type of policy. Parameter Store supports the following policy types: Expiration, ExpirationNotification, and NoChangeNotification. '
+      PolicyStatus:
+        $ref: '#/definitions/String'
+        description: 'The status of the policy. Policies report the following statuses: Pending (the policy has not been enforced or applied yet), Finished (the policy was applied), Failed (the policy was not applied), or InProgress (the policy is being applied now). '
+    description: One or more policies assigned to a parameter.
   ParameterLabel:
     type: string
     minLength: 1
@@ -12125,12 +12177,22 @@ definitions:
       Version:
         $ref: '#/definitions/PSParameterVersion'
         description: The parameter version.
+      Tier:
+        $ref: '#/definitions/ParameterTier'
+        description: The parameter tier.
+      Policies:
+        $ref: '#/definitions/ParameterPolicyList'
+        description: A list of policies associated with a parameter.
     description: Metada includes information like the ARN of the last user and the date/time the parameter was last used.
   ParameterName:
     type: string
+  ParameterPolicies:
+    type: string
+    minLength: 1
+    maxLength: 4096
   ParameterStringFilterKey:
     type: string
-    pattern: 'tag:.+|Name|Type|KeyId|Path|Label'
+    pattern: 'tag:.+|Name|Type|KeyId|Path|Label|Tier'
     minLength: 1
     maxLength: 132
   ParameterStringQueryOption:
@@ -12157,7 +12219,7 @@ definitions:
       Values:
         $ref: '#/definitions/ParameterStringFilterValueList'
         description: The value you want to search for.
-    description: <p>One or more filters. Use a filter to return a more specific list of results.</p> <note> <p>The <code>Name</code> field can't be used with the <a>GetParametersByPath</a> API action.</p> </note>
+    description: '<p>One or more filters. Use a filter to return a more specific list of results.</p> <note> <p>The <code>Name</code> and <code>Tier</code> filter keys can''t be used with the <a>GetParametersByPath</a> API action. Also, the <code>Label</code> filter key can''t be used with the <a>DescribeParameters</a> API action.</p> </note>'
   ParameterStringFilterValue:
     type: string
     minLength: 1
@@ -12826,10 +12888,10 @@ definitions:
     properties:
       Key:
         $ref: '#/definitions/TargetKey'
-        description: 'User-defined criteria for sending commands that target instances that meet the criteria. Key can be tag:&lt;Amazon EC2 tag&gt; or InstanceIds. For more information about how to send commands that target instances using Key,Value parameters, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting">Targeting Multiple Instances</a> in the <i>AWS Systems Manager User Guide</i>.'
+        description: 'User-defined criteria for sending commands that target instances that meet the criteria. <code>Key</code> can be <code>tag:&lt;Amazon EC2 tag&gt;</code> or <code>InstanceIds</code>. For more information about how to send commands that target instances using <code>Key,Value</code> parameters, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting">Using Targets and Rate Controls to Send Commands to a Fleet</a> in the <i>AWS Systems Manager User Guide</i>.'
       Values:
         $ref: '#/definitions/TargetValues'
-        description: 'User-defined criteria that maps to Key. For example, if you specified tag:ServerRole, you could specify value:WebServer to run a command on instances that include Amazon EC2 tags of ServerRole,WebServer. For more information about how to send commands that target instances using Key,Value parameters, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html">Sending Commands to a Fleet</a> in the <i>AWS Systems Manager User Guide</i>.'
+        description: 'User-defined criteria that maps to <code>Key</code>. For example, if you specified <code>tag:ServerRole</code>, you could specify <code>value:WebServer</code> to run a command on instances that include Amazon EC2 tags of <code>ServerRole,WebServer</code>. For more information about how to send commands that target instances using <code>Key,Value</code> parameters, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html">Using Targets and Rate Controls to Send Commands to a Fleet</a> in the <i>AWS Systems Manager User Guide</i>.'
     description: '<p>An array of search criteria that targets instances using a Key,Value combination that you specify. <code>Targets</code> is required if you don''t provide one or more instance IDs in the call.</p> <p/>'
   TargetMapValueList:
     type: array

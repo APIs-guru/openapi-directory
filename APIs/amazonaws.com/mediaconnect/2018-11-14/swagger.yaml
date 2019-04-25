@@ -488,6 +488,16 @@ paths:
           required: false
           description: 'The token that identifies which batch of results that you want to see. For example, you submit a ListEntitlements request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListEntitlements request a second time and specify the NextToken value.'
           type: string
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -499,7 +509,7 @@ paths:
   '/tags/{resourceArn}':
     get:
       operationId: ListTagsForResource
-      description: Lists all tags associated with the resource.
+      description: List all tags on an AWS Elemental MediaConnect resource
       responses:
         '200':
           description: Success
@@ -521,7 +531,7 @@ paths:
         - name: resourceArn
           in: path
           required: true
-          description: The Amazon Resource Name (ARN) of the resource that you want to view tags for.
+          description: The Amazon Resource Name (ARN) that identifies the AWS Elemental MediaConnect resource for which to list the tags.
           type: string
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
@@ -533,7 +543,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
       operationId: TagResource
-      description: 'Associates the specified tags to a resource. If the request does not mention an existing tag associated with the resource, that tag is not changed.'
+      description: 'Associates the specified tags to a resource with the specified resourceArn. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are deleted as well.'
       responses:
         '204':
           description: Success
@@ -553,7 +563,7 @@ paths:
         - name: resourceArn
           in: path
           required: true
-          description: The Amazon Resource Name (ARN) of the resource that you want to add tags to.
+          description: The Amazon Resource Name (ARN) that identifies the AWS Elemental MediaConnect resource to which to add tags.
           type: string
         - name: body
           in: body
@@ -932,7 +942,7 @@ paths:
   '/tags/{resourceArn}#tagKeys':
     delete:
       operationId: UntagResource
-      description: Deletes the specified tags from a resource.
+      description: Deletes specified tags from a resource.
       responses:
         '204':
           description: Success
@@ -952,7 +962,7 @@ paths:
         - name: resourceArn
           in: path
           required: true
-          description: The Amazon Resource Name (ARN) of the resource that you want to remove tags from.
+          description: The Amazon Resource Name (ARN) that identifies the AWS Elemental MediaConnect resource from which to delete tags.
           type: string
         - name: tagKeys
           in: query
@@ -1658,7 +1668,7 @@ definitions:
       Tags:
         $ref: '#/definitions/__mapOf__string'
         description: 'A map from tag keys to values. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
-    description: 'The tags to add to the resource. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
+    description: 'The tags to add to the resource. A tag is an array of key-value pairs. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
   UntagResourceRequest:
     type: object
     properties: {}
