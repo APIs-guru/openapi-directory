@@ -243,7 +243,7 @@ paths:
   '/#X-Amz-Target=WorkspacesService.CreateTags':
     post:
       operationId: CreateTags
-      description: Creates the specified tags for the specified WorkSpace.
+      description: Creates the specified tags for the specified WorkSpaces resource.
       responses:
         '200':
           description: Success
@@ -366,7 +366,7 @@ paths:
   '/#X-Amz-Target=WorkspacesService.DeleteTags':
     post:
       operationId: DeleteTags
-      description: Deletes the specified tags from the specified WorkSpace.
+      description: Deletes the specified tags from the specified WorkSpaces resource.
       responses:
         '200':
           description: Success
@@ -588,7 +588,7 @@ paths:
   '/#X-Amz-Target=WorkspacesService.DescribeTags':
     post:
       operationId: DescribeTags
-      description: Describes the specified tags for the specified WorkSpace.
+      description: Describes the specified tags for the specified WorkSpaces resource.
       responses:
         '200':
           description: Success
@@ -1442,10 +1442,10 @@ definitions:
     properties:
       ResourceId:
         $ref: '#/definitions/NonEmptyString'
-        description: 'The identifier of the WorkSpace. To find this ID, use <a>DescribeWorkspaces</a>.'
+        description: 'The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces, registered directories, images, custom bundles, and IP access control groups.'
       Tags:
         $ref: '#/definitions/TagList'
-        description: The tags. Each WorkSpace can have a maximum of 50 tags.
+        description: The tags. Each WorkSpaces resource can have a maximum of 50 tags.
   CreateWorkspacesResult:
     type: object
     properties:
@@ -1486,7 +1486,7 @@ definitions:
     properties:
       ResourceId:
         $ref: '#/definitions/NonEmptyString'
-        description: 'The identifier of the WorkSpace. To find this ID, use <a>DescribeWorkspaces</a>.'
+        description: 'The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces, registered directories, images, custom bundles, and IP access control groups.'
       TagKeys:
         $ref: '#/definitions/TagKeyList'
         description: The tag keys.
@@ -1576,7 +1576,7 @@ definitions:
     properties:
       ResourceId:
         $ref: '#/definitions/NonEmptyString'
-        description: 'The identifier of the WorkSpace. To find this ID, use <a>DescribeWorkspaces</a>.'
+        description: 'The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces, registered directories, images, custom bundles, and IP access control groups.'
   DescribeWorkspaceBundlesResult:
     type: object
     properties:
