@@ -1,0 +1,2208 @@
+swagger: '2.0'
+info:
+  version: '2018-09-24'
+  x-release: v4
+  title: Amazon Managed Blockchain
+  description: '<p/> <p>Amazon Managed Blockchain is a fully managed service for creating and managing blockchain networks using open source frameworks. Blockchain allows you to build applications where multiple parties can securely and transparently run transactions and share data without the need for a trusted, central authority. Currently, Managed Blockchain supports the Hyperledger Fabric open source framework. </p>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: managedblockchain
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/managedblockchain-2018-09-24.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/managedblockchain/'
+host: managedblockchain.amazonaws.com
+basePath: /
+schemes:
+  - https
+  - http
+x-servers:
+  - url: 'http://managedblockchain.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+    description: The ManagedBlockchain multi-region endpoint
+  - url: 'https://managedblockchain.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+    description: The ManagedBlockchain multi-region endpoint
+  - url: 'http://managedblockchain.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+    description: The ManagedBlockchain endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://managedblockchain.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+    description: The ManagedBlockchain endpoint for China (Beijing) and China (Ningxia)
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  '/networks/{networkId}/members':
+    post:
+      operationId: CreateMember
+      description: Creates a member within a Managed Blockchain network.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateMemberOutput'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '484':
+          description: ResourceNotReadyException
+          schema:
+            $ref: '#/definitions/ResourceNotReadyException'
+        '485':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '486':
+          description: ResourceLimitExceededException
+          schema:
+            $ref: '#/definitions/ResourceLimitExceededException'
+        '487':
+          description: InternalServiceErrorException
+          schema:
+            $ref: '#/definitions/InternalServiceErrorException'
+      parameters:
+        - name: networkId
+          in: path
+          required: true
+          description: The unique identifier of the network in which the member is created.
+          type: string
+          minLength: 1
+          maxLength: 32
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - ClientRequestToken
+              - InvitationId
+              - MemberConfiguration
+            properties:
+              ClientRequestToken:
+                description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than one time. This identifier is required only if you make a service request directly using an HTTP client. It is generated automatically if you use an AWS SDK or the AWS CLI.'
+                type: string
+                minLength: 1
+                maxLength: 64
+              InvitationId:
+                description: The unique identifier of the invitation that is sent to the member to join the network.
+                type: string
+                minLength: 1
+                maxLength: 32
+              MemberConfiguration:
+                description: Configuration properties of the member.
+                type: object
+                properties:
+                  Name:
+                    $ref: '#/definitions/NetworkMemberNameString'
+                    description: The name of the member.
+                  Description:
+                    $ref: '#/definitions/DescriptionString'
+                    description: An optional description of the member.
+                  FrameworkConfiguration:
+                    $ref: '#/definitions/MemberFrameworkConfiguration'
+                    description: Configuration properties of the blockchain framework relevant to the member.
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListMembers
+      description: Returns a listing of the members in a network and properties of their configurations.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListMembersOutput'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: InternalServiceErrorException
+          schema:
+            $ref: '#/definitions/InternalServiceErrorException'
+      parameters:
+        - name: networkId
+          in: path
+          required: true
+          description: The unique identifier of the network for which to list members.
+          type: string
+          minLength: 1
+          maxLength: 32
+        - name: name
+          in: query
+          required: false
+          description: The optional name of the member to list.
+          type: string
+        - name: status
+          in: query
+          required: false
+          description: 'An optional status specifier. If provided, only members currently in this status are listed.'
+          type: string
+          enum:
+            - CREATING
+            - AVAILABLE
+            - CREATE_FAILED
+            - DELETING
+            - DELETED
+        - name: isOwned
+          in: query
+          required: false
+          description: 'An optional Boolean value. If provided, the request is limited either to members that the current AWS account owns (<code>true</code>) or that other AWS accounts own (<code>false</code>). If omitted, all members are listed.'
+          type: boolean
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of members to return in the request.
+          type: integer
+          minimum: 1
+          maximum: 20
+        - name: nextToken
+          in: query
+          required: false
+          description: The pagination token that indicates the next set of results to retrieve.
+          type: string
+          maxLength: 128
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+  /networks:
+    post:
+      operationId: CreateNetwork
+      description: Creates a new blockchain network using Amazon Managed Blockchain.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateNetworkOutput'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: ResourceLimitExceededException
+          schema:
+            $ref: '#/definitions/ResourceLimitExceededException'
+        '485':
+          description: InternalServiceErrorException
+          schema:
+            $ref: '#/definitions/InternalServiceErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - ClientRequestToken
+              - Name
+              - Framework
+              - FrameworkVersion
+              - VotingPolicy
+              - MemberConfiguration
+            properties:
+              ClientRequestToken:
+                description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than one time. This identifier is required only if you make a service request directly using an HTTP client. It is generated automatically if you use an AWS SDK or the AWS CLI.'
+                type: string
+                minLength: 1
+                maxLength: 64
+              Name:
+                description: The name of the network.
+                type: string
+                pattern: .*\S.*
+                minLength: 1
+                maxLength: 64
+              Description:
+                description: An optional description for the network.
+                type: string
+                maxLength: 128
+              Framework:
+                description: The blockchain framework that the network uses.
+                type: string
+                enum:
+                  - HYPERLEDGER_FABRIC
+              FrameworkVersion:
+                description: The version of the blockchain framework that the network uses.
+                type: string
+                minLength: 1
+                maxLength: 8
+              FrameworkConfiguration:
+                description: ' Configuration properties relevant to the network for the blockchain framework that the network uses. '
+                type: object
+                properties:
+                  Fabric:
+                    $ref: '#/definitions/NetworkFabricConfiguration'
+                    description: ' Hyperledger Fabric configuration properties for a Managed Blockchain network that uses Hyperledger Fabric. '
+              VotingPolicy:
+                description: ' The voting rules for the network to decide if a proposal is accepted '
+                type: object
+                properties:
+                  ApprovalThresholdPolicy:
+                    $ref: '#/definitions/ApprovalThresholdPolicy'
+                    description: 'Defines the rules for the network for voting on proposals, such as the percentage of <code>YES</code> votes required for the proposal to be approved and the duration of the proposal. The policy applies to all proposals and is specified when the network is created.'
+              MemberConfiguration:
+                description: Configuration properties of the member.
+                type: object
+                properties:
+                  Name:
+                    $ref: '#/definitions/NetworkMemberNameString'
+                    description: The name of the member.
+                  Description:
+                    $ref: '#/definitions/DescriptionString'
+                    description: An optional description of the member.
+                  FrameworkConfiguration:
+                    $ref: '#/definitions/MemberFrameworkConfiguration'
+                    description: Configuration properties of the blockchain framework relevant to the member.
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListNetworks
+      description: Returns information about the networks in which the current AWS account has members.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListNetworksOutput'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: InternalServiceErrorException
+          schema:
+            $ref: '#/definitions/InternalServiceErrorException'
+      parameters:
+        - name: name
+          in: query
+          required: false
+          description: The name of the network.
+          type: string
+        - name: framework
+          in: query
+          required: false
+          description: 'An optional framework specifier. If provided, only networks of this framework type are listed.'
+          type: string
+          enum:
+            - HYPERLEDGER_FABRIC
+        - name: status
+          in: query
+          required: false
+          description: 'An optional status specifier. If provided, only networks currently in this status are listed.'
+          type: string
+          enum:
+            - CREATING
+            - AVAILABLE
+            - CREATE_FAILED
+            - DELETING
+            - DELETED
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of networks to list.
+          type: integer
+          minimum: 1
+          maximum: 10
+        - name: nextToken
+          in: query
+          required: false
+          description: The pagination token that indicates the next set of results to retrieve.
+          type: string
+          maxLength: 128
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+  '/networks/{networkId}/members/{memberId}/nodes':
+    post:
+      operationId: CreateNode
+      description: Creates a peer node in a member.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateNodeOutput'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '484':
+          description: ResourceNotReadyException
+          schema:
+            $ref: '#/definitions/ResourceNotReadyException'
+        '485':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '486':
+          description: ResourceLimitExceededException
+          schema:
+            $ref: '#/definitions/ResourceLimitExceededException'
+        '487':
+          description: InternalServiceErrorException
+          schema:
+            $ref: '#/definitions/InternalServiceErrorException'
+      parameters:
+        - name: networkId
+          in: path
+          required: true
+          description: The unique identifier of the network in which this node runs.
+          type: string
+          minLength: 1
+          maxLength: 32
+        - name: memberId
+          in: path
+          required: true
+          description: The unique identifier of the member that owns this node.
+          type: string
+          minLength: 1
+          maxLength: 32
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - ClientRequestToken
+              - NodeConfiguration
+            properties:
+              ClientRequestToken:
+                description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than one time. This identifier is required only if you make a service request directly using an HTTP client. It is generated automatically if you use an AWS SDK or the AWS CLI.'
+                type: string
+                minLength: 1
+                maxLength: 64
+              NodeConfiguration:
+                description: Configuration properties of a peer node.
+                type: object
+                properties:
+                  InstanceType:
+                    $ref: '#/definitions/InstanceTypeString'
+                    description: The Amazon Managed Blockchain instance type for the node.
+                  AvailabilityZone:
+                    $ref: '#/definitions/AvailabilityZoneString'
+                    description: The Availability Zone in which the node exists.
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListNodes
+      description: Returns information about the nodes within a network.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListNodesOutput'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: InternalServiceErrorException
+          schema:
+            $ref: '#/definitions/InternalServiceErrorException'
+      parameters:
+        - name: networkId
+          in: path
+          required: true
+          description: The unique identifier of the network for which to list nodes.
+          type: string
+          minLength: 1
+          maxLength: 32
+        - name: memberId
+          in: path
+          required: true
+          description: The unique identifier of the member who owns the nodes to list.
+          type: string
+          minLength: 1
+          maxLength: 32
+        - name: status
+          in: query
+          required: false
+          description: 'An optional status specifier. If provided, only nodes currently in this status are listed.'
+          type: string
+          enum:
+            - CREATING
+            - AVAILABLE
+            - CREATE_FAILED
+            - DELETING
+            - DELETED
+            - FAILED
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of nodes to list.
+          type: integer
+          minimum: 1
+          maximum: 20
+        - name: nextToken
+          in: query
+          required: false
+          description: The pagination token that indicates the next set of results to retrieve.
+          type: string
+          maxLength: 128
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+  '/networks/{networkId}/proposals':
+    post:
+      operationId: CreateProposal
+      description: 'Creates a proposal for a change to the network that other members of the network can vote on, for example, a proposal to add a new member to the network. Any member can create a proposal.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateProposalOutput'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ResourceNotReadyException
+          schema:
+            $ref: '#/definitions/ResourceNotReadyException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '485':
+          description: InternalServiceErrorException
+          schema:
+            $ref: '#/definitions/InternalServiceErrorException'
+      parameters:
+        - name: networkId
+          in: path
+          required: true
+          description: ' The unique identifier of the network for which the proposal is made.'
+          type: string
+          minLength: 1
+          maxLength: 32
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - ClientRequestToken
+              - MemberId
+              - Actions
+            properties:
+              ClientRequestToken:
+                description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than one time. This identifier is required only if you make a service request directly using an HTTP client. It is generated automatically if you use an AWS SDK or the AWS CLI.'
+                type: string
+                minLength: 1
+                maxLength: 64
+              MemberId:
+                description: The unique identifier of the member that is creating the proposal. This identifier is especially useful for identifying the member making the proposal when multiple members exist in a single AWS account.
+                type: string
+                minLength: 1
+                maxLength: 32
+              Actions:
+                description: ' The actions to carry out if a proposal is <code>APPROVED</code>. '
+                type: object
+                properties:
+                  Invitations:
+                    $ref: '#/definitions/InviteActionList'
+                    description: ' The actions to perform for an <code>APPROVED</code> proposal to invite an AWS account to create a member and join the network. '
+                  Removals:
+                    $ref: '#/definitions/RemoveActionList'
+                    description: ' The actions to perform for an <code>APPROVED</code> proposal to remove a member from the network, which deletes the member and all associated member resources from the network. '
+              Description:
+                description: 'A description for the proposal that is visible to voting members, for example, "Proposal to add Example Corp. as member."'
+                type: string
+                maxLength: 128
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListProposals
+      description: Returns a listing of proposals for the network.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListProposalsOutput'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: InternalServiceErrorException
+          schema:
+            $ref: '#/definitions/InternalServiceErrorException'
+      parameters:
+        - name: networkId
+          in: path
+          required: true
+          description: ' The unique identifier of the network. '
+          type: string
+          minLength: 1
+          maxLength: 32
+        - name: maxResults
+          in: query
+          required: false
+          description: ' The maximum number of proposals to return. '
+          type: integer
+          minimum: 1
+          maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: ' The pagination token that indicates the next set of results to retrieve. '
+          type: string
+          maxLength: 128
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+  '/networks/{networkId}/members/{memberId}':
+    delete:
+      operationId: DeleteMember
+      description: 'Deletes a member. Deleting a member removes the member and all associated resources from the network. <code>DeleteMember</code> can only be called for a specified <code>MemberId</code> if the principal performing the action is associated with the AWS account that owns the member. In all other cases, the <code>DeleteMember</code> action is carried out as the result of an approved proposal to remove a member. If <code>MemberId</code> is the last member in a network specified by the last AWS account, the network is deleted also.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteMemberOutput'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ResourceNotReadyException
+          schema:
+            $ref: '#/definitions/ResourceNotReadyException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '485':
+          description: InternalServiceErrorException
+          schema:
+            $ref: '#/definitions/InternalServiceErrorException'
+      parameters:
+        - name: networkId
+          in: path
+          required: true
+          description: The unique identifier of the network from which the member is removed.
+          type: string
+          minLength: 1
+          maxLength: 32
+        - name: memberId
+          in: path
+          required: true
+          description: The unique identifier of the member to remove.
+          type: string
+          minLength: 1
+          maxLength: 32
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetMember
+      description: Returns detailed information about a member.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetMemberOutput'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: InternalServiceErrorException
+          schema:
+            $ref: '#/definitions/InternalServiceErrorException'
+      parameters:
+        - name: networkId
+          in: path
+          required: true
+          description: The unique identifier of the network to which the member belongs.
+          type: string
+          minLength: 1
+          maxLength: 32
+        - name: memberId
+          in: path
+          required: true
+          description: The unique identifier of the member.
+          type: string
+          minLength: 1
+          maxLength: 32
+  '/networks/{networkId}/members/{memberId}/nodes/{nodeId}':
+    delete:
+      operationId: DeleteNode
+      description: Deletes a peer node from a member that your AWS account owns. All data on the node is lost and cannot be recovered.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteNodeOutput'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ResourceNotReadyException
+          schema:
+            $ref: '#/definitions/ResourceNotReadyException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '485':
+          description: InternalServiceErrorException
+          schema:
+            $ref: '#/definitions/InternalServiceErrorException'
+      parameters:
+        - name: networkId
+          in: path
+          required: true
+          description: The unique identifier of the network that the node belongs to.
+          type: string
+          minLength: 1
+          maxLength: 32
+        - name: memberId
+          in: path
+          required: true
+          description: The unique identifier of the member that owns this node.
+          type: string
+          minLength: 1
+          maxLength: 32
+        - name: nodeId
+          in: path
+          required: true
+          description: The unique identifier of the node.
+          type: string
+          minLength: 1
+          maxLength: 32
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetNode
+      description: Returns detailed information about a peer node.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetNodeOutput'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: InternalServiceErrorException
+          schema:
+            $ref: '#/definitions/InternalServiceErrorException'
+      parameters:
+        - name: networkId
+          in: path
+          required: true
+          description: The unique identifier of the network to which the node belongs.
+          type: string
+          minLength: 1
+          maxLength: 32
+        - name: memberId
+          in: path
+          required: true
+          description: The unique identifier of the member that owns the node.
+          type: string
+          minLength: 1
+          maxLength: 32
+        - name: nodeId
+          in: path
+          required: true
+          description: The unique identifier of the node.
+          type: string
+          minLength: 1
+          maxLength: 32
+  '/networks/{networkId}':
+    get:
+      operationId: GetNetwork
+      description: Returns detailed information about a network.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetNetworkOutput'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: InternalServiceErrorException
+          schema:
+            $ref: '#/definitions/InternalServiceErrorException'
+      parameters:
+        - name: networkId
+          in: path
+          required: true
+          description: The unique identifier of the network to get information about.
+          type: string
+          minLength: 1
+          maxLength: 32
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/networks/{networkId}/proposals/{proposalId}':
+    get:
+      operationId: GetProposal
+      description: Returns detailed information about a proposal.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetProposalOutput'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: InternalServiceErrorException
+          schema:
+            $ref: '#/definitions/InternalServiceErrorException'
+      parameters:
+        - name: networkId
+          in: path
+          required: true
+          description: The unique identifier of the network for which the proposal is made.
+          type: string
+          minLength: 1
+          maxLength: 32
+        - name: proposalId
+          in: path
+          required: true
+          description: The unique identifier of the proposal.
+          type: string
+          minLength: 1
+          maxLength: 32
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /invitations:
+    get:
+      operationId: ListInvitations
+      description: Returns a listing of all invitations made on the specified network.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListInvitationsOutput'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: ResourceLimitExceededException
+          schema:
+            $ref: '#/definitions/ResourceLimitExceededException'
+        '485':
+          description: InternalServiceErrorException
+          schema:
+            $ref: '#/definitions/InternalServiceErrorException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of invitations to return.
+          type: integer
+          minimum: 1
+          maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: The pagination token that indicates the next set of results to retrieve.
+          type: string
+          maxLength: 128
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/networks/{networkId}/proposals/{proposalId}/votes':
+    get:
+      operationId: ListProposalVotes
+      description: 'Returns the listing of votes for a specified proposal, including the value of each vote and the unique identifier of the member that cast the vote.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListProposalVotesOutput'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: InternalServiceErrorException
+          schema:
+            $ref: '#/definitions/InternalServiceErrorException'
+      parameters:
+        - name: networkId
+          in: path
+          required: true
+          description: ' The unique identifier of the network. '
+          type: string
+          minLength: 1
+          maxLength: 32
+        - name: proposalId
+          in: path
+          required: true
+          description: ' The unique identifier of the proposal. '
+          type: string
+          minLength: 1
+          maxLength: 32
+        - name: maxResults
+          in: query
+          required: false
+          description: ' The maximum number of votes to return. '
+          type: integer
+          minimum: 1
+          maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: ' The pagination token that indicates the next set of results to retrieve. '
+          type: string
+          maxLength: 128
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: VoteOnProposal
+      description: 'Casts a vote for a specified <code>ProposalId</code> on behalf of a member. The member to vote as, specified by <code>VoterMemberId</code>, must be in the same AWS account as the principal that calls the action.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/VoteOnProposalOutput'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: IllegalActionException
+          schema:
+            $ref: '#/definitions/IllegalActionException'
+        '482':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '485':
+          description: InternalServiceErrorException
+          schema:
+            $ref: '#/definitions/InternalServiceErrorException'
+      parameters:
+        - name: networkId
+          in: path
+          required: true
+          description: ' The unique identifier of the network. '
+          type: string
+          minLength: 1
+          maxLength: 32
+        - name: proposalId
+          in: path
+          required: true
+          description: ' The unique identifier of the proposal. '
+          type: string
+          minLength: 1
+          maxLength: 32
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - VoterMemberId
+              - Vote
+            properties:
+              VoterMemberId:
+                description: 'The unique identifier of the member casting the vote. '
+                type: string
+                minLength: 1
+                maxLength: 32
+              Vote:
+                description: ' The value of the vote. '
+                type: string
+                enum:
+                  - 'YES'
+                  - 'NO'
+  '/invitations/{invitationId}':
+    delete:
+      operationId: RejectInvitation
+      description: Rejects an invitation to join a network. This action can be called by a principal in an AWS account that has received an invitation to create a member and join a network.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RejectInvitationOutput'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: IllegalActionException
+          schema:
+            $ref: '#/definitions/IllegalActionException'
+        '482':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '485':
+          description: InternalServiceErrorException
+          schema:
+            $ref: '#/definitions/InternalServiceErrorException'
+      parameters:
+        - name: invitationId
+          in: path
+          required: true
+          description: The unique identifier of the invitation to reject.
+          type: string
+          minLength: 1
+          maxLength: 32
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  CreateMemberOutput:
+    type: object
+    properties:
+      MemberId:
+        $ref: '#/definitions/ResourceIdString'
+        description: The unique identifier of the member.
+  NetworkMemberNameString:
+    type: string
+    pattern: '^(?!-)^[^0-9](?!.*--)[A-Za-z0-9-]+[^- ]$'
+    minLength: 1
+    maxLength: 64
+  DescriptionString:
+    type: string
+    maxLength: 128
+  MemberFrameworkConfiguration:
+    type: object
+    properties:
+      Fabric:
+        $ref: '#/definitions/MemberFabricConfiguration'
+        description: Attributes of Hyperledger Fabric for a member on a Managed Blockchain network that uses Hyperledger Fabric.
+    description: Configuration properties relevant to a member for the blockchain framework that the Managed Blockchain network uses.
+  InvalidRequestException: {}
+  AccessDeniedException: {}
+  ResourceNotFoundException: {}
+  ResourceAlreadyExistsException: {}
+  ResourceNotReadyException: {}
+  ThrottlingException: {}
+  ResourceLimitExceededException: {}
+  InternalServiceErrorException: {}
+  CreateNetworkOutput:
+    type: object
+    properties:
+      NetworkId:
+        $ref: '#/definitions/ResourceIdString'
+        description: The unique identifier for the network.
+      MemberId:
+        $ref: '#/definitions/ResourceIdString'
+        description: The unique identifier for the first member within the network.
+  NetworkFabricConfiguration:
+    type: object
+    required:
+      - Edition
+    properties:
+      Edition:
+        $ref: '#/definitions/Edition'
+        description: 'The edition of Amazon Managed Blockchain that the network uses. For more information, see <a href="https://aws.amazon.com/managed-blockchain/pricing/">Amazon Managed Blockchain Pricing</a>.'
+    description: Hyperledger Fabric configuration properties for the network.
+  ApprovalThresholdPolicy:
+    type: object
+    properties:
+      ThresholdPercentage:
+        $ref: '#/definitions/ThresholdPercentageInt'
+        description: 'The percentage of votes among all members that must be <code>YES</code> for a proposal to be approved. For example, a <code>ThresholdPercentage</code> value of <code>50</code> indicates 50%. The <code>ThresholdComparator</code> determines the precise comparison. If a <code>ThresholdPercentage</code> value of <code>50</code> is specified on a network with 10 members, along with a <code>ThresholdComparator</code> value of <code>GREATER_THAN</code>, this indicates that 6 <code>YES</code> votes are required for the proposal to be approved.'
+      ProposalDurationInHours:
+        $ref: '#/definitions/ProposalDurationInt'
+        description: 'The duration from the time that a proposal is created until it expires. If members cast neither the required number of <code>YES</code> votes to approve the proposal nor the number of <code>NO</code> votes required to reject it before the duration expires, the proposal is <code>EXPIRED</code> and <code>ProposalActions</code> are not carried out.'
+      ThresholdComparator:
+        $ref: '#/definitions/ThresholdComparator'
+        description: Determines whether the vote percentage must be greater than the <code>ThresholdPercentage</code> or must be greater than or equal to the <code>ThreholdPercentage</code> to be approved.
+    description: A policy type that defines the voting rules for the network. The rules decide if a proposal is approved. Approval may be based on criteria such as the percentage of <code>YES</code> votes and the duration of the proposal. The policy applies to all proposals and is specified when the network is created.
+  CreateNodeOutput:
+    type: object
+    properties:
+      NodeId:
+        $ref: '#/definitions/ResourceIdString'
+        description: The unique identifier of the node.
+  InstanceTypeString:
+    type: string
+  AvailabilityZoneString:
+    type: string
+  CreateProposalOutput:
+    type: object
+    properties:
+      ProposalId:
+        $ref: '#/definitions/ResourceIdString'
+        description: The unique identifier of the proposal.
+  InviteActionList:
+    type: array
+    items:
+      $ref: '#/definitions/InviteAction'
+  RemoveActionList:
+    type: array
+    items:
+      $ref: '#/definitions/RemoveAction'
+  DeleteMemberOutput:
+    type: object
+    properties: {}
+  DeleteNodeOutput:
+    type: object
+    properties: {}
+  GetMemberOutput:
+    type: object
+    properties:
+      Member:
+        $ref: '#/definitions/Member'
+        description: The properties of a member.
+  GetNetworkOutput:
+    type: object
+    properties:
+      Network:
+        $ref: '#/definitions/Network'
+        description: An object containing network configuration parameters.
+  GetNodeOutput:
+    type: object
+    properties:
+      Node:
+        $ref: '#/definitions/Node'
+        description: Properties of the node configuration.
+  GetProposalOutput:
+    type: object
+    properties:
+      Proposal:
+        $ref: '#/definitions/Proposal'
+        description: Information about a proposal.
+  ListInvitationsOutput:
+    type: object
+    properties:
+      Invitations:
+        $ref: '#/definitions/InvitationList'
+        description: The invitations for the network.
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: The pagination token that indicates the next set of results to retrieve.
+  ListMembersOutput:
+    type: object
+    properties:
+      Members:
+        $ref: '#/definitions/MemberSummaryList'
+        description: An array of <code>MemberSummary</code> objects. Each object contains details about a network member.
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: The pagination token that indicates the next set of results to retrieve.
+  ListNetworksOutput:
+    type: object
+    properties:
+      Networks:
+        $ref: '#/definitions/NetworkSummaryList'
+        description: An array of <code>NetworkSummary</code> objects that contain configuration properties for each network.
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: The pagination token that indicates the next set of results to retrieve.
+  ListNodesOutput:
+    type: object
+    properties:
+      Nodes:
+        $ref: '#/definitions/NodeSummaryList'
+        description: An array of <code>NodeSummary</code> objects that contain configuration properties for each node.
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: The pagination token that indicates the next set of results to retrieve.
+  ListProposalVotesOutput:
+    type: object
+    properties:
+      ProposalVotes:
+        $ref: '#/definitions/ProposalVoteList'
+        description: ' The listing of votes. '
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: ' The pagination token that indicates the next set of results to retrieve. '
+  ListProposalsOutput:
+    type: object
+    properties:
+      Proposals:
+        $ref: '#/definitions/ProposalSummaryList'
+        description: The summary of each proposal made on the network.
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: The pagination token that indicates the next set of results to retrieve.
+  RejectInvitationOutput:
+    type: object
+    properties: {}
+  IllegalActionException: {}
+  VoteOnProposalOutput:
+    type: object
+    properties: {}
+  ThresholdPercentageInt:
+    type: integer
+    minimum: 0
+    maximum: 100
+  ProposalDurationInt:
+    type: integer
+    minimum: 1
+    maximum: 168
+  ThresholdComparator:
+    type: string
+    enum:
+      - GREATER_THAN
+      - GREATER_THAN_OR_EQUAL_TO
+  ClientRequestTokenString:
+    type: string
+    minLength: 1
+    maxLength: 64
+  ResourceIdString:
+    type: string
+    minLength: 1
+    maxLength: 32
+  MemberConfiguration:
+    type: object
+    required:
+      - Name
+      - FrameworkConfiguration
+    properties:
+      Name:
+        $ref: '#/definitions/NetworkMemberNameString'
+        description: The name of the member.
+      Description:
+        $ref: '#/definitions/DescriptionString'
+        description: An optional description of the member.
+      FrameworkConfiguration:
+        $ref: '#/definitions/MemberFrameworkConfiguration'
+        description: Configuration properties of the blockchain framework relevant to the member.
+    description: Configuration properties of the member.
+  CreateMemberInput:
+    type: object
+    required:
+      - ClientRequestToken
+      - InvitationId
+      - MemberConfiguration
+    properties:
+      ClientRequestToken:
+        $ref: '#/definitions/ClientRequestTokenString'
+        description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than one time. This identifier is required only if you make a service request directly using an HTTP client. It is generated automatically if you use an AWS SDK or the AWS CLI.'
+      InvitationId:
+        $ref: '#/definitions/ResourceIdString'
+        description: The unique identifier of the invitation that is sent to the member to join the network.
+      MemberConfiguration:
+        $ref: '#/definitions/MemberConfiguration'
+        description: Member configuration parameters.
+  NameString:
+    type: string
+    pattern: .*\S.*
+    minLength: 1
+    maxLength: 64
+  Framework:
+    type: string
+    enum:
+      - HYPERLEDGER_FABRIC
+  FrameworkVersionString:
+    type: string
+    minLength: 1
+    maxLength: 8
+  NetworkFrameworkConfiguration:
+    type: object
+    properties:
+      Fabric:
+        $ref: '#/definitions/NetworkFabricConfiguration'
+        description: ' Hyperledger Fabric configuration properties for a Managed Blockchain network that uses Hyperledger Fabric. '
+    description: ' Configuration properties relevant to the network for the blockchain framework that the network uses. '
+  VotingPolicy:
+    type: object
+    properties:
+      ApprovalThresholdPolicy:
+        $ref: '#/definitions/ApprovalThresholdPolicy'
+        description: 'Defines the rules for the network for voting on proposals, such as the percentage of <code>YES</code> votes required for the proposal to be approved and the duration of the proposal. The policy applies to all proposals and is specified when the network is created.'
+    description: ' The voting rules for the network to decide if a proposal is accepted '
+  CreateNetworkInput:
+    type: object
+    required:
+      - ClientRequestToken
+      - Name
+      - Framework
+      - FrameworkVersion
+      - VotingPolicy
+      - MemberConfiguration
+    properties:
+      ClientRequestToken:
+        $ref: '#/definitions/ClientRequestTokenString'
+        description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than one time. This identifier is required only if you make a service request directly using an HTTP client. It is generated automatically if you use an AWS SDK or the AWS CLI.'
+      Name:
+        $ref: '#/definitions/NameString'
+        description: The name of the network.
+      Description:
+        $ref: '#/definitions/DescriptionString'
+        description: An optional description for the network.
+      Framework:
+        $ref: '#/definitions/Framework'
+        description: The blockchain framework that the network uses.
+      FrameworkVersion:
+        $ref: '#/definitions/FrameworkVersionString'
+        description: The version of the blockchain framework that the network uses.
+      FrameworkConfiguration:
+        $ref: '#/definitions/NetworkFrameworkConfiguration'
+        description: ' Configuration properties of the blockchain framework relevant to the network configuration. '
+      VotingPolicy:
+        $ref: '#/definitions/VotingPolicy'
+        description: ' The voting rules used by the network to determine if a proposal is approved. '
+      MemberConfiguration:
+        $ref: '#/definitions/MemberConfiguration'
+        description: Configuration properties for the first member within the network.
+  NodeConfiguration:
+    type: object
+    required:
+      - InstanceType
+      - AvailabilityZone
+    properties:
+      InstanceType:
+        $ref: '#/definitions/InstanceTypeString'
+        description: The Amazon Managed Blockchain instance type for the node.
+      AvailabilityZone:
+        $ref: '#/definitions/AvailabilityZoneString'
+        description: The Availability Zone in which the node exists.
+    description: Configuration properties of a peer node.
+  CreateNodeInput:
+    type: object
+    required:
+      - ClientRequestToken
+      - NodeConfiguration
+    properties:
+      ClientRequestToken:
+        $ref: '#/definitions/ClientRequestTokenString'
+        description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than one time. This identifier is required only if you make a service request directly using an HTTP client. It is generated automatically if you use an AWS SDK or the AWS CLI.'
+      NodeConfiguration:
+        $ref: '#/definitions/NodeConfiguration'
+        description: The properties of a node configuration.
+  ProposalActions:
+    type: object
+    properties:
+      Invitations:
+        $ref: '#/definitions/InviteActionList'
+        description: ' The actions to perform for an <code>APPROVED</code> proposal to invite an AWS account to create a member and join the network. '
+      Removals:
+        $ref: '#/definitions/RemoveActionList'
+        description: ' The actions to perform for an <code>APPROVED</code> proposal to remove a member from the network, which deletes the member and all associated member resources from the network. '
+    description: ' The actions to carry out if a proposal is <code>APPROVED</code>. '
+  CreateProposalInput:
+    type: object
+    required:
+      - ClientRequestToken
+      - MemberId
+      - Actions
+    properties:
+      ClientRequestToken:
+        $ref: '#/definitions/ClientRequestTokenString'
+        description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than one time. This identifier is required only if you make a service request directly using an HTTP client. It is generated automatically if you use an AWS SDK or the AWS CLI.'
+      MemberId:
+        $ref: '#/definitions/ResourceIdString'
+        description: The unique identifier of the member that is creating the proposal. This identifier is especially useful for identifying the member making the proposal when multiple members exist in a single AWS account.
+      Actions:
+        $ref: '#/definitions/ProposalActions'
+        description: 'The type of actions proposed, such as inviting a member or removing a member. The types of <code>Actions</code> in a proposal are mutually exclusive. For example, a proposal with <code>Invitations</code> actions cannot also contain <code>Removals</code> actions.'
+      Description:
+        $ref: '#/definitions/DescriptionString'
+        description: 'A description for the proposal that is visible to voting members, for example, "Proposal to add Example Corp. as member."'
+  DeleteMemberInput:
+    type: object
+    properties: {}
+  DeleteNodeInput:
+    type: object
+    properties: {}
+  Edition:
+    type: string
+    enum:
+      - STARTER
+      - STANDARD
+  GetMemberInput:
+    type: object
+    properties: {}
+  Member:
+    type: object
+    properties:
+      NetworkId:
+        $ref: '#/definitions/ResourceIdString'
+        description: The unique identifier of the network to which the member belongs.
+      Id:
+        $ref: '#/definitions/ResourceIdString'
+        description: The unique identifier of the member.
+      Name:
+        $ref: '#/definitions/NetworkMemberNameString'
+        description: The name of the member.
+      Description:
+        $ref: '#/definitions/DescriptionString'
+        description: An optional description for the member.
+      FrameworkAttributes:
+        $ref: '#/definitions/MemberFrameworkAttributes'
+        description: Attributes relevant to a member for the blockchain framework that the Managed Blockchain network uses.
+      Status:
+        $ref: '#/definitions/MemberStatus'
+        description: '<p>The status of a member.</p> <ul> <li> <p> <code>CREATING</code> - The AWS account is in the process of creating a member.</p> </li> <li> <p> <code>AVAILABLE</code> - The member has been created and can participate in the network.</p> </li> <li> <p> <code>CREATE_FAILED</code> - The AWS account attempted to create a member and creation failed.</p> </li> <li> <p> <code>DELETING</code> - The member and all associated resources are in the process of being deleted. Either the AWS account that owns the member deleted it, or the member is being deleted as the result of an <code>APPROVED</code> <code>PROPOSAL</code> to remove the member.</p> </li> <li> <p> <code>DELETED</code> - The member can no longer participate on the network and all associated resources are deleted. Either the AWS account that owns the member deleted it, or the member is being deleted as the result of an <code>APPROVED</code> <code>PROPOSAL</code> to remove the member.</p> </li> </ul>'
+      CreationDate:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time that the member was created.
+    description: Member configuration properties.
+  GetNetworkInput:
+    type: object
+    properties: {}
+  Network:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/ResourceIdString'
+        description: The unique identifier of the network.
+      Name:
+        $ref: '#/definitions/NameString'
+        description: The name of the network.
+      Description:
+        $ref: '#/definitions/DescriptionString'
+        description: Attributes of the blockchain framework for the network.
+      Framework:
+        $ref: '#/definitions/Framework'
+        description: The blockchain framework that the network uses.
+      FrameworkVersion:
+        $ref: '#/definitions/FrameworkVersionString'
+        description: The version of the blockchain framework that the network uses.
+      FrameworkAttributes:
+        $ref: '#/definitions/NetworkFrameworkAttributes'
+        description: Attributes of the blockchain framework that the network uses.
+      VpcEndpointServiceName:
+        $ref: '#/definitions/String'
+        description: The VPC endpoint service name of the VPC endpoint service of the network. Members use the VPC endpoint service name to create a VPC endpoint to access network resources.
+      VotingPolicy:
+        $ref: '#/definitions/VotingPolicy'
+        description: The voting rules for the network to decide if a proposal is accepted.
+      Status:
+        $ref: '#/definitions/NetworkStatus'
+        description: The current status of the network.
+      CreationDate:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time that the network was created.
+    description: Network configuration properties.
+  GetNodeInput:
+    type: object
+    properties: {}
+  Node:
+    type: object
+    properties:
+      NetworkId:
+        $ref: '#/definitions/ResourceIdString'
+        description: The unique identifier of the network that the node is in.
+      MemberId:
+        $ref: '#/definitions/ResourceIdString'
+        description: The unique identifier of the member to which the node belongs.
+      Id:
+        $ref: '#/definitions/ResourceIdString'
+        description: The unique identifier of the node.
+      InstanceType:
+        $ref: '#/definitions/InstanceTypeString'
+        description: The instance type of the node.
+      AvailabilityZone:
+        $ref: '#/definitions/AvailabilityZoneString'
+        description: The Availability Zone in which the node exists.
+      FrameworkAttributes:
+        $ref: '#/definitions/NodeFrameworkAttributes'
+        description: Attributes of the blockchain framework being used.
+      Status:
+        $ref: '#/definitions/NodeStatus'
+        description: The status of the node.
+      CreationDate:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time that the node was created.
+    description: Configuration properties of a peer node.
+  GetProposalInput:
+    type: object
+    properties: {}
+  Proposal:
+    type: object
+    properties:
+      ProposalId:
+        $ref: '#/definitions/ResourceIdString'
+        description: The unique identifier of the proposal.
+      NetworkId:
+        $ref: '#/definitions/ResourceIdString'
+        description: The unique identifier of the network for which the proposal is made.
+      Description:
+        $ref: '#/definitions/DescriptionString'
+        description: The description of the proposal.
+      Actions:
+        $ref: '#/definitions/ProposalActions'
+        description: The actions to perform on the network if the proposal is <code>APPROVED</code>.
+      ProposedByMemberId:
+        $ref: '#/definitions/ResourceIdString'
+        description: The unique identifier of the member that created the proposal.
+      ProposedByMemberName:
+        $ref: '#/definitions/NetworkMemberNameString'
+        description: The name of the member that created the proposal.
+      Status:
+        $ref: '#/definitions/ProposalStatus'
+        description: '<p>The status of the proposal. Values are as follows:</p> <ul> <li> <p> <code>IN_PROGRESS</code> - The proposal is active and open for member voting.</p> </li> <li> <p> <code>APPROVED</code> - The proposal was approved with sufficient <code>YES</code> votes among members according to the <code>VotingPolicy</code> specified for the <code>Network</code>. The specified proposal actions are carried out.</p> </li> <li> <p> <code>REJECTED</code> - The proposal was rejected with insufficient <code>YES</code> votes among members according to the <code>VotingPolicy</code> specified for the <code>Network</code>. The specified <code>ProposalActions</code> are not carried out.</p> </li> <li> <p> <code>EXPIRED</code> - Members did not cast the number of votes required to determine the proposal outcome before the proposal expired. The specified <code>ProposalActions</code> are not carried out.</p> </li> <li> <p> <code>ACTION_FAILED</code> - One or more of the specified <code>ProposalActions</code> in a proposal that was approved could not be completed because of an error.</p> </li> </ul>'
+      CreationDate:
+        $ref: '#/definitions/Timestamp'
+        description: ' The date and time that the proposal was created. '
+      ExpirationDate:
+        $ref: '#/definitions/Timestamp'
+        description: ' The date and time that the proposal expires. This is the <code>CreationDate</code> plus the <code>ProposalDurationInHours</code> that is specified in the <code>ProposalThresholdPolicy</code>. After this date and time, if members have not cast enough votes to determine the outcome according to the voting policy, the proposal is <code>EXPIRED</code> and <code>Actions</code> are not carried out. '
+      YesVoteCount:
+        $ref: '#/definitions/VoteCount'
+        description: ' The current total of <code>YES</code> votes cast on the proposal by members. '
+      NoVoteCount:
+        $ref: '#/definitions/VoteCount'
+        description: ' The current total of <code>NO</code> votes cast on the proposal by members. '
+      OutstandingVoteCount:
+        $ref: '#/definitions/VoteCount'
+        description: ' The number of votes remaining to be cast on the proposal by members. In other words, the number of members minus the sum of <code>YES</code> votes and <code>NO</code> votes. '
+    description: Properties of a proposal on a Managed Blockchain network.
+  Timestamp:
+    type: string
+    format: date-time
+  InvitationStatus:
+    type: string
+    enum:
+      - PENDING
+      - ACCEPTED
+      - ACCEPTING
+      - REJECTED
+      - EXPIRED
+  NetworkSummary:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/ResourceIdString'
+        description: The unique identifier of the network.
+      Name:
+        $ref: '#/definitions/NameString'
+        description: The name of the network.
+      Description:
+        $ref: '#/definitions/DescriptionString'
+        description: An optional description of the network.
+      Framework:
+        $ref: '#/definitions/Framework'
+        description: The blockchain framework that the network uses.
+      FrameworkVersion:
+        $ref: '#/definitions/FrameworkVersionString'
+        description: The version of the blockchain framework that the network uses.
+      Status:
+        $ref: '#/definitions/NetworkStatus'
+        description: The current status of the network.
+      CreationDate:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time that the network was created.
+    description: A summary of network configuration properties.
+  Invitation:
+    type: object
+    properties:
+      InvitationId:
+        $ref: '#/definitions/ResourceIdString'
+        description: The unique identifier for the invitation.
+      CreationDate:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time that the invitation was created.
+      ExpirationDate:
+        $ref: '#/definitions/Timestamp'
+        description: 'The date and time that the invitation expires. This is the <code>CreationDate</code> plus the <code>ProposalDurationInHours</code> that is specified in the <code>ProposalThresholdPolicy</code>. After this date and time, the invitee can no longer create a member and join the network using this <code>InvitationId</code>.'
+      Status:
+        $ref: '#/definitions/InvitationStatus'
+        description: '<p>The status of the invitation:</p> <ul> <li> <p> <code>PENDING</code> - The invitee has not created a member to join the network, and the invitation has not yet expired.</p> </li> <li> <p> <code>ACCEPTING</code> - The invitee has begun creating a member, and creation has not yet completed.</p> </li> <li> <p> <code>ACCEPTED</code> - The invitee created a member and joined the network using the <code>InvitationID</code>.</p> </li> <li> <p> <code>REJECTED</code> - The invitee rejected the invitation.</p> </li> <li> <p> <code>EXPIRED</code> - The invitee neither created a member nor rejected the invitation before the <code>ExpirationDate</code>.</p> </li> </ul>'
+      NetworkSummary:
+        $ref: '#/definitions/NetworkSummary'
+    description: An invitation to an AWS account to create a member and join the network.
+  InvitationList:
+    type: array
+    items:
+      $ref: '#/definitions/Invitation'
+  PrincipalString:
+    type: string
+  InviteAction:
+    type: object
+    required:
+      - Principal
+    properties:
+      Principal:
+        $ref: '#/definitions/PrincipalString'
+        description: The AWS account ID to invite.
+    description: An action to invite a specific AWS account to create a member and join the network. The <code>InviteAction</code> is carried out when a <code>Proposal</code> is <code>APPROVED</code>.
+  IsOwned:
+    type: boolean
+  ProposalListMaxResults:
+    type: integer
+    minimum: 1
+    maximum: 100
+  PaginationToken:
+    type: string
+    maxLength: 128
+  ListInvitationsInput:
+    type: object
+    properties: {}
+  String:
+    type: string
+  MemberStatus:
+    type: string
+    enum:
+      - CREATING
+      - AVAILABLE
+      - CREATE_FAILED
+      - DELETING
+      - DELETED
+  MemberListMaxResults:
+    type: integer
+    minimum: 1
+    maximum: 20
+  ListMembersInput:
+    type: object
+    properties: {}
+  MemberSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/MemberSummary'
+  NetworkStatus:
+    type: string
+    enum:
+      - CREATING
+      - AVAILABLE
+      - CREATE_FAILED
+      - DELETING
+      - DELETED
+  NetworkListMaxResults:
+    type: integer
+    minimum: 1
+    maximum: 10
+  ListNetworksInput:
+    type: object
+    properties: {}
+  NetworkSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/NetworkSummary'
+  NodeStatus:
+    type: string
+    enum:
+      - CREATING
+      - AVAILABLE
+      - CREATE_FAILED
+      - DELETING
+      - DELETED
+      - FAILED
+  NodeListMaxResults:
+    type: integer
+    minimum: 1
+    maximum: 20
+  ListNodesInput:
+    type: object
+    properties: {}
+  NodeSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/NodeSummary'
+  ListProposalVotesInput:
+    type: object
+    properties: {}
+  ProposalVoteList:
+    type: array
+    items:
+      $ref: '#/definitions/VoteSummary'
+  ListProposalsInput:
+    type: object
+    properties: {}
+  ProposalSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/ProposalSummary'
+  MemberFrameworkAttributes:
+    type: object
+    properties:
+      Fabric:
+        $ref: '#/definitions/MemberFabricAttributes'
+        description: Attributes of Hyperledger Fabric relevant to a member on a Managed Blockchain network that uses Hyperledger Fabric.
+    description: Attributes relevant to a member for the blockchain framework that the Managed Blockchain network uses.
+  UsernameString:
+    type: string
+    pattern: '^[a-zA-Z][a-zA-Z0-9]*$'
+    minLength: 1
+    maxLength: 16
+  MemberFabricAttributes:
+    type: object
+    properties:
+      AdminUsername:
+        $ref: '#/definitions/UsernameString'
+        description: The user name for the initial administrator user for the member.
+      CaEndpoint:
+        $ref: '#/definitions/String'
+        description: The endpoint used to access the member's certificate authority.
+    description: Attributes of Hyperledger Fabric for a member in a Managed Blockchain network using the Hyperledger Fabric framework.
+  PasswordString:
+    type: string
+    pattern: '^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?!.*[@''\\"/])[a-zA-Z0-9\S]*$'
+    minLength: 8
+    maxLength: 32
+    format: password
+  MemberFabricConfiguration:
+    type: object
+    required:
+      - AdminUsername
+      - AdminPassword
+    properties:
+      AdminUsername:
+        $ref: '#/definitions/UsernameString'
+        description: The user name for the member's initial administrative user.
+      AdminPassword:
+        $ref: '#/definitions/PasswordString'
+        description: 'The password for the member''s initial administrative user. The <code>AdminPassword</code> must be at least eight characters long and no more than 32 characters. It must contain at least one uppercase letter, one lowercase letter, and one digit. It cannot have a single quote(‘), double quote(“), forward slash(/), backward slash(\), @, or a space.'
+    description: Configuration properties for Hyperledger Fabric for a member in a Managed Blockchain network using the Hyperledger Fabric framework.
+  MemberSummary:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/ResourceIdString'
+        description: The unique identifier of the member.
+      Name:
+        $ref: '#/definitions/NetworkMemberNameString'
+        description: The name of the member.
+      Description:
+        $ref: '#/definitions/DescriptionString'
+        description: An optional description of the member.
+      Status:
+        $ref: '#/definitions/MemberStatus'
+        description: '<p>The status of the member.</p> <ul> <li> <p> <code>CREATING</code> - The AWS account is in the process of creating a member.</p> </li> <li> <p> <code>AVAILABLE</code> - The member has been created and can participate in the network.</p> </li> <li> <p> <code>CREATE_FAILED</code> - The AWS account attempted to create a member and creation failed.</p> </li> <li> <p> <code>DELETING</code> - The member and all associated resources are in the process of being deleted. Either the AWS account that owns the member deleted it, or the member is being deleted as the result of an <code>APPROVED</code> <code>PROPOSAL</code> to remove the member.</p> </li> <li> <p> <code>DELETED</code> - The member can no longer participate on the network and all associated resources are deleted. Either the AWS account that owns the member deleted it, or the member is being deleted as the result of an <code>APPROVED</code> <code>PROPOSAL</code> to remove the member.</p> </li> </ul>'
+      CreationDate:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time that the member was created.
+      IsOwned:
+        $ref: '#/definitions/IsOwned'
+        description: An indicator of whether the member is owned by your AWS account or a different AWS account.
+    description: A summary of configuration properties for a member.
+  NetworkFrameworkAttributes:
+    type: object
+    properties:
+      Fabric:
+        $ref: '#/definitions/NetworkFabricAttributes'
+        description: Attributes of Hyperledger Fabric for a Managed Blockchain network that uses Hyperledger Fabric.
+    description: Attributes relevant to the network for the blockchain framework that the network uses.
+  NetworkFabricAttributes:
+    type: object
+    properties:
+      OrderingServiceEndpoint:
+        $ref: '#/definitions/String'
+        description: The endpoint of the ordering service for the network.
+      Edition:
+        $ref: '#/definitions/Edition'
+        description: 'The edition of Amazon Managed Blockchain that Hyperledger Fabric uses. For more information, see <a href="https://aws.amazon.com/managed-blockchain/pricing/">Amazon Managed Blockchain Pricing</a>.'
+    description: Attributes of Hyperledger Fabric for a network.
+  NodeFrameworkAttributes:
+    type: object
+    properties:
+      Fabric:
+        $ref: '#/definitions/NodeFabricAttributes'
+        description: Attributes of Hyperledger Fabric for a peer node on a Managed Blockchain network that uses Hyperledger Fabric.
+    description: Attributes relevant to a peer node on a Managed Blockchain network for the blockchain framework that the network uses.
+  NodeFabricAttributes:
+    type: object
+    properties:
+      PeerEndpoint:
+        $ref: '#/definitions/String'
+        description: The endpoint that identifies the peer node for all services except peer channel-based event services.
+      PeerEventEndpoint:
+        $ref: '#/definitions/String'
+        description: The endpoint that identifies the peer node for peer channel-based event services.
+    description: Attributes of Hyperledger Fabric for a peer node on a Managed Blockchain network that uses Hyperledger Fabric.
+  NodeSummary:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/ResourceIdString'
+        description: The unique identifier of the node.
+      Status:
+        $ref: '#/definitions/NodeStatus'
+        description: The status of the node.
+      CreationDate:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time that the node was created.
+      AvailabilityZone:
+        $ref: '#/definitions/AvailabilityZoneString'
+        description: The Availability Zone in which the node exists.
+      InstanceType:
+        $ref: '#/definitions/InstanceTypeString'
+        description: The EC2 instance type for the node.
+    description: A summary of configuration properties for a peer node.
+  ProposalStatus:
+    type: string
+    enum:
+      - IN_PROGRESS
+      - APPROVED
+      - REJECTED
+      - EXPIRED
+      - ACTION_FAILED
+  VoteCount:
+    type: integer
+  ProposalSummary:
+    type: object
+    properties:
+      ProposalId:
+        $ref: '#/definitions/ResourceIdString'
+        description: ' The unique identifier of the proposal. '
+      Description:
+        $ref: '#/definitions/DescriptionString'
+        description: ' The description of the proposal. '
+      ProposedByMemberId:
+        $ref: '#/definitions/ResourceIdString'
+        description: ' The unique identifier of the member that created the proposal. '
+      ProposedByMemberName:
+        $ref: '#/definitions/NetworkMemberNameString'
+        description: ' The name of the member that created the proposal. '
+      Status:
+        $ref: '#/definitions/ProposalStatus'
+        description: '<p>The status of the proposal. Values are as follows:</p> <ul> <li> <p> <code>IN_PROGRESS</code> - The proposal is active and open for member voting.</p> </li> <li> <p> <code>APPROVED</code> - The proposal was approved with sufficient <code>YES</code> votes among members according to the <code>VotingPolicy</code> specified for the <code>Network</code>. The specified proposal actions are carried out.</p> </li> <li> <p> <code>REJECTED</code> - The proposal was rejected with insufficient <code>YES</code> votes among members according to the <code>VotingPolicy</code> specified for the <code>Network</code>. The specified <code>ProposalActions</code> are not carried out.</p> </li> <li> <p> <code>EXPIRED</code> - Members did not cast the number of votes required to determine the proposal outcome before the proposal expired. The specified <code>ProposalActions</code> are not carried out.</p> </li> <li> <p> <code>ACTION_FAILED</code> - One or more of the specified <code>ProposalActions</code> in a proposal that was approved could not be completed because of an error.</p> </li> </ul>'
+      CreationDate:
+        $ref: '#/definitions/Timestamp'
+        description: ' The date and time that the proposal was created. '
+      ExpirationDate:
+        $ref: '#/definitions/Timestamp'
+        description: ' The date and time that the proposal expires. This is the <code>CreationDate</code> plus the <code>ProposalDurationInHours</code> that is specified in the <code>ProposalThresholdPolicy</code>. After this date and time, if members have not cast enough votes to determine the outcome according to the voting policy, the proposal is <code>EXPIRED</code> and <code>Actions</code> are not carried out. '
+    description: Properties of a proposal.
+  VoteSummary:
+    type: object
+    properties:
+      Vote:
+        $ref: '#/definitions/VoteValue'
+        description: ' The vote value, either <code>YES</code> or <code>NO</code>. '
+      MemberName:
+        $ref: '#/definitions/NetworkMemberNameString'
+        description: ' The name of the member that cast the vote. '
+      MemberId:
+        $ref: '#/definitions/ResourceIdString'
+        description: ' The unique identifier of the member that cast the vote. '
+    description: ' Properties of an individual vote that a member cast for a proposal. '
+  RejectInvitationInput:
+    type: object
+    properties: {}
+  RemoveAction:
+    type: object
+    required:
+      - MemberId
+    properties:
+      MemberId:
+        $ref: '#/definitions/ResourceIdString'
+        description: The unique identifier of the member to remove.
+    description: An action to remove a member from a Managed Blockchain network as the result of a removal proposal that is <code>APPROVED</code>. The member and all associated resources are deleted from the network.
+  VoteValue:
+    type: string
+    enum:
+      - 'YES'
+      - 'NO'
+  VoteOnProposalInput:
+    type: object
+    required:
+      - VoterMemberId
+      - Vote
+    properties:
+      VoterMemberId:
+        $ref: '#/definitions/ResourceIdString'
+        description: 'The unique identifier of the member casting the vote. '
+      Vote:
+        $ref: '#/definitions/VoteValue'
+        description: ' The value of the vote. '

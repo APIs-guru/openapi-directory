@@ -197,6 +197,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWS242ServiceCatalogService.AssociateBudgetWithResource':
+    post:
+      operationId: AssociateBudgetWithResource
+      description: Associates the specified budget with the specified resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AssociateBudgetWithResourceOutput'
+        '480':
+          description: InvalidParametersException
+          schema:
+            $ref: '#/definitions/InvalidParametersException'
+        '481':
+          description: DuplicateResourceException
+          schema:
+            $ref: '#/definitions/DuplicateResourceException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AssociateBudgetWithResourceInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.AssociateBudgetWithResource
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AWS242ServiceCatalogService.AssociatePrincipalWithPortfolio':
     post:
       operationId: AssociatePrincipalWithPortfolio
@@ -1663,6 +1708,39 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWS242ServiceCatalogService.DisassociateBudgetFromResource':
+    post:
+      operationId: DisassociateBudgetFromResource
+      description: Disassociates the specified budget from the specified resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DisassociateBudgetFromResourceOutput'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DisassociateBudgetFromResourceInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.DisassociateBudgetFromResource
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AWS242ServiceCatalogService.DisassociatePrincipalFromPortfolio':
     post:
       operationId: DisassociatePrincipalFromPortfolio
@@ -2010,6 +2088,53 @@ paths:
           type: string
           enum:
             - AWS242ServiceCatalogService.ListAcceptedPortfolioShares
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWS242ServiceCatalogService.ListBudgetsForResource':
+    post:
+      operationId: ListBudgetsForResource
+      description: Lists all the budgets associated to the specified resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListBudgetsForResourceOutput'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidParametersException
+          schema:
+            $ref: '#/definitions/InvalidParametersException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListBudgetsForResourceInput'
+        - name: PageSize
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: PageToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.ListBudgetsForResource
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -3248,6 +3373,22 @@ definitions:
   InvalidParametersException: {}
   ResourceNotFoundException: {}
   LimitExceededException: {}
+  AssociateBudgetWithResourceOutput:
+    type: object
+    properties: {}
+  AssociateBudgetWithResourceInput:
+    type: object
+    required:
+      - BudgetName
+      - ResourceId
+    properties:
+      BudgetName:
+        $ref: '#/definitions/BudgetName'
+        description: The name of the budget you want to associate.
+      ResourceId:
+        $ref: '#/definitions/Id'
+        description: ' The resource identifier. Either a portfolio-id or a product-id.'
+  DuplicateResourceException: {}
   AssociatePrincipalWithPortfolioOutput:
     type: object
     properties: {}
@@ -3313,7 +3454,6 @@ definitions:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
         description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
-  DuplicateResourceException: {}
   AssociateTagOptionWithResourceOutput:
     type: object
     properties: {}
@@ -3430,7 +3570,7 @@ definitions:
         description: The product identifier.
       Parameters:
         $ref: '#/definitions/ConstraintParameters'
-        description: '<p>The constraint parameters, in JSON format. The syntax depends on the constraint type as follows:</p> <dl> <dt>LAUNCH</dt> <dd> <p>Specify the <code>RoleArn</code> property as follows:</p> <p> <code>{"RoleArn" : "arn:aws:iam::123456789012:role/LaunchRole"}</code> </p> <p>You cannot have both a <code>LAUNCH</code> and a <code>STACKSET</code> constraint.</p> <p>You also cannot have more than one <code>LAUNCH</code> constraint on a product and portfolio.</p> </dd> <dt>NOTIFICATION</dt> <dd> <p>Specify the <code>NotificationArns</code> property as follows:</p> <p> <code>{"NotificationArns" : ["arn:aws:sns:us-east-1:123456789012:Topic"]}</code> </p> </dd> <dt>RESOUCE_UPDATE</dt> <dd> <p>Specify the <code>TagUpdatesOnProvisionedProduct</code> property as follows:</p> <p> <code>{"Version":"2.0","Properties":{"TagUpdateOnProvisionedProduct":"String"}}</code> </p> <p>The <code>TagUpdatesOnProvisionedProduct</code> property accepts a string value of <code>ALLOWED</code> or <code>NOT_ALLOWED</code>.</p> </dd> <dt>STACKSET</dt> <dd> <p>Specify the <code>Parameters</code> property as follows:</p> <p> <code>{"Version": "String", "Properties": {"AccountList": [ "String" ], "RegionList": [ "String" ], "AdminRole": "String", "ExecutionRole": "String"}}</code> </p> <p>You cannot have both a <code>LAUNCH</code> and a <code>STACKSET</code> constraint.</p> <p>You also cannot have more than one <code>STACKSET</code> constraint on a product and portfolio.</p> <p>Products with a <code>STACKSET</code> constraint will launch an AWS CloudFormation stack set.</p> </dd> <dt>TEMPLATE</dt> <dd> <p>Specify the <code>Rules</code> property. For more information, see <a href="http://docs.aws.amazon.com/servicecatalog/latest/adminguide/reference-template_constraint_rules.html">Template Constraint Rules</a>.</p> </dd> </dl>'
+        description: '<p>The constraint parameters, in JSON format. The syntax depends on the constraint type as follows:</p> <dl> <dt>LAUNCH</dt> <dd> <p>Specify the <code>RoleArn</code> property as follows:</p> <p> <code>{"RoleArn" : "arn:aws:iam::123456789012:role/LaunchRole"}</code> </p> <p>You cannot have both a <code>LAUNCH</code> and a <code>STACKSET</code> constraint.</p> <p>You also cannot have more than one <code>LAUNCH</code> constraint on a product and portfolio.</p> </dd> <dt>NOTIFICATION</dt> <dd> <p>Specify the <code>NotificationArns</code> property as follows:</p> <p> <code>{"NotificationArns" : ["arn:aws:sns:us-east-1:123456789012:Topic"]}</code> </p> </dd> <dt>RESOURCE_UPDATE</dt> <dd> <p>Specify the <code>TagUpdatesOnProvisionedProduct</code> property as follows:</p> <p> <code>{"Version":"2.0","Properties":{"TagUpdateOnProvisionedProduct":"String"}}</code> </p> <p>The <code>TagUpdatesOnProvisionedProduct</code> property accepts a string value of <code>ALLOWED</code> or <code>NOT_ALLOWED</code>.</p> </dd> <dt>STACKSET</dt> <dd> <p>Specify the <code>Parameters</code> property as follows:</p> <p> <code>{"Version": "String", "Properties": {"AccountList": [ "String" ], "RegionList": [ "String" ], "AdminRole": "String", "ExecutionRole": "String"}}</code> </p> <p>You cannot have both a <code>LAUNCH</code> and a <code>STACKSET</code> constraint.</p> <p>You also cannot have more than one <code>STACKSET</code> constraint on a product and portfolio.</p> <p>Products with a <code>STACKSET</code> constraint will launch an AWS CloudFormation stack set.</p> </dd> <dt>TEMPLATE</dt> <dd> <p>Specify the <code>Rules</code> property. For more information, see <a href="http://docs.aws.amazon.com/servicecatalog/latest/adminguide/reference-template_constraint_rules.html">Template Constraint Rules</a>.</p> </dd> </dl>'
       Type:
         $ref: '#/definitions/ConstraintType'
         description: <p>The type of constraint.</p> <ul> <li> <p> <code>LAUNCH</code> </p> </li> <li> <p> <code>NOTIFICATION</code> </p> </li> <li> <p> <code>RESOURCE_UPDATE</code> </p> </li> <li> <p> <code>STACKSET</code> </p> </li> <li> <p> <code>TEMPLATE</code> </p> </li> </ul>
@@ -3478,7 +3618,7 @@ definitions:
     type: object
     properties:
       PortfolioShareToken:
-        $ref: '#/definitions/PortfolioShareToken'
+        $ref: '#/definitions/Id'
         description: The portfolio share unique identifier. This will only be returned if portfolio is shared to an organization node.
   CreatePortfolioShareInput:
     type: object
@@ -3730,7 +3870,7 @@ definitions:
     type: object
     properties:
       PortfolioShareToken:
-        $ref: '#/definitions/PortfolioShareToken'
+        $ref: '#/definitions/Id'
         description: The portfolio share unique identifier. This will only be returned if delete is made to an organization node.
   DeletePortfolioShareInput:
     type: object
@@ -3881,6 +4021,9 @@ definitions:
       TagOptions:
         $ref: '#/definitions/TagOptionDetails'
         description: Information about the TagOptions associated with the portfolio.
+      Budgets:
+        $ref: '#/definitions/Budgets'
+        description: Information about the associated budgets.
   DescribePortfolioInput:
     type: object
     required:
@@ -3896,7 +4039,7 @@ definitions:
     type: object
     properties:
       PortfolioShareToken:
-        $ref: '#/definitions/PortfolioShareToken'
+        $ref: '#/definitions/Id'
         description: 'The token for the portfolio share operation. For example, <code>share-6v24abcdefghi</code>.'
       PortfolioId:
         $ref: '#/definitions/Id'
@@ -3916,7 +4059,7 @@ definitions:
       - PortfolioShareToken
     properties:
       PortfolioShareToken:
-        $ref: '#/definitions/PortfolioShareToken'
+        $ref: '#/definitions/Id'
         description: The token for the portfolio share operation. This token is returned either by CreatePortfolioShare or by DeletePortfolioShare.
   DescribeProductOutput:
     type: object
@@ -3927,6 +4070,9 @@ definitions:
       ProvisioningArtifacts:
         $ref: '#/definitions/ProvisioningArtifacts'
         description: Information about the provisioning artifacts for the specified product.
+      Budgets:
+        $ref: '#/definitions/Budgets'
+        description: Information about the associated budgets.
   DescribeProductInput:
     type: object
     required:
@@ -3953,6 +4099,9 @@ definitions:
       TagOptions:
         $ref: '#/definitions/TagOptionDetails'
         description: Information about the TagOptions associated with the product.
+      Budgets:
+        $ref: '#/definitions/Budgets'
+        description: Information about the associated budgets.
   DescribeProductAsAdminInput:
     type: object
     required:
@@ -4165,6 +4314,21 @@ definitions:
   DisableAWSOrganizationsAccessInput:
     type: object
     properties: {}
+  DisassociateBudgetFromResourceOutput:
+    type: object
+    properties: {}
+  DisassociateBudgetFromResourceInput:
+    type: object
+    required:
+      - BudgetName
+      - ResourceId
+    properties:
+      BudgetName:
+        $ref: '#/definitions/BudgetName'
+        description: The name of the budget you want to disassociate.
+      ResourceId:
+        $ref: '#/definitions/Id'
+        description: The resource identifier you want to disassociate from. Either a portfolio-id or a product-id.
   DisassociatePrincipalFromPortfolioOutput:
     type: object
     properties: {}
@@ -4323,6 +4487,32 @@ definitions:
       PortfolioShareType:
         $ref: '#/definitions/PortfolioShareType'
         description: <p>The type of shared portfolios to list. The default is to list imported portfolios.</p> <ul> <li> <p> <code>AWS_ORGANIZATIONS</code> - List portfolios shared by the master account of your organization</p> </li> <li> <p> <code>AWS_SERVICECATALOG</code> - List default portfolios</p> </li> <li> <p> <code>IMPORTED</code> - List imported portfolios</p> </li> </ul>
+  ListBudgetsForResourceOutput:
+    type: object
+    properties:
+      Budgets:
+        $ref: '#/definitions/Budgets'
+        description: Information about the associated budgets.
+      NextPageToken:
+        $ref: '#/definitions/PageToken'
+        description: 'The page token to use to retrieve the next set of results. If there are no additional results, this value is null.'
+  ListBudgetsForResourceInput:
+    type: object
+    required:
+      - ResourceId
+    properties:
+      AcceptLanguage:
+        $ref: '#/definitions/AcceptLanguage'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
+      ResourceId:
+        $ref: '#/definitions/Id'
+        description: The resource identifier.
+      PageSize:
+        $ref: '#/definitions/PageSize'
+        description: The maximum number of items to return with this call.
+      PageToken:
+        $ref: '#/definitions/PageToken'
+        description: 'The page token for the next set of results. To retrieve the first set of results, use null.'
   ListConstraintsForPortfolioOutput:
     type: object
     properties:
@@ -5217,6 +5407,10 @@ definitions:
       $ref: '#/definitions/AllowedValue'
   ApproximateCount:
     type: integer
+  BudgetName:
+    type: string
+    minLength: 1
+    maxLength: 100
   PrincipalARN:
     type: string
     minLength: 1
@@ -5244,6 +5438,17 @@ definitions:
     items:
       $ref: '#/definitions/FailedServiceActionAssociation'
     maxItems: 50
+  BudgetDetail:
+    type: object
+    properties:
+      BudgetName:
+        $ref: '#/definitions/BudgetName'
+        description: Name of the associated budget.
+    description: Information about a budget.
+  Budgets:
+    type: array
+    items:
+      $ref: '#/definitions/BudgetDetail'
   CausingEntity:
     type: string
   ChangeAction:
@@ -5393,8 +5598,6 @@ definitions:
         $ref: '#/definitions/OrganizationNodeValue'
         description: The identifier of the organization node.
     description: Information about the organization node.
-  PortfolioShareToken:
-    type: string
   ProductViewOwner:
     type: string
     maxLength: 8191
@@ -5433,6 +5636,9 @@ definitions:
       Type:
         $ref: '#/definitions/ProvisioningArtifactType'
         description: <p>The type of provisioning artifact.</p> <ul> <li> <p> <code>CLOUD_FORMATION_TEMPLATE</code> - AWS CloudFormation template</p> </li> <li> <p> <code>MARKETPLACE_AMI</code> - AWS Marketplace AMI</p> </li> <li> <p> <code>MARKETPLACE_CAR</code> - AWS Marketplace Clusters and AWS Resources</p> </li> </ul>
+      DisableTemplateValidation:
+        $ref: '#/definitions/DisableTemplateValidation'
+        description: 'If set to true, AWS Service Catalog stops validating the specified provisioning artifact even if it is invalid.'
     description: Information about a provisioning artifact (also known as a version) for a product.
   ProductViewDetail:
     type: object
@@ -5805,6 +6011,8 @@ definitions:
       $ref: '#/definitions/RecordOutput'
   Description:
     type: string
+  DisableTemplateValidation:
+    type: boolean
   Error:
     type: string
   ErrorCode:

@@ -159,7 +159,7 @@ paths:
   '/#X-Amz-Target=OvertureService.AcceptDirectConnectGatewayAssociationProposal':
     post:
       operationId: AcceptDirectConnectGatewayAssociationProposal
-      description: Accepts a proposal request to attach a virtual private gateway to a Direct Connect gateway.
+      description: Accepts a proposal request to attach a virtual private gateway or transit gateway to a Direct Connect gateway.
       responses:
         '200':
           description: Success
@@ -334,6 +334,43 @@ paths:
           type: string
           enum:
             - OvertureService.AllocatePublicVirtualInterface
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=OvertureService.AllocateTransitVirtualInterface':
+    post:
+      operationId: AllocateTransitVirtualInterface
+      description: '<p>Provisions a transit virtual interface to be owned by the specified AWS account. Use this type of interface to connect a transit gateway to your Direct Connect gateway.</p> <p>The owner of a connection provisions a transit virtual interface to be owned by the specified AWS account.</p> <p>After you create a transit virtual interface, it must be confirmed by the owner using <a>ConfirmTransitVirtualInterface</a>. Until this step has been completed, the transit virtual interface is in the <code>requested</code> state and is not available to handle traffic.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AllocateTransitVirtualInterfaceResult'
+        '480':
+          description: DirectConnectServerException
+          schema:
+            $ref: '#/definitions/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          schema:
+            $ref: '#/definitions/DirectConnectClientException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AllocateTransitVirtualInterfaceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - OvertureService.AllocateTransitVirtualInterface
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -564,6 +601,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=OvertureService.ConfirmTransitVirtualInterface':
+    post:
+      operationId: ConfirmTransitVirtualInterface
+      description: '<p>Accepts ownership of a transit virtual interface created by another AWS account.</p> <p> After the owner of the transit virtual interface makes this call, the specified transit virtual interface is created and made available to handle traffic.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ConfirmTransitVirtualInterfaceResponse'
+        '480':
+          description: DirectConnectServerException
+          schema:
+            $ref: '#/definitions/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          schema:
+            $ref: '#/definitions/DirectConnectClientException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ConfirmTransitVirtualInterfaceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - OvertureService.ConfirmTransitVirtualInterface
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=OvertureService.CreateBGPPeer':
     post:
       operationId: CreateBGPPeer
@@ -715,7 +789,7 @@ paths:
   '/#X-Amz-Target=OvertureService.CreateDirectConnectGatewayAssociationProposal':
     post:
       operationId: CreateDirectConnectGatewayAssociationProposal
-      description: <p>Creates a proposal to associate the specified virtual private gateway with the specified Direct Connect gateway.</p> <p>You can only associate a Direct Connect gateway and virtual private gateway when the account that owns the Direct Connect gateway and the account that owns the virtual private gateway have the same payer ID.</p>
+      description: <p>Creates a proposal to associate the specified virtual private gateway or transit gateway with the specified Direct Connect gateway.</p> <p>You can only associate a Direct Connect gateway and virtual private gateway or transit gateway when the account that owns the Direct Connect gateway and the account that owns the virtual private gateway or transit gateway have the same AWS Payer ID.</p>
       responses:
         '200':
           description: Success
@@ -897,6 +971,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=OvertureService.CreateTransitVirtualInterface':
+    post:
+      operationId: CreateTransitVirtualInterface
+      description: Creates a transit virtual interface. A transit virtual interface is a VLAN that transports traffic from a Direct Connect gateway to one or more transit gateways. A transit virtual interface enables the connection of multiple VPCs attached to a transit gateway to a Direct Connect gateway.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateTransitVirtualInterfaceResult'
+        '480':
+          description: DirectConnectServerException
+          schema:
+            $ref: '#/definitions/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          schema:
+            $ref: '#/definitions/DirectConnectClientException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateTransitVirtualInterfaceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - OvertureService.CreateTransitVirtualInterface
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=OvertureService.DeleteBGPPeer':
     post:
       operationId: DeleteBGPPeer
@@ -1048,7 +1159,7 @@ paths:
   '/#X-Amz-Target=OvertureService.DeleteDirectConnectGatewayAssociationProposal':
     post:
       operationId: DeleteDirectConnectGatewayAssociationProposal
-      description: Deletes the association proposal request between the specified Direct Connect gateway and virtual private gateway.
+      description: Deletes the association proposal request between the specified Direct Connect gateway and virtual private gateway or transit gateway.
       responses:
         '200':
           description: Success
@@ -1309,7 +1420,7 @@ paths:
   '/#X-Amz-Target=OvertureService.DescribeDirectConnectGatewayAssociationProposals':
     post:
       operationId: DescribeDirectConnectGatewayAssociationProposals
-      description: 'Describes one or more association proposals for connection between a virtual private gateway and a Direct Connect gateway. '
+      description: 'Describes one or more association proposals for connection between a virtual private gateway or transit gateway and a Direct Connect gateway. '
       responses:
         '200':
           description: Success
@@ -2029,10 +2140,10 @@ definitions:
         description: The ID of the request proposal.
       associatedGatewayOwnerAccount:
         $ref: '#/definitions/OwnerAccount'
-        description: The ID of the AWS account that owns the virtual private gateway.
+        description: The ID of the AWS account that owns the virtual private gateway or transit gateway.
       overrideAllowedPrefixesToDirectConnectGateway:
         $ref: '#/definitions/RouteFilterPrefixList'
-        description: Overrides the Amazon VPC prefixes advertised to the Direct Connect gateway.
+        description: Overrides the existing Amazon VPC prefixes advertised to the Direct Connect gateway.
   DirectConnectServerException: {}
   DirectConnectClientException: {}
   Connection:
@@ -2237,6 +2348,27 @@ definitions:
       newPublicVirtualInterfaceAllocation:
         $ref: '#/definitions/NewPublicVirtualInterfaceAllocation'
         description: Information about the public virtual interface.
+  AllocateTransitVirtualInterfaceResult:
+    type: object
+    properties:
+      virtualInterface:
+        $ref: '#/definitions/VirtualInterface'
+  AllocateTransitVirtualInterfaceRequest:
+    type: object
+    required:
+      - connectionId
+      - ownerAccount
+      - newTransitVirtualInterfaceAllocation
+    properties:
+      connectionId:
+        $ref: '#/definitions/ConnectionId'
+        description: The ID of the connection on which the transit virtual interface is provisioned.
+      ownerAccount:
+        $ref: '#/definitions/OwnerAccount'
+        description: The ID of the AWS account that owns the transit virtual interface.
+      newTransitVirtualInterfaceAllocation:
+        $ref: '#/definitions/NewTransitVirtualInterfaceAllocation'
+        description: Information about the transit virtual interface.
   AssociateConnectionWithLagRequest:
     type: object
     required:
@@ -2321,6 +2453,24 @@ definitions:
       virtualInterfaceId:
         $ref: '#/definitions/VirtualInterfaceId'
         description: The ID of the virtual interface.
+  ConfirmTransitVirtualInterfaceResponse:
+    type: object
+    properties:
+      virtualInterfaceState:
+        $ref: '#/definitions/VirtualInterfaceState'
+        description: '<p>The state of the virtual interface. The following are the possible values:</p> <ul> <li> <p> <code>confirming</code>: The creation of the virtual interface is pending confirmation from the virtual interface owner. If the owner of the virtual interface is different from the owner of the connection on which it is provisioned, then the virtual interface will remain in this state until it is confirmed by the virtual interface owner.</p> </li> <li> <p> <code>verifying</code>: This state only applies to public virtual interfaces. Each public virtual interface needs validation before the virtual interface can be created.</p> </li> <li> <p> <code>pending</code>: A virtual interface is in this state from the time that it is created until the virtual interface is ready to forward traffic.</p> </li> <li> <p> <code>available</code>: A virtual interface that is able to forward traffic.</p> </li> <li> <p> <code>down</code>: A virtual interface that is BGP down.</p> </li> <li> <p> <code>deleting</code>: A virtual interface is in this state immediately after calling <a>DeleteVirtualInterface</a> until it can no longer forward traffic.</p> </li> <li> <p> <code>deleted</code>: A virtual interface that cannot forward traffic.</p> </li> <li> <p> <code>rejected</code>: The virtual interface owner has declined creation of the virtual interface. If a virtual interface in the <code>Confirming</code> state is deleted by the virtual interface owner, the virtual interface enters the <code>Rejected</code> state.</p> </li> <li> <p> <code>unknown</code>: The state of the virtual interface is not available.</p> </li> </ul>'
+  ConfirmTransitVirtualInterfaceRequest:
+    type: object
+    required:
+      - virtualInterfaceId
+      - directConnectGatewayId
+    properties:
+      virtualInterfaceId:
+        $ref: '#/definitions/VirtualInterfaceId'
+        description: The ID of the virtual interface.
+      directConnectGatewayId:
+        $ref: '#/definitions/DirectConnectGatewayId'
+        description: The ID of the Direct Connect gateway.
   CreateBGPPeerResponse:
     type: object
     properties:
@@ -2388,7 +2538,7 @@ definitions:
         description: The ID of the Direct Connect gateway.
       gatewayId:
         $ref: '#/definitions/GatewayIdToAssociate'
-        description: The ID of the virtual private gateway.
+        description: The ID of the virtual private gateway or transit gateway.
       addAllowedPrefixesToDirectConnectGateway:
         $ref: '#/definitions/RouteFilterPrefixList'
         description: The Amazon VPC prefixes to advertise to the Direct Connect gateway
@@ -2416,7 +2566,7 @@ definitions:
         description: The ID of the AWS account that owns the Direct Connect gateway.
       gatewayId:
         $ref: '#/definitions/GatewayIdToAssociate'
-        description: The ID of the virtual private gateway.
+        description: The ID of the virtual private gateway or transit gateway.
       addAllowedPrefixesToDirectConnectGateway:
         $ref: '#/definitions/RouteFilterPrefixList'
         description: The Amazon VPC prefixes to advertise to the Direct Connect gateway.
@@ -2578,6 +2728,23 @@ definitions:
       newPublicVirtualInterface:
         $ref: '#/definitions/NewPublicVirtualInterface'
         description: Information about the public virtual interface.
+  CreateTransitVirtualInterfaceResult:
+    type: object
+    properties:
+      virtualInterface:
+        $ref: '#/definitions/VirtualInterface'
+  CreateTransitVirtualInterfaceRequest:
+    type: object
+    required:
+      - connectionId
+      - newTransitVirtualInterface
+    properties:
+      connectionId:
+        $ref: '#/definitions/ConnectionId'
+        description: The ID of the connection.
+      newTransitVirtualInterface:
+        $ref: '#/definitions/NewTransitVirtualInterface'
+        description: Information about the transit virtual interface.
   DeleteBGPPeerResponse:
     type: object
     properties:
@@ -2644,7 +2811,7 @@ definitions:
     properties:
       directConnectGatewayAssociationProposal:
         $ref: '#/definitions/DirectConnectGatewayAssociationProposal'
-        description: The ID of the virtual private gateway.
+        description: The ID of the associated gateway.
   DeleteDirectConnectGatewayAssociationProposalRequest:
     type: object
     required:
@@ -2749,7 +2916,7 @@ definitions:
         description: The ID of the proposal.
       associatedGatewayId:
         $ref: '#/definitions/AssociatedGatewayId'
-        description: The ID of the associated virtual private gateway.
+        description: The ID of the associated gateway.
       maxResults:
         $ref: '#/definitions/MaxResultSetSize'
         description: '<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p> <p>If <code>MaxResults</code> is given a value larger than 100, only 100 results are returned.</p>'
@@ -3057,13 +3224,13 @@ definitions:
         description: The ID of the AWS account that owns the associated gateway.
       associationState:
         $ref: '#/definitions/DirectConnectGatewayAssociationState'
-        description: '<p>The state of the association. The following are the possible values:</p> <ul> <li> <p> <code>associating</code>: The initial state after calling <a>CreateDirectConnectGatewayAssociation</a>.</p> </li> <li> <p> <code>associated</code>: The Direct Connect gateway and virtual private gateway are successfully associated and ready to pass traffic.</p> </li> <li> <p> <code>disassociating</code>: The initial state after calling <a>DeleteDirectConnectGatewayAssociation</a>.</p> </li> <li> <p> <code>disassociated</code>: The virtual private gateway is disassociated from the Direct Connect gateway. Traffic flow between the Direct Connect gateway and virtual private gateway is stopped.</p> </li> </ul>'
+        description: '<p>The state of the association. The following are the possible values:</p> <ul> <li> <p> <code>associating</code>: The initial state after calling <a>CreateDirectConnectGatewayAssociation</a>.</p> </li> <li> <p> <code>associated</code>: The Direct Connect gateway and virtual private gateway or transit gateway are successfully associated and ready to pass traffic.</p> </li> <li> <p> <code>disassociating</code>: The initial state after calling <a>DeleteDirectConnectGatewayAssociation</a>.</p> </li> <li> <p> <code>disassociated</code>: The virtual private gateway or transit gateway is disassociated from the Direct Connect gateway. Traffic flow between the Direct Connect gateway and virtual private gateway or transit gateway is stopped.</p> </li> </ul>'
       stateChangeError:
         $ref: '#/definitions/StateChangeError'
         description: The error message if the state of an object failed to advance.
       associatedGateway:
         $ref: '#/definitions/AssociatedGateway'
-        description: Information about the associated virtual private gateway.
+        description: Information about the associated gateway.
       associationId:
         $ref: '#/definitions/DirectConnectGatewayAssociationId'
         description: The ID of the Direct Connect gateway association.
@@ -3079,7 +3246,7 @@ definitions:
       virtualGatewayOwnerAccount:
         $ref: '#/definitions/OwnerAccount'
         description: The ID of the AWS account that owns the virtual private gateway.
-    description: Information about an association between a Direct Connect gateway and a virtual private gateway.
+    description: Information about an association between a Direct Connect gateway and a virtual private gateway or transit gateway.
   AddressFamily:
     type: string
     enum:
@@ -3159,6 +3326,34 @@ definitions:
         $ref: '#/definitions/RouteFilterPrefixList'
         description: The routes to be advertised to the AWS network in this Region. Applies to public virtual interfaces.
     description: Information about a public virtual interface to be provisioned on a connection.
+  NewTransitVirtualInterfaceAllocation:
+    type: object
+    properties:
+      virtualInterfaceName:
+        $ref: '#/definitions/VirtualInterfaceName'
+        description: The name of the virtual interface assigned by the customer network.
+      vlan:
+        $ref: '#/definitions/VLAN'
+        description: The ID of the VLAN.
+      asn:
+        $ref: '#/definitions/ASN'
+        description: The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
+      mtu:
+        $ref: '#/definitions/MTU'
+        description: 'The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 9001. The default value is 1500. '
+      authKey:
+        $ref: '#/definitions/BGPAuthKey'
+        description: The authentication key for BGP configuration.
+      amazonAddress:
+        $ref: '#/definitions/AmazonAddress'
+        description: The IP address assigned to the Amazon interface.
+      customerAddress:
+        $ref: '#/definitions/CustomerAddress'
+        description: The IP address assigned to the customer interface.
+      addressFamily:
+        $ref: '#/definitions/AddressFamily'
+        description: The address family for the BGP peer.
+    description: Information about a transit virtual interface to be provisioned on a connection.
   AmazonAddress:
     type: string
   LagId:
@@ -3171,6 +3366,7 @@ definitions:
     type: string
     enum:
       - virtualPrivateGateway
+      - transitGateway
   Region:
     type: string
   AssociatedGateway:
@@ -3184,7 +3380,7 @@ definitions:
         description: The type of associated gateway.
       ownerAccount:
         $ref: '#/definitions/OwnerAccount'
-        description: The ID of the AWS account that owns the associated virtual private gateway.
+        description: The ID of the AWS account that owns the associated virtual private gateway or transit gateway.
       region:
         $ref: '#/definitions/Region'
         description: The Region where the associated gateway is located.
@@ -3345,14 +3541,14 @@ definitions:
         description: '<p>The state of the proposal. The following are possible values:</p> <ul> <li> <p> <code>accepted</code>: The proposal has been accepted. The Direct Connect gateway association is available to use in this state.</p> </li> <li> <p> <code>deleted</code>: The proposal has been deleted by the owner that made the proposal. The Direct Connect gateway association cannot be used in this state.</p> </li> <li> <p> <code>requested</code>: The proposal has been requested. The Direct Connect gateway association cannot be used in this state.</p> </li> </ul>'
       associatedGateway:
         $ref: '#/definitions/AssociatedGateway'
-        description: Information about the associated virtual private gateway.
+        description: Information about the associated gateway.
       existingAllowedPrefixesToDirectConnectGateway:
         $ref: '#/definitions/RouteFilterPrefixList'
         description: The existing Amazon VPC prefixes advertised to the Direct Connect gateway.
       requestedAllowedPrefixesToDirectConnectGateway:
         $ref: '#/definitions/RouteFilterPrefixList'
         description: The Amazon VPC prefixes to advertise to the Direct Connect gateway.
-    description: 'Information about the proposal request to attach a virtual private gateway to a DDirect Connect gateway. '
+    description: 'Information about the proposal request to attach a virtual private gateway to a Direct Connect gateway. '
   DirectConnectGatewayName:
     type: string
   LongAsn:
@@ -3378,7 +3574,7 @@ definitions:
       stateChangeError:
         $ref: '#/definitions/StateChangeError'
         description: The error message if the state of an object failed to advance.
-    description: 'Information about a Direct Connect gateway, which enables you to connect virtual interfaces and virtual private gateways.'
+    description: 'Information about a Direct Connect gateway, which enables you to connect virtual interfaces and virtual private gateway or transit gateways.'
   InterconnectName:
     type: string
   LagName:
@@ -3453,6 +3649,37 @@ definitions:
         $ref: '#/definitions/RouteFilterPrefixList'
         description: The routes to be advertised to the AWS network in this Region. Applies to public virtual interfaces.
     description: Information about a public virtual interface.
+  NewTransitVirtualInterface:
+    type: object
+    properties:
+      virtualInterfaceName:
+        $ref: '#/definitions/VirtualInterfaceName'
+        description: The name of the virtual interface assigned by the customer network.
+      vlan:
+        $ref: '#/definitions/VLAN'
+        description: The ID of the VLAN.
+      asn:
+        $ref: '#/definitions/ASN'
+        description: The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
+      mtu:
+        $ref: '#/definitions/MTU'
+        description: 'The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 9001. The default value is 1500.'
+      authKey:
+        $ref: '#/definitions/BGPAuthKey'
+        description: The authentication key for BGP configuration.
+      amazonAddress:
+        $ref: '#/definitions/AmazonAddress'
+        description: The IP address assigned to the Amazon interface.
+      customerAddress:
+        $ref: '#/definitions/CustomerAddress'
+        description: The IP address assigned to the customer interface.
+      addressFamily:
+        $ref: '#/definitions/AddressFamily'
+        description: The address family for the BGP peer.
+      directConnectGatewayId:
+        $ref: '#/definitions/DirectConnectGatewayId'
+        description: The ID of the Direct Connect gateway.
+    description: Information about a transit virtual interface.
   DirectConnectGatewayAssociationId:
     type: string
   InterconnectState:
@@ -3533,6 +3760,11 @@ definitions:
       - attached
       - detaching
       - detached
+  DirectConnectGatewayAttachmentType:
+    type: string
+    enum:
+      - TransitVirtualInterface
+      - PrivateVirtualInterface
   DirectConnectGatewayAttachment:
     type: object
     properties:
@@ -3551,6 +3783,9 @@ definitions:
       attachmentState:
         $ref: '#/definitions/DirectConnectGatewayAttachmentState'
         description: '<p>The state of the attachment. The following are the possible values:</p> <ul> <li> <p> <code>attaching</code>: The initial state after a virtual interface is created using the Direct Connect gateway.</p> </li> <li> <p> <code>attached</code>: The Direct Connect gateway and virtual interface are attached and ready to pass traffic.</p> </li> <li> <p> <code>detaching</code>: The initial state after calling <a>DeleteVirtualInterface</a>.</p> </li> <li> <p> <code>detached</code>: The virtual interface is detached from the Direct Connect gateway. Traffic flow between the Direct Connect gateway and virtual interface is stopped.</p> </li> </ul>'
+      attachmentType:
+        $ref: '#/definitions/DirectConnectGatewayAttachmentType'
+        description: The type of attachment.
       stateChangeError:
         $ref: '#/definitions/StateChangeError'
         description: The error message if the state of an object failed to advance.
