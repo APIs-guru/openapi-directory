@@ -35,10 +35,77 @@ externalDocs:
   url: 'https://docs.aws.amazon.com/elasticbeanstalk/'
 host: elasticbeanstalk.amazonaws.com
 basePath: /
-x-hasEquivalentPaths: true
 schemes:
   - https
   - http
+x-servers:
+  - url: 'http://elasticbeanstalk.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+    description: The Elastic Beanstalk multi-region endpoint
+  - url: 'https://elasticbeanstalk.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+    description: The Elastic Beanstalk multi-region endpoint
+  - url: 'http://elasticbeanstalk.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+    description: The Elastic Beanstalk endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://elasticbeanstalk.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+    description: The Elastic Beanstalk endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 consumes:
   - text/xml
 produces:
@@ -90,8 +157,9 @@ security:
   - hmac: []
 paths:
   '/#Action=AbortEnvironmentUpdate':
-    post:
-      operationId: AbortEnvironmentUpdate
+    get:
+      x-aws-operation-name: AbortEnvironmentUpdate
+      operationId: GET AbortEnvironmentUpdate
       description: Cancels in-progress environment configuration update or application version deployment.
       responses:
         '200':
@@ -133,9 +201,46 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=ApplyEnvironmentManagedAction':
     post:
-      operationId: ApplyEnvironmentManagedAction
+      x-aws-operation-name: AbortEnvironmentUpdate
+      operationId: POST AbortEnvironmentUpdate
+      description: Cancels in-progress environment configuration update or application version deployment.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InsufficientPrivilegesException
+          schema:
+            $ref: '#/definitions/InsufficientPrivilegesException'
+      parameters:
+        - name: EnvironmentId
+          in: formData
+          required: false
+          description: This specifies the ID of the environment with the in-progress update that you want to cancel.
+          type: string
+        - name: EnvironmentName
+          in: formData
+          required: false
+          description: This specifies the name of the environment with the in-progress update that you want to cancel.
+          type: string
+          minLength: 4
+          maxLength: 40
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - AbortEnvironmentUpdate
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=ApplyEnvironmentManagedAction':
+    get:
+      x-aws-operation-name: ApplyEnvironmentManagedAction
+      operationId: GET ApplyEnvironmentManagedAction
       description: Applies a scheduled managed action immediately. A managed action can be applied only if its status is <code>Scheduled</code>. Get the status and action ID of a managed action with <a>DescribeEnvironmentManagedActions</a>.
       responses:
         '200':
@@ -186,9 +291,55 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=CheckDNSAvailability':
     post:
-      operationId: CheckDNSAvailability
+      x-aws-operation-name: ApplyEnvironmentManagedAction
+      operationId: POST ApplyEnvironmentManagedAction
+      description: Applies a scheduled managed action immediately. A managed action can be applied only if its status is <code>Scheduled</code>. Get the status and action ID of a managed action with <a>DescribeEnvironmentManagedActions</a>.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ApplyEnvironmentManagedActionResult'
+        '480':
+          description: ElasticBeanstalkServiceException
+          schema:
+            $ref: '#/definitions/ElasticBeanstalkServiceException'
+        '481':
+          description: ManagedActionInvalidStateException
+          schema:
+            $ref: '#/definitions/ManagedActionInvalidStateException'
+      parameters:
+        - name: EnvironmentName
+          in: formData
+          required: false
+          description: The name of the target environment.
+          type: string
+        - name: EnvironmentId
+          in: formData
+          required: false
+          description: The environment ID of the target environment.
+          type: string
+        - name: ActionId
+          in: formData
+          required: true
+          description: The action ID of the scheduled managed action to execute.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ApplyEnvironmentManagedAction
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=CheckDNSAvailability':
+    get:
+      x-aws-operation-name: CheckDNSAvailability
+      operationId: GET CheckDNSAvailability
       description: Checks if the specified CNAME is available.
       responses:
         '200':
@@ -223,9 +374,39 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=ComposeEnvironments':
     post:
-      operationId: ComposeEnvironments
+      x-aws-operation-name: CheckDNSAvailability
+      operationId: POST CheckDNSAvailability
+      description: Checks if the specified CNAME is available.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CheckDNSAvailabilityResultMessage'
+      parameters:
+        - name: CNAMEPrefix
+          in: formData
+          required: true
+          description: The prefix used when this CNAME is reserved.
+          type: string
+          minLength: 4
+          maxLength: 63
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - CheckDNSAvailability
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=ComposeEnvironments':
+    get:
+      x-aws-operation-name: ComposeEnvironments
+      operationId: GET ComposeEnvironments
       description: 'Create or update a group of environments that each run a separate component of a single application. Takes a list of version labels that specify application source bundles for each of the environments to create or update. The name of each environment and other required information must be included in the source bundles in an environment manifest named <code>env.yaml</code>. See <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-mgmt-compose.html">Compose Environments</a> for details.'
       responses:
         '200':
@@ -282,9 +463,61 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=CreateApplication':
     post:
-      operationId: CreateApplication
+      x-aws-operation-name: ComposeEnvironments
+      operationId: POST ComposeEnvironments
+      description: 'Create or update a group of environments that each run a separate component of a single application. Takes a list of version labels that specify application source bundles for each of the environments to create or update. The name of each environment and other required information must be included in the source bundles in an environment manifest named <code>env.yaml</code>. See <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-mgmt-compose.html">Compose Environments</a> for details.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/EnvironmentDescriptionsMessage'
+        '480':
+          description: TooManyEnvironmentsException
+          schema:
+            $ref: '#/definitions/TooManyEnvironmentsException'
+        '481':
+          description: InsufficientPrivilegesException
+          schema:
+            $ref: '#/definitions/InsufficientPrivilegesException'
+      parameters:
+        - name: ApplicationName
+          in: formData
+          required: false
+          description: The name of the application to which the specified source bundles belong.
+          type: string
+          minLength: 1
+          maxLength: 100
+        - name: GroupName
+          in: formData
+          required: false
+          description: 'The name of the group to which the target environments belong. Specify a group name only if the environment name defined in each target environment''s manifest ends with a + (plus) character. See <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html">Environment Manifest (env.yaml)</a> for details.'
+          type: string
+          minLength: 1
+          maxLength: 19
+        - name: VersionLabels
+          in: formData
+          required: false
+          description: 'A list of version labels, specifying one or more application source bundles that belong to the target application. Each source bundle must include an environment manifest that specifies the name of the environment and the name of the solution stack to use, and optionally can specify environment links to create.'
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ComposeEnvironments
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=CreateApplication':
+    get:
+      x-aws-operation-name: CreateApplication
+      operationId: GET CreateApplication
       description: ' Creates an application that has one configuration template named <code>default</code> and no application versions. '
       responses:
         '200':
@@ -348,9 +581,68 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=CreateApplicationVersion':
     post:
-      operationId: CreateApplicationVersion
+      x-aws-operation-name: CreateApplication
+      operationId: POST CreateApplication
+      description: ' Creates an application that has one configuration template named <code>default</code> and no application versions. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ApplicationDescriptionMessage'
+        '480':
+          description: TooManyApplicationsException
+          schema:
+            $ref: '#/definitions/TooManyApplicationsException'
+      parameters:
+        - name: ApplicationName
+          in: formData
+          required: true
+          description: '<p>The name of the application.</p> <p>Constraint: This name must be unique within your account. If the specified name already exists, the action returns an <code>InvalidParameterValue</code> error.</p>'
+          type: string
+          minLength: 1
+          maxLength: 100
+        - name: Description
+          in: formData
+          required: false
+          description: Describes the application.
+          type: string
+          maxLength: 200
+        - name: ResourceLifecycleConfig.ServiceRole
+          in: formData
+          description: |-
+            The resource lifecycle configuration for an application. Defines lifecycle settings for resources that belong to the application, and the service role that Elastic Beanstalk assumes in order to apply lifecycle settings. The version lifecycle configuration defines lifecycle settings for application versions.
+            <p>The ARN of an IAM service role that Elastic Beanstalk has permission to assume.</p> <p>The <code>ServiceRole</code> property is required the first time that you provide a <code>VersionLifecycleConfig</code> for the application in one of the supporting calls (<code>CreateApplication</code> or <code>UpdateApplicationResourceLifecycle</code>). After you provide it once, in either one of the calls, Elastic Beanstalk persists the Service Role with the application, and you don't need to specify it again in subsequent <code>UpdateApplicationResourceLifecycle</code> calls. You can, however, specify it in subsequent calls to change the Service Role to another value.</p>
+          type: string
+        - name: ResourceLifecycleConfig.VersionLifecycleConfig
+          in: formData
+          description: |-
+            The resource lifecycle configuration for an application. Defines lifecycle settings for resources that belong to the application, and the service role that Elastic Beanstalk assumes in order to apply lifecycle settings. The version lifecycle configuration defines lifecycle settings for application versions.
+            The application version lifecycle configuration.
+          type: string
+        - name: Tags
+          in: formData
+          required: false
+          description: <p>Specifies the tags applied to the application.</p> <p>Elastic Beanstalk applies these tags only to the application. Environments that you create in the application don't inherit the tags.</p>
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - CreateApplication
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=CreateApplicationVersion':
+    get:
+      x-aws-operation-name: CreateApplicationVersion
+      operationId: GET CreateApplicationVersion
       description: '<p>Creates an application version for the specified application. You can create an application version from a source bundle in Amazon S3, a commit in AWS CodeCommit, or the output of an AWS CodeBuild build as follows:</p> <p>Specify a commit in an AWS CodeCommit repository with <code>SourceBuildInformation</code>.</p> <p>Specify a build in an AWS CodeBuild with <code>SourceBuildInformation</code> and <code>BuildConfiguration</code>.</p> <p>Specify a source bundle in S3 with <code>SourceBundle</code> </p> <p>Omit both <code>SourceBuildInformation</code> and <code>SourceBundle</code> to use the default sample application.</p> <note> <p>Once you create an application version with a specified Amazon S3 bucket and key location, you cannot change that Amazon S3 location. If you change the Amazon S3 location, you receive an exception when you attempt to launch an environment from the application version.</p> </note>'
       responses:
         '200':
@@ -495,9 +787,149 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=CreateConfigurationTemplate':
     post:
-      operationId: CreateConfigurationTemplate
+      x-aws-operation-name: CreateApplicationVersion
+      operationId: POST CreateApplicationVersion
+      description: '<p>Creates an application version for the specified application. You can create an application version from a source bundle in Amazon S3, a commit in AWS CodeCommit, or the output of an AWS CodeBuild build as follows:</p> <p>Specify a commit in an AWS CodeCommit repository with <code>SourceBuildInformation</code>.</p> <p>Specify a build in an AWS CodeBuild with <code>SourceBuildInformation</code> and <code>BuildConfiguration</code>.</p> <p>Specify a source bundle in S3 with <code>SourceBundle</code> </p> <p>Omit both <code>SourceBuildInformation</code> and <code>SourceBundle</code> to use the default sample application.</p> <note> <p>Once you create an application version with a specified Amazon S3 bucket and key location, you cannot change that Amazon S3 location. If you change the Amazon S3 location, you receive an exception when you attempt to launch an environment from the application version.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ApplicationVersionDescriptionMessage'
+        '480':
+          description: TooManyApplicationsException
+          schema:
+            $ref: '#/definitions/TooManyApplicationsException'
+        '481':
+          description: TooManyApplicationVersionsException
+          schema:
+            $ref: '#/definitions/TooManyApplicationVersionsException'
+        '482':
+          description: InsufficientPrivilegesException
+          schema:
+            $ref: '#/definitions/InsufficientPrivilegesException'
+        '483':
+          description: S3LocationNotInServiceRegionException
+          schema:
+            $ref: '#/definitions/S3LocationNotInServiceRegionException'
+        '484':
+          description: CodeBuildNotInServiceRegionException
+          schema:
+            $ref: '#/definitions/CodeBuildNotInServiceRegionException'
+      parameters:
+        - name: ApplicationName
+          in: formData
+          required: true
+          description: ' The name of the application. If no application is found with this name, and <code>AutoCreateApplication</code> is <code>false</code>, returns an <code>InvalidParameterValue</code> error. '
+          type: string
+          minLength: 1
+          maxLength: 100
+        - name: VersionLabel
+          in: formData
+          required: true
+          description: '<p>A label identifying this version.</p> <p>Constraint: Must be unique per application. If an application version already exists with this label for the specified application, AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. </p>'
+          type: string
+          minLength: 1
+          maxLength: 100
+        - name: Description
+          in: formData
+          required: false
+          description: Describes this version.
+          type: string
+          maxLength: 200
+        - name: SourceBuildInformation.SourceType
+          in: formData
+          description: |-
+            Location of the source code for an application version.
+            <p>The type of repository.</p> <ul> <li> <p> <code>Git</code> </p> </li> <li> <p> <code>Zip</code> </p> </li> </ul>
+          type: string
+        - name: SourceBuildInformation.SourceRepository
+          in: formData
+          description: |-
+            Location of the source code for an application version.
+            <p>Location where the repository is stored.</p> <ul> <li> <p> <code>CodeCommit</code> </p> </li> <li> <p> <code>S3</code> </p> </li> </ul>
+          type: string
+        - name: SourceBuildInformation.SourceLocation
+          in: formData
+          description: |-
+            Location of the source code for an application version.
+            <p>The location of the source code, as a formatted string, depending on the value of <code>SourceRepository</code> </p> <ul> <li> <p>For <code>CodeCommit</code>, the format is the repository name and commit ID, separated by a forward slash. For example, <code>my-git-repo/265cfa0cf6af46153527f55d6503ec030551f57a</code>.</p> </li> <li> <p>For <code>S3</code>, the format is the S3 bucket name and object key, separated by a forward slash. For example, <code>my-s3-bucket/Folders/my-source-file</code>.</p> </li> </ul>
+          type: string
+        - name: SourceBundle.S3Bucket
+          in: formData
+          description: |-
+            The bucket and key of an item stored in Amazon S3.
+            The Amazon S3 bucket where the data is located.
+          type: string
+        - name: SourceBundle.S3Key
+          in: formData
+          description: |-
+            The bucket and key of an item stored in Amazon S3.
+            The Amazon S3 key where the data is located.
+          type: string
+        - name: BuildConfiguration.ArtifactName
+          in: formData
+          description: |-
+            Settings for an AWS CodeBuild build.
+            The name of the artifact of the CodeBuild build. If provided, Elastic Beanstalk stores the build artifact in the S3 location <i>S3-bucket</i>/resources/<i>application-name</i>/codebuild/codebuild-<i>version-label</i>-<i>artifact-name</i>.zip. If not provided, Elastic Beanstalk stores the build artifact in the S3 location <i>S3-bucket</i>/resources/<i>application-name</i>/codebuild/codebuild-<i>version-label</i>.zip. 
+          type: string
+        - name: BuildConfiguration.CodeBuildServiceRole
+          in: formData
+          description: |-
+            Settings for an AWS CodeBuild build.
+            The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that enables AWS CodeBuild to interact with dependent AWS services on behalf of the AWS account.
+          type: string
+        - name: BuildConfiguration.ComputeType
+          in: formData
+          description: |-
+            Settings for an AWS CodeBuild build.
+            <p>Information about the compute resources the build project will use.</p> <ul> <li> <p> <code>BUILD_GENERAL1_SMALL: Use up to 3 GB memory and 2 vCPUs for builds</code> </p> </li> <li> <p> <code>BUILD_GENERAL1_MEDIUM: Use up to 7 GB memory and 4 vCPUs for builds</code> </p> </li> <li> <p> <code>BUILD_GENERAL1_LARGE: Use up to 15 GB memory and 8 vCPUs for builds</code> </p> </li> </ul>
+          type: string
+        - name: BuildConfiguration.Image
+          in: formData
+          description: |-
+            Settings for an AWS CodeBuild build.
+            The ID of the Docker image to use for this build project.
+          type: string
+        - name: BuildConfiguration.TimeoutInMinutes
+          in: formData
+          description: |-
+            Settings for an AWS CodeBuild build.
+            How long in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait until timing out any related build that does not get marked as completed. The default is 60 minutes.
+          type: string
+        - name: AutoCreateApplication
+          in: formData
+          required: false
+          description: Set to <code>true</code> to create an application with the specified name if it doesn't already exist.
+          type: boolean
+        - name: Process
+          in: formData
+          required: false
+          description: '<p>Pre-processes and validates the environment manifest (<code>env.yaml</code>) and configuration files (<code>*.config</code> files in the <code>.ebextensions</code> folder) in the source bundle. Validating configuration files can identify issues prior to deploying the application version to an environment.</p> <p>You must turn processing on for application versions that you create using AWS CodeBuild or AWS CodeCommit. For application versions built from a source bundle in Amazon S3, processing is optional.</p> <note> <p>The <code>Process</code> option validates Elastic Beanstalk configuration files. It doesn''t validate your application''s configuration files, like proxy server or Docker configuration.</p> </note>'
+          type: boolean
+        - name: Tags
+          in: formData
+          required: false
+          description: <p>Specifies the tags applied to the application version.</p> <p>Elastic Beanstalk applies these tags only to the application version. Environments that use the application version don't inherit the tags.</p>
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - CreateApplicationVersion
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=CreateConfigurationTemplate':
+    get:
+      x-aws-operation-name: CreateConfigurationTemplate
+      operationId: GET CreateConfigurationTemplate
       description: <p>Creates a configuration template. Templates are associated with a specific application and are used to deploy different versions of the application with the same configuration settings.</p> <p>Templates aren't associated with any environment. The <code>EnvironmentName</code> response element is always <code>null</code>.</p> <p>Related Topics</p> <ul> <li> <p> <a>DescribeConfigurationOptions</a> </p> </li> <li> <p> <a>DescribeConfigurationSettings</a> </p> </li> <li> <p> <a>ListAvailableSolutionStacks</a> </p> </li> </ul>
       responses:
         '200':
@@ -598,9 +1030,105 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=CreateEnvironment':
     post:
-      operationId: CreateEnvironment
+      x-aws-operation-name: CreateConfigurationTemplate
+      operationId: POST CreateConfigurationTemplate
+      description: <p>Creates a configuration template. Templates are associated with a specific application and are used to deploy different versions of the application with the same configuration settings.</p> <p>Templates aren't associated with any environment. The <code>EnvironmentName</code> response element is always <code>null</code>.</p> <p>Related Topics</p> <ul> <li> <p> <a>DescribeConfigurationOptions</a> </p> </li> <li> <p> <a>DescribeConfigurationSettings</a> </p> </li> <li> <p> <a>ListAvailableSolutionStacks</a> </p> </li> </ul>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ConfigurationSettingsDescription'
+        '480':
+          description: InsufficientPrivilegesException
+          schema:
+            $ref: '#/definitions/InsufficientPrivilegesException'
+        '481':
+          description: TooManyBucketsException
+          schema:
+            $ref: '#/definitions/TooManyBucketsException'
+        '482':
+          description: TooManyConfigurationTemplatesException
+          schema:
+            $ref: '#/definitions/TooManyConfigurationTemplatesException'
+      parameters:
+        - name: ApplicationName
+          in: formData
+          required: true
+          description: 'The name of the application to associate with this configuration template. If no application is found with this name, AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. '
+          type: string
+          minLength: 1
+          maxLength: 100
+        - name: TemplateName
+          in: formData
+          required: true
+          description: '<p>The name of the configuration template.</p> <p>Constraint: This name must be unique per application.</p> <p>Default: If a configuration template already exists with this name, AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. </p>'
+          type: string
+          minLength: 1
+          maxLength: 100
+        - name: SolutionStackName
+          in: formData
+          required: false
+          description: '<p>The name of the solution stack used by this configuration. The solution stack specifies the operating system, architecture, and application server for a configuration template. It determines the set of configuration options as well as the possible and default values.</p> <p> Use <a>ListAvailableSolutionStacks</a> to obtain a list of available solution stacks. </p> <p> A solution stack name or a source configuration parameter must be specified, otherwise AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. </p> <p>If a solution stack name is not specified and the source configuration parameter is specified, AWS Elastic Beanstalk uses the same solution stack as the source configuration template.</p>'
+          type: string
+        - name: PlatformArn
+          in: formData
+          required: false
+          description: The ARN of the custom platform.
+          type: string
+        - name: SourceConfiguration.ApplicationName
+          in: formData
+          description: |-
+            A specification for an environment configuration
+            The name of the application associated with the configuration.
+          type: string
+        - name: SourceConfiguration.TemplateName
+          in: formData
+          description: |-
+            A specification for an environment configuration
+            The name of the configuration template.
+          type: string
+        - name: EnvironmentId
+          in: formData
+          required: false
+          description: The ID of the environment used with this configuration template.
+          type: string
+        - name: Description
+          in: formData
+          required: false
+          description: Describes this configuration.
+          type: string
+          maxLength: 200
+        - name: OptionSettings
+          in: formData
+          required: false
+          description: 'If specified, AWS Elastic Beanstalk sets the specified configuration option to the requested value. The new value overrides the value obtained from the solution stack or the source configuration template.'
+          type: array
+          items:
+            type: string
+        - name: Tags
+          in: formData
+          required: false
+          description: Specifies the tags applied to the configuration template.
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - CreateConfigurationTemplate
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=CreateEnvironment':
+    get:
+      x-aws-operation-name: CreateEnvironment
+      operationId: GET CreateEnvironment
       description: Launches an environment for the specified application using the specified configuration.
       responses:
         '200':
@@ -733,9 +1261,137 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=CreatePlatformVersion':
     post:
-      operationId: CreatePlatformVersion
+      x-aws-operation-name: CreateEnvironment
+      operationId: POST CreateEnvironment
+      description: Launches an environment for the specified application using the specified configuration.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/EnvironmentDescription'
+        '480':
+          description: TooManyEnvironmentsException
+          schema:
+            $ref: '#/definitions/TooManyEnvironmentsException'
+        '481':
+          description: InsufficientPrivilegesException
+          schema:
+            $ref: '#/definitions/InsufficientPrivilegesException'
+      parameters:
+        - name: ApplicationName
+          in: formData
+          required: true
+          description: '<p>The name of the application that contains the version to be deployed.</p> <p> If no application is found with this name, <code>CreateEnvironment</code> returns an <code>InvalidParameterValue</code> error. </p>'
+          type: string
+          minLength: 1
+          maxLength: 100
+        - name: EnvironmentName
+          in: formData
+          required: false
+          description: '<p>A unique name for the deployment environment. Used in the application URL.</p> <p>Constraint: Must be from 4 to 40 characters in length. The name can contain only letters, numbers, and hyphens. It cannot start or end with a hyphen. This name must be unique within a region in your account. If the specified name already exists in the region, AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. </p> <p>Default: If the CNAME parameter is not specified, the environment name becomes part of the CNAME, and therefore part of the visible URL for your application.</p>'
+          type: string
+          minLength: 4
+          maxLength: 40
+        - name: GroupName
+          in: formData
+          required: false
+          description: 'The name of the group to which the target environment belongs. Specify a group name only if the environment''s name is specified in an environment manifest and not with the environment name parameter. See <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html">Environment Manifest (env.yaml)</a> for details.'
+          type: string
+          minLength: 1
+          maxLength: 19
+        - name: Description
+          in: formData
+          required: false
+          description: Describes this environment.
+          type: string
+          maxLength: 200
+        - name: CNAMEPrefix
+          in: formData
+          required: false
+          description: 'If specified, the environment attempts to use this value as the prefix for the CNAME. If not specified, the CNAME is generated automatically by appending a random alphanumeric string to the environment name.'
+          type: string
+          minLength: 4
+          maxLength: 63
+        - name: Tier.Name
+          in: formData
+          description: |-
+            Describes the properties of an environment tier
+            <p>The name of this environment tier.</p> <p>Valid values:</p> <ul> <li> <p>For <i>Web server tier</i> – <code>WebServer</code> </p> </li> <li> <p>For <i>Worker tier</i> – <code>Worker</code> </p> </li> </ul>
+          type: string
+        - name: Tier.Type
+          in: formData
+          description: |-
+            Describes the properties of an environment tier
+            <p>The type of this environment tier.</p> <p>Valid values:</p> <ul> <li> <p>For <i>Web server tier</i> – <code>Standard</code> </p> </li> <li> <p>For <i>Worker tier</i> – <code>SQS/HTTP</code> </p> </li> </ul>
+          type: string
+        - name: Tier.Version
+          in: formData
+          description: |-
+            Describes the properties of an environment tier
+            <p>The version of this environment tier. When you don't set a value to it, Elastic Beanstalk uses the latest compatible worker tier version.</p> <note> <p>This member is deprecated. Any specific version that you set may become out of date. We recommend leaving it unspecified.</p> </note>
+          type: string
+        - name: Tags
+          in: formData
+          required: false
+          description: Specifies the tags applied to resources in the environment.
+          type: array
+          items:
+            type: string
+        - name: VersionLabel
+          in: formData
+          required: false
+          description: '<p>The name of the application version to deploy.</p> <p> If the specified application has no associated application versions, AWS Elastic Beanstalk <code>UpdateEnvironment</code> returns an <code>InvalidParameterValue</code> error. </p> <p>Default: If not specified, AWS Elastic Beanstalk attempts to launch the sample application in the container.</p>'
+          type: string
+          minLength: 1
+          maxLength: 100
+        - name: TemplateName
+          in: formData
+          required: false
+          description: ' The name of the configuration template to use in deployment. If no configuration template is found with this name, AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. '
+          type: string
+          minLength: 1
+          maxLength: 100
+        - name: SolutionStackName
+          in: formData
+          required: false
+          description: '<p>This is an alternative to specifying a template name. If specified, AWS Elastic Beanstalk sets the configuration values to the default values associated with the specified solution stack.</p> <p>For a list of current solution stacks, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html">Elastic Beanstalk Supported Platforms</a>.</p>'
+          type: string
+        - name: PlatformArn
+          in: formData
+          required: false
+          description: The ARN of the platform.
+          type: string
+        - name: OptionSettings
+          in: formData
+          required: false
+          description: 'If specified, AWS Elastic Beanstalk sets the specified configuration options to the requested value in the configuration set for the new environment. These override the values obtained from the solution stack or the configuration template.'
+          type: array
+          items:
+            type: string
+        - name: OptionsToRemove
+          in: formData
+          required: false
+          description: A list of custom user-defined configuration options to remove from the configuration set for this new environment.
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - CreateEnvironment
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=CreatePlatformVersion':
+    get:
+      x-aws-operation-name: CreatePlatformVersion
+      operationId: GET CreatePlatformVersion
       description: Create a new version of your custom platform.
       responses:
         '200':
@@ -818,9 +1474,87 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=CreateStorageLocation':
     post:
-      operationId: CreateStorageLocation
+      x-aws-operation-name: CreatePlatformVersion
+      operationId: POST CreatePlatformVersion
+      description: Create a new version of your custom platform.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreatePlatformVersionResult'
+        '480':
+          description: InsufficientPrivilegesException
+          schema:
+            $ref: '#/definitions/InsufficientPrivilegesException'
+        '481':
+          description: ElasticBeanstalkServiceException
+          schema:
+            $ref: '#/definitions/ElasticBeanstalkServiceException'
+        '482':
+          description: TooManyPlatformsException
+          schema:
+            $ref: '#/definitions/TooManyPlatformsException'
+      parameters:
+        - name: PlatformName
+          in: formData
+          required: true
+          description: The name of your custom platform.
+          type: string
+        - name: PlatformVersion
+          in: formData
+          required: true
+          description: 'The number, such as 1.0.2, for the new platform version.'
+          type: string
+        - name: PlatformDefinitionBundle.S3Bucket
+          in: formData
+          description: |-
+            The bucket and key of an item stored in Amazon S3.
+            The Amazon S3 bucket where the data is located.
+          type: string
+        - name: PlatformDefinitionBundle.S3Key
+          in: formData
+          description: |-
+            The bucket and key of an item stored in Amazon S3.
+            The Amazon S3 key where the data is located.
+          type: string
+        - name: EnvironmentName
+          in: formData
+          required: false
+          description: The name of the builder environment.
+          type: string
+          minLength: 4
+          maxLength: 40
+        - name: OptionSettings
+          in: formData
+          required: false
+          description: The configuration option settings to apply to the builder environment.
+          type: array
+          items:
+            type: string
+        - name: Tags
+          in: formData
+          required: false
+          description: <p>Specifies the tags applied to the new platform version.</p> <p>Elastic Beanstalk applies these tags only to the platform version. Environments that you create using the platform version don't inherit the tags.</p>
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - CreatePlatformVersion
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=CreateStorageLocation':
+    get:
+      x-aws-operation-name: CreateStorageLocation
+      operationId: GET CreateStorageLocation
       description: 'Creates a bucket in Amazon S3 to store application versions, logs, and other files used by Elastic Beanstalk environments. The Elastic Beanstalk console and EB CLI call this API the first time you create an environment in a region. If the storage location already exists, <code>CreateStorageLocation</code> still returns the bucket name but does not create a new bucket.'
       responses:
         '200':
@@ -860,9 +1594,44 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DeleteApplication':
     post:
-      operationId: DeleteApplication
+      x-aws-operation-name: CreateStorageLocation
+      operationId: POST CreateStorageLocation
+      description: 'Creates a bucket in Amazon S3 to store application versions, logs, and other files used by Elastic Beanstalk environments. The Elastic Beanstalk console and EB CLI call this API the first time you create an environment in a region. If the storage location already exists, <code>CreateStorageLocation</code> still returns the bucket name but does not create a new bucket.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateStorageLocationResultMessage'
+        '480':
+          description: TooManyBucketsException
+          schema:
+            $ref: '#/definitions/TooManyBucketsException'
+        '481':
+          description: S3SubscriptionRequiredException
+          schema:
+            $ref: '#/definitions/S3SubscriptionRequiredException'
+        '482':
+          description: InsufficientPrivilegesException
+          schema:
+            $ref: '#/definitions/InsufficientPrivilegesException'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - CreateStorageLocation
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=DeleteApplication':
+    get:
+      x-aws-operation-name: DeleteApplication
+      operationId: GET DeleteApplication
       description: <p>Deletes the specified application along with all associated versions and configurations. The application versions will not be deleted from your Amazon S3 bucket.</p> <note> <p>You cannot delete an application that has a running environment.</p> </note>
       responses:
         '200':
@@ -904,9 +1673,46 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DeleteApplicationVersion':
     post:
-      operationId: DeleteApplicationVersion
+      x-aws-operation-name: DeleteApplication
+      operationId: POST DeleteApplication
+      description: <p>Deletes the specified application along with all associated versions and configurations. The application versions will not be deleted from your Amazon S3 bucket.</p> <note> <p>You cannot delete an application that has a running environment.</p> </note>
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: OperationInProgressException
+          schema:
+            $ref: '#/definitions/OperationInProgressException'
+      parameters:
+        - name: ApplicationName
+          in: formData
+          required: true
+          description: The name of the application to delete.
+          type: string
+          minLength: 1
+          maxLength: 100
+        - name: TerminateEnvByForce
+          in: formData
+          required: false
+          description: 'When set to true, running environments will be terminated before deleting the application.'
+          type: boolean
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeleteApplication
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=DeleteApplicationVersion':
+    get:
+      x-aws-operation-name: DeleteApplicationVersion
+      operationId: GET DeleteApplicationVersion
       description: <p>Deletes the specified version from the specified application.</p> <note> <p>You cannot delete an application version that is associated with a running environment.</p> </note>
       responses:
         '200':
@@ -967,9 +1773,65 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DeleteConfigurationTemplate':
     post:
-      operationId: DeleteConfigurationTemplate
+      x-aws-operation-name: DeleteApplicationVersion
+      operationId: POST DeleteApplicationVersion
+      description: <p>Deletes the specified version from the specified application.</p> <note> <p>You cannot delete an application version that is associated with a running environment.</p> </note>
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: SourceBundleDeletionException
+          schema:
+            $ref: '#/definitions/SourceBundleDeletionException'
+        '481':
+          description: InsufficientPrivilegesException
+          schema:
+            $ref: '#/definitions/InsufficientPrivilegesException'
+        '482':
+          description: OperationInProgressException
+          schema:
+            $ref: '#/definitions/OperationInProgressException'
+        '483':
+          description: S3LocationNotInServiceRegionException
+          schema:
+            $ref: '#/definitions/S3LocationNotInServiceRegionException'
+      parameters:
+        - name: ApplicationName
+          in: formData
+          required: true
+          description: The name of the application to which the version belongs.
+          type: string
+          minLength: 1
+          maxLength: 100
+        - name: VersionLabel
+          in: formData
+          required: true
+          description: The label of the version to delete.
+          type: string
+          minLength: 1
+          maxLength: 100
+        - name: DeleteSourceBundle
+          in: formData
+          required: false
+          description: 'Set to <code>true</code> to delete the source bundle from your storage bucket. Otherwise, the application version is deleted only from Elastic Beanstalk and the source bundle remains in Amazon S3.'
+          type: boolean
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeleteApplicationVersion
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=DeleteConfigurationTemplate':
+    get:
+      x-aws-operation-name: DeleteConfigurationTemplate
+      operationId: GET DeleteConfigurationTemplate
       description: '<p>Deletes the specified configuration template.</p> <note> <p>When you launch an environment using a configuration template, the environment gets a copy of the template. You can delete or modify the environment''s copy of the template without affecting the running environment.</p> </note>'
       responses:
         '200':
@@ -1013,9 +1875,48 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DeleteEnvironmentConfiguration':
     post:
-      operationId: DeleteEnvironmentConfiguration
+      x-aws-operation-name: DeleteConfigurationTemplate
+      operationId: POST DeleteConfigurationTemplate
+      description: '<p>Deletes the specified configuration template.</p> <note> <p>When you launch an environment using a configuration template, the environment gets a copy of the template. You can delete or modify the environment''s copy of the template without affecting the running environment.</p> </note>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: OperationInProgressException
+          schema:
+            $ref: '#/definitions/OperationInProgressException'
+      parameters:
+        - name: ApplicationName
+          in: formData
+          required: true
+          description: The name of the application to delete the configuration template from.
+          type: string
+          minLength: 1
+          maxLength: 100
+        - name: TemplateName
+          in: formData
+          required: true
+          description: The name of the configuration template to delete.
+          type: string
+          minLength: 1
+          maxLength: 100
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeleteConfigurationTemplate
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=DeleteEnvironmentConfiguration':
+    get:
+      x-aws-operation-name: DeleteEnvironmentConfiguration
+      operationId: GET DeleteEnvironmentConfiguration
       description: <p>Deletes the draft configuration associated with the running environment.</p> <p>Updating a running environment with any configuration changes creates a draft configuration set. You can get the draft configuration using <a>DescribeConfigurationSettings</a> while the update is in progress or if the update fails. The <code>DeploymentStatus</code> for the draft configuration indicates whether the deployment is in process or has failed. The draft configuration remains in existence until it is deleted with this action.</p>
       responses:
         '200':
@@ -1055,9 +1956,44 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DeletePlatformVersion':
     post:
-      operationId: DeletePlatformVersion
+      x-aws-operation-name: DeleteEnvironmentConfiguration
+      operationId: POST DeleteEnvironmentConfiguration
+      description: <p>Deletes the draft configuration associated with the running environment.</p> <p>Updating a running environment with any configuration changes creates a draft configuration set. You can get the draft configuration using <a>DescribeConfigurationSettings</a> while the update is in progress or if the update fails. The <code>DeploymentStatus</code> for the draft configuration indicates whether the deployment is in process or has failed. The draft configuration remains in existence until it is deleted with this action.</p>
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: ApplicationName
+          in: formData
+          required: true
+          description: The name of the application the environment is associated with.
+          type: string
+          minLength: 1
+          maxLength: 100
+        - name: EnvironmentName
+          in: formData
+          required: true
+          description: The name of the environment to delete the draft configuration from.
+          type: string
+          minLength: 4
+          maxLength: 40
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeleteEnvironmentConfiguration
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=DeletePlatformVersion':
+    get:
+      x-aws-operation-name: DeletePlatformVersion
+      operationId: GET DeletePlatformVersion
       description: Deletes the specified version of a custom platform.
       responses:
         '200':
@@ -1106,9 +2042,53 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeAccountAttributes':
     post:
-      operationId: DescribeAccountAttributes
+      x-aws-operation-name: DeletePlatformVersion
+      operationId: POST DeletePlatformVersion
+      description: Deletes the specified version of a custom platform.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeletePlatformVersionResult'
+        '480':
+          description: OperationInProgressException
+          schema:
+            $ref: '#/definitions/OperationInProgressException'
+        '481':
+          description: InsufficientPrivilegesException
+          schema:
+            $ref: '#/definitions/InsufficientPrivilegesException'
+        '482':
+          description: ElasticBeanstalkServiceException
+          schema:
+            $ref: '#/definitions/ElasticBeanstalkServiceException'
+        '483':
+          description: PlatformVersionStillReferencedException
+          schema:
+            $ref: '#/definitions/PlatformVersionStillReferencedException'
+      parameters:
+        - name: PlatformArn
+          in: formData
+          required: false
+          description: The ARN of the version of the custom platform.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeletePlatformVersion
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=DescribeAccountAttributes':
+    get:
+      x-aws-operation-name: DescribeAccountAttributes
+      operationId: GET DescribeAccountAttributes
       description: <p>Returns attributes related to AWS Elastic Beanstalk that are associated with the calling AWS account.</p> <p>The result currently has one set of attributes—resource quotas.</p>
       responses:
         '200':
@@ -1140,9 +2120,36 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeApplicationVersions':
     post:
-      operationId: DescribeApplicationVersions
+      x-aws-operation-name: DescribeAccountAttributes
+      operationId: POST DescribeAccountAttributes
+      description: <p>Returns attributes related to AWS Elastic Beanstalk that are associated with the calling AWS account.</p> <p>The result currently has one set of attributes—resource quotas.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeAccountAttributesResult'
+        '480':
+          description: InsufficientPrivilegesException
+          schema:
+            $ref: '#/definitions/InsufficientPrivilegesException'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeAccountAttributes
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=DescribeApplicationVersions':
+    get:
+      x-aws-operation-name: DescribeApplicationVersions
+      operationId: GET DescribeApplicationVersions
       description: Retrieve a list of application versions.
       responses:
         '200':
@@ -1196,9 +2203,58 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeApplications':
     post:
-      operationId: DescribeApplications
+      x-aws-operation-name: DescribeApplicationVersions
+      operationId: POST DescribeApplicationVersions
+      description: Retrieve a list of application versions.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ApplicationVersionDescriptionsMessage'
+      parameters:
+        - name: ApplicationName
+          in: formData
+          required: false
+          description: Specify an application name to show only application versions for that application.
+          type: string
+          minLength: 1
+          maxLength: 100
+        - name: VersionLabels
+          in: formData
+          required: false
+          description: Specify a version label to show a specific application version.
+          type: array
+          items:
+            type: string
+        - name: MaxRecords
+          in: formData
+          required: false
+          description: '<p>For a paginated request. Specify a maximum number of application versions to include in each response.</p> <p>If no <code>MaxRecords</code> is specified, all available application versions are retrieved in a single response.</p>'
+          type: integer
+          minimum: 1
+          maximum: 1000
+        - name: NextToken
+          in: formData
+          required: false
+          description: '<p>For a paginated request. Specify a token from a previous response page to retrieve the next response page. All other parameter values must be identical to the ones specified in the initial request.</p> <p>If no <code>NextToken</code> is specified, the first page is retrieved.</p>'
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeApplicationVersions
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=DescribeApplications':
+    get:
+      x-aws-operation-name: DescribeApplications
+      operationId: GET DescribeApplications
       description: Returns the descriptions of existing applications.
       responses:
         '200':
@@ -1233,9 +2289,39 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeConfigurationOptions':
     post:
-      operationId: DescribeConfigurationOptions
+      x-aws-operation-name: DescribeApplications
+      operationId: POST DescribeApplications
+      description: Returns the descriptions of existing applications.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ApplicationDescriptionsMessage'
+      parameters:
+        - name: ApplicationNames
+          in: formData
+          required: false
+          description: 'If specified, AWS Elastic Beanstalk restricts the returned descriptions to only include those with the specified names.'
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeApplications
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=DescribeConfigurationOptions':
+    get:
+      x-aws-operation-name: DescribeConfigurationOptions
+      operationId: GET DescribeConfigurationOptions
       description: 'Describes the configuration options that are used in a particular configuration template or environment, or that a specified solution stack defines. The description includes the values the options, their default values, and an indication of the required action on a running environment if an option value is changed.'
       responses:
         '200':
@@ -1305,9 +2391,74 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeConfigurationSettings':
     post:
-      operationId: DescribeConfigurationSettings
+      x-aws-operation-name: DescribeConfigurationOptions
+      operationId: POST DescribeConfigurationOptions
+      description: 'Describes the configuration options that are used in a particular configuration template or environment, or that a specified solution stack defines. The description includes the values the options, their default values, and an indication of the required action on a running environment if an option value is changed.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ConfigurationOptionsDescription'
+        '480':
+          description: TooManyBucketsException
+          schema:
+            $ref: '#/definitions/TooManyBucketsException'
+      parameters:
+        - name: ApplicationName
+          in: formData
+          required: false
+          description: The name of the application associated with the configuration template or environment. Only needed if you want to describe the configuration options associated with either the configuration template or environment.
+          type: string
+          minLength: 1
+          maxLength: 100
+        - name: TemplateName
+          in: formData
+          required: false
+          description: The name of the configuration template whose configuration options you want to describe.
+          type: string
+          minLength: 1
+          maxLength: 100
+        - name: EnvironmentName
+          in: formData
+          required: false
+          description: The name of the environment whose configuration options you want to describe.
+          type: string
+          minLength: 4
+          maxLength: 40
+        - name: SolutionStackName
+          in: formData
+          required: false
+          description: The name of the solution stack whose configuration options you want to describe.
+          type: string
+        - name: PlatformArn
+          in: formData
+          required: false
+          description: The ARN of the custom platform.
+          type: string
+        - name: Options
+          in: formData
+          required: false
+          description: 'If specified, restricts the descriptions to only the specified options.'
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeConfigurationOptions
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=DescribeConfigurationSettings':
+    get:
+      x-aws-operation-name: DescribeConfigurationSettings
+      operationId: GET DescribeConfigurationSettings
       description: '<p>Returns a description of the settings for the specified configuration set, that is, either a configuration template or the configuration set associated with a running environment.</p> <p>When describing the settings for the configuration set associated with a running environment, it is possible to receive two sets of setting descriptions. One is the deployed configuration set, and the other is a draft configuration of an environment that is either in the process of deployment or that failed to deploy.</p> <p>Related Topics</p> <ul> <li> <p> <a>DeleteEnvironmentConfiguration</a> </p> </li> </ul>'
       responses:
         '200':
@@ -1360,9 +2511,57 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeEnvironmentHealth':
     post:
-      operationId: DescribeEnvironmentHealth
+      x-aws-operation-name: DescribeConfigurationSettings
+      operationId: POST DescribeConfigurationSettings
+      description: '<p>Returns a description of the settings for the specified configuration set, that is, either a configuration template or the configuration set associated with a running environment.</p> <p>When describing the settings for the configuration set associated with a running environment, it is possible to receive two sets of setting descriptions. One is the deployed configuration set, and the other is a draft configuration of an environment that is either in the process of deployment or that failed to deploy.</p> <p>Related Topics</p> <ul> <li> <p> <a>DeleteEnvironmentConfiguration</a> </p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ConfigurationSettingsDescriptions'
+        '480':
+          description: TooManyBucketsException
+          schema:
+            $ref: '#/definitions/TooManyBucketsException'
+      parameters:
+        - name: ApplicationName
+          in: formData
+          required: true
+          description: The application for the environment or configuration template.
+          type: string
+          minLength: 1
+          maxLength: 100
+        - name: TemplateName
+          in: formData
+          required: false
+          description: '<p>The name of the configuration template to describe.</p> <p> Conditional: You must specify either this parameter or an EnvironmentName, but not both. If you specify both, AWS Elastic Beanstalk returns an <code>InvalidParameterCombination</code> error. If you do not specify either, AWS Elastic Beanstalk returns a <code>MissingRequiredParameter</code> error. </p>'
+          type: string
+          minLength: 1
+          maxLength: 100
+        - name: EnvironmentName
+          in: formData
+          required: false
+          description: '<p>The name of the environment to describe.</p> <p> Condition: You must specify either this or a TemplateName, but not both. If you specify both, AWS Elastic Beanstalk returns an <code>InvalidParameterCombination</code> error. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>'
+          type: string
+          minLength: 4
+          maxLength: 40
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeConfigurationSettings
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=DescribeEnvironmentHealth':
+    get:
+      x-aws-operation-name: DescribeEnvironmentHealth
+      operationId: GET DescribeEnvironmentHealth
       description: Returns information about the overall health of the specified environment. The <b>DescribeEnvironmentHealth</b> operation is only available with AWS Elastic Beanstalk Enhanced Health.
       responses:
         '200':
@@ -1417,9 +2616,59 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeEnvironmentManagedActionHistory':
     post:
-      operationId: DescribeEnvironmentManagedActionHistory
+      x-aws-operation-name: DescribeEnvironmentHealth
+      operationId: POST DescribeEnvironmentHealth
+      description: Returns information about the overall health of the specified environment. The <b>DescribeEnvironmentHealth</b> operation is only available with AWS Elastic Beanstalk Enhanced Health.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeEnvironmentHealthResult'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ElasticBeanstalkServiceException
+          schema:
+            $ref: '#/definitions/ElasticBeanstalkServiceException'
+      parameters:
+        - name: EnvironmentName
+          in: formData
+          required: false
+          description: '<p>Specify the environment by name.</p> <p>You must specify either this or an EnvironmentName, or both.</p>'
+          type: string
+          minLength: 4
+          maxLength: 40
+        - name: EnvironmentId
+          in: formData
+          required: false
+          description: '<p>Specify the environment by ID.</p> <p>You must specify either this or an EnvironmentName, or both.</p>'
+          type: string
+        - name: AttributeNames
+          in: formData
+          required: false
+          description: 'Specify the response elements to return. To retrieve all attributes, set to <code>All</code>. If no attribute names are specified, returns the name of the environment.'
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeEnvironmentHealth
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=DescribeEnvironmentManagedActionHistory':
+    get:
+      x-aws-operation-name: DescribeEnvironmentManagedActionHistory
+      operationId: GET DescribeEnvironmentManagedActionHistory
       description: Lists an environment's completed and failed managed actions.
       responses:
         '200':
@@ -1473,9 +2722,58 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeEnvironmentManagedActions':
     post:
-      operationId: DescribeEnvironmentManagedActions
+      x-aws-operation-name: DescribeEnvironmentManagedActionHistory
+      operationId: POST DescribeEnvironmentManagedActionHistory
+      description: Lists an environment's completed and failed managed actions.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeEnvironmentManagedActionHistoryResult'
+        '480':
+          description: ElasticBeanstalkServiceException
+          schema:
+            $ref: '#/definitions/ElasticBeanstalkServiceException'
+      parameters:
+        - name: EnvironmentId
+          in: formData
+          required: false
+          description: The environment ID of the target environment.
+          type: string
+        - name: EnvironmentName
+          in: formData
+          required: false
+          description: The name of the target environment.
+          type: string
+          minLength: 4
+          maxLength: 40
+        - name: NextToken
+          in: formData
+          required: false
+          description: The pagination token returned by a previous request.
+          type: string
+        - name: MaxItems
+          in: formData
+          required: false
+          description: The maximum number of items to return for a single request.
+          type: integer
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeEnvironmentManagedActionHistory
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=DescribeEnvironmentManagedActions':
+    get:
+      x-aws-operation-name: DescribeEnvironmentManagedActions
+      operationId: GET DescribeEnvironmentManagedActions
       description: Lists an environment's upcoming and in-progress managed actions.
       responses:
         '200':
@@ -1527,9 +2825,56 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeEnvironmentResources':
     post:
-      operationId: DescribeEnvironmentResources
+      x-aws-operation-name: DescribeEnvironmentManagedActions
+      operationId: POST DescribeEnvironmentManagedActions
+      description: Lists an environment's upcoming and in-progress managed actions.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeEnvironmentManagedActionsResult'
+        '480':
+          description: ElasticBeanstalkServiceException
+          schema:
+            $ref: '#/definitions/ElasticBeanstalkServiceException'
+      parameters:
+        - name: EnvironmentName
+          in: formData
+          required: false
+          description: The name of the target environment.
+          type: string
+        - name: EnvironmentId
+          in: formData
+          required: false
+          description: The environment ID of the target environment.
+          type: string
+        - name: Status
+          in: formData
+          required: false
+          description: 'To show only actions with a particular status, specify a status.'
+          type: string
+          enum:
+            - Scheduled
+            - Pending
+            - Running
+            - Unknown
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeEnvironmentManagedActions
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=DescribeEnvironmentResources':
+    get:
+      x-aws-operation-name: DescribeEnvironmentResources
+      operationId: GET DescribeEnvironmentResources
       description: Returns AWS resources for this environment.
       responses:
         '200':
@@ -1573,9 +2918,48 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeEnvironments':
     post:
-      operationId: DescribeEnvironments
+      x-aws-operation-name: DescribeEnvironmentResources
+      operationId: POST DescribeEnvironmentResources
+      description: Returns AWS resources for this environment.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/EnvironmentResourceDescriptionsMessage'
+        '480':
+          description: InsufficientPrivilegesException
+          schema:
+            $ref: '#/definitions/InsufficientPrivilegesException'
+      parameters:
+        - name: EnvironmentId
+          in: formData
+          required: false
+          description: '<p>The ID of the environment to retrieve AWS resource usage data.</p> <p> Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>'
+          type: string
+        - name: EnvironmentName
+          in: formData
+          required: false
+          description: '<p>The name of the environment to retrieve AWS resource usage data.</p> <p> Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>'
+          type: string
+          minLength: 4
+          maxLength: 40
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeEnvironmentResources
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=DescribeEnvironments':
+    get:
+      x-aws-operation-name: DescribeEnvironments
+      operationId: GET DescribeEnvironments
       description: Returns descriptions for existing environments.
       responses:
         '200':
@@ -1654,9 +3038,83 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeEvents':
     post:
-      operationId: DescribeEvents
+      x-aws-operation-name: DescribeEnvironments
+      operationId: POST DescribeEnvironments
+      description: Returns descriptions for existing environments.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/EnvironmentDescriptionsMessage'
+      parameters:
+        - name: ApplicationName
+          in: formData
+          required: false
+          description: 'If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that are associated with this application.'
+          type: string
+          minLength: 1
+          maxLength: 100
+        - name: VersionLabel
+          in: formData
+          required: false
+          description: 'If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that are associated with this application version.'
+          type: string
+          minLength: 1
+          maxLength: 100
+        - name: EnvironmentIds
+          in: formData
+          required: false
+          description: 'If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that have the specified IDs.'
+          type: array
+          items:
+            type: string
+        - name: EnvironmentNames
+          in: formData
+          required: false
+          description: 'If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that have the specified names.'
+          type: array
+          items:
+            type: string
+        - name: IncludeDeleted
+          in: formData
+          required: false
+          description: '<p>Indicates whether to include deleted environments:</p> <p> <code>true</code>: Environments that have been deleted after <code>IncludedDeletedBackTo</code> are displayed.</p> <p> <code>false</code>: Do not include deleted environments.</p>'
+          type: boolean
+        - name: IncludedDeletedBackTo
+          in: formData
+          required: false
+          description: ' If specified when <code>IncludeDeleted</code> is set to <code>true</code>, then environments deleted after this date are displayed. '
+          type: string
+          format: date-time
+        - name: MaxRecords
+          in: formData
+          required: false
+          description: '<p>For a paginated request. Specify a maximum number of environments to include in each response.</p> <p>If no <code>MaxRecords</code> is specified, all available environments are retrieved in a single response.</p>'
+          type: integer
+          minimum: 1
+          maximum: 1000
+        - name: NextToken
+          in: formData
+          required: false
+          description: '<p>For a paginated request. Specify a token from a previous response page to retrieve the next response page. All other parameter values must be identical to the ones specified in the initial request.</p> <p>If no <code>NextToken</code> is specified, the first page is retrieved.</p>'
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeEnvironments
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=DescribeEvents':
+    get:
+      x-aws-operation-name: DescribeEvents
+      operationId: GET DescribeEvents
       description: '<p>Returns list of event descriptions matching criteria up to the last 6 weeks.</p> <note> <p>This action returns the most recent 1,000 events from the specified <code>NextToken</code>.</p> </note>'
       responses:
         '200':
@@ -1763,9 +3221,111 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeInstancesHealth':
     post:
-      operationId: DescribeInstancesHealth
+      x-aws-operation-name: DescribeEvents
+      operationId: POST DescribeEvents
+      description: '<p>Returns list of event descriptions matching criteria up to the last 6 weeks.</p> <note> <p>This action returns the most recent 1,000 events from the specified <code>NextToken</code>.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/EventDescriptionsMessage'
+      parameters:
+        - name: ApplicationName
+          in: formData
+          required: false
+          description: 'If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those associated with this application.'
+          type: string
+          minLength: 1
+          maxLength: 100
+        - name: VersionLabel
+          in: formData
+          required: false
+          description: 'If specified, AWS Elastic Beanstalk restricts the returned descriptions to those associated with this application version.'
+          type: string
+          minLength: 1
+          maxLength: 100
+        - name: TemplateName
+          in: formData
+          required: false
+          description: 'If specified, AWS Elastic Beanstalk restricts the returned descriptions to those that are associated with this environment configuration.'
+          type: string
+          minLength: 1
+          maxLength: 100
+        - name: EnvironmentId
+          in: formData
+          required: false
+          description: 'If specified, AWS Elastic Beanstalk restricts the returned descriptions to those associated with this environment.'
+          type: string
+        - name: EnvironmentName
+          in: formData
+          required: false
+          description: 'If specified, AWS Elastic Beanstalk restricts the returned descriptions to those associated with this environment.'
+          type: string
+          minLength: 4
+          maxLength: 40
+        - name: PlatformArn
+          in: formData
+          required: false
+          description: The ARN of the version of the custom platform.
+          type: string
+        - name: RequestId
+          in: formData
+          required: false
+          description: 'If specified, AWS Elastic Beanstalk restricts the described events to include only those associated with this request ID.'
+          type: string
+        - name: Severity
+          in: formData
+          required: false
+          description: 'If specified, limits the events returned from this call to include only those with the specified severity or higher.'
+          type: string
+          enum:
+            - TRACE
+            - DEBUG
+            - INFO
+            - WARN
+            - ERROR
+            - FATAL
+        - name: StartTime
+          in: formData
+          required: false
+          description: 'If specified, AWS Elastic Beanstalk restricts the returned descriptions to those that occur on or after this time.'
+          type: string
+          format: date-time
+        - name: EndTime
+          in: formData
+          required: false
+          description: ' If specified, AWS Elastic Beanstalk restricts the returned descriptions to those that occur up to, but not including, the <code>EndTime</code>. '
+          type: string
+          format: date-time
+        - name: MaxRecords
+          in: formData
+          required: false
+          description: 'Specifies the maximum number of events that can be returned, beginning with the most recent event.'
+          type: integer
+          minimum: 1
+          maximum: 1000
+        - name: NextToken
+          in: formData
+          required: false
+          description: 'Pagination token. If specified, the events return the next batch of results.'
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeEvents
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=DescribeInstancesHealth':
+    get:
+      x-aws-operation-name: DescribeInstancesHealth
+      operationId: GET DescribeInstancesHealth
       description: 'Retrieves detailed information about the health of instances in your AWS Elastic Beanstalk. This operation requires <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced.html">enhanced health reporting</a>.'
       responses:
         '200':
@@ -1827,9 +3387,66 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribePlatformVersion':
     post:
-      operationId: DescribePlatformVersion
+      x-aws-operation-name: DescribeInstancesHealth
+      operationId: POST DescribeInstancesHealth
+      description: 'Retrieves detailed information about the health of instances in your AWS Elastic Beanstalk. This operation requires <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced.html">enhanced health reporting</a>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeInstancesHealthResult'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ElasticBeanstalkServiceException
+          schema:
+            $ref: '#/definitions/ElasticBeanstalkServiceException'
+      parameters:
+        - name: EnvironmentName
+          in: formData
+          required: false
+          description: Specify the AWS Elastic Beanstalk environment by name.
+          type: string
+          minLength: 4
+          maxLength: 40
+        - name: EnvironmentId
+          in: formData
+          required: false
+          description: Specify the AWS Elastic Beanstalk environment by ID.
+          type: string
+        - name: AttributeNames
+          in: formData
+          required: false
+          description: 'Specifies the response elements you wish to receive. To retrieve all attributes, set to <code>All</code>. If no attribute names are specified, returns a list of instances.'
+          type: array
+          items:
+            type: string
+        - name: NextToken
+          in: formData
+          required: false
+          description: Specify the pagination token returned by a previous call.
+          type: string
+          minLength: 1
+          maxLength: 100
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeInstancesHealth
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=DescribePlatformVersion':
+    get:
+      x-aws-operation-name: DescribePlatformVersion
+      operationId: GET DescribePlatformVersion
       description: Describes the version of the platform.
       responses:
         '200':
@@ -1870,9 +3487,45 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=ListAvailableSolutionStacks':
     post:
-      operationId: ListAvailableSolutionStacks
+      x-aws-operation-name: DescribePlatformVersion
+      operationId: POST DescribePlatformVersion
+      description: Describes the version of the platform.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribePlatformVersionResult'
+        '480':
+          description: InsufficientPrivilegesException
+          schema:
+            $ref: '#/definitions/InsufficientPrivilegesException'
+        '481':
+          description: ElasticBeanstalkServiceException
+          schema:
+            $ref: '#/definitions/ElasticBeanstalkServiceException'
+      parameters:
+        - name: PlatformArn
+          in: formData
+          required: false
+          description: The ARN of the version of the platform.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribePlatformVersion
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=ListAvailableSolutionStacks':
+    get:
+      x-aws-operation-name: ListAvailableSolutionStacks
+      operationId: GET ListAvailableSolutionStacks
       description: 'Returns a list of the available solution stack names, with the public version first and then in reverse chronological order.'
       responses:
         '200':
@@ -1900,9 +3553,32 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=ListPlatformVersions':
     post:
-      operationId: ListPlatformVersions
+      x-aws-operation-name: ListAvailableSolutionStacks
+      operationId: POST ListAvailableSolutionStacks
+      description: 'Returns a list of the available solution stack names, with the public version first and then in reverse chronological order.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListAvailableSolutionStacksResultMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ListAvailableSolutionStacks
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=ListPlatformVersions':
+    get:
+      x-aws-operation-name: ListPlatformVersions
+      operationId: GET ListPlatformVersions
       description: Lists the available platforms.
       responses:
         '200':
@@ -1956,9 +3632,58 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=ListTagsForResource':
     post:
-      operationId: ListTagsForResource
+      x-aws-operation-name: ListPlatformVersions
+      operationId: POST ListPlatformVersions
+      description: Lists the available platforms.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListPlatformVersionsResult'
+        '480':
+          description: InsufficientPrivilegesException
+          schema:
+            $ref: '#/definitions/InsufficientPrivilegesException'
+        '481':
+          description: ElasticBeanstalkServiceException
+          schema:
+            $ref: '#/definitions/ElasticBeanstalkServiceException'
+      parameters:
+        - name: Filters
+          in: formData
+          required: false
+          description: List only the platforms where the platform member value relates to one of the supplied values.
+          type: array
+          items:
+            type: string
+        - name: MaxRecords
+          in: formData
+          required: false
+          description: The maximum number of platform values returned in one call.
+          type: integer
+          minimum: 1
+        - name: NextToken
+          in: formData
+          required: false
+          description: The starting index into the remaining list of platforms. Use the <code>NextToken</code> value from a previous <code>ListPlatformVersion</code> call.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ListPlatformVersions
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=ListTagsForResource':
+    get:
+      x-aws-operation-name: ListTagsForResource
+      operationId: GET ListTagsForResource
       description: '<p>Returns the tags applied to an AWS Elastic Beanstalk resource. The response contains a list of tag key-value pairs.</p> <p>Currently, Elastic Beanstalk only supports tagging of Elastic Beanstalk environments. For details about environment tagging, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.tagging.html">Tagging Resources in Your Elastic Beanstalk Environment</a>.</p>'
       responses:
         '200':
@@ -2003,9 +3728,49 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=RebuildEnvironment':
     post:
-      operationId: RebuildEnvironment
+      x-aws-operation-name: ListTagsForResource
+      operationId: POST ListTagsForResource
+      description: '<p>Returns the tags applied to an AWS Elastic Beanstalk resource. The response contains a list of tag key-value pairs.</p> <p>Currently, Elastic Beanstalk only supports tagging of Elastic Beanstalk environments. For details about environment tagging, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.tagging.html">Tagging Resources in Your Elastic Beanstalk Environment</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ResourceTagsDescriptionMessage'
+        '480':
+          description: InsufficientPrivilegesException
+          schema:
+            $ref: '#/definitions/InsufficientPrivilegesException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ResourceTypeNotSupportedException
+          schema:
+            $ref: '#/definitions/ResourceTypeNotSupportedException'
+      parameters:
+        - name: ResourceArn
+          in: formData
+          required: true
+          description: <p>The Amazon Resource Name (ARN) of the resouce for which a tag list is requested.</p> <p>Must be the ARN of an Elastic Beanstalk environment.</p>
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ListTagsForResource
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=RebuildEnvironment':
+    get:
+      x-aws-operation-name: RebuildEnvironment
+      operationId: GET RebuildEnvironment
       description: 'Deletes and recreates all of the AWS resources (for example: the Auto Scaling group, load balancer, etc.) for a specified environment and forces a restart.'
       responses:
         '200':
@@ -2047,9 +3812,46 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=RequestEnvironmentInfo':
     post:
-      operationId: RequestEnvironmentInfo
+      x-aws-operation-name: RebuildEnvironment
+      operationId: POST RebuildEnvironment
+      description: 'Deletes and recreates all of the AWS resources (for example: the Auto Scaling group, load balancer, etc.) for a specified environment and forces a restart.'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InsufficientPrivilegesException
+          schema:
+            $ref: '#/definitions/InsufficientPrivilegesException'
+      parameters:
+        - name: EnvironmentId
+          in: formData
+          required: false
+          description: '<p>The ID of the environment to rebuild.</p> <p> Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>'
+          type: string
+        - name: EnvironmentName
+          in: formData
+          required: false
+          description: '<p>The name of the environment to rebuild.</p> <p> Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>'
+          type: string
+          minLength: 4
+          maxLength: 40
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - RebuildEnvironment
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=RequestEnvironmentInfo':
+    get:
+      x-aws-operation-name: RequestEnvironmentInfo
+      operationId: GET RequestEnvironmentInfo
       description: <p>Initiates a request to compile the specified type of information of the deployed environment.</p> <p> Setting the <code>InfoType</code> to <code>tail</code> compiles the last lines from the application server log files of every Amazon EC2 instance in your environment. </p> <p> Setting the <code>InfoType</code> to <code>bundle</code> compresses the application server log files for every Amazon EC2 instance into a <code>.zip</code> file. Legacy and .NET containers do not support bundle logs. </p> <p> Use <a>RetrieveEnvironmentInfo</a> to obtain the set of logs. </p> <p>Related Topics</p> <ul> <li> <p> <a>RetrieveEnvironmentInfo</a> </p> </li> </ul>
       responses:
         '200':
@@ -2095,9 +3897,50 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=RestartAppServer':
     post:
-      operationId: RestartAppServer
+      x-aws-operation-name: RequestEnvironmentInfo
+      operationId: POST RequestEnvironmentInfo
+      description: <p>Initiates a request to compile the specified type of information of the deployed environment.</p> <p> Setting the <code>InfoType</code> to <code>tail</code> compiles the last lines from the application server log files of every Amazon EC2 instance in your environment. </p> <p> Setting the <code>InfoType</code> to <code>bundle</code> compresses the application server log files for every Amazon EC2 instance into a <code>.zip</code> file. Legacy and .NET containers do not support bundle logs. </p> <p> Use <a>RetrieveEnvironmentInfo</a> to obtain the set of logs. </p> <p>Related Topics</p> <ul> <li> <p> <a>RetrieveEnvironmentInfo</a> </p> </li> </ul>
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: EnvironmentId
+          in: formData
+          required: false
+          description: '<p>The ID of the environment of the requested data.</p> <p>If no such environment is found, <code>RequestEnvironmentInfo</code> returns an <code>InvalidParameterValue</code> error. </p> <p>Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>'
+          type: string
+        - name: EnvironmentName
+          in: formData
+          required: false
+          description: '<p>The name of the environment of the requested data.</p> <p>If no such environment is found, <code>RequestEnvironmentInfo</code> returns an <code>InvalidParameterValue</code> error. </p> <p>Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>'
+          type: string
+          minLength: 4
+          maxLength: 40
+        - name: InfoType
+          in: formData
+          required: true
+          description: The type of information to request.
+          type: string
+          enum:
+            - tail
+            - bundle
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - RequestEnvironmentInfo
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=RestartAppServer':
+    get:
+      x-aws-operation-name: RestartAppServer
+      operationId: GET RestartAppServer
       description: Causes the environment to restart the application container server running on each Amazon EC2 instance.
       responses:
         '200':
@@ -2135,9 +3978,42 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=RetrieveEnvironmentInfo':
     post:
-      operationId: RetrieveEnvironmentInfo
+      x-aws-operation-name: RestartAppServer
+      operationId: POST RestartAppServer
+      description: Causes the environment to restart the application container server running on each Amazon EC2 instance.
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: EnvironmentId
+          in: formData
+          required: false
+          description: '<p>The ID of the environment to restart the server for.</p> <p> Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>'
+          type: string
+        - name: EnvironmentName
+          in: formData
+          required: false
+          description: '<p>The name of the environment to restart the server for.</p> <p> Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>'
+          type: string
+          minLength: 4
+          maxLength: 40
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - RestartAppServer
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=RetrieveEnvironmentInfo':
+    get:
+      x-aws-operation-name: RetrieveEnvironmentInfo
+      operationId: GET RetrieveEnvironmentInfo
       description: <p>Retrieves the compiled information from a <a>RequestEnvironmentInfo</a> request.</p> <p>Related Topics</p> <ul> <li> <p> <a>RequestEnvironmentInfo</a> </p> </li> </ul>
       responses:
         '200':
@@ -2185,9 +4061,52 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=SwapEnvironmentCNAMEs':
     post:
-      operationId: SwapEnvironmentCNAMEs
+      x-aws-operation-name: RetrieveEnvironmentInfo
+      operationId: POST RetrieveEnvironmentInfo
+      description: <p>Retrieves the compiled information from a <a>RequestEnvironmentInfo</a> request.</p> <p>Related Topics</p> <ul> <li> <p> <a>RequestEnvironmentInfo</a> </p> </li> </ul>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RetrieveEnvironmentInfoResultMessage'
+      parameters:
+        - name: EnvironmentId
+          in: formData
+          required: false
+          description: '<p>The ID of the data''s environment.</p> <p>If no such environment is found, returns an <code>InvalidParameterValue</code> error.</p> <p>Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error.</p>'
+          type: string
+        - name: EnvironmentName
+          in: formData
+          required: false
+          description: '<p>The name of the data''s environment.</p> <p> If no such environment is found, returns an <code>InvalidParameterValue</code> error. </p> <p> Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>'
+          type: string
+          minLength: 4
+          maxLength: 40
+        - name: InfoType
+          in: formData
+          required: true
+          description: The type of information to retrieve.
+          type: string
+          enum:
+            - tail
+            - bundle
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - RetrieveEnvironmentInfo
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=SwapEnvironmentCNAMEs':
+    get:
+      x-aws-operation-name: SwapEnvironmentCNAMEs
+      operationId: GET SwapEnvironmentCNAMEs
       description: Swaps the CNAMEs of two environments.
       responses:
         '200':
@@ -2237,9 +4156,54 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=TerminateEnvironment':
     post:
-      operationId: TerminateEnvironment
+      x-aws-operation-name: SwapEnvironmentCNAMEs
+      operationId: POST SwapEnvironmentCNAMEs
+      description: Swaps the CNAMEs of two environments.
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: SourceEnvironmentId
+          in: formData
+          required: false
+          description: '<p>The ID of the source environment.</p> <p> Condition: You must specify at least the <code>SourceEnvironmentID</code> or the <code>SourceEnvironmentName</code>. You may also specify both. If you specify the <code>SourceEnvironmentId</code>, you must specify the <code>DestinationEnvironmentId</code>. </p>'
+          type: string
+        - name: SourceEnvironmentName
+          in: formData
+          required: false
+          description: '<p>The name of the source environment.</p> <p> Condition: You must specify at least the <code>SourceEnvironmentID</code> or the <code>SourceEnvironmentName</code>. You may also specify both. If you specify the <code>SourceEnvironmentName</code>, you must specify the <code>DestinationEnvironmentName</code>. </p>'
+          type: string
+          minLength: 4
+          maxLength: 40
+        - name: DestinationEnvironmentId
+          in: formData
+          required: false
+          description: '<p>The ID of the destination environment.</p> <p> Condition: You must specify at least the <code>DestinationEnvironmentID</code> or the <code>DestinationEnvironmentName</code>. You may also specify both. You must specify the <code>SourceEnvironmentId</code> with the <code>DestinationEnvironmentId</code>. </p>'
+          type: string
+        - name: DestinationEnvironmentName
+          in: formData
+          required: false
+          description: '<p>The name of the destination environment.</p> <p> Condition: You must specify at least the <code>DestinationEnvironmentID</code> or the <code>DestinationEnvironmentName</code>. You may also specify both. You must specify the <code>SourceEnvironmentName</code> with the <code>DestinationEnvironmentName</code>. </p>'
+          type: string
+          minLength: 4
+          maxLength: 40
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - SwapEnvironmentCNAMEs
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=TerminateEnvironment':
+    get:
+      x-aws-operation-name: TerminateEnvironment
+      operationId: GET TerminateEnvironment
       description: Terminates the specified environment.
       responses:
         '200':
@@ -2293,9 +4257,58 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=UpdateApplication':
     post:
-      operationId: UpdateApplication
+      x-aws-operation-name: TerminateEnvironment
+      operationId: POST TerminateEnvironment
+      description: Terminates the specified environment.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/EnvironmentDescription'
+        '480':
+          description: InsufficientPrivilegesException
+          schema:
+            $ref: '#/definitions/InsufficientPrivilegesException'
+      parameters:
+        - name: EnvironmentId
+          in: formData
+          required: false
+          description: '<p>The ID of the environment to terminate.</p> <p> Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>'
+          type: string
+        - name: EnvironmentName
+          in: formData
+          required: false
+          description: '<p>The name of the environment to terminate.</p> <p> Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>'
+          type: string
+          minLength: 4
+          maxLength: 40
+        - name: TerminateResources
+          in: formData
+          required: false
+          description: '<p>Indicates whether the associated AWS resources should shut down when the environment is terminated:</p> <ul> <li> <p> <code>true</code>: The specified environment as well as the associated AWS resources, such as Auto Scaling group and LoadBalancer, are terminated.</p> </li> <li> <p> <code>false</code>: AWS Elastic Beanstalk resource management is removed from the environment, but the AWS resources continue to operate.</p> </li> </ul> <p> For more information, see the <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/ug/"> AWS Elastic Beanstalk User Guide. </a> </p> <p> Default: <code>true</code> </p> <p> Valid Values: <code>true</code> | <code>false</code> </p>'
+          type: boolean
+        - name: ForceTerminate
+          in: formData
+          required: false
+          description: Terminates the target environment even if another environment in the same group is dependent on it.
+          type: boolean
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - TerminateEnvironment
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=UpdateApplication':
+    get:
+      x-aws-operation-name: UpdateApplication
+      operationId: GET UpdateApplication
       description: '<p>Updates the specified application to have the specified properties.</p> <note> <p>If a property (for example, <code>description</code>) is not provided, the value remains unchanged. To clear these properties, specify an empty string.</p> </note>'
       responses:
         '200':
@@ -2336,9 +4349,45 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=UpdateApplicationResourceLifecycle':
     post:
-      operationId: UpdateApplicationResourceLifecycle
+      x-aws-operation-name: UpdateApplication
+      operationId: POST UpdateApplication
+      description: '<p>Updates the specified application to have the specified properties.</p> <note> <p>If a property (for example, <code>description</code>) is not provided, the value remains unchanged. To clear these properties, specify an empty string.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ApplicationDescriptionMessage'
+      parameters:
+        - name: ApplicationName
+          in: formData
+          required: true
+          description: 'The name of the application to update. If no such application is found, <code>UpdateApplication</code> returns an <code>InvalidParameterValue</code> error. '
+          type: string
+          minLength: 1
+          maxLength: 100
+        - name: Description
+          in: formData
+          required: false
+          description: '<p>A new description for the application.</p> <p>Default: If not specified, AWS Elastic Beanstalk does not update the description.</p>'
+          type: string
+          maxLength: 200
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - UpdateApplication
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=UpdateApplicationResourceLifecycle':
+    get:
+      x-aws-operation-name: UpdateApplicationResourceLifecycle
+      operationId: GET UpdateApplicationResourceLifecycle
       description: Modifies lifecycle settings for an application.
       responses:
         '200':
@@ -2389,9 +4438,55 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=UpdateApplicationVersion':
     post:
-      operationId: UpdateApplicationVersion
+      x-aws-operation-name: UpdateApplicationResourceLifecycle
+      operationId: POST UpdateApplicationResourceLifecycle
+      description: Modifies lifecycle settings for an application.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ApplicationResourceLifecycleDescriptionMessage'
+        '480':
+          description: InsufficientPrivilegesException
+          schema:
+            $ref: '#/definitions/InsufficientPrivilegesException'
+      parameters:
+        - name: ApplicationName
+          in: formData
+          required: true
+          description: The name of the application.
+          type: string
+          minLength: 1
+          maxLength: 100
+        - name: ResourceLifecycleConfig.ServiceRole
+          in: formData
+          description: |-
+            The resource lifecycle configuration for an application. Defines lifecycle settings for resources that belong to the application, and the service role that Elastic Beanstalk assumes in order to apply lifecycle settings. The version lifecycle configuration defines lifecycle settings for application versions.
+            <p>The ARN of an IAM service role that Elastic Beanstalk has permission to assume.</p> <p>The <code>ServiceRole</code> property is required the first time that you provide a <code>VersionLifecycleConfig</code> for the application in one of the supporting calls (<code>CreateApplication</code> or <code>UpdateApplicationResourceLifecycle</code>). After you provide it once, in either one of the calls, Elastic Beanstalk persists the Service Role with the application, and you don't need to specify it again in subsequent <code>UpdateApplicationResourceLifecycle</code> calls. You can, however, specify it in subsequent calls to change the Service Role to another value.</p>
+          type: string
+        - name: ResourceLifecycleConfig.VersionLifecycleConfig
+          in: formData
+          description: |-
+            The resource lifecycle configuration for an application. Defines lifecycle settings for resources that belong to the application, and the service role that Elastic Beanstalk assumes in order to apply lifecycle settings. The version lifecycle configuration defines lifecycle settings for application versions.
+            The application version lifecycle configuration.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - UpdateApplicationResourceLifecycle
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=UpdateApplicationVersion':
+    get:
+      x-aws-operation-name: UpdateApplicationVersion
+      operationId: GET UpdateApplicationVersion
       description: '<p>Updates the specified application version to have the specified properties.</p> <note> <p>If a property (for example, <code>description</code>) is not provided, the value remains unchanged. To clear properties, specify an empty string.</p> </note>'
       responses:
         '200':
@@ -2439,9 +4534,52 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=UpdateConfigurationTemplate':
     post:
-      operationId: UpdateConfigurationTemplate
+      x-aws-operation-name: UpdateApplicationVersion
+      operationId: POST UpdateApplicationVersion
+      description: '<p>Updates the specified application version to have the specified properties.</p> <note> <p>If a property (for example, <code>description</code>) is not provided, the value remains unchanged. To clear properties, specify an empty string.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ApplicationVersionDescriptionMessage'
+      parameters:
+        - name: ApplicationName
+          in: formData
+          required: true
+          description: '<p>The name of the application associated with this version.</p> <p> If no application is found with this name, <code>UpdateApplication</code> returns an <code>InvalidParameterValue</code> error.</p>'
+          type: string
+          minLength: 1
+          maxLength: 100
+        - name: VersionLabel
+          in: formData
+          required: true
+          description: '<p>The name of the version to update.</p> <p>If no application version is found with this label, <code>UpdateApplication</code> returns an <code>InvalidParameterValue</code> error. </p>'
+          type: string
+          minLength: 1
+          maxLength: 100
+        - name: Description
+          in: formData
+          required: false
+          description: A new description for this version.
+          type: string
+          maxLength: 200
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - UpdateApplicationVersion
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=UpdateConfigurationTemplate':
+    get:
+      x-aws-operation-name: UpdateConfigurationTemplate
+      operationId: GET UpdateConfigurationTemplate
       description: '<p>Updates the specified configuration template to have the specified properties or configuration option values.</p> <note> <p>If a property (for example, <code>ApplicationName</code>) is not provided, its value remains unchanged. To clear such properties, specify an empty string.</p> </note> <p>Related Topics</p> <ul> <li> <p> <a>DescribeConfigurationOptions</a> </p> </li> </ul>'
       responses:
         '200':
@@ -2511,9 +4649,74 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=UpdateEnvironment':
     post:
-      operationId: UpdateEnvironment
+      x-aws-operation-name: UpdateConfigurationTemplate
+      operationId: POST UpdateConfigurationTemplate
+      description: '<p>Updates the specified configuration template to have the specified properties or configuration option values.</p> <note> <p>If a property (for example, <code>ApplicationName</code>) is not provided, its value remains unchanged. To clear such properties, specify an empty string.</p> </note> <p>Related Topics</p> <ul> <li> <p> <a>DescribeConfigurationOptions</a> </p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ConfigurationSettingsDescription'
+        '480':
+          description: InsufficientPrivilegesException
+          schema:
+            $ref: '#/definitions/InsufficientPrivilegesException'
+        '481':
+          description: TooManyBucketsException
+          schema:
+            $ref: '#/definitions/TooManyBucketsException'
+      parameters:
+        - name: ApplicationName
+          in: formData
+          required: true
+          description: '<p>The name of the application associated with the configuration template to update.</p> <p> If no application is found with this name, <code>UpdateConfigurationTemplate</code> returns an <code>InvalidParameterValue</code> error. </p>'
+          type: string
+          minLength: 1
+          maxLength: 100
+        - name: TemplateName
+          in: formData
+          required: true
+          description: '<p>The name of the configuration template to update.</p> <p> If no configuration template is found with this name, <code>UpdateConfigurationTemplate</code> returns an <code>InvalidParameterValue</code> error. </p>'
+          type: string
+          minLength: 1
+          maxLength: 100
+        - name: Description
+          in: formData
+          required: false
+          description: A new description for the configuration.
+          type: string
+          maxLength: 200
+        - name: OptionSettings
+          in: formData
+          required: false
+          description: A list of configuration option settings to update with the new specified option value.
+          type: array
+          items:
+            type: string
+        - name: OptionsToRemove
+          in: formData
+          required: false
+          description: '<p>A list of configuration options to remove from the configuration set.</p> <p> Constraint: You can remove only <code>UserDefined</code> configuration options. </p>'
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - UpdateConfigurationTemplate
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=UpdateEnvironment':
+    get:
+      x-aws-operation-name: UpdateEnvironment
+      operationId: GET UpdateEnvironment
       description: '<p>Updates the environment description, deploys a new application version, updates the configuration settings to an entirely new configuration template, or updates select configuration option values in the running environment.</p> <p> Attempting to update both the release and configuration is not allowed and AWS Elastic Beanstalk returns an <code>InvalidParameterCombination</code> error. </p> <p> When updating the configuration settings to a new template or individual settings, a draft configuration is created and <a>DescribeConfigurationSettings</a> for this environment returns two setting descriptions with different <code>DeploymentStatus</code> values. </p>'
       responses:
         '200':
@@ -2637,9 +4840,128 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=UpdateTagsForResource':
     post:
-      operationId: UpdateTagsForResource
+      x-aws-operation-name: UpdateEnvironment
+      operationId: POST UpdateEnvironment
+      description: '<p>Updates the environment description, deploys a new application version, updates the configuration settings to an entirely new configuration template, or updates select configuration option values in the running environment.</p> <p> Attempting to update both the release and configuration is not allowed and AWS Elastic Beanstalk returns an <code>InvalidParameterCombination</code> error. </p> <p> When updating the configuration settings to a new template or individual settings, a draft configuration is created and <a>DescribeConfigurationSettings</a> for this environment returns two setting descriptions with different <code>DeploymentStatus</code> values. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/EnvironmentDescription'
+        '480':
+          description: InsufficientPrivilegesException
+          schema:
+            $ref: '#/definitions/InsufficientPrivilegesException'
+        '481':
+          description: TooManyBucketsException
+          schema:
+            $ref: '#/definitions/TooManyBucketsException'
+      parameters:
+        - name: ApplicationName
+          in: formData
+          required: false
+          description: The name of the application with which the environment is associated.
+          type: string
+          minLength: 1
+          maxLength: 100
+        - name: EnvironmentId
+          in: formData
+          required: false
+          description: '<p>The ID of the environment to update.</p> <p>If no environment with this ID exists, AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error.</p> <p>Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>'
+          type: string
+        - name: EnvironmentName
+          in: formData
+          required: false
+          description: '<p>The name of the environment to update. If no environment with this name exists, AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. </p> <p>Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>'
+          type: string
+          minLength: 4
+          maxLength: 40
+        - name: GroupName
+          in: formData
+          required: false
+          description: 'The name of the group to which the target environment belongs. Specify a group name only if the environment''s name is specified in an environment manifest and not with the environment name or environment ID parameters. See <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html">Environment Manifest (env.yaml)</a> for details.'
+          type: string
+          minLength: 1
+          maxLength: 19
+        - name: Description
+          in: formData
+          required: false
+          description: 'If this parameter is specified, AWS Elastic Beanstalk updates the description of this environment.'
+          type: string
+          maxLength: 200
+        - name: Tier.Name
+          in: formData
+          description: |-
+            Describes the properties of an environment tier
+            <p>The name of this environment tier.</p> <p>Valid values:</p> <ul> <li> <p>For <i>Web server tier</i> – <code>WebServer</code> </p> </li> <li> <p>For <i>Worker tier</i> – <code>Worker</code> </p> </li> </ul>
+          type: string
+        - name: Tier.Type
+          in: formData
+          description: |-
+            Describes the properties of an environment tier
+            <p>The type of this environment tier.</p> <p>Valid values:</p> <ul> <li> <p>For <i>Web server tier</i> – <code>Standard</code> </p> </li> <li> <p>For <i>Worker tier</i> – <code>SQS/HTTP</code> </p> </li> </ul>
+          type: string
+        - name: Tier.Version
+          in: formData
+          description: |-
+            Describes the properties of an environment tier
+            <p>The version of this environment tier. When you don't set a value to it, Elastic Beanstalk uses the latest compatible worker tier version.</p> <note> <p>This member is deprecated. Any specific version that you set may become out of date. We recommend leaving it unspecified.</p> </note>
+          type: string
+        - name: VersionLabel
+          in: formData
+          required: false
+          description: 'If this parameter is specified, AWS Elastic Beanstalk deploys the named application version to the environment. If no such application version is found, returns an <code>InvalidParameterValue</code> error. '
+          type: string
+          minLength: 1
+          maxLength: 100
+        - name: TemplateName
+          in: formData
+          required: false
+          description: 'If this parameter is specified, AWS Elastic Beanstalk deploys this configuration template to the environment. If no such configuration template is found, AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. '
+          type: string
+          minLength: 1
+          maxLength: 100
+        - name: SolutionStackName
+          in: formData
+          required: false
+          description: This specifies the platform version that the environment will run after the environment is updated.
+          type: string
+        - name: PlatformArn
+          in: formData
+          required: false
+          description: 'The ARN of the platform, if used.'
+          type: string
+        - name: OptionSettings
+          in: formData
+          required: false
+          description: 'If specified, AWS Elastic Beanstalk updates the configuration set associated with the running environment and sets the specified configuration options to the requested value.'
+          type: array
+          items:
+            type: string
+        - name: OptionsToRemove
+          in: formData
+          required: false
+          description: A list of custom user-defined configuration options to remove from the configuration set for this environment.
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - UpdateEnvironment
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=UpdateTagsForResource':
+    get:
+      x-aws-operation-name: UpdateTagsForResource
+      operationId: GET UpdateTagsForResource
       description: '<p>Update the list of tags applied to an AWS Elastic Beanstalk resource. Two lists can be passed: <code>TagsToAdd</code> for tags to add or update, and <code>TagsToRemove</code>.</p> <p>Currently, Elastic Beanstalk only supports tagging of Elastic Beanstalk environments. For details about environment tagging, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.tagging.html">Tagging Resources in Your Elastic Beanstalk Environment</a>.</p> <p>If you create a custom IAM user policy to control permission to this operation, specify one of the following two virtual actions (or both) instead of the API operation name:</p> <dl> <dt>elasticbeanstalk:AddTags</dt> <dd> <p>Controls permission to call <code>UpdateTagsForResource</code> and pass a list of tags to add in the <code>TagsToAdd</code> parameter.</p> </dd> <dt>elasticbeanstalk:RemoveTags</dt> <dd> <p>Controls permission to call <code>UpdateTagsForResource</code> and pass a list of tag keys to remove in the <code>TagsToRemove</code> parameter.</p> </dd> </dl> <p>For details about creating a custom user policy, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#AWSHowTo.iam.policies">Creating a Custom User Policy</a>.</p>'
       responses:
         '200':
@@ -2704,9 +5026,69 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=ValidateConfigurationSettings':
     post:
-      operationId: ValidateConfigurationSettings
+      x-aws-operation-name: UpdateTagsForResource
+      operationId: POST UpdateTagsForResource
+      description: '<p>Update the list of tags applied to an AWS Elastic Beanstalk resource. Two lists can be passed: <code>TagsToAdd</code> for tags to add or update, and <code>TagsToRemove</code>.</p> <p>Currently, Elastic Beanstalk only supports tagging of Elastic Beanstalk environments. For details about environment tagging, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.tagging.html">Tagging Resources in Your Elastic Beanstalk Environment</a>.</p> <p>If you create a custom IAM user policy to control permission to this operation, specify one of the following two virtual actions (or both) instead of the API operation name:</p> <dl> <dt>elasticbeanstalk:AddTags</dt> <dd> <p>Controls permission to call <code>UpdateTagsForResource</code> and pass a list of tags to add in the <code>TagsToAdd</code> parameter.</p> </dd> <dt>elasticbeanstalk:RemoveTags</dt> <dd> <p>Controls permission to call <code>UpdateTagsForResource</code> and pass a list of tag keys to remove in the <code>TagsToRemove</code> parameter.</p> </dd> </dl> <p>For details about creating a custom user policy, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#AWSHowTo.iam.policies">Creating a Custom User Policy</a>.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InsufficientPrivilegesException
+          schema:
+            $ref: '#/definitions/InsufficientPrivilegesException'
+        '481':
+          description: OperationInProgressException
+          schema:
+            $ref: '#/definitions/OperationInProgressException'
+        '482':
+          description: TooManyTagsException
+          schema:
+            $ref: '#/definitions/TooManyTagsException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: ResourceTypeNotSupportedException
+          schema:
+            $ref: '#/definitions/ResourceTypeNotSupportedException'
+      parameters:
+        - name: ResourceArn
+          in: formData
+          required: true
+          description: <p>The Amazon Resource Name (ARN) of the resouce to be updated.</p> <p>Must be the ARN of an Elastic Beanstalk environment.</p>
+          type: string
+        - name: TagsToAdd
+          in: formData
+          required: false
+          description: '<p>A list of tags to add or update.</p> <p>If a key of an existing tag is added, the tag''s value is updated.</p>'
+          type: array
+          items:
+            type: string
+        - name: TagsToRemove
+          in: formData
+          required: false
+          description: '<p>A list of tag keys to remove.</p> <p>If a tag key doesn''t exist, it is silently ignored.</p>'
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - UpdateTagsForResource
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
+  '/#Action=ValidateConfigurationSettings':
+    get:
+      x-aws-operation-name: ValidateConfigurationSettings
+      operationId: GET ValidateConfigurationSettings
       description: '<p>Takes a set of configuration settings and either a configuration template or environment, and determines whether those values are valid.</p> <p>This action returns a list of messages indicating any errors or warnings associated with the selection of option values.</p>'
       responses:
         '200':
@@ -2770,6 +5152,64 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: ValidateConfigurationSettings
+      operationId: POST ValidateConfigurationSettings
+      description: '<p>Takes a set of configuration settings and either a configuration template or environment, and determines whether those values are valid.</p> <p>This action returns a list of messages indicating any errors or warnings associated with the selection of option values.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ConfigurationSettingsValidationMessages'
+        '480':
+          description: InsufficientPrivilegesException
+          schema:
+            $ref: '#/definitions/InsufficientPrivilegesException'
+        '481':
+          description: TooManyBucketsException
+          schema:
+            $ref: '#/definitions/TooManyBucketsException'
+      parameters:
+        - name: ApplicationName
+          in: formData
+          required: true
+          description: The name of the application that the configuration template or environment belongs to.
+          type: string
+          minLength: 1
+          maxLength: 100
+        - name: TemplateName
+          in: formData
+          required: false
+          description: '<p>The name of the configuration template to validate the settings against.</p> <p>Condition: You cannot specify both this and an environment name.</p>'
+          type: string
+          minLength: 1
+          maxLength: 100
+        - name: EnvironmentName
+          in: formData
+          required: false
+          description: '<p>The name of the environment to validate the settings against.</p> <p>Condition: You cannot specify both this and a configuration template name.</p>'
+          type: string
+          minLength: 4
+          maxLength: 40
+        - name: OptionSettings
+          in: formData
+          required: true
+          description: A list of the options and desired values to evaluate.
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ValidateConfigurationSettings
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-12-01'
 definitions:
   InsufficientPrivilegesException: {}
   ApplyEnvironmentManagedActionResult:

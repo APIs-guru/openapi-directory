@@ -35,10 +35,30 @@ externalDocs:
   url: 'https://docs.aws.amazon.com/cloudfront/'
 host: cloudfront.amazonaws.com
 basePath: /
-x-hasEquivalentPaths: true
 schemes:
   - https
   - http
+x-servers:
+  - url: 'https://cloudfront.amazonaws.com'
+    variables: {}
+    description: The general CloudFront multi-region endpoint
+  - url: 'http://cloudfront.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+    description: The CloudFront endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://cloudfront.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+    description: The CloudFront endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 consumes:
   - text/xml
 produces:
@@ -91,7 +111,7 @@ security:
 paths:
   /2017-10-30/origin-access-identity/cloudfront:
     post:
-      operationId: CreateCloudFrontOriginAccessIdentity
+      operationId: CreateCloudFrontOriginAccessIdentity2017_10_30
       description: 'Creates a new origin access identity. If you''re using Amazon S3 for your origin, you can use an origin access identity to require users to access your content using a CloudFront URL instead of the Amazon S3 URL. For more information about how to use origin access identities, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">Serving Private Content through CloudFront</a> in the <i>Amazon CloudFront Developer Guide</i>.'
       responses:
         '201':
@@ -146,7 +166,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
-      operationId: ListCloudFrontOriginAccessIdentities
+      operationId: ListCloudFrontOriginAccessIdentities2017_10_30
       description: Lists origin access identities.
       responses:
         '200':
@@ -170,7 +190,7 @@ paths:
           type: string
   /2017-10-30/distribution:
     post:
-      operationId: CreateDistribution
+      operationId: CreateDistribution2017_10_30
       description: Creates a new web distribution. Send a <code>POST</code> request to the <code>/<i>CloudFront API version</i>/distribution</code>/<code>distribution ID</code> resource.
       responses:
         '201':
@@ -417,7 +437,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
-      operationId: ListDistributions
+      operationId: ListDistributions2017_10_30
       description: 'List distributions. '
       responses:
         '200':
@@ -441,7 +461,7 @@ paths:
           type: string
   '/2017-10-30/distribution#WithTags':
     post:
-      operationId: CreateDistributionWithTags
+      operationId: CreateDistributionWithTags2017_10_30
       description: Create a new distribution with tags.
       responses:
         '201':
@@ -660,7 +680,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
   /2017-10-30/field-level-encryption:
     post:
-      operationId: CreateFieldLevelEncryptionConfig
+      operationId: CreateFieldLevelEncryptionConfig2017_10_30
       description: Create a new field-level encryption configuration.
       responses:
         '201':
@@ -733,7 +753,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
-      operationId: ListFieldLevelEncryptionConfigs
+      operationId: ListFieldLevelEncryptionConfigs2017_10_30
       description: List all field-level encryption configurations that have been created in CloudFront for this account.
       responses:
         '200':
@@ -757,7 +777,7 @@ paths:
           type: string
   /2017-10-30/field-level-encryption-profile:
     post:
-      operationId: CreateFieldLevelEncryptionProfile
+      operationId: CreateFieldLevelEncryptionProfile2017_10_30
       description: Create a field-level encryption profile.
       responses:
         '201':
@@ -830,7 +850,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
-      operationId: ListFieldLevelEncryptionProfiles
+      operationId: ListFieldLevelEncryptionProfiles2017_10_30
       description: Request a list of field-level encryption profiles that have been created in CloudFront for this account.
       responses:
         '200':
@@ -854,7 +874,7 @@ paths:
           type: string
   '/2017-10-30/distribution/{DistributionId}/invalidation':
     post:
-      operationId: CreateInvalidation
+      operationId: CreateInvalidation2017_10_30
       description: 'Create a new invalidation. '
       responses:
         '201':
@@ -922,7 +942,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
-      operationId: ListInvalidations
+      operationId: ListInvalidations2017_10_30
       description: 'Lists invalidation batches. '
       responses:
         '200':
@@ -959,7 +979,7 @@ paths:
           type: string
   /2017-10-30/public-key:
     post:
-      operationId: CreatePublicKey
+      operationId: CreatePublicKey2017_10_30
       description: 'Add a new public key to CloudFront to use, for example, for field-level encryption. You can add a maximum of 10 public keys with one AWS account.'
       responses:
         '201':
@@ -1012,7 +1032,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
-      operationId: ListPublicKeys
+      operationId: ListPublicKeys2017_10_30
       description: List all public keys that have been added to CloudFront for this account.
       responses:
         '200':
@@ -1036,7 +1056,7 @@ paths:
           type: string
   /2017-10-30/streaming-distribution:
     post:
-      operationId: CreateStreamingDistribution
+      operationId: CreateStreamingDistribution2017_10_30
       description: '<p>Creates a new RMTP distribution. An RTMP distribution is similar to a web distribution, but an RTMP distribution streams media files using the Adobe Real-Time Messaging Protocol (RTMP) instead of serving files using HTTP. </p> <p>To create a new web distribution, submit a <code>POST</code> request to the <i>CloudFront API version</i>/distribution resource. The request body must include a document with a <i>StreamingDistributionConfig</i> element. The response echoes the <code>StreamingDistributionConfig</code> element and returns other information about the RTMP distribution.</p> <p>To get the status of your request, use the <i>GET StreamingDistribution</i> API action. When the value of <code>Enabled</code> is <code>true</code> and the value of <code>Status</code> is <code>Deployed</code>, your distribution is ready. A distribution usually deploys in less than 15 minutes.</p> <p>For more information about web distributions, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-rtmp.html">Working with RTMP Distributions</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> <important> <p>Beginning with the 2012-05-05 version of the CloudFront API, we made substantial changes to the format of the XML document that you include in the request body when you create or update a web distribution or an RTMP distribution, and when you invalidate objects. With previous versions of the API, we discovered that it was too easy to accidentally delete one or more values for an element that accepts multiple values, for example, CNAMEs and trusted signers. Our changes for the 2012-05-05 release are intended to prevent these accidental deletions and to notify you when there''s a mismatch between the number of values you say you''re specifying in the <code>Quantity</code> element and the number of values specified.</p> </important>'
       responses:
         '201':
@@ -1137,7 +1157,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
-      operationId: ListStreamingDistributions
+      operationId: ListStreamingDistributions2017_10_30
       description: 'List streaming distributions. '
       responses:
         '200':
@@ -1161,7 +1181,7 @@ paths:
           type: string
   '/2017-10-30/streaming-distribution#WithTags':
     post:
-      operationId: CreateStreamingDistributionWithTags
+      operationId: CreateStreamingDistributionWithTags2017_10_30
       description: Create a new streaming distribution with tags.
       responses:
         '201':
@@ -1256,7 +1276,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/2017-10-30/origin-access-identity/cloudfront/{Id}':
     delete:
-      operationId: DeleteCloudFrontOriginAccessIdentity
+      operationId: DeleteCloudFrontOriginAccessIdentity2017_10_30
       description: 'Delete an origin access identity. '
       responses:
         '204':
@@ -1301,7 +1321,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
-      operationId: GetCloudFrontOriginAccessIdentity
+      operationId: GetCloudFrontOriginAccessIdentity2017_10_30
       description: 'Get the information about an origin access identity. '
       responses:
         '200':
@@ -1324,7 +1344,7 @@ paths:
           type: string
   '/2017-10-30/distribution/{Id}':
     delete:
-      operationId: DeleteDistribution
+      operationId: DeleteDistribution2017_10_30
       description: 'Delete a distribution. '
       responses:
         '204':
@@ -1369,7 +1389,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
-      operationId: GetDistribution
+      operationId: GetDistribution2017_10_30
       description: 'Get the information about a distribution. '
       responses:
         '200':
@@ -1392,7 +1412,7 @@ paths:
           type: string
   '/2017-10-30/field-level-encryption/{Id}':
     delete:
-      operationId: DeleteFieldLevelEncryptionConfig
+      operationId: DeleteFieldLevelEncryptionConfig2017_10_30
       description: Remove a field-level encryption configuration.
       responses:
         '204':
@@ -1437,7 +1457,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
-      operationId: GetFieldLevelEncryption
+      operationId: GetFieldLevelEncryption2017_10_30
       description: Get the field-level encryption configuration information.
       responses:
         '200':
@@ -1460,7 +1480,7 @@ paths:
           type: string
   '/2017-10-30/field-level-encryption-profile/{Id}':
     delete:
-      operationId: DeleteFieldLevelEncryptionProfile
+      operationId: DeleteFieldLevelEncryptionProfile2017_10_30
       description: Remove a field-level encryption profile.
       responses:
         '204':
@@ -1505,7 +1525,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
-      operationId: GetFieldLevelEncryptionProfile
+      operationId: GetFieldLevelEncryptionProfile2017_10_30
       description: Get the field-level encryption profile information.
       responses:
         '200':
@@ -1528,7 +1548,7 @@ paths:
           type: string
   '/2017-10-30/public-key/{Id}':
     delete:
-      operationId: DeletePublicKey
+      operationId: DeletePublicKey2017_10_30
       description: Remove a public key you previously added to CloudFront.
       responses:
         '204':
@@ -1573,7 +1593,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
-      operationId: GetPublicKey
+      operationId: GetPublicKey2017_10_30
       description: Get the public key information.
       responses:
         '200':
@@ -1596,7 +1616,7 @@ paths:
           type: string
   '/2017-10-30/streaming-distribution/{Id}':
     delete:
-      operationId: DeleteStreamingDistribution
+      operationId: DeleteStreamingDistribution2017_10_30
       description: '<p>Delete a streaming distribution. To delete an RTMP distribution using the CloudFront API, perform the following steps.</p> <p> <b>To delete an RTMP distribution using the CloudFront API</b>:</p> <ol> <li> <p>Disable the RTMP distribution.</p> </li> <li> <p>Submit a <code>GET Streaming Distribution Config</code> request to get the current configuration and the <code>Etag</code> header for the distribution. </p> </li> <li> <p>Update the XML document that was returned in the response to your <code>GET Streaming Distribution Config</code> request to change the value of <code>Enabled</code> to <code>false</code>.</p> </li> <li> <p>Submit a <code>PUT Streaming Distribution Config</code> request to update the configuration for your distribution. In the request body, include the XML document that you updated in Step 3. Then set the value of the HTTP <code>If-Match</code> header to the value of the <code>ETag</code> header that CloudFront returned when you submitted the <code>GET Streaming Distribution Config</code> request in Step 2.</p> </li> <li> <p>Review the response to the <code>PUT Streaming Distribution Config</code> request to confirm that the distribution was successfully disabled.</p> </li> <li> <p>Submit a <code>GET Streaming Distribution Config</code> request to confirm that your changes have propagated. When propagation is complete, the value of <code>Status</code> is <code>Deployed</code>.</p> </li> <li> <p>Submit a <code>DELETE Streaming Distribution</code> request. Set the value of the HTTP <code>If-Match</code> header to the value of the <code>ETag</code> header that CloudFront returned when you submitted the <code>GET Streaming Distribution Config</code> request in Step 2.</p> </li> <li> <p>Review the response to your <code>DELETE Streaming Distribution</code> request to confirm that the distribution was successfully deleted.</p> </li> </ol> <p>For information about deleting a distribution using the CloudFront console, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/HowToDeleteDistribution.html">Deleting a Distribution</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
       responses:
         '204':
@@ -1641,7 +1661,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
-      operationId: GetStreamingDistribution
+      operationId: GetStreamingDistribution2017_10_30
       description: 'Gets information about a specified RTMP distribution, including the distribution configuration.'
       responses:
         '200':
@@ -1664,7 +1684,7 @@ paths:
           type: string
   '/2017-10-30/origin-access-identity/cloudfront/{Id}/config':
     get:
-      operationId: GetCloudFrontOriginAccessIdentityConfig
+      operationId: GetCloudFrontOriginAccessIdentityConfig2017_10_30
       description: 'Get the configuration information about an origin access identity. '
       responses:
         '200':
@@ -1694,7 +1714,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     put:
-      operationId: UpdateCloudFrontOriginAccessIdentity
+      operationId: UpdateCloudFrontOriginAccessIdentity2017_10_30
       description: 'Update an origin access identity. '
       responses:
         '200':
@@ -1764,7 +1784,7 @@ paths:
                     description: 'Any comments you want to include about the origin access identity. '
   '/2017-10-30/distribution/{Id}/config':
     get:
-      operationId: GetDistributionConfig
+      operationId: GetDistributionConfig2017_10_30
       description: 'Get the configuration information about a distribution. '
       responses:
         '200':
@@ -1794,7 +1814,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     put:
-      operationId: UpdateDistribution
+      operationId: UpdateDistribution2017_10_30
       description: '<p>Updates the configuration for a web distribution. Perform the following steps.</p> <p>For information about updating a distribution using the CloudFront console, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-creating-console.html">Creating or Updating a Web Distribution Using the CloudFront Console </a> in the <i>Amazon CloudFront Developer Guide</i>.</p> <p> <b>To update a web distribution using the CloudFront API</b> </p> <ol> <li> <p>Submit a <a>GetDistributionConfig</a> request to get the current configuration and an <code>Etag</code> header for the distribution.</p> <note> <p>If you update the distribution again, you need to get a new <code>Etag</code> header.</p> </note> </li> <li> <p>Update the XML document that was returned in the response to your <code>GetDistributionConfig</code> request to include the desired changes. You can''t change the value of <code>CallerReference</code>. If you try to change this value, CloudFront returns an <code>IllegalUpdate</code> error.</p> <important> <p>The new configuration replaces the existing configuration; the values that you specify in an <code>UpdateDistribution</code> request are not merged into the existing configuration. When you add, delete, or replace values in an element that allows multiple values (for example, <code>CNAME</code>), you must specify all of the values that you want to appear in the updated distribution. In addition, you must update the corresponding <code>Quantity</code> element.</p> </important> </li> <li> <p>Submit an <code>UpdateDistribution</code> request to update the configuration for your distribution:</p> <ul> <li> <p>In the request body, include the XML document that you updated in Step 2. The request body must include an XML document with a <code>DistributionConfig</code> element.</p> </li> <li> <p>Set the value of the HTTP <code>If-Match</code> header to the value of the <code>ETag</code> header that CloudFront returned when you submitted the <code>GetDistributionConfig</code> request in Step 1.</p> </li> </ul> </li> <li> <p>Review the response to the <code>UpdateDistribution</code> request to confirm that the configuration was successfully updated.</p> </li> <li> <p>Optional: Submit a <a>GetDistribution</a> request to confirm that your changes have propagated. When propagation is complete, the value of <code>Status</code> is <code>Deployed</code>.</p> <important> <p>Beginning with the 2012-05-05 version of the CloudFront API, we made substantial changes to the format of the XML document that you include in the request body when you create or update a distribution. With previous versions of the API, we discovered that it was too easy to accidentally delete one or more values for an element that accepts multiple values, for example, CNAMEs and trusted signers. Our changes for the 2012-05-05 release are intended to prevent these accidental deletions and to notify you when there''s a mismatch between the number of values you say you''re specifying in the <code>Quantity</code> element and the number of values you''re actually specifying.</p> </important> </li> </ol>'
       responses:
         '200':
@@ -2044,7 +2064,7 @@ paths:
                     description: '<p>If you want CloudFront to respond to IPv6 DNS requests with an IPv6 address for your distribution, specify <code>true</code>. If you specify <code>false</code>, CloudFront responds to IPv6 DNS requests with the DNS response code <code>NOERROR</code> and with no IP addresses. This allows viewers to submit a second request, for an IPv4 address for your distribution. </p> <p>In general, you should enable IPv6 if you have users on IPv6 networks who want to access your content. However, if you''re using signed URLs or signed cookies to restrict access to your content, and if you''re using a custom policy that includes the <code>IpAddress</code> parameter to restrict the IP addresses that can access your content, don''t enable IPv6. If you want to restrict access to some content by IP address and not restrict access to other content (or restrict access but not by IP address), you can create two distributions. For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-creating-signed-url-custom-policy.html">Creating a Signed URL Using a Custom Policy</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> <p>If you''re using an Amazon Route 53 alias resource record set to route traffic to your CloudFront distribution, you need to create a second alias resource record set when both of the following are true:</p> <ul> <li> <p>You enable IPv6 for the distribution</p> </li> <li> <p>You''re using alternate domain names in the URLs for your objects</p> </li> </ul> <p>For more information, see <a href="http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-cloudfront-distribution.html">Routing Traffic to an Amazon CloudFront Web Distribution by Using Your Domain Name</a> in the <i>Amazon Route 53 Developer Guide</i>.</p> <p>If you created a CNAME resource record set, either with Amazon Route 53 or with another DNS service, you don''t need to make any changes. A CNAME record will route traffic to your distribution regardless of the IP address format of the viewer request.</p>'
   '/2017-10-30/field-level-encryption/{Id}/config':
     get:
-      operationId: GetFieldLevelEncryptionConfig
+      operationId: GetFieldLevelEncryptionConfig2017_10_30
       description: Get the field-level encryption configuration information.
       responses:
         '200':
@@ -2074,7 +2094,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     put:
-      operationId: UpdateFieldLevelEncryptionConfig
+      operationId: UpdateFieldLevelEncryptionConfig2017_10_30
       description: 'Update a field-level encryption configuration. '
       responses:
         '200':
@@ -2162,7 +2182,7 @@ paths:
                     description: A complex data type that specifies when to forward content if a content type isn't recognized and profiles to use as by default in a request if a query argument doesn't specify a profile to use.
   '/2017-10-30/field-level-encryption-profile/{Id}/config':
     get:
-      operationId: GetFieldLevelEncryptionProfileConfig
+      operationId: GetFieldLevelEncryptionProfileConfig2017_10_30
       description: Get the field-level encryption profile configuration information.
       responses:
         '200':
@@ -2192,7 +2212,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     put:
-      operationId: UpdateFieldLevelEncryptionProfile
+      operationId: UpdateFieldLevelEncryptionProfile2017_10_30
       description: 'Update a field-level encryption profile. '
       responses:
         '200':
@@ -2284,7 +2304,7 @@ paths:
                     description: 'A complex data type of encryption entities for the field-level encryption profile that include the public key ID, provider, and field patterns for specifying which fields to encrypt with this key.'
   '/2017-10-30/distribution/{DistributionId}/invalidation/{Id}':
     get:
-      operationId: GetInvalidation
+      operationId: GetInvalidation2017_10_30
       description: 'Get the information about an invalidation. '
       responses:
         '200':
@@ -2324,7 +2344,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/2017-10-30/public-key/{Id}/config':
     get:
-      operationId: GetPublicKeyConfig
+      operationId: GetPublicKeyConfig2017_10_30
       description: Return public key configuration informaation
       responses:
         '200':
@@ -2354,7 +2374,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     put:
-      operationId: UpdatePublicKey
+      operationId: UpdatePublicKey2017_10_30
       description: Update public key information. Note that the only value you can change is the comment.
       responses:
         '200':
@@ -2426,7 +2446,7 @@ paths:
                     description: An optional comment about a public key.
   '/2017-10-30/streaming-distribution/{Id}/config':
     get:
-      operationId: GetStreamingDistributionConfig
+      operationId: GetStreamingDistributionConfig2017_10_30
       description: 'Get the configuration information about a streaming distribution. '
       responses:
         '200':
@@ -2456,7 +2476,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     put:
-      operationId: UpdateStreamingDistribution
+      operationId: UpdateStreamingDistribution2017_10_30
       description: 'Update a streaming distribution. '
       responses:
         '200':
@@ -2564,7 +2584,7 @@ paths:
                     description: Whether the streaming distribution is enabled to accept user requests for content.
   '/2017-10-30/distributionsByWebACLId/{WebACLId}':
     get:
-      operationId: ListDistributionsByWebACLId
+      operationId: ListDistributionsByWebACLId2017_10_30
       description: 'List the distributions that are associated with a specified AWS WAF web ACL. '
       responses:
         '200':
@@ -2605,7 +2625,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/2017-10-30/tagging#Resource':
     get:
-      operationId: ListTagsForResource
+      operationId: ListTagsForResource2017_10_30
       description: List tags for a CloudFront resource.
       responses:
         '200':
@@ -2645,7 +2665,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/2017-10-30/tagging#Operation=Tag&Resource':
     post:
-      operationId: TagResource
+      operationId: TagResource2017_10_30
       description: Add tags to a CloudFront resource.
       responses:
         '204':
@@ -2704,7 +2724,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/2017-10-30/tagging#Operation=Untag&Resource':
     post:
-      operationId: UntagResource
+      operationId: UntagResource2017_10_30
       description: Remove tags from a CloudFront resource.
       responses:
         '204':

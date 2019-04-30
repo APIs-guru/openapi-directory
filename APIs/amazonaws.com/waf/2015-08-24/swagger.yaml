@@ -35,10 +35,30 @@ externalDocs:
   url: 'https://docs.aws.amazon.com/waf/'
 host: waf.amazonaws.com
 basePath: /
-x-hasEquivalentPaths: true
 schemes:
   - https
   - http
+x-servers:
+  - url: 'https://waf.amazonaws.com'
+    variables: {}
+    description: The general WAF multi-region endpoint
+  - url: 'http://waf.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+    description: The WAF endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://waf.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+    description: The WAF endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 consumes:
   - application/json
 produces:

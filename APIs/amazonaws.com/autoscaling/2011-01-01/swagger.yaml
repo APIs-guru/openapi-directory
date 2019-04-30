@@ -35,10 +35,83 @@ externalDocs:
   url: 'https://docs.aws.amazon.com/autoscaling/'
 host: autoscaling.amazonaws.com
 basePath: /
-x-hasEquivalentPaths: true
 schemes:
   - https
   - http
+x-servers:
+  - url: 'http://autoscaling.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+    description: The Auto Scaling multi-region endpoint
+  - url: 'https://autoscaling.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+    description: The Auto Scaling multi-region endpoint
+  - url: 'http://autoscaling.amazonaws.com'
+    variables: {}
+    description: The general Auto Scaling endpoint for US East (N. Virginia)
+  - url: 'https://autoscaling.amazonaws.com'
+    variables: {}
+    description: The general Auto Scaling endpoint for US East (N. Virginia)
+  - url: 'http://autoscaling.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+    description: The Auto Scaling endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://autoscaling.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+    description: The Auto Scaling endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 consumes:
   - text/xml
 produces:
@@ -90,8 +163,9 @@ security:
   - hmac: []
 paths:
   '/#Action=AttachInstances':
-    post:
-      operationId: AttachInstances
+    get:
+      x-aws-operation-name: AttachInstances
+      operationId: GET AttachInstances
       description: '<p>Attaches one or more EC2 instances to the specified Auto Scaling group.</p> <p>When you attach instances, Amazon EC2 Auto Scaling increases the desired capacity of the group by the number of instances being attached. If the number of instances being attached plus the desired capacity of the group exceeds the maximum size of the group, the operation fails.</p> <p>If there is a Classic Load Balancer attached to your Auto Scaling group, the instances are also registered with the load balancer. If there are target groups attached to your Auto Scaling group, the instances are also registered with the target groups.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/attach-instance-asg.html">Attach EC2 Instances to Your Auto Scaling Group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -140,9 +214,53 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=AttachLoadBalancerTargetGroups':
     post:
-      operationId: AttachLoadBalancerTargetGroups
+      x-aws-operation-name: AttachInstances
+      operationId: POST AttachInstances
+      description: '<p>Attaches one or more EC2 instances to the specified Auto Scaling group.</p> <p>When you attach instances, Amazon EC2 Auto Scaling increases the desired capacity of the group by the number of instances being attached. If the number of instances being attached plus the desired capacity of the group exceeds the maximum size of the group, the operation fails.</p> <p>If there is a Classic Load Balancer attached to your Auto Scaling group, the instances are also registered with the load balancer. If there are target groups attached to your Auto Scaling group, the instances are also registered with the target groups.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/attach-instance-asg.html">Attach EC2 Instances to Your Auto Scaling Group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+        '481':
+          description: ServiceLinkedRoleFailure
+          schema:
+            $ref: '#/definitions/ServiceLinkedRoleFailure'
+      parameters:
+        - name: InstanceIds
+          in: formData
+          required: false
+          description: The IDs of the instances. You can specify up to 20 instances.
+          type: array
+          items:
+            type: string
+        - name: AutoScalingGroupName
+          in: formData
+          required: true
+          description: The name of the Auto Scaling group.
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - AttachInstances
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=AttachLoadBalancerTargetGroups':
+    get:
+      x-aws-operation-name: AttachLoadBalancerTargetGroups
+      operationId: GET AttachLoadBalancerTargetGroups
       description: '<p>Attaches one or more target groups to the specified Auto Scaling group. </p> <p>To describe the target groups for an Auto Scaling group, use <a>DescribeLoadBalancerTargetGroups</a>. To detach the target group from the Auto Scaling group, use <a>DetachLoadBalancerTargetGroups</a>.</p> <p>With Application Load Balancers and Network Load Balancers, instances are registered as targets with a target group. With Classic Load Balancers, instances are registered with the load balancer. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/attach-load-balancer-asg.html">Attaching a Load Balancer to Your Auto Scaling Group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -193,9 +311,55 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=AttachLoadBalancers':
     post:
-      operationId: AttachLoadBalancers
+      x-aws-operation-name: AttachLoadBalancerTargetGroups
+      operationId: POST AttachLoadBalancerTargetGroups
+      description: '<p>Attaches one or more target groups to the specified Auto Scaling group. </p> <p>To describe the target groups for an Auto Scaling group, use <a>DescribeLoadBalancerTargetGroups</a>. To detach the target group from the Auto Scaling group, use <a>DetachLoadBalancerTargetGroups</a>.</p> <p>With Application Load Balancers and Network Load Balancers, instances are registered as targets with a target group. With Classic Load Balancers, instances are registered with the load balancer. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/attach-load-balancer-asg.html">Attaching a Load Balancer to Your Auto Scaling Group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AttachLoadBalancerTargetGroupsResultType'
+        '480':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+        '481':
+          description: ServiceLinkedRoleFailure
+          schema:
+            $ref: '#/definitions/ServiceLinkedRoleFailure'
+      parameters:
+        - name: AutoScalingGroupName
+          in: formData
+          required: true
+          description: The name of the Auto Scaling group.
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: TargetGroupARNs
+          in: formData
+          required: true
+          description: The Amazon Resource Names (ARN) of the target groups. You can specify up to 10 target groups.
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - AttachLoadBalancerTargetGroups
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=AttachLoadBalancers':
+    get:
+      x-aws-operation-name: AttachLoadBalancers
+      operationId: GET AttachLoadBalancers
       description: '<p>Attaches one or more Classic Load Balancers to the specified Auto Scaling group.</p> <p>To attach an Application Load Balancer or a Network Load Balancer instead, see <a>AttachLoadBalancerTargetGroups</a>.</p> <p>To describe the load balancers for an Auto Scaling group, use <a>DescribeLoadBalancers</a>. To detach the load balancer from the Auto Scaling group, use <a>DetachLoadBalancers</a>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/attach-load-balancer-asg.html">Attaching a Load Balancer to Your Auto Scaling Group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -246,9 +410,55 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=BatchDeleteScheduledAction':
     post:
-      operationId: BatchDeleteScheduledAction
+      x-aws-operation-name: AttachLoadBalancers
+      operationId: POST AttachLoadBalancers
+      description: '<p>Attaches one or more Classic Load Balancers to the specified Auto Scaling group.</p> <p>To attach an Application Load Balancer or a Network Load Balancer instead, see <a>AttachLoadBalancerTargetGroups</a>.</p> <p>To describe the load balancers for an Auto Scaling group, use <a>DescribeLoadBalancers</a>. To detach the load balancer from the Auto Scaling group, use <a>DetachLoadBalancers</a>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/attach-load-balancer-asg.html">Attaching a Load Balancer to Your Auto Scaling Group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AttachLoadBalancersResultType'
+        '480':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+        '481':
+          description: ServiceLinkedRoleFailure
+          schema:
+            $ref: '#/definitions/ServiceLinkedRoleFailure'
+      parameters:
+        - name: AutoScalingGroupName
+          in: formData
+          required: true
+          description: The name of the Auto Scaling group.
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: LoadBalancerNames
+          in: formData
+          required: true
+          description: The names of the load balancers. You can specify up to 10 load balancers.
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - AttachLoadBalancers
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=BatchDeleteScheduledAction':
+    get:
+      x-aws-operation-name: BatchDeleteScheduledAction
+      operationId: GET BatchDeleteScheduledAction
       description: Deletes one or more scheduled actions for the specified Auto Scaling group.
       responses:
         '200':
@@ -295,9 +505,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=BatchPutScheduledUpdateGroupAction':
     post:
-      operationId: BatchPutScheduledUpdateGroupAction
+      x-aws-operation-name: BatchDeleteScheduledAction
+      operationId: POST BatchDeleteScheduledAction
+      description: Deletes one or more scheduled actions for the specified Auto Scaling group.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/BatchDeleteScheduledActionAnswer'
+        '480':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: AutoScalingGroupName
+          in: formData
+          required: true
+          description: The name of the Auto Scaling group.
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: ScheduledActionNames
+          in: formData
+          required: true
+          description: 'The names of the scheduled actions to delete. The maximum number allowed is 50. '
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - BatchDeleteScheduledAction
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=BatchPutScheduledUpdateGroupAction':
+    get:
+      x-aws-operation-name: BatchPutScheduledUpdateGroupAction
+      operationId: GET BatchPutScheduledUpdateGroupAction
       description: 'Creates or updates one or more scheduled scaling actions for an Auto Scaling group. If you leave a parameter unspecified when updating a scheduled scaling action, the corresponding value remains unchanged.'
       responses:
         '200':
@@ -352,9 +604,59 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=CompleteLifecycleAction':
     post:
-      operationId: CompleteLifecycleAction
+      x-aws-operation-name: BatchPutScheduledUpdateGroupAction
+      operationId: POST BatchPutScheduledUpdateGroupAction
+      description: 'Creates or updates one or more scheduled scaling actions for an Auto Scaling group. If you leave a parameter unspecified when updating a scheduled scaling action, the corresponding value remains unchanged.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/BatchPutScheduledUpdateGroupActionAnswer'
+        '480':
+          description: AlreadyExistsFault
+          schema:
+            $ref: '#/definitions/AlreadyExistsFault'
+        '481':
+          description: LimitExceededFault
+          schema:
+            $ref: '#/definitions/LimitExceededFault'
+        '482':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: AutoScalingGroupName
+          in: formData
+          required: true
+          description: The name of the Auto Scaling group.
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: ScheduledUpdateGroupActions
+          in: formData
+          required: true
+          description: 'One or more scheduled actions. The maximum number allowed is 50. '
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - BatchPutScheduledUpdateGroupAction
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=CompleteLifecycleAction':
+    get:
+      x-aws-operation-name: CompleteLifecycleAction
+      operationId: GET CompleteLifecycleAction
       description: '<p>Completes the lifecycle action for the specified token or instance with the specified result.</p> <p>This step is a part of the procedure for adding a lifecycle hook to an Auto Scaling group:</p> <ol> <li> <p>(Optional) Create a Lambda function and a rule that allows CloudWatch Events to invoke your Lambda function when Amazon EC2 Auto Scaling launches or terminates instances.</p> </li> <li> <p>(Optional) Create a notification target and an IAM role. The target can be either an Amazon SQS queue or an Amazon SNS topic. The role allows Amazon EC2 Auto Scaling to publish lifecycle notifications to the target.</p> </li> <li> <p>Create the lifecycle hook. Specify whether the hook is used when the instances launch or terminate.</p> </li> <li> <p>If you need more time, record the lifecycle action heartbeat to keep the instance in a pending state.</p> </li> <li> <p> <b>If you finish before the timeout period ends, complete the lifecycle action.</b> </p> </li> </ol> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html">Amazon EC2 Auto Scaling Lifecycle Hooks</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -422,9 +724,72 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=CreateAutoScalingGroup':
     post:
-      operationId: CreateAutoScalingGroup
+      x-aws-operation-name: CompleteLifecycleAction
+      operationId: POST CompleteLifecycleAction
+      description: '<p>Completes the lifecycle action for the specified token or instance with the specified result.</p> <p>This step is a part of the procedure for adding a lifecycle hook to an Auto Scaling group:</p> <ol> <li> <p>(Optional) Create a Lambda function and a rule that allows CloudWatch Events to invoke your Lambda function when Amazon EC2 Auto Scaling launches or terminates instances.</p> </li> <li> <p>(Optional) Create a notification target and an IAM role. The target can be either an Amazon SQS queue or an Amazon SNS topic. The role allows Amazon EC2 Auto Scaling to publish lifecycle notifications to the target.</p> </li> <li> <p>Create the lifecycle hook. Specify whether the hook is used when the instances launch or terminate.</p> </li> <li> <p>If you need more time, record the lifecycle action heartbeat to keep the instance in a pending state.</p> </li> <li> <p> <b>If you finish before the timeout period ends, complete the lifecycle action.</b> </p> </li> </ol> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html">Amazon EC2 Auto Scaling Lifecycle Hooks</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CompleteLifecycleActionAnswer'
+        '480':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: LifecycleHookName
+          in: formData
+          required: true
+          description: The name of the lifecycle hook.
+          type: string
+          pattern: '[A-Za-z0-9\-_\/]+'
+          minLength: 1
+          maxLength: 255
+        - name: AutoScalingGroupName
+          in: formData
+          required: true
+          description: The name of the Auto Scaling group.
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: LifecycleActionToken
+          in: formData
+          required: false
+          description: A universally unique identifier (UUID) that identifies a specific lifecycle action associated with an instance. Amazon EC2 Auto Scaling sends this token to the notification target you specified when you created the lifecycle hook.
+          type: string
+          minLength: 36
+          maxLength: 36
+        - name: LifecycleActionResult
+          in: formData
+          required: true
+          description: The action for the group to take. This parameter can be either <code>CONTINUE</code> or <code>ABANDON</code>.
+          type: string
+        - name: InstanceId
+          in: formData
+          required: false
+          description: The ID of the instance.
+          type: string
+          minLength: 1
+          maxLength: 19
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - CompleteLifecycleAction
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=CreateAutoScalingGroup':
+    get:
+      x-aws-operation-name: CreateAutoScalingGroup
+      operationId: GET CreateAutoScalingGroup
       description: '<p>Creates an Auto Scaling group with the specified name and attributes.</p> <p>If you exceed your maximum limit of Auto Scaling groups, the call fails. For information about viewing this limit, see <a>DescribeAccountLimits</a>. For information about updating this limit, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-account-limits.html">Amazon EC2 Auto Scaling Limits</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -624,9 +989,204 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=CreateLaunchConfiguration':
     post:
-      operationId: CreateLaunchConfiguration
+      x-aws-operation-name: CreateAutoScalingGroup
+      operationId: POST CreateAutoScalingGroup
+      description: '<p>Creates an Auto Scaling group with the specified name and attributes.</p> <p>If you exceed your maximum limit of Auto Scaling groups, the call fails. For information about viewing this limit, see <a>DescribeAccountLimits</a>. For information about updating this limit, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-account-limits.html">Amazon EC2 Auto Scaling Limits</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: AlreadyExistsFault
+          schema:
+            $ref: '#/definitions/AlreadyExistsFault'
+        '481':
+          description: LimitExceededFault
+          schema:
+            $ref: '#/definitions/LimitExceededFault'
+        '482':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+        '483':
+          description: ServiceLinkedRoleFailure
+          schema:
+            $ref: '#/definitions/ServiceLinkedRoleFailure'
+      parameters:
+        - name: AutoScalingGroupName
+          in: formData
+          required: true
+          description: The name of the Auto Scaling group. This name must be unique within the scope of your AWS account.
+          type: string
+          minLength: 1
+          maxLength: 255
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: LaunchConfigurationName
+          in: formData
+          required: false
+          description: '<p>The name of the launch configuration. This parameter, a launch template, a mixed instances policy, or an EC2 instance must be specified.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg.html">Creating an Auto Scaling Group Using a Launch Configuration</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: LaunchTemplate.LaunchTemplateId
+          in: formData
+          description: |-
+            <p>Describes a launch template and the launch template version.</p> <p>The launch template that is specified must be configured for use with an Auto Scaling group. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html">Creating a Launch Template for an Auto Scaling Group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>
+            The ID of the launch template. You must specify either a template ID or a template name.
+          type: string
+        - name: LaunchTemplate.LaunchTemplateName
+          in: formData
+          description: |-
+            <p>Describes a launch template and the launch template version.</p> <p>The launch template that is specified must be configured for use with an Auto Scaling group. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html">Creating a Launch Template for an Auto Scaling Group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>
+            The name of the launch template. You must specify either a template name or a template ID.
+          type: string
+        - name: LaunchTemplate.Version
+          in: formData
+          description: |-
+            <p>Describes a launch template and the launch template version.</p> <p>The launch template that is specified must be configured for use with an Auto Scaling group. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html">Creating a Launch Template for an Auto Scaling Group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>
+            The version number, <code>$Latest</code>, or <code>$Default</code>. If the value is <code>$Latest</code>, Amazon EC2 Auto Scaling selects the latest version of the launch template when launching instances. If the value is <code>$Default</code>, Amazon EC2 Auto Scaling selects the default version of the launch template when launching instances. The default value is <code>$Default</code>.
+          type: string
+        - name: MixedInstancesPolicy.LaunchTemplate
+          in: formData
+          description: |-
+            <p>Describes a mixed instances policy for an Auto Scaling group. With mixed instances, your Auto Scaling group can provision a combination of On-Demand Instances and Spot Instances across multiple instance types. Used in combination with <a>CreateAutoScalingGroup</a>. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html">Auto Scaling Groups with Multiple Instance Types and Purchase Options</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>When you create your Auto Scaling group, you can specify a launch configuration or template as a parameter for the top-level object, or you can specify a mixed instances policy, but not both at the same time.</p>
+            <p>The launch template and overrides.</p> <p>This parameter is required when creating an Auto Scaling group with a mixed instances policy, but is not required when updating the group.</p>
+          type: string
+        - name: MixedInstancesPolicy.InstancesDistribution
+          in: formData
+          description: |-
+            <p>Describes a mixed instances policy for an Auto Scaling group. With mixed instances, your Auto Scaling group can provision a combination of On-Demand Instances and Spot Instances across multiple instance types. Used in combination with <a>CreateAutoScalingGroup</a>. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html">Auto Scaling Groups with Multiple Instance Types and Purchase Options</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>When you create your Auto Scaling group, you can specify a launch configuration or template as a parameter for the top-level object, or you can specify a mixed instances policy, but not both at the same time.</p>
+            <p>The instances distribution to use. </p> <p>If you leave this parameter unspecified when creating the group, the default values are used.</p>
+          type: string
+        - name: InstanceId
+          in: formData
+          required: false
+          description: '<p>The ID of the instance used to create a launch configuration for the group. This parameter, a launch configuration, a launch template, or a mixed instances policy must be specified.</p> <p>When you specify an ID of an instance, Amazon EC2 Auto Scaling creates a new launch configuration and associates it with the group. This launch configuration derives its attributes from the specified instance, except for the block device mapping.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-from-instance.html">Create an Auto Scaling Group Using an EC2 Instance</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+          type: string
+          minLength: 1
+          maxLength: 19
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: MinSize
+          in: formData
+          required: true
+          description: The minimum size of the group.
+          type: integer
+        - name: MaxSize
+          in: formData
+          required: true
+          description: The maximum size of the group.
+          type: integer
+        - name: DesiredCapacity
+          in: formData
+          required: false
+          description: 'The number of EC2 instances that should be running in the group. This number must be greater than or equal to the minimum size of the group and less than or equal to the maximum size of the group. If you do not specify a desired capacity, the default is the minimum size of the group.'
+          type: integer
+        - name: DefaultCooldown
+          in: formData
+          required: false
+          description: '<p>The amount of time, in seconds, after a scaling activity completes before another scaling activity can start. The default value is <code>300</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html">Scaling Cooldowns</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+          type: integer
+        - name: AvailabilityZones
+          in: formData
+          required: false
+          description: '<p>One or more Availability Zones for the group. This parameter is optional if you specify one or more subnets for <code>VPCZoneIdentifier</code>.</p> <p>Conditional: If your account supports EC2-Classic and VPC, this parameter is required to launch instances into EC2-Classic.</p>'
+          type: array
+          items:
+            type: string
+        - name: LoadBalancerNames
+          in: formData
+          required: false
+          description: '<p>One or more Classic Load Balancers. To specify an Application Load Balancer or a Network Load Balancer, use <code>TargetGroupARNs</code> instead.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html">Using a Load Balancer With an Auto Scaling Group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+          type: array
+          items:
+            type: string
+        - name: TargetGroupARNs
+          in: formData
+          required: false
+          description: The Amazon Resource Names (ARN) of the target groups.
+          type: array
+          items:
+            type: string
+        - name: HealthCheckType
+          in: formData
+          required: false
+          description: '<p>The service to use for the health checks. The valid values are <code>EC2</code> and <code>ELB</code>. The default value is <code>EC2</code>. If you configure an Auto Scaling group to use ELB health checks, it considers the instance unhealthy if it fails either the EC2 status checks or the load balancer health checks.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html">Health Checks for Auto Scaling Instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+          type: string
+          minLength: 1
+          maxLength: 32
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: HealthCheckGracePeriod
+          in: formData
+          required: false
+          description: '<p>The amount of time, in seconds, that Amazon EC2 Auto Scaling waits before checking the health status of an EC2 instance that has come into service. During this time, any health check failures for the instance are ignored. The default value is <code>0</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html">Health Checks for Auto Scaling Instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>Conditional: This parameter is required if you are adding an <code>ELB</code> health check.</p>'
+          type: integer
+        - name: PlacementGroup
+          in: formData
+          required: false
+          description: 'The name of the placement group into which to launch your instances, if any. A placement group is a logical grouping of instances within a single Availability Zone. You cannot specify multiple Availability Zones and a placement group. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html">Placement Groups</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.'
+          type: string
+          minLength: 1
+          maxLength: 255
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: VPCZoneIdentifier
+          in: formData
+          required: false
+          description: '<p>A comma-separated list of subnet IDs for your virtual private cloud (VPC).</p> <p>If you specify <code>VPCZoneIdentifier</code> with <code>AvailabilityZones</code>, the subnets that you specify for this parameter must reside in those Availability Zones.</p> <p>Conditional: If your account supports EC2-Classic and VPC, this parameter is required to launch instances into a VPC.</p>'
+          type: string
+          minLength: 1
+          maxLength: 2047
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: TerminationPolicies
+          in: formData
+          required: false
+          description: '<p>One or more termination policies used to select the instance to terminate. These policies are executed in the order that they are listed.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html">Controlling Which Instances Auto Scaling Terminates During Scale In</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+          type: array
+          items:
+            type: string
+        - name: NewInstancesProtectedFromScaleIn
+          in: formData
+          required: false
+          description: '<p>Indicates whether newly launched instances are protected from termination by Amazon EC2 Auto Scaling when scaling in.</p> <p>For more information about preventing instances from terminating on scale in, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection">Instance Protection</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+          type: boolean
+        - name: LifecycleHookSpecificationList
+          in: formData
+          required: false
+          description: One or more lifecycle hooks.
+          type: array
+          items:
+            type: string
+        - name: Tags
+          in: formData
+          required: false
+          description: '<p>One or more tags.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-tagging.html">Tagging Auto Scaling Groups and Instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+          type: array
+          items:
+            type: string
+        - name: ServiceLinkedRoleARN
+          in: formData
+          required: false
+          description: 'The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling group uses to call other AWS services on your behalf. By default, Amazon EC2 Auto Scaling uses a service-linked role named AWSServiceRoleForAutoScaling, which it creates if it does not exist. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-service-linked-role.html">Service-Linked Roles</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.'
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - CreateAutoScalingGroup
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=CreateLaunchConfiguration':
+    get:
+      x-aws-operation-name: CreateLaunchConfiguration
+      operationId: GET CreateLaunchConfiguration
       description: '<p>Creates a launch configuration.</p> <p>If you exceed your maximum limit of launch configurations, the call fails. For information about viewing this limit, see <a>DescribeAccountLimits</a>. For information about updating this limit, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-account-limits.html">Amazon EC2 Auto Scaling Limits</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/LaunchConfiguration.html">Launch Configurations</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -795,9 +1355,173 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=CreateOrUpdateTags':
     post:
-      operationId: CreateOrUpdateTags
+      x-aws-operation-name: CreateLaunchConfiguration
+      operationId: POST CreateLaunchConfiguration
+      description: '<p>Creates a launch configuration.</p> <p>If you exceed your maximum limit of launch configurations, the call fails. For information about viewing this limit, see <a>DescribeAccountLimits</a>. For information about updating this limit, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-account-limits.html">Amazon EC2 Auto Scaling Limits</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/LaunchConfiguration.html">Launch Configurations</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: AlreadyExistsFault
+          schema:
+            $ref: '#/definitions/AlreadyExistsFault'
+        '481':
+          description: LimitExceededFault
+          schema:
+            $ref: '#/definitions/LimitExceededFault'
+        '482':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: LaunchConfigurationName
+          in: formData
+          required: true
+          description: The name of the launch configuration. This name must be unique within the scope of your AWS account.
+          type: string
+          minLength: 1
+          maxLength: 255
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: ImageId
+          in: formData
+          required: false
+          description: '<p>The ID of the Amazon Machine Image (AMI) to use to launch your EC2 instances.</p> <p>If you do not specify <code>InstanceId</code>, you must specify <code>ImageId</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html">Finding an AMI</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>'
+          type: string
+          minLength: 1
+          maxLength: 255
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: KeyName
+          in: formData
+          required: false
+          description: 'The name of the key pair. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html">Amazon EC2 Key Pairs</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.'
+          type: string
+          minLength: 1
+          maxLength: 255
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: SecurityGroups
+          in: formData
+          required: false
+          description: '<p>One or more security groups with which to associate the instances.</p> <p>If your instances are launched in EC2-Classic, you can either specify security group names or the security group IDs. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html">Amazon EC2 Security Groups</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p> <p>If your instances are launched into a VPC, specify security group IDs. For more information, see <a href="https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html">Security Groups for Your VPC</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>'
+          type: array
+          items:
+            type: string
+        - name: ClassicLinkVPCId
+          in: formData
+          required: false
+          description: 'The ID of a ClassicLink-enabled VPC to link your EC2-Classic instances to. This parameter is supported only if you are launching EC2-Classic instances. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html">ClassicLink</a> in the <i>Amazon EC2 User Guide for Linux Instances</i> and <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-ClassicLink">Linking EC2-Classic Instances to a VPC</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.'
+          type: string
+          minLength: 1
+          maxLength: 255
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: ClassicLinkVPCSecurityGroups
+          in: formData
+          required: false
+          description: '<p>The IDs of one or more security groups for the specified ClassicLink-enabled VPC. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html">ClassicLink</a> in the <i>Amazon EC2 User Guide for Linux Instances</i> and <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-ClassicLink">Linking EC2-Classic Instances to a VPC</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>Conditional: This parameter is required if you specify a ClassicLink-enabled VPC, and is not supported otherwise.</p>'
+          type: array
+          items:
+            type: string
+        - name: UserData
+          in: formData
+          required: false
+          description: 'The user data to make available to the launched EC2 instances. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html">Instance Metadata and User Data</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.'
+          type: string
+          maxLength: 21847
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: InstanceId
+          in: formData
+          required: false
+          description: '<p>The ID of the instance to use to create the launch configuration. The new launch configuration derives attributes from the instance, except for the block device mapping.</p> <p>If you do not specify <code>InstanceId</code>, you must specify both <code>ImageId</code> and <code>InstanceType</code>.</p> <p>To create a launch configuration with a block device mapping or override any other instance attributes, specify them as part of the same request.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-lc-with-instanceID.html">Create a Launch Configuration Using an EC2 Instance</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+          type: string
+          minLength: 1
+          maxLength: 19
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: InstanceType
+          in: formData
+          required: false
+          description: '<p>The instance type of the EC2 instance.</p> <p>If you do not specify <code>InstanceId</code>, you must specify <code>InstanceType</code>.</p> <p>For information about available instance types, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#AvailableInstanceTypes">Available Instance Types</a> in the <i>Amazon EC2 User Guide for Linux Instances.</i> </p>'
+          type: string
+          minLength: 1
+          maxLength: 255
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: KernelId
+          in: formData
+          required: false
+          description: The ID of the kernel associated with the AMI.
+          type: string
+          minLength: 1
+          maxLength: 255
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: RamdiskId
+          in: formData
+          required: false
+          description: The ID of the RAM disk associated with the AMI.
+          type: string
+          minLength: 1
+          maxLength: 255
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: BlockDeviceMappings
+          in: formData
+          required: false
+          description: 'One or more mappings that specify how block devices are exposed to the instance. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html">Block Device Mapping</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.'
+          type: array
+          items:
+            type: string
+        - name: InstanceMonitoring.Enabled
+          in: formData
+          description: |-
+            Describes whether detailed monitoring is enabled for the Auto Scaling instances.
+            If <code>true</code>, detailed monitoring is enabled. Otherwise, basic monitoring is enabled.
+          type: string
+        - name: SpotPrice
+          in: formData
+          required: false
+          description: 'The maximum hourly price to be paid for any Spot Instance launched to fulfill the request. Spot Instances are launched when the price you specify exceeds the current Spot market price. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-launch-spot-instances.html">Launching Spot Instances in Your Auto Scaling Group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.'
+          type: string
+          minLength: 1
+          maxLength: 255
+        - name: IamInstanceProfile
+          in: formData
+          required: false
+          description: '<p>The name or the Amazon Resource Name (ARN) of the instance profile associated with the IAM role for the instance.</p> <p>EC2 instances launched with an IAM role automatically have AWS security credentials available. You can use IAM roles with Amazon EC2 Auto Scaling to automatically enable applications running on your EC2 instances to securely access other AWS resources. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/us-iam-role.html">Use an IAM Role for Applications That Run on Amazon EC2 Instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: EbsOptimized
+          in: formData
+          required: false
+          description: 'Indicates whether the instance is optimized for Amazon EBS I/O. By default, the instance is not optimized for EBS I/O. The optimization provides dedicated throughput to Amazon EBS and an optimized configuration stack to provide optimal I/O performance. This optimization is not available with all instance types. Additional usage charges apply. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html">Amazon EBS-Optimized Instances</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.'
+          type: boolean
+        - name: AssociatePublicIpAddress
+          in: formData
+          required: false
+          description: '<p>Used for groups that launch instances into a virtual private cloud (VPC). Specifies whether to assign a public IP address to each instance. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html">Launching Auto Scaling Instances in a VPC</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>If you specify this parameter, be sure to specify at least one subnet when you create your group.</p> <p>Default: If the instance is launched into a default subnet, the default is to assign a public IP address. If the instance is launched into a nondefault subnet, the default is not to assign a public IP address.</p>'
+          type: boolean
+        - name: PlacementTenancy
+          in: formData
+          required: false
+          description: '<p>The tenancy of the instance. An instance with a tenancy of <code>dedicated</code> runs on single-tenant hardware and can only be launched into a VPC.</p> <p>To launch Dedicated Instances into a shared tenancy VPC (a VPC with the instance placement tenancy attribute set to <code>default</code>), you must set the value of this parameter to <code>dedicated</code>.</p> <p>If you specify this parameter, be sure to specify at least one subnet when you create your group.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html">Launching Auto Scaling Instances in a VPC</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>Valid values: <code>default</code> | <code>dedicated</code> </p>'
+          type: string
+          minLength: 1
+          maxLength: 64
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - CreateLaunchConfiguration
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=CreateOrUpdateTags':
+    get:
+      x-aws-operation-name: CreateOrUpdateTags
+      operationId: GET CreateOrUpdateTags
       description: '<p>Creates or updates tags for the specified Auto Scaling group.</p> <p>When you specify a tag with a key that already exists, the operation overwrites the previous tag definition, and you do not get an error message.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-tagging.html">Tagging Auto Scaling Groups and Instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -846,9 +1570,53 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DeleteAutoScalingGroup':
     post:
-      operationId: DeleteAutoScalingGroup
+      x-aws-operation-name: CreateOrUpdateTags
+      operationId: POST CreateOrUpdateTags
+      description: '<p>Creates or updates tags for the specified Auto Scaling group.</p> <p>When you specify a tag with a key that already exists, the operation overwrites the previous tag definition, and you do not get an error message.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-tagging.html">Tagging Auto Scaling Groups and Instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: LimitExceededFault
+          schema:
+            $ref: '#/definitions/LimitExceededFault'
+        '481':
+          description: AlreadyExistsFault
+          schema:
+            $ref: '#/definitions/AlreadyExistsFault'
+        '482':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+        '483':
+          description: ResourceInUseFault
+          schema:
+            $ref: '#/definitions/ResourceInUseFault'
+      parameters:
+        - name: Tags
+          in: formData
+          required: true
+          description: One or more tags.
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - CreateOrUpdateTags
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=DeleteAutoScalingGroup':
+    get:
+      x-aws-operation-name: DeleteAutoScalingGroup
+      operationId: GET DeleteAutoScalingGroup
       description: '<p>Deletes the specified Auto Scaling group.</p> <p>If the group has instances or scaling activities in progress, you must specify the option to force the deletion in order for it to succeed.</p> <p>If the group has policies, deleting the group deletes the policies, the underlying alarm actions, and any alarm that no longer has an associated action.</p> <p>To remove instances from the Auto Scaling group before deleting it, call <a>DetachInstances</a> with the list of instances and the option to decrement the desired capacity. This ensures that Amazon EC2 Auto Scaling does not launch replacement instances.</p> <p>To terminate all instances before deleting the Auto Scaling group, call <a>UpdateAutoScalingGroup</a> and set the minimum size and desired capacity of the Auto Scaling group to zero.</p>'
       responses:
         '200':
@@ -899,9 +1667,55 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DeleteLaunchConfiguration':
     post:
-      operationId: DeleteLaunchConfiguration
+      x-aws-operation-name: DeleteAutoScalingGroup
+      operationId: POST DeleteAutoScalingGroup
+      description: '<p>Deletes the specified Auto Scaling group.</p> <p>If the group has instances or scaling activities in progress, you must specify the option to force the deletion in order for it to succeed.</p> <p>If the group has policies, deleting the group deletes the policies, the underlying alarm actions, and any alarm that no longer has an associated action.</p> <p>To remove instances from the Auto Scaling group before deleting it, call <a>DetachInstances</a> with the list of instances and the option to decrement the desired capacity. This ensures that Amazon EC2 Auto Scaling does not launch replacement instances.</p> <p>To terminate all instances before deleting the Auto Scaling group, call <a>UpdateAutoScalingGroup</a> and set the minimum size and desired capacity of the Auto Scaling group to zero.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ScalingActivityInProgressFault
+          schema:
+            $ref: '#/definitions/ScalingActivityInProgressFault'
+        '481':
+          description: ResourceInUseFault
+          schema:
+            $ref: '#/definitions/ResourceInUseFault'
+        '482':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: AutoScalingGroupName
+          in: formData
+          required: true
+          description: The name of the Auto Scaling group.
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: ForceDelete
+          in: formData
+          required: false
+          description: 'Specifies that the group is to be deleted along with all instances associated with the group, without waiting for all instances to be terminated. This parameter also deletes any lifecycle actions associated with the group.'
+          type: boolean
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeleteAutoScalingGroup
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=DeleteLaunchConfiguration':
+    get:
+      x-aws-operation-name: DeleteLaunchConfiguration
+      operationId: GET DeleteLaunchConfiguration
       description: '<p>Deletes the specified launch configuration.</p> <p>The launch configuration must not be attached to an Auto Scaling group. When this call completes, the launch configuration is no longer available for use.</p>'
       responses:
         '200':
@@ -943,9 +1757,46 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DeleteLifecycleHook':
     post:
-      operationId: DeleteLifecycleHook
+      x-aws-operation-name: DeleteLaunchConfiguration
+      operationId: POST DeleteLaunchConfiguration
+      description: '<p>Deletes the specified launch configuration.</p> <p>The launch configuration must not be attached to an Auto Scaling group. When this call completes, the launch configuration is no longer available for use.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceInUseFault
+          schema:
+            $ref: '#/definitions/ResourceInUseFault'
+        '481':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: LaunchConfigurationName
+          in: formData
+          required: true
+          description: The name of the launch configuration.
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeleteLaunchConfiguration
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=DeleteLifecycleHook':
+    get:
+      x-aws-operation-name: DeleteLifecycleHook
+      operationId: GET DeleteLifecycleHook
       description: '<p>Deletes the specified lifecycle hook.</p> <p>If there are any outstanding lifecycle actions, they are completed first (<code>ABANDON</code> for launching instances, <code>CONTINUE</code> for terminating instances).</p>'
       responses:
         '200':
@@ -993,9 +1844,52 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DeleteNotificationConfiguration':
     post:
-      operationId: DeleteNotificationConfiguration
+      x-aws-operation-name: DeleteLifecycleHook
+      operationId: POST DeleteLifecycleHook
+      description: '<p>Deletes the specified lifecycle hook.</p> <p>If there are any outstanding lifecycle actions, they are completed first (<code>ABANDON</code> for launching instances, <code>CONTINUE</code> for terminating instances).</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteLifecycleHookAnswer'
+        '480':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: LifecycleHookName
+          in: formData
+          required: true
+          description: The name of the lifecycle hook.
+          type: string
+          pattern: '[A-Za-z0-9\-_\/]+'
+          minLength: 1
+          maxLength: 255
+        - name: AutoScalingGroupName
+          in: formData
+          required: true
+          description: The name of the Auto Scaling group.
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeleteLifecycleHook
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=DeleteNotificationConfiguration':
+    get:
+      x-aws-operation-name: DeleteNotificationConfiguration
+      operationId: GET DeleteNotificationConfiguration
       description: Deletes the specified notification.
       responses:
         '200':
@@ -1041,9 +1935,50 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DeletePolicy':
     post:
-      operationId: DeletePolicy
+      x-aws-operation-name: DeleteNotificationConfiguration
+      operationId: POST DeleteNotificationConfiguration
+      description: Deletes the specified notification.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: AutoScalingGroupName
+          in: formData
+          required: true
+          description: The name of the Auto Scaling group.
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: TopicARN
+          in: formData
+          required: true
+          description: The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (Amazon SNS) topic.
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeleteNotificationConfiguration
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=DeletePolicy':
+    get:
+      x-aws-operation-name: DeletePolicy
+      operationId: GET DeletePolicy
       description: '<p>Deletes the specified scaling policy.</p> <p>Deleting a policy deletes the underlying alarm action, but does not delete the alarm, even if it no longer has an associated action.</p>'
       responses:
         '200':
@@ -1093,9 +2028,54 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DeleteScheduledAction':
     post:
-      operationId: DeleteScheduledAction
+      x-aws-operation-name: DeletePolicy
+      operationId: POST DeletePolicy
+      description: '<p>Deletes the specified scaling policy.</p> <p>Deleting a policy deletes the underlying alarm action, but does not delete the alarm, even if it no longer has an associated action.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+        '481':
+          description: ServiceLinkedRoleFailure
+          schema:
+            $ref: '#/definitions/ServiceLinkedRoleFailure'
+      parameters:
+        - name: AutoScalingGroupName
+          in: formData
+          required: false
+          description: The name of the Auto Scaling group.
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: PolicyName
+          in: formData
+          required: true
+          description: The name or Amazon Resource Name (ARN) of the policy.
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeletePolicy
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=DeleteScheduledAction':
+    get:
+      x-aws-operation-name: DeleteScheduledAction
+      operationId: GET DeleteScheduledAction
       description: Deletes the specified scheduled action.
       responses:
         '200':
@@ -1141,9 +2121,50 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DeleteTags':
     post:
-      operationId: DeleteTags
+      x-aws-operation-name: DeleteScheduledAction
+      operationId: POST DeleteScheduledAction
+      description: Deletes the specified scheduled action.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: AutoScalingGroupName
+          in: formData
+          required: true
+          description: The name of the Auto Scaling group.
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: ScheduledActionName
+          in: formData
+          required: true
+          description: The name of the action to delete.
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeleteScheduledAction
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=DeleteTags':
+    get:
+      x-aws-operation-name: DeleteTags
+      operationId: GET DeleteTags
       description: Deletes the specified tags.
       responses:
         '200':
@@ -1184,9 +2205,45 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeAccountLimits':
     post:
-      operationId: DescribeAccountLimits
+      x-aws-operation-name: DeleteTags
+      operationId: POST DeleteTags
+      description: Deletes the specified tags.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+        '481':
+          description: ResourceInUseFault
+          schema:
+            $ref: '#/definitions/ResourceInUseFault'
+      parameters:
+        - name: Tags
+          in: formData
+          required: true
+          description: One or more tags.
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeleteTags
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=DescribeAccountLimits':
+    get:
+      x-aws-operation-name: DescribeAccountLimits
+      operationId: GET DescribeAccountLimits
       description: '<p>Describes the current Amazon EC2 Auto Scaling resource limits for your AWS account.</p> <p>For information about requesting an increase in these limits, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-account-limits.html">Amazon EC2 Auto Scaling Limits</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -1218,9 +2275,36 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeAdjustmentTypes':
     post:
-      operationId: DescribeAdjustmentTypes
+      x-aws-operation-name: DescribeAccountLimits
+      operationId: POST DescribeAccountLimits
+      description: '<p>Describes the current Amazon EC2 Auto Scaling resource limits for your AWS account.</p> <p>For information about requesting an increase in these limits, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-account-limits.html">Amazon EC2 Auto Scaling Limits</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeAccountLimitsAnswer'
+        '480':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeAccountLimits
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=DescribeAdjustmentTypes':
+    get:
+      x-aws-operation-name: DescribeAdjustmentTypes
+      operationId: GET DescribeAdjustmentTypes
       description: Describes the policy adjustment types for use with <a>PutScalingPolicy</a>.
       responses:
         '200':
@@ -1252,9 +2336,36 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeAutoScalingGroups':
     post:
-      operationId: DescribeAutoScalingGroups
+      x-aws-operation-name: DescribeAdjustmentTypes
+      operationId: POST DescribeAdjustmentTypes
+      description: Describes the policy adjustment types for use with <a>PutScalingPolicy</a>.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeAdjustmentTypesAnswer'
+        '480':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeAdjustmentTypes
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=DescribeAutoScalingGroups':
+    get:
+      x-aws-operation-name: DescribeAutoScalingGroups
+      operationId: GET DescribeAutoScalingGroups
       description: Describes one or more Auto Scaling groups.
       responses:
         '200':
@@ -1308,9 +2419,58 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeAutoScalingInstances':
     post:
-      operationId: DescribeAutoScalingInstances
+      x-aws-operation-name: DescribeAutoScalingGroups
+      operationId: POST DescribeAutoScalingGroups
+      description: Describes one or more Auto Scaling groups.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AutoScalingGroupsType'
+        '480':
+          description: InvalidNextToken
+          schema:
+            $ref: '#/definitions/InvalidNextToken'
+        '481':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: AutoScalingGroupNames
+          in: formData
+          required: false
+          description: '<p>The names of the Auto Scaling groups. Each name can be a maximum of 1600 characters. By default, you can only specify up to 50 names. You can optionally increase this limit using the <code>MaxRecords</code> parameter. </p> <p>If you omit this parameter, all Auto Scaling groups are described.</p>'
+          type: array
+          items:
+            type: string
+        - name: NextToken
+          in: formData
+          required: false
+          description: The token for the next set of items to return. (You received this token from a previous call.)
+          type: string
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: MaxRecords
+          in: formData
+          required: false
+          description: 'The maximum number of items to return with this call. The default value is <code>50</code> and the maximum value is <code>100</code>. '
+          type: integer
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeAutoScalingGroups
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=DescribeAutoScalingInstances':
+    get:
+      x-aws-operation-name: DescribeAutoScalingInstances
+      operationId: GET DescribeAutoScalingInstances
       description: Describes one or more Auto Scaling instances.
       responses:
         '200':
@@ -1364,9 +2524,58 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeAutoScalingNotificationTypes':
     post:
-      operationId: DescribeAutoScalingNotificationTypes
+      x-aws-operation-name: DescribeAutoScalingInstances
+      operationId: POST DescribeAutoScalingInstances
+      description: Describes one or more Auto Scaling instances.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AutoScalingInstancesType'
+        '480':
+          description: InvalidNextToken
+          schema:
+            $ref: '#/definitions/InvalidNextToken'
+        '481':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: InstanceIds
+          in: formData
+          required: false
+          description: 'The IDs of the instances. You can specify up to <code>MaxRecords</code> IDs. If you omit this parameter, all Auto Scaling instances are described. If you specify an ID that does not exist, it is ignored with no error.'
+          type: array
+          items:
+            type: string
+        - name: MaxRecords
+          in: formData
+          required: false
+          description: The maximum number of items to return with this call. The default value is <code>50</code> and the maximum value is <code>50</code>.
+          type: integer
+        - name: NextToken
+          in: formData
+          required: false
+          description: The token for the next set of items to return. (You received this token from a previous call.)
+          type: string
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeAutoScalingInstances
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=DescribeAutoScalingNotificationTypes':
+    get:
+      x-aws-operation-name: DescribeAutoScalingNotificationTypes
+      operationId: GET DescribeAutoScalingNotificationTypes
       description: Describes the notification types that are supported by Amazon EC2 Auto Scaling.
       responses:
         '200':
@@ -1398,9 +2607,36 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeLaunchConfigurations':
     post:
-      operationId: DescribeLaunchConfigurations
+      x-aws-operation-name: DescribeAutoScalingNotificationTypes
+      operationId: POST DescribeAutoScalingNotificationTypes
+      description: Describes the notification types that are supported by Amazon EC2 Auto Scaling.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeAutoScalingNotificationTypesAnswer'
+        '480':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeAutoScalingNotificationTypes
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=DescribeLaunchConfigurations':
+    get:
+      x-aws-operation-name: DescribeLaunchConfigurations
+      operationId: GET DescribeLaunchConfigurations
       description: Describes one or more launch configurations.
       responses:
         '200':
@@ -1454,9 +2690,58 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeLifecycleHookTypes':
     post:
-      operationId: DescribeLifecycleHookTypes
+      x-aws-operation-name: DescribeLaunchConfigurations
+      operationId: POST DescribeLaunchConfigurations
+      description: Describes one or more launch configurations.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/LaunchConfigurationsType'
+        '480':
+          description: InvalidNextToken
+          schema:
+            $ref: '#/definitions/InvalidNextToken'
+        '481':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: LaunchConfigurationNames
+          in: formData
+          required: false
+          description: 'The launch configuration names. If you omit this parameter, all launch configurations are described.'
+          type: array
+          items:
+            type: string
+        - name: NextToken
+          in: formData
+          required: false
+          description: The token for the next set of items to return. (You received this token from a previous call.)
+          type: string
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: MaxRecords
+          in: formData
+          required: false
+          description: The maximum number of items to return with this call. The default value is <code>50</code> and the maximum value is <code>100</code>.
+          type: integer
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeLaunchConfigurations
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=DescribeLifecycleHookTypes':
+    get:
+      x-aws-operation-name: DescribeLifecycleHookTypes
+      operationId: GET DescribeLifecycleHookTypes
       description: '<p>Describes the available types of lifecycle hooks.</p> <p>The following hook types are supported:</p> <ul> <li> <p>autoscaling:EC2_INSTANCE_LAUNCHING</p> </li> <li> <p>autoscaling:EC2_INSTANCE_TERMINATING</p> </li> </ul>'
       responses:
         '200':
@@ -1488,9 +2773,36 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeLifecycleHooks':
     post:
-      operationId: DescribeLifecycleHooks
+      x-aws-operation-name: DescribeLifecycleHookTypes
+      operationId: POST DescribeLifecycleHookTypes
+      description: '<p>Describes the available types of lifecycle hooks.</p> <p>The following hook types are supported:</p> <ul> <li> <p>autoscaling:EC2_INSTANCE_LAUNCHING</p> </li> <li> <p>autoscaling:EC2_INSTANCE_TERMINATING</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeLifecycleHookTypesAnswer'
+        '480':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeLifecycleHookTypes
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=DescribeLifecycleHooks':
+    get:
+      x-aws-operation-name: DescribeLifecycleHooks
+      operationId: GET DescribeLifecycleHooks
       description: Describes the lifecycle hooks for the specified Auto Scaling group.
       responses:
         '200':
@@ -1537,9 +2849,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeLoadBalancerTargetGroups':
     post:
-      operationId: DescribeLoadBalancerTargetGroups
+      x-aws-operation-name: DescribeLifecycleHooks
+      operationId: POST DescribeLifecycleHooks
+      description: Describes the lifecycle hooks for the specified Auto Scaling group.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeLifecycleHooksAnswer'
+        '480':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: AutoScalingGroupName
+          in: formData
+          required: true
+          description: The name of the Auto Scaling group.
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: LifecycleHookNames
+          in: formData
+          required: false
+          description: 'The names of one or more lifecycle hooks. If you omit this parameter, all lifecycle hooks are described.'
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeLifecycleHooks
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=DescribeLoadBalancerTargetGroups':
+    get:
+      x-aws-operation-name: DescribeLoadBalancerTargetGroups
+      operationId: GET DescribeLoadBalancerTargetGroups
       description: Describes the target groups for the specified Auto Scaling group.
       responses:
         '200':
@@ -1590,9 +2944,55 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeLoadBalancers':
     post:
-      operationId: DescribeLoadBalancers
+      x-aws-operation-name: DescribeLoadBalancerTargetGroups
+      operationId: POST DescribeLoadBalancerTargetGroups
+      description: Describes the target groups for the specified Auto Scaling group.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeLoadBalancerTargetGroupsResponse'
+        '480':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: AutoScalingGroupName
+          in: formData
+          required: true
+          description: The name of the Auto Scaling group.
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: NextToken
+          in: formData
+          required: false
+          description: The token for the next set of items to return. (You received this token from a previous call.)
+          type: string
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: MaxRecords
+          in: formData
+          required: false
+          description: The maximum number of items to return with this call. The default value is <code>100</code> and the maximum value is <code>100</code>.
+          type: integer
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeLoadBalancerTargetGroups
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=DescribeLoadBalancers':
+    get:
+      x-aws-operation-name: DescribeLoadBalancers
+      operationId: GET DescribeLoadBalancers
       description: '<p>Describes the load balancers for the specified Auto Scaling group.</p> <p>This operation describes only Classic Load Balancers. If you have Application Load Balancers or Network Load Balancers, use <a>DescribeLoadBalancerTargetGroups</a> instead.</p>'
       responses:
         '200':
@@ -1643,9 +3043,55 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeMetricCollectionTypes':
     post:
-      operationId: DescribeMetricCollectionTypes
+      x-aws-operation-name: DescribeLoadBalancers
+      operationId: POST DescribeLoadBalancers
+      description: '<p>Describes the load balancers for the specified Auto Scaling group.</p> <p>This operation describes only Classic Load Balancers. If you have Application Load Balancers or Network Load Balancers, use <a>DescribeLoadBalancerTargetGroups</a> instead.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeLoadBalancersResponse'
+        '480':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: AutoScalingGroupName
+          in: formData
+          required: true
+          description: The name of the Auto Scaling group.
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: NextToken
+          in: formData
+          required: false
+          description: The token for the next set of items to return. (You received this token from a previous call.)
+          type: string
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: MaxRecords
+          in: formData
+          required: false
+          description: The maximum number of items to return with this call. The default value is <code>100</code> and the maximum value is <code>100</code>.
+          type: integer
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeLoadBalancers
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=DescribeMetricCollectionTypes':
+    get:
+      x-aws-operation-name: DescribeMetricCollectionTypes
+      operationId: GET DescribeMetricCollectionTypes
       description: <p>Describes the available CloudWatch metrics for Amazon EC2 Auto Scaling.</p> <p>The <code>GroupStandbyInstances</code> metric is not returned by default. You must explicitly request this metric when calling <a>EnableMetricsCollection</a>.</p>
       responses:
         '200':
@@ -1677,9 +3123,36 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeNotificationConfigurations':
     post:
-      operationId: DescribeNotificationConfigurations
+      x-aws-operation-name: DescribeMetricCollectionTypes
+      operationId: POST DescribeMetricCollectionTypes
+      description: <p>Describes the available CloudWatch metrics for Amazon EC2 Auto Scaling.</p> <p>The <code>GroupStandbyInstances</code> metric is not returned by default. You must explicitly request this metric when calling <a>EnableMetricsCollection</a>.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeMetricCollectionTypesAnswer'
+        '480':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeMetricCollectionTypes
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=DescribeNotificationConfigurations':
+    get:
+      x-aws-operation-name: DescribeNotificationConfigurations
+      operationId: GET DescribeNotificationConfigurations
       description: Describes the notification actions associated with the specified Auto Scaling group.
       responses:
         '200':
@@ -1733,9 +3206,58 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribePolicies':
     post:
-      operationId: DescribePolicies
+      x-aws-operation-name: DescribeNotificationConfigurations
+      operationId: POST DescribeNotificationConfigurations
+      description: Describes the notification actions associated with the specified Auto Scaling group.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeNotificationConfigurationsAnswer'
+        '480':
+          description: InvalidNextToken
+          schema:
+            $ref: '#/definitions/InvalidNextToken'
+        '481':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: AutoScalingGroupNames
+          in: formData
+          required: false
+          description: The name of the Auto Scaling group.
+          type: array
+          items:
+            type: string
+        - name: NextToken
+          in: formData
+          required: false
+          description: The token for the next set of items to return. (You received this token from a previous call.)
+          type: string
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: MaxRecords
+          in: formData
+          required: false
+          description: The maximum number of items to return with this call. The default value is <code>50</code> and the maximum value is <code>100</code>.
+          type: integer
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeNotificationConfigurations
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=DescribePolicies':
+    get:
+      x-aws-operation-name: DescribePolicies
+      operationId: GET DescribePolicies
       description: Describes the policies for the specified Auto Scaling group.
       responses:
         '200':
@@ -1808,9 +3330,77 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeScalingActivities':
     post:
-      operationId: DescribeScalingActivities
+      x-aws-operation-name: DescribePolicies
+      operationId: POST DescribePolicies
+      description: Describes the policies for the specified Auto Scaling group.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PoliciesType'
+        '480':
+          description: InvalidNextToken
+          schema:
+            $ref: '#/definitions/InvalidNextToken'
+        '481':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+        '482':
+          description: ServiceLinkedRoleFailure
+          schema:
+            $ref: '#/definitions/ServiceLinkedRoleFailure'
+      parameters:
+        - name: AutoScalingGroupName
+          in: formData
+          required: false
+          description: The name of the Auto Scaling group.
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: PolicyNames
+          in: formData
+          required: false
+          description: 'The names of one or more policies. If you omit this parameter, all policies are described. If a group name is provided, the results are limited to that group. This list is limited to 50 items. If you specify an unknown policy name, it is ignored with no error.'
+          type: array
+          items:
+            type: string
+        - name: PolicyTypes
+          in: formData
+          required: false
+          description: 'One or more policy types. The valid values are <code>SimpleScaling</code>, <code>StepScaling</code>, and <code>TargetTrackingScaling</code>.'
+          type: array
+          items:
+            type: string
+        - name: NextToken
+          in: formData
+          required: false
+          description: The token for the next set of items to return. (You received this token from a previous call.)
+          type: string
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: MaxRecords
+          in: formData
+          required: false
+          description: The maximum number of items to be returned with each call. The default value is <code>50</code> and the maximum value is <code>100</code>.
+          type: integer
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribePolicies
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=DescribeScalingActivities':
+    get:
+      x-aws-operation-name: DescribeScalingActivities
+      operationId: GET DescribeScalingActivities
       description: Describes one or more scaling activities for the specified Auto Scaling group.
       responses:
         '200':
@@ -1872,9 +3462,66 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeScalingProcessTypes':
     post:
-      operationId: DescribeScalingProcessTypes
+      x-aws-operation-name: DescribeScalingActivities
+      operationId: POST DescribeScalingActivities
+      description: Describes one or more scaling activities for the specified Auto Scaling group.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ActivitiesType'
+        '480':
+          description: InvalidNextToken
+          schema:
+            $ref: '#/definitions/InvalidNextToken'
+        '481':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: ActivityIds
+          in: formData
+          required: false
+          description: 'The activity IDs of the desired scaling activities. You can specify up to 50 IDs. If you omit this parameter, all activities for the past six weeks are described. If unknown activities are requested, they are ignored with no error. If you specify an Auto Scaling group, the results are limited to that group.'
+          type: array
+          items:
+            type: string
+        - name: AutoScalingGroupName
+          in: formData
+          required: false
+          description: The name of the Auto Scaling group.
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: MaxRecords
+          in: formData
+          required: false
+          description: The maximum number of items to return with this call. The default value is <code>100</code> and the maximum value is <code>100</code>.
+          type: integer
+        - name: NextToken
+          in: formData
+          required: false
+          description: The token for the next set of items to return. (You received this token from a previous call.)
+          type: string
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeScalingActivities
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=DescribeScalingProcessTypes':
+    get:
+      x-aws-operation-name: DescribeScalingProcessTypes
+      operationId: GET DescribeScalingProcessTypes
       description: Describes the scaling process types for use with <a>ResumeProcesses</a> and <a>SuspendProcesses</a>.
       responses:
         '200':
@@ -1906,9 +3553,36 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeScheduledActions':
     post:
-      operationId: DescribeScheduledActions
+      x-aws-operation-name: DescribeScalingProcessTypes
+      operationId: POST DescribeScalingProcessTypes
+      description: Describes the scaling process types for use with <a>ResumeProcesses</a> and <a>SuspendProcesses</a>.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ProcessesType'
+        '480':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeScalingProcessTypes
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=DescribeScheduledActions':
+    get:
+      x-aws-operation-name: DescribeScheduledActions
+      operationId: GET DescribeScheduledActions
       description: 'Describes the actions scheduled for your Auto Scaling group that haven''t run. To describe the actions that have already run, use <a>DescribeScalingActivities</a>.'
       responses:
         '200':
@@ -1982,9 +3656,78 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeTags':
     post:
-      operationId: DescribeTags
+      x-aws-operation-name: DescribeScheduledActions
+      operationId: POST DescribeScheduledActions
+      description: 'Describes the actions scheduled for your Auto Scaling group that haven''t run. To describe the actions that have already run, use <a>DescribeScalingActivities</a>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ScheduledActionsType'
+        '480':
+          description: InvalidNextToken
+          schema:
+            $ref: '#/definitions/InvalidNextToken'
+        '481':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: AutoScalingGroupName
+          in: formData
+          required: false
+          description: The name of the Auto Scaling group.
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: ScheduledActionNames
+          in: formData
+          required: false
+          description: 'The names of one or more scheduled actions. You can specify up to 50 actions. If you omit this parameter, all scheduled actions are described. If you specify an unknown scheduled action, it is ignored with no error.'
+          type: array
+          items:
+            type: string
+        - name: StartTime
+          in: formData
+          required: false
+          description: 'The earliest scheduled start time to return. If scheduled action names are provided, this parameter is ignored.'
+          type: string
+          format: date-time
+        - name: EndTime
+          in: formData
+          required: false
+          description: 'The latest scheduled start time to return. If scheduled action names are provided, this parameter is ignored.'
+          type: string
+          format: date-time
+        - name: NextToken
+          in: formData
+          required: false
+          description: The token for the next set of items to return. (You received this token from a previous call.)
+          type: string
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: MaxRecords
+          in: formData
+          required: false
+          description: The maximum number of items to return with this call. The default value is <code>50</code> and the maximum value is <code>100</code>.
+          type: integer
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeScheduledActions
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=DescribeTags':
+    get:
+      x-aws-operation-name: DescribeTags
+      operationId: GET DescribeTags
       description: '<p>Describes the specified tags.</p> <p>You can use filters to limit the results. For example, you can query for the tags for a specific Auto Scaling group. You can specify multiple values for a filter. A tag must match at least one of the specified values for it to be included in the results.</p> <p>You can also specify multiple filters. The result includes information for a particular tag only if it matches all the filters. If there''s no match, no special message is returned.</p>'
       responses:
         '200':
@@ -2038,9 +3781,58 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeTerminationPolicyTypes':
     post:
-      operationId: DescribeTerminationPolicyTypes
+      x-aws-operation-name: DescribeTags
+      operationId: POST DescribeTags
+      description: '<p>Describes the specified tags.</p> <p>You can use filters to limit the results. For example, you can query for the tags for a specific Auto Scaling group. You can specify multiple values for a filter. A tag must match at least one of the specified values for it to be included in the results.</p> <p>You can also specify multiple filters. The result includes information for a particular tag only if it matches all the filters. If there''s no match, no special message is returned.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TagsType'
+        '480':
+          description: InvalidNextToken
+          schema:
+            $ref: '#/definitions/InvalidNextToken'
+        '481':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: Filters
+          in: formData
+          required: false
+          description: 'One or more filters to scope the tags to return. The maximum number of filters per filter type (for example, <code>auto-scaling-group</code>) is 1000.'
+          type: array
+          items:
+            type: string
+        - name: NextToken
+          in: formData
+          required: false
+          description: The token for the next set of items to return. (You received this token from a previous call.)
+          type: string
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: MaxRecords
+          in: formData
+          required: false
+          description: The maximum number of items to return with this call. The default value is <code>50</code> and the maximum value is <code>100</code>.
+          type: integer
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeTags
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=DescribeTerminationPolicyTypes':
+    get:
+      x-aws-operation-name: DescribeTerminationPolicyTypes
+      operationId: GET DescribeTerminationPolicyTypes
       description: '<p>Describes the termination policies supported by Amazon EC2 Auto Scaling.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html">Controlling Which Auto Scaling Instances Terminate During Scale In</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -2072,9 +3864,36 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DetachInstances':
     post:
-      operationId: DetachInstances
+      x-aws-operation-name: DescribeTerminationPolicyTypes
+      operationId: POST DescribeTerminationPolicyTypes
+      description: '<p>Describes the termination policies supported by Amazon EC2 Auto Scaling.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html">Controlling Which Auto Scaling Instances Terminate During Scale In</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeTerminationPolicyTypesAnswer'
+        '480':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeTerminationPolicyTypes
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=DetachInstances':
+    get:
+      x-aws-operation-name: DetachInstances
+      operationId: GET DetachInstances
       description: '<p>Removes one or more instances from the specified Auto Scaling group.</p> <p>After the instances are detached, you can manage them independent of the Auto Scaling group.</p> <p>If you do not specify the option to decrement the desired capacity, Amazon EC2 Auto Scaling launches instances to replace the ones that are detached.</p> <p>If there is a Classic Load Balancer attached to the Auto Scaling group, the instances are deregistered from the load balancer. If there are target groups attached to the Auto Scaling group, the instances are deregistered from the target groups.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/detach-instance-asg.html">Detach EC2 Instances from Your Auto Scaling Group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -2126,9 +3945,56 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DetachLoadBalancerTargetGroups':
     post:
-      operationId: DetachLoadBalancerTargetGroups
+      x-aws-operation-name: DetachInstances
+      operationId: POST DetachInstances
+      description: '<p>Removes one or more instances from the specified Auto Scaling group.</p> <p>After the instances are detached, you can manage them independent of the Auto Scaling group.</p> <p>If you do not specify the option to decrement the desired capacity, Amazon EC2 Auto Scaling launches instances to replace the ones that are detached.</p> <p>If there is a Classic Load Balancer attached to the Auto Scaling group, the instances are deregistered from the load balancer. If there are target groups attached to the Auto Scaling group, the instances are deregistered from the target groups.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/detach-instance-asg.html">Detach EC2 Instances from Your Auto Scaling Group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DetachInstancesAnswer'
+        '480':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: InstanceIds
+          in: formData
+          required: false
+          description: The IDs of the instances. You can specify up to 20 instances.
+          type: array
+          items:
+            type: string
+        - name: AutoScalingGroupName
+          in: formData
+          required: true
+          description: The name of the Auto Scaling group.
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: ShouldDecrementDesiredCapacity
+          in: formData
+          required: true
+          description: Indicates whether the Auto Scaling group decrements the desired capacity value by the number of instances detached.
+          type: boolean
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DetachInstances
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=DetachLoadBalancerTargetGroups':
+    get:
+      x-aws-operation-name: DetachLoadBalancerTargetGroups
+      operationId: GET DetachLoadBalancerTargetGroups
       description: Detaches one or more target groups from the specified Auto Scaling group.
       responses:
         '200':
@@ -2175,9 +4041,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DetachLoadBalancers':
     post:
-      operationId: DetachLoadBalancers
+      x-aws-operation-name: DetachLoadBalancerTargetGroups
+      operationId: POST DetachLoadBalancerTargetGroups
+      description: Detaches one or more target groups from the specified Auto Scaling group.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DetachLoadBalancerTargetGroupsResultType'
+        '480':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: AutoScalingGroupName
+          in: formData
+          required: true
+          description: The name of the Auto Scaling group.
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: TargetGroupARNs
+          in: formData
+          required: true
+          description: The Amazon Resource Names (ARN) of the target groups. You can specify up to 10 target groups.
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DetachLoadBalancerTargetGroups
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=DetachLoadBalancers':
+    get:
+      x-aws-operation-name: DetachLoadBalancers
+      operationId: GET DetachLoadBalancers
       description: '<p>Detaches one or more Classic Load Balancers from the specified Auto Scaling group.</p> <p>This operation detaches only Classic Load Balancers. If you have Application Load Balancers or Network Load Balancers, use <a>DetachLoadBalancerTargetGroups</a> instead.</p> <p>When you detach a load balancer, it enters the <code>Removing</code> state while deregistering the instances in the group. When all instances are deregistered, then you can no longer describe the load balancer using <a>DescribeLoadBalancers</a>. The instances remain running.</p>'
       responses:
         '200':
@@ -2224,9 +4132,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DisableMetricsCollection':
     post:
-      operationId: DisableMetricsCollection
+      x-aws-operation-name: DetachLoadBalancers
+      operationId: POST DetachLoadBalancers
+      description: '<p>Detaches one or more Classic Load Balancers from the specified Auto Scaling group.</p> <p>This operation detaches only Classic Load Balancers. If you have Application Load Balancers or Network Load Balancers, use <a>DetachLoadBalancerTargetGroups</a> instead.</p> <p>When you detach a load balancer, it enters the <code>Removing</code> state while deregistering the instances in the group. When all instances are deregistered, then you can no longer describe the load balancer using <a>DescribeLoadBalancers</a>. The instances remain running.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DetachLoadBalancersResultType'
+        '480':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: AutoScalingGroupName
+          in: formData
+          required: true
+          description: The name of the Auto Scaling group.
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: LoadBalancerNames
+          in: formData
+          required: true
+          description: The names of the load balancers. You can specify up to 10 load balancers.
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DetachLoadBalancers
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=DisableMetricsCollection':
+    get:
+      x-aws-operation-name: DisableMetricsCollection
+      operationId: GET DisableMetricsCollection
       description: Disables group metrics for the specified Auto Scaling group.
       responses:
         '200':
@@ -2271,9 +4221,49 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=EnableMetricsCollection':
     post:
-      operationId: EnableMetricsCollection
+      x-aws-operation-name: DisableMetricsCollection
+      operationId: POST DisableMetricsCollection
+      description: Disables group metrics for the specified Auto Scaling group.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: AutoScalingGroupName
+          in: formData
+          required: true
+          description: The name of the Auto Scaling group.
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: Metrics
+          in: formData
+          required: false
+          description: '<p>One or more of the following metrics. If you omit this parameter, all metrics are disabled.</p> <ul> <li> <p> <code>GroupMinSize</code> </p> </li> <li> <p> <code>GroupMaxSize</code> </p> </li> <li> <p> <code>GroupDesiredCapacity</code> </p> </li> <li> <p> <code>GroupInServiceInstances</code> </p> </li> <li> <p> <code>GroupPendingInstances</code> </p> </li> <li> <p> <code>GroupStandbyInstances</code> </p> </li> <li> <p> <code>GroupTerminatingInstances</code> </p> </li> <li> <p> <code>GroupTotalInstances</code> </p> </li> </ul>'
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DisableMetricsCollection
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=EnableMetricsCollection':
+    get:
+      x-aws-operation-name: EnableMetricsCollection
+      operationId: GET EnableMetricsCollection
       description: 'Enables group metrics for the specified Auto Scaling group. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-monitoring.html">Monitoring Your Auto Scaling Groups and Instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.'
       responses:
         '200':
@@ -2326,9 +4316,57 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=EnterStandby':
     post:
-      operationId: EnterStandby
+      x-aws-operation-name: EnableMetricsCollection
+      operationId: POST EnableMetricsCollection
+      description: 'Enables group metrics for the specified Auto Scaling group. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-monitoring.html">Monitoring Your Auto Scaling Groups and Instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: AutoScalingGroupName
+          in: formData
+          required: true
+          description: The name of the Auto Scaling group.
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: Metrics
+          in: formData
+          required: false
+          description: '<p>One or more of the following metrics. If you omit this parameter, all metrics are enabled.</p> <ul> <li> <p> <code>GroupMinSize</code> </p> </li> <li> <p> <code>GroupMaxSize</code> </p> </li> <li> <p> <code>GroupDesiredCapacity</code> </p> </li> <li> <p> <code>GroupInServiceInstances</code> </p> </li> <li> <p> <code>GroupPendingInstances</code> </p> </li> <li> <p> <code>GroupStandbyInstances</code> </p> </li> <li> <p> <code>GroupTerminatingInstances</code> </p> </li> <li> <p> <code>GroupTotalInstances</code> </p> </li> </ul>'
+          type: array
+          items:
+            type: string
+        - name: Granularity
+          in: formData
+          required: true
+          description: The granularity to associate with the metrics to collect. The only valid value is <code>1Minute</code>.
+          type: string
+          minLength: 1
+          maxLength: 255
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - EnableMetricsCollection
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=EnterStandby':
+    get:
+      x-aws-operation-name: EnterStandby
+      operationId: GET EnterStandby
       description: '<p>Moves the specified instances into the standby state.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-enter-exit-standby.html">Temporarily Removing Instances from Your Auto Scaling Group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -2380,9 +4418,56 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=ExecutePolicy':
     post:
-      operationId: ExecutePolicy
+      x-aws-operation-name: EnterStandby
+      operationId: POST EnterStandby
+      description: '<p>Moves the specified instances into the standby state.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-enter-exit-standby.html">Temporarily Removing Instances from Your Auto Scaling Group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/EnterStandbyAnswer'
+        '480':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: InstanceIds
+          in: formData
+          required: false
+          description: The IDs of the instances. You can specify up to 20 instances.
+          type: array
+          items:
+            type: string
+        - name: AutoScalingGroupName
+          in: formData
+          required: true
+          description: The name of the Auto Scaling group.
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: ShouldDecrementDesiredCapacity
+          in: formData
+          required: true
+          description: Indicates whether to decrement the desired capacity of the Auto Scaling group by the number of instances moved to <code>Standby</code> mode.
+          type: boolean
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - EnterStandby
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=ExecutePolicy':
+    get:
+      x-aws-operation-name: ExecutePolicy
+      operationId: GET ExecutePolicy
       description: Executes the specified policy.
       responses:
         '200':
@@ -2449,9 +4534,71 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=ExitStandby':
     post:
-      operationId: ExitStandby
+      x-aws-operation-name: ExecutePolicy
+      operationId: POST ExecutePolicy
+      description: Executes the specified policy.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ScalingActivityInProgressFault
+          schema:
+            $ref: '#/definitions/ScalingActivityInProgressFault'
+        '481':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: AutoScalingGroupName
+          in: formData
+          required: false
+          description: The name of the Auto Scaling group.
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: PolicyName
+          in: formData
+          required: true
+          description: The name or ARN of the policy.
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: HonorCooldown
+          in: formData
+          required: false
+          description: '<p>Indicates whether Amazon EC2 Auto Scaling waits for the cooldown period to complete before executing the policy.</p> <p>This parameter is not supported if the policy type is <code>StepScaling</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html">Scaling Cooldowns</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+          type: boolean
+        - name: MetricValue
+          in: formData
+          required: false
+          description: '<p>The metric value to compare to <code>BreachThreshold</code>. This enables you to execute a policy of type <code>StepScaling</code> and determine which step adjustment to use. For example, if the breach threshold is 50 and you want to use a step adjustment with a lower bound of 0 and an upper bound of 10, you can set the metric value to 59.</p> <p>If you specify a metric value that doesn''t correspond to a step adjustment for the policy, the call returns an error.</p> <p>Conditional: This parameter is required if the policy type is <code>StepScaling</code> and not supported otherwise.</p>'
+          type: number
+          format: double
+        - name: BreachThreshold
+          in: formData
+          required: false
+          description: '<p>The breach threshold for the alarm.</p> <p>Conditional: This parameter is required if the policy type is <code>StepScaling</code> and not supported otherwise.</p>'
+          type: number
+          format: double
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ExecutePolicy
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=ExitStandby':
+    get:
+      x-aws-operation-name: ExitStandby
+      operationId: GET ExitStandby
       description: '<p>Moves the specified instances out of the standby state.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-enter-exit-standby.html">Temporarily Removing Instances from Your Auto Scaling Group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -2498,9 +4645,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=PutLifecycleHook':
     post:
-      operationId: PutLifecycleHook
+      x-aws-operation-name: ExitStandby
+      operationId: POST ExitStandby
+      description: '<p>Moves the specified instances out of the standby state.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-enter-exit-standby.html">Temporarily Removing Instances from Your Auto Scaling Group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ExitStandbyAnswer'
+        '480':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: InstanceIds
+          in: formData
+          required: false
+          description: The IDs of the instances. You can specify up to 20 instances.
+          type: array
+          items:
+            type: string
+        - name: AutoScalingGroupName
+          in: formData
+          required: true
+          description: The name of the Auto Scaling group.
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ExitStandby
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=PutLifecycleHook':
+    get:
+      x-aws-operation-name: PutLifecycleHook
+      operationId: GET PutLifecycleHook
       description: '<p>Creates or updates a lifecycle hook for the specified Auto Scaling group.</p> <p>A lifecycle hook tells Amazon EC2 Auto Scaling to perform an action on an instance when the instance launches (before it is put into service) or as the instance terminates (before it is fully terminated).</p> <p>This step is a part of the procedure for adding a lifecycle hook to an Auto Scaling group:</p> <ol> <li> <p>(Optional) Create a Lambda function and a rule that allows CloudWatch Events to invoke your Lambda function when Amazon EC2 Auto Scaling launches or terminates instances.</p> </li> <li> <p>(Optional) Create a notification target and an IAM role. The target can be either an Amazon SQS queue or an Amazon SNS topic. The role allows Amazon EC2 Auto Scaling to publish lifecycle notifications to the target.</p> </li> <li> <p> <b>Create the lifecycle hook. Specify whether the hook is used when the instances launch or terminate.</b> </p> </li> <li> <p>If you need more time, record the lifecycle action heartbeat to keep the instance in a pending state using using <a>RecordLifecycleActionHeartbeat</a>.</p> </li> <li> <p>If you finish before the timeout period ends, complete the lifecycle action using <a>CompleteLifecycleAction</a>.</p> </li> </ol> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html">Amazon EC2 Auto Scaling Lifecycle Hooks</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>If you exceed your maximum limit of lifecycle hooks, which by default is 50 per Auto Scaling group, the call fails.</p> <p>You can view the lifecycle hooks for an Auto Scaling group using <a>DescribeLifecycleHooks</a>. If you are no longer using a lifecycle hook, you can delete it using <a>DeleteLifecycleHook</a>.</p>'
       responses:
         '200':
@@ -2591,9 +4780,95 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=PutNotificationConfiguration':
     post:
-      operationId: PutNotificationConfiguration
+      x-aws-operation-name: PutLifecycleHook
+      operationId: POST PutLifecycleHook
+      description: '<p>Creates or updates a lifecycle hook for the specified Auto Scaling group.</p> <p>A lifecycle hook tells Amazon EC2 Auto Scaling to perform an action on an instance when the instance launches (before it is put into service) or as the instance terminates (before it is fully terminated).</p> <p>This step is a part of the procedure for adding a lifecycle hook to an Auto Scaling group:</p> <ol> <li> <p>(Optional) Create a Lambda function and a rule that allows CloudWatch Events to invoke your Lambda function when Amazon EC2 Auto Scaling launches or terminates instances.</p> </li> <li> <p>(Optional) Create a notification target and an IAM role. The target can be either an Amazon SQS queue or an Amazon SNS topic. The role allows Amazon EC2 Auto Scaling to publish lifecycle notifications to the target.</p> </li> <li> <p> <b>Create the lifecycle hook. Specify whether the hook is used when the instances launch or terminate.</b> </p> </li> <li> <p>If you need more time, record the lifecycle action heartbeat to keep the instance in a pending state using using <a>RecordLifecycleActionHeartbeat</a>.</p> </li> <li> <p>If you finish before the timeout period ends, complete the lifecycle action using <a>CompleteLifecycleAction</a>.</p> </li> </ol> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html">Amazon EC2 Auto Scaling Lifecycle Hooks</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>If you exceed your maximum limit of lifecycle hooks, which by default is 50 per Auto Scaling group, the call fails.</p> <p>You can view the lifecycle hooks for an Auto Scaling group using <a>DescribeLifecycleHooks</a>. If you are no longer using a lifecycle hook, you can delete it using <a>DeleteLifecycleHook</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutLifecycleHookAnswer'
+        '480':
+          description: LimitExceededFault
+          schema:
+            $ref: '#/definitions/LimitExceededFault'
+        '481':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: LifecycleHookName
+          in: formData
+          required: true
+          description: The name of the lifecycle hook.
+          type: string
+          pattern: '[A-Za-z0-9\-_\/]+'
+          minLength: 1
+          maxLength: 255
+        - name: AutoScalingGroupName
+          in: formData
+          required: true
+          description: The name of the Auto Scaling group.
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: LifecycleTransition
+          in: formData
+          required: false
+          description: '<p>The instance state to which you want to attach the lifecycle hook. The valid values are:</p> <ul> <li> <p>autoscaling:EC2_INSTANCE_LAUNCHING</p> </li> <li> <p>autoscaling:EC2_INSTANCE_TERMINATING</p> </li> </ul> <p>Conditional: This parameter is required for new lifecycle hooks, but optional when updating existing hooks.</p>'
+          type: string
+        - name: RoleARN
+          in: formData
+          required: false
+          description: '<p>The ARN of the IAM role that allows the Auto Scaling group to publish to the specified notification target, for example, an Amazon SNS topic or an Amazon SQS queue.</p> <p>Conditional: This parameter is required for new lifecycle hooks, but optional when updating existing hooks.</p>'
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: NotificationTargetARN
+          in: formData
+          required: false
+          description: '<p>The ARN of the notification target that Amazon EC2 Auto Scaling uses to notify you when an instance is in the transition state for the lifecycle hook. This target can be either an SQS queue or an SNS topic.</p> <p>If you specify an empty string, this overrides the current ARN.</p> <p>This operation uses the JSON format when sending notifications to an Amazon SQS queue, and an email key-value pair format when sending notifications to an Amazon SNS topic.</p> <p>When you specify a notification target, Amazon EC2 Auto Scaling sends it a test message. Test messages contain the following additional key-value pair: <code>"Event": "autoscaling:TEST_NOTIFICATION"</code>.</p>'
+          type: string
+          minLength: 0
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: NotificationMetadata
+          in: formData
+          required: false
+          description: Additional information that you want to include any time Amazon EC2 Auto Scaling sends a message to the notification target.
+          type: string
+          minLength: 1
+          maxLength: 1023
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: HeartbeatTimeout
+          in: formData
+          required: false
+          description: '<p>The maximum time, in seconds, that can elapse before the lifecycle hook times out. The range is from <code>30</code> to <code>7200</code> seconds. The default value is <code>3600</code> seconds (1 hour).</p> <p>If the lifecycle hook times out, Amazon EC2 Auto Scaling performs the action that you specified in the <code>DefaultResult</code> parameter. You can prevent the lifecycle hook from timing out by calling <a>RecordLifecycleActionHeartbeat</a>.</p>'
+          type: integer
+        - name: DefaultResult
+          in: formData
+          required: false
+          description: Defines the action the Auto Scaling group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. This parameter can be either <code>CONTINUE</code> or <code>ABANDON</code>. The default value is <code>ABANDON</code>.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - PutLifecycleHook
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=PutNotificationConfiguration':
+    get:
+      x-aws-operation-name: PutNotificationConfiguration
+      operationId: GET PutNotificationConfiguration
       description: '<p>Configures an Auto Scaling group to send notifications when specified events take place. Subscribers to the specified topic can have messages delivered to an endpoint such as a web server or an email address.</p> <p>This configuration overwrites any existing configuration.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/ASGettingNotifications.html">Getting Amazon SNS Notifications When Your Auto Scaling Group Scales</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -2654,9 +4929,65 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=PutScalingPolicy':
     post:
-      operationId: PutScalingPolicy
+      x-aws-operation-name: PutNotificationConfiguration
+      operationId: POST PutNotificationConfiguration
+      description: '<p>Configures an Auto Scaling group to send notifications when specified events take place. Subscribers to the specified topic can have messages delivered to an endpoint such as a web server or an email address.</p> <p>This configuration overwrites any existing configuration.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/ASGettingNotifications.html">Getting Amazon SNS Notifications When Your Auto Scaling Group Scales</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: LimitExceededFault
+          schema:
+            $ref: '#/definitions/LimitExceededFault'
+        '481':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+        '482':
+          description: ServiceLinkedRoleFailure
+          schema:
+            $ref: '#/definitions/ServiceLinkedRoleFailure'
+      parameters:
+        - name: AutoScalingGroupName
+          in: formData
+          required: true
+          description: The name of the Auto Scaling group.
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: TopicARN
+          in: formData
+          required: true
+          description: The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (Amazon SNS) topic.
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: NotificationTypes
+          in: formData
+          required: true
+          description: 'The type of event that causes the notification to be sent. For more information about notification types supported by Amazon EC2 Auto Scaling, see <a>DescribeAutoScalingNotificationTypes</a>.'
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - PutNotificationConfiguration
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=PutScalingPolicy':
+    get:
+      x-aws-operation-name: PutScalingPolicy
+      operationId: GET PutScalingPolicy
       description: 'Creates or updates a policy for an Auto Scaling group. To update an existing policy, use the existing policy name and set the parameters to change. Any existing parameter not changed in an update to an existing policy is not changed in this update request.'
       responses:
         '200':
@@ -2792,9 +5123,140 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=PutScheduledUpdateGroupAction':
     post:
-      operationId: PutScheduledUpdateGroupAction
+      x-aws-operation-name: PutScalingPolicy
+      operationId: POST PutScalingPolicy
+      description: 'Creates or updates a policy for an Auto Scaling group. To update an existing policy, use the existing policy name and set the parameters to change. Any existing parameter not changed in an update to an existing policy is not changed in this update request.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PolicyARNType'
+        '480':
+          description: LimitExceededFault
+          schema:
+            $ref: '#/definitions/LimitExceededFault'
+        '481':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+        '482':
+          description: ServiceLinkedRoleFailure
+          schema:
+            $ref: '#/definitions/ServiceLinkedRoleFailure'
+      parameters:
+        - name: AutoScalingGroupName
+          in: formData
+          required: true
+          description: The name of the Auto Scaling group.
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: PolicyName
+          in: formData
+          required: true
+          description: The name of the policy.
+          type: string
+          minLength: 1
+          maxLength: 255
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: PolicyType
+          in: formData
+          required: false
+          description: 'The policy type. The valid values are <code>SimpleScaling</code>, <code>StepScaling</code>, and <code>TargetTrackingScaling</code>. If the policy type is null, the value is treated as <code>SimpleScaling</code>.'
+          type: string
+          minLength: 1
+          maxLength: 64
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: AdjustmentType
+          in: formData
+          required: false
+          description: '<p>The adjustment type. The valid values are <code>ChangeInCapacity</code>, <code>ExactCapacity</code>, and <code>PercentChangeInCapacity</code>.</p> <p>This parameter is supported if the policy type is <code>SimpleScaling</code> or <code>StepScaling</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scale-based-on-demand.html">Dynamic Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+          type: string
+          minLength: 1
+          maxLength: 255
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: MinAdjustmentStep
+          in: formData
+          required: false
+          description: Available for backward compatibility. Use <code>MinAdjustmentMagnitude</code> instead.
+          type: integer
+        - name: MinAdjustmentMagnitude
+          in: formData
+          required: false
+          description: '<p>The minimum number of instances to scale. If the value of <code>AdjustmentType</code> is <code>PercentChangeInCapacity</code>, the scaling policy changes the <code>DesiredCapacity</code> of the Auto Scaling group by at least this many instances. Otherwise, the error is <code>ValidationError</code>.</p> <p>This parameter is supported if the policy type is <code>SimpleScaling</code> or <code>StepScaling</code>.</p>'
+          type: integer
+        - name: ScalingAdjustment
+          in: formData
+          required: false
+          description: '<p>The amount by which to scale, based on the specified adjustment type. A positive value adds to the current capacity while a negative number removes from the current capacity.</p> <p>Conditional: This parameter is required if the policy type is <code>SimpleScaling</code> and not supported otherwise.</p>'
+          type: integer
+        - name: Cooldown
+          in: formData
+          required: false
+          description: '<p>The amount of time, in seconds, after a scaling activity completes and before the next scaling activity can start. If this parameter is not specified, the default cooldown period for the group applies.</p> <p>This parameter is supported if the policy type is <code>SimpleScaling</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html">Scaling Cooldowns</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+          type: integer
+        - name: MetricAggregationType
+          in: formData
+          required: false
+          description: '<p>The aggregation type for the CloudWatch metrics. The valid values are <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code>. If the aggregation type is null, the value is treated as <code>Average</code>.</p> <p>This parameter is supported if the policy type is <code>StepScaling</code>.</p>'
+          type: string
+          minLength: 1
+          maxLength: 32
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: StepAdjustments
+          in: formData
+          required: false
+          description: '<p>A set of adjustments that enable you to scale based on the size of the alarm breach.</p> <p>Conditional: This parameter is required if the policy type is <code>StepScaling</code> and not supported otherwise.</p>'
+          type: array
+          items:
+            type: string
+        - name: EstimatedInstanceWarmup
+          in: formData
+          required: false
+          description: '<p>The estimated time, in seconds, until a newly launched instance can contribute to the CloudWatch metrics. The default is to use the value specified for the default cooldown period for the group.</p> <p>This parameter is supported if the policy type is <code>StepScaling</code> or <code>TargetTrackingScaling</code>.</p>'
+          type: integer
+        - name: TargetTrackingConfiguration.PredefinedMetricSpecification
+          in: formData
+          description: |-
+            Represents a target tracking scaling policy configuration to use with Amazon EC2 Auto Scaling.
+            A predefined metric. You can specify either a predefined metric or a customized metric.
+          type: string
+        - name: TargetTrackingConfiguration.CustomizedMetricSpecification
+          in: formData
+          description: |-
+            Represents a target tracking scaling policy configuration to use with Amazon EC2 Auto Scaling.
+            A customized metric. You can specify either a predefined metric or a customized metric.
+          type: string
+        - name: TargetTrackingConfiguration.TargetValue
+          in: formData
+          description: |-
+            Represents a target tracking scaling policy configuration to use with Amazon EC2 Auto Scaling.
+            The target value for the metric.
+          type: string
+        - name: TargetTrackingConfiguration.DisableScaleIn
+          in: formData
+          description: |-
+            Represents a target tracking scaling policy configuration to use with Amazon EC2 Auto Scaling.
+            Indicates whether scaling in by the target tracking scaling policy is disabled. If scaling in is disabled, the target tracking scaling policy doesn't remove instances from the Auto Scaling group. Otherwise, the target tracking scaling policy can remove instances from the Auto Scaling group. The default is disabled.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - PutScalingPolicy
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=PutScheduledUpdateGroupAction':
+    get:
+      x-aws-operation-name: PutScheduledUpdateGroupAction
+      operationId: GET PutScheduledUpdateGroupAction
       description: '<p>Creates or updates a scheduled scaling action for an Auto Scaling group. If you leave a parameter unspecified when updating a scheduled scaling action, the corresponding value remains unchanged.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/schedule_time.html">Scheduled Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -2889,9 +5351,99 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=RecordLifecycleActionHeartbeat':
     post:
-      operationId: RecordLifecycleActionHeartbeat
+      x-aws-operation-name: PutScheduledUpdateGroupAction
+      operationId: POST PutScheduledUpdateGroupAction
+      description: '<p>Creates or updates a scheduled scaling action for an Auto Scaling group. If you leave a parameter unspecified when updating a scheduled scaling action, the corresponding value remains unchanged.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/schedule_time.html">Scheduled Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: AlreadyExistsFault
+          schema:
+            $ref: '#/definitions/AlreadyExistsFault'
+        '481':
+          description: LimitExceededFault
+          schema:
+            $ref: '#/definitions/LimitExceededFault'
+        '482':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: AutoScalingGroupName
+          in: formData
+          required: true
+          description: The name of the Auto Scaling group.
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: ScheduledActionName
+          in: formData
+          required: true
+          description: The name of this scaling action.
+          type: string
+          minLength: 1
+          maxLength: 255
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: Time
+          in: formData
+          required: false
+          description: This parameter is deprecated.
+          type: string
+          format: date-time
+        - name: StartTime
+          in: formData
+          required: false
+          description: '<p>The time for this action to start, in YYYY-MM-DDThh:mm:ssZ format in UTC/GMT only and in quotes (for example, <code>"2019-06-01T00:00:00Z"</code>).</p> <p>If you specify <code>Recurrence</code> and <code>StartTime</code>, Amazon EC2 Auto Scaling performs the action at this time, and then performs the action based on the specified recurrence.</p> <p>If you try to schedule your action in the past, Amazon EC2 Auto Scaling returns an error message.</p>'
+          type: string
+          format: date-time
+        - name: EndTime
+          in: formData
+          required: false
+          description: The time for the recurring schedule to end. Amazon EC2 Auto Scaling does not perform the action after this time.
+          type: string
+          format: date-time
+        - name: Recurrence
+          in: formData
+          required: false
+          description: 'The recurring schedule for this action, in Unix cron syntax format. This format consists of five fields separated by white spaces: [Minute] [Hour] [Day_of_Month] [Month_of_Year] [Day_of_Week]. The value must be in quotes (for example, <code>"30 0 1 1,6,12 *"</code>). For more information about this format, see <a href="http://crontab.org">Crontab</a>.'
+          type: string
+          minLength: 1
+          maxLength: 255
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: MinSize
+          in: formData
+          required: false
+          description: The minimum size for the Auto Scaling group.
+          type: integer
+        - name: MaxSize
+          in: formData
+          required: false
+          description: The maximum size for the Auto Scaling group.
+          type: integer
+        - name: DesiredCapacity
+          in: formData
+          required: false
+          description: The number of EC2 instances that should be running in the group.
+          type: integer
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - PutScheduledUpdateGroupAction
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=RecordLifecycleActionHeartbeat':
+    get:
+      x-aws-operation-name: RecordLifecycleActionHeartbeat
+      operationId: GET RecordLifecycleActionHeartbeat
       description: '<p>Records a heartbeat for the lifecycle action associated with the specified token or instance. This extends the timeout by the length of time defined using <a>PutLifecycleHook</a>.</p> <p>This step is a part of the procedure for adding a lifecycle hook to an Auto Scaling group:</p> <ol> <li> <p>(Optional) Create a Lambda function and a rule that allows CloudWatch Events to invoke your Lambda function when Amazon EC2 Auto Scaling launches or terminates instances.</p> </li> <li> <p>(Optional) Create a notification target and an IAM role. The target can be either an Amazon SQS queue or an Amazon SNS topic. The role allows Amazon EC2 Auto Scaling to publish lifecycle notifications to the target.</p> </li> <li> <p>Create the lifecycle hook. Specify whether the hook is used when the instances launch or terminate.</p> </li> <li> <p> <b>If you need more time, record the lifecycle action heartbeat to keep the instance in a pending state.</b> </p> </li> <li> <p>If you finish before the timeout period ends, complete the lifecycle action.</p> </li> </ol> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroupLifecycle.html">Auto Scaling Lifecycle</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -2954,9 +5506,67 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=ResumeProcesses':
     post:
-      operationId: ResumeProcesses
+      x-aws-operation-name: RecordLifecycleActionHeartbeat
+      operationId: POST RecordLifecycleActionHeartbeat
+      description: '<p>Records a heartbeat for the lifecycle action associated with the specified token or instance. This extends the timeout by the length of time defined using <a>PutLifecycleHook</a>.</p> <p>This step is a part of the procedure for adding a lifecycle hook to an Auto Scaling group:</p> <ol> <li> <p>(Optional) Create a Lambda function and a rule that allows CloudWatch Events to invoke your Lambda function when Amazon EC2 Auto Scaling launches or terminates instances.</p> </li> <li> <p>(Optional) Create a notification target and an IAM role. The target can be either an Amazon SQS queue or an Amazon SNS topic. The role allows Amazon EC2 Auto Scaling to publish lifecycle notifications to the target.</p> </li> <li> <p>Create the lifecycle hook. Specify whether the hook is used when the instances launch or terminate.</p> </li> <li> <p> <b>If you need more time, record the lifecycle action heartbeat to keep the instance in a pending state.</b> </p> </li> <li> <p>If you finish before the timeout period ends, complete the lifecycle action.</p> </li> </ol> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroupLifecycle.html">Auto Scaling Lifecycle</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RecordLifecycleActionHeartbeatAnswer'
+        '480':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: LifecycleHookName
+          in: formData
+          required: true
+          description: The name of the lifecycle hook.
+          type: string
+          pattern: '[A-Za-z0-9\-_\/]+'
+          minLength: 1
+          maxLength: 255
+        - name: AutoScalingGroupName
+          in: formData
+          required: true
+          description: The name of the Auto Scaling group.
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: LifecycleActionToken
+          in: formData
+          required: false
+          description: A token that uniquely identifies a specific lifecycle action associated with an instance. Amazon EC2 Auto Scaling sends this token to the notification target that you specified when you created the lifecycle hook.
+          type: string
+          minLength: 36
+          maxLength: 36
+        - name: InstanceId
+          in: formData
+          required: false
+          description: The ID of the instance.
+          type: string
+          minLength: 1
+          maxLength: 19
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - RecordLifecycleActionHeartbeat
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=ResumeProcesses':
+    get:
+      x-aws-operation-name: ResumeProcesses
+      operationId: GET ResumeProcesses
       description: '<p>Resumes the specified suspended automatic scaling processes, or all suspended process, for the specified Auto Scaling group.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-suspend-resume-processes.html">Suspending and Resuming Scaling Processes</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -3005,9 +5615,53 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=SetDesiredCapacity':
     post:
-      operationId: SetDesiredCapacity
+      x-aws-operation-name: ResumeProcesses
+      operationId: POST ResumeProcesses
+      description: '<p>Resumes the specified suspended automatic scaling processes, or all suspended process, for the specified Auto Scaling group.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-suspend-resume-processes.html">Suspending and Resuming Scaling Processes</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceInUseFault
+          schema:
+            $ref: '#/definitions/ResourceInUseFault'
+        '481':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: AutoScalingGroupName
+          in: formData
+          required: true
+          description: The name of the Auto Scaling group.
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: ScalingProcesses
+          in: formData
+          required: false
+          description: '<p>One or more of the following processes. If you omit this parameter, all processes are specified.</p> <ul> <li> <p> <code>Launch</code> </p> </li> <li> <p> <code>Terminate</code> </p> </li> <li> <p> <code>HealthCheck</code> </p> </li> <li> <p> <code>ReplaceUnhealthy</code> </p> </li> <li> <p> <code>AZRebalance</code> </p> </li> <li> <p> <code>AlarmNotification</code> </p> </li> <li> <p> <code>ScheduledActions</code> </p> </li> <li> <p> <code>AddToLoadBalancer</code> </p> </li> </ul>'
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ResumeProcesses
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=SetDesiredCapacity':
+    get:
+      x-aws-operation-name: SetDesiredCapacity
+      operationId: GET SetDesiredCapacity
       description: '<p>Sets the size of the specified Auto Scaling group.</p> <p>For more information about desired capacity, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html">What Is Amazon EC2 Auto Scaling?</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -3059,9 +5713,56 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=SetInstanceHealth':
     post:
-      operationId: SetInstanceHealth
+      x-aws-operation-name: SetDesiredCapacity
+      operationId: POST SetDesiredCapacity
+      description: '<p>Sets the size of the specified Auto Scaling group.</p> <p>For more information about desired capacity, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html">What Is Amazon EC2 Auto Scaling?</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ScalingActivityInProgressFault
+          schema:
+            $ref: '#/definitions/ScalingActivityInProgressFault'
+        '481':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: AutoScalingGroupName
+          in: formData
+          required: true
+          description: The name of the Auto Scaling group.
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: DesiredCapacity
+          in: formData
+          required: true
+          description: The number of EC2 instances that should be running in the Auto Scaling group.
+          type: integer
+        - name: HonorCooldown
+          in: formData
+          required: false
+          description: 'Indicates whether Amazon EC2 Auto Scaling waits for the cooldown period to complete before initiating a scaling activity to set your Auto Scaling group to its new capacity. By default, Amazon EC2 Auto Scaling does not honor the cooldown period during manual scaling activities.'
+          type: boolean
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - SetDesiredCapacity
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=SetInstanceHealth':
+    get:
+      x-aws-operation-name: SetInstanceHealth
+      operationId: GET SetInstanceHealth
       description: '<p>Sets the health status of the specified instance.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html">Health Checks for Auto Scaling Instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -3112,9 +5813,55 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=SetInstanceProtection':
     post:
-      operationId: SetInstanceProtection
+      x-aws-operation-name: SetInstanceHealth
+      operationId: POST SetInstanceHealth
+      description: '<p>Sets the health status of the specified instance.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html">Health Checks for Auto Scaling Instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: InstanceId
+          in: formData
+          required: true
+          description: The ID of the instance.
+          type: string
+          minLength: 1
+          maxLength: 19
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: HealthStatus
+          in: formData
+          required: true
+          description: The health status of the instance. Set to <code>Healthy</code> to have the instance remain in service. Set to <code>Unhealthy</code> to have the instance be out of service. Amazon EC2 Auto Scaling terminates and replaces the unhealthy instance.
+          type: string
+          minLength: 1
+          maxLength: 32
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: ShouldRespectGracePeriod
+          in: formData
+          required: false
+          description: '<p>If the Auto Scaling group of the specified instance has a <code>HealthCheckGracePeriod</code> specified for the group, by default, this call respects the grace period. Set this to <code>False</code>, to have the call not respect the grace period associated with the group.</p> <p>For more information about the health check grace period, see <a>CreateAutoScalingGroup</a>.</p>'
+          type: boolean
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - SetInstanceHealth
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=SetInstanceProtection':
+    get:
+      x-aws-operation-name: SetInstanceProtection
+      operationId: GET SetInstanceProtection
       description: '<p>Updates the instance protection settings of the specified instances.</p> <p>For more information about preventing instances that are part of an Auto Scaling group from terminating on scale in, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection">Instance Protection</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -3170,9 +5917,60 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=SuspendProcesses':
     post:
-      operationId: SuspendProcesses
+      x-aws-operation-name: SetInstanceProtection
+      operationId: POST SetInstanceProtection
+      description: '<p>Updates the instance protection settings of the specified instances.</p> <p>For more information about preventing instances that are part of an Auto Scaling group from terminating on scale in, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection">Instance Protection</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SetInstanceProtectionAnswer'
+        '480':
+          description: LimitExceededFault
+          schema:
+            $ref: '#/definitions/LimitExceededFault'
+        '481':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: InstanceIds
+          in: formData
+          required: true
+          description: One or more instance IDs.
+          type: array
+          items:
+            type: string
+        - name: AutoScalingGroupName
+          in: formData
+          required: true
+          description: The name of the Auto Scaling group.
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: ProtectedFromScaleIn
+          in: formData
+          required: true
+          description: Indicates whether the instance is protected from termination by Amazon EC2 Auto Scaling when scaling in.
+          type: boolean
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - SetInstanceProtection
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=SuspendProcesses':
+    get:
+      x-aws-operation-name: SuspendProcesses
+      operationId: GET SuspendProcesses
       description: '<p>Suspends the specified automatic scaling processes, or all processes, for the specified Auto Scaling group.</p> <p>If you suspend either the <code>Launch</code> or <code>Terminate</code> process types, it can prevent other process types from functioning properly.</p> <p>To resume processes that have been suspended, use <a>ResumeProcesses</a>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-suspend-resume-processes.html">Suspending and Resuming Scaling Processes</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -3221,9 +6019,53 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=TerminateInstanceInAutoScalingGroup':
     post:
-      operationId: TerminateInstanceInAutoScalingGroup
+      x-aws-operation-name: SuspendProcesses
+      operationId: POST SuspendProcesses
+      description: '<p>Suspends the specified automatic scaling processes, or all processes, for the specified Auto Scaling group.</p> <p>If you suspend either the <code>Launch</code> or <code>Terminate</code> process types, it can prevent other process types from functioning properly.</p> <p>To resume processes that have been suspended, use <a>ResumeProcesses</a>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-suspend-resume-processes.html">Suspending and Resuming Scaling Processes</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceInUseFault
+          schema:
+            $ref: '#/definitions/ResourceInUseFault'
+        '481':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: AutoScalingGroupName
+          in: formData
+          required: true
+          description: The name of the Auto Scaling group.
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: ScalingProcesses
+          in: formData
+          required: false
+          description: '<p>One or more of the following processes. If you omit this parameter, all processes are specified.</p> <ul> <li> <p> <code>Launch</code> </p> </li> <li> <p> <code>Terminate</code> </p> </li> <li> <p> <code>HealthCheck</code> </p> </li> <li> <p> <code>ReplaceUnhealthy</code> </p> </li> <li> <p> <code>AZRebalance</code> </p> </li> <li> <p> <code>AlarmNotification</code> </p> </li> <li> <p> <code>ScheduledActions</code> </p> </li> <li> <p> <code>AddToLoadBalancer</code> </p> </li> </ul>'
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - SuspendProcesses
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=TerminateInstanceInAutoScalingGroup':
+    get:
+      x-aws-operation-name: TerminateInstanceInAutoScalingGroup
+      operationId: GET TerminateInstanceInAutoScalingGroup
       description: <p>Terminates the specified instance and optionally adjusts the desired group size.</p> <p>This call simply makes a termination request. The instance is not terminated immediately.</p>
       responses:
         '200':
@@ -3272,9 +6114,53 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=UpdateAutoScalingGroup':
     post:
-      operationId: UpdateAutoScalingGroup
+      x-aws-operation-name: TerminateInstanceInAutoScalingGroup
+      operationId: POST TerminateInstanceInAutoScalingGroup
+      description: <p>Terminates the specified instance and optionally adjusts the desired group size.</p> <p>This call simply makes a termination request. The instance is not terminated immediately.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ActivityType'
+        '480':
+          description: ScalingActivityInProgressFault
+          schema:
+            $ref: '#/definitions/ScalingActivityInProgressFault'
+        '481':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+      parameters:
+        - name: InstanceId
+          in: formData
+          required: true
+          description: The ID of the instance.
+          type: string
+          minLength: 1
+          maxLength: 19
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: ShouldDecrementDesiredCapacity
+          in: formData
+          required: true
+          description: Indicates whether terminating the instance also decrements the size of the Auto Scaling group.
+          type: boolean
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - TerminateInstanceInAutoScalingGroup
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
+  '/#Action=UpdateAutoScalingGroup':
+    get:
+      x-aws-operation-name: UpdateAutoScalingGroup
+      operationId: GET UpdateAutoScalingGroup
       description: '<p>Updates the configuration for the specified Auto Scaling group.</p> <p>The new settings take effect on any scaling activities after this call returns. Scaling activities that are currently in progress aren''t affected.</p> <p>To update an Auto Scaling group with a launch configuration with <code>InstanceMonitoring</code> set to <code>false</code>, you must first disable the collection of group metrics. Otherwise, you get an error. If you have previously enabled the collection of group metrics, you can disable it using <a>DisableMetricsCollection</a>.</p> <p>Note the following:</p> <ul> <li> <p>If you specify a new value for <code>MinSize</code> without specifying a value for <code>DesiredCapacity</code>, and the new <code>MinSize</code> is larger than the current size of the group, we implicitly call <a>SetDesiredCapacity</a> to set the size of the group to the new value of <code>MinSize</code>.</p> </li> <li> <p>If you specify a new value for <code>MaxSize</code> without specifying a value for <code>DesiredCapacity</code>, and the new <code>MaxSize</code> is smaller than the current size of the group, we implicitly call <a>SetDesiredCapacity</a> to set the size of the group to the new value of <code>MaxSize</code>.</p> </li> <li> <p>All other optional parameters are left unchanged if not specified.</p> </li> </ul>'
       responses:
         '200':
@@ -3434,6 +6320,160 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: UpdateAutoScalingGroup
+      operationId: POST UpdateAutoScalingGroup
+      description: '<p>Updates the configuration for the specified Auto Scaling group.</p> <p>The new settings take effect on any scaling activities after this call returns. Scaling activities that are currently in progress aren''t affected.</p> <p>To update an Auto Scaling group with a launch configuration with <code>InstanceMonitoring</code> set to <code>false</code>, you must first disable the collection of group metrics. Otherwise, you get an error. If you have previously enabled the collection of group metrics, you can disable it using <a>DisableMetricsCollection</a>.</p> <p>Note the following:</p> <ul> <li> <p>If you specify a new value for <code>MinSize</code> without specifying a value for <code>DesiredCapacity</code>, and the new <code>MinSize</code> is larger than the current size of the group, we implicitly call <a>SetDesiredCapacity</a> to set the size of the group to the new value of <code>MinSize</code>.</p> </li> <li> <p>If you specify a new value for <code>MaxSize</code> without specifying a value for <code>DesiredCapacity</code>, and the new <code>MaxSize</code> is smaller than the current size of the group, we implicitly call <a>SetDesiredCapacity</a> to set the size of the group to the new value of <code>MaxSize</code>.</p> </li> <li> <p>All other optional parameters are left unchanged if not specified.</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ScalingActivityInProgressFault
+          schema:
+            $ref: '#/definitions/ScalingActivityInProgressFault'
+        '481':
+          description: ResourceContentionFault
+          schema:
+            $ref: '#/definitions/ResourceContentionFault'
+        '482':
+          description: ServiceLinkedRoleFailure
+          schema:
+            $ref: '#/definitions/ServiceLinkedRoleFailure'
+      parameters:
+        - name: AutoScalingGroupName
+          in: formData
+          required: true
+          description: The name of the Auto Scaling group.
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: LaunchConfigurationName
+          in: formData
+          required: false
+          description: 'The name of the launch configuration. If you specify this parameter, you can''t specify a launch template or a mixed instances policy.'
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: LaunchTemplate.LaunchTemplateId
+          in: formData
+          description: |-
+            <p>Describes a launch template and the launch template version.</p> <p>The launch template that is specified must be configured for use with an Auto Scaling group. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html">Creating a Launch Template for an Auto Scaling Group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>
+            The ID of the launch template. You must specify either a template ID or a template name.
+          type: string
+        - name: LaunchTemplate.LaunchTemplateName
+          in: formData
+          description: |-
+            <p>Describes a launch template and the launch template version.</p> <p>The launch template that is specified must be configured for use with an Auto Scaling group. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html">Creating a Launch Template for an Auto Scaling Group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>
+            The name of the launch template. You must specify either a template name or a template ID.
+          type: string
+        - name: LaunchTemplate.Version
+          in: formData
+          description: |-
+            <p>Describes a launch template and the launch template version.</p> <p>The launch template that is specified must be configured for use with an Auto Scaling group. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html">Creating a Launch Template for an Auto Scaling Group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>
+            The version number, <code>$Latest</code>, or <code>$Default</code>. If the value is <code>$Latest</code>, Amazon EC2 Auto Scaling selects the latest version of the launch template when launching instances. If the value is <code>$Default</code>, Amazon EC2 Auto Scaling selects the default version of the launch template when launching instances. The default value is <code>$Default</code>.
+          type: string
+        - name: MixedInstancesPolicy.LaunchTemplate
+          in: formData
+          description: |-
+            <p>Describes a mixed instances policy for an Auto Scaling group. With mixed instances, your Auto Scaling group can provision a combination of On-Demand Instances and Spot Instances across multiple instance types. Used in combination with <a>CreateAutoScalingGroup</a>. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html">Auto Scaling Groups with Multiple Instance Types and Purchase Options</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>When you create your Auto Scaling group, you can specify a launch configuration or template as a parameter for the top-level object, or you can specify a mixed instances policy, but not both at the same time.</p>
+            <p>The launch template and overrides.</p> <p>This parameter is required when creating an Auto Scaling group with a mixed instances policy, but is not required when updating the group.</p>
+          type: string
+        - name: MixedInstancesPolicy.InstancesDistribution
+          in: formData
+          description: |-
+            <p>Describes a mixed instances policy for an Auto Scaling group. With mixed instances, your Auto Scaling group can provision a combination of On-Demand Instances and Spot Instances across multiple instance types. Used in combination with <a>CreateAutoScalingGroup</a>. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html">Auto Scaling Groups with Multiple Instance Types and Purchase Options</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>When you create your Auto Scaling group, you can specify a launch configuration or template as a parameter for the top-level object, or you can specify a mixed instances policy, but not both at the same time.</p>
+            <p>The instances distribution to use. </p> <p>If you leave this parameter unspecified when creating the group, the default values are used.</p>
+          type: string
+        - name: MinSize
+          in: formData
+          required: false
+          description: The minimum size of the Auto Scaling group.
+          type: integer
+        - name: MaxSize
+          in: formData
+          required: false
+          description: The maximum size of the Auto Scaling group.
+          type: integer
+        - name: DesiredCapacity
+          in: formData
+          required: false
+          description: The number of EC2 instances that should be running in the Auto Scaling group. This number must be greater than or equal to the minimum size of the group and less than or equal to the maximum size of the group.
+          type: integer
+        - name: DefaultCooldown
+          in: formData
+          required: false
+          description: '<p>The amount of time, in seconds, after a scaling activity completes before another scaling activity can start. The default value is <code>300</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html">Scaling Cooldowns</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+          type: integer
+        - name: AvailabilityZones
+          in: formData
+          required: false
+          description: One or more Availability Zones for the group.
+          type: array
+          items:
+            type: string
+        - name: HealthCheckType
+          in: formData
+          required: false
+          description: 'The service to use for the health checks. The valid values are <code>EC2</code> and <code>ELB</code>. If you configure an Auto Scaling group to use ELB health checks, it considers the instance unhealthy if it fails either the EC2 status checks or the load balancer health checks.'
+          type: string
+          minLength: 1
+          maxLength: 32
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: HealthCheckGracePeriod
+          in: formData
+          required: false
+          description: '<p>The amount of time, in seconds, that Amazon EC2 Auto Scaling waits before checking the health status of an EC2 instance that has come into service. The default value is <code>0</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html">Health Checks for Auto Scaling Instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>Conditional: This parameter is required if you are adding an <code>ELB</code> health check.</p>'
+          type: integer
+        - name: PlacementGroup
+          in: formData
+          required: false
+          description: 'The name of the placement group into which to launch your instances, if any. A placement group is a logical grouping of instances within a single Availability Zone. You cannot specify multiple Availability Zones and a placement group. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html">Placement Groups</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.'
+          type: string
+          minLength: 1
+          maxLength: 255
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: VPCZoneIdentifier
+          in: formData
+          required: false
+          description: '<p>A comma-separated list of subnet IDs, if you are launching into a VPC.</p> <p>If you specify <code>VPCZoneIdentifier</code> with <code>AvailabilityZones</code>, the subnets that you specify for this parameter must reside in those Availability Zones.</p>'
+          type: string
+          minLength: 1
+          maxLength: 2047
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: TerminationPolicies
+          in: formData
+          required: false
+          description: '<p>A standalone termination policy or a list of termination policies used to select the instance to terminate. The policies are executed in the order that they are listed.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html">Controlling Which Instances Auto Scaling Terminates During Scale In</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+          type: array
+          items:
+            type: string
+        - name: NewInstancesProtectedFromScaleIn
+          in: formData
+          required: false
+          description: '<p>Indicates whether newly launched instances are protected from termination by Amazon EC2 Auto Scaling when scaling in.</p> <p>For more information about preventing instances from terminating on scale in, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection">Instance Protection</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+          type: boolean
+        - name: ServiceLinkedRoleARN
+          in: formData
+          required: false
+          description: 'The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling group uses to call other AWS services on your behalf. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-service-linked-role.html">Service-Linked Roles</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.'
+          type: string
+          minLength: 1
+          maxLength: 1600
+          x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - UpdateAutoScalingGroup
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2011-01-01'
 definitions:
   XmlStringMaxLen19:
     type: string

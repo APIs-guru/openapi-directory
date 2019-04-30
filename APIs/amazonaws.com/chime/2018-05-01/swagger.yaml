@@ -35,10 +35,33 @@ externalDocs:
   url: 'https://docs.aws.amazon.com/chime/'
 host: chime.amazonaws.com
 basePath: /
-x-hasEquivalentPaths: true
 schemes:
   - https
   - http
+x-servers:
+  - url: 'http://service.chime.aws.amazon.com'
+    variables: {}
+    description: The general Amazon Chime multi-region endpoint
+  - url: 'https://service.chime.aws.amazon.com'
+    variables: {}
+    description: The general Amazon Chime multi-region endpoint
+  - url: 'http://chime.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+    description: The Amazon Chime endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://chime.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+    description: The Amazon Chime endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 consumes:
   - application/json
 produces:

@@ -34,10 +34,83 @@ externalDocs:
   url: 'https://docs.aws.amazon.com/rds/'
 host: rds.amazonaws.com
 basePath: /
-x-hasEquivalentPaths: true
 schemes:
   - https
   - http
+x-servers:
+  - url: 'http://rds.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+    description: The Amazon RDS multi-region endpoint
+  - url: 'https://rds.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+    description: The Amazon RDS multi-region endpoint
+  - url: 'http://rds.amazonaws.com'
+    variables: {}
+    description: The general Amazon RDS multi-region endpoint
+  - url: 'https://rds.amazonaws.com'
+    variables: {}
+    description: The general Amazon RDS multi-region endpoint
+  - url: 'http://rds.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+    description: The Amazon RDS endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://rds.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+    description: The Amazon RDS endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 consumes:
   - text/xml
 produces:
@@ -89,8 +162,9 @@ security:
   - hmac: []
 paths:
   '/#Action=AddSourceIdentifierToSubscription':
-    post:
-      operationId: AddSourceIdentifierToSubscription
+    get:
+      x-aws-operation-name: AddSourceIdentifierToSubscription
+      operationId: GET AddSourceIdentifierToSubscription
       description: ''
       responses:
         '200':
@@ -136,9 +210,50 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=AddTagsToResource':
     post:
-      operationId: AddTagsToResource
+      x-aws-operation-name: AddSourceIdentifierToSubscription
+      operationId: POST AddSourceIdentifierToSubscription
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AddSourceIdentifierToSubscriptionResult'
+        '480':
+          description: SubscriptionNotFoundFault
+          schema:
+            $ref: '#/definitions/SubscriptionNotFoundFault'
+        '481':
+          description: SourceNotFoundFault
+          schema:
+            $ref: '#/definitions/SourceNotFoundFault'
+      parameters:
+        - name: SubscriptionName
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: SourceIdentifier
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - AddSourceIdentifierToSubscription
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=AddTagsToResource':
+    get:
+      x-aws-operation-name: AddTagsToResource
+      operationId: GET AddTagsToResource
       description: ''
       responses:
         '200':
@@ -184,9 +299,50 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=AuthorizeDBSecurityGroupIngress':
     post:
-      operationId: AuthorizeDBSecurityGroupIngress
+      x-aws-operation-name: AddTagsToResource
+      operationId: POST AddTagsToResource
+      description: ''
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: DBInstanceNotFoundFault
+          schema:
+            $ref: '#/definitions/DBInstanceNotFoundFault'
+        '481':
+          description: DBSnapshotNotFoundFault
+          schema:
+            $ref: '#/definitions/DBSnapshotNotFoundFault'
+      parameters:
+        - name: ResourceName
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: Tags
+          in: formData
+          required: true
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - AddTagsToResource
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=AuthorizeDBSecurityGroupIngress':
+    get:
+      x-aws-operation-name: AuthorizeDBSecurityGroupIngress
+      operationId: GET AuthorizeDBSecurityGroupIngress
       description: ''
       responses:
         '200':
@@ -255,9 +411,73 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=CopyDBSnapshot':
     post:
-      operationId: CopyDBSnapshot
+      x-aws-operation-name: AuthorizeDBSecurityGroupIngress
+      operationId: POST AuthorizeDBSecurityGroupIngress
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AuthorizeDBSecurityGroupIngressResult'
+        '480':
+          description: DBSecurityGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBSecurityGroupNotFoundFault'
+        '481':
+          description: InvalidDBSecurityGroupStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBSecurityGroupStateFault'
+        '482':
+          description: AuthorizationAlreadyExistsFault
+          schema:
+            $ref: '#/definitions/AuthorizationAlreadyExistsFault'
+        '483':
+          description: AuthorizationQuotaExceededFault
+          schema:
+            $ref: '#/definitions/AuthorizationQuotaExceededFault'
+      parameters:
+        - name: DBSecurityGroupName
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: CIDRIP
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: EC2SecurityGroupName
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: EC2SecurityGroupId
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: EC2SecurityGroupOwnerId
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - AuthorizeDBSecurityGroupIngress
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=CopyDBSnapshot':
+    get:
+      x-aws-operation-name: CopyDBSnapshot
+      operationId: GET CopyDBSnapshot
       description: ''
       responses:
         '200':
@@ -318,9 +538,65 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=CreateDBInstance':
     post:
-      operationId: CreateDBInstance
+      x-aws-operation-name: CopyDBSnapshot
+      operationId: POST CopyDBSnapshot
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CopyDBSnapshotResult'
+        '480':
+          description: DBSnapshotAlreadyExistsFault
+          schema:
+            $ref: '#/definitions/DBSnapshotAlreadyExistsFault'
+        '481':
+          description: DBSnapshotNotFoundFault
+          schema:
+            $ref: '#/definitions/DBSnapshotNotFoundFault'
+        '482':
+          description: InvalidDBSnapshotStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBSnapshotStateFault'
+        '483':
+          description: SnapshotQuotaExceededFault
+          schema:
+            $ref: '#/definitions/SnapshotQuotaExceededFault'
+      parameters:
+        - name: SourceDBSnapshotIdentifier
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: TargetDBSnapshotIdentifier
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: Tags
+          in: formData
+          required: false
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - CopyDBSnapshot
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=CreateDBInstance':
+    get:
+      x-aws-operation-name: CreateDBInstance
+      operationId: GET CreateDBInstance
       description: ''
       responses:
         '200':
@@ -527,9 +803,211 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=CreateDBInstanceReadReplica':
     post:
-      operationId: CreateDBInstanceReadReplica
+      x-aws-operation-name: CreateDBInstance
+      operationId: POST CreateDBInstance
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateDBInstanceResult'
+        '480':
+          description: DBInstanceAlreadyExistsFault
+          schema:
+            $ref: '#/definitions/DBInstanceAlreadyExistsFault'
+        '481':
+          description: InsufficientDBInstanceCapacityFault
+          schema:
+            $ref: '#/definitions/InsufficientDBInstanceCapacityFault'
+        '482':
+          description: DBParameterGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBParameterGroupNotFoundFault'
+        '483':
+          description: DBSecurityGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBSecurityGroupNotFoundFault'
+        '484':
+          description: InstanceQuotaExceededFault
+          schema:
+            $ref: '#/definitions/InstanceQuotaExceededFault'
+        '485':
+          description: StorageQuotaExceededFault
+          schema:
+            $ref: '#/definitions/StorageQuotaExceededFault'
+        '486':
+          description: DBSubnetGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBSubnetGroupNotFoundFault'
+        '487':
+          description: DBSubnetGroupDoesNotCoverEnoughAZs
+          schema:
+            $ref: '#/definitions/DBSubnetGroupDoesNotCoverEnoughAZs'
+        '488':
+          description: InvalidSubnet
+          schema:
+            $ref: '#/definitions/InvalidSubnet'
+        '489':
+          description: InvalidVPCNetworkStateFault
+          schema:
+            $ref: '#/definitions/InvalidVPCNetworkStateFault'
+        '490':
+          description: ProvisionedIopsNotAvailableInAZFault
+          schema:
+            $ref: '#/definitions/ProvisionedIopsNotAvailableInAZFault'
+        '491':
+          description: OptionGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/OptionGroupNotFoundFault'
+      parameters:
+        - name: DBName
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: DBInstanceIdentifier
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: AllocatedStorage
+          in: formData
+          required: true
+          description: ''
+          type: integer
+        - name: DBInstanceClass
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: Engine
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: MasterUsername
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: MasterUserPassword
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: DBSecurityGroups
+          in: formData
+          required: false
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: VpcSecurityGroupIds
+          in: formData
+          required: false
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: AvailabilityZone
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: DBSubnetGroupName
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: PreferredMaintenanceWindow
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: DBParameterGroupName
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: BackupRetentionPeriod
+          in: formData
+          required: false
+          description: ''
+          type: integer
+        - name: PreferredBackupWindow
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Port
+          in: formData
+          required: false
+          description: ''
+          type: integer
+        - name: MultiAZ
+          in: formData
+          required: false
+          description: ''
+          type: boolean
+        - name: EngineVersion
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: AutoMinorVersionUpgrade
+          in: formData
+          required: false
+          description: ''
+          type: boolean
+        - name: LicenseModel
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Iops
+          in: formData
+          required: false
+          description: ''
+          type: integer
+        - name: OptionGroupName
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: CharacterSetName
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: PubliclyAccessible
+          in: formData
+          required: false
+          description: ''
+          type: boolean
+        - name: Tags
+          in: formData
+          required: false
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - CreateDBInstance
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=CreateDBInstanceReadReplica':
+    get:
+      x-aws-operation-name: CreateDBInstanceReadReplica
+      operationId: GET CreateDBInstanceReadReplica
       description: ''
       responses:
         '200':
@@ -678,9 +1156,153 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=CreateDBParameterGroup':
     post:
-      operationId: CreateDBParameterGroup
+      x-aws-operation-name: CreateDBInstanceReadReplica
+      operationId: POST CreateDBInstanceReadReplica
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateDBInstanceReadReplicaResult'
+        '480':
+          description: DBInstanceAlreadyExistsFault
+          schema:
+            $ref: '#/definitions/DBInstanceAlreadyExistsFault'
+        '481':
+          description: InsufficientDBInstanceCapacityFault
+          schema:
+            $ref: '#/definitions/InsufficientDBInstanceCapacityFault'
+        '482':
+          description: DBParameterGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBParameterGroupNotFoundFault'
+        '483':
+          description: DBSecurityGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBSecurityGroupNotFoundFault'
+        '484':
+          description: InstanceQuotaExceededFault
+          schema:
+            $ref: '#/definitions/InstanceQuotaExceededFault'
+        '485':
+          description: StorageQuotaExceededFault
+          schema:
+            $ref: '#/definitions/StorageQuotaExceededFault'
+        '486':
+          description: DBInstanceNotFoundFault
+          schema:
+            $ref: '#/definitions/DBInstanceNotFoundFault'
+        '487':
+          description: InvalidDBInstanceStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBInstanceStateFault'
+        '488':
+          description: DBSubnetGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBSubnetGroupNotFoundFault'
+        '489':
+          description: DBSubnetGroupDoesNotCoverEnoughAZs
+          schema:
+            $ref: '#/definitions/DBSubnetGroupDoesNotCoverEnoughAZs'
+        '490':
+          description: InvalidSubnet
+          schema:
+            $ref: '#/definitions/InvalidSubnet'
+        '491':
+          description: InvalidVPCNetworkStateFault
+          schema:
+            $ref: '#/definitions/InvalidVPCNetworkStateFault'
+        '492':
+          description: ProvisionedIopsNotAvailableInAZFault
+          schema:
+            $ref: '#/definitions/ProvisionedIopsNotAvailableInAZFault'
+        '493':
+          description: OptionGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/OptionGroupNotFoundFault'
+        '494':
+          description: DBSubnetGroupNotAllowedFault
+          schema:
+            $ref: '#/definitions/DBSubnetGroupNotAllowedFault'
+        '495':
+          description: InvalidDBSubnetGroupFault
+          schema:
+            $ref: '#/definitions/InvalidDBSubnetGroupFault'
+      parameters:
+        - name: DBInstanceIdentifier
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: SourceDBInstanceIdentifier
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: DBInstanceClass
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: AvailabilityZone
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Port
+          in: formData
+          required: false
+          description: ''
+          type: integer
+        - name: AutoMinorVersionUpgrade
+          in: formData
+          required: false
+          description: ''
+          type: boolean
+        - name: Iops
+          in: formData
+          required: false
+          description: ''
+          type: integer
+        - name: OptionGroupName
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: PubliclyAccessible
+          in: formData
+          required: false
+          description: ''
+          type: boolean
+        - name: Tags
+          in: formData
+          required: false
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: DBSubnetGroupName
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - CreateDBInstanceReadReplica
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=CreateDBParameterGroup':
+    get:
+      x-aws-operation-name: CreateDBParameterGroup
+      operationId: GET CreateDBParameterGroup
       description: ''
       responses:
         '200':
@@ -738,9 +1360,62 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=CreateDBSecurityGroup':
     post:
-      operationId: CreateDBSecurityGroup
+      x-aws-operation-name: CreateDBParameterGroup
+      operationId: POST CreateDBParameterGroup
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateDBParameterGroupResult'
+        '480':
+          description: DBParameterGroupQuotaExceededFault
+          schema:
+            $ref: '#/definitions/DBParameterGroupQuotaExceededFault'
+        '481':
+          description: DBParameterGroupAlreadyExistsFault
+          schema:
+            $ref: '#/definitions/DBParameterGroupAlreadyExistsFault'
+      parameters:
+        - name: DBParameterGroupName
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: DBParameterGroupFamily
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: Description
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: Tags
+          in: formData
+          required: false
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - CreateDBParameterGroup
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=CreateDBSecurityGroup':
+    get:
+      x-aws-operation-name: CreateDBSecurityGroup
+      operationId: GET CreateDBSecurityGroup
       description: ''
       responses:
         '200':
@@ -797,9 +1472,61 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=CreateDBSnapshot':
     post:
-      operationId: CreateDBSnapshot
+      x-aws-operation-name: CreateDBSecurityGroup
+      operationId: POST CreateDBSecurityGroup
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateDBSecurityGroupResult'
+        '480':
+          description: DBSecurityGroupAlreadyExistsFault
+          schema:
+            $ref: '#/definitions/DBSecurityGroupAlreadyExistsFault'
+        '481':
+          description: DBSecurityGroupQuotaExceededFault
+          schema:
+            $ref: '#/definitions/DBSecurityGroupQuotaExceededFault'
+        '482':
+          description: DBSecurityGroupNotSupportedFault
+          schema:
+            $ref: '#/definitions/DBSecurityGroupNotSupportedFault'
+      parameters:
+        - name: DBSecurityGroupName
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: DBSecurityGroupDescription
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: Tags
+          in: formData
+          required: false
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - CreateDBSecurityGroup
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=CreateDBSnapshot':
+    get:
+      x-aws-operation-name: CreateDBSnapshot
+      operationId: GET CreateDBSnapshot
       description: ''
       responses:
         '200':
@@ -860,9 +1587,65 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=CreateDBSubnetGroup':
     post:
-      operationId: CreateDBSubnetGroup
+      x-aws-operation-name: CreateDBSnapshot
+      operationId: POST CreateDBSnapshot
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateDBSnapshotResult'
+        '480':
+          description: DBSnapshotAlreadyExistsFault
+          schema:
+            $ref: '#/definitions/DBSnapshotAlreadyExistsFault'
+        '481':
+          description: InvalidDBInstanceStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBInstanceStateFault'
+        '482':
+          description: DBInstanceNotFoundFault
+          schema:
+            $ref: '#/definitions/DBInstanceNotFoundFault'
+        '483':
+          description: SnapshotQuotaExceededFault
+          schema:
+            $ref: '#/definitions/SnapshotQuotaExceededFault'
+      parameters:
+        - name: DBSnapshotIdentifier
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: DBInstanceIdentifier
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: Tags
+          in: formData
+          required: false
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - CreateDBSnapshot
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=CreateDBSubnetGroup':
+    get:
+      x-aws-operation-name: CreateDBSubnetGroup
+      operationId: GET CreateDBSubnetGroup
       description: ''
       responses:
         '200':
@@ -934,9 +1717,76 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=CreateEventSubscription':
     post:
-      operationId: CreateEventSubscription
+      x-aws-operation-name: CreateDBSubnetGroup
+      operationId: POST CreateDBSubnetGroup
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateDBSubnetGroupResult'
+        '480':
+          description: DBSubnetGroupAlreadyExistsFault
+          schema:
+            $ref: '#/definitions/DBSubnetGroupAlreadyExistsFault'
+        '481':
+          description: DBSubnetGroupQuotaExceededFault
+          schema:
+            $ref: '#/definitions/DBSubnetGroupQuotaExceededFault'
+        '482':
+          description: DBSubnetQuotaExceededFault
+          schema:
+            $ref: '#/definitions/DBSubnetQuotaExceededFault'
+        '483':
+          description: DBSubnetGroupDoesNotCoverEnoughAZs
+          schema:
+            $ref: '#/definitions/DBSubnetGroupDoesNotCoverEnoughAZs'
+        '484':
+          description: InvalidSubnet
+          schema:
+            $ref: '#/definitions/InvalidSubnet'
+      parameters:
+        - name: DBSubnetGroupName
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: DBSubnetGroupDescription
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: SubnetIds
+          in: formData
+          required: true
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: Tags
+          in: formData
+          required: false
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - CreateDBSubnetGroup
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=CreateEventSubscription':
+    get:
+      x-aws-operation-name: CreateEventSubscription
+      operationId: GET CreateEventSubscription
       description: ''
       responses:
         '200':
@@ -1033,9 +1883,101 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=CreateOptionGroup':
     post:
-      operationId: CreateOptionGroup
+      x-aws-operation-name: CreateEventSubscription
+      operationId: POST CreateEventSubscription
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateEventSubscriptionResult'
+        '480':
+          description: EventSubscriptionQuotaExceededFault
+          schema:
+            $ref: '#/definitions/EventSubscriptionQuotaExceededFault'
+        '481':
+          description: SubscriptionAlreadyExistFault
+          schema:
+            $ref: '#/definitions/SubscriptionAlreadyExistFault'
+        '482':
+          description: SNSInvalidTopicFault
+          schema:
+            $ref: '#/definitions/SNSInvalidTopicFault'
+        '483':
+          description: SNSNoAuthorizationFault
+          schema:
+            $ref: '#/definitions/SNSNoAuthorizationFault'
+        '484':
+          description: SNSTopicArnNotFoundFault
+          schema:
+            $ref: '#/definitions/SNSTopicArnNotFoundFault'
+        '485':
+          description: SubscriptionCategoryNotFoundFault
+          schema:
+            $ref: '#/definitions/SubscriptionCategoryNotFoundFault'
+        '486':
+          description: SourceNotFoundFault
+          schema:
+            $ref: '#/definitions/SourceNotFoundFault'
+      parameters:
+        - name: SubscriptionName
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: SnsTopicArn
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: SourceType
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: EventCategories
+          in: formData
+          required: false
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: SourceIds
+          in: formData
+          required: false
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: Enabled
+          in: formData
+          required: false
+          description: ''
+          type: boolean
+        - name: Tags
+          in: formData
+          required: false
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - CreateEventSubscription
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=CreateOptionGroup':
+    get:
+      x-aws-operation-name: CreateOptionGroup
+      operationId: GET CreateOptionGroup
       description: ''
       responses:
         '200':
@@ -1098,9 +2040,67 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DeleteDBInstance':
     post:
-      operationId: DeleteDBInstance
+      x-aws-operation-name: CreateOptionGroup
+      operationId: POST CreateOptionGroup
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateOptionGroupResult'
+        '480':
+          description: OptionGroupAlreadyExistsFault
+          schema:
+            $ref: '#/definitions/OptionGroupAlreadyExistsFault'
+        '481':
+          description: OptionGroupQuotaExceededFault
+          schema:
+            $ref: '#/definitions/OptionGroupQuotaExceededFault'
+      parameters:
+        - name: OptionGroupName
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: EngineName
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: MajorEngineVersion
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: OptionGroupDescription
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: Tags
+          in: formData
+          required: false
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - CreateOptionGroup
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=DeleteDBInstance':
+    get:
+      x-aws-operation-name: DeleteDBInstance
+      operationId: GET DeleteDBInstance
       description: ''
       responses:
         '200':
@@ -1159,9 +2159,63 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DeleteDBParameterGroup':
     post:
-      operationId: DeleteDBParameterGroup
+      x-aws-operation-name: DeleteDBInstance
+      operationId: POST DeleteDBInstance
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteDBInstanceResult'
+        '480':
+          description: DBInstanceNotFoundFault
+          schema:
+            $ref: '#/definitions/DBInstanceNotFoundFault'
+        '481':
+          description: InvalidDBInstanceStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBInstanceStateFault'
+        '482':
+          description: DBSnapshotAlreadyExistsFault
+          schema:
+            $ref: '#/definitions/DBSnapshotAlreadyExistsFault'
+        '483':
+          description: SnapshotQuotaExceededFault
+          schema:
+            $ref: '#/definitions/SnapshotQuotaExceededFault'
+      parameters:
+        - name: DBInstanceIdentifier
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: SkipFinalSnapshot
+          in: formData
+          required: false
+          description: ''
+          type: boolean
+        - name: FinalDBSnapshotIdentifier
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeleteDBInstance
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=DeleteDBParameterGroup':
+    get:
+      x-aws-operation-name: DeleteDBParameterGroup
+      operationId: GET DeleteDBParameterGroup
       description: ''
       responses:
         '200':
@@ -1200,9 +2254,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DeleteDBSecurityGroup':
     post:
-      operationId: DeleteDBSecurityGroup
+      x-aws-operation-name: DeleteDBParameterGroup
+      operationId: POST DeleteDBParameterGroup
+      description: ''
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidDBParameterGroupStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBParameterGroupStateFault'
+        '481':
+          description: DBParameterGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBParameterGroupNotFoundFault'
+      parameters:
+        - name: DBParameterGroupName
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeleteDBParameterGroup
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=DeleteDBSecurityGroup':
+    get:
+      x-aws-operation-name: DeleteDBSecurityGroup
+      operationId: GET DeleteDBSecurityGroup
       description: ''
       responses:
         '200':
@@ -1241,9 +2329,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DeleteDBSnapshot':
     post:
-      operationId: DeleteDBSnapshot
+      x-aws-operation-name: DeleteDBSecurityGroup
+      operationId: POST DeleteDBSecurityGroup
+      description: ''
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidDBSecurityGroupStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBSecurityGroupStateFault'
+        '481':
+          description: DBSecurityGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBSecurityGroupNotFoundFault'
+      parameters:
+        - name: DBSecurityGroupName
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeleteDBSecurityGroup
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=DeleteDBSnapshot':
+    get:
+      x-aws-operation-name: DeleteDBSnapshot
+      operationId: GET DeleteDBSnapshot
       description: ''
       responses:
         '200':
@@ -1284,9 +2406,45 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DeleteDBSubnetGroup':
     post:
-      operationId: DeleteDBSubnetGroup
+      x-aws-operation-name: DeleteDBSnapshot
+      operationId: POST DeleteDBSnapshot
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteDBSnapshotResult'
+        '480':
+          description: InvalidDBSnapshotStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBSnapshotStateFault'
+        '481':
+          description: DBSnapshotNotFoundFault
+          schema:
+            $ref: '#/definitions/DBSnapshotNotFoundFault'
+      parameters:
+        - name: DBSnapshotIdentifier
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeleteDBSnapshot
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=DeleteDBSubnetGroup':
+    get:
+      x-aws-operation-name: DeleteDBSubnetGroup
+      operationId: GET DeleteDBSubnetGroup
       description: ''
       responses:
         '200':
@@ -1329,9 +2487,47 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DeleteEventSubscription':
     post:
-      operationId: DeleteEventSubscription
+      x-aws-operation-name: DeleteDBSubnetGroup
+      operationId: POST DeleteDBSubnetGroup
+      description: ''
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidDBSubnetGroupStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBSubnetGroupStateFault'
+        '481':
+          description: InvalidDBSubnetStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBSubnetStateFault'
+        '482':
+          description: DBSubnetGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBSubnetGroupNotFoundFault'
+      parameters:
+        - name: DBSubnetGroupName
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeleteDBSubnetGroup
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=DeleteEventSubscription':
+    get:
+      x-aws-operation-name: DeleteEventSubscription
+      operationId: GET DeleteEventSubscription
       description: ''
       responses:
         '200':
@@ -1372,9 +2568,45 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DeleteOptionGroup':
     post:
-      operationId: DeleteOptionGroup
+      x-aws-operation-name: DeleteEventSubscription
+      operationId: POST DeleteEventSubscription
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteEventSubscriptionResult'
+        '480':
+          description: SubscriptionNotFoundFault
+          schema:
+            $ref: '#/definitions/SubscriptionNotFoundFault'
+        '481':
+          description: InvalidEventSubscriptionStateFault
+          schema:
+            $ref: '#/definitions/InvalidEventSubscriptionStateFault'
+      parameters:
+        - name: SubscriptionName
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeleteEventSubscription
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=DeleteOptionGroup':
+    get:
+      x-aws-operation-name: DeleteOptionGroup
+      operationId: GET DeleteOptionGroup
       description: ''
       responses:
         '200':
@@ -1413,9 +2645,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeDBEngineVersions':
     post:
-      operationId: DescribeDBEngineVersions
+      x-aws-operation-name: DeleteOptionGroup
+      operationId: POST DeleteOptionGroup
+      description: ''
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: OptionGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/OptionGroupNotFoundFault'
+        '481':
+          description: InvalidOptionGroupStateFault
+          schema:
+            $ref: '#/definitions/InvalidOptionGroupStateFault'
+      parameters:
+        - name: OptionGroupName
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeleteOptionGroup
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=DescribeDBEngineVersions':
+    get:
+      x-aws-operation-name: DescribeDBEngineVersions
+      operationId: GET DescribeDBEngineVersions
       description: ''
       responses:
         '200':
@@ -1485,9 +2751,74 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeDBInstances':
     post:
-      operationId: DescribeDBInstances
+      x-aws-operation-name: DescribeDBEngineVersions
+      operationId: POST DescribeDBEngineVersions
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DBEngineVersionMessage'
+      parameters:
+        - name: Engine
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: EngineVersion
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: DBParameterGroupFamily
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Filters
+          in: formData
+          required: false
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: MaxRecords
+          in: formData
+          required: false
+          description: ''
+          type: integer
+        - name: Marker
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: DefaultOnly
+          in: formData
+          required: false
+          description: ''
+          type: boolean
+        - name: ListSupportedCharacterSets
+          in: formData
+          required: false
+          description: ''
+          type: boolean
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeDBEngineVersions
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=DescribeDBInstances':
+    get:
+      x-aws-operation-name: DescribeDBInstances
+      operationId: GET DescribeDBInstances
       description: ''
       responses:
         '200':
@@ -1541,9 +2872,58 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeDBLogFiles':
     post:
-      operationId: DescribeDBLogFiles
+      x-aws-operation-name: DescribeDBInstances
+      operationId: POST DescribeDBInstances
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DBInstanceMessage'
+        '480':
+          description: DBInstanceNotFoundFault
+          schema:
+            $ref: '#/definitions/DBInstanceNotFoundFault'
+      parameters:
+        - name: DBInstanceIdentifier
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Filters
+          in: formData
+          required: false
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: MaxRecords
+          in: formData
+          required: false
+          description: ''
+          type: integer
+        - name: Marker
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeDBInstances
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=DescribeDBLogFiles':
+    get:
+      x-aws-operation-name: DescribeDBLogFiles
+      operationId: GET DescribeDBLogFiles
       description: ''
       responses:
         '200':
@@ -1612,9 +2992,73 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeDBParameterGroups':
     post:
-      operationId: DescribeDBParameterGroups
+      x-aws-operation-name: DescribeDBLogFiles
+      operationId: POST DescribeDBLogFiles
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeDBLogFilesResponse'
+        '480':
+          description: DBInstanceNotFoundFault
+          schema:
+            $ref: '#/definitions/DBInstanceNotFoundFault'
+      parameters:
+        - name: DBInstanceIdentifier
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: FilenameContains
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: FileLastWritten
+          in: formData
+          required: false
+          description: ''
+          type: integer
+        - name: FileSize
+          in: formData
+          required: false
+          description: ''
+          type: integer
+        - name: Filters
+          in: formData
+          required: false
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: MaxRecords
+          in: formData
+          required: false
+          description: ''
+          type: integer
+        - name: Marker
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeDBLogFiles
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=DescribeDBParameterGroups':
+    get:
+      x-aws-operation-name: DescribeDBParameterGroups
+      operationId: GET DescribeDBParameterGroups
       description: ''
       responses:
         '200':
@@ -1668,9 +3112,58 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeDBParameters':
     post:
-      operationId: DescribeDBParameters
+      x-aws-operation-name: DescribeDBParameterGroups
+      operationId: POST DescribeDBParameterGroups
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DBParameterGroupsMessage'
+        '480':
+          description: DBParameterGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBParameterGroupNotFoundFault'
+      parameters:
+        - name: DBParameterGroupName
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Filters
+          in: formData
+          required: false
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: MaxRecords
+          in: formData
+          required: false
+          description: ''
+          type: integer
+        - name: Marker
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeDBParameterGroups
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=DescribeDBParameters':
+    get:
+      x-aws-operation-name: DescribeDBParameters
+      operationId: GET DescribeDBParameters
       description: ''
       responses:
         '200':
@@ -1729,9 +3222,63 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeDBSecurityGroups':
     post:
-      operationId: DescribeDBSecurityGroups
+      x-aws-operation-name: DescribeDBParameters
+      operationId: POST DescribeDBParameters
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DBParameterGroupDetails'
+        '480':
+          description: DBParameterGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBParameterGroupNotFoundFault'
+      parameters:
+        - name: DBParameterGroupName
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: Source
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Filters
+          in: formData
+          required: false
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: MaxRecords
+          in: formData
+          required: false
+          description: ''
+          type: integer
+        - name: Marker
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeDBParameters
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=DescribeDBSecurityGroups':
+    get:
+      x-aws-operation-name: DescribeDBSecurityGroups
+      operationId: GET DescribeDBSecurityGroups
       description: ''
       responses:
         '200':
@@ -1785,9 +3332,58 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeDBSnapshots':
     post:
-      operationId: DescribeDBSnapshots
+      x-aws-operation-name: DescribeDBSecurityGroups
+      operationId: POST DescribeDBSecurityGroups
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DBSecurityGroupMessage'
+        '480':
+          description: DBSecurityGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBSecurityGroupNotFoundFault'
+      parameters:
+        - name: DBSecurityGroupName
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Filters
+          in: formData
+          required: false
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: MaxRecords
+          in: formData
+          required: false
+          description: ''
+          type: integer
+        - name: Marker
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeDBSecurityGroups
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=DescribeDBSnapshots':
+    get:
+      x-aws-operation-name: DescribeDBSnapshots
+      operationId: GET DescribeDBSnapshots
       description: ''
       responses:
         '200':
@@ -1851,9 +3447,68 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeDBSubnetGroups':
     post:
-      operationId: DescribeDBSubnetGroups
+      x-aws-operation-name: DescribeDBSnapshots
+      operationId: POST DescribeDBSnapshots
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DBSnapshotMessage'
+        '480':
+          description: DBSnapshotNotFoundFault
+          schema:
+            $ref: '#/definitions/DBSnapshotNotFoundFault'
+      parameters:
+        - name: DBInstanceIdentifier
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: DBSnapshotIdentifier
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: SnapshotType
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Filters
+          in: formData
+          required: false
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: MaxRecords
+          in: formData
+          required: false
+          description: ''
+          type: integer
+        - name: Marker
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeDBSnapshots
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=DescribeDBSubnetGroups':
+    get:
+      x-aws-operation-name: DescribeDBSubnetGroups
+      operationId: GET DescribeDBSubnetGroups
       description: ''
       responses:
         '200':
@@ -1907,9 +3562,58 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeEngineDefaultParameters':
     post:
-      operationId: DescribeEngineDefaultParameters
+      x-aws-operation-name: DescribeDBSubnetGroups
+      operationId: POST DescribeDBSubnetGroups
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DBSubnetGroupMessage'
+        '480':
+          description: DBSubnetGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBSubnetGroupNotFoundFault'
+      parameters:
+        - name: DBSubnetGroupName
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Filters
+          in: formData
+          required: false
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: MaxRecords
+          in: formData
+          required: false
+          description: ''
+          type: integer
+        - name: Marker
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeDBSubnetGroups
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=DescribeEngineDefaultParameters':
+    get:
+      x-aws-operation-name: DescribeEngineDefaultParameters
+      operationId: GET DescribeEngineDefaultParameters
       description: ''
       responses:
         '200':
@@ -1959,9 +3663,54 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeEventCategories':
     post:
-      operationId: DescribeEventCategories
+      x-aws-operation-name: DescribeEngineDefaultParameters
+      operationId: POST DescribeEngineDefaultParameters
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeEngineDefaultParametersResult'
+      parameters:
+        - name: DBParameterGroupFamily
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: Filters
+          in: formData
+          required: false
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: MaxRecords
+          in: formData
+          required: false
+          description: ''
+          type: integer
+        - name: Marker
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeEngineDefaultParameters
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=DescribeEventCategories':
+    get:
+      x-aws-operation-name: DescribeEventCategories
+      operationId: GET DescribeEventCategories
       description: ''
       responses:
         '200':
@@ -2001,9 +3750,44 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeEventSubscriptions':
     post:
-      operationId: DescribeEventSubscriptions
+      x-aws-operation-name: DescribeEventCategories
+      operationId: POST DescribeEventCategories
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/EventCategoriesMessage'
+      parameters:
+        - name: SourceType
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Filters
+          in: formData
+          required: false
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeEventCategories
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=DescribeEventSubscriptions':
+    get:
+      x-aws-operation-name: DescribeEventSubscriptions
+      operationId: GET DescribeEventSubscriptions
       description: ''
       responses:
         '200':
@@ -2057,9 +3841,58 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeEvents':
     post:
-      operationId: DescribeEvents
+      x-aws-operation-name: DescribeEventSubscriptions
+      operationId: POST DescribeEventSubscriptions
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/EventSubscriptionsMessage'
+        '480':
+          description: SubscriptionNotFoundFault
+          schema:
+            $ref: '#/definitions/SubscriptionNotFoundFault'
+      parameters:
+        - name: SubscriptionName
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Filters
+          in: formData
+          required: false
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: MaxRecords
+          in: formData
+          required: false
+          description: ''
+          type: integer
+        - name: Marker
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeEventSubscriptions
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=DescribeEvents':
+    get:
+      x-aws-operation-name: DescribeEvents
+      operationId: GET DescribeEvents
       description: ''
       responses:
         '200':
@@ -2143,9 +3976,88 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeOptionGroupOptions':
     post:
-      operationId: DescribeOptionGroupOptions
+      x-aws-operation-name: DescribeEvents
+      operationId: POST DescribeEvents
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/EventsMessage'
+      parameters:
+        - name: SourceIdentifier
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: SourceType
+          in: formData
+          required: false
+          description: ''
+          type: string
+          enum:
+            - db-instance
+            - db-parameter-group
+            - db-security-group
+            - db-snapshot
+        - name: StartTime
+          in: formData
+          required: false
+          description: ''
+          type: string
+          format: date-time
+        - name: EndTime
+          in: formData
+          required: false
+          description: ''
+          type: string
+          format: date-time
+        - name: Duration
+          in: formData
+          required: false
+          description: ''
+          type: integer
+        - name: EventCategories
+          in: formData
+          required: false
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: Filters
+          in: formData
+          required: false
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: MaxRecords
+          in: formData
+          required: false
+          description: ''
+          type: integer
+        - name: Marker
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeEvents
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=DescribeOptionGroupOptions':
+    get:
+      x-aws-operation-name: DescribeOptionGroupOptions
+      operationId: GET DescribeOptionGroupOptions
       description: ''
       responses:
         '200':
@@ -2200,9 +4112,59 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeOptionGroups':
     post:
-      operationId: DescribeOptionGroups
+      x-aws-operation-name: DescribeOptionGroupOptions
+      operationId: POST DescribeOptionGroupOptions
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/OptionGroupOptionsMessage'
+      parameters:
+        - name: EngineName
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: MajorEngineVersion
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Filters
+          in: formData
+          required: false
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: MaxRecords
+          in: formData
+          required: false
+          description: ''
+          type: integer
+        - name: Marker
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeOptionGroupOptions
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=DescribeOptionGroups':
+    get:
+      x-aws-operation-name: DescribeOptionGroups
+      operationId: GET DescribeOptionGroups
       description: ''
       responses:
         '200':
@@ -2266,9 +4228,68 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeOrderableDBInstanceOptions':
     post:
-      operationId: DescribeOrderableDBInstanceOptions
+      x-aws-operation-name: DescribeOptionGroups
+      operationId: POST DescribeOptionGroups
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/OptionGroups'
+        '480':
+          description: OptionGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/OptionGroupNotFoundFault'
+      parameters:
+        - name: OptionGroupName
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Filters
+          in: formData
+          required: false
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: Marker
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: MaxRecords
+          in: formData
+          required: false
+          description: ''
+          type: integer
+        - name: EngineName
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: MajorEngineVersion
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeOptionGroups
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=DescribeOrderableDBInstanceOptions':
+    get:
+      x-aws-operation-name: DescribeOrderableDBInstanceOptions
+      operationId: GET DescribeOrderableDBInstanceOptions
       description: ''
       responses:
         '200':
@@ -2338,9 +4359,74 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeReservedDBInstances':
     post:
-      operationId: DescribeReservedDBInstances
+      x-aws-operation-name: DescribeOrderableDBInstanceOptions
+      operationId: POST DescribeOrderableDBInstanceOptions
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/OrderableDBInstanceOptionsMessage'
+      parameters:
+        - name: Engine
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: EngineVersion
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: DBInstanceClass
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: LicenseModel
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Vpc
+          in: formData
+          required: false
+          description: ''
+          type: boolean
+        - name: Filters
+          in: formData
+          required: false
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: MaxRecords
+          in: formData
+          required: false
+          description: ''
+          type: integer
+        - name: Marker
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeOrderableDBInstanceOptions
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=DescribeReservedDBInstances':
+    get:
+      x-aws-operation-name: DescribeReservedDBInstances
+      operationId: GET DescribeReservedDBInstances
       description: ''
       responses:
         '200':
@@ -2424,9 +4510,88 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeReservedDBInstancesOfferings':
     post:
-      operationId: DescribeReservedDBInstancesOfferings
+      x-aws-operation-name: DescribeReservedDBInstances
+      operationId: POST DescribeReservedDBInstances
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ReservedDBInstanceMessage'
+        '480':
+          description: ReservedDBInstanceNotFoundFault
+          schema:
+            $ref: '#/definitions/ReservedDBInstanceNotFoundFault'
+      parameters:
+        - name: ReservedDBInstanceId
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: ReservedDBInstancesOfferingId
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: DBInstanceClass
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Duration
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: ProductDescription
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: OfferingType
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: MultiAZ
+          in: formData
+          required: false
+          description: ''
+          type: boolean
+        - name: Filters
+          in: formData
+          required: false
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: MaxRecords
+          in: formData
+          required: false
+          description: ''
+          type: integer
+        - name: Marker
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeReservedDBInstances
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=DescribeReservedDBInstancesOfferings':
+    get:
+      x-aws-operation-name: DescribeReservedDBInstancesOfferings
+      operationId: GET DescribeReservedDBInstancesOfferings
       description: ''
       responses:
         '200':
@@ -2505,9 +4670,83 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DownloadDBLogFilePortion':
     post:
-      operationId: DownloadDBLogFilePortion
+      x-aws-operation-name: DescribeReservedDBInstancesOfferings
+      operationId: POST DescribeReservedDBInstancesOfferings
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ReservedDBInstancesOfferingMessage'
+        '480':
+          description: ReservedDBInstancesOfferingNotFoundFault
+          schema:
+            $ref: '#/definitions/ReservedDBInstancesOfferingNotFoundFault'
+      parameters:
+        - name: ReservedDBInstancesOfferingId
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: DBInstanceClass
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Duration
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: ProductDescription
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: OfferingType
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: MultiAZ
+          in: formData
+          required: false
+          description: ''
+          type: boolean
+        - name: Filters
+          in: formData
+          required: false
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: MaxRecords
+          in: formData
+          required: false
+          description: ''
+          type: integer
+        - name: Marker
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeReservedDBInstancesOfferings
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=DownloadDBLogFilePortion':
+    get:
+      x-aws-operation-name: DownloadDBLogFilePortion
+      operationId: GET DownloadDBLogFilePortion
       description: ''
       responses:
         '200':
@@ -2563,9 +4802,60 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=ListTagsForResource':
     post:
-      operationId: ListTagsForResource
+      x-aws-operation-name: DownloadDBLogFilePortion
+      operationId: POST DownloadDBLogFilePortion
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DownloadDBLogFilePortionDetails'
+        '480':
+          description: DBInstanceNotFoundFault
+          schema:
+            $ref: '#/definitions/DBInstanceNotFoundFault'
+        '481':
+          description: DBLogFileNotFoundFault
+          schema:
+            $ref: '#/definitions/DBLogFileNotFoundFault'
+      parameters:
+        - name: DBInstanceIdentifier
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: LogFileName
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: Marker
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: NumberOfLines
+          in: formData
+          required: false
+          description: ''
+          type: integer
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DownloadDBLogFilePortion
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=ListTagsForResource':
+    get:
+      x-aws-operation-name: ListTagsForResource
+      operationId: GET ListTagsForResource
       description: ''
       responses:
         '200':
@@ -2613,9 +4903,52 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=ModifyDBInstance':
     post:
-      operationId: ModifyDBInstance
+      x-aws-operation-name: ListTagsForResource
+      operationId: POST ListTagsForResource
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TagListMessage'
+        '480':
+          description: DBInstanceNotFoundFault
+          schema:
+            $ref: '#/definitions/DBInstanceNotFoundFault'
+        '481':
+          description: DBSnapshotNotFoundFault
+          schema:
+            $ref: '#/definitions/DBSnapshotNotFoundFault'
+      parameters:
+        - name: ResourceName
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: Filters
+          in: formData
+          required: false
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ListTagsForResource
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=ModifyDBInstance':
+    get:
+      x-aws-operation-name: ModifyDBInstance
+      operationId: GET ModifyDBInstance
       description: ''
       responses:
         '200':
@@ -2785,9 +5118,174 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=ModifyDBParameterGroup':
     post:
-      operationId: ModifyDBParameterGroup
+      x-aws-operation-name: ModifyDBInstance
+      operationId: POST ModifyDBInstance
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModifyDBInstanceResult'
+        '480':
+          description: InvalidDBInstanceStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBInstanceStateFault'
+        '481':
+          description: InvalidDBSecurityGroupStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBSecurityGroupStateFault'
+        '482':
+          description: DBInstanceAlreadyExistsFault
+          schema:
+            $ref: '#/definitions/DBInstanceAlreadyExistsFault'
+        '483':
+          description: DBInstanceNotFoundFault
+          schema:
+            $ref: '#/definitions/DBInstanceNotFoundFault'
+        '484':
+          description: DBSecurityGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBSecurityGroupNotFoundFault'
+        '485':
+          description: DBParameterGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBParameterGroupNotFoundFault'
+        '486':
+          description: InsufficientDBInstanceCapacityFault
+          schema:
+            $ref: '#/definitions/InsufficientDBInstanceCapacityFault'
+        '487':
+          description: StorageQuotaExceededFault
+          schema:
+            $ref: '#/definitions/StorageQuotaExceededFault'
+        '488':
+          description: InvalidVPCNetworkStateFault
+          schema:
+            $ref: '#/definitions/InvalidVPCNetworkStateFault'
+        '489':
+          description: ProvisionedIopsNotAvailableInAZFault
+          schema:
+            $ref: '#/definitions/ProvisionedIopsNotAvailableInAZFault'
+        '490':
+          description: OptionGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/OptionGroupNotFoundFault'
+        '491':
+          description: DBUpgradeDependencyFailureFault
+          schema:
+            $ref: '#/definitions/DBUpgradeDependencyFailureFault'
+      parameters:
+        - name: DBInstanceIdentifier
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: AllocatedStorage
+          in: formData
+          required: false
+          description: ''
+          type: integer
+        - name: DBInstanceClass
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: DBSecurityGroups
+          in: formData
+          required: false
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: VpcSecurityGroupIds
+          in: formData
+          required: false
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: ApplyImmediately
+          in: formData
+          required: false
+          description: ''
+          type: boolean
+        - name: MasterUserPassword
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: DBParameterGroupName
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: BackupRetentionPeriod
+          in: formData
+          required: false
+          description: ''
+          type: integer
+        - name: PreferredBackupWindow
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: PreferredMaintenanceWindow
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: MultiAZ
+          in: formData
+          required: false
+          description: ''
+          type: boolean
+        - name: EngineVersion
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: AllowMajorVersionUpgrade
+          in: formData
+          required: false
+          description: ''
+          type: boolean
+        - name: AutoMinorVersionUpgrade
+          in: formData
+          required: false
+          description: ''
+          type: boolean
+        - name: Iops
+          in: formData
+          required: false
+          description: ''
+          type: integer
+        - name: OptionGroupName
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: NewDBInstanceIdentifier
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ModifyDBInstance
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=ModifyDBParameterGroup':
+    get:
+      x-aws-operation-name: ModifyDBParameterGroup
+      operationId: GET ModifyDBParameterGroup
       description: ''
       responses:
         '200':
@@ -2835,9 +5333,52 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=ModifyDBSubnetGroup':
     post:
-      operationId: ModifyDBSubnetGroup
+      x-aws-operation-name: ModifyDBParameterGroup
+      operationId: POST ModifyDBParameterGroup
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DBParameterGroupNameMessage'
+        '480':
+          description: DBParameterGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBParameterGroupNotFoundFault'
+        '481':
+          description: InvalidDBParameterGroupStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBParameterGroupStateFault'
+      parameters:
+        - name: DBParameterGroupName
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: Parameters
+          in: formData
+          required: true
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ModifyDBParameterGroup
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=ModifyDBSubnetGroup':
+    get:
+      x-aws-operation-name: ModifyDBSubnetGroup
+      operationId: GET ModifyDBSubnetGroup
       description: ''
       responses:
         '200':
@@ -2902,9 +5443,69 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=ModifyEventSubscription':
     post:
-      operationId: ModifyEventSubscription
+      x-aws-operation-name: ModifyDBSubnetGroup
+      operationId: POST ModifyDBSubnetGroup
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModifyDBSubnetGroupResult'
+        '480':
+          description: DBSubnetGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBSubnetGroupNotFoundFault'
+        '481':
+          description: DBSubnetQuotaExceededFault
+          schema:
+            $ref: '#/definitions/DBSubnetQuotaExceededFault'
+        '482':
+          description: SubnetAlreadyInUse
+          schema:
+            $ref: '#/definitions/SubnetAlreadyInUse'
+        '483':
+          description: DBSubnetGroupDoesNotCoverEnoughAZs
+          schema:
+            $ref: '#/definitions/DBSubnetGroupDoesNotCoverEnoughAZs'
+        '484':
+          description: InvalidSubnet
+          schema:
+            $ref: '#/definitions/InvalidSubnet'
+      parameters:
+        - name: DBSubnetGroupName
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: DBSubnetGroupDescription
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: SubnetIds
+          in: formData
+          required: true
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ModifyDBSubnetGroup
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=ModifyEventSubscription':
+    get:
+      x-aws-operation-name: ModifyEventSubscription
+      operationId: GET ModifyEventSubscription
       description: ''
       responses:
         '200':
@@ -2983,9 +5584,83 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=ModifyOptionGroup':
     post:
-      operationId: ModifyOptionGroup
+      x-aws-operation-name: ModifyEventSubscription
+      operationId: POST ModifyEventSubscription
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModifyEventSubscriptionResult'
+        '480':
+          description: EventSubscriptionQuotaExceededFault
+          schema:
+            $ref: '#/definitions/EventSubscriptionQuotaExceededFault'
+        '481':
+          description: SubscriptionNotFoundFault
+          schema:
+            $ref: '#/definitions/SubscriptionNotFoundFault'
+        '482':
+          description: SNSInvalidTopicFault
+          schema:
+            $ref: '#/definitions/SNSInvalidTopicFault'
+        '483':
+          description: SNSNoAuthorizationFault
+          schema:
+            $ref: '#/definitions/SNSNoAuthorizationFault'
+        '484':
+          description: SNSTopicArnNotFoundFault
+          schema:
+            $ref: '#/definitions/SNSTopicArnNotFoundFault'
+        '485':
+          description: SubscriptionCategoryNotFoundFault
+          schema:
+            $ref: '#/definitions/SubscriptionCategoryNotFoundFault'
+      parameters:
+        - name: SubscriptionName
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: SnsTopicArn
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: SourceType
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: EventCategories
+          in: formData
+          required: false
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: Enabled
+          in: formData
+          required: false
+          description: ''
+          type: boolean
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ModifyEventSubscription
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=ModifyOptionGroup':
+    get:
+      x-aws-operation-name: ModifyOptionGroup
+      operationId: GET ModifyOptionGroup
       description: ''
       responses:
         '200':
@@ -3045,9 +5720,64 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=PromoteReadReplica':
     post:
-      operationId: PromoteReadReplica
+      x-aws-operation-name: ModifyOptionGroup
+      operationId: POST ModifyOptionGroup
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModifyOptionGroupResult'
+        '480':
+          description: InvalidOptionGroupStateFault
+          schema:
+            $ref: '#/definitions/InvalidOptionGroupStateFault'
+        '481':
+          description: OptionGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/OptionGroupNotFoundFault'
+      parameters:
+        - name: OptionGroupName
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: OptionsToInclude
+          in: formData
+          required: false
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: OptionsToRemove
+          in: formData
+          required: false
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: ApplyImmediately
+          in: formData
+          required: false
+          description: ''
+          type: boolean
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ModifyOptionGroup
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=PromoteReadReplica':
+    get:
+      x-aws-operation-name: PromoteReadReplica
+      operationId: GET PromoteReadReplica
       description: ''
       responses:
         '200':
@@ -3098,9 +5828,55 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=PurchaseReservedDBInstancesOffering':
     post:
-      operationId: PurchaseReservedDBInstancesOffering
+      x-aws-operation-name: PromoteReadReplica
+      operationId: POST PromoteReadReplica
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PromoteReadReplicaResult'
+        '480':
+          description: InvalidDBInstanceStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBInstanceStateFault'
+        '481':
+          description: DBInstanceNotFoundFault
+          schema:
+            $ref: '#/definitions/DBInstanceNotFoundFault'
+      parameters:
+        - name: DBInstanceIdentifier
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: BackupRetentionPeriod
+          in: formData
+          required: false
+          description: ''
+          type: integer
+        - name: PreferredBackupWindow
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - PromoteReadReplica
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=PurchaseReservedDBInstancesOffering':
+    get:
+      x-aws-operation-name: PurchaseReservedDBInstancesOffering
+      operationId: GET PurchaseReservedDBInstancesOffering
       description: ''
       responses:
         '200':
@@ -3162,9 +5938,66 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=RebootDBInstance':
     post:
-      operationId: RebootDBInstance
+      x-aws-operation-name: PurchaseReservedDBInstancesOffering
+      operationId: POST PurchaseReservedDBInstancesOffering
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PurchaseReservedDBInstancesOfferingResult'
+        '480':
+          description: ReservedDBInstancesOfferingNotFoundFault
+          schema:
+            $ref: '#/definitions/ReservedDBInstancesOfferingNotFoundFault'
+        '481':
+          description: ReservedDBInstanceAlreadyExistsFault
+          schema:
+            $ref: '#/definitions/ReservedDBInstanceAlreadyExistsFault'
+        '482':
+          description: ReservedDBInstanceQuotaExceededFault
+          schema:
+            $ref: '#/definitions/ReservedDBInstanceQuotaExceededFault'
+      parameters:
+        - name: ReservedDBInstancesOfferingId
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: ReservedDBInstanceId
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: DBInstanceCount
+          in: formData
+          required: false
+          description: ''
+          type: integer
+        - name: Tags
+          in: formData
+          required: false
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - PurchaseReservedDBInstancesOffering
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=RebootDBInstance':
+    get:
+      x-aws-operation-name: RebootDBInstance
+      operationId: GET RebootDBInstance
       description: ''
       responses:
         '200':
@@ -3210,9 +6043,50 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=RemoveSourceIdentifierFromSubscription':
     post:
-      operationId: RemoveSourceIdentifierFromSubscription
+      x-aws-operation-name: RebootDBInstance
+      operationId: POST RebootDBInstance
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RebootDBInstanceResult'
+        '480':
+          description: InvalidDBInstanceStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBInstanceStateFault'
+        '481':
+          description: DBInstanceNotFoundFault
+          schema:
+            $ref: '#/definitions/DBInstanceNotFoundFault'
+      parameters:
+        - name: DBInstanceIdentifier
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: ForceFailover
+          in: formData
+          required: false
+          description: ''
+          type: boolean
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - RebootDBInstance
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=RemoveSourceIdentifierFromSubscription':
+    get:
+      x-aws-operation-name: RemoveSourceIdentifierFromSubscription
+      operationId: GET RemoveSourceIdentifierFromSubscription
       description: ''
       responses:
         '200':
@@ -3258,9 +6132,50 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=RemoveTagsFromResource':
     post:
-      operationId: RemoveTagsFromResource
+      x-aws-operation-name: RemoveSourceIdentifierFromSubscription
+      operationId: POST RemoveSourceIdentifierFromSubscription
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RemoveSourceIdentifierFromSubscriptionResult'
+        '480':
+          description: SubscriptionNotFoundFault
+          schema:
+            $ref: '#/definitions/SubscriptionNotFoundFault'
+        '481':
+          description: SourceNotFoundFault
+          schema:
+            $ref: '#/definitions/SourceNotFoundFault'
+      parameters:
+        - name: SubscriptionName
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: SourceIdentifier
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - RemoveSourceIdentifierFromSubscription
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=RemoveTagsFromResource':
+    get:
+      x-aws-operation-name: RemoveTagsFromResource
+      operationId: GET RemoveTagsFromResource
       description: ''
       responses:
         '200':
@@ -3306,9 +6221,50 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=ResetDBParameterGroup':
     post:
-      operationId: ResetDBParameterGroup
+      x-aws-operation-name: RemoveTagsFromResource
+      operationId: POST RemoveTagsFromResource
+      description: ''
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: DBInstanceNotFoundFault
+          schema:
+            $ref: '#/definitions/DBInstanceNotFoundFault'
+        '481':
+          description: DBSnapshotNotFoundFault
+          schema:
+            $ref: '#/definitions/DBSnapshotNotFoundFault'
+      parameters:
+        - name: ResourceName
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: TagKeys
+          in: formData
+          required: true
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - RemoveTagsFromResource
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=ResetDBParameterGroup':
+    get:
+      x-aws-operation-name: ResetDBParameterGroup
+      operationId: GET ResetDBParameterGroup
       description: ''
       responses:
         '200':
@@ -3361,9 +6317,57 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=RestoreDBInstanceFromDBSnapshot':
     post:
-      operationId: RestoreDBInstanceFromDBSnapshot
+      x-aws-operation-name: ResetDBParameterGroup
+      operationId: POST ResetDBParameterGroup
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DBParameterGroupNameMessage'
+        '480':
+          description: InvalidDBParameterGroupStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBParameterGroupStateFault'
+        '481':
+          description: DBParameterGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBParameterGroupNotFoundFault'
+      parameters:
+        - name: DBParameterGroupName
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: ResetAllParameters
+          in: formData
+          required: false
+          description: ''
+          type: boolean
+        - name: Parameters
+          in: formData
+          required: false
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ResetDBParameterGroup
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=RestoreDBInstanceFromDBSnapshot':
+    get:
+      x-aws-operation-name: RestoreDBInstanceFromDBSnapshot
+      operationId: GET RestoreDBInstanceFromDBSnapshot
       description: ''
       responses:
         '200':
@@ -3520,9 +6524,161 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=RestoreDBInstanceToPointInTime':
     post:
-      operationId: RestoreDBInstanceToPointInTime
+      x-aws-operation-name: RestoreDBInstanceFromDBSnapshot
+      operationId: POST RestoreDBInstanceFromDBSnapshot
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RestoreDBInstanceFromDBSnapshotResult'
+        '480':
+          description: DBInstanceAlreadyExistsFault
+          schema:
+            $ref: '#/definitions/DBInstanceAlreadyExistsFault'
+        '481':
+          description: DBSnapshotNotFoundFault
+          schema:
+            $ref: '#/definitions/DBSnapshotNotFoundFault'
+        '482':
+          description: InstanceQuotaExceededFault
+          schema:
+            $ref: '#/definitions/InstanceQuotaExceededFault'
+        '483':
+          description: InsufficientDBInstanceCapacityFault
+          schema:
+            $ref: '#/definitions/InsufficientDBInstanceCapacityFault'
+        '484':
+          description: InvalidDBSnapshotStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBSnapshotStateFault'
+        '485':
+          description: StorageQuotaExceededFault
+          schema:
+            $ref: '#/definitions/StorageQuotaExceededFault'
+        '486':
+          description: InvalidVPCNetworkStateFault
+          schema:
+            $ref: '#/definitions/InvalidVPCNetworkStateFault'
+        '487':
+          description: InvalidRestoreFault
+          schema:
+            $ref: '#/definitions/InvalidRestoreFault'
+        '488':
+          description: DBSubnetGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBSubnetGroupNotFoundFault'
+        '489':
+          description: DBSubnetGroupDoesNotCoverEnoughAZs
+          schema:
+            $ref: '#/definitions/DBSubnetGroupDoesNotCoverEnoughAZs'
+        '490':
+          description: InvalidSubnet
+          schema:
+            $ref: '#/definitions/InvalidSubnet'
+        '491':
+          description: ProvisionedIopsNotAvailableInAZFault
+          schema:
+            $ref: '#/definitions/ProvisionedIopsNotAvailableInAZFault'
+        '492':
+          description: OptionGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/OptionGroupNotFoundFault'
+      parameters:
+        - name: DBInstanceIdentifier
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: DBSnapshotIdentifier
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: DBInstanceClass
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Port
+          in: formData
+          required: false
+          description: ''
+          type: integer
+        - name: AvailabilityZone
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: DBSubnetGroupName
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: MultiAZ
+          in: formData
+          required: false
+          description: ''
+          type: boolean
+        - name: PubliclyAccessible
+          in: formData
+          required: false
+          description: ''
+          type: boolean
+        - name: AutoMinorVersionUpgrade
+          in: formData
+          required: false
+          description: ''
+          type: boolean
+        - name: LicenseModel
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: DBName
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Engine
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Iops
+          in: formData
+          required: false
+          description: ''
+          type: integer
+        - name: OptionGroupName
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Tags
+          in: formData
+          required: false
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - RestoreDBInstanceFromDBSnapshot
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=RestoreDBInstanceToPointInTime':
+    get:
+      x-aws-operation-name: RestoreDBInstanceToPointInTime
+      operationId: GET RestoreDBInstanceToPointInTime
       description: ''
       responses:
         '200':
@@ -3694,9 +6850,176 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=RevokeDBSecurityGroupIngress':
     post:
-      operationId: RevokeDBSecurityGroupIngress
+      x-aws-operation-name: RestoreDBInstanceToPointInTime
+      operationId: POST RestoreDBInstanceToPointInTime
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RestoreDBInstanceToPointInTimeResult'
+        '480':
+          description: DBInstanceAlreadyExistsFault
+          schema:
+            $ref: '#/definitions/DBInstanceAlreadyExistsFault'
+        '481':
+          description: DBInstanceNotFoundFault
+          schema:
+            $ref: '#/definitions/DBInstanceNotFoundFault'
+        '482':
+          description: InstanceQuotaExceededFault
+          schema:
+            $ref: '#/definitions/InstanceQuotaExceededFault'
+        '483':
+          description: InsufficientDBInstanceCapacityFault
+          schema:
+            $ref: '#/definitions/InsufficientDBInstanceCapacityFault'
+        '484':
+          description: InvalidDBInstanceStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBInstanceStateFault'
+        '485':
+          description: PointInTimeRestoreNotEnabledFault
+          schema:
+            $ref: '#/definitions/PointInTimeRestoreNotEnabledFault'
+        '486':
+          description: StorageQuotaExceededFault
+          schema:
+            $ref: '#/definitions/StorageQuotaExceededFault'
+        '487':
+          description: InvalidVPCNetworkStateFault
+          schema:
+            $ref: '#/definitions/InvalidVPCNetworkStateFault'
+        '488':
+          description: InvalidRestoreFault
+          schema:
+            $ref: '#/definitions/InvalidRestoreFault'
+        '489':
+          description: DBSubnetGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBSubnetGroupNotFoundFault'
+        '490':
+          description: DBSubnetGroupDoesNotCoverEnoughAZs
+          schema:
+            $ref: '#/definitions/DBSubnetGroupDoesNotCoverEnoughAZs'
+        '491':
+          description: InvalidSubnet
+          schema:
+            $ref: '#/definitions/InvalidSubnet'
+        '492':
+          description: ProvisionedIopsNotAvailableInAZFault
+          schema:
+            $ref: '#/definitions/ProvisionedIopsNotAvailableInAZFault'
+        '493':
+          description: OptionGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/OptionGroupNotFoundFault'
+      parameters:
+        - name: SourceDBInstanceIdentifier
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: TargetDBInstanceIdentifier
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: RestoreTime
+          in: formData
+          required: false
+          description: ''
+          type: string
+          format: date-time
+        - name: UseLatestRestorableTime
+          in: formData
+          required: false
+          description: ''
+          type: boolean
+        - name: DBInstanceClass
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Port
+          in: formData
+          required: false
+          description: ''
+          type: integer
+        - name: AvailabilityZone
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: DBSubnetGroupName
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: MultiAZ
+          in: formData
+          required: false
+          description: ''
+          type: boolean
+        - name: PubliclyAccessible
+          in: formData
+          required: false
+          description: ''
+          type: boolean
+        - name: AutoMinorVersionUpgrade
+          in: formData
+          required: false
+          description: ''
+          type: boolean
+        - name: LicenseModel
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: DBName
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Engine
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Iops
+          in: formData
+          required: false
+          description: ''
+          type: integer
+        - name: OptionGroupName
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Tags
+          in: formData
+          required: false
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - RestoreDBInstanceToPointInTime
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
+  '/#Action=RevokeDBSecurityGroupIngress':
+    get:
+      x-aws-operation-name: RevokeDBSecurityGroupIngress
+      operationId: GET RevokeDBSecurityGroupIngress
       description: ''
       responses:
         '200':
@@ -3761,6 +7084,65 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: RevokeDBSecurityGroupIngress
+      operationId: POST RevokeDBSecurityGroupIngress
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RevokeDBSecurityGroupIngressResult'
+        '480':
+          description: DBSecurityGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBSecurityGroupNotFoundFault'
+        '481':
+          description: AuthorizationNotFoundFault
+          schema:
+            $ref: '#/definitions/AuthorizationNotFoundFault'
+        '482':
+          description: InvalidDBSecurityGroupStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBSecurityGroupStateFault'
+      parameters:
+        - name: DBSecurityGroupName
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: CIDRIP
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: EC2SecurityGroupName
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: EC2SecurityGroupId
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: EC2SecurityGroupOwnerId
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - RevokeDBSecurityGroupIngress
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2013-09-09'
 definitions:
   AddSourceIdentifierToSubscriptionResult:
     type: object

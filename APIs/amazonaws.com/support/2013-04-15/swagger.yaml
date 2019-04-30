@@ -35,10 +35,30 @@ externalDocs:
   url: 'https://docs.aws.amazon.com/support/'
 host: support.amazonaws.com
 basePath: /
-x-hasEquivalentPaths: true
 schemes:
   - https
   - http
+x-servers:
+  - url: 'https://support.us-east-1.amazonaws.com'
+    variables: {}
+    description: The general AWS Support multi-region endpoint
+  - url: 'http://support.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+    description: The AWS Support endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://support.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+    description: The AWS Support endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 consumes:
   - application/json
 produces:

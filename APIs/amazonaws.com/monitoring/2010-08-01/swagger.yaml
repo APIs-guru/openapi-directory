@@ -35,10 +35,77 @@ externalDocs:
   url: 'https://docs.aws.amazon.com/monitoring/'
 host: monitoring.amazonaws.com
 basePath: /
-x-hasEquivalentPaths: true
 schemes:
   - https
   - http
+x-servers:
+  - url: 'http://monitoring.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+    description: The CloudWatch multi-region endpoint
+  - url: 'https://monitoring.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+    description: The CloudWatch multi-region endpoint
+  - url: 'http://monitoring.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+    description: The CloudWatch endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://monitoring.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+    description: The CloudWatch endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 consumes:
   - text/xml
 produces:
@@ -90,8 +157,9 @@ security:
   - hmac: []
 paths:
   '/#Action=DeleteAlarms':
-    post:
-      operationId: DeleteAlarms
+    get:
+      x-aws-operation-name: DeleteAlarms
+      operationId: GET DeleteAlarms
       description: 'Deletes the specified alarms. In the event of an error, no alarms are deleted.'
       responses:
         '200':
@@ -128,9 +196,41 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DeleteDashboards':
     post:
-      operationId: DeleteDashboards
+      x-aws-operation-name: DeleteAlarms
+      operationId: POST DeleteAlarms
+      description: 'Deletes the specified alarms. In the event of an error, no alarms are deleted.'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFound
+          schema:
+            $ref: '#/definitions/ResourceNotFound'
+      parameters:
+        - name: AlarmNames
+          in: formData
+          required: true
+          description: The alarms to be deleted.
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeleteAlarms
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
+  '/#Action=DeleteDashboards':
+    get:
+      x-aws-operation-name: DeleteDashboards
+      operationId: GET DeleteDashboards
       description: 'Deletes all dashboards that you specify. You may specify up to 100 dashboards to delete. If there is an error during this call, no dashboards are deleted.'
       responses:
         '200':
@@ -177,9 +277,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeAlarmHistory':
     post:
-      operationId: DescribeAlarmHistory
+      x-aws-operation-name: DeleteDashboards
+      operationId: POST DeleteDashboards
+      description: 'Deletes all dashboards that you specify. You may specify up to 100 dashboards to delete. If there is an error during this call, no dashboards are deleted.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteDashboardsOutput'
+        '480':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '481':
+          description: DashboardNotFoundError
+          schema:
+            $ref: '#/definitions/DashboardNotFoundError'
+        '482':
+          description: InternalServiceFault
+          schema:
+            $ref: '#/definitions/InternalServiceFault'
+      parameters:
+        - name: DashboardNames
+          in: formData
+          required: true
+          description: The dashboards to be deleted. This parameter is required.
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeleteDashboards
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
+  '/#Action=DescribeAlarmHistory':
+    get:
+      x-aws-operation-name: DescribeAlarmHistory
+      operationId: GET DescribeAlarmHistory
       description: '<p>Retrieves the history for the specified alarm. You can filter the results by date range or item type. If an alarm name is not specified, the histories for all alarms are returned.</p> <p>CloudWatch retains the history of an alarm even if you delete the alarm.</p>'
       responses:
         '200':
@@ -251,9 +393,76 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeAlarms':
     post:
-      operationId: DescribeAlarms
+      x-aws-operation-name: DescribeAlarmHistory
+      operationId: POST DescribeAlarmHistory
+      description: '<p>Retrieves the history for the specified alarm. You can filter the results by date range or item type. If an alarm name is not specified, the histories for all alarms are returned.</p> <p>CloudWatch retains the history of an alarm even if you delete the alarm.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeAlarmHistoryOutput'
+        '480':
+          description: InvalidNextToken
+          schema:
+            $ref: '#/definitions/InvalidNextToken'
+      parameters:
+        - name: AlarmName
+          in: formData
+          required: false
+          description: The name of the alarm.
+          type: string
+          minLength: 1
+          maxLength: 255
+        - name: HistoryItemType
+          in: formData
+          required: false
+          description: The type of alarm histories to retrieve.
+          type: string
+          enum:
+            - ConfigurationUpdate
+            - StateUpdate
+            - Action
+        - name: StartDate
+          in: formData
+          required: false
+          description: The starting date to retrieve alarm history.
+          type: string
+          format: date-time
+        - name: EndDate
+          in: formData
+          required: false
+          description: The ending date to retrieve alarm history.
+          type: string
+          format: date-time
+        - name: MaxRecords
+          in: formData
+          required: false
+          description: The maximum number of alarm history records to retrieve.
+          type: integer
+          minimum: 1
+          maximum: 100
+        - name: NextToken
+          in: formData
+          required: false
+          description: The token returned by a previous call to indicate that there is more data available.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeAlarmHistory
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
+  '/#Action=DescribeAlarms':
+    get:
+      x-aws-operation-name: DescribeAlarms
+      operationId: GET DescribeAlarms
       description: 'Retrieves the specified alarms. If no alarms are specified, all alarms are returned. Alarms can be retrieved by using only a prefix for the alarm name, the alarm state, or a prefix for any action.'
       responses:
         '200':
@@ -327,9 +536,78 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeAlarmsForMetric':
     post:
-      operationId: DescribeAlarmsForMetric
+      x-aws-operation-name: DescribeAlarms
+      operationId: POST DescribeAlarms
+      description: 'Retrieves the specified alarms. If no alarms are specified, all alarms are returned. Alarms can be retrieved by using only a prefix for the alarm name, the alarm state, or a prefix for any action.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeAlarmsOutput'
+        '480':
+          description: InvalidNextToken
+          schema:
+            $ref: '#/definitions/InvalidNextToken'
+      parameters:
+        - name: AlarmNames
+          in: formData
+          required: false
+          description: The names of the alarms.
+          type: array
+          items:
+            type: string
+        - name: AlarmNamePrefix
+          in: formData
+          required: false
+          description: 'The alarm name prefix. If this parameter is specified, you cannot specify <code>AlarmNames</code>.'
+          type: string
+          minLength: 1
+          maxLength: 255
+        - name: StateValue
+          in: formData
+          required: false
+          description: The state value to be used in matching alarms.
+          type: string
+          enum:
+            - OK
+            - ALARM
+            - INSUFFICIENT_DATA
+        - name: ActionPrefix
+          in: formData
+          required: false
+          description: The action name prefix.
+          type: string
+          minLength: 1
+          maxLength: 1024
+        - name: MaxRecords
+          in: formData
+          required: false
+          description: The maximum number of alarm descriptions to retrieve.
+          type: integer
+          minimum: 1
+          maximum: 100
+        - name: NextToken
+          in: formData
+          required: false
+          description: The token returned by a previous call to indicate that there is more data available.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeAlarms
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
+  '/#Action=DescribeAlarmsForMetric':
+    get:
+      x-aws-operation-name: DescribeAlarmsForMetric
+      operationId: GET DescribeAlarmsForMetric
       description: 'Retrieves the alarms for the specified metric. To filter the results, specify a statistic, period, or unit.'
       responses:
         '200':
@@ -435,9 +713,110 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DisableAlarmActions':
     post:
-      operationId: DisableAlarmActions
+      x-aws-operation-name: DescribeAlarmsForMetric
+      operationId: POST DescribeAlarmsForMetric
+      description: 'Retrieves the alarms for the specified metric. To filter the results, specify a statistic, period, or unit.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeAlarmsForMetricOutput'
+      parameters:
+        - name: MetricName
+          in: formData
+          required: true
+          description: The name of the metric.
+          type: string
+          minLength: 1
+          maxLength: 255
+        - name: Namespace
+          in: formData
+          required: true
+          description: The namespace of the metric.
+          type: string
+          pattern: '[^:].*'
+          minLength: 1
+          maxLength: 255
+        - name: Statistic
+          in: formData
+          required: false
+          description: 'The statistic for the metric, other than percentiles. For percentile statistics, use <code>ExtendedStatistics</code>.'
+          type: string
+          enum:
+            - SampleCount
+            - Average
+            - Sum
+            - Minimum
+            - Maximum
+        - name: ExtendedStatistic
+          in: formData
+          required: false
+          description: The percentile statistic for the metric. Specify a value between p0.0 and p100.
+          type: string
+          pattern: 'p(\d{1,2}(\.\d{0,2})?|100)'
+        - name: Dimensions
+          in: formData
+          required: false
+          description: 'The dimensions associated with the metric. If the metric has any associated dimensions, you must specify them in order for the call to succeed.'
+          type: array
+          items:
+            type: string
+        - name: Period
+          in: formData
+          required: false
+          description: 'The period, in seconds, over which the statistic is applied.'
+          type: integer
+          minimum: 1
+        - name: Unit
+          in: formData
+          required: false
+          description: The unit for the metric.
+          type: string
+          enum:
+            - Seconds
+            - Microseconds
+            - Milliseconds
+            - Bytes
+            - Kilobytes
+            - Megabytes
+            - Gigabytes
+            - Terabytes
+            - Bits
+            - Kilobits
+            - Megabits
+            - Gigabits
+            - Terabits
+            - Percent
+            - Count
+            - Bytes/Second
+            - Kilobytes/Second
+            - Megabytes/Second
+            - Gigabytes/Second
+            - Terabytes/Second
+            - Bits/Second
+            - Kilobits/Second
+            - Megabits/Second
+            - Gigabits/Second
+            - Terabits/Second
+            - Count/Second
+            - None
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeAlarmsForMetric
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
+  '/#Action=DisableAlarmActions':
+    get:
+      x-aws-operation-name: DisableAlarmActions
+      operationId: GET DisableAlarmActions
       description: 'Disables the actions for the specified alarms. When an alarm''s actions are disabled, the alarm actions do not execute when the alarm state changes.'
       responses:
         '200':
@@ -470,9 +849,37 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=EnableAlarmActions':
     post:
-      operationId: EnableAlarmActions
+      x-aws-operation-name: DisableAlarmActions
+      operationId: POST DisableAlarmActions
+      description: 'Disables the actions for the specified alarms. When an alarm''s actions are disabled, the alarm actions do not execute when the alarm state changes.'
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: AlarmNames
+          in: formData
+          required: true
+          description: The names of the alarms.
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DisableAlarmActions
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
+  '/#Action=EnableAlarmActions':
+    get:
+      x-aws-operation-name: EnableAlarmActions
+      operationId: GET EnableAlarmActions
       description: Enables the actions for the specified alarms.
       responses:
         '200':
@@ -505,9 +912,37 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=GetDashboard':
     post:
-      operationId: GetDashboard
+      x-aws-operation-name: EnableAlarmActions
+      operationId: POST EnableAlarmActions
+      description: Enables the actions for the specified alarms.
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: AlarmNames
+          in: formData
+          required: true
+          description: The names of the alarms.
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - EnableAlarmActions
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
+  '/#Action=GetDashboard':
+    get:
+      x-aws-operation-name: GetDashboard
+      operationId: GET GetDashboard
       description: '<p>Displays the details of the dashboard that you specify.</p> <p>To copy an existing dashboard, use <code>GetDashboard</code>, and then use the data returned within <code>DashboardBody</code> as the template for the new dashboard when you call <code>PutDashboard</code> to create the copy.</p>'
       responses:
         '200':
@@ -552,9 +987,49 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=GetMetricData':
     post:
-      operationId: GetMetricData
+      x-aws-operation-name: GetDashboard
+      operationId: POST GetDashboard
+      description: '<p>Displays the details of the dashboard that you specify.</p> <p>To copy an existing dashboard, use <code>GetDashboard</code>, and then use the data returned within <code>DashboardBody</code> as the template for the new dashboard when you call <code>PutDashboard</code> to create the copy.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetDashboardOutput'
+        '480':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '481':
+          description: DashboardNotFoundError
+          schema:
+            $ref: '#/definitions/DashboardNotFoundError'
+        '482':
+          description: InternalServiceFault
+          schema:
+            $ref: '#/definitions/InternalServiceFault'
+      parameters:
+        - name: DashboardName
+          in: formData
+          required: true
+          description: The name of the dashboard to be described.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - GetDashboard
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
+  '/#Action=GetMetricData':
+    get:
+      x-aws-operation-name: GetMetricData
+      operationId: GET GetMetricData
       description: '<p>You can use the <code>GetMetricData</code> API to retrieve as many as 100 different metrics in a single request, with a total of as many as 100,800 datapoints. You can also optionally perform math expressions on the values of the returned statistics, to create new time series that represent new insights into your data. For example, using Lambda metrics, you could divide the Errors metric by the Invocations metric to get an error rate time series. For more information about metric math expressions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax">Metric Math Syntax and Functions</a> in the <i>Amazon CloudWatch User Guide</i>.</p> <p>Calls to the <code>GetMetricData</code> API have a different pricing structure than calls to <code>GetMetricStatistics</code>. For more information about pricing, see <a href="https://aws.amazon.com/cloudwatch/pricing/">Amazon CloudWatch Pricing</a>.</p> <p>Amazon CloudWatch retains metric data as follows:</p> <ul> <li> <p>Data points with a period of less than 60 seconds are available for 3 hours. These data points are high-resolution metrics and are available only for custom metrics that have been defined with a <code>StorageResolution</code> of 1.</p> </li> <li> <p>Data points with a period of 60 seconds (1-minute) are available for 15 days.</p> </li> <li> <p>Data points with a period of 300 seconds (5-minute) are available for 63 days.</p> </li> <li> <p>Data points with a period of 3600 seconds (1 hour) are available for 455 days (15 months).</p> </li> </ul> <p>Data points that are initially published with a shorter period are aggregated together for long-term storage. For example, if you collect data using a period of 1 minute, the data remains available for 15 days with 1-minute resolution. After 15 days, this data is still available, but is aggregated and retrievable only with a resolution of 5 minutes. After 63 days, the data is further aggregated and is available with a resolution of 1 hour.</p>'
       responses:
         '200':
@@ -623,9 +1098,73 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=GetMetricStatistics':
     post:
-      operationId: GetMetricStatistics
+      x-aws-operation-name: GetMetricData
+      operationId: POST GetMetricData
+      description: '<p>You can use the <code>GetMetricData</code> API to retrieve as many as 100 different metrics in a single request, with a total of as many as 100,800 datapoints. You can also optionally perform math expressions on the values of the returned statistics, to create new time series that represent new insights into your data. For example, using Lambda metrics, you could divide the Errors metric by the Invocations metric to get an error rate time series. For more information about metric math expressions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax">Metric Math Syntax and Functions</a> in the <i>Amazon CloudWatch User Guide</i>.</p> <p>Calls to the <code>GetMetricData</code> API have a different pricing structure than calls to <code>GetMetricStatistics</code>. For more information about pricing, see <a href="https://aws.amazon.com/cloudwatch/pricing/">Amazon CloudWatch Pricing</a>.</p> <p>Amazon CloudWatch retains metric data as follows:</p> <ul> <li> <p>Data points with a period of less than 60 seconds are available for 3 hours. These data points are high-resolution metrics and are available only for custom metrics that have been defined with a <code>StorageResolution</code> of 1.</p> </li> <li> <p>Data points with a period of 60 seconds (1-minute) are available for 15 days.</p> </li> <li> <p>Data points with a period of 300 seconds (5-minute) are available for 63 days.</p> </li> <li> <p>Data points with a period of 3600 seconds (1 hour) are available for 455 days (15 months).</p> </li> </ul> <p>Data points that are initially published with a shorter period are aggregated together for long-term storage. For example, if you collect data using a period of 1 minute, the data remains available for 15 days with 1-minute resolution. After 15 days, this data is still available, but is aggregated and retrievable only with a resolution of 5 minutes. After 63 days, the data is further aggregated and is available with a resolution of 1 hour.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetMetricDataOutput'
+        '480':
+          description: InvalidNextToken
+          schema:
+            $ref: '#/definitions/InvalidNextToken'
+      parameters:
+        - name: MetricDataQueries
+          in: formData
+          required: true
+          description: 'The metric queries to be returned. A single <code>GetMetricData</code> call can include as many as 100 <code>MetricDataQuery</code> structures. Each of these structures can specify either a metric to retrieve, or a math expression to perform on retrieved data. '
+          type: array
+          items:
+            type: string
+        - name: StartTime
+          in: formData
+          required: true
+          description: '<p>The time stamp indicating the earliest data to be returned.</p> <p>For better performance, specify <code>StartTime</code> and <code>EndTime</code> values that align with the value of the metric''s <code>Period</code> and sync up with the beginning and end of an hour. For example, if the <code>Period</code> of a metric is 5 minutes, specifying 12:05 or 12:30 as <code>StartTime</code> can get a faster response from CloudWatch than setting 12:07 or 12:29 as the <code>StartTime</code>.</p>'
+          type: string
+          format: date-time
+        - name: EndTime
+          in: formData
+          required: true
+          description: '<p>The time stamp indicating the latest data to be returned.</p> <p>For better performance, specify <code>StartTime</code> and <code>EndTime</code> values that align with the value of the metric''s <code>Period</code> and sync up with the beginning and end of an hour. For example, if the <code>Period</code> of a metric is 5 minutes, specifying 12:05 or 12:30 as <code>EndTime</code> can get a faster response from CloudWatch than setting 12:07 or 12:29 as the <code>EndTime</code>.</p>'
+          type: string
+          format: date-time
+        - name: NextToken
+          in: formData
+          required: false
+          description: 'Include this value, if it was returned by the previous call, to get the next set of data points.'
+          type: string
+        - name: ScanBy
+          in: formData
+          required: false
+          description: The order in which data points should be returned. <code>TimestampDescending</code> returns the newest data first and paginates when the <code>MaxDatapoints</code> limit is reached. <code>TimestampAscending</code> returns the oldest data first and paginates when the <code>MaxDatapoints</code> limit is reached.
+          type: string
+          enum:
+            - TimestampDescending
+            - TimestampAscending
+        - name: MaxDatapoints
+          in: formData
+          required: false
+          description: 'The maximum number of data points the request should return before paginating. If you omit this, the default of 100,800 is used.'
+          type: integer
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - GetMetricData
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
+  '/#Action=GetMetricStatistics':
+    get:
+      x-aws-operation-name: GetMetricStatistics
+      operationId: GET GetMetricStatistics
       description: '<p>Gets statistics for the specified metric.</p> <p>The maximum number of data points returned from a single call is 1,440. If you request more than 1,440 data points, CloudWatch returns an error. To reduce the number of data points, you can narrow the specified time range and make multiple requests across adjacent time ranges, or you can increase the specified period. Data points are not returned in chronological order.</p> <p>CloudWatch aggregates data points based on the length of the period that you specify. For example, if you request statistics with a one-hour period, CloudWatch aggregates all data points with time stamps that fall within each one-hour period. Therefore, the number of values aggregated by CloudWatch is larger than the number of data points returned.</p> <p>CloudWatch needs raw data points to calculate percentile statistics. If you publish data using a statistic set instead, you can only retrieve percentile statistics for this data if one of the following conditions is true:</p> <ul> <li> <p>The SampleCount value of the statistic set is 1.</p> </li> <li> <p>The Min and the Max values of the statistic set are equal.</p> </li> </ul> <p>Percentile statistics are not available for metrics when any of the metric values are negative numbers.</p> <p>Amazon CloudWatch retains metric data as follows:</p> <ul> <li> <p>Data points with a period of less than 60 seconds are available for 3 hours. These data points are high-resolution metrics and are available only for custom metrics that have been defined with a <code>StorageResolution</code> of 1.</p> </li> <li> <p>Data points with a period of 60 seconds (1-minute) are available for 15 days.</p> </li> <li> <p>Data points with a period of 300 seconds (5-minute) are available for 63 days.</p> </li> <li> <p>Data points with a period of 3600 seconds (1 hour) are available for 455 days (15 months).</p> </li> </ul> <p>Data points that are initially published with a shorter period are aggregated together for long-term storage. For example, if you collect data using a period of 1 minute, the data remains available for 15 days with 1-minute resolution. After 15 days, this data is still available, but is aggregated and retrievable only with a resolution of 5 minutes. After 63 days, the data is further aggregated and is available with a resolution of 1 hour.</p> <p>CloudWatch started retaining 5-minute and 1-hour metric data as of July 9, 2016.</p> <p>For information about metrics and dimensions supported by AWS services, see the <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CW_Support_For_AWS.html">Amazon CloudWatch Metrics and Dimensions Reference</a> in the <i>Amazon CloudWatch User Guide</i>.</p>'
       responses:
         '200':
@@ -756,9 +1295,135 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=GetMetricWidgetImage':
     post:
-      operationId: GetMetricWidgetImage
+      x-aws-operation-name: GetMetricStatistics
+      operationId: POST GetMetricStatistics
+      description: '<p>Gets statistics for the specified metric.</p> <p>The maximum number of data points returned from a single call is 1,440. If you request more than 1,440 data points, CloudWatch returns an error. To reduce the number of data points, you can narrow the specified time range and make multiple requests across adjacent time ranges, or you can increase the specified period. Data points are not returned in chronological order.</p> <p>CloudWatch aggregates data points based on the length of the period that you specify. For example, if you request statistics with a one-hour period, CloudWatch aggregates all data points with time stamps that fall within each one-hour period. Therefore, the number of values aggregated by CloudWatch is larger than the number of data points returned.</p> <p>CloudWatch needs raw data points to calculate percentile statistics. If you publish data using a statistic set instead, you can only retrieve percentile statistics for this data if one of the following conditions is true:</p> <ul> <li> <p>The SampleCount value of the statistic set is 1.</p> </li> <li> <p>The Min and the Max values of the statistic set are equal.</p> </li> </ul> <p>Percentile statistics are not available for metrics when any of the metric values are negative numbers.</p> <p>Amazon CloudWatch retains metric data as follows:</p> <ul> <li> <p>Data points with a period of less than 60 seconds are available for 3 hours. These data points are high-resolution metrics and are available only for custom metrics that have been defined with a <code>StorageResolution</code> of 1.</p> </li> <li> <p>Data points with a period of 60 seconds (1-minute) are available for 15 days.</p> </li> <li> <p>Data points with a period of 300 seconds (5-minute) are available for 63 days.</p> </li> <li> <p>Data points with a period of 3600 seconds (1 hour) are available for 455 days (15 months).</p> </li> </ul> <p>Data points that are initially published with a shorter period are aggregated together for long-term storage. For example, if you collect data using a period of 1 minute, the data remains available for 15 days with 1-minute resolution. After 15 days, this data is still available, but is aggregated and retrievable only with a resolution of 5 minutes. After 63 days, the data is further aggregated and is available with a resolution of 1 hour.</p> <p>CloudWatch started retaining 5-minute and 1-hour metric data as of July 9, 2016.</p> <p>For information about metrics and dimensions supported by AWS services, see the <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CW_Support_For_AWS.html">Amazon CloudWatch Metrics and Dimensions Reference</a> in the <i>Amazon CloudWatch User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetMetricStatisticsOutput'
+        '480':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '481':
+          description: MissingRequiredParameterException
+          schema:
+            $ref: '#/definitions/MissingRequiredParameterException'
+        '482':
+          description: InvalidParameterCombinationException
+          schema:
+            $ref: '#/definitions/InvalidParameterCombinationException'
+        '483':
+          description: InternalServiceFault
+          schema:
+            $ref: '#/definitions/InternalServiceFault'
+      parameters:
+        - name: Namespace
+          in: formData
+          required: true
+          description: 'The namespace of the metric, with or without spaces.'
+          type: string
+          pattern: '[^:].*'
+          minLength: 1
+          maxLength: 255
+        - name: MetricName
+          in: formData
+          required: true
+          description: 'The name of the metric, with or without spaces.'
+          type: string
+          minLength: 1
+          maxLength: 255
+        - name: Dimensions
+          in: formData
+          required: false
+          description: 'The dimensions. If the metric contains multiple dimensions, you must include a value for each dimension. CloudWatch treats each unique combination of dimensions as a separate metric. If a specific combination of dimensions was not published, you can''t retrieve statistics for it. You must specify the same dimensions that were used when the metrics were created. For an example, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#dimension-combinations">Dimension Combinations</a> in the <i>Amazon CloudWatch User Guide</i>. For more information about specifying dimensions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html">Publishing Metrics</a> in the <i>Amazon CloudWatch User Guide</i>.'
+          type: array
+          items:
+            type: string
+        - name: StartTime
+          in: formData
+          required: true
+          description: '<p>The time stamp that determines the first data point to return. Start times are evaluated relative to the time that CloudWatch receives the request.</p> <p>The value specified is inclusive; results include data points with the specified time stamp. The time stamp must be in ISO 8601 UTC format (for example, 2016-10-03T23:00:00Z).</p> <p>CloudWatch rounds the specified time stamp as follows:</p> <ul> <li> <p>Start time less than 15 days ago - Round down to the nearest whole minute. For example, 12:32:34 is rounded down to 12:32:00.</p> </li> <li> <p>Start time between 15 and 63 days ago - Round down to the nearest 5-minute clock interval. For example, 12:32:34 is rounded down to 12:30:00.</p> </li> <li> <p>Start time greater than 63 days ago - Round down to the nearest 1-hour clock interval. For example, 12:32:34 is rounded down to 12:00:00.</p> </li> </ul> <p>If you set <code>Period</code> to 5, 10, or 30, the start time of your request is rounded down to the nearest time that corresponds to even 5-, 10-, or 30-second divisions of a minute. For example, if you make a query at (HH:mm:ss) 01:05:23 for the previous 10-second period, the start time of your request is rounded down and you receive data from 01:05:10 to 01:05:20. If you make a query at 15:07:17 for the previous 5 minutes of data, using a period of 5 seconds, you receive data timestamped between 15:02:15 and 15:07:15. </p>'
+          type: string
+          format: date-time
+        - name: EndTime
+          in: formData
+          required: true
+          description: '<p>The time stamp that determines the last data point to return.</p> <p>The value specified is exclusive; results include data points up to the specified time stamp. The time stamp must be in ISO 8601 UTC format (for example, 2016-10-10T23:00:00Z).</p>'
+          type: string
+          format: date-time
+        - name: Period
+          in: formData
+          required: true
+          description: '<p>The granularity, in seconds, of the returned data points. For metrics with regular resolution, a period can be as short as one minute (60 seconds) and must be a multiple of 60. For high-resolution metrics that are collected at intervals of less than one minute, the period can be 1, 5, 10, 30, 60, or any multiple of 60. High-resolution metrics are those metrics stored by a <code>PutMetricData</code> call that includes a <code>StorageResolution</code> of 1 second.</p> <p>If the <code>StartTime</code> parameter specifies a time stamp that is greater than 3 hours ago, you must specify the period as follows or no data points in that time range is returned:</p> <ul> <li> <p>Start time between 3 hours and 15 days ago - Use a multiple of 60 seconds (1 minute).</p> </li> <li> <p>Start time between 15 and 63 days ago - Use a multiple of 300 seconds (5 minutes).</p> </li> <li> <p>Start time greater than 63 days ago - Use a multiple of 3600 seconds (1 hour).</p> </li> </ul>'
+          type: integer
+          minimum: 1
+        - name: Statistics
+          in: formData
+          required: false
+          description: 'The metric statistics, other than percentile. For percentile statistics, use <code>ExtendedStatistics</code>. When calling <code>GetMetricStatistics</code>, you must specify either <code>Statistics</code> or <code>ExtendedStatistics</code>, but not both.'
+          type: array
+          items:
+            type: string
+        - name: ExtendedStatistics
+          in: formData
+          required: false
+          description: 'The percentile statistics. Specify values between p0.0 and p100. When calling <code>GetMetricStatistics</code>, you must specify either <code>Statistics</code> or <code>ExtendedStatistics</code>, but not both. Percentile statistics are not available for metrics when any of the metric values are negative numbers.'
+          type: array
+          items:
+            type: string
+        - name: Unit
+          in: formData
+          required: false
+          description: 'The unit for a given metric. Metrics may be reported in multiple units. Not supplying a unit results in all units being returned. If you specify only a unit that the metric does not report, the results of the call are null.'
+          type: string
+          enum:
+            - Seconds
+            - Microseconds
+            - Milliseconds
+            - Bytes
+            - Kilobytes
+            - Megabytes
+            - Gigabytes
+            - Terabytes
+            - Bits
+            - Kilobits
+            - Megabits
+            - Gigabits
+            - Terabits
+            - Percent
+            - Count
+            - Bytes/Second
+            - Kilobytes/Second
+            - Megabytes/Second
+            - Gigabytes/Second
+            - Terabytes/Second
+            - Bits/Second
+            - Kilobits/Second
+            - Megabits/Second
+            - Gigabits/Second
+            - Terabits/Second
+            - Count/Second
+            - None
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - GetMetricStatistics
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
+  '/#Action=GetMetricWidgetImage':
+    get:
+      x-aws-operation-name: GetMetricWidgetImage
+      operationId: GET GetMetricWidgetImage
       description: '<p>You can use the <code>GetMetricWidgetImage</code> API to retrieve a snapshot graph of one or more Amazon CloudWatch metrics as a bitmap image. You can then embed this image into your services and products, such as wiki pages, reports, and documents. You could also retrieve images regularly, such as every minute, and create your own custom live dashboard.</p> <p>The graph you retrieve can include all CloudWatch metric graph features, including metric math and horizontal and vertical annotations.</p> <p>There is a limit of 20 transactions per second for this API. Each <code>GetMetricWidgetImage</code> action has the following limits:</p> <ul> <li> <p>As many as 100 metrics in the graph.</p> </li> <li> <p>Up to 100 KB uncompressed payload.</p> </li> </ul>'
       responses:
         '200':
@@ -796,9 +1461,42 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=ListDashboards':
     post:
-      operationId: ListDashboards
+      x-aws-operation-name: GetMetricWidgetImage
+      operationId: POST GetMetricWidgetImage
+      description: '<p>You can use the <code>GetMetricWidgetImage</code> API to retrieve a snapshot graph of one or more Amazon CloudWatch metrics as a bitmap image. You can then embed this image into your services and products, such as wiki pages, reports, and documents. You could also retrieve images regularly, such as every minute, and create your own custom live dashboard.</p> <p>The graph you retrieve can include all CloudWatch metric graph features, including metric math and horizontal and vertical annotations.</p> <p>There is a limit of 20 transactions per second for this API. Each <code>GetMetricWidgetImage</code> action has the following limits:</p> <ul> <li> <p>As many as 100 metrics in the graph.</p> </li> <li> <p>Up to 100 KB uncompressed payload.</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetMetricWidgetImageOutput'
+      parameters:
+        - name: MetricWidget
+          in: formData
+          required: true
+          description: '<p>A JSON string that defines the bitmap graph to be retrieved. The string includes the metrics to include in the graph, statistics, annotations, title, axis limits, and so on. You can include only one <code>MetricWidget</code> parameter in each <code>GetMetricWidgetImage</code> call.</p> <p>For more information about the syntax of <code>MetricWidget</code> see <a>CloudWatch-Metric-Widget-Structure</a>.</p> <p>If any metric on the graph could not load all the requested data points, an orange triangle with an exclamation point appears next to the graph legend.</p>'
+          type: string
+        - name: OutputFormat
+          in: formData
+          required: false
+          description: '<p>The format of the resulting image. Only PNG images are supported.</p> <p>The default is <code>png</code>. If you specify <code>png</code>, the API returns an HTTP response with the content-type set to <code>text/xml</code>. The image data is in a <code>MetricWidgetImage</code> field. For example:</p> <p> <code> &lt;GetMetricWidgetImageResponse xmlns=&lt;URLstring&gt;&gt;</code> </p> <p> <code> &lt;GetMetricWidgetImageResult&gt;</code> </p> <p> <code> &lt;MetricWidgetImage&gt;</code> </p> <p> <code> iVBORw0KGgoAAAANSUhEUgAAAlgAAAGQEAYAAAAip...</code> </p> <p> <code> &lt;/MetricWidgetImage&gt;</code> </p> <p> <code> &lt;/GetMetricWidgetImageResult&gt;</code> </p> <p> <code> &lt;ResponseMetadata&gt;</code> </p> <p> <code> &lt;RequestId&gt;6f0d4192-4d42-11e8-82c1-f539a07e0e3b&lt;/RequestId&gt;</code> </p> <p> <code> &lt;/ResponseMetadata&gt;</code> </p> <p> <code>&lt;/GetMetricWidgetImageResponse&gt;</code> </p> <p>The <code>image/png</code> setting is intended only for custom HTTP requests. For most use cases, and all actions using an AWS SDK, you should use <code>png</code>. If you specify <code>image/png</code>, the HTTP response has a content-type set to <code>image/png</code>, and the body of the response is a PNG image. </p>'
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - GetMetricWidgetImage
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
+  '/#Action=ListDashboards':
+    get:
+      x-aws-operation-name: ListDashboards
+      operationId: GET ListDashboards
       description: '<p>Returns a list of the dashboards for your account. If you include <code>DashboardNamePrefix</code>, only those dashboards with names starting with the prefix are listed. Otherwise, all dashboards in your account are listed. </p> <p> <code>ListDashboards</code> returns up to 1000 results on one page. If there are more than 1000 dashboards, you can call <code>ListDashboards</code> again and include the value you received for <code>NextToken</code> in the first call, to receive the next 1000 results.</p>'
       responses:
         '200':
@@ -844,9 +1542,50 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=ListMetrics':
     post:
-      operationId: ListMetrics
+      x-aws-operation-name: ListDashboards
+      operationId: POST ListDashboards
+      description: '<p>Returns a list of the dashboards for your account. If you include <code>DashboardNamePrefix</code>, only those dashboards with names starting with the prefix are listed. Otherwise, all dashboards in your account are listed. </p> <p> <code>ListDashboards</code> returns up to 1000 results on one page. If there are more than 1000 dashboards, you can call <code>ListDashboards</code> again and include the value you received for <code>NextToken</code> in the first call, to receive the next 1000 results.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListDashboardsOutput'
+        '480':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '481':
+          description: InternalServiceFault
+          schema:
+            $ref: '#/definitions/InternalServiceFault'
+      parameters:
+        - name: DashboardNamePrefix
+          in: formData
+          required: false
+          description: 'If you specify this parameter, only the dashboards with names starting with the specified string are listed. The maximum length is 255, and valid characters are A-Z, a-z, 0-9, ".", "-", and "_". '
+          type: string
+        - name: NextToken
+          in: formData
+          required: false
+          description: The token returned by a previous call to indicate that there is more data available.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ListDashboards
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
+  '/#Action=ListMetrics':
+    get:
+      x-aws-operation-name: ListMetrics
+      operationId: GET ListMetrics
       description: '<p>List the specified metrics. You can use the returned metrics with <a>GetMetricData</a> or <a>GetMetricStatistics</a> to obtain statistical data.</p> <p>Up to 500 results are returned for any one call. To retrieve additional results, use the returned token with subsequent calls.</p> <p>After you create a metric, allow up to fifteen minutes before the metric appears. Statistics about the metric, however, are available sooner using <a>GetMetricData</a> or <a>GetMetricStatistics</a>.</p>'
       responses:
         '200':
@@ -909,9 +1648,67 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=ListTagsForResource':
     post:
-      operationId: ListTagsForResource
+      x-aws-operation-name: ListMetrics
+      operationId: POST ListMetrics
+      description: '<p>List the specified metrics. You can use the returned metrics with <a>GetMetricData</a> or <a>GetMetricStatistics</a> to obtain statistical data.</p> <p>Up to 500 results are returned for any one call. To retrieve additional results, use the returned token with subsequent calls.</p> <p>After you create a metric, allow up to fifteen minutes before the metric appears. Statistics about the metric, however, are available sooner using <a>GetMetricData</a> or <a>GetMetricStatistics</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListMetricsOutput'
+        '480':
+          description: InternalServiceFault
+          schema:
+            $ref: '#/definitions/InternalServiceFault'
+        '481':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+      parameters:
+        - name: Namespace
+          in: formData
+          required: false
+          description: The namespace to filter against.
+          type: string
+          pattern: '[^:].*'
+          minLength: 1
+          maxLength: 255
+        - name: MetricName
+          in: formData
+          required: false
+          description: The name of the metric to filter against.
+          type: string
+          minLength: 1
+          maxLength: 255
+        - name: Dimensions
+          in: formData
+          required: false
+          description: The dimensions to filter against.
+          type: array
+          items:
+            type: string
+        - name: NextToken
+          in: formData
+          required: false
+          description: The token returned by a previous call to indicate that there is more data available.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ListMetrics
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
+  '/#Action=ListTagsForResource':
+    get:
+      x-aws-operation-name: ListTagsForResource
+      operationId: GET ListTagsForResource
       description: Displays the tags associated with a CloudWatch resource. Alarms support tagging.
       responses:
         '200':
@@ -958,9 +1755,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=PutDashboard':
     post:
-      operationId: PutDashboard
+      x-aws-operation-name: ListTagsForResource
+      operationId: POST ListTagsForResource
+      description: Displays the tags associated with a CloudWatch resource. Alarms support tagging.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsForResourceOutput'
+        '480':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InternalServiceFault
+          schema:
+            $ref: '#/definitions/InternalServiceFault'
+      parameters:
+        - name: ResourceARN
+          in: formData
+          required: true
+          description: 'The ARN of the CloudWatch resource that you want to view tags for. For more information on ARN format, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-cloudwatch">Example ARNs</a> in the <i>Amazon Web Services General Reference</i>.'
+          type: string
+          minLength: 1
+          maxLength: 1024
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ListTagsForResource
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
+  '/#Action=PutDashboard':
+    get:
+      x-aws-operation-name: PutDashboard
+      operationId: GET PutDashboard
       description: '<p>Creates a dashboard if it does not already exist, or updates an existing dashboard. If you update a dashboard, the entire contents are replaced with what you specify here.</p> <p>There is no limit to the number of dashboards in your account. All dashboards in your account are global, not region-specific.</p> <p>A simple way to create a dashboard using <code>PutDashboard</code> is to copy an existing dashboard. To copy an existing dashboard using the console, you can load the dashboard and then use the View/edit source command in the Actions menu to display the JSON block for that dashboard. Another way to copy a dashboard is to use <code>GetDashboard</code>, and then use the data returned within <code>DashboardBody</code> as the template for the new dashboard when you call <code>PutDashboard</code>.</p> <p>When you create a dashboard with <code>PutDashboard</code>, a good practice is to add a text widget at the top of the dashboard with a message that the dashboard was created by script and should not be changed in the console. This message could also point console users to the location of the <code>DashboardBody</code> script or the CloudFormation template used to create the dashboard.</p>'
       responses:
         '200':
@@ -1006,9 +1845,50 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=PutMetricAlarm':
     post:
-      operationId: PutMetricAlarm
+      x-aws-operation-name: PutDashboard
+      operationId: POST PutDashboard
+      description: '<p>Creates a dashboard if it does not already exist, or updates an existing dashboard. If you update a dashboard, the entire contents are replaced with what you specify here.</p> <p>There is no limit to the number of dashboards in your account. All dashboards in your account are global, not region-specific.</p> <p>A simple way to create a dashboard using <code>PutDashboard</code> is to copy an existing dashboard. To copy an existing dashboard using the console, you can load the dashboard and then use the View/edit source command in the Actions menu to display the JSON block for that dashboard. Another way to copy a dashboard is to use <code>GetDashboard</code>, and then use the data returned within <code>DashboardBody</code> as the template for the new dashboard when you call <code>PutDashboard</code>.</p> <p>When you create a dashboard with <code>PutDashboard</code>, a good practice is to add a text widget at the top of the dashboard with a message that the dashboard was created by script and should not be changed in the console. This message could also point console users to the location of the <code>DashboardBody</code> script or the CloudFormation template used to create the dashboard.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutDashboardOutput'
+        '480':
+          description: DashboardInvalidInputError
+          schema:
+            $ref: '#/definitions/DashboardInvalidInputError'
+        '481':
+          description: InternalServiceFault
+          schema:
+            $ref: '#/definitions/InternalServiceFault'
+      parameters:
+        - name: DashboardName
+          in: formData
+          required: true
+          description: 'The name of the dashboard. If a dashboard with this name already exists, this call modifies that dashboard, replacing its current contents. Otherwise, a new dashboard is created. The maximum length is 255, and valid characters are A-Z, a-z, 0-9, "-", and "_". This parameter is required.'
+          type: string
+        - name: DashboardBody
+          in: formData
+          required: true
+          description: '<p>The detailed information about the dashboard in JSON format, including the widgets to include and their location on the dashboard. This parameter is required.</p> <p>For more information about the syntax, see <a>CloudWatch-Dashboard-Body-Structure</a>.</p>'
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - PutDashboard
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
+  '/#Action=PutMetricAlarm':
+    get:
+      x-aws-operation-name: PutMetricAlarm
+      operationId: GET PutMetricAlarm
       description: '<p>Creates or updates an alarm and associates it with the specified metric or metric math expression.</p> <p>When this operation creates an alarm, the alarm state is immediately set to <code>INSUFFICIENT_DATA</code>. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed.</p> <p>When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm.</p> <p>If you are an IAM user, you must have Amazon EC2 permissions for some alarm operations:</p> <ul> <li> <p> <code>iam:CreateServiceLinkedRole</code> for all alarms with EC2 actions</p> </li> <li> <p> <code>ec2:DescribeInstanceStatus</code> and <code>ec2:DescribeInstances</code> for all alarms on EC2 instance status metrics</p> </li> <li> <p> <code>ec2:StopInstances</code> for alarms with stop actions</p> </li> <li> <p> <code>ec2:TerminateInstances</code> for alarms with terminate actions</p> </li> <li> <p>No specific permissions are needed for alarms with recover actions</p> </li> </ul> <p>If you have read/write permissions for Amazon CloudWatch but not for Amazon EC2, you can still create an alarm, but the stop or terminate actions are not performed. However, if you are later granted the required permissions, the alarm actions that you created earlier are performed.</p> <p>If you are using an IAM role (for example, an EC2 instance profile), you cannot stop or terminate the instance using alarm actions. However, you can still see the alarm state and perform any other actions such as Amazon SNS notifications or Auto Scaling policies.</p> <p>If you are using temporary security credentials granted using AWS STS, you cannot stop or terminate an EC2 instance using alarm actions.</p> <p>The first time you create an alarm in the AWS Management Console, the CLI, or by using the PutMetricAlarm API, CloudWatch creates the necessary service-linked role for you. The service-linked role is called <code>AWSServiceRoleForCloudWatchEvents</code>. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role">AWS service-linked role</a>.</p>'
       responses:
         '200':
@@ -1212,9 +2092,208 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=PutMetricData':
     post:
-      operationId: PutMetricData
+      x-aws-operation-name: PutMetricAlarm
+      operationId: POST PutMetricAlarm
+      description: '<p>Creates or updates an alarm and associates it with the specified metric or metric math expression.</p> <p>When this operation creates an alarm, the alarm state is immediately set to <code>INSUFFICIENT_DATA</code>. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed.</p> <p>When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm.</p> <p>If you are an IAM user, you must have Amazon EC2 permissions for some alarm operations:</p> <ul> <li> <p> <code>iam:CreateServiceLinkedRole</code> for all alarms with EC2 actions</p> </li> <li> <p> <code>ec2:DescribeInstanceStatus</code> and <code>ec2:DescribeInstances</code> for all alarms on EC2 instance status metrics</p> </li> <li> <p> <code>ec2:StopInstances</code> for alarms with stop actions</p> </li> <li> <p> <code>ec2:TerminateInstances</code> for alarms with terminate actions</p> </li> <li> <p>No specific permissions are needed for alarms with recover actions</p> </li> </ul> <p>If you have read/write permissions for Amazon CloudWatch but not for Amazon EC2, you can still create an alarm, but the stop or terminate actions are not performed. However, if you are later granted the required permissions, the alarm actions that you created earlier are performed.</p> <p>If you are using an IAM role (for example, an EC2 instance profile), you cannot stop or terminate the instance using alarm actions. However, you can still see the alarm state and perform any other actions such as Amazon SNS notifications or Auto Scaling policies.</p> <p>If you are using temporary security credentials granted using AWS STS, you cannot stop or terminate an EC2 instance using alarm actions.</p> <p>The first time you create an alarm in the AWS Management Console, the CLI, or by using the PutMetricAlarm API, CloudWatch creates the necessary service-linked role for you. The service-linked role is called <code>AWSServiceRoleForCloudWatchEvents</code>. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role">AWS service-linked role</a>.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: LimitExceededFault
+          schema:
+            $ref: '#/definitions/LimitExceededFault'
+      parameters:
+        - name: AlarmName
+          in: formData
+          required: true
+          description: The name for the alarm. This name must be unique within your AWS account.
+          type: string
+          minLength: 1
+          maxLength: 255
+        - name: AlarmDescription
+          in: formData
+          required: false
+          description: The description for the alarm.
+          type: string
+          minLength: 0
+          maxLength: 1024
+        - name: ActionsEnabled
+          in: formData
+          required: false
+          description: Indicates whether actions should be executed during any changes to the alarm state. The default is TRUE.
+          type: boolean
+        - name: OKActions
+          in: formData
+          required: false
+          description: '<p>The actions to execute when this alarm transitions to an <code>OK</code> state from any other state. Each action is specified as an Amazon Resource Name (ARN).</p> <p>Valid Values: <code>arn:aws:automate:<i>region</i>:ec2:stop</code> | <code>arn:aws:automate:<i>region</i>:ec2:terminate</code> | <code>arn:aws:automate:<i>region</i>:ec2:recover</code> | <code>arn:aws:automate:<i>region</i>:ec2:reboot</code> | <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> | <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code> </p> <p>Valid Values (for use with IAM roles): <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Stop/1.0</code> | <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Terminate/1.0</code> | <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Reboot/1.0</code> </p>'
+          type: array
+          items:
+            type: string
+        - name: AlarmActions
+          in: formData
+          required: false
+          description: '<p>The actions to execute when this alarm transitions to the <code>ALARM</code> state from any other state. Each action is specified as an Amazon Resource Name (ARN).</p> <p>Valid Values: <code>arn:aws:automate:<i>region</i>:ec2:stop</code> | <code>arn:aws:automate:<i>region</i>:ec2:terminate</code> | <code>arn:aws:automate:<i>region</i>:ec2:recover</code> | <code>arn:aws:automate:<i>region</i>:ec2:reboot</code> | <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> | <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code> </p> <p>Valid Values (for use with IAM roles): <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Stop/1.0</code> | <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Terminate/1.0</code> | <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Reboot/1.0</code> </p>'
+          type: array
+          items:
+            type: string
+        - name: InsufficientDataActions
+          in: formData
+          required: false
+          description: '<p>The actions to execute when this alarm transitions to the <code>INSUFFICIENT_DATA</code> state from any other state. Each action is specified as an Amazon Resource Name (ARN).</p> <p>Valid Values: <code>arn:aws:automate:<i>region</i>:ec2:stop</code> | <code>arn:aws:automate:<i>region</i>:ec2:terminate</code> | <code>arn:aws:automate:<i>region</i>:ec2:recover</code> | <code>arn:aws:automate:<i>region</i>:ec2:reboot</code> | <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> | <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code> </p> <p>Valid Values (for use with IAM roles): <code>&gt;arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Stop/1.0</code> | <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Terminate/1.0</code> | <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Reboot/1.0</code> </p>'
+          type: array
+          items:
+            type: string
+        - name: MetricName
+          in: formData
+          required: false
+          description: '<p>The name for the metric associated with the alarm.</p> <p>If you are creating an alarm based on a math expression, you cannot specify this parameter, or any of the <code>Dimensions</code>, <code>Period</code>, <code>Namespace</code>, <code>Statistic</code>, or <code>ExtendedStatistic</code> parameters. Instead, you specify all this information in the <code>Metrics</code> array.</p>'
+          type: string
+          minLength: 1
+          maxLength: 255
+        - name: Namespace
+          in: formData
+          required: false
+          description: The namespace for the metric associated specified in <code>MetricName</code>.
+          type: string
+          pattern: '[^:].*'
+          minLength: 1
+          maxLength: 255
+        - name: Statistic
+          in: formData
+          required: false
+          description: 'The statistic for the metric specified in <code>MetricName</code>, other than percentile. For percentile statistics, use <code>ExtendedStatistic</code>. When you call <code>PutMetricAlarm</code> and specify a <code>MetricName</code>, you must specify either <code>Statistic</code> or <code>ExtendedStatistic,</code> but not both.'
+          type: string
+          enum:
+            - SampleCount
+            - Average
+            - Sum
+            - Minimum
+            - Maximum
+        - name: ExtendedStatistic
+          in: formData
+          required: false
+          description: 'The percentile statistic for the metric specified in <code>MetricName</code>. Specify a value between p0.0 and p100. When you call <code>PutMetricAlarm</code> and specify a <code>MetricName</code>, you must specify either <code>Statistic</code> or <code>ExtendedStatistic,</code> but not both.'
+          type: string
+          pattern: 'p(\d{1,2}(\.\d{0,2})?|100)'
+        - name: Dimensions
+          in: formData
+          required: false
+          description: The dimensions for the metric specified in <code>MetricName</code>.
+          type: array
+          items:
+            type: string
+        - name: Period
+          in: formData
+          required: false
+          description: '<p>The length, in seconds, used each time the metric specified in <code>MetricName</code> is evaluated. Valid values are 10, 30, and any multiple of 60.</p> <p>Be sure to specify 10 or 30 only for metrics that are stored by a <code>PutMetricData</code> call with a <code>StorageResolution</code> of 1. If you specify a period of 10 or 30 for a metric that does not have sub-minute resolution, the alarm still attempts to gather data at the period rate that you specify. In this case, it does not receive data for the attempts that do not correspond to a one-minute data resolution, and the alarm may often lapse into INSUFFICENT_DATA status. Specifying 10 or 30 also sets this alarm as a high-resolution alarm, which has a higher charge than other alarms. For more information about pricing, see <a href="https://aws.amazon.com/cloudwatch/pricing/">Amazon CloudWatch Pricing</a>.</p> <p>An alarm''s total current evaluation period can be no longer than one day, so <code>Period</code> multiplied by <code>EvaluationPeriods</code> cannot be more than 86,400 seconds.</p>'
+          type: integer
+          minimum: 1
+        - name: Unit
+          in: formData
+          required: false
+          description: '<p>The unit of measure for the statistic. For example, the units for the Amazon EC2 NetworkIn metric are Bytes because NetworkIn tracks the number of bytes that an instance receives on all network interfaces. You can also specify a unit when you create a custom metric. Units help provide conceptual meaning to your data. Metric data points that specify a unit of measure, such as Percent, are aggregated separately.</p> <p>If you specify a unit, you must use a unit that is appropriate for the metric. Otherwise, the CloudWatch alarm can get stuck in the <code>INSUFFICIENT DATA</code> state. </p>'
+          type: string
+          enum:
+            - Seconds
+            - Microseconds
+            - Milliseconds
+            - Bytes
+            - Kilobytes
+            - Megabytes
+            - Gigabytes
+            - Terabytes
+            - Bits
+            - Kilobits
+            - Megabits
+            - Gigabits
+            - Terabits
+            - Percent
+            - Count
+            - Bytes/Second
+            - Kilobytes/Second
+            - Megabytes/Second
+            - Gigabytes/Second
+            - Terabytes/Second
+            - Bits/Second
+            - Kilobits/Second
+            - Megabits/Second
+            - Gigabits/Second
+            - Terabits/Second
+            - Count/Second
+            - None
+        - name: EvaluationPeriods
+          in: formData
+          required: true
+          description: '<p>The number of periods over which data is compared to the specified threshold. If you are setting an alarm that requires that a number of consecutive data points be breaching to trigger the alarm, this value specifies that number. If you are setting an "M out of N" alarm, this value is the N.</p> <p>An alarm''s total current evaluation period can be no longer than one day, so this number multiplied by <code>Period</code> cannot be more than 86,400 seconds.</p>'
+          type: integer
+          minimum: 1
+        - name: DatapointsToAlarm
+          in: formData
+          required: false
+          description: 'The number of datapoints that must be breaching to trigger the alarm. This is used only if you are setting an "M out of N" alarm. In that case, this value is the M. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation">Evaluating an Alarm</a> in the <i>Amazon CloudWatch User Guide</i>.'
+          type: integer
+          minimum: 1
+        - name: Threshold
+          in: formData
+          required: true
+          description: The value against which the specified statistic is compared.
+          type: number
+          format: double
+        - name: ComparisonOperator
+          in: formData
+          required: true
+          description: ' The arithmetic operation to use when comparing the specified statistic and threshold. The specified statistic value is used as the first operand.'
+          type: string
+          enum:
+            - GreaterThanOrEqualToThreshold
+            - GreaterThanThreshold
+            - LessThanThreshold
+            - LessThanOrEqualToThreshold
+        - name: TreatMissingData
+          in: formData
+          required: false
+          description: '<p> Sets how this alarm is to handle missing data points. If <code>TreatMissingData</code> is omitted, the default behavior of <code>missing</code> is used. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data">Configuring How CloudWatch Alarms Treats Missing Data</a>.</p> <p>Valid Values: <code>breaching | notBreaching | ignore | missing</code> </p>'
+          type: string
+          minLength: 1
+          maxLength: 255
+        - name: EvaluateLowSampleCountPercentile
+          in: formData
+          required: false
+          description: '<p> Used only for alarms based on percentiles. If you specify <code>ignore</code>, the alarm state does not change during periods with too few data points to be statistically significant. If you specify <code>evaluate</code> or omit this parameter, the alarm is always evaluated and possibly changes state no matter how many data points are available. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#percentiles-with-low-samples">Percentile-Based CloudWatch Alarms and Low Data Samples</a>.</p> <p>Valid Values: <code>evaluate | ignore</code> </p>'
+          type: string
+          minLength: 1
+          maxLength: 255
+        - name: Metrics
+          in: formData
+          required: false
+          description: '<p>An array of <code>MetricDataQuery</code> structures that enable you to create an alarm based on the result of a metric math expression. Each item in the <code>Metrics</code> array either retrieves a metric or performs a math expression.</p> <p>One item in the <code>Metrics</code> array is the expression that the alarm watches. You designate this expression by setting <code>ReturnValue</code> to true for this object in the array. For more information, see <a>MetricDataQuery</a>.</p> <p>If you use the <code>Metrics</code> parameter, you cannot include the <code>MetricName</code>, <code>Dimensions</code>, <code>Period</code>, <code>Namespace</code>, <code>Statistic</code>, or <code>ExtendedStatistic</code> parameters of <code>PutMetricAlarm</code> in the same operation. Instead, you retrieve the metrics you are using in your math expression as part of the <code>Metrics</code> array.</p>'
+          type: array
+          items:
+            type: string
+        - name: Tags
+          in: formData
+          required: false
+          description: '<p>A list of key-value pairs to associate with the alarm. You can associate as many as 50 tags with an alarm.</p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values.</p>'
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - PutMetricAlarm
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
+  '/#Action=PutMetricData':
+    get:
+      x-aws-operation-name: PutMetricData
+      operationId: GET PutMetricData
       description: '<p>Publishes metric data points to Amazon CloudWatch. CloudWatch associates the data points with the specified metric. If the specified metric does not exist, CloudWatch creates the metric. When CloudWatch creates a metric, it can take up to fifteen minutes for the metric to appear in calls to <a>ListMetrics</a>.</p> <p>You can publish either individual data points in the <code>Value</code> field, or arrays of values and the number of times each value occurred during the period by using the <code>Values</code> and <code>Counts</code> fields in the <code>MetricDatum</code> structure. Using the <code>Values</code> and <code>Counts</code> method enables you to publish up to 150 values per metric with one <code>PutMetricData</code> request, and supports retrieving percentile statistics on this data.</p> <p>Each <code>PutMetricData</code> request is limited to 40 KB in size for HTTP POST requests. You can send a payload compressed by gzip. Each request is also limited to no more than 20 different metrics.</p> <p>Although the <code>Value</code> parameter accepts numbers of type <code>Double</code>, CloudWatch rejects values that are either too small or too large. Values must be in the range of 8.515920e-109 to 1.174271e+108 (Base 10) or 2e-360 to 2e360 (Base 2). In addition, special values (for example, NaN, +Infinity, -Infinity) are not supported.</p> <p>You can use up to 10 dimensions per metric to further clarify what data the metric collects. Each dimension consists of a Name and Value pair. For more information about specifying dimensions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html">Publishing Metrics</a> in the <i>Amazon CloudWatch User Guide</i>.</p> <p>Data points with time stamps from 24 hours ago or longer can take at least 48 hours to become available for <a>GetMetricData</a> or <a>GetMetricStatistics</a> from the time they are submitted.</p> <p>CloudWatch needs raw data points to calculate percentile statistics. If you publish data using a statistic set instead, you can only retrieve percentile statistics for this data if one of the following conditions is true:</p> <ul> <li> <p>The <code>SampleCount</code> value of the statistic set is 1 and <code>Min</code>, <code>Max</code>, and <code>Sum</code> are all equal.</p> </li> <li> <p>The <code>Min</code> and <code>Max</code> are equal, and <code>Sum</code> is equal to <code>Min</code> multiplied by <code>SampleCount</code>.</p> </li> </ul>'
       responses:
         '200':
@@ -1271,9 +2350,61 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=SetAlarmState':
     post:
-      operationId: SetAlarmState
+      x-aws-operation-name: PutMetricData
+      operationId: POST PutMetricData
+      description: '<p>Publishes metric data points to Amazon CloudWatch. CloudWatch associates the data points with the specified metric. If the specified metric does not exist, CloudWatch creates the metric. When CloudWatch creates a metric, it can take up to fifteen minutes for the metric to appear in calls to <a>ListMetrics</a>.</p> <p>You can publish either individual data points in the <code>Value</code> field, or arrays of values and the number of times each value occurred during the period by using the <code>Values</code> and <code>Counts</code> fields in the <code>MetricDatum</code> structure. Using the <code>Values</code> and <code>Counts</code> method enables you to publish up to 150 values per metric with one <code>PutMetricData</code> request, and supports retrieving percentile statistics on this data.</p> <p>Each <code>PutMetricData</code> request is limited to 40 KB in size for HTTP POST requests. You can send a payload compressed by gzip. Each request is also limited to no more than 20 different metrics.</p> <p>Although the <code>Value</code> parameter accepts numbers of type <code>Double</code>, CloudWatch rejects values that are either too small or too large. Values must be in the range of 8.515920e-109 to 1.174271e+108 (Base 10) or 2e-360 to 2e360 (Base 2). In addition, special values (for example, NaN, +Infinity, -Infinity) are not supported.</p> <p>You can use up to 10 dimensions per metric to further clarify what data the metric collects. Each dimension consists of a Name and Value pair. For more information about specifying dimensions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html">Publishing Metrics</a> in the <i>Amazon CloudWatch User Guide</i>.</p> <p>Data points with time stamps from 24 hours ago or longer can take at least 48 hours to become available for <a>GetMetricData</a> or <a>GetMetricStatistics</a> from the time they are submitted.</p> <p>CloudWatch needs raw data points to calculate percentile statistics. If you publish data using a statistic set instead, you can only retrieve percentile statistics for this data if one of the following conditions is true:</p> <ul> <li> <p>The <code>SampleCount</code> value of the statistic set is 1 and <code>Min</code>, <code>Max</code>, and <code>Sum</code> are all equal.</p> </li> <li> <p>The <code>Min</code> and <code>Max</code> are equal, and <code>Sum</code> is equal to <code>Min</code> multiplied by <code>SampleCount</code>.</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '481':
+          description: MissingRequiredParameterException
+          schema:
+            $ref: '#/definitions/MissingRequiredParameterException'
+        '482':
+          description: InvalidParameterCombinationException
+          schema:
+            $ref: '#/definitions/InvalidParameterCombinationException'
+        '483':
+          description: InternalServiceFault
+          schema:
+            $ref: '#/definitions/InternalServiceFault'
+      parameters:
+        - name: Namespace
+          in: formData
+          required: true
+          description: <p>The namespace for the metric data.</p> <p>You cannot specify a namespace that begins with "AWS/". Namespaces that begin with "AWS/" are reserved for use by Amazon Web Services products.</p>
+          type: string
+          pattern: '[^:].*'
+          minLength: 1
+          maxLength: 255
+        - name: MetricData
+          in: formData
+          required: true
+          description: The data for the metric. The array can include no more than 20 metrics per call.
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - PutMetricData
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
+  '/#Action=SetAlarmState':
+    get:
+      x-aws-operation-name: SetAlarmState
+      operationId: GET SetAlarmState
       description: 'Temporarily sets the state of an alarm for testing purposes. When the updated state differs from the previous value, the action configured for the appropriate state is invoked. For example, if your alarm is configured to send an Amazon SNS message when an alarm is triggered, temporarily changing the alarm state to <code>ALARM</code> sends an SNS message. The alarm returns to its actual state (often within seconds). Because the alarm state change happens quickly, it is typically only visible in the alarm''s <b>History</b> tab in the Amazon CloudWatch console or through <a>DescribeAlarmHistory</a>.'
       responses:
         '200':
@@ -1337,9 +2468,68 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=TagResource':
     post:
-      operationId: TagResource
+      x-aws-operation-name: SetAlarmState
+      operationId: POST SetAlarmState
+      description: 'Temporarily sets the state of an alarm for testing purposes. When the updated state differs from the previous value, the action configured for the appropriate state is invoked. For example, if your alarm is configured to send an Amazon SNS message when an alarm is triggered, temporarily changing the alarm state to <code>ALARM</code> sends an SNS message. The alarm returns to its actual state (often within seconds). Because the alarm state change happens quickly, it is typically only visible in the alarm''s <b>History</b> tab in the Amazon CloudWatch console or through <a>DescribeAlarmHistory</a>.'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFound
+          schema:
+            $ref: '#/definitions/ResourceNotFound'
+        '481':
+          description: InvalidFormatFault
+          schema:
+            $ref: '#/definitions/InvalidFormatFault'
+      parameters:
+        - name: AlarmName
+          in: formData
+          required: true
+          description: The name for the alarm. This name must be unique within the AWS account. The maximum length is 255 characters.
+          type: string
+          minLength: 1
+          maxLength: 255
+        - name: StateValue
+          in: formData
+          required: true
+          description: The value of the state.
+          type: string
+          enum:
+            - OK
+            - ALARM
+            - INSUFFICIENT_DATA
+        - name: StateReason
+          in: formData
+          required: true
+          description: 'The reason that this alarm is set to this specific state, in text format.'
+          type: string
+          minLength: 0
+          maxLength: 1023
+        - name: StateReasonData
+          in: formData
+          required: false
+          description: 'The reason that this alarm is set to this specific state, in JSON format.'
+          type: string
+          minLength: 0
+          maxLength: 4000
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - SetAlarmState
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
+  '/#Action=TagResource':
+    get:
+      x-aws-operation-name: TagResource
+      operationId: GET TagResource
       description: '<p>Assigns one or more tags (key-value pairs) to the specified CloudWatch resource. Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. In CloudWatch, alarms can be tagged.</p> <p>Tags don''t have any semantic meaning to AWS and are interpreted strictly as strings of characters.</p> <p>You can use the <code>TagResource</code> action with a resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag.</p> <p>You can associate as many as 50 tags with a resource.</p>'
       responses:
         '200':
@@ -1397,9 +2587,62 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=UntagResource':
     post:
-      operationId: UntagResource
+      x-aws-operation-name: TagResource
+      operationId: POST TagResource
+      description: '<p>Assigns one or more tags (key-value pairs) to the specified CloudWatch resource. Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. In CloudWatch, alarms can be tagged.</p> <p>Tags don''t have any semantic meaning to AWS and are interpreted strictly as strings of characters.</p> <p>You can use the <code>TagResource</code> action with a resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag.</p> <p>You can associate as many as 50 tags with a resource.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TagResourceOutput'
+        '480':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '483':
+          description: InternalServiceFault
+          schema:
+            $ref: '#/definitions/InternalServiceFault'
+      parameters:
+        - name: ResourceARN
+          in: formData
+          required: true
+          description: 'The ARN of the CloudWatch resource that you''re adding tags to. For more information on ARN format, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-cloudwatch">Example ARNs</a> in the <i>Amazon Web Services General Reference</i>.'
+          type: string
+          minLength: 1
+          maxLength: 1024
+        - name: Tags
+          in: formData
+          required: true
+          description: The list of key-value pairs to associate with the resource.
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - TagResource
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
+  '/#Action=UntagResource':
+    get:
+      x-aws-operation-name: UntagResource
+      operationId: GET UntagResource
       description: Removes one or more tags from the specified resource.
       responses:
         '200':
@@ -1457,6 +2700,58 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: UntagResource
+      operationId: POST UntagResource
+      description: Removes one or more tags from the specified resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UntagResourceOutput'
+        '480':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '483':
+          description: InternalServiceFault
+          schema:
+            $ref: '#/definitions/InternalServiceFault'
+      parameters:
+        - name: ResourceARN
+          in: formData
+          required: true
+          description: 'The ARN of the CloudWatch resource that you''re removing tags from. For more information on ARN format, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-cloudwatch">Example ARNs</a> in the <i>Amazon Web Services General Reference</i>.'
+          type: string
+          minLength: 1
+          maxLength: 1024
+        - name: TagKeys
+          in: formData
+          required: true
+          description: The list of tag keys to remove from the resource.
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - UntagResource
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
 definitions:
   AlarmName:
     type: string

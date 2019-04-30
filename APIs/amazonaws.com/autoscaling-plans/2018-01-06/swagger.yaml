@@ -35,10 +35,83 @@ externalDocs:
   url: 'https://docs.aws.amazon.com/autoscaling/'
 host: autoscaling.amazonaws.com
 basePath: /
-x-hasEquivalentPaths: true
 schemes:
   - https
   - http
+x-servers:
+  - url: 'http://autoscaling.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+    description: The AWS Auto Scaling Plans multi-region endpoint
+  - url: 'https://autoscaling.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+    description: The AWS Auto Scaling Plans multi-region endpoint
+  - url: 'http://autoscaling.amazonaws.com'
+    variables: {}
+    description: The general AWS Auto Scaling Plans endpoint for US East (N. Virginia)
+  - url: 'https://autoscaling.amazonaws.com'
+    variables: {}
+    description: The general AWS Auto Scaling Plans endpoint for US East (N. Virginia)
+  - url: 'http://autoscaling.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+    description: The AWS Auto Scaling Plans endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://autoscaling.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+    description: The AWS Auto Scaling Plans endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 consumes:
   - application/json
 produces:

@@ -35,10 +35,30 @@ externalDocs:
   url: 'https://docs.aws.amazon.com/budgets/'
 host: budgets.amazonaws.com
 basePath: /
-x-hasEquivalentPaths: true
 schemes:
   - https
   - http
+x-servers:
+  - url: 'https://budgets.amazonaws.com'
+    variables: {}
+    description: The general AWSBudgets multi-region endpoint
+  - url: 'http://budgets.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+    description: The AWSBudgets endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://budgets.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+    description: The AWSBudgets endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 consumes:
   - application/json
 produces:

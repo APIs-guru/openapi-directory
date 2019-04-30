@@ -35,10 +35,83 @@ externalDocs:
   url: 'https://docs.aws.amazon.com/elasticloadbalancing/'
 host: elasticloadbalancing.amazonaws.com
 basePath: /
-x-hasEquivalentPaths: true
 schemes:
   - https
   - http
+x-servers:
+  - url: 'http://elasticloadbalancing.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+    description: The Elastic Load Balancing v2 multi-region endpoint
+  - url: 'https://elasticloadbalancing.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+    description: The Elastic Load Balancing v2 multi-region endpoint
+  - url: 'http://elasticloadbalancing.amazonaws.com'
+    variables: {}
+    description: The general Elastic Load Balancing v2 endpoint for US East (N. Virginia)
+  - url: 'https://elasticloadbalancing.amazonaws.com'
+    variables: {}
+    description: The general Elastic Load Balancing v2 endpoint for US East (N. Virginia)
+  - url: 'http://elasticloadbalancing.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+    description: The Elastic Load Balancing v2 endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://elasticloadbalancing.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+    description: The Elastic Load Balancing v2 endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 consumes:
   - text/xml
 produces:
@@ -90,8 +163,9 @@ security:
   - hmac: []
 paths:
   '/#Action=AddListenerCertificates':
-    post:
-      operationId: AddListenerCertificates
+    get:
+      x-aws-operation-name: AddListenerCertificates
+      operationId: GET AddListenerCertificates
       description: '<p>Adds the specified certificate to the specified HTTPS listener.</p> <p>If the certificate was already added, the call is successful but the certificate is not added again.</p> <p>To list the certificates for your listener, use <a>DescribeListenerCertificates</a>. To remove certificates from your listener, use <a>RemoveListenerCertificates</a>. To specify the default SSL server certificate, use <a>ModifyListener</a>.</p>'
       responses:
         '200':
@@ -143,9 +217,56 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=AddTags':
     post:
-      operationId: AddTags
+      x-aws-operation-name: AddListenerCertificates
+      operationId: POST AddListenerCertificates
+      description: '<p>Adds the specified certificate to the specified HTTPS listener.</p> <p>If the certificate was already added, the call is successful but the certificate is not added again.</p> <p>To list the certificates for your listener, use <a>DescribeListenerCertificates</a>. To remove certificates from your listener, use <a>RemoveListenerCertificates</a>. To specify the default SSL server certificate, use <a>ModifyListener</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AddListenerCertificatesOutput'
+        '480':
+          description: ListenerNotFoundException
+          schema:
+            $ref: '#/definitions/ListenerNotFoundException'
+        '481':
+          description: TooManyCertificatesException
+          schema:
+            $ref: '#/definitions/TooManyCertificatesException'
+        '482':
+          description: CertificateNotFoundException
+          schema:
+            $ref: '#/definitions/CertificateNotFoundException'
+      parameters:
+        - name: ListenerArn
+          in: formData
+          required: true
+          description: The Amazon Resource Name (ARN) of the listener.
+          type: string
+        - name: Certificates
+          in: formData
+          required: true
+          description: The certificate to add. You can specify one certificate per call. Set <code>CertificateArn</code> to the certificate ARN but do not set <code>IsDefault</code>.
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - AddListenerCertificates
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2015-12-01'
+  '/#Action=AddTags':
+    get:
+      x-aws-operation-name: AddTags
+      operationId: GET AddTags
       description: '<p>Adds the specified tags to the specified Elastic Load Balancing resource. You can tag your Application Load Balancers, Network Load Balancers, and your target groups.</p> <p>Each tag consists of a key and an optional value. If a resource already has a tag with the same key, <code>AddTags</code> updates its value.</p> <p>To list the current tags for your resources, use <a>DescribeTags</a>. To remove tags from your resources, use <a>RemoveTags</a>.</p>'
       responses:
         '200':
@@ -203,9 +324,62 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=CreateListener':
     post:
-      operationId: CreateListener
+      x-aws-operation-name: AddTags
+      operationId: POST AddTags
+      description: '<p>Adds the specified tags to the specified Elastic Load Balancing resource. You can tag your Application Load Balancers, Network Load Balancers, and your target groups.</p> <p>Each tag consists of a key and an optional value. If a resource already has a tag with the same key, <code>AddTags</code> updates its value.</p> <p>To list the current tags for your resources, use <a>DescribeTags</a>. To remove tags from your resources, use <a>RemoveTags</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AddTagsOutput'
+        '480':
+          description: DuplicateTagKeysException
+          schema:
+            $ref: '#/definitions/DuplicateTagKeysException'
+        '481':
+          description: TooManyTagsException
+          schema:
+            $ref: '#/definitions/TooManyTagsException'
+        '482':
+          description: LoadBalancerNotFoundException
+          schema:
+            $ref: '#/definitions/LoadBalancerNotFoundException'
+        '483':
+          description: TargetGroupNotFoundException
+          schema:
+            $ref: '#/definitions/TargetGroupNotFoundException'
+      parameters:
+        - name: ResourceArns
+          in: formData
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource.
+          type: array
+          items:
+            type: string
+        - name: Tags
+          in: formData
+          required: true
+          description: The tags. Each resource can have a maximum of 10 tags.
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - AddTags
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2015-12-01'
+  '/#Action=CreateListener':
+    get:
+      x-aws-operation-name: CreateListener
+      operationId: GET CreateListener
       description: '<p>Creates a listener for the specified Application Load Balancer or Network Load Balancer.</p> <p>To update a listener, use <a>ModifyListener</a>. When you are finished with a listener, you can delete it using <a>DeleteListener</a>. If you are finished with both the listener and the load balancer, you can delete them both using <a>DeleteLoadBalancer</a>.</p> <p>This operation is idempotent, which means that it completes at most one time. If you attempt to create multiple listeners with the same settings, each call succeeds.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html">Listeners for Your Application Load Balancers</a> in the <i>Application Load Balancers Guide</i> and <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-listeners.html">Listeners for Your Network Load Balancers</a> in the <i>Network Load Balancers Guide</i>.</p>'
       responses:
         '200':
@@ -334,9 +508,133 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=CreateLoadBalancer':
     post:
-      operationId: CreateLoadBalancer
+      x-aws-operation-name: CreateListener
+      operationId: POST CreateListener
+      description: '<p>Creates a listener for the specified Application Load Balancer or Network Load Balancer.</p> <p>To update a listener, use <a>ModifyListener</a>. When you are finished with a listener, you can delete it using <a>DeleteListener</a>. If you are finished with both the listener and the load balancer, you can delete them both using <a>DeleteLoadBalancer</a>.</p> <p>This operation is idempotent, which means that it completes at most one time. If you attempt to create multiple listeners with the same settings, each call succeeds.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html">Listeners for Your Application Load Balancers</a> in the <i>Application Load Balancers Guide</i> and <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-listeners.html">Listeners for Your Network Load Balancers</a> in the <i>Network Load Balancers Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateListenerOutput'
+        '480':
+          description: DuplicateListenerException
+          schema:
+            $ref: '#/definitions/DuplicateListenerException'
+        '481':
+          description: TooManyListenersException
+          schema:
+            $ref: '#/definitions/TooManyListenersException'
+        '482':
+          description: TooManyCertificatesException
+          schema:
+            $ref: '#/definitions/TooManyCertificatesException'
+        '483':
+          description: LoadBalancerNotFoundException
+          schema:
+            $ref: '#/definitions/LoadBalancerNotFoundException'
+        '484':
+          description: TargetGroupNotFoundException
+          schema:
+            $ref: '#/definitions/TargetGroupNotFoundException'
+        '485':
+          description: TargetGroupAssociationLimitException
+          schema:
+            $ref: '#/definitions/TargetGroupAssociationLimitException'
+        '486':
+          description: InvalidConfigurationRequestException
+          schema:
+            $ref: '#/definitions/InvalidConfigurationRequestException'
+        '487':
+          description: IncompatibleProtocolsException
+          schema:
+            $ref: '#/definitions/IncompatibleProtocolsException'
+        '488':
+          description: SSLPolicyNotFoundException
+          schema:
+            $ref: '#/definitions/SSLPolicyNotFoundException'
+        '489':
+          description: CertificateNotFoundException
+          schema:
+            $ref: '#/definitions/CertificateNotFoundException'
+        '490':
+          description: UnsupportedProtocolException
+          schema:
+            $ref: '#/definitions/UnsupportedProtocolException'
+        '491':
+          description: TooManyRegistrationsForTargetIdException
+          schema:
+            $ref: '#/definitions/TooManyRegistrationsForTargetIdException'
+        '492':
+          description: TooManyTargetsException
+          schema:
+            $ref: '#/definitions/TooManyTargetsException'
+        '493':
+          description: TooManyActionsException
+          schema:
+            $ref: '#/definitions/TooManyActionsException'
+        '494':
+          description: InvalidLoadBalancerActionException
+          schema:
+            $ref: '#/definitions/InvalidLoadBalancerActionException'
+      parameters:
+        - name: LoadBalancerArn
+          in: formData
+          required: true
+          description: The Amazon Resource Name (ARN) of the load balancer.
+          type: string
+        - name: Protocol
+          in: formData
+          required: true
+          description: 'The protocol for connections from clients to the load balancer. For Application Load Balancers, the supported protocols are HTTP and HTTPS. For Network Load Balancers, the supported protocols are TCP and TLS.'
+          type: string
+          enum:
+            - HTTP
+            - HTTPS
+            - TCP
+            - TLS
+        - name: Port
+          in: formData
+          required: true
+          description: The port on which the load balancer is listening.
+          type: integer
+          minimum: 1
+          maximum: 65535
+        - name: SslPolicy
+          in: formData
+          required: false
+          description: '[HTTPS and TLS listeners] The security policy that defines which ciphers and protocols are supported. The default is the current predefined security policy.'
+          type: string
+        - name: Certificates
+          in: formData
+          required: false
+          description: '<p>[HTTPS and TLS listeners] The default SSL server certificate. You must provide exactly one certificate. Set <code>CertificateArn</code> to the certificate ARN but do not set <code>IsDefault</code>.</p> <p>To create a certificate list, use <a>AddListenerCertificates</a>.</p>'
+          type: array
+          items:
+            type: string
+        - name: DefaultActions
+          in: formData
+          required: true
+          description: '<p>The actions for the default rule. The rule must include one forward action or one or more fixed-response actions.</p> <p>If the action type is <code>forward</code>, you specify a target group. The protocol of the target group must be HTTP or HTTPS for an Application Load Balancer. The protocol of the target group must be TCP or TLS for a Network Load Balancer.</p> <p>[HTTPS listeners] If the action type is <code>authenticate-oidc</code>, you authenticate users through an identity provider that is OpenID Connect (OIDC) compliant.</p> <p>[HTTPS listeners] If the action type is <code>authenticate-cognito</code>, you authenticate users through the user pools supported by Amazon Cognito.</p> <p>[Application Load Balancer] If the action type is <code>redirect</code>, you redirect specified client requests from one URL to another.</p> <p>[Application Load Balancer] If the action type is <code>fixed-response</code>, you drop specified client requests and return a custom HTTP response.</p>'
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - CreateListener
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2015-12-01'
+  '/#Action=CreateLoadBalancer':
+    get:
+      x-aws-operation-name: CreateLoadBalancer
+      operationId: GET CreateLoadBalancer
       description: '<p>Creates an Application Load Balancer or a Network Load Balancer.</p> <p>When you create a load balancer, you can specify security groups, public subnets, IP address type, and tags. Otherwise, you could do so later using <a>SetSecurityGroups</a>, <a>SetSubnets</a>, <a>SetIpAddressType</a>, and <a>AddTags</a>.</p> <p>To create listeners for your load balancer, use <a>CreateListener</a>. To describe your current load balancers, see <a>DescribeLoadBalancers</a>. When you are finished with a load balancer, you can delete it using <a>DeleteLoadBalancer</a>.</p> <p>For limit information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-limits.html">Limits for Your Application Load Balancer</a> in the <i>Application Load Balancers Guide</i> and <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-limits.html">Limits for Your Network Load Balancer</a> in the <i>Network Load Balancers Guide</i>.</p> <p>This operation is idempotent, which means that it completes at most one time. If you attempt to create multiple load balancers with the same settings, each call succeeds.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancers.html">Application Load Balancers</a> in the <i>Application Load Balancers Guide</i> and <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/network/network-load-balancers.html">Network Load Balancers</a> in the <i>Network Load Balancers Guide</i>.</p>'
       responses:
         '200':
@@ -473,9 +771,141 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=CreateRule':
     post:
-      operationId: CreateRule
+      x-aws-operation-name: CreateLoadBalancer
+      operationId: POST CreateLoadBalancer
+      description: '<p>Creates an Application Load Balancer or a Network Load Balancer.</p> <p>When you create a load balancer, you can specify security groups, public subnets, IP address type, and tags. Otherwise, you could do so later using <a>SetSecurityGroups</a>, <a>SetSubnets</a>, <a>SetIpAddressType</a>, and <a>AddTags</a>.</p> <p>To create listeners for your load balancer, use <a>CreateListener</a>. To describe your current load balancers, see <a>DescribeLoadBalancers</a>. When you are finished with a load balancer, you can delete it using <a>DeleteLoadBalancer</a>.</p> <p>For limit information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-limits.html">Limits for Your Application Load Balancer</a> in the <i>Application Load Balancers Guide</i> and <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-limits.html">Limits for Your Network Load Balancer</a> in the <i>Network Load Balancers Guide</i>.</p> <p>This operation is idempotent, which means that it completes at most one time. If you attempt to create multiple load balancers with the same settings, each call succeeds.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancers.html">Application Load Balancers</a> in the <i>Application Load Balancers Guide</i> and <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/network/network-load-balancers.html">Network Load Balancers</a> in the <i>Network Load Balancers Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateLoadBalancerOutput'
+        '480':
+          description: DuplicateLoadBalancerNameException
+          schema:
+            $ref: '#/definitions/DuplicateLoadBalancerNameException'
+        '481':
+          description: TooManyLoadBalancersException
+          schema:
+            $ref: '#/definitions/TooManyLoadBalancersException'
+        '482':
+          description: InvalidConfigurationRequestException
+          schema:
+            $ref: '#/definitions/InvalidConfigurationRequestException'
+        '483':
+          description: SubnetNotFoundException
+          schema:
+            $ref: '#/definitions/SubnetNotFoundException'
+        '484':
+          description: InvalidSubnetException
+          schema:
+            $ref: '#/definitions/InvalidSubnetException'
+        '485':
+          description: InvalidSecurityGroupException
+          schema:
+            $ref: '#/definitions/InvalidSecurityGroupException'
+        '486':
+          description: InvalidSchemeException
+          schema:
+            $ref: '#/definitions/InvalidSchemeException'
+        '487':
+          description: TooManyTagsException
+          schema:
+            $ref: '#/definitions/TooManyTagsException'
+        '488':
+          description: DuplicateTagKeysException
+          schema:
+            $ref: '#/definitions/DuplicateTagKeysException'
+        '489':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '490':
+          description: AllocationIdNotFoundException
+          schema:
+            $ref: '#/definitions/AllocationIdNotFoundException'
+        '491':
+          description: AvailabilityZoneNotSupportedException
+          schema:
+            $ref: '#/definitions/AvailabilityZoneNotSupportedException'
+        '492':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+      parameters:
+        - name: Name
+          in: formData
+          required: true
+          description: '<p>The name of the load balancer.</p> <p>This name must be unique per region per account, can have a maximum of 32 characters, must contain only alphanumeric characters or hyphens, must not begin or end with a hyphen, and must not begin with "internal-".</p>'
+          type: string
+        - name: Subnets
+          in: formData
+          required: false
+          description: '<p>The IDs of the public subnets. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings.</p> <p>[Application Load Balancers] You must specify subnets from at least two Availability Zones.</p> <p>[Network Load Balancers] You can specify subnets from one or more Availability Zones.</p>'
+          type: array
+          items:
+            type: string
+        - name: SubnetMappings
+          in: formData
+          required: false
+          description: '<p>The IDs of the public subnets. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings.</p> <p>[Application Load Balancers] You must specify subnets from at least two Availability Zones. You cannot specify Elastic IP addresses for your subnets.</p> <p>[Network Load Balancers] You can specify subnets from one or more Availability Zones. You can specify one Elastic IP address per subnet.</p>'
+          type: array
+          items:
+            type: string
+        - name: SecurityGroups
+          in: formData
+          required: false
+          description: '[Application Load Balancers] The IDs of the security groups for the load balancer.'
+          type: array
+          items:
+            type: string
+        - name: Scheme
+          in: formData
+          required: false
+          description: '<p>The nodes of an Internet-facing load balancer have public IP addresses. The DNS name of an Internet-facing load balancer is publicly resolvable to the public IP addresses of the nodes. Therefore, Internet-facing load balancers can route requests from clients over the internet.</p> <p>The nodes of an internal load balancer have only private IP addresses. The DNS name of an internal load balancer is publicly resolvable to the private IP addresses of the nodes. Therefore, internal load balancers can only route requests from clients with access to the VPC for the load balancer.</p> <p>The default is an Internet-facing load balancer.</p>'
+          type: string
+          enum:
+            - internet-facing
+            - internal
+        - name: Tags
+          in: formData
+          required: false
+          description: One or more tags to assign to the load balancer.
+          type: array
+          items:
+            type: string
+        - name: Type
+          in: formData
+          required: false
+          description: The type of load balancer. The default is <code>application</code>.
+          type: string
+          enum:
+            - application
+            - network
+        - name: IpAddressType
+          in: formData
+          required: false
+          description: '[Application Load Balancers] The type of IP addresses used by the subnets for your load balancer. The possible values are <code>ipv4</code> (for IPv4 addresses) and <code>dualstack</code> (for IPv4 and IPv6 addresses). Internal load balancers must use <code>ipv4</code>.'
+          type: string
+          enum:
+            - ipv4
+            - dualstack
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - CreateLoadBalancer
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2015-12-01'
+  '/#Action=CreateRule':
+    get:
+      x-aws-operation-name: CreateRule
+      operationId: GET CreateRule
       description: '<p>Creates a rule for the specified listener. The listener must be associated with an Application Load Balancer.</p> <p>Rules are evaluated in priority order, from the lowest value to the highest value. When the conditions for a rule are met, its actions are performed. If the conditions for no rules are met, the actions for the default rule are performed. For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#listener-rules">Listener Rules</a> in the <i>Application Load Balancers Guide</i>.</p> <p>To view your current rules, use <a>DescribeRules</a>. To update a rule, use <a>ModifyRule</a>. To set the priorities of your rules, use <a>SetRulePriorities</a>. To delete a rule, use <a>DeleteRule</a>.</p>'
       responses:
         '200':
@@ -581,9 +1011,110 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=CreateTargetGroup':
     post:
-      operationId: CreateTargetGroup
+      x-aws-operation-name: CreateRule
+      operationId: POST CreateRule
+      description: '<p>Creates a rule for the specified listener. The listener must be associated with an Application Load Balancer.</p> <p>Rules are evaluated in priority order, from the lowest value to the highest value. When the conditions for a rule are met, its actions are performed. If the conditions for no rules are met, the actions for the default rule are performed. For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#listener-rules">Listener Rules</a> in the <i>Application Load Balancers Guide</i>.</p> <p>To view your current rules, use <a>DescribeRules</a>. To update a rule, use <a>ModifyRule</a>. To set the priorities of your rules, use <a>SetRulePriorities</a>. To delete a rule, use <a>DeleteRule</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateRuleOutput'
+        '480':
+          description: PriorityInUseException
+          schema:
+            $ref: '#/definitions/PriorityInUseException'
+        '481':
+          description: TooManyTargetGroupsException
+          schema:
+            $ref: '#/definitions/TooManyTargetGroupsException'
+        '482':
+          description: TooManyRulesException
+          schema:
+            $ref: '#/definitions/TooManyRulesException'
+        '483':
+          description: TargetGroupAssociationLimitException
+          schema:
+            $ref: '#/definitions/TargetGroupAssociationLimitException'
+        '484':
+          description: IncompatibleProtocolsException
+          schema:
+            $ref: '#/definitions/IncompatibleProtocolsException'
+        '485':
+          description: ListenerNotFoundException
+          schema:
+            $ref: '#/definitions/ListenerNotFoundException'
+        '486':
+          description: TargetGroupNotFoundException
+          schema:
+            $ref: '#/definitions/TargetGroupNotFoundException'
+        '487':
+          description: InvalidConfigurationRequestException
+          schema:
+            $ref: '#/definitions/InvalidConfigurationRequestException'
+        '488':
+          description: TooManyRegistrationsForTargetIdException
+          schema:
+            $ref: '#/definitions/TooManyRegistrationsForTargetIdException'
+        '489':
+          description: TooManyTargetsException
+          schema:
+            $ref: '#/definitions/TooManyTargetsException'
+        '490':
+          description: UnsupportedProtocolException
+          schema:
+            $ref: '#/definitions/UnsupportedProtocolException'
+        '491':
+          description: TooManyActionsException
+          schema:
+            $ref: '#/definitions/TooManyActionsException'
+        '492':
+          description: InvalidLoadBalancerActionException
+          schema:
+            $ref: '#/definitions/InvalidLoadBalancerActionException'
+      parameters:
+        - name: ListenerArn
+          in: formData
+          required: true
+          description: The Amazon Resource Name (ARN) of the listener.
+          type: string
+        - name: Conditions
+          in: formData
+          required: true
+          description: '<p>The conditions. Each condition specifies a field name and a single value.</p> <p>If the field name is <code>host-header</code>, you can specify a single host name (for example, my.example.com). A host name is case insensitive, can be up to 128 characters in length, and can contain any of the following characters. You can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>- .</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul> <p>If the field name is <code>path-pattern</code>, you can specify a single path pattern. A path pattern is case-sensitive, can be up to 128 characters in length, and can contain any of the following characters. You can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>_ - . $ / ~ " '' @ : +</p> </li> <li> <p>&amp; (using &amp;amp;)</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul>'
+          type: array
+          items:
+            type: string
+        - name: Priority
+          in: formData
+          required: true
+          description: The rule priority. A listener can't have multiple rules with the same priority.
+          type: integer
+          minimum: 1
+          maximum: 50000
+        - name: Actions
+          in: formData
+          required: true
+          description: '<p>The actions. Each rule must include exactly one of the following types of actions: <code>forward</code>, <code>fixed-response</code>, or <code>redirect</code>.</p> <p>If the action type is <code>forward</code>, you specify a target group. The protocol of the target group must be HTTP or HTTPS for an Application Load Balancer. The protocol of the target group must be TCP or TLS for a Network Load Balancer.</p> <p>[HTTPS listeners] If the action type is <code>authenticate-oidc</code>, you authenticate users through an identity provider that is OpenID Connect (OIDC) compliant.</p> <p>[HTTPS listeners] If the action type is <code>authenticate-cognito</code>, you authenticate users through the user pools supported by Amazon Cognito.</p> <p>[Application Load Balancer] If the action type is <code>redirect</code>, you redirect specified client requests from one URL to another.</p> <p>[Application Load Balancer] If the action type is <code>fixed-response</code>, you drop specified client requests and return a custom HTTP response.</p>'
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - CreateRule
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2015-12-01'
+  '/#Action=CreateTargetGroup':
+    get:
+      x-aws-operation-name: CreateTargetGroup
+      operationId: GET CreateTargetGroup
       description: '<p>Creates a target group.</p> <p>To register targets with the target group, use <a>RegisterTargets</a>. To update the health check settings for the target group, use <a>ModifyTargetGroup</a>. To monitor the health of targets in the target group, use <a>DescribeTargetHealth</a>.</p> <p>To route traffic to the targets in a target group, specify the target group in an action using <a>CreateListener</a> or <a>CreateRule</a>.</p> <p>To delete a target group, use <a>DeleteTargetGroup</a>.</p> <p>This operation is idempotent, which means that it completes at most one time. If you attempt to create multiple target groups with the same settings, each call succeeds.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html">Target Groups for Your Application Load Balancers</a> in the <i>Application Load Balancers Guide</i> or <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-target-groups.html">Target Groups for Your Network Load Balancers</a> in the <i>Network Load Balancers Guide</i>.</p>'
       responses:
         '200':
@@ -720,9 +1251,141 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DeleteListener':
     post:
-      operationId: DeleteListener
+      x-aws-operation-name: CreateTargetGroup
+      operationId: POST CreateTargetGroup
+      description: '<p>Creates a target group.</p> <p>To register targets with the target group, use <a>RegisterTargets</a>. To update the health check settings for the target group, use <a>ModifyTargetGroup</a>. To monitor the health of targets in the target group, use <a>DescribeTargetHealth</a>.</p> <p>To route traffic to the targets in a target group, specify the target group in an action using <a>CreateListener</a> or <a>CreateRule</a>.</p> <p>To delete a target group, use <a>DeleteTargetGroup</a>.</p> <p>This operation is idempotent, which means that it completes at most one time. If you attempt to create multiple target groups with the same settings, each call succeeds.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html">Target Groups for Your Application Load Balancers</a> in the <i>Application Load Balancers Guide</i> or <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-target-groups.html">Target Groups for Your Network Load Balancers</a> in the <i>Network Load Balancers Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateTargetGroupOutput'
+        '480':
+          description: DuplicateTargetGroupNameException
+          schema:
+            $ref: '#/definitions/DuplicateTargetGroupNameException'
+        '481':
+          description: TooManyTargetGroupsException
+          schema:
+            $ref: '#/definitions/TooManyTargetGroupsException'
+        '482':
+          description: InvalidConfigurationRequestException
+          schema:
+            $ref: '#/definitions/InvalidConfigurationRequestException'
+      parameters:
+        - name: Name
+          in: formData
+          required: true
+          description: '<p>The name of the target group.</p> <p>This name must be unique per region per account, can have a maximum of 32 characters, must contain only alphanumeric characters or hyphens, and must not begin or end with a hyphen.</p>'
+          type: string
+        - name: Protocol
+          in: formData
+          required: false
+          description: 'The protocol to use for routing traffic to the targets. For Application Load Balancers, the supported protocols are HTTP and HTTPS. For Network Load Balancers, the supported protocols are TCP and TLS. If the target is a Lambda function, this parameter does not apply.'
+          type: string
+          enum:
+            - HTTP
+            - HTTPS
+            - TCP
+            - TLS
+        - name: Port
+          in: formData
+          required: false
+          description: 'The port on which the targets receive traffic. This port is used unless you specify a port override when registering the target. If the target is a Lambda function, this parameter does not apply.'
+          type: integer
+          minimum: 1
+          maximum: 65535
+        - name: VpcId
+          in: formData
+          required: false
+          description: 'The identifier of the virtual private cloud (VPC). If the target is a Lambda function, this parameter does not apply.'
+          type: string
+        - name: HealthCheckProtocol
+          in: formData
+          required: false
+          description: 'The protocol the load balancer uses when performing health checks on targets. For Application Load Balancers, the default is HTTP. For Network Load Balancers, the default is TCP. The TCP protocol is supported for health checks only if the protocol of the target group is TCP or TLS. The TLS protocol is not supported for health checks.'
+          type: string
+          enum:
+            - HTTP
+            - HTTPS
+            - TCP
+            - TLS
+        - name: HealthCheckPort
+          in: formData
+          required: false
+          description: 'The port the load balancer uses when performing health checks on targets. The default is <code>traffic-port</code>, which is the port on which each target receives traffic from the load balancer.'
+          type: string
+        - name: HealthCheckEnabled
+          in: formData
+          required: false
+          description: 'Indicates whether health checks are enabled. If the target type is <code>instance</code> or <code>ip</code>, the default is <code>true</code>. If the target type is <code>lambda</code>, the default is <code>false</code>.'
+          type: boolean
+        - name: HealthCheckPath
+          in: formData
+          required: false
+          description: '[HTTP/HTTPS health checks] The ping path that is the destination on the targets for health checks. The default is /.'
+          type: string
+          minLength: 1
+          maxLength: 1024
+        - name: HealthCheckIntervalSeconds
+          in: formData
+          required: false
+          description: 'The approximate amount of time, in seconds, between health checks of an individual target. For Application Load Balancers, the range is 5–300 seconds. For Network Load Balancers, the supported values are 10 or 30 seconds. If the target type is <code>instance</code> or <code>ip</code>, the default is 30 seconds. If the target type is <code>lambda</code>, the default is 35 seconds.'
+          type: integer
+          minimum: 5
+          maximum: 300
+        - name: HealthCheckTimeoutSeconds
+          in: formData
+          required: false
+          description: 'The amount of time, in seconds, during which no response from a target means a failed health check. For Application Load Balancers, the range is 2–120 seconds and the default is 5 seconds if the target type is <code>instance</code> or <code>ip</code> and 30 seconds if the target type is <code>lambda</code>. For Network Load Balancers, this is 10 seconds for TCP and HTTPS health checks and 6 seconds for HTTP health checks.'
+          type: integer
+          minimum: 2
+          maximum: 120
+        - name: HealthyThresholdCount
+          in: formData
+          required: false
+          description: 'The number of consecutive health checks successes required before considering an unhealthy target healthy. For Application Load Balancers, the default is 5. For Network Load Balancers, the default is 3.'
+          type: integer
+          minimum: 2
+          maximum: 10
+        - name: UnhealthyThresholdCount
+          in: formData
+          required: false
+          description: 'The number of consecutive health check failures required before considering a target unhealthy. For Application Load Balancers, the default is 2. For Network Load Balancers, this value must be the same as the healthy threshold count.'
+          type: integer
+          minimum: 2
+          maximum: 10
+        - name: Matcher.HttpCode
+          in: formData
+          description: |-
+            Information to use when checking for a successful response from a target.
+            <p>The HTTP codes.</p> <p>For Application Load Balancers, you can specify values between 200 and 499, and the default value is 200. You can specify multiple values (for example, "200,202") or a range of values (for example, "200-299").</p> <p>For Network Load Balancers, this is 200–399.</p>
+          type: string
+        - name: TargetType
+          in: formData
+          required: false
+          description: '<p>The type of target that you must specify when registering targets with this target group. You can''t specify targets for a target group using more than one target type.</p> <ul> <li> <p> <code>instance</code> - Targets are specified by instance ID. This is the default value.</p> </li> <li> <p> <code>ip</code> - Targets are specified by IP address. You can specify IP addresses from the subnets of the virtual private cloud (VPC) for the target group, the RFC 1918 range (10.0.0.0/8, 172.16.0.0/12, and 192.168.0.0/16), and the RFC 6598 range (100.64.0.0/10). You can''t specify publicly routable IP addresses.</p> </li> <li> <p> <code>lambda</code> - The target groups contains a single Lambda function.</p> </li> </ul>'
+          type: string
+          enum:
+            - instance
+            - ip
+            - lambda
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - CreateTargetGroup
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2015-12-01'
+  '/#Action=DeleteListener':
+    get:
+      x-aws-operation-name: DeleteListener
+      operationId: GET DeleteListener
       description: '<p>Deletes the specified listener.</p> <p>Alternatively, your listener is deleted when you delete the load balancer to which it is attached, using <a>DeleteLoadBalancer</a>.</p>'
       responses:
         '200':
@@ -759,9 +1422,41 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DeleteLoadBalancer':
     post:
-      operationId: DeleteLoadBalancer
+      x-aws-operation-name: DeleteListener
+      operationId: POST DeleteListener
+      description: '<p>Deletes the specified listener.</p> <p>Alternatively, your listener is deleted when you delete the load balancer to which it is attached, using <a>DeleteLoadBalancer</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteListenerOutput'
+        '480':
+          description: ListenerNotFoundException
+          schema:
+            $ref: '#/definitions/ListenerNotFoundException'
+      parameters:
+        - name: ListenerArn
+          in: formData
+          required: true
+          description: The Amazon Resource Name (ARN) of the listener.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeleteListener
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2015-12-01'
+  '/#Action=DeleteLoadBalancer':
+    get:
+      x-aws-operation-name: DeleteLoadBalancer
+      operationId: GET DeleteLoadBalancer
       description: '<p>Deletes the specified Application Load Balancer or Network Load Balancer and its attached listeners.</p> <p>You can''t delete a load balancer if deletion protection is enabled. If the load balancer does not exist or has already been deleted, the call succeeds.</p> <p>Deleting a load balancer does not affect its registered targets. For example, your EC2 instances continue to run and are still registered to their target groups. If you no longer need these EC2 instances, you can stop or terminate them.</p>'
       responses:
         '200':
@@ -806,9 +1501,49 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DeleteRule':
     post:
-      operationId: DeleteRule
+      x-aws-operation-name: DeleteLoadBalancer
+      operationId: POST DeleteLoadBalancer
+      description: '<p>Deletes the specified Application Load Balancer or Network Load Balancer and its attached listeners.</p> <p>You can''t delete a load balancer if deletion protection is enabled. If the load balancer does not exist or has already been deleted, the call succeeds.</p> <p>Deleting a load balancer does not affect its registered targets. For example, your EC2 instances continue to run and are still registered to their target groups. If you no longer need these EC2 instances, you can stop or terminate them.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteLoadBalancerOutput'
+        '480':
+          description: LoadBalancerNotFoundException
+          schema:
+            $ref: '#/definitions/LoadBalancerNotFoundException'
+        '481':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+        '482':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+      parameters:
+        - name: LoadBalancerArn
+          in: formData
+          required: true
+          description: The Amazon Resource Name (ARN) of the load balancer.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeleteLoadBalancer
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2015-12-01'
+  '/#Action=DeleteRule':
+    get:
+      x-aws-operation-name: DeleteRule
+      operationId: GET DeleteRule
       description: Deletes the specified rule.
       responses:
         '200':
@@ -849,9 +1584,45 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DeleteTargetGroup':
     post:
-      operationId: DeleteTargetGroup
+      x-aws-operation-name: DeleteRule
+      operationId: POST DeleteRule
+      description: Deletes the specified rule.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteRuleOutput'
+        '480':
+          description: RuleNotFoundException
+          schema:
+            $ref: '#/definitions/RuleNotFoundException'
+        '481':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+      parameters:
+        - name: RuleArn
+          in: formData
+          required: true
+          description: The Amazon Resource Name (ARN) of the rule.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeleteRule
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2015-12-01'
+  '/#Action=DeleteTargetGroup':
+    get:
+      x-aws-operation-name: DeleteTargetGroup
+      operationId: GET DeleteTargetGroup
       description: <p>Deletes the specified target group.</p> <p>You can delete a target group if it is not referenced by any actions. Deleting a target group also deletes any associated health checks.</p>
       responses:
         '200':
@@ -888,9 +1659,41 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DeregisterTargets':
     post:
-      operationId: DeregisterTargets
+      x-aws-operation-name: DeleteTargetGroup
+      operationId: POST DeleteTargetGroup
+      description: <p>Deletes the specified target group.</p> <p>You can delete a target group if it is not referenced by any actions. Deleting a target group also deletes any associated health checks.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteTargetGroupOutput'
+        '480':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+      parameters:
+        - name: TargetGroupArn
+          in: formData
+          required: true
+          description: The Amazon Resource Name (ARN) of the target group.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeleteTargetGroup
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2015-12-01'
+  '/#Action=DeregisterTargets':
+    get:
+      x-aws-operation-name: DeregisterTargets
+      operationId: GET DeregisterTargets
       description: 'Deregisters the specified targets from the specified target group. After the targets are deregistered, they no longer receive traffic from the load balancer.'
       responses:
         '200':
@@ -938,9 +1741,52 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeAccountLimits':
     post:
-      operationId: DescribeAccountLimits
+      x-aws-operation-name: DeregisterTargets
+      operationId: POST DeregisterTargets
+      description: 'Deregisters the specified targets from the specified target group. After the targets are deregistered, they no longer receive traffic from the load balancer.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeregisterTargetsOutput'
+        '480':
+          description: TargetGroupNotFoundException
+          schema:
+            $ref: '#/definitions/TargetGroupNotFoundException'
+        '481':
+          description: InvalidTargetException
+          schema:
+            $ref: '#/definitions/InvalidTargetException'
+      parameters:
+        - name: TargetGroupArn
+          in: formData
+          required: true
+          description: The Amazon Resource Name (ARN) of the target group.
+          type: string
+        - name: Targets
+          in: formData
+          required: true
+          description: 'The targets. If you specified a port override when you registered a target, you must specify both the target ID and the port when you deregister it.'
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeregisterTargets
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2015-12-01'
+  '/#Action=DescribeAccountLimits':
+    get:
+      x-aws-operation-name: DescribeAccountLimits
+      operationId: GET DescribeAccountLimits
       description: '<p>Describes the current Elastic Load Balancing resource limits for your AWS account.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-limits.html">Limits for Your Application Load Balancers</a> in the <i>Application Load Balancer Guide</i> or <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-limits.html">Limits for Your Network Load Balancers</a> in the <i>Network Load Balancers Guide</i>.</p>'
       responses:
         '200':
@@ -980,9 +1826,44 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeListenerCertificates':
     post:
-      operationId: DescribeListenerCertificates
+      x-aws-operation-name: DescribeAccountLimits
+      operationId: POST DescribeAccountLimits
+      description: '<p>Describes the current Elastic Load Balancing resource limits for your AWS account.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-limits.html">Limits for Your Application Load Balancers</a> in the <i>Application Load Balancer Guide</i> or <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-limits.html">Limits for Your Network Load Balancers</a> in the <i>Network Load Balancers Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeAccountLimitsOutput'
+      parameters:
+        - name: Marker
+          in: formData
+          required: false
+          description: The marker for the next set of results. (You received this marker from a previous call.)
+          type: string
+        - name: PageSize
+          in: formData
+          required: false
+          description: The maximum number of results to return with this call.
+          type: integer
+          minimum: 1
+          maximum: 400
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeAccountLimits
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2015-12-01'
+  '/#Action=DescribeListenerCertificates':
+    get:
+      x-aws-operation-name: DescribeListenerCertificates
+      operationId: GET DescribeListenerCertificates
       description: Describes the certificates for the specified HTTPS listener.
       responses:
         '200':
@@ -1031,9 +1912,53 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeListeners':
     post:
-      operationId: DescribeListeners
+      x-aws-operation-name: DescribeListenerCertificates
+      operationId: POST DescribeListenerCertificates
+      description: Describes the certificates for the specified HTTPS listener.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeListenerCertificatesOutput'
+        '480':
+          description: ListenerNotFoundException
+          schema:
+            $ref: '#/definitions/ListenerNotFoundException'
+      parameters:
+        - name: ListenerArn
+          in: formData
+          required: true
+          description: The Amazon Resource Names (ARN) of the listener.
+          type: string
+        - name: Marker
+          in: formData
+          required: false
+          description: The marker for the next set of results. (You received this marker from a previous call.)
+          type: string
+        - name: PageSize
+          in: formData
+          required: false
+          description: The maximum number of results to return with this call.
+          type: integer
+          minimum: 1
+          maximum: 400
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeListenerCertificates
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2015-12-01'
+  '/#Action=DescribeListeners':
+    get:
+      x-aws-operation-name: DescribeListeners
+      operationId: GET DescribeListeners
       description: Describes the specified listeners or the listeners for the specified Application Load Balancer or Network Load Balancer. You must specify either a load balancer or one or more listeners.
       responses:
         '200':
@@ -1097,9 +2022,68 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeLoadBalancerAttributes':
     post:
-      operationId: DescribeLoadBalancerAttributes
+      x-aws-operation-name: DescribeListeners
+      operationId: POST DescribeListeners
+      description: Describes the specified listeners or the listeners for the specified Application Load Balancer or Network Load Balancer. You must specify either a load balancer or one or more listeners.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeListenersOutput'
+        '480':
+          description: ListenerNotFoundException
+          schema:
+            $ref: '#/definitions/ListenerNotFoundException'
+        '481':
+          description: LoadBalancerNotFoundException
+          schema:
+            $ref: '#/definitions/LoadBalancerNotFoundException'
+        '482':
+          description: UnsupportedProtocolException
+          schema:
+            $ref: '#/definitions/UnsupportedProtocolException'
+      parameters:
+        - name: LoadBalancerArn
+          in: formData
+          required: false
+          description: The Amazon Resource Name (ARN) of the load balancer.
+          type: string
+        - name: ListenerArns
+          in: formData
+          required: false
+          description: The Amazon Resource Names (ARN) of the listeners.
+          type: array
+          items:
+            type: string
+        - name: Marker
+          in: formData
+          required: false
+          description: The marker for the next set of results. (You received this marker from a previous call.)
+          type: string
+        - name: PageSize
+          in: formData
+          required: false
+          description: The maximum number of results to return with this call.
+          type: integer
+          minimum: 1
+          maximum: 400
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeListeners
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2015-12-01'
+  '/#Action=DescribeLoadBalancerAttributes':
+    get:
+      x-aws-operation-name: DescribeLoadBalancerAttributes
+      operationId: GET DescribeLoadBalancerAttributes
       description: '<p>Describes the attributes for the specified Application Load Balancer or Network Load Balancer.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancers.html#load-balancer-attributes">Load Balancer Attributes</a> in the <i>Application Load Balancers Guide</i> or <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/network/network-load-balancers.html#load-balancer-attributes">Load Balancer Attributes</a> in the <i>Network Load Balancers Guide</i>.</p>'
       responses:
         '200':
@@ -1136,9 +2120,41 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeLoadBalancers':
     post:
-      operationId: DescribeLoadBalancers
+      x-aws-operation-name: DescribeLoadBalancerAttributes
+      operationId: POST DescribeLoadBalancerAttributes
+      description: '<p>Describes the attributes for the specified Application Load Balancer or Network Load Balancer.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancers.html#load-balancer-attributes">Load Balancer Attributes</a> in the <i>Application Load Balancers Guide</i> or <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/network/network-load-balancers.html#load-balancer-attributes">Load Balancer Attributes</a> in the <i>Network Load Balancers Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeLoadBalancerAttributesOutput'
+        '480':
+          description: LoadBalancerNotFoundException
+          schema:
+            $ref: '#/definitions/LoadBalancerNotFoundException'
+      parameters:
+        - name: LoadBalancerArn
+          in: formData
+          required: true
+          description: The Amazon Resource Name (ARN) of the load balancer.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeLoadBalancerAttributes
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2015-12-01'
+  '/#Action=DescribeLoadBalancers':
+    get:
+      x-aws-operation-name: DescribeLoadBalancers
+      operationId: GET DescribeLoadBalancers
       description: '<p>Describes the specified load balancers or all of your load balancers.</p> <p>To describe the listeners for a load balancer, use <a>DescribeListeners</a>. To describe the attributes for a load balancer, use <a>DescribeLoadBalancerAttributes</a>.</p>'
       responses:
         '200':
@@ -1196,9 +2212,62 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeRules':
     post:
-      operationId: DescribeRules
+      x-aws-operation-name: DescribeLoadBalancers
+      operationId: POST DescribeLoadBalancers
+      description: '<p>Describes the specified load balancers or all of your load balancers.</p> <p>To describe the listeners for a load balancer, use <a>DescribeListeners</a>. To describe the attributes for a load balancer, use <a>DescribeLoadBalancerAttributes</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeLoadBalancersOutput'
+        '480':
+          description: LoadBalancerNotFoundException
+          schema:
+            $ref: '#/definitions/LoadBalancerNotFoundException'
+      parameters:
+        - name: LoadBalancerArns
+          in: formData
+          required: false
+          description: The Amazon Resource Names (ARN) of the load balancers. You can specify up to 20 load balancers in a single call.
+          type: array
+          items:
+            type: string
+        - name: Names
+          in: formData
+          required: false
+          description: The names of the load balancers.
+          type: array
+          items:
+            type: string
+        - name: Marker
+          in: formData
+          required: false
+          description: The marker for the next set of results. (You received this marker from a previous call.)
+          type: string
+        - name: PageSize
+          in: formData
+          required: false
+          description: The maximum number of results to return with this call.
+          type: integer
+          minimum: 1
+          maximum: 400
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeLoadBalancers
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2015-12-01'
+  '/#Action=DescribeRules':
+    get:
+      x-aws-operation-name: DescribeRules
+      operationId: GET DescribeRules
       description: Describes the specified rules or the rules for the specified listener. You must specify either a listener or one or more rules.
       responses:
         '200':
@@ -1262,9 +2331,68 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeSSLPolicies':
     post:
-      operationId: DescribeSSLPolicies
+      x-aws-operation-name: DescribeRules
+      operationId: POST DescribeRules
+      description: Describes the specified rules or the rules for the specified listener. You must specify either a listener or one or more rules.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeRulesOutput'
+        '480':
+          description: ListenerNotFoundException
+          schema:
+            $ref: '#/definitions/ListenerNotFoundException'
+        '481':
+          description: RuleNotFoundException
+          schema:
+            $ref: '#/definitions/RuleNotFoundException'
+        '482':
+          description: UnsupportedProtocolException
+          schema:
+            $ref: '#/definitions/UnsupportedProtocolException'
+      parameters:
+        - name: ListenerArn
+          in: formData
+          required: false
+          description: The Amazon Resource Name (ARN) of the listener.
+          type: string
+        - name: RuleArns
+          in: formData
+          required: false
+          description: The Amazon Resource Names (ARN) of the rules.
+          type: array
+          items:
+            type: string
+        - name: Marker
+          in: formData
+          required: false
+          description: The marker for the next set of results. (You received this marker from a previous call.)
+          type: string
+        - name: PageSize
+          in: formData
+          required: false
+          description: The maximum number of results to return with this call.
+          type: integer
+          minimum: 1
+          maximum: 400
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeRules
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2015-12-01'
+  '/#Action=DescribeSSLPolicies':
+    get:
+      x-aws-operation-name: DescribeSSLPolicies
+      operationId: GET DescribeSSLPolicies
       description: '<p>Describes the specified policies or all policies used for SSL negotiation.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies">Security Policies</a> in the <i>Application Load Balancers Guide</i>.</p>'
       responses:
         '200':
@@ -1315,9 +2443,55 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeTags':
     post:
-      operationId: DescribeTags
+      x-aws-operation-name: DescribeSSLPolicies
+      operationId: POST DescribeSSLPolicies
+      description: '<p>Describes the specified policies or all policies used for SSL negotiation.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies">Security Policies</a> in the <i>Application Load Balancers Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeSSLPoliciesOutput'
+        '480':
+          description: SSLPolicyNotFoundException
+          schema:
+            $ref: '#/definitions/SSLPolicyNotFoundException'
+      parameters:
+        - name: Names
+          in: formData
+          required: false
+          description: The names of the policies.
+          type: array
+          items:
+            type: string
+        - name: Marker
+          in: formData
+          required: false
+          description: The marker for the next set of results. (You received this marker from a previous call.)
+          type: string
+        - name: PageSize
+          in: formData
+          required: false
+          description: The maximum number of results to return with this call.
+          type: integer
+          minimum: 1
+          maximum: 400
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeSSLPolicies
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2015-12-01'
+  '/#Action=DescribeTags':
+    get:
+      x-aws-operation-name: DescribeTags
+      operationId: GET DescribeTags
       description: 'Describes the tags for the specified resources. You can describe the tags for one or more Application Load Balancers, Network Load Balancers, and target groups.'
       responses:
         '200':
@@ -1368,9 +2542,55 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeTargetGroupAttributes':
     post:
-      operationId: DescribeTargetGroupAttributes
+      x-aws-operation-name: DescribeTags
+      operationId: POST DescribeTags
+      description: 'Describes the tags for the specified resources. You can describe the tags for one or more Application Load Balancers, Network Load Balancers, and target groups.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeTagsOutput'
+        '480':
+          description: LoadBalancerNotFoundException
+          schema:
+            $ref: '#/definitions/LoadBalancerNotFoundException'
+        '481':
+          description: TargetGroupNotFoundException
+          schema:
+            $ref: '#/definitions/TargetGroupNotFoundException'
+        '482':
+          description: ListenerNotFoundException
+          schema:
+            $ref: '#/definitions/ListenerNotFoundException'
+        '483':
+          description: RuleNotFoundException
+          schema:
+            $ref: '#/definitions/RuleNotFoundException'
+      parameters:
+        - name: ResourceArns
+          in: formData
+          required: true
+          description: The Amazon Resource Names (ARN) of the resources.
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeTags
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2015-12-01'
+  '/#Action=DescribeTargetGroupAttributes':
+    get:
+      x-aws-operation-name: DescribeTargetGroupAttributes
+      operationId: GET DescribeTargetGroupAttributes
       description: '<p>Describes the attributes for the specified target group.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html#target-group-attributes">Target Group Attributes</a> in the <i>Application Load Balancers Guide</i> or <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-target-groups.html#target-group-attributes">Target Group Attributes</a> in the <i>Network Load Balancers Guide</i>.</p>'
       responses:
         '200':
@@ -1407,9 +2627,41 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeTargetGroups':
     post:
-      operationId: DescribeTargetGroups
+      x-aws-operation-name: DescribeTargetGroupAttributes
+      operationId: POST DescribeTargetGroupAttributes
+      description: '<p>Describes the attributes for the specified target group.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html#target-group-attributes">Target Group Attributes</a> in the <i>Application Load Balancers Guide</i> or <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-target-groups.html#target-group-attributes">Target Group Attributes</a> in the <i>Network Load Balancers Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeTargetGroupAttributesOutput'
+        '480':
+          description: TargetGroupNotFoundException
+          schema:
+            $ref: '#/definitions/TargetGroupNotFoundException'
+      parameters:
+        - name: TargetGroupArn
+          in: formData
+          required: true
+          description: The Amazon Resource Name (ARN) of the target group.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeTargetGroupAttributes
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2015-12-01'
+  '/#Action=DescribeTargetGroups':
+    get:
+      x-aws-operation-name: DescribeTargetGroups
+      operationId: GET DescribeTargetGroups
       description: '<p>Describes the specified target groups or all of your target groups. By default, all target groups are described. Alternatively, you can specify one of the following to filter the results: the ARN of the load balancer, the names of one or more target groups, or the ARNs of one or more target groups.</p> <p>To describe the targets for a target group, use <a>DescribeTargetHealth</a>. To describe the attributes of a target group, use <a>DescribeTargetGroupAttributes</a>.</p>'
       responses:
         '200':
@@ -1476,9 +2728,71 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=DescribeTargetHealth':
     post:
-      operationId: DescribeTargetHealth
+      x-aws-operation-name: DescribeTargetGroups
+      operationId: POST DescribeTargetGroups
+      description: '<p>Describes the specified target groups or all of your target groups. By default, all target groups are described. Alternatively, you can specify one of the following to filter the results: the ARN of the load balancer, the names of one or more target groups, or the ARNs of one or more target groups.</p> <p>To describe the targets for a target group, use <a>DescribeTargetHealth</a>. To describe the attributes of a target group, use <a>DescribeTargetGroupAttributes</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeTargetGroupsOutput'
+        '480':
+          description: LoadBalancerNotFoundException
+          schema:
+            $ref: '#/definitions/LoadBalancerNotFoundException'
+        '481':
+          description: TargetGroupNotFoundException
+          schema:
+            $ref: '#/definitions/TargetGroupNotFoundException'
+      parameters:
+        - name: LoadBalancerArn
+          in: formData
+          required: false
+          description: The Amazon Resource Name (ARN) of the load balancer.
+          type: string
+        - name: TargetGroupArns
+          in: formData
+          required: false
+          description: The Amazon Resource Names (ARN) of the target groups.
+          type: array
+          items:
+            type: string
+        - name: Names
+          in: formData
+          required: false
+          description: The names of the target groups.
+          type: array
+          items:
+            type: string
+        - name: Marker
+          in: formData
+          required: false
+          description: The marker for the next set of results. (You received this marker from a previous call.)
+          type: string
+        - name: PageSize
+          in: formData
+          required: false
+          description: The maximum number of results to return with this call.
+          type: integer
+          minimum: 1
+          maximum: 400
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeTargetGroups
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2015-12-01'
+  '/#Action=DescribeTargetHealth':
+    get:
+      x-aws-operation-name: DescribeTargetHealth
+      operationId: GET DescribeTargetHealth
       description: Describes the health of the specified targets or all of your targets.
       responses:
         '200':
@@ -1530,9 +2844,56 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=ModifyListener':
     post:
-      operationId: ModifyListener
+      x-aws-operation-name: DescribeTargetHealth
+      operationId: POST DescribeTargetHealth
+      description: Describes the health of the specified targets or all of your targets.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeTargetHealthOutput'
+        '480':
+          description: InvalidTargetException
+          schema:
+            $ref: '#/definitions/InvalidTargetException'
+        '481':
+          description: TargetGroupNotFoundException
+          schema:
+            $ref: '#/definitions/TargetGroupNotFoundException'
+        '482':
+          description: HealthUnavailableException
+          schema:
+            $ref: '#/definitions/HealthUnavailableException'
+      parameters:
+        - name: TargetGroupArn
+          in: formData
+          required: true
+          description: The Amazon Resource Name (ARN) of the target group.
+          type: string
+        - name: Targets
+          in: formData
+          required: false
+          description: The targets.
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeTargetHealth
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2015-12-01'
+  '/#Action=ModifyListener':
+    get:
+      x-aws-operation-name: ModifyListener
+      operationId: GET ModifyListener
       description: '<p>Modifies the specified properties of the specified listener.</p> <p>Any properties that you do not specify retain their current values. However, changing the protocol from HTTPS to HTTP, or from TLS to TCP, removes the security policy and server certificate properties. If you change the protocol from HTTP to HTTPS, or from TCP to TLS, you must add the security policy and server certificate properties.</p>'
       responses:
         '200':
@@ -1661,9 +3022,133 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=ModifyLoadBalancerAttributes':
     post:
-      operationId: ModifyLoadBalancerAttributes
+      x-aws-operation-name: ModifyListener
+      operationId: POST ModifyListener
+      description: '<p>Modifies the specified properties of the specified listener.</p> <p>Any properties that you do not specify retain their current values. However, changing the protocol from HTTPS to HTTP, or from TLS to TCP, removes the security policy and server certificate properties. If you change the protocol from HTTP to HTTPS, or from TCP to TLS, you must add the security policy and server certificate properties.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModifyListenerOutput'
+        '480':
+          description: DuplicateListenerException
+          schema:
+            $ref: '#/definitions/DuplicateListenerException'
+        '481':
+          description: TooManyListenersException
+          schema:
+            $ref: '#/definitions/TooManyListenersException'
+        '482':
+          description: TooManyCertificatesException
+          schema:
+            $ref: '#/definitions/TooManyCertificatesException'
+        '483':
+          description: ListenerNotFoundException
+          schema:
+            $ref: '#/definitions/ListenerNotFoundException'
+        '484':
+          description: TargetGroupNotFoundException
+          schema:
+            $ref: '#/definitions/TargetGroupNotFoundException'
+        '485':
+          description: TargetGroupAssociationLimitException
+          schema:
+            $ref: '#/definitions/TargetGroupAssociationLimitException'
+        '486':
+          description: IncompatibleProtocolsException
+          schema:
+            $ref: '#/definitions/IncompatibleProtocolsException'
+        '487':
+          description: SSLPolicyNotFoundException
+          schema:
+            $ref: '#/definitions/SSLPolicyNotFoundException'
+        '488':
+          description: CertificateNotFoundException
+          schema:
+            $ref: '#/definitions/CertificateNotFoundException'
+        '489':
+          description: InvalidConfigurationRequestException
+          schema:
+            $ref: '#/definitions/InvalidConfigurationRequestException'
+        '490':
+          description: UnsupportedProtocolException
+          schema:
+            $ref: '#/definitions/UnsupportedProtocolException'
+        '491':
+          description: TooManyRegistrationsForTargetIdException
+          schema:
+            $ref: '#/definitions/TooManyRegistrationsForTargetIdException'
+        '492':
+          description: TooManyTargetsException
+          schema:
+            $ref: '#/definitions/TooManyTargetsException'
+        '493':
+          description: TooManyActionsException
+          schema:
+            $ref: '#/definitions/TooManyActionsException'
+        '494':
+          description: InvalidLoadBalancerActionException
+          schema:
+            $ref: '#/definitions/InvalidLoadBalancerActionException'
+      parameters:
+        - name: ListenerArn
+          in: formData
+          required: true
+          description: The Amazon Resource Name (ARN) of the listener.
+          type: string
+        - name: Port
+          in: formData
+          required: false
+          description: The port for connections from clients to the load balancer.
+          type: integer
+          minimum: 1
+          maximum: 65535
+        - name: Protocol
+          in: formData
+          required: false
+          description: The protocol for connections from clients to the load balancer. Application Load Balancers support the HTTP and HTTPS protocols. Network Load Balancers support the TCP and TLS protocols.
+          type: string
+          enum:
+            - HTTP
+            - HTTPS
+            - TCP
+            - TLS
+        - name: SslPolicy
+          in: formData
+          required: false
+          description: '[HTTPS and TLS listeners] The security policy that defines which protocols and ciphers are supported. For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies">Security Policies</a> in the <i>Application Load Balancers Guide</i>.'
+          type: string
+        - name: Certificates
+          in: formData
+          required: false
+          description: '<p>[HTTPS and TLS listeners] The default SSL server certificate. You must provide exactly one certificate. Set <code>CertificateArn</code> to the certificate ARN but do not set <code>IsDefault</code>.</p> <p>To create a certificate list, use <a>AddListenerCertificates</a>.</p>'
+          type: array
+          items:
+            type: string
+        - name: DefaultActions
+          in: formData
+          required: false
+          description: '<p>The actions for the default rule. The rule must include one forward action or one or more fixed-response actions.</p> <p>If the action type is <code>forward</code>, you specify a target group. The protocol of the target group must be HTTP or HTTPS for an Application Load Balancer. The protocol of the target group must be TCP or TLS for a Network Load Balancer.</p> <p>[HTTPS listeners] If the action type is <code>authenticate-oidc</code>, you authenticate users through an identity provider that is OpenID Connect (OIDC) compliant.</p> <p>[HTTPS listeners] If the action type is <code>authenticate-cognito</code>, you authenticate users through the user pools supported by Amazon Cognito.</p> <p>[Application Load Balancer] If the action type is <code>redirect</code>, you redirect specified client requests from one URL to another.</p> <p>[Application Load Balancer] If the action type is <code>fixed-response</code>, you drop specified client requests and return a custom HTTP response.</p>'
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ModifyListener
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2015-12-01'
+  '/#Action=ModifyLoadBalancerAttributes':
+    get:
+      x-aws-operation-name: ModifyLoadBalancerAttributes
+      operationId: GET ModifyLoadBalancerAttributes
       description: '<p>Modifies the specified attributes of the specified Application Load Balancer or Network Load Balancer.</p> <p>If any of the specified attributes can''t be modified as requested, the call fails. Any existing attributes that you do not modify retain their current values.</p>'
       responses:
         '200':
@@ -1711,9 +3196,52 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=ModifyRule':
     post:
-      operationId: ModifyRule
+      x-aws-operation-name: ModifyLoadBalancerAttributes
+      operationId: POST ModifyLoadBalancerAttributes
+      description: '<p>Modifies the specified attributes of the specified Application Load Balancer or Network Load Balancer.</p> <p>If any of the specified attributes can''t be modified as requested, the call fails. Any existing attributes that you do not modify retain their current values.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModifyLoadBalancerAttributesOutput'
+        '480':
+          description: LoadBalancerNotFoundException
+          schema:
+            $ref: '#/definitions/LoadBalancerNotFoundException'
+        '481':
+          description: InvalidConfigurationRequestException
+          schema:
+            $ref: '#/definitions/InvalidConfigurationRequestException'
+      parameters:
+        - name: LoadBalancerArn
+          in: formData
+          required: true
+          description: The Amazon Resource Name (ARN) of the load balancer.
+          type: string
+        - name: Attributes
+          in: formData
+          required: true
+          description: The load balancer attributes.
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ModifyLoadBalancerAttributes
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2015-12-01'
+  '/#Action=ModifyRule':
+    get:
+      x-aws-operation-name: ModifyRule
+      operationId: GET ModifyRule
       description: '<p>Modifies the specified rule.</p> <p>Any existing properties that you do not modify retain their current values.</p> <p>To modify the actions for the default rule, use <a>ModifyListener</a>.</p>'
       responses:
         '200':
@@ -1800,9 +3328,91 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=ModifyTargetGroup':
     post:
-      operationId: ModifyTargetGroup
+      x-aws-operation-name: ModifyRule
+      operationId: POST ModifyRule
+      description: '<p>Modifies the specified rule.</p> <p>Any existing properties that you do not modify retain their current values.</p> <p>To modify the actions for the default rule, use <a>ModifyListener</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModifyRuleOutput'
+        '480':
+          description: TargetGroupAssociationLimitException
+          schema:
+            $ref: '#/definitions/TargetGroupAssociationLimitException'
+        '481':
+          description: IncompatibleProtocolsException
+          schema:
+            $ref: '#/definitions/IncompatibleProtocolsException'
+        '482':
+          description: RuleNotFoundException
+          schema:
+            $ref: '#/definitions/RuleNotFoundException'
+        '483':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+        '484':
+          description: TooManyRegistrationsForTargetIdException
+          schema:
+            $ref: '#/definitions/TooManyRegistrationsForTargetIdException'
+        '485':
+          description: TooManyTargetsException
+          schema:
+            $ref: '#/definitions/TooManyTargetsException'
+        '486':
+          description: TargetGroupNotFoundException
+          schema:
+            $ref: '#/definitions/TargetGroupNotFoundException'
+        '487':
+          description: UnsupportedProtocolException
+          schema:
+            $ref: '#/definitions/UnsupportedProtocolException'
+        '488':
+          description: TooManyActionsException
+          schema:
+            $ref: '#/definitions/TooManyActionsException'
+        '489':
+          description: InvalidLoadBalancerActionException
+          schema:
+            $ref: '#/definitions/InvalidLoadBalancerActionException'
+      parameters:
+        - name: RuleArn
+          in: formData
+          required: true
+          description: The Amazon Resource Name (ARN) of the rule.
+          type: string
+        - name: Conditions
+          in: formData
+          required: false
+          description: '<p>The conditions. Each condition specifies a field name and a single value.</p> <p>If the field name is <code>host-header</code>, you can specify a single host name (for example, my.example.com). A host name is case insensitive, can be up to 128 characters in length, and can contain any of the following characters. You can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>- .</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul> <p>If the field name is <code>path-pattern</code>, you can specify a single path pattern. A path pattern is case-sensitive, can be up to 128 characters in length, and can contain any of the following characters. You can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>_ - . $ / ~ " '' @ : +</p> </li> <li> <p>&amp; (using &amp;amp;)</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul>'
+          type: array
+          items:
+            type: string
+        - name: Actions
+          in: formData
+          required: false
+          description: '<p>The actions.</p> <p>If the action type is <code>forward</code>, you specify a target group. The protocol of the target group must be HTTP or HTTPS for an Application Load Balancer. The protocol of the target group must be TCP or TLS for a Network Load Balancer.</p> <p>[HTTPS listeners] If the action type is <code>authenticate-oidc</code>, you authenticate users through an identity provider that is OpenID Connect (OIDC) compliant.</p> <p>[HTTPS listeners] If the action type is <code>authenticate-cognito</code>, you authenticate users through the user pools supported by Amazon Cognito.</p> <p>[Application Load Balancer] If the action type is <code>redirect</code>, you redirect specified client requests from one URL to another.</p> <p>[Application Load Balancer] If the action type is <code>fixed-response</code>, you drop specified client requests and return a custom HTTP response.</p>'
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ModifyRule
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2015-12-01'
+  '/#Action=ModifyTargetGroup':
+    get:
+      x-aws-operation-name: ModifyTargetGroup
+      operationId: GET ModifyTargetGroup
       description: '<p>Modifies the health checks used when evaluating the health state of the targets in the specified target group.</p> <p>To monitor the health of the targets, use <a>DescribeTargetHealth</a>.</p>'
       responses:
         '200':
@@ -1904,9 +3514,106 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=ModifyTargetGroupAttributes':
     post:
-      operationId: ModifyTargetGroupAttributes
+      x-aws-operation-name: ModifyTargetGroup
+      operationId: POST ModifyTargetGroup
+      description: '<p>Modifies the health checks used when evaluating the health state of the targets in the specified target group.</p> <p>To monitor the health of the targets, use <a>DescribeTargetHealth</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModifyTargetGroupOutput'
+        '480':
+          description: TargetGroupNotFoundException
+          schema:
+            $ref: '#/definitions/TargetGroupNotFoundException'
+        '481':
+          description: InvalidConfigurationRequestException
+          schema:
+            $ref: '#/definitions/InvalidConfigurationRequestException'
+      parameters:
+        - name: TargetGroupArn
+          in: formData
+          required: true
+          description: The Amazon Resource Name (ARN) of the target group.
+          type: string
+        - name: HealthCheckProtocol
+          in: formData
+          required: false
+          description: '<p>The protocol the load balancer uses when performing health checks on targets. The TCP protocol is supported for health checks only if the protocol of the target group is TCP or TLS. The TLS protocol is not supported for health checks.</p> <p>If the protocol of the target group is TCP, you can''t modify this setting.</p>'
+          type: string
+          enum:
+            - HTTP
+            - HTTPS
+            - TCP
+            - TLS
+        - name: HealthCheckPort
+          in: formData
+          required: false
+          description: The port the load balancer uses when performing health checks on targets.
+          type: string
+        - name: HealthCheckPath
+          in: formData
+          required: false
+          description: '[HTTP/HTTPS health checks] The ping path that is the destination for the health check request.'
+          type: string
+          minLength: 1
+          maxLength: 1024
+        - name: HealthCheckEnabled
+          in: formData
+          required: false
+          description: Indicates whether health checks are enabled.
+          type: boolean
+        - name: HealthCheckIntervalSeconds
+          in: formData
+          required: false
+          description: '<p>The approximate amount of time, in seconds, between health checks of an individual target. For Application Load Balancers, the range is 5–300 seconds. For Network Load Balancers, the supported values are 10 or 30 seconds.</p> <p>If the protocol of the target group is TCP, you can''t modify this setting.</p>'
+          type: integer
+          minimum: 5
+          maximum: 300
+        - name: HealthCheckTimeoutSeconds
+          in: formData
+          required: false
+          description: '<p>[HTTP/HTTPS health checks] The amount of time, in seconds, during which no response means a failed health check.</p> <p>If the protocol of the target group is TCP, you can''t modify this setting.</p>'
+          type: integer
+          minimum: 2
+          maximum: 120
+        - name: HealthyThresholdCount
+          in: formData
+          required: false
+          description: The number of consecutive health checks successes required before considering an unhealthy target healthy.
+          type: integer
+          minimum: 2
+          maximum: 10
+        - name: UnhealthyThresholdCount
+          in: formData
+          required: false
+          description: 'The number of consecutive health check failures required before considering the target unhealthy. For Network Load Balancers, this value must be the same as the healthy threshold count.'
+          type: integer
+          minimum: 2
+          maximum: 10
+        - name: Matcher.HttpCode
+          in: formData
+          description: |-
+            Information to use when checking for a successful response from a target.
+            <p>The HTTP codes.</p> <p>For Application Load Balancers, you can specify values between 200 and 499, and the default value is 200. You can specify multiple values (for example, "200,202") or a range of values (for example, "200-299").</p> <p>For Network Load Balancers, this is 200–399.</p>
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ModifyTargetGroup
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2015-12-01'
+  '/#Action=ModifyTargetGroupAttributes':
+    get:
+      x-aws-operation-name: ModifyTargetGroupAttributes
+      operationId: GET ModifyTargetGroupAttributes
       description: Modifies the specified attributes of the specified target group.
       responses:
         '200':
@@ -1954,9 +3661,52 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=RegisterTargets':
     post:
-      operationId: RegisterTargets
+      x-aws-operation-name: ModifyTargetGroupAttributes
+      operationId: POST ModifyTargetGroupAttributes
+      description: Modifies the specified attributes of the specified target group.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModifyTargetGroupAttributesOutput'
+        '480':
+          description: TargetGroupNotFoundException
+          schema:
+            $ref: '#/definitions/TargetGroupNotFoundException'
+        '481':
+          description: InvalidConfigurationRequestException
+          schema:
+            $ref: '#/definitions/InvalidConfigurationRequestException'
+      parameters:
+        - name: TargetGroupArn
+          in: formData
+          required: true
+          description: The Amazon Resource Name (ARN) of the target group.
+          type: string
+        - name: Attributes
+          in: formData
+          required: true
+          description: The attributes.
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ModifyTargetGroupAttributes
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2015-12-01'
+  '/#Action=RegisterTargets':
+    get:
+      x-aws-operation-name: RegisterTargets
+      operationId: GET RegisterTargets
       description: '<p>Registers the specified targets with the specified target group.</p> <p>If the target is an EC2 instance, it must be in the <code>running</code> state when you register it.</p> <p>By default, the load balancer routes requests to registered targets using the protocol and port for the target group. Alternatively, you can override the port for a target when you register it. You can register each EC2 instance or IP address with the same target group multiple times using different ports.</p> <p>With a Network Load Balancer, you cannot register instances by instance ID if they have the following instance types: C1, CC1, CC2, CG1, CG2, CR1, CS1, G1, G2, HI1, HS1, M1, M2, M3, and T1. You can register instances of these types by IP address.</p> <p>To remove a target from a target group, use <a>DeregisterTargets</a>.</p>'
       responses:
         '200':
@@ -2012,9 +3762,60 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=RemoveListenerCertificates':
     post:
-      operationId: RemoveListenerCertificates
+      x-aws-operation-name: RegisterTargets
+      operationId: POST RegisterTargets
+      description: '<p>Registers the specified targets with the specified target group.</p> <p>If the target is an EC2 instance, it must be in the <code>running</code> state when you register it.</p> <p>By default, the load balancer routes requests to registered targets using the protocol and port for the target group. Alternatively, you can override the port for a target when you register it. You can register each EC2 instance or IP address with the same target group multiple times using different ports.</p> <p>With a Network Load Balancer, you cannot register instances by instance ID if they have the following instance types: C1, CC1, CC2, CG1, CG2, CR1, CS1, G1, G2, HI1, HS1, M1, M2, M3, and T1. You can register instances of these types by IP address.</p> <p>To remove a target from a target group, use <a>DeregisterTargets</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RegisterTargetsOutput'
+        '480':
+          description: TargetGroupNotFoundException
+          schema:
+            $ref: '#/definitions/TargetGroupNotFoundException'
+        '481':
+          description: TooManyTargetsException
+          schema:
+            $ref: '#/definitions/TooManyTargetsException'
+        '482':
+          description: InvalidTargetException
+          schema:
+            $ref: '#/definitions/InvalidTargetException'
+        '483':
+          description: TooManyRegistrationsForTargetIdException
+          schema:
+            $ref: '#/definitions/TooManyRegistrationsForTargetIdException'
+      parameters:
+        - name: TargetGroupArn
+          in: formData
+          required: true
+          description: The Amazon Resource Name (ARN) of the target group.
+          type: string
+        - name: Targets
+          in: formData
+          required: true
+          description: '<p>The targets.</p> <p>To register a target by instance ID, specify the instance ID. To register a target by IP address, specify the IP address. To register a Lambda function, specify the ARN of the Lambda function.</p>'
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - RegisterTargets
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2015-12-01'
+  '/#Action=RemoveListenerCertificates':
+    get:
+      x-aws-operation-name: RemoveListenerCertificates
+      operationId: GET RemoveListenerCertificates
       description: '<p>Removes the specified certificate from the specified HTTPS listener.</p> <p>You can''t remove the default certificate for a listener. To replace the default certificate, call <a>ModifyListener</a>.</p> <p>To list the certificates for your listener, use <a>DescribeListenerCertificates</a>.</p>'
       responses:
         '200':
@@ -2062,9 +3863,52 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=RemoveTags':
     post:
-      operationId: RemoveTags
+      x-aws-operation-name: RemoveListenerCertificates
+      operationId: POST RemoveListenerCertificates
+      description: '<p>Removes the specified certificate from the specified HTTPS listener.</p> <p>You can''t remove the default certificate for a listener. To replace the default certificate, call <a>ModifyListener</a>.</p> <p>To list the certificates for your listener, use <a>DescribeListenerCertificates</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RemoveListenerCertificatesOutput'
+        '480':
+          description: ListenerNotFoundException
+          schema:
+            $ref: '#/definitions/ListenerNotFoundException'
+        '481':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+      parameters:
+        - name: ListenerArn
+          in: formData
+          required: true
+          description: The Amazon Resource Name (ARN) of the listener.
+          type: string
+        - name: Certificates
+          in: formData
+          required: true
+          description: The certificate to remove. You can specify one certificate per call. Set <code>CertificateArn</code> to the certificate ARN but do not set <code>IsDefault</code>.
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - RemoveListenerCertificates
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2015-12-01'
+  '/#Action=RemoveTags':
+    get:
+      x-aws-operation-name: RemoveTags
+      operationId: GET RemoveTags
       description: '<p>Removes the specified tags from the specified Elastic Load Balancing resource.</p> <p>To list the current tags for your resources, use <a>DescribeTags</a>.</p>'
       responses:
         '200':
@@ -2126,9 +3970,66 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=SetIpAddressType':
     post:
-      operationId: SetIpAddressType
+      x-aws-operation-name: RemoveTags
+      operationId: POST RemoveTags
+      description: '<p>Removes the specified tags from the specified Elastic Load Balancing resource.</p> <p>To list the current tags for your resources, use <a>DescribeTags</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RemoveTagsOutput'
+        '480':
+          description: LoadBalancerNotFoundException
+          schema:
+            $ref: '#/definitions/LoadBalancerNotFoundException'
+        '481':
+          description: TargetGroupNotFoundException
+          schema:
+            $ref: '#/definitions/TargetGroupNotFoundException'
+        '482':
+          description: ListenerNotFoundException
+          schema:
+            $ref: '#/definitions/ListenerNotFoundException'
+        '483':
+          description: RuleNotFoundException
+          schema:
+            $ref: '#/definitions/RuleNotFoundException'
+        '484':
+          description: TooManyTagsException
+          schema:
+            $ref: '#/definitions/TooManyTagsException'
+      parameters:
+        - name: ResourceArns
+          in: formData
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource.
+          type: array
+          items:
+            type: string
+        - name: TagKeys
+          in: formData
+          required: true
+          description: The tag keys for the tags to remove.
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - RemoveTags
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2015-12-01'
+  '/#Action=SetIpAddressType':
+    get:
+      x-aws-operation-name: SetIpAddressType
+      operationId: GET SetIpAddressType
       description: <p>Sets the type of IP addresses used by the subnets of the specified Application Load Balancer or Network Load Balancer.</p> <p>Network Load Balancers must use <code>ipv4</code>.</p>
       responses:
         '200':
@@ -2181,9 +4082,57 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=SetRulePriorities':
     post:
-      operationId: SetRulePriorities
+      x-aws-operation-name: SetIpAddressType
+      operationId: POST SetIpAddressType
+      description: <p>Sets the type of IP addresses used by the subnets of the specified Application Load Balancer or Network Load Balancer.</p> <p>Network Load Balancers must use <code>ipv4</code>.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SetIpAddressTypeOutput'
+        '480':
+          description: LoadBalancerNotFoundException
+          schema:
+            $ref: '#/definitions/LoadBalancerNotFoundException'
+        '481':
+          description: InvalidConfigurationRequestException
+          schema:
+            $ref: '#/definitions/InvalidConfigurationRequestException'
+        '482':
+          description: InvalidSubnetException
+          schema:
+            $ref: '#/definitions/InvalidSubnetException'
+      parameters:
+        - name: LoadBalancerArn
+          in: formData
+          required: true
+          description: The Amazon Resource Name (ARN) of the load balancer.
+          type: string
+        - name: IpAddressType
+          in: formData
+          required: true
+          description: The IP address type. The possible values are <code>ipv4</code> (for IPv4 addresses) and <code>dualstack</code> (for IPv4 and IPv6 addresses). Internal load balancers must use <code>ipv4</code>.
+          type: string
+          enum:
+            - ipv4
+            - dualstack
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - SetIpAddressType
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2015-12-01'
+  '/#Action=SetRulePriorities':
+    get:
+      x-aws-operation-name: SetRulePriorities
+      operationId: GET SetRulePriorities
       description: <p>Sets the priorities of the specified rules.</p> <p>You can reorder the rules as long as there are no priority conflicts in the new order. Any existing rules that you do not specify retain their current priority.</p>
       responses:
         '200':
@@ -2230,9 +4179,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=SetSecurityGroups':
     post:
-      operationId: SetSecurityGroups
+      x-aws-operation-name: SetRulePriorities
+      operationId: POST SetRulePriorities
+      description: <p>Sets the priorities of the specified rules.</p> <p>You can reorder the rules as long as there are no priority conflicts in the new order. Any existing rules that you do not specify retain their current priority.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SetRulePrioritiesOutput'
+        '480':
+          description: RuleNotFoundException
+          schema:
+            $ref: '#/definitions/RuleNotFoundException'
+        '481':
+          description: PriorityInUseException
+          schema:
+            $ref: '#/definitions/PriorityInUseException'
+        '482':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+      parameters:
+        - name: RulePriorities
+          in: formData
+          required: true
+          description: The rule priorities.
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - SetRulePriorities
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2015-12-01'
+  '/#Action=SetSecurityGroups':
+    get:
+      x-aws-operation-name: SetSecurityGroups
+      operationId: GET SetSecurityGroups
       description: <p>Associates the specified security groups with the specified Application Load Balancer. The specified security groups override the previously associated security groups.</p> <p>You can't specify a security group for a Network Load Balancer.</p>
       responses:
         '200':
@@ -2284,9 +4275,56 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#Action=SetSubnets':
     post:
-      operationId: SetSubnets
+      x-aws-operation-name: SetSecurityGroups
+      operationId: POST SetSecurityGroups
+      description: <p>Associates the specified security groups with the specified Application Load Balancer. The specified security groups override the previously associated security groups.</p> <p>You can't specify a security group for a Network Load Balancer.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SetSecurityGroupsOutput'
+        '480':
+          description: LoadBalancerNotFoundException
+          schema:
+            $ref: '#/definitions/LoadBalancerNotFoundException'
+        '481':
+          description: InvalidConfigurationRequestException
+          schema:
+            $ref: '#/definitions/InvalidConfigurationRequestException'
+        '482':
+          description: InvalidSecurityGroupException
+          schema:
+            $ref: '#/definitions/InvalidSecurityGroupException'
+      parameters:
+        - name: LoadBalancerArn
+          in: formData
+          required: true
+          description: The Amazon Resource Name (ARN) of the load balancer.
+          type: string
+        - name: SecurityGroups
+          in: formData
+          required: true
+          description: The IDs of the security groups.
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - SetSecurityGroups
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2015-12-01'
+  '/#Action=SetSubnets':
+    get:
+      x-aws-operation-name: SetSubnets
+      operationId: GET SetSubnets
       description: <p>Enables the Availability Zone for the specified public subnets for the specified Application Load Balancer. The specified subnets replace the previously enabled subnets.</p> <p>You can't change the subnets for a Network Load Balancer.</p>
       responses:
         '200':
@@ -2357,6 +4395,71 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: SetSubnets
+      operationId: POST SetSubnets
+      description: <p>Enables the Availability Zone for the specified public subnets for the specified Application Load Balancer. The specified subnets replace the previously enabled subnets.</p> <p>You can't change the subnets for a Network Load Balancer.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SetSubnetsOutput'
+        '480':
+          description: LoadBalancerNotFoundException
+          schema:
+            $ref: '#/definitions/LoadBalancerNotFoundException'
+        '481':
+          description: InvalidConfigurationRequestException
+          schema:
+            $ref: '#/definitions/InvalidConfigurationRequestException'
+        '482':
+          description: SubnetNotFoundException
+          schema:
+            $ref: '#/definitions/SubnetNotFoundException'
+        '483':
+          description: InvalidSubnetException
+          schema:
+            $ref: '#/definitions/InvalidSubnetException'
+        '484':
+          description: AllocationIdNotFoundException
+          schema:
+            $ref: '#/definitions/AllocationIdNotFoundException'
+        '485':
+          description: AvailabilityZoneNotSupportedException
+          schema:
+            $ref: '#/definitions/AvailabilityZoneNotSupportedException'
+      parameters:
+        - name: LoadBalancerArn
+          in: formData
+          required: true
+          description: The Amazon Resource Name (ARN) of the load balancer.
+          type: string
+        - name: Subnets
+          in: formData
+          required: false
+          description: The IDs of the public subnets. You must specify subnets from at least two Availability Zones. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings.
+          type: array
+          items:
+            type: string
+        - name: SubnetMappings
+          in: formData
+          required: false
+          description: <p>The IDs of the public subnets. You must specify subnets from at least two Availability Zones. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings.</p> <p>You cannot specify Elastic IP addresses for your subnets.</p>
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - SetSubnets
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2015-12-01'
 definitions:
   AddListenerCertificatesOutput:
     type: object

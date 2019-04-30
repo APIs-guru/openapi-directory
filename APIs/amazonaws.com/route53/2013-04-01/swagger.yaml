@@ -38,6 +38,26 @@ basePath: /
 schemes:
   - https
   - http
+x-servers:
+  - url: 'https://route53.amazonaws.com'
+    variables: {}
+    description: The general Route 53 multi-region endpoint
+  - url: 'http://route53.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+    description: The Route 53 endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://route53.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+    description: The Route 53 endpoint for China (Beijing) and China (Ningxia)
 consumes:
   - text/xml
 produces:

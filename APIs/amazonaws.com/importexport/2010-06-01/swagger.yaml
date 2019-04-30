@@ -35,10 +35,33 @@ externalDocs:
   url: 'https://docs.aws.amazon.com/importexport/'
 host: importexport.amazonaws.com
 basePath: /
-x-hasEquivalentPaths: true
 schemes:
   - https
   - http
+x-servers:
+  - url: 'http://importexport.amazonaws.com'
+    variables: {}
+    description: The general AWS Import/Export multi-region endpoint
+  - url: 'https://importexport.amazonaws.com'
+    variables: {}
+    description: The general AWS Import/Export multi-region endpoint
+  - url: 'http://importexport.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+    description: The AWS Import/Export endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://importexport.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+    description: The AWS Import/Export endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 consumes:
   - text/xml
 produces:
@@ -90,8 +113,9 @@ security:
   - hmac: []
 paths:
   '/#Operation=CancelJob&Action=CancelJob':
-    post:
-      operationId: CancelJob
+    get:
+      x-aws-operation-name: CancelJob
+      operationId: GET CancelJob
       description: This operation cancels a specified job. Only the job owner can cancel it. The operation fails if the job has already started or is complete.
       responses:
         '200':
@@ -165,9 +189,78 @@ paths:
       - $ref: '#/parameters/Timestamp'
       - $ref: '#/parameters/Version'
       - $ref: '#/parameters/Signature'
-  '/#Operation=CreateJob&Action=CreateJob':
     post:
-      operationId: CreateJob
+      x-aws-operation-name: CancelJob
+      operationId: POST CancelJob
+      description: This operation cancels a specified job. Only the job owner can cancel it. The operation fails if the job has already started or is complete.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CancelJobOutput'
+        '480':
+          description: InvalidJobIdException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidJobIdException'
+        '481':
+          description: ExpiredJobIdException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ExpiredJobIdException'
+        '482':
+          description: CanceledJobIdException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/CanceledJobIdException'
+        '483':
+          description: UnableToCancelJobIdException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/UnableToCancelJobIdException'
+        '484':
+          description: InvalidAccessKeyIdException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidAccessKeyIdException'
+        '485':
+          description: InvalidVersionException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidVersionException'
+      parameters:
+        - name: JobId
+          in: formData
+          required: true
+          description: A unique identifier which refers to a particular job.
+          type: string
+        - name: APIVersion
+          in: formData
+          required: false
+          description: Specifies the version of the client tool.
+          type: string
+        - name: Operation
+          in: query
+          required: true
+          type: string
+          enum:
+            - CancelJob
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - CancelJob
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-06-01'
+  '/#Operation=CreateJob&Action=CreateJob':
+    get:
+      x-aws-operation-name: CreateJob
+      operationId: GET CreateJob
       description: 'This operation initiates the process of scheduling an upload or download of your data. You include in the request a manifest that describes the data transfer specifics. The response to the request includes a job ID, which you can use in other operations, a signature that you use to identify your storage device, and the address where you should ship your storage device.'
       responses:
         '200':
@@ -309,9 +402,146 @@ paths:
       - $ref: '#/parameters/Timestamp'
       - $ref: '#/parameters/Version'
       - $ref: '#/parameters/Signature'
-  '/#Operation=GetShippingLabel&Action=GetShippingLabel':
     post:
-      operationId: GetShippingLabel
+      x-aws-operation-name: CreateJob
+      operationId: POST CreateJob
+      description: 'This operation initiates the process of scheduling an upload or download of your data. You include in the request a manifest that describes the data transfer specifics. The response to the request includes a job ID, which you can use in other operations, a signature that you use to identify your storage device, and the address where you should ship your storage device.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateJobOutput'
+        '480':
+          description: MissingParameterException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/MissingParameterException'
+        '481':
+          description: InvalidParameterException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: InvalidAccessKeyIdException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidAccessKeyIdException'
+        '483':
+          description: InvalidAddressException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidAddressException'
+        '484':
+          description: InvalidManifestFieldException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidManifestFieldException'
+        '485':
+          description: MissingManifestFieldException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/MissingManifestFieldException'
+        '486':
+          description: NoSuchBucketException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/NoSuchBucketException'
+        '487':
+          description: MissingCustomsException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/MissingCustomsException'
+        '488':
+          description: InvalidCustomsException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidCustomsException'
+        '489':
+          description: InvalidFileSystemException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidFileSystemException'
+        '490':
+          description: MultipleRegionsException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/MultipleRegionsException'
+        '491':
+          description: BucketPermissionException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/BucketPermissionException'
+        '492':
+          description: MalformedManifestException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/MalformedManifestException'
+        '493':
+          description: CreateJobQuotaExceededException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/CreateJobQuotaExceededException'
+        '494':
+          description: InvalidJobIdException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidJobIdException'
+        '495':
+          description: InvalidVersionException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidVersionException'
+      parameters:
+        - name: JobType
+          in: formData
+          required: true
+          description: Specifies whether the job to initiate is an import or export job.
+          type: string
+          enum:
+            - Import
+            - Export
+        - name: Manifest
+          in: formData
+          required: true
+          description: The UTF-8 encoded text of the manifest file.
+          type: string
+        - name: ManifestAddendum
+          in: formData
+          required: false
+          description: For internal use only.
+          type: string
+        - name: ValidateOnly
+          in: formData
+          required: true
+          description: Validate the manifest and parameter values in the request but do not actually create a job.
+          type: boolean
+        - name: APIVersion
+          in: formData
+          required: false
+          description: Specifies the version of the client tool.
+          type: string
+        - name: Operation
+          in: query
+          required: true
+          type: string
+          enum:
+            - CreateJob
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - CreateJob
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-06-01'
+  '/#Operation=GetShippingLabel&Action=GetShippingLabel':
+    get:
+      x-aws-operation-name: GetShippingLabel
+      operationId: GET GetShippingLabel
       description: This operation generates a pre-paid UPS shipping label that you will use to ship your device to AWS for processing.
       responses:
         '200':
@@ -442,9 +672,135 @@ paths:
       - $ref: '#/parameters/Timestamp'
       - $ref: '#/parameters/Version'
       - $ref: '#/parameters/Signature'
-  '/#Operation=GetStatus&Action=GetStatus':
     post:
-      operationId: GetStatus
+      x-aws-operation-name: GetShippingLabel
+      operationId: POST GetShippingLabel
+      description: This operation generates a pre-paid UPS shipping label that you will use to ship your device to AWS for processing.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetShippingLabelOutput'
+        '480':
+          description: InvalidJobIdException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidJobIdException'
+        '481':
+          description: ExpiredJobIdException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ExpiredJobIdException'
+        '482':
+          description: CanceledJobIdException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/CanceledJobIdException'
+        '483':
+          description: InvalidAccessKeyIdException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidAccessKeyIdException'
+        '484':
+          description: InvalidAddressException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidAddressException'
+        '485':
+          description: InvalidVersionException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidVersionException'
+        '486':
+          description: InvalidParameterException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+      parameters:
+        - name: jobIds
+          in: formData
+          required: true
+          description: ''
+          type: array
+          items:
+            type: string
+        - name: name
+          in: formData
+          required: false
+          description: Specifies the name of the person responsible for shipping this package.
+          type: string
+        - name: company
+          in: formData
+          required: false
+          description: Specifies the name of the company that will ship this package.
+          type: string
+        - name: phoneNumber
+          in: formData
+          required: false
+          description: Specifies the phone number of the person responsible for shipping this package.
+          type: string
+        - name: country
+          in: formData
+          required: false
+          description: Specifies the name of your country for the return address.
+          type: string
+        - name: stateOrProvince
+          in: formData
+          required: false
+          description: Specifies the name of your state or your province for the return address.
+          type: string
+        - name: city
+          in: formData
+          required: false
+          description: Specifies the name of your city for the return address.
+          type: string
+        - name: postalCode
+          in: formData
+          required: false
+          description: Specifies the postal code for the return address.
+          type: string
+        - name: street1
+          in: formData
+          required: false
+          description: 'Specifies the first part of the street address for the return address, for example 1234 Main Street.'
+          type: string
+        - name: street2
+          in: formData
+          required: false
+          description: 'Specifies the optional second part of the street address for the return address, for example Suite 100.'
+          type: string
+        - name: street3
+          in: formData
+          required: false
+          description: 'Specifies the optional third part of the street address for the return address, for example c/o Jane Doe.'
+          type: string
+        - name: APIVersion
+          in: formData
+          required: false
+          description: Specifies the version of the client tool.
+          type: string
+        - name: Operation
+          in: query
+          required: true
+          type: string
+          enum:
+            - GetShippingLabel
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - GetShippingLabel
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-06-01'
+  '/#Operation=GetStatus&Action=GetStatus':
+    get:
+      x-aws-operation-name: GetStatus
+      operationId: GET GetStatus
       description: 'This operation returns information about a job, including where the job is in the processing pipeline, the status of the results, and the signature value associated with the job. You can only return information about jobs you own.'
       responses:
         '200':
@@ -513,9 +869,73 @@ paths:
       - $ref: '#/parameters/Timestamp'
       - $ref: '#/parameters/Version'
       - $ref: '#/parameters/Signature'
-  '/#Operation=ListJobs&Action=ListJobs':
     post:
-      operationId: ListJobs
+      x-aws-operation-name: GetStatus
+      operationId: POST GetStatus
+      description: 'This operation returns information about a job, including where the job is in the processing pipeline, the status of the results, and the signature value associated with the job. You can only return information about jobs you own.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetStatusOutput'
+        '480':
+          description: InvalidJobIdException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidJobIdException'
+        '481':
+          description: ExpiredJobIdException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ExpiredJobIdException'
+        '482':
+          description: CanceledJobIdException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/CanceledJobIdException'
+        '483':
+          description: InvalidAccessKeyIdException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidAccessKeyIdException'
+        '484':
+          description: InvalidVersionException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidVersionException'
+      parameters:
+        - name: JobId
+          in: formData
+          required: true
+          description: A unique identifier which refers to a particular job.
+          type: string
+        - name: APIVersion
+          in: formData
+          required: false
+          description: Specifies the version of the client tool.
+          type: string
+        - name: Operation
+          in: query
+          required: true
+          type: string
+          enum:
+            - GetStatus
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - GetStatus
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-06-01'
+  '/#Operation=ListJobs&Action=ListJobs':
+    get:
+      x-aws-operation-name: ListJobs
+      operationId: GET ListJobs
       description: 'This operation returns the jobs associated with the requester. AWS Import/Export lists the jobs in reverse chronological order based on the date of creation. For example if Job Test1 was created 2009Dec30 and Test2 was created 2010Feb05, the ListJobs operation would return Test2 followed by Test1.'
       responses:
         '200':
@@ -579,9 +999,68 @@ paths:
       - $ref: '#/parameters/Timestamp'
       - $ref: '#/parameters/Version'
       - $ref: '#/parameters/Signature'
-  '/#Operation=UpdateJob&Action=UpdateJob':
     post:
-      operationId: UpdateJob
+      x-aws-operation-name: ListJobs
+      operationId: POST ListJobs
+      description: 'This operation returns the jobs associated with the requester. AWS Import/Export lists the jobs in reverse chronological order based on the date of creation. For example if Job Test1 was created 2009Dec30 and Test2 was created 2010Feb05, the ListJobs operation would return Test2 followed by Test1.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListJobsOutput'
+        '480':
+          description: InvalidParameterException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: InvalidAccessKeyIdException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidAccessKeyIdException'
+        '482':
+          description: InvalidVersionException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidVersionException'
+      parameters:
+        - name: MaxJobs
+          in: formData
+          required: false
+          description: 'Sets the maximum number of jobs returned in the response. If there are additional jobs that were not returned because MaxJobs was exceeded, the response contains &lt;IsTruncated&gt;true&lt;/IsTruncated&gt;. To return the additional jobs, see Marker.'
+          type: integer
+        - name: Marker
+          in: formData
+          required: false
+          description: Specifies the JOBID to start after when listing the jobs created with your account. AWS Import/Export lists your jobs in reverse chronological order. See MaxJobs.
+          type: string
+        - name: APIVersion
+          in: formData
+          required: false
+          description: Specifies the version of the client tool.
+          type: string
+        - name: Operation
+          in: query
+          required: true
+          type: string
+          enum:
+            - ListJobs
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ListJobs
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-06-01'
+  '/#Operation=UpdateJob&Action=UpdateJob':
+    get:
+      x-aws-operation-name: UpdateJob
+      operationId: GET UpdateJob
       description: You use this operation to change the parameters specified in the original manifest file by supplying a new manifest file. The manifest file attached to this request replaces the original manifest file. You can only use the operation after a CreateJob request but before the data transfer starts and you can only use it on jobs you own.
       responses:
         '200':
@@ -733,6 +1212,152 @@ paths:
       - $ref: '#/parameters/Timestamp'
       - $ref: '#/parameters/Version'
       - $ref: '#/parameters/Signature'
+    post:
+      x-aws-operation-name: UpdateJob
+      operationId: POST UpdateJob
+      description: You use this operation to change the parameters specified in the original manifest file by supplying a new manifest file. The manifest file attached to this request replaces the original manifest file. You can only use the operation after a CreateJob request but before the data transfer starts and you can only use it on jobs you own.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateJobOutput'
+        '480':
+          description: MissingParameterException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/MissingParameterException'
+        '481':
+          description: InvalidParameterException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: InvalidAccessKeyIdException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidAccessKeyIdException'
+        '483':
+          description: InvalidAddressException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidAddressException'
+        '484':
+          description: InvalidManifestFieldException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidManifestFieldException'
+        '485':
+          description: InvalidJobIdException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidJobIdException'
+        '486':
+          description: MissingManifestFieldException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/MissingManifestFieldException'
+        '487':
+          description: NoSuchBucketException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/NoSuchBucketException'
+        '488':
+          description: ExpiredJobIdException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ExpiredJobIdException'
+        '489':
+          description: CanceledJobIdException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/CanceledJobIdException'
+        '490':
+          description: MissingCustomsException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/MissingCustomsException'
+        '491':
+          description: InvalidCustomsException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidCustomsException'
+        '492':
+          description: InvalidFileSystemException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidFileSystemException'
+        '493':
+          description: MultipleRegionsException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/MultipleRegionsException'
+        '494':
+          description: BucketPermissionException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/BucketPermissionException'
+        '495':
+          description: MalformedManifestException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/MalformedManifestException'
+        '496':
+          description: UnableToUpdateJobIdException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/UnableToUpdateJobIdException'
+        '497':
+          description: InvalidVersionException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidVersionException'
+      parameters:
+        - name: JobId
+          in: formData
+          required: true
+          description: A unique identifier which refers to a particular job.
+          type: string
+        - name: Manifest
+          in: formData
+          required: true
+          description: The UTF-8 encoded text of the manifest file.
+          type: string
+        - name: JobType
+          in: formData
+          required: true
+          description: Specifies whether the job to initiate is an import or export job.
+          type: string
+          enum:
+            - Import
+            - Export
+        - name: ValidateOnly
+          in: formData
+          required: true
+          description: Validate the manifest and parameter values in the request but do not actually create a job.
+          type: boolean
+        - name: APIVersion
+          in: formData
+          required: false
+          description: Specifies the version of the client tool.
+          type: string
+        - name: Operation
+          in: query
+          required: true
+          type: string
+          enum:
+            - UpdateJob
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - UpdateJob
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-06-01'
 definitions:
   CancelJobOutput:
     type: object
