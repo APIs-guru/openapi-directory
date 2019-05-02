@@ -236,8 +236,6 @@ paths:
               FilterExpression:
                 description: The filter expression defining criteria by which to group traces.
                 type: string
-                minLength: 1
-                maxLength: 2000
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -504,6 +502,11 @@ paths:
                 type: string
                 minLength: 1
                 maxLength: 100
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -539,6 +542,11 @@ paths:
               NextToken:
                 description: Pagination token. Not used.
                 type: string
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -574,6 +582,11 @@ paths:
               NextToken:
                 description: Pagination token. Not used.
                 type: string
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -683,6 +696,75 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /TimeSeriesServiceStatistics:
+    post:
+      operationId: GetTimeSeriesServiceStatistics
+      description: Get an aggregation of service statistics defined by a specific time range.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetTimeSeriesServiceStatisticsResult'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottledException
+          schema:
+            $ref: '#/definitions/ThrottledException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - StartTime
+              - EndTime
+            properties:
+              StartTime:
+                description: The start of the time frame for which to aggregate statistics.
+                type: string
+                format: date-time
+              EndTime:
+                description: The end of the time frame for which to aggregate statistics.
+                type: string
+                format: date-time
+              GroupName:
+                description: The case-sensitive name of the group for which to pull statistics from.
+                type: string
+                minLength: 1
+                maxLength: 32
+              GroupARN:
+                description: The ARN of the group for which to pull statistics from.
+                type: string
+                minLength: 1
+                maxLength: 400
+              EntitySelectorExpression:
+                description: 'A filter expression defining entities that will be aggregated for statistics. Supports ID, service, and edge functions. If no selector expression is specified, edge statistics are returned. '
+                type: string
+                minLength: 1
+                maxLength: 500
+              Period:
+                description: Aggregation period in seconds.
+                type: integer
+              NextToken:
+                description: Pagination token. Not used.
+                type: string
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /TraceGraph:
     post:
       operationId: GetTraceGraph
@@ -733,7 +815,7 @@ paths:
   /TraceSummaries:
     post:
       operationId: GetTraceSummaries
-      description: '<p>Retrieves IDs and metadata for traces available for a specified time frame using an optional filter. To get the full traces, pass the trace IDs to <code>BatchGetTraces</code>.</p> <p>A filter expression can target traced requests that hit specific service nodes or edges, have errors, or come from a known user. For example, the following filter expression targets traces that pass through <code>api.example.com</code>:</p> <p> <code>service("api.example.com")</code> </p> <p>This filter expression finds traces that have an annotation named <code>account</code> with the value <code>12345</code>:</p> <p> <code>annotation.account = "12345"</code> </p> <p>For a full list of indexed fields and keywords that you can use in filter expressions, see <a href="http://docs.aws.amazon.com/xray/latest/devguide/xray-console-filters.html">Using Filter Expressions</a> in the <i>AWS X-Ray Developer Guide</i>.</p>'
+      description: '<p>Retrieves IDs and metadata for traces available for a specified time frame using an optional filter. To get the full traces, pass the trace IDs to <code>BatchGetTraces</code>.</p> <p>A filter expression can target traced requests that hit specific service nodes or edges, have errors, or come from a known user. For example, the following filter expression targets traces that pass through <code>api.example.com</code>:</p> <p> <code>service("api.example.com")</code> </p> <p>This filter expression finds traces that have an annotation named <code>account</code> with the value <code>12345</code>:</p> <p> <code>annotation.account = "12345"</code> </p> <p>For a full list of indexed fields and keywords that you can use in filter expressions, see <a href="https://docs.aws.amazon.com/xray/latest/devguide/xray-console-filters.html">Using Filter Expressions</a> in the <i>AWS X-Ray Developer Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -765,14 +847,28 @@ paths:
                 description: The end of the time frame for which to retrieve traces.
                 type: string
                 format: date-time
+              TimeRangeType:
+                description: A parameter to indicate whether to query trace summaries by TraceId or Event time.
+                type: string
+                enum:
+                  - TraceId
+                  - Event
               Sampling:
                 description: Set to <code>true</code> to get summaries for only a subset of available traces.
                 type: boolean
+              SamplingStrategy:
+                description: The name and value of a sampling rule to apply to a trace summary.
+                type: object
+                properties:
+                  Name:
+                    $ref: '#/definitions/SamplingStrategyName'
+                    description: The name of a sampling rule.
+                  Value:
+                    $ref: '#/definitions/NullableDouble'
+                    description: The value of a sampling rule.
               FilterExpression:
                 description: Specify a filter expression to retrieve trace summaries for services or requests that meet certain requirements.
                 type: string
-                minLength: 1
-                maxLength: 2000
               NextToken:
                 description: Specify the pagination token returned by a previous request to retrieve the next page of results.
                 type: string
@@ -961,8 +1057,6 @@ paths:
               FilterExpression:
                 description: The updated filter expression defining criteria by which to group traces.
                 type: string
-                minLength: 1
-                maxLength: 2000
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1227,6 +1321,18 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: Pagination token. Not used.
+  GetTimeSeriesServiceStatisticsResult:
+    type: object
+    properties:
+      TimeSeriesServiceStatistics:
+        $ref: '#/definitions/TimeSeriesServiceStatisticsList'
+        description: The collection of statistics.
+      ContainsOldGroupVersions:
+        $ref: '#/definitions/Boolean'
+        description: 'A flag indicating whether or not a group''s filter expression has been consistent, or if a returned aggregation may show statistics from an older version of the group''s filter expression.'
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Pagination token. Not used.
   GetTraceGraphResult:
     type: object
     properties:
@@ -1251,6 +1357,14 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: 'If the requested time frame contained more than one page of results, you can use this token to retrieve the next page. The first page contains the most most recent results, closest to the end of the time frame.'
+  SamplingStrategyName:
+    type: string
+    enum:
+      - PartialScan
+      - FixedRate
+  NullableDouble:
+    type: number
+    format: double
   PutEncryptionConfigResult:
     type: object
     properties:
@@ -1306,9 +1420,6 @@ definitions:
         description: The updated rule definition and metadata.
   NullableInteger:
     type: integer
-  NullableDouble:
-    type: number
-    format: double
   AliasNames:
     type: array
     items:
@@ -1430,8 +1541,6 @@ definitions:
     maxLength: 32
   FilterExpression:
     type: string
-    minLength: 1
-    maxLength: 2000
   CreateGroupRequest:
     type: object
     required:
@@ -1663,6 +1772,10 @@ definitions:
     type: string
     minLength: 1
     maxLength: 3000
+  EntitySelectorExpression:
+    type: string
+    minLength: 1
+    maxLength: 500
   ErrorRootCauseServices:
     type: array
     items:
@@ -1871,6 +1984,37 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Service'
+  GetTimeSeriesServiceStatisticsRequest:
+    type: object
+    required:
+      - StartTime
+      - EndTime
+    properties:
+      StartTime:
+        $ref: '#/definitions/Timestamp'
+        description: The start of the time frame for which to aggregate statistics.
+      EndTime:
+        $ref: '#/definitions/Timestamp'
+        description: The end of the time frame for which to aggregate statistics.
+      GroupName:
+        $ref: '#/definitions/GroupName'
+        description: The case-sensitive name of the group for which to pull statistics from.
+      GroupARN:
+        $ref: '#/definitions/GroupARN'
+        description: The ARN of the group for which to pull statistics from.
+      EntitySelectorExpression:
+        $ref: '#/definitions/EntitySelectorExpression'
+        description: 'A filter expression defining entities that will be aggregated for statistics. Supports ID, service, and edge functions. If no selector expression is specified, edge statistics are returned. '
+      Period:
+        $ref: '#/definitions/NullableInteger'
+        description: Aggregation period in seconds.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Pagination token. Not used.
+  TimeSeriesServiceStatisticsList:
+    type: array
+    items:
+      $ref: '#/definitions/TimeSeriesServiceStatistics'
   GetTraceGraphRequest:
     type: object
     required:
@@ -1882,6 +2026,21 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: Pagination token. Not used.
+  TimeRangeType:
+    type: string
+    enum:
+      - TraceId
+      - Event
+  SamplingStrategy:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/SamplingStrategyName'
+        description: The name of a sampling rule.
+      Value:
+        $ref: '#/definitions/NullableDouble'
+        description: The value of a sampling rule.
+    description: The name and value of a sampling rule to apply to a trace summary.
   GetTraceSummariesRequest:
     type: object
     required:
@@ -1894,9 +2053,15 @@ definitions:
       EndTime:
         $ref: '#/definitions/Timestamp'
         description: The end of the time frame for which to retrieve traces.
+      TimeRangeType:
+        $ref: '#/definitions/TimeRangeType'
+        description: A parameter to indicate whether to query trace summaries by TraceId or Event time.
       Sampling:
         $ref: '#/definitions/NullableBoolean'
         description: Set to <code>true</code> to get summaries for only a subset of available traces.
+      SamplingStrategy:
+        $ref: '#/definitions/SamplingStrategy'
+        description: A paramater to indicate whether to enable sampling on trace summaries. Input parameters are Name and Value.
       FilterExpression:
         $ref: '#/definitions/FilterExpression'
         description: Specify a filter expression to retrieve trace summaries for services or requests that meet certain requirements.
@@ -2265,6 +2430,20 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ServiceId'
+  TimeSeriesServiceStatistics:
+    type: object
+    properties:
+      Timestamp:
+        $ref: '#/definitions/Timestamp'
+        description: Timestamp of the window for which statistics are aggregated.
+      EdgeSummaryStatistics:
+        $ref: '#/definitions/EdgeStatistics'
+      ServiceSummaryStatistics:
+        $ref: '#/definitions/ServiceStatistics'
+      ResponseTimeHistogram:
+        $ref: '#/definitions/Histogram'
+        description: The response time histogram for the selected entities.
+    description: A list of TimeSeriesStatistic structures.
   Trace:
     type: object
     properties:
@@ -2354,6 +2533,9 @@ definitions:
       Revision:
         $ref: '#/definitions/Integer'
         description: The revision number of a trace.
+      MatchedEventTime:
+        $ref: '#/definitions/Timestamp'
+        description: The matched time stamp of a defined event.
     description: Metadata generated from the segment documents in a trace.
   TraceUser:
     type: object

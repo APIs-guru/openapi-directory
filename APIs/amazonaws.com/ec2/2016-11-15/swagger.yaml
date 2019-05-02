@@ -30358,6 +30358,99 @@ paths:
           type: string
           enum:
             - '2016-11-15'
+  '/#Action=ModifyVpnConnection':
+    get:
+      x-aws-operation-name: ModifyVpnConnection
+      operationId: GET ModifyVpnConnection
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModifyVpnConnectionResult'
+      parameters:
+        - name: VpnConnectionId
+          in: query
+          required: true
+          description: ''
+          type: string
+        - name: TransitGatewayId
+          in: query
+          required: false
+          description: ''
+          type: string
+        - name: VpnGatewayId
+          in: query
+          required: false
+          description: ''
+          type: string
+        - name: DryRun
+          in: query
+          required: false
+          description: ''
+          type: boolean
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ModifyVpnConnection
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2016-11-15'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: ModifyVpnConnection
+      operationId: POST ModifyVpnConnection
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModifyVpnConnectionResult'
+      parameters:
+        - name: VpnConnectionId
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: TransitGatewayId
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: VpnGatewayId
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: DryRun
+          in: formData
+          required: false
+          description: ''
+          type: boolean
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ModifyVpnConnection
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2016-11-15'
   '/#Action=MonitorInstances':
     get:
       x-aws-operation-name: MonitorInstances
@@ -40035,6 +40128,11 @@ definitions:
       ReturnValue:
         $ref: '#/definitions/Boolean'
         description: 'Returns <code>true</code> if the request succeeds; otherwise, returns an error.'
+  ModifyVpnConnectionResult:
+    type: object
+    properties:
+      VpnConnection:
+        $ref: '#/definitions/VpnConnection'
   MonitorInstancesResult:
     type: object
     properties:
@@ -51296,6 +51394,19 @@ definitions:
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+  ModifyVpnConnectionRequest:
+    type: object
+    required:
+      - VpnConnectionId
+    properties:
+      VpnConnectionId:
+        $ref: '#/definitions/String'
+      TransitGatewayId:
+        $ref: '#/definitions/String'
+      VpnGatewayId:
+        $ref: '#/definitions/String'
+      DryRun:
+        $ref: '#/definitions/Boolean'
   MonitorInstancesRequest:
     type: object
     required:
