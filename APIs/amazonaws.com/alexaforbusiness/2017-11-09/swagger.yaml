@@ -2720,6 +2720,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AlexaForBusiness.SendAnnouncement':
+    post:
+      operationId: SendAnnouncement
+      description: 'Triggers an asynchronous flow to send text, SSML, or audio announcements to multiple rooms, identified by a search, such as filter. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SendAnnouncementResponse'
+        '480':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '481':
+          description: AlreadyExistsException
+          schema:
+            $ref: '#/definitions/AlreadyExistsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/SendAnnouncementRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.SendAnnouncement
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AlexaForBusiness.SendInvitation':
     post:
       operationId: SendInvitation
@@ -4535,6 +4572,31 @@ definitions:
       SortCriteria:
         $ref: '#/definitions/SortList'
         description: 'The sort order to use in listing the filtered set of users. Required. Supported sort keys are UserId, FirstName, LastName, Email, and EnrollmentStatus.'
+  SendAnnouncementResponse:
+    type: object
+    properties:
+      AnnouncementArn:
+        $ref: '#/definitions/Arn'
+        description: The identifier of the announcement.
+  SendAnnouncementRequest:
+    type: object
+    required:
+      - RoomFilters
+      - Content
+      - ClientRequestToken
+    properties:
+      RoomFilters:
+        $ref: '#/definitions/FilterList'
+        description: 'The filters to use to send an announcement to a specified list of rooms. The supported filter keys are RoomName, ProfileName, RoomArn, and ProfileArn. To send to all rooms, specify an empty RoomFilters list.'
+      Content:
+        $ref: '#/definitions/Content'
+        description: 'The announcement content. This can contain only one of the three possible announcement types (text, SSML or audio).'
+      TimeToLiveInSeconds:
+        $ref: '#/definitions/TimeToLiveInSeconds'
+        description: 'The time to live for an announcement. If delivery doesn''t occur within this time, the announcement will not be delivered.'
+      ClientRequestToken:
+        $ref: '#/definitions/ClientRequestToken'
+        description: 'The unique, user-specified identifier for the request that ensures idempotency.'
   SendInvitationResponse:
     type: object
     properties: {}
@@ -4878,6 +4940,33 @@ definitions:
   SkillId:
     type: string
     pattern: '(^amzn1\.ask\.skill\.[0-9a-f\-]{1,200})|(^amzn1\.echo-sdk-ams\.app\.[0-9a-f\-]{1,200})'
+  Locale:
+    type: string
+    enum:
+      - en-US
+  AudioLocation:
+    type: string
+    pattern: 'https://([A-Za-z0-9_.-]+)?(s3-[A-Za-z0-9-]+|s3\.([A-Za-z0-9-])+|s3|s3.dualstack\.([A-Za-z0-9-])+)+.amazonaws.com/.*'
+    minLength: 0
+    maxLength: 1200
+  Audio:
+    type: object
+    required:
+      - Locale
+      - Location
+    properties:
+      Locale:
+        $ref: '#/definitions/Locale'
+        description: 'The locale of the audio message. Currently, en-US is supported.'
+      Location:
+        $ref: '#/definitions/AudioLocation'
+        description: 'The location of the audio file. Currently, S3 URLs are supported. Only S3 locations comprised of safe character are valid. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#Safe%20Characters">Safe Characters</a>.'
+    description: '<p>The audio message. There is a 1 MB limit on the audio file input, and the only supported format is MP3. You must convert audio files to an Alexa-friendly format. </p> <p>You might need to use converter software to convert your MP3 files to the required codec version (MPEG version 2) and bit rate (48 kbps). One option for this is a command-line tool, FFmpeg. For more information, see <a href="https://www.ffmpeg.org/">FFmpeg</a>. The following command converts the provided &lt;input-file&gt; to an MP3 file that will be played in the announcement:</p> <p> <code>ffmpeg -i &lt;input-file&gt; -ac 2 -codec:a libmp3lame -b:a 48k -ar 16000 &lt;output-file.mp3&gt;</code> </p>'
+  AudioList:
+    type: array
+    items:
+      $ref: '#/definitions/Audio'
+    maxItems: 1
   Value:
     type: string
     minLength: 1
@@ -4915,7 +5004,7 @@ definitions:
         $ref: '#/definitions/CustomerS3BucketName'
         description: The S3 bucket name of the output reports.
     description: The S3 location of the output reports.
-  Timestamp:
+  BusinessReportDeliveryTime:
     type: string
     format: date-time
   BusinessReportDownloadUrl:
@@ -4933,7 +5022,7 @@ definitions:
         $ref: '#/definitions/BusinessReportS3Location'
         description: The S3 location of the output reports.
       DeliveryTime:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/BusinessReportDeliveryTime'
         description: The time of report delivery.
       DownloadUrl:
         $ref: '#/definitions/BusinessReportDownloadUrl'
@@ -5197,6 +5286,29 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ContactData'
+  TextList:
+    type: array
+    items:
+      $ref: '#/definitions/Text'
+    maxItems: 1
+  SsmlList:
+    type: array
+    items:
+      $ref: '#/definitions/Ssml'
+    maxItems: 1
+  Content:
+    type: object
+    properties:
+      TextList:
+        $ref: '#/definitions/TextList'
+        description: The list of text messages.
+      SsmlList:
+        $ref: '#/definitions/SsmlList'
+        description: The list of SSML messages.
+      AudioList:
+        $ref: '#/definitions/AudioList'
+        description: The list of audio messages.
+    description: 'The content definition. It can contain only one text, SSML, or audio list object.'
   CountryCode:
     type: string
     pattern: '\d{1,3}'
@@ -5423,6 +5535,9 @@ definitions:
       - DEVICE_STATUS
   DeviceEventValue:
     type: string
+  DeviceEventTime:
+    type: string
+    format: date-time
   DeviceEvent:
     type: object
     properties:
@@ -5433,7 +5548,7 @@ definitions:
         $ref: '#/definitions/DeviceEventValue'
         description: The value of the event.
       Timestamp:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/DeviceEventTime'
         description: 'The time (in epoch) when the event occurred. '
     description: The list of device events.
   DeviceEventList:
@@ -5882,6 +5997,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/UserData'
+  TimeToLiveInSeconds:
+    type: integer
+    minimum: 1
+    maximum: 3600
   ShortDescription:
     type: string
   SkillTypes:
@@ -6031,6 +6150,24 @@ definitions:
         $ref: '#/definitions/SortValue'
         description: The sort value of a sort object.
     description: 'An object representing a sort criteria. '
+  SsmlValue:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+    minLength: 0
+    maxLength: 4096
+  Ssml:
+    type: object
+    required:
+      - Locale
+      - Value
+    properties:
+      Locale:
+        $ref: '#/definitions/Locale'
+        description: 'The locale of the SSML message. Currently, en-US is supported.'
+      Value:
+        $ref: '#/definitions/SsmlValue'
+        description: The value of the SSML message in the correct SSML format. The audio tag is not supported.
+    description: 'The SSML message. For more information, see <a href="https://developer.amazon.com/docs/custom-skills/speech-synthesis-markup-language-ssml-reference.html">SSML Reference</a>.'
   TagKey:
     type: string
     pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
@@ -6058,6 +6195,24 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/TagKey'
+  TextValue:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+    minLength: 0
+    maxLength: 4096
+  Text:
+    type: object
+    required:
+      - Locale
+      - Value
+    properties:
+      Locale:
+        $ref: '#/definitions/Locale'
+        description: 'The locale of the text message. Currently, en-US is supported.'
+      Value:
+        $ref: '#/definitions/TextValue'
+        description: The value of the text message.
+    description: The text message.
   UserData:
     type: object
     properties:
