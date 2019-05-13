@@ -904,6 +904,47 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AlexaForBusiness.DeleteDeviceUsageData':
+    post:
+      operationId: DeleteDeviceUsageData
+      description: 'When this action is called for a specified shared device, it allows authorized users to delete the device''s entire previous history of voice input data and associated response data. This action can be called once every 24 hours for a specific shared device.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteDeviceUsageDataResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: DeviceNotRegisteredException
+          schema:
+            $ref: '#/definitions/DeviceNotRegisteredException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteDeviceUsageDataRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.DeleteDeviceUsageData
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AlexaForBusiness.DeleteGatewayGroup':
     post:
       operationId: DeleteGatewayGroup
@@ -2723,7 +2764,7 @@ paths:
   '/#X-Amz-Target=AlexaForBusiness.SendAnnouncement':
     post:
       operationId: SendAnnouncement
-      description: 'Triggers an asynchronous flow to send text, SSML, or audio announcements to multiple rooms, identified by a search, such as filter. '
+      description: 'Triggers an asynchronous flow to send text, SSML, or audio announcements to rooms that are identified by a search or filter. '
       responses:
         '200':
           description: Success
@@ -3706,6 +3747,21 @@ definitions:
         $ref: '#/definitions/Arn'
         description: The ARN of the device for which to request details.
   InvalidCertificateAuthorityException: {}
+  DeleteDeviceUsageDataResponse:
+    type: object
+    properties: {}
+  DeleteDeviceUsageDataRequest:
+    type: object
+    required:
+      - DeviceArn
+      - DeviceUsageType
+    properties:
+      DeviceArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the device.
+      DeviceUsageType:
+        $ref: '#/definitions/DeviceUsageType'
+        description: The type of usage data to delete.
   DeleteGatewayGroupResponse:
     type: object
     properties: {}
@@ -4593,7 +4649,7 @@ definitions:
         description: 'The announcement content. This can contain only one of the three possible announcement types (text, SSML or audio).'
       TimeToLiveInSeconds:
         $ref: '#/definitions/TimeToLiveInSeconds'
-        description: 'The time to live for an announcement. If delivery doesn''t occur within this time, the announcement will not be delivered.'
+        description: 'The time to live for an announcement. Default is 300. If delivery doesn''t occur within this time, the announcement is not delivered.'
       ClientRequestToken:
         $ref: '#/definitions/ClientRequestToken'
         description: 'The unique, user-specified identifier for the request that ensures idempotency.'
@@ -4960,8 +5016,8 @@ definitions:
         description: 'The locale of the audio message. Currently, en-US is supported.'
       Location:
         $ref: '#/definitions/AudioLocation'
-        description: 'The location of the audio file. Currently, S3 URLs are supported. Only S3 locations comprised of safe character are valid. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#Safe%20Characters">Safe Characters</a>.'
-    description: '<p>The audio message. There is a 1 MB limit on the audio file input, and the only supported format is MP3. You must convert audio files to an Alexa-friendly format. </p> <p>You might need to use converter software to convert your MP3 files to the required codec version (MPEG version 2) and bit rate (48 kbps). One option for this is a command-line tool, FFmpeg. For more information, see <a href="https://www.ffmpeg.org/">FFmpeg</a>. The following command converts the provided &lt;input-file&gt; to an MP3 file that will be played in the announcement:</p> <p> <code>ffmpeg -i &lt;input-file&gt; -ac 2 -codec:a libmp3lame -b:a 48k -ar 16000 &lt;output-file.mp3&gt;</code> </p>'
+        description: 'The location of the audio file. Currently, S3 URLs are supported. Only S3 locations comprised of safe characters are valid. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#Safe%20Characters">Safe Characters</a>.'
+    description: '<p>The audio message. There is a 1 MB limit on the audio file input and the only supported format is MP3. To convert your MP3 audio files to an Alexa-friendly, </p> <p>required codec version (MPEG version 2) and bit rate (48 kbps), you might use converter software. One option for this is a command-line tool, FFmpeg. For more information, see <a href="https://www.ffmpeg.org/">FFmpeg</a>. The following command converts the provided &lt;input-file&gt; to an MP3 file that is played in the announcement:</p> <p> <code>ffmpeg -i &lt;input-file&gt; -ac 2 -codec:a libmp3lame -b:a 48k -ar 16000 &lt;output-file.mp3&gt;</code> </p>'
   AudioList:
     type: array
     items:
@@ -5308,7 +5364,7 @@ definitions:
       AudioList:
         $ref: '#/definitions/AudioList'
         description: The list of audio messages.
-    description: 'The content definition. It can contain only one text, SSML, or audio list object.'
+    description: 'The content definition. This can contain only one text, SSML, or audio list object.'
   CountryCode:
     type: string
     pattern: '\d{1,3}'
@@ -5397,6 +5453,10 @@ definitions:
     pattern: '([0-9a-zA-Z]([+-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})'
     minLength: 1
     maxLength: 128
+  DeviceUsageType:
+    type: string
+    enum:
+      - VOICE
   RoomSkillParameterKey:
     type: string
     minLength: 1
@@ -5563,6 +5623,19 @@ definitions:
     enum:
       - DEVICE_SOFTWARE_UPDATE_NEEDED
       - DEVICE_WAS_OFFLINE
+      - CREDENTIALS_ACCESS_FAILURE
+      - TLS_VERSION_MISMATCH
+      - ASSOCIATION_REJECTION
+      - AUTHENTICATION_FAILURE
+      - DHCP_FAILURE
+      - INTERNET_UNAVAILABLE
+      - DNS_FAILURE
+      - UNKNOWN_FAILURE
+      - CERTIFICATE_ISSUING_LIMIT_EXCEEDED
+      - INVALID_CERTIFICATE_AUTHORITY
+      - NETWORK_PROFILE_NOT_FOUND
+      - INVALID_PASSWORD_STATE
+      - PASSWORD_NOT_FOUND
   DeviceStatusDetail:
     type: object
     properties:

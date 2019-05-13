@@ -611,7 +611,7 @@ paths:
                     $ref: '#/definitions/String'
                     description: 'The service role that AWS AppSync will assume to publish to Amazon CloudWatch logs in your account. '
               authenticationType:
-                description: 'The authentication type: API key, AWS IAM, or Amazon Cognito user pools.'
+                description: 'The authentication type: API key, AWS IAM, OIDC, or Amazon Cognito user pools.'
                 type: string
                 enum:
                   - API_KEY
@@ -650,6 +650,18 @@ paths:
                   authTTL:
                     $ref: '#/definitions/Long'
                     description: The number of milliseconds a token is valid after being authenticated.
+              tags:
+                description: A map with keys of <code>TagKey</code> objects and values of <code>TagValue</code> objects.
+                type: object
+                minProperties: 1
+                maxProperties: 50
+                additionalProperties:
+                  $ref: '#/definitions/TagValue'
+              additionalAuthenticationProviders:
+                description: A list of additional authentication providers for the <code>GraphqlApi</code> API.
+                type: array
+                items:
+                  $ref: '#/definitions/AdditionalAuthenticationProvider'
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1368,6 +1380,10 @@ paths:
           description: InternalFailureException
           schema:
             $ref: '#/definitions/InternalFailureException'
+        '485':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
       parameters:
         - name: apiId
           in: path
@@ -1406,6 +1422,10 @@ paths:
           description: InternalFailureException
           schema:
             $ref: '#/definitions/InternalFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
       parameters:
         - name: apiId
           in: path
@@ -1440,6 +1460,10 @@ paths:
           description: InternalFailureException
           schema:
             $ref: '#/definitions/InternalFailureException'
+        '485':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
       parameters:
         - name: apiId
           in: path
@@ -1510,6 +1534,11 @@ paths:
                   authTTL:
                     $ref: '#/definitions/Long'
                     description: The number of milliseconds a token is valid after being authenticated.
+              additionalAuthenticationProviders:
+                description: A list of additional authentication providers for the <code>GraphqlApi</code> API.
+                type: array
+                items:
+                  $ref: '#/definitions/AdditionalAuthenticationProvider'
   '/v1/apis/{apiId}/types/{typeName}/resolvers/{fieldName}':
     delete:
       operationId: DeleteResolver
@@ -1821,6 +1850,11 @@ paths:
           enum:
             - SDL
             - JSON
+        - name: includeDirectives
+          in: query
+          required: false
+          description: A flag that specifies whether the schema introspection should contain directives.
+          type: boolean
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -2027,6 +2061,112 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/tags/{resourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: Lists the tags for a resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsForResourceResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '485':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The <code>GraphqlApi</code> ARN.
+          type: string
+          pattern: '^arn:aws:appsync:[A-Za-z0-9_/.-]{0,63}:\d{12}:apis/[0-9A-Za-z_-]{26}$'
+          minLength: 70
+          maxLength: 75
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: Tags a resource with user-supplied tags.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TagResourceResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '485':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The <code>GraphqlApi</code> ARN.
+          type: string
+          pattern: '^arn:aws:appsync:[A-Za-z0-9_/.-]{0,63}:\d{12}:apis/[0-9A-Za-z_-]{26}$'
+          minLength: 70
+          maxLength: 75
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - tags
+            properties:
+              tags:
+                description: A map with keys of <code>TagKey</code> objects and values of <code>TagValue</code> objects.
+                type: object
+                minProperties: 1
+                maxProperties: 50
+                additionalProperties:
+                  $ref: '#/definitions/TagValue'
   '/v1/apis/{apiId}/types#format':
     get:
       operationId: ListTypes
@@ -2083,6 +2223,63 @@ paths:
           type: integer
           minimum: 0
           maximum: 25
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/tags/{resourceArn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Untags a resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UntagResourceResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '485':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The <code>GraphqlApi</code> ARN.
+          type: string
+          pattern: '^arn:aws:appsync:[A-Za-z0-9_/.-]{0,63}:\d{12}:apis/[0-9A-Za-z_-]{26}$'
+          minLength: 70
+          maxLength: 75
+        - name: tagKeys
+          in: query
+          required: true
+          description: A list of <code>TagKey</code> objects.
+          type: array
+          items:
+            type: string
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -2176,6 +2373,23 @@ definitions:
       - DENY
   Long:
     type: integer
+  TagValue:
+    type: string
+    description: The value for the tag.
+    maxLength: 256
+  AdditionalAuthenticationProvider:
+    type: object
+    properties:
+      authenticationType:
+        $ref: '#/definitions/AuthenticationType'
+        description: 'The authentication type: API key, AWS IAM, OIDC, or Amazon Cognito user pools.'
+      openIDConnectConfig:
+        $ref: '#/definitions/OpenIDConnectConfig'
+        description: The OpenID Connect configuration.
+      userPoolConfig:
+        $ref: '#/definitions/CognitoUserPoolConfig'
+        description: The Amazon Cognito user pool configuration.
+    description: Describes an additional authentication provider.
   ApiLimitExceededException: {}
   CreateResolverResponse:
     type: object
@@ -2205,6 +2419,7 @@ definitions:
   DeleteGraphqlApiResponse:
     type: object
     properties: {}
+  AccessDeniedException: {}
   DeleteResolverResponse:
     type: object
     properties: {}
@@ -2247,7 +2462,7 @@ definitions:
     properties:
       status:
         $ref: '#/definitions/SchemaStatus'
-        description: 'The current state of the schema (PROCESSING, ACTIVE, or DELETING). Once the schema is in the ACTIVE state, you can add data.'
+        description: 'The current state of the schema (PROCESSING, FAILED, SUCCESS, or NOT_APPLICABLE). When the schema is in the ACTIVE state, you can add data.'
       details:
         $ref: '#/definitions/String'
         description: Detailed information about the status of the schema creation operation.
@@ -2311,6 +2526,12 @@ definitions:
       nextToken:
         $ref: '#/definitions/PaginationToken'
         description: An identifier that can be used to return the next set of items in the list.
+  ListTagsForResourceResponse:
+    type: object
+    properties:
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: A <code>TagMap</code> object.
   ListTypesResponse:
     type: object
     properties:
@@ -2325,7 +2546,19 @@ definitions:
     properties:
       status:
         $ref: '#/definitions/SchemaStatus'
-        description: 'The current state of the schema (PROCESSING, ACTIVE, or DELETING). When the schema is in the ACTIVE state, you can add data.'
+        description: 'The current state of the schema (PROCESSING, FAILED, SUCCESS, or NOT_APPLICABLE). When the schema is in the ACTIVE state, you can add data.'
+  TagResourceResponse:
+    type: object
+    properties: {}
+  UntagResourceResponse:
+    type: object
+    properties: {}
+  TagKey:
+    type: string
+    pattern: '^(?!aws:)[a-zA-Z+-=._:/]+$'
+    description: The key for the tag.
+    minLength: 1
+    maxLength: 128
   UpdateApiKeyResponse:
     type: object
     properties:
@@ -2362,6 +2595,51 @@ definitions:
       type:
         $ref: '#/definitions/Type'
         description: The updated <code>Type</code> object.
+  AuthenticationType:
+    type: string
+    enum:
+      - API_KEY
+      - AWS_IAM
+      - AMAZON_COGNITO_USER_POOLS
+      - OPENID_CONNECT
+  OpenIDConnectConfig:
+    type: object
+    required:
+      - issuer
+    properties:
+      issuer:
+        $ref: '#/definitions/String'
+        description: The issuer for the OpenID Connect configuration. The issuer returned by discovery must exactly match the value of <code>iss</code> in the ID token.
+      clientId:
+        $ref: '#/definitions/String'
+        description: The client identifier of the Relying party at the OpenID identity provider. This identifier is typically obtained when the Relying party is registered with the OpenID identity provider. You can specify a regular expression so the AWS AppSync can validate against multiple client identifiers at a time.
+      iatTTL:
+        $ref: '#/definitions/Long'
+        description: The number of milliseconds a token is valid after being issued to a user.
+      authTTL:
+        $ref: '#/definitions/Long'
+        description: The number of milliseconds a token is valid after being authenticated.
+    description: Describes an OpenID Connect configuration.
+  CognitoUserPoolConfig:
+    type: object
+    required:
+      - userPoolId
+      - awsRegion
+    properties:
+      userPoolId:
+        $ref: '#/definitions/String'
+        description: The user pool ID.
+      awsRegion:
+        $ref: '#/definitions/String'
+        description: The AWS Region in which the user pool was created.
+      appIdClientRegex:
+        $ref: '#/definitions/String'
+        description: A regular expression for validating the incoming Amazon Cognito user pool app client ID.
+    description: Describes an Amazon Cognito user pool configuration.
+  AdditionalAuthenticationProviders:
+    type: array
+    items:
+      $ref: '#/definitions/AdditionalAuthenticationProvider'
   ApiKey:
     type: object
     properties:
@@ -2379,13 +2657,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ApiKey'
-  AuthenticationType:
-    type: string
-    enum:
-      - API_KEY
-      - AWS_IAM
-      - AMAZON_COGNITO_USER_POOLS
-      - OPENID_CONNECT
   AuthorizationType:
     type: string
     enum:
@@ -2402,6 +2673,8 @@ definitions:
     description: The AWS IAM configuration.
   Blob:
     type: string
+  BooleanValue:
+    type: boolean
   CreateApiKeyRequest:
     type: object
     properties:
@@ -2639,24 +2912,13 @@ definitions:
         $ref: '#/definitions/String'
         description: A regular expression for validating the incoming Amazon Cognito user pool app client ID.
     description: Describes an Amazon Cognito user pool configuration.
-  OpenIDConnectConfig:
+  TagMap:
     type: object
-    required:
-      - issuer
-    properties:
-      issuer:
-        $ref: '#/definitions/String'
-        description: The issuer for the OpenID Connect configuration. The issuer returned by discovery must exactly match the value of <code>iss</code> in the ID token.
-      clientId:
-        $ref: '#/definitions/String'
-        description: The client identifier of the Relying party at the OpenID identity provider. This identifier is typically obtained when the Relying party is registered with the OpenID identity provider. You can specify a regular expression so the AWS AppSync can validate against multiple client identifiers at a time.
-      iatTTL:
-        $ref: '#/definitions/Long'
-        description: The number of milliseconds a token is valid after being issued to a user.
-      authTTL:
-        $ref: '#/definitions/Long'
-        description: The number of milliseconds a token is valid after being authenticated.
-    description: Describes an OpenID Connect configuration.
+    description: A map with keys of <code>TagKey</code> objects and values of <code>TagValue</code> objects.
+    minProperties: 1
+    maxProperties: 50
+    additionalProperties:
+      $ref: '#/definitions/TagValue'
   CreateGraphqlApiRequest:
     type: object
     required:
@@ -2671,13 +2933,19 @@ definitions:
         description: The Amazon CloudWatch Logs configuration.
       authenticationType:
         $ref: '#/definitions/AuthenticationType'
-        description: 'The authentication type: API key, AWS IAM, or Amazon Cognito user pools.'
+        description: 'The authentication type: API key, AWS IAM, OIDC, or Amazon Cognito user pools.'
       userPoolConfig:
         $ref: '#/definitions/UserPoolConfig'
         description: The Amazon Cognito user pool configuration.
       openIDConnectConfig:
         $ref: '#/definitions/OpenIDConnectConfig'
         description: The OpenID Connect configuration.
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: A <code>TagMap</code> object.
+      additionalAuthenticationProviders:
+        $ref: '#/definitions/AdditionalAuthenticationProviders'
+        description: A list of additional authentication providers for the <code>GraphqlApi</code> API.
   GraphqlApi:
     type: object
     properties:
@@ -2705,6 +2973,12 @@ definitions:
       uris:
         $ref: '#/definitions/MapOfStringToString'
         description: The URIs.
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: The tags.
+      additionalAuthenticationProviders:
+        $ref: '#/definitions/AdditionalAuthenticationProviders'
+        description: A list of additional authentication providers for the <code>GraphqlApi</code> API.
     description: Describes a GraphQL API.
   ResolverKind:
     type: string
@@ -2861,6 +3135,9 @@ definitions:
       - PROCESSING
       - ACTIVE
       - DELETING
+      - FAILED
+      - SUCCESS
+      - NOT_APPLICABLE
   GetTypeRequest:
     type: object
     properties: {}
@@ -2901,6 +3178,14 @@ definitions:
   ListResolversRequest:
     type: object
     properties: {}
+  ResourceArn:
+    type: string
+    pattern: '^arn:aws:appsync:[A-Za-z0-9_/.-]{0,63}:\d{12}:apis/[0-9A-Za-z_-]{26}$'
+    minLength: 70
+    maxLength: 75
+  ListTagsForResourceRequest:
+    type: object
+    properties: {}
   ListTypesRequest:
     type: object
     properties: {}
@@ -2916,6 +3201,23 @@ definitions:
       definition:
         $ref: '#/definitions/Blob'
         description: 'The schema definition, in GraphQL schema language format.'
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+    minItems: 1
+    maxItems: 50
+  TagResourceRequest:
+    type: object
+    required:
+      - tags
+    properties:
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: A <code>TagMap</code> object.
+  UntagResourceRequest:
+    type: object
+    properties: {}
   UpdateApiKeyRequest:
     type: object
     properties:
@@ -3000,6 +3302,9 @@ definitions:
       openIDConnectConfig:
         $ref: '#/definitions/OpenIDConnectConfig'
         description: The OpenID Connect configuration for the <code>GraphqlApi</code> object.
+      additionalAuthenticationProviders:
+        $ref: '#/definitions/AdditionalAuthenticationProviders'
+        description: A list of additional authentication providers for the <code>GraphqlApi</code> API.
   UpdateResolverRequest:
     type: object
     required:

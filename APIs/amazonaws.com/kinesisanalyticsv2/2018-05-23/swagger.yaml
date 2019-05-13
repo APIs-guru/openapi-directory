@@ -3,7 +3,7 @@ info:
   version: '2018-05-23'
   x-release: v4
   title: Amazon Kinesis Analytics
-  description: Documentation for Kinesis Data Analytics API v2
+  description: 'Amazon Kinesis Data Analytics is a fully managed service that you can use to process and analyze streaming data using SQL or Java. The service enables you to quickly author and run SQL or Java code against streaming sources to perform time series analytics, feed real-time dashboards, and create real-time metrics.'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -185,6 +185,10 @@ paths:
           description: InvalidRequestException
           schema:
             $ref: '#/definitions/InvalidRequestException'
+        '485':
+          description: InvalidApplicationConfigurationException
+          schema:
+            $ref: '#/definitions/InvalidApplicationConfigurationException'
       parameters:
         - name: body
           in: body
@@ -408,7 +412,7 @@ paths:
   '/#X-Amz-Target=KinesisAnalytics_20180523.CreateApplication':
     post:
       operationId: CreateApplication
-      description: '<p>Creates an Amazon Kinesis Data Analytics application. For information about creating a Kinesis Data Analytics application, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/Java/creating-app.html">Creating an Application</a>. </p> <note> <p>SQL is not enabled for this private beta release. Using SQL parameters (such as <a>SqlApplicationConfiguration</a>) will result in an error.</p> </note>'
+      description: 'Creates an Amazon Kinesis Data Analytics application. For information about creating a Kinesis Data Analytics application, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/java/getting-started.html">Creating an Application</a>. '
       responses:
         '200':
           description: Success
@@ -434,6 +438,14 @@ paths:
           description: InvalidRequestException
           schema:
             $ref: '#/definitions/InvalidRequestException'
+        '485':
+          description: TooManyTagsException
+          schema:
+            $ref: '#/definitions/TooManyTagsException'
+        '486':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
       parameters:
         - name: body
           in: body
@@ -536,6 +548,10 @@ paths:
           description: InvalidRequestException
           schema:
             $ref: '#/definitions/InvalidRequestException'
+        '485':
+          description: InvalidApplicationConfigurationException
+          schema:
+            $ref: '#/definitions/InvalidApplicationConfigurationException'
       parameters:
         - name: body
           in: body
@@ -585,6 +601,10 @@ paths:
           description: InvalidRequestException
           schema:
             $ref: '#/definitions/InvalidRequestException'
+        '485':
+          description: InvalidApplicationConfigurationException
+          schema:
+            $ref: '#/definitions/InvalidApplicationConfigurationException'
       parameters:
         - name: body
           in: body
@@ -1002,10 +1022,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=KinesisAnalytics_20180523.ListTagsForResource':
+    post:
+      operationId: ListTagsForResource
+      description: Retrieves the list of key-value tags assigned to the application.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsForResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidArgumentException
+          schema:
+            $ref: '#/definitions/InvalidArgumentException'
+        '482':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTagsForResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - KinesisAnalytics_20180523.ListTagsForResource
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=KinesisAnalytics_20180523.StartApplication':
     post:
       operationId: StartApplication
-      description: '<p>Starts the specified Amazon Kinesis Data Analytics application. After creating an application, you must exclusively call this operation to start your application.</p> <note> <p>SQL is not enabled for this private beta. Using SQL parameters (such as <a>RunConfiguration$SqlRunConfigurations</a>) will result in an error.</p> </note>'
+      description: 'Starts the specified Amazon Kinesis Data Analytics application. After creating an application, you must exclusively call this operation to start your application.'
       responses:
         '200':
           description: Success
@@ -1076,6 +1137,10 @@ paths:
           description: InvalidRequestException
           schema:
             $ref: '#/definitions/InvalidRequestException'
+        '484':
+          description: InvalidApplicationConfigurationException
+          schema:
+            $ref: '#/definitions/InvalidApplicationConfigurationException'
       parameters:
         - name: body
           in: body
@@ -1096,10 +1161,108 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=KinesisAnalytics_20180523.TagResource':
+    post:
+      operationId: TagResource
+      description: Adds one or more key-value tags to a Kinesis Analytics application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TagResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '482':
+          description: TooManyTagsException
+          schema:
+            $ref: '#/definitions/TooManyTagsException'
+        '483':
+          description: InvalidArgumentException
+          schema:
+            $ref: '#/definitions/InvalidArgumentException'
+        '484':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/TagResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - KinesisAnalytics_20180523.TagResource
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=KinesisAnalytics_20180523.UntagResource':
+    post:
+      operationId: UntagResource
+      description: Removes one or more tags from a Kinesis Analytics application.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UntagResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '482':
+          description: TooManyTagsException
+          schema:
+            $ref: '#/definitions/TooManyTagsException'
+        '483':
+          description: InvalidArgumentException
+          schema:
+            $ref: '#/definitions/InvalidArgumentException'
+        '484':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UntagResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - KinesisAnalytics_20180523.UntagResource
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=KinesisAnalytics_20180523.UpdateApplication':
     post:
       operationId: UpdateApplication
-      description: '<p>Updates an existing Amazon Kinesis Data Analytics application. Using this operation, you can update application code, input configuration, and output configuration. </p> <p>Kinesis Data Analytics updates the <code>ApplicationVersionId</code> each time you update your application. </p> <note> <p>SQL is not enabled for this private beta. Using SQL parameters (such as <a>SqlApplicationConfigurationUpdate</a>) will result in an error.</p> </note>'
+      description: '<p>Updates an existing Amazon Kinesis Data Analytics application. Using this operation, you can update application code, input configuration, and output configuration. </p> <p>Kinesis Data Analytics updates the <code>ApplicationVersionId</code> each time you update your application. </p>'
       responses:
         '200':
           description: Success
@@ -1129,6 +1292,10 @@ paths:
           description: InvalidRequestException
           schema:
             $ref: '#/definitions/InvalidRequestException'
+        '486':
+          description: InvalidApplicationConfigurationException
+          schema:
+            $ref: '#/definitions/InvalidApplicationConfigurationException'
       parameters:
         - name: body
           in: body
@@ -1183,6 +1350,7 @@ definitions:
   InvalidArgumentException: {}
   ConcurrentModificationException: {}
   InvalidRequestException: {}
+  InvalidApplicationConfigurationException: {}
   AddApplicationInputResponse:
     type: object
     properties:
@@ -1258,7 +1426,7 @@ definitions:
         description: The updated application version ID. Kinesis Data Analytics increments this ID when the application is updated.
       OutputDescriptions:
         $ref: '#/definitions/OutputDescriptions'
-        description: 'Describes the application output configuration. For more information, see <a href="http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html">Configuring Application Output</a>. '
+        description: 'Describes the application output configuration. For more information, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html">Configuring Application Output</a>. '
   AddApplicationOutputRequest:
     type: object
     required:
@@ -1326,7 +1494,7 @@ definitions:
         description: A summary description of the application.
       RuntimeEnvironment:
         $ref: '#/definitions/RuntimeEnvironment'
-        description: The runtime environment for the application (<code>SQL-1.0</code> or <code>JAVA-8-FLINK-1.5</code>).
+        description: The runtime environment for the application (<code>SQL-1.0</code> or <code>FLINK-1_6</code>).
       ServiceExecutionRole:
         $ref: '#/definitions/RoleARN'
         description: 'The IAM role used by the application to access Kinesis data streams, Kinesis Data Firehose delivery streams, Amazon S3 objects, and other external resources.'
@@ -1336,7 +1504,11 @@ definitions:
       CloudWatchLoggingOptions:
         $ref: '#/definitions/CloudWatchLoggingOptions'
         description: 'Use this parameter to configure an Amazon CloudWatch log stream to monitor application configuration errors. '
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: 'A list of one or more tags to assign to the application. A tag is a key-value pair that identifies an application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management Guide</i>.'
   LimitExceededException: {}
+  TooManyTagsException: {}
   CreateApplicationSnapshotResponse:
     type: object
     properties: {}
@@ -1610,6 +1782,20 @@ definitions:
       NextToken:
         $ref: '#/definitions/ApplicationName'
         description: 'If a previous command returned a pagination token, pass it into this value to retrieve the next set of results. For more information about pagination, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/pagination.html">Using the AWS Command Line Interface''s Pagination Options</a>.'
+  ListTagsForResourceResponse:
+    type: object
+    properties:
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: The key-value tags assigned to the application.
+  ListTagsForResourceRequest:
+    type: object
+    required:
+      - ResourceARN
+    properties:
+      ResourceARN:
+        $ref: '#/definitions/KinesisAnalyticsARN'
+        description: The ARN of the application for which to retrieve tags.
   StartApplicationResponse:
     type: object
     properties: {}
@@ -1625,7 +1811,6 @@ definitions:
       RunConfiguration:
         $ref: '#/definitions/RunConfiguration'
         description: Identifies the run configuration (start parameters) of a Kinesis Data Analytics application.
-  InvalidApplicationConfigurationException: {}
   StopApplicationResponse:
     type: object
     properties: {}
@@ -1637,6 +1822,36 @@ definitions:
       ApplicationName:
         $ref: '#/definitions/ApplicationName'
         description: The name of the running application to stop.
+  TagResourceResponse:
+    type: object
+    properties: {}
+  TagResourceRequest:
+    type: object
+    required:
+      - ResourceARN
+      - Tags
+    properties:
+      ResourceARN:
+        $ref: '#/definitions/KinesisAnalyticsARN'
+        description: The ARN of the application to assign the tags.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: The key-value tags to assign to the application.
+  UntagResourceResponse:
+    type: object
+    properties: {}
+  UntagResourceRequest:
+    type: object
+    required:
+      - ResourceARN
+      - TagKeys
+    properties:
+      ResourceARN:
+        $ref: '#/definitions/KinesisAnalyticsARN'
+        description: The ARN of the Kinesis Analytics application from which to remove the tags.
+      TagKeys:
+        $ref: '#/definitions/TagKeys'
+        description: A list of keys of tags to remove from the specified application.
   UpdateApplicationResponse:
     type: object
     required:
@@ -2121,7 +2336,7 @@ definitions:
         description: The name of the application.
       RuntimeEnvironment:
         $ref: '#/definitions/RuntimeEnvironment'
-        description: The runtime environment for the application (<code>SQL-1.0</code> or <code>JAVA-8-FLINK-1.5</code>).
+        description: The runtime environment for the application (<code>SQL-1.0</code> or <code>FLINK-1_6</code>).
       ServiceExecutionRole:
         $ref: '#/definitions/RoleARN'
         description: Specifies the IAM role that the application uses to access external resources.
@@ -2192,7 +2407,7 @@ definitions:
         description: Provides the current application version.
       RuntimeEnvironment:
         $ref: '#/definitions/RuntimeEnvironment'
-        description: The runtime environment for the application (<code>SQL-1.0</code> or <code>JAVA-8-FLINK-1.5</code>).
+        description: The runtime environment for the application (<code>SQL-1.0</code> or <code>FLINK-1_6</code>).
     description: 'Provides application summary information, including the application Amazon Resource Name (ARN), name, and status.'
   ApplicationSummaries:
     type: array
@@ -2384,6 +2599,12 @@ definitions:
         $ref: '#/definitions/ObjectVersion'
         description: The new version of the object containing the application code.
     description: Describes an update for the Amazon S3 code content location for a Java-based Amazon Kinesis Data Analytics application.
+  Tags:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+    minItems: 1
+    maxItems: 200
   SnapshotDetails:
     type: object
     required:
@@ -2489,7 +2710,7 @@ definitions:
       LogLevel:
         $ref: '#/definitions/LogLevel'
         description: Describes the verbosity of the CloudWatch Logs for an application.
-    description: 'Describes configuration parameters for Amazon CloudWatch logging for a Java-based Kinesis Data Analytics application. For more information about CloudWatch logging, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/Java/monitoring-overview.html">Monitoring</a>.'
+    description: 'Describes configuration parameters for Amazon CloudWatch logging for a Java-based Kinesis Data Analytics application. For more information about CloudWatch logging, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/java/monitoring-overview.html">Monitoring</a>.'
   ParallelismConfiguration:
     type: object
     required:
@@ -2573,7 +2794,6 @@ definitions:
     description: Describes updates to parameters for how a Java-based Kinesis Data Analytics application executes multiple tasks simultaneously.
   InAppStreamName:
     type: string
-    pattern: '[a-zA-Z][a-zA-Z0-9_]+'
     minLength: 1
     maxLength: 32
   InAppStreamNames:
@@ -2582,7 +2802,6 @@ definitions:
       $ref: '#/definitions/InAppStreamName'
   InAppTableName:
     type: string
-    pattern: '[a-zA-Z][a-zA-Z0-9_]+'
     minLength: 1
     maxLength: 32
   KinesisStreamsInput:
@@ -2672,7 +2891,7 @@ definitions:
     properties:
       ResourceARN:
         $ref: '#/definitions/ResourceARN'
-        description: The ARN of the AWS Lambda function that operates on records in the stream.
+        description: '<p>The ARN of the AWS Lambda function that operates on records in the stream.</p> <note> <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda">Example ARNs: AWS Lambda</a> </p> </note>'
     description: 'An object that contains the Amazon Resource Name (ARN) of the AWS Lambda function that is used to preprocess records in the stream in an SQL-based Amazon Kinesis Data Analytics application. '
   InputLambdaProcessorDescription:
     type: object
@@ -2681,7 +2900,7 @@ definitions:
     properties:
       ResourceARN:
         $ref: '#/definitions/ResourceARN'
-        description: The ARN of the AWS Lambda function that is used to preprocess the records in the stream.
+        description: '<p>The ARN of the AWS Lambda function that is used to preprocess the records in the stream.</p> <note> <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda">Example ARNs: AWS Lambda</a> </p> </note>'
       RoleARN:
         $ref: '#/definitions/RoleARN'
         description: <p>The ARN of the IAM role that is used to access the AWS Lambda function.</p> <note> <p>Provided for backward compatibility. Applications that are created with the current API version have an application-level service execution role rather than a resource-level role.</p> </note>
@@ -2693,7 +2912,7 @@ definitions:
     properties:
       ResourceARNUpdate:
         $ref: '#/definitions/ResourceARN'
-        description: The Amazon Resource Name (ARN) of the new AWS Lambda function that is used to preprocess the records in the stream.
+        description: '<p>The Amazon Resource Name (ARN) of the new AWS Lambda function that is used to preprocess the records in the stream.</p> <note> <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda">Example ARNs: AWS Lambda</a> </p> </note>'
     description: 'For an SQL-based Amazon Kinesis Data Analytics application, represents an update to the <a>InputLambdaProcessor</a> that is used to preprocess the records in the stream.'
   InputParallelismCount:
     type: integer
@@ -2822,6 +3041,11 @@ definitions:
         $ref: '#/definitions/RecordRowPath'
         description: The path to the top-level parent that contains the records.
     description: 'For an SQL-based Amazon Kinesis Data Analytics application, provides additional mapping information when JSON is the record format on the streaming source.'
+  KinesisAnalyticsARN:
+    type: string
+    pattern: 'arn:aws:kinesisanalytics:[a-z]\{2\}-[a-z]\+-\d\{1\}\+:\d\{12\}\+:application/[a-zA-Z0-9_.-]\{1,128\}'
+    minLength: 1
+    maxLength: 2048
   KinesisFirehoseOutput:
     type: object
     required:
@@ -2889,7 +3113,7 @@ definitions:
     properties:
       ResourceARN:
         $ref: '#/definitions/ResourceARN'
-        description: The Amazon Resource Name (ARN) of the destination Lambda function to write to.
+        description: '<p>The Amazon Resource Name (ARN) of the destination Lambda function to write to.</p> <note> <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda">Example ARNs: AWS Lambda</a> </p> </note>'
     description: 'When you configure an SQL-based Amazon Kinesis Data Analytics application''s output, identifies an AWS Lambda function as the destination. You provide the function Amazon Resource Name (ARN) of the Lambda function. '
   LambdaOutputDescription:
     type: object
@@ -2910,7 +3134,7 @@ definitions:
     properties:
       ResourceARNUpdate:
         $ref: '#/definitions/ResourceARN'
-        description: The Amazon Resource Name (ARN) of the destination AWS Lambda function.
+        description: '<p>The Amazon Resource Name (ARN) of the destination AWS Lambda function.</p> <note> <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda">Example ARNs: AWS Lambda</a> </p> </note>'
     description: 'When you update an SQL-based Amazon Kinesis Data Analytics application''s output configuration using the <a>UpdateApplication</a> operation, provides information about an AWS Lambda function that is configured as the destination.'
   ListSnapshotsInputLimit:
     type: integer
@@ -3053,7 +3277,6 @@ definitions:
     type: string
   RecordColumnName:
     type: string
-    pattern: '[a-zA-Z_][a-zA-Z0-9_]*'
   RecordColumnMapping:
     type: string
   RecordColumnSqlType:
@@ -3070,7 +3293,7 @@ definitions:
         description: The name of the column that is created in the in-application input stream or reference table.
       Mapping:
         $ref: '#/definitions/RecordColumnMapping'
-        description: A reference to the data element in the streaming input of the reference data source.
+        description: A reference to the data element in the streaming input or the reference data source.
       SqlType:
         $ref: '#/definitions/RecordColumnSqlType'
         description: The type of column created in the in-application input stream or reference table.
@@ -3198,3 +3421,29 @@ definitions:
         $ref: '#/definitions/InputStartingPositionConfiguration'
         description: 'The point at which you want the application to start processing records from the streaming source. '
     description: Describes the starting parameters for an SQL-based Kinesis Data Analytics application.
+  TagKey:
+    type: string
+    minLength: 1
+    maxLength: 128
+  TagValue:
+    type: string
+    minLength: 0
+    maxLength: 256
+  Tag:
+    type: object
+    required:
+      - Key
+    properties:
+      Key:
+        $ref: '#/definitions/TagKey'
+        description: The key of the key-value tag.
+      Value:
+        $ref: '#/definitions/TagValue'
+        description: The value of the key-value tag. The value is optional.
+    description: 'A key-value pair (the value is optional) that you can define and assign to AWS resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management Guide</i>.'
+  TagKeys:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+    minItems: 1
+    maxItems: 200

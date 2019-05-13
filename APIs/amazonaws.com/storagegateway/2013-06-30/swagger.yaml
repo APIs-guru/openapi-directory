@@ -3240,6 +3240,9 @@ definitions:
       SMBACLEnabled:
         $ref: '#/definitions/Boolean'
         description: Set this value to "true to enable ACL (access control list) on the SMB file share. Set it to "false" to map file and directory permissions to the POSIX permissions.
+      AdminUserList:
+        $ref: '#/definitions/FileShareUserList'
+        description: A list of users or groups in the Active Directory that have administrator rights to the file share. A group must be prefixed with the @ character. For example <code>@group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.
       ValidUserList:
         $ref: '#/definitions/FileShareUserList'
         description: A list of users or groups in the Active Directory that are allowed to access the file share. A group must be prefixed with the @ character. For example <code>@group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.
@@ -4827,6 +4830,9 @@ definitions:
       SMBACLEnabled:
         $ref: '#/definitions/Boolean'
         description: Set this value to "true to enable ACL (access control list) on the SMB file share. Set it to "false" to map file and directory permissions to the POSIX permissions.
+      AdminUserList:
+        $ref: '#/definitions/FileShareUserList'
+        description: A list of users or groups in the Active Directory that have administrator rights to the file share. A group must be prefixed with the @ character. For example <code>@group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.
       ValidUserList:
         $ref: '#/definitions/FileShareUserList'
         description: A list of users or groups in the Active Directory that are allowed to access the file share. A group must be prefixed with the @ character. For example <code>@group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.
@@ -5629,6 +5635,9 @@ definitions:
       SMBACLEnabled:
         $ref: '#/definitions/Boolean'
         description: 'If this value is set to "true", indicates that ACL (access control list) is enabled on the SMB file share. If it is set to "false", it indicates that file and directory permissions are mapped to the POSIX permission.'
+      AdminUserList:
+        $ref: '#/definitions/FileShareUserList'
+        description: A list of users or groups in the Active Directory that have administrator rights to the file share. A group must be prefixed with the @ character. For example <code>@group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.
       ValidUserList:
         $ref: '#/definitions/FileShareUserList'
         description: A list of users or groups in the Active Directory that are allowed to access the file share. A group must be prefixed with the @ character. For example <code>@group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.

@@ -1098,6 +1098,47 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkMailService.GetMailboxDetails':
+    post:
+      operationId: GetMailboxDetails
+      description: Requests a user's mailbox details for a specified organization and user.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetMailboxDetailsResponse'
+        '480':
+          description: OrganizationNotFoundException
+          schema:
+            $ref: '#/definitions/OrganizationNotFoundException'
+        '481':
+          description: OrganizationStateException
+          schema:
+            $ref: '#/definitions/OrganizationStateException'
+        '482':
+          description: EntityNotFoundException
+          schema:
+            $ref: '#/definitions/EntityNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetMailboxDetailsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkMailService.GetMailboxDetails
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=WorkMailService.ListAliases':
     post:
       operationId: ListAliases
@@ -1404,6 +1445,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListResourceDelegatesRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -1699,6 +1750,55 @@ paths:
           type: string
           enum:
             - WorkMailService.ResetPassword
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkMailService.UpdateMailboxQuota':
+    post:
+      operationId: UpdateMailboxQuota
+      description: Updates a user's current mailbox quota for a specified organization and user.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateMailboxQuotaResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: OrganizationNotFoundException
+          schema:
+            $ref: '#/definitions/OrganizationNotFoundException'
+        '482':
+          description: OrganizationStateException
+          schema:
+            $ref: '#/definitions/OrganizationStateException'
+        '483':
+          description: EntityNotFoundException
+          schema:
+            $ref: '#/definitions/EntityNotFoundException'
+        '484':
+          description: EntityStateException
+          schema:
+            $ref: '#/definitions/EntityStateException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateMailboxQuotaRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkMailService.UpdateMailboxQuota
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -2273,6 +2373,27 @@ definitions:
       MemberId:
         $ref: '#/definitions/WorkMailIdentifier'
         description: The identifier for the member to be removed to the group.
+  GetMailboxDetailsResponse:
+    type: object
+    properties:
+      MailboxQuota:
+        $ref: '#/definitions/MailboxQuota'
+        description: 'The maximum allowed mailbox size, in MB, for the specified user.'
+      MailboxSize:
+        $ref: '#/definitions/MailboxSize'
+        description: 'The current mailbox size, in MB, for the specified user.'
+  GetMailboxDetailsRequest:
+    type: object
+    required:
+      - OrganizationId
+      - UserId
+    properties:
+      OrganizationId:
+        $ref: '#/definitions/OrganizationId'
+        description: The identifier for the organization that contains the user whose mailbox details are being requested.
+      UserId:
+        $ref: '#/definitions/WorkMailIdentifier'
+        description: The identifier for the user whose mailbox details are being requested.
   ListAliasesResponse:
     type: object
     properties:
@@ -2530,6 +2651,25 @@ definitions:
       Password:
         $ref: '#/definitions/Password'
         description: The new password for the user.
+  UpdateMailboxQuotaResponse:
+    type: object
+    properties: {}
+  UpdateMailboxQuotaRequest:
+    type: object
+    required:
+      - OrganizationId
+      - UserId
+      - MailboxQuota
+    properties:
+      OrganizationId:
+        $ref: '#/definitions/OrganizationId'
+        description: The identifier for the organization that contains the user for whom to update the mailbox quota.
+      UserId:
+        $ref: '#/definitions/WorkMailIdentifier'
+        description: The identifer for the user for whom to update the mailbox quota.
+      MailboxQuota:
+        $ref: '#/definitions/MailboxQuota'
+        description: 'The updated mailbox quota, in MB, for the specified user.'
   UpdatePrimaryEmailAddressResponse:
     type: object
     properties: {}
@@ -2671,6 +2811,13 @@ definitions:
       - USER
       - RESOURCE
       - SYSTEM_USER
+  MailboxQuota:
+    type: integer
+    minimum: 1
+  MailboxSize:
+    type: number
+    format: double
+    minimum: 0
   Group:
     type: object
     properties:

@@ -1481,6 +1481,63 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSCognitoIdentityProviderService.AdminSetUserPassword':
+    post:
+      operationId: AdminSetUserPassword
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AdminSetUserPasswordResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: NotAuthorizedException
+          schema:
+            $ref: '#/definitions/NotAuthorizedException'
+        '482':
+          description: UserNotFoundException
+          schema:
+            $ref: '#/definitions/UserNotFoundException'
+        '483':
+          description: InternalErrorException
+          schema:
+            $ref: '#/definitions/InternalErrorException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '485':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '486':
+          description: InvalidPasswordException
+          schema:
+            $ref: '#/definitions/InvalidPasswordException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AdminSetUserPasswordRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityProviderService.AdminSetUserPassword
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AWSCognitoIdentityProviderService.AdminSetUserSettings':
     post:
       operationId: AdminSetUserSettings
@@ -6661,6 +6718,24 @@ definitions:
       UserPoolId:
         $ref: '#/definitions/UserPoolIdType'
         description: The user pool ID.
+  AdminSetUserPasswordResponse:
+    type: object
+    properties: {}
+  AdminSetUserPasswordRequest:
+    type: object
+    required:
+      - UserPoolId
+      - Username
+      - Password
+    properties:
+      UserPoolId:
+        $ref: '#/definitions/UserPoolIdType'
+      Username:
+        $ref: '#/definitions/UsernameType'
+      Password:
+        $ref: '#/definitions/PasswordType'
+      Permanent:
+        $ref: '#/definitions/BooleanType'
   AdminSetUserSettingsResponse:
     type: object
     properties: {}
@@ -10134,6 +10209,10 @@ definitions:
     type: integer
     minimum: 6
     maximum: 99
+  TemporaryPasswordValidityDaysType:
+    type: integer
+    minimum: 0
+    maximum: 365
   PasswordPolicyType:
     type: object
     properties:
@@ -10152,6 +10231,8 @@ definitions:
       RequireSymbols:
         $ref: '#/definitions/BooleanType'
         description: 'In the password policy that you have set, refers to whether you have required users to use at least one symbol in their password.'
+      TemporaryPasswordValidityDays:
+        $ref: '#/definitions/TemporaryPasswordValidityDaysType'
     description: The password policy type.
   PreSignedUrlType:
     type: string

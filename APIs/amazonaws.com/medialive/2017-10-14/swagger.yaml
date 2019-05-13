@@ -234,6 +234,48 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteSchedule
+      description: Delete all schedule actions on a channel.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteScheduleResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadGatewayException
+          schema:
+            $ref: '#/definitions/BadGatewayException'
+        '484':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '485':
+          description: GatewayTimeoutException
+          schema:
+            $ref: '#/definitions/GatewayTimeoutException'
+        '486':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: channelId
+          in: path
+          required: true
+          description: Placeholder documentation for __string
+          type: string
     get:
       operationId: DescribeSchedule
       description: Get a channel schedule
@@ -2039,6 +2081,84 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/prod/channels/{channelId}/channelClass':
+    put:
+      operationId: UpdateChannelClass
+      description: Changes the class of the channel.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateChannelClassResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: UnprocessableEntityException
+          schema:
+            $ref: '#/definitions/UnprocessableEntityException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '484':
+          description: BadGatewayException
+          schema:
+            $ref: '#/definitions/BadGatewayException'
+        '485':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '486':
+          description: GatewayTimeoutException
+          schema:
+            $ref: '#/definitions/GatewayTimeoutException'
+        '487':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '488':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+      parameters:
+        - name: channelId
+          in: path
+          required: true
+          description: Placeholder documentation for __string
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - channelClass
+            properties:
+              channelClass:
+                description: A standard channel has two encoding pipelines and a single pipeline channel only has one.
+                type: string
+                enum:
+                  - STANDARD
+                  - SINGLE_PIPELINE
+              destinations:
+                description: Placeholder documentation for __listOfOutputDestination
+                type: array
+                items:
+                  $ref: '#/definitions/OutputDestination'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
   BatchUpdateScheduleResponse:
     type: object
@@ -2386,6 +2506,10 @@ definitions:
         $ref: '#/definitions/__double'
         description: 'Recurring usage charge for each reserved resource, e.g. ''157.0'''
     description: Placeholder documentation for DeleteReservationResponse
+  DeleteScheduleResponse:
+    type: object
+    properties: {}
+    description: Placeholder documentation for DeleteScheduleResponse
   DescribeChannelResponse:
     type: object
     properties:
@@ -2757,6 +2881,12 @@ definitions:
       Channel:
         $ref: '#/definitions/Channel'
     description: Placeholder documentation for UpdateChannelResponse
+  UpdateChannelClassResponse:
+    type: object
+    properties:
+      Channel:
+        $ref: '#/definitions/Channel'
+    description: Placeholder documentation for UpdateChannelClassResponse
   UpdateInputResponse:
     type: object
     properties:
@@ -4038,6 +4168,8 @@ definitions:
       - STOPPING
       - DELETING
       - DELETED
+      - UPDATING
+      - UPDATE_FAILED
     description: Placeholder documentation for ChannelState
   Tags:
     type: object
@@ -4412,6 +4544,10 @@ definitions:
       - CANCELED
       - DELETED
     description: Current reservation state
+  DeleteScheduleRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for DeleteScheduleRequest
   DeleteTagsRequest:
     type: object
     properties: {}
@@ -7057,6 +7193,18 @@ definitions:
       - PRIV
       - TDRL
     description: Udp Timed Metadata Id3 Frame
+  UpdateChannelClassRequest:
+    type: object
+    required:
+      - ChannelClass
+    properties:
+      ChannelClass:
+        $ref: '#/definitions/ChannelClass'
+        description: The channel class that you wish to update this channel to use.
+      Destinations:
+        $ref: '#/definitions/__listOfOutputDestination'
+        description: A list of output destinations for this channel.
+    description: Channel class that the channel should be updated to.
   UpdateChannelRequest:
     type: object
     properties:

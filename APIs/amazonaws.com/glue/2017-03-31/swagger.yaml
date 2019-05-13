@@ -642,7 +642,7 @@ paths:
   '/#X-Amz-Target=AWSGlue.CreateClassifier':
     post:
       operationId: CreateClassifier
-      description: 'Creates a classifier in the user''s account. This may be a <code>GrokClassifier</code>, an <code>XMLClassifier</code>, a <code>JsonClassifier</code>, or a <code>CsvClassifier</code>, depending on which field of the request is present.'
+      description: 'Creates a classifier in the user''s account. This can be a <code>GrokClassifier</code>, an <code>XMLClassifier</code>, a <code>JsonClassifier</code>, or a <code>CsvClassifier</code>, depending on which field of the request is present.'
       responses:
         '200':
           description: Success
@@ -732,7 +732,7 @@ paths:
   '/#X-Amz-Target=AWSGlue.CreateCrawler':
     post:
       operationId: CreateCrawler
-      description: 'Creates a new crawler with specified targets, role, configuration, and optional schedule. At least one crawl target must be specified, in the <i>s3Targets</i> field, the <i>jdbcTargets</i> field, or the <i>DynamoDBTargets</i> field.'
+      description: 'Creates a new crawler with specified targets, role, configuration, and optional schedule. At least one crawl target must be specified, in the <code>s3Targets</code> field, the <code>jdbcTargets</code> field, or the <code>DynamoDBTargets</code> field.'
       responses:
         '200':
           description: Success
@@ -1340,7 +1340,7 @@ paths:
   '/#X-Amz-Target=AWSGlue.DeleteCrawler':
     post:
       operationId: DeleteCrawler
-      description: 'Removes a specified crawler from the Data Catalog, unless the crawler state is <code>RUNNING</code>.'
+      description: 'Removes a specified crawler from the AWS Glue Data Catalog, unless the crawler state is <code>RUNNING</code>.'
       responses:
         '200':
           description: Success
@@ -4946,7 +4946,7 @@ definitions:
         description: A list of crawler definitions.
       CrawlersNotFound:
         $ref: '#/definitions/CrawlerNameList'
-        description: A list of names of crawlers not found.
+        description: A list of names of crawlers that were not found.
   BatchGetCrawlersRequest:
     type: object
     required:
@@ -4954,7 +4954,7 @@ definitions:
     properties:
       CrawlerNames:
         $ref: '#/definitions/CrawlerNameList'
-        description: 'A list of crawler names, which may be the names returned from the <code>ListCrawlers</code> operation.'
+        description: 'A list of crawler names, which might be the names returned from the <code>ListCrawlers</code> operation.'
   BatchGetDevEndpointsResponse:
     type: object
     properties:
@@ -5096,7 +5096,6 @@ definitions:
     required:
       - Name
       - Role
-      - DatabaseName
       - Targets
     properties:
       Name:
@@ -5104,7 +5103,7 @@ definitions:
         description: Name of the new crawler.
       Role:
         $ref: '#/definitions/Role'
-        description: The IAM role (or ARN of an IAM role) used by the new crawler to access customer resources.
+        description: The IAM role or Amazon Resource Name (ARN) of an IAM role used by the new crawler to access customer resources.
       DatabaseName:
         $ref: '#/definitions/DatabaseName'
         description: 'The AWS Glue database where results are written, such as: <code>arn:aws:daylight:us-east-1::database/sometable/*</code>.'
@@ -5116,7 +5115,7 @@ definitions:
         description: A list of collection of targets to crawl.
       Schedule:
         $ref: '#/definitions/CronExpression'
-        description: 'A <code>cron</code> expression used to specify the schedule (see <a href="http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.'
+        description: 'A <code>cron</code> expression used to specify the schedule. For more information, see <a href="http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, specify <code>cron(15 12 * * ? *)</code>.'
       Classifiers:
         $ref: '#/definitions/ClassifierNameList'
         description: 'A list of custom classifiers that the user has registered. By default, all built-in classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification.'
@@ -5125,16 +5124,16 @@ definitions:
         description: The table prefix used for catalog tables that are created.
       SchemaChangePolicy:
         $ref: '#/definitions/SchemaChangePolicy'
-        description: Policy for the crawler's update and deletion behavior.
+        description: The policy for the crawler's update and deletion behavior.
       Configuration:
         $ref: '#/definitions/CrawlerConfiguration'
-        description: 'Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler''s behavior. For more information, see <a href="http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html">Configuring a Crawler</a>.'
+        description: 'The crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler''s behavior. For more information, see <a href="http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html">Configuring a Crawler</a>.'
       CrawlerSecurityConfiguration:
         $ref: '#/definitions/CrawlerSecurityConfiguration'
-        description: The name of the SecurityConfiguration structure to be used by this Crawler.
+        description: The name of the <code>SecurityConfiguration</code> structure to be used by this crawler.
       Tags:
         $ref: '#/definitions/TagsMap'
-        description: 'The tags to use with this crawler request. You may use tags to limit access to the crawler. For more information about tags in AWS Glue, see <a href="http://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html">AWS Tags in AWS Glue</a> in the developer guide.'
+        description: 'The tags to use with this crawler request. You can use tags to limit access to the crawler. For more information, see <a href="http://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html">AWS Tags in AWS Glue</a>.'
   CreateDatabaseResponse:
     type: object
     properties: {}
@@ -5481,7 +5480,7 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/NameString'
-        description: Name of the crawler to remove.
+        description: The name of the crawler to remove.
   CrawlerRunningException: {}
   SchedulerTransitioningException: {}
   DeleteDatabaseResponse:
@@ -5678,7 +5677,7 @@ definitions:
     properties:
       MaxResults:
         $ref: '#/definitions/PageSize'
-        description: Size of the list to return (optional).
+        description: The size of the list to return (optional).
       NextToken:
         $ref: '#/definitions/Token'
         description: An optional continuation token.
@@ -5742,7 +5741,7 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/NameString'
-        description: Name of the crawler to retrieve metadata for.
+        description: The name of the crawler to retrieve metadata for.
   GetCrawlerMetricsResponse:
     type: object
     properties:
@@ -6048,7 +6047,7 @@ definitions:
         description: A Python script to perform the mapping.
       ScalaCode:
         $ref: '#/definitions/ScalaCode'
-        description: Scala code to perform the mapping.
+        description: The Scala code to perform the mapping.
   GetPlanRequest:
     type: object
     required:
@@ -6066,7 +6065,7 @@ definitions:
         description: The target tables.
       Location:
         $ref: '#/definitions/Location'
-        description: Parameters for the mapping.
+        description: The parameters for the mapping.
       Language:
         $ref: '#/definitions/Language'
         description: The programming language of the code to perform the mapping.
@@ -6667,7 +6666,7 @@ definitions:
         description: Name of the new crawler.
       Role:
         $ref: '#/definitions/Role'
-        description: The IAM role (or ARN of an IAM role) used by the new crawler to access customer resources.
+        description: The IAM role or Amazon Resource Name (ARN) of an IAM role that is used by the new crawler to access customer resources.
       DatabaseName:
         $ref: '#/definitions/DatabaseName'
         description: 'The AWS Glue database where results are stored, such as: <code>arn:aws:daylight:us-east-1::database/sometable/*</code>.'
@@ -6679,7 +6678,7 @@ definitions:
         description: A list of targets to crawl.
       Schedule:
         $ref: '#/definitions/CronExpression'
-        description: 'A <code>cron</code> expression used to specify the schedule (see <a href="http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.'
+        description: 'A <code>cron</code> expression used to specify the schedule. For more information, see <a href="http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, specify <code>cron(15 12 * * ? *)</code>.'
       Classifiers:
         $ref: '#/definitions/ClassifierNameList'
         description: 'A list of custom classifiers that the user has registered. By default, all built-in classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification.'
@@ -6688,13 +6687,13 @@ definitions:
         description: The table prefix used for catalog tables that are created.
       SchemaChangePolicy:
         $ref: '#/definitions/SchemaChangePolicy'
-        description: Policy for the crawler's update and deletion behavior.
+        description: The policy for the crawler's update and deletion behavior.
       Configuration:
         $ref: '#/definitions/CrawlerConfiguration'
-        description: 'Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler''s behavior. For more information, see <a href="http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html">Configuring a Crawler</a>.'
+        description: 'The crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler''s behavior. For more information, see <a href="http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html">Configuring a Crawler</a>.'
       CrawlerSecurityConfiguration:
         $ref: '#/definitions/CrawlerSecurityConfiguration'
-        description: The name of the SecurityConfiguration structure to be used by this Crawler.
+        description: The name of the <code>SecurityConfiguration</code> structure to be used by this crawler.
   UpdateCrawlerScheduleResponse:
     type: object
     properties: {}
@@ -6705,10 +6704,10 @@ definitions:
     properties:
       CrawlerName:
         $ref: '#/definitions/NameString'
-        description: Name of the crawler whose schedule to update.
+        description: The name of the crawler whose schedule to update.
       Schedule:
         $ref: '#/definitions/CronExpression'
-        description: 'The updated <code>cron</code> expression used to specify the schedule (see <a href="http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.'
+        description: 'The updated <code>cron</code> expression used to specify the schedule. For more information, see <a href="http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, specify <code>cron(15 12 * * ? *)</code>.'
   UpdateDatabaseResponse:
     type: object
     properties: {}
@@ -7107,7 +7106,7 @@ definitions:
       TableName:
         $ref: '#/definitions/NameString'
         description: The name of the table in question.
-    description: Specifies a table definition in the Data Catalog.
+    description: Specifies a table definition in the AWS Glue Data Catalog.
   CatalogEntries:
     type: array
     items:
@@ -7128,6 +7127,28 @@ definitions:
         $ref: '#/definitions/NameString'
         description: The name of the person who initiated the migration.
     description: A structure containing migration status information.
+  CatalogTablesList:
+    type: array
+    items:
+      $ref: '#/definitions/NameString'
+    minItems: 1
+  CatalogTarget:
+    type: object
+    required:
+      - DatabaseName
+      - Tables
+    properties:
+      DatabaseName:
+        $ref: '#/definitions/NameString'
+        description: The name of the database to be synchronized.
+      Tables:
+        $ref: '#/definitions/CatalogTablesList'
+        description: A list of the tables to be synchronized.
+    description: Specifies an AWS Glue Data Catalog target.
+  CatalogTargetList:
+    type: array
+    items:
+      $ref: '#/definitions/CatalogTarget'
   Classification:
     type: string
   GrokClassifier:
@@ -7145,19 +7166,19 @@ definitions:
         description: 'An identifier of the data format that the classifier matches, such as Twitter, JSON, Omniture logs, and so on.'
       CreationTime:
         $ref: '#/definitions/Timestamp'
-        description: The time this classifier was registered.
+        description: The time that this classifier was registered.
       LastUpdated:
         $ref: '#/definitions/Timestamp'
-        description: The time this classifier was last updated.
+        description: The time that this classifier was last updated.
       Version:
         $ref: '#/definitions/VersionId'
         description: The version of this classifier.
       GrokPattern:
         $ref: '#/definitions/GrokPattern'
-        description: 'The grok pattern applied to a data store by this classifier. For more information, see built-in patterns in <a href="http://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html">Writing Custom Classifers</a>.'
+        description: 'The grok pattern applied to a data store by this classifier. For more information, see built-in patterns in <a href="http://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html">Writing Custom Classifiers</a>.'
       CustomPatterns:
         $ref: '#/definitions/CustomPatterns'
-        description: 'Optional custom grok patterns defined by this classifier. For more information, see custom patterns in <a href="http://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html">Writing Custom Classifers</a>.'
+        description: 'Optional custom grok patterns defined by this classifier. For more information, see custom patterns in <a href="http://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html">Writing Custom Classifiers</a>.'
     description: A classifier that uses <code>grok</code> patterns.
   XMLClassifier:
     type: object
@@ -7173,16 +7194,16 @@ definitions:
         description: An identifier of the data format that the classifier matches.
       CreationTime:
         $ref: '#/definitions/Timestamp'
-        description: The time this classifier was registered.
+        description: The time that this classifier was registered.
       LastUpdated:
         $ref: '#/definitions/Timestamp'
-        description: The time this classifier was last updated.
+        description: The time that this classifier was last updated.
       Version:
         $ref: '#/definitions/VersionId'
         description: The version of this classifier.
       RowTag:
         $ref: '#/definitions/RowTag'
-        description: 'The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot identify a self-closing element (closed by <code>/&gt;</code>). An empty row element that contains only attributes can be parsed as long as it ends with a closing tag (for example, <code>&lt;row item_a="A" item_b="B"&gt;&lt;/row&gt;</code> is okay, but <code>&lt;row item_a="A" item_b="B" /&gt;</code> is not).'
+        description: 'The XML tag designating the element that contains each record in an XML document being parsed. This can''t identify a self-closing element (closed by <code>/&gt;</code>). An empty row element that contains only attributes can be parsed as long as it ends with a closing tag (for example, <code>&lt;row item_a="A" item_b="B"&gt;&lt;/row&gt;</code> is okay, but <code>&lt;row item_a="A" item_b="B" /&gt;</code> is not).'
     description: A classifier for <code>XML</code> content.
   JsonClassifier:
     type: object
@@ -7195,16 +7216,16 @@ definitions:
         description: The name of the classifier.
       CreationTime:
         $ref: '#/definitions/Timestamp'
-        description: The time this classifier was registered.
+        description: The time that this classifier was registered.
       LastUpdated:
         $ref: '#/definitions/Timestamp'
-        description: The time this classifier was last updated.
+        description: The time that this classifier was last updated.
       Version:
         $ref: '#/definitions/VersionId'
         description: The version of this classifier.
       JsonPath:
         $ref: '#/definitions/JsonPath'
-        description: 'A <code>JsonPath</code> string defining the JSON data for the classifier to classify. AWS Glue supports a subset of JsonPath, as described in <a href="https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json">Writing JsonPath Custom Classifiers</a>.'
+        description: 'A <code>JsonPath</code> string defining the JSON data for the classifier to classify. AWS Glue supports a subset of <code>JsonPath</code>, as described in <a href="https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json">Writing JsonPath Custom Classifiers</a>.'
     description: A classifier for <code>JSON</code> content.
   CsvClassifier:
     type: object
@@ -7216,10 +7237,10 @@ definitions:
         description: The name of the classifier.
       CreationTime:
         $ref: '#/definitions/Timestamp'
-        description: The time this classifier was registered.
+        description: The time that this classifier was registered.
       LastUpdated:
         $ref: '#/definitions/Timestamp'
-        description: The time this classifier was last updated.
+        description: The time that this classifier was last updated.
       Version:
         $ref: '#/definitions/VersionId'
         description: The version of this classifier.
@@ -7228,7 +7249,7 @@ definitions:
         description: A custom symbol to denote what separates each column entry in the row.
       QuoteSymbol:
         $ref: '#/definitions/CsvQuoteSymbol'
-        description: A custom symbol to denote what combines content into a single column value. Must be different from the column delimiter.
+        description: A custom symbol to denote what combines content into a single column value. It must be different from the column delimiter.
       ContainsHeader:
         $ref: '#/definitions/CsvHeaderOption'
         description: Indicates whether the CSV file contains a header.
@@ -7237,7 +7258,7 @@ definitions:
         description: A list of strings representing column names.
       DisableValueTrimming:
         $ref: '#/definitions/NullableBoolean'
-        description: Specifies not to trim values before identifying the type of column values. The default value is true.
+        description: Specifies not to trim values before identifying the type of column values. The default value is <code>true</code>.
       AllowSingleColumn:
         $ref: '#/definitions/NullableBoolean'
         description: Enables the processing of files that contain only one column.
@@ -7247,17 +7268,17 @@ definitions:
     properties:
       GrokClassifier:
         $ref: '#/definitions/GrokClassifier'
-        description: A <code>GrokClassifier</code> object.
+        description: A classifier that uses <code>grok</code>.
       XMLClassifier:
         $ref: '#/definitions/XMLClassifier'
-        description: An <code>XMLClassifier</code> object.
+        description: A classifier for XML content.
       JsonClassifier:
         $ref: '#/definitions/JsonClassifier'
-        description: A <code>JsonClassifier</code> object.
+        description: A classifier for JSON content.
       CsvClassifier:
         $ref: '#/definitions/CsvClassifier'
-        description: A <code>CSVClassifier</code> object.
-    description: '<p>Classifiers are triggered during a crawl task. A classifier checks whether a given file is in a format it can handle, and if it is, the classifier creates a schema in the form of a <code>StructType</code> object that matches that data format.</p> <p>You can use the standard classifiers that AWS Glue supplies, or you can write your own classifiers to best categorize your data sources and specify the appropriate schemas to use for them. A classifier can be a <code>grok</code> classifier, an <code>XML</code> classifier, a <code>JSON</code> classifier, or a custom <code>CSV</code> classifier as specified in one of the fields in the <code>Classifier</code> object.</p>'
+        description: A classifier for comma-separated values (CSV).
+    description: '<p>Classifiers are triggered during a crawl task. A classifier checks whether a given file is in a format it can handle. If it is, the classifier creates a schema in the form of a <code>StructType</code> object that matches that data format.</p> <p>You can use the standard classifiers that AWS Glue provides, or you can write your own classifiers to best categorize your data sources and specify the appropriate schemas to use for them. A classifier can be a <code>grok</code> classifier, an <code>XML</code> classifier, a <code>JSON</code> classifier, or a custom <code>CSV</code> classifier, as specified in one of the fields in the <code>Classifier</code> object.</p>'
   ClassifierList:
     type: array
     items:
@@ -7331,7 +7352,7 @@ definitions:
         description: A node identifier that is unique within the node's graph.
       NodeType:
         $ref: '#/definitions/CodeGenNodeType'
-        description: The type of node this is.
+        description: The type of node that this is.
       Args:
         $ref: '#/definitions/CodeGenNodeArgs'
         description: 'Properties of the node, in the form of name-value pairs.'
@@ -7565,13 +7586,16 @@ definitions:
     properties:
       S3Targets:
         $ref: '#/definitions/S3TargetList'
-        description: Specifies Amazon S3 targets.
+        description: Specifies Amazon Simple Storage Service (Amazon S3) targets.
       JdbcTargets:
         $ref: '#/definitions/JdbcTargetList'
         description: Specifies JDBC targets.
       DynamoDBTargets:
         $ref: '#/definitions/DynamoDBTargetList'
-        description: Specifies DynamoDB targets.
+        description: Specifies Amazon DynamoDB targets.
+      CatalogTargets:
+        $ref: '#/definitions/CatalogTargetList'
+        description: Specifies AWS Glue Data Catalog targets.
     description: Specifies data stores to crawl.
   DatabaseName:
     type: string
@@ -7584,7 +7608,7 @@ definitions:
       DeleteBehavior:
         $ref: '#/definitions/DeleteBehavior'
         description: The deletion behavior when the crawler finds a deleted object.
-    description: Crawler policy for update and deletion behavior.
+    description: A policy that specifies update and deletion behaviors for the crawler.
   CrawlerState:
     type: string
     enum:
@@ -7600,7 +7624,7 @@ definitions:
     properties:
       ScheduleExpression:
         $ref: '#/definitions/CronExpression'
-        description: 'A <code>cron</code> expression used to specify the schedule (see <a href="http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.'
+        description: 'A <code>cron</code> expression used to specify the schedule. For more information, see <a href="http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, specify <code>cron(15 12 * * ? *)</code>.'
       State:
         $ref: '#/definitions/ScheduleState'
         description: The state of the schedule.
@@ -7642,25 +7666,25 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/NameString'
-        description: The crawler name.
+        description: The name of the crawler.
       Role:
         $ref: '#/definitions/Role'
-        description: 'The IAM role (or ARN of an IAM role) used to access customer resources, such as data in Amazon S3.'
+        description: 'The Amazon Resource Name (ARN) of an IAM role that''s used to access customer resources, such as Amazon Simple Storage Service (Amazon S3) data.'
       Targets:
         $ref: '#/definitions/CrawlerTargets'
         description: A collection of targets to crawl.
       DatabaseName:
         $ref: '#/definitions/DatabaseName'
-        description: The database where metadata is written by this crawler.
+        description: The name of the database in which the crawler's output is stored.
       Description:
         $ref: '#/definitions/DescriptionString'
         description: A description of the crawler.
       Classifiers:
         $ref: '#/definitions/ClassifierNameList'
-        description: A list of custom classifiers associated with the crawler.
+        description: A list of UTF-8 strings that specify the custom classifiers that are associated with the crawler.
       SchemaChangePolicy:
         $ref: '#/definitions/SchemaChangePolicy'
-        description: Sets the behavior when the crawler finds a changed or deleted object.
+        description: The policy that specifies update and delete behaviors for the crawler.
       State:
         $ref: '#/definitions/CrawlerState'
         description: 'Indicates whether the crawler is running, or whether a run is pending.'
@@ -7675,10 +7699,10 @@ definitions:
         description: 'If the crawler is running, contains the total time elapsed since the last crawl began.'
       CreationTime:
         $ref: '#/definitions/Timestamp'
-        description: The time when the crawler was created.
+        description: The time that the crawler was created.
       LastUpdated:
         $ref: '#/definitions/Timestamp'
-        description: The time the crawler was last updated.
+        description: The time that the crawler was last updated.
       LastCrawl:
         $ref: '#/definitions/LastCrawlInfo'
         description: 'The status of the last crawl, and potentially error information if an error occurred.'
@@ -7690,7 +7714,7 @@ definitions:
         description: 'Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler''s behavior. For more information, see <a href="http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html">Configuring a Crawler</a>.'
       CrawlerSecurityConfiguration:
         $ref: '#/definitions/CrawlerSecurityConfiguration'
-        description: The name of the SecurityConfiguration structure to be used by this Crawler.
+        description: The name of the <code>SecurityConfiguration</code> structure to be used by this crawler.
     description: 'Specifies a crawler program that examines a data source and uses classifiers to try to determine its schema. If successful, the crawler records metadata concerning the data source in the AWS Glue Data Catalog.'
   NonNegativeDouble:
     type: number
@@ -7777,7 +7801,7 @@ definitions:
         description: The name of the classifier.
       RowTag:
         $ref: '#/definitions/RowTag'
-        description: 'The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot identify a self-closing element (closed by <code>/&gt;</code>). An empty row element that contains only attributes can be parsed as long as it ends with a closing tag (for example, <code>&lt;row item_a="A" item_b="B"&gt;&lt;/row&gt;</code> is okay, but <code>&lt;row item_a="A" item_b="B" /&gt;</code> is not).'
+        description: 'The XML tag designating the element that contains each record in an XML document being parsed. This can''t identify a self-closing element (closed by <code>/&gt;</code>). An empty row element that contains only attributes can be parsed as long as it ends with a closing tag (for example, <code>&lt;row item_a="A" item_b="B"&gt;&lt;/row&gt;</code> is okay, but <code>&lt;row item_a="A" item_b="B" /&gt;</code> is not).'
     description: Specifies an XML classifier for <code>CreateClassifier</code> to create.
   CreateJsonClassifierRequest:
     type: object
@@ -7790,7 +7814,7 @@ definitions:
         description: The name of the classifier.
       JsonPath:
         $ref: '#/definitions/JsonPath'
-        description: 'A <code>JsonPath</code> string defining the JSON data for the classifier to classify. AWS Glue supports a subset of JsonPath, as described in <a href="https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json">Writing JsonPath Custom Classifiers</a>.'
+        description: 'A <code>JsonPath</code> string defining the JSON data for the classifier to classify. AWS Glue supports a subset of <code>JsonPath</code>, as described in <a href="https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json">Writing JsonPath Custom Classifiers</a>.'
     description: Specifies a JSON classifier for <code>CreateClassifier</code> to create.
   CreateCsvClassifierRequest:
     type: object
@@ -8230,7 +8254,7 @@ definitions:
       Path:
         $ref: '#/definitions/Path'
         description: The name of the DynamoDB table to crawl.
-    description: Specifies a DynamoDB table to crawl.
+    description: Specifies an Amazon DynamoDB table to crawl.
   S3EncryptionList:
     type: array
     items:
@@ -8421,10 +8445,10 @@ definitions:
         description: A JDBC location.
       S3:
         $ref: '#/definitions/CodeGenNodeArgs'
-        description: An Amazon S3 location.
+        description: An Amazon Simple Storage Service (Amazon S3) location.
       DynamoDB:
         $ref: '#/definitions/CodeGenNodeArgs'
-        description: A DynamoDB Table location.
+        description: An Amazon DynamoDB table location.
     description: The location of resources.
   MappingList:
     type: array
@@ -8939,7 +8963,7 @@ definitions:
       Exclusions:
         $ref: '#/definitions/PathList'
         description: 'A list of glob patterns used to exclude from the crawl. For more information, see <a href="http://docs.aws.amazon.com/glue/latest/dg/add-crawler.html">Catalog Tables with a Crawler</a>.'
-    description: Specifies a data store in Amazon S3.
+    description: Specifies a data store in Amazon Simple Storage Service (Amazon S3).
   ScheduleState:
     type: string
     enum:
@@ -9085,7 +9109,7 @@ definitions:
         description: An identifier of the data format that the classifier matches.
       RowTag:
         $ref: '#/definitions/RowTag'
-        description: 'The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot identify a self-closing element (closed by <code>/&gt;</code>). An empty row element that contains only attributes can be parsed as long as it ends with a closing tag (for example, <code>&lt;row item_a="A" item_b="B"&gt;&lt;/row&gt;</code> is okay, but <code>&lt;row item_a="A" item_b="B" /&gt;</code> is not).'
+        description: 'The XML tag designating the element that contains each record in an XML document being parsed. This cannot identify a self-closing element (closed by <code>/&gt;</code>). An empty row element that contains only attributes can be parsed as long as it ends with a closing tag (for example, <code>&lt;row item_a="A" item_b="B"&gt;&lt;/row&gt;</code> is okay, but <code>&lt;row item_a="A" item_b="B" /&gt;</code> is not).'
     description: Specifies an XML classifier to be updated.
   UpdateJsonClassifierRequest:
     type: object
@@ -9097,7 +9121,7 @@ definitions:
         description: The name of the classifier.
       JsonPath:
         $ref: '#/definitions/JsonPath'
-        description: 'A <code>JsonPath</code> string defining the JSON data for the classifier to classify. AWS Glue supports a subset of JsonPath, as described in <a href="https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json">Writing JsonPath Custom Classifiers</a>.'
+        description: 'A <code>JsonPath</code> string defining the JSON data for the classifier to classify. AWS Glue supports a subset of <code>JsonPath</code>, as described in <a href="https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json">Writing JsonPath Custom Classifiers</a>.'
     description: Specifies a JSON classifier to be updated.
   UpdateCsvClassifierRequest:
     type: object
@@ -9112,7 +9136,7 @@ definitions:
         description: A custom symbol to denote what separates each column entry in the row.
       QuoteSymbol:
         $ref: '#/definitions/CsvQuoteSymbol'
-        description: A custom symbol to denote what combines content into a single column value. Must be different from the column delimiter.
+        description: A custom symbol to denote what combines content into a single column value. It must be different from the column delimiter.
       ContainsHeader:
         $ref: '#/definitions/CsvHeaderOption'
         description: Indicates whether the CSV file contains a header.
