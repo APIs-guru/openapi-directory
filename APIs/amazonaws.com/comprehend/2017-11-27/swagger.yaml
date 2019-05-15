@@ -1237,6 +1237,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListDocumentClassificationJobsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -1282,6 +1292,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListDocumentClassifiersRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -1437,6 +1457,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListEntityRecognizersRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -2455,6 +2485,9 @@ definitions:
       VolumeKmsKeyId:
         $ref: '#/definitions/KmsKeyId'
         description: '<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:</p> <ul> <li> <p>KMS Key ID: <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>Amazon Resource Name (ARN) of a KMS Key: <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> </ul>'
+      VpcConfig:
+        $ref: '#/definitions/VpcConfig'
+        description: 'Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your custom classifier. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html">Amazon VPC</a>. '
   ResourceInUseException: {}
   TooManyTagsException: {}
   TooManyRequestsException: {}
@@ -2495,6 +2528,9 @@ definitions:
       VolumeKmsKeyId:
         $ref: '#/definitions/KmsKeyId'
         description: '<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:</p> <ul> <li> <p>KMS Key ID: <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>Amazon Resource Name (ARN) of a KMS Key: <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> </ul>'
+      VpcConfig:
+        $ref: '#/definitions/VpcConfig'
+        description: 'Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your custom entity recognizer. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html">Amazon VPC</a>. '
   DeleteDocumentClassifierResponse:
     type: object
     properties: {}
@@ -2945,6 +2981,9 @@ definitions:
       VolumeKmsKeyId:
         $ref: '#/definitions/KmsKeyId'
         description: '<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:</p> <ul> <li> <p>KMS Key ID: <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>Amazon Resource Name (ARN) of a KMS Key: <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> </ul>'
+      VpcConfig:
+        $ref: '#/definitions/VpcConfig'
+        description: 'Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your document classification job. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html">Amazon VPC</a>. '
   StartDominantLanguageDetectionJobResponse:
     type: object
     properties:
@@ -2979,6 +3018,9 @@ definitions:
       VolumeKmsKeyId:
         $ref: '#/definitions/KmsKeyId'
         description: '<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:</p> <ul> <li> <p>KMS Key ID: <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>Amazon Resource Name (ARN) of a KMS Key: <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> </ul>'
+      VpcConfig:
+        $ref: '#/definitions/VpcConfig'
+        description: 'Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your dominant language detection job. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html">Amazon VPC</a>. '
   StartEntitiesDetectionJobResponse:
     type: object
     properties:
@@ -3020,6 +3062,9 @@ definitions:
       VolumeKmsKeyId:
         $ref: '#/definitions/KmsKeyId'
         description: '<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:</p> <ul> <li> <p>KMS Key ID: <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>Amazon Resource Name (ARN) of a KMS Key: <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> </ul>'
+      VpcConfig:
+        $ref: '#/definitions/VpcConfig'
+        description: 'Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your entity detection job. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html">Amazon VPC</a>. '
   StartKeyPhrasesDetectionJobResponse:
     type: object
     properties:
@@ -3058,6 +3103,9 @@ definitions:
       VolumeKmsKeyId:
         $ref: '#/definitions/KmsKeyId'
         description: '<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:</p> <ul> <li> <p>KMS Key ID: <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>Amazon Resource Name (ARN) of a KMS Key: <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> </ul>'
+      VpcConfig:
+        $ref: '#/definitions/VpcConfig'
+        description: ' Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your key phrases detection job. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html">Amazon VPC</a>. '
   StartSentimentDetectionJobResponse:
     type: object
     properties:
@@ -3096,6 +3144,9 @@ definitions:
       VolumeKmsKeyId:
         $ref: '#/definitions/KmsKeyId'
         description: '<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:</p> <ul> <li> <p>KMS Key ID: <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>Amazon Resource Name (ARN) of a KMS Key: <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> </ul>'
+      VpcConfig:
+        $ref: '#/definitions/VpcConfig'
+        description: 'Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your sentiment detection job. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html">Amazon VPC</a>. '
   StartTopicsDetectionJobResponse:
     type: object
     properties:
@@ -3133,6 +3184,9 @@ definitions:
       VolumeKmsKeyId:
         $ref: '#/definitions/KmsKeyId'
         description: '<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:</p> <ul> <li> <p>KMS Key ID: <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>Amazon Resource Name (ARN) of a KMS Key: <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> </ul>'
+      VpcConfig:
+        $ref: '#/definitions/VpcConfig'
+        description: 'Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your topic detection job. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html">Amazon VPC</a>. '
   StopDominantLanguageDetectionJobResponse:
     type: object
     properties:
@@ -3492,6 +3546,19 @@ definitions:
   KmsKeyId:
     type: string
     maxLength: 2048
+  VpcConfig:
+    type: object
+    required:
+      - SecurityGroupIds
+      - Subnets
+    properties:
+      SecurityGroupIds:
+        $ref: '#/definitions/SecurityGroupIds'
+        description: 'The ID number for a security group on an instance of your private VPC. Security groups on your VPC function serve as a virtual firewall to control inbound and outbound traffic and provides security for the resources that you’ll be accessing on the VPC. This ID number is preceded by "sg-", for instance: "sg-03b388029b0a285ea". For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html">Security Groups for your VPC</a>. '
+      Subnets:
+        $ref: '#/definitions/Subnets'
+        description: 'The ID for each subnet being used in your private VPC. This subnet is a subset of the a range of IPv4 addresses used by the VPC and is specific to a given availability zone in the VPC’s region. This ID number is preceded by "subnet-", for instance: "subnet-04ccf456919e69055". For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html">VPCs and Subnets</a>. '
+    description: ' Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for the job. For For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html">Amazon VPC</a>. '
   DocumentClassifierArn:
     type: string
     pattern: 'arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:document-classifier/[a-zA-Z0-9](-*[a-zA-Z0-9])*'
@@ -3560,6 +3627,9 @@ definitions:
       VolumeKmsKeyId:
         $ref: '#/definitions/KmsKeyId'
         description: '<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:</p> <ul> <li> <p>KMS Key ID: <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>Amazon Resource Name (ARN) of a KMS Key: <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> </ul>'
+      VpcConfig:
+        $ref: '#/definitions/VpcConfig'
+        description: ' Configuration parameters for a private Virtual Private Cloud (VPC) containing the resources you are using for your document classification job. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html">Amazon VPC</a>. '
     description: Provides information about a document classification job.
   DocumentClassifierProperties:
     type: object
@@ -3603,6 +3673,9 @@ definitions:
       VolumeKmsKeyId:
         $ref: '#/definitions/KmsKeyId'
         description: '<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:</p> <ul> <li> <p>KMS Key ID: <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>Amazon Resource Name (ARN) of a KMS Key: <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> </ul>'
+      VpcConfig:
+        $ref: '#/definitions/VpcConfig'
+        description: ' Configuration parameters for a private Virtual Private Cloud (VPC) containing the resources you are using for your custom classifier. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html">Amazon VPC</a>. '
     description: Provides information about a document classifier.
   DominantLanguageDetectionJobProperties:
     type: object
@@ -3637,6 +3710,9 @@ definitions:
       VolumeKmsKeyId:
         $ref: '#/definitions/KmsKeyId'
         description: '<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:</p> <ul> <li> <p>KMS Key ID: <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>Amazon Resource Name (ARN) of a KMS Key: <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> </ul>'
+      VpcConfig:
+        $ref: '#/definitions/VpcConfig'
+        description: ' Configuration parameters for a private Virtual Private Cloud (VPC) containing the resources you are using for your dominant language detection job. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html">Amazon VPC</a>. '
     description: Provides information about a dominant language detection job.
   EntitiesDetectionJobProperties:
     type: object
@@ -3677,6 +3753,9 @@ definitions:
       VolumeKmsKeyId:
         $ref: '#/definitions/KmsKeyId'
         description: '<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:</p> <ul> <li> <p>KMS Key ID: <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>Amazon Resource Name (ARN) of a KMS Key: <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> </ul>'
+      VpcConfig:
+        $ref: '#/definitions/VpcConfig'
+        description: ' Configuration parameters for a private Virtual Private Cloud (VPC) containing the resources you are using for your entity detection job. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html">Amazon VPC</a>. '
     description: Provides information about an entities detection job.
   EntityRecognizerProperties:
     type: object
@@ -3717,6 +3796,9 @@ definitions:
       VolumeKmsKeyId:
         $ref: '#/definitions/KmsKeyId'
         description: '<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:</p> <ul> <li> <p>KMS Key ID: <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>Amazon Resource Name (ARN) of a KMS Key: <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> </ul>'
+      VpcConfig:
+        $ref: '#/definitions/VpcConfig'
+        description: ' Configuration parameters for a private Virtual Private Cloud (VPC) containing the resources you are using for your custom entity recognizer. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html">Amazon VPC</a>. '
     description: Describes information about an entity recognizer.
   KeyPhrasesDetectionJobProperties:
     type: object
@@ -3754,6 +3836,9 @@ definitions:
       VolumeKmsKeyId:
         $ref: '#/definitions/KmsKeyId'
         description: '<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:</p> <ul> <li> <p>KMS Key ID: <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>Amazon Resource Name (ARN) of a KMS Key: <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> </ul>'
+      VpcConfig:
+        $ref: '#/definitions/VpcConfig'
+        description: ' Configuration parameters for a private Virtual Private Cloud (VPC) containing the resources you are using for your key phrases detection job. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html">Amazon VPC</a>. '
     description: Provides information about a key phrases detection job.
   SentimentDetectionJobProperties:
     type: object
@@ -3791,6 +3876,9 @@ definitions:
       VolumeKmsKeyId:
         $ref: '#/definitions/KmsKeyId'
         description: '<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:</p> <ul> <li> <p>KMS Key ID: <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>Amazon Resource Name (ARN) of a KMS Key: <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> </ul>'
+      VpcConfig:
+        $ref: '#/definitions/VpcConfig'
+        description: ' Configuration parameters for a private Virtual Private Cloud (VPC) containing the resources you are using for your sentiment detection job. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html">Amazon VPC</a>. '
     description: Provides information about a sentiment detection job.
   TopicsDetectionJobProperties:
     type: object
@@ -3828,6 +3916,9 @@ definitions:
       VolumeKmsKeyId:
         $ref: '#/definitions/KmsKeyId'
         description: '<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:</p> <ul> <li> <p>KMS Key ID: <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>Amazon Resource Name (ARN) of a KMS Key: <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> </ul>'
+      VpcConfig:
+        $ref: '#/definitions/VpcConfig'
+        description: 'Configuration parameters for a private Virtual Private Cloud (VPC) containing the resources you are using for your topic detection job. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html">Amazon VPC</a>. '
     description: Provides information about a topic detection job.
   JobName:
     type: string
@@ -4245,6 +4336,28 @@ definitions:
         $ref: '#/definitions/Float'
         description: The confidence that Amazon Comprehend has that the part of speech was correctly identified.
     description: 'Identifies the part of speech represented by the token and gives the confidence that Amazon Comprehend has that the part of speech was correctly identified. For more information about the parts of speech that Amazon Comprehend can identify, see <a>how-syntax</a>.'
+  SecurityGroupId:
+    type: string
+    pattern: '[-0-9a-zA-Z]+'
+    minLength: 1
+    maxLength: 32
+  SecurityGroupIds:
+    type: array
+    items:
+      $ref: '#/definitions/SecurityGroupId'
+    minItems: 1
+    maxItems: 5
+  SubnetId:
+    type: string
+    pattern: '[-0-9a-zA-Z]+'
+    minLength: 1
+    maxLength: 32
+  Subnets:
+    type: array
+    items:
+      $ref: '#/definitions/SubnetId'
+    minItems: 1
+    maxItems: 16
   TagKey:
     type: string
     minLength: 1

@@ -456,7 +456,7 @@ paths:
                     $ref: '#/definitions/RetentionPeriodInDays'
                     description: The number of days that message data is kept. The "unlimited" parameter must be false.
               versioningConfiguration:
-                description: '[Optional] How many versions of data set contents are kept. If not specified or set to null, only the latest version plus the latest succeeded version (if they are different) are kept for the time period specified by the "retentionPeriod" parameter. (For more information, see https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)'
+                description: Information about the versioning of data set contents.
                 type: object
                 properties:
                   unlimited:
@@ -1160,7 +1160,7 @@ paths:
                     $ref: '#/definitions/RetentionPeriodInDays'
                     description: The number of days that message data is kept. The "unlimited" parameter must be false.
               versioningConfiguration:
-                description: '[Optional] How many versions of data set contents are kept. If not specified or set to null, only the latest version plus the latest succeeded version (if they are different) are kept for the time period specified by the "retentionPeriod" parameter. (For more information, see https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)'
+                description: Information about the versioning of data set contents.
                 type: object
                 properties:
                   unlimited:
@@ -2533,6 +2533,16 @@ definitions:
       messages:
         $ref: '#/definitions/Messages'
         description: '<p>The list of messages to be sent. Each message has format: ''{ "messageId": "string", "payload": "string"}''.</p> <p>Note that the field names of message payloads (data) that you send to AWS IoT Analytics:</p> <ul> <li> <p>Must contain only alphanumeric characters and undescores (_); no other special characters are allowed.</p> </li> <li> <p>Must begin with an alphabetic character or single underscore (_).</p> </li> <li> <p>Cannot contain hyphens (-).</p> </li> <li> <p>In regular expression terms: "^[A-Za-z_]([A-Za-z0-9]*|[A-Za-z0-9][A-Za-z0-9_]*)$". </p> </li> <li> <p>Cannot be greater than 255 characters.</p> </li> <li> <p>Are case-insensitive. (Fields named "foo" and "FOO" in the same payload are considered duplicates.)</p> </li> </ul> <p>For example, {"temp_01": 29} or {"_temp_01": 29} are valid, but {"temp-01": 29}, {"01_temp": 29} or {"__temp_01": 29} are invalid in message payloads. </p>'
+  BucketKeyExpression:
+    type: string
+    pattern: '^[a-zA-Z0-9!_.*''()/{}:-]*$'
+    minLength: 1
+    maxLength: 255
+  BucketName:
+    type: string
+    pattern: '^[a-zA-Z0-9.\-_]*$'
+    minLength: 3
+    maxLength: 255
   PipelineName:
     type: string
     pattern: '^[a-zA-Z0-9_]+$'
@@ -2729,6 +2739,7 @@ definitions:
       maxVersions:
         $ref: '#/definitions/MaxVersions'
         description: How many versions of data set contents will be kept. The "unlimited" parameter must be false.
+    description: Information about the versioning of data set contents.
   CreateDatasetRequest:
     type: object
     required:
@@ -2868,7 +2879,7 @@ definitions:
       actionType:
         $ref: '#/definitions/DatasetActionType'
         description: The type of action by which the data set's contents are automatically created.
-    description: <p/>
+    description: Information about the action which automatically creates the data set's contents.
   DatasetActionSummaries:
     type: array
     items:
@@ -2893,12 +2904,35 @@ definitions:
         $ref: '#/definitions/RoleArn'
         description: The ARN of the role which grants AWS IoT Analytics permission to deliver data set contents to an AWS IoT Events input.
     description: Configuration information for delivery of data set contents to AWS IoT Events.
+  S3DestinationConfiguration:
+    type: object
+    required:
+      - bucket
+      - key
+      - roleArn
+    properties:
+      bucket:
+        $ref: '#/definitions/BucketName'
+        description: The name of the Amazon S3 bucket to which data set contents are delivered.
+      key:
+        $ref: '#/definitions/BucketKeyExpression'
+        description: The key of the data set contents object. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key).
+      glueConfiguration:
+        $ref: '#/definitions/GlueConfiguration'
+        description: 'Configuration information for coordination with the AWS Glue ETL (extract, transform and load) service.'
+      roleArn:
+        $ref: '#/definitions/RoleArn'
+        description: The ARN of the role which grants AWS IoT Analytics permission to interact with your Amazon S3 and AWS Glue resources.
+    description: Configuration information for delivery of data set contents to Amazon S3.
   DatasetContentDeliveryDestination:
     type: object
     properties:
       iotEventsDestinationConfiguration:
         $ref: '#/definitions/IotEventsDestinationConfiguration'
         description: Configuration information for delivery of data set contents to AWS IoT Events.
+      s3DestinationConfiguration:
+        $ref: '#/definitions/S3DestinationConfiguration'
+        description: Configuration information for delivery of data set contents to Amazon S3.
     description: The destination to which data set contents are delivered.
   EntryName:
     type: string
@@ -3166,6 +3200,29 @@ definitions:
   GetDatasetContentRequest:
     type: object
     properties: {}
+  GlueTableName:
+    type: string
+    minLength: 1
+    maxLength: 150
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
+  GlueDatabaseName:
+    type: string
+    minLength: 1
+    maxLength: 150
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
+  GlueConfiguration:
+    type: object
+    required:
+      - tableName
+      - databaseName
+    properties:
+      tableName:
+        $ref: '#/definitions/GlueTableName'
+        description: 'The name of the table in your AWS Glue Data Catalog which is used to perform the ETL (extract, transform and load) operations. (An AWS Glue Data Catalog table contains partitioned data and descriptions of data sources and targets.)'
+      databaseName:
+        $ref: '#/definitions/GlueDatabaseName'
+        description: The name of the database in your AWS Glue Data Catalog in which the table is located. (An AWS Glue Data Catalog database contains Glue Data tables.)
+    description: 'Configuration information for coordination with the AWS Glue ETL (extract, transform and load) service.'
   IotEventsInputName:
     type: string
     pattern: '^[a-zA-Z][a-zA-Z0-9_]*$'

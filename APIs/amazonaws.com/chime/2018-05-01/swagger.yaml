@@ -325,7 +325,7 @@ paths:
   '/accounts/{accountId}/users#operation=suspend':
     post:
       operationId: BatchSuspendUser
-      description: '<p>Suspends up to 50 users from a <code>Team</code> or <code>EnterpriseLWA</code> Amazon Chime account. For more information about different account types, see <a href="https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html">Managing Your Amazon Chime Accounts</a> in the <i>Amazon Chime Administration Guide</i>.</p> <p>Users suspended from a <code>Team</code> account are dissociated from the account, but they can continue to use Amazon Chime as free users. To remove the suspension from suspended <code>Team</code> account users, invite them to the <code>Team</code> account again. You can use the <a>InviteUsers</a> action to do so.</p> <p>Users suspended from an <code>EnterpriseLWA</code> account are immediately signed out of Amazon Chime and can no longer sign in. To remove the suspension from suspended <code>EnterpriseLWA</code> account users, use the <a>BatchUnsuspendUser</a> action. </p> <p>To sign out users without suspending them, use the <a>LogoutUser</a> action.</p>'
+      description: '<p>Suspends up to 50 users from a <code>Team</code> or <code>EnterpriseLWA</code> Amazon Chime account. For more information about different account types, see <a href="https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html">Managing Your Amazon Chime Accounts</a> in the <i>Amazon Chime Administration Guide</i>.</p> <p>Users suspended from a <code>Team</code> account are dissasociated from the account, but they can continue to use Amazon Chime as free users. To remove the suspension from suspended <code>Team</code> account users, invite them to the <code>Team</code> account again. You can use the <a>InviteUsers</a> action to do so.</p> <p>Users suspended from an <code>EnterpriseLWA</code> account are immediately signed out of Amazon Chime and can no longer sign in. To remove the suspension from suspended <code>EnterpriseLWA</code> account users, use the <a>BatchUnsuspendUser</a> action. </p> <p>To sign out users without suspending them, use the <a>LogoutUser</a> action.</p>'
       responses:
         '200':
           description: Success
@@ -803,6 +803,125 @@ paths:
           in: query
           description: Pagination token
           required: false
+  '/accounts/{accountId}/bots':
+    post:
+      operationId: CreateBot
+      description: Creates a bot for an Amazon Chime Enterprise account.
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateBotResponse'
+        '480':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '481':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '485':
+          description: ResourceLimitExceededException
+          schema:
+            $ref: '#/definitions/ResourceLimitExceededException'
+        '486':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: The Amazon Chime account ID.
+          type: string
+          pattern: .*\S.*
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - DisplayName
+            properties:
+              DisplayName:
+                description: The bot display name.
+                type: string
+                format: password
+              Domain:
+                description: The domain of the Amazon Chime Enterprise account.
+                type: string
+                pattern: .*\S.*
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListBots
+      description: Lists the bots associated with the administrator's Amazon Chime Enterprise account ID.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListBotsResponse'
+        '480':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '481':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '484':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '485':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: The Amazon Chime account ID.
+          type: string
+          pattern: .*\S.*
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of results to return in a single call. Default is 10.
+          type: integer
+          minimum: 1
+          maximum: 99
+        - name: next-token
+          in: query
+          required: false
+          description: The token to use to retrieve the next page of results.
+          type: string
   /phone-number-orders:
     post:
       operationId: CreatePhoneNumberOrder
@@ -1188,6 +1307,170 @@ paths:
                 pattern: .*\S.*
                 minLength: 1
                 maxLength: 100
+  '/accounts/{accountId}/bots/{botId}/events-configuration':
+    delete:
+      operationId: DeleteEventsConfiguration
+      description: Deletes the events configuration that allows a bot to receive outgoing events.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '481':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '485':
+          description: ResourceLimitExceededException
+          schema:
+            $ref: '#/definitions/ResourceLimitExceededException'
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: The Amazon Chime account ID.
+          type: string
+          pattern: .*\S.*
+        - name: botId
+          in: path
+          required: true
+          description: The bot ID.
+          type: string
+          pattern: .*\S.*
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetEventsConfiguration
+      description: 'Gets details for an events configuration that allows a bot to receive outgoing events, such as an HTTPS endpoint or Lambda function ARN. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetEventsConfigurationResponse'
+        '480':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '481':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '485':
+          description: ResourceLimitExceededException
+          schema:
+            $ref: '#/definitions/ResourceLimitExceededException'
+        '486':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: The Amazon Chime account ID.
+          type: string
+          pattern: .*\S.*
+        - name: botId
+          in: path
+          required: true
+          description: The bot ID.
+          type: string
+          pattern: .*\S.*
+    put:
+      operationId: PutEventsConfiguration
+      description: 'Creates an events configuration that allows a bot to receive outgoing events sent by Amazon Chime. Choose either an HTTPS endpoint or a Lambda function ARN. For more information, see <a>Bot</a>.'
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutEventsConfigurationResponse'
+        '480':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '481':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '485':
+          description: ResourceLimitExceededException
+          schema:
+            $ref: '#/definitions/ResourceLimitExceededException'
+        '486':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: The Amazon Chime account ID.
+          type: string
+          pattern: .*\S.*
+        - name: botId
+          in: path
+          required: true
+          description: The bot ID.
+          type: string
+          pattern: .*\S.*
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              OutboundEventsHTTPSEndpoint:
+                description: HTTPS endpoint that allows the bot to receive outgoing events.
+                type: string
+                format: password
+              LambdaFunctionArn:
+                description: Lambda function ARN that allows the bot to receive outgoing events.
+                type: string
+                format: password
   '/phone-numbers/{phoneNumberId}':
     delete:
       operationId: DeletePhoneNumber
@@ -2118,6 +2401,114 @@ paths:
                   EnableDialOut:
                     $ref: '#/definitions/Boolean'
                     description: 'Setting that allows meeting participants to choose the <b>Call me at a phone number</b> option. For more information, see <a href="https://docs.aws.amazon.com/chime/latest/ug/chime-join-meeting.html">Join a Meeting without the Amazon Chime App</a>.'
+  '/accounts/{accountId}/bots/{botId}':
+    get:
+      operationId: GetBot
+      description: 'Retrieves details for the specified bot, such as bot email address, bot type, status, and display name.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetBotResponse'
+        '480':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '481':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '484':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '485':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: The Amazon Chime account ID.
+          type: string
+          pattern: .*\S.*
+        - name: botId
+          in: path
+          required: true
+          description: The bot ID.
+          type: string
+          pattern: .*\S.*
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: UpdateBot
+      description: 'Updates the status of the specified bot, such as starting or stopping the bot from running in your Amazon Chime Enterprise account.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateBotResponse'
+        '480':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '481':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '485':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: The Amazon Chime account ID.
+          type: string
+          pattern: .*\S.*
+        - name: botId
+          in: path
+          required: true
+          description: The bot ID.
+          type: string
+          pattern: .*\S.*
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              Disabled:
+                description: 'When true, stops the specified bot from running in your account.'
+                type: boolean
   /settings:
     get:
       operationId: GetGlobalSettings
@@ -2909,6 +3300,66 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/accounts/{accountId}/bots/{botId}#operation=regenerate-security-token':
+    post:
+      operationId: RegenerateSecurityToken
+      description: Regenerates the security token for a bot.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RegenerateSecurityTokenResponse'
+        '480':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '481':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '485':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: The Amazon Chime account ID.
+          type: string
+          pattern: .*\S.*
+        - name: botId
+          in: path
+          required: true
+          description: The bot ID.
+          type: string
+          pattern: .*\S.*
+        - name: operation
+          in: query
+          required: true
+          type: string
+          enum:
+            - regenerate-security-token
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/accounts/{accountId}/users/{userId}#operation=reset-personal-pin':
     post:
       operationId: ResetPersonalPIN
@@ -3197,6 +3648,13 @@ definitions:
       Account:
         $ref: '#/definitions/Account'
         description: The Amazon Chime account details.
+  CreateBotResponse:
+    type: object
+    properties:
+      Bot:
+        $ref: '#/definitions/Bot'
+        description: The bot details.
+  ResourceLimitExceededException: {}
   CreatePhoneNumberOrderResponse:
     type: object
     properties:
@@ -3237,6 +3695,18 @@ definitions:
       AccountSettings:
         $ref: '#/definitions/AccountSettings'
         description: The Amazon Chime account settings.
+  GetBotResponse:
+    type: object
+    properties:
+      Bot:
+        $ref: '#/definitions/Bot'
+        description: The chat bot details.
+  GetEventsConfigurationResponse:
+    type: object
+    properties:
+      EventsConfiguration:
+        $ref: '#/definitions/EventsConfiguration'
+        description: The events configuration details.
   GetGlobalSettingsResponse:
     type: object
     properties:
@@ -3313,6 +3783,15 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results.
+  ListBotsResponse:
+    type: object
+    properties:
+      Bots:
+        $ref: '#/definitions/BotList'
+        description: List of bots and bot details.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token to use to retrieve the next page of results.
   ListPhoneNumberOrdersResponse:
     type: object
     properties:
@@ -3358,6 +3837,11 @@ definitions:
   LogoutUserResponse:
     type: object
     properties: {}
+  PutEventsConfigurationResponse:
+    type: object
+    properties:
+      EventsConfiguration:
+        $ref: '#/definitions/EventsConfiguration'
   PutVoiceConnectorOriginationResponse:
     type: object
     properties:
@@ -3397,6 +3881,11 @@ definitions:
         $ref: '#/definitions/SensitiveString'
         description: 'The RFC2617 compliant password associated with the SIP credentials, in US-ASCII format.'
     description: The SIP credentials used to authenticate requests to your Amazon Chime Voice Connector.
+  RegenerateSecurityTokenResponse:
+    type: object
+    properties:
+      Bot:
+        $ref: '#/definitions/Bot'
   ResetPersonalPINResponse:
     type: object
     properties:
@@ -3425,6 +3914,12 @@ definitions:
     type: object
     properties: {}
   ConflictException: {}
+  UpdateBotResponse:
+    type: object
+    properties:
+      Bot:
+        $ref: '#/definitions/Bot'
+        description: The updated bot details.
   UpdatePhoneNumberResponse:
     type: object
     properties:
@@ -3614,6 +4109,47 @@ definitions:
       UpdateUserRequestItems:
         $ref: '#/definitions/UpdateUserRequestItemList'
         description: The request containing the user IDs and details to update.
+  BotType:
+    type: string
+    enum:
+      - ChatBot
+  NullableBoolean:
+    type: boolean
+  Bot:
+    type: object
+    properties:
+      BotId:
+        $ref: '#/definitions/String'
+        description: The bot ID.
+      UserId:
+        $ref: '#/definitions/String'
+        description: The unique ID for the bot user.
+      DisplayName:
+        $ref: '#/definitions/SensitiveString'
+        description: The bot display name.
+      BotType:
+        $ref: '#/definitions/BotType'
+        description: The bot type.
+      Disabled:
+        $ref: '#/definitions/NullableBoolean'
+        description: 'When true, the bot is stopped from running in your account.'
+      CreatedTimestamp:
+        $ref: '#/definitions/Iso8601Timestamp'
+        description: 'The bot creation timestamp, in ISO 8601 format.'
+      UpdatedTimestamp:
+        $ref: '#/definitions/Iso8601Timestamp'
+        description: 'The updated bot timestamp, in ISO 8601 format.'
+      BotEmail:
+        $ref: '#/definitions/SensitiveString'
+        description: The bot email address.
+      SecurityToken:
+        $ref: '#/definitions/SensitiveString'
+        description: The security token used to authenticate Amazon Chime with the outgoing event endpoint.
+    description: A resource that allows Enterprise account administrators to configure an interface to receive events from Amazon Chime.
+  BotList:
+    type: array
+    items:
+      $ref: '#/definitions/Bot'
   BusinessCallingSettings:
     type: object
     properties:
@@ -3631,6 +4167,17 @@ definitions:
       Name:
         $ref: '#/definitions/AccountName'
         description: The name of the Amazon Chime account.
+  CreateBotRequest:
+    type: object
+    required:
+      - DisplayName
+    properties:
+      DisplayName:
+        $ref: '#/definitions/SensitiveString'
+        description: The bot display name.
+      Domain:
+        $ref: '#/definitions/NonEmptyString'
+        description: The domain of the Amazon Chime Enterprise account.
   PhoneNumberProductType:
     type: string
     enum:
@@ -3715,6 +4262,9 @@ definitions:
   DeleteAccountRequest:
     type: object
     properties: {}
+  DeleteEventsConfigurationRequest:
+    type: object
+    properties: {}
   DeletePhoneNumberRequest:
     type: object
     properties: {}
@@ -3765,10 +4315,29 @@ definitions:
       - Unprocessable
       - Throttled
       - PreconditionFailed
+  EventsConfiguration:
+    type: object
+    properties:
+      BotId:
+        $ref: '#/definitions/String'
+        description: The bot ID.
+      OutboundEventsHTTPSEndpoint:
+        $ref: '#/definitions/SensitiveString'
+        description: HTTPS endpoint that allows a bot to receive outgoing events.
+      LambdaFunctionArn:
+        $ref: '#/definitions/SensitiveString'
+        description: Lambda function ARN that allows a bot to receive outgoing events.
+    description: The configuration that allows a bot to receive outgoing events. Can be either an HTTPS endpoint or a Lambda function ARN.
   GetAccountRequest:
     type: object
     properties: {}
   GetAccountSettingsRequest:
+    type: object
+    properties: {}
+  GetBotRequest:
+    type: object
+    properties: {}
+  GetEventsConfigurationRequest:
     type: object
     properties: {}
   VoiceConnectorSettings:
@@ -3973,6 +4542,9 @@ definitions:
     type: integer
     minimum: 1
     maximum: 99
+  ListBotsRequest:
+    type: object
+    properties: {}
   ListPhoneNumberOrdersRequest:
     type: object
     properties: {}
@@ -4024,8 +4596,6 @@ definitions:
   LogoutUserRequest:
     type: object
     properties: {}
-  NullableBoolean:
-    type: boolean
   OrderedPhoneNumberStatus:
     type: string
     enum:
@@ -4145,6 +4715,15 @@ definitions:
       - Successful
       - Failed
       - Partial
+  PutEventsConfigurationRequest:
+    type: object
+    properties:
+      OutboundEventsHTTPSEndpoint:
+        $ref: '#/definitions/SensitiveString'
+        description: HTTPS endpoint that allows the bot to receive outgoing events.
+      LambdaFunctionArn:
+        $ref: '#/definitions/SensitiveString'
+        description: Lambda function ARN that allows the bot to receive outgoing events.
   PutVoiceConnectorOriginationRequest:
     type: object
     required:
@@ -4167,6 +4746,9 @@ definitions:
       Termination:
         $ref: '#/definitions/Termination'
         description: The termination setting details to add.
+  RegenerateSecurityTokenRequest:
+    type: object
+    properties: {}
   RegistrationStatus:
     type: string
     enum:
@@ -4196,6 +4778,12 @@ definitions:
       AccountSettings:
         $ref: '#/definitions/AccountSettings'
         description: The Amazon Chime account settings to update.
+  UpdateBotRequest:
+    type: object
+    properties:
+      Disabled:
+        $ref: '#/definitions/NullableBoolean'
+        description: 'When true, stops the specified bot from running in your account.'
   UpdateGlobalSettingsRequest:
     type: object
     required:
