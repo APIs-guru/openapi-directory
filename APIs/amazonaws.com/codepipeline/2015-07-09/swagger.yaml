@@ -259,6 +259,18 @@ paths:
           description: LimitExceededException
           schema:
             $ref: '#/definitions/LimitExceededException'
+        '482':
+          description: TooManyTagsException
+          schema:
+            $ref: '#/definitions/TooManyTagsException'
+        '483':
+          description: InvalidTagsException
+          schema:
+            $ref: '#/definitions/InvalidTagsException'
+        '484':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
       parameters:
         - name: body
           in: body
@@ -316,6 +328,18 @@ paths:
           description: LimitExceededException
           schema:
             $ref: '#/definitions/LimitExceededException'
+        '487':
+          description: TooManyTagsException
+          schema:
+            $ref: '#/definitions/TooManyTagsException'
+        '488':
+          description: InvalidTagsException
+          schema:
+            $ref: '#/definitions/InvalidTagsException'
+        '489':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
       parameters:
         - name: body
           in: body
@@ -347,6 +371,10 @@ paths:
           description: ValidationException
           schema:
             $ref: '#/definitions/ValidationException'
+        '481':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
       parameters:
         - name: body
           in: body
@@ -378,6 +406,10 @@ paths:
           description: ValidationException
           schema:
             $ref: '#/definitions/ValidationException'
+        '481':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
       parameters:
         - name: body
           in: body
@@ -411,6 +443,10 @@ paths:
           description: ValidationException
           schema:
             $ref: '#/definitions/ValidationException'
+        '481':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
       parameters:
         - name: body
           in: body
@@ -778,6 +814,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListActionExecutionsInput'
+        - name: maxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -815,6 +861,11 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListActionTypesInput'
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -856,6 +907,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListPipelineExecutionsInput'
+        - name: maxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -893,12 +954,72 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListPipelinesInput'
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
           type: string
           enum:
             - CodePipeline_20150709.ListPipelines
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=CodePipeline_20150709.ListTagsForResource':
+    post:
+      operationId: ListTagsForResource
+      description: Gets the set of key/value pairs (metadata) that are used to manage the resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsForResourceOutput'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InvalidNextTokenException
+          schema:
+            $ref: '#/definitions/InvalidNextTokenException'
+        '483':
+          description: InvalidArnException
+          schema:
+            $ref: '#/definitions/InvalidArnException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTagsForResourceInput'
+        - name: maxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodePipeline_20150709.ListTagsForResource
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -930,6 +1051,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListWebhooksInput'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -1309,6 +1440,18 @@ paths:
           description: PipelineNotFoundException
           schema:
             $ref: '#/definitions/PipelineNotFoundException'
+        '485':
+          description: TooManyTagsException
+          schema:
+            $ref: '#/definitions/TooManyTagsException'
+        '486':
+          description: InvalidTagsException
+          schema:
+            $ref: '#/definitions/InvalidTagsException'
+        '487':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
       parameters:
         - name: body
           in: body
@@ -1452,6 +1595,108 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=CodePipeline_20150709.TagResource':
+    post:
+      operationId: TagResource
+      description: 'Adds to or modifies the tags of the given resource. Tags are metadata that can be used to manage a resource. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TagResourceOutput'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InvalidArnException
+          schema:
+            $ref: '#/definitions/InvalidArnException'
+        '483':
+          description: TooManyTagsException
+          schema:
+            $ref: '#/definitions/TooManyTagsException'
+        '484':
+          description: InvalidTagsException
+          schema:
+            $ref: '#/definitions/InvalidTagsException'
+        '485':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/TagResourceInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodePipeline_20150709.TagResource
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=CodePipeline_20150709.UntagResource':
+    post:
+      operationId: UntagResource
+      description: Removes tags from an AWS resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UntagResourceOutput'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InvalidArnException
+          schema:
+            $ref: '#/definitions/InvalidArnException'
+        '483':
+          description: InvalidTagsException
+          schema:
+            $ref: '#/definitions/InvalidTagsException'
+        '484':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UntagResourceInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodePipeline_20150709.UntagResource
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=CodePipeline_20150709.UpdatePipeline':
     post:
       operationId: UpdatePipeline
@@ -1562,6 +1807,9 @@ definitions:
       actionType:
         $ref: '#/definitions/ActionType'
         description: Returns information about the details of an action type.
+      tags:
+        $ref: '#/definitions/TagList'
+        description: Specifies the tags applied to the custom action.
     description: Represents the output of a <code>CreateCustomActionType</code> operation.
   CreateCustomActionTypeInput:
     type: object
@@ -1593,14 +1841,23 @@ definitions:
       outputArtifactDetails:
         $ref: '#/definitions/ArtifactDetails'
         description: 'The details of the output artifact of the action, such as its commit ID.'
+      tags:
+        $ref: '#/definitions/TagList'
+        description: The tags for the custom action.
     description: Represents the input of a CreateCustomActionType operation.
   LimitExceededException: {}
+  TooManyTagsException: {}
+  InvalidTagsException: {}
+  ConcurrentModificationException: {}
   CreatePipelineOutput:
     type: object
     properties:
       pipeline:
         $ref: '#/definitions/PipelineDeclaration'
         description: 'Represents the structure of actions and stages to be performed in the pipeline. '
+      tags:
+        $ref: '#/definitions/TagList'
+        description: Specifies the tags applied to the pipeline.
     description: Represents the output of a <code>CreatePipeline</code> action.
   CreatePipelineInput:
     type: object
@@ -1610,6 +1867,9 @@ definitions:
       pipeline:
         $ref: '#/definitions/PipelineDeclaration'
         description: 'Represents the structure of actions and stages to be performed in the pipeline. '
+      tags:
+        $ref: '#/definitions/TagList'
+        description: The tags for the pipeline.
     description: Represents the input of a <code>CreatePipeline</code> action.
   PipelineNameInUseException: {}
   InvalidStageDeclarationException: {}
@@ -1903,6 +2163,31 @@ definitions:
         $ref: '#/definitions/NextToken'
         description: 'An identifier that was returned from the previous list pipelines call, which can be used to return the next set of pipelines in the list.'
     description: Represents the input of a <code>ListPipelines</code> action.
+  ListTagsForResourceOutput:
+    type: object
+    properties:
+      tags:
+        $ref: '#/definitions/TagList'
+        description: The tags for the resource.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If the amount of returned information is significantly large, an identifier is also returned and can be used in a subsequent API call to return the next page of the list. However, the ListTagsforResource call lists all available tags in one call and does not use pagination.'
+  ListTagsForResourceInput:
+    type: object
+    required:
+      - resourceArn
+    properties:
+      resourceArn:
+        $ref: '#/definitions/ResourceArn'
+        description: The Amazon Resource Name (ARN) of the resource to get tags for.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The token that was returned from the previous API call, which would be used to return the next page of the list. However, the ListTagsforResource call lists all available tags in one call and does not use pagination.'
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of results to return in a single call.
+  ResourceNotFoundException: {}
+  InvalidArnException: {}
   ListWebhooksOutput:
     type: object
     properties:
@@ -2114,6 +2399,9 @@ definitions:
       webhook:
         $ref: '#/definitions/WebhookDefinition'
         description: 'The detail provided in an input file to create the webhook, such as the webhook name, the pipeline name, and the action name. Give the webhook a unique name which identifies the webhook being defined. You may choose to name the webhook after the pipeline and action it targets so that you can easily recognize what it''s used for later.'
+      tags:
+        $ref: '#/definitions/TagList'
+        description: The tags for the webhook.
   InvalidWebhookFilterPatternException: {}
   InvalidWebhookAuthenticationParametersException: {}
   RegisterWebhookWithThirdPartyOutput:
@@ -2174,6 +2462,36 @@ definitions:
         $ref: '#/definitions/ClientRequestToken'
         description: The system-generated unique ID used to identify a unique execution request.
     description: Represents the input of a <code>StartPipelineExecution</code> action.
+  TagResourceOutput:
+    type: object
+    properties: {}
+  TagResourceInput:
+    type: object
+    required:
+      - resourceArn
+      - tags
+    properties:
+      resourceArn:
+        $ref: '#/definitions/ResourceArn'
+        description: The Amazon Resource Name (ARN) of the resource you want to add tags to.
+      tags:
+        $ref: '#/definitions/TagList'
+        description: The tags you want to modify or add to the resource.
+  UntagResourceOutput:
+    type: object
+    properties: {}
+  UntagResourceInput:
+    type: object
+    required:
+      - resourceArn
+      - tagKeys
+    properties:
+      resourceArn:
+        $ref: '#/definitions/ResourceArn'
+        description: ' The Amazon Resource Name (ARN) of the resource to remove tags from.'
+      tagKeys:
+        $ref: '#/definitions/TagKeyList'
+        description: The list of keys for the tags to be removed from the resource.
   UpdatePipelineOutput:
     type: object
     properties:
@@ -2918,6 +3236,10 @@ definitions:
     type: string
     minLength: 1
     maxLength: 2048
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
   PipelineDeclaration:
     type: object
     required:
@@ -3201,6 +3523,9 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/PipelineSummary'
+  ResourceArn:
+    type: string
+    pattern: 'arn:aws(-[\w]+)*:codepipeline:.+:[0-9]{12}:.+'
   WebhookDefinition:
     type: object
     required:
@@ -3267,6 +3592,9 @@ definitions:
       arn:
         $ref: '#/definitions/WebhookArn'
         description: The Amazon Resource Name (ARN) of the webhook.
+      tags:
+        $ref: '#/definitions/TagList'
+        description: Specifies the tags applied to the webhook.
     description: 'The detail returned for each webhook after listing webhooks, such as the webhook URL, the webhook name, and the webhook ARN.'
   WebhookList:
     type: array
@@ -3467,6 +3795,31 @@ definitions:
         $ref: '#/definitions/StageExecution'
         description: 'Information about the latest execution in the stage, including its ID and status.'
     description: Represents information about the state of the stage.
+  TagKey:
+    type: string
+    minLength: 1
+    maxLength: 128
+  TagValue:
+    type: string
+    minLength: 0
+    maxLength: 256
+  Tag:
+    type: object
+    required:
+      - key
+      - value
+    properties:
+      key:
+        $ref: '#/definitions/TagKey'
+        description: The tag's key.
+      value:
+        $ref: '#/definitions/TagValue'
+        description: The tag's value.
+    description: A tag is a key/value pair that is used to manage the resource.
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
   ThirdPartyJob:
     type: object
     properties:

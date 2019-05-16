@@ -13213,6 +13213,8 @@ paths:
           required: false
           description: The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned nextToken value.
           type: integer
+          minimum: 1
+          maximum: 1000
         - name: Filter
           in: query
           required: false
@@ -13272,6 +13274,8 @@ paths:
           required: false
           description: The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned nextToken value.
           type: integer
+          minimum: 1
+          maximum: 1000
         - name: Filter
           in: formData
           required: false
@@ -14415,6 +14419,8 @@ paths:
           required: false
           description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. This value can be between 5 and 1000.'
           type: integer
+          minimum: 10
+          maximum: 1000
         - name: NextToken
           in: query
           required: false
@@ -14474,6 +14480,8 @@ paths:
           required: false
           description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. This value can be between 5 and 1000.'
           type: integer
+          minimum: 10
+          maximum: 1000
         - name: NextToken
           in: formData
           required: false
@@ -17114,6 +17122,8 @@ paths:
           required: false
           description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. This value can be between 1 and 200.'
           type: integer
+          minimum: 1
+          maximum: 200
         - name: Action
           in: query
           required: true
@@ -17180,6 +17190,8 @@ paths:
           required: false
           description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. This value can be between 1 and 200.'
           type: integer
+          minimum: 1
+          maximum: 200
         - name: Action
           in: query
           required: true
@@ -17647,6 +17659,8 @@ paths:
           required: false
           description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. If this parameter is not specified, up to 50 results are returned by default.'
           type: integer
+          minimum: 5
+          maximum: 255
         - name: Action
           in: query
           required: true
@@ -17701,6 +17715,8 @@ paths:
           required: false
           description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. If this parameter is not specified, up to 50 results are returned by default.'
           type: integer
+          minimum: 5
+          maximum: 255
         - name: Action
           in: query
           required: true
@@ -17753,6 +17769,8 @@ paths:
           required: false
           description: The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results.
           type: integer
+          minimum: 5
+          maximum: 1000
         - name: Action
           in: query
           required: true
@@ -17812,6 +17830,8 @@ paths:
           required: false
           description: The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results.
           type: integer
+          minimum: 5
+          maximum: 1000
         - name: Action
           in: query
           required: true
@@ -19309,6 +19329,8 @@ paths:
           required: false
           description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
           type: integer
+          minimum: 5
+          maximum: 100
         - name: Action
           in: query
           required: true
@@ -19368,6 +19390,8 @@ paths:
           required: false
           description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
           type: integer
+          minimum: 5
+          maximum: 100
         - name: Action
           in: query
           required: true
@@ -19844,6 +19868,8 @@ paths:
           required: false
           description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another request with the returned <code>NextToken</code> value. This value can be between 5 and 1000. If this parameter is not specified, then all results are returned.'
           type: integer
+          minimum: 5
+          maximum: 1000
         - name: Action
           in: query
           required: true
@@ -19910,6 +19936,8 @@ paths:
           required: false
           description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another request with the returned <code>NextToken</code> value. This value can be between 5 and 1000. If this parameter is not specified, then all results are returned.'
           type: integer
+          minimum: 5
+          maximum: 1000
         - name: Action
           in: query
           required: true
@@ -22496,7 +22524,7 @@ paths:
         - name: Filter
           in: query
           required: false
-          description: <p>One or more filters.</p> <ul> <li> <p> <code>service-name</code> - The name of the service.</p> </li> <li> <p> <code>service-id</code> - The ID of the service.</p> </li> <li> <p> <code>service-state</code> - The state of the service (<code>Pending</code> | <code>Available</code> | <code>Deleting</code> | <code>Deleted</code> | <code>Failed</code>). </p> </li> </ul>
+          description: '<p>One or more filters.</p> <ul> <li> <p> <code>service-name</code> - The name of the service.</p> </li> <li> <p> <code>service-id</code> - The ID of the service.</p> </li> <li> <p> <code>service-state</code> - The state of the service (<code>Pending</code> | <code>Available</code> | <code>Deleting</code> | <code>Deleted</code> | <code>Failed</code>). </p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> </ul>'
           type: array
           items:
             type: string
@@ -22555,7 +22583,7 @@ paths:
         - name: Filter
           in: formData
           required: false
-          description: <p>One or more filters.</p> <ul> <li> <p> <code>service-name</code> - The name of the service.</p> </li> <li> <p> <code>service-id</code> - The ID of the service.</p> </li> <li> <p> <code>service-state</code> - The state of the service (<code>Pending</code> | <code>Available</code> | <code>Deleting</code> | <code>Deleted</code> | <code>Failed</code>). </p> </li> </ul>
+          description: '<p>One or more filters.</p> <ul> <li> <p> <code>service-name</code> - The name of the service.</p> </li> <li> <p> <code>service-id</code> - The ID of the service.</p> </li> <li> <p> <code>service-state</code> - The state of the service (<code>Pending</code> | <code>Available</code> | <code>Deleting</code> | <code>Deleted</code> | <code>Failed</code>). </p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> </ul>'
           type: array
           items:
             type: string
@@ -22714,7 +22742,7 @@ paths:
         - name: Filter
           in: query
           required: false
-          description: '<p>One or more filters.</p> <ul> <li> <p> <code>service-name</code>: The name of the service.</p> </li> </ul>'
+          description: '<p>One or more filters.</p> <ul> <li> <p> <code>service-name</code>: The name of the service.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> </ul>'
           type: array
           items:
             type: string
@@ -22773,7 +22801,7 @@ paths:
         - name: Filter
           in: formData
           required: false
-          description: '<p>One or more filters.</p> <ul> <li> <p> <code>service-name</code>: The name of the service.</p> </li> </ul>'
+          description: '<p>One or more filters.</p> <ul> <li> <p> <code>service-name</code>: The name of the service.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> </ul>'
           type: array
           items:
             type: string
@@ -22825,7 +22853,7 @@ paths:
         - name: Filter
           in: query
           required: false
-          description: '<p>One or more filters.</p> <ul> <li> <p> <code>service-name</code>: The name of the service.</p> </li> <li> <p> <code>vpc-id</code>: The ID of the VPC in which the endpoint resides.</p> </li> <li> <p> <code>vpc-endpoint-id</code>: The ID of the endpoint.</p> </li> <li> <p> <code>vpc-endpoint-state</code>: The state of the endpoint. (<code>pending</code> | <code>available</code> | <code>deleting</code> | <code>deleted</code>)</p> </li> </ul>'
+          description: '<p>One or more filters.</p> <ul> <li> <p> <code>service-name</code>: The name of the service.</p> </li> <li> <p> <code>vpc-id</code>: The ID of the VPC in which the endpoint resides.</p> </li> <li> <p> <code>vpc-endpoint-id</code>: The ID of the endpoint.</p> </li> <li> <p> <code>vpc-endpoint-state</code>: The state of the endpoint. (<code>pending</code> | <code>available</code> | <code>deleting</code> | <code>deleted</code>)</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> </ul>'
           type: array
           items:
             type: string
@@ -22884,7 +22912,7 @@ paths:
         - name: Filter
           in: formData
           required: false
-          description: '<p>One or more filters.</p> <ul> <li> <p> <code>service-name</code>: The name of the service.</p> </li> <li> <p> <code>vpc-id</code>: The ID of the VPC in which the endpoint resides.</p> </li> <li> <p> <code>vpc-endpoint-id</code>: The ID of the endpoint.</p> </li> <li> <p> <code>vpc-endpoint-state</code>: The state of the endpoint. (<code>pending</code> | <code>available</code> | <code>deleting</code> | <code>deleted</code>)</p> </li> </ul>'
+          description: '<p>One or more filters.</p> <ul> <li> <p> <code>service-name</code>: The name of the service.</p> </li> <li> <p> <code>vpc-id</code>: The ID of the VPC in which the endpoint resides.</p> </li> <li> <p> <code>vpc-endpoint-id</code>: The ID of the endpoint.</p> </li> <li> <p> <code>vpc-endpoint-state</code>: The state of the endpoint. (<code>pending</code> | <code>available</code> | <code>deleting</code> | <code>deleted</code>)</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> </ul>'
           type: array
           items:
             type: string
@@ -44642,6 +44670,9 @@ definitions:
       CreationTimestamp:
         $ref: '#/definitions/MillisecondDateTime'
         description: The date and time the VPC endpoint was created.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: Any tags assigned to the VPC endpoint.
     description: Describes a VPC endpoint.
   CreateVpcEndpointServiceConfigurationRequest:
     type: object
@@ -44693,6 +44724,9 @@ definitions:
       PrivateDnsName:
         $ref: '#/definitions/String'
         description: The private DNS name for the service.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: Any tags assigned to the service.
     description: Describes a service configuration for a VPC endpoint service.
   CreateVpcPeeringConnectionRequest:
     type: object
@@ -45579,6 +45613,10 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: The token for the next page of results.
+  DescribeCapacityReservationsMaxResults:
+    type: integer
+    minimum: 1
+    maximum: 1000
   DescribeCapacityReservationsRequest:
     type: object
     properties:
@@ -45589,7 +45627,7 @@ definitions:
         $ref: '#/definitions/String'
         description: The token to retrieve the next page of results.
       MaxResults:
-        $ref: '#/definitions/Integer'
+        $ref: '#/definitions/DescribeCapacityReservationsMaxResults'
         description: The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned nextToken value.
       Filters:
         $ref: '#/definitions/FilterList'
@@ -45808,6 +45846,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/EgressOnlyInternetGateway'
+  DescribeElasticGpusMaxResults:
+    type: integer
+    minimum: 10
+    maximum: 1000
   ElasticGpuIdSet:
     type: array
     items:
@@ -45825,7 +45867,7 @@ definitions:
         $ref: '#/definitions/FilterList'
         description: '<p>The filters.</p> <ul> <li> <p> <code>availability-zone</code> - The Availability Zone in which the Elastic Graphics accelerator resides.</p> </li> <li> <p> <code>elastic-gpu-health</code> - The status of the Elastic Graphics accelerator (<code>OK</code> | <code>IMPAIRED</code>).</p> </li> <li> <p> <code>elastic-gpu-state</code> - The state of the Elastic Graphics accelerator (<code>ATTACHED</code>).</p> </li> <li> <p> <code>elastic-gpu-type</code> - The type of Elastic Graphics accelerator; for example, <code>eg1.medium</code>.</p> </li> <li> <p> <code>instance-id</code> - The ID of the instance to which the Elastic Graphics accelerator is associated.</p> </li> </ul>'
       MaxResults:
-        $ref: '#/definitions/Integer'
+        $ref: '#/definitions/DescribeElasticGpusMaxResults'
         description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. This value can be between 5 and 1000.'
       NextToken:
         $ref: '#/definitions/String'
@@ -46466,6 +46508,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/LaunchTemplateVersion'
+  DescribeLaunchTemplatesMaxResults:
+    type: integer
+    minimum: 1
+    maximum: 200
   LaunchTemplateNameStringList:
     type: array
     items:
@@ -46489,7 +46535,7 @@ definitions:
         $ref: '#/definitions/String'
         description: The token to request the next page of results.
       MaxResults:
-        $ref: '#/definitions/Integer'
+        $ref: '#/definitions/DescribeLaunchTemplatesMaxResults'
         description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. This value can be between 1 and 200.'
   LaunchTemplateSet:
     type: array
@@ -46609,6 +46655,10 @@ definitions:
         $ref: '#/definitions/AttachmentStatus'
         description: The attachment state.
     description: Describes a network interface attachment.
+  DescribeNetworkInterfacePermissionsMaxResults:
+    type: integer
+    minimum: 5
+    maximum: 255
   NetworkInterfacePermissionIdList:
     type: array
     items:
@@ -46626,13 +46676,17 @@ definitions:
         $ref: '#/definitions/String'
         description: The token to request the next page of results.
       MaxResults:
-        $ref: '#/definitions/Integer'
+        $ref: '#/definitions/DescribeNetworkInterfacePermissionsMaxResults'
         description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. If this parameter is not specified, up to 50 results are returned by default.'
     description: Contains the parameters for DescribeNetworkInterfacePermissions.
   NetworkInterfacePermissionList:
     type: array
     items:
       $ref: '#/definitions/NetworkInterfacePermission'
+  DescribeNetworkInterfacesMaxResults:
+    type: integer
+    minimum: 5
+    maximum: 1000
   NetworkInterfaceIdList:
     type: array
     items:
@@ -46653,7 +46707,7 @@ definitions:
         $ref: '#/definitions/String'
         description: The token to retrieve the next page of results.
       MaxResults:
-        $ref: '#/definitions/Integer'
+        $ref: '#/definitions/DescribeNetworkInterfacesMaxResults'
         description: The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results.
     description: Contains the parameters for DescribeNetworkInterfaces.
   NetworkInterfaceList:
@@ -46904,6 +46958,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ReservedInstances'
+  DescribeRouteTablesMaxResults:
+    type: integer
+    minimum: 5
+    maximum: 100
   DescribeRouteTablesRequest:
     type: object
     properties:
@@ -46920,7 +46978,7 @@ definitions:
         $ref: '#/definitions/String'
         description: The token for the next page of results.
       MaxResults:
-        $ref: '#/definitions/Integer'
+        $ref: '#/definitions/DescribeRouteTablesMaxResults'
         description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
   RouteTableList:
     type: array
@@ -47052,6 +47110,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/SecurityGroupReference'
+  DescribeSecurityGroupsMaxResults:
+    type: integer
+    minimum: 5
+    maximum: 1000
   GroupNameStringList:
     type: array
     items:
@@ -47075,7 +47137,7 @@ definitions:
         $ref: '#/definitions/String'
         description: The token to request the next page of results.
       MaxResults:
-        $ref: '#/definitions/Integer'
+        $ref: '#/definitions/DescribeSecurityGroupsMaxResults'
         description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another request with the returned <code>NextToken</code> value. This value can be between 5 and 1000. If this parameter is not specified, then all results are returned.'
   SecurityGroupList:
     type: array
@@ -47288,6 +47350,14 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/SpotPrice'
+  DescribeStaleSecurityGroupsMaxResults:
+    type: integer
+    minimum: 5
+    maximum: 255
+  DescribeStaleSecurityGroupsNextToken:
+    type: string
+    minLength: 1
+    maxLength: 1024
   DescribeStaleSecurityGroupsRequest:
     type: object
     required:
@@ -47297,10 +47367,10 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       MaxResults:
-        $ref: '#/definitions/MaxResults'
+        $ref: '#/definitions/DescribeStaleSecurityGroupsMaxResults'
         description: The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results.
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/DescribeStaleSecurityGroupsNextToken'
         description: The token for the next set of items to return. (You received this token from a prior call.)
       VpcId:
         $ref: '#/definitions/String'
@@ -47653,7 +47723,7 @@ definitions:
         description: The IDs of one or more services.
       Filters:
         $ref: '#/definitions/FilterList'
-        description: <p>One or more filters.</p> <ul> <li> <p> <code>service-name</code> - The name of the service.</p> </li> <li> <p> <code>service-id</code> - The ID of the service.</p> </li> <li> <p> <code>service-state</code> - The state of the service (<code>Pending</code> | <code>Available</code> | <code>Deleting</code> | <code>Deleted</code> | <code>Failed</code>). </p> </li> </ul>
+        description: '<p>One or more filters.</p> <ul> <li> <p> <code>service-name</code> - The name of the service.</p> </li> <li> <p> <code>service-id</code> - The ID of the service.</p> </li> <li> <p> <code>service-state</code> - The state of the service (<code>Pending</code> | <code>Available</code> | <code>Deleting</code> | <code>Deleted</code> | <code>Failed</code>). </p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> </ul>'
       MaxResults:
         $ref: '#/definitions/Integer'
         description: 'The maximum number of results to return for the request in a single page. The remaining results of the initial request can be seen by sending another request with the returned <code>NextToken</code> value. This value can be between 5 and 1000; if <code>MaxResults</code> is given a value larger than 1000, only 1000 results are returned.'
@@ -47695,7 +47765,7 @@ definitions:
         description: One or more service names.
       Filters:
         $ref: '#/definitions/FilterList'
-        description: '<p>One or more filters.</p> <ul> <li> <p> <code>service-name</code>: The name of the service.</p> </li> </ul>'
+        description: '<p>One or more filters.</p> <ul> <li> <p> <code>service-name</code>: The name of the service.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> </ul>'
       MaxResults:
         $ref: '#/definitions/Integer'
         description: '<p>The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results.</p> <p>Constraint: If the value is greater than 1000, we return only 1000 items.</p>'
@@ -47718,7 +47788,7 @@ definitions:
         description: One or more endpoint IDs.
       Filters:
         $ref: '#/definitions/FilterList'
-        description: '<p>One or more filters.</p> <ul> <li> <p> <code>service-name</code>: The name of the service.</p> </li> <li> <p> <code>vpc-id</code>: The ID of the VPC in which the endpoint resides.</p> </li> <li> <p> <code>vpc-endpoint-id</code>: The ID of the endpoint.</p> </li> <li> <p> <code>vpc-endpoint-state</code>: The state of the endpoint. (<code>pending</code> | <code>available</code> | <code>deleting</code> | <code>deleted</code>)</p> </li> </ul>'
+        description: '<p>One or more filters.</p> <ul> <li> <p> <code>service-name</code>: The name of the service.</p> </li> <li> <p> <code>vpc-id</code>: The ID of the VPC in which the endpoint resides.</p> </li> <li> <p> <code>vpc-endpoint-id</code>: The ID of the endpoint.</p> </li> <li> <p> <code>vpc-endpoint-state</code>: The state of the endpoint. (<code>pending</code> | <code>available</code> | <code>deleting</code> | <code>deleted</code>)</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> </ul>'
       MaxResults:
         $ref: '#/definitions/Integer'
         description: '<p>The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results.</p> <p>Constraint: If the value is greater than 1000, we return only 1000 items.</p>'
@@ -53373,6 +53443,9 @@ definitions:
       ServiceName:
         $ref: '#/definitions/String'
         description: The Amazon Resource Name (ARN) of the service.
+      ServiceId:
+        $ref: '#/definitions/String'
+        description: The ID of the endpoint service.
       ServiceType:
         $ref: '#/definitions/ServiceTypeDetailSet'
         description: The type of service.
@@ -53397,6 +53470,9 @@ definitions:
       ManagesVpcEndpoints:
         $ref: '#/definitions/Boolean'
         description: Indicates whether the service manages it's VPC endpoints. Management of the service VPC endpoints using the VPC endpoint API is restricted.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: Any tags assigned to the service.
     description: Describes a VPC endpoint service.
   ServiceType:
     type: string
