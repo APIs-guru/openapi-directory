@@ -230,6 +230,47 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AlexaForBusiness.AssociateDeviceWithNetworkProfile':
+    post:
+      operationId: AssociateDeviceWithNetworkProfile
+      description: Associates a device with the specified network profile.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AssociateDeviceWithNetworkProfileResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '482':
+          description: DeviceNotRegisteredException
+          schema:
+            $ref: '#/definitions/DeviceNotRegisteredException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AssociateDeviceWithNetworkProfileRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.AssociateDeviceWithNetworkProfile
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AlexaForBusiness.AssociateDeviceWithRoom':
     post:
       operationId: AssociateDeviceWithRoom
@@ -551,6 +592,55 @@ paths:
           type: string
           enum:
             - AlexaForBusiness.CreateGatewayGroup
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AlexaForBusiness.CreateNetworkProfile':
+    post:
+      operationId: CreateNetworkProfile
+      description: Creates a network profile with the specified details.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateNetworkProfileResponse'
+        '480':
+          description: AlreadyExistsException
+          schema:
+            $ref: '#/definitions/AlreadyExistsException'
+        '481':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '482':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '483':
+          description: InvalidCertificateAuthorityException
+          schema:
+            $ref: '#/definitions/InvalidCertificateAuthorityException'
+        '484':
+          description: InvalidServiceLinkedRoleStateException
+          schema:
+            $ref: '#/definitions/InvalidServiceLinkedRoleStateException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateNetworkProfileRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.CreateNetworkProfile
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -907,7 +997,7 @@ paths:
   '/#X-Amz-Target=AlexaForBusiness.DeleteDeviceUsageData':
     post:
       operationId: DeleteDeviceUsageData
-      description: 'When this action is called for a specified shared device, it allows authorized users to delete the device''s entire previous history of voice input data and associated response data. This action can be called once every 24 hours for a specific shared device.'
+      description: 'When this action is called for a specified shared device, it allows authorized users to delete the device''s entire previous history of voice input data. This action can be called once every 24 hours for a specific shared device. '
       responses:
         '200':
           description: Success
@@ -970,6 +1060,47 @@ paths:
           type: string
           enum:
             - AlexaForBusiness.DeleteGatewayGroup
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AlexaForBusiness.DeleteNetworkProfile':
+    post:
+      operationId: DeleteNetworkProfile
+      description: Deletes a network profile by the network profile ARN.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteNetworkProfileResponse'
+        '480':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '481':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteNetworkProfileRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.DeleteNetworkProfile
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1658,6 +1789,43 @@ paths:
           type: string
           enum:
             - AlexaForBusiness.GetInvitationConfiguration
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AlexaForBusiness.GetNetworkProfile':
+    post:
+      operationId: GetNetworkProfile
+      description: Gets the network profile details by the network profile ARN.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetNetworkProfileResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: InvalidSecretsManagerResourceException
+          schema:
+            $ref: '#/definitions/InvalidSecretsManagerResourceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetNetworkProfileRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.GetNetworkProfile
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -2605,6 +2773,45 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AlexaForBusiness.SearchNetworkProfiles':
+    post:
+      operationId: SearchNetworkProfiles
+      description: Searches network profiles and lists the ones that meet a set of filter and sort criteria.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SearchNetworkProfilesResponse'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/SearchNetworkProfilesRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.SearchNetworkProfiles
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AlexaForBusiness.SearchProfiles':
     post:
       operationId: SearchProfiles
@@ -2842,7 +3049,7 @@ paths:
   '/#X-Amz-Target=AlexaForBusiness.StartDeviceSync':
     post:
       operationId: StartDeviceSync
-      description: 'Resets a device and its account to the known default settings, by clearing all information and settings set by previous users.'
+      description: '<p>Resets a device and its account to the known default settings. This clears all information and settings set by previous users in the following ways:</p> <ul> <li> <p>Bluetooth - This unpairs all bluetooth devices paired with your echo device.</p> </li> <li> <p>Volume - This resets the echo device''s volume to the default value.</p> </li> <li> <p>Notifications - This clears all notifications from your echo device.</p> </li> <li> <p>Lists - This clears all to-do items from your echo device.</p> </li> <li> <p>Settings - This internally syncs the room''s profile (if the device is assigned to a room), contacts, address books, delegation access for account linking, and communications (if enabled on the room profile).</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -3234,6 +3441,55 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AlexaForBusiness.UpdateNetworkProfile':
+    post:
+      operationId: UpdateNetworkProfile
+      description: Updates a network profile by the network profile ARN.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateNetworkProfileResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: NameInUseException
+          schema:
+            $ref: '#/definitions/NameInUseException'
+        '482':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '483':
+          description: InvalidCertificateAuthorityException
+          schema:
+            $ref: '#/definitions/InvalidCertificateAuthorityException'
+        '484':
+          description: InvalidSecretsManagerResourceException
+          schema:
+            $ref: '#/definitions/InvalidSecretsManagerResourceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateNetworkProfileRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AlexaForBusiness.UpdateNetworkProfile
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AlexaForBusiness.UpdateProfile':
     post:
       operationId: UpdateProfile
@@ -3383,6 +3639,22 @@ definitions:
       AddressBookArn:
         $ref: '#/definitions/Arn'
         description: The ARN of the address book with which to associate the contact.
+  AssociateDeviceWithNetworkProfileResponse:
+    type: object
+    properties: {}
+  AssociateDeviceWithNetworkProfileRequest:
+    type: object
+    required:
+      - DeviceArn
+      - NetworkProfileArn
+    properties:
+      DeviceArn:
+        $ref: '#/definitions/Arn'
+        description: The device ARN.
+      NetworkProfileArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the network profile to associate with a device.
+  DeviceNotRegisteredException: {}
   AssociateDeviceWithRoomResponse:
     type: object
     properties: {}
@@ -3395,7 +3667,6 @@ definitions:
       RoomArn:
         $ref: '#/definitions/Arn'
         description: The ARN of the room with which to associate the device. Required.
-  DeviceNotRegisteredException: {}
   AssociateSkillGroupWithRoomResponse:
     type: object
     properties: {}
@@ -3566,6 +3837,51 @@ definitions:
       ClientRequestToken:
         $ref: '#/definitions/ClientRequestToken'
         description: ' A unique, user-specified identifier for the request that ensures idempotency.'
+  CreateNetworkProfileResponse:
+    type: object
+    properties:
+      NetworkProfileArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the network profile associated with a device.
+  CreateNetworkProfileRequest:
+    type: object
+    required:
+      - NetworkProfileName
+      - Ssid
+      - SecurityType
+      - ClientRequestToken
+    properties:
+      NetworkProfileName:
+        $ref: '#/definitions/NetworkProfileName'
+        description: The name of the network profile associated with a device.
+      Description:
+        $ref: '#/definitions/NetworkProfileDescription'
+        description: Detailed information about a device's network profile.
+      Ssid:
+        $ref: '#/definitions/NetworkSsid'
+        description: The SSID of the Wi-Fi network.
+      SecurityType:
+        $ref: '#/definitions/NetworkSecurityType'
+        description: 'The security type of the Wi-Fi network. This can be WPA2_ENTERPRISE, WPA2_PSK, WPA_PSK, WEP, or OPEN.'
+      EapMethod:
+        $ref: '#/definitions/NetworkEapMethod'
+        description: 'The authentication standard that is used in the EAP framework. Currently, EAP_TLS is supported.'
+      CurrentPassword:
+        $ref: '#/definitions/CurrentWiFiPassword'
+        description: The current password of the Wi-Fi network.
+      NextPassword:
+        $ref: '#/definitions/NextWiFiPassword'
+        description: 'The next, or subsequent, password of the Wi-Fi network. This password is asynchronously transmitted to the device and is used when the password of the network changes to NextPassword. '
+      CertificateAuthorityArn:
+        $ref: '#/definitions/Arn'
+        description: 'The ARN of the Private Certificate Authority (PCA) created in AWS Certificate Manager (ACM). This is used to issue certificates to the devices. '
+      TrustAnchors:
+        $ref: '#/definitions/TrustAnchorList'
+        description: 'The root certificates of your authentication server that is installed on your devices and used to trust your authentication server during EAP negotiation. '
+      ClientRequestToken:
+        $ref: '#/definitions/ClientRequestToken'
+  InvalidCertificateAuthorityException: {}
+  InvalidServiceLinkedRoleStateException: {}
   CreateProfileResponse:
     type: object
     properties:
@@ -3746,7 +4062,6 @@ definitions:
       DeviceArn:
         $ref: '#/definitions/Arn'
         description: The ARN of the device for which to request details.
-  InvalidCertificateAuthorityException: {}
   DeleteDeviceUsageDataResponse:
     type: object
     properties: {}
@@ -3774,6 +4089,17 @@ definitions:
         $ref: '#/definitions/Arn'
         description: The ARN of the gateway group to delete.
   ResourceAssociatedException: {}
+  DeleteNetworkProfileResponse:
+    type: object
+    properties: {}
+  DeleteNetworkProfileRequest:
+    type: object
+    required:
+      - NetworkProfileArn
+    properties:
+      NetworkProfileArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the network profile associated with a device.
   DeleteProfileResponse:
     type: object
     properties: {}
@@ -4024,6 +4350,21 @@ definitions:
   GetInvitationConfigurationRequest:
     type: object
     properties: {}
+  GetNetworkProfileResponse:
+    type: object
+    properties:
+      NetworkProfile:
+        $ref: '#/definitions/NetworkProfile'
+        description: The network profile associated with a device.
+  GetNetworkProfileRequest:
+    type: object
+    required:
+      - NetworkProfileArn
+    properties:
+      NetworkProfileArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the network profile associated with a device.
+  InvalidSecretsManagerResourceException: {}
   GetProfileResponse:
     type: object
     properties:
@@ -4516,10 +4857,37 @@ definitions:
         description: 'The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.'
       Filters:
         $ref: '#/definitions/FilterList'
-        description: 'The filters to use to list a specified set of devices. Supported filter keys are DeviceName, DeviceStatus, DeviceStatusDetailCode, RoomName, DeviceType, DeviceSerialNumber, UnassociatedOnly, and ConnectionStatus (ONLINE and OFFLINE).'
+        description: 'The filters to use to list a specified set of devices. Supported filter keys are DeviceName, DeviceStatus, DeviceStatusDetailCode, RoomName, DeviceType, DeviceSerialNumber, UnassociatedOnly, ConnectionStatus (ONLINE and OFFLINE), NetworkProfileName, NetworkProfileArn, Feature, and FailureCode.'
       SortCriteria:
         $ref: '#/definitions/SortList'
-        description: 'The sort order to use in listing the specified set of devices. Supported sort keys are DeviceName, DeviceStatus, RoomName, DeviceType, DeviceSerialNumber, and ConnectionStatus.'
+        description: 'The sort order to use in listing the specified set of devices. Supported sort keys are DeviceName, DeviceStatus, RoomName, DeviceType, DeviceSerialNumber, ConnectionStatus, NetworkProfileName, NetworkProfileArn, Feature, and FailureCode.'
+  SearchNetworkProfilesResponse:
+    type: object
+    properties:
+      NetworkProfiles:
+        $ref: '#/definitions/NetworkProfileDataList'
+        description: 'The network profiles that meet the specified set of filter criteria, in sort order. It is a list of NetworkProfileData objects. '
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults.'
+      TotalCount:
+        $ref: '#/definitions/TotalCount'
+        description: The total number of network profiles returned.
+  SearchNetworkProfilesRequest:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults. '
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved. '
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: 'The filters to use to list a specified set of network profiles. Valid filters are NetworkProfileName, Ssid, and SecurityType.'
+      SortCriteria:
+        $ref: '#/definitions/SortList'
+        description: 'The sort order to use to list the specified set of network profiles. Valid sort criteria includes NetworkProfileName, Ssid, and SecurityType.'
   SearchProfilesResponse:
     type: object
     properties:
@@ -4862,6 +5230,35 @@ definitions:
       Description:
         $ref: '#/definitions/GatewayGroupDescription'
         description: The updated description of the gateway group.
+  UpdateNetworkProfileResponse:
+    type: object
+    properties: {}
+  UpdateNetworkProfileRequest:
+    type: object
+    required:
+      - NetworkProfileArn
+    properties:
+      NetworkProfileArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the network profile associated with a device.
+      NetworkProfileName:
+        $ref: '#/definitions/NetworkProfileName'
+        description: The name of the network profile associated with a device.
+      Description:
+        $ref: '#/definitions/NetworkProfileDescription'
+        description: Detailed information about a device's network profile.
+      CurrentPassword:
+        $ref: '#/definitions/CurrentWiFiPassword'
+        description: The current password of the Wi-Fi network.
+      NextPassword:
+        $ref: '#/definitions/NextWiFiPassword'
+        description: 'The next, or subsequent, password of the Wi-Fi network. This password is asynchronously transmitted to the device and is used when the password of the network changes to NextPassword. '
+      CertificateAuthorityArn:
+        $ref: '#/definitions/Arn'
+        description: 'The ARN of the Private Certificate Authority (PCA) created in AWS Certificate Manager (ACM). This is used to issue certificates to the devices. '
+      TrustAnchors:
+        $ref: '#/definitions/TrustAnchorList'
+        description: 'The root certificate(s) of your authentication server that will be installed on your devices and used to trust your authentication server during EAP negotiation. '
   UpdateProfileResponse:
     type: object
     properties: {}
@@ -5177,6 +5574,9 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Category'
+  CertificateTime:
+    type: string
+    format: date-time
   ClientId:
     type: string
     pattern: '^\S\+\{1,256\}$'
@@ -5377,6 +5777,51 @@ definitions:
     type: string
     minLength: 0
     maxLength: 200
+  NetworkProfileName:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+    minLength: 1
+    maxLength: 100
+  NetworkProfileDescription:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+    minLength: 0
+    maxLength: 200
+  NetworkSsid:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+    minLength: 1
+    maxLength: 32
+  NetworkSecurityType:
+    type: string
+    enum:
+      - OPEN
+      - WEP
+      - WPA_PSK
+      - WPA2_PSK
+      - WPA2_ENTERPRISE
+  NetworkEapMethod:
+    type: string
+    enum:
+      - EAP_TLS
+  CurrentWiFiPassword:
+    type: string
+    pattern: '[\x00-\x7F]*'
+    minLength: 5
+    maxLength: 128
+    format: password
+  NextWiFiPassword:
+    type: string
+    pattern: '(^$)|([\x00-\x7F]{5,})'
+    minLength: 0
+    maxLength: 128
+    format: password
+  TrustAnchorList:
+    type: array
+    items:
+      $ref: '#/definitions/TrustAnchor'
+    minItems: 1
+    maxItems: 5
   ProfileName:
     type: string
     pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
@@ -5509,6 +5954,7 @@ definitions:
       - PENDING
       - WAS_OFFLINE
       - DEREGISTERED
+      - FAILED
   DeviceStatusInfo:
     type: object
     properties:
@@ -5519,6 +5965,19 @@ definitions:
         $ref: '#/definitions/ConnectionStatus'
         description: 'The latest available information about the connection status of a device. '
     description: Detailed information about a device's status.
+  DeviceNetworkProfileInfo:
+    type: object
+    properties:
+      NetworkProfileArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the network profile associated with a device.
+      CertificateArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the certificate associated with a device.
+      CertificateExpirationTime:
+        $ref: '#/definitions/CertificateTime'
+        description: The time (in epoch) when the certificate expires.
+    description: Detailed information about a device's network profile.
   Device:
     type: object
     properties:
@@ -5549,6 +6008,9 @@ definitions:
       DeviceStatusInfo:
         $ref: '#/definitions/DeviceStatusInfo'
         description: Detailed information about a device's status.
+      NetworkProfileInfo:
+        $ref: '#/definitions/DeviceNetworkProfileInfo'
+        description: Detailed information about a device's network profile.
     description: A device with attributes.
   DeviceData:
     type: object
@@ -5574,6 +6036,12 @@ definitions:
       DeviceStatus:
         $ref: '#/definitions/DeviceStatus'
         description: The status of a device.
+      NetworkProfileArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the network profile associated with a device.
+      NetworkProfileName:
+        $ref: '#/definitions/NetworkProfileName'
+        description: The name of the network profile associated with a device.
       RoomArn:
         $ref: '#/definitions/Arn'
         description: The room ARN associated with a device.
@@ -5618,6 +6086,17 @@ definitions:
   DeviceSerialNumberForAVS:
     type: string
     pattern: '^[a-zA-Z0-9]{1,50}$'
+  Feature:
+    type: string
+    enum:
+      - BLUETOOTH
+      - VOLUME
+      - NOTIFICATIONS
+      - LISTS
+      - SKILLS
+      - NETWORK_PROFILE
+      - SETTINGS
+      - ALL
   DeviceStatusDetailCode:
     type: string
     enum:
@@ -5639,6 +6118,9 @@ definitions:
   DeviceStatusDetail:
     type: object
     properties:
+      Feature:
+        $ref: '#/definitions/Feature'
+        description: The list of available features on the device.
       Code:
         $ref: '#/definitions/DeviceStatusDetailCode'
         description: The device status detail code.
@@ -5671,15 +6153,6 @@ definitions:
       - REGISTERED
       - DISASSOCIATING
       - DEREGISTERING
-  Feature:
-    type: string
-    enum:
-      - BLUETOOTH
-      - VOLUME
-      - NOTIFICATIONS
-      - LISTS
-      - SKILLS
-      - ALL
   Features:
     type: array
     items:
@@ -5809,7 +6282,7 @@ definitions:
       $ref: '#/definitions/GenericKeyword'
   OrganizationName:
     type: string
-    pattern: '([A-Za-z\-'' 0-9._]|\p{IsLetter})*'
+    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
     minLength: 1
     maxLength: 100
   ShortSkillIdList:
@@ -5818,6 +6291,40 @@ definitions:
       $ref: '#/definitions/SkillId'
     minItems: 0
     maxItems: 3
+  NetworkProfile:
+    type: object
+    properties:
+      NetworkProfileArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the network profile associated with a device.
+      NetworkProfileName:
+        $ref: '#/definitions/NetworkProfileName'
+        description: The name of the network profile associated with a device.
+      Description:
+        $ref: '#/definitions/NetworkProfileDescription'
+        description: Detailed information about a device's network profile.
+      Ssid:
+        $ref: '#/definitions/NetworkSsid'
+        description: The SSID of the Wi-Fi network.
+      SecurityType:
+        $ref: '#/definitions/NetworkSecurityType'
+        description: 'The security type of the Wi-Fi network. This can be WPA2_ENTERPRISE, WPA2_PSK, WPA_PSK, WEP, or OPEN.'
+      EapMethod:
+        $ref: '#/definitions/NetworkEapMethod'
+        description: 'The authentication standard that is used in the EAP framework. Currently, EAP_TLS is supported. '
+      CurrentPassword:
+        $ref: '#/definitions/CurrentWiFiPassword'
+        description: The current password of the Wi-Fi network.
+      NextPassword:
+        $ref: '#/definitions/NextWiFiPassword'
+        description: 'The next, or subsequent, password of the Wi-Fi network. This password is asynchronously transmitted to the device and is used when the password of the network changes to NextPassword. '
+      CertificateAuthorityArn:
+        $ref: '#/definitions/Arn'
+        description: 'The ARN of the Private Certificate Authority (PCA) created in AWS Certificate Manager (ACM). This is used to issue certificates to the devices. '
+      TrustAnchors:
+        $ref: '#/definitions/TrustAnchorList'
+        description: 'The root certificates of your authentication server, which is installed on your devices and used to trust your authentication server during EAP negotiation.'
+    description: The network profile associated with a device.
   Profile:
     type: object
     properties:
@@ -5913,7 +6420,7 @@ definitions:
   NextToken:
     type: string
     minLength: 1
-    maxLength: 1000
+    maxLength: 1100
   MaxResults:
     type: integer
     minimum: 1
@@ -5946,6 +6453,35 @@ definitions:
       - 'YES'
       - 'NO'
       - OPTIONAL
+  NetworkProfileData:
+    type: object
+    properties:
+      NetworkProfileArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the network profile associated with a device.
+      NetworkProfileName:
+        $ref: '#/definitions/NetworkProfileName'
+        description: The name of the network profile associated with a device.
+      Description:
+        $ref: '#/definitions/NetworkProfileDescription'
+        description: Detailed information about a device's network profile.
+      Ssid:
+        $ref: '#/definitions/NetworkSsid'
+        description: The SSID of the Wi-Fi network.
+      SecurityType:
+        $ref: '#/definitions/NetworkSecurityType'
+        description: 'The security type of the Wi-Fi network. This can be WPA2_ENTERPRISE, WPA2_PSK, WPA_PSK, WEP, or OPEN.'
+      EapMethod:
+        $ref: '#/definitions/NetworkEapMethod'
+        description: 'The authentication standard that is used in the EAP framework. Currently, EAP_TLS is supported.'
+      CertificateAuthorityArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the Private Certificate Authority (PCA) created in AWS Certificate Manager (ACM). This is used to issue certificates to the devices.
+    description: The data associated with a network profile.
+  NetworkProfileDataList:
+    type: array
+    items:
+      $ref: '#/definitions/NetworkProfileData'
   NewInThisVersionBulletPoints:
     type: array
     items:
@@ -6286,6 +6822,9 @@ definitions:
         $ref: '#/definitions/TextValue'
         description: The value of the text message.
     description: The text message.
+  TrustAnchor:
+    type: string
+    pattern: '-{5}BEGIN CERTIFICATE-{5}\u000D?\u000A([A-Za-z0-9/+]{64}\u000D?\u000A)*[A-Za-z0-9/+]{1,64}={0,2}\u000D?\u000A-{5}END CERTIFICATE-{5}(\u000D?\u000A)?'
   UserData:
     type: object
     properties:

@@ -1338,6 +1338,10 @@ definitions:
       CreationTime:
         $ref: '#/definitions/Time'
         description: 'The time that the agent was activated (that is, created in your account).'
+      EndpointOptions:
+        $ref: '#/definitions/EndpointOptions'
+      PrivateLinkConfig:
+        $ref: '#/definitions/PrivateLinkConfig'
     description: DescribeAgentResponse
   DescribeAgentRequest:
     type: object
@@ -1725,7 +1729,7 @@ definitions:
     maxLength: 29
   AgentArn:
     type: string
-    pattern: '^arn:(aws|aws-cn):datasync:[a-z\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$'
+    pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$'
     maxLength: 128
   AgentArnList:
     type: array
@@ -1770,7 +1774,7 @@ definitions:
     minimum: -1
   TaskExecutionArn:
     type: string
-    pattern: '^arn:(aws|aws-cn):datasync:[a-z\-0-9]*:[0-9]{12}:task/task-[0-9a-f]{17}/execution/exec-[0-9a-f]{17}$'
+    pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]*:[0-9]{12}:task/task-[0-9a-f]{17}/execution/exec-[0-9a-f]{17}$'
     maxLength: 128
   TagList:
     type: array
@@ -1784,7 +1788,7 @@ definitions:
     maxLength: 4096
   EfsFilesystemArn:
     type: string
-    pattern: '^arn:(aws|aws-cn):elasticfilesystem:[a-z\-0-9]*:[0-9]{12}:file-system/fs-.*$'
+    pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):elasticfilesystem:[a-z\-0-9]*:[0-9]{12}:file-system/fs-.*$'
     maxLength: 128
   Ec2Config:
     type: object
@@ -1801,7 +1805,7 @@ definitions:
     description: 'The subnet and the security group that DataSync uses to access target EFS file system. The subnet must have at least one mount target for that file system. The security group that you provide needs to be able to communicate with the security group on the mount target in the subnet specified. '
   LocationArn:
     type: string
-    pattern: '^arn:(aws|aws-cn):datasync:[a-z\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$'
+    pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$'
     maxLength: 128
   NonEmptySubdirectory:
     type: string
@@ -1829,7 +1833,7 @@ definitions:
     description: Represents the mount options that are available for DataSync to access an NFS location.
   S3BucketArn:
     type: string
-    pattern: '^arn:(aws|aws-cn):s3:::([^/]*)$'
+    pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):s3:::([^/]*)$'
     maxLength: 76
   S3Config:
     type: object
@@ -1842,7 +1846,7 @@ definitions:
     description: '<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that is used to access an Amazon S3 bucket.</p> <p>For detailed information about using such a role, see "https://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html#create-s3-location" (Creating a Location for Amazon S3) in the <i>AWS DataSync User Guide</i>.</p>'
   LogGroupArn:
     type: string
-    pattern: '^arn:(aws|aws-cn):logs:[a-z\-0-9]*:[0-9]{12}:log-group:([^:\*]*)$'
+    pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):logs:[a-z\-0-9]*:[0-9]{12}:log-group:([^:\*]*)$'
     maxLength: 562
   Options:
     type: object
@@ -1883,11 +1887,27 @@ definitions:
     maxItems: 1
   TaskArn:
     type: string
-    pattern: '^arn:(aws|aws-cn):datasync:[a-z\-0-9]*:[0-9]{12}:task/task-[0-9a-f]{17}$'
+    pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]*:[0-9]{12}:task/task-[0-9a-f]{17}$'
     maxLength: 128
   Time:
     type: string
     format: date-time
+  EndpointOptions:
+    type: object
+    properties:
+      Fips:
+        $ref: '#/definitions/boolean'
+      PrivateLink:
+        $ref: '#/definitions/boolean'
+  PrivateLinkConfig:
+    type: object
+    properties:
+      PrivateLinkEndpoint:
+        $ref: '#/definitions/string'
+      SubnetArns:
+        $ref: '#/definitions/PLSubnetArnList'
+      SecurityGroupArns:
+        $ref: '#/definitions/PLSecurityGroupArnList'
   LocationUri:
     type: string
     pattern: '(efs|nfs|s3)://[a-zA-Z0-9.\-]+'
@@ -1944,7 +1964,7 @@ definitions:
     minimum: 0
   Ec2SubnetArn:
     type: string
-    pattern: '^arn:(aws|aws-cn):ec2:[a-z\-0-9]*:[0-9]{12}:subnet/.*$'
+    pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\-0-9]*:[0-9]{12}:subnet/.*$'
     maxLength: 128
   Ec2SecurityGroupArnList:
     type: array
@@ -1954,8 +1974,10 @@ definitions:
     maxItems: 5
   Ec2SecurityGroupArn:
     type: string
-    pattern: '^arn:(aws|aws-cn):ec2:[a-z\-0-9]*:[0-9]{12}:security-group/.*$'
+    pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\-0-9]*:[0-9]{12}:security-group/.*$'
     maxLength: 128
+  boolean:
+    type: boolean
   FilterRule:
     type: object
     properties:
@@ -1974,7 +1996,7 @@ definitions:
     maxLength: 128
   FilterValue:
     type: string
-    pattern: ^.+$
+    pattern: '^[^\x00]+$'
     maxLength: 409600
   Gid:
     type: string
@@ -1985,7 +2007,7 @@ definitions:
       - BOTH
   IamRoleArn:
     type: string
-    pattern: '^arn:(aws|aws-cn):iam::[0-9]{12}:role/.*$'
+    pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*$'
     maxLength: 2048
   MaxResults:
     type: integer
@@ -1994,14 +2016,14 @@ definitions:
   NextToken:
     type: string
     pattern: '[a-zA-Z0-9=_-]+'
-    maxLength: 93
+    maxLength: 65535
   LocationList:
     type: array
     items:
       $ref: '#/definitions/LocationListEntry'
   TaggableResourceArn:
     type: string
-    pattern: '^arn:(aws|aws-cn):datasync:[a-z\-0-9]+:[0-9]{12}:(agent|task|location)/(agent|task|loc)-[0-9a-z]{17}$'
+    pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]+:[0-9]{12}:(agent|task|location)/(agent|task|loc)-[0-9a-z]{17}$'
     maxLength: 128
   TaskExecutionList:
     type: array
@@ -2061,6 +2083,18 @@ definitions:
       - NONE
       - BEST_EFFORT
       - PRESERVE
+  PLSecurityGroupArnList:
+    type: array
+    items:
+      $ref: '#/definitions/Ec2SecurityGroupArn'
+    minItems: 1
+    maxItems: 1
+  PLSubnetArnList:
+    type: array
+    items:
+      $ref: '#/definitions/Ec2SubnetArn'
+    minItems: 1
+    maxItems: 1
   PhaseStatus:
     type: string
     enum:

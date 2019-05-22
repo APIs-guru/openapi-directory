@@ -429,7 +429,7 @@ definitions:
         description: Product code is used to uniquely identify a product in AWS Marketplace. The product code should be the same as the one used during the publishing of a new product.
       Timestamp:
         $ref: '#/definitions/Timestamp'
-        description: 'Timestamp of the hour, recorded in UTC. The seconds and milliseconds portions of the timestamp will be ignored.'
+        description: 'Timestamp, in UTC, for which the usage is being reported. Your application can meter usage for up to one hour in the past. Make sure the timestamp value is not before the start of the software usage.'
       UsageDimension:
         $ref: '#/definitions/UsageDimension'
         description: It will be one of the fcp dimension name provided during the publishing of the product.
@@ -541,7 +541,7 @@ definitions:
     properties:
       Timestamp:
         $ref: '#/definitions/Timestamp'
-        description: '<p>Timestamp of the hour, recorded in UTC. The seconds and milliseconds portions of the timestamp will be ignored.</p> <p>Your application can meter usage for up to one hour in the past.</p>'
+        description: '<p>Timestamp, in UTC, for which the usage is being reported.</p> <p>Your application can meter usage for up to one hour in the past. Make sure the timestamp value is not before the start of the software usage.</p>'
       CustomerIdentifier:
         $ref: '#/definitions/CustomerIdentifier'
         description: The CustomerIdentifier is obtained through the ResolveCustomer operation and represents an individual buyer in your application.
