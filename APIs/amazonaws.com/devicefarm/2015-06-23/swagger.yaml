@@ -316,6 +316,10 @@ paths:
           description: ServiceAccountException
           schema:
             $ref: '#/definitions/ServiceAccountException'
+        '484':
+          description: TagOperationException
+          schema:
+            $ref: '#/definitions/TagOperationException'
       parameters:
         - name: body
           in: body
@@ -2334,6 +2338,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=DeviceFarm_20150623.ListTagsForResource':
+    post:
+      operationId: ListTagsForResource
+      description: List the tags for an AWS Device Farm resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsForResourceResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: TagOperationException
+          schema:
+            $ref: '#/definitions/TagOperationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTagsForResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.ListTagsForResource
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=DeviceFarm_20150623.ListTests':
     post:
       operationId: ListTests
@@ -2803,6 +2844,88 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=DeviceFarm_20150623.TagResource':
+    post:
+      operationId: TagResource
+      description: 'Associates the specified tags to a resource with the specified <code>resourceArn</code>. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are deleted as well.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TagResourceResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: TagOperationException
+          schema:
+            $ref: '#/definitions/TagOperationException'
+        '482':
+          description: TooManyTagsException
+          schema:
+            $ref: '#/definitions/TooManyTagsException'
+        '483':
+          description: TagPolicyException
+          schema:
+            $ref: '#/definitions/TagPolicyException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/TagResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.TagResource
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=DeviceFarm_20150623.UntagResource':
+    post:
+      operationId: UntagResource
+      description: Deletes the specified tags from a resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UntagResourceResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: TagOperationException
+          schema:
+            $ref: '#/definitions/TagOperationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UntagResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - DeviceFarm_20150623.UntagResource
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=DeviceFarm_20150623.UpdateDeviceInstance':
     post:
       operationId: UpdateDeviceInstance
@@ -3253,6 +3376,7 @@ definitions:
         $ref: '#/definitions/JobTimeoutMinutes'
         description: Sets the execution timeout value (in minutes) for a project. All test runs in this project will use the specified execution timeout value unless overridden when scheduling a run.
     description: Represents a request to the create project operation.
+  TagOperationException: {}
   CreateRemoteAccessSessionResult:
     type: object
     example:
@@ -4304,6 +4428,20 @@ definitions:
         $ref: '#/definitions/PaginationToken'
         description: 'An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.'
     description: Represents a request to the list suites operation.
+  ListTagsForResourceResponse:
+    type: object
+    properties:
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: 'The tags to add to the resource. A tag is an array of key-value pairs. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
+  ListTagsForResourceRequest:
+    type: object
+    required:
+      - ResourceARN
+    properties:
+      ResourceARN:
+        $ref: '#/definitions/AmazonResourceName'
+        description: 'The Amazon Resource Name (ARN) of the resource(s) for which to list tags. You can associate tags with the following Device Farm resources: <code>PROJECT</code>, <code>RUN</code>, <code>NETWORK_PROFILE</code>, <code>INSTANCE_PROFILE</code>, <code>DEVICE_INSTANCE</code>, <code>SESSION</code>, <code>DEVICE_POOL</code>, <code>DEVICE</code>, and <code>VPCE_CONFIGURATION</code>.'
   ListTestsResult:
     type: object
     example:
@@ -4555,6 +4693,38 @@ definitions:
         $ref: '#/definitions/AmazonResourceName'
         description: Represents the Amazon Resource Name (ARN) of the Device Farm run you wish to stop.
     description: Represents the request to stop a specific run.
+  TagResourceResponse:
+    type: object
+    properties: {}
+  TagResourceRequest:
+    type: object
+    required:
+      - ResourceARN
+      - Tags
+    properties:
+      ResourceARN:
+        $ref: '#/definitions/AmazonResourceName'
+        description: 'The Amazon Resource Name (ARN) of the resource(s) to which to add tags. You can associate tags with the following Device Farm resources: <code>PROJECT</code>, <code>RUN</code>, <code>NETWORK_PROFILE</code>, <code>INSTANCE_PROFILE</code>, <code>DEVICE_INSTANCE</code>, <code>SESSION</code>, <code>DEVICE_POOL</code>, <code>DEVICE</code>, and <code>VPCE_CONFIGURATION</code>.'
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: 'The tags to add to the resource. A tag is an array of key-value pairs. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
+  TooManyTagsException: {}
+  TagPolicyException: {}
+  UntagResourceResponse:
+    type: object
+    properties: {}
+  UntagResourceRequest:
+    type: object
+    required:
+      - ResourceARN
+      - TagKeys
+    properties:
+      ResourceARN:
+        $ref: '#/definitions/AmazonResourceName'
+        description: 'The Amazon Resource Name (ARN) of the resource(s) from which to delete tags. You can associate tags with the following Device Farm resources: <code>PROJECT</code>, <code>RUN</code>, <code>NETWORK_PROFILE</code>, <code>INSTANCE_PROFILE</code>, <code>DEVICE_INSTANCE</code>, <code>SESSION</code>, <code>DEVICE_POOL</code>, <code>DEVICE</code>, and <code>VPCE_CONFIGURATION</code>.'
+      TagKeys:
+        $ref: '#/definitions/TagKeyList'
+        description: The keys of the tags to be removed.
   UpdateDeviceInstanceResult:
     type: object
     properties:
@@ -4819,6 +4989,7 @@ definitions:
   AmazonResourceName:
     type: string
     minLength: 32
+    maxLength: 1011
   AmazonResourceNames:
     type: array
     items:
@@ -5981,6 +6152,11 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Suite'
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+    maxItems: 150
   Tests:
     type: array
     items:
@@ -6230,6 +6406,32 @@ definitions:
     type: object
     additionalProperties:
       $ref: '#/definitions/String'
+  TagKey:
+    type: string
+    minLength: 1
+    maxLength: 128
+  TagValue:
+    type: string
+    minLength: 0
+    maxLength: 256
+  Tag:
+    type: object
+    required:
+      - Key
+      - Value
+    properties:
+      Key:
+        $ref: '#/definitions/TagKey'
+        description: One part of a key-value pair that make up a tag. A <code>key</code> is a general label that acts like a category for more specific tag values.
+      Value:
+        $ref: '#/definitions/TagValue'
+        description: The optional part of a key-value pair that make up a tag. A <code>value</code> acts as a descriptor within a tag category (key).
+    description: 'The metadata that you apply to a resource to help you categorize and organize it. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters. '
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+    maxItems: 150
   UniqueProblem:
     type: object
     properties:

@@ -217,16 +217,16 @@ paths:
                 minLength: 1
                 maxLength: 2048
               ThroughputMode:
-                description: 'The throughput mode for the file system to be created. There are two throughput modes to choose from for your file system: bursting and provisioned. You can decrease your file system''s throughput in Provisioned Throughput mode or change between the throughput modes as long as it’s been more than 24 hours since the last decrease or throughput mode change.'
+                description: 'The throughput mode for the file system to be created. There are two throughput modes to choose from for your file system: <code>bursting</code> and <code>provisioned</code>. If you set <code>ThroughputMode</code> to <code>provisioned</code>, you must also set a value for <code>ProvisionedThroughPutInMibps</code>. You can decrease your file system''s throughput in Provisioned Throughput mode or change between the throughput modes as long as it’s been more than 24 hours since the last decrease or throughput mode change. For more, see <a href="https://docs.aws.amazon.com/efs/latest/ug/performance.html#provisioned-throughput">Specifying Throughput with Provisioned Mode</a> in the <i>Amazon EFS User Guide.</i> '
                 type: string
                 enum:
                   - bursting
                   - provisioned
               ProvisionedThroughputInMibps:
-                description: 'The throughput, measured in MiB/s, that you want to provision for a file system that you''re creating. The limit on throughput is 1024 MiB/s. You can get these limits increased by contacting AWS Support. For more information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits">Amazon EFS Limits That You Can Increase</a> in the <i>Amazon EFS User Guide.</i> '
+                description: 'The throughput, measured in MiB/s, that you want to provision for a file system that you''re creating. Valid values are 1-1024. Required if <code>ThroughputMode</code> is set to <code>provisioned</code>. The upper limit for throughput is 1024 MiB/s. You can get this limit increased by contacting AWS Support. For more information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits">Amazon EFS Limits That You Can Increase</a> in the <i>Amazon EFS User Guide.</i> '
                 type: number
                 format: double
-                minimum: 0
+                minimum: 1
               Tags:
                 description: 'A value that specifies to create one or more tags associated with the file system. Each tag is a user-defined key-value pair. Name your file system on creation by including a <code>"Key":"Name","Value":"{value}"</code> key-value pair.'
                 type: array
@@ -264,7 +264,7 @@ paths:
         - name: MaxItems
           in: query
           required: false
-          description: '(Optional) Specifies the maximum number of file systems to return in the response (integer). Currently, this number is automatically set to 10. '
+          description: '(Optional) Specifies the maximum number of file systems to return in the response (integer). Currently, this number is automatically set to 10, and other values are ignored. The response is paginated at 10 per page if you have more than 10 file systems. '
           type: integer
           minimum: 1
         - name: Marker
@@ -402,7 +402,7 @@ paths:
         - name: MaxItems
           in: query
           required: false
-          description: '(Optional) Maximum number of mount targets to return in the response. Currently, this number is automatically set to 10.'
+          description: '(Optional) Maximum number of mount targets to return in the response. Currently, this number is automatically set to 10, and other values are ignored. The response is paginated at 10 per page if you have more than 10 mount targets.'
           type: integer
           minimum: 1
         - name: Marker
@@ -552,16 +552,16 @@ paths:
             type: object
             properties:
               ThroughputMode:
-                description: '(Optional) The throughput mode that you want your file system to use. If you''re not updating your throughput mode, you don''t need to provide this value in your request.'
+                description: '(Optional) The throughput mode that you want your file system to use. If you''re not updating your throughput mode, you don''t need to provide this value in your request. If you are changing the <code>ThroughputMode</code> to <code>provisioned</code>, you must also set a value for <code>ProvisionedThroughputInMibps</code>.'
                 type: string
                 enum:
                   - bursting
                   - provisioned
               ProvisionedThroughputInMibps:
-                description: '(Optional) The amount of throughput, in MiB/s, that you want to provision for your file system. If you''re not updating the amount of provisioned throughput for your file system, you don''t need to provide this value in your request.'
+                description: '(Optional) The amount of throughput, in MiB/s, that you want to provision for your file system. Valid values are 1-1024. Required if <code>ThroughputMode</code> is changed to <code>provisioned</code> on update. If you''re not updating the amount of provisioned throughput for your file system, you don''t need to provide this value in your request. '
                 type: number
                 format: double
-                minimum: 0
+                minimum: 1
   '/2015-02-01/mount-targets/{MountTargetId}':
     delete:
       operationId: DeleteMountTarget
@@ -835,7 +835,7 @@ paths:
         - name: MaxItems
           in: query
           required: false
-          description: '(Optional) The maximum number of file system tags to return in the response. Currently, this number is automatically set to 10.'
+          description: '(Optional) The maximum number of file system tags to return in the response. Currently, this number is automatically set to 10, and other values are ignored. The response is paginated at 10 per page if you have more than 10 tags.'
           type: integer
           minimum: 1
         - name: Marker
@@ -918,10 +918,10 @@ definitions:
         description: The ID of an AWS Key Management Service (AWS KMS) customer master key (CMK) that was used to protect the encrypted file system.
       ThroughputMode:
         $ref: '#/definitions/ThroughputMode'
-        description: 'The throughput mode for a file system. There are two throughput modes to choose from for your file system: bursting and provisioned. You can decrease your file system''s throughput in Provisioned Throughput mode or change between the throughput modes as long as it’s been more than 24 hours since the last decrease or throughput mode change.'
+        description: 'The throughput mode for a file system. There are two throughput modes to choose from for your file system: <code>bursting</code> and <code>provisioned</code>. If you set <code>ThroughputMode</code> to <code>provisioned</code>, you must also set a value for <code>ProvisionedThroughPutInMibps</code>. You can decrease your file system''s throughput in Provisioned Throughput mode or change between the throughput modes as long as it’s been more than 24 hours since the last decrease or throughput mode change. '
       ProvisionedThroughputInMibps:
         $ref: '#/definitions/ProvisionedThroughputInMibps'
-        description: 'The throughput, measured in MiB/s, that you want to provision for a file system. The limit on throughput is 1024 MiB/s. You can get these limits increased by contacting AWS Support. For more information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits">Amazon EFS Limits That You Can Increase</a> in the <i>Amazon EFS User Guide.</i> '
+        description: 'The throughput, measured in MiB/s, that you want to provision for a file system. Valid values are 1-1024. Required if <code>ThroughputMode</code> is set to <code>provisioned</code>. The limit on throughput is 1024 MiB/s. You can get these limits increased by contacting AWS Support. For more information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits">Amazon EFS Limits That You Can Increase</a> in the <i>Amazon EFS User Guide.</i> '
       Tags:
         $ref: '#/definitions/Tags'
         description: 'The tags associated with the file system, presented as an array of <code>Tag</code> objects.'
@@ -1124,7 +1124,7 @@ definitions:
   ProvisionedThroughputInMibps:
     type: number
     format: double
-    minimum: 0
+    minimum: 1
   Tags:
     type: array
     items:
@@ -1148,10 +1148,10 @@ definitions:
         description: '<p>The ID of the AWS KMS CMK to be used to protect the encrypted file system. This parameter is only required if you want to use a nondefault CMK. If this parameter is not specified, the default CMK for Amazon EFS is used. This ID can be in one of the following formats:</p> <ul> <li> <p>Key ID - A unique identifier of the key, for example <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p> </li> <li> <p>ARN - An Amazon Resource Name (ARN) for the key, for example <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p> </li> <li> <p>Key alias - A previously created display name for a key, for example <code>alias/projectKey1</code>.</p> </li> <li> <p>Key alias ARN - An ARN for a key alias, for example <code>arn:aws:kms:us-west-2:444455556666:alias/projectKey1</code>.</p> </li> </ul> <p>If <code>KmsKeyId</code> is specified, the <a>CreateFileSystemRequest$Encrypted</a> parameter must be set to true.</p>'
       ThroughputMode:
         $ref: '#/definitions/ThroughputMode'
-        description: 'The throughput mode for the file system to be created. There are two throughput modes to choose from for your file system: bursting and provisioned. You can decrease your file system''s throughput in Provisioned Throughput mode or change between the throughput modes as long as it’s been more than 24 hours since the last decrease or throughput mode change.'
+        description: 'The throughput mode for the file system to be created. There are two throughput modes to choose from for your file system: <code>bursting</code> and <code>provisioned</code>. If you set <code>ThroughputMode</code> to <code>provisioned</code>, you must also set a value for <code>ProvisionedThroughPutInMibps</code>. You can decrease your file system''s throughput in Provisioned Throughput mode or change between the throughput modes as long as it’s been more than 24 hours since the last decrease or throughput mode change. For more, see <a href="https://docs.aws.amazon.com/efs/latest/ug/performance.html#provisioned-throughput">Specifying Throughput with Provisioned Mode</a> in the <i>Amazon EFS User Guide.</i> '
       ProvisionedThroughputInMibps:
         $ref: '#/definitions/ProvisionedThroughputInMibps'
-        description: 'The throughput, measured in MiB/s, that you want to provision for a file system that you''re creating. The limit on throughput is 1024 MiB/s. You can get these limits increased by contacting AWS Support. For more information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits">Amazon EFS Limits That You Can Increase</a> in the <i>Amazon EFS User Guide.</i> '
+        description: 'The throughput, measured in MiB/s, that you want to provision for a file system that you''re creating. Valid values are 1-1024. Required if <code>ThroughputMode</code> is set to <code>provisioned</code>. The upper limit for throughput is 1024 MiB/s. You can get this limit increased by contacting AWS Support. For more information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits">Amazon EFS Limits That You Can Increase</a> in the <i>Amazon EFS User Guide.</i> '
       Tags:
         $ref: '#/definitions/Tags'
         description: 'A value that specifies to create one or more tags associated with the file system. Each tag is a user-defined key-value pair. Name your file system on creation by including a <code>"Key":"Name","Value":"{value}"</code> key-value pair.'
@@ -1320,7 +1320,7 @@ definitions:
     properties:
       ThroughputMode:
         $ref: '#/definitions/ThroughputMode'
-        description: '(Optional) The throughput mode that you want your file system to use. If you''re not updating your throughput mode, you don''t need to provide this value in your request.'
+        description: '(Optional) The throughput mode that you want your file system to use. If you''re not updating your throughput mode, you don''t need to provide this value in your request. If you are changing the <code>ThroughputMode</code> to <code>provisioned</code>, you must also set a value for <code>ProvisionedThroughputInMibps</code>.'
       ProvisionedThroughputInMibps:
         $ref: '#/definitions/ProvisionedThroughputInMibps'
-        description: '(Optional) The amount of throughput, in MiB/s, that you want to provision for your file system. If you''re not updating the amount of provisioned throughput for your file system, you don''t need to provide this value in your request.'
+        description: '(Optional) The amount of throughput, in MiB/s, that you want to provision for your file system. Valid values are 1-1024. Required if <code>ThroughputMode</code> is changed to <code>provisioned</code> on update. If you''re not updating the amount of provisioned throughput for your file system, you don''t need to provide this value in your request. '

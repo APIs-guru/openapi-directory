@@ -112,7 +112,7 @@ paths:
   '/#X-Amz-Target=AWSBudgetServiceGateway.CreateBudget':
     post:
       operationId: CreateBudget
-      description: 'Creates a budget and, if included, notifications and subscribers. '
+      description: '<p>Creates a budget and, if included, notifications and subscribers. </p> <important> <p>Only one of <code>BudgetLimit</code> or <code>PlannedBudgetLimits</code> can be present in the syntax at one time. Use the syntax that matches your case. The Request Syntax section shows the <code>BudgetLimit</code> syntax. For <code>PlannedBudgetLimits</code>, see the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_CreateBudget.html#API_CreateBudget_Examples">Examples</a> section. </p> </important>'
       responses:
         '200':
           description: Success
@@ -378,7 +378,7 @@ paths:
   '/#X-Amz-Target=AWSBudgetServiceGateway.DescribeBudget':
     post:
       operationId: DescribeBudget
-      description: Describes a budget.
+      description: '<p>Describes a budget.</p> <important> <p>The Request Syntax section shows the <code>BudgetLimit</code> syntax. For <code>PlannedBudgetLimits</code>, see the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_DescribeBudget.html#API_DescribeBudget_Examples">Examples</a> section. </p> </important>'
       responses:
         '200':
           description: Success
@@ -468,7 +468,7 @@ paths:
   '/#X-Amz-Target=AWSBudgetServiceGateway.DescribeBudgets':
     post:
       operationId: DescribeBudgets
-      description: Lists the budgets that are associated with an account.
+      description: '<p>Lists the budgets that are associated with an account.</p> <important> <p>The Request Syntax section shows the <code>BudgetLimit</code> syntax. For <code>PlannedBudgetLimits</code>, see the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_DescribeBudgets.html#API_DescribeBudgets_Examples">Examples</a> section. </p> </important>'
       responses:
         '200':
           description: Success
@@ -615,7 +615,7 @@ paths:
   '/#X-Amz-Target=AWSBudgetServiceGateway.UpdateBudget':
     post:
       operationId: UpdateBudget
-      description: 'Updates a budget. You can change every part of a budget except for the <code>budgetName</code> and the <code>calculatedSpend</code>. When you modify a budget, the <code>calculatedSpend</code> drops to zero until AWS has new usage data to use for forecasting.'
+      description: '<p>Updates a budget. You can change every part of a budget except for the <code>budgetName</code> and the <code>calculatedSpend</code>. When you modify a budget, the <code>calculatedSpend</code> drops to zero until AWS has new usage data to use for forecasting.</p> <important> <p>Only one of <code>BudgetLimit</code> or <code>PlannedBudgetLimits</code> can be present in the syntax at one time. Use the syntax that matches your case. The Request Syntax section shows the <code>BudgetLimit</code> syntax. For <code>PlannedBudgetLimits</code>, see the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_UpdateBudget.html#API_UpdateBudget_Examples">Examples</a> section. </p> </important>'
       responses:
         '200':
           description: Success
@@ -1112,6 +1112,10 @@ definitions:
         $ref: '#/definitions/UnitValue'
         description: 'The unit of measurement that is used for the budget forecast, actual spend, or budget threshold, such as dollars or GB.'
     description: '<p>The amount of cost or usage that is measured for a budget.</p> <p>For example, a <code>Spend</code> for <code>3 GB</code> of S3 usage would have the following parameters:</p> <ul> <li> <p>An <code>Amount</code> of <code>3</code> </p> </li> <li> <p>A <code>unit</code> of <code>GB</code> </p> </li> </ul>'
+  PlannedBudgetLimits:
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/Spend'
   CostFilters:
     type: object
     description: ' A map that represents the cost filters that are applied to the budget.'
@@ -1205,13 +1209,16 @@ definitions:
     properties:
       BudgetName:
         $ref: '#/definitions/BudgetName'
-        description: 'The name of a budget. The name must be unique within accounts. The <code>:</code> and <code>\</code> characters aren''t allowed in <code>BudgetName</code>.'
+        description: 'The name of a budget. The name must be unique within an account. The <code>:</code> and <code>\</code> characters aren''t allowed in <code>BudgetName</code>.'
       BudgetLimit:
         $ref: '#/definitions/Spend'
-        description: '<p>The total amount of cost, usage, RI utilization, or RI coverage that you want to track with your budget.</p> <p> <code>BudgetLimit</code> is required for cost or usage budgets, but optional for RI utilization or coverage budgets. RI utilization or coverage budgets default to <code>100</code>, which is the only valid value for RI utilization or coverage budgets.</p>'
+        description: '<p>The total amount of cost, usage, RI utilization, or RI coverage that you want to track with your budget.</p> <p> <code>BudgetLimit</code> is required for cost or usage budgets, but optional for RI utilization or coverage budgets. RI utilization or coverage budgets default to <code>100</code>, which is the only valid value for RI utilization or coverage budgets. You can''t use <code>BudgetLimit</code> with <code>PlannedBudgetLimits</code> for <code>CreateBudget</code> and <code>UpdateBudget</code> actions. </p>'
+      PlannedBudgetLimits:
+        $ref: '#/definitions/PlannedBudgetLimits'
+        description: '<p>A map containing multiple <code>BudgetLimit</code>, including current or future limits.</p> <p> <code>PlannedBudgetLimits</code> is available for cost or usage budget and supports monthly and quarterly <code>TimeUnit</code>. </p> <p>For monthly budgets, provide 12 months of <code>PlannedBudgetLimits</code> values. This must start from the current month and include the next 11 months. The <code>key</code> is the start of the month, <code>UTC</code> in epoch seconds. </p> <p>For quarterly budgets, provide 4 quarters of <code>PlannedBudgetLimits</code> value entries in standard calendar quarter increments. This must start from the current quarter and include the next 3 quarters. The <code>key</code> is the start of the quarter, <code>UTC</code> in epoch seconds. </p> <p>If the planned budget expires before 12 months for monthly or 4 quarters for quarterly, provide the <code>PlannedBudgetLimits</code> values only for the remaining periods.</p> <p>If the budget begins at a date in the future, provide <code>PlannedBudgetLimits</code> values from the start date of the budget. </p> <p>After all of the <code>BudgetLimit</code> values in <code>PlannedBudgetLimits</code> are used, the budget continues to use the last limit as the <code>BudgetLimit</code>. At that point, the planned budget provides the same experience as a fixed budget. </p> <p> <code>DescribeBudget</code> and <code>DescribeBudgets</code> response along with <code>PlannedBudgetLimits</code> will also contain <code>BudgetLimit</code> representing the current month or quarter limit present in <code>PlannedBudgetLimits</code>. This only applies to budgets created with <code>PlannedBudgetLimits</code>. Budgets created without <code>PlannedBudgetLimits</code> will only contain <code>BudgetLimit</code>, and no <code>PlannedBudgetLimits</code>.</p>'
       CostFilters:
         $ref: '#/definitions/CostFilters'
-        description: '<p>The cost filters, such as service or region, that are applied to a budget.</p> <p>AWS Budgets supports the following services as a filter for RI budgets:</p> <ul> <li> <p>Amazon Elastic Compute Cloud - Compute</p> </li> <li> <p>Amazon Redshift</p> </li> <li> <p>Amazon Relational Database Service</p> </li> <li> <p>Amazon ElastiCache</p> </li> <li> <p>Amazon Elasticsearch Service</p> </li> </ul>'
+        description: '<p>The cost filters, such as service or tag, that are applied to a budget.</p> <p>AWS Budgets supports the following services as a filter for RI budgets:</p> <ul> <li> <p>Amazon Elastic Compute Cloud - Compute</p> </li> <li> <p>Amazon Redshift</p> </li> <li> <p>Amazon Relational Database Service</p> </li> <li> <p>Amazon ElastiCache</p> </li> <li> <p>Amazon Elasticsearch Service</p> </li> </ul>'
       CostTypes:
         $ref: '#/definitions/CostTypes'
         description: '<p>The types of costs that are included in this <code>COST</code> budget.</p> <p> <code>USAGE</code>, <code>RI_UTILIZATION</code>, and <code>RI_COVERAGE</code> budgets do not have <code>CostTypes</code>.</p>'
@@ -1226,7 +1233,7 @@ definitions:
         description: The actual and forecasted cost or usage that the budget tracks.
       BudgetType:
         $ref: '#/definitions/BudgetType'
-        description: 'Whether this budget tracks monetary costs, usage, RI utilization, or RI coverage.'
+        description: 'Whether this budget tracks costs, usage, RI utilization, or RI coverage.'
       LastUpdatedTime:
         $ref: '#/definitions/GenericTimestamp'
         description: The last time that you updated this budget.
@@ -1332,7 +1339,7 @@ definitions:
         description: The type of notification that AWS sends to a subscriber.
       Address:
         $ref: '#/definitions/SubscriberAddress'
-        description: 'The address that AWS sends budget notifications to, either an SNS topic or an email.'
+        description: '<p>The address that AWS sends budget notifications to, either an SNS topic or an email.</p> <p>AWS validates the address for a <code>CreateSubscriber</code> request with the <code>.*</code> regex.</p>'
     description: '<p>The subscriber to a budget notification. The subscriber consists of a subscription type and either an Amazon SNS topic or an email address.</p> <p>For example, an email subscriber would have the following parameters:</p> <ul> <li> <p>A <code>subscriptionType</code> of <code>EMAIL</code> </p> </li> <li> <p>An <code>address</code> of <code>example@example.com</code> </p> </li> </ul>'
   MaxResults:
     type: integer
@@ -1406,7 +1413,7 @@ definitions:
     description: ' The subscription type of the subscriber. It can be SMS or EMAIL.'
   SubscriberAddress:
     type: string
-    pattern: .*
+    pattern: \(\?s\).*
     description: ' A string that contains an email address or SNS topic for the subscriber''s address.'
     minLength: 1
     maxLength: 2147483647

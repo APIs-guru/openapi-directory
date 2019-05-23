@@ -219,6 +219,11 @@ paths:
               customerId:
                 description: 'An AWS Marketplace customer identifier , when integrating with the AWS SaaS Marketplace.'
                 type: string
+              tags:
+                description: 'The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with <code>aws:</code>. The tag value can be up to 256 characters.'
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/String'
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1017,6 +1022,11 @@ paths:
                   types:
                     $ref: '#/definitions/ListOfEndpointType'
                     description: 'A list of endpoint types of an API (<a>RestApi</a>) or its custom domain name (<a>DomainName</a>). For an edge-optimized API and its custom domain name, the endpoint type is <code>"EDGE"</code>. For a regional API and its custom domain name, the endpoint type is <code>REGIONAL</code>. For a private API, the endpoint type is <code>PRIVATE</code>.'
+              tags:
+                description: 'The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with <code>aws:</code>. The tag value can be up to 256 characters.'
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/String'
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1395,6 +1405,11 @@ paths:
               policy:
                 description: A stringified JSON policy document that applies to this RestApi regardless of the caller and <a>Method</a> configuration.
                 type: string
+              tags:
+                description: 'The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with <code>aws:</code>. The tag value can be up to 256 characters.'
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/String'
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1653,6 +1668,11 @@ paths:
                   period:
                     $ref: '#/definitions/QuotaPeriodType'
                     description: 'The time period in which the limit applies. Valid values are "DAY", "WEEK" or "MONTH".'
+              tags:
+                description: 'The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with <code>aws:</code>. The tag value can be up to 256 characters.'
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/String'
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1849,6 +1869,11 @@ paths:
                 description: '[Required] The ARNs of network load balancers of the VPC targeted by the VPC link. The network load balancers must be owned by the same AWS account of the API owner.'
                 type: array
                 items:
+                  $ref: '#/definitions/String'
+              tags:
+                description: 'The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with <code>aws:</code>. The tag value can be up to 256 characters.'
+                type: object
+                additionalProperties:
                   $ref: '#/definitions/String'
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
@@ -5315,6 +5340,11 @@ paths:
               description:
                 description: The description of the <a>ClientCertificate</a>.
                 type: string
+              tags:
+                description: 'The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with <code>aws:</code>. The tag value can be up to 256 characters.'
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/String'
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -6236,6 +6266,9 @@ definitions:
       stageKeys:
         $ref: '#/definitions/ListOfString'
         description: A list of <a>Stage</a> resources that are associated with the <a>ApiKey</a> resource.
+      tags:
+        $ref: '#/definitions/MapOfStringToString'
+        description: The collection of tags. Each tag element is associated with a given resource.
     description: '<p>A resource that can be distributed to callers for executing <a>Method</a> resources that require an API key. API keys can be mapped to any <a>Stage</a> on any <a>RestApi</a>, which indicates that the callers with the API key can make requests to that stage.</p> <div class="seeAlso"> <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-api-keys.html">Use API Keys</a> </div>'
   StageKey:
     type: object
@@ -6247,6 +6280,8 @@ definitions:
         $ref: '#/definitions/String'
         description: The stage name associated with the stage key.
     description: 'A reference to a unique stage identified in the format <code>{restApiId}/{stage}</code>.'
+  String:
+    type: string
   UnauthorizedException: {}
   NotFoundException: {}
   TooManyRequestsException: {}
@@ -6318,8 +6353,6 @@ definitions:
         $ref: '#/definitions/PathToMapOfMethodSnapshot'
         description: A summary of the <a>RestApi</a> at the date and time that the deployment resource was created.
     description: '<p>An immutable representation of a <a>RestApi</a> resource that can be called by users using <a>Stages</a>. A deployment must be associated with a <a>Stage</a> for it to be callable over the Internet.</p> <div class="remarks">To create a deployment, call <code>POST</code> on the <a>Deployments</a> resource of a <a>RestApi</a>. To view, update, or delete a deployment, call <code>GET</code>, <code>PATCH</code>, or <code>DELETE</code> on the specified deployment resource (<code>/restapis/{restapi_id}/deployments/{deployment_id}</code>).</div> <div class="seeAlso"><a>RestApi</a>, <a>Deployments</a>, <a>Stage</a>, <a href="https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-deployment.html">AWS CLI</a>, <a href="https://aws.amazon.com/tools/">AWS SDKs</a> </div>'
-  String:
-    type: string
   Double:
     type: number
     format: double
@@ -6410,6 +6443,9 @@ definitions:
       endpointConfiguration:
         $ref: '#/definitions/EndpointConfiguration'
         description: 'The endpoint configuration of this <a>DomainName</a> showing the endpoint types of the domain name. '
+      tags:
+        $ref: '#/definitions/MapOfStringToString'
+        description: The collection of tags. Each tag element is associated with a given resource.
     description: '<p>Represents a custom domain name as a user-friendly host name of an API (<a>RestApi</a>).</p> <div class="Remarks"> <p>When you deploy an API, API Gateway creates a default host name for the API. This default API host name is of the <code>{restapi-id}.execute-api.{region}.amazonaws.com</code> format. With the default host name, you can access the API''s root resource with the URL of <code>https://{restapi-id}.execute-api.{region}.amazonaws.com/{stage}/</code>. When you set up a custom domain name of <code>apis.example.com</code> for this API, you can then access the same resource using the URL of the <code>https://apis.examples.com/myApi</code>, where <code>myApi</code> is the base path mapping (<a>BasePathMapping</a>) of your API under the custom domain name. </p> </div> <div class="seeAlso"> <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html">Set a Custom Host Name for an API</a> </div>'
   ListOfEndpointType:
     type: array
@@ -6505,6 +6541,9 @@ definitions:
       policy:
         $ref: '#/definitions/String'
         description: A stringified JSON policy document that applies to this RestApi regardless of the caller and <a>Method</a> configuration.
+      tags:
+        $ref: '#/definitions/MapOfStringToString'
+        description: The collection of tags. Each tag element is associated with a given resource.
     description: '<p>Represents a REST API.</p> <div class="seeAlso"> <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html">Create an API</a> </div>'
   Stage:
     type: object
@@ -6585,6 +6624,9 @@ definitions:
       productCode:
         $ref: '#/definitions/String'
         description: The AWS Markeplace product identifier to associate with the usage plan as a SaaS product on AWS Marketplace.
+      tags:
+        $ref: '#/definitions/MapOfStringToString'
+        description: The collection of tags. Each tag element is associated with a given resource.
     description: '<p>Represents a usage plan than can specify who can assess associated API stages with specified request limits and quotas.</p> <div class="remarks"> <p>In a usage plan, you associate an API by specifying the API''s Id and a stage name of the specified API. You add plan customers by adding API keys to the plan. </p> </div> <div class="seeAlso"> <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html">Create and Use Usage Plans</a> </div>'
   ApiStage:
     type: object
@@ -6644,6 +6686,9 @@ definitions:
       statusMessage:
         $ref: '#/definitions/String'
         description: A description about the VPC link status.
+      tags:
+        $ref: '#/definitions/MapOfStringToString'
+        description: The collection of tags. Each tag element is associated with a given resource.
     description: '<p>A API Gateway VPC link for a <a>RestApi</a> to access resources in an Amazon Virtual Private Cloud (VPC).</p> <div class="remarks"> <p><p>To enable access to a resource in an Amazon Virtual Private Cloud through Amazon API Gateway, you, as an API developer, create a <a>VpcLink</a> resource targeted for one or more network load balancers of the VPC and then integrate an API method with a private integration that uses the <a>VpcLink</a>. The private integration has an integration type of <code>HTTP</code> or <code>HTTP_PROXY</code> and has a connection type of <code>VPC_LINK</code>. The integration uses the <code>connectionId</code> property to identify the <a>VpcLink</a> used.</p> </p> </div>'
   ClientCertificate:
     type: object
@@ -6663,6 +6708,9 @@ definitions:
       expirationDate:
         $ref: '#/definitions/Timestamp'
         description: The timestamp when the client certificate will expire.
+      tags:
+        $ref: '#/definitions/MapOfStringToString'
+        description: The collection of tags. Each tag element is associated with a given resource.
     description: '<p>Represents a client certificate used to configure client-side SSL authentication while sending requests to the integration endpoint.</p> <div class="remarks">Client certificates are used to authenticate an API by the backend server. To authenticate an API client (or user), use IAM roles and policies, a custom <a>Authorizer</a> or an Amazon Cognito user pool.</div> <div class="seeAlso"> <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-client-side-ssl-authentication.html">Use Client-Side Certificate</a> </div>'
   Account:
     type: object
@@ -7269,6 +7317,9 @@ definitions:
       customerId:
         $ref: '#/definitions/String'
         description: 'An AWS Marketplace customer identifier , when integrating with the AWS SaaS Marketplace.'
+      tags:
+        $ref: '#/definitions/MapOfStringToString'
+        description: 'The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with <code>aws:</code>. The tag value can be up to 256 characters.'
     description: Request to create an <a>ApiKey</a> resource.
   CreateAuthorizerRequest:
     type: object
@@ -7448,6 +7499,9 @@ definitions:
       endpointConfiguration:
         $ref: '#/definitions/EndpointConfiguration'
         description: 'The endpoint configuration of this <a>DomainName</a> showing the endpoint types of the domain name. '
+      tags:
+        $ref: '#/definitions/MapOfStringToString'
+        description: 'The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with <code>aws:</code>. The tag value can be up to 256 characters.'
     description: A request to create a new domain name.
   CreateModelRequest:
     type: object
@@ -7522,6 +7576,9 @@ definitions:
       policy:
         $ref: '#/definitions/String'
         description: A stringified JSON policy document that applies to this RestApi regardless of the caller and <a>Method</a> configuration.
+      tags:
+        $ref: '#/definitions/MapOfStringToString'
+        description: 'The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with <code>aws:</code>. The tag value can be up to 256 characters.'
     description: The POST Request to add a new <a>RestApi</a> resource to your collection.
   CreateStageRequest:
     type: object
@@ -7610,6 +7667,9 @@ definitions:
       quota:
         $ref: '#/definitions/QuotaSettings'
         description: The quota of the usage plan.
+      tags:
+        $ref: '#/definitions/MapOfStringToString'
+        description: 'The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with <code>aws:</code>. The tag value can be up to 256 characters.'
     description: 'The POST request to create a usage plan with the name, description, throttle limits and quota limits, as well as the associated API stages, specified in the payload.'
   CreateVpcLinkRequest:
     type: object
@@ -7626,6 +7686,9 @@ definitions:
       targetArns:
         $ref: '#/definitions/ListOfString'
         description: '[Required] The ARNs of network load balancers of the VPC targeted by the VPC link. The network load balancers must be owned by the same AWS account of the API owner.'
+      tags:
+        $ref: '#/definitions/MapOfStringToString'
+        description: 'The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with <code>aws:</code>. The tag value can be up to 256 characters.'
     description: 'Creates a VPC link, under the caller''s account in a selected region, in an asynchronous operation that typically takes 2-4 minutes to complete and become operational. The caller must have permissions to create and update VPC Endpoint services.'
   DeleteApiKeyRequest:
     type: object
@@ -7783,6 +7846,9 @@ definitions:
       description:
         $ref: '#/definitions/String'
         description: The description of the <a>ClientCertificate</a>.
+      tags:
+        $ref: '#/definitions/MapOfStringToString'
+        description: 'The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with <code>aws:</code>. The tag value can be up to 256 characters.'
     description: A request to generate a <a>ClientCertificate</a> resource.
   GetAccountRequest:
     type: object

@@ -209,15 +209,82 @@ paths:
                 type: string
                 pattern: '^[a-zA-Z0-9]?((?!-)([A-Za-z0-9-]*[A-Za-z0-9])\.)+[a-zA-Z0-9]+$'
                 minLength: 1
-                maxLength: 64
-              AcmCertificateArn:
-                description: 'The ARN of an issued ACM certificate that is valid for the domain being associated. '
-                type: string
-                pattern: 'arn:[\w+=/,.@-]+:[\w+=/,.@-]+:[\w+=/,.@-]*:[0-9]+:[\w+=,.@-]+(/[\w+=/,.@-]+)*'
+                maxLength: 253
               DisplayName:
                 description: The name to display.
                 type: string
                 maxLength: 100
+              AcmCertificateArn:
+                description: The ARN of an issued ACM certificate that is valid for the domain being associated.
+                type: string
+                pattern: 'arn:[\w+=/,.@-]+:[\w+=/,.@-]+:[\w+=/,.@-]*:[0-9]+:[\w+=,.@-]+(/[\w+=/,.@-]+)*'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /associateWebsiteAuthorizationProvider:
+    post:
+      operationId: AssociateWebsiteAuthorizationProvider
+      description: Associates a website authorization provider with a specified fleet. This is used to authorize users against associated websites in the company network.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AssociateWebsiteAuthorizationProviderResponse'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - FleetArn
+              - AuthorizationProviderType
+            properties:
+              FleetArn:
+                description: The ARN of the fleet.
+                type: string
+                minLength: 20
+                maxLength: 2048
+              AuthorizationProviderType:
+                description: The authorization provider type.
+                type: string
+                enum:
+                  - SAML
+              DomainName:
+                description: The domain name of the authorization provider. This applies only to SAML-based authorization providers.
+                type: string
+                pattern: '^[a-zA-Z0-9]?((?!-)([A-Za-z0-9-]*[A-Za-z0-9])\.)+[a-zA-Z0-9]+$'
+                minLength: 1
+                maxLength: 253
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -665,7 +732,7 @@ paths:
                 type: string
                 pattern: '^[a-zA-Z0-9]?((?!-)([A-Za-z0-9-]*[A-Za-z0-9])\.)+[a-zA-Z0-9]+$'
                 minLength: 1
-                maxLength: 64
+                maxLength: 253
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -882,7 +949,68 @@ paths:
                 type: string
                 pattern: '^[a-zA-Z0-9]?((?!-)([A-Za-z0-9-]*[A-Za-z0-9])\.)+[a-zA-Z0-9]+$'
                 minLength: 1
-                maxLength: 64
+                maxLength: 253
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /disassociateWebsiteAuthorizationProvider:
+    post:
+      operationId: DisassociateWebsiteAuthorizationProvider
+      description: 'Disassociates a website authorization provider from a specified fleet. After the disassociation, users can''t load any associated websites that require this authorization provider.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DisassociateWebsiteAuthorizationProviderResponse'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - FleetArn
+              - AuthorizationProviderId
+            properties:
+              FleetArn:
+                description: The ARN of the fleet.
+                type: string
+                minLength: 20
+                maxLength: 2048
+              AuthorizationProviderId:
+                description: A unique identifier for the authorization provider.
+                type: string
+                minLength: 1
+                maxLength: 256
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1146,6 +1274,77 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /listWebsiteAuthorizationProviders:
+    post:
+      operationId: ListWebsiteAuthorizationProviders
+      description: Retrieves a list of website authorization providers associated with a specified fleet.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListWebsiteAuthorizationProvidersResponse'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - FleetArn
+            properties:
+              FleetArn:
+                description: The ARN of the fleet.
+                type: string
+                minLength: 20
+                maxLength: 2048
+              NextToken:
+                description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+                type: string
+                pattern: '[\w\-]+'
+                minLength: 1
+                maxLength: 4096
+              MaxResults:
+                description: The maximum number of results to be included in the next page.
+                type: integer
+                minimum: 1
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /listWebsiteCertificateAuthorities:
     post:
       operationId: ListWebsiteCertificateAuthorities
@@ -1262,7 +1461,7 @@ paths:
                 type: string
                 pattern: '^[a-zA-Z0-9]?((?!-)([A-Za-z0-9-]*[A-Za-z0-9])\.)+[a-zA-Z0-9]+$'
                 minLength: 1
-                maxLength: 64
+                maxLength: 253
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1320,7 +1519,7 @@ paths:
                 type: string
                 pattern: '^[a-zA-Z0-9]?((?!-)([A-Za-z0-9-]*[A-Za-z0-9])\.)+[a-zA-Z0-9]+$'
                 minLength: 1
-                maxLength: 64
+                maxLength: 253
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1500,6 +1699,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/definitions/SecurityGroupId'
+                maxItems: 5
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1614,7 +1814,7 @@ paths:
                 type: string
                 pattern: '^[a-zA-Z0-9]?((?!-)([A-Za-z0-9-]*[A-Za-z0-9])\.)+[a-zA-Z0-9]+$'
                 minLength: 1
-                maxLength: 64
+                maxLength: 253
               DisplayName:
                 description: The name to display.
                 type: string
@@ -1757,6 +1957,12 @@ definitions:
   ResourceNotFoundException: {}
   ResourceAlreadyExistsException: {}
   TooManyRequestsException: {}
+  AssociateWebsiteAuthorizationProviderResponse:
+    type: object
+    properties:
+      AuthorizationProviderId:
+        $ref: '#/definitions/Id'
+        description: A unique identifier for the authorization provider.
   AssociateWebsiteCertificateAuthorityResponse:
     type: object
     properties:
@@ -1829,6 +2035,9 @@ definitions:
   DescribeDomainResponse:
     type: object
     properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+        description: The name of the domain.
       DisplayName:
         $ref: '#/definitions/DisplayName'
         description: The name to display.
@@ -1838,6 +2047,9 @@ definitions:
       DomainStatus:
         $ref: '#/definitions/DomainStatus'
         description: The current state for the domain.
+      AcmCertificateArn:
+        $ref: '#/definitions/AcmCertificateArn'
+        description: The ARN of an issued ACM certificate that is valid for the domain being associated.
   DescribeFleetMetadataResponse:
     type: object
     properties:
@@ -1889,6 +2101,9 @@ definitions:
   DisassociateDomainResponse:
     type: object
     properties: {}
+  DisassociateWebsiteAuthorizationProviderResponse:
+    type: object
+    properties: {}
   DisassociateWebsiteCertificateAuthorityResponse:
     type: object
     properties: {}
@@ -1919,6 +2134,15 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'The pagination token used to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
+  ListWebsiteAuthorizationProvidersResponse:
+    type: object
+    properties:
+      WebsiteAuthorizationProviders:
+        $ref: '#/definitions/WebsiteAuthorizationProvidersSummaryList'
+        description: The website authorization providers.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
   ListWebsiteCertificateAuthoritiesResponse:
     type: object
     properties:
@@ -1972,7 +2196,7 @@ definitions:
     type: string
     pattern: '^[a-zA-Z0-9]?((?!-)([A-Za-z0-9-]*[A-Za-z0-9])\.)+[a-zA-Z0-9]+$'
     minLength: 1
-    maxLength: 64
+    maxLength: 253
   DisplayName:
     type: string
     maxLength: 100
@@ -1989,12 +2213,35 @@ definitions:
       DomainName:
         $ref: '#/definitions/DomainName'
         description: The fully qualified domain name (FQDN).
-      AcmCertificateArn:
-        $ref: '#/definitions/AcmCertificateArn'
-        description: 'The ARN of an issued ACM certificate that is valid for the domain being associated. '
       DisplayName:
         $ref: '#/definitions/DisplayName'
         description: The name to display.
+      AcmCertificateArn:
+        $ref: '#/definitions/AcmCertificateArn'
+        description: The ARN of an issued ACM certificate that is valid for the domain being associated.
+  AuthorizationProviderType:
+    type: string
+    enum:
+      - SAML
+  AssociateWebsiteAuthorizationProviderRequest:
+    type: object
+    required:
+      - FleetArn
+      - AuthorizationProviderType
+    properties:
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+      AuthorizationProviderType:
+        $ref: '#/definitions/AuthorizationProviderType'
+        description: The authorization provider type.
+      DomainName:
+        $ref: '#/definitions/DomainName'
+        description: The domain name of the authorization provider. This applies only to SAML-based authorization providers.
+  Id:
+    type: string
+    minLength: 1
+    maxLength: 256
   Certificate:
     type: string
     pattern: '-{5}BEGIN CERTIFICATE-{5}\u000D?\u000A([A-Za-z0-9/+]{64}\u000D?\u000A)*[A-Za-z0-9/+]{1,64}={0,2}\u000D?\u000A-{5}END CERTIFICATE-{5}(\u000D?\u000A)?'
@@ -2015,10 +2262,6 @@ definitions:
       DisplayName:
         $ref: '#/definitions/DisplayName'
         description: The certificate name to display.
-  Id:
-    type: string
-    minLength: 1
-    maxLength: 256
   AuditStreamArn:
     type: string
   Boolean:
@@ -2089,6 +2332,7 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/SecurityGroupId'
+    maxItems: 5
   DescribeDevicePolicyConfigurationRequest:
     type: object
     required:
@@ -2232,6 +2476,18 @@ definitions:
       DomainName:
         $ref: '#/definitions/DomainName'
         description: The name of the domain.
+  DisassociateWebsiteAuthorizationProviderRequest:
+    type: object
+    required:
+      - FleetArn
+      - AuthorizationProviderId
+    properties:
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+      AuthorizationProviderId:
+        $ref: '#/definitions/Id'
+        description: A unique identifier for the authorization provider.
   DisassociateWebsiteCertificateAuthorityRequest:
     type: object
     required:
@@ -2254,15 +2510,15 @@ definitions:
       DomainName:
         $ref: '#/definitions/DomainName'
         description: The name of the domain.
+      DisplayName:
+        $ref: '#/definitions/DisplayName'
+        description: The name to display.
       CreatedTime:
         $ref: '#/definitions/DateTime'
         description: The time that the domain was created.
       DomainStatus:
         $ref: '#/definitions/DomainStatus'
         description: The status of the domain.
-      DisplayName:
-        $ref: '#/definitions/DisplayName'
-        description: The name to display.
     description: The summary of the domain.
   DomainSummaryList:
     type: array
@@ -2342,6 +2598,24 @@ definitions:
       MaxResults:
         $ref: '#/definitions/MaxResults'
         description: The maximum number of results to be included in the next page.
+  ListWebsiteAuthorizationProvidersRequest:
+    type: object
+    required:
+      - FleetArn
+    properties:
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of results to be included in the next page.
+  WebsiteAuthorizationProvidersSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/WebsiteAuthorizationProviderSummary'
   ListWebsiteCertificateAuthoritiesRequest:
     type: object
     required:
@@ -2482,6 +2756,24 @@ definitions:
       IdentityProviderSamlMetadata:
         $ref: '#/definitions/SamlMetadata'
         description: The SAML metadata document provided by the customer’s identity provider. The existing IdentityProviderSamlMetadata is unset if null is passed.
+  WebsiteAuthorizationProviderSummary:
+    type: object
+    required:
+      - AuthorizationProviderType
+    properties:
+      AuthorizationProviderId:
+        $ref: '#/definitions/Id'
+        description: A unique identifier for the authorization provider.
+      AuthorizationProviderType:
+        $ref: '#/definitions/AuthorizationProviderType'
+        description: The authorization provider type.
+      DomainName:
+        $ref: '#/definitions/DomainName'
+        description: The domain name of the authorization provider. This applies only to SAML-based authorization providers.
+      CreatedTime:
+        $ref: '#/definitions/DateTime'
+        description: The time of creation.
+    description: The summary of the website authorization provider.
   WebsiteCaSummary:
     type: object
     properties:

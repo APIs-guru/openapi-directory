@@ -1567,7 +1567,7 @@ paths:
   '/#X-Amz-Target=AWS242ServiceCatalogService.DescribeRecord':
     post:
       operationId: DescribeRecord
-      description: '<p>Gets information about the specified request operation.</p> <p>Use this operation after calling a request operation (for example, <a>ProvisionProduct</a>, <a>TerminateProvisionedProduct</a>, or <a>UpdateProvisionedProduct</a>). </p>'
+      description: '<p>Gets information about the specified request operation.</p> <p>Use this operation after calling a request operation (for example, <a>ProvisionProduct</a>, <a>TerminateProvisionedProduct</a>, or <a>UpdateProvisionedProduct</a>). </p> <note> <p>If a provisioned product was transferred to a new owner using <a>UpdateProvisionedProductProperties</a>, the new owner will be able to describe all past records for that product. The previous owner will no longer be able to describe the records, but will be able to use <a>ListRecordHistory</a> to see the product''s history from when he was the owner.</p> </note>'
       responses:
         '200':
           description: Success
@@ -3225,6 +3225,47 @@ paths:
           type: string
           enum:
             - AWS242ServiceCatalogService.UpdateProvisionedProduct
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWS242ServiceCatalogService.UpdateProvisionedProductProperties':
+    post:
+      operationId: UpdateProvisionedProductProperties
+      description: Requests updates to the properties of the specified provisioned product.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateProvisionedProductPropertiesOutput'
+        '480':
+          description: InvalidParametersException
+          schema:
+            $ref: '#/definitions/InvalidParametersException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InvalidStateException
+          schema:
+            $ref: '#/definitions/InvalidStateException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateProvisionedProductPropertiesInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.UpdateProvisionedProductProperties
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -5232,7 +5273,7 @@ definitions:
         description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       ProvisionedProductName:
         $ref: '#/definitions/ProvisionedProductNameOrArn'
-        description: The updated name of the provisioned product. You cannot specify both <code>ProvisionedProductName</code> and <code>ProvisionedProductId</code>.
+        description: The name of the provisioned product. You cannot specify both <code>ProvisionedProductName</code> and <code>ProvisionedProductId</code>.
       ProvisionedProductId:
         $ref: '#/definitions/Id'
         description: The identifier of the provisioned product. You cannot specify both <code>ProvisionedProductName</code> and <code>ProvisionedProductId</code>.
@@ -5257,6 +5298,40 @@ definitions:
       UpdateToken:
         $ref: '#/definitions/IdempotencyToken'
         description: The idempotency token that uniquely identifies the provisioning update request.
+  UpdateProvisionedProductPropertiesOutput:
+    type: object
+    properties:
+      ProvisionedProductId:
+        $ref: '#/definitions/Id'
+        description: The provisioned product identifier.
+      ProvisionedProductProperties:
+        $ref: '#/definitions/ProvisionedProductProperties'
+        description: A map that contains the properties updated.
+      RecordId:
+        $ref: '#/definitions/Id'
+        description: The identifier of the record.
+      Status:
+        $ref: '#/definitions/RecordStatus'
+        description: The status of the request.
+  UpdateProvisionedProductPropertiesInput:
+    type: object
+    required:
+      - ProvisionedProductId
+      - ProvisionedProductProperties
+      - IdempotencyToken
+    properties:
+      AcceptLanguage:
+        $ref: '#/definitions/AcceptLanguage'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
+      ProvisionedProductId:
+        $ref: '#/definitions/Id'
+        description: The identifier of the provisioned product.
+      ProvisionedProductProperties:
+        $ref: '#/definitions/ProvisionedProductProperties'
+        description: '<p>A map that contains the provisioned product properties to be updated.</p> <p>The <code>OWNER</code> key only accepts user ARNs. The owner is the user that is allowed to see, update, terminate, and execute service actions in the provisioned product.</p> <p>The administrator can change the owner of a provisioned product to another IAM user within the same account. Both end user owners and administrators can see ownership history of the provisioned product using the <code>ListRecordHistory</code> API. The new owner can describe all past records for the provisioned product using the <code>DescribeRecord</code> API. The previous owner can no longer use <code>DescribeRecord</code>, but can still see the product''s history from when he was an owner using <code>ListRecordHistory</code>.</p> <p>If a provisioned product ownership is assigned to an end user, they can see and perform any action through the API or Service Catalog console such as update, terminate, and execute service actions. If an end user provisions a product and the owner is updated to someone else, they will no longer be able to see or perform any actions through API or the Service Catalog console on that provisioned product.</p>'
+      IdempotencyToken:
+        $ref: '#/definitions/IdempotencyToken'
+        description: The idempotency token that uniquely identifies the provisioning product update request.
   UpdateProvisioningArtifactOutput:
     type: object
     properties:
@@ -6275,8 +6350,18 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ProductViewSummary'
+  PropertyKey:
+    type: string
+    enum:
+      - OWNER
+    minLength: 1
+    maxLength: 128
   PropertyName:
     type: string
+  PropertyValue:
+    type: string
+    minLength: 1
+    maxLength: 1024
   ProvisioningParameters:
     type: array
     items:
@@ -6428,6 +6513,12 @@ definitions:
         $ref: '#/definitions/Id'
         description: The identifier of the provisioning artifact.
     description: Summary information about a plan.
+  ProvisionedProductProperties:
+    type: object
+    minProperties: 1
+    maxProperties: 100
+    additionalProperties:
+      $ref: '#/definitions/PropertyValue'
   ProvisionedProductViewFilterBy:
     type: string
     enum:
