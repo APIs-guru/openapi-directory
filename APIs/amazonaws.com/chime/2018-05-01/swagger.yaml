@@ -469,7 +469,7 @@ paths:
   '/phone-numbers#operation=batch-update':
     post:
       operationId: BatchUpdatePhoneNumber
-      description: Updates phone number product types. Choose from Amazon Chime Business Calling and Amazon Chime Voice Connector product types.
+      description: 'Updates phone number product types. Choose from Amazon Chime Business Calling and Amazon Chime Voice Connector product types. For toll-free numbers, you can use only the Amazon Chime Voice Connector product type.'
       responses:
         '200':
           description: Success
@@ -925,7 +925,7 @@ paths:
   /phone-number-orders:
     post:
       operationId: CreatePhoneNumberOrder
-      description: Creates an order for phone numbers to be provisioned. Choose from Amazon Chime Business Calling and Amazon Chime Voice Connector product types.
+      description: 'Creates an order for phone numbers to be provisioned. Choose from Amazon Chime Business Calling and Amazon Chime Voice Connector product types. For toll-free numbers, you can use only the Amazon Chime Voice Connector product type.'
       responses:
         '201':
           description: Success
@@ -1564,7 +1564,7 @@ paths:
           type: string
     post:
       operationId: UpdatePhoneNumber
-      description: 'Updates phone number details, such as product type, for the specified phone number ID.'
+      description: 'Updates phone number details, such as product type, for the specified phone number ID. For toll-free numbers, you can use only the Amazon Chime Voice Connector product type.'
       responses:
         '200':
           description: Success
@@ -3536,6 +3536,14 @@ paths:
           required: false
           description: The state used to filter results.
           type: string
+        - name: toll-free-prefix
+          in: query
+          required: false
+          description: The toll-free prefix that you use to filter results.
+          type: string
+          pattern: ^8(00|33|44|55|66|77|88)$
+          minLength: 3
+          maxLength: 3
         - name: max-results
           in: query
           required: false
@@ -4365,6 +4373,9 @@ definitions:
       E164PhoneNumber:
         $ref: '#/definitions/E164PhoneNumber'
         description: 'The phone number, in E.164 format.'
+      Type:
+        $ref: '#/definitions/PhoneNumberType'
+        description: The phone number type.
       ProductType:
         $ref: '#/definitions/PhoneNumberProductType'
         description: The phone number product type.
@@ -4652,6 +4663,11 @@ definitions:
         $ref: '#/definitions/OriginationRouteWeight'
         description: 'The weight associated with the host. If hosts are equal in priority, calls are distributed among them based on their relative weight.'
     description: 'Origination routes define call distribution properties for your SIP hosts to receive inbound calls using your Amazon Chime Voice Connector. Limit: 10 origination routes per Amazon Chime Voice Connector.'
+  PhoneNumberType:
+    type: string
+    enum:
+      - Local
+      - TollFree
   PhoneNumberCapabilities:
     type: object
     properties:
@@ -4761,6 +4777,11 @@ definitions:
   RestorePhoneNumberRequest:
     type: object
     properties: {}
+  TollFreePrefix:
+    type: string
+    pattern: ^8(00|33|44|55|66|77|88)$
+    minLength: 3
+    maxLength: 3
   SearchAvailablePhoneNumbersRequest:
     type: object
     properties: {}

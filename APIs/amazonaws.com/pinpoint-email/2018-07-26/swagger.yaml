@@ -3,7 +3,7 @@ info:
   version: '2018-07-26'
   x-release: v4
   title: Amazon Pinpoint Email Service
-  description: '<fullname>Amazon Pinpoint Email Service</fullname> <p> This document contains reference information for the <a href="https://aws.amazon.com/pinpoint">Amazon Pinpoint</a> Email API, version 1.0. This document is best used in conjunction with the <a href="https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html">Amazon Pinpoint Developer Guide</a>.</p> <p>The Amazon Pinpoint Email API is available in the US East (N. Virginia), US West (Oregon), EU (Frankfurt), and EU (Ireland) Regions at the following endpoints:</p> <ul> <li> <p> <b>US East (N. Virginia)</b>: <code>email.us-east-1.amazonaws.com</code> </p> </li> <li> <p> <b>US West (Oregon)</b>: <code>email.us-west-2.amazonaws.com</code> </p> </li> <li> <p> <b>EU (Frankfurt)</b>: <code>email.eu-central-1.amazonaws.com</code> </p> </li> <li> <p> <b>EU (Ireland)</b>: <code>email.eu-west-1.amazonaws.com</code> </p> </li> </ul>'
+  description: '<fullname>Amazon Pinpoint Email Service</fullname> <p>This document contains reference information for the <a href="https://aws.amazon.com/pinpoint">Amazon Pinpoint</a> Email API, version 1.0. This document is best used in conjunction with the <a href="https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html">Amazon Pinpoint Developer Guide</a>.</p> <p>The Amazon Pinpoint Email API is available in several AWS Regions and it provides an endpoint for each of these Regions. For a list of all the Regions and endpoints where the API is currently available, see <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#pinpoint_region">AWS Regions and Endpoints</a> in the <i>Amazon Web Services General Reference</i>.</p> <p>In each Region, AWS maintains multiple Availability Zones. These Availability Zones are physically isolated from each other, but are united by private, low-latency, high-throughput, and highly redundant network connections. These Availability Zones enable us to provide very high levels of availability and redundancy, while also minimizing latency. To learn more about the number of Availability Zones that are available in each Region, see <a href="http://aws.amazon.com/about-aws/global-infrastructure/">AWS Global Infrastructure</a>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -196,6 +196,7 @@ paths:
           schema:
             type: object
             required:
+              - ConfigurationSetName
               - TrackingOptions
             properties:
               ConfigurationSetName:
@@ -233,7 +234,7 @@ paths:
                     $ref: '#/definitions/Enabled'
                     description: 'If <code>true</code>, email sending is enabled for the configuration set. If <code>false</code>, email sending is disabled for the configuration set.'
               Tags:
-                description: An object that defines the tags (keys and values) that you want to associate with the configuration set.
+                description: An array of objects that define the tags (keys and values) that you want to associate with the configuration set.
                 type: array
                 items:
                   $ref: '#/definitions/Tag'
@@ -262,28 +263,16 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            properties:
-              NextToken:
-                description: A token returned from a previous call to <code>ListConfigurationSets</code> to indicate the position in the list of configuration sets.
-                type: string
-              PageSize:
-                description: 'The number of results to show in a single call to <code>ListConfigurationSets</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.'
-                type: integer
-        - name: PageSize
-          type: string
-          in: query
-          description: Pagination limit
-          required: false
         - name: NextToken
-          type: string
           in: query
-          description: Pagination token
           required: false
+          description: A token returned from a previous call to <code>ListConfigurationSets</code> to indicate the position in the list of configuration sets.
+          type: string
+        - name: PageSize
+          in: query
+          required: false
+          description: 'The number of results to show in a single call to <code>ListConfigurationSets</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.'
+          type: integer
   '/v1/email/configuration-sets/{ConfigurationSetName}/event-destinations':
     post:
       operationId: CreateConfigurationSetEventDestination
@@ -458,28 +447,16 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            properties:
-              NextToken:
-                description: A token returned from a previous call to <code>ListDedicatedIpPools</code> to indicate the position in the list of dedicated IP pools.
-                type: string
-              PageSize:
-                description: 'The number of results to show in a single call to <code>ListDedicatedIpPools</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.'
-                type: integer
-        - name: PageSize
-          type: string
-          in: query
-          description: Pagination limit
-          required: false
         - name: NextToken
-          type: string
           in: query
-          description: Pagination token
           required: false
+          description: A token returned from a previous call to <code>ListDedicatedIpPools</code> to indicate the position in the list of dedicated IP pools.
+          type: string
+        - name: PageSize
+          in: query
+          required: false
+          description: 'The number of results to show in a single call to <code>ListDedicatedIpPools</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.'
+          type: integer
   /v1/email/deliverability-dashboard/test:
     post:
       operationId: CreateDeliverabilityTestReport
@@ -552,7 +529,7 @@ paths:
                     $ref: '#/definitions/RawMessage'
                     description: '<p>The raw email message. The message has to meet the following criteria:</p> <ul> <li> <p>The message has to contain a header and a body, separated by one blank line.</p> </li> <li> <p>All of the required header fields must be present in the message.</p> </li> <li> <p>Each part of a multipart MIME message must be formatted properly.</p> </li> <li> <p>If you include attachments, they must be in a file format that Amazon Pinpoint supports. </p> </li> <li> <p>The entire message must be Base64 encoded.</p> </li> <li> <p>If any of the MIME parts in your message contain content that is outside of the 7-bit ASCII character range, you should encode that content to ensure that recipients'' email clients render the message properly.</p> </li> <li> <p>The length of any single line of text in the message can''t exceed 1,000 characters. This restriction is defined in <a href="https://tools.ietf.org/html/rfc5321">RFC 5321</a>.</p> </li> </ul>'
               Tags:
-                description: An object that defines the tags (keys and values) that you want to associate with the predictive inbox placement test.
+                description: An array of objects that define the tags (keys and values) that you want to associate with the predictive inbox placement test.
                 type: array
                 items:
                   $ref: '#/definitions/Tag'
@@ -602,7 +579,7 @@ paths:
                 description: The email address or domain that you want to verify.
                 type: string
               Tags:
-                description: An object that defines the tags (keys and values) that you want to associate with the email identity.
+                description: An array of objects that define the tags (keys and values) that you want to associate with the email identity.
                 type: array
                 items:
                   $ref: '#/definitions/Tag'
@@ -631,28 +608,16 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            properties:
-              NextToken:
-                description: A token returned from a previous call to <code>ListEmailIdentities</code> to indicate the position in the list of identities.
-                type: string
-              PageSize:
-                description: '<p>The number of results to show in a single call to <code>ListEmailIdentities</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.</p> <p>The value you specify has to be at least 0, and can be no more than 1000.</p>'
-                type: integer
-        - name: PageSize
-          type: string
-          in: query
-          description: Pagination limit
-          required: false
         - name: NextToken
-          type: string
           in: query
-          description: Pagination token
           required: false
+          description: A token returned from a previous call to <code>ListEmailIdentities</code> to indicate the position in the list of identities.
+          type: string
+        - name: PageSize
+          in: query
+          required: false
+          description: '<p>The number of results to show in a single call to <code>ListEmailIdentities</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.</p> <p>The value you specify has to be at least 0, and can be no more than 1000.</p>'
+          type: integer
   '/v1/email/configuration-sets/{ConfigurationSetName}':
     delete:
       operationId: DeleteConfigurationSet
@@ -949,7 +914,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /v1/email/deliverability-dashboard/blacklist-report:
+  '/v1/email/deliverability-dashboard/blacklist-report#BlacklistItemNames':
     get:
       operationId: GetBlacklistReports
       description: Retrieve a list of the blacklists that your dedicated IP addresses appear on.
@@ -971,19 +936,13 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
+        - name: BlacklistItemNames
+          in: query
           required: true
-          schema:
-            type: object
-            required:
-              - BlacklistItemNames
-            properties:
-              BlacklistItemNames:
-                description: A list of IP addresses that you want to retrieve blacklist information about. You can only specify the dedicated IP addresses that you use to send email using Amazon Pinpoint or Amazon SES.
-                type: array
-                items:
-                  $ref: '#/definitions/BlacklistItemName'
+          description: A list of IP addresses that you want to retrieve blacklist information about. You can only specify the dedicated IP addresses that you use to send email using Amazon Pinpoint or Amazon SES.
+          type: array
+          items:
+            type: string
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1049,31 +1008,21 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            properties:
-              PoolName:
-                description: The name of a dedicated IP pool.
-                type: string
-              NextToken:
-                description: A token returned from a previous call to <code>GetDedicatedIps</code> to indicate the position of the dedicated IP pool in the list of IP pools.
-                type: string
-              PageSize:
-                description: 'The number of results to show in a single call to <code>GetDedicatedIpsRequest</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.'
-                type: integer
-        - name: PageSize
-          type: string
+        - name: PoolName
           in: query
-          description: Pagination limit
           required: false
+          description: The name of a dedicated IP pool.
+          type: string
         - name: NextToken
-          type: string
           in: query
-          description: Pagination token
           required: false
+          description: A token returned from a previous call to <code>GetDedicatedIps</code> to indicate the position of the dedicated IP pool in the list of IP pools.
+          type: string
+        - name: PageSize
+          in: query
+          required: false
+          description: 'The number of results to show in a single call to <code>GetDedicatedIpsRequest</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.'
+          type: integer
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1085,7 +1034,7 @@ paths:
   /v1/email/deliverability-dashboard:
     get:
       operationId: GetDeliverabilityDashboardOptions
-      description: '<p>Show the status of the Deliverability dashboard. When the Deliverability dashboard is enabled, you gain access to reputation metrics for the domains that you use to send email using Amazon Pinpoint. You also gain the ability to perform predictive inbox placement tests.</p> <p>When you use the Deliverability dashboard, you pay a monthly charge of USD$1,250.00, in addition to any other fees that you accrue by using Amazon Pinpoint. If you enable the Deliverability dashboard after the first day of a calendar month, AWS prorates the monthly charge based on how many days have elapsed in the current calendar month.</p>'
+      description: '<p>Retrieve information about the status of the Deliverability dashboard for your Amazon Pinpoint account. When the Deliverability dashboard is enabled, you gain access to reputation, deliverability, and other metrics for the domains that you use to send email using Amazon Pinpoint. You also gain the ability to perform predictive inbox placement tests.</p> <p>When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition to any other fees that you accrue by using Amazon Pinpoint. For more information about the features and cost of a Deliverability dashboard subscription, see <a href="http://aws.amazon.com/pinpoint/pricing/">Amazon Pinpoint Pricing</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1114,7 +1063,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     put:
       operationId: PutDeliverabilityDashboardOption
-      description: '<p>Enable or disable the Deliverability dashboard. When you enable the Deliverability dashboard, you gain access to reputation metrics for the domains that you use to send email using Amazon Pinpoint. You also gain the ability to perform predictive inbox placement tests.</p> <p>When you use the Deliverability dashboard, you pay a monthly charge of USD$1,250.00, in addition to any other fees that you accrue by using Amazon Pinpoint. If you enable the Deliverability dashboard after the first day of a calendar month, we prorate the monthly charge based on how many days have elapsed in the current calendar month.</p>'
+      description: '<p>Enable or disable the Deliverability dashboard for your Amazon Pinpoint account. When you enable the Deliverability dashboard, you gain access to reputation, deliverability, and other metrics for the domains that you use to send email using Amazon Pinpoint. You also gain the ability to perform predictive inbox placement tests.</p> <p>When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition to any other fees that you accrue by using Amazon Pinpoint. For more information about the features and cost of a Deliverability dashboard subscription, see <a href="http://aws.amazon.com/pinpoint/pricing/">Amazon Pinpoint Pricing</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1150,8 +1099,13 @@ paths:
               - DashboardEnabled
             properties:
               DashboardEnabled:
-                description: 'Indicates whether the Deliverability dashboard is enabled. If the value is <code>true</code>, then the dashboard is enabled.'
+                description: 'Specifies whether to enable the Deliverability dashboard for your Amazon Pinpoint account. To enable the dashboard, set this value to <code>true</code>.'
                 type: boolean
+              SubscribedDomains:
+                description: 'An object that contains information about the Deliverability dashboard subscription for a verified domain that you use to send email and currently has an active Deliverability dashboard subscription. If a Deliverability dashboard subscription is active for a domain, you gain access to reputation, inbox placement, and other metrics for the domain.'
+                type: array
+                items:
+                  $ref: '#/definitions/DomainDeliverabilityTrackingOption'
   '/v1/email/deliverability-dashboard/test-reports/{ReportId}':
     get:
       operationId: GetDeliverabilityTestReport
@@ -1187,7 +1141,42 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/v1/email/deliverability-dashboard/statistics-report/{Domain}':
+  '/v1/email/deliverability-dashboard/campaigns/{CampaignId}':
+    get:
+      operationId: GetDomainDeliverabilityCampaign
+      description: Retrieve all the deliverability data for a specific campaign. This data is available for a campaign only if the campaign sent email by using a domain that the Deliverability dashboard is enabled for (<code>PutDeliverabilityDashboardOption</code> operation).
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetDomainDeliverabilityCampaignResponse'
+        '480':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+      parameters:
+        - name: CampaignId
+          in: path
+          required: true
+          description: The unique identifier for the campaign. Amazon Pinpoint automatically generates and assigns this identifier to a campaign. This value is not the same as the campaign identifier that Amazon Pinpoint assigns to campaigns that you create and manage by using the Amazon Pinpoint API or the Amazon Pinpoint console.
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/email/deliverability-dashboard/statistics-report/{Domain}#StartDate&EndDate':
     get:
       operationId: GetDomainStatisticsReport
       description: Retrieve inbox placement and engagement rates for the domains that you use to send email.
@@ -1214,23 +1203,18 @@ paths:
           required: true
           description: The domain that you want to obtain deliverability metrics for.
           type: string
-        - name: body
-          in: body
+        - name: StartDate
+          in: query
           required: true
-          schema:
-            type: object
-            required:
-              - StartDate
-              - EndDate
-            properties:
-              StartDate:
-                description: The first day (in Unix time) that you want to obtain domain deliverability metrics for.
-                type: string
-                format: date-time
-              EndDate:
-                description: The last day (in Unix time) that you want to obtain domain deliverability metrics for. The <code>EndDate</code> that you specify has to be less than or equal to 30 days after the <code>StartDate</code>.
-                type: string
-                format: date-time
+          description: The first day (in Unix time) that you want to obtain domain deliverability metrics for.
+          type: string
+          format: date-time
+        - name: EndDate
+          in: query
+          required: true
+          description: The last day (in Unix time) that you want to obtain domain deliverability metrics for. The <code>EndDate</code> that you specify has to be less than or equal to 30 days after the <code>StartDate</code>.
+          type: string
+          format: date-time
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1261,28 +1245,16 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            properties:
-              NextToken:
-                description: A token returned from a previous call to <code>ListDeliverabilityTestReports</code> to indicate the position in the list of predictive inbox placement tests.
-                type: string
-              PageSize:
-                description: '<p>The number of results to show in a single call to <code>ListDeliverabilityTestReports</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.</p> <p>The value you specify has to be at least 0, and can be no more than 1000.</p>'
-                type: integer
-        - name: PageSize
-          type: string
-          in: query
-          description: Pagination limit
-          required: false
         - name: NextToken
-          type: string
           in: query
-          description: Pagination token
           required: false
+          description: A token returned from a previous call to <code>ListDeliverabilityTestReports</code> to indicate the position in the list of predictive inbox placement tests.
+          type: string
+        - name: PageSize
+          in: query
+          required: false
+          description: '<p>The number of results to show in a single call to <code>ListDeliverabilityTestReports</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.</p> <p>The value you specify has to be at least 0, and can be no more than 1000.</p>'
+          type: integer
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1291,10 +1263,67 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /v1/email/tags:
+  '/v1/email/deliverability-dashboard/domains/{SubscribedDomain}/campaigns#StartDate&EndDate':
+    get:
+      operationId: ListDomainDeliverabilityCampaigns
+      description: Retrieve deliverability data for all the campaigns that used a specific domain to send email during a specified time range. This data is available for a domain only if you enabled the Deliverability dashboard (<code>PutDeliverabilityDashboardOption</code> operation) for the domain.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListDomainDeliverabilityCampaignsResponse'
+        '480':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+      parameters:
+        - name: StartDate
+          in: query
+          required: true
+          description: 'The first day, in Unix time format, that you want to obtain deliverability data for.'
+          type: string
+          format: date-time
+        - name: EndDate
+          in: query
+          required: true
+          description: 'The last day, in Unix time format, that you want to obtain deliverability data for. This value has to be less than or equal to 30 days after the value of the <code>StartDate</code> parameter.'
+          type: string
+          format: date-time
+        - name: SubscribedDomain
+          in: path
+          required: true
+          description: The domain to obtain deliverability data for.
+          type: string
+        - name: NextToken
+          in: query
+          required: false
+          description: A token that’s returned from a previous call to the <code>ListDomainDeliverabilityCampaigns</code> operation. This token indicates the position of a campaign in the list of campaigns.
+          type: string
+        - name: PageSize
+          in: query
+          required: false
+          description: 'The maximum number of results to include in response to a single call to the <code>ListDomainDeliverabilityCampaigns</code> operation. If the number of results is larger than the number that you specify in this parameter, the response includes a <code>NextToken</code> element, which you can use to obtain additional results.'
+          type: integer
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/email/tags#ResourceArn':
     get:
       operationId: ListTagsForResource
-      description: "Retrieve a list of the tags (keys and values) that are associated with a specific resource. A\_<i>tag</i>\_is a label that you optionally define and associate with a resource in Amazon Pinpoint. Each tag consists of a required\_<i>tag key</i>\_and an optional associated\_<i>tag value</i>. A tag key is a general label that acts as a category for more specific tag values. A tag value acts as a descriptor within a tag key."
+      description: "Retrieve a list of the tags (keys and values) that are associated with a specified resource. A\_<i>tag</i>\_is a label that you optionally define and associate with a resource in Amazon Pinpoint. Each tag consists of a required\_<i>tag key</i>\_and an optional associated\_<i>tag value</i>. A tag key is a general label that acts as a category for more specific tag values. A tag value acts as a descriptor within a tag key."
       responses:
         '200':
           description: Success
@@ -1313,17 +1342,11 @@ paths:
           schema:
             $ref: '#/definitions/TooManyRequestsException'
       parameters:
-        - name: body
-          in: body
+        - name: ResourceArn
+          in: query
           required: true
-          schema:
-            type: object
-            required:
-              - ResourceArn
-            properties:
-              ResourceArn:
-                description: The Amazon Resource Name (ARN) of the resource that you want to retrieve tag information for.
-                type: string
+          description: The Amazon Resource Name (ARN) of the resource that you want to retrieve tag information for.
+          type: string
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1332,48 +1355,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-    post:
-      operationId: TagResource
-      description: "<p>Add one or more tags (keys and values) to one or more specified resources. A <i>tag</i>\_is a label that you optionally define and associate with a resource in Amazon Pinpoint. Tags can help you categorize and manage resources in different ways, such as by purpose, owner, environment, or other criteria. A resource can have as many as 50 tags.</p> <p>Each tag consists of a required\_<i>tag key</i>\_and an associated\_<i>tag value</i>, both of which you define. A tag key is a general label that acts as a category for more specific tag values. A tag value acts as a descriptor within a tag key.</p>"
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/TagResourceResponse'
-        '480':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
-          description: ConcurrentModificationException
-          schema:
-            $ref: '#/definitions/ConcurrentModificationException'
-        '482':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '483':
-          description: TooManyRequestsException
-          schema:
-            $ref: '#/definitions/TooManyRequestsException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - ResourceArn
-              - Tags
-            properties:
-              ResourceArn:
-                description: The Amazon Resource Name (ARN) of the resource that you want to add one or more tags to.
-                type: string
-              Tags:
-                description: A list of the tags that you want to add to the resource. A tag consists of a required tag key (<code>Key</code>) and an associated tag value (<code>Value</code>). The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.
-                type: array
-                items:
-                  $ref: '#/definitions/Tag'
   /v1/email/account/dedicated-ips/warmup:
     put:
       operationId: PutAccountDedicatedIpWarmupAttributes
@@ -1951,6 +1932,57 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /v1/email/tags:
+    post:
+      operationId: TagResource
+      description: "<p>Add one or more tags (keys and values) to a specified resource. A <i>tag</i>\_is a label that you optionally define and associate with a resource in Amazon Pinpoint. Tags can help you categorize and manage resources in different ways, such as by purpose, owner, environment, or other criteria. A resource can have as many as 50 tags.</p> <p>Each tag consists of a required\_<i>tag key</i>\_and an associated\_<i>tag value</i>, both of which you define. A tag key is a general label that acts as a category for more specific tag values. A tag value acts as a descriptor within a tag key.</p>"
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TagResourceResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - ResourceArn
+              - Tags
+            properties:
+              ResourceArn:
+                description: The Amazon Resource Name (ARN) of the resource that you want to add one or more tags to.
+                type: string
+              Tags:
+                description: A list of the tags that you want to add to the resource. A tag consists of a required tag key (<code>Key</code>) and an associated tag value (<code>Value</code>). The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.
+                type: array
+                items:
+                  $ref: '#/definitions/Tag'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/v1/email/tags#ResourceArn&TagKeys':
     delete:
       operationId: UntagResource
@@ -2026,7 +2058,7 @@ definitions:
       Value:
         $ref: '#/definitions/TagValue'
         description: "The optional part of a key-value pair that defines a tag. The maximum length of a tag value is 256 characters. The minimum length is 0 characters. If you don’t want a resource to have a specific tag value, don’t specify a value for this\_parameter. Amazon Pinpoint will set the value to an empty string."
-    description: "<p>An object that defines the tags that are associated with a resource. A\_<i>tag</i>\_is a label that you optionally define and associate with a resource in Amazon Pinpoint. Tags can help you categorize and manage resources in different ways, such as by purpose, owner, environment, or other criteria. A resource can have as many as 50 tags.</p> <p>Each tag consists of a required\_<i>tag key</i>\_and an associated\_<i>tag value</i>, both of which you define. A tag key is a general label that acts as a category for a more specific tag value. A tag value acts as a descriptor within a tag key. For example, if you have two versions of an Amazon Pinpoint project, one for internal testing and another for external use, you might assign a\_<code>Stack</code>\_tag key to both projects. The value of the\_<code>Stack</code>\_tag key might be\_<code>Test</code>\_for one project and\_<code>Production</code>\_for the other project.</p> <p>A tag key can contain as many as 128 characters. A tag value can contain as many as 256 characters. The characters can be Unicode letters, digits, white space, or one of the following symbols: _ . : / = + -. The following additional restrictions apply to tags:</p> <ul> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>For each associated resource, each tag key must be unique and it can have only one value.</p> </li> <li> <p>The\_<code>aws:</code>\_prefix is reserved for use by AWS; you can’t use it in any tag keys or values that you define. In addition, you can't edit or remove tag keys or values that use this prefix. Tags that use this prefix don’t count against the limit of 50 tags per resource.</p> </li> <li> <p>You can associate tags with public or shared resources, but the tags are available only for your AWS account, not any other accounts that share the resource. In addition, the tags are available only for resources that are located in the specified AWS Region for your AWS account.</p> </li> </ul>"
+    description: "<p>An object that defines the tags that are associated with a resource. A\_<i>tag</i>\_is a label that you optionally define and associate with a resource in Amazon Pinpoint. Tags can help you categorize and manage resources in different ways, such as by purpose, owner, environment, or other criteria. A resource can have as many as 50 tags.</p> <p>Each tag consists of a required\_<i>tag key</i>\_and an associated\_<i>tag value</i>, both of which you define. A tag key is a general label that acts as a category for a more specific tag value. A tag value acts as a descriptor within a tag key. A tag key can contain as many as 128 characters. A tag value can contain as many as 256 characters. The characters can be Unicode letters, digits, white space, or one of the following symbols: _ . : / = + -. The following additional restrictions apply to tags:</p> <ul> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>For each associated resource, each tag key must be unique and it can have only one value.</p> </li> <li> <p>The\_<code>aws:</code>\_prefix is reserved for use by AWS; you can’t use it in any tag keys or values that you define. In addition, you can't edit or remove tag keys or values that use this prefix. Tags that use this prefix don’t count against the limit of 50 tags per resource.</p> </li> <li> <p>You can associate tags with public or shared resources, but the tags are available only for your AWS account, not any other accounts that share the resource. In addition, the tags are available only for resources that are located in the specified AWS Region for your AWS account.</p> </li> </ul>"
   AlreadyExistsException: {}
   NotFoundException: {}
   TooManyRequestsException: {}
@@ -2200,6 +2232,9 @@ definitions:
       SendingOptions:
         $ref: '#/definitions/SendingOptions'
         description: An object that defines whether or not Amazon Pinpoint can send email that you send using the configuration set.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: An array of objects that define the tags (keys and values) that are associated with the configuration set.
     description: Information about a configuration set.
   GetConfigurationSetEventDestinationsResponse:
     type: object
@@ -2232,7 +2267,19 @@ definitions:
     properties:
       DashboardEnabled:
         $ref: '#/definitions/Enabled'
-        description: 'Indicates whether the Deliverability dashboard is enabled. If the value is <code>true</code>, then the dashboard is enabled.'
+        description: 'Specifies whether the Deliverability dashboard is enabled for your Amazon Pinpoint account. If this value is <code>true</code>, the dashboard is enabled.'
+      SubscriptionExpiryDate:
+        $ref: '#/definitions/Timestamp'
+        description: 'The date, in Unix time format, when your current subscription to the Deliverability dashboard is scheduled to expire, if your subscription is scheduled to expire at the end of the current calendar month. This value is null if you have an active subscription that isn’t due to expire at the end of the month.'
+      AccountStatus:
+        $ref: '#/definitions/DeliverabilityDashboardAccountStatus'
+        description: 'The current status of your Deliverability dashboard subscription. If this value is <code>PENDING_EXPIRATION</code>, your subscription is scheduled to expire at the end of the current calendar month.'
+      ActiveSubscribedDomains:
+        $ref: '#/definitions/DomainDeliverabilityTrackingOptions'
+        description: 'An array of objects, one for each verified domain that you use to send email and currently has an active Deliverability dashboard subscription that isn’t scheduled to expire at the end of the current calendar month.'
+      PendingExpirationSubscribedDomains:
+        $ref: '#/definitions/DomainDeliverabilityTrackingOptions'
+        description: 'An array of objects, one for each verified domain that you use to send email and currently has an active Deliverability dashboard subscription that''s scheduled to expire at the end of the current calendar month.'
     description: An object that shows the status of the Deliverability dashboard for your Amazon Pinpoint account.
   GetDeliverabilityTestReportResponse:
     type: object
@@ -2253,7 +2300,19 @@ definitions:
       Message:
         $ref: '#/definitions/MessageContent'
         description: An object that contains the message that you sent when you performed this predictive inbox placement test.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: An array of objects that define the tags (keys and values) that are associated with the predictive inbox placement test.
     description: The results of the predictive inbox placement test.
+  GetDomainDeliverabilityCampaignResponse:
+    type: object
+    required:
+      - DomainDeliverabilityCampaign
+    properties:
+      DomainDeliverabilityCampaign:
+        $ref: '#/definitions/DomainDeliverabilityCampaign'
+        description: An object that contains the deliverability data for the campaign.
+    description: An object that contains all the deliverability data for a specific campaign. This data is available for a campaign only if the campaign sent email by using a domain that the Deliverability dashboard is enabled for (<code>PutDeliverabilityDashboardOption</code> operation).
   GetDomainStatisticsReportResponse:
     type: object
     required:
@@ -2285,6 +2344,9 @@ definitions:
       MailFromAttributes:
         $ref: '#/definitions/MailFromAttributes'
         description: An object that contains information about the Mail-From attributes for the email identity.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: An array of objects that define the tags (keys and values) that are associated with the email identity.
     description: Details about an email identity.
   ListConfigurationSetsResponse:
     type: object
@@ -2318,6 +2380,18 @@ definitions:
         $ref: '#/definitions/NextToken'
         description: 'A token that indicates that there are additional predictive inbox placement tests to list. To view additional predictive inbox placement tests, issue another request to <code>ListDeliverabilityTestReports</code>, and pass this token in the <code>NextToken</code> parameter.'
     description: 'A list of the predictive inbox placement test reports that are available for your account, regardless of whether or not those tests are complete.'
+  ListDomainDeliverabilityCampaignsResponse:
+    type: object
+    required:
+      - DomainDeliverabilityCampaigns
+    properties:
+      DomainDeliverabilityCampaigns:
+        $ref: '#/definitions/DomainDeliverabilityCampaignList'
+        description: 'An array of responses, one for each campaign that used the domain to send email during the specified time range.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: A token that’s returned from a previous call to the <code>ListDomainDeliverabilityCampaigns</code> operation. This token indicates the position of the campaign in the list of campaigns.
+    description: An array of objects that provide deliverability data for all the campaigns that used a specific domain to send email during a specified time range. This data is available for a domain only if you enabled the Deliverability dashboard (<code>PutDeliverabilityDashboardOption</code> operation) for the domain.
   ListEmailIdentitiesResponse:
     type: object
     properties:
@@ -2372,6 +2446,19 @@ definitions:
     type: object
     properties: {}
     description: A response that indicates whether the Deliverability dashboard is enabled for your Amazon Pinpoint account.
+  DomainDeliverabilityTrackingOption:
+    type: object
+    properties:
+      Domain:
+        $ref: '#/definitions/Domain'
+        description: A verified domain that’s associated with your AWS account and currently has an active Deliverability dashboard subscription.
+      SubscriptionStartDate:
+        $ref: '#/definitions/Timestamp'
+        description: 'The date, in Unix time format, when you enabled the Deliverability dashboard for the domain.'
+      InboxPlacementTrackingOption:
+        $ref: '#/definitions/InboxPlacementTrackingOption'
+        description: An object that contains information about the inbox placement data settings for the domain.
+    description: 'An object that contains information about the Deliverability dashboard subscription for a verified domain that you use to send email and currently has an active Deliverability dashboard subscription. If a Deliverability dashboard subscription is active for a domain, you gain access to reputation, inbox placement, and other metrics for the domain.'
   PutEmailIdentityDkimAttributesResponse:
     type: object
     properties: {}
@@ -2486,6 +2573,8 @@ definitions:
         $ref: '#/definitions/Content'
         description: 'An object that represents the version of the message that is displayed in email clients that support HTML. HTML messages can include formatted text, hyperlinks, images, and more. '
     description: Represents the body of the email message.
+  CampaignId:
+    type: string
   Charset:
     type: string
   CloudWatchDimensionConfigurations:
@@ -2608,6 +2697,8 @@ definitions:
       $ref: '#/definitions/Tag'
   CreateConfigurationSetRequest:
     type: object
+    required:
+      - ConfigurationSetName
     properties:
       ConfigurationSetName:
         $ref: '#/definitions/ConfigurationSetName'
@@ -2626,7 +2717,7 @@ definitions:
         description: An object that defines whether or not Amazon Pinpoint can send email that you send using the configuration set.
       Tags:
         $ref: '#/definitions/TagList'
-        description: An object that defines the tags (keys and values) that you want to associate with the configuration set.
+        description: An array of objects that define the tags (keys and values) that you want to associate with the configuration set.
     description: A request to create a configuration set.
   CreateDedicatedIpPoolRequest:
     type: object
@@ -2670,7 +2761,7 @@ definitions:
         description: The HTML body of the message that you sent when you performed the predictive inbox placement test.
       Tags:
         $ref: '#/definitions/TagList'
-        description: An object that defines the tags (keys and values) that you want to associate with the predictive inbox placement test.
+        description: An array of objects that define the tags (keys and values) that you want to associate with the predictive inbox placement test.
     description: 'A request to perform a predictive inbox placement test. Predictive inbox placement tests can help you predict how your messages will be handled by various email providers around the world. When you perform a predictive inbox placement test, you provide a sample message that contains the content that you plan to send to your customers. Amazon Pinpoint then sends that message to special email addresses spread across several major email providers. After about 24 hours, the test is complete, and you can use the <code>GetDeliverabilityTestReport</code> operation to view the results of the test.'
   ReportId:
     type: string
@@ -2693,7 +2784,7 @@ definitions:
         description: The email address or domain that you want to verify.
       Tags:
         $ref: '#/definitions/TagList'
-        description: An object that defines the tags (keys and values) that you want to associate with the email identity.
+        description: An array of objects that define the tags (keys and values) that you want to associate with the email identity.
     description: A request to begin the verification process for an email identity (an email address or domain).
   IdentityType:
     type: string
@@ -2746,7 +2837,7 @@ definitions:
         description: An object that contains inbox placement metrics for a specific day in the analysis period.
       DomainIspPlacements:
         $ref: '#/definitions/DomainIspPlacements'
-        description: 'An object that contains inbox placement metrics for a specifid day in the analysis period, broken out by the recipient''s email provider.'
+        description: 'An object that contains inbox placement metrics for a specified day in the analysis period, broken out by the recipient''s email provider.'
     description: An object that contains information about the volume of email sent on each day of the analysis period.
   DailyVolumes:
     type: array
@@ -2804,6 +2895,13 @@ definitions:
     type: object
     properties: {}
     description: 'A request to delete an existing email identity. When you delete an identity, you lose the ability to use Amazon Pinpoint to send email from that identity. You can restore your ability to send email by completing the verification process for the identity again.'
+  DeliverabilityDashboardAccountStatus:
+    type: string
+    enum:
+      - ACTIVE
+      - PENDING_EXPIRATION
+      - DISABLED
+    description: 'The current status of your Deliverability dashboard subscription. If this value is <code>PENDING_EXPIRATION</code>, your subscription is scheduled to expire at the end of the current calendar month.'
   DeliverabilityTestSubject:
     type: string
     description: The subject line for an email that you submitted in a predictive inbox placement test.
@@ -2861,9 +2959,16 @@ definitions:
       $ref: '#/definitions/DnsToken'
   DnsToken:
     type: string
-  IspName:
+  Domain:
     type: string
-    description: The name of an email provider.
+  ImageUrl:
+    type: string
+  Subject:
+    type: string
+  IpList:
+    type: array
+    items:
+      $ref: '#/definitions/Ip'
   Volume:
     type: integer
     description: An object that contains information about inbox placement volume.
@@ -2871,6 +2976,79 @@ definitions:
     type: number
     description: An object that contains information about inbox placement percentages.
     format: double
+  Esps:
+    type: array
+    items:
+      $ref: '#/definitions/Esp'
+  DomainDeliverabilityCampaign:
+    type: object
+    properties:
+      CampaignId:
+        $ref: '#/definitions/CampaignId'
+        description: The unique identifier for the campaign. Amazon Pinpoint automatically generates and assigns this identifier to a campaign. This value is not the same as the campaign identifier that Amazon Pinpoint assigns to campaigns that you create and manage by using the Amazon Pinpoint API or the Amazon Pinpoint console.
+      ImageUrl:
+        $ref: '#/definitions/ImageUrl'
+        description: The URL of an image that contains a snapshot of the email message that was sent.
+      Subject:
+        $ref: '#/definitions/Subject'
+        description: 'The subject line, or title, of the email message.'
+      FromAddress:
+        $ref: '#/definitions/Identity'
+        description: The verified email address that the email message was sent from.
+      SendingIps:
+        $ref: '#/definitions/IpList'
+        description: The IP addresses that were used to send the email message.
+      FirstSeenDateTime:
+        $ref: '#/definitions/Timestamp'
+        description: 'The first time, in Unix time format, when the email message was delivered to any recipient''s inbox. This value can help you determine how long it took for a campaign to deliver an email message.'
+      LastSeenDateTime:
+        $ref: '#/definitions/Timestamp'
+        description: 'The last time, in Unix time format, when the email message was delivered to any recipient''s inbox. This value can help you determine how long it took for a campaign to deliver an email message.'
+      InboxCount:
+        $ref: '#/definitions/Volume'
+        description: The number of email messages that were delivered to recipients’ inboxes.
+      SpamCount:
+        $ref: '#/definitions/Volume'
+        description: The number of email messages that were delivered to recipients' spam or junk mail folders.
+      ReadRate:
+        $ref: '#/definitions/Percentage'
+        description: 'The percentage of email messages that were opened by recipients. Due to technical limitations, this value only includes recipients who opened the message by using an email client that supports images.'
+      DeleteRate:
+        $ref: '#/definitions/Percentage'
+        description: 'The percentage of email messages that were deleted by recipients, without being opened first. Due to technical limitations, this value only includes recipients who opened the message by using an email client that supports images.'
+      ReadDeleteRate:
+        $ref: '#/definitions/Percentage'
+        description: 'The percentage of email messages that were opened and then deleted by recipients. Due to technical limitations, this value only includes recipients who opened the message by using an email client that supports images.'
+      ProjectedVolume:
+        $ref: '#/definitions/Volume'
+        description: The projected number of recipients that the email message was sent to.
+      Esps:
+        $ref: '#/definitions/Esps'
+        description: The major email providers who handled the email message.
+    description: An object that contains the deliverability data for a specific campaign. This data is available for a campaign only if the campaign sent email by using a domain that the Deliverability dashboard is enabled for (<code>PutDeliverabilityDashboardOption</code> operation).
+  DomainDeliverabilityCampaignList:
+    type: array
+    description: <p/>
+    items:
+      $ref: '#/definitions/DomainDeliverabilityCampaign'
+  InboxPlacementTrackingOption:
+    type: object
+    properties:
+      Global:
+        $ref: '#/definitions/Enabled'
+        description: Specifies whether inbox placement data is being tracked for the domain.
+      TrackedIsps:
+        $ref: '#/definitions/IspNameList'
+        description: 'An array of strings, one for each major email provider that the inbox placement data applies to.'
+    description: An object that contains information about the inbox placement data settings for a verified domain that’s associated with your AWS account. This data is available only if you enabled the Deliverability dashboard for the domain (<code>PutDeliverabilityDashboardOption</code> operation).
+  DomainDeliverabilityTrackingOptions:
+    type: array
+    description: 'An object that contains information about the Deliverability dashboard subscription for a verified domain that you use to send email and currently has an active Deliverability dashboard subscription. If a Deliverability dashboard subscription is active for a domain, you gain access to reputation, inbox placement, and other metrics for the domain.'
+    items:
+      $ref: '#/definitions/DomainDeliverabilityTrackingOption'
+  IspName:
+    type: string
+    description: The name of an email provider.
   DomainIspPlacement:
     type: object
     properties:
@@ -2890,6 +3068,8 @@ definitions:
         $ref: '#/definitions/Percentage'
         description: The percentage of messages that were sent from the selected domain to the specified email provider that arrived in recipients' spam or junk mail folders.
     description: An object that contains inbox placement data for email sent from one of your email domains to a specific email provider.
+  Esp:
+    type: string
   EventDestination:
     type: object
     required:
@@ -2955,12 +3135,7 @@ definitions:
     description: An object that contains information about the per-day and per-second sending limits for your Amazon Pinpoint account in the current AWS Region.
   GetBlacklistReportsRequest:
     type: object
-    required:
-      - BlacklistItemNames
-    properties:
-      BlacklistItemNames:
-        $ref: '#/definitions/BlacklistItemNames'
-        description: A list of IP addresses that you want to retrieve blacklist information about. You can only specify the dedicated IP addresses that you use to send email using Amazon Pinpoint or Amazon SES.
+    properties: {}
     description: A request to retrieve a list of the blacklists that your dedicated IP addresses appear on.
   GetConfigurationSetEventDestinationsRequest:
     type: object
@@ -2980,21 +3155,12 @@ definitions:
     type: integer
   GetDedicatedIpsRequest:
     type: object
-    properties:
-      PoolName:
-        $ref: '#/definitions/PoolName'
-        description: The name of the IP pool that the dedicated IP address is associated with.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: A token returned from a previous call to <code>GetDedicatedIps</code> to indicate the position of the dedicated IP pool in the list of IP pools.
-      PageSize:
-        $ref: '#/definitions/MaxItems'
-        description: 'The number of results to show in a single call to <code>GetDedicatedIpsRequest</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.'
+    properties: {}
     description: A request to obtain more information about dedicated IP pools.
   GetDeliverabilityDashboardOptionsRequest:
     type: object
     properties: {}
-    description: '<p>A request to retrieve the status of the Deliverability dashboard for your account. When the Deliverability dashboard is enabled, you gain access to reputation metrics for the domains that you use to send email using Amazon Pinpoint. You also gain the ability to perform predictive inbox placement tests.</p> <p>When you use the Deliverability dashboard, you pay a monthly charge of USD$1,250.00, in addition to any other fees that you accrue by using Amazon Pinpoint. If you enable the Deliverability dashboard after the first day of a calendar month, AWS prorates the monthly charge based on how many days have elapsed in the current calendar month.</p>'
+    description: '<p>Retrieve information about the status of the Deliverability dashboard for your Amazon Pinpoint account. When the Deliverability dashboard is enabled, you gain access to reputation, deliverability, and other metrics for the domains that you use to send email using Amazon Pinpoint. You also gain the ability to perform predictive inbox placement tests.</p> <p>When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition to any other fees that you accrue by using Amazon Pinpoint. For more information about the features and cost of a Deliverability dashboard subscription, see <a href="http://aws.amazon.com/pinpoint/pricing/">Amazon Pinpoint Pricing</a>.</p>'
   GetDeliverabilityTestReportRequest:
     type: object
     properties: {}
@@ -3025,18 +3191,13 @@ definitions:
   MessageContent:
     type: string
     description: The body of an email message.
+  GetDomainDeliverabilityCampaignRequest:
+    type: object
+    properties: {}
+    description: Retrieve all the deliverability data for a specific campaign. This data is available for a campaign only if the campaign sent email by using a domain that the Deliverability dashboard is enabled for (<code>PutDeliverabilityDashboardOption</code> operation).
   GetDomainStatisticsReportRequest:
     type: object
-    required:
-      - StartDate
-      - EndDate
-    properties:
-      StartDate:
-        $ref: '#/definitions/Timestamp'
-        description: The first day (in Unix time) that you want to obtain domain deliverability metrics for.
-      EndDate:
-        $ref: '#/definitions/Timestamp'
-        description: The last day (in Unix time) that you want to obtain domain deliverability metrics for. The <code>EndDate</code> that you specify has to be less than or equal to 30 days after the <code>StartDate</code>.
+    properties: {}
     description: A request to obtain deliverability metrics for a domain.
   OverallVolume:
     type: object
@@ -3089,6 +3250,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/IdentityInfo'
+  IspNameList:
+    type: array
+    items:
+      $ref: '#/definitions/IspName'
   IspPlacement:
     type: object
     properties:
@@ -3101,23 +3266,11 @@ definitions:
     description: An object that describes how email sent during the predictive inbox placement test was handled by a certain email provider.
   ListConfigurationSetsRequest:
     type: object
-    properties:
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: A token returned from a previous call to <code>ListConfigurationSets</code> to indicate the position in the list of configuration sets.
-      PageSize:
-        $ref: '#/definitions/MaxItems'
-        description: 'The number of results to show in a single call to <code>ListConfigurationSets</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.'
+    properties: {}
     description: A request to obtain a list of configuration sets for your Amazon Pinpoint account in the current AWS Region.
   ListDedicatedIpPoolsRequest:
     type: object
-    properties:
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: A token returned from a previous call to <code>ListDedicatedIpPools</code> to indicate the position in the list of dedicated IP pools.
-      PageSize:
-        $ref: '#/definitions/MaxItems'
-        description: 'The number of results to show in a single call to <code>ListDedicatedIpPools</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.'
+    properties: {}
     description: A request to obtain a list of dedicated IP pools.
   ListOfDedicatedIpPools:
     type: array
@@ -3126,32 +3279,19 @@ definitions:
       $ref: '#/definitions/PoolName'
   ListDeliverabilityTestReportsRequest:
     type: object
-    properties:
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: A token returned from a previous call to <code>ListDeliverabilityTestReports</code> to indicate the position in the list of predictive inbox placement tests.
-      PageSize:
-        $ref: '#/definitions/MaxItems'
-        description: '<p>The number of results to show in a single call to <code>ListDeliverabilityTestReports</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.</p> <p>The value you specify has to be at least 0, and can be no more than 1000.</p>'
+    properties: {}
     description: A request to list all of the predictive inbox placement tests that you've performed.
+  ListDomainDeliverabilityCampaignsRequest:
+    type: object
+    properties: {}
+    description: Retrieve deliverability data for all the campaigns that used a specific domain to send email during a specified time range. This data is available for a domain only if you enabled the Deliverability dashboard (<code>PutDeliverabilityDashboardOption</code> operation) for the domain.
   ListEmailIdentitiesRequest:
     type: object
-    properties:
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: A token returned from a previous call to <code>ListEmailIdentities</code> to indicate the position in the list of identities.
-      PageSize:
-        $ref: '#/definitions/MaxItems'
-        description: '<p>The number of results to show in a single call to <code>ListEmailIdentities</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.</p> <p>The value you specify has to be at least 0, and can be no more than 1000.</p>'
+    properties: {}
     description: 'A request to list all of the email identities associated with your Amazon Pinpoint account. This list includes identities that you''ve already verified, identities that are unverified, and identities that were verified in the past, but are no longer verified.'
   ListTagsForResourceRequest:
     type: object
-    required:
-      - ResourceArn
-    properties:
-      ResourceArn:
-        $ref: '#/definitions/AmazonResourceName'
-        description: The Amazon Resource Name (ARN) of the resource that you want to retrieve tag information for.
+    properties: {}
   MailFromDomainName:
     type: string
     description: The domain that you want to use as a MAIL FROM domain.
@@ -3252,8 +3392,11 @@ definitions:
     properties:
       DashboardEnabled:
         $ref: '#/definitions/Enabled'
-        description: 'Indicates whether the Deliverability dashboard is enabled. If the value is <code>true</code>, then the dashboard is enabled.'
-    description: '<p>A request to enable or disable the Deliverability dashboard. When you enable the Deliverability dashboard, you gain access to reputation metrics for the domains that you use to send email using Amazon Pinpoint. You also gain the ability to perform predictive inbox placement tests.</p> <p>When you use the Deliverability dashboard, you pay a monthly charge of USD$1,250.00, in addition to any other fees that you accrue by using Amazon Pinpoint. If you enable the Deliverability dashboard after the first day of a calendar month, we prorate the monthly charge based on how many days have elapsed in the current calendar month.</p>'
+        description: 'Specifies whether to enable the Deliverability dashboard for your Amazon Pinpoint account. To enable the dashboard, set this value to <code>true</code>.'
+      SubscribedDomains:
+        $ref: '#/definitions/DomainDeliverabilityTrackingOptions'
+        description: 'An array of objects, one for each verified domain that you use to send email and enabled the Deliverability dashboard for.'
+    description: '<p>Enable or disable the Deliverability dashboard for your Amazon Pinpoint account. When you enable the Deliverability dashboard, you gain access to reputation, deliverability, and other metrics for the domains that you use to send email using Amazon Pinpoint. You also gain the ability to perform predictive inbox placement tests.</p> <p>When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition to any other fees that you accrue by using Amazon Pinpoint. For more information about the features and cost of a Deliverability dashboard subscription, see <a href="http://aws.amazon.com/pinpoint/pricing/">Amazon Pinpoint Pricing</a>.</p>'
   PutEmailIdentityDkimAttributesRequest:
     type: object
     properties:

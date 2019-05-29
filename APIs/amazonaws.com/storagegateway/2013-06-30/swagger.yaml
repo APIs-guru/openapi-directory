@@ -341,6 +341,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=StorageGateway_20130630.AssignTapePool':
+    post:
+      operationId: AssignTapePool
+      description: '<p>Assigns a tape to a tape pool for archiving. The tape assigned to a pool is archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the S3 storage class (Glacier or Deep Archive) that corresponds to the pool.</p> <p>Valid values: "GLACIER", "DEEP_ARCHIVE"</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AssignTapePoolOutput'
+        '480':
+          description: InvalidGatewayRequestException
+          schema:
+            $ref: '#/definitions/InvalidGatewayRequestException'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AssignTapePoolInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - StorageGateway_20130630.AssignTapePool
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=StorageGateway_20130630.AttachVolume':
     post:
       operationId: AttachVolume
@@ -3003,6 +3040,24 @@ definitions:
         $ref: '#/definitions/DiskIds'
         description: An array of strings that identify disks that are to be configured as working storage. Each string have a minimum length of 1 and maximum length of 300. You can get the disk IDs from the <a>ListLocalDisks</a> API.
     description: '<p>A JSON object containing one or more of the following fields:</p> <ul> <li> <p> <a>AddWorkingStorageInput$DiskIds</a> </p> </li> </ul>'
+  AssignTapePoolOutput:
+    type: object
+    properties:
+      TapeARN:
+        $ref: '#/definitions/TapeARN'
+        description: The unique Amazon Resource Names (ARN) of the virtual tape that was added to the tape pool.
+  AssignTapePoolInput:
+    type: object
+    required:
+      - TapeARN
+      - PoolId
+    properties:
+      TapeARN:
+        $ref: '#/definitions/TapeARN'
+        description: The unique Amazon Resource Name (ARN) of the virtual tape that you want to add to the tape pool.
+      PoolId:
+        $ref: '#/definitions/PoolId'
+        description: '<p>The ID of the pool that you want to add your tape to for archiving. The tape in this pool is archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (Glacier or Deep Archive) that corresponds to the pool.</p> <p>Valid values: "GLACIER", "DEEP_ARCHIVE"</p>'
   AttachVolumeOutput:
     type: object
     properties:
@@ -4943,6 +4998,15 @@ definitions:
     type: string
     minLength: 50
     maxLength: 500
+  TapeARN:
+    type: string
+    pattern: '^arn:(aws|aws-cn|aws-us-gov):storagegateway:[a-z\-0-9]+:[0-9]+:tape\/[0-9A-Z]{7,16}$'
+    minLength: 50
+    maxLength: 500
+  PoolId:
+    type: string
+    minLength: 1
+    maxLength: 100
   TargetName:
     type: string
     pattern: '^[-\.;a-z0-9]+$'
@@ -5079,11 +5143,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/CachediSCSIVolume'
-  TapeARN:
-    type: string
-    pattern: '^arn:(aws|aws-cn|aws-us-gov):storagegateway:[a-z\-0-9]+:[0-9]+:tape\/[0-9A-Z]{7,16}$'
-    minLength: 50
-    maxLength: 500
   ChapInfo:
     type: object
     properties:
@@ -5108,6 +5167,7 @@ definitions:
     type: string
     minLength: 1
     maxLength: 100
+    format: password
   IqnName:
     type: string
     pattern: '[0-9a-z:.-]+'
@@ -5197,10 +5257,6 @@ definitions:
     pattern: '^[A-Z0-9]*$'
     minLength: 7
     maxLength: 16
-  PoolId:
-    type: string
-    minLength: 1
-    maxLength: 100
   NumTapesToCreate:
     type: integer
     minimum: 1

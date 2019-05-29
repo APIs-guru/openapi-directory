@@ -2942,7 +2942,7 @@ paths:
   '/#X-Amz-Target=AWSWAF_Regional_20161128.PutLoggingConfiguration':
     post:
       operationId: PutLoggingConfiguration
-      description: '<p>Associates a <a>LoggingConfiguration</a> with a specified web ACL.</p> <p>You can access information about all traffic that AWS WAF inspects using the following steps:</p> <ol> <li> <p>Create an Amazon Kinesis Data Firehose . </p> <p>Create the data firehose with a PUT source and in the region that you are operating. However, if you are capturing logs for Amazon CloudFront, always create the firehose in US East (N. Virginia). </p> </li> <li> <p>Associate that firehose to your web ACL using a <code>PutLoggingConfiguration</code> request.</p> </li> </ol> <p>When you successfully enable logging using a <code>PutLoggingConfiguration</code> request, AWS WAF will create a service linked role with the necessary permissions to write logs to the Amazon Kinesis Data Firehose. For more information, see <a href="https://docs.aws.amazon.com/waf/latest/developerguide/logging.html">Logging Web ACL Traffic Information</a> in the <i>AWS WAF Developer Guide</i>.</p>'
+      description: '<p>Associates a <a>LoggingConfiguration</a> with a specified web ACL.</p> <p>You can access information about all traffic that AWS WAF inspects using the following steps:</p> <ol> <li> <p>Create an Amazon Kinesis Data Firehose . </p> <p>Create the data firehose with a PUT source and in the region that you are operating. However, if you are capturing logs for Amazon CloudFront, always create the firehose in US East (N. Virginia). </p> <note> <p>Do not create the data firehose using a <code>Kinesis stream</code> as your source.</p> </note> </li> <li> <p>Associate that firehose to your web ACL using a <code>PutLoggingConfiguration</code> request.</p> </li> </ol> <p>When you successfully enable logging using a <code>PutLoggingConfiguration</code> request, AWS WAF will create a service linked role with the necessary permissions to write logs to the Amazon Kinesis Data Firehose. For more information, see <a href="https://docs.aws.amazon.com/waf/latest/developerguide/logging.html">Logging Web ACL Traffic Information</a> in the <i>AWS WAF Developer Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -3903,7 +3903,7 @@ definitions:
         description: A friendly name or description of the <a>RateBasedRule</a>. You can't change the name of a <code>RateBasedRule</code> after you create it.
       MetricName:
         $ref: '#/definitions/MetricName'
-        description: 'A friendly name or description for the metrics for this <code>RateBasedRule</code>. The name can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can''t contain whitespace. You can''t change the name of the metric after you create the <code>RateBasedRule</code>.'
+        description: 'A friendly name or description for the metrics for this <code>RateBasedRule</code>. The name can contain only alphanumeric characters (A-Z, a-z, 0-9), with maximum length 128 and minimum length one. It can''t contain whitespace or metric names reserved for AWS WAF, including "All" and "Default_Action." You can''t change the name of the metric after you create the <code>RateBasedRule</code>.'
       RateKey:
         $ref: '#/definitions/RateKey'
         description: The field that AWS WAF uses to determine if requests are likely arriving from a single source and thus subject to rate monitoring. The only valid value for <code>RateKey</code> is <code>IP</code>. <code>IP</code> indicates that requests that arrive from the same IP address are subject to the <code>RateLimit</code> that is specified in the <code>RateBasedRule</code>.
@@ -3986,7 +3986,7 @@ definitions:
         description: A friendly name or description of the <a>Rule</a>. You can't change the name of a <code>Rule</code> after you create it.
       MetricName:
         $ref: '#/definitions/MetricName'
-        description: 'A friendly name or description for the metrics for this <code>Rule</code>. The name can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can''t contain white space. You can''t change the name of the metric after you create the <code>Rule</code>.'
+        description: 'A friendly name or description for the metrics for this <code>Rule</code>. The name can contain only alphanumeric characters (A-Z, a-z, 0-9), with maximum length 128 and minimum length one. It can''t contain whitespace or metric names reserved for AWS WAF, including "All" and "Default_Action." You can''t change the name of the metric after you create the <code>Rule</code>.'
       ChangeToken:
         $ref: '#/definitions/ChangeToken'
         description: The value returned by the most recent call to <a>GetChangeToken</a>.
@@ -4011,7 +4011,7 @@ definitions:
         description: A friendly name or description of the <a>RuleGroup</a>. You can't change <code>Name</code> after you create a <code>RuleGroup</code>.
       MetricName:
         $ref: '#/definitions/MetricName'
-        description: 'A friendly name or description for the metrics for this <code>RuleGroup</code>. The name can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can''t contain whitespace. You can''t change the name of the metric after you create the <code>RuleGroup</code>.'
+        description: 'A friendly name or description for the metrics for this <code>RuleGroup</code>. The name can contain only alphanumeric characters (A-Z, a-z, 0-9), with maximum length 128 and minimum length one. It can''t contain whitespace or metric names reserved for AWS WAF, including "All" and "Default_Action." You can''t change the name of the metric after you create the <code>RuleGroup</code>.'
       ChangeToken:
         $ref: '#/definitions/ChangeToken'
         description: The value returned by the most recent call to <a>GetChangeToken</a>.
@@ -4114,7 +4114,7 @@ definitions:
         description: A friendly name or description of the <a>WebACL</a>. You can't change <code>Name</code> after you create the <code>WebACL</code>.
       MetricName:
         $ref: '#/definitions/MetricName'
-        description: 'A friendly name or description for the metrics for this <code>WebACL</code>. The name can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can''t contain white space. You can''t change <code>MetricName</code> after you create the <code>WebACL</code>.'
+        description: 'A friendly name or description for the metrics for this <code>WebACL</code>.The name can contain only alphanumeric characters (A-Z, a-z, 0-9), with maximum length 128 and minimum length one. It can''t contain whitespace or metric names reserved for AWS WAF, including "All" and "Default_Action." You can''t change <code>MetricName</code> after you create the <code>WebACL</code>.'
       DefaultAction:
         $ref: '#/definitions/WafAction'
         description: The action that you want AWS WAF to take when a request doesn't match the criteria specified in any of the <code>Rule</code> objects that are associated with the <code>WebACL</code>.
@@ -5701,7 +5701,7 @@ definitions:
         description: A friendly name or description for a <code>RateBasedRule</code>. You can't change the name of a <code>RateBasedRule</code> after you create it.
       MetricName:
         $ref: '#/definitions/MetricName'
-        description: 'A friendly name or description for the metrics for a <code>RateBasedRule</code>. The name can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can''t contain whitespace. You can''t change the name of the metric after you create the <code>RateBasedRule</code>.'
+        description: 'A friendly name or description for the metrics for a <code>RateBasedRule</code>. The name can contain only alphanumeric characters (A-Z, a-z, 0-9), with maximum length 128 and minimum length one. It can''t contain whitespace or metric names reserved for AWS WAF, including "All" and "Default_Action." You can''t change the name of the metric after you create the <code>RateBasedRule</code>.'
       MatchPredicates:
         $ref: '#/definitions/Predicates'
         description: 'The <code>Predicates</code> object contains one <code>Predicate</code> element for each <a>ByteMatchSet</a>, <a>IPSet</a>, or <a>SqlInjectionMatchSet</a> object that you want to include in a <code>RateBasedRule</code>.'
@@ -5754,7 +5754,7 @@ definitions:
         description: The friendly name or description for the <code>RuleGroup</code>. You can't change the name of a <code>RuleGroup</code> after you create it.
       MetricName:
         $ref: '#/definitions/MetricName'
-        description: 'A friendly name or description for the metrics for this <code>RuleGroup</code>. The name can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can''t contain whitespace. You can''t change the name of the metric after you create the <code>RuleGroup</code>.'
+        description: 'A friendly name or description for the metrics for this <code>RuleGroup</code>. The name can contain only alphanumeric characters (A-Z, a-z, 0-9), with maximum length 128 and minimum length one. It can''t contain whitespace or metric names reserved for AWS WAF, including "All" and "Default_Action." You can''t change the name of the metric after you create the <code>RuleGroup</code>.'
     description: '<p>A collection of predefined rules that you can add to a web ACL.</p> <p>Rule groups are subject to the following limits:</p> <ul> <li> <p>Three rule groups per account. You can request an increase to this limit by contacting customer support.</p> </li> <li> <p>One rule group per web ACL.</p> </li> <li> <p>Ten rules per rule group.</p> </li> </ul>'
   Rule:
     type: object
@@ -5770,7 +5770,7 @@ definitions:
         description: The friendly name or description for the <code>Rule</code>. You can't change the name of a <code>Rule</code> after you create it.
       MetricName:
         $ref: '#/definitions/MetricName'
-        description: 'A friendly name or description for the metrics for this <code>Rule</code>. The name can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can''t contain whitespace. You can''t change <code>MetricName</code> after you create the <code>Rule</code>.'
+        description: 'A friendly name or description for the metrics for this <code>Rule</code>. The name can contain only alphanumeric characters (A-Z, a-z, 0-9), with maximum length 128 and minimum length one. It can''t contain whitespace or metric names reserved for AWS WAF, including "All" and "Default_Action." You can''t change <code>MetricName</code> after you create the <code>Rule</code>.'
       Predicates:
         $ref: '#/definitions/Predicates'
         description: 'The <code>Predicates</code> object contains one <code>Predicate</code> element for each <a>ByteMatchSet</a>, <a>IPSet</a>, or <a>SqlInjectionMatchSet</a> object that you want to include in a <code>Rule</code>.'
@@ -5822,7 +5822,7 @@ definitions:
         description: A friendly name or description of the <code>WebACL</code>. You can't change the name of a <code>WebACL</code> after you create it.
       MetricName:
         $ref: '#/definitions/MetricName'
-        description: 'A friendly name or description for the metrics for this <code>WebACL</code>. The name can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can''t contain whitespace. You can''t change <code>MetricName</code> after you create the <code>WebACL</code>.'
+        description: 'A friendly name or description for the metrics for this <code>WebACL</code>. The name can contain only alphanumeric characters (A-Z, a-z, 0-9), with maximum length 128 and minimum length one. It can''t contain whitespace or metric names reserved for AWS WAF, including "All" and "Default_Action." You can''t change <code>MetricName</code> after you create the <code>WebACL</code>.'
       DefaultAction:
         $ref: '#/definitions/WafAction'
         description: The action to perform if none of the <code>Rules</code> contained in the <code>WebACL</code> match. The action is specified by the <a>WafAction</a> object.
@@ -6748,7 +6748,7 @@ definitions:
         description: A friendly name or description of the <code>RuleGroup</code>. You can't change the name of a <code>RuleGroup</code> after you create it.
       MetricName:
         $ref: '#/definitions/MetricName'
-        description: 'A friendly name or description for the metrics for this <code>RuleGroup</code>. The name can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can''t contain whitespace. You can''t change the name of the metric after you create the <code>RuleGroup</code>.'
+        description: 'A friendly name or description for the metrics for this <code>RuleGroup</code>. The name can contain only alphanumeric characters (A-Z, a-z, 0-9), with maximum length 128 and minimum length one. It can''t contain whitespace or metric names reserved for AWS WAF, including "All" and "Default_Action." You can''t change the name of the metric after you create the <code>RuleGroup</code>.'
     description: A summary of the rule groups you are subscribed to.
   WebACLUpdates:
     type: array

@@ -1,0 +1,2350 @@
+swagger: '2.0'
+info:
+  version: '2019-05-23'
+  x-release: v4
+  title: AWS Ground Station
+  description: |-
+    Welcome to the AWS Ground Station API Reference. AWS Ground Station is a fully managed service that
+          enables you to control satellite communications, downlink and process satellite data, and
+          scale your satellite operations efficiently and cost-effectively without having
+          to build or manage your own ground station infrastructure.
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: groundstation
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/groundstation-2019-05-23.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/groundstation/'
+host: groundstation.amazonaws.com
+basePath: /
+schemes:
+  - https
+  - http
+x-servers:
+  - url: 'http://groundstation.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+    description: The AWS Ground Station multi-region endpoint
+  - url: 'https://groundstation.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+    description: The AWS Ground Station multi-region endpoint
+  - url: 'http://groundstation.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+    description: The AWS Ground Station endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://groundstation.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+    description: The AWS Ground Station endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  '/contact/{contactId}':
+    delete:
+      operationId: CancelContact
+      description: Cancels a contact with a specified contact ID.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ContactIdResponse'
+        '480':
+          description: DependencyException
+          schema:
+            $ref: '#/definitions/DependencyException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: contactId
+          in: path
+          required: true
+          description: UUID of a contact.
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeContact
+      description: Describes an existing contact.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeContactResponse'
+        '480':
+          description: DependencyException
+          schema:
+            $ref: '#/definitions/DependencyException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: contactId
+          in: path
+          required: true
+          description: UUID of a contact.
+          type: string
+  /config:
+    post:
+      operationId: CreateConfig
+      description: |-
+        <p>Creates a <code>Config</code> with the specified <code>configData</code> parameters.</p>
+                 <p>Only one type of <code>configData</code> can be specified.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ConfigIdResponse'
+        '480':
+          description: DependencyException
+          schema:
+            $ref: '#/definitions/DependencyException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - configData
+              - name
+            properties:
+              configData:
+                description: |-
+                  <p>Object containing the parameters for a <code>Config</code>.</p>
+                           <p>See the subtype definitions for what each type of <code>Config</code> contains.</p>
+                type: object
+                properties:
+                  antennaDownlinkConfig:
+                    $ref: '#/definitions/AntennaDownlinkConfig'
+                    description: Information about how AWS Ground Station should configure an antenna for downlink during a contact.
+                  antennaDownlinkDemodDecodeConfig:
+                    $ref: '#/definitions/AntennaDownlinkDemodDecodeConfig'
+                    description: Information about how AWS Ground Station should conﬁgure an antenna for downlink demod decode during a contact.
+                  antennaUplinkConfig:
+                    $ref: '#/definitions/AntennaUplinkConfig'
+                    description: Information about how AWS Ground Station should conﬁgure an antenna for uplink during a contact.
+                  dataflowEndpointConfig:
+                    $ref: '#/definitions/DataflowEndpointConfig'
+                    description: Information about the dataflow endpoint <code>Config</code>.
+                  trackingConfig:
+                    $ref: '#/definitions/TrackingConfig'
+                    description: 'Object that determines whether tracking should be used during a contact executed with this <code>Config</code> in the mission profile. '
+                  uplinkEchoConfig:
+                    $ref: '#/definitions/UplinkEchoConfig'
+                    description: |-
+                      <p>Information about an uplink echo <code>Config</code>.</p>
+                               <p>Parameters from the <code>AntennaUplinkConfig</code>, corresponding to the specified <code>AntennaUplinkConfigArn</code>, are used when this <code>UplinkEchoConfig</code> is used in a contact.</p>
+              name:
+                description: Name of a <code>Config</code>.
+                type: string
+                pattern: '^[ a-zA-Z0-9_:-]+$'
+                minLength: 1
+                maxLength: 256
+              tags:
+                description: Tags assigned to a <code>Config</code>.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/String'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListConfigs
+      description: Returns a list of <code>Config</code> objects.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListConfigsResponse'
+        '480':
+          description: DependencyException
+          schema:
+            $ref: '#/definitions/DependencyException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: Maximum number of <code>Configs</code> returned.
+          type: integer
+        - name: nextToken
+          in: query
+          required: false
+          description: Next token returned in the request of a previous <code>ListConfigs</code> call. Used to get the next page of results.
+          type: string
+  /dataflowEndpointGroup:
+    post:
+      operationId: CreateDataflowEndpointGroup
+      description: |-
+        <p>Creates a <code>DataflowEndpoint</code> group containing the specified list of <code>DataflowEndpoint</code> objects.</p>
+                 <p>The <code>name</code> field in each endpoint is used in your mission profile <code>DataflowEndpointConfig</code> 
+                 to specify which endpoints to use during a contact.</p> 
+                 <p>When a contact uses multiple <code>DataflowEndpointConfig</code> objects, each <code>Config</code> 
+                 must match a <code>DataflowEndpoint</code> in the same group.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DataflowEndpointGroupIdResponse'
+        '480':
+          description: DependencyException
+          schema:
+            $ref: '#/definitions/DependencyException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - endpointDetails
+            properties:
+              endpointDetails:
+                description: Endpoint details of each endpoint in the dataflow endpoint group.
+                type: array
+                items:
+                  $ref: '#/definitions/EndpointDetails'
+              tags:
+                description: Tags of a dataflow endpoint group.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/String'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListDataflowEndpointGroups
+      description: Returns a list of <code>DataflowEndpoint</code> groups.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListDataflowEndpointGroupsResponse'
+        '480':
+          description: DependencyException
+          schema:
+            $ref: '#/definitions/DependencyException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: Maximum number of dataflow endpoint groups returned.
+          type: integer
+        - name: nextToken
+          in: query
+          required: false
+          description: Next token returned in the request of a previous <code>ListDataflowEndpointGroups</code> call. Used to get the next page of results.
+          type: string
+  /missionprofile:
+    post:
+      operationId: CreateMissionProfile
+      description: |-
+        <p>Creates a mission profile.</p>
+                 <p>
+                    <code>dataflowEdges</code> is a list of lists of strings. Each lower level list of strings
+                 has two elements: a <i>from ARN</i> and a <i>to ARN</i>.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/MissionProfileIdResponse'
+        '480':
+          description: DependencyException
+          schema:
+            $ref: '#/definitions/DependencyException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - dataflowEdges
+              - minimumViableContactDurationSeconds
+              - name
+              - trackingConfigArn
+            properties:
+              contactPostPassDurationSeconds:
+                description: Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.
+                type: integer
+                minimum: 1
+                maximum: 21600
+              contactPrePassDurationSeconds:
+                description: Amount of time prior to contact start you’d like to receive a CloudWatch event indicating an upcoming pass.
+                type: integer
+                minimum: 1
+                maximum: 21600
+              dataflowEdges:
+                description: |-
+                  A list of lists of ARNs. Each list of ARNs is an edge, with a from <code>Config</code> and a to 
+                           <code>Config</code>.
+                type: array
+                items:
+                  $ref: '#/definitions/DataflowEdge'
+              minimumViableContactDurationSeconds:
+                description: Smallest amount of time in seconds that you’d like to see for an available contact. AWS Ground Station will not present you with contacts shorter than this duration.
+                type: integer
+                minimum: 1
+                maximum: 21600
+              name:
+                description: Name of a mission profile.
+                type: string
+                pattern: '^[ a-zA-Z0-9_:-]+$'
+                minLength: 1
+                maxLength: 256
+              tags:
+                description: Tags assigned to a mission profile.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/String'
+              trackingConfigArn:
+                description: ARN of a tracking <code>Config</code>.
+                type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListMissionProfiles
+      description: Returns a list of mission profiles.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListMissionProfilesResponse'
+        '480':
+          description: DependencyException
+          schema:
+            $ref: '#/definitions/DependencyException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: Maximum number of mission profiles returned.
+          type: integer
+        - name: nextToken
+          in: query
+          required: false
+          description: Next token returned in the request of a previous <code>ListMissionProfiles</code> call. Used to get the next page of results.
+          type: string
+  '/config/{configType}/{configId}':
+    delete:
+      operationId: DeleteConfig
+      description: Deletes a <code>Config</code>.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ConfigIdResponse'
+        '480':
+          description: DependencyException
+          schema:
+            $ref: '#/definitions/DependencyException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: configId
+          in: path
+          required: true
+          description: UUID of a <code>Config</code>.
+          type: string
+        - name: configType
+          in: path
+          required: true
+          description: Type of a <code>Config</code>.
+          type: string
+          enum:
+            - antenna-downlink
+            - antenna-downlink-demod-decode
+            - antenna-uplink
+            - dataflow-endpoint
+            - tracking
+            - uplink-echo
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetConfig
+      description: |-
+        <p>Returns <code>Config</code> information.</p>
+                 <p>Only one <code>Config</code> response can be returned.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetConfigResponse'
+        '480':
+          description: DependencyException
+          schema:
+            $ref: '#/definitions/DependencyException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: configId
+          in: path
+          required: true
+          description: UUID of a <code>Config</code>.
+          type: string
+        - name: configType
+          in: path
+          required: true
+          description: Type of a <code>Config</code>.
+          type: string
+          enum:
+            - antenna-downlink
+            - antenna-downlink-demod-decode
+            - antenna-uplink
+            - dataflow-endpoint
+            - tracking
+            - uplink-echo
+    put:
+      operationId: UpdateConfig
+      description: |-
+        <p>Updates the <code>Config</code> used when scheduling contacts.</p>
+                 <p>Updating a <code>Config</code> will not update the execution parameters
+                 for existing future contacts scheduled with this <code>Config</code>.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ConfigIdResponse'
+        '480':
+          description: DependencyException
+          schema:
+            $ref: '#/definitions/DependencyException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: configId
+          in: path
+          required: true
+          description: UUID of a <code>Config</code>.
+          type: string
+        - name: configType
+          in: path
+          required: true
+          description: Type of a <code>Config</code>.
+          type: string
+          enum:
+            - antenna-downlink
+            - antenna-downlink-demod-decode
+            - antenna-uplink
+            - dataflow-endpoint
+            - tracking
+            - uplink-echo
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - configData
+              - name
+            properties:
+              configData:
+                description: |-
+                  <p>Object containing the parameters for a <code>Config</code>.</p>
+                           <p>See the subtype definitions for what each type of <code>Config</code> contains.</p>
+                type: object
+                properties:
+                  antennaDownlinkConfig:
+                    $ref: '#/definitions/AntennaDownlinkConfig'
+                    description: Information about how AWS Ground Station should configure an antenna for downlink during a contact.
+                  antennaDownlinkDemodDecodeConfig:
+                    $ref: '#/definitions/AntennaDownlinkDemodDecodeConfig'
+                    description: Information about how AWS Ground Station should conﬁgure an antenna for downlink demod decode during a contact.
+                  antennaUplinkConfig:
+                    $ref: '#/definitions/AntennaUplinkConfig'
+                    description: Information about how AWS Ground Station should conﬁgure an antenna for uplink during a contact.
+                  dataflowEndpointConfig:
+                    $ref: '#/definitions/DataflowEndpointConfig'
+                    description: Information about the dataflow endpoint <code>Config</code>.
+                  trackingConfig:
+                    $ref: '#/definitions/TrackingConfig'
+                    description: 'Object that determines whether tracking should be used during a contact executed with this <code>Config</code> in the mission profile. '
+                  uplinkEchoConfig:
+                    $ref: '#/definitions/UplinkEchoConfig'
+                    description: |-
+                      <p>Information about an uplink echo <code>Config</code>.</p>
+                               <p>Parameters from the <code>AntennaUplinkConfig</code>, corresponding to the specified <code>AntennaUplinkConfigArn</code>, are used when this <code>UplinkEchoConfig</code> is used in a contact.</p>
+              name:
+                description: Name of a <code>Config</code>.
+                type: string
+                pattern: '^[ a-zA-Z0-9_:-]+$'
+                minLength: 1
+                maxLength: 256
+  '/dataflowEndpointGroup/{dataflowEndpointGroupId}':
+    delete:
+      operationId: DeleteDataflowEndpointGroup
+      description: Deletes a dataflow endpoint group.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DataflowEndpointGroupIdResponse'
+        '480':
+          description: DependencyException
+          schema:
+            $ref: '#/definitions/DependencyException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: dataflowEndpointGroupId
+          in: path
+          required: true
+          description: ID of a dataflow endpoint group.
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetDataflowEndpointGroup
+      description: Returns the dataflow endpoint group.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetDataflowEndpointGroupResponse'
+        '480':
+          description: DependencyException
+          schema:
+            $ref: '#/definitions/DependencyException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: dataflowEndpointGroupId
+          in: path
+          required: true
+          description: UUID of a dataflow endpoint group.
+          type: string
+  '/missionprofile/{missionProfileId}':
+    delete:
+      operationId: DeleteMissionProfile
+      description: Deletes a mission profile.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/MissionProfileIdResponse'
+        '480':
+          description: DependencyException
+          schema:
+            $ref: '#/definitions/DependencyException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: missionProfileId
+          in: path
+          required: true
+          description: UUID of a mission profile.
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetMissionProfile
+      description: Returns a mission profile.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetMissionProfileResponse'
+        '480':
+          description: DependencyException
+          schema:
+            $ref: '#/definitions/DependencyException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: missionProfileId
+          in: path
+          required: true
+          description: UUID of a mission profile.
+          type: string
+    put:
+      operationId: UpdateMissionProfile
+      description: |-
+        <p>Updates a mission profile.</p>
+                 <p>Updating a mission profile will not update the execution parameters
+                 for existing future contacts.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/MissionProfileIdResponse'
+        '480':
+          description: DependencyException
+          schema:
+            $ref: '#/definitions/DependencyException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: missionProfileId
+          in: path
+          required: true
+          description: ID of a mission profile.
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              contactPostPassDurationSeconds:
+                description: Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.
+                type: integer
+                minimum: 1
+                maximum: 21600
+              contactPrePassDurationSeconds:
+                description: Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.
+                type: integer
+                minimum: 1
+                maximum: 21600
+              dataflowEdges:
+                description: |-
+                  A list of lists of ARNs. Each list of ARNs is an edge, with a from <code>Config</code> and a to 
+                           <code>Config</code>.
+                type: array
+                items:
+                  $ref: '#/definitions/DataflowEdge'
+              minimumViableContactDurationSeconds:
+                description: Smallest amount of time in seconds that you’d like to see for an available contact. AWS Ground Station will not present you with contacts shorter than this duration.
+                type: integer
+                minimum: 1
+                maximum: 21600
+              name:
+                description: Name of a mission profile.
+                type: string
+                pattern: '^[ a-zA-Z0-9_:-]+$'
+                minLength: 1
+                maxLength: 256
+              trackingConfigArn:
+                description: ARN of a tracking <code>Config</code>.
+                type: string
+  /contacts:
+    post:
+      operationId: ListContacts
+      description: |-
+        <p>Returns a list of contacts.</p>
+                 <p>If <code>statusList</code> contains AVAILABLE, the request must include
+              <code>groundstation</code>, <code>missionprofileArn</code>, and <code>satelliteArn</code>.
+              </p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListContactsResponse'
+        '480':
+          description: DependencyException
+          schema:
+            $ref: '#/definitions/DependencyException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - endTime
+              - startTime
+              - statusList
+            properties:
+              endTime:
+                description: End time of a contact.
+                type: string
+                format: date-time
+              groundStation:
+                description: Name of a ground station.
+                type: string
+              maxResults:
+                description: Maximum number of contacts returned.
+                type: integer
+              missionProfileArn:
+                description: ARN of a mission profile.
+                type: string
+              nextToken:
+                description: Next token returned in the request of a previous <code>ListContacts</code> call. Used to get the next page of results.
+                type: string
+              satelliteArn:
+                description: ARN of a satellite.
+                type: string
+              startTime:
+                description: Start time of a contact.
+                type: string
+                format: date-time
+              statusList:
+                description: Status of a contact reservation.
+                type: array
+                items:
+                  $ref: '#/definitions/ContactStatus'
+        - name: maxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /contact:
+    post:
+      operationId: ReserveContact
+      description: Reserves a contact using specified parameters.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ContactIdResponse'
+        '480':
+          description: DependencyException
+          schema:
+            $ref: '#/definitions/DependencyException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - endTime
+              - groundStation
+              - missionProfileArn
+              - satelliteArn
+              - startTime
+            properties:
+              endTime:
+                description: End time of a contact.
+                type: string
+                format: date-time
+              groundStation:
+                description: Name of a ground station.
+                type: string
+              missionProfileArn:
+                description: ARN of a mission profile.
+                type: string
+              satelliteArn:
+                description: ARN of a satellite
+                type: string
+              startTime:
+                description: Start time of a contact.
+                type: string
+                format: date-time
+              tags:
+                description: Tags assigned to a contact.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/String'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /minute-usage:
+    post:
+      operationId: GetMinuteUsage
+      description: Returns the number of minutes used by account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetMinuteUsageResponse'
+        '480':
+          description: DependencyException
+          schema:
+            $ref: '#/definitions/DependencyException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - month
+              - year
+            properties:
+              month:
+                description: 'The month being requested, with a value of 1-12.'
+                type: integer
+              year:
+                description: 'The year being requested, in the format of YYYY.'
+                type: integer
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/satellite/{satelliteId}':
+    get:
+      operationId: GetSatellite
+      description: Returns a satellite.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetSatelliteResponse'
+        '480':
+          description: DependencyException
+          schema:
+            $ref: '#/definitions/DependencyException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: satelliteId
+          in: path
+          required: true
+          description: UUID of a satellite.
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /groundstation:
+    get:
+      operationId: ListGroundStations
+      description: 'Returns a list of ground stations. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListGroundStationsResponse'
+        '480':
+          description: DependencyException
+          schema:
+            $ref: '#/definitions/DependencyException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: Maximum number of ground stations returned.
+          type: integer
+        - name: nextToken
+          in: query
+          required: false
+          description: Next token that can be supplied in the next call to get the next page of ground stations.
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /satellite:
+    get:
+      operationId: ListSatellites
+      description: Returns a list of satellites.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListSatellitesResponse'
+        '480':
+          description: DependencyException
+          schema:
+            $ref: '#/definitions/DependencyException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: Maximum number of satellites returned.
+          type: integer
+        - name: nextToken
+          in: query
+          required: false
+          description: Next token that can be supplied in the next call to get the next page of satellites.
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/tags/{resourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: Returns a list of tags or a specified resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsForResourceResponse'
+        '480':
+          description: DependencyException
+          schema:
+            $ref: '#/definitions/DependencyException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: ARN of a resource.
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: Assigns a tag to a resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TagResourceResponse'
+        '480':
+          description: DependencyException
+          schema:
+            $ref: '#/definitions/DependencyException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: ARN of a resource tag.
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              tags:
+                description: Tags assigned to a resource.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/String'
+  '/tags/{resourceArn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Deassigns a resource tag.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UntagResourceResponse'
+        '480':
+          description: DependencyException
+          schema:
+            $ref: '#/definitions/DependencyException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: ARN of a resource.
+          type: string
+        - name: tagKeys
+          in: query
+          required: true
+          description: Keys of a resource tag.
+          type: array
+          items:
+            type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  ContactIdResponse:
+    type: object
+    properties:
+      contactId:
+        $ref: '#/definitions/String'
+        description: UUID of a contact.
+    description: <p/>
+  DependencyException: {}
+  InvalidParameterException: {}
+  ResourceNotFoundException: {}
+  ConfigIdResponse:
+    type: object
+    properties:
+      configArn:
+        $ref: '#/definitions/ConfigArn'
+        description: ARN of a <code>Config</code>.
+      configId:
+        $ref: '#/definitions/String'
+        description: UUID of a <code>Config</code>.
+      configType:
+        $ref: '#/definitions/ConfigCapabilityType'
+        description: Type of a <code>Config</code>.
+    description: <p/>
+  AntennaDownlinkConfig:
+    type: object
+    required:
+      - spectrumConfig
+    properties:
+      spectrumConfig:
+        $ref: '#/definitions/SpectrumConfig'
+        description: Object that describes a spectral <code>Config</code>.
+    description: |-
+      Information about how AWS Ground Station should configure an
+               antenna for downlink during a contact.
+  AntennaDownlinkDemodDecodeConfig:
+    type: object
+    required:
+      - decodeConfig
+      - demodulationConfig
+      - spectrumConfig
+    properties:
+      decodeConfig:
+        $ref: '#/definitions/DecodeConfig'
+        description: Information about the decode <code>Config</code>.
+      demodulationConfig:
+        $ref: '#/definitions/DemodulationConfig'
+        description: Information about the demodulation <code>Config</code>.
+      spectrumConfig:
+        $ref: '#/definitions/SpectrumConfig'
+        description: Information about the spectral <code>Config</code>.
+    description: Information about how AWS Ground Station should conﬁgure an antenna for downlink demod decode during a contact.
+  AntennaUplinkConfig:
+    type: object
+    required:
+      - spectrumConfig
+      - targetEirp
+    properties:
+      spectrumConfig:
+        $ref: '#/definitions/UplinkSpectrumConfig'
+        description: Information about the uplink spectral <code>Config</code>.
+      targetEirp:
+        $ref: '#/definitions/Eirp'
+        description: EIRP of the target.
+    description: Information about the uplink <code>Config</code> of an antenna.
+  DataflowEndpointConfig:
+    type: object
+    required:
+      - dataflowEndpointName
+    properties:
+      dataflowEndpointName:
+        $ref: '#/definitions/String'
+        description: Name of a dataflow endpoint.
+    description: Information about the dataflow endpoint <code>Config</code>.
+  TrackingConfig:
+    type: object
+    required:
+      - autotrack
+    properties:
+      autotrack:
+        $ref: '#/definitions/Criticality'
+        description: Current setting for autotrack.
+    description: |-
+      Object that determines whether tracking should be used during a contact
+               executed with this <code>Config</code> in the mission profile.
+  UplinkEchoConfig:
+    type: object
+    required:
+      - antennaUplinkConfigArn
+      - enabled
+    properties:
+      antennaUplinkConfigArn:
+        $ref: '#/definitions/ConfigArn'
+        description: ARN of an uplink <code>Config</code>.
+      enabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether or not an uplink <code>Config</code> is enabled.
+    description: |-
+      <p>Information about an uplink echo <code>Config</code>.</p>
+               <p>Parameters from the <code>AntennaUplinkConfig</code>, corresponding to the 
+               specified <code>AntennaUplinkConfigArn</code>, are used when this <code>UplinkEchoConfig</code> 
+               is used in a contact.</p>
+  String:
+    type: string
+  DataflowEndpointGroupIdResponse:
+    type: object
+    properties:
+      dataflowEndpointGroupId:
+        $ref: '#/definitions/String'
+        description: ID of a dataflow endpoint group.
+    description: <p/>
+  EndpointDetails:
+    type: object
+    properties:
+      endpoint:
+        $ref: '#/definitions/DataflowEndpoint'
+        description: A dataflow endpoint.
+      securityDetails:
+        $ref: '#/definitions/SecurityDetails'
+        description: Endpoint security details.
+    description: Information about the endpoint details.
+  MissionProfileIdResponse:
+    type: object
+    properties:
+      missionProfileId:
+        $ref: '#/definitions/String'
+        description: ID of a mission profile.
+    description: <p/>
+  DataflowEdge:
+    type: array
+    items:
+      $ref: '#/definitions/ConfigArn'
+    minItems: 2
+    maxItems: 2
+  DescribeContactResponse:
+    type: object
+    properties:
+      contactId:
+        $ref: '#/definitions/String'
+        description: UUID of a contact.
+      contactStatus:
+        $ref: '#/definitions/ContactStatus'
+        description: Status of a contact.
+      endTime:
+        $ref: '#/definitions/Timestamp'
+        description: End time of a contact.
+      errorMessage:
+        $ref: '#/definitions/String'
+        description: Error message for a contact.
+      groundStation:
+        $ref: '#/definitions/String'
+        description: Ground station for a contact.
+      maximumElevation:
+        $ref: '#/definitions/Elevation'
+        description: Maximum elevation angle of a contact.
+      missionProfileArn:
+        $ref: '#/definitions/MissionProfileArn'
+        description: ARN of a mission profile.
+      postPassEndTime:
+        $ref: '#/definitions/Timestamp'
+        description: Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.
+      prePassStartTime:
+        $ref: '#/definitions/Timestamp'
+        description: Amount of time prior to contact start you’d like to receive a CloudWatch event indicating an upcoming pass.
+      satelliteArn:
+        $ref: '#/definitions/satelliteArn'
+        description: ARN of a satellite.
+      startTime:
+        $ref: '#/definitions/Timestamp'
+        description: Start time of a contact.
+      tags:
+        $ref: '#/definitions/TagsMap'
+        description: Tags assigned to a contact.
+    description: <p/>
+  GetConfigResponse:
+    type: object
+    required:
+      - configArn
+      - configData
+      - configId
+      - name
+    properties:
+      configArn:
+        $ref: '#/definitions/ConfigArn'
+        description: |-
+          ARN of a <code>Config</code>
+                   
+      configData:
+        $ref: '#/definitions/ConfigTypeData'
+        description: Data elements in a <code>Config</code>.
+      configId:
+        $ref: '#/definitions/String'
+        description: UUID of a <code>Config</code>.
+      configType:
+        $ref: '#/definitions/ConfigCapabilityType'
+        description: Type of a <code>Config</code>.
+      name:
+        $ref: '#/definitions/String'
+        description: Name of a <code>Config</code>.
+      tags:
+        $ref: '#/definitions/TagsMap'
+        description: Tags assigned to a <code>Config</code>.
+    description: <p/>
+  GetDataflowEndpointGroupResponse:
+    type: object
+    properties:
+      dataflowEndpointGroupArn:
+        $ref: '#/definitions/DataflowEndpointGroupArn'
+        description: ARN of a dataflow endpoint group.
+      dataflowEndpointGroupId:
+        $ref: '#/definitions/String'
+        description: UUID of a dataflow endpoint group.
+      endpointsDetails:
+        $ref: '#/definitions/EndpointDetailsList'
+        description: Details of a dataflow endpoint.
+      tags:
+        $ref: '#/definitions/TagsMap'
+        description: Tags assigned to a dataflow endpoint group.
+    description: <p/>
+  GetMissionProfileResponse:
+    type: object
+    properties:
+      contactPostPassDurationSeconds:
+        $ref: '#/definitions/DurationInSeconds'
+        description: Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.
+      contactPrePassDurationSeconds:
+        $ref: '#/definitions/DurationInSeconds'
+        description: Amount of time prior to contact start you’d like to receive a CloudWatch event indicating an upcoming pass.
+      dataflowEdges:
+        $ref: '#/definitions/DataflowEdgeList'
+        description: |-
+          A list of lists of ARNs. Each list of ARNs is an edge, with a from <code>Config</code> and a to 
+                   <code>Config</code>.
+      minimumViableContactDurationSeconds:
+        $ref: '#/definitions/DurationInSeconds'
+        description: Smallest amount of time in seconds that you’d like to see for an available contact. AWS Ground Station will not present you with contacts shorter than this duration.
+      missionProfileArn:
+        $ref: '#/definitions/MissionProfileArn'
+        description: ARN of a mission profile.
+      missionProfileId:
+        $ref: '#/definitions/String'
+        description: ID of a mission profile.
+      name:
+        $ref: '#/definitions/String'
+        description: Name of a mission profile.
+      region:
+        $ref: '#/definitions/String'
+        description: Region of a mission profile.
+      tags:
+        $ref: '#/definitions/TagsMap'
+        description: Tags assigned to a mission profile.
+      trackingConfigArn:
+        $ref: '#/definitions/ConfigArn'
+        description: ARN of a tracking <code>Config</code>.
+    description: <p/>
+  ListConfigsResponse:
+    type: object
+    properties:
+      configList:
+        $ref: '#/definitions/ConfigList'
+        description: List of <code>Config</code> items.
+      nextToken:
+        $ref: '#/definitions/String'
+        description: Next token returned in the response of a previous <code>ListConfigs</code> call. Used to get the next page of results.
+    description: <p/>
+  ListContactsResponse:
+    type: object
+    properties:
+      contactList:
+        $ref: '#/definitions/ContactList'
+        description: List of contacts.
+      nextToken:
+        $ref: '#/definitions/String'
+        description: Next token returned in the response of a previous <code>ListContacts</code> call. Used to get the next page of results.
+    description: <p/>
+  ContactStatus:
+    type: string
+    enum:
+      - AVAILABLE
+      - AWS_CANCELLED
+      - CANCELLED
+      - COMPLETED
+      - FAILED
+      - FAILED_TO_SCHEDULE
+      - PASS
+      - POSTPASS
+      - PREPASS
+      - SCHEDULED
+      - SCHEDULING
+  ListDataflowEndpointGroupsResponse:
+    type: object
+    properties:
+      dataflowEndpointGroupList:
+        $ref: '#/definitions/DataflowEndpointGroupList'
+        description: A list of dataflow endpoint groups.
+      nextToken:
+        $ref: '#/definitions/String'
+        description: Next token returned in the response of a previous <code>ListDataflowEndpointGroups</code> call. Used to get the next page of results.
+    description: <p/>
+  ListMissionProfilesResponse:
+    type: object
+    properties:
+      missionProfileList:
+        $ref: '#/definitions/MissionProfileList'
+        description: List of mission profiles
+      nextToken:
+        $ref: '#/definitions/String'
+        description: Next token returned in the response of a previous <code>ListMissionProfiles</code> call. Used to get the next page of results.
+    description: <p/>
+  GetMinuteUsageResponse:
+    type: object
+    properties:
+      estimatedMinutesRemaining:
+        $ref: '#/definitions/Integer'
+        description: 'Estimated number of minutes remaining for an account, specific to the month being requested.'
+      isReservedMinutesCustomer:
+        $ref: '#/definitions/Boolean'
+        description: 'Returns whether or not an account has signed up for the reserved minutes pricing plan, specific to the month being requested.'
+      totalReservedMinuteAllocation:
+        $ref: '#/definitions/Integer'
+        description: 'Total number of reserved minutes allocated, specific to the month being requested.'
+      totalScheduledMinutes:
+        $ref: '#/definitions/Integer'
+        description: 'Total scheduled minutes for an account, specific to the month being requested.'
+      upcomingMinutesScheduled:
+        $ref: '#/definitions/Integer'
+        description: 'Upcoming minutes scheduled for an account, specific to the month being requested.'
+    description: <p/>
+  GetSatelliteResponse:
+    type: object
+    properties:
+      dateCreated:
+        $ref: '#/definitions/Timestamp'
+        description: When a satellite was created.
+      lastUpdated:
+        $ref: '#/definitions/Timestamp'
+        description: When a satellite was last updated.
+      noradSatelliteID:
+        $ref: '#/definitions/noradSatelliteID'
+        description: NORAD satellite ID number.
+      satelliteArn:
+        $ref: '#/definitions/satelliteArn'
+        description: ARN of a satellite.
+      satelliteId:
+        $ref: '#/definitions/Uuid'
+        description: UUID of a satellite.
+      tags:
+        $ref: '#/definitions/TagsMap'
+        description: Tags assigned to a satellite.
+    description: <p/>
+  ListGroundStationsResponse:
+    type: object
+    properties:
+      groundStationList:
+        $ref: '#/definitions/GroundStationList'
+        description: List of ground stations.
+      nextToken:
+        $ref: '#/definitions/String'
+        description: Next token that can be supplied in the next call to get the next page of ground stations.
+    description: <p/>
+  ListSatellitesResponse:
+    type: object
+    properties:
+      nextToken:
+        $ref: '#/definitions/String'
+        description: Next token that can be supplied in the next call to get the next page of satellites.
+      satellites:
+        $ref: '#/definitions/SatelliteList'
+        description: List of satellites.
+    description: <p/>
+  ListTagsForResourceResponse:
+    type: object
+    properties:
+      tags:
+        $ref: '#/definitions/TagsMap'
+        description: Tags assigned to a resource.
+    description: <p/>
+  TagResourceResponse:
+    type: object
+    properties: {}
+    description: <p/>
+  UntagResourceResponse:
+    type: object
+    properties: {}
+    description: <p/>
+  ConfigTypeData:
+    type: object
+    properties:
+      antennaDownlinkConfig:
+        $ref: '#/definitions/AntennaDownlinkConfig'
+        description: Information about how AWS Ground Station should configure an antenna for downlink during a contact.
+      antennaDownlinkDemodDecodeConfig:
+        $ref: '#/definitions/AntennaDownlinkDemodDecodeConfig'
+        description: Information about how AWS Ground Station should conﬁgure an antenna for downlink demod decode during a contact.
+      antennaUplinkConfig:
+        $ref: '#/definitions/AntennaUplinkConfig'
+        description: Information about how AWS Ground Station should conﬁgure an antenna for uplink during a contact.
+      dataflowEndpointConfig:
+        $ref: '#/definitions/DataflowEndpointConfig'
+        description: Information about the dataflow endpoint <code>Config</code>.
+      trackingConfig:
+        $ref: '#/definitions/TrackingConfig'
+        description: 'Object that determines whether tracking should be used during a contact executed with this <code>Config</code> in the mission profile. '
+      uplinkEchoConfig:
+        $ref: '#/definitions/UplinkEchoConfig'
+        description: |-
+          <p>Information about an uplink echo <code>Config</code>.</p>
+                   <p>Parameters from the <code>AntennaUplinkConfig</code>, corresponding to the specified <code>AntennaUplinkConfigArn</code>, are used when this <code>UplinkEchoConfig</code> is used in a contact.</p>
+    description: |-
+      <p>Object containing the parameters for a <code>Config</code>.</p>
+               <p>See the subtype definitions for what each type of <code>Config</code> contains.</p>
+  ConfigCapabilityType:
+    type: string
+    enum:
+      - antenna-downlink
+      - antenna-downlink-demod-decode
+      - antenna-uplink
+      - dataflow-endpoint
+      - tracking
+      - uplink-echo
+  SafeName:
+    type: string
+    pattern: '^[ a-zA-Z0-9_:-]+$'
+    minLength: 1
+    maxLength: 256
+  UpdateConfigRequest:
+    type: object
+    required:
+      - configData
+      - name
+    properties:
+      configData:
+        $ref: '#/definitions/ConfigTypeData'
+        description: Parameters for a <code>Config</code>.
+      name:
+        $ref: '#/definitions/SafeName'
+        description: Name of a <code>Config</code>.
+    description: <p/>
+  noradSatelliteID:
+    type: integer
+    minimum: 1
+    maximum: 99999
+  GroundStationData:
+    type: object
+    properties:
+      groundStationId:
+        $ref: '#/definitions/String'
+        description: ID of a ground station.
+      groundStationName:
+        $ref: '#/definitions/String'
+        description: Name of a ground station.
+      region:
+        $ref: '#/definitions/String'
+        description: Ground station Region.
+    description: Information about the ground station data.
+  GetConfigRequest:
+    type: object
+    properties: {}
+    description: <p/>
+  GroundStationList:
+    type: array
+    items:
+      $ref: '#/definitions/GroundStationData'
+  SecurityGroupIdList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  DataflowEndpoint:
+    type: object
+    properties:
+      address:
+        $ref: '#/definitions/SocketAddress'
+        description: Socket address of a dataflow endpoint.
+      name:
+        $ref: '#/definitions/SafeName'
+        description: Name of a dataflow endpoint.
+      status:
+        $ref: '#/definitions/EndpointStatus'
+        description: Status of a dataflow endpoint.
+    description: Information about a dataflow endpoint.
+  SecurityDetails:
+    type: object
+    required:
+      - roleArn
+      - securityGroupIds
+      - subnetIds
+    properties:
+      roleArn:
+        $ref: '#/definitions/RoleArn'
+        description: 'ARN to a role needed for connecting streams to your instances. '
+      securityGroupIds:
+        $ref: '#/definitions/SecurityGroupIdList'
+        description: The security groups to attach to the elastic network interfaces.
+      subnetIds:
+        $ref: '#/definitions/SubnetList'
+        description: A list of subnets where AWS Ground Station places elastic network interfaces to send streams to your instances.
+    description: Information about endpoints.
+  DataflowEndpointGroupArn:
+    type: string
+  Integer:
+    type: integer
+  Boolean:
+    type: boolean
+  MissionProfileArn:
+    type: string
+  MissionProfileListItem:
+    type: object
+    properties:
+      missionProfileArn:
+        $ref: '#/definitions/MissionProfileArn'
+        description: ARN of a mission profile.
+      missionProfileId:
+        $ref: '#/definitions/String'
+        description: ID of a mission profile.
+      name:
+        $ref: '#/definitions/String'
+        description: Name of a mission profile.
+      region:
+        $ref: '#/definitions/String'
+        description: Region of a mission profile.
+    description: Item in a list of mission profiles.
+  SatelliteListItem:
+    type: object
+    properties:
+      noradSatelliteID:
+        $ref: '#/definitions/noradSatelliteID'
+        description: NORAD satellite ID number.
+      satelliteArn:
+        $ref: '#/definitions/satelliteArn'
+        description: ARN of a satellite.
+      satelliteId:
+        $ref: '#/definitions/Uuid'
+        description: ID of a satellite.
+    description: Item in a list of satellites.
+  SatelliteList:
+    type: array
+    items:
+      $ref: '#/definitions/SatelliteListItem'
+  DataflowEndpointGroupList:
+    type: array
+    items:
+      $ref: '#/definitions/DataflowEndpointListItem'
+  DecodeConfig:
+    type: object
+    required:
+      - unvalidatedJSON
+    properties:
+      unvalidatedJSON:
+        $ref: '#/definitions/JsonString'
+        description: Unvalidated JSON of a decode <code>Config</code>.
+    description: Information about the decode <code>Config</code>.
+  DemodulationConfig:
+    type: object
+    required:
+      - unvalidatedJSON
+    properties:
+      unvalidatedJSON:
+        $ref: '#/definitions/JsonString'
+        description: Unvalidated JSON of a demodulation <code>Config</code>.
+    description: Information about the demodulation <code>Config</code>.
+  SpectrumConfig:
+    type: object
+    required:
+      - bandwidth
+      - centerFrequency
+    properties:
+      bandwidth:
+        $ref: '#/definitions/FrequencyBandwidth'
+        description: Bandwidth of a spectral <code>Config</code>.
+      centerFrequency:
+        $ref: '#/definitions/Frequency'
+        description: Center frequency of a spectral <code>Config</code>.
+      polarization:
+        $ref: '#/definitions/Polarization'
+        description: Polarization of a spectral <code>Config</code>.
+    description: Object that describes a spectral <code>Config</code>.
+  SubnetList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  Polarization:
+    type: string
+    enum:
+      - LEFT_HAND
+      - NONE
+      - RIGHT_HAND
+  ConfigListItem:
+    type: object
+    properties:
+      configArn:
+        $ref: '#/definitions/ConfigArn'
+        description: ARN of a <code>Config</code>.
+      configId:
+        $ref: '#/definitions/String'
+        description: UUID of a <code>Config</code>.
+      configType:
+        $ref: '#/definitions/ConfigCapabilityType'
+        description: Type of a <code>Config</code>.
+      name:
+        $ref: '#/definitions/String'
+        description: Name of a <code>Config</code>.
+    description: An item in a list of <code>Config</code> objects.
+  ConfigList:
+    type: array
+    items:
+      $ref: '#/definitions/ConfigListItem'
+  UplinkSpectrumConfig:
+    type: object
+    required:
+      - centerFrequency
+    properties:
+      centerFrequency:
+        $ref: '#/definitions/Frequency'
+        description: Center frequency of an uplink spectral <code>Config</code>.
+      polarization:
+        $ref: '#/definitions/Polarization'
+        description: Polarization of an uplink spectral <code>Config</code>.
+    description: Information about the uplink spectral <code>Config</code>.
+  Eirp:
+    type: object
+    required:
+      - units
+      - value
+    properties:
+      units:
+        $ref: '#/definitions/EirpUnits'
+        description: Units of an EIRP.
+      value:
+        $ref: '#/definitions/Double'
+        description: Value of an EIRP.
+    description: Object that represents EIRP.
+  EndpointStatus:
+    type: string
+    enum:
+      - created
+      - creating
+      - deleted
+      - deleting
+      - failed
+  ConfigArn:
+    type: string
+  JsonString:
+    type: string
+    minLength: 2
+    maxLength: 8192
+  DeleteDataflowEndpointGroupRequest:
+    type: object
+    properties: {}
+    description: <p/>
+  MissionProfileList:
+    type: array
+    items:
+      $ref: '#/definitions/MissionProfileListItem'
+  TagsMap:
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/String'
+  CreateConfigRequest:
+    type: object
+    required:
+      - configData
+      - name
+    properties:
+      configData:
+        $ref: '#/definitions/ConfigTypeData'
+        description: Parameters of a <code>Config</code>.
+      name:
+        $ref: '#/definitions/SafeName'
+        description: Name of a <code>Config</code>.
+      tags:
+        $ref: '#/definitions/TagsMap'
+        description: Tags assigned to a <code>Config</code>.
+    description: <p/>
+  FrequencyUnits:
+    type: string
+    enum:
+      - GHz
+      - MHz
+      - kHz
+  Double:
+    type: number
+    format: double
+  Frequency:
+    type: object
+    required:
+      - units
+      - value
+    properties:
+      units:
+        $ref: '#/definitions/FrequencyUnits'
+        description: Frequency units.
+      value:
+        $ref: '#/definitions/Double'
+        description: Frequency value.
+    description: Object that describes the frequency.
+  RoleArn:
+    type: string
+  Criticality:
+    type: string
+    enum:
+      - PREFERRED
+      - REMOVED
+      - REQUIRED
+  EndpointDetailsList:
+    type: array
+    items:
+      $ref: '#/definitions/EndpointDetails'
+  CreateDataflowEndpointGroupRequest:
+    type: object
+    required:
+      - endpointDetails
+    properties:
+      endpointDetails:
+        $ref: '#/definitions/EndpointDetailsList'
+        description: Endpoint details of each endpoint in the dataflow endpoint group.
+      tags:
+        $ref: '#/definitions/TagsMap'
+        description: Tags of a dataflow endpoint group.
+    description: <p/>
+  AngleUnits:
+    type: string
+    enum:
+      - DEGREE_ANGLE
+      - RADIAN
+  Elevation:
+    type: object
+    required:
+      - unit
+      - value
+    properties:
+      unit:
+        $ref: '#/definitions/AngleUnits'
+        description: Elevation angle units.
+      value:
+        $ref: '#/definitions/Double'
+        description: Elevation angle value.
+    description: Elevation angle of the satellite in the sky during a contact.
+  GetSatelliteRequest:
+    type: object
+    properties: {}
+    description: <p/>
+  CancelContactRequest:
+    type: object
+    properties: {}
+    description: <p/>
+  TagKeys:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  UntagResourceRequest:
+    type: object
+    properties: {}
+    description: <p/>
+  satelliteArn:
+    type: string
+  DurationInSeconds:
+    type: integer
+    minimum: 1
+    maximum: 21600
+  DataflowEdgeList:
+    type: array
+    items:
+      $ref: '#/definitions/DataflowEdge'
+  ListGroundStationsRequest:
+    type: object
+    properties: {}
+    description: <p/>
+  DescribeContactRequest:
+    type: object
+    properties: {}
+    description: <p/>
+  Timestamp:
+    type: string
+    format: date-time
+  DeleteConfigRequest:
+    type: object
+    properties: {}
+    description: <p/>
+  BandwidthUnits:
+    type: string
+    enum:
+      - GHz
+      - MHz
+      - kHz
+  FrequencyBandwidth:
+    type: object
+    required:
+      - units
+      - value
+    properties:
+      units:
+        $ref: '#/definitions/BandwidthUnits'
+        description: Frequency bandwidth units.
+      value:
+        $ref: '#/definitions/Double'
+        description: Frequency bandwidth value.
+    description: Object that describes the frequency bandwidth.
+  EirpUnits:
+    type: string
+    enum:
+      - dBW
+  ListMissionProfilesRequest:
+    type: object
+    properties: {}
+    description: <p/>
+  Uuid:
+    type: string
+    pattern: '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}'
+    minLength: 1
+    maxLength: 128
+  StatusList:
+    type: array
+    items:
+      $ref: '#/definitions/ContactStatus'
+  ListContactsRequest:
+    type: object
+    required:
+      - endTime
+      - startTime
+      - statusList
+    properties:
+      endTime:
+        $ref: '#/definitions/Timestamp'
+        description: End time of a contact.
+      groundStation:
+        $ref: '#/definitions/String'
+        description: Name of a ground station.
+      maxResults:
+        $ref: '#/definitions/Integer'
+        description: Maximum number of contacts returned.
+      missionProfileArn:
+        $ref: '#/definitions/MissionProfileArn'
+        description: ARN of a mission profile.
+      nextToken:
+        $ref: '#/definitions/String'
+        description: Next token returned in the request of a previous <code>ListContacts</code> call. Used to get the next page of results.
+      satelliteArn:
+        $ref: '#/definitions/satelliteArn'
+        description: ARN of a satellite.
+      startTime:
+        $ref: '#/definitions/Timestamp'
+        description: Start time of a contact.
+      statusList:
+        $ref: '#/definitions/StatusList'
+        description: Status of a contact reservation.
+    description: <p/>
+  ContactData:
+    type: object
+    properties:
+      contactId:
+        $ref: '#/definitions/String'
+        description: UUID of a contact.
+      contactStatus:
+        $ref: '#/definitions/ContactStatus'
+        description: Status of a contact.
+      endTime:
+        $ref: '#/definitions/Timestamp'
+        description: End time of a contact.
+      errorMessage:
+        $ref: '#/definitions/String'
+        description: Error message of a contact.
+      groundStation:
+        $ref: '#/definitions/String'
+        description: Name of a ground station.
+      maximumElevation:
+        $ref: '#/definitions/Elevation'
+        description: Maximum elevation angle of a contact.
+      missionProfileArn:
+        $ref: '#/definitions/MissionProfileArn'
+        description: ARN of a mission profile.
+      postPassEndTime:
+        $ref: '#/definitions/Timestamp'
+        description: Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.
+      prePassStartTime:
+        $ref: '#/definitions/Timestamp'
+        description: Amount of time prior to contact start you’d like to receive a CloudWatch event indicating an upcoming pass.
+      satelliteArn:
+        $ref: '#/definitions/satelliteArn'
+        description: ARN of a satellite.
+      startTime:
+        $ref: '#/definitions/Timestamp'
+        description: Start time of a contact.
+      tags:
+        $ref: '#/definitions/TagsMap'
+        description: Tags assigned to a contact.
+    description: Data describing a contact.
+  SocketAddress:
+    type: object
+    required:
+      - name
+      - port
+    properties:
+      name:
+        $ref: '#/definitions/String'
+        description: Name of a socket address.
+      port:
+        $ref: '#/definitions/Integer'
+        description: Port of a socket address.
+    description: Information about the socket address.
+  ListConfigsRequest:
+    type: object
+    properties: {}
+    description: <p/>
+  DeleteMissionProfileRequest:
+    type: object
+    properties: {}
+    description: <p/>
+  DataflowEndpointListItem:
+    type: object
+    properties:
+      dataflowEndpointGroupArn:
+        $ref: '#/definitions/DataflowEndpointGroupArn'
+        description: ARN of a dataflow endpoint group.
+      dataflowEndpointGroupId:
+        $ref: '#/definitions/String'
+        description: UUID of a dataflow endpoint group.
+    description: Item in a list of <code>DataflowEndpoint</code> groups.
+  ContactList:
+    type: array
+    items:
+      $ref: '#/definitions/ContactData'
+  GetMissionProfileRequest:
+    type: object
+    properties: {}
+    description: <p/>
+  CreateMissionProfileRequest:
+    type: object
+    required:
+      - dataflowEdges
+      - minimumViableContactDurationSeconds
+      - name
+      - trackingConfigArn
+    properties:
+      contactPostPassDurationSeconds:
+        $ref: '#/definitions/DurationInSeconds'
+        description: Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.
+      contactPrePassDurationSeconds:
+        $ref: '#/definitions/DurationInSeconds'
+        description: Amount of time prior to contact start you’d like to receive a CloudWatch event indicating an upcoming pass.
+      dataflowEdges:
+        $ref: '#/definitions/DataflowEdgeList'
+        description: |-
+          A list of lists of ARNs. Each list of ARNs is an edge, with a from <code>Config</code> and a to 
+                   <code>Config</code>.
+      minimumViableContactDurationSeconds:
+        $ref: '#/definitions/DurationInSeconds'
+        description: Smallest amount of time in seconds that you’d like to see for an available contact. AWS Ground Station will not present you with contacts shorter than this duration.
+      name:
+        $ref: '#/definitions/SafeName'
+        description: Name of a mission profile.
+      tags:
+        $ref: '#/definitions/TagsMap'
+        description: Tags assigned to a mission profile.
+      trackingConfigArn:
+        $ref: '#/definitions/ConfigArn'
+        description: ARN of a tracking <code>Config</code>.
+    description: <p/>
+  ReserveContactRequest:
+    type: object
+    required:
+      - endTime
+      - groundStation
+      - missionProfileArn
+      - satelliteArn
+      - startTime
+    properties:
+      endTime:
+        $ref: '#/definitions/Timestamp'
+        description: End time of a contact.
+      groundStation:
+        $ref: '#/definitions/String'
+        description: Name of a ground station.
+      missionProfileArn:
+        $ref: '#/definitions/MissionProfileArn'
+        description: ARN of a mission profile.
+      satelliteArn:
+        $ref: '#/definitions/satelliteArn'
+        description: ARN of a satellite
+      startTime:
+        $ref: '#/definitions/Timestamp'
+        description: Start time of a contact.
+      tags:
+        $ref: '#/definitions/TagsMap'
+        description: Tags assigned to a contact.
+    description: <p/>
+  ListTagsForResourceRequest:
+    type: object
+    properties: {}
+    description: <p/>
+  ListDataflowEndpointGroupsRequest:
+    type: object
+    properties: {}
+    description: <p/>
+  ListSatellitesRequest:
+    type: object
+    properties: {}
+    description: <p/>
+  UpdateMissionProfileRequest:
+    type: object
+    properties:
+      contactPostPassDurationSeconds:
+        $ref: '#/definitions/DurationInSeconds'
+        description: Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.
+      contactPrePassDurationSeconds:
+        $ref: '#/definitions/DurationInSeconds'
+        description: Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.
+      dataflowEdges:
+        $ref: '#/definitions/DataflowEdgeList'
+        description: |-
+          A list of lists of ARNs. Each list of ARNs is an edge, with a from <code>Config</code> and a to 
+                   <code>Config</code>.
+      minimumViableContactDurationSeconds:
+        $ref: '#/definitions/DurationInSeconds'
+        description: Smallest amount of time in seconds that you’d like to see for an available contact. AWS Ground Station will not present you with contacts shorter than this duration.
+      name:
+        $ref: '#/definitions/SafeName'
+        description: Name of a mission profile.
+      trackingConfigArn:
+        $ref: '#/definitions/ConfigArn'
+        description: ARN of a tracking <code>Config</code>.
+    description: <p/>
+  TagResourceRequest:
+    type: object
+    properties:
+      tags:
+        $ref: '#/definitions/TagsMap'
+        description: Tags assigned to a resource.
+    description: <p/>
+  GetDataflowEndpointGroupRequest:
+    type: object
+    properties: {}
+    description: <p/>
+  GetMinuteUsageRequest:
+    type: object
+    required:
+      - month
+      - year
+    properties:
+      month:
+        $ref: '#/definitions/Integer'
+        description: 'The month being requested, with a value of 1-12.'
+      year:
+        $ref: '#/definitions/Integer'
+        description: 'The year being requested, in the format of YYYY.'
+    description: <p/>

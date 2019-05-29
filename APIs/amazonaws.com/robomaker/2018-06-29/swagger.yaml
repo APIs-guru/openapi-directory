@@ -205,6 +205,54 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /cancelDeploymentJob:
+    post:
+      operationId: CancelDeploymentJob
+      description: Cancels the specified deployment job.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CancelDeploymentJobResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - job
+            properties:
+              job:
+                description: The deployment job ARN to cancel.
+                type: string
+                pattern: 'arn:.*'
+                minLength: 1
+                maxLength: 1224
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /cancelSimulationJob:
     post:
       operationId: CancelSimulationJob
@@ -2331,6 +2379,9 @@ definitions:
   InvalidParameterException: {}
   InternalServerException: {}
   ThrottlingException: {}
+  CancelDeploymentJobResponse:
+    type: object
+    properties: {}
   CancelSimulationJobResponse:
     type: object
     properties: {}
@@ -2588,6 +2639,9 @@ definitions:
       status:
         $ref: '#/definitions/SimulationJobStatus'
         description: The status of the simulation job.
+      lastStartedAt:
+        $ref: '#/definitions/LastStartedAt'
+        description: 'The time, in milliseconds since the epoch, when the simulation job was last started.'
       lastUpdatedAt:
         $ref: '#/definitions/LastUpdatedAt'
         description: 'The time, in milliseconds since the epoch, when the simulation job was last updated.'
@@ -2866,6 +2920,9 @@ definitions:
       status:
         $ref: '#/definitions/SimulationJobStatus'
         description: The status of the simulation job.
+      lastStartedAt:
+        $ref: '#/definitions/LastStartedAt'
+        description: 'The time, in milliseconds since the epoch, when the simulation job was last started.'
       lastUpdatedAt:
         $ref: '#/definitions/LastUpdatedAt'
         description: 'The time, in milliseconds since the epoch, when the simulation job was last updated.'
@@ -3105,6 +3162,14 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/SimulationJob'
+  CancelDeploymentJobRequest:
+    type: object
+    required:
+      - job
+    properties:
+      job:
+        $ref: '#/definitions/Arn'
+        description: The deployment job ARN to cancel.
   CancelSimulationJobRequest:
     type: object
     required:
@@ -3175,6 +3240,7 @@ definitions:
       - InProgress
       - Failed
       - Succeeded
+      - Canceled
   GenericString:
     type: string
   DeploymentJobErrorCode:
@@ -3452,6 +3518,9 @@ definitions:
       - Terminating
       - Terminated
       - Canceled
+  LastStartedAt:
+    type: string
+    format: date-time
   SimulationJobErrorCode:
     type: string
     enum:
@@ -3880,7 +3949,7 @@ definitions:
     properties:
       currentProgress:
         $ref: '#/definitions/RobotDeploymentStep'
-        description: <p>The current progress status.</p> <dl> <dt>Validating</dt> <dd> <p>Validating the deployment.</p> </dd> <dt>Downloading/Extracting</dt> <dd> <p>Downloading and extracting the bundle on the robot.</p> </dd> <dt>Executing pre-launch script(s)</dt> <dd> <p>Executing pre-launch script(s) if provided.</p> </dd> <dt>Launching</dt> <dd> <p>Launching the robot application.</p> </dd> <dt>Executing post-launch script(s)</dt> <dd> <p>Executing post-launch script(s) if provided.</p> </dd> <dt>Finished</dt> <dd> <p>Deployment is complete.</p> </dd> </dl>
+        description: <p>The current progress status.</p> <dl> <dt>Validating</dt> <dd> <p>Validating the deployment.</p> </dd> <dt>DownloadingExtracting</dt> <dd> <p>Downloading and extracting the bundle on the robot.</p> </dd> <dt>ExecutingPreLaunch</dt> <dd> <p>Executing pre-launch script(s) if provided.</p> </dd> <dt>Launching</dt> <dd> <p>Launching the robot application.</p> </dd> <dt>ExecutingPostLaunch</dt> <dd> <p>Executing post-launch script(s) if provided.</p> </dd> <dt>Finished</dt> <dd> <p>Deployment is complete.</p> </dd> </dl>
       percentDone:
         $ref: '#/definitions/PercentDone'
         description: Precentage of the step that is done. This currently only applies to the <code>Downloading/Extracting</code> step of the deployment. It is empty for other steps.
@@ -3963,6 +4032,9 @@ definitions:
       lastUpdatedAt:
         $ref: '#/definitions/LastUpdatedAt'
         description: 'The time, in milliseconds since the epoch, when the robot application was last updated.'
+      robotSoftwareSuite:
+        $ref: '#/definitions/RobotSoftwareSuite'
+        description: Information about a robot software suite.
     description: Summary information for a robot application.
   RobotDeployment:
     type: object
@@ -4012,6 +4084,12 @@ definitions:
       lastUpdatedAt:
         $ref: '#/definitions/LastUpdatedAt'
         description: 'The time, in milliseconds since the epoch, when the simulation application was last updated.'
+      robotSoftwareSuite:
+        $ref: '#/definitions/RobotSoftwareSuite'
+        description: Information about a robot software suite.
+      simulationSoftwareSuite:
+        $ref: '#/definitions/SimulationSoftwareSuite'
+        description: Information about a simulation software suite.
     description: Summary information for a simulation application.
   SimulationJob:
     type: object
@@ -4025,6 +4103,9 @@ definitions:
       status:
         $ref: '#/definitions/SimulationJobStatus'
         description: Status of the simulation job.
+      lastStartedAt:
+        $ref: '#/definitions/LastStartedAt'
+        description: 'The time, in milliseconds since the epoch, when the simulation job was last started.'
       lastUpdatedAt:
         $ref: '#/definitions/LastUpdatedAt'
         description: 'The time, in milliseconds since the epoch, when the simulation job was last updated.'
@@ -4051,7 +4132,7 @@ definitions:
         description: The simulation job execution duration in milliseconds.
       iamRole:
         $ref: '#/definitions/IamRole'
-        description: 'The IAM role that allows the simulation instance to call the AWS APIs that are specified in its associated policies on your behalf. This is how credentials are passed in to your simulation job. See how to <a href="https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/deployment-ecs-specify-credentials">specify AWS security credentials for your application</a>. '
+        description: 'The IAM role that allows the simulation instance to call the AWS APIs that are specified in its associated policies on your behalf. This is how credentials are passed in to your simulation job. '
       robotApplications:
         $ref: '#/definitions/RobotApplicationConfigs'
         description: A list of robot applications.
