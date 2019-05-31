@@ -1,0 +1,3040 @@
+swagger: '2.0'
+info:
+  version: '2018-09-06'
+  x-release: v4
+  title: AWS IoT Things Graph
+  description: '<fullname>AWS IoT Things Graph</fullname> <p>AWS IoT Things Graph provides an integrated set of tools that enable developers to connect devices and services that use different standards, such as units of measure and communication protocols. AWS IoT Things Graph makes it possible to build IoT applications with little to no code by connecting devices and services and defining how they interact at an abstract level.</p> <p>For more information about how AWS IoT Things Graph works, see the <a href="https://docs.aws.amazon.com/thingsgraph/latest/ug/iot-tg-whatis.html">User Guide</a>.</p>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: iotthingsgraph
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/iotthingsgraph-2018-09-06.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/iotthingsgraph/'
+host: iotthingsgraph.amazonaws.com
+basePath: /
+schemes:
+  - https
+  - http
+x-servers:
+  - url: 'http://iotthingsgraph.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+    description: The AWS IoT Things Graph multi-region endpoint
+  - url: 'https://iotthingsgraph.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+    description: The AWS IoT Things Graph multi-region endpoint
+  - url: 'http://iotthingsgraph.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+    description: The AWS IoT Things Graph endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://iotthingsgraph.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+    description: The AWS IoT Things Graph endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  '/#X-Amz-Target=IotThingsGraphFrontEndService.AssociateEntityToThing':
+    post:
+      operationId: AssociateEntityToThing
+      description: '<p>Associates a device with a concrete thing that is in the user''s registry.</p> <p>A thing can be associated with only one device at a time. If you associate a thing with a new device id, its previous association will be removed.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AssociateEntityToThingResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AssociateEntityToThingRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - IotThingsGraphFrontEndService.AssociateEntityToThing
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=IotThingsGraphFrontEndService.CreateFlowTemplate':
+    post:
+      operationId: CreateFlowTemplate
+      description: Creates a workflow template. Workflows can be created only in the user's namespace. (The public namespace contains only entities.) The workflow can contain only entities in the specified namespace. The workflow is validated against the entities in the latest version of the user's namespace unless another namespace version is specified in the request.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateFlowTemplateResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateFlowTemplateRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - IotThingsGraphFrontEndService.CreateFlowTemplate
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=IotThingsGraphFrontEndService.CreateSystemInstance':
+    post:
+      operationId: CreateSystemInstance
+      description: '<p>Creates a system instance. </p> <p>This action validates the system instance, prepares the deployment-related resources. For Greengrass deployments, it updates the Greengrass group that is specified by the <code>greengrassGroupName</code> parameter. It also adds a file to the S3 bucket specified by the <code>s3BucketName</code> parameter. You need to call <code>DeploySystemInstance</code> after running this action.</p> <p>For Greengrass deployments, since this action modifies and adds resources to a Greengrass group and an S3 bucket on the caller''s behalf, the calling identity must have write permissions to both the specified Greengrass group and S3 bucket. Otherwise, the call will fail with an authorization error.</p> <p>For cloud deployments, this action requires a <code>flowActionsRoleArn</code> value. This is an IAM role that has permissions to access AWS services, such as AWS Lambda and AWS IoT, that the flow uses when it executes.</p> <p>If the definition document doesn''t specify a version of the user''s namespace, the latest version will be used by default.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateSystemInstanceResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '484':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateSystemInstanceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - IotThingsGraphFrontEndService.CreateSystemInstance
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=IotThingsGraphFrontEndService.CreateSystemTemplate':
+    post:
+      operationId: CreateSystemTemplate
+      description: Creates a system. The system is validated against the entities in the latest version of the user's namespace unless another namespace version is specified in the request.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateSystemTemplateResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateSystemTemplateRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - IotThingsGraphFrontEndService.CreateSystemTemplate
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=IotThingsGraphFrontEndService.DeleteFlowTemplate':
+    post:
+      operationId: DeleteFlowTemplate
+      description: Deletes a workflow. Any new system or deployment that contains this workflow will fail to update or deploy. Existing deployments that contain the workflow will continue to run (since they use a snapshot of the workflow taken at the time of deployment).
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteFlowTemplateResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteFlowTemplateRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - IotThingsGraphFrontEndService.DeleteFlowTemplate
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=IotThingsGraphFrontEndService.DeleteNamespace':
+    post:
+      operationId: DeleteNamespace
+      description: Deletes the specified namespace. This action deletes all of the entities in the namespace. Delete the systems and flows that use entities in the namespace before performing this action.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteNamespaceResponse'
+        '480':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteNamespaceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - IotThingsGraphFrontEndService.DeleteNamespace
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=IotThingsGraphFrontEndService.DeleteSystemInstance':
+    post:
+      operationId: DeleteSystemInstance
+      description: '<p>Deletes a system instance. Only system instances that have never been deployed, or that have been undeployed can be deleted.</p> <p>Users can create a new system instance that has the same ID as a deleted system instance.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteSystemInstanceResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteSystemInstanceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - IotThingsGraphFrontEndService.DeleteSystemInstance
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=IotThingsGraphFrontEndService.DeleteSystemTemplate':
+    post:
+      operationId: DeleteSystemTemplate
+      description: Deletes a system. New deployments can't contain the system after its deletion. Existing deployments that contain the system will continue to work because they use a snapshot of the system that is taken when it is deployed.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteSystemTemplateResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteSystemTemplateRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - IotThingsGraphFrontEndService.DeleteSystemTemplate
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=IotThingsGraphFrontEndService.DeploySystemInstance':
+    post:
+      operationId: DeploySystemInstance
+      description: '<p> <b>Greengrass and Cloud Deployments</b> </p> <p>Deploys the system instance to the target specified in <code>CreateSystemInstance</code>. </p> <p> <b>Greengrass Deployments</b> </p> <p>If the system or any workflows and entities have been updated before this action is called, then the deployment will create a new Amazon Simple Storage Service resource file and then deploy it.</p> <p>Since this action creates a Greengrass deployment on the caller''s behalf, the calling identity must have write permissions to the specified Greengrass group. Otherwise, the call will fail with an authorization error.</p> <p>For information about the artifacts that get added to your Greengrass core device when you use this API, see <a href="https://docs.aws.amazon.com/thingsgraph/latest/ug/iot-tg-greengrass.html">AWS IoT Things Graph and AWS IoT Greengrass</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeploySystemInstanceResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '484':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeploySystemInstanceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - IotThingsGraphFrontEndService.DeploySystemInstance
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=IotThingsGraphFrontEndService.DeprecateFlowTemplate':
+    post:
+      operationId: DeprecateFlowTemplate
+      description: 'Deprecates the specified workflow. This action marks the workflow for deletion. Deprecated flows can''t be deployed, but existing deployments will continue to run.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeprecateFlowTemplateResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeprecateFlowTemplateRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - IotThingsGraphFrontEndService.DeprecateFlowTemplate
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=IotThingsGraphFrontEndService.DeprecateSystemTemplate':
+    post:
+      operationId: DeprecateSystemTemplate
+      description: Deprecates the specified system.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeprecateSystemTemplateResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeprecateSystemTemplateRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - IotThingsGraphFrontEndService.DeprecateSystemTemplate
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=IotThingsGraphFrontEndService.DescribeNamespace':
+    post:
+      operationId: DescribeNamespace
+      description: Gets the latest version of the user's namespace and the public version that it is tracking.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeNamespaceResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeNamespaceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - IotThingsGraphFrontEndService.DescribeNamespace
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=IotThingsGraphFrontEndService.DissociateEntityFromThing':
+    post:
+      operationId: DissociateEntityFromThing
+      description: Dissociates a device entity from a concrete thing. The action takes only the type of the entity that you need to dissociate because only one entity of a particular type can be associated with a thing.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DissociateEntityFromThingResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DissociateEntityFromThingRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - IotThingsGraphFrontEndService.DissociateEntityFromThing
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=IotThingsGraphFrontEndService.GetEntities':
+    post:
+      operationId: GetEntities
+      description: '<p>Gets definitions of the specified entities. Uses the latest version of the user''s namespace by default. This API returns the following TDM entities.</p> <ul> <li> <p>Properties</p> </li> <li> <p>States</p> </li> <li> <p>Events</p> </li> <li> <p>Actions</p> </li> <li> <p>Capabilities</p> </li> <li> <p>Mappings</p> </li> <li> <p>Devices</p> </li> <li> <p>Device Models</p> </li> <li> <p>Services</p> </li> </ul> <p>This action doesn''t return definitions for systems, flows, and deployments.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetEntitiesResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetEntitiesRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - IotThingsGraphFrontEndService.GetEntities
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=IotThingsGraphFrontEndService.GetFlowTemplate':
+    post:
+      operationId: GetFlowTemplate
+      description: Gets the latest version of the <code>DefinitionDocument</code> and <code>FlowTemplateSummary</code> for the specified workflow.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetFlowTemplateResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetFlowTemplateRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - IotThingsGraphFrontEndService.GetFlowTemplate
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=IotThingsGraphFrontEndService.GetFlowTemplateRevisions':
+    post:
+      operationId: GetFlowTemplateRevisions
+      description: 'Gets revisions of the specified workflow. Only the last 100 revisions are stored. If the workflow has been deprecated, this action will return revisions that occurred before the deprecation. This action won''t work for workflows that have been deleted.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetFlowTemplateRevisionsResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetFlowTemplateRevisionsRequest'
+        - name: maxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - IotThingsGraphFrontEndService.GetFlowTemplateRevisions
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=IotThingsGraphFrontEndService.GetNamespaceDeletionStatus':
+    post:
+      operationId: GetNamespaceDeletionStatus
+      description: Gets the status of a namespace deletion task.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetNamespaceDeletionStatusResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetNamespaceDeletionStatusRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - IotThingsGraphFrontEndService.GetNamespaceDeletionStatus
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=IotThingsGraphFrontEndService.GetSystemInstance':
+    post:
+      operationId: GetSystemInstance
+      description: Gets a system instance.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetSystemInstanceResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetSystemInstanceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - IotThingsGraphFrontEndService.GetSystemInstance
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=IotThingsGraphFrontEndService.GetSystemTemplate':
+    post:
+      operationId: GetSystemTemplate
+      description: Gets a system.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetSystemTemplateResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetSystemTemplateRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - IotThingsGraphFrontEndService.GetSystemTemplate
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=IotThingsGraphFrontEndService.GetSystemTemplateRevisions':
+    post:
+      operationId: GetSystemTemplateRevisions
+      description: 'Gets revisions made to the specified system template. Only the previous 100 revisions are stored. If the system has been deprecated, this action will return the revisions that occurred before its deprecation. This action won''t work with systems that have been deleted.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetSystemTemplateRevisionsResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetSystemTemplateRevisionsRequest'
+        - name: maxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - IotThingsGraphFrontEndService.GetSystemTemplateRevisions
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=IotThingsGraphFrontEndService.GetUploadStatus':
+    post:
+      operationId: GetUploadStatus
+      description: Gets the status of the specified upload.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetUploadStatusResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetUploadStatusRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - IotThingsGraphFrontEndService.GetUploadStatus
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=IotThingsGraphFrontEndService.ListFlowExecutionMessages':
+    post:
+      operationId: ListFlowExecutionMessages
+      description: Returns a list of objects that contain information about events in a flow execution.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListFlowExecutionMessagesResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListFlowExecutionMessagesRequest'
+        - name: maxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - IotThingsGraphFrontEndService.ListFlowExecutionMessages
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=IotThingsGraphFrontEndService.ListTagsForResource':
+    post:
+      operationId: ListTagsForResource
+      description: Lists all tags on an AWS IoT Things Graph resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsForResourceResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTagsForResourceRequest'
+        - name: maxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - IotThingsGraphFrontEndService.ListTagsForResource
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=IotThingsGraphFrontEndService.SearchEntities':
+    post:
+      operationId: SearchEntities
+      description: Searches for entities of the specified type. You can search for entities in your namespace and the public namespace that you're tracking.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SearchEntitiesResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/SearchEntitiesRequest'
+        - name: maxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - IotThingsGraphFrontEndService.SearchEntities
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=IotThingsGraphFrontEndService.SearchFlowExecutions':
+    post:
+      operationId: SearchFlowExecutions
+      description: Searches for AWS IoT Things Graph workflow execution instances.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SearchFlowExecutionsResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/SearchFlowExecutionsRequest'
+        - name: maxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - IotThingsGraphFrontEndService.SearchFlowExecutions
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=IotThingsGraphFrontEndService.SearchFlowTemplates':
+    post:
+      operationId: SearchFlowTemplates
+      description: Searches for summary information about workflows.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SearchFlowTemplatesResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/SearchFlowTemplatesRequest'
+        - name: maxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - IotThingsGraphFrontEndService.SearchFlowTemplates
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=IotThingsGraphFrontEndService.SearchSystemInstances':
+    post:
+      operationId: SearchSystemInstances
+      description: Searches for system instances in the user's account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SearchSystemInstancesResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/SearchSystemInstancesRequest'
+        - name: maxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - IotThingsGraphFrontEndService.SearchSystemInstances
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=IotThingsGraphFrontEndService.SearchSystemTemplates':
+    post:
+      operationId: SearchSystemTemplates
+      description: Searches for summary information about systems in the user's account. You can filter by the ID of a workflow to return only systems that use the specified workflow.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SearchSystemTemplatesResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/SearchSystemTemplatesRequest'
+        - name: maxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - IotThingsGraphFrontEndService.SearchSystemTemplates
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=IotThingsGraphFrontEndService.SearchThings':
+    post:
+      operationId: SearchThings
+      description: '<p>Searches for things associated with the specified entity. You can search by both device and device model.</p> <p>For example, if two different devices, camera1 and camera2, implement the camera device model, the user can associate thing1 to camera1 and thing2 to camera2. <code>SearchThings(camera2)</code> will return only thing2, but <code>SearchThings(camera)</code> will return both thing1 and thing2.</p> <p>This action searches for exact matches and doesn''t perform partial text matching.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SearchThingsResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/SearchThingsRequest'
+        - name: maxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - IotThingsGraphFrontEndService.SearchThings
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=IotThingsGraphFrontEndService.TagResource':
+    post:
+      operationId: TagResource
+      description: Creates a tag for the specified resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TagResourceResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/TagResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - IotThingsGraphFrontEndService.TagResource
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=IotThingsGraphFrontEndService.UndeploySystemInstance':
+    post:
+      operationId: UndeploySystemInstance
+      description: Removes a system instance from its target (Cloud or Greengrass).
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UndeploySystemInstanceResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UndeploySystemInstanceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - IotThingsGraphFrontEndService.UndeploySystemInstance
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=IotThingsGraphFrontEndService.UntagResource':
+    post:
+      operationId: UntagResource
+      description: Removes a tag from the specified resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UntagResourceResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UntagResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - IotThingsGraphFrontEndService.UntagResource
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=IotThingsGraphFrontEndService.UpdateFlowTemplate':
+    post:
+      operationId: UpdateFlowTemplate
+      description: 'Updates the specified workflow. All deployed systems and system instances that use the workflow will see the changes in the flow when it is redeployed. If you don''t want this behavior, copy the workflow (creating a new workflow with a different ID), and update the copy. The workflow can contain only entities in the specified namespace. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateFlowTemplateResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateFlowTemplateRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - IotThingsGraphFrontEndService.UpdateFlowTemplate
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=IotThingsGraphFrontEndService.UpdateSystemTemplate':
+    post:
+      operationId: UpdateSystemTemplate
+      description: Updates the specified system. You don't need to run this action after updating a workflow. Any deployment that uses the system will see the changes in the system when it is redeployed.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateSystemTemplateResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateSystemTemplateRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - IotThingsGraphFrontEndService.UpdateSystemTemplate
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=IotThingsGraphFrontEndService.UploadEntityDefinitions':
+    post:
+      operationId: UploadEntityDefinitions
+      description: '<p>Asynchronously uploads one or more entity definitions to the user''s namespace. The <code>document</code> parameter is required if <code>syncWithPublicNamespace</code> and <code>deleteExistingEntites</code> are false. If the <code>syncWithPublicNamespace</code> parameter is set to <code>true</code>, the user''s namespace will synchronize with the latest version of the public namespace. If <code>deprecateExistingEntities</code> is set to true, all entities in the latest version will be deleted before the new <code>DefinitionDocument</code> is uploaded.</p> <p>When a user uploads entity definitions for the first time, the service creates a new namespace for the user. The new namespace tracks the public namespace. Currently users can have only one namespace. The namespace version increments whenever a user uploads entity definitions that are backwards-incompatible and whenever a user sets the <code>syncWithPublicNamespace</code> parameter or the <code>deprecateExistingEntities</code> parameter to <code>true</code>.</p> <p>The IDs for all of the entities should be in URN format. Each entity must be in the user''s namespace. Users can''t create entities in the public namespace, but entity definitions can refer to entities in the public namespace.</p> <p>Valid entities are <code>Device</code>, <code>DeviceModel</code>, <code>Service</code>, <code>Capability</code>, <code>State</code>, <code>Action</code>, <code>Event</code>, <code>Property</code>, <code>Mapping</code>, <code>Enum</code>. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UploadEntityDefinitionsResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UploadEntityDefinitionsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - IotThingsGraphFrontEndService.UploadEntityDefinitions
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  AssociateEntityToThingResponse:
+    type: object
+    properties: {}
+  AssociateEntityToThingRequest:
+    type: object
+    required:
+      - thingName
+      - entityId
+    properties:
+      thingName:
+        $ref: '#/definitions/ThingName'
+        description: The name of the thing to which the entity is to be associated.
+      entityId:
+        $ref: '#/definitions/Urn'
+        description: '<p>The ID of the device to be associated with the thing.</p> <p>The ID should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:device:DEVICENAME</code> </p>'
+      namespaceVersion:
+        $ref: '#/definitions/Version'
+        description: The version of the user's namespace. Defaults to the latest version of the user's namespace.
+  InvalidRequestException: {}
+  ResourceNotFoundException: {}
+  InternalFailureException: {}
+  ThrottlingException: {}
+  CreateFlowTemplateResponse:
+    type: object
+    properties:
+      summary:
+        $ref: '#/definitions/FlowTemplateSummary'
+        description: The summary object that describes the created workflow.
+  CreateFlowTemplateRequest:
+    type: object
+    required:
+      - definition
+    properties:
+      definition:
+        $ref: '#/definitions/DefinitionDocument'
+        description: The workflow <code>DefinitionDocument</code>.
+      compatibleNamespaceVersion:
+        $ref: '#/definitions/Version'
+        description: '<p>The namespace version in which the workflow is to be created.</p> <p>If no value is specified, the latest version is used by default.</p>'
+  ResourceAlreadyExistsException: {}
+  LimitExceededException: {}
+  CreateSystemInstanceResponse:
+    type: object
+    properties:
+      summary:
+        $ref: '#/definitions/SystemInstanceSummary'
+        description: The summary object that describes the new system instance.
+  CreateSystemInstanceRequest:
+    type: object
+    required:
+      - definition
+      - target
+    properties:
+      tags:
+        $ref: '#/definitions/TagList'
+        description: 'Metadata, consisting of key-value pairs, that can be used to categorize your system instances.'
+      definition:
+        $ref: '#/definitions/DefinitionDocument'
+      target:
+        $ref: '#/definitions/DeploymentTarget'
+        description: The target type of the deployment. Valid values are <code>GREENGRASS</code> and <code>CLOUD</code>.
+      greengrassGroupName:
+        $ref: '#/definitions/GroupName'
+        description: The name of the Greengrass group where the system instance will be deployed. This value is required if the value of the <code>target</code> parameter is <code>GREENGRASS</code>.
+      s3BucketName:
+        $ref: '#/definitions/S3BucketName'
+        description: The name of the Amazon Simple Storage Service bucket that will be used to store and deploy the system instance's resource file. This value is required if the value of the <code>target</code> parameter is <code>GREENGRASS</code>.
+      metricsConfiguration:
+        $ref: '#/definitions/MetricsConfiguration'
+      flowActionsRoleArn:
+        $ref: '#/definitions/RoleArn'
+        description: The ARN of the IAM role that AWS IoT Things Graph will assume when it executes the flow. This role must have read and write access to AWS Lambda and AWS IoT and any other AWS services that the flow uses when it executes. This value is required if the value of the <code>target</code> parameter is <code>CLOUD</code>.
+  CreateSystemTemplateResponse:
+    type: object
+    properties:
+      summary:
+        $ref: '#/definitions/SystemTemplateSummary'
+        description: The summary object that describes the created system.
+  CreateSystemTemplateRequest:
+    type: object
+    required:
+      - definition
+    properties:
+      definition:
+        $ref: '#/definitions/DefinitionDocument'
+        description: The <code>DefinitionDocument</code> used to create the system.
+      compatibleNamespaceVersion:
+        $ref: '#/definitions/Version'
+        description: '<p>The namespace version in which the system is to be created.</p> <p>If no value is specified, the latest version is used by default.</p>'
+  DeleteFlowTemplateResponse:
+    type: object
+    properties: {}
+  DeleteFlowTemplateRequest:
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        $ref: '#/definitions/Urn'
+        description: '<p>The ID of the workflow to be deleted.</p> <p>The ID should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:workflow:WORKFLOWNAME</code> </p>'
+  ResourceInUseException: {}
+  DeleteNamespaceResponse:
+    type: object
+    properties:
+      namespaceArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the namespace to be deleted.
+      namespaceName:
+        $ref: '#/definitions/NamespaceName'
+        description: The name of the namespace to be deleted.
+  DeleteNamespaceRequest:
+    type: object
+    properties: {}
+  DeleteSystemInstanceResponse:
+    type: object
+    properties: {}
+  DeleteSystemInstanceRequest:
+    type: object
+    properties:
+      id:
+        $ref: '#/definitions/Urn'
+        description: The ID of the system instance to be deleted.
+  DeleteSystemTemplateResponse:
+    type: object
+    properties: {}
+  DeleteSystemTemplateRequest:
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        $ref: '#/definitions/Urn'
+        description: '<p>The ID of the system to be deleted.</p> <p>The ID should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:system:SYSTEMNAME</code> </p>'
+  DeploySystemInstanceResponse:
+    type: object
+    required:
+      - summary
+    properties:
+      summary:
+        $ref: '#/definitions/SystemInstanceSummary'
+        description: 'An object that contains summary information about a system instance that was deployed. '
+      greengrassDeploymentId:
+        $ref: '#/definitions/GreengrassDeploymentId'
+        description: The ID of the Greengrass deployment used to deploy the system instance.
+  DeploySystemInstanceRequest:
+    type: object
+    properties:
+      id:
+        $ref: '#/definitions/Urn'
+        description: '<p>The ID of the system instance. This value is returned by the <code>CreateSystemInstance</code> action.</p> <p>The ID should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:deployment:DEPLOYMENTNAME</code> </p>'
+  DeprecateFlowTemplateResponse:
+    type: object
+    properties: {}
+  DeprecateFlowTemplateRequest:
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        $ref: '#/definitions/Urn'
+        description: '<p>The ID of the workflow to be deleted.</p> <p>The ID should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:workflow:WORKFLOWNAME</code> </p>'
+  DeprecateSystemTemplateResponse:
+    type: object
+    properties: {}
+  DeprecateSystemTemplateRequest:
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        $ref: '#/definitions/Urn'
+        description: '<p>The ID of the system to delete.</p> <p>The ID should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:system:SYSTEMNAME</code> </p>'
+  DescribeNamespaceResponse:
+    type: object
+    properties:
+      namespaceArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the namespace.
+      namespaceName:
+        $ref: '#/definitions/NamespaceName'
+        description: The name of the namespace.
+      trackingNamespaceName:
+        $ref: '#/definitions/NamespaceName'
+        description: The name of the public namespace that the latest namespace version is tracking.
+      trackingNamespaceVersion:
+        $ref: '#/definitions/Version'
+        description: The version of the public namespace that the latest version is tracking.
+      namespaceVersion:
+        $ref: '#/definitions/Version'
+        description: The version of the user's namespace to describe.
+  DescribeNamespaceRequest:
+    type: object
+    properties:
+      namespaceName:
+        $ref: '#/definitions/NamespaceName'
+        description: The name of the user's namespace. Set this to <code>aws</code> to get the public namespace.
+  DissociateEntityFromThingResponse:
+    type: object
+    properties: {}
+  DissociateEntityFromThingRequest:
+    type: object
+    required:
+      - thingName
+      - entityType
+    properties:
+      thingName:
+        $ref: '#/definitions/ThingName'
+        description: The name of the thing to disassociate.
+      entityType:
+        $ref: '#/definitions/EntityType'
+        description: The entity type from which to disassociate the thing.
+  GetEntitiesResponse:
+    type: object
+    properties:
+      descriptions:
+        $ref: '#/definitions/EntityDescriptions'
+        description: An array of descriptions for the specified entities.
+  GetEntitiesRequest:
+    type: object
+    required:
+      - ids
+    properties:
+      ids:
+        $ref: '#/definitions/Urns'
+        description: '<p>An array of entity IDs.</p> <p>The IDs should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:device:DEVICENAME</code> </p>'
+      namespaceVersion:
+        $ref: '#/definitions/Version'
+        description: The version of the user's namespace. Defaults to the latest version of the user's namespace.
+  GetFlowTemplateResponse:
+    type: object
+    properties:
+      description:
+        $ref: '#/definitions/FlowTemplateDescription'
+        description: The object that describes the specified workflow.
+  GetFlowTemplateRequest:
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        $ref: '#/definitions/Urn'
+        description: '<p>The ID of the workflow.</p> <p>The ID should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:workflow:WORKFLOWNAME</code> </p>'
+      revisionNumber:
+        $ref: '#/definitions/Version'
+        description: The number of the workflow revision to retrieve.
+  GetFlowTemplateRevisionsResponse:
+    type: object
+    properties:
+      summaries:
+        $ref: '#/definitions/FlowTemplateSummaries'
+        description: An array of objects that provide summary data about each revision.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: The string to specify as <code>nextToken</code> when you request the next page of results.
+  GetFlowTemplateRevisionsRequest:
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        $ref: '#/definitions/Urn'
+        description: '<p>The ID of the workflow.</p> <p>The ID should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:workflow:WORKFLOWNAME</code> </p>'
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: The string that specifies the next page of results. Use this when you're paginating results.
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of results to return in the response.
+  GetNamespaceDeletionStatusResponse:
+    type: object
+    properties:
+      namespaceArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the namespace that is being deleted.
+      namespaceName:
+        $ref: '#/definitions/NamespaceName'
+        description: The name of the namespace that is being deleted.
+      status:
+        $ref: '#/definitions/NamespaceDeletionStatus'
+        description: The status of the deletion request.
+      errorCode:
+        $ref: '#/definitions/NamespaceDeletionStatusErrorCodes'
+        description: An error code returned by the namespace deletion task.
+      errorMessage:
+        $ref: '#/definitions/String'
+        description: An error code returned by the namespace deletion task.
+  GetNamespaceDeletionStatusRequest:
+    type: object
+    properties: {}
+  GetSystemInstanceResponse:
+    type: object
+    properties:
+      description:
+        $ref: '#/definitions/SystemInstanceDescription'
+        description: An object that describes the system instance.
+  GetSystemInstanceRequest:
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        $ref: '#/definitions/Urn'
+        description: '<p>The ID of the system deployment instance. This value is returned by <code>CreateSystemInstance</code>.</p> <p>The ID should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:deployment:DEPLOYMENTNAME</code> </p>'
+  GetSystemTemplateResponse:
+    type: object
+    properties:
+      description:
+        $ref: '#/definitions/SystemTemplateDescription'
+        description: An object that contains summary data about the system.
+  GetSystemTemplateRequest:
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        $ref: '#/definitions/Urn'
+        description: '<p>The ID of the system to get. This ID must be in the user''s namespace.</p> <p>The ID should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:system:SYSTEMNAME</code> </p>'
+      revisionNumber:
+        $ref: '#/definitions/Version'
+        description: The number that specifies the revision of the system to get.
+  GetSystemTemplateRevisionsResponse:
+    type: object
+    properties:
+      summaries:
+        $ref: '#/definitions/SystemTemplateSummaries'
+        description: An array of objects that contain summary data about the system template revisions.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The string to specify as <code>nextToken</code> when you request the next page of results. '
+  GetSystemTemplateRevisionsRequest:
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        $ref: '#/definitions/Urn'
+        description: '<p>The ID of the system template.</p> <p>The ID should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:system:SYSTEMNAME</code> </p>'
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: The string that specifies the next page of results. Use this when you're paginating results.
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of results to return in the response.
+  GetUploadStatusResponse:
+    type: object
+    required:
+      - uploadId
+      - uploadStatus
+      - createdDate
+    properties:
+      uploadId:
+        $ref: '#/definitions/UploadId'
+        description: The ID of the upload.
+      uploadStatus:
+        $ref: '#/definitions/UploadStatus'
+        description: The status of the upload. The initial status is <code>IN_PROGRESS</code>. The response show all validation failures if the upload fails.
+      namespaceArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the upload.
+      namespaceName:
+        $ref: '#/definitions/NamespaceName'
+        description: The name of the upload's namespace.
+      namespaceVersion:
+        $ref: '#/definitions/Version'
+        description: The version of the user's namespace. Defaults to the latest version of the user's namespace.
+      failureReason:
+        $ref: '#/definitions/StringList'
+        description: The reason for an upload failure.
+      createdDate:
+        $ref: '#/definitions/Timestamp'
+        description: The date at which the upload was created.
+  GetUploadStatusRequest:
+    type: object
+    required:
+      - uploadId
+    properties:
+      uploadId:
+        $ref: '#/definitions/UploadId'
+        description: The ID of the upload. This value is returned by the <code>UploadEntityDefinitions</code> action.
+  ListFlowExecutionMessagesResponse:
+    type: object
+    properties:
+      messages:
+        $ref: '#/definitions/FlowExecutionMessages'
+        description: A list of objects that contain information about events in the specified flow execution.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The string to specify as <code>nextToken</code> when you request the next page of results. '
+  ListFlowExecutionMessagesRequest:
+    type: object
+    required:
+      - flowExecutionId
+    properties:
+      flowExecutionId:
+        $ref: '#/definitions/FlowExecutionId'
+        description: The ID of the flow execution.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: The string that specifies the next page of results. Use this when you're paginating results.
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of results to return in the response.
+  ListTagsForResourceResponse:
+    type: object
+    properties:
+      tags:
+        $ref: '#/definitions/TagList'
+        description: List of tags returned by the <code>ListTagsForResource</code> operation.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token that specifies the next page of results to return.
+  ListTagsForResourceRequest:
+    type: object
+    required:
+      - resourceArn
+    properties:
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of tags to return.
+      resourceArn:
+        $ref: '#/definitions/ResourceArn'
+        description: The Amazon Resource Name (ARN) of the resource whose tags are to be returned.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token that specifies the next page of results to return.
+  SearchEntitiesResponse:
+    type: object
+    properties:
+      descriptions:
+        $ref: '#/definitions/EntityDescriptions'
+        description: An array of descriptions for each entity returned in the search result.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: The string to specify as <code>nextToken</code> when you request the next page of results.
+  SearchEntitiesRequest:
+    type: object
+    required:
+      - entityTypes
+    properties:
+      entityTypes:
+        $ref: '#/definitions/EntityTypes'
+        description: The entity types for which to search.
+      filters:
+        $ref: '#/definitions/EntityFilters'
+        description: '<p>Optional filter to apply to the search. Valid filters are <code>NAME</code> <code>NAMESPACE</code>, <code>SEMANTIC_TYPE_PATH</code> and <code>REFERENCED_ENTITY_ID</code>. <code>REFERENCED_ENTITY_ID</code> filters on entities that are used by the entity in the result set. For example, you can filter on the ID of a property that is used in a state.</p> <p>Multiple filters function as OR criteria in the query. Multiple values passed inside the filter function as AND criteria.</p>'
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: The string that specifies the next page of results. Use this when you're paginating results.
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of results to return in the response.
+      namespaceVersion:
+        $ref: '#/definitions/Version'
+        description: The version of the user's namespace. Defaults to the latest version of the user's namespace.
+  SearchFlowExecutionsResponse:
+    type: object
+    properties:
+      summaries:
+        $ref: '#/definitions/FlowExecutionSummaries'
+        description: An array of objects that contain summary information about each workflow execution in the result set.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: The string to specify as <code>nextToken</code> when you request the next page of results.
+  SearchFlowExecutionsRequest:
+    type: object
+    required:
+      - systemInstanceId
+    properties:
+      systemInstanceId:
+        $ref: '#/definitions/Urn'
+        description: The ID of the system instance that contains the flow.
+      flowExecutionId:
+        $ref: '#/definitions/FlowExecutionId'
+        description: The ID of a flow execution.
+      startTime:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time of the earliest flow execution to return.
+      endTime:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time of the latest flow execution to return.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: The string that specifies the next page of results. Use this when you're paginating results.
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of results to return in the response.
+  SearchFlowTemplatesResponse:
+    type: object
+    properties:
+      summaries:
+        $ref: '#/definitions/FlowTemplateSummaries'
+        description: An array of objects that contain summary information about each workflow in the result set.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: The string to specify as <code>nextToken</code> when you request the next page of results.
+  SearchFlowTemplatesRequest:
+    type: object
+    properties:
+      filters:
+        $ref: '#/definitions/FlowTemplateFilters'
+        description: An array of objects that limit the result set. The only valid filter is <code>DEVICE_MODEL_ID</code>.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: The string that specifies the next page of results. Use this when you're paginating results.
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of results to return in the response.
+  SearchSystemInstancesResponse:
+    type: object
+    properties:
+      summaries:
+        $ref: '#/definitions/SystemInstanceSummaries'
+        description: An array of objects that contain summary data abour the system instances in the result set.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The string to specify as <code>nextToken</code> when you request the next page of results. '
+  SearchSystemInstancesRequest:
+    type: object
+    properties:
+      filters:
+        $ref: '#/definitions/SystemInstanceFilters'
+        description: '<p>Optional filter to apply to the search. Valid filters are <code>SYSTEM_TEMPLATE_ID</code>, <code>STATUS</code>, and <code>GREENGRASS_GROUP_NAME</code>.</p> <p>Multiple filters function as OR criteria in the query. Multiple values passed inside the filter function as AND criteria.</p>'
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: The string that specifies the next page of results. Use this when you're paginating results.
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of results to return in the response.
+  SearchSystemTemplatesResponse:
+    type: object
+    properties:
+      summaries:
+        $ref: '#/definitions/SystemTemplateSummaries'
+        description: An array of objects that contain summary information about each system deployment in the result set.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: The string to specify as <code>nextToken</code> when you request the next page of results.
+  SearchSystemTemplatesRequest:
+    type: object
+    properties:
+      filters:
+        $ref: '#/definitions/SystemTemplateFilters'
+        description: An array of filters that limit the result set. The only valid filter is <code>FLOW_TEMPLATE_ID</code>.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: The string that specifies the next page of results. Use this when you're paginating results.
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of results to return in the response.
+  SearchThingsResponse:
+    type: object
+    properties:
+      things:
+        $ref: '#/definitions/Things'
+        description: An array of things in the result set.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: The string to specify as <code>nextToken</code> when you request the next page of results.
+  SearchThingsRequest:
+    type: object
+    required:
+      - entityId
+    properties:
+      entityId:
+        $ref: '#/definitions/Urn'
+        description: '<p>The ID of the entity to which the things are associated.</p> <p>The IDs should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:device:DEVICENAME</code> </p>'
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: The string that specifies the next page of results. Use this when you're paginating results.
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of results to return in the response.
+      namespaceVersion:
+        $ref: '#/definitions/Version'
+        description: The version of the user's namespace. Defaults to the latest version of the user's namespace.
+  TagResourceResponse:
+    type: object
+    properties: {}
+  TagResourceRequest:
+    type: object
+    required:
+      - resourceArn
+      - tags
+    properties:
+      resourceArn:
+        $ref: '#/definitions/ResourceArn'
+        description: The Amazon Resource Name (ARN) of the resource whose tags are returned.
+      tags:
+        $ref: '#/definitions/TagList'
+        description: A list of tags to add to the resource.&gt;
+  UndeploySystemInstanceResponse:
+    type: object
+    properties:
+      summary:
+        $ref: '#/definitions/SystemInstanceSummary'
+        description: An object that contains summary information about the system instance that was removed from its target.
+  UndeploySystemInstanceRequest:
+    type: object
+    properties:
+      id:
+        $ref: '#/definitions/Urn'
+        description: The ID of the system instance to remove from its target.
+  UntagResourceResponse:
+    type: object
+    properties: {}
+  UntagResourceRequest:
+    type: object
+    required:
+      - resourceArn
+      - tagKeys
+    properties:
+      resourceArn:
+        $ref: '#/definitions/ResourceArn'
+        description: The Amazon Resource Name (ARN) of the resource whose tags are to be removed.
+      tagKeys:
+        $ref: '#/definitions/TagKeyList'
+        description: '<p>A list of tag key names to remove from the resource. You don''t specify the value. Both the key and its associated value are removed. </p> <p>This parameter to the API requires a JSON text string argument. For information on how to format a JSON parameter for the various command line tool environments, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters.html#cli-using-param-json">Using JSON for Parameters</a> in the <i>AWS CLI User Guide</i>. </p>'
+  UpdateFlowTemplateResponse:
+    type: object
+    properties:
+      summary:
+        $ref: '#/definitions/FlowTemplateSummary'
+        description: An object containing summary information about the updated workflow.
+  UpdateFlowTemplateRequest:
+    type: object
+    required:
+      - id
+      - definition
+    properties:
+      id:
+        $ref: '#/definitions/Urn'
+        description: '<p>The ID of the workflow to be updated.</p> <p>The ID should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:workflow:WORKFLOWNAME</code> </p>'
+      definition:
+        $ref: '#/definitions/DefinitionDocument'
+        description: The <code>DefinitionDocument</code> that contains the updated workflow definition.
+      compatibleNamespaceVersion:
+        $ref: '#/definitions/Version'
+        description: '<p>The version of the user''s namespace.</p> <p>If no value is specified, the latest version is used by default. Use the <code>GetFlowTemplateRevisions</code> if you want to find earlier revisions of the flow to update.</p>'
+  UpdateSystemTemplateResponse:
+    type: object
+    properties:
+      summary:
+        $ref: '#/definitions/SystemTemplateSummary'
+        description: An object containing summary information about the updated system.
+  UpdateSystemTemplateRequest:
+    type: object
+    required:
+      - id
+      - definition
+    properties:
+      id:
+        $ref: '#/definitions/Urn'
+        description: '<p>The ID of the system to be updated.</p> <p>The ID should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:system:SYSTEMNAME</code> </p>'
+      definition:
+        $ref: '#/definitions/DefinitionDocument'
+        description: The <code>DefinitionDocument</code> that contains the updated system definition.
+      compatibleNamespaceVersion:
+        $ref: '#/definitions/Version'
+        description: '<p>The version of the user''s namespace. Defaults to the latest version of the user''s namespace.</p> <p>If no value is specified, the latest version is used by default.</p>'
+  UploadEntityDefinitionsResponse:
+    type: object
+    required:
+      - uploadId
+    properties:
+      uploadId:
+        $ref: '#/definitions/UploadId'
+        description: The ID that specifies the upload action. You can use this to track the status of the upload.
+  UploadEntityDefinitionsRequest:
+    type: object
+    properties:
+      document:
+        $ref: '#/definitions/DefinitionDocument'
+        description: The <code>DefinitionDocument</code> that defines the updated entities.
+      syncWithPublicNamespace:
+        $ref: '#/definitions/SyncWithPublicNamespace'
+        description: 'A Boolean that specifies whether to synchronize with the latest version of the public namespace. If set to <code>true</code>, the upload will create a new namespace version.'
+      deprecateExistingEntities:
+        $ref: '#/definitions/DeprecateExistingEntities'
+        description: 'A Boolean that specifies whether to deprecate all entities in the latest version before uploading the new <code>DefinitionDocument</code>. If set to <code>true</code>, the upload will create a new namespace version.'
+  Arn:
+    type: string
+  ThingName:
+    type: string
+    pattern: '[a-zA-Z0-9:_-]+'
+    minLength: 1
+    maxLength: 128
+  Urn:
+    type: string
+    pattern: '^urn:tdm:(([a-z]{2}-(gov-)?[a-z]{4,9}-[0-9]{1,3}/[0-9]+/)*[\p{Alnum}_]+(/[\p{Alnum}_]+)*):([\p{Alpha}]*):([\p{Alnum}_]+(/[\p{Alnum}_]+)*)$'
+    maxLength: 160
+  Version:
+    type: integer
+  DefinitionDocument:
+    type: object
+    required:
+      - language
+      - text
+    properties:
+      language:
+        $ref: '#/definitions/DefinitionLanguage'
+        description: The language used to define the entity. <code>GRAPHQL</code> is the only valid value.
+      text:
+        $ref: '#/definitions/DefinitionText'
+        description: The GraphQL text that defines the entity.
+    description: 'A document that defines an entity. '
+  FlowTemplateSummary:
+    type: object
+    properties:
+      id:
+        $ref: '#/definitions/Urn'
+        description: The ID of the workflow.
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the workflow.
+      revisionNumber:
+        $ref: '#/definitions/Version'
+        description: The revision number of the workflow.
+      createdAt:
+        $ref: '#/definitions/Timestamp'
+        description: The date when the workflow was created.
+    description: An object that contains summary information about a workflow.
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+    minItems: 0
+    maxItems: 50
+  DeploymentTarget:
+    type: string
+    enum:
+      - GREENGRASS
+      - CLOUD
+  GroupName:
+    type: string
+  S3BucketName:
+    type: string
+  MetricsConfiguration:
+    type: object
+    properties:
+      cloudMetricEnabled:
+        $ref: '#/definitions/Enabled'
+        description: A Boolean that specifies whether cloud metrics are collected.
+      metricRuleRoleArn:
+        $ref: '#/definitions/RoleArn'
+        description: The ARN of the role that is used to collect cloud metrics.
+    description: 'An object that specifies whether cloud metrics are collected in a deployment and, if so, what role is used to collect metrics.'
+  RoleArn:
+    type: string
+    minLength: 20
+    maxLength: 2048
+  SystemInstanceSummary:
+    type: object
+    properties:
+      id:
+        $ref: '#/definitions/Urn'
+        description: The ID of the system instance.
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the system instance.
+      status:
+        $ref: '#/definitions/SystemInstanceDeploymentStatus'
+        description: The status of the system instance.
+      target:
+        $ref: '#/definitions/DeploymentTarget'
+        description: The target of the system instance.
+      greengrassGroupName:
+        $ref: '#/definitions/GroupName'
+        description: The ID of the Greengrass group where the system instance is deployed.
+      createdAt:
+        $ref: '#/definitions/Timestamp'
+        description: The date when the system instance was created.
+      updatedAt:
+        $ref: '#/definitions/Timestamp'
+        description: ' The date and time when the system instance was last updated.'
+      greengrassGroupId:
+        $ref: '#/definitions/GreengrassGroupId'
+        description: The ID of the Greengrass group where the system instance is deployed.
+      greengrassGroupVersionId:
+        $ref: '#/definitions/GreengrassGroupVersionId'
+        description: The version of the Greengrass group where the system instance is deployed.
+    description: An object that contains summary information about a system instance.
+  SystemTemplateSummary:
+    type: object
+    properties:
+      id:
+        $ref: '#/definitions/Urn'
+        description: The ID of the system.
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the system.
+      revisionNumber:
+        $ref: '#/definitions/Version'
+        description: The revision number of the system.
+      createdAt:
+        $ref: '#/definitions/Timestamp'
+        description: The date when the system was created.
+    description: An object that contains information about a system.
+  DefinitionLanguage:
+    type: string
+    enum:
+      - GRAPHQL
+  DefinitionText:
+    type: string
+    maxLength: 1048576
+  NamespaceName:
+    type: string
+    maxLength: 128
+  DependencyRevision:
+    type: object
+    properties:
+      id:
+        $ref: '#/definitions/Urn'
+        description: The ID of the workflow or system.
+      revisionNumber:
+        $ref: '#/definitions/Version'
+        description: The revision number of the workflow or system.
+    description: An object that contains the ID and revision number of a workflow or system that is part of a deployment.
+  DependencyRevisions:
+    type: array
+    items:
+      $ref: '#/definitions/DependencyRevision'
+  GreengrassDeploymentId:
+    type: string
+  DeprecateExistingEntities:
+    type: boolean
+  EntityType:
+    type: string
+    enum:
+      - DEVICE
+      - SERVICE
+      - DEVICE_MODEL
+      - CAPABILITY
+      - STATE
+      - ACTION
+      - EVENT
+      - PROPERTY
+      - MAPPING
+      - ENUM
+  Enabled:
+    type: boolean
+  Timestamp:
+    type: string
+    format: date-time
+  EntityDescription:
+    type: object
+    properties:
+      id:
+        $ref: '#/definitions/Urn'
+        description: The entity ID.
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The entity ARN.
+      type:
+        $ref: '#/definitions/EntityType'
+        description: The entity type.
+      createdAt:
+        $ref: '#/definitions/Timestamp'
+        description: The time at which the entity was created.
+      definition:
+        $ref: '#/definitions/DefinitionDocument'
+        description: The definition document of the entity.
+    description: Describes the properties of an entity.
+  EntityDescriptions:
+    type: array
+    items:
+      $ref: '#/definitions/EntityDescription'
+  EntityFilterName:
+    type: string
+    enum:
+      - NAME
+      - NAMESPACE
+      - SEMANTIC_TYPE_PATH
+      - REFERENCED_ENTITY_ID
+  EntityFilterValues:
+    type: array
+    items:
+      $ref: '#/definitions/EntityFilterValue'
+  EntityFilter:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/EntityFilterName'
+        description: 'The name of the entity search filter field. <code>REFERENCED_ENTITY_ID</code> filters on entities that are used by the entity in the result set. For example, you can filter on the ID of a property that is used in a state.'
+      value:
+        $ref: '#/definitions/EntityFilterValues'
+        description: An array of string values for the search filter field. Multiple values function as AND criteria in the search.
+    description: An object that filters an entity search. Multiple filters function as OR criteria in the search. For example a search that includes a <code>NAMESPACE</code> and a <code>REFERENCED_ENTITY_ID</code> filter searches for entities in the specified namespace that use the entity specified by the value of <code>REFERENCED_ENTITY_ID</code>.
+  EntityFilterValue:
+    type: string
+  EntityFilters:
+    type: array
+    items:
+      $ref: '#/definitions/EntityFilter'
+  EntityTypes:
+    type: array
+    items:
+      $ref: '#/definitions/EntityType'
+  FlowExecutionEventType:
+    type: string
+    enum:
+      - EXECUTION_STARTED
+      - EXECUTION_FAILED
+      - EXECUTION_ABORTED
+      - EXECUTION_SUCCEEDED
+      - STEP_STARTED
+      - STEP_FAILED
+      - STEP_SUCCEEDED
+      - ACTIVITY_SCHEDULED
+      - ACTIVITY_STARTED
+      - ACTIVITY_FAILED
+      - ACTIVITY_SUCCEEDED
+      - START_FLOW_EXECUTION_TASK
+      - SCHEDULE_NEXT_READY_STEPS_TASK
+      - THING_ACTION_TASK
+      - THING_ACTION_TASK_FAILED
+      - THING_ACTION_TASK_SUCCEEDED
+      - ACKNOWLEDGE_TASK_MESSAGE
+  FlowExecutionId:
+    type: string
+  FlowExecutionMessageId:
+    type: string
+  FlowExecutionMessagePayload:
+    type: string
+  FlowExecutionMessage:
+    type: object
+    properties:
+      messageId:
+        $ref: '#/definitions/FlowExecutionMessageId'
+        description: The unique identifier of the message.
+      eventType:
+        $ref: '#/definitions/FlowExecutionEventType'
+        description: The type of flow event .
+      timestamp:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time when the message was last updated.
+      payload:
+        $ref: '#/definitions/FlowExecutionMessagePayload'
+        description: A string containing information about the flow event.
+    description: An object that contains information about a flow event.
+  FlowExecutionMessages:
+    type: array
+    items:
+      $ref: '#/definitions/FlowExecutionMessage'
+  FlowExecutionStatus:
+    type: string
+    enum:
+      - RUNNING
+      - ABORTED
+      - SUCCEEDED
+      - FAILED
+  FlowExecutionSummary:
+    type: object
+    properties:
+      flowExecutionId:
+        $ref: '#/definitions/FlowExecutionId'
+        description: The ID of the flow execution.
+      status:
+        $ref: '#/definitions/FlowExecutionStatus'
+        description: The current status of the flow execution.
+      systemInstanceId:
+        $ref: '#/definitions/Urn'
+        description: The ID of the system instance that contains the flow.
+      flowTemplateId:
+        $ref: '#/definitions/Urn'
+        description: The ID of the flow.
+      createdAt:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time when the flow execution summary was created.
+      updatedAt:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time when the flow execution summary was last updated.
+    description: An object that contains summary information about a flow execution.
+  FlowExecutionSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/FlowExecutionSummary'
+  FlowTemplateDescription:
+    type: object
+    properties:
+      summary:
+        $ref: '#/definitions/FlowTemplateSummary'
+        description: An object that contains summary information about a workflow.
+      definition:
+        $ref: '#/definitions/DefinitionDocument'
+        description: A workflow's definition document.
+      validatedNamespaceVersion:
+        $ref: '#/definitions/Version'
+        description: The version of the user's namespace against which the workflow was validated. Use this value in your system instance.
+    description: An object that contains a workflow's definition and summary information.
+  FlowTemplateFilterName:
+    type: string
+    enum:
+      - DEVICE_MODEL_ID
+  FlowTemplateFilterValues:
+    type: array
+    items:
+      $ref: '#/definitions/FlowTemplateFilterValue'
+  FlowTemplateFilter:
+    type: object
+    required:
+      - name
+      - value
+    properties:
+      name:
+        $ref: '#/definitions/FlowTemplateFilterName'
+        description: The name of the search filter field.
+      value:
+        $ref: '#/definitions/FlowTemplateFilterValues'
+        description: An array of string values for the search filter field. Multiple values function as AND criteria in the search.
+    description: An object that filters a workflow search.
+  FlowTemplateFilterValue:
+    type: string
+    pattern: '^urn:tdm:(([a-z]{2}-(gov-)?[a-z]{4,9}-[0-9]{1,3}/[0-9]+/)*[\p{Alnum}_]+(/[\p{Alnum}_]+)*):([\p{Alpha}]*):([\p{Alnum}_]+(/[\p{Alnum}_]+)*)$'
+  FlowTemplateFilters:
+    type: array
+    items:
+      $ref: '#/definitions/FlowTemplateFilter'
+  FlowTemplateSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/FlowTemplateSummary'
+  Urns:
+    type: array
+    items:
+      $ref: '#/definitions/Urn'
+    minItems: 0
+    maxItems: 25
+  NextToken:
+    type: string
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 250
+  NamespaceDeletionStatus:
+    type: string
+    enum:
+      - IN_PROGRESS
+      - SUCCEEDED
+      - FAILED
+  NamespaceDeletionStatusErrorCodes:
+    type: string
+    enum:
+      - VALIDATION_FAILED
+  String:
+    type: string
+  SystemInstanceDescription:
+    type: object
+    properties:
+      summary:
+        $ref: '#/definitions/SystemInstanceSummary'
+        description: An object that contains summary information about a system instance.
+      definition:
+        $ref: '#/definitions/DefinitionDocument'
+      s3BucketName:
+        $ref: '#/definitions/S3BucketName'
+        description: The Amazon Simple Storage Service bucket where information about a system instance is stored.
+      metricsConfiguration:
+        $ref: '#/definitions/MetricsConfiguration'
+      validatedNamespaceVersion:
+        $ref: '#/definitions/Version'
+        description: The version of the user's namespace against which the system instance was validated.
+      validatedDependencyRevisions:
+        $ref: '#/definitions/DependencyRevisions'
+        description: A list of objects that contain all of the IDs and revision numbers of workflows and systems that are used in a system instance.
+      flowActionsRoleArn:
+        $ref: '#/definitions/RoleArn'
+        description: The AWS Identity and Access Management (IAM) role that AWS IoT Things Graph assumes during flow execution in a cloud deployment. This role must have read and write permissionss to AWS Lambda and AWS IoT and to any other AWS services that the flow uses.
+    description: An object that contains a system instance definition and summary information.
+  SystemTemplateDescription:
+    type: object
+    properties:
+      summary:
+        $ref: '#/definitions/SystemTemplateSummary'
+        description: An object that contains summary information about a system.
+      definition:
+        $ref: '#/definitions/DefinitionDocument'
+        description: The definition document of a system.
+      validatedNamespaceVersion:
+        $ref: '#/definitions/Version'
+        description: The namespace version against which the system was validated. Use this value in your system instance.
+    description: An object that contains a system's definition document and summary information.
+  SystemTemplateSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/SystemTemplateSummary'
+  UploadId:
+    type: string
+    minLength: 1
+    maxLength: 40
+  UploadStatus:
+    type: string
+    enum:
+      - IN_PROGRESS
+      - SUCCEEDED
+      - FAILED
+  StringList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  GreengrassGroupId:
+    type: string
+  GreengrassGroupVersionId:
+    type: string
+  ResourceArn:
+    type: string
+    minLength: 1
+    maxLength: 2048
+  SystemInstanceFilters:
+    type: array
+    items:
+      $ref: '#/definitions/SystemInstanceFilter'
+  SystemInstanceSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/SystemInstanceSummary'
+  SystemTemplateFilters:
+    type: array
+    items:
+      $ref: '#/definitions/SystemTemplateFilter'
+  Things:
+    type: array
+    items:
+      $ref: '#/definitions/Thing'
+  SyncWithPublicNamespace:
+    type: boolean
+  SystemInstanceDeploymentStatus:
+    type: string
+    enum:
+      - NOT_DEPLOYED
+      - BOOTSTRAP
+      - DEPLOY_IN_PROGRESS
+      - DEPLOYED_IN_TARGET
+      - UNDEPLOY_IN_PROGRESS
+      - FAILED
+      - PENDING_DELETE
+      - DELETED_IN_TARGET
+  SystemInstanceFilterName:
+    type: string
+    enum:
+      - SYSTEM_TEMPLATE_ID
+      - STATUS
+      - GREENGRASS_GROUP_NAME
+  SystemInstanceFilterValues:
+    type: array
+    items:
+      $ref: '#/definitions/SystemInstanceFilterValue'
+  SystemInstanceFilter:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/SystemInstanceFilterName'
+        description: The name of the search filter field.
+      value:
+        $ref: '#/definitions/SystemInstanceFilterValues'
+        description: 'An array of string values for the search filter field. Multiple values function as AND criteria in the search. '
+    description: An object that filters a system instance search. Multiple filters function as OR criteria in the search. For example a search that includes a GREENGRASS_GROUP_NAME and a STATUS filter searches for system instances in the specified Greengrass group that have the specified status.
+  SystemInstanceFilterValue:
+    type: string
+  SystemTemplateFilterName:
+    type: string
+    enum:
+      - FLOW_TEMPLATE_ID
+  SystemTemplateFilterValues:
+    type: array
+    items:
+      $ref: '#/definitions/SystemTemplateFilterValue'
+  SystemTemplateFilter:
+    type: object
+    required:
+      - name
+      - value
+    properties:
+      name:
+        $ref: '#/definitions/SystemTemplateFilterName'
+        description: The name of the system search filter field.
+      value:
+        $ref: '#/definitions/SystemTemplateFilterValues'
+        description: An array of string values for the search filter field. Multiple values function as AND criteria in the search.
+    description: An object that filters a system search.
+  SystemTemplateFilterValue:
+    type: string
+    pattern: '^urn:tdm:(([a-z]{2}-(gov-)?[a-z]{4,9}-[0-9]{1,3}/[0-9]+/)*[\p{Alnum}_]+(/[\p{Alnum}_]+)*):([\p{Alpha}]*):([\p{Alnum}_]+(/[\p{Alnum}_]+)*)$'
+  TagKey:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 1
+    maxLength: 128
+  TagValue:
+    type: string
+    minLength: 1
+    maxLength: 256
+  Tag:
+    type: object
+    required:
+      - key
+      - value
+    properties:
+      key:
+        $ref: '#/definitions/TagKey'
+        description: The required name of the tag. The string value can be from 1 to 128 Unicode characters in length.
+      value:
+        $ref: '#/definitions/TagValue'
+        description: The optional value of the tag. The string value can be from 1 to 256 Unicode characters in length.
+    description: Metadata assigned to an AWS IoT Things Graph resource consisting of a key-value pair.
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+    minItems: 1
+    maxItems: 50
+  ThingArn:
+    type: string
+  Thing:
+    type: object
+    properties:
+      thingArn:
+        $ref: '#/definitions/ThingArn'
+        description: The ARN of the thing.
+      thingName:
+        $ref: '#/definitions/ThingName'
+        description: The name of the thing.
+    description: An AWS IoT thing.

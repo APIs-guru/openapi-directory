@@ -206,6 +206,9 @@ paths:
                 description: Specifies the configuration of a lifecycle policy.
                 type: object
                 properties:
+                  PolicyType:
+                    $ref: '#/definitions/PolicyTypeValues'
+                    description: This field determines the valid target resource types and actions a policy can manage. This field defaults to EBS_SNAPSHOT_MANAGEMENT if not present.
                   ResourceTypes:
                     $ref: '#/definitions/ResourceTypeValuesList'
                     description: The resource type.
@@ -215,6 +218,9 @@ paths:
                   Schedules:
                     $ref: '#/definitions/ScheduleList'
                     description: The schedule of policy-defined actions.
+                  Parameters:
+                    $ref: '#/definitions/Parameters'
+                    description: 'A set of optional parameters that can be provided by the policy. '
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -401,6 +407,9 @@ paths:
                 description: Specifies the configuration of a lifecycle policy.
                 type: object
                 properties:
+                  PolicyType:
+                    $ref: '#/definitions/PolicyTypeValues'
+                    description: This field determines the valid target resource types and actions a policy can manage. This field defaults to EBS_SNAPSHOT_MANAGEMENT if not present.
                   ResourceTypes:
                     $ref: '#/definitions/ResourceTypeValuesList'
                     description: The resource type.
@@ -410,6 +419,9 @@ paths:
                   Schedules:
                     $ref: '#/definitions/ScheduleList'
                     description: The schedule of policy-defined actions.
+                  Parameters:
+                    $ref: '#/definitions/Parameters'
+                    description: 'A set of optional parameters that can be provided by the policy. '
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -425,6 +437,10 @@ definitions:
       PolicyId:
         $ref: '#/definitions/PolicyId'
         description: The identifier of the lifecycle policy.
+  PolicyTypeValues:
+    type: string
+    enum:
+      - EBS_SNAPSHOT_MANAGEMENT
   ResourceTypeValuesList:
     type: array
     items:
@@ -443,6 +459,13 @@ definitions:
       $ref: '#/definitions/Schedule'
     minItems: 1
     maxItems: 1
+  Parameters:
+    type: object
+    properties:
+      ExcludeBootVolume:
+        $ref: '#/definitions/ExcludeBootVolume'
+        description: 'When executing an EBS Snapshot Management – Instance policy, execute all CreateSnapshots calls with the <code>excludeBootVolume</code> set to the supplied field. Defaults to false. Only valid for EBS Snapshot Management – Instance policies.'
+    description: Optional parameters that can be added to the policy. The set of valid parameters depends on the combination of <code>policyType</code> and <code>resourceType</code> values.
   InvalidRequestException: {}
   LimitExceededException: {}
   InternalServerException: {}
@@ -462,6 +485,7 @@ definitions:
     type: string
     enum:
       - VOLUME
+      - INSTANCE
   TagFilter:
     type: string
   GetLifecyclePolicyResponse:
@@ -493,6 +517,9 @@ definitions:
   PolicyDetails:
     type: object
     properties:
+      PolicyType:
+        $ref: '#/definitions/PolicyTypeValues'
+        description: This field determines the valid target resource types and actions a policy can manage. This field defaults to EBS_SNAPSHOT_MANAGEMENT if not present.
       ResourceTypes:
         $ref: '#/definitions/ResourceTypeValuesList'
         description: The resource type.
@@ -502,6 +529,9 @@ definitions:
       Schedules:
         $ref: '#/definitions/ScheduleList'
         description: The schedule of policy-defined actions.
+      Parameters:
+        $ref: '#/definitions/Parameters'
+        description: 'A set of optional parameters that can be provided by the policy. '
     description: Specifies the configuration of a lifecycle policy.
   CreateLifecyclePolicyRequest:
     type: object
@@ -543,17 +573,19 @@ definitions:
     properties:
       Interval:
         $ref: '#/definitions/Interval'
-        description: The interval. The supported values are 12 and 24.
+        description: 'The interval between snapshots. The supported values are 2, 3, 4, 6, 8, 12, and 24.'
       IntervalUnit:
         $ref: '#/definitions/IntervalUnitValues'
         description: The interval unit.
       Times:
         $ref: '#/definitions/TimesList'
-        description: '<p>The time, in UTC, to start the operation.</p> <p>The operation occurs within a one-hour window following the specified time.</p>'
+        description: '<p>The time, in UTC, to start the operation. The supported format is hh:mm.</p> <p>The operation occurs within a one-hour window following the specified time.</p>'
     description: Specifies when to create snapshots of EBS volumes.
   DeleteLifecyclePolicyRequest:
     type: object
     properties: {}
+  ExcludeBootVolume:
+    type: boolean
   PolicyIdList:
     type: array
     items:
@@ -646,6 +678,12 @@ definitions:
       $ref: '#/definitions/Tag'
     minItems: 0
     maxItems: 50
+  VariableTagsList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+    minItems: 0
+    maxItems: 50
   Schedule:
     type: object
     properties:
@@ -654,9 +692,13 @@ definitions:
         description: The name of the schedule.
       CopyTags:
         $ref: '#/definitions/CopyTags'
+        description: Copy all user-defined tags on a source volume to snapshots of the volume created by this policy.
       TagsToAdd:
         $ref: '#/definitions/TagsToAddList'
         description: The tags to apply to policy-created resources. These user-defined tags are in addition to the AWS-added lifecycle tags.
+      VariableTags:
+        $ref: '#/definitions/VariableTagsList'
+        description: 'A collection of key/value pairs with values determined dynamically when the policy is executed. Keys may be any valid Amazon EC2 tag key. Values must be in one of the two following formats: <code>$(instance-id)</code> or <code>$(timestamp)</code>. Variable tags are only valid for EBS Snapshot Management – Instance policies.'
       CreateRule:
         $ref: '#/definitions/CreateRule'
         description: The create rule.

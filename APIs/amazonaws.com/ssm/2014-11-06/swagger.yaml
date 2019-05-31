@@ -3,7 +3,7 @@ info:
   version: '2014-11-06'
   x-release: v4
   title: Amazon Simple Systems Manager (SSM)
-  description: '<fullname>AWS Systems Manager</fullname> <p>AWS Systems Manager is a collection of capabilities that helps you automate management tasks such as collecting system inventory, applying operating system (OS) patches, automating the creation of Amazon Machine Images (AMIs), and configuring operating systems (OSs) and applications at scale. Systems Manager lets you remotely and securely manage the configuration of your managed instances. A <i>managed instance</i> is any Amazon EC2 instance or on-premises machine in your hybrid environment that has been configured for Systems Manager.</p> <p>This reference is intended to be used with the <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/">AWS Systems Manager User Guide</a>.</p> <p>To get started, verify prerequisites and configure managed instances. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up.html">Systems Manager Prerequisites</a> in the <i>AWS Systems Manager User Guide</i>.</p> <p>For information about other API actions you can perform on Amazon EC2 instances, see the <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/">Amazon EC2 API Reference</a>. For information about how to use a Query API, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/making-api-requests.html">Making API Requests</a>. </p>'
+  description: '<fullname>AWS Systems Manager</fullname> <p>AWS Systems Manager is a collection of capabilities that helps you automate management tasks such as collecting system inventory, applying operating system (OS) patches, automating the creation of Amazon Machine Images (AMIs), and configuring operating systems (OSs) and applications at scale. Systems Manager lets you remotely and securely manage the configuration of your managed instances. A <i>managed instance</i> is any Amazon EC2 instance or on-premises machine in your hybrid environment that has been configured for Systems Manager.</p> <p>This reference is intended to be used with the <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/">AWS Systems Manager User Guide</a>.</p> <p>To get started, verify prerequisites and configure managed instances. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up.html">Setting Up AWS Systems Manager</a> in the <i>AWS Systems Manager User Guide</i>.</p> <p>For information about other API actions you can perform on Amazon EC2 instances, see the <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/">Amazon EC2 API Reference</a>. For information about how to use a Query API, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/making-api-requests.html">Making API Requests</a>. </p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -159,7 +159,7 @@ paths:
   '/#X-Amz-Target=AmazonSSM.AddTagsToResource':
     post:
       operationId: AddTagsToResource
-      description: '<p>Adds or overwrites one or more tags for the specified resource. Tags are metadata that you can assign to your documents, managed instances, Maintenance Windows, Parameter Store parameters, and patch baselines. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment. Each tag consists of a key and an optional value, both of which you define. For example, you could define a set of tags for your account''s managed instances that helps you track each instance''s owner and stack level. For example: Key=Owner and Value=DbAdmin, SysAdmin, or Dev. Or Key=Stack and Value=Production, Pre-Production, or Test.</p> <p>Each resource can have a maximum of 50 tags. </p> <p>We recommend that you devise a set of tag keys that meets your needs for each resource type. Using a consistent set of tag keys makes it easier for you to manage your resources. You can search and filter the resources based on the tags you add. Tags don''t have any semantic meaning to Amazon EC2 and are interpreted strictly as a string of characters. </p> <p>For more information about tags, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html">Tagging Your Amazon EC2 Resources</a> in the <i>Amazon EC2 User Guide</i>.</p>'
+      description: '<p>Adds or overwrites one or more tags for the specified resource. Tags are metadata that you can assign to your documents, managed instances, maintenance windows, Parameter Store parameters, and patch baselines. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment. Each tag consists of a key and an optional value, both of which you define. For example, you could define a set of tags for your account''s managed instances that helps you track each instance''s owner and stack level. For example: Key=Owner and Value=DbAdmin, SysAdmin, or Dev. Or Key=Stack and Value=Production, Pre-Production, or Test.</p> <p>Each resource can have a maximum of 50 tags. </p> <p>We recommend that you devise a set of tag keys that meets your needs for each resource type. Using a consistent set of tag keys makes it easier for you to manage your resources. You can search and filter the resources based on the tags you add. Tags don''t have any semantic meaning to Amazon EC2 and are interpreted strictly as a string of characters. </p> <p>For more information about tags, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html">Tagging Your Amazon EC2 Resources</a> in the <i>Amazon EC2 User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -253,7 +253,7 @@ paths:
   '/#X-Amz-Target=AmazonSSM.CancelMaintenanceWindowExecution':
     post:
       operationId: CancelMaintenanceWindowExecution
-      description: Stops a Maintenance Window execution that is already in progress and cancels any tasks in the window that have not already starting running. (Tasks already in progress will continue to completion.)
+      description: Stops a maintenance window execution that is already in progress and cancels any tasks in the window that have not already starting running. (Tasks already in progress will continue to completion.)
       responses:
         '200':
           description: Success
@@ -290,7 +290,7 @@ paths:
   '/#X-Amz-Target=AmazonSSM.CreateActivation':
     post:
       operationId: CreateActivation
-      description: 'Registers your on-premises server or virtual machine with Amazon EC2 so that you can manage these resources using Run Command. An on-premises server or virtual machine that has been registered with EC2 is called a managed instance. For more information about activations, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-managedinstances.html">Setting Up Systems Manager in Hybrid Environments</a>.'
+      description: 'Registers your on-premises server or virtual machine with Amazon EC2 so that you can manage these resources using Run Command. An on-premises server or virtual machine that has been registered with EC2 is called a managed instance. For more information about activations, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-managedinstances.html">Setting Up AWS Systems Manager for Hybrid Environments</a>.'
       responses:
         '200':
           description: Success
@@ -522,7 +522,7 @@ paths:
   '/#X-Amz-Target=AmazonSSM.CreateMaintenanceWindow':
     post:
       operationId: CreateMaintenanceWindow
-      description: Creates a new Maintenance Window.
+      description: Creates a new maintenance window.
       responses:
         '200':
           description: Success
@@ -837,7 +837,7 @@ paths:
   '/#X-Amz-Target=AmazonSSM.DeleteMaintenanceWindow':
     post:
       operationId: DeleteMaintenanceWindow
-      description: Deletes a Maintenance Window.
+      description: Deletes a maintenance window.
       responses:
         '200':
           description: Success
@@ -1088,7 +1088,7 @@ paths:
   '/#X-Amz-Target=AmazonSSM.DeregisterTargetFromMaintenanceWindow':
     post:
       operationId: DeregisterTargetFromMaintenanceWindow
-      description: Removes a target from a Maintenance Window.
+      description: Removes a target from a maintenance window.
       responses:
         '200':
           description: Success
@@ -1129,7 +1129,7 @@ paths:
   '/#X-Amz-Target=AmazonSSM.DeregisterTaskFromMaintenanceWindow':
     post:
       operationId: DeregisterTaskFromMaintenanceWindow
-      description: Removes a task from a Maintenance Window.
+      description: Removes a task from a maintenance window.
       responses:
         '200':
           description: Success
@@ -1911,7 +1911,7 @@ paths:
   '/#X-Amz-Target=AmazonSSM.DescribeMaintenanceWindowExecutionTaskInvocations':
     post:
       operationId: DescribeMaintenanceWindowExecutionTaskInvocations
-      description: Retrieves the individual task executions (one per target) for a particular task run as part of a Maintenance Window execution.
+      description: Retrieves the individual task executions (one per target) for a particular task run as part of a maintenance window execution.
       responses:
         '200':
           description: Success
@@ -1948,7 +1948,7 @@ paths:
   '/#X-Amz-Target=AmazonSSM.DescribeMaintenanceWindowExecutionTasks':
     post:
       operationId: DescribeMaintenanceWindowExecutionTasks
-      description: 'For a given Maintenance Window execution, lists the tasks that were run.'
+      description: 'For a given maintenance window execution, lists the tasks that were run.'
       responses:
         '200':
           description: Success
@@ -1985,7 +1985,7 @@ paths:
   '/#X-Amz-Target=AmazonSSM.DescribeMaintenanceWindowExecutions':
     post:
       operationId: DescribeMaintenanceWindowExecutions
-      description: 'Lists the executions of a Maintenance Window. This includes information about when the Maintenance Window was scheduled to be active, and information about tasks registered and run with the Maintenance Window.'
+      description: 'Lists the executions of a maintenance window. This includes information about when the maintenance window was scheduled to be active, and information about tasks registered and run with the maintenance window.'
       responses:
         '200':
           description: Success
@@ -2018,7 +2018,7 @@ paths:
   '/#X-Amz-Target=AmazonSSM.DescribeMaintenanceWindowSchedule':
     post:
       operationId: DescribeMaintenanceWindowSchedule
-      description: Retrieves information about upcoming executions of a Maintenance Window.
+      description: Retrieves information about upcoming executions of a maintenance window.
       responses:
         '200':
           description: Success
@@ -2055,7 +2055,7 @@ paths:
   '/#X-Amz-Target=AmazonSSM.DescribeMaintenanceWindowTargets':
     post:
       operationId: DescribeMaintenanceWindowTargets
-      description: Lists the targets registered with the Maintenance Window.
+      description: Lists the targets registered with the maintenance window.
       responses:
         '200':
           description: Success
@@ -2092,7 +2092,7 @@ paths:
   '/#X-Amz-Target=AmazonSSM.DescribeMaintenanceWindowTasks':
     post:
       operationId: DescribeMaintenanceWindowTasks
-      description: Lists the tasks in a Maintenance Window.
+      description: Lists the tasks in a maintenance window.
       responses:
         '200':
           description: Success
@@ -2129,7 +2129,7 @@ paths:
   '/#X-Amz-Target=AmazonSSM.DescribeMaintenanceWindows':
     post:
       operationId: DescribeMaintenanceWindows
-      description: Retrieves the Maintenance Windows in an AWS account.
+      description: Retrieves the maintenance windows in an AWS account.
       responses:
         '200':
           description: Success
@@ -2162,7 +2162,7 @@ paths:
   '/#X-Amz-Target=AmazonSSM.DescribeMaintenanceWindowsForTarget':
     post:
       operationId: DescribeMaintenanceWindowsForTarget
-      description: Retrieves information about the Maintenance Windows targets or tasks that an instance is associated with.
+      description: Retrieves information about the maintenance window targets or tasks that an instance is associated with.
       responses:
         '200':
           description: Success
@@ -2763,7 +2763,7 @@ paths:
   '/#X-Amz-Target=AmazonSSM.GetMaintenanceWindow':
     post:
       operationId: GetMaintenanceWindow
-      description: Retrieves a Maintenance Window.
+      description: Retrieves a maintenance window.
       responses:
         '200':
           description: Success
@@ -2800,7 +2800,7 @@ paths:
   '/#X-Amz-Target=AmazonSSM.GetMaintenanceWindowExecution':
     post:
       operationId: GetMaintenanceWindowExecution
-      description: Retrieves details about a specific task run as part of a Maintenance Window execution.
+      description: Retrieves details about a specific task run as part of a maintenance window execution.
       responses:
         '200':
           description: Success
@@ -2837,7 +2837,7 @@ paths:
   '/#X-Amz-Target=AmazonSSM.GetMaintenanceWindowExecutionTask':
     post:
       operationId: GetMaintenanceWindowExecutionTask
-      description: Retrieves the details about a specific task run as part of a Maintenance Window execution.
+      description: Retrieves the details about a specific task run as part of a maintenance window execution.
       responses:
         '200':
           description: Success
@@ -2874,7 +2874,7 @@ paths:
   '/#X-Amz-Target=AmazonSSM.GetMaintenanceWindowExecutionTaskInvocation':
     post:
       operationId: GetMaintenanceWindowExecutionTaskInvocation
-      description: 'Retrieves a task invocation. A task invocation is a specific task running on a specific target. Maintenance Windows report status for all invocations. '
+      description: 'Retrieves a task invocation. A task invocation is a specific task running on a specific target. maintenance windows report status for all invocations. '
       responses:
         '200':
           description: Success
@@ -2911,7 +2911,7 @@ paths:
   '/#X-Amz-Target=AmazonSSM.GetMaintenanceWindowTask':
     post:
       operationId: GetMaintenanceWindowTask
-      description: Lists the tasks in a Maintenance Window.
+      description: Lists the tasks in a maintenance window.
       responses:
         '200':
           description: Success
@@ -4226,7 +4226,7 @@ paths:
   '/#X-Amz-Target=AmazonSSM.RegisterTargetWithMaintenanceWindow':
     post:
       operationId: RegisterTargetWithMaintenanceWindow
-      description: Registers a target with a Maintenance Window.
+      description: Registers a target with a maintenance window.
       responses:
         '200':
           description: Success
@@ -4271,7 +4271,7 @@ paths:
   '/#X-Amz-Target=AmazonSSM.RegisterTaskWithMaintenanceWindow':
     post:
       operationId: RegisterTaskWithMaintenanceWindow
-      description: Adds a new task to a Maintenance Window.
+      description: Adds a new task to a maintenance window.
       responses:
         '200':
           description: Success
@@ -5018,7 +5018,7 @@ paths:
   '/#X-Amz-Target=AmazonSSM.UpdateMaintenanceWindow':
     post:
       operationId: UpdateMaintenanceWindow
-      description: Updates an existing Maintenance Window. Only specified parameters are modified.
+      description: Updates an existing maintenance window. Only specified parameters are modified.
       responses:
         '200':
           description: Success
@@ -5055,7 +5055,7 @@ paths:
   '/#X-Amz-Target=AmazonSSM.UpdateMaintenanceWindowTarget':
     post:
       operationId: UpdateMaintenanceWindowTarget
-      description: '<p>Modifies the target of an existing Maintenance Window. You can''t change the target type, but you can change the following:</p> <p>The target from being an ID target to a Tag target, or a Tag target to an ID target.</p> <p>IDs for an ID target.</p> <p>Tags for a Tag target.</p> <p>Owner.</p> <p>Name.</p> <p>Description.</p> <p>If a parameter is null, then the corresponding field is not modified.</p>'
+      description: '<p>Modifies the target of an existing maintenance window. You can''t change the target type, but you can change the following:</p> <p>The target from being an ID target to a Tag target, or a Tag target to an ID target.</p> <p>IDs for an ID target.</p> <p>Tags for a Tag target.</p> <p>Owner.</p> <p>Name.</p> <p>Description.</p> <p>If a parameter is null, then the corresponding field is not modified.</p>'
       responses:
         '200':
           description: Success
@@ -5092,7 +5092,7 @@ paths:
   '/#X-Amz-Target=AmazonSSM.UpdateMaintenanceWindowTask':
     post:
       operationId: UpdateMaintenanceWindowTask
-      description: '<p>Modifies a task assigned to a Maintenance Window. You can''t change the task type, but you can change the following values:</p> <ul> <li> <p>TaskARN. For example, you can change a RUN_COMMAND task from AWS-RunPowerShellScript to AWS-RunShellScript.</p> </li> <li> <p>ServiceRoleArn</p> </li> <li> <p>TaskInvocationParameters</p> </li> <li> <p>Priority</p> </li> <li> <p>MaxConcurrency</p> </li> <li> <p>MaxErrors</p> </li> </ul> <p>If a parameter is null, then the corresponding field is not modified. Also, if you set Replace to true, then all fields required by the <a>RegisterTaskWithMaintenanceWindow</a> action are required for this request. Optional fields that aren''t specified are set to null.</p>'
+      description: '<p>Modifies a task assigned to a maintenance window. You can''t change the task type, but you can change the following values:</p> <ul> <li> <p>TaskARN. For example, you can change a RUN_COMMAND task from AWS-RunPowerShellScript to AWS-RunShellScript.</p> </li> <li> <p>ServiceRoleArn</p> </li> <li> <p>TaskInvocationParameters</p> </li> <li> <p>Priority</p> </li> <li> <p>MaxConcurrency</p> </li> <li> <p>MaxErrors</p> </li> </ul> <p>If a parameter is null, then the corresponding field is not modified. Also, if you set Replace to true, then all fields required by the <a>RegisterTaskWithMaintenanceWindow</a> action are required for this request. Optional fields that aren''t specified are set to null.</p>'
       responses:
         '200':
           description: Success
@@ -5254,10 +5254,10 @@ definitions:
     properties:
       ResourceType:
         $ref: '#/definitions/ResourceTypeForTagging'
-        description: '<p>Specifies the type of resource you are tagging.</p> <note> <p>The ManagedInstance type for this API action is for on-premises managed instances. You must specify the the name of the managed instance in the following format: mi-ID_number. For example, mi-1a2b3c4d5e6f.</p> </note>'
+        description: '<p>Specifies the type of resource you are tagging.</p> <note> <p>The ManagedInstance type for this API action is for on-premises managed instances. You must specify the name of the managed instance in the following format: mi-ID_number. For example, mi-1a2b3c4d5e6f.</p> </note>'
       ResourceId:
         $ref: '#/definitions/ResourceId'
-        description: '<p>The resource ID you want to tag.</p> <p>Use the ID of the resource. Here are some examples:</p> <p>ManagedInstance: mi-012345abcde</p> <p>MaintenanceWindow: mw-012345abcde</p> <p>PatchBaseline: pb-012345abcde</p> <p>For the Document and Parameter values, use the name of the resource.</p> <note> <p>The ManagedInstance type for this API action is only for on-premises managed instances. You must specify the the name of the managed instance in the following format: mi-ID_number. For example, mi-1a2b3c4d5e6f.</p> </note>'
+        description: '<p>The resource ID you want to tag.</p> <p>Use the ID of the resource. Here are some examples:</p> <p>ManagedInstance: mi-012345abcde</p> <p>MaintenanceWindow: mw-012345abcde</p> <p>PatchBaseline: pb-012345abcde</p> <p>For the Document and Parameter values, use the name of the resource.</p> <note> <p>The ManagedInstance type for this API action is only for on-premises managed instances. You must specify the name of the managed instance in the following format: mi-ID_number. For example, mi-1a2b3c4d5e6f.</p> </note>'
       Tags:
         $ref: '#/definitions/TagList'
         description: '<p> One or more tags. The value parameter is required, but if you don''t want the tag to have a value, specify the parameter with no value, and we set the value to an empty string. </p> <important> <p>Do not enter personally identifiable information in this field.</p> </important>'
@@ -5290,7 +5290,7 @@ definitions:
     properties:
       WindowExecutionId:
         $ref: '#/definitions/MaintenanceWindowExecutionId'
-        description: The ID of the Maintenance Window execution that has been stopped.
+        description: The ID of the maintenance window execution that has been stopped.
   CancelMaintenanceWindowExecutionRequest:
     type: object
     required:
@@ -5298,7 +5298,7 @@ definitions:
     properties:
       WindowExecutionId:
         $ref: '#/definitions/MaintenanceWindowExecutionId'
-        description: The ID of the Maintenance Window execution to stop.
+        description: The ID of the maintenance window execution to stop.
   DoesNotExistException: {}
   CreateActivationResult:
     type: object
@@ -5354,7 +5354,7 @@ definitions:
         description: The instance ID.
       Parameters:
         $ref: '#/definitions/Parameters'
-        description: 'The parameters for the runtime configuration of the document. '
+        description: The parameters for the runtime configuration of the document.
       Targets:
         $ref: '#/definitions/Targets'
         description: The targets (either instances or tags) for the association.
@@ -5451,7 +5451,7 @@ definitions:
     properties:
       WindowId:
         $ref: '#/definitions/MaintenanceWindowId'
-        description: The ID of the created Maintenance Window.
+        description: The ID of the created maintenance window.
   CreateMaintenanceWindowRequest:
     type: object
     required:
@@ -5463,37 +5463,37 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/MaintenanceWindowName'
-        description: The name of the Maintenance Window.
+        description: The name of the maintenance window.
       Description:
         $ref: '#/definitions/MaintenanceWindowDescription'
-        description: 'An optional description for the Maintenance Window. We recommend specifying a description to help you organize your Maintenance Windows. '
+        description: 'An optional description for the maintenance window. We recommend specifying a description to help you organize your maintenance windows. '
       StartDate:
         $ref: '#/definitions/MaintenanceWindowStringDateTime'
-        description: 'The date and time, in ISO-8601 Extended format, for when you want the Maintenance Window to become active. StartDate allows you to delay activation of the Maintenance Window until the specified future date.'
+        description: 'The date and time, in ISO-8601 Extended format, for when you want the maintenance window to become active. StartDate allows you to delay activation of the maintenance window until the specified future date.'
       EndDate:
         $ref: '#/definitions/MaintenanceWindowStringDateTime'
-        description: 'The date and time, in ISO-8601 Extended format, for when you want the Maintenance Window to become inactive. EndDate allows you to set a date and time in the future when the Maintenance Window will no longer run.'
+        description: 'The date and time, in ISO-8601 Extended format, for when you want the maintenance window to become inactive. EndDate allows you to set a date and time in the future when the maintenance window will no longer run.'
       Schedule:
         $ref: '#/definitions/MaintenanceWindowSchedule'
-        description: The schedule of the Maintenance Window in the form of a cron or rate expression.
+        description: The schedule of the maintenance window in the form of a cron or rate expression.
       ScheduleTimezone:
         $ref: '#/definitions/MaintenanceWindowTimezone'
-        description: 'The time zone that the scheduled Maintenance Window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "etc/UTC", or "Asia/Seoul". For more information, see the <a href="https://www.iana.org/time-zones">Time Zone Database</a> on the IANA website.'
+        description: 'The time zone that the scheduled maintenance window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "etc/UTC", or "Asia/Seoul". For more information, see the <a href="https://www.iana.org/time-zones">Time Zone Database</a> on the IANA website.'
       Duration:
         $ref: '#/definitions/MaintenanceWindowDurationHours'
-        description: The duration of the Maintenance Window in hours.
+        description: The duration of the maintenance window in hours.
       Cutoff:
         $ref: '#/definitions/MaintenanceWindowCutoff'
-        description: The number of hours before the end of the Maintenance Window that Systems Manager stops scheduling new tasks for execution.
+        description: The number of hours before the end of the maintenance window that Systems Manager stops scheduling new tasks for execution.
       AllowUnassociatedTargets:
         $ref: '#/definitions/MaintenanceWindowAllowUnassociatedTargets'
-        description: '<p>Enables a Maintenance Window task to run on managed instances, even if you have not registered those instances as targets. If enabled, then you must specify the unregistered instances (by instance ID) when you register a task with the Maintenance Window </p> <p>If you don''t enable this option, then you must specify previously-registered targets when you register a task with the Maintenance Window. </p>'
+        description: '<p>Enables a maintenance window task to run on managed instances, even if you have not registered those instances as targets. If enabled, then you must specify the unregistered instances (by instance ID) when you register a task with the maintenance window.</p> <p>If you don''t enable this option, then you must specify previously-registered targets when you register a task with the maintenance window.</p>'
       ClientToken:
         $ref: '#/definitions/ClientToken'
         description: User-provided idempotency token.
       Tags:
         $ref: '#/definitions/TagList'
-        description: '<p>Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag a Maintenance Window to identify the type of tasks it will run, the types of targets, and the environment it will run in. In this case, you could specify the following key name/value pairs:</p> <ul> <li> <p> <code>Key=TaskType,Value=AgentUpdate</code> </p> </li> <li> <p> <code>Key=OS,Value=Windows</code> </p> </li> <li> <p> <code>Key=Environment,Value=Production</code> </p> </li> </ul> <note> <p>To add tags to an existing Maintenance Window, use the <a>AddTagsToResource</a> action.</p> </note>'
+        description: '<p>Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag a maintenance window to identify the type of tasks it will run, the types of targets, and the environment it will run in. In this case, you could specify the following key name/value pairs:</p> <ul> <li> <p> <code>Key=TaskType,Value=AgentUpdate</code> </p> </li> <li> <p> <code>Key=OS,Value=Windows</code> </p> </li> <li> <p> <code>Key=Environment,Value=Production</code> </p> </li> </ul> <note> <p>To add tags to an existing maintenance window, use the <a>AddTagsToResource</a> action.</p> </note>'
   IdempotentParameterMismatch: {}
   ResourceLimitExceededException: {}
   CreatePatchBaselineResult:
@@ -5628,7 +5628,7 @@ definitions:
         description: 'The name of the custom inventory type for which you want to delete either all previously collected data, or the inventory type itself. '
       SchemaDeleteOption:
         $ref: '#/definitions/InventorySchemaDeleteOption'
-        description: '<p>Use the <code>SchemaDeleteOption</code> to delete a custom inventory type (schema). If you don''t choose this option, the system only deletes existing inventory data associated with the custom inventory type. Choose one of the following options:</p> <p>DisableSchema: If you choose this option, the system ignores all inventory data for the specified version, and any earlier versions. To enable this schema again, you must call the <code>PutInventory</code> action for a version greater than the disbled version.</p> <p>DeleteSchema: This option deletes the specified custom type from the Inventory service. You can recreate the schema later, if you want.</p>'
+        description: '<p>Use the <code>SchemaDeleteOption</code> to delete a custom inventory type (schema). If you don''t choose this option, the system only deletes existing inventory data associated with the custom inventory type. Choose one of the following options:</p> <p>DisableSchema: If you choose this option, the system ignores all inventory data for the specified version, and any earlier versions. To enable this schema again, you must call the <code>PutInventory</code> action for a version greater than the disabled version.</p> <p>DeleteSchema: This option deletes the specified custom type from the Inventory service. You can recreate the schema later, if you want.</p>'
       DryRun:
         $ref: '#/definitions/DryRun'
         description: 'Use this option to view a summary of the deletion request without deleting any data or the data type. This option is useful when you only want to understand what will be deleted. Once you validate that the data to be deleted is what you intend to delete, you can run the same command without specifying the <code>DryRun</code> option.'
@@ -5644,7 +5644,7 @@ definitions:
     properties:
       WindowId:
         $ref: '#/definitions/MaintenanceWindowId'
-        description: The ID of the deleted Maintenance Window.
+        description: The ID of the deleted maintenance window.
   DeleteMaintenanceWindowRequest:
     type: object
     required:
@@ -5652,7 +5652,7 @@ definitions:
     properties:
       WindowId:
         $ref: '#/definitions/MaintenanceWindowId'
-        description: The ID of the Maintenance Window to delete.
+        description: The ID of the maintenance window to delete.
   DeleteParameterResult:
     type: object
     properties: {}
@@ -5746,7 +5746,7 @@ definitions:
     properties:
       WindowId:
         $ref: '#/definitions/MaintenanceWindowId'
-        description: The ID of the Maintenance Window the target was removed from.
+        description: The ID of the maintenance window the target was removed from.
       WindowTargetId:
         $ref: '#/definitions/MaintenanceWindowTargetId'
         description: The ID of the removed target definition.
@@ -5758,23 +5758,23 @@ definitions:
     properties:
       WindowId:
         $ref: '#/definitions/MaintenanceWindowId'
-        description: The ID of the Maintenance Window the target should be removed from.
+        description: The ID of the maintenance window the target should be removed from.
       WindowTargetId:
         $ref: '#/definitions/MaintenanceWindowTargetId'
         description: The ID of the target definition to remove.
       Safe:
         $ref: '#/definitions/Boolean'
-        description: 'The system checks if the target is being referenced by a task. If the target is being referenced, the system returns an error and does not deregister the target from the Maintenance Window.'
+        description: 'The system checks if the target is being referenced by a task. If the target is being referenced, the system returns an error and does not deregister the target from the maintenance window.'
   TargetInUseException: {}
   DeregisterTaskFromMaintenanceWindowResult:
     type: object
     properties:
       WindowId:
         $ref: '#/definitions/MaintenanceWindowId'
-        description: The ID of the Maintenance Window the task was removed from.
+        description: The ID of the maintenance window the task was removed from.
       WindowTaskId:
         $ref: '#/definitions/MaintenanceWindowTaskId'
-        description: The ID of the task removed from the Maintenance Window.
+        description: The ID of the task removed from the maintenance window.
   DeregisterTaskFromMaintenanceWindowRequest:
     type: object
     required:
@@ -5783,10 +5783,10 @@ definitions:
     properties:
       WindowId:
         $ref: '#/definitions/MaintenanceWindowId'
-        description: The ID of the Maintenance Window the task should be removed from.
+        description: The ID of the maintenance window the task should be removed from.
       WindowTaskId:
         $ref: '#/definitions/MaintenanceWindowTaskId'
-        description: The ID of the task to remove from the Maintenance Window.
+        description: The ID of the task to remove from the maintenance window.
   DescribeActivationsResult:
     type: object
     properties:
@@ -6211,10 +6211,10 @@ definitions:
     properties:
       WindowExecutionId:
         $ref: '#/definitions/MaintenanceWindowExecutionId'
-        description: The ID of the Maintenance Window execution the task is part of.
+        description: The ID of the maintenance window execution the task is part of.
       TaskId:
         $ref: '#/definitions/MaintenanceWindowExecutionTaskId'
-        description: The ID of the specific task in the Maintenance Window task that should be retrieved.
+        description: The ID of the specific task in the maintenance window task that should be retrieved.
       Filters:
         $ref: '#/definitions/MaintenanceWindowFilterList'
         description: 'Optional filters used to scope down the returned task invocations. The supported filter key is STATUS with the corresponding values PENDING, IN_PROGRESS, SUCCESS, FAILED, TIMED_OUT, CANCELLING, and CANCELLED.'
@@ -6240,7 +6240,7 @@ definitions:
     properties:
       WindowExecutionId:
         $ref: '#/definitions/MaintenanceWindowExecutionId'
-        description: The ID of the Maintenance Window execution whose task executions should be retrieved.
+        description: The ID of the maintenance window execution whose task executions should be retrieved.
       Filters:
         $ref: '#/definitions/MaintenanceWindowFilterList'
         description: 'Optional filters used to scope down the returned tasks. The supported filter key is STATUS with the corresponding values PENDING, IN_PROGRESS, SUCCESS, FAILED, TIMED_OUT, CANCELLING, and CANCELLED. '
@@ -6255,7 +6255,7 @@ definitions:
     properties:
       WindowExecutions:
         $ref: '#/definitions/MaintenanceWindowExecutionList'
-        description: Information about the Maintenance Windows execution.
+        description: Information about the maintenance window executions.
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.'
@@ -6266,7 +6266,7 @@ definitions:
     properties:
       WindowId:
         $ref: '#/definitions/MaintenanceWindowId'
-        description: The ID of the Maintenance Window whose executions should be retrieved.
+        description: The ID of the maintenance window whose executions should be retrieved.
       Filters:
         $ref: '#/definitions/MaintenanceWindowFilterList'
         description: '<p>Each entry in the array is a structure containing:</p> <p>Key (string, between 1 and 128 characters)</p> <p>Values (array of strings, each string is between 1 and 256 characters)</p> <p>The supported Keys are ExecutedBefore and ExecutedAfter with the value being a date/time string such as 2016-11-04T05:00:00Z.</p>'
@@ -6281,7 +6281,7 @@ definitions:
     properties:
       ScheduledWindowExecutions:
         $ref: '#/definitions/ScheduledWindowExecutionList'
-        description: Information about Maintenance Window executions scheduled for the specified time range.
+        description: Information about maintenance window executions scheduled for the specified time range.
       NextToken:
         $ref: '#/definitions/NextToken'
         description: The token for the next set of items to return. (You use this token in the next call.)
@@ -6290,7 +6290,7 @@ definitions:
     properties:
       WindowId:
         $ref: '#/definitions/MaintenanceWindowId'
-        description: The ID of the Maintenance Window to retrieve information about.
+        description: The ID of the maintenance window to retrieve information about.
       Targets:
         $ref: '#/definitions/Targets'
         description: The instance ID or key/value pair to retrieve information about.
@@ -6299,7 +6299,7 @@ definitions:
         description: 'The type of resource you want to retrieve information about. For example, "INSTANCE".'
       Filters:
         $ref: '#/definitions/PatchOrchestratorFilterList'
-        description: 'Filters used to limit the range of results. For example, you can limit Maintenance Window executions to only those scheduled before or after a certain date and time.'
+        description: 'Filters used to limit the range of results. For example, you can limit maintenance window executions to only those scheduled before or after a certain date and time.'
       MaxResults:
         $ref: '#/definitions/MaintenanceWindowSearchMaxResults'
         description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
@@ -6311,7 +6311,7 @@ definitions:
     properties:
       Targets:
         $ref: '#/definitions/MaintenanceWindowTargetList'
-        description: Information about the targets in the Maintenance Window.
+        description: Information about the targets in the maintenance window.
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.'
@@ -6322,7 +6322,7 @@ definitions:
     properties:
       WindowId:
         $ref: '#/definitions/MaintenanceWindowId'
-        description: The ID of the Maintenance Window whose targets should be retrieved.
+        description: The ID of the maintenance window whose targets should be retrieved.
       Filters:
         $ref: '#/definitions/MaintenanceWindowFilterList'
         description: 'Optional filters that can be used to narrow down the scope of the returned window targets. The supported filter keys are Type, WindowTargetId and OwnerInformation.'
@@ -6337,7 +6337,7 @@ definitions:
     properties:
       Tasks:
         $ref: '#/definitions/MaintenanceWindowTaskList'
-        description: Information about the tasks in the Maintenance Window.
+        description: Information about the tasks in the maintenance window.
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.'
@@ -6348,7 +6348,7 @@ definitions:
     properties:
       WindowId:
         $ref: '#/definitions/MaintenanceWindowId'
-        description: The ID of the Maintenance Window whose tasks should be retrieved.
+        description: The ID of the maintenance window whose tasks should be retrieved.
       Filters:
         $ref: '#/definitions/MaintenanceWindowFilterList'
         description: 'Optional filters used to narrow down the scope of the returned tasks. The supported filter keys are WindowTaskId, TaskArn, Priority, and TaskType.'
@@ -6363,7 +6363,7 @@ definitions:
     properties:
       WindowIdentities:
         $ref: '#/definitions/MaintenanceWindowIdentityList'
-        description: Information about the Maintenance Windows.
+        description: Information about the maintenance windows.
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.'
@@ -6372,7 +6372,7 @@ definitions:
     properties:
       Filters:
         $ref: '#/definitions/MaintenanceWindowFilterList'
-        description: Optional filters used to narrow down the scope of the returned Maintenance Windows. Supported filter keys are <b>Name</b> and <b>Enabled</b>.
+        description: Optional filters used to narrow down the scope of the returned maintenance windows. Supported filter keys are <b>Name</b> and <b>Enabled</b>.
       MaxResults:
         $ref: '#/definitions/MaintenanceWindowMaxResults'
         description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
@@ -6384,7 +6384,7 @@ definitions:
     properties:
       WindowIdentities:
         $ref: '#/definitions/MaintenanceWindowsForTargetList'
-        description: Information about the Maintenance Window targets and tasks an instance is associated with.
+        description: Information about the maintenance window targets and tasks an instance is associated with.
       NextToken:
         $ref: '#/definitions/NextToken'
         description: The token for the next set of items to return. (You use this token in the next call.)
@@ -6818,46 +6818,46 @@ definitions:
     properties:
       WindowId:
         $ref: '#/definitions/MaintenanceWindowId'
-        description: The ID of the created Maintenance Window.
+        description: The ID of the created maintenance window.
       Name:
         $ref: '#/definitions/MaintenanceWindowName'
-        description: The name of the Maintenance Window.
+        description: The name of the maintenance window.
       Description:
         $ref: '#/definitions/MaintenanceWindowDescription'
-        description: The description of the Maintenance Window.
+        description: The description of the maintenance window.
       StartDate:
         $ref: '#/definitions/MaintenanceWindowStringDateTime'
-        description: 'The date and time, in ISO-8601 Extended format, for when the Maintenance Window is scheduled to become active. The Maintenance Window will not run before this specified time.'
+        description: 'The date and time, in ISO-8601 Extended format, for when the maintenance window is scheduled to become active. The maintenance window will not run before this specified time.'
       EndDate:
         $ref: '#/definitions/MaintenanceWindowStringDateTime'
-        description: 'The date and time, in ISO-8601 Extended format, for when the Maintenance Window is scheduled to become inactive. The Maintenance Window will not run after this specified time.'
+        description: 'The date and time, in ISO-8601 Extended format, for when the maintenance window is scheduled to become inactive. The maintenance window will not run after this specified time.'
       Schedule:
         $ref: '#/definitions/MaintenanceWindowSchedule'
-        description: The schedule of the Maintenance Window in the form of a cron or rate expression.
+        description: The schedule of the maintenance window in the form of a cron or rate expression.
       ScheduleTimezone:
         $ref: '#/definitions/MaintenanceWindowTimezone'
-        description: 'The time zone that the scheduled Maintenance Window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "etc/UTC", or "Asia/Seoul". For more information, see the <a href="https://www.iana.org/time-zones">Time Zone Database</a> on the IANA website.'
+        description: 'The time zone that the scheduled maintenance window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "etc/UTC", or "Asia/Seoul". For more information, see the <a href="https://www.iana.org/time-zones">Time Zone Database</a> on the IANA website.'
       NextExecutionTime:
         $ref: '#/definitions/MaintenanceWindowStringDateTime'
-        description: 'The next time the Maintenance Window will actually run, taking into account any specified times for the Maintenance Window to become active or inactive.'
+        description: 'The next time the maintenance window will actually run, taking into account any specified times for the maintenance window to become active or inactive.'
       Duration:
         $ref: '#/definitions/MaintenanceWindowDurationHours'
-        description: The duration of the Maintenance Window in hours.
+        description: The duration of the maintenance window in hours.
       Cutoff:
         $ref: '#/definitions/MaintenanceWindowCutoff'
-        description: The number of hours before the end of the Maintenance Window that Systems Manager stops scheduling new tasks for execution.
+        description: The number of hours before the end of the maintenance window that Systems Manager stops scheduling new tasks for execution.
       AllowUnassociatedTargets:
         $ref: '#/definitions/MaintenanceWindowAllowUnassociatedTargets'
-        description: Whether targets must be registered with the Maintenance Window before tasks can be defined for those targets.
+        description: Whether targets must be registered with the maintenance window before tasks can be defined for those targets.
       Enabled:
         $ref: '#/definitions/MaintenanceWindowEnabled'
-        description: Whether the Maintenance Windows is enabled.
+        description: Indicates whether the maintenance window is enabled.
       CreatedDate:
         $ref: '#/definitions/DateTime'
-        description: The date the Maintenance Window was created.
+        description: The date the maintenance window was created.
       ModifiedDate:
         $ref: '#/definitions/DateTime'
-        description: The date the Maintenance Window was last modified.
+        description: The date the maintenance window was last modified.
   GetMaintenanceWindowRequest:
     type: object
     required:
@@ -6865,28 +6865,28 @@ definitions:
     properties:
       WindowId:
         $ref: '#/definitions/MaintenanceWindowId'
-        description: The ID of the desired Maintenance Window.
+        description: The ID of the maintenance window for which you want to retrieve information.
   GetMaintenanceWindowExecutionResult:
     type: object
     properties:
       WindowExecutionId:
         $ref: '#/definitions/MaintenanceWindowExecutionId'
-        description: The ID of the Maintenance Window execution.
+        description: The ID of the maintenance window execution.
       TaskIds:
         $ref: '#/definitions/MaintenanceWindowExecutionTaskIdList'
-        description: The ID of the task executions from the Maintenance Window execution.
+        description: The ID of the task executions from the maintenance window execution.
       Status:
         $ref: '#/definitions/MaintenanceWindowExecutionStatus'
-        description: The status of the Maintenance Window execution.
+        description: The status of the maintenance window execution.
       StatusDetails:
         $ref: '#/definitions/MaintenanceWindowExecutionStatusDetails'
         description: The details explaining the Status. Only available for certain status values.
       StartTime:
         $ref: '#/definitions/DateTime'
-        description: The time the Maintenance Window started running.
+        description: The time the maintenance window started running.
       EndTime:
         $ref: '#/definitions/DateTime'
-        description: The time the Maintenance Window finished running.
+        description: The time the maintenance window finished running.
   GetMaintenanceWindowExecutionRequest:
     type: object
     required:
@@ -6894,16 +6894,16 @@ definitions:
     properties:
       WindowExecutionId:
         $ref: '#/definitions/MaintenanceWindowExecutionId'
-        description: The ID of the Maintenance Window execution that includes the task.
+        description: The ID of the maintenance window execution that includes the task.
   GetMaintenanceWindowExecutionTaskResult:
     type: object
     properties:
       WindowExecutionId:
         $ref: '#/definitions/MaintenanceWindowExecutionId'
-        description: The ID of the Maintenance Window execution that includes the task.
+        description: The ID of the maintenance window execution that includes the task.
       TaskExecutionId:
         $ref: '#/definitions/MaintenanceWindowExecutionTaskId'
-        description: The ID of the specific task execution in the Maintenance Window task that was retrieved.
+        description: The ID of the specific task execution in the maintenance window task that was retrieved.
       TaskArn:
         $ref: '#/definitions/MaintenanceWindowTaskArn'
         description: The ARN of the task that ran.
@@ -6915,7 +6915,7 @@ definitions:
         description: The type of task that was run.
       TaskParameters:
         $ref: '#/definitions/MaintenanceWindowTaskParametersList'
-        description: '<p>The parameters passed to the task when it was run.</p> <note> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note> <p>The map has the following format:</p> <p>Key: string, between 1 and 255 characters</p> <p>Value: an array of strings, each string is between 1 and 255 characters</p>'
+        description: '<p>The parameters passed to the task when it was run.</p> <note> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported maintenance window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note> <p>The map has the following format:</p> <p>Key: string, between 1 and 255 characters</p> <p>Value: an array of strings, each string is between 1 and 255 characters</p>'
       Priority:
         $ref: '#/definitions/MaintenanceWindowTaskPriority'
         description: The priority of the task.
@@ -6945,16 +6945,16 @@ definitions:
     properties:
       WindowExecutionId:
         $ref: '#/definitions/MaintenanceWindowExecutionId'
-        description: The ID of the Maintenance Window execution that includes the task.
+        description: The ID of the maintenance window execution that includes the task.
       TaskId:
         $ref: '#/definitions/MaintenanceWindowExecutionTaskId'
-        description: The ID of the specific task execution in the Maintenance Window task that should be retrieved.
+        description: The ID of the specific task execution in the maintenance window task that should be retrieved.
   GetMaintenanceWindowExecutionTaskInvocationResult:
     type: object
     properties:
       WindowExecutionId:
         $ref: '#/definitions/MaintenanceWindowExecutionId'
-        description: The Maintenance Window execution ID.
+        description: The maintenance window execution ID.
       TaskExecutionId:
         $ref: '#/definitions/MaintenanceWindowExecutionTaskId'
         description: The task execution ID.
@@ -6966,7 +6966,7 @@ definitions:
         description: The execution ID.
       TaskType:
         $ref: '#/definitions/MaintenanceWindowTaskType'
-        description: 'Retrieves the task type for a Maintenance Window. Task types include the following: LAMBDA, STEP_FUNCTION, AUTOMATION, RUN_COMMAND.'
+        description: 'Retrieves the task type for a maintenance window. Task types include the following: LAMBDA, STEP_FUNCTION, AUTOMATION, RUN_COMMAND.'
       Parameters:
         $ref: '#/definitions/MaintenanceWindowExecutionTaskInvocationParameters'
         description: The parameters used at the time that the task ran.
@@ -6984,10 +6984,10 @@ definitions:
         description: The time that the task finished running on the target.
       OwnerInformation:
         $ref: '#/definitions/OwnerInformation'
-        description: 'User-provided value to be included in any CloudWatch events raised while running tasks for these targets in this Maintenance Window. '
+        description: 'User-provided value to be included in any CloudWatch events raised while running tasks for these targets in this maintenance window. '
       WindowTargetId:
         $ref: '#/definitions/MaintenanceWindowTaskTargetId'
-        description: The Maintenance Window target ID.
+        description: The maintenance window target ID.
   GetMaintenanceWindowExecutionTaskInvocationRequest:
     type: object
     required:
@@ -6997,10 +6997,10 @@ definitions:
     properties:
       WindowExecutionId:
         $ref: '#/definitions/MaintenanceWindowExecutionId'
-        description: The ID of the Maintenance Window execution for which the task is a part.
+        description: The ID of the maintenance window execution for which the task is a part.
       TaskId:
         $ref: '#/definitions/MaintenanceWindowExecutionTaskId'
-        description: 'The ID of the specific task in the Maintenance Window task that should be retrieved. '
+        description: 'The ID of the specific task in the maintenance window task that should be retrieved. '
       InvocationId:
         $ref: '#/definitions/MaintenanceWindowExecutionTaskInvocationId'
         description: The invocation ID to retrieve.
@@ -7009,10 +7009,10 @@ definitions:
     properties:
       WindowId:
         $ref: '#/definitions/MaintenanceWindowId'
-        description: The retrieved Maintenance Window ID.
+        description: The retrieved maintenance window ID.
       WindowTaskId:
         $ref: '#/definitions/MaintenanceWindowTaskId'
-        description: The retrieved Maintenance Window task ID.
+        description: The retrieved maintenance window task ID.
       Targets:
         $ref: '#/definitions/Targets'
         description: The targets where the task should run.
@@ -7021,13 +7021,13 @@ definitions:
         description: 'The resource that the task used during execution. For RUN_COMMAND and AUTOMATION task types, the TaskArn is the Systems Manager Document name/ARN. For LAMBDA tasks, the value is the function name/ARN. For STEP_FUNCTION tasks, the value is the state machine ARN.'
       ServiceRoleArn:
         $ref: '#/definitions/ServiceRole'
-        description: The IAM service role to assume during task execution.
+        description: The ARN of the IAM service role to use to publish Amazon Simple Notification Service (Amazon SNS) notifications for maintenance window Run Command tasks.
       TaskType:
         $ref: '#/definitions/MaintenanceWindowTaskType'
         description: The type of task to run.
       TaskParameters:
         $ref: '#/definitions/MaintenanceWindowTaskParameters'
-        description: '<p>The parameters to pass to the task when it runs.</p> <note> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>'
+        description: '<p>The parameters to pass to the task when it runs.</p> <note> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported maintenance window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>'
       TaskInvocationParameters:
         $ref: '#/definitions/MaintenanceWindowTaskInvocationParameters'
         description: The parameters to pass to the task when it runs.
@@ -7042,7 +7042,7 @@ definitions:
         description: The maximum number of errors allowed before the task stops being scheduled.
       LoggingInfo:
         $ref: '#/definitions/LoggingInfo'
-        description: '<p>The location in Amazon S3 where the task results are logged.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>'
+        description: '<p>The location in Amazon S3 where the task results are logged.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported maintenance window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>'
       Name:
         $ref: '#/definitions/MaintenanceWindowName'
         description: The retrieved task name.
@@ -7057,10 +7057,10 @@ definitions:
     properties:
       WindowId:
         $ref: '#/definitions/MaintenanceWindowId'
-        description: The Maintenance Window ID that includes the task to retrieve.
+        description: The maintenance window ID that includes the task to retrieve.
       WindowTaskId:
         $ref: '#/definitions/MaintenanceWindowTaskId'
-        description: The Maintenance Window task ID to retrieve.
+        description: The maintenance window task ID to retrieve.
   GetParameterResult:
     type: object
     properties:
@@ -7114,7 +7114,7 @@ definitions:
         description: A list of details for a parameter.
       InvalidParameters:
         $ref: '#/definitions/ParameterNameList'
-        description: A list of parameters that are not formatted correctly or do not run when executed.
+        description: A list of parameters that are not formatted correctly or do not run during an execution.
   GetParametersRequest:
     type: object
     required:
@@ -7747,7 +7747,7 @@ definitions:
     properties:
       WindowTargetId:
         $ref: '#/definitions/MaintenanceWindowTargetId'
-        description: The ID of the target definition in this Maintenance Window.
+        description: The ID of the target definition in this maintenance window.
   RegisterTargetWithMaintenanceWindowRequest:
     type: object
     required:
@@ -7757,16 +7757,16 @@ definitions:
     properties:
       WindowId:
         $ref: '#/definitions/MaintenanceWindowId'
-        description: The ID of the Maintenance Window the target should be registered with.
+        description: The ID of the maintenance window the target should be registered with.
       ResourceType:
         $ref: '#/definitions/MaintenanceWindowResourceType'
-        description: The type of target being registered with the Maintenance Window.
+        description: The type of target being registered with the maintenance window.
       Targets:
         $ref: '#/definitions/Targets'
-        description: '<p>The targets (either instances or tags). </p> <p>Specify instances using the following format:</p> <p> <code>Key=InstanceIds,Values=&lt;instance-id-1&gt;,&lt;instance-id-2&gt;</code> </p> <p>Specify tags using either of the following formats:</p> <p> <code>Key=tag:&lt;tag-key&gt;,Values=&lt;tag-value-1&gt;,&lt;tag-value-2&gt;</code> </p> <p> <code>Key=tag-key,Values=&lt;tag-key-1&gt;,&lt;tag-key-2&gt;</code> </p>'
+        description: '<p>The targets to register with the maintenance window. In other words, the instances to run commands on when the maintenance window runs.</p> <p>You can specify targets using either instance IDs or tags that have been applied to instances.</p> <p> <b>Example 1</b>: Specify instance IDs</p> <p> <code>Key=InstanceIds,Values=<i>instance-id-1</i>,<i>instance-id-2</i>,<i>instance-id-3</i> </code> </p> <p> <b>Example 2</b>: Use tag key-pairs applied to instances</p> <p> <code>Key=tag:<i>my-tag-key</i>,Values=<i>my-tag-value-1</i>,<i>my-tag-value-2</i> </code> </p> <p> <b>Example 3</b>: Use tag-keys applied to instances</p> <p> <code>Key=tag-key,Values=<i>my-tag-key-1</i>,<i>my-tag-key-2</i> </code> </p> <p>For more information about these examples formats, including the best use case for each one, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/mw-cli-tutorial-targets-examples.html">Examples: Register Targets with a Maintenance Window</a> in the <i>AWS Systems Manager User Guide</i>.</p>'
       OwnerInformation:
         $ref: '#/definitions/OwnerInformation'
-        description: User-provided value that will be included in any CloudWatch events raised while running tasks for these targets in this Maintenance Window.
+        description: User-provided value that will be included in any CloudWatch events raised while running tasks for these targets in this maintenance window.
       Name:
         $ref: '#/definitions/MaintenanceWindowName'
         description: An optional name for the target.
@@ -7781,7 +7781,7 @@ definitions:
     properties:
       WindowTaskId:
         $ref: '#/definitions/MaintenanceWindowTaskId'
-        description: The ID of the task in the Maintenance Window.
+        description: The ID of the task in the maintenance window.
   RegisterTaskWithMaintenanceWindowRequest:
     type: object
     required:
@@ -7794,28 +7794,28 @@ definitions:
     properties:
       WindowId:
         $ref: '#/definitions/MaintenanceWindowId'
-        description: The ID of the Maintenance Window the task should be added to.
+        description: The ID of the maintenance window the task should be added to.
       Targets:
         $ref: '#/definitions/Targets'
-        description: '<p>The targets (either instances or Maintenance Window targets).</p> <p>Specify instances using the following format: </p> <p> <code>Key=InstanceIds,Values=&lt;instance-id-1&gt;,&lt;instance-id-2&gt;</code> </p> <p>Specify Maintenance Window targets using the following format:</p> <p> <code>Key=&lt;WindowTargetIds&gt;,Values=&lt;window-target-id-1&gt;,&lt;window-target-id-2&gt;</code> </p>'
+        description: '<p>The targets (either instances or maintenance window targets).</p> <p>Specify instances using the following format: </p> <p> <code>Key=InstanceIds,Values=&lt;instance-id-1&gt;,&lt;instance-id-2&gt;</code> </p> <p>Specify maintenance window targets using the following format:</p> <p> <code>Key=&lt;WindowTargetIds&gt;,Values=&lt;window-target-id-1&gt;,&lt;window-target-id-2&gt;</code> </p>'
       TaskArn:
         $ref: '#/definitions/MaintenanceWindowTaskArn'
         description: The ARN of the task to run.
       ServiceRoleArn:
         $ref: '#/definitions/ServiceRole'
-        description: '<p>The role to assume when running the Maintenance Window task.</p> <p>If you do not specify a service role ARN, Systems Manager will use your account''s service-linked role for Systems Manager by default. If no service-linked role for Systems Manager exists in your account, it will be created when you run <code>RegisterTaskWithMaintenanceWindow</code> without specifying a service role ARN.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions">Service-Linked Role Permissions for Systems Manager</a> and <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role">Should I Use a Service-Linked Role or a Custom Service Role to Run Maintenance Window Tasks? </a> in the <i>AWS Systems Manager User Guide</i>.</p>'
+        description: '<p>The ARN of the IAM service role for Systems Manager to assume when running a maintenance window task. If you do not specify a service role ARN, Systems Manager uses your account''s service-linked role. If no service-linked role for Systems Manager exists in your account, it is created when you run <code>RegisterTaskWithMaintenanceWindow</code>.</p> <p>For more information, see the following topics in the in the <i>AWS Systems Manager User Guide</i>:</p> <ul> <li> <p> <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions">Service-Linked Role Permissions for Systems Manager</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role">Should I Use a Service-Linked Role or a Custom Service Role to Run Maintenance Window Tasks? </a> </p> </li> </ul>'
       TaskType:
         $ref: '#/definitions/MaintenanceWindowTaskType'
         description: The type of task being registered.
       TaskParameters:
         $ref: '#/definitions/MaintenanceWindowTaskParameters'
-        description: '<p>The parameters that should be passed to the task when it is run.</p> <note> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>'
+        description: '<p>The parameters that should be passed to the task when it is run.</p> <note> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported maintenance window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>'
       TaskInvocationParameters:
         $ref: '#/definitions/MaintenanceWindowTaskInvocationParameters'
         description: 'The parameters that the task should use during execution. Populate only the fields that match the task type. All other fields should be empty. '
       Priority:
         $ref: '#/definitions/MaintenanceWindowTaskPriority'
-        description: 'The priority of the task in the Maintenance Window, the lower the number the higher the priority. Tasks in a Maintenance Window are scheduled in priority order with tasks that have the same priority scheduled in parallel.'
+        description: 'The priority of the task in the maintenance window, the lower the number the higher the priority. Tasks in a maintenance window are scheduled in priority order with tasks that have the same priority scheduled in parallel.'
       MaxConcurrency:
         $ref: '#/definitions/MaxConcurrency'
         description: The maximum number of targets this task can be run for in parallel.
@@ -7824,7 +7824,7 @@ definitions:
         description: The maximum number of errors allowed before this task stops being scheduled.
       LoggingInfo:
         $ref: '#/definitions/LoggingInfo'
-        description: '<p>A structure containing information about an Amazon S3 bucket to write instance-level logs to. </p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>'
+        description: '<p>A structure containing information about an Amazon S3 bucket to write instance-level logs to. </p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported maintenance window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>'
       Name:
         $ref: '#/definitions/MaintenanceWindowName'
         description: An optional name for the task.
@@ -7847,10 +7847,10 @@ definitions:
     properties:
       ResourceType:
         $ref: '#/definitions/ResourceTypeForTagging'
-        description: '<p>The type of resource of which you want to remove a tag.</p> <note> <p>The ManagedInstance type for this API action is only for on-premises managed instances. You must specify the the name of the managed instance in the following format: mi-ID_number. For example, mi-1a2b3c4d5e6f.</p> </note>'
+        description: '<p>The type of resource of which you want to remove a tag.</p> <note> <p>The ManagedInstance type for this API action is only for on-premises managed instances. You must specify the name of the managed instance in the following format: mi-ID_number. For example, mi-1a2b3c4d5e6f.</p> </note>'
       ResourceId:
         $ref: '#/definitions/ResourceId'
-        description: '<p>The resource ID for which you want to remove tags. Use the ID of the resource. Here are some examples:</p> <p>ManagedInstance: mi-012345abcde</p> <p>MaintenanceWindow: mw-012345abcde</p> <p>PatchBaseline: pb-012345abcde</p> <p>For the Document and Parameter values, use the name of the resource.</p> <note> <p>The ManagedInstance type for this API action is only for on-premises managed instances. You must specify the the name of the managed instance in the following format: mi-ID_number. For example, mi-1a2b3c4d5e6f.</p> </note>'
+        description: '<p>The resource ID for which you want to remove tags. Use the ID of the resource. Here are some examples:</p> <p>ManagedInstance: mi-012345abcde</p> <p>MaintenanceWindow: mw-012345abcde</p> <p>PatchBaseline: pb-012345abcde</p> <p>For the Document and Parameter values, use the name of the resource.</p> <note> <p>The ManagedInstance type for this API action is only for on-premises managed instances. You must specify the name of the managed instance in the following format: mi-ID_number. For example, mi-1a2b3c4d5e6f.</p> </note>'
       TagKeys:
         $ref: '#/definitions/KeyList'
         description: Tag keys that you want to remove from the specified resource.
@@ -7904,10 +7904,10 @@ definitions:
         description: The unique identifier for an existing Automation execution that you want to send the signal to.
       SignalType:
         $ref: '#/definitions/SignalType'
-        description: 'The type of signal. Valid signal types include the following: Approve and Reject '
+        description: 'The type of signal to send to an Automation execution. '
       Payload:
         $ref: '#/definitions/AutomationParameterMap'
-        description: 'The data sent with the signal. The data schema depends on the type of signal used in the request. '
+        description: '<p>The data sent with the signal. The data schema depends on the type of signal used in the request.</p> <p>For <code>Approve</code> and <code>Reject</code> signal types, the payload is an optional comment that you can send with the signal type. For example:</p> <p> <code>Comment="Looks good"</code> </p> <p>For <code>StartStep</code> and <code>Resume</code> signal types, you must send the name of the Automation step to start or resume as the payload. For example:</p> <p> <code>StepName="step1"</code> </p> <p>For the <code>StopStep</code> signal type, you must send the step execution ID as the payload. For example:</p> <p> <code>StepExecutionId="97fff367-fc5a-4299-aed8-0123456789ab"</code> </p>'
   AutomationStepNotFoundException: {}
   InvalidAutomationSignalException: {}
   SendCommandResult:
@@ -7965,7 +7965,7 @@ definitions:
         description: 'The maximum number of errors allowed without the command failing. When the command fails one more time beyond the value of MaxErrors, the systems stops sending the command to additional targets. You can specify a number like 10 or a percentage like 10%. The default value is 0. For more information about how to use MaxErrors, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-maxerrors">Using Error Controls</a> in the <i>AWS Systems Manager User Guide</i>.'
       ServiceRoleArn:
         $ref: '#/definitions/ServiceRole'
-        description: 'The IAM role that Systems Manager uses to send notifications. '
+        description: The ARN of the IAM service role to use to publish Amazon Simple Notification Service (Amazon SNS) notifications for Run Command commands.
       NotificationConfig:
         $ref: '#/definitions/NotificationConfig'
         description: Configurations for sending notifications.
@@ -8225,37 +8225,37 @@ definitions:
     properties:
       WindowId:
         $ref: '#/definitions/MaintenanceWindowId'
-        description: The ID of the created Maintenance Window.
+        description: The ID of the created maintenance window.
       Name:
         $ref: '#/definitions/MaintenanceWindowName'
-        description: The name of the Maintenance Window.
+        description: The name of the maintenance window.
       Description:
         $ref: '#/definitions/MaintenanceWindowDescription'
         description: An optional description of the update.
       StartDate:
         $ref: '#/definitions/MaintenanceWindowStringDateTime'
-        description: 'The date and time, in ISO-8601 Extended format, for when the Maintenance Window is scheduled to become active. The Maintenance Window will not run before this specified time.'
+        description: 'The date and time, in ISO-8601 Extended format, for when the maintenance window is scheduled to become active. The maintenance window will not run before this specified time.'
       EndDate:
         $ref: '#/definitions/MaintenanceWindowStringDateTime'
-        description: 'The date and time, in ISO-8601 Extended format, for when the Maintenance Window is scheduled to become inactive. The Maintenance Window will not run after this specified time.'
+        description: 'The date and time, in ISO-8601 Extended format, for when the maintenance window is scheduled to become inactive. The maintenance window will not run after this specified time.'
       Schedule:
         $ref: '#/definitions/MaintenanceWindowSchedule'
-        description: The schedule of the Maintenance Window in the form of a cron or rate expression.
+        description: The schedule of the maintenance window in the form of a cron or rate expression.
       ScheduleTimezone:
         $ref: '#/definitions/MaintenanceWindowTimezone'
-        description: 'The time zone that the scheduled Maintenance Window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "etc/UTC", or "Asia/Seoul". For more information, see the <a href="https://www.iana.org/time-zones">Time Zone Database</a> on the IANA website.'
+        description: 'The time zone that the scheduled maintenance window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "etc/UTC", or "Asia/Seoul". For more information, see the <a href="https://www.iana.org/time-zones">Time Zone Database</a> on the IANA website.'
       Duration:
         $ref: '#/definitions/MaintenanceWindowDurationHours'
-        description: The duration of the Maintenance Window in hours.
+        description: The duration of the maintenance window in hours.
       Cutoff:
         $ref: '#/definitions/MaintenanceWindowCutoff'
-        description: The number of hours before the end of the Maintenance Window that Systems Manager stops scheduling new tasks for execution.
+        description: The number of hours before the end of the maintenance window that Systems Manager stops scheduling new tasks for execution.
       AllowUnassociatedTargets:
         $ref: '#/definitions/MaintenanceWindowAllowUnassociatedTargets'
-        description: Whether targets must be registered with the Maintenance Window before tasks can be defined for those targets.
+        description: Whether targets must be registered with the maintenance window before tasks can be defined for those targets.
       Enabled:
         $ref: '#/definitions/MaintenanceWindowEnabled'
-        description: Whether the Maintenance Window is enabled.
+        description: Whether the maintenance window is enabled.
   UpdateMaintenanceWindowRequest:
     type: object
     required:
@@ -8263,37 +8263,37 @@ definitions:
     properties:
       WindowId:
         $ref: '#/definitions/MaintenanceWindowId'
-        description: The ID of the Maintenance Window to update.
+        description: The ID of the maintenance window to update.
       Name:
         $ref: '#/definitions/MaintenanceWindowName'
-        description: The name of the Maintenance Window.
+        description: The name of the maintenance window.
       Description:
         $ref: '#/definitions/MaintenanceWindowDescription'
         description: An optional description for the update request.
       StartDate:
         $ref: '#/definitions/MaintenanceWindowStringDateTime'
-        description: 'The time zone that the scheduled Maintenance Window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "etc/UTC", or "Asia/Seoul". For more information, see the <a href="https://www.iana.org/time-zones">Time Zone Database</a> on the IANA website.'
+        description: 'The time zone that the scheduled maintenance window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "etc/UTC", or "Asia/Seoul". For more information, see the <a href="https://www.iana.org/time-zones">Time Zone Database</a> on the IANA website.'
       EndDate:
         $ref: '#/definitions/MaintenanceWindowStringDateTime'
-        description: 'The date and time, in ISO-8601 Extended format, for when you want the Maintenance Window to become inactive. EndDate allows you to set a date and time in the future when the Maintenance Window will no longer run.'
+        description: 'The date and time, in ISO-8601 Extended format, for when you want the maintenance window to become inactive. EndDate allows you to set a date and time in the future when the maintenance window will no longer run.'
       Schedule:
         $ref: '#/definitions/MaintenanceWindowSchedule'
-        description: The schedule of the Maintenance Window in the form of a cron or rate expression.
+        description: The schedule of the maintenance window in the form of a cron or rate expression.
       ScheduleTimezone:
         $ref: '#/definitions/MaintenanceWindowTimezone'
-        description: 'The time zone that the scheduled Maintenance Window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "etc/UTC", or "Asia/Seoul". For more information, see the <a href="https://www.iana.org/time-zones">Time Zone Database</a> on the IANA website.'
+        description: 'The time zone that the scheduled maintenance window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "etc/UTC", or "Asia/Seoul". For more information, see the <a href="https://www.iana.org/time-zones">Time Zone Database</a> on the IANA website.'
       Duration:
         $ref: '#/definitions/MaintenanceWindowDurationHours'
-        description: The duration of the Maintenance Window in hours.
+        description: The duration of the maintenance window in hours.
       Cutoff:
         $ref: '#/definitions/MaintenanceWindowCutoff'
-        description: The number of hours before the end of the Maintenance Window that Systems Manager stops scheduling new tasks for execution.
+        description: The number of hours before the end of the maintenance window that Systems Manager stops scheduling new tasks for execution.
       AllowUnassociatedTargets:
         $ref: '#/definitions/MaintenanceWindowAllowUnassociatedTargets'
-        description: Whether targets must be registered with the Maintenance Window before tasks can be defined for those targets.
+        description: Whether targets must be registered with the maintenance window before tasks can be defined for those targets.
       Enabled:
         $ref: '#/definitions/MaintenanceWindowEnabled'
-        description: Whether the Maintenance Window is enabled.
+        description: Whether the maintenance window is enabled.
       Replace:
         $ref: '#/definitions/Boolean'
         description: 'If True, then all fields that are required by the CreateMaintenanceWindow action are also required for this API request. Optional fields that are not specified are set to null. '
@@ -8302,7 +8302,7 @@ definitions:
     properties:
       WindowId:
         $ref: '#/definitions/MaintenanceWindowId'
-        description: The Maintenance Window ID specified in the update request.
+        description: The maintenance window ID specified in the update request.
       WindowTargetId:
         $ref: '#/definitions/MaintenanceWindowTargetId'
         description: The target ID specified in the update request.
@@ -8326,7 +8326,7 @@ definitions:
     properties:
       WindowId:
         $ref: '#/definitions/MaintenanceWindowId'
-        description: The Maintenance Window ID with which to modify the target.
+        description: The maintenance window ID with which to modify the target.
       WindowTargetId:
         $ref: '#/definitions/MaintenanceWindowTargetId'
         description: The target ID to modify.
@@ -8335,7 +8335,7 @@ definitions:
         description: The targets to add or replace.
       OwnerInformation:
         $ref: '#/definitions/OwnerInformation'
-        description: User-provided value that will be included in any CloudWatch events raised while running tasks for these targets in this Maintenance Window.
+        description: User-provided value that will be included in any CloudWatch events raised while running tasks for these targets in this maintenance window.
       Name:
         $ref: '#/definitions/MaintenanceWindowName'
         description: A name for the update.
@@ -8350,10 +8350,10 @@ definitions:
     properties:
       WindowId:
         $ref: '#/definitions/MaintenanceWindowId'
-        description: The ID of the Maintenance Window that was updated.
+        description: The ID of the maintenance window that was updated.
       WindowTaskId:
         $ref: '#/definitions/MaintenanceWindowTaskId'
-        description: The task ID of the Maintenance Window that was updated.
+        description: The task ID of the maintenance window that was updated.
       Targets:
         $ref: '#/definitions/Targets'
         description: The updated target values.
@@ -8362,10 +8362,10 @@ definitions:
         description: The updated task ARN value.
       ServiceRoleArn:
         $ref: '#/definitions/ServiceRole'
-        description: The updated service role ARN value.
+        description: The ARN of the IAM service role to use to publish Amazon Simple Notification Service (Amazon SNS) notifications for maintenance window Run Command tasks.
       TaskParameters:
         $ref: '#/definitions/MaintenanceWindowTaskParameters'
-        description: '<p>The updated parameter values.</p> <note> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>'
+        description: '<p>The updated parameter values.</p> <note> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported maintenance window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>'
       TaskInvocationParameters:
         $ref: '#/definitions/MaintenanceWindowTaskInvocationParameters'
         description: The updated parameter values.
@@ -8380,7 +8380,7 @@ definitions:
         description: The updated MaxErrors value.
       LoggingInfo:
         $ref: '#/definitions/LoggingInfo'
-        description: '<p>The updated logging information in Amazon S3.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>'
+        description: '<p>The updated logging information in Amazon S3.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported maintenance window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>'
       Name:
         $ref: '#/definitions/MaintenanceWindowName'
         description: The updated task name.
@@ -8395,7 +8395,7 @@ definitions:
     properties:
       WindowId:
         $ref: '#/definitions/MaintenanceWindowId'
-        description: The Maintenance Window ID that contains the task to modify.
+        description: The maintenance window ID that contains the task to modify.
       WindowTaskId:
         $ref: '#/definitions/MaintenanceWindowTaskId'
         description: The task ID to modify.
@@ -8407,10 +8407,10 @@ definitions:
         description: The task ARN to modify.
       ServiceRoleArn:
         $ref: '#/definitions/ServiceRole'
-        description: '<p>The IAM service role ARN to modify. The system assumes this role during task execution.</p> <p>If you do not specify a service role ARN, Systems Manager will use your account''s service-linked role for Systems Manager by default. If no service-linked role for Systems Manager exists in your account, it will be created when you run <code>RegisterTaskWithMaintenanceWindow</code> without specifying a service role ARN.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions">Service-Linked Role Permissions for Systems Manager</a> and <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role">Should I Use a Service-Linked Role or a Custom Service Role to Run Maintenance Window Tasks? </a> in the <i>AWS Systems Manager User Guide</i>.</p>'
+        description: '<p>The ARN of the IAM service role for Systems Manager to assume when running a maintenance window task. If you do not specify a service role ARN, Systems Manager uses your account''s service-linked role. If no service-linked role for Systems Manager exists in your account, it is created when you run <code>RegisterTaskWithMaintenanceWindow</code>.</p> <p>For more information, see the following topics in the in the <i>AWS Systems Manager User Guide</i>:</p> <ul> <li> <p> <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions">Service-Linked Role Permissions for Systems Manager</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role">Should I Use a Service-Linked Role or a Custom Service Role to Run Maintenance Window Tasks? </a> </p> </li> </ul>'
       TaskParameters:
         $ref: '#/definitions/MaintenanceWindowTaskParameters'
-        description: '<p>The parameters to modify.</p> <note> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note> <p>The map has the following format:</p> <p>Key: string, between 1 and 255 characters</p> <p>Value: an array of strings, each string is between 1 and 255 characters</p>'
+        description: '<p>The parameters to modify.</p> <note> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported maintenance window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note> <p>The map has the following format:</p> <p>Key: string, between 1 and 255 characters</p> <p>Value: an array of strings, each string is between 1 and 255 characters</p>'
       TaskInvocationParameters:
         $ref: '#/definitions/MaintenanceWindowTaskInvocationParameters'
         description: The parameters that the task should use during execution. Populate only the fields that match the task type. All other fields should be empty.
@@ -8425,7 +8425,7 @@ definitions:
         description: The new <code>MaxErrors</code> value to specify. <code>MaxErrors</code> is the maximum number of errors that are allowed before the task stops being scheduled.
       LoggingInfo:
         $ref: '#/definitions/LoggingInfo'
-        description: '<p>The new logging location in Amazon S3 to specify.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>'
+        description: '<p>The new logging location in Amazon S3 to specify.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported maintenance window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>'
       Name:
         $ref: '#/definitions/MaintenanceWindowName'
         description: The new task name to specify.
@@ -9605,10 +9605,10 @@ definitions:
     properties:
       NotificationArn:
         $ref: '#/definitions/NotificationArn'
-        description: An Amazon Resource Name (ARN) for a Simple Notification Service (SNS) topic. Run Command pushes notifications about command status changes to this topic.
+        description: An Amazon Resource Name (ARN) for an Amazon Simple Notification Service (Amazon SNS) topic. Run Command pushes notifications about command status changes to this topic.
       NotificationEvents:
         $ref: '#/definitions/NotificationEventList'
-        description: 'The different events for which you can receive notifications. These events include the following: All (events), InProgress, Success, TimedOut, Cancelled, Failed. To learn more about these events, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/rc-sns-notifications.html">Configuring Amazon SNS Notifications for Run Command</a> in the <i>AWS Systems Manager User Guide</i>.'
+        description: 'The different events for which you can receive notifications. These events include the following: All (events), InProgress, Success, TimedOut, Cancelled, Failed. To learn more about these events, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/monitoring-sns-notifications.html">Configuring Amazon SNS Notifications for AWS Systems Manager</a> in the <i>AWS Systems Manager User Guide</i>.'
       NotificationType:
         $ref: '#/definitions/NotificationType'
         description: 'Command: Receive notification when the status of a command changes. Invocation: For commands sent to multiple instances, receive notification on a per-instance basis when the status of a command changes. '
@@ -10355,7 +10355,7 @@ definitions:
         description: The AWS Region with the Amazon S3 bucket targeted by the Resource Data Sync.
       AWSKMSKeyARN:
         $ref: '#/definitions/ResourceDataSyncAWSKMSKeyARN'
-        description: The ARN of an encryption key for a destination in Amazon S3. Must belong to the same region as the destination Amazon S3 bucket.
+        description: The ARN of an encryption key for a destination in Amazon S3. Must belong to the same Region as the destination Amazon S3 bucket.
     description: Information about the target Amazon S3 bucket for the Resource Data Sync.
   DefaultBaseline:
     type: boolean
@@ -11103,7 +11103,7 @@ definitions:
       S3Region:
         $ref: '#/definitions/S3Region'
         description: The region where the Amazon S3 bucket is located.
-    description: '<p>Information about an Amazon S3 bucket to write instance-level logs to.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>'
+    description: '<p>Information about an Amazon S3 bucket to write instance-level logs to.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported maintenance window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>'
   ParameterHistoryList:
     type: array
     items:
@@ -11260,7 +11260,7 @@ definitions:
         description: The name of the association.
       DocumentVersion:
         $ref: '#/definitions/DocumentVersion'
-        description: The association document verions.
+        description: The association document versions.
       AssociationVersion:
         $ref: '#/definitions/AssociationVersion'
         description: The version of the association applied to the instance.
@@ -11594,7 +11594,7 @@ definitions:
         description: Information about the status.
       DeletionSummary:
         $ref: '#/definitions/InventoryDeletionSummary'
-        description: 'Information about the delete operation. For more information about this summary, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-delete.html#sysman-inventory-delete-summary">Understanding the Delete Inventory Summary</a> in the <i>AWS Systems Manager User Guide</i>.'
+        description: 'Information about the delete operation. For more information about this summary, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-custom.html#sysman-inventory-delete">Understanding the Delete Inventory Summary</a> in the <i>AWS Systems Manager User Guide</i>.'
       LastStatusUpdateTime:
         $ref: '#/definitions/InventoryDeletionLastStatusUpdateTime'
         description: The UTC timestamp of when the last status report.
@@ -11867,17 +11867,17 @@ definitions:
         description: The version of an Automation document to use during task execution.
       Parameters:
         $ref: '#/definitions/AutomationParameterMap'
-        description: '<p>The parameters for the AUTOMATION task.</p> <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p>For AUTOMATION task types, Systems Manager ignores any values specified for these parameters.</p> </note>'
+        description: '<p>The parameters for the AUTOMATION task.</p> <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported maintenance window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported maintenance window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p>For AUTOMATION task types, Systems Manager ignores any values specified for these parameters.</p> </note>'
     description: The parameters for an AUTOMATION task type.
   MaintenanceWindowExecution:
     type: object
     properties:
       WindowId:
         $ref: '#/definitions/MaintenanceWindowId'
-        description: The ID of the Maintenance Window.
+        description: The ID of the maintenance window.
       WindowExecutionId:
         $ref: '#/definitions/MaintenanceWindowExecutionId'
-        description: The ID of the Maintenance Window execution.
+        description: The ID of the maintenance window execution.
       Status:
         $ref: '#/definitions/MaintenanceWindowExecutionStatus'
         description: The status of the execution.
@@ -11890,16 +11890,16 @@ definitions:
       EndTime:
         $ref: '#/definitions/DateTime'
         description: The time the execution finished.
-    description: 'Describes the information about an execution of a Maintenance Window. '
+    description: 'Describes the information about an execution of a maintenance window. '
   MaintenanceWindowExecutionTaskIdentity:
     type: object
     properties:
       WindowExecutionId:
         $ref: '#/definitions/MaintenanceWindowExecutionId'
-        description: The ID of the Maintenance Window execution that ran the task.
+        description: The ID of the maintenance window execution that ran the task.
       TaskExecutionId:
         $ref: '#/definitions/MaintenanceWindowExecutionTaskId'
-        description: The ID of the specific task execution in the Maintenance Window execution.
+        description: The ID of the specific task execution in the maintenance window execution.
       Status:
         $ref: '#/definitions/MaintenanceWindowExecutionStatus'
         description: The status of the task execution.
@@ -11918,16 +11918,16 @@ definitions:
       TaskType:
         $ref: '#/definitions/MaintenanceWindowTaskType'
         description: The type of task that ran.
-    description: Information about a task execution performed as part of a Maintenance Window execution.
+    description: Information about a task execution performed as part of a maintenance window execution.
   MaintenanceWindowExecutionTaskInvocationIdentity:
     type: object
     properties:
       WindowExecutionId:
         $ref: '#/definitions/MaintenanceWindowExecutionId'
-        description: The ID of the Maintenance Window execution that ran the task.
+        description: The ID of the maintenance window execution that ran the task.
       TaskExecutionId:
         $ref: '#/definitions/MaintenanceWindowExecutionTaskId'
-        description: The ID of the specific task execution in the Maintenance Window execution.
+        description: The ID of the specific task execution in the maintenance window execution.
       InvocationId:
         $ref: '#/definitions/MaintenanceWindowExecutionTaskInvocationId'
         description: The ID of the task invocation.
@@ -11954,11 +11954,11 @@ definitions:
         description: The time the invocation finished.
       OwnerInformation:
         $ref: '#/definitions/OwnerInformation'
-        description: User-provided value that was specified when the target was registered with the Maintenance Window. This was also included in any CloudWatch events raised during the task invocation.
+        description: User-provided value that was specified when the target was registered with the maintenance window. This was also included in any CloudWatch events raised during the task invocation.
       WindowTargetId:
         $ref: '#/definitions/MaintenanceWindowTaskTargetId'
-        description: The ID of the target definition in this Maintenance Window the invocation was performed for.
-    description: Describes the information about a task invocation for a particular target as part of a task execution performed as part of a Maintenance Window execution.
+        description: The ID of the target definition in this maintenance window the invocation was performed for.
+    description: Describes the information about a task invocation for a particular target as part of a task execution performed as part of a maintenance window execution.
   MaintenanceWindowFilterKey:
     type: string
     minLength: 1
@@ -11986,48 +11986,48 @@ definitions:
     properties:
       WindowId:
         $ref: '#/definitions/MaintenanceWindowId'
-        description: The ID of the Maintenance Window.
+        description: The ID of the maintenance window.
       Name:
         $ref: '#/definitions/MaintenanceWindowName'
-        description: The name of the Maintenance Window.
+        description: The name of the maintenance window.
       Description:
         $ref: '#/definitions/MaintenanceWindowDescription'
-        description: A description of the Maintenance Window.
+        description: A description of the maintenance window.
       Enabled:
         $ref: '#/definitions/MaintenanceWindowEnabled'
-        description: Whether the Maintenance Window is enabled.
+        description: Indicates whether the maintenance window is enabled.
       Duration:
         $ref: '#/definitions/MaintenanceWindowDurationHours'
-        description: The duration of the Maintenance Window in hours.
+        description: The duration of the maintenance window in hours.
       Cutoff:
         $ref: '#/definitions/MaintenanceWindowCutoff'
-        description: The number of hours before the end of the Maintenance Window that Systems Manager stops scheduling new tasks for execution.
+        description: The number of hours before the end of the maintenance window that Systems Manager stops scheduling new tasks for execution.
       Schedule:
         $ref: '#/definitions/MaintenanceWindowSchedule'
-        description: The schedule of the Maintenance Window in the form of a cron or rate expression.
+        description: The schedule of the maintenance window in the form of a cron or rate expression.
       ScheduleTimezone:
         $ref: '#/definitions/MaintenanceWindowTimezone'
-        description: 'The time zone that the scheduled Maintenance Window executions are based on, in Internet Assigned Numbers Authority (IANA) format.'
+        description: 'The time zone that the scheduled maintenance window executions are based on, in Internet Assigned Numbers Authority (IANA) format.'
       EndDate:
         $ref: '#/definitions/MaintenanceWindowStringDateTime'
-        description: 'The date and time, in ISO-8601 Extended format, for when the Maintenance Window is scheduled to become inactive.'
+        description: 'The date and time, in ISO-8601 Extended format, for when the maintenance window is scheduled to become inactive.'
       StartDate:
         $ref: '#/definitions/MaintenanceWindowStringDateTime'
-        description: 'The date and time, in ISO-8601 Extended format, for when the Maintenance Window is scheduled to become active.'
+        description: 'The date and time, in ISO-8601 Extended format, for when the maintenance window is scheduled to become active.'
       NextExecutionTime:
         $ref: '#/definitions/MaintenanceWindowStringDateTime'
-        description: 'The next time the Maintenance Window will actually run, taking into account any specified times for the Maintenance Window to become active or inactive.'
-    description: Information about the Maintenance Window.
+        description: 'The next time the maintenance window will actually run, taking into account any specified times for the maintenance window to become active or inactive.'
+    description: Information about the maintenance window.
   MaintenanceWindowIdentityForTarget:
     type: object
     properties:
       WindowId:
         $ref: '#/definitions/MaintenanceWindowId'
-        description: The ID of the Maintenance Window.
+        description: The ID of the maintenance window.
       Name:
         $ref: '#/definitions/MaintenanceWindowName'
-        description: The name of the Maintenance Window.
-    description: The Maintenance Window to which the specified target belongs.
+        description: The name of the maintenance window.
+    description: The maintenance window to which the specified target belongs.
   MaintenanceWindowLambdaClientContext:
     type: string
     minLength: 1
@@ -12052,7 +12052,7 @@ definitions:
       Payload:
         $ref: '#/definitions/MaintenanceWindowLambdaPayload'
         description: JSON to provide to your Lambda function as input.
-    description: '<p>The parameters for a LAMBDA task type.</p> <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p>For Lambda tasks, Systems Manager ignores any values specified for TaskParameters and LoggingInfo.</p> </note>'
+    description: '<p>The parameters for a LAMBDA task type.</p> <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported maintenance window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported maintenance window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p>For Lambda tasks, Systems Manager ignores any values specified for TaskParameters and LoggingInfo.</p> </note>'
   TimeoutSeconds:
     type: integer
     minimum: 30
@@ -12062,7 +12062,7 @@ definitions:
     properties:
       Comment:
         $ref: '#/definitions/Comment'
-        description: Information about the command(s) to run.
+        description: Information about the commands to run.
       DocumentHash:
         $ref: '#/definitions/DocumentHash'
         description: The SHA-256 or SHA-1 hash created by the system when the document was created. SHA-1 hashes have been deprecated.
@@ -12083,11 +12083,11 @@ definitions:
         description: The parameters for the RUN_COMMAND task execution.
       ServiceRoleArn:
         $ref: '#/definitions/ServiceRole'
-        description: The IAM service role to assume during task execution.
+        description: The ARN of the IAM service role to use to publish Amazon Simple Notification Service (Amazon SNS) notifications for maintenance window Run Command tasks.
       TimeoutSeconds:
         $ref: '#/definitions/TimeoutSeconds'
         description: 'If this time is reached and the command has not already started running, it doesn''t run.'
-    description: '<p>The parameters for a RUN_COMMAND task type.</p> <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p>For Run Command tasks, Systems Manager uses specified values for <code>TaskParameters</code> and <code>LoggingInfo</code> only if no values are specified for <code>TaskInvocationParameters</code>. </p> </note>'
+    description: '<p>The parameters for a RUN_COMMAND task type.</p> <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported maintenance window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported maintenance window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p>For Run Command tasks, Systems Manager uses specified values for <code>TaskParameters</code> and <code>LoggingInfo</code> only if no values are specified for <code>TaskInvocationParameters</code>. </p> </note>'
   MaintenanceWindowStepFunctionsInput:
     type: string
     maxLength: 4096
@@ -12105,38 +12105,38 @@ definitions:
       Name:
         $ref: '#/definitions/MaintenanceWindowStepFunctionsName'
         description: The name of the STEP_FUNCTION task.
-    description: '<p>The parameters for a STEP_FUNCTION task.</p> <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p>For Step Functions tasks, Systems Manager ignores any values specified for <code>TaskParameters</code> and <code>LoggingInfo</code>.</p> </note>'
+    description: '<p>The parameters for a STEP_FUNCTION task.</p> <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported maintenance window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported maintenance window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p>For Step Functions tasks, Systems Manager ignores any values specified for <code>TaskParameters</code> and <code>LoggingInfo</code>.</p> </note>'
   MaintenanceWindowTarget:
     type: object
     properties:
       WindowId:
         $ref: '#/definitions/MaintenanceWindowId'
-        description: The ID of the Maintenance Window to register the target with.
+        description: The ID of the maintenance window to register the target with.
       WindowTargetId:
         $ref: '#/definitions/MaintenanceWindowTargetId'
         description: The ID of the target.
       ResourceType:
         $ref: '#/definitions/MaintenanceWindowResourceType'
-        description: The type of target that is being registered with the Maintenance Window.
+        description: The type of target that is being registered with the maintenance window.
       Targets:
         $ref: '#/definitions/Targets'
         description: '<p>The targets, either instances or tags.</p> <p>Specify instances using the following format:</p> <p> <code>Key=instanceids,Values=&lt;instanceid1&gt;,&lt;instanceid2&gt;</code> </p> <p>Tags are specified using the following format:</p> <p> <code>Key=&lt;tag name&gt;,Values=&lt;tag value&gt;</code>.</p>'
       OwnerInformation:
         $ref: '#/definitions/OwnerInformation'
-        description: A user-provided value that will be included in any CloudWatch events that are raised while running tasks for these targets in this Maintenance Window.
+        description: A user-provided value that will be included in any CloudWatch events that are raised while running tasks for these targets in this maintenance window.
       Name:
         $ref: '#/definitions/MaintenanceWindowName'
-        description: The target name.
+        description: The name for the maintenance window target.
       Description:
         $ref: '#/definitions/MaintenanceWindowDescription'
         description: A description for the target.
-    description: The target registered with the Maintenance Window.
+    description: The target registered with the maintenance window.
   MaintenanceWindowTask:
     type: object
     properties:
       WindowId:
         $ref: '#/definitions/MaintenanceWindowId'
-        description: The ID of the Maintenance Window where the task is registered.
+        description: The ID of the maintenance window where the task is registered.
       WindowTaskId:
         $ref: '#/definitions/MaintenanceWindowTaskId'
         description: The task ID.
@@ -12151,16 +12151,16 @@ definitions:
         description: 'The targets (either instances or tags). Instances are specified using Key=instanceids,Values=&lt;instanceid1&gt;,&lt;instanceid2&gt;. Tags are specified using Key=&lt;tag name&gt;,Values=&lt;tag value&gt;.'
       TaskParameters:
         $ref: '#/definitions/MaintenanceWindowTaskParameters'
-        description: '<p>The parameters that should be passed to the task when it is run.</p> <note> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>'
+        description: '<p>The parameters that should be passed to the task when it is run.</p> <note> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported maintenance window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>'
       Priority:
         $ref: '#/definitions/MaintenanceWindowTaskPriority'
-        description: 'The priority of the task in the Maintenance Window. The lower the number, the higher the priority. Tasks that have the same priority are scheduled in parallel.'
+        description: 'The priority of the task in the maintenance window. The lower the number, the higher the priority. Tasks that have the same priority are scheduled in parallel.'
       LoggingInfo:
         $ref: '#/definitions/LoggingInfo'
-        description: '<p>Information about an Amazon S3 bucket to write task-level logs to.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>'
+        description: '<p>Information about an Amazon S3 bucket to write task-level logs to.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported maintenance window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>'
       ServiceRoleArn:
         $ref: '#/definitions/ServiceRole'
-        description: The role that should be assumed when running the task.
+        description: The ARN of the IAM service role to use to publish Amazon Simple Notification Service (Amazon SNS) notifications for maintenance window Run Command tasks.
       MaxConcurrency:
         $ref: '#/definitions/MaxConcurrency'
         description: 'The maximum number of targets this task can be run for, in parallel.'
@@ -12173,7 +12173,7 @@ definitions:
       Description:
         $ref: '#/definitions/MaintenanceWindowDescription'
         description: A description of the task.
-    description: Information about a task defined for a Maintenance Window.
+    description: Information about a task defined for a maintenance window.
   MaintenanceWindowTaskParameterName:
     type: string
     minLength: 1
@@ -12292,7 +12292,7 @@ definitions:
         description: The parameter tier.
       Policies:
         $ref: '#/definitions/ParameterPolicyList'
-        description: Information about the policies assigned to a parameter.
+        description: '<p>Information about the policies assigned to a parameter.</p> <p> <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-policies.html">Working with Parameter Policies</a> in the <i>AWS Systems Manager User Guide</i>.</p>'
     description: Information about parameter usage.
   ParameterInlinePolicy:
     type: object
@@ -12344,7 +12344,7 @@ definitions:
       Policies:
         $ref: '#/definitions/ParameterPolicyList'
         description: A list of policies associated with a parameter.
-    description: Metada includes information like the ARN of the last user and the date/time the parameter was last used.
+    description: Metadata includes information like the ARN of the last user and the date/time the parameter was last used.
   ParameterName:
     type: string
   ParameterPolicies:
@@ -12764,14 +12764,14 @@ definitions:
     properties:
       WindowId:
         $ref: '#/definitions/MaintenanceWindowId'
-        description: The ID of the Maintenance Window to be run.
+        description: The ID of the maintenance window to be run.
       Name:
         $ref: '#/definitions/MaintenanceWindowName'
-        description: The name of the Maintenance Window to be run.
+        description: The name of the maintenance window to be run.
       ExecutionTime:
         $ref: '#/definitions/MaintenanceWindowStringDateTime'
-        description: 'The time, in ISO-8601 Extended format, that the Maintenance Window is scheduled to be run.'
-    description: Information about a scheduled execution for a Maintenance Window.
+        description: 'The time, in ISO-8601 Extended format, that the maintenance window is scheduled to be run.'
+    description: Information about a scheduled execution for a maintenance window.
   SignalType:
     type: string
     enum:
@@ -12906,10 +12906,10 @@ definitions:
         description: The AWS Regions targeted by the current Automation execution.
       TargetLocationMaxConcurrency:
         $ref: '#/definitions/MaxConcurrency'
-        description: 'The maxium number of AWS accounts and AWS regions allowed to run the Automation concurrently '
+        description: 'The maximum number of AWS accounts and AWS regions allowed to run the Automation concurrently '
       TargetLocationMaxErrors:
         $ref: '#/definitions/MaxErrors'
-        description: 'The maxium number of errors allowed before the system stops queueing additional Automation executions for the currently running Automation. '
+        description: 'The maximum number of errors allowed before the system stops queueing additional Automation executions for the currently running Automation. '
       ExecutionRoleName:
         $ref: '#/definitions/ExecutionRoleName'
         description: The Automation execution role used by the currently running Automation.
@@ -13038,7 +13038,7 @@ definitions:
       Value:
         $ref: '#/definitions/TagValue'
         description: The value of the tag.
-    description: 'Metadata that you assign to your AWS resources. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment. In Systems Manager, you can apply tags to documents, managed instances, Maintenance Windows, Parameter Store parameters, and patch baselines.'
+    description: 'Metadata that you assign to your AWS resources. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment. In Systems Manager, you can apply tags to documents, managed instances, maintenance windows, Parameter Store parameters, and patch baselines.'
   TargetKey:
     type: string
     pattern: '^[\p{L}\p{Z}\p{N}_.:/=\-@]*$'

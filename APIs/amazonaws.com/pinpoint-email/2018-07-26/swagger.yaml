@@ -213,6 +213,9 @@ paths:
                 description: Used to associate a configuration set with a dedicated IP pool.
                 type: object
                 properties:
+                  TlsPolicy:
+                    $ref: '#/definitions/TlsPolicy'
+                    description: 'Specifies whether Amazon Pinpoint should require that incoming email is delivered over a connection that’s encrypted by using Transport Layer Security (TLS). If this value is set to <code>Require</code>, Amazon Pinpoint will bounce email messages that cannot be delivered over TLS. The default value is <code>Optional</code>.'
                   SendingPoolName:
                     $ref: '#/definitions/PoolName'
                     description: The name of the dedicated IP pool that you want to associate with the configuration set.
@@ -1458,6 +1461,12 @@ paths:
           schema:
             type: object
             properties:
+              TlsPolicy:
+                description: 'Specifies whether Amazon Pinpoint should require that incoming email is delivered over a connection encrypted with Transport Layer Security (TLS). If this parameter is set to <code>Require</code>, Amazon Pinpoint rejects emails that weren''t received over TLS. If the parameter is set to <code>Optional</code>, then Amazon Pinpoint accepts emails that weren''t received over TLS. The default value is <code>Optional</code>.'
+                type: string
+                enum:
+                  - REQUIRE
+                  - OPTIONAL
               SendingPoolName:
                 description: The name of the dedicated IP pool that you want to associate with the configuration set.
                 type: string
@@ -2037,6 +2046,12 @@ definitions:
   CustomRedirectDomain:
     type: string
     description: The domain that you want to use for tracking open and click events.
+  TlsPolicy:
+    type: string
+    enum:
+      - REQUIRE
+      - OPTIONAL
+    description: 'Specifies whether Amazon Pinpoint should require that incoming email is delivered over a connection encrypted with Transport Layer Security (TLS). If this parameter is set to <code>Require</code>, Amazon Pinpoint rejects emails that weren''t received over TLS. If the parameter is set to <code>Optional</code>, then Amazon Pinpoint accepts emails that weren''t received over TLS. The default value is <code>Optional</code>.'
   PoolName:
     type: string
     description: The name of a dedicated IP pool.
@@ -2670,6 +2685,9 @@ definitions:
   DeliveryOptions:
     type: object
     properties:
+      TlsPolicy:
+        $ref: '#/definitions/TlsPolicy'
+        description: 'Specifies whether Amazon Pinpoint should require that incoming email is delivered over a connection that’s encrypted by using Transport Layer Security (TLS). If this value is set to <code>Require</code>, Amazon Pinpoint will bounce email messages that cannot be delivered over TLS. The default value is <code>Optional</code>.'
       SendingPoolName:
         $ref: '#/definitions/PoolName'
         description: The name of the dedicated IP pool that you want to associate with the configuration set.
@@ -3342,6 +3360,9 @@ definitions:
   PutConfigurationSetDeliveryOptionsRequest:
     type: object
     properties:
+      TlsPolicy:
+        $ref: '#/definitions/TlsPolicy'
+        description: Whether Amazon Pinpoint should require that incoming email is delivered over a connection encrypted with Transport Layer Security (TLS).
       SendingPoolName:
         $ref: '#/definitions/SendingPoolName'
         description: The name of the dedicated IP pool that you want to associate with the configuration set.

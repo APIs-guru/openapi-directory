@@ -313,6 +313,16 @@ paths:
                 pattern: '^[a-zA-Z0-9_]+$'
                 minLength: 1
                 maxLength: 128
+              channelStorage:
+                description: Where channel data is stored.
+                type: object
+                properties:
+                  serviceManagedS3:
+                    $ref: '#/definitions/ServiceManagedChannelS3Storage'
+                    description: Use this to store channel data in an S3 bucket managed by the AWS IoT Analytics service.
+                  customerManagedS3:
+                    $ref: '#/definitions/CustomerManagedChannelS3Storage'
+                    description: Use this to store channel data in an S3 bucket that you manage.
               retentionPeriod:
                 description: 'How long, in days, message data is kept.'
                 type: object
@@ -697,6 +707,16 @@ paths:
                 pattern: '^[a-zA-Z0-9_]+$'
                 minLength: 1
                 maxLength: 128
+              datastoreStorage:
+                description: Where data store data is stored.
+                type: object
+                properties:
+                  serviceManagedS3:
+                    $ref: '#/definitions/ServiceManagedDatastoreS3Storage'
+                    description: Use this to store data store data in an S3 bucket managed by the AWS IoT Analytics service.
+                  customerManagedS3:
+                    $ref: '#/definitions/CustomerManagedDatastoreS3Storage'
+                    description: Use this to store data store data in an S3 bucket that you manage.
               retentionPeriod:
                 description: 'How long, in days, message data is kept.'
                 type: object
@@ -994,6 +1014,16 @@ paths:
           schema:
             type: object
             properties:
+              channelStorage:
+                description: Where channel data is stored.
+                type: object
+                properties:
+                  serviceManagedS3:
+                    $ref: '#/definitions/ServiceManagedChannelS3Storage'
+                    description: Use this to store channel data in an S3 bucket managed by the AWS IoT Analytics service.
+                  customerManagedS3:
+                    $ref: '#/definitions/CustomerManagedChannelS3Storage'
+                    description: Use this to store channel data in an S3 bucket that you manage.
               retentionPeriod:
                 description: 'How long, in days, message data is kept.'
                 type: object
@@ -1306,6 +1336,16 @@ paths:
                   numberOfDays:
                     $ref: '#/definitions/RetentionPeriodInDays'
                     description: The number of days that message data is kept. The "unlimited" parameter must be false.
+              datastoreStorage:
+                description: Where data store data is stored.
+                type: object
+                properties:
+                  serviceManagedS3:
+                    $ref: '#/definitions/ServiceManagedDatastoreS3Storage'
+                    description: Use this to store data store data in an S3 bucket managed by the AWS IoT Analytics service.
+                  customerManagedS3:
+                    $ref: '#/definitions/CustomerManagedDatastoreS3Storage'
+                    description: Use this to store data store data in an S3 bucket that you manage.
   '/pipelines/{pipelineName}':
     delete:
       operationId: DeletePipeline
@@ -2006,6 +2046,26 @@ definitions:
       retentionPeriod:
         $ref: '#/definitions/RetentionPeriod'
         description: 'How long, in days, message data is kept for the channel.'
+  ServiceManagedChannelS3Storage:
+    type: object
+    properties: {}
+    description: Use this to store channel data in an S3 bucket managed by the AWS IoT Analytics service.
+  CustomerManagedChannelS3Storage:
+    type: object
+    required:
+      - bucket
+      - roleArn
+    properties:
+      bucket:
+        $ref: '#/definitions/BucketName'
+        description: The name of the Amazon S3 bucket in which channel data is stored.
+      keyPrefix:
+        $ref: '#/definitions/S3KeyPrefix'
+        description: The prefix used to create the keys of the channel data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key).
+      roleArn:
+        $ref: '#/definitions/RoleArn'
+        description: The ARN of the role which grants AWS IoT Analytics permission to interact with your Amazon S3 resources.
+    description: Use this to store channel data in an S3 bucket that you manage.
   UnlimitedRetentionPeriod:
     type: boolean
   RetentionPeriodInDays:
@@ -2097,6 +2157,26 @@ definitions:
       retentionPeriod:
         $ref: '#/definitions/RetentionPeriod'
         description: 'How long, in days, message data is kept for the data store.'
+  ServiceManagedDatastoreS3Storage:
+    type: object
+    properties: {}
+    description: Use this to store data store data in an S3 bucket managed by the AWS IoT Analytics service.
+  CustomerManagedDatastoreS3Storage:
+    type: object
+    required:
+      - bucket
+      - roleArn
+    properties:
+      bucket:
+        $ref: '#/definitions/BucketName'
+        description: The name of the Amazon S3 bucket in which data store data is stored.
+      keyPrefix:
+        $ref: '#/definitions/S3KeyPrefix'
+        description: The prefix used to create the keys of the data store data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key).
+      roleArn:
+        $ref: '#/definitions/RoleArn'
+        description: The ARN of the role which grants AWS IoT Analytics permission to interact with your Amazon S3 resources.
+    description: Use this to store data store data in an S3 bucket that you manage.
   CreatePipelineResponse:
     type: object
     properties:
@@ -2553,6 +2633,16 @@ definitions:
   CancelPipelineReprocessingRequest:
     type: object
     properties: {}
+  ChannelStorage:
+    type: object
+    properties:
+      serviceManagedS3:
+        $ref: '#/definitions/ServiceManagedChannelS3Storage'
+        description: Use this to store channel data in an S3 bucket managed by the AWS IoT Analytics service.
+      customerManagedS3:
+        $ref: '#/definitions/CustomerManagedChannelS3Storage'
+        description: Use this to store channel data in an S3 bucket that you manage.
+    description: Where channel data is stored.
   ChannelArn:
     type: string
   ChannelStatus:
@@ -2580,6 +2670,9 @@ definitions:
       name:
         $ref: '#/definitions/ChannelName'
         description: The name of the channel.
+      storage:
+        $ref: '#/definitions/ChannelStorage'
+        description: Where channel data is stored.
       arn:
         $ref: '#/definitions/ChannelArn'
         description: The ARN of the channel.
@@ -2613,12 +2706,42 @@ definitions:
         $ref: '#/definitions/EstimatedResourceSize'
         description: The estimated size of the channel.
     description: Statistics information about the channel.
+  ServiceManagedChannelS3StorageSummary:
+    type: object
+    properties: {}
+    description: Used to store channel data in an S3 bucket managed by the AWS IoT Analytics service.
+  CustomerManagedChannelS3StorageSummary:
+    type: object
+    properties:
+      bucket:
+        $ref: '#/definitions/BucketName'
+        description: The name of the Amazon S3 bucket in which channel data is stored.
+      keyPrefix:
+        $ref: '#/definitions/S3KeyPrefix'
+        description: The prefix used to create the keys of the channel data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key).
+      roleArn:
+        $ref: '#/definitions/RoleArn'
+        description: The ARN of the role which grants AWS IoT Analytics permission to interact with your Amazon S3 resources.
+    description: Used to store channel data in an S3 bucket that you manage.
+  ChannelStorageSummary:
+    type: object
+    properties:
+      serviceManagedS3:
+        $ref: '#/definitions/ServiceManagedChannelS3StorageSummary'
+        description: Used to store channel data in an S3 bucket managed by the AWS IoT Analytics service.
+      customerManagedS3:
+        $ref: '#/definitions/CustomerManagedChannelS3StorageSummary'
+        description: Used to store channel data in an S3 bucket that you manage.
+    description: Where channel data is stored.
   ChannelSummary:
     type: object
     properties:
       channelName:
         $ref: '#/definitions/ChannelName'
         description: The name of the channel.
+      channelStorage:
+        $ref: '#/definitions/ChannelStorageSummary'
+        description: Where channel data is stored.
       status:
         $ref: '#/definitions/ChannelStatus'
         description: The status of the channel.
@@ -2694,6 +2817,9 @@ definitions:
       channelName:
         $ref: '#/definitions/ChannelName'
         description: The name of the channel.
+      channelStorage:
+        $ref: '#/definitions/ChannelStorage'
+        description: Where channel data is stored.
       retentionPeriod:
         $ref: '#/definitions/RetentionPeriod'
         description: 'How long, in days, message data is kept for the channel.'
@@ -2774,6 +2900,16 @@ definitions:
     pattern: '^[a-zA-Z0-9_]+$'
     minLength: 1
     maxLength: 128
+  DatastoreStorage:
+    type: object
+    properties:
+      serviceManagedS3:
+        $ref: '#/definitions/ServiceManagedDatastoreS3Storage'
+        description: Use this to store data store data in an S3 bucket managed by the AWS IoT Analytics service.
+      customerManagedS3:
+        $ref: '#/definitions/CustomerManagedDatastoreS3Storage'
+        description: Use this to store data store data in an S3 bucket that you manage.
+    description: Where data store data is stored.
   CreateDatastoreRequest:
     type: object
     required:
@@ -2782,6 +2918,9 @@ definitions:
       datastoreName:
         $ref: '#/definitions/DatastoreName'
         description: The name of the data store.
+      datastoreStorage:
+        $ref: '#/definitions/DatastoreStorage'
+        description: Where data store data is stored.
       retentionPeriod:
         $ref: '#/definitions/RetentionPeriod'
         description: 'How long, in days, message data is kept for the data store.'
@@ -2813,6 +2952,24 @@ definitions:
         description: Metadata which can be used to manage the pipeline.
   PipelineArn:
     type: string
+  S3KeyPrefix:
+    type: string
+    pattern: '^[a-zA-Z0-9!_.*''()/{}:-]*/$'
+    minLength: 1
+    maxLength: 255
+  CustomerManagedDatastoreS3StorageSummary:
+    type: object
+    properties:
+      bucket:
+        $ref: '#/definitions/BucketName'
+        description: The name of the Amazon S3 bucket in which data store data is stored.
+      keyPrefix:
+        $ref: '#/definitions/S3KeyPrefix'
+        description: The prefix used to create the keys of the data store data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key).
+      roleArn:
+        $ref: '#/definitions/RoleArn'
+        description: The ARN of the role which grants AWS IoT Analytics permission to interact with your Amazon S3 resources.
+    description: Used to store data store data in an S3 bucket that you manage.
   DatasetStatus:
     type: string
     enum:
@@ -3053,6 +3210,9 @@ definitions:
       name:
         $ref: '#/definitions/DatastoreName'
         description: The name of the data store.
+      storage:
+        $ref: '#/definitions/DatastoreStorage'
+        description: Where data store data is stored.
       arn:
         $ref: '#/definitions/DatastoreArn'
         description: The ARN of the data store.
@@ -3076,12 +3236,29 @@ definitions:
         $ref: '#/definitions/EstimatedResourceSize'
         description: The estimated size of the data store.
     description: Statistical information about the data store.
+  ServiceManagedDatastoreS3StorageSummary:
+    type: object
+    properties: {}
+    description: Used to store data store data in an S3 bucket managed by the AWS IoT Analytics service.
+  DatastoreStorageSummary:
+    type: object
+    properties:
+      serviceManagedS3:
+        $ref: '#/definitions/ServiceManagedDatastoreS3StorageSummary'
+        description: Used to store data store data in an S3 bucket managed by the AWS IoT Analytics service.
+      customerManagedS3:
+        $ref: '#/definitions/CustomerManagedDatastoreS3StorageSummary'
+        description: Used to store data store data in an S3 bucket that you manage.
+    description: Where data store data is stored.
   DatastoreSummary:
     type: object
     properties:
       datastoreName:
         $ref: '#/definitions/DatastoreName'
         description: The name of the data store.
+      datastoreStorage:
+        $ref: '#/definitions/DatastoreStorageSummary'
+        description: Where data store data is stored.
       status:
         $ref: '#/definitions/DatastoreStatus'
         description: The status of the data store.
@@ -3417,6 +3594,9 @@ definitions:
   UpdateChannelRequest:
     type: object
     properties:
+      channelStorage:
+        $ref: '#/definitions/ChannelStorage'
+        description: Where channel data is stored.
       retentionPeriod:
         $ref: '#/definitions/RetentionPeriod'
         description: 'How long, in days, message data is kept for the channel.'
@@ -3446,6 +3626,9 @@ definitions:
       retentionPeriod:
         $ref: '#/definitions/RetentionPeriod'
         description: 'How long, in days, message data is kept for the data store.'
+      datastoreStorage:
+        $ref: '#/definitions/DatastoreStorage'
+        description: Where data store data is stored.
   UpdatePipelineRequest:
     type: object
     required:
