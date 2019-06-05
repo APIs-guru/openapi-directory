@@ -2844,6 +2844,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=StorageGateway_20130630.UpdateSMBSecurityStrategy':
+    post:
+      operationId: UpdateSMBSecurityStrategy
+      description: Updates the SMB security strategy on a file gateway. This action is only supported in file gateways.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateSMBSecurityStrategyOutput'
+        '480':
+          description: InvalidGatewayRequestException
+          schema:
+            $ref: '#/definitions/InvalidGatewayRequestException'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateSMBSecurityStrategyInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - StorageGateway_20130630.UpdateSMBSecurityStrategy
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=StorageGateway_20130630.UpdateSnapshotSchedule':
     post:
       operationId: UpdateSnapshotSchedule
@@ -3827,6 +3864,9 @@ definitions:
       Tags:
         $ref: '#/definitions/Tags'
         description: 'A list of up to 50 tags assigned to the gateway, sorted alphabetically by key name. Each tag is a key-value pair. For a gateway with more than 10 tags assigned, you can view all tags using the <code>ListTagsForResource</code> API operation.'
+      VPCEndpoint:
+        $ref: '#/definitions/string'
+        description: 'The configuration settings for the virtual private cloud (VPC) endpoint for your gateway. '
     description: 'A JSON object containing the following fields:'
   DescribeGatewayInformationInput:
     type: object
@@ -3914,6 +3954,9 @@ definitions:
       SMBGuestPasswordSet:
         $ref: '#/definitions/Boolean'
         description: 'This value is true if a password for the guest user “smbguest” is set, and otherwise false.'
+      SMBSecurityStrategy:
+        $ref: '#/definitions/SMBSecurityStrategy'
+        description: '<p>The type of security strategy that was specified for file gateway.</p> <p>ClientSpecified: SMBv1 is enabled, SMB signing is offered but not required, SMB encryption is offered but not required.</p> <p>MandatorySigning: SMBv1 is disabled, SMB signing is required, SMB encryption is offered but not required.</p> <p>MandatoryEncryption: SMBv1 is disabled, SMB signing is offered but not required, SMB encryption is required.</p>'
   DescribeSMBSettingsInput:
     type: object
     required:
@@ -4898,6 +4941,22 @@ definitions:
         $ref: '#/definitions/FileShareUserList'
         description: A list of users or groups in the Active Directory that are not allowed to access the file share. A group must be prefixed with the @ character. For example <code>@group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.
     description: UpdateSMBFileShareInput
+  UpdateSMBSecurityStrategyOutput:
+    type: object
+    properties:
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
+  UpdateSMBSecurityStrategyInput:
+    type: object
+    required:
+      - GatewayARN
+      - SMBSecurityStrategy
+    properties:
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
+      SMBSecurityStrategy:
+        $ref: '#/definitions/SMBSecurityStrategy'
+        description: '<p>Specifies the type of security strategy.</p> <p>ClientSpecified: SMBv1 is enabled, SMB signing is offered but not required, SMB encryption is offered but not required.</p> <p>MandatorySigning: SMBv1 is disabled, SMB signing is required, SMB encryption is offered but not required.</p> <p>MandatoryEncryption: SMBv1 is disabled, SMB signing is offered but not required, SMB encryption is required.</p>'
   UpdateSnapshotScheduleOutput:
     type: object
     example:
@@ -5337,6 +5396,12 @@ definitions:
     pattern: '^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$'
     minLength: 1
     maxLength: 1024
+  SMBSecurityStrategy:
+    type: string
+    enum:
+      - ClientSpecified
+      - MandatorySigning
+      - MandatoryEncryption
   RecurrenceInHours:
     type: integer
     minimum: 1
