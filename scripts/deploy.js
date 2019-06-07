@@ -88,7 +88,7 @@ function buildApiList(specs) {
 
       var logoUrl = _.get(swagger, 'info["x-logo"].url');
       if (logoUrl) {
-        if (!cachedLogo[logoUrl])
+        if (!cachedLogo[logoUrl]) && (logoUrl.indexOf('apitore.com')<0)
           cachedLogo[logoUrl] = yield cacheLogo(logoUrl);
         swagger.info['x-logo'].url = cachedLogo[logoUrl];
       }
