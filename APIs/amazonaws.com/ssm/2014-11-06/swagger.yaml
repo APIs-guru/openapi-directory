@@ -560,6 +560,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonSSM.CreateOpsItem':
+    post:
+      operationId: CreateOpsItem
+      description: '<p>Creates a new OpsItem. You must have permission in AWS Identity and Access Management (IAM) to create a new OpsItem. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems-getting-started.html">Getting Started with OpsItems</a> in the <i>AWS Systems Manager User Guide</i>.</p> <p>Operations engineers and IT professionals use the Systems Manager OpsItems capability to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems.html">AWS Systems Manager OpsItems</a> in the <i>AWS Systems Manager User Guide</i>. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateOpsItemResponse'
+        '480':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '481':
+          description: OpsItemAlreadyExistsException
+          schema:
+            $ref: '#/definitions/OpsItemAlreadyExistsException'
+        '482':
+          description: OpsItemLimitExceededException
+          schema:
+            $ref: '#/definitions/OpsItemLimitExceededException'
+        '483':
+          description: OpsItemInvalidParameterException
+          schema:
+            $ref: '#/definitions/OpsItemInvalidParameterException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateOpsItemRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonSSM.CreateOpsItem
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AmazonSSM.CreatePatchBaseline':
     post:
       operationId: CreatePatchBaseline
@@ -2192,6 +2237,39 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonSSM.DescribeOpsItems':
+    post:
+      operationId: DescribeOpsItems
+      description: '<p>Query a set of OpsItems. You must have permission in AWS Identity and Access Management (IAM) to query a list of OpsItems. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems-getting-started.html">Getting Started with OpsItems</a> in the <i>AWS Systems Manager User Guide</i>.</p> <p>Operations engineers and IT professionals use the Systems Manager OpsItems capability to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems.html">AWS Systems Manager OpsItems</a> in the <i>AWS Systems Manager User Guide</i>. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeOpsItemsResponse'
+        '480':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeOpsItemsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonSSM.DescribeOpsItems
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AmazonSSM.DescribeParameters':
     post:
       operationId: DescribeParameters
@@ -2937,6 +3015,92 @@ paths:
           type: string
           enum:
             - AmazonSSM.GetMaintenanceWindowTask
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonSSM.GetOpsItem':
+    post:
+      operationId: GetOpsItem
+      description: '<p>Get information about an OpsItem by using the ID. You must have permission in AWS Identity and Access Management (IAM) to view information about an OpsItem. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems-getting-started.html">Getting Started with OpsItems</a> in the <i>AWS Systems Manager User Guide</i>.</p> <p>Operations engineers and IT professionals use the Systems Manager OpsItems capability to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems.html">AWS Systems Manager OpsItems</a> in the <i>AWS Systems Manager User Guide</i>. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetOpsItemResponse'
+        '480':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '481':
+          description: OpsItemNotFoundException
+          schema:
+            $ref: '#/definitions/OpsItemNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetOpsItemRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonSSM.GetOpsItem
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonSSM.GetOpsSummary':
+    post:
+      operationId: GetOpsSummary
+      description: View a summary of OpsItems based on specified filters and aggregators.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetOpsSummaryResult'
+        '480':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '481':
+          description: InvalidFilter
+          schema:
+            $ref: '#/definitions/InvalidFilter'
+        '482':
+          description: InvalidNextToken
+          schema:
+            $ref: '#/definitions/InvalidNextToken'
+        '483':
+          description: InvalidTypeNameException
+          schema:
+            $ref: '#/definitions/InvalidTypeNameException'
+        '484':
+          description: InvalidAggregatorException
+          schema:
+            $ref: '#/definitions/InvalidAggregatorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetOpsSummaryRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonSSM.GetOpsSummary
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -5163,6 +5327,55 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonSSM.UpdateOpsItem':
+    post:
+      operationId: UpdateOpsItem
+      description: '<p>Edit or change an OpsItem. You must have permission in AWS Identity and Access Management (IAM) to update an OpsItem. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems-getting-started.html">Getting Started with OpsItems</a> in the <i>AWS Systems Manager User Guide</i>.</p> <p>Operations engineers and IT professionals use the Systems Manager OpsItems capability to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems.html">AWS Systems Manager OpsItems</a> in the <i>AWS Systems Manager User Guide</i>. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateOpsItemResponse'
+        '480':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '481':
+          description: OpsItemNotFoundException
+          schema:
+            $ref: '#/definitions/OpsItemNotFoundException'
+        '482':
+          description: OpsItemAlreadyExistsException
+          schema:
+            $ref: '#/definitions/OpsItemAlreadyExistsException'
+        '483':
+          description: OpsItemLimitExceededException
+          schema:
+            $ref: '#/definitions/OpsItemLimitExceededException'
+        '484':
+          description: OpsItemInvalidParameterException
+          schema:
+            $ref: '#/definitions/OpsItemInvalidParameterException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateOpsItemRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonSSM.UpdateOpsItem
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AmazonSSM.UpdatePatchBaseline':
     post:
       operationId: UpdatePatchBaseline
@@ -5496,6 +5709,46 @@ definitions:
         description: '<p>Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag a maintenance window to identify the type of tasks it will run, the types of targets, and the environment it will run in. In this case, you could specify the following key name/value pairs:</p> <ul> <li> <p> <code>Key=TaskType,Value=AgentUpdate</code> </p> </li> <li> <p> <code>Key=OS,Value=Windows</code> </p> </li> <li> <p> <code>Key=Environment,Value=Production</code> </p> </li> </ul> <note> <p>To add tags to an existing maintenance window, use the <a>AddTagsToResource</a> action.</p> </note>'
   IdempotentParameterMismatch: {}
   ResourceLimitExceededException: {}
+  CreateOpsItemResponse:
+    type: object
+    properties:
+      OpsItemId:
+        $ref: '#/definitions/String'
+        description: The ID of the OpsItem.
+  CreateOpsItemRequest:
+    type: object
+    required:
+      - Description
+      - Source
+      - Title
+    properties:
+      Description:
+        $ref: '#/definitions/OpsItemDescription'
+        description: 'Information about the OpsItem. '
+      OperationalData:
+        $ref: '#/definitions/OpsItemOperationalData'
+        description: '<p>Operational data is custom data that provides useful reference details about the OpsItem. For example, you can specify log files, error strings, license keys, troubleshooting tips, or other relevant data. You enter operational data as key-value pairs. The key has a maximum length of 128 characters. The value has a maximum size of 20 KB.</p> <p>This custom data is searchable, but with restrictions. For the <code>Searchable operational data</code> feature, all users with access to the OpsItem Overview page (as provided by the <a>DescribeOpsItems</a> API action) can view and search on the specified data. For the <code>Private operational data</code> feature, the data is only viewable by users who have access to the OpsItem (as provided by the <a>GetOpsItem</a> API action).</p>'
+      Notifications:
+        $ref: '#/definitions/OpsItemNotifications'
+        description: The Amazon Resource Name (ARN) of an SNS topic where notifications are sent when this OpsItem is edited or changed.
+      Priority:
+        $ref: '#/definitions/OpsItemPriority'
+        description: The importance of this OpsItem in relation to other OpsItems in the system.
+      RelatedOpsItems:
+        $ref: '#/definitions/RelatedOpsItems'
+        description: 'One or more OpsItems that share something in common with the current OpsItems. For example, related OpsItems can include OpsItems with similar error messages, impacted resources, or statuses for the impacted resource.'
+      Source:
+        $ref: '#/definitions/OpsItemSource'
+        description: 'The origin of the OpsItem, such as Amazon EC2 or AWS Systems Manager.'
+      Title:
+        $ref: '#/definitions/OpsItemTitle'
+        description: A short heading that describes the nature of the OpsItem and the impacted resource.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: '<p>Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag an OpsItem to identify the AWS resource or the type of issue. In this case, you could specify the following key name/value pairs:</p> <ul> <li> <p> <code>Key=source,Value=EC2-instance</code> </p> </li> <li> <p> <code>Key=status,Value=stopped</code> </p> </li> </ul> <note> <p>To add tags to an existing OpsItem, use the <a>AddTagsToResource</a> action.</p> </note>'
+  OpsItemAlreadyExistsException: {}
+  OpsItemLimitExceededException: {}
+  OpsItemInvalidParameterException: {}
   CreatePatchBaselineResult:
     type: object
     properties:
@@ -6406,6 +6659,27 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: The token for the next set of items to return. (You received this token from a previous call.)
+  DescribeOpsItemsResponse:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token for the next set of items to return. Use this token to get the next set of results.
+      OpsItemSummaries:
+        $ref: '#/definitions/OpsItemSummaries'
+        description: A list of OpsItems.
+  DescribeOpsItemsRequest:
+    type: object
+    properties:
+      OpsItemFilters:
+        $ref: '#/definitions/OpsItemFilters'
+        description: '<p>One or more filters to limit the reponse.</p> <ul> <li> <p>Key: CreatedTime</p> <p>Operations: GreaterThan, LessThan</p> </li> <li> <p>Key: LastModifiedBy</p> <p>Operations: Contains, Equals</p> </li> <li> <p>Key: LastModifiedTime</p> <p>Operations: GreaterThan, LessThan</p> </li> <li> <p>Key: Priority</p> <p>Operations: Equals</p> </li> <li> <p>Key: Source</p> <p>Operations: Contains, Equals</p> </li> <li> <p>Key: Status</p> <p>Operations: Equals</p> </li> <li> <p>Key: Title</p> <p>Operations: Contains</p> </li> <li> <p>Key: OperationalData</p> <p>Operations: Equals</p> </li> <li> <p>Key: OperationalDataKey</p> <p>Operations: Equals</p> </li> <li> <p>Key: OperationalDataValue</p> <p>Operations: Equals, Contains</p> </li> <li> <p>Key: OpsItemId</p> <p>Operations: Equals</p> </li> <li> <p>Key: ResourceId</p> <p>Operations: Contains</p> </li> <li> <p>Key: AutomationId</p> <p>Operations: Equals</p> </li> </ul>'
+      MaxResults:
+        $ref: '#/definitions/OpsItemMaxResults'
+        description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: A token to start the list. Use this token to get the next set of results.
   DescribeParametersResult:
     type: object
     properties:
@@ -7061,6 +7335,47 @@ definitions:
       WindowTaskId:
         $ref: '#/definitions/MaintenanceWindowTaskId'
         description: The maintenance window task ID to retrieve.
+  GetOpsItemResponse:
+    type: object
+    properties:
+      OpsItem:
+        $ref: '#/definitions/OpsItem'
+        description: The OpsItem.
+  GetOpsItemRequest:
+    type: object
+    required:
+      - OpsItemId
+    properties:
+      OpsItemId:
+        $ref: '#/definitions/OpsItemId'
+        description: The ID of the OpsItem that you want to get.
+  OpsItemNotFoundException: {}
+  GetOpsSummaryResult:
+    type: object
+    properties:
+      Entities:
+        $ref: '#/definitions/OpsEntityList'
+        description: The list of aggregated and filtered OpsItems.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token for the next set of items to return. Use this token to get the next set of results.
+  GetOpsSummaryRequest:
+    type: object
+    required:
+      - Aggregators
+    properties:
+      Filters:
+        $ref: '#/definitions/OpsFilterList'
+        description: 'Optional filters used to scope down the returned OpsItems. '
+      Aggregators:
+        $ref: '#/definitions/OpsAggregatorList'
+        description: Optional aggregators that return counts of OpsItems based on one or more expressions.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'A token to start the list. Use this token to get the next set of results. '
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
   GetParameterResult:
     type: object
     properties:
@@ -8450,6 +8765,41 @@ definitions:
       IamRole:
         $ref: '#/definitions/IamRole'
         description: The IAM role you want to assign or change.
+  UpdateOpsItemResponse:
+    type: object
+    properties: {}
+  UpdateOpsItemRequest:
+    type: object
+    required:
+      - OpsItemId
+    properties:
+      Description:
+        $ref: '#/definitions/OpsItemDescription'
+        description: 'Update the information about the OpsItem. Provide enough information so that users reading this OpsItem for the first time understand the issue. '
+      OperationalData:
+        $ref: '#/definitions/OpsItemOperationalData'
+        description: '<p>Add new keys or edit existing key-value pairs of the OperationalData map in the OpsItem object.</p> <p>Operational data is custom data that provides useful reference details about the OpsItem. For example, you can specify log files, error strings, license keys, troubleshooting tips, or other relevant data. You enter operational data as key-value pairs. The key has a maximum length of 128 characters. The value has a maximum size of 20 KB.</p> <p>This custom data is searchable, but with restrictions. For the <code>Searchable operational data</code> feature, all users with access to the OpsItem Overview page (as provided by the <a>DescribeOpsItems</a> API action) can view and search on the specified data. For the <code>Private operational data</code> feature, the data is only viewable by users who have access to the OpsItem (as provided by the <a>GetOpsItem</a> API action).</p>'
+      OperationalDataToDelete:
+        $ref: '#/definitions/OpsItemOpsDataKeysList'
+        description: Keys that you want to remove from the OperationalData map.
+      Notifications:
+        $ref: '#/definitions/OpsItemNotifications'
+        description: The Amazon Resource Name (ARN) of an SNS topic where notifications are sent when this OpsItem is edited or changed.
+      Priority:
+        $ref: '#/definitions/OpsItemPriority'
+        description: The importance of this OpsItem in relation to other OpsItems in the system.
+      RelatedOpsItems:
+        $ref: '#/definitions/RelatedOpsItems'
+        description: 'One or more OpsItems that share something in common with the current OpsItems. For example, related OpsItems can include OpsItems with similar error messages, impacted resources, or statuses for the impacted resource.'
+      Status:
+        $ref: '#/definitions/OpsItemStatus'
+        description: 'The OpsItem status. Status can be <code>Open</code>, <code>In Progress</code>, or <code>Resolved</code>. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems-working-with-OpsItems-editing-details.html">Editing OpsItem Details</a> in the <i>AWS Systems Manager User Guide</i>.'
+      OpsItemId:
+        $ref: '#/definitions/OpsItemId'
+        description: The ID of the OpsItem.
+      Title:
+        $ref: '#/definitions/OpsItemTitle'
+        description: A short heading that describes the nature of the OpsItem and the impacted resource.
   UpdatePatchBaselineResult:
     type: object
     properties:
@@ -8655,6 +9005,7 @@ definitions:
       - MaintenanceWindow
       - Parameter
       - PatchBaseline
+      - OpsItem
   ResourceId:
     type: string
   AgentErrorCode:
@@ -9260,7 +9611,7 @@ definitions:
   AutomationParameterKey:
     type: string
     minLength: 1
-    maxLength: 30
+    maxLength: 50
   TargetMaps:
     type: array
     items:
@@ -10276,6 +10627,34 @@ definitions:
     pattern: '^mw-[0-9a-f]{17}$'
     minLength: 20
     maxLength: 20
+  OpsItemDescription:
+    type: string
+    minLength: 1
+    maxLength: 1024
+  OpsItemOperationalData:
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/OpsItemDataValue'
+  OpsItemNotifications:
+    type: array
+    items:
+      $ref: '#/definitions/OpsItemNotification'
+  OpsItemPriority:
+    type: integer
+    minimum: 1
+    maximum: 5
+  RelatedOpsItems:
+    type: array
+    items:
+      $ref: '#/definitions/RelatedOpsItem'
+  OpsItemSource:
+    type: string
+    minLength: 1
+    maxLength: 64
+  OpsItemTitle:
+    type: string
+    minLength: 1
+    maxLength: 1024
   OperatingSystem:
     type: string
     enum:
@@ -10584,6 +10963,18 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/MaintenanceWindowIdentity'
+  OpsItemFilters:
+    type: array
+    items:
+      $ref: '#/definitions/OpsItemFilter'
+  OpsItemMaxResults:
+    type: integer
+    minimum: 1
+    maximum: 50
+  OpsItemSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/OpsItemSummary'
   ParametersFilterList:
     type: array
     items:
@@ -11104,6 +11495,71 @@ definitions:
         $ref: '#/definitions/S3Region'
         description: The region where the Amazon S3 bucket is located.
     description: '<p>Information about an Amazon S3 bucket to write instance-level logs to.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported maintenance window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>'
+  OpsItemId:
+    type: string
+    pattern: '^(oi)-[0-9a-f]{12}$'
+  OpsItem:
+    type: object
+    properties:
+      CreatedBy:
+        $ref: '#/definitions/String'
+        description: The ARN of the AWS account that created the OpsItem.
+      CreatedTime:
+        $ref: '#/definitions/DateTime'
+        description: The date and time the OpsItem was created.
+      Description:
+        $ref: '#/definitions/OpsItemDescription'
+        description: The OpsItem description.
+      LastModifiedBy:
+        $ref: '#/definitions/String'
+        description: The ARN of the AWS account that last updated the OpsItem.
+      LastModifiedTime:
+        $ref: '#/definitions/DateTime'
+        description: The date and time the OpsItem was last updated.
+      Notifications:
+        $ref: '#/definitions/OpsItemNotifications'
+        description: The Amazon Resource Name (ARN) of an SNS topic where notifications are sent when this OpsItem is edited or changed.
+      Priority:
+        $ref: '#/definitions/OpsItemPriority'
+        description: The importance of this OpsItem in relation to other OpsItems in the system.
+      RelatedOpsItems:
+        $ref: '#/definitions/RelatedOpsItems'
+        description: 'One or more OpsItems that share something in common with the current OpsItems. For example, related OpsItems can include OpsItems with similar error messages, impacted resources, or statuses for the impacted resource.'
+      Status:
+        $ref: '#/definitions/OpsItemStatus'
+        description: 'The OpsItem status. Status can be <code>Open</code>, <code>In Progress</code>, or <code>Resolved</code>. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems-working-with-OpsItems-editing-details.html">Editing OpsItem Details</a> in the <i>AWS Systems Manager User Guide</i>.'
+      OpsItemId:
+        $ref: '#/definitions/OpsItemId'
+        description: The ID of the OpsItem.
+      Version:
+        $ref: '#/definitions/String'
+        description: The version of this OpsItem. Each time the OpsItem is edited the version number increments by one.
+      Title:
+        $ref: '#/definitions/OpsItemTitle'
+        description: A short heading that describes the nature of the OpsItem and the impacted resource.
+      Source:
+        $ref: '#/definitions/OpsItemSource'
+        description: 'The origin of the OpsItem, such as Amazon EC2 or AWS Systems Manager. The impacted resource is a subset of source.'
+      OperationalData:
+        $ref: '#/definitions/OpsItemOperationalData'
+        description: '<p>Operational data is custom data that provides useful reference details about the OpsItem. For example, you can specify log files, error strings, license keys, troubleshooting tips, or other relevant data. You enter operational data as key-value pairs. The key has a maximum length of 128 characters. The value has a maximum size of 20 KB.</p> <p>This custom data is searchable, but with restrictions. For the <code>Searchable operational data</code> feature, all users with access to the OpsItem Overview page (as provided by the <a>DescribeOpsItems</a> API action) can view and search on the specified data. For the <code>Private operational data</code> feature, the data is only viewable by users who have access to the OpsItem (as provided by the <a>GetOpsItem</a> API action).</p>'
+    description: 'Operations engineers and IT professionals use the Systems Manager OpsItems capability to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems.html">AWS Systems Manager OpsItems</a> in the <i>AWS Systems Manager User Guide</i>. '
+  OpsFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/OpsFilter'
+    minItems: 1
+    maxItems: 5
+  OpsAggregatorList:
+    type: array
+    items:
+      $ref: '#/definitions/OpsAggregator'
+    minItems: 1
+    maxItems: 12
+  OpsEntityList:
+    type: array
+    items:
+      $ref: '#/definitions/OpsEntity'
   ParameterHistoryList:
     type: array
     items:
@@ -12218,6 +12674,246 @@ definitions:
       - TimedOut
       - Cancelled
       - Failed
+  OpsAggregatorType:
+    type: string
+    pattern: ^(range|count)
+    minLength: 1
+    maxLength: 20
+  OpsDataTypeName:
+    type: string
+    pattern: '^(AWS|Custom):.*$'
+    minLength: 1
+    maxLength: 100
+  OpsDataAttributeName:
+    type: string
+  OpsAggregatorValueMap:
+    type: object
+    minProperties: 0
+    maxProperties: 5
+    additionalProperties:
+      $ref: '#/definitions/OpsAggregatorValue'
+  OpsAggregator:
+    type: object
+    properties:
+      AggregatorType:
+        $ref: '#/definitions/OpsAggregatorType'
+        description: Either a Range or Count aggregator for limiting an OpsItem summary.
+      TypeName:
+        $ref: '#/definitions/OpsDataTypeName'
+        description: The data type name to use for viewing counts of OpsItems.
+      AttributeName:
+        $ref: '#/definitions/OpsDataAttributeName'
+        description: The name of an OpsItem attribute on which to limit the count of OpsItems.
+      Values:
+        $ref: '#/definitions/OpsAggregatorValueMap'
+        description: The aggregator value.
+      Filters:
+        $ref: '#/definitions/OpsFilterList'
+        description: The aggregator filters.
+      Aggregators:
+        $ref: '#/definitions/OpsAggregatorList'
+        description: A nested aggregator for viewing counts of OpsItems.
+    description: 'One or more aggregators for viewing counts of OpsItems using different dimensions such as <code>Source</code>, <code>CreatedTime</code>, or <code>Source and CreatedTime</code>, to name a few.'
+  OpsAggregatorValue:
+    type: string
+    minLength: 0
+    maxLength: 512
+  OpsAggregatorValueKey:
+    type: string
+    minLength: 1
+    maxLength: 32
+  OpsEntityId:
+    type: string
+  OpsEntityItemMap:
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/OpsEntityItem'
+  OpsEntity:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/OpsEntityId'
+        description: The query ID.
+      Data:
+        $ref: '#/definitions/OpsEntityItemMap'
+        description: The data returned by the query.
+    description: The result of the query.
+  OpsEntityItemEntryList:
+    type: array
+    items:
+      $ref: '#/definitions/OpsEntityItemEntry'
+    minItems: 0
+    maxItems: 10000
+  OpsEntityItem:
+    type: object
+    properties:
+      Content:
+        $ref: '#/definitions/OpsEntityItemEntryList'
+        description: The detailed data content for an OpsItem summaries result item.
+    description: The OpsItem summaries result item.
+  OpsEntityItemEntry:
+    type: object
+    minProperties: 0
+    maxProperties: 50
+    additionalProperties:
+      $ref: '#/definitions/AttributeValue'
+  OpsEntityItemKey:
+    type: string
+  OpsFilterKey:
+    type: string
+    minLength: 1
+    maxLength: 200
+  OpsFilterValueList:
+    type: array
+    items:
+      $ref: '#/definitions/OpsFilterValue'
+    minItems: 1
+    maxItems: 40
+  OpsFilterOperatorType:
+    type: string
+    enum:
+      - Equal
+      - NotEqual
+      - BeginWith
+      - LessThan
+      - GreaterThan
+      - Exists
+  OpsFilter:
+    type: object
+    required:
+      - Key
+      - Values
+    properties:
+      Key:
+        $ref: '#/definitions/OpsFilterKey'
+        description: The name of the filter.
+      Values:
+        $ref: '#/definitions/OpsFilterValueList'
+        description: The filter value.
+      Type:
+        $ref: '#/definitions/OpsFilterOperatorType'
+        description: The type of filter.
+    description: A filter for viewing OpsItem summaries.
+  OpsFilterValue:
+    type: string
+  OpsItemStatus:
+    type: string
+    enum:
+      - Open
+      - InProgress
+      - Resolved
+  OpsItemDataKey:
+    type: string
+    minLength: 1
+    maxLength: 128
+  OpsItemDataType:
+    type: string
+    enum:
+      - SearchableString
+      - String
+  OpsItemDataValueString:
+    type: string
+  OpsItemDataValue:
+    type: object
+    properties:
+      Value:
+        $ref: '#/definitions/OpsItemDataValueString'
+        description: The value of the OperationalData key.
+      Type:
+        $ref: '#/definitions/OpsItemDataType'
+        description: The type of key-value pair. Valid types include <code>SearchableString</code> and <code>String</code>.
+    description: An object that defines the value of the key and its type in the OperationalData map.
+  OpsItemFilterKey:
+    type: string
+    enum:
+      - Status
+      - CreatedBy
+      - Source
+      - Priority
+      - Title
+      - OpsItemId
+      - CreatedTime
+      - LastModifiedTime
+      - OperationalData
+      - OperationalDataKey
+      - OperationalDataValue
+      - ResourceId
+      - AutomationId
+  OpsItemFilterValues:
+    type: array
+    items:
+      $ref: '#/definitions/OpsItemFilterValue'
+  OpsItemFilterOperator:
+    type: string
+    enum:
+      - Equal
+      - Contains
+      - GreaterThan
+      - LessThan
+  OpsItemFilter:
+    type: object
+    required:
+      - Key
+      - Values
+      - Operator
+    properties:
+      Key:
+        $ref: '#/definitions/OpsItemFilterKey'
+        description: The name of the filter.
+      Values:
+        $ref: '#/definitions/OpsItemFilterValues'
+        description: The filter value.
+      Operator:
+        $ref: '#/definitions/OpsItemFilterOperator'
+        description: The operator used by the filter call.
+    description: Describes an OpsCenter filter.
+  OpsItemFilterValue:
+    type: string
+  OpsItemNotification:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of an SNS topic where notifications are sent when this OpsItem is edited or changed.
+    description: A notification about the OpsItem.
+  OpsItemOpsDataKeysList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  OpsItemSummary:
+    type: object
+    properties:
+      CreatedBy:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the IAM entity that created the OpsItem.
+      CreatedTime:
+        $ref: '#/definitions/DateTime'
+        description: The date and time the OpsItem was created.
+      LastModifiedBy:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the IAM entity that created the OpsItem.
+      LastModifiedTime:
+        $ref: '#/definitions/DateTime'
+        description: The date and time the OpsItem was last updated.
+      Priority:
+        $ref: '#/definitions/OpsItemPriority'
+        description: The importance of this OpsItem in relation to other OpsItems in the system.
+      Source:
+        $ref: '#/definitions/OpsItemSource'
+        description: The impacted AWS resource.
+      Status:
+        $ref: '#/definitions/OpsItemStatus'
+        description: 'The OpsItem status. Status can be <code>Open</code>, <code>In Progress</code>, or <code>Resolved</code>.'
+      OpsItemId:
+        $ref: '#/definitions/OpsItemId'
+        description: The ID of the OpsItem.
+      Title:
+        $ref: '#/definitions/OpsItemTitle'
+        description: A short heading that describes the nature of the OpsItem and the impacted resource.
+      OperationalData:
+        $ref: '#/definitions/OpsItemOperationalData'
+        description: '<p>Operational data is custom data that provides useful reference details about the OpsItem. For example, you can specify log files, error strings, license keys, troubleshooting tips, or other relevant data. You enter operational data as key-value pairs. The key has a maximum length of 128 characters. The value has a maximum size of 20 KB.</p> <p>This custom data is searchable, but with restrictions. For the <code>Searchable operational data</code> feature, all users with access to the OpsItem Overview page (as provided by the <a>DescribeOpsItems</a> API action) can view and search on the specified data. For the <code>Private operational data</code> feature, the data is only viewable by users who have access to the OpsItem (as provided by the <a>GetOpsItem</a> API action).</p>'
+    description: A count of OpsItems.
   OutputSourceId:
     type: string
     minLength: 36
@@ -12659,6 +13355,15 @@ definitions:
       $ref: '#/definitions/Region'
     minItems: 1
     maxItems: 50
+  RelatedOpsItem:
+    type: object
+    required:
+      - OpsItemId
+    properties:
+      OpsItemId:
+        $ref: '#/definitions/String'
+        description: The ID of an OpsItem related to the current OpsItem.
+    description: 'An OpsItems that shares something in common with the current OpsItems. For example, related OpsItems can include OpsItems with similar error messages, impacted resources, or statuses for the impacted resource.'
   TargetParameterList:
     type: array
     items:
