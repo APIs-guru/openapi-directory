@@ -3,7 +3,7 @@ info:
   version: '2015-04-13'
   x-release: v4
   title: AWS CodeCommit
-  description: '<fullname>AWS CodeCommit</fullname> <p>This is the <i>AWS CodeCommit API Reference</i>. This reference provides descriptions of the operations and data types for AWS CodeCommit API along with usage examples.</p> <p>You can use the AWS CodeCommit API to work with the following objects:</p> <p>Repositories, by calling the following:</p> <ul> <li> <p> <a>BatchGetRepositories</a>, which returns information about one or more repositories associated with your AWS account.</p> </li> <li> <p> <a>CreateRepository</a>, which creates an AWS CodeCommit repository.</p> </li> <li> <p> <a>DeleteRepository</a>, which deletes an AWS CodeCommit repository.</p> </li> <li> <p> <a>GetRepository</a>, which returns information about a specified repository.</p> </li> <li> <p> <a>ListRepositories</a>, which lists all AWS CodeCommit repositories associated with your AWS account.</p> </li> <li> <p> <a>UpdateRepositoryDescription</a>, which sets or updates the description of the repository.</p> </li> <li> <p> <a>UpdateRepositoryName</a>, which changes the name of the repository. If you change the name of a repository, no other users of that repository will be able to access it until you send them the new HTTPS or SSH URL to use.</p> </li> </ul> <p>Branches, by calling the following:</p> <ul> <li> <p> <a>CreateBranch</a>, which creates a new branch in a specified repository.</p> </li> <li> <p> <a>DeleteBranch</a>, which deletes the specified branch in a repository unless it is the default branch.</p> </li> <li> <p> <a>GetBranch</a>, which returns information about a specified branch.</p> </li> <li> <p> <a>ListBranches</a>, which lists all branches for a specified repository.</p> </li> <li> <p> <a>UpdateDefaultBranch</a>, which changes the default branch for a repository.</p> </li> </ul> <p>Files, by calling the following:</p> <ul> <li> <p> <a>DeleteFile</a>, which deletes the content of a specified file from a specified branch.</p> </li> <li> <p> <a>GetFile</a>, which returns the base-64 encoded content of a specified file.</p> </li> <li> <p> <a>GetFolder</a>, which returns the contents of a specified folder or directory.</p> </li> <li> <p> <a>PutFile</a>, which adds or modifies a file in a specified repository and branch.</p> </li> </ul> <p>Information about committed code in a repository, by calling the following:</p> <ul> <li> <p> <a>CreateCommit</a>, which creates a commit for changes to a repository.</p> </li> <li> <p> <a>GetBlob</a>, which returns the base-64 encoded content of an individual Git blob object within a repository.</p> </li> <li> <p> <a>GetCommit</a>, which returns information about a commit, including commit messages and author and committer information.</p> </li> <li> <p> <a>GetDifferences</a>, which returns information about the differences in a valid commit specifier (such as a branch, tag, HEAD, commit ID or other fully qualified reference).</p> </li> </ul> <p>Pull requests, by calling the following:</p> <ul> <li> <p> <a>CreatePullRequest</a>, which creates a pull request in a specified repository.</p> </li> <li> <p> <a>DescribePullRequestEvents</a>, which returns information about one or more pull request events.</p> </li> <li> <p> <a>GetCommentsForPullRequest</a>, which returns information about comments on a specified pull request.</p> </li> <li> <p> <a>GetMergeConflicts</a>, which returns information about merge conflicts between the source and destination branch in a pull request.</p> </li> <li> <p> <a>GetPullRequest</a>, which returns information about a specified pull request.</p> </li> <li> <p> <a>ListPullRequests</a>, which lists all pull requests for a repository.</p> </li> <li> <p> <a>MergePullRequestByFastForward</a>, which merges the source destination branch of a pull request into the specified destination branch for that pull request using the fast-forward merge option.</p> </li> <li> <p> <a>PostCommentForPullRequest</a>, which posts a comment to a pull request at the specified line, file, or request.</p> </li> <li> <p> <a>UpdatePullRequestDescription</a>, which updates the description of a pull request.</p> </li> <li> <p> <a>UpdatePullRequestStatus</a>, which updates the status of a pull request.</p> </li> <li> <p> <a>UpdatePullRequestTitle</a>, which updates the title of a pull request.</p> </li> </ul> <p>Information about comments in a repository, by calling the following:</p> <ul> <li> <p> <a>DeleteCommentContent</a>, which deletes the content of a comment on a commit in a repository.</p> </li> <li> <p> <a>GetComment</a>, which returns information about a comment on a commit.</p> </li> <li> <p> <a>GetCommentsForComparedCommit</a>, which returns information about comments on the comparison between two commit specifiers in a repository.</p> </li> <li> <p> <a>PostCommentForComparedCommit</a>, which creates a comment on the comparison between two commit specifiers in a repository.</p> </li> <li> <p> <a>PostCommentReply</a>, which creates a reply to a comment.</p> </li> <li> <p> <a>UpdateComment</a>, which updates the content of a comment on a commit in a repository.</p> </li> </ul> <p>Tags used to tag resources in AWS CodeCommit (not Git tags), by calling the following:</p> <ul> <li> <p> <a>ListTagsForResource</a>, which gets information about AWS tags for a specified Amazon Resource Name (ARN) in AWS CodeCommit.</p> </li> <li> <p> <a>TagResource</a>, which adds or updates tags for a resource in AWS CodeCommit.</p> </li> <li> <p> <a>UntagResource</a>, which removes tags for a resource in AWS CodeCommit.</p> </li> </ul> <p>Triggers, by calling the following:</p> <ul> <li> <p> <a>GetRepositoryTriggers</a>, which returns information about triggers configured for a repository.</p> </li> <li> <p> <a>PutRepositoryTriggers</a>, which replaces all triggers for a repository and can be used to create or delete triggers.</p> </li> <li> <p> <a>TestRepositoryTriggers</a>, which tests the functionality of a repository trigger by sending data to the trigger target.</p> </li> </ul> <p>For information about how to use AWS CodeCommit, see the <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html">AWS CodeCommit User Guide</a>.</p>'
+  description: '<fullname>AWS CodeCommit</fullname> <p>This is the <i>AWS CodeCommit API Reference</i>. This reference provides descriptions of the operations and data types for AWS CodeCommit API along with usage examples.</p> <p>You can use the AWS CodeCommit API to work with the following objects:</p> <p>Repositories, by calling the following:</p> <ul> <li> <p> <a>BatchGetRepositories</a>, which returns information about one or more repositories associated with your AWS account.</p> </li> <li> <p> <a>CreateRepository</a>, which creates an AWS CodeCommit repository.</p> </li> <li> <p> <a>DeleteRepository</a>, which deletes an AWS CodeCommit repository.</p> </li> <li> <p> <a>GetRepository</a>, which returns information about a specified repository.</p> </li> <li> <p> <a>ListRepositories</a>, which lists all AWS CodeCommit repositories associated with your AWS account.</p> </li> <li> <p> <a>UpdateRepositoryDescription</a>, which sets or updates the description of the repository.</p> </li> <li> <p> <a>UpdateRepositoryName</a>, which changes the name of the repository. If you change the name of a repository, no other users of that repository will be able to access it until you send them the new HTTPS or SSH URL to use.</p> </li> </ul> <p>Branches, by calling the following:</p> <ul> <li> <p> <a>CreateBranch</a>, which creates a new branch in a specified repository.</p> </li> <li> <p> <a>DeleteBranch</a>, which deletes the specified branch in a repository unless it is the default branch.</p> </li> <li> <p> <a>GetBranch</a>, which returns information about a specified branch.</p> </li> <li> <p> <a>ListBranches</a>, which lists all branches for a specified repository.</p> </li> <li> <p> <a>UpdateDefaultBranch</a>, which changes the default branch for a repository.</p> </li> </ul> <p>Files, by calling the following:</p> <ul> <li> <p> <a>DeleteFile</a>, which deletes the content of a specified file from a specified branch.</p> </li> <li> <p> <a>GetFile</a>, which returns the base-64 encoded content of a specified file.</p> </li> <li> <p> <a>GetFolder</a>, which returns the contents of a specified folder or directory.</p> </li> <li> <p> <a>PutFile</a>, which adds or modifies a file in a specified repository and branch.</p> </li> </ul> <p>Information about committed code in a repository, by calling the following:</p> <ul> <li> <p> <a>CreateCommit</a>, which creates a commit for changes to a repository.</p> </li> <li> <p> <a>GetBlob</a>, which returns the base-64 encoded content of an individual Git blob object within a repository.</p> </li> <li> <p> <a>GetCommit</a>, which returns information about a commit, including commit messages and author and committer information.</p> </li> <li> <p> <a>GetDifferences</a>, which returns information about the differences in a valid commit specifier (such as a branch, tag, HEAD, commit ID or other fully qualified reference).</p> </li> </ul> <p>Merges, by calling the following:</p> <ul> <li> <p> <a>BatchDescribeMergeConflicts</a>, which returns information about conflicts in a merge between commits in a repository.</p> </li> <li> <p> <a>CreateUnreferencedMergeCommit</a>, which creates an unreferenced commit between two branches or commits for the purpose of comparing them and identifying any potential conflicts.</p> </li> <li> <p> <a>DescribeMergeConflicts</a>, which returns information about merge conflicts between the base, source, and destination versions of a file in a potential merge.</p> </li> <li> <p> <a>GetMergeCommit</a>, which returns information about the merge between a source and destination commit. </p> </li> <li> <p> <a>GetMergeConflicts</a>, which returns information about merge conflicts between the source and destination branch in a pull request.</p> </li> <li> <p> <a>GetMergeOptions</a>, which returns information about the available merge options between two branches or commit specifiers.</p> </li> <li> <p> <a>MergeBranchesByFastForward</a>, which merges two branches using the fast-forward merge option.</p> </li> <li> <p> <a>MergeBranchesBySquash</a>, which merges two branches using the squash merge option.</p> </li> <li> <p> <a>MergeBranchesByThreeWay</a>, which merges two branches using the three-way merge option.</p> </li> </ul> <p>Pull requests, by calling the following:</p> <ul> <li> <p> <a>CreatePullRequest</a>, which creates a pull request in a specified repository.</p> </li> <li> <p> <a>DescribePullRequestEvents</a>, which returns information about one or more pull request events.</p> </li> <li> <p> <a>GetCommentsForPullRequest</a>, which returns information about comments on a specified pull request.</p> </li> <li> <p> <a>GetPullRequest</a>, which returns information about a specified pull request.</p> </li> <li> <p> <a>ListPullRequests</a>, which lists all pull requests for a repository.</p> </li> <li> <p> <a>MergePullRequestByFastForward</a>, which merges the source destination branch of a pull request into the specified destination branch for that pull request using the fast-forward merge option.</p> </li> <li> <p> <a>MergePullRequestBySquash</a>, which merges the source destination branch of a pull request into the specified destination branch for that pull request using the squash merge option.</p> </li> <li> <p> <a>MergePullRequestByThreeWay</a>. which merges the source destination branch of a pull request into the specified destination branch for that pull request using the three-way merge option.</p> </li> <li> <p> <a>PostCommentForPullRequest</a>, which posts a comment to a pull request at the specified line, file, or request.</p> </li> <li> <p> <a>UpdatePullRequestDescription</a>, which updates the description of a pull request.</p> </li> <li> <p> <a>UpdatePullRequestStatus</a>, which updates the status of a pull request.</p> </li> <li> <p> <a>UpdatePullRequestTitle</a>, which updates the title of a pull request.</p> </li> </ul> <p>Information about comments in a repository, by calling the following:</p> <ul> <li> <p> <a>DeleteCommentContent</a>, which deletes the content of a comment on a commit in a repository.</p> </li> <li> <p> <a>GetComment</a>, which returns information about a comment on a commit.</p> </li> <li> <p> <a>GetCommentsForComparedCommit</a>, which returns information about comments on the comparison between two commit specifiers in a repository.</p> </li> <li> <p> <a>PostCommentForComparedCommit</a>, which creates a comment on the comparison between two commit specifiers in a repository.</p> </li> <li> <p> <a>PostCommentReply</a>, which creates a reply to a comment.</p> </li> <li> <p> <a>UpdateComment</a>, which updates the content of a comment on a commit in a repository.</p> </li> </ul> <p>Tags used to tag resources in AWS CodeCommit (not Git tags), by calling the following:</p> <ul> <li> <p> <a>ListTagsForResource</a>, which gets information about AWS tags for a specified Amazon Resource Name (ARN) in AWS CodeCommit.</p> </li> <li> <p> <a>TagResource</a>, which adds or updates tags for a resource in AWS CodeCommit.</p> </li> <li> <p> <a>UntagResource</a>, which removes tags for a resource in AWS CodeCommit.</p> </li> </ul> <p>Triggers, by calling the following:</p> <ul> <li> <p> <a>GetRepositoryTriggers</a>, which returns information about triggers configured for a repository.</p> </li> <li> <p> <a>PutRepositoryTriggers</a>, which replaces all triggers for a repository and can be used to create or delete triggers.</p> </li> <li> <p> <a>TestRepositoryTriggers</a>, which tests the functionality of a repository trigger by sending data to the trigger target.</p> </li> </ul> <p>For information about how to use AWS CodeCommit, see the <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html">AWS CodeCommit User Guide</a>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -156,6 +156,115 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
+  '/#X-Amz-Target=CodeCommit_20150413.BatchDescribeMergeConflicts':
+    post:
+      operationId: BatchDescribeMergeConflicts
+      description: Returns information about one or more merge conflicts in the attempted merge of two commit specifiers using the squash or three-way merge strategy.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/BatchDescribeMergeConflictsOutput'
+        '480':
+          description: RepositoryNameRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryNameRequiredException'
+        '481':
+          description: InvalidRepositoryNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryNameException'
+        '482':
+          description: RepositoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/RepositoryDoesNotExistException'
+        '483':
+          description: MergeOptionRequiredException
+          schema:
+            $ref: '#/definitions/MergeOptionRequiredException'
+        '484':
+          description: InvalidMergeOptionException
+          schema:
+            $ref: '#/definitions/InvalidMergeOptionException'
+        '485':
+          description: InvalidContinuationTokenException
+          schema:
+            $ref: '#/definitions/InvalidContinuationTokenException'
+        '486':
+          description: CommitRequiredException
+          schema:
+            $ref: '#/definitions/CommitRequiredException'
+        '487':
+          description: CommitDoesNotExistException
+          schema:
+            $ref: '#/definitions/CommitDoesNotExistException'
+        '488':
+          description: InvalidCommitException
+          schema:
+            $ref: '#/definitions/InvalidCommitException'
+        '489':
+          description: TipsDivergenceExceededException
+          schema:
+            $ref: '#/definitions/TipsDivergenceExceededException'
+        '490':
+          description: InvalidMaxConflictFilesException
+          schema:
+            $ref: '#/definitions/InvalidMaxConflictFilesException'
+        '491':
+          description: InvalidMaxMergeHunksException
+          schema:
+            $ref: '#/definitions/InvalidMaxMergeHunksException'
+        '492':
+          description: InvalidConflictDetailLevelException
+          schema:
+            $ref: '#/definitions/InvalidConflictDetailLevelException'
+        '493':
+          description: InvalidConflictResolutionStrategyException
+          schema:
+            $ref: '#/definitions/InvalidConflictResolutionStrategyException'
+        '494':
+          description: MaximumFileContentToLoadExceededException
+          schema:
+            $ref: '#/definitions/MaximumFileContentToLoadExceededException'
+        '495':
+          description: EncryptionIntegrityChecksFailedException
+          schema:
+            $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
+        '496':
+          description: EncryptionKeyAccessDeniedException
+          schema:
+            $ref: '#/definitions/EncryptionKeyAccessDeniedException'
+        '497':
+          description: EncryptionKeyDisabledException
+          schema:
+            $ref: '#/definitions/EncryptionKeyDisabledException'
+        '498':
+          description: EncryptionKeyNotFoundException
+          schema:
+            $ref: '#/definitions/EncryptionKeyNotFoundException'
+        '499':
+          description: EncryptionKeyUnavailableException
+          schema:
+            $ref: '#/definitions/EncryptionKeyUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/BatchDescribeMergeConflictsInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.BatchDescribeMergeConflicts
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=CodeCommit_20150413.BatchGetRepositories':
     post:
       operationId: BatchGetRepositories
@@ -695,6 +804,171 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=CodeCommit_20150413.CreateUnreferencedMergeCommit':
+    post:
+      operationId: CreateUnreferencedMergeCommit
+      description: '<p>Creates an unerferenced commit that represents the result of merging two branches using a specified merge strategy. This can help you determine the outcome of a potential merge. </p> <note> <p>This unreferenced merge commit can only be accessed using the GetCommit API or through git commands such as git fetch. To retrieve this commit, you must specify its commit ID or otherwise reference it.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateUnreferencedMergeCommitOutput'
+        '480':
+          description: RepositoryNameRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryNameRequiredException'
+        '481':
+          description: InvalidRepositoryNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryNameException'
+        '482':
+          description: RepositoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/RepositoryDoesNotExistException'
+        '483':
+          description: TipsDivergenceExceededException
+          schema:
+            $ref: '#/definitions/TipsDivergenceExceededException'
+        '484':
+          description: CommitRequiredException
+          schema:
+            $ref: '#/definitions/CommitRequiredException'
+        '485':
+          description: InvalidCommitException
+          schema:
+            $ref: '#/definitions/InvalidCommitException'
+        '486':
+          description: CommitDoesNotExistException
+          schema:
+            $ref: '#/definitions/CommitDoesNotExistException'
+        '487':
+          description: MergeOptionRequiredException
+          schema:
+            $ref: '#/definitions/MergeOptionRequiredException'
+        '488':
+          description: InvalidMergeOptionException
+          schema:
+            $ref: '#/definitions/InvalidMergeOptionException'
+        '489':
+          description: InvalidConflictDetailLevelException
+          schema:
+            $ref: '#/definitions/InvalidConflictDetailLevelException'
+        '490':
+          description: InvalidConflictResolutionStrategyException
+          schema:
+            $ref: '#/definitions/InvalidConflictResolutionStrategyException'
+        '491':
+          description: InvalidConflictResolutionException
+          schema:
+            $ref: '#/definitions/InvalidConflictResolutionException'
+        '492':
+          description: ManualMergeRequiredException
+          schema:
+            $ref: '#/definitions/ManualMergeRequiredException'
+        '493':
+          description: MaximumConflictResolutionEntriesExceededException
+          schema:
+            $ref: '#/definitions/MaximumConflictResolutionEntriesExceededException'
+        '494':
+          description: MultipleConflictResolutionEntriesException
+          schema:
+            $ref: '#/definitions/MultipleConflictResolutionEntriesException'
+        '495':
+          description: ReplacementTypeRequiredException
+          schema:
+            $ref: '#/definitions/ReplacementTypeRequiredException'
+        '496':
+          description: InvalidReplacementTypeException
+          schema:
+            $ref: '#/definitions/InvalidReplacementTypeException'
+        '497':
+          description: ReplacementContentRequiredException
+          schema:
+            $ref: '#/definitions/ReplacementContentRequiredException'
+        '498':
+          description: InvalidReplacementContentException
+          schema:
+            $ref: '#/definitions/InvalidReplacementContentException'
+        '499':
+          description: PathRequiredException
+          schema:
+            $ref: '#/definitions/PathRequiredException'
+        '500':
+          description: InvalidPathException
+          schema:
+            $ref: '#/definitions/InvalidPathException'
+        '501':
+          description: FileContentSizeLimitExceededException
+          schema:
+            $ref: '#/definitions/FileContentSizeLimitExceededException'
+        '502':
+          description: FolderContentSizeLimitExceededException
+          schema:
+            $ref: '#/definitions/FolderContentSizeLimitExceededException'
+        '503':
+          description: MaximumFileContentToLoadExceededException
+          schema:
+            $ref: '#/definitions/MaximumFileContentToLoadExceededException'
+        '504':
+          description: FileModeRequiredException
+          schema:
+            $ref: '#/definitions/FileModeRequiredException'
+        '505':
+          description: InvalidFileModeException
+          schema:
+            $ref: '#/definitions/InvalidFileModeException'
+        '506':
+          description: NameLengthExceededException
+          schema:
+            $ref: '#/definitions/NameLengthExceededException'
+        '507':
+          description: InvalidEmailException
+          schema:
+            $ref: '#/definitions/InvalidEmailException'
+        '508':
+          description: CommitMessageLengthExceededException
+          schema:
+            $ref: '#/definitions/CommitMessageLengthExceededException'
+        '509':
+          description: EncryptionIntegrityChecksFailedException
+          schema:
+            $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
+        '510':
+          description: EncryptionKeyAccessDeniedException
+          schema:
+            $ref: '#/definitions/EncryptionKeyAccessDeniedException'
+        '511':
+          description: EncryptionKeyDisabledException
+          schema:
+            $ref: '#/definitions/EncryptionKeyDisabledException'
+        '512':
+          description: EncryptionKeyNotFoundException
+          schema:
+            $ref: '#/definitions/EncryptionKeyNotFoundException'
+        '513':
+          description: EncryptionKeyUnavailableException
+          schema:
+            $ref: '#/definitions/EncryptionKeyUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateUnreferencedMergeCommitInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.CreateUnreferencedMergeCommit
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=CodeCommit_20150413.DeleteBranch':
     post:
       operationId: DeleteBranch
@@ -979,6 +1253,133 @@ paths:
           type: string
           enum:
             - CodeCommit_20150413.DeleteRepository
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=CodeCommit_20150413.DescribeMergeConflicts':
+    post:
+      operationId: DescribeMergeConflicts
+      description: 'Returns information about one or more merge conflicts in the attempted merge of two commit specifiers using the squash or three-way merge strategy. If the merge option for the attempted merge is specified as FAST_FORWARD_MERGE, an exception will be thrown.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeMergeConflictsOutput'
+        '480':
+          description: RepositoryNameRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryNameRequiredException'
+        '481':
+          description: InvalidRepositoryNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryNameException'
+        '482':
+          description: RepositoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/RepositoryDoesNotExistException'
+        '483':
+          description: MergeOptionRequiredException
+          schema:
+            $ref: '#/definitions/MergeOptionRequiredException'
+        '484':
+          description: InvalidMergeOptionException
+          schema:
+            $ref: '#/definitions/InvalidMergeOptionException'
+        '485':
+          description: InvalidContinuationTokenException
+          schema:
+            $ref: '#/definitions/InvalidContinuationTokenException'
+        '486':
+          description: CommitRequiredException
+          schema:
+            $ref: '#/definitions/CommitRequiredException'
+        '487':
+          description: CommitDoesNotExistException
+          schema:
+            $ref: '#/definitions/CommitDoesNotExistException'
+        '488':
+          description: InvalidCommitException
+          schema:
+            $ref: '#/definitions/InvalidCommitException'
+        '489':
+          description: TipsDivergenceExceededException
+          schema:
+            $ref: '#/definitions/TipsDivergenceExceededException'
+        '490':
+          description: PathRequiredException
+          schema:
+            $ref: '#/definitions/PathRequiredException'
+        '491':
+          description: InvalidPathException
+          schema:
+            $ref: '#/definitions/InvalidPathException'
+        '492':
+          description: FileDoesNotExistException
+          schema:
+            $ref: '#/definitions/FileDoesNotExistException'
+        '493':
+          description: InvalidMaxMergeHunksException
+          schema:
+            $ref: '#/definitions/InvalidMaxMergeHunksException'
+        '494':
+          description: InvalidConflictDetailLevelException
+          schema:
+            $ref: '#/definitions/InvalidConflictDetailLevelException'
+        '495':
+          description: InvalidConflictResolutionStrategyException
+          schema:
+            $ref: '#/definitions/InvalidConflictResolutionStrategyException'
+        '496':
+          description: MaximumFileContentToLoadExceededException
+          schema:
+            $ref: '#/definitions/MaximumFileContentToLoadExceededException'
+        '497':
+          description: EncryptionIntegrityChecksFailedException
+          schema:
+            $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
+        '498':
+          description: EncryptionKeyAccessDeniedException
+          schema:
+            $ref: '#/definitions/EncryptionKeyAccessDeniedException'
+        '499':
+          description: EncryptionKeyDisabledException
+          schema:
+            $ref: '#/definitions/EncryptionKeyDisabledException'
+        '500':
+          description: EncryptionKeyNotFoundException
+          schema:
+            $ref: '#/definitions/EncryptionKeyNotFoundException'
+        '501':
+          description: EncryptionKeyUnavailableException
+          schema:
+            $ref: '#/definitions/EncryptionKeyUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeMergeConflictsInput'
+        - name: maxMergeHunks
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.DescribeMergeConflicts
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1813,6 +2214,87 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=CodeCommit_20150413.GetMergeCommit':
+    post:
+      operationId: GetMergeCommit
+      description: Returns information about a specified merge commit.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetMergeCommitOutput'
+        '480':
+          description: RepositoryNameRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryNameRequiredException'
+        '481':
+          description: InvalidRepositoryNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryNameException'
+        '482':
+          description: RepositoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/RepositoryDoesNotExistException'
+        '483':
+          description: CommitRequiredException
+          schema:
+            $ref: '#/definitions/CommitRequiredException'
+        '484':
+          description: InvalidCommitException
+          schema:
+            $ref: '#/definitions/InvalidCommitException'
+        '485':
+          description: CommitDoesNotExistException
+          schema:
+            $ref: '#/definitions/CommitDoesNotExistException'
+        '486':
+          description: InvalidConflictDetailLevelException
+          schema:
+            $ref: '#/definitions/InvalidConflictDetailLevelException'
+        '487':
+          description: InvalidConflictResolutionStrategyException
+          schema:
+            $ref: '#/definitions/InvalidConflictResolutionStrategyException'
+        '488':
+          description: EncryptionIntegrityChecksFailedException
+          schema:
+            $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
+        '489':
+          description: EncryptionKeyAccessDeniedException
+          schema:
+            $ref: '#/definitions/EncryptionKeyAccessDeniedException'
+        '490':
+          description: EncryptionKeyDisabledException
+          schema:
+            $ref: '#/definitions/EncryptionKeyDisabledException'
+        '491':
+          description: EncryptionKeyNotFoundException
+          schema:
+            $ref: '#/definitions/EncryptionKeyNotFoundException'
+        '492':
+          description: EncryptionKeyUnavailableException
+          schema:
+            $ref: '#/definitions/EncryptionKeyUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetMergeCommitInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.GetMergeCommit
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=CodeCommit_20150413.GetMergeConflicts':
     post:
       operationId: GetMergeConflicts
@@ -1843,46 +2325,66 @@ paths:
           schema:
             $ref: '#/definitions/InvalidMergeOptionException'
         '485':
-          description: InvalidDestinationCommitSpecifierException
+          description: InvalidContinuationTokenException
           schema:
-            $ref: '#/definitions/InvalidDestinationCommitSpecifierException'
+            $ref: '#/definitions/InvalidContinuationTokenException'
         '486':
-          description: InvalidSourceCommitSpecifierException
-          schema:
-            $ref: '#/definitions/InvalidSourceCommitSpecifierException'
-        '487':
           description: CommitRequiredException
           schema:
             $ref: '#/definitions/CommitRequiredException'
-        '488':
+        '487':
           description: CommitDoesNotExistException
           schema:
             $ref: '#/definitions/CommitDoesNotExistException'
-        '489':
+        '488':
           description: InvalidCommitException
           schema:
             $ref: '#/definitions/InvalidCommitException'
-        '490':
+        '489':
           description: TipsDivergenceExceededException
           schema:
             $ref: '#/definitions/TipsDivergenceExceededException'
+        '490':
+          description: InvalidMaxConflictFilesException
+          schema:
+            $ref: '#/definitions/InvalidMaxConflictFilesException'
         '491':
+          description: InvalidConflictDetailLevelException
+          schema:
+            $ref: '#/definitions/InvalidConflictDetailLevelException'
+        '492':
+          description: InvalidDestinationCommitSpecifierException
+          schema:
+            $ref: '#/definitions/InvalidDestinationCommitSpecifierException'
+        '493':
+          description: InvalidSourceCommitSpecifierException
+          schema:
+            $ref: '#/definitions/InvalidSourceCommitSpecifierException'
+        '494':
+          description: InvalidConflictResolutionStrategyException
+          schema:
+            $ref: '#/definitions/InvalidConflictResolutionStrategyException'
+        '495':
+          description: MaximumFileContentToLoadExceededException
+          schema:
+            $ref: '#/definitions/MaximumFileContentToLoadExceededException'
+        '496':
           description: EncryptionIntegrityChecksFailedException
           schema:
             $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
-        '492':
+        '497':
           description: EncryptionKeyAccessDeniedException
           schema:
             $ref: '#/definitions/EncryptionKeyAccessDeniedException'
-        '493':
+        '498':
           description: EncryptionKeyDisabledException
           schema:
             $ref: '#/definitions/EncryptionKeyDisabledException'
-        '494':
+        '499':
           description: EncryptionKeyNotFoundException
           schema:
             $ref: '#/definitions/EncryptionKeyNotFoundException'
-        '495':
+        '500':
           description: EncryptionKeyUnavailableException
           schema:
             $ref: '#/definitions/EncryptionKeyUnavailableException'
@@ -1892,12 +2394,111 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetMergeConflictsInput'
+        - name: maxConflictFiles
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
           type: string
           enum:
             - CodeCommit_20150413.GetMergeConflicts
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=CodeCommit_20150413.GetMergeOptions':
+    post:
+      operationId: GetMergeOptions
+      description: 'Returns information about the merge options available for merging two specified branches. For details about why a particular merge option is not available, use GetMergeConflicts or DescribeMergeConflicts.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetMergeOptionsOutput'
+        '480':
+          description: RepositoryNameRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryNameRequiredException'
+        '481':
+          description: InvalidRepositoryNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryNameException'
+        '482':
+          description: RepositoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/RepositoryDoesNotExistException'
+        '483':
+          description: CommitRequiredException
+          schema:
+            $ref: '#/definitions/CommitRequiredException'
+        '484':
+          description: CommitDoesNotExistException
+          schema:
+            $ref: '#/definitions/CommitDoesNotExistException'
+        '485':
+          description: InvalidCommitException
+          schema:
+            $ref: '#/definitions/InvalidCommitException'
+        '486':
+          description: TipsDivergenceExceededException
+          schema:
+            $ref: '#/definitions/TipsDivergenceExceededException'
+        '487':
+          description: InvalidConflictDetailLevelException
+          schema:
+            $ref: '#/definitions/InvalidConflictDetailLevelException'
+        '488':
+          description: InvalidConflictResolutionStrategyException
+          schema:
+            $ref: '#/definitions/InvalidConflictResolutionStrategyException'
+        '489':
+          description: MaximumFileContentToLoadExceededException
+          schema:
+            $ref: '#/definitions/MaximumFileContentToLoadExceededException'
+        '490':
+          description: EncryptionIntegrityChecksFailedException
+          schema:
+            $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
+        '491':
+          description: EncryptionKeyAccessDeniedException
+          schema:
+            $ref: '#/definitions/EncryptionKeyAccessDeniedException'
+        '492':
+          description: EncryptionKeyDisabledException
+          schema:
+            $ref: '#/definitions/EncryptionKeyDisabledException'
+        '493':
+          description: EncryptionKeyNotFoundException
+          schema:
+            $ref: '#/definitions/EncryptionKeyNotFoundException'
+        '494':
+          description: EncryptionKeyUnavailableException
+          schema:
+            $ref: '#/definitions/EncryptionKeyUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetMergeOptionsInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.GetMergeOptions
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -2341,10 +2942,465 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=CodeCommit_20150413.MergeBranchesByFastForward':
+    post:
+      operationId: MergeBranchesByFastForward
+      description: Merges two branches using the fast-forward merge strategy.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/MergeBranchesByFastForwardOutput'
+        '480':
+          description: RepositoryNameRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryNameRequiredException'
+        '481':
+          description: InvalidRepositoryNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryNameException'
+        '482':
+          description: RepositoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/RepositoryDoesNotExistException'
+        '483':
+          description: TipsDivergenceExceededException
+          schema:
+            $ref: '#/definitions/TipsDivergenceExceededException'
+        '484':
+          description: CommitRequiredException
+          schema:
+            $ref: '#/definitions/CommitRequiredException'
+        '485':
+          description: InvalidCommitException
+          schema:
+            $ref: '#/definitions/InvalidCommitException'
+        '486':
+          description: CommitDoesNotExistException
+          schema:
+            $ref: '#/definitions/CommitDoesNotExistException'
+        '487':
+          description: InvalidTargetBranchException
+          schema:
+            $ref: '#/definitions/InvalidTargetBranchException'
+        '488':
+          description: InvalidBranchNameException
+          schema:
+            $ref: '#/definitions/InvalidBranchNameException'
+        '489':
+          description: BranchNameRequiredException
+          schema:
+            $ref: '#/definitions/BranchNameRequiredException'
+        '490':
+          description: BranchNameIsTagNameException
+          schema:
+            $ref: '#/definitions/BranchNameIsTagNameException'
+        '491':
+          description: BranchDoesNotExistException
+          schema:
+            $ref: '#/definitions/BranchDoesNotExistException'
+        '492':
+          description: ManualMergeRequiredException
+          schema:
+            $ref: '#/definitions/ManualMergeRequiredException'
+        '493':
+          description: EncryptionIntegrityChecksFailedException
+          schema:
+            $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
+        '494':
+          description: EncryptionKeyAccessDeniedException
+          schema:
+            $ref: '#/definitions/EncryptionKeyAccessDeniedException'
+        '495':
+          description: EncryptionKeyDisabledException
+          schema:
+            $ref: '#/definitions/EncryptionKeyDisabledException'
+        '496':
+          description: EncryptionKeyNotFoundException
+          schema:
+            $ref: '#/definitions/EncryptionKeyNotFoundException'
+        '497':
+          description: EncryptionKeyUnavailableException
+          schema:
+            $ref: '#/definitions/EncryptionKeyUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/MergeBranchesByFastForwardInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.MergeBranchesByFastForward
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=CodeCommit_20150413.MergeBranchesBySquash':
+    post:
+      operationId: MergeBranchesBySquash
+      description: Merges two branches using the squash merge strategy.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/MergeBranchesBySquashOutput'
+        '480':
+          description: RepositoryNameRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryNameRequiredException'
+        '481':
+          description: InvalidRepositoryNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryNameException'
+        '482':
+          description: RepositoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/RepositoryDoesNotExistException'
+        '483':
+          description: TipsDivergenceExceededException
+          schema:
+            $ref: '#/definitions/TipsDivergenceExceededException'
+        '484':
+          description: CommitRequiredException
+          schema:
+            $ref: '#/definitions/CommitRequiredException'
+        '485':
+          description: InvalidCommitException
+          schema:
+            $ref: '#/definitions/InvalidCommitException'
+        '486':
+          description: CommitDoesNotExistException
+          schema:
+            $ref: '#/definitions/CommitDoesNotExistException'
+        '487':
+          description: InvalidTargetBranchException
+          schema:
+            $ref: '#/definitions/InvalidTargetBranchException'
+        '488':
+          description: InvalidBranchNameException
+          schema:
+            $ref: '#/definitions/InvalidBranchNameException'
+        '489':
+          description: BranchNameRequiredException
+          schema:
+            $ref: '#/definitions/BranchNameRequiredException'
+        '490':
+          description: BranchNameIsTagNameException
+          schema:
+            $ref: '#/definitions/BranchNameIsTagNameException'
+        '491':
+          description: BranchDoesNotExistException
+          schema:
+            $ref: '#/definitions/BranchDoesNotExistException'
+        '492':
+          description: ManualMergeRequiredException
+          schema:
+            $ref: '#/definitions/ManualMergeRequiredException'
+        '493':
+          description: InvalidConflictDetailLevelException
+          schema:
+            $ref: '#/definitions/InvalidConflictDetailLevelException'
+        '494':
+          description: InvalidConflictResolutionStrategyException
+          schema:
+            $ref: '#/definitions/InvalidConflictResolutionStrategyException'
+        '495':
+          description: InvalidConflictResolutionException
+          schema:
+            $ref: '#/definitions/InvalidConflictResolutionException'
+        '496':
+          description: MaximumConflictResolutionEntriesExceededException
+          schema:
+            $ref: '#/definitions/MaximumConflictResolutionEntriesExceededException'
+        '497':
+          description: MultipleConflictResolutionEntriesException
+          schema:
+            $ref: '#/definitions/MultipleConflictResolutionEntriesException'
+        '498':
+          description: ReplacementTypeRequiredException
+          schema:
+            $ref: '#/definitions/ReplacementTypeRequiredException'
+        '499':
+          description: InvalidReplacementTypeException
+          schema:
+            $ref: '#/definitions/InvalidReplacementTypeException'
+        '500':
+          description: ReplacementContentRequiredException
+          schema:
+            $ref: '#/definitions/ReplacementContentRequiredException'
+        '501':
+          description: InvalidReplacementContentException
+          schema:
+            $ref: '#/definitions/InvalidReplacementContentException'
+        '502':
+          description: PathRequiredException
+          schema:
+            $ref: '#/definitions/PathRequiredException'
+        '503':
+          description: InvalidPathException
+          schema:
+            $ref: '#/definitions/InvalidPathException'
+        '504':
+          description: FileContentSizeLimitExceededException
+          schema:
+            $ref: '#/definitions/FileContentSizeLimitExceededException'
+        '505':
+          description: FolderContentSizeLimitExceededException
+          schema:
+            $ref: '#/definitions/FolderContentSizeLimitExceededException'
+        '506':
+          description: MaximumFileContentToLoadExceededException
+          schema:
+            $ref: '#/definitions/MaximumFileContentToLoadExceededException'
+        '507':
+          description: FileModeRequiredException
+          schema:
+            $ref: '#/definitions/FileModeRequiredException'
+        '508':
+          description: InvalidFileModeException
+          schema:
+            $ref: '#/definitions/InvalidFileModeException'
+        '509':
+          description: NameLengthExceededException
+          schema:
+            $ref: '#/definitions/NameLengthExceededException'
+        '510':
+          description: InvalidEmailException
+          schema:
+            $ref: '#/definitions/InvalidEmailException'
+        '511':
+          description: CommitMessageLengthExceededException
+          schema:
+            $ref: '#/definitions/CommitMessageLengthExceededException'
+        '512':
+          description: EncryptionIntegrityChecksFailedException
+          schema:
+            $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
+        '513':
+          description: EncryptionKeyAccessDeniedException
+          schema:
+            $ref: '#/definitions/EncryptionKeyAccessDeniedException'
+        '514':
+          description: EncryptionKeyDisabledException
+          schema:
+            $ref: '#/definitions/EncryptionKeyDisabledException'
+        '515':
+          description: EncryptionKeyNotFoundException
+          schema:
+            $ref: '#/definitions/EncryptionKeyNotFoundException'
+        '516':
+          description: EncryptionKeyUnavailableException
+          schema:
+            $ref: '#/definitions/EncryptionKeyUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/MergeBranchesBySquashInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.MergeBranchesBySquash
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=CodeCommit_20150413.MergeBranchesByThreeWay':
+    post:
+      operationId: MergeBranchesByThreeWay
+      description: Merges two specified branches using the three-way merge strategy.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/MergeBranchesByThreeWayOutput'
+        '480':
+          description: RepositoryNameRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryNameRequiredException'
+        '481':
+          description: InvalidRepositoryNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryNameException'
+        '482':
+          description: RepositoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/RepositoryDoesNotExistException'
+        '483':
+          description: TipsDivergenceExceededException
+          schema:
+            $ref: '#/definitions/TipsDivergenceExceededException'
+        '484':
+          description: CommitRequiredException
+          schema:
+            $ref: '#/definitions/CommitRequiredException'
+        '485':
+          description: InvalidCommitException
+          schema:
+            $ref: '#/definitions/InvalidCommitException'
+        '486':
+          description: CommitDoesNotExistException
+          schema:
+            $ref: '#/definitions/CommitDoesNotExistException'
+        '487':
+          description: InvalidTargetBranchException
+          schema:
+            $ref: '#/definitions/InvalidTargetBranchException'
+        '488':
+          description: InvalidBranchNameException
+          schema:
+            $ref: '#/definitions/InvalidBranchNameException'
+        '489':
+          description: BranchNameRequiredException
+          schema:
+            $ref: '#/definitions/BranchNameRequiredException'
+        '490':
+          description: BranchNameIsTagNameException
+          schema:
+            $ref: '#/definitions/BranchNameIsTagNameException'
+        '491':
+          description: BranchDoesNotExistException
+          schema:
+            $ref: '#/definitions/BranchDoesNotExistException'
+        '492':
+          description: ManualMergeRequiredException
+          schema:
+            $ref: '#/definitions/ManualMergeRequiredException'
+        '493':
+          description: InvalidConflictDetailLevelException
+          schema:
+            $ref: '#/definitions/InvalidConflictDetailLevelException'
+        '494':
+          description: InvalidConflictResolutionStrategyException
+          schema:
+            $ref: '#/definitions/InvalidConflictResolutionStrategyException'
+        '495':
+          description: InvalidConflictResolutionException
+          schema:
+            $ref: '#/definitions/InvalidConflictResolutionException'
+        '496':
+          description: MaximumConflictResolutionEntriesExceededException
+          schema:
+            $ref: '#/definitions/MaximumConflictResolutionEntriesExceededException'
+        '497':
+          description: MultipleConflictResolutionEntriesException
+          schema:
+            $ref: '#/definitions/MultipleConflictResolutionEntriesException'
+        '498':
+          description: ReplacementTypeRequiredException
+          schema:
+            $ref: '#/definitions/ReplacementTypeRequiredException'
+        '499':
+          description: InvalidReplacementTypeException
+          schema:
+            $ref: '#/definitions/InvalidReplacementTypeException'
+        '500':
+          description: ReplacementContentRequiredException
+          schema:
+            $ref: '#/definitions/ReplacementContentRequiredException'
+        '501':
+          description: InvalidReplacementContentException
+          schema:
+            $ref: '#/definitions/InvalidReplacementContentException'
+        '502':
+          description: PathRequiredException
+          schema:
+            $ref: '#/definitions/PathRequiredException'
+        '503':
+          description: InvalidPathException
+          schema:
+            $ref: '#/definitions/InvalidPathException'
+        '504':
+          description: FileContentSizeLimitExceededException
+          schema:
+            $ref: '#/definitions/FileContentSizeLimitExceededException'
+        '505':
+          description: FolderContentSizeLimitExceededException
+          schema:
+            $ref: '#/definitions/FolderContentSizeLimitExceededException'
+        '506':
+          description: MaximumFileContentToLoadExceededException
+          schema:
+            $ref: '#/definitions/MaximumFileContentToLoadExceededException'
+        '507':
+          description: FileModeRequiredException
+          schema:
+            $ref: '#/definitions/FileModeRequiredException'
+        '508':
+          description: InvalidFileModeException
+          schema:
+            $ref: '#/definitions/InvalidFileModeException'
+        '509':
+          description: NameLengthExceededException
+          schema:
+            $ref: '#/definitions/NameLengthExceededException'
+        '510':
+          description: InvalidEmailException
+          schema:
+            $ref: '#/definitions/InvalidEmailException'
+        '511':
+          description: CommitMessageLengthExceededException
+          schema:
+            $ref: '#/definitions/CommitMessageLengthExceededException'
+        '512':
+          description: EncryptionIntegrityChecksFailedException
+          schema:
+            $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
+        '513':
+          description: EncryptionKeyAccessDeniedException
+          schema:
+            $ref: '#/definitions/EncryptionKeyAccessDeniedException'
+        '514':
+          description: EncryptionKeyDisabledException
+          schema:
+            $ref: '#/definitions/EncryptionKeyDisabledException'
+        '515':
+          description: EncryptionKeyNotFoundException
+          schema:
+            $ref: '#/definitions/EncryptionKeyNotFoundException'
+        '516':
+          description: EncryptionKeyUnavailableException
+          schema:
+            $ref: '#/definitions/EncryptionKeyUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/MergeBranchesByThreeWayInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.MergeBranchesByThreeWay
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=CodeCommit_20150413.MergePullRequestByFastForward':
     post:
       operationId: MergePullRequestByFastForward
-      description: Closes a pull request and attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the fast-forward merge option.
+      description: Closes a pull request and attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the fast-forward merge strategy.
       responses:
         '200':
           description: Success
@@ -2383,34 +3439,38 @@ paths:
           schema:
             $ref: '#/definitions/InvalidCommitIdException'
         '488':
+          description: RepositoryNotAssociatedWithPullRequestException
+          schema:
+            $ref: '#/definitions/RepositoryNotAssociatedWithPullRequestException'
+        '489':
           description: RepositoryNameRequiredException
           schema:
             $ref: '#/definitions/RepositoryNameRequiredException'
-        '489':
+        '490':
           description: InvalidRepositoryNameException
           schema:
             $ref: '#/definitions/InvalidRepositoryNameException'
-        '490':
+        '491':
           description: RepositoryDoesNotExistException
           schema:
             $ref: '#/definitions/RepositoryDoesNotExistException'
-        '491':
+        '492':
           description: EncryptionIntegrityChecksFailedException
           schema:
             $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
-        '492':
+        '493':
           description: EncryptionKeyAccessDeniedException
           schema:
             $ref: '#/definitions/EncryptionKeyAccessDeniedException'
-        '493':
+        '494':
           description: EncryptionKeyDisabledException
           schema:
             $ref: '#/definitions/EncryptionKeyDisabledException'
-        '494':
+        '495':
           description: EncryptionKeyNotFoundException
           schema:
             $ref: '#/definitions/EncryptionKeyNotFoundException'
-        '495':
+        '496':
           description: EncryptionKeyUnavailableException
           schema:
             $ref: '#/definitions/EncryptionKeyUnavailableException'
@@ -2426,6 +3486,344 @@ paths:
           type: string
           enum:
             - CodeCommit_20150413.MergePullRequestByFastForward
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=CodeCommit_20150413.MergePullRequestBySquash':
+    post:
+      operationId: MergePullRequestBySquash
+      description: Closes a pull request and attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the squash merge strategy.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/MergePullRequestBySquashOutput'
+        '480':
+          description: PullRequestAlreadyClosedException
+          schema:
+            $ref: '#/definitions/PullRequestAlreadyClosedException'
+        '481':
+          description: PullRequestDoesNotExistException
+          schema:
+            $ref: '#/definitions/PullRequestDoesNotExistException'
+        '482':
+          description: PullRequestIdRequiredException
+          schema:
+            $ref: '#/definitions/PullRequestIdRequiredException'
+        '483':
+          description: InvalidPullRequestIdException
+          schema:
+            $ref: '#/definitions/InvalidPullRequestIdException'
+        '484':
+          description: InvalidCommitIdException
+          schema:
+            $ref: '#/definitions/InvalidCommitIdException'
+        '485':
+          description: ManualMergeRequiredException
+          schema:
+            $ref: '#/definitions/ManualMergeRequiredException'
+        '486':
+          description: TipOfSourceReferenceIsDifferentException
+          schema:
+            $ref: '#/definitions/TipOfSourceReferenceIsDifferentException'
+        '487':
+          description: TipsDivergenceExceededException
+          schema:
+            $ref: '#/definitions/TipsDivergenceExceededException'
+        '488':
+          description: NameLengthExceededException
+          schema:
+            $ref: '#/definitions/NameLengthExceededException'
+        '489':
+          description: InvalidEmailException
+          schema:
+            $ref: '#/definitions/InvalidEmailException'
+        '490':
+          description: CommitMessageLengthExceededException
+          schema:
+            $ref: '#/definitions/CommitMessageLengthExceededException'
+        '491':
+          description: InvalidConflictDetailLevelException
+          schema:
+            $ref: '#/definitions/InvalidConflictDetailLevelException'
+        '492':
+          description: InvalidConflictResolutionStrategyException
+          schema:
+            $ref: '#/definitions/InvalidConflictResolutionStrategyException'
+        '493':
+          description: InvalidConflictResolutionException
+          schema:
+            $ref: '#/definitions/InvalidConflictResolutionException'
+        '494':
+          description: ReplacementTypeRequiredException
+          schema:
+            $ref: '#/definitions/ReplacementTypeRequiredException'
+        '495':
+          description: InvalidReplacementTypeException
+          schema:
+            $ref: '#/definitions/InvalidReplacementTypeException'
+        '496':
+          description: MultipleConflictResolutionEntriesException
+          schema:
+            $ref: '#/definitions/MultipleConflictResolutionEntriesException'
+        '497':
+          description: ReplacementContentRequiredException
+          schema:
+            $ref: '#/definitions/ReplacementContentRequiredException'
+        '498':
+          description: MaximumConflictResolutionEntriesExceededException
+          schema:
+            $ref: '#/definitions/MaximumConflictResolutionEntriesExceededException'
+        '499':
+          description: PathRequiredException
+          schema:
+            $ref: '#/definitions/PathRequiredException'
+        '500':
+          description: InvalidPathException
+          schema:
+            $ref: '#/definitions/InvalidPathException'
+        '501':
+          description: InvalidFileModeException
+          schema:
+            $ref: '#/definitions/InvalidFileModeException'
+        '502':
+          description: InvalidReplacementContentException
+          schema:
+            $ref: '#/definitions/InvalidReplacementContentException'
+        '503':
+          description: FileContentSizeLimitExceededException
+          schema:
+            $ref: '#/definitions/FileContentSizeLimitExceededException'
+        '504':
+          description: FolderContentSizeLimitExceededException
+          schema:
+            $ref: '#/definitions/FolderContentSizeLimitExceededException'
+        '505':
+          description: MaximumFileContentToLoadExceededException
+          schema:
+            $ref: '#/definitions/MaximumFileContentToLoadExceededException'
+        '506':
+          description: RepositoryNameRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryNameRequiredException'
+        '507':
+          description: InvalidRepositoryNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryNameException'
+        '508':
+          description: RepositoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/RepositoryDoesNotExistException'
+        '509':
+          description: RepositoryNotAssociatedWithPullRequestException
+          schema:
+            $ref: '#/definitions/RepositoryNotAssociatedWithPullRequestException'
+        '510':
+          description: EncryptionIntegrityChecksFailedException
+          schema:
+            $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
+        '511':
+          description: EncryptionKeyAccessDeniedException
+          schema:
+            $ref: '#/definitions/EncryptionKeyAccessDeniedException'
+        '512':
+          description: EncryptionKeyDisabledException
+          schema:
+            $ref: '#/definitions/EncryptionKeyDisabledException'
+        '513':
+          description: EncryptionKeyNotFoundException
+          schema:
+            $ref: '#/definitions/EncryptionKeyNotFoundException'
+        '514':
+          description: EncryptionKeyUnavailableException
+          schema:
+            $ref: '#/definitions/EncryptionKeyUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/MergePullRequestBySquashInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.MergePullRequestBySquash
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=CodeCommit_20150413.MergePullRequestByThreeWay':
+    post:
+      operationId: MergePullRequestByThreeWay
+      description: Closes a pull request and attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the three-way merge strategy.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/MergePullRequestByThreeWayOutput'
+        '480':
+          description: PullRequestAlreadyClosedException
+          schema:
+            $ref: '#/definitions/PullRequestAlreadyClosedException'
+        '481':
+          description: PullRequestDoesNotExistException
+          schema:
+            $ref: '#/definitions/PullRequestDoesNotExistException'
+        '482':
+          description: PullRequestIdRequiredException
+          schema:
+            $ref: '#/definitions/PullRequestIdRequiredException'
+        '483':
+          description: InvalidPullRequestIdException
+          schema:
+            $ref: '#/definitions/InvalidPullRequestIdException'
+        '484':
+          description: InvalidCommitIdException
+          schema:
+            $ref: '#/definitions/InvalidCommitIdException'
+        '485':
+          description: ManualMergeRequiredException
+          schema:
+            $ref: '#/definitions/ManualMergeRequiredException'
+        '486':
+          description: TipOfSourceReferenceIsDifferentException
+          schema:
+            $ref: '#/definitions/TipOfSourceReferenceIsDifferentException'
+        '487':
+          description: TipsDivergenceExceededException
+          schema:
+            $ref: '#/definitions/TipsDivergenceExceededException'
+        '488':
+          description: NameLengthExceededException
+          schema:
+            $ref: '#/definitions/NameLengthExceededException'
+        '489':
+          description: InvalidEmailException
+          schema:
+            $ref: '#/definitions/InvalidEmailException'
+        '490':
+          description: CommitMessageLengthExceededException
+          schema:
+            $ref: '#/definitions/CommitMessageLengthExceededException'
+        '491':
+          description: InvalidConflictDetailLevelException
+          schema:
+            $ref: '#/definitions/InvalidConflictDetailLevelException'
+        '492':
+          description: InvalidConflictResolutionStrategyException
+          schema:
+            $ref: '#/definitions/InvalidConflictResolutionStrategyException'
+        '493':
+          description: InvalidConflictResolutionException
+          schema:
+            $ref: '#/definitions/InvalidConflictResolutionException'
+        '494':
+          description: ReplacementTypeRequiredException
+          schema:
+            $ref: '#/definitions/ReplacementTypeRequiredException'
+        '495':
+          description: InvalidReplacementTypeException
+          schema:
+            $ref: '#/definitions/InvalidReplacementTypeException'
+        '496':
+          description: MultipleConflictResolutionEntriesException
+          schema:
+            $ref: '#/definitions/MultipleConflictResolutionEntriesException'
+        '497':
+          description: ReplacementContentRequiredException
+          schema:
+            $ref: '#/definitions/ReplacementContentRequiredException'
+        '498':
+          description: MaximumConflictResolutionEntriesExceededException
+          schema:
+            $ref: '#/definitions/MaximumConflictResolutionEntriesExceededException'
+        '499':
+          description: PathRequiredException
+          schema:
+            $ref: '#/definitions/PathRequiredException'
+        '500':
+          description: InvalidPathException
+          schema:
+            $ref: '#/definitions/InvalidPathException'
+        '501':
+          description: InvalidFileModeException
+          schema:
+            $ref: '#/definitions/InvalidFileModeException'
+        '502':
+          description: InvalidReplacementContentException
+          schema:
+            $ref: '#/definitions/InvalidReplacementContentException'
+        '503':
+          description: FileContentSizeLimitExceededException
+          schema:
+            $ref: '#/definitions/FileContentSizeLimitExceededException'
+        '504':
+          description: FolderContentSizeLimitExceededException
+          schema:
+            $ref: '#/definitions/FolderContentSizeLimitExceededException'
+        '505':
+          description: MaximumFileContentToLoadExceededException
+          schema:
+            $ref: '#/definitions/MaximumFileContentToLoadExceededException'
+        '506':
+          description: RepositoryNameRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryNameRequiredException'
+        '507':
+          description: InvalidRepositoryNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryNameException'
+        '508':
+          description: RepositoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/RepositoryDoesNotExistException'
+        '509':
+          description: RepositoryNotAssociatedWithPullRequestException
+          schema:
+            $ref: '#/definitions/RepositoryNotAssociatedWithPullRequestException'
+        '510':
+          description: EncryptionIntegrityChecksFailedException
+          schema:
+            $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
+        '511':
+          description: EncryptionKeyAccessDeniedException
+          schema:
+            $ref: '#/definitions/EncryptionKeyAccessDeniedException'
+        '512':
+          description: EncryptionKeyDisabledException
+          schema:
+            $ref: '#/definitions/EncryptionKeyDisabledException'
+        '513':
+          description: EncryptionKeyNotFoundException
+          schema:
+            $ref: '#/definitions/EncryptionKeyNotFoundException'
+        '514':
+          description: EncryptionKeyUnavailableException
+          schema:
+            $ref: '#/definitions/EncryptionKeyUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/MergePullRequestByThreeWayInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - CodeCommit_20150413.MergePullRequestByThreeWay
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -3668,6 +5066,89 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
+  BatchDescribeMergeConflictsOutput:
+    type: object
+    required:
+      - conflicts
+      - destinationCommitId
+      - sourceCommitId
+    properties:
+      conflicts:
+        $ref: '#/definitions/Conflicts'
+        description: 'A list of conflicts for each file, including the conflict metadata and the hunks of the differences between the files.'
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: An enumeration token that can be used in a request to return the next batch of the results.
+      errors:
+        $ref: '#/definitions/BatchDescribeMergeConflictsErrors'
+        description: A list of any errors returned while describing the merge conflicts for each file.
+      destinationCommitId:
+        $ref: '#/definitions/ObjectId'
+        description: The commit ID of the destination commit specifier that was used in the merge evaluation.
+      sourceCommitId:
+        $ref: '#/definitions/ObjectId'
+        description: The commit ID of the source commit specifier that was used in the merge evaluation.
+      baseCommitId:
+        $ref: '#/definitions/ObjectId'
+        description: The commit ID of the merge base.
+  BatchDescribeMergeConflictsInput:
+    type: object
+    required:
+      - repositoryName
+      - destinationCommitSpecifier
+      - sourceCommitSpecifier
+      - mergeOption
+    properties:
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository that contains the merge conflicts you want to review.
+      destinationCommitSpecifier:
+        $ref: '#/definitions/CommitName'
+        description: 'The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.'
+      sourceCommitSpecifier:
+        $ref: '#/definitions/CommitName'
+        description: 'The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.'
+      mergeOption:
+        $ref: '#/definitions/MergeOptionTypeEnum'
+        description: The merge option or strategy you want to use to merge the code.
+      maxMergeHunks:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of merge hunks to include in the output.
+      maxConflictFiles:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of files to include in the output.
+      filePaths:
+        $ref: '#/definitions/FilePaths'
+        description: 'The path of the target files used to describe the conflicts. If not specified, the default is all conflict files.'
+      conflictDetailLevel:
+        $ref: '#/definitions/ConflictDetailLevelTypeEnum'
+        description: 'The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which will return a not mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict will be considered not mergeable if the same file in both branches has differences on the same line.'
+      conflictResolutionStrategy:
+        $ref: '#/definitions/ConflictResolutionStrategyTypeEnum'
+        description: 'Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation will be successful.'
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'An enumeration token that when provided in a request, returns the next batch of the results.'
+  RepositoryNameRequiredException: {}
+  InvalidRepositoryNameException: {}
+  RepositoryDoesNotExistException: {}
+  MergeOptionRequiredException: {}
+  InvalidMergeOptionException: {}
+  InvalidContinuationTokenException: {}
+  CommitRequiredException: {}
+  CommitDoesNotExistException: {}
+  InvalidCommitException: {}
+  TipsDivergenceExceededException: {}
+  InvalidMaxConflictFilesException: {}
+  InvalidMaxMergeHunksException: {}
+  InvalidConflictDetailLevelException: {}
+  InvalidConflictResolutionStrategyException: {}
+  MaximumFileContentToLoadExceededException: {}
+  EncryptionIntegrityChecksFailedException: {}
+  EncryptionKeyAccessDeniedException: {}
+  EncryptionKeyDisabledException: {}
+  EncryptionKeyNotFoundException: {}
+  EncryptionKeyUnavailableException: {}
   BatchGetRepositoriesOutput:
     type: object
     properties:
@@ -3689,12 +5170,6 @@ definitions:
     description: Represents the input of a batch get repositories operation.
   RepositoryNamesRequiredException: {}
   MaximumRepositoryNamesExceededException: {}
-  InvalidRepositoryNameException: {}
-  EncryptionIntegrityChecksFailedException: {}
-  EncryptionKeyAccessDeniedException: {}
-  EncryptionKeyDisabledException: {}
-  EncryptionKeyNotFoundException: {}
-  EncryptionKeyUnavailableException: {}
   CreateBranchInput:
     type: object
     required:
@@ -3712,13 +5187,10 @@ definitions:
         $ref: '#/definitions/CommitId'
         description: The ID of the commit to point the new branch to.
     description: Represents the input of a create branch operation.
-  RepositoryNameRequiredException: {}
-  RepositoryDoesNotExistException: {}
   BranchNameRequiredException: {}
   BranchNameExistsException: {}
   InvalidBranchNameException: {}
   CommitIdRequiredException: {}
-  CommitDoesNotExistException: {}
   InvalidCommitIdException: {}
   CreateCommitOutput:
     type: object
@@ -3764,7 +5236,7 @@ definitions:
         description: 'The commit message you want to include as part of creating the commit. Commit messages are limited to 256 KB. If no message is specified, a default message will be used.'
       keepEmptyFolders:
         $ref: '#/definitions/KeepEmptyFolders'
-        description: 'If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty. If this is specified as true, a .gitkeep file will be created for empty folders.'
+        description: 'If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty. If this is specified as true, a .gitkeep file will be created for empty folders. The default is false.'
       putFiles:
         $ref: '#/definitions/PutFileEntries'
         description: The files to add or update in this commit.
@@ -3874,6 +5346,64 @@ definitions:
   TooManyTagsException: {}
   InvalidSystemTagUsageException: {}
   TagPolicyException: {}
+  CreateUnreferencedMergeCommitOutput:
+    type: object
+    properties:
+      commitId:
+        $ref: '#/definitions/ObjectId'
+        description: The full commit ID of the commit that contains your merge results.
+      treeId:
+        $ref: '#/definitions/ObjectId'
+        description: The full SHA-1 pointer of the tree information for the commit that contains the merge results.
+  CreateUnreferencedMergeCommitInput:
+    type: object
+    required:
+      - repositoryName
+      - sourceCommitSpecifier
+      - destinationCommitSpecifier
+      - mergeOption
+    properties:
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository where you want to create the unreferenced merge commit.
+      sourceCommitSpecifier:
+        $ref: '#/definitions/CommitName'
+        description: 'The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.'
+      destinationCommitSpecifier:
+        $ref: '#/definitions/CommitName'
+        description: 'The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.'
+      mergeOption:
+        $ref: '#/definitions/MergeOptionTypeEnum'
+        description: The merge option or strategy you want to use to merge the code.
+      conflictDetailLevel:
+        $ref: '#/definitions/ConflictDetailLevelTypeEnum'
+        description: 'The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which will return a not mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict will be considered not mergeable if the same file in both branches has differences on the same line.'
+      conflictResolutionStrategy:
+        $ref: '#/definitions/ConflictResolutionStrategyTypeEnum'
+        description: 'Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation will be successful.'
+      authorName:
+        $ref: '#/definitions/Name'
+        description: The name of the author who created the unreferenced commit. This information will be used as both the author and committer for the commit.
+      email:
+        $ref: '#/definitions/Email'
+        description: The email address for the person who created the unreferenced commit.
+      commitMessage:
+        $ref: '#/definitions/Message'
+        description: The commit message for the unreferenced commit.
+      keepEmptyFolders:
+        $ref: '#/definitions/KeepEmptyFolders'
+        description: 'If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty. If this is specified as true, a .gitkeep file will be created for empty folders. The default is false.'
+      conflictResolution:
+        $ref: '#/definitions/ConflictResolution'
+        description: A list of inputs to use when resolving conflicts during a merge if AUTOMERGE is chosen as the conflict resolution strategy.
+  InvalidConflictResolutionException: {}
+  ManualMergeRequiredException: {}
+  MaximumConflictResolutionEntriesExceededException: {}
+  MultipleConflictResolutionEntriesException: {}
+  ReplacementTypeRequiredException: {}
+  InvalidReplacementTypeException: {}
+  ReplacementContentRequiredException: {}
+  InvalidReplacementContentException: {}
   DeleteBranchOutput:
     type: object
     properties:
@@ -3981,6 +5511,68 @@ definitions:
         $ref: '#/definitions/RepositoryName'
         description: The name of the repository to delete.
     description: Represents the input of a delete repository operation.
+  DescribeMergeConflictsOutput:
+    type: object
+    required:
+      - conflictMetadata
+      - mergeHunks
+      - destinationCommitId
+      - sourceCommitId
+    properties:
+      conflictMetadata:
+        $ref: '#/definitions/ConflictMetadata'
+        description: Contains metadata about the conflicts found in the merge.
+      mergeHunks:
+        $ref: '#/definitions/MergeHunks'
+        description: A list of merge hunks of the differences between the files or lines.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: An enumeration token that can be used in a request to return the next batch of the results.
+      destinationCommitId:
+        $ref: '#/definitions/ObjectId'
+        description: The commit ID of the destination commit specifier that was used in the merge evaluation.
+      sourceCommitId:
+        $ref: '#/definitions/ObjectId'
+        description: The commit ID of the source commit specifier that was used in the merge evaluation.
+      baseCommitId:
+        $ref: '#/definitions/ObjectId'
+        description: The commit ID of the merge base.
+  DescribeMergeConflictsInput:
+    type: object
+    required:
+      - repositoryName
+      - destinationCommitSpecifier
+      - sourceCommitSpecifier
+      - mergeOption
+      - filePath
+    properties:
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository where you want to get information about a merge conflict.
+      destinationCommitSpecifier:
+        $ref: '#/definitions/CommitName'
+        description: 'The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.'
+      sourceCommitSpecifier:
+        $ref: '#/definitions/CommitName'
+        description: 'The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.'
+      mergeOption:
+        $ref: '#/definitions/MergeOptionTypeEnum'
+        description: The merge option or strategy you want to use to merge the code.
+      maxMergeHunks:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of merge hunks to include in the output.
+      filePath:
+        $ref: '#/definitions/Path'
+        description: 'The path of the target files used to describe the conflicts. '
+      conflictDetailLevel:
+        $ref: '#/definitions/ConflictDetailLevelTypeEnum'
+        description: 'The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which will return a not mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict will be considered not mergeable if the same file in both branches has differences on the same line.'
+      conflictResolutionStrategy:
+        $ref: '#/definitions/ConflictResolutionStrategyTypeEnum'
+        description: 'Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation will be successful.'
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'An enumeration token that when provided in a request, returns the next batch of the results.'
   DescribePullRequestEventsOutput:
     type: object
     required:
@@ -4019,7 +5611,6 @@ definitions:
   InvalidActorArnException: {}
   ActorDoesNotExistException: {}
   InvalidMaxResultsException: {}
-  InvalidContinuationTokenException: {}
   GetBlobOutput:
     type: object
     required:
@@ -4199,8 +5790,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'An enumeration token that when provided in a request, returns the next batch of the results.'
-  CommitRequiredException: {}
-  InvalidCommitException: {}
   PathDoesNotExistException: {}
   GetFileOutput:
     type: object
@@ -4288,22 +5877,69 @@ definitions:
         $ref: '#/definitions/Path'
         description: 'The fully-qualified path to the folder whose contents will be returned, including the folder name. For example, /examples is a fully-qualified path to a folder named examples that was created off of the root directory (/) of a repository. '
   FolderDoesNotExistException: {}
+  GetMergeCommitOutput:
+    type: object
+    properties:
+      sourceCommitId:
+        $ref: '#/definitions/ObjectId'
+        description: The commit ID of the source commit specifier that was used in the merge evaluation.
+      destinationCommitId:
+        $ref: '#/definitions/ObjectId'
+        description: The commit ID of the destination commit specifier that was used in the merge evaluation.
+      baseCommitId:
+        $ref: '#/definitions/ObjectId'
+        description: The commit ID of the merge base.
+      mergedCommitId:
+        $ref: '#/definitions/ObjectId'
+        description: 'The commit ID for the merge commit created when the source branch was merged into the destination branch. If the fast-forward merge strategy was used, no merge commit exists.'
+  GetMergeCommitInput:
+    type: object
+    required:
+      - repositoryName
+      - sourceCommitSpecifier
+      - destinationCommitSpecifier
+    properties:
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository that contains the merge commit about which you want to get information.
+      sourceCommitSpecifier:
+        $ref: '#/definitions/CommitName'
+        description: 'The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.'
+      destinationCommitSpecifier:
+        $ref: '#/definitions/CommitName'
+        description: 'The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.'
+      conflictDetailLevel:
+        $ref: '#/definitions/ConflictDetailLevelTypeEnum'
+        description: 'The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which will return a not mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict will be considered not mergeable if the same file in both branches has differences on the same line.'
+      conflictResolutionStrategy:
+        $ref: '#/definitions/ConflictResolutionStrategyTypeEnum'
+        description: 'Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation will be successful.'
   GetMergeConflictsOutput:
     type: object
     required:
       - mergeable
       - destinationCommitId
       - sourceCommitId
+      - conflictMetadataList
     properties:
       mergeable:
         $ref: '#/definitions/IsMergeable'
-        description: A Boolean value that indicates whether the code is mergable by the specified merge option.
+        description: A Boolean value that indicates whether the code is mergeable by the specified merge option.
       destinationCommitId:
-        $ref: '#/definitions/CommitId'
+        $ref: '#/definitions/ObjectId'
         description: The commit ID of the destination commit specifier that was used in the merge evaluation.
       sourceCommitId:
-        $ref: '#/definitions/CommitId'
+        $ref: '#/definitions/ObjectId'
         description: The commit ID of the source commit specifier that was used in the merge evaluation.
+      baseCommitId:
+        $ref: '#/definitions/ObjectId'
+        description: The commit ID of the merge base.
+      conflictMetadataList:
+        $ref: '#/definitions/ConflictMetadataList'
+        description: A list of metadata for any conflicts found.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: An enumeration token that can be used in a request to return the next batch of the results.
   GetMergeConflictsInput:
     type: object
     required:
@@ -4323,12 +5959,63 @@ definitions:
         description: 'The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.'
       mergeOption:
         $ref: '#/definitions/MergeOptionTypeEnum'
-        description: The merge option or strategy you want to use to merge the code. The only valid value is FAST_FORWARD_MERGE.
-  MergeOptionRequiredException: {}
-  InvalidMergeOptionException: {}
+        description: 'The merge option or strategy you want to use to merge the code. '
+      conflictDetailLevel:
+        $ref: '#/definitions/ConflictDetailLevelTypeEnum'
+        description: 'The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which will return a not mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict will be considered not mergeable if the same file in both branches has differences on the same line.'
+      maxConflictFiles:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of files to include in the output.
+      conflictResolutionStrategy:
+        $ref: '#/definitions/ConflictResolutionStrategyTypeEnum'
+        description: 'Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation will be successful.'
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'An enumeration token that when provided in a request, returns the next batch of the results.'
   InvalidDestinationCommitSpecifierException: {}
   InvalidSourceCommitSpecifierException: {}
-  TipsDivergenceExceededException: {}
+  GetMergeOptionsOutput:
+    type: object
+    required:
+      - mergeOptions
+      - sourceCommitId
+      - destinationCommitId
+      - baseCommitId
+    properties:
+      mergeOptions:
+        $ref: '#/definitions/MergeOptions'
+        description: The merge option or strategy used to merge the code.
+      sourceCommitId:
+        $ref: '#/definitions/ObjectId'
+        description: The commit ID of the source commit specifier that was used in the merge evaluation.
+      destinationCommitId:
+        $ref: '#/definitions/ObjectId'
+        description: The commit ID of the destination commit specifier that was used in the merge evaluation.
+      baseCommitId:
+        $ref: '#/definitions/ObjectId'
+        description: The commit ID of the merge base.
+  GetMergeOptionsInput:
+    type: object
+    required:
+      - repositoryName
+      - sourceCommitSpecifier
+      - destinationCommitSpecifier
+    properties:
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository that contains the commits about which you want to get merge options.
+      sourceCommitSpecifier:
+        $ref: '#/definitions/CommitName'
+        description: 'The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.'
+      destinationCommitSpecifier:
+        $ref: '#/definitions/CommitName'
+        description: 'The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.'
+      conflictDetailLevel:
+        $ref: '#/definitions/ConflictDetailLevelTypeEnum'
+        description: 'The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which will return a not mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict will be considered not mergeable if the same file in both branches has differences on the same line.'
+      conflictResolutionStrategy:
+        $ref: '#/definitions/ConflictResolutionStrategyTypeEnum'
+        description: 'Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation will be successful.'
   GetPullRequestOutput:
     type: object
     required:
@@ -4483,6 +6170,133 @@ definitions:
         description: 'An enumeration token that when provided in a request, returns the next batch of the results.'
   ResourceArnRequiredException: {}
   InvalidResourceArnException: {}
+  MergeBranchesByFastForwardOutput:
+    type: object
+    properties:
+      commitId:
+        $ref: '#/definitions/ObjectId'
+        description: The commit ID of the merge in the destination or target branch.
+      treeId:
+        $ref: '#/definitions/ObjectId'
+        description: The tree ID of the merge in the destination or target branch.
+  MergeBranchesByFastForwardInput:
+    type: object
+    required:
+      - repositoryName
+      - sourceCommitSpecifier
+      - destinationCommitSpecifier
+    properties:
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository where you want to merge two branches.
+      sourceCommitSpecifier:
+        $ref: '#/definitions/CommitName'
+        description: 'The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.'
+      destinationCommitSpecifier:
+        $ref: '#/definitions/CommitName'
+        description: 'The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.'
+      targetBranch:
+        $ref: '#/definitions/BranchName'
+        description: The branch where the merge will be applied.
+  InvalidTargetBranchException: {}
+  MergeBranchesBySquashOutput:
+    type: object
+    properties:
+      commitId:
+        $ref: '#/definitions/ObjectId'
+        description: The commit ID of the merge in the destination or target branch.
+      treeId:
+        $ref: '#/definitions/ObjectId'
+        description: The tree ID of the merge in the destination or target branch.
+  MergeBranchesBySquashInput:
+    type: object
+    required:
+      - repositoryName
+      - sourceCommitSpecifier
+      - destinationCommitSpecifier
+    properties:
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository where you want to merge two branches.
+      sourceCommitSpecifier:
+        $ref: '#/definitions/CommitName'
+        description: 'The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.'
+      destinationCommitSpecifier:
+        $ref: '#/definitions/CommitName'
+        description: 'The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.'
+      targetBranch:
+        $ref: '#/definitions/BranchName'
+        description: 'The branch where the merge will be applied. '
+      conflictDetailLevel:
+        $ref: '#/definitions/ConflictDetailLevelTypeEnum'
+        description: 'The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which will return a not mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict will be considered not mergeable if the same file in both branches has differences on the same line.'
+      conflictResolutionStrategy:
+        $ref: '#/definitions/ConflictResolutionStrategyTypeEnum'
+        description: 'Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation will be successful.'
+      authorName:
+        $ref: '#/definitions/Name'
+        description: The name of the author who created the commit. This information will be used as both the author and committer for the commit.
+      email:
+        $ref: '#/definitions/Email'
+        description: The email address of the person merging the branches. This information will be used in the commit information for the merge.
+      commitMessage:
+        $ref: '#/definitions/Message'
+        description: The commit message for the merge.
+      keepEmptyFolders:
+        $ref: '#/definitions/KeepEmptyFolders'
+        description: 'If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty. If this is specified as true, a .gitkeep file will be created for empty folders. The default is false.'
+      conflictResolution:
+        $ref: '#/definitions/ConflictResolution'
+        description: A list of inputs to use when resolving conflicts during a merge if AUTOMERGE is chosen as the conflict resolution strategy.
+  MergeBranchesByThreeWayOutput:
+    type: object
+    properties:
+      commitId:
+        $ref: '#/definitions/ObjectId'
+        description: The commit ID of the merge in the destination or target branch.
+      treeId:
+        $ref: '#/definitions/ObjectId'
+        description: The tree ID of the merge in the destination or target branch.
+  MergeBranchesByThreeWayInput:
+    type: object
+    required:
+      - repositoryName
+      - sourceCommitSpecifier
+      - destinationCommitSpecifier
+    properties:
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository where you want to merge two branches.
+      sourceCommitSpecifier:
+        $ref: '#/definitions/CommitName'
+        description: 'The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.'
+      destinationCommitSpecifier:
+        $ref: '#/definitions/CommitName'
+        description: 'The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.'
+      targetBranch:
+        $ref: '#/definitions/BranchName'
+        description: 'The branch where the merge will be applied. '
+      conflictDetailLevel:
+        $ref: '#/definitions/ConflictDetailLevelTypeEnum'
+        description: 'The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which will return a not mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict will be considered not mergeable if the same file in both branches has differences on the same line.'
+      conflictResolutionStrategy:
+        $ref: '#/definitions/ConflictResolutionStrategyTypeEnum'
+        description: 'Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation will be successful.'
+      authorName:
+        $ref: '#/definitions/Name'
+        description: The name of the author who created the commit. This information will be used as both the author and committer for the commit.
+      email:
+        $ref: '#/definitions/Email'
+        description: The email address of the person merging the branches. This information will be used in the commit information for the merge.
+      commitMessage:
+        $ref: '#/definitions/Message'
+        description: The commit message to include in the commit information for the merge.
+      keepEmptyFolders:
+        $ref: '#/definitions/KeepEmptyFolders'
+        description: 'If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty. If this is specified as true, a .gitkeep file will be created for empty folders. The default is false.'
+      conflictResolution:
+        $ref: '#/definitions/ConflictResolution'
+        description: A list of inputs to use when resolving conflicts during a merge if AUTOMERGE is chosen as the conflict resolution strategy.
   MergePullRequestByFastForwardOutput:
     type: object
     properties:
@@ -4502,11 +6316,92 @@ definitions:
         $ref: '#/definitions/RepositoryName'
         description: The name of the repository where the pull request was created.
       sourceCommitId:
-        $ref: '#/definitions/CommitId'
+        $ref: '#/definitions/ObjectId'
         description: The full commit ID of the original or updated commit in the pull request source branch. Pass this value if you want an exception thrown if the current commit ID of the tip of the source branch does not match this commit ID.
-  ManualMergeRequiredException: {}
   PullRequestAlreadyClosedException: {}
   TipOfSourceReferenceIsDifferentException: {}
+  MergePullRequestBySquashOutput:
+    type: object
+    properties:
+      pullRequest:
+        $ref: '#/definitions/PullRequest'
+  MergePullRequestBySquashInput:
+    type: object
+    required:
+      - pullRequestId
+      - repositoryName
+    properties:
+      pullRequestId:
+        $ref: '#/definitions/PullRequestId'
+        description: 'The system-generated ID of the pull request. To get this ID, use <a>ListPullRequests</a>.'
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository where the pull request was created.
+      sourceCommitId:
+        $ref: '#/definitions/ObjectId'
+        description: The full commit ID of the original or updated commit in the pull request source branch. Pass this value if you want an exception thrown if the current commit ID of the tip of the source branch does not match this commit ID.
+      conflictDetailLevel:
+        $ref: '#/definitions/ConflictDetailLevelTypeEnum'
+        description: 'The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which will return a not mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict will be considered not mergeable if the same file in both branches has differences on the same line.'
+      conflictResolutionStrategy:
+        $ref: '#/definitions/ConflictResolutionStrategyTypeEnum'
+        description: 'Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation will be successful.'
+      commitMessage:
+        $ref: '#/definitions/Message'
+        description: The commit message to include in the commit information for the merge.
+      authorName:
+        $ref: '#/definitions/Name'
+        description: The name of the author who created the commit. This information will be used as both the author and committer for the commit.
+      email:
+        $ref: '#/definitions/Email'
+        description: The email address of the person merging the branches. This information will be used in the commit information for the merge.
+      keepEmptyFolders:
+        $ref: '#/definitions/KeepEmptyFolders'
+        description: 'If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty. If this is specified as true, a .gitkeep file will be created for empty folders. The default is false.'
+      conflictResolution:
+        $ref: '#/definitions/ConflictResolution'
+        description: A list of inputs to use when resolving conflicts during a merge if AUTOMERGE is chosen as the conflict resolution strategy.
+  MergePullRequestByThreeWayOutput:
+    type: object
+    properties:
+      pullRequest:
+        $ref: '#/definitions/PullRequest'
+  MergePullRequestByThreeWayInput:
+    type: object
+    required:
+      - pullRequestId
+      - repositoryName
+    properties:
+      pullRequestId:
+        $ref: '#/definitions/PullRequestId'
+        description: 'The system-generated ID of the pull request. To get this ID, use <a>ListPullRequests</a>.'
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository where the pull request was created.
+      sourceCommitId:
+        $ref: '#/definitions/ObjectId'
+        description: The full commit ID of the original or updated commit in the pull request source branch. Pass this value if you want an exception thrown if the current commit ID of the tip of the source branch does not match this commit ID.
+      conflictDetailLevel:
+        $ref: '#/definitions/ConflictDetailLevelTypeEnum'
+        description: 'The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which will return a not mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict will be considered not mergeable if the same file in both branches has differences on the same line.'
+      conflictResolutionStrategy:
+        $ref: '#/definitions/ConflictResolutionStrategyTypeEnum'
+        description: 'Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation will be successful.'
+      commitMessage:
+        $ref: '#/definitions/Message'
+        description: The commit message to include in the commit information for the merge.
+      authorName:
+        $ref: '#/definitions/Name'
+        description: The name of the author who created the commit. This information will be used as both the author and committer for the commit.
+      email:
+        $ref: '#/definitions/Email'
+        description: The email address of the person merging the branches. This information will be used in the commit information for the merge.
+      keepEmptyFolders:
+        $ref: '#/definitions/KeepEmptyFolders'
+        description: 'If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty. If this is specified as true, a .gitkeep file will be created for empty folders. The default is false.'
+      conflictResolution:
+        $ref: '#/definitions/ConflictResolution'
+        description: A list of inputs to use when resolving conflicts during a merge if AUTOMERGE is chosen as the conflict resolution strategy.
   PostCommentForComparedCommitOutput:
     type: object
     properties:
@@ -4901,6 +6796,72 @@ definitions:
     type: string
   Arn:
     type: string
+  Path:
+    type: string
+  ExceptionName:
+    type: string
+  Message:
+    type: string
+  BatchDescribeMergeConflictsError:
+    type: object
+    required:
+      - filePath
+      - exceptionName
+      - message
+    properties:
+      filePath:
+        $ref: '#/definitions/Path'
+        description: The path to the file.
+      exceptionName:
+        $ref: '#/definitions/ExceptionName'
+        description: The name of the exception.
+      message:
+        $ref: '#/definitions/Message'
+        description: The message provided by the exception.
+    description: Information about errors in a BatchDescribeMergeConflicts operation.
+  BatchDescribeMergeConflictsErrors:
+    type: array
+    items:
+      $ref: '#/definitions/BatchDescribeMergeConflictsError'
+  RepositoryName:
+    type: string
+    pattern: '[\w\.-]+'
+    minLength: 1
+    maxLength: 100
+  CommitName:
+    type: string
+  MergeOptionTypeEnum:
+    type: string
+    enum:
+      - FAST_FORWARD_MERGE
+      - SQUASH_MERGE
+      - THREE_WAY_MERGE
+  MaxResults:
+    type: integer
+  FilePaths:
+    type: array
+    items:
+      $ref: '#/definitions/Path'
+  ConflictDetailLevelTypeEnum:
+    type: string
+    enum:
+      - FILE_LEVEL
+      - LINE_LEVEL
+  ConflictResolutionStrategyTypeEnum:
+    type: string
+    enum:
+      - NONE
+      - ACCEPT_SOURCE
+      - ACCEPT_DESTINATION
+      - AUTOMERGE
+  NextToken:
+    type: string
+  Conflicts:
+    type: array
+    items:
+      $ref: '#/definitions/Conflict'
+  ObjectId:
+    type: string
   RepositoryNameList:
     type: array
     items:
@@ -4913,10 +6874,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/RepositoryName'
-  ObjectId:
-    type: string
-  Path:
-    type: string
   Mode:
     type: string
   BlobMetadata:
@@ -4952,6 +6909,8 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/BranchName'
+  CapitalBoolean:
+    type: boolean
   ChangeTypeEnum:
     type: string
     enum:
@@ -5008,11 +6967,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Comment'
-  RepositoryName:
-    type: string
-    pattern: '[\w\.-]+'
-    minLength: 1
-    maxLength: 100
   Location:
     type: object
     properties:
@@ -5093,8 +7047,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ObjectId'
-  Message:
-    type: string
   UserInfo:
     type: object
     properties:
@@ -5133,8 +7085,153 @@ definitions:
         $ref: '#/definitions/AdditionalData'
         description: Any additional data associated with the specified commit.
     description: Returns information about a specific commit.
-  CommitName:
-    type: string
+  ConflictMetadata:
+    type: object
+    properties:
+      filePath:
+        $ref: '#/definitions/Path'
+        description: The path of the file that contains conflicts.
+      fileSizes:
+        $ref: '#/definitions/FileSizes'
+        description: 'The file sizes of the file in the source, destination, and base of the merge.'
+      fileModes:
+        $ref: '#/definitions/FileModes'
+        description: 'The file modes of the file in the source, destination, and base of the merge.'
+      objectTypes:
+        $ref: '#/definitions/ObjectTypes'
+        description: Information about any object type conflicts in a merge operation.
+      numberOfConflicts:
+        $ref: '#/definitions/NumberOfConflicts'
+        description: 'The number of conflicts, including both hunk conflicts and metadata conflicts.'
+      isBinaryFile:
+        $ref: '#/definitions/IsBinaryFile'
+        description: 'A boolean value (true or false) indicating whether the file is binary or textual in the source, destination, and base of the merge.'
+      contentConflict:
+        $ref: '#/definitions/IsContentConflict'
+        description: A boolean value indicating whether there are conflicts in the content of a file.
+      fileModeConflict:
+        $ref: '#/definitions/IsFileModeConflict'
+        description: A boolean value indicating whether there are conflicts in the file mode of a file.
+      objectTypeConflict:
+        $ref: '#/definitions/IsObjectTypeConflict'
+        description: A boolean value (true or false) indicating whether there are conflicts in the object type of a file.
+      mergeOperations:
+        $ref: '#/definitions/MergeOperations'
+        description: 'Whether an add, modify, or delete operation caused the conflict between the source and destination of the merge.'
+    description: Information about the metadata for a conflict in a merge operation.
+  MergeHunks:
+    type: array
+    items:
+      $ref: '#/definitions/MergeHunk'
+  Conflict:
+    type: object
+    properties:
+      conflictMetadata:
+        $ref: '#/definitions/ConflictMetadata'
+        description: Metadata about a conflict in a merge operation.
+      mergeHunks:
+        $ref: '#/definitions/MergeHunks'
+        description: A list of hunks that contain the differences between files or lines causing the conflict.
+    description: Information about conflicts in a merge operation.
+  FileSizes:
+    type: object
+    properties:
+      source:
+        $ref: '#/definitions/FileSize'
+        description: The size of a file in the source of a merge or pull request.
+      destination:
+        $ref: '#/definitions/FileSize'
+        description: The size of a file in the destination of a merge or pull request.
+      base:
+        $ref: '#/definitions/FileSize'
+        description: The size of a file in the base of a merge or pull request.
+    description: Information about the size of files in a merge or pull request.
+  FileModes:
+    type: object
+    properties:
+      source:
+        $ref: '#/definitions/FileModeTypeEnum'
+        description: The file mode of a file in the source of a merge or pull request.
+      destination:
+        $ref: '#/definitions/FileModeTypeEnum'
+        description: The file mode of a file in the destination of a merge or pull request.
+      base:
+        $ref: '#/definitions/FileModeTypeEnum'
+        description: The file mode of a file in the base of a merge or pull request.
+    description: Information about file modes in a merge or pull request.
+  ObjectTypes:
+    type: object
+    properties:
+      source:
+        $ref: '#/definitions/ObjectTypeEnum'
+        description: The type of the object in the source branch.
+      destination:
+        $ref: '#/definitions/ObjectTypeEnum'
+        description: The type of the object in the destination branch.
+      base:
+        $ref: '#/definitions/ObjectTypeEnum'
+        description: The type of the object in the base commit of the merge.
+    description: Information about the type of an object in a merge operation.
+  NumberOfConflicts:
+    type: integer
+  IsBinaryFile:
+    type: object
+    properties:
+      source:
+        $ref: '#/definitions/CapitalBoolean'
+        description: The binary or non-binary status of file in the source of a merge or pull request.
+      destination:
+        $ref: '#/definitions/CapitalBoolean'
+        description: The binary or non-binary status of a file in the destination of a merge or pull request.
+      base:
+        $ref: '#/definitions/CapitalBoolean'
+        description: The binary or non-binary status of a file in the base of a merge or pull request.
+    description: Information about whether a file is binary or textual in a merge or pull request operation.
+  IsContentConflict:
+    type: boolean
+  IsFileModeConflict:
+    type: boolean
+  IsObjectTypeConflict:
+    type: boolean
+  MergeOperations:
+    type: object
+    properties:
+      source:
+        $ref: '#/definitions/ChangeTypeEnum'
+        description: 'The operation on a file (add, modify, or delete) of a file in the source of a merge or pull request.'
+      destination:
+        $ref: '#/definitions/ChangeTypeEnum'
+        description: The operation on a file in the destination of a merge or pull request.
+    description: Information about the file operation conflicts in a merge operation.
+  ConflictMetadataList:
+    type: array
+    items:
+      $ref: '#/definitions/ConflictMetadata'
+  ReplaceContentEntries:
+    type: array
+    items:
+      $ref: '#/definitions/ReplaceContentEntry'
+  DeleteFileEntries:
+    type: array
+    items:
+      $ref: '#/definitions/DeleteFileEntry'
+  SetFileModeEntries:
+    type: array
+    items:
+      $ref: '#/definitions/SetFileModeEntry'
+  ConflictResolution:
+    type: object
+    properties:
+      replaceContents:
+        $ref: '#/definitions/ReplaceContentEntries'
+        description: Information about how a conflict in a merge will be resolved.
+      deleteFiles:
+        $ref: '#/definitions/DeleteFileEntries'
+        description: Files that will be deleted as part of the merge conflict resolution.
+      setFileModes:
+        $ref: '#/definitions/SetFileModeEntries'
+        description: File modes that will be set as part of the merge conflict resolution.
+    description: A list of inputs to use when resolving conflicts during a merge if AUTOMERGE is chosen as the conflict resolution strategy.
   Name:
     type: string
   Email:
@@ -5145,14 +7242,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/PutFileEntry'
-  DeleteFileEntries:
-    type: array
-    items:
-      $ref: '#/definitions/DeleteFileEntry'
-  SetFileModeEntries:
-    type: array
-    items:
-      $ref: '#/definitions/SetFileModeEntry'
   FilesMetadata:
     type: array
     items:
@@ -5259,10 +7348,6 @@ definitions:
       - PULL_REQUEST_STATUS_CHANGED
       - PULL_REQUEST_SOURCE_REFERENCE_UPDATED
       - PULL_REQUEST_MERGE_STATE_CHANGED
-  NextToken:
-    type: string
-  MaxResults:
-    type: integer
   PullRequestEventList:
     type: array
     items:
@@ -5329,6 +7414,8 @@ definitions:
         $ref: '#/definitions/FileModeTypeEnum'
         description: The extrapolated file mode permissions for the file. Valid values include EXECUTABLE and NORMAL.
     description: 'A file that will be added, updated, or deleted as part of a commit.'
+  FileSize:
+    type: integer
   Folder:
     type: object
     properties:
@@ -5360,22 +7447,28 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/SubModule'
-  MergeOptionTypeEnum:
-    type: string
-    enum:
-      - FAST_FORWARD_MERGE
   IsMergeable:
     type: boolean
+  MergeOptions:
+    type: array
+    items:
+      $ref: '#/definitions/MergeOptionTypeEnum'
   RepositoryTriggersConfigurationId:
     type: string
   RepositoryTriggersList:
     type: array
     items:
       $ref: '#/definitions/RepositoryTrigger'
+  HunkContent:
+    type: string
+  IsHunkConflict:
+    type: boolean
   IsMerged:
     type: boolean
   IsMove:
     type: boolean
+  LineNumber:
+    type: integer
   PullRequestStatusEnum:
     type: string
     enum:
@@ -5408,6 +7501,35 @@ definitions:
     enum:
       - BEFORE
       - AFTER
+  MergeHunkDetail:
+    type: object
+    properties:
+      startLine:
+        $ref: '#/definitions/LineNumber'
+        description: The line number where a merge conflict begins.
+      endLine:
+        $ref: '#/definitions/LineNumber'
+        description: The line number where a merge conflict ends.
+      hunkContent:
+        $ref: '#/definitions/HunkContent'
+        description: The base-64 encoded content of the hunk that contains the conflict.
+    description: Information about the details of a merge hunk that contains a conflict in a merge or pull request operation.
+  MergeHunk:
+    type: object
+    properties:
+      isConflict:
+        $ref: '#/definitions/IsHunkConflict'
+        description: 'A Boolean value indicating whether a combination of hunks contains a conflict. Conflicts occur when the same file or the same lines in a file were modified in both the source and destination of a merge or pull request. Valid values include true, false, and null.'
+      source:
+        $ref: '#/definitions/MergeHunkDetail'
+        description: Information about the merge hunk in the source of a merge or pull request.
+      destination:
+        $ref: '#/definitions/MergeHunkDetail'
+        description: Information about the merge hunk in the destination of a merge or pull request.
+      base:
+        $ref: '#/definitions/MergeHunkDetail'
+        description: Information about the merge hunk in the base of a merge or pull request.
+    description: Information about merge hunks in a merge or pull request operation.
   MergeMetadata:
     type: object
     properties:
@@ -5417,7 +7539,20 @@ definitions:
       mergedBy:
         $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the user who merged the branches.
+      mergeCommitId:
+        $ref: '#/definitions/CommitId'
+        description: 'The commit ID for the merge commit, if any.'
+      mergeOption:
+        $ref: '#/definitions/MergeOptionTypeEnum'
+        description: The merge strategy used in the merge.
     description: Returns information about a merge or potential merge between a source reference and a destination reference in a pull request.
+  ObjectTypeEnum:
+    type: string
+    enum:
+      - FILE
+      - DIRECTORY
+      - GIT_LINK
+      - SYMBOLIC_LINK
   PullRequestTargetList:
     type: array
     items:
@@ -5559,6 +7694,32 @@ definitions:
         $ref: '#/definitions/IsMove'
         description: Whether to remove the source file from the parent commit.
     description: Information about a source file that is part of changes made in a commit.
+  ReplaceContentEntry:
+    type: object
+    required:
+      - filePath
+      - replacementType
+    properties:
+      filePath:
+        $ref: '#/definitions/Path'
+        description: The path of the conflicting file.
+      replacementType:
+        $ref: '#/definitions/ReplacementTypeEnum'
+        description: The replacement type to use when determining how to resolve the conflict.
+      content:
+        $ref: '#/definitions/FileContent'
+        description: The base-64 encoded content to use when the replacement type is USE_NEW_CONTENT.
+      fileMode:
+        $ref: '#/definitions/FileModeTypeEnum'
+        description: The file mode to apply during conflict resoltion.
+    description: Information about a replacement content entry in the conflict of a merge or pull request operation.
+  ReplacementTypeEnum:
+    type: string
+    enum:
+      - KEEP_BASE
+      - KEEP_SOURCE
+      - KEEP_DESTINATION
+      - USE_NEW_CONTENT
   RepositoryNameIdPair:
     type: object
     properties:
