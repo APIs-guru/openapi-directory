@@ -23,8 +23,6 @@ info:
 externalDocs:
   description: Find out more about API2Cart
   url: 'http://docs.api2cart.com'
-produces:
-  - application/json
 securityDefinitions:
   api_key:
     in: query
@@ -45,6 +43,329 @@ tags:
   - name: tax
   - name: webhook
 paths:
+  /account.cart.add.json:
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Add store to the account
+      operationId: AccountCartAdd
+      parameters:
+        - description: Store’s identifier which you can get from cart_list method
+          in: query
+          name: cart_id
+          required: true
+          type: string
+        - description: A web address of a store that you would like to connect to API2Cart
+          in: query
+          name: store_url
+          required: true
+          type: string
+        - description: This parameter allows to set up store with custom bridge url (you must use store_root parameter if a bridge folder is not in the root folder of the store)
+          in: query
+          name: bridge_url
+          required: false
+          type: string
+        - description: Absolute path to the store root directory (used with "bridge_url" parameter)
+          in: query
+          name: store_root
+          required: false
+          type: string
+        - description: Set this parameter if bridge is already uploaded to store
+          in: query
+          name: store_key
+          required: false
+          type: string
+        - default: false
+          description: Specify if api2cart should validate cart version
+          in: query
+          name: validate_version
+          required: false
+          type: boolean
+        - default: true
+          description: Enables or disables cart's verification
+          in: query
+          name: verify
+          required: false
+          type: boolean
+        - description: 'This parameter is deprecated for this method. Please, use this parameter in method account.config.update'
+          in: query
+          name: db_tables_prefix
+          required: false
+          type: string
+        - description: FTP connection host
+          in: query
+          name: ftp_host
+          required: false
+          type: string
+        - description: FTP User
+          in: query
+          name: ftp_user
+          required: false
+          type: string
+        - description: FTP Password
+          in: query
+          name: ftp_password
+          required: false
+          type: string
+        - description: FTP Port
+          in: query
+          name: ftp_port
+          required: false
+          type: integer
+        - description: FTP Store dir
+          in: query
+          name: ftp_store_dir
+          required: false
+          type: string
+        - description: 3DCart API Key
+          in: query
+          name: 3dcartapi_api_key
+          required: false
+          type: string
+        - description: Access token authorizing the app to access resources on behalf of a user
+          in: query
+          name: amazon_access_token
+          required: false
+          type: string
+        - description: Seller Id
+          in: query
+          name: amazon_seller_id
+          required: true
+          type: string
+        - description: Comma separated marketplaces ids
+          in: query
+          name: amazon_marketplaces_ids
+          required: true
+          type: string
+        - description: Amazon Secret Key
+          in: query
+          name: amazon_secret_key
+          required: false
+          type: string
+        - description: Amazon Secret Key Id
+          in: query
+          name: amazon_access_key_id
+          required: false
+          type: string
+        - description: It's a AspDotNetStorefront account for which API is available
+          in: query
+          name: aspdotnetstorefront_api_user
+          required: false
+          type: string
+        - description: AspDotNetStorefront API Password
+          in: query
+          name: aspdotnetstorefront_api_pass
+          required: false
+          type: string
+        - description: It's a BigCommerce account for which API is enabled
+          in: query
+          name: bigcommerceapi_admin_account
+          required: false
+          type: string
+        - description: BigCommerce API URL
+          in: query
+          name: bigcommerceapi_api_path
+          required: false
+          type: string
+        - description: Bigcommerce API Key
+          in: query
+          name: bigcommerceapi_api_key
+          required: false
+          type: string
+        - description: Client ID of the requesting app
+          in: query
+          name: bigcommerceapi_client_id
+          required: false
+          type: string
+        - description: Access token authorizing the app to access resources on behalf of a user
+          in: query
+          name: bigcommerceapi_access_token
+          required: false
+          type: string
+        - description: API Path section unique to the store
+          in: query
+          name: bigcommerceapi_context
+          required: false
+          type: string
+        - description: Demandware client id
+          in: query
+          name: demandware_client_id
+          required: false
+          type: string
+        - description: Demandware api password
+          in: query
+          name: demandware_api_password
+          required: false
+          type: string
+        - description: Demandware user name
+          in: query
+          name: demandware_user_name
+          required: false
+          type: string
+        - description: Demandware user password
+          in: query
+          name: demandware_user_password
+          required: false
+          type: string
+        - default: production
+          description: ''
+          in: query
+          name: demandware_env_type
+          required: false
+          type: string
+        - description: Application ID (AppID).
+          in: query
+          name: ebay_client_id
+          required: false
+          type: string
+        - description: Shared Secret from eBay application
+          in: query
+          name: ebay_client_secret
+          required: false
+          type: string
+        - description: The RuName value that eBay assigns to your application.
+          in: query
+          name: ebay_runame
+          required: false
+          type: string
+        - description: Used to authenticate API requests.
+          in: query
+          name: ebay_access_token
+          required: false
+          type: string
+        - description: Used to renew the access token.
+          in: query
+          name: ebay_refresh_token
+          required: false
+          type: string
+        - default: production
+          description: ''
+          in: query
+          name: ebay_environment
+          required: false
+          type: string
+        - default: 0
+          description: eBay global ID
+          in: query
+          name: ebay_site_id
+          required: false
+          type: integer
+        - description: Private Key from API section in Settings on your store
+          in: query
+          name: walmart_private_key
+          required: false
+          type: string
+        - description: WM_CONSUMER.CHANNEL.TYPE from API section in Settings on your store
+          in: query
+          name: walmart_channel_type
+          required: false
+          type: string
+        - description: Consumer ID from API section in Settings on your store
+          in: query
+          name: walmart_consumer_id
+          required: false
+          type: string
+        - description: Access token authorizing the app to access resources on behalf of a user
+          in: query
+          name: ecwid_acess_token
+          required: false
+          type: string
+        - description: Store Id
+          in: query
+          name: ecwid_store_id
+          required: false
+          type: string
+        - description: Etsy keystring
+          in: query
+          name: etsy_keystring
+          required: false
+          type: string
+        - description: Etsy shared secret
+          in: query
+          name: etsy_shared_secret
+          required: false
+          type: string
+        - description: Access token authorizing the app to access resources on behalf of a user
+          in: query
+          name: etsy_access_token
+          required: false
+          type: string
+        - description: Secret token authorizing the app to access resources on behalf of a user
+          in: query
+          name: etsy_token_secret
+          required: false
+          type: string
+        - description: Neto API Key
+          in: query
+          name: neto_api_key
+          required: false
+          type: string
+        - description: Neto User Name
+          in: query
+          name: neto_api_username
+          required: false
+          type: string
+        - description: Shopify API Key
+          in: query
+          name: shopify_api_key
+          required: false
+          type: string
+        - description: Shopify API Password
+          in: query
+          name: shopify_api_password
+          required: false
+          type: string
+        - description: Shared secret
+          in: query
+          name: shopify_shared_secret
+          required: false
+          type: string
+        - description: Access token authorizing the app to access resources on behalf of a user
+          in: query
+          name: shopify_access_token
+          required: false
+          type: string
+        - description: It's a Volusion account for which API is enabled
+          in: query
+          name: volusion_login
+          required: false
+          type: string
+        - description: Volusion API Password
+          in: query
+          name: volusion_password
+          required: false
+          type: string
+        - description: Omni Commerce Connector Client ID
+          in: query
+          name: hybris_client_id
+          required: false
+          type: string
+        - description: Omni Commerce Connector Client Secret
+          in: query
+          name: hybris_client_secret
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            properties:
+              result:
+                properties:
+                  store_key:
+                    type: string
+                type: object
+              return_code:
+                type: integer
+              return_message:
+                type: string
+            type: object
+      security:
+        - api_key: []
+      tags:
+        - account
   /account.cart.list.json:
     get:
       consumes:
@@ -52,7 +373,7 @@ paths:
       description: Get list of carts.
       operationId: AccountCartList
       parameters:
-        - default: 'id,url,store_key,cart_id,requests_count'
+        - default: force_all
           description: Set this parameter in order to choose which entity fields you want to retrieve
           in: query
           name: params
@@ -73,6 +394,18 @@ paths:
           name: request_to_date
           required: false
           type: string
+        - description: A web address of a store
+          in: query
+          name: store_url
+          required: false
+          type: string
+        - description: Find store by store key
+          in: query
+          name: store_key
+          required: false
+          type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -114,14 +447,9 @@ paths:
       description: Update configs in the API2Cart database.
       operationId: AccountConfigUpdate
       parameters:
-        - description: 'This parameter is deprecated for this method. Please, use this parameter in method account.config.update'
+        - description: Update store key
           in: query
-          name: db_tables_prefix
-          required: false
-          type: string
-        - description: Client ID of the requesting app.
-          in: query
-          name: client_id
+          name: new_store_key
           required: false
           type: string
         - description: This parameter allows to set up store with custom bridge url (you must use store_root parameter if a bridge folder is not in the root folder of the store)
@@ -134,11 +462,229 @@ paths:
           name: store_root
           required: false
           type: string
-        - description: Shared secret
+        - description: 'This parameter is deprecated for this method. Please, use this parameter in method account.config.update'
           in: query
-          name: shared_secret
+          name: db_tables_prefix
           required: false
           type: string
+        - description: 3DCart API Key
+          in: query
+          name: 3dcartapi_api_key
+          required: false
+          type: string
+        - description: Access token authorizing the app to access resources on behalf of a user
+          in: query
+          name: amazon_access_token
+          required: false
+          type: string
+        - description: Seller Id
+          in: query
+          name: amazon_seller_id
+          required: false
+          type: string
+        - description: Comma separated marketplaces ids
+          in: query
+          name: amazon_marketplaces_ids
+          required: false
+          type: string
+        - description: Amazon Secret Key
+          in: query
+          name: amazon_secret_key
+          required: false
+          type: string
+        - description: Amazon Secret Key Id
+          in: query
+          name: amazon_access_key_id
+          required: false
+          type: string
+        - description: It's a AspDotNetStorefront account for which API is available
+          in: query
+          name: aspdotnetstorefront_api_user
+          required: false
+          type: string
+        - description: AspDotNetStorefront API Password
+          in: query
+          name: aspdotnetstorefront_api_pass
+          required: false
+          type: string
+        - description: It's a BigCommerce account for which API is enabled
+          in: query
+          name: bigcommerceapi_admin_account
+          required: false
+          type: string
+        - description: BigCommerce API URL
+          in: query
+          name: bigcommerceapi_api_path
+          required: false
+          type: string
+        - description: Bigcommerce API Key
+          in: query
+          name: bigcommerceapi_api_key
+          required: false
+          type: string
+        - description: Client ID of the requesting app
+          in: query
+          name: bigcommerceapi_client_id
+          required: false
+          type: string
+        - description: Access token authorizing the app to access resources on behalf of a user
+          in: query
+          name: bigcommerceapi_access_token
+          required: false
+          type: string
+        - description: API Path section unique to the store
+          in: query
+          name: bigcommerceapi_context
+          required: false
+          type: string
+        - description: Demandware client id
+          in: query
+          name: demandware_client_id
+          required: false
+          type: string
+        - description: Demandware api password
+          in: query
+          name: demandware_api_password
+          required: false
+          type: string
+        - description: Demandware user name
+          in: query
+          name: demandware_user_name
+          required: false
+          type: string
+        - description: Demandware user password
+          in: query
+          name: demandware_user_password
+          required: false
+          type: string
+        - description: ''
+          in: query
+          name: demandware_env_type
+          required: false
+          type: string
+        - description: Application ID (AppID).
+          in: query
+          name: ebay_client_id
+          required: false
+          type: string
+        - description: Shared Secret from eBay application
+          in: query
+          name: ebay_client_secret
+          required: false
+          type: string
+        - description: The RuName value that eBay assigns to your application.
+          in: query
+          name: ebay_runame
+          required: false
+          type: string
+        - description: Used to authenticate API requests.
+          in: query
+          name: ebay_access_token
+          required: false
+          type: string
+        - description: Used to renew the access token.
+          in: query
+          name: ebay_refresh_token
+          required: false
+          type: string
+        - description: ''
+          in: query
+          name: ebay_environment
+          required: false
+          type: string
+        - default: 0
+          description: eBay global ID
+          in: query
+          name: ebay_site_id
+          required: false
+          type: integer
+        - description: Access token authorizing the app to access resources on behalf of a user
+          in: query
+          name: ecwid_acess_token
+          required: false
+          type: string
+        - description: Store Id
+          in: query
+          name: ecwid_store_id
+          required: false
+          type: string
+        - description: Etsy keystring
+          in: query
+          name: etsy_keystring
+          required: false
+          type: string
+        - description: Etsy shared secret
+          in: query
+          name: etsy_shared_secret
+          required: false
+          type: string
+        - description: Access token authorizing the app to access resources on behalf of a user
+          in: query
+          name: etsy_access_token
+          required: false
+          type: string
+        - description: Secret token authorizing the app to access resources on behalf of a user
+          in: query
+          name: etsy_token_secret
+          required: false
+          type: string
+        - description: Neto API Key
+          in: query
+          name: neto_api_key
+          required: false
+          type: string
+        - description: Neto User Name
+          in: query
+          name: neto_api_username
+          required: false
+          type: string
+        - description: Shopify API Key
+          in: query
+          name: shopify_api_key
+          required: false
+          type: string
+        - description: Shopify API Password
+          in: query
+          name: shopify_api_password
+          required: false
+          type: string
+        - description: Shared secret
+          in: query
+          name: shopify_shared_secret
+          required: false
+          type: string
+        - description: Access token authorizing the app to access resources on behalf of a user
+          in: query
+          name: shopify_access_token
+          required: false
+          type: string
+        - description: It's a Volusion account for which API is enabled
+          in: query
+          name: volusion_login
+          required: false
+          type: string
+        - description: Volusion API Password
+          in: query
+          name: volusion_password
+          required: false
+          type: string
+        - description: Private Key from API section in Settings on your store
+          in: query
+          name: walmart_private_key
+          required: false
+          type: string
+        - description: WM_CONSUMER.CHANNEL.TYPE from API section in Settings on your store
+          in: query
+          name: walmart_channel_type
+          required: false
+          type: string
+        - description: Consumer ID from API section in Settings on your store
+          in: query
+          name: walmart_consumer_id
+          required: false
+          type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -167,7 +713,7 @@ paths:
       operationId: AccountFailedWebhooks
       parameters:
         - default: 10
-          description: This parameter sets the entity amount that has to be retrieved
+          description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
           in: query
           name: count
           required: false
@@ -183,6 +729,8 @@ paths:
           name: ids
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -201,6 +749,47 @@ paths:
                           $ref: '#/definitions/DateTime'
                         webhook_id:
                           type: integer
+                      type: object
+                    type: array
+                type: object
+              return_code:
+                type: integer
+              return_message:
+                type: string
+            type: object
+      security:
+        - api_key: []
+      tags:
+        - account
+  /account.supported_platforms.json:
+    get:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Get list of supported platforms
+      operationId: AccountSupportedPlatforms
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            properties:
+              result:
+                properties:
+                  supported_platforms:
+                    items:
+                      properties:
+                        cart_id:
+                          type: string
+                        cart_name:
+                          type: string
+                        cart_versions:
+                          type: string
+                        params:
+                          items:
+                            type: string
+                          type: array
                       type: object
                     type: array
                 type: object
@@ -247,7 +836,7 @@ paths:
           in: query
           name: lang_id
           required: false
-          type: integer
+          type: string
         - default: false
           description: Set visibility status
           in: query
@@ -268,10 +857,6 @@ paths:
           type: integer
         - default: Store
           description: Attribute saving scope
-          enum:
-            - Global
-            - Store
-            - Website
           in: query
           name: is_global
           required: false
@@ -284,10 +869,6 @@ paths:
           type: boolean
         - default: 'No'
           description: Use In Layered Navigation
-          enum:
-            - Filterable (with results)
-            - Filterable (no results)
-            - 'No'
           in: query
           name: is_filterable
           required: false
@@ -342,17 +923,12 @@ paths:
           type: boolean
         - default: all_types
           description: Types of products which can have this attribute
-          enum:
-            - simple
-            - configurable
-            - virtual
-            - bundle
-            - downloadable
-            - all_types
           in: query
           name: apply_to
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -395,6 +971,8 @@ paths:
           name: attribute_set_id
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -437,6 +1015,8 @@ paths:
           name: attribute_set_id
           required: true
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -471,7 +1051,7 @@ paths:
           required: false
           type: integer
         - default: 10
-          description: This parameter sets the entity amount that has to be retrieved
+          description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
           in: query
           name: count
           required: false
@@ -487,6 +1067,8 @@ paths:
           name: exclude
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -514,14 +1096,6 @@ paths:
       operationId: AttributeCount
       parameters:
         - description: Defines attribute's type
-          enum:
-            - text
-            - select
-            - textarea
-            - date
-            - price
-            - multiselect
-            - boolean
           in: query
           name: type
           required: false
@@ -535,7 +1109,7 @@ paths:
           in: query
           name: lang_id
           required: false
-          type: integer
+          type: string
         - description: Filter items by visibility status
           in: query
           name: visible
@@ -546,6 +1120,8 @@ paths:
           name: required
           required: false
           type: boolean
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -583,6 +1159,8 @@ paths:
           name: id
           required: true
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -617,7 +1195,7 @@ paths:
           required: false
           type: integer
         - default: 10
-          description: This parameter sets the entity amount that has to be retrieved
+          description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
           in: query
           name: count
           required: false
@@ -638,6 +1216,8 @@ paths:
           name: attribute_set_id
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -678,7 +1258,7 @@ paths:
           in: query
           name: lang_id
           required: false
-          type: integer
+          type: string
         - default: force_all
           description: Set this parameter in order to choose which entity fields you want to retrieve
           in: query
@@ -690,6 +1270,8 @@ paths:
           name: exclude
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -721,20 +1303,12 @@ paths:
           required: false
           type: integer
         - default: 10
-          description: This parameter sets the entity amount that has to be retrieved
+          description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
           in: query
           name: count
           required: false
           type: integer
         - description: Defines attribute's type
-          enum:
-            - text
-            - select
-            - textarea
-            - date
-            - price
-            - multiselect
-            - boolean
           in: query
           name: type
           required: false
@@ -753,7 +1327,7 @@ paths:
           in: query
           name: lang_id
           required: false
-          type: integer
+          type: string
         - default: 'id,name'
           description: Set this parameter in order to choose which entity fields you want to retrieve
           in: query
@@ -780,6 +1354,8 @@ paths:
           name: system
           required: false
           type: boolean
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -809,6 +1385,8 @@ paths:
       description: Get list of supported attributes types
       operationId: AttributeTypeList
       parameters: []
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -848,6 +1426,8 @@ paths:
           name: group_id
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -885,6 +1465,8 @@ paths:
           name: attribute_set_id
           required: true
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -905,6 +1487,53 @@ paths:
           store_key: []
       tags:
         - attribute
+  /basket.info.json:
+    get:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Retrieve basket information.
+      operationId: BasketInfo
+      parameters:
+        - description: Entity id
+          in: query
+          name: id
+          required: true
+          type: string
+        - description: Store Id
+          in: query
+          name: store_id
+          required: false
+          type: string
+        - default: force_all
+          description: Set this parameter in order to choose which entity fields you want to retrieve
+          in: query
+          name: params
+          required: false
+          type: string
+        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+          in: query
+          name: exclude
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            properties:
+              result:
+                $ref: '#/definitions/Basket'
+              return_code:
+                type: integer
+              return_message:
+                type: string
+            type: object
+      security:
+        - api_key: []
+          store_key: []
+      tags:
+        - basket
   /basket.item.add.json:
     post:
       consumes:
@@ -938,6 +1567,8 @@ paths:
           name: store_id
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -958,6 +1589,132 @@ paths:
           store_key: []
       tags:
         - basket
+  /basket.live_shipping_service.create.json:
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Create live shipping rate service. (Beta)
+      operationId: BasketLiveShippingServiceCreate
+      parameters:
+        - description: Store Id
+          in: query
+          name: store_id
+          required: false
+          type: string
+        - description: Shipping Service Name
+          in: query
+          name: name
+          required: true
+          type: string
+        - description: Callback url that returns shipping rates. It should be able to accept POST requests with json data.
+          in: query
+          name: callback
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            properties:
+              result:
+                properties:
+                  id:
+                    type: integer
+                type: object
+              return_code:
+                type: integer
+              return_message:
+                type: string
+            type: object
+      security:
+        - api_key: []
+          store_key: []
+      tags:
+        - basket
+  /basket.live_shipping_service.delete.json:
+    delete:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Delete live shipping rate service. (Beta)
+      operationId: BasketLiveShippingServiceDelete
+      parameters:
+        - description: Entity id
+          in: query
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            properties:
+              result:
+                properties:
+                  status:
+                    type: boolean
+                type: object
+              return_code:
+                type: integer
+              return_message:
+                type: string
+            type: object
+      security:
+        - api_key: []
+          store_key: []
+      tags:
+        - basket
+  /basket.live_shipping_service.list.json:
+    get:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Retrieve a list of live shipping rate services. (Beta)
+      operationId: BasketLiveShippingServiceList
+      parameters:
+        - description: Store Id
+          in: query
+          name: store_id
+          required: false
+          type: string
+        - default: 0
+          description: This parameter sets the number from which you want to get entities
+          in: query
+          name: start
+          required: false
+          type: integer
+        - default: 10
+          description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+          in: query
+          name: count
+          required: false
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            properties:
+              result:
+                properties:
+                  live_shipping_services:
+                    items:
+                      $ref: '#/definitions/Basket_LiveShippingService'
+                    type: array
+                type: object
+              return_code:
+                type: integer
+              return_message:
+                type: string
+            type: object
+      security:
+        - api_key: []
+          store_key: []
+      tags:
+        - basket
   /bridge.delete.json:
     post:
       consumes:
@@ -965,6 +1722,8 @@ paths:
       description: Delete bridge from the store.
       operationId: BridgeDelete
       parameters: []
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -985,25 +1744,26 @@ paths:
           store_key: []
       tags:
         - bridge
-  /bridge.download.json:
+  /bridge.download.file:
     get:
       consumes:
         - application/x-www-form-urlencoded
       description: Download bridge for store
       operationId: BridgeDownload
-      parameters: []
+      parameters:
+        - default: false
+          description: Identifies if there is a necessity to download whitelabel bridge.
+          in: query
+          name: whitelabel
+          required: false
+          type: boolean
+      produces:
+        - application/zip
       responses:
         '200':
           description: successful operation
           schema:
-            properties:
-              result:
-                type: object
-              return_code:
-                type: integer
-              return_message:
-                type: string
-            type: object
+            type: file
       security:
         - api_key: []
           store_key: []
@@ -1016,6 +1776,8 @@ paths:
       description: Update bridge in the store.
       operationId: BridgeUpdate
       parameters: []
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -1043,6 +1805,8 @@ paths:
       description: Get bridge key and store key
       operationId: CartBridge
       parameters: []
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -1076,6 +1840,8 @@ paths:
           name: cache_type
           required: true
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -1114,6 +1880,8 @@ paths:
           name: exclude
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -1151,6 +1919,8 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CartConfigUpdate'
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -1175,11 +1945,28 @@ paths:
       description: Create new coupon
       operationId: CartCouponAdd
       parameters:
+        - description: Store Id
+          in: query
+          name: store_id
+          required: false
+          type: string
         - description: Coupon code
           in: query
           name: code
           required: true
           type: string
+        - description: Coupon name
+          in: query
+          name: name
+          required: false
+          type: string
+        - description: Entity codes
+          in: query
+          items:
+            type: string
+          name: codes
+          required: false
+          type: array
         - description: Coupon discount type
           enum:
             - percent
@@ -1210,7 +1997,7 @@ paths:
           name: action_amount
           required: true
           type: number
-        - default: Current date and time
+        - default: now
           description: Defines when discount code will be available.
           in: query
           name: date_start
@@ -1232,29 +2019,16 @@ paths:
           required: false
           type: integer
         - description: Defines entity for action condition.
-          enum:
-            - order
-            - order_shipping_address
-            - product
-            - customer
           in: query
           name: action_condition_entity
           required: false
           type: string
         - description: Defines entity attribute code for action condition.
-          enum:
-            - product_id
-            - category_id
-            - variant_id
-            - country
           in: query
           name: action_condition_key
           required: false
           type: string
         - description: Defines condition operator.
-          enum:
-            - ONE_OF
-            - ==
           in: query
           name: action_condition_operator
           required: false
@@ -1264,6 +2038,8 @@ paths:
           name: action_condition_value
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -1273,6 +2049,97 @@ paths:
                 properties:
                   coupon_id:
                     type: string
+                type: object
+              return_code:
+                type: integer
+              return_message:
+                type: string
+            type: object
+      security:
+        - api_key: []
+          store_key: []
+      tags:
+        - cart
+  /cart.coupon.condition.add.json:
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Create new coupon condition
+      operationId: CartCouponConditionAdd
+      parameters:
+        - description: Store Id
+          in: query
+          name: store_id
+          required: false
+          type: string
+        - description: Coupon Id
+          in: query
+          name: coupon_id
+          required: true
+          type: string
+        - default: coupon_prerequisite
+          description: Defines condition operator
+          in: query
+          name: target
+          required: false
+          type: string
+        - description: Defines condition entity type
+          enum:
+            - order
+            - order_shipping_address
+            - product
+            - customer
+          in: query
+          name: entity
+          required: true
+          type: string
+        - description: Defines condition entity attribute key
+          enum:
+            - total
+            - subtotal
+            - shipping_total
+            - total_quantity
+            - total_weight
+            - country
+            - product_id
+            - variant_id
+            - category_id
+            - customer_id
+            - item_price
+            - item_total_price
+            - item_quantity
+          in: query
+          name: key
+          required: true
+          type: string
+        - description: Defines condition operator
+          enum:
+            - ==
+            - <
+            - <=
+            - '>'
+            - '>='
+            - ONE_OF
+          in: query
+          name: operator
+          required: true
+          type: string
+        - description: 'Defines condition value, can be comma separated according to the operator.'
+          in: query
+          name: value
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            properties:
+              result:
+                properties:
+                  status:
+                    type: boolean
                 type: object
               return_code:
                 type: integer
@@ -1322,6 +2189,8 @@ paths:
           name: avail
           required: false
           type: boolean
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -1354,6 +2223,13 @@ paths:
           name: id
           required: true
           type: string
+        - description: Store Id
+          in: query
+          name: store_id
+          required: false
+          type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -1393,6 +2269,11 @@ paths:
           name: count
           required: false
           type: integer
+        - description: Filter coupons by ids
+          in: query
+          name: coupons_ids
+          required: false
+          type: string
         - description: Filter coupons by store id
           in: query
           name: store_id
@@ -1427,7 +2308,7 @@ paths:
           in: query
           name: lang_id
           required: false
-          type: integer
+          type: string
         - default: force_all
           description: Set this parameter in order to choose which entity fields you want to retrieve
           in: query
@@ -1439,6 +2320,8 @@ paths:
           name: exclude
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -1560,7 +2443,7 @@ paths:
           name: ApiKey
           required: false
           type: string
-        - description: Client ID of the requesting app.
+        - description: Client ID of the requesting app
           in: query
           name: client_id
           required: false
@@ -1568,6 +2451,11 @@ paths:
         - description: Access token authorizing the app to access resources on behalf of a user
           in: query
           name: accessToken
+          required: false
+          type: string
+        - description: API Path section unique to the store
+          in: query
+          name: context
           required: false
           type: string
         - description: Access token authorizing the app to access resources on behalf of a user
@@ -1583,6 +2471,21 @@ paths:
         - description: Shopify API Password
           in: query
           name: apiPassword
+          required: false
+          type: string
+        - description: Access token authorizing the app to access resources on behalf of a user
+          in: query
+          name: accessToken_shopify
+          required: false
+          type: string
+        - description: Neto API Key
+          in: query
+          name: apiKey
+          required: false
+          type: string
+        - description: Neto User Name
+          in: query
+          name: apiUsername
           required: false
           type: string
         - description: Volusion API Password
@@ -1672,13 +2575,16 @@ paths:
           type: string
         - default: production
           description: ''
-          enum:
-            - production
-            - sandbox
           in: query
           name: ebay_environment
           required: false
           type: string
+        - default: 0
+          description: eBay global ID
+          in: query
+          name: ebay_site_id
+          required: false
+          type: integer
         - description: Demandware client id
           in: query
           name: dw_client_id
@@ -1689,21 +2595,74 @@ paths:
           name: dw_api_pass
           required: false
           type: string
+        - description: Demandware user name
+          in: query
+          name: demandware_user_name
+          required: false
+          type: string
+        - description: Demandware user password
+          in: query
+          name: demandware_user_password
+          required: false
+          type: string
         - description: Store Id
           in: query
           name: store_id
-          required: false
+          required: true
           type: string
         - description: Seller Id
           in: query
           name: seller_id
           required: true
           type: string
+        - description: Amazon Secret Key
+          in: query
+          name: amazon_secret_key
+          required: false
+          type: string
+        - description: Amazon Secret Key Id
+          in: query
+          name: amazon_access_key_id
+          required: false
+          type: string
         - description: Comma separated marketplaces ids
           in: query
           name: marketplaces_ids
           required: true
           type: string
+        - default: production
+          description: ''
+          in: query
+          name: environment
+          required: false
+          type: string
+        - description: Omni Commerce Connector Client ID
+          in: query
+          name: hybris_client_id
+          required: false
+          type: string
+        - description: Omni Commerce Connector Client Secret
+          in: query
+          name: hybris_client_secret
+          required: false
+          type: string
+        - description: Private Key from API section in Settings on your store
+          in: query
+          name: walmart_private_key
+          required: false
+          type: string
+        - description: WM_CONSUMER.CHANNEL.TYPE from API section in Settings on your store
+          in: query
+          name: walmart_channel_type
+          required: false
+          type: string
+        - description: Consumer ID from API section in Settings on your store
+          in: query
+          name: walmart_consumer_id
+          required: false
+          type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -1730,6 +2689,8 @@ paths:
       description: Remove store from API2Cart
       operationId: CartDelete
       parameters: []
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -1763,6 +2724,8 @@ paths:
           name: delete_bridge
           required: false
           type: boolean
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -1805,6 +2768,8 @@ paths:
           name: owner_email
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -1839,6 +2804,8 @@ paths:
           name: store_id
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -1873,7 +2840,7 @@ paths:
           required: false
           type: integer
         - default: 10
-          description: This parameter sets the entity amount that has to be retrieved
+          description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
           in: query
           name: count
           required: false
@@ -1894,6 +2861,8 @@ paths:
           name: exclude
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -1939,6 +2908,8 @@ paths:
           name: store_id
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -1963,6 +2934,8 @@ paths:
       description: Get list of supported carts
       operationId: CartList
       parameters: []
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -2002,6 +2975,8 @@ paths:
       description: Get list of cart methods
       operationId: CartMethods
       parameters: []
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -2048,11 +3023,13 @@ paths:
           required: false
           type: integer
         - default: 10
-          description: This parameter sets the entity amount that has to be retrieved
+          description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
           in: query
           name: count
           required: false
           type: integer
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -2090,6 +3067,8 @@ paths:
           name: validate_version
           required: false
           type: boolean
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -2185,6 +3164,8 @@ paths:
           name: seo_url
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -2222,6 +3203,8 @@ paths:
           name: category_id
           required: true
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -2260,7 +3243,9 @@ paths:
           in: query
           name: lang_id
           required: false
-          type: integer
+          type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -2293,6 +3278,8 @@ paths:
           name: id
           required: true
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -2327,23 +3314,18 @@ paths:
           type: string
         - default: name
           description: Entity search that is specified by the comma-separated unique fields
-          enum:
-            - name
-            - description
           in: query
           name: find_where
           required: false
           type: string
         - default: whole_words
           description: Entity search that is specified by comma-separated parameters
-          enum:
-            - regex
-            - case_sensitive
-            - whole_words
           in: query
           name: find_params
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -2424,6 +3406,8 @@ paths:
           name: store_id
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -2466,6 +3450,8 @@ paths:
           name: store_id
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -2518,7 +3504,9 @@ paths:
           in: query
           name: lang_id
           required: false
-          type: integer
+          type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -2550,7 +3538,7 @@ paths:
           required: false
           type: integer
         - default: 10
-          description: This parameter sets the entity amount that has to be retrieved
+          description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
           in: query
           name: count
           required: false
@@ -2580,7 +3568,9 @@ paths:
           in: query
           name: lang_id
           required: false
-          type: integer
+          type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -2620,6 +3610,8 @@ paths:
           name: product_id
           required: true
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -2705,6 +3697,8 @@ paths:
           name: seo_url
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -2737,6 +3731,8 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CustomerAdd'
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -2799,6 +3795,8 @@ paths:
           name: customer_list_id
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -2833,20 +3831,12 @@ paths:
           type: string
         - default: email
           description: Entity search that is specified by the comma-separated unique fields
-          enum:
-            - email
-            - first_name
-            - last_name
           in: query
           name: find_where
           required: false
           type: string
         - default: whole_words
           description: Entity search that is specified by comma-separated parameters
-          enum:
-            - regex
-            - case_sensitive
-            - whole_words
           in: query
           name: find_params
           required: false
@@ -2856,6 +3846,8 @@ paths:
           name: store_id
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -2910,6 +3902,8 @@ paths:
           name: store_id
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -2941,7 +3935,7 @@ paths:
           required: false
           type: integer
         - default: 10
-          description: This parameter sets the entity amount that has to be retrieved
+          description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
           in: query
           name: count
           required: false
@@ -2992,6 +3986,8 @@ paths:
           name: customer_list_id
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -2999,7 +3995,7 @@ paths:
             properties:
               result:
                 properties:
-                  order:
+                  customer:
                     items:
                       $ref: '#/definitions/Customer'
                     type: array
@@ -3043,7 +4039,7 @@ paths:
           required: false
           type: integer
         - default: 10
-          description: This parameter sets the entity amount that has to be retrieved
+          description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
           in: query
           name: count
           required: false
@@ -3079,6 +4075,14 @@ paths:
           name: modified_from
           required: false
           type: string
+        - default: false
+          description: Filter empty emails
+          in: query
+          name: skip_empty_email
+          required: false
+          type: boolean
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -3113,6 +4117,8 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/OrderAdd'
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -3180,24 +4186,33 @@ paths:
           name: store_id
           required: false
           type: string
+        - description: Counts orders specified by ids
+          in: query
+          name: ids
+          required: false
+          type: string
         - description: Counts orders specified by order ids
           in: query
           name: order_ids
           required: false
           type: string
         - description: Counts orders quantity specified by financial status
-          enum:
-            - pending
-            - authorized
-            - partially_paid
-            - paid
-            - partially_refunded
-            - refunded
-            - voided
           in: query
           name: financial_status
           required: false
           type: string
+        - description: Create order with fulfillment status
+          in: query
+          name: fulfillment_status
+          required: false
+          type: string
+        - description: Retrieve entities according to shipping method
+          in: query
+          name: shipping_method
+          required: false
+          type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -3225,6 +4240,8 @@ paths:
       description: Retrieve list of financial statuses
       operationId: OrderFinancialStatusList
       parameters: []
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -3281,7 +4298,7 @@ paths:
           required: false
           type: integer
         - default: 10
-          description: This parameter sets the entity amount that has to be retrieved
+          description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
           in: query
           name: count
           required: false
@@ -3318,18 +4335,12 @@ paths:
           required: false
           type: string
         - description: Retrieves orders specified by financial status
-          enum:
-            - pending
-            - authorized
-            - partially_paid
-            - paid
-            - partially_refunded
-            - refunded
-            - voided
           in: query
           name: financial_status
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -3380,6 +4391,8 @@ paths:
           name: store_id
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -3426,7 +4439,7 @@ paths:
           required: false
           type: integer
         - default: 10
-          description: This parameter sets the entity amount that has to be retrieved
+          description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
           in: query
           name: count
           required: false
@@ -3439,9 +4452,6 @@ paths:
           type: string
         - default: asc
           description: Set sorting direction
-          enum:
-            - asc
-            - desc
           in: query
           name: sort_direction
           required: false
@@ -3482,24 +4492,43 @@ paths:
           name: store_id
           required: false
           type: string
+        - description: Retrieves orders specified by ids
+          in: query
+          name: ids
+          required: false
+          type: string
         - description: Retrieves orders specified by order ids
           in: query
           name: order_ids
           required: false
           type: string
+        - description: Retrieves order’s info specified by basket id.
+          in: query
+          name: basket_id
+          required: false
+          type: string
         - description: Retrieves orders specified by financial status
-          enum:
-            - pending
-            - authorized
-            - partially_paid
-            - paid
-            - partially_refunded
-            - refunded
-            - voided
           in: query
           name: financial_status
           required: false
           type: string
+        - description: Create order with fulfillment status
+          in: query
+          name: fulfillment_status
+          required: false
+          type: string
+        - description: Retrieve entities according to shipping method
+          in: query
+          name: shipping_method
+          required: false
+          type: string
+        - description: Skipped orders by ids
+          in: query
+          name: skip_order_ids
+          required: false
+          type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -3534,6 +4563,8 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/OrderRefundAdd'
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -3566,6 +4597,8 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/OrderShipmentAdd'
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -3605,7 +4638,7 @@ paths:
           required: false
           type: integer
         - default: 10
-          description: This parameter sets the entity amount that has to be retrieved
+          description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
           in: query
           name: count
           required: false
@@ -3631,6 +4664,8 @@ paths:
           name: created_to
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -3642,6 +4677,40 @@ paths:
                     items:
                       $ref: '#/definitions/Shipment'
                     type: array
+                type: object
+              return_code:
+                type: integer
+              return_message:
+                type: string
+            type: object
+      security:
+        - api_key: []
+          store_key: []
+      tags:
+        - order
+  /order.shipment.tracking.add.json:
+    post:
+      consumes:
+        - application/json
+      description: Add order shipment's tracking info.
+      operationId: OrderShipmentTrackingAdd
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/OrderShipmentTrackingAdd'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            properties:
+              result:
+                properties:
+                  tracking_id:
+                    type: string
                 type: object
               return_code:
                 type: integer
@@ -3665,6 +4734,8 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/OrderShipmentUpdate'
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -3692,6 +4763,8 @@ paths:
       description: Retrieve list of statuses
       operationId: OrderStatusList
       parameters: []
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -3757,12 +4830,17 @@ paths:
           required: false
           type: string
         - description: Update order financial status to specified
-          enum:
-            - paid
           in: query
           name: financial_status
           required: false
           type: string
+        - description: Defines order payment method
+          in: query
+          name: order_payment_method
+          required: false
+          type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -3795,6 +4873,8 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ProductAdd'
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -3834,7 +4914,7 @@ paths:
           required: false
           type: integer
         - default: 10
-          description: This parameter sets the entity amount that has to be retrieved
+          description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
           in: query
           name: count
           required: false
@@ -3858,9 +4938,6 @@ paths:
           type: string
         - default: asc
           description: Set sorting direction
-          enum:
-            - asc
-            - desc
           in: query
           name: sort_direction
           required: false
@@ -3869,7 +4946,7 @@ paths:
           in: query
           name: lang_id
           required: false
-          type: integer
+          type: string
         - description: Retrieves attributes specified by store id
           in: query
           name: store_id
@@ -3890,6 +4967,8 @@ paths:
           name: set_name
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -3953,12 +5032,14 @@ paths:
           in: query
           name: lang_id
           required: false
-          type: integer
+          type: string
         - description: Store Id
           in: query
           name: store_id
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -3972,6 +5053,95 @@ paths:
                     type: string
                   value_id:
                     type: string
+                type: object
+              return_code:
+                type: integer
+              return_message:
+                type: string
+            type: object
+      security:
+        - api_key: []
+          store_key: []
+      tags:
+        - product
+  /product.brand.list.json:
+    get:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Get list of brands from your store.
+      operationId: ProductBrandList
+      parameters:
+        - default: 0
+          description: This parameter sets the number from which you want to get entities
+          in: query
+          name: start
+          required: false
+          type: integer
+        - default: 10
+          description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+          in: query
+          name: count
+          required: false
+          type: integer
+        - default: 'id,name,short_description,active,url'
+          description: Set this parameter in order to choose which entity fields you want to retrieve
+          in: query
+          name: params
+          required: false
+          type: string
+        - description: Retrieves brands specified by brand ids
+          in: query
+          name: brand_ids
+          required: false
+          type: string
+        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+          in: query
+          name: exclude
+          required: false
+          type: string
+        - description: Store Id
+          in: query
+          name: store_id
+          required: false
+          type: string
+        - description: Language id
+          in: query
+          name: lang_id
+          required: false
+          type: string
+        - description: Retrieve entities from their creation date
+          in: query
+          name: created_from
+          required: false
+          type: string
+        - description: Retrieve entities to their creation date
+          in: query
+          name: created_to
+          required: false
+          type: string
+        - description: Retrieve entities from their modification date
+          in: query
+          name: modified_from
+          required: false
+          type: string
+        - description: Retrieve entities to their modification date
+          in: query
+          name: modified_to
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            properties:
+              result:
+                properties:
+                  product:
+                    items:
+                      $ref: '#/definitions/Brand'
+                    type: array
                 type: object
               return_code:
                 type: integer
@@ -3997,20 +5167,12 @@ paths:
           type: string
         - default: name
           description: Entity search that is specified by the comma-separated unique fields
-          enum:
-            - name
-            - sku
-            - description
           in: query
           name: find_where
           required: false
           type: string
         - default: whole_words
           description: Entity search that is specified by comma-separated parameters
-          enum:
-            - regex
-            - case_sensitive
-            - whole_words
           in: query
           name: find_params
           required: false
@@ -4020,6 +5182,8 @@ paths:
           name: store_id
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -4041,11 +5205,63 @@ paths:
           store_key: []
       tags:
         - product
+  /product.child_item.info.json:
+    get:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Get child for specific product.
+      operationId: ProductChildItemInfo
+      parameters:
+        - default: force_all
+          description: Set this parameter in order to choose which entity fields you want to retrieve
+          in: query
+          name: params
+          required: false
+          type: string
+        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+          in: query
+          name: exclude
+          required: false
+          type: string
+        - description: Filter by parent product id
+          in: query
+          name: product_id
+          required: true
+          type: string
+        - description: Entity id
+          in: query
+          name: id
+          required: true
+          type: string
+        - description: Store Id
+          in: query
+          name: store_id
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            properties:
+              result:
+                $ref: '#/definitions/Child'
+              return_code:
+                type: integer
+              return_message:
+                type: string
+            type: object
+      security:
+        - api_key: []
+          store_key: []
+      tags:
+        - product
   /product.child_item.list.json:
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: Get child items list of specific product.
+      description: Get child items list of specific product(s).
       operationId: ProductChildItemList
       parameters:
         - default: 0
@@ -4055,7 +5271,7 @@ paths:
           required: false
           type: integer
         - default: 10
-          description: This parameter sets the entity amount that has to be retrieved
+          description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
           in: query
           name: count
           required: false
@@ -4090,7 +5306,19 @@ paths:
           in: query
           name: lang_id
           required: false
-          type: integer
+          type: string
+        - description: Currency Id
+          in: query
+          name: currency_id
+          required: false
+          type: string
+        - description: Specifies the set of available/not available products for sale
+          in: query
+          name: avail_sale
+          required: false
+          type: boolean
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -4103,7 +5331,7 @@ paths:
                       $ref: '#/definitions/Child'
                     type: array
                   total_count:
-                    type: string
+                    type: integer
                 type: object
               return_code:
                 type: integer
@@ -4166,7 +5394,7 @@ paths:
           in: query
           name: lang_id
           required: false
-          type: integer
+          type: string
         - description: Counts products specified by product ids
           in: query
           name: product_ids
@@ -4183,6 +5411,8 @@ paths:
           name: disable_report_cache
           required: false
           type: boolean
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -4247,6 +5477,8 @@ paths:
           name: default
           required: false
           type: boolean
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -4281,7 +5513,7 @@ paths:
           required: false
           type: integer
         - default: 10
-          description: This parameter sets the entity amount that has to be retrieved
+          description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
           in: query
           name: count
           required: false
@@ -4307,6 +5539,8 @@ paths:
           name: avail
           required: false
           type: boolean
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -4341,6 +5575,8 @@ paths:
           name: id
           required: true
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -4368,6 +5604,8 @@ paths:
       description: Retrieve all available fields for product item in store.
       operationId: ProductFields
       parameters: []
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -4399,34 +5637,24 @@ paths:
           type: string
         - default: name
           description: Entity search that is specified by the comma-separated unique fields
-          enum:
-            - name
-            - model
-            - description
           in: query
           name: find_where
           required: false
           type: string
         - default: whole_words
           description: Entity search that is specified by comma-separated parameters
-          enum:
-            - regex
-            - case_sensitive
-            - whole_words
           in: query
           name: find_params
           required: false
           type: string
         - default: product
           description: Parameter's value specifies the entity that has to be found
-          enum:
-            - product
-            - variant
-            - each
           in: query
           name: find_what
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -4516,11 +5744,18 @@ paths:
           name: product_variant_id
           required: false
           type: integer
+        - description: Defines product's variants ids
+          in: query
+          name: variant_ids
+          required: false
+          type: string
         - description: Store Id
           in: query
           name: store_id
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -4563,6 +5798,8 @@ paths:
           name: store_id
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -4602,11 +5839,6 @@ paths:
           type: string
         - default: additional
           description: Defines image's types that are specified by comma-separated list
-          enum:
-            - small
-            - base
-            - additional
-            - thumbnail
           in: query
           name: type
           required: false
@@ -4636,6 +5868,8 @@ paths:
           name: hidden
           required: false
           type: boolean
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -4688,7 +5922,12 @@ paths:
           in: query
           name: lang_id
           required: false
-          type: integer
+          type: string
+        - description: Currency Id
+          in: query
+          name: currency_id
+          required: false
+          type: string
         - default: force_all
           description: Set this parameter in order to choose which product variants fields you want to retrieve
           in: query
@@ -4706,6 +5945,8 @@ paths:
           name: disable_report_cache
           required: false
           type: boolean
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -4727,7 +5968,7 @@ paths:
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: Get list of products from your store. Returns 4 products by default.
+      description: Get list of products from your store. Returns 10 products by default.
       operationId: ProductList
       parameters:
         - default: 0
@@ -4737,7 +5978,7 @@ paths:
           required: false
           type: integer
         - default: 10
-          description: This parameter sets the entity amount that has to be retrieved
+          description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
           in: query
           name: count
           required: false
@@ -4797,7 +6038,12 @@ paths:
           in: query
           name: lang_id
           required: false
-          type: integer
+          type: string
+        - description: Currency Id
+          in: query
+          name: currency_id
+          required: false
+          type: string
         - description: Retrieves products specified by product ids
           in: query
           name: product_ids
@@ -4825,6 +6071,20 @@ paths:
           name: disable_report_cache
           required: false
           type: boolean
+        - default: id
+          description: Set field to sort by
+          in: query
+          name: sort_by
+          required: false
+          type: string
+        - default: asc
+          description: Set sorting direction
+          in: query
+          name: sort_direction
+          required: false
+          type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -4864,6 +6124,8 @@ paths:
           name: manufacturer
           required: true
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -4947,6 +6209,8 @@ paths:
           name: required
           required: false
           type: boolean
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -4986,6 +6250,8 @@ paths:
           name: option_id
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -5020,7 +6286,7 @@ paths:
           required: false
           type: integer
         - default: 10
-          description: This parameter sets the entity amount that has to be retrieved
+          description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
           in: query
           name: count
           required: false
@@ -5041,6 +6307,18 @@ paths:
           name: product_id
           required: false
           type: string
+        - description: Language id
+          in: query
+          name: lang_id
+          required: false
+          type: string
+        - description: Store Id
+          in: query
+          name: store_id
+          required: false
+          type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -5086,6 +6364,8 @@ paths:
           name: sort_order
           required: false
           type: integer
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -5123,6 +6403,8 @@ paths:
           name: option_value_id
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -5165,6 +6447,8 @@ paths:
           name: quantity
           required: false
           type: number
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -5197,6 +6481,8 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ProductPriceAdd'
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -5234,6 +6520,8 @@ paths:
           name: group_prices
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -5266,6 +6554,8 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ProductPriceUpdate'
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -5300,7 +6590,7 @@ paths:
           required: false
           type: integer
         - default: 10
-          description: This parameter sets the entity amount that has to be retrieved
+          description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
           in: query
           name: count
           required: false
@@ -5310,16 +6600,17 @@ paths:
           name: product_id
           required: true
           type: string
+        - description: Retrieves reviews specified by ids
+          in: query
+          name: ids
+          required: false
+          type: string
         - description: Store Id
           in: query
           name: store_id
           required: false
           type: string
         - description: Defines status
-          enum:
-            - approved
-            - pending
-            - disapproved
           in: query
           name: status
           required: false
@@ -5335,6 +6626,8 @@ paths:
           name: exclude
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -5347,7 +6640,46 @@ paths:
                       $ref: '#/definitions/Product_Review'
                     type: array
                   total_count:
-                    type: string
+                    type: integer
+                type: object
+              return_code:
+                type: integer
+              return_message:
+                type: string
+            type: object
+      security:
+        - api_key: []
+          store_key: []
+      tags:
+        - product
+  /product.store.assign.json:
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Assign product to store
+      operationId: ProductStoreAssign
+      parameters:
+        - description: Defines id of the product which should be assigned to a store
+          in: query
+          name: product_id
+          required: true
+          type: string
+        - description: Defines id of the store product should be assigned to
+          in: query
+          name: store_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            properties:
+              result:
+                properties:
+                  updated_items:
+                    type: integer
                 type: object
               return_code:
                 type: integer
@@ -5371,6 +6703,8 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ProductTaxAdd'
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -5453,7 +6787,7 @@ paths:
           name: reduce_quantity
           required: false
           type: number
-        - description: 'This parameter is used for selecting a warehouse where you need to update a product quantity. Also, it has to be used along with this parameters: in_stock,quantity,increase_quantity,reduce_quantity.'
+        - description: This parameter is used for selecting a warehouse where you need to set/modify a product quantity.
           in: query
           name: warehouse_id
           required: false
@@ -5479,11 +6813,6 @@ paths:
           required: false
           type: string
         - description: Set visibility status
-          enum:
-            - nowhere
-            - catalog
-            - search
-            - everywhere
           in: query
           name: visible
           required: false
@@ -5532,16 +6861,13 @@ paths:
           in: query
           name: lang_id
           required: false
-          type: integer
+          type: string
         - description: Set stock status
           in: query
           name: in_stock
           required: false
           type: boolean
         - description: Defines product's status
-          enum:
-            - enabled
-            - disabled
           in: query
           name: status
           required: false
@@ -5562,6 +6888,8 @@ paths:
           name: disable_report_cache
           required: false
           type: boolean
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -5664,6 +6992,11 @@ paths:
           name: short_description
           required: false
           type: string
+        - description: This parameter is used for selecting a warehouse where you need to set/modify a product quantity.
+          in: query
+          name: warehouse_id
+          required: false
+          type: string
         - default: 0
           description: Defines product variant's quantity that has to be added
           in: query
@@ -5710,6 +7043,8 @@ paths:
           name: store_id
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -5772,6 +7107,8 @@ paths:
           name: store_id
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -5804,6 +7141,8 @@ paths:
           name: id
           required: true
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -5852,6 +7191,8 @@ paths:
           name: store_id
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -5883,7 +7224,7 @@ paths:
           required: false
           type: integer
         - default: 10
-          description: This parameter sets the entity amount that has to be retrieved
+          description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
           in: query
           name: count
           required: false
@@ -5934,6 +7275,8 @@ paths:
           name: store_id
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -5968,6 +7311,8 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ProductVariantPriceAdd'
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -6005,6 +7350,8 @@ paths:
           name: group_prices
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -6037,6 +7384,8 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ProductVariantPriceUpdate'
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -6064,6 +7413,11 @@ paths:
       description: Update variant.
       operationId: ProductVariantUpdate
       parameters:
+        - description: Defines store id where the variant should be found
+          in: query
+          name: store_id
+          required: false
+          type: string
         - description: Defines variant update specified by variant id
           in: query
           name: id
@@ -6074,9 +7428,26 @@ paths:
           name: product_id
           required: true
           type: string
+        - description: This parameter is used for selecting a warehouse where you need to set/modify a product quantity.
+          in: query
+          name: warehouse_id
+          required: false
+          type: string
         - description: Defines new products' variants quantity
           in: query
           name: quantity
+          required: false
+          type: number
+        - default: 0
+          description: Defines the incremental changes in product quantity
+          in: query
+          name: increase_quantity
+          required: false
+          type: number
+        - default: 0
+          description: Defines the decrement changes in product quantity
+          in: query
+          name: reduce_quantity
           required: false
           type: number
         - description: Defines new product's variant price
@@ -6089,15 +7460,35 @@ paths:
           name: special_price
           required: false
           type: number
+        - description: Defines the date of special price creation
+          in: query
+          name: sprice_create
+          required: false
+          type: string
+        - description: Defines the term of special price offer duration
+          in: query
+          name: sprice_expire
+          required: false
+          type: string
         - description: Defines inventory tracking for product variant
           in: query
           name: manage_stock
           required: false
           type: boolean
+        - description: Set stock status
+          in: query
+          name: in_stock
+          required: false
+          type: boolean
         - description: Defines variant's name that has to be updated
           in: query
           name: name
-          required: true
+          required: false
+          type: string
+        - description: Specifies variant's description
+          in: query
+          name: description
+          required: false
           type: string
         - description: Defines new product's variant sku
           in: query
@@ -6119,34 +7510,29 @@ paths:
           name: meta_keywords
           required: false
           type: string
-        - description: Specifies variant's description
-          in: query
-          name: description
-          required: false
-          type: string
         - description: Defines short description
           in: query
           name: short_description
           required: false
           type: string
         - description: Set visibility status
-          enum:
-            - nowhere
-            - catalog
-            - search
-            - everywhere
           in: query
           name: visible
           required: false
           type: string
         - description: Defines product variant's status
-          enum:
-            - enabled
-            - disabled
           in: query
           name: status
           required: false
           type: string
+        - default: 0
+          description: Weight
+          in: query
+          name: weight
+          required: false
+          type: number
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -6167,6 +7553,78 @@ paths:
           store_key: []
       tags:
         - product
+  /subscriber.list.json:
+    get:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Get subscribers list
+      operationId: SubscriberList
+      parameters:
+        - default: 0
+          description: This parameter sets the number from which you want to get entities
+          in: query
+          name: start
+          required: false
+          type: integer
+        - default: 10
+          description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+          in: query
+          name: count
+          required: false
+          type: integer
+        - default: true
+          description: Filter by subscription status
+          in: query
+          name: subscribed
+          required: false
+          type: boolean
+        - description: Store Id
+          in: query
+          name: store_id
+          required: false
+          type: string
+        - description: Filter subscribers by email
+          in: query
+          name: email
+          required: false
+          type: string
+        - default: force_all
+          description: Set this parameter in order to choose which entity fields you want to retrieve
+          in: query
+          name: params
+          required: false
+          type: string
+        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+          in: query
+          name: exclude
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            properties:
+              result:
+                properties:
+                  subscribers:
+                    items:
+                      $ref: '#/definitions/Subscriber'
+                    type: array
+                  total_count:
+                    type: integer
+                type: object
+              return_code:
+                type: integer
+              return_message:
+                type: string
+            type: object
+      security:
+        - api_key: []
+          store_key: []
+      tags:
+        - subscriber
   /tax.class.info.json:
     get:
       consumes:
@@ -6190,6 +7648,8 @@ paths:
           name: exclude
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -6229,6 +7689,8 @@ paths:
           name: active
           required: false
           type: boolean
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -6293,6 +7755,8 @@ paths:
           name: store_id
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -6325,6 +7789,8 @@ paths:
           name: id
           required: true
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -6352,6 +7818,8 @@ paths:
       description: List all Webhooks that are available on this store.
       operationId: WebhookEvents
       parameters: []
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -6401,7 +7869,7 @@ paths:
           required: false
           type: integer
         - default: 10
-          description: This parameter sets the entity amount that has to be retrieved
+          description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
           in: query
           name: count
           required: false
@@ -6426,6 +7894,8 @@ paths:
           name: ids
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -6480,6 +7950,8 @@ paths:
           name: active
           required: false
           type: boolean
+      produces:
+        - application/json
       responses:
         '200':
           description: successful operation
@@ -6501,6 +7973,127 @@ paths:
       tags:
         - webhook
 definitions:
+  BaseCustomer:
+    properties:
+      additional_fields:
+        type: object
+      custom_fields:
+        type: object
+      email:
+        type: string
+      first_name:
+        type: string
+      id:
+        type: string
+      last_name:
+        type: string
+    type: object
+  Basket:
+    properties:
+      additional_fields:
+        type: object
+      basket_products:
+        items:
+          $ref: '#/definitions/Basket_Item'
+        type: array
+      basket_url:
+        type: string
+      created_at:
+        $ref: '#/definitions/DateTime'
+      currency:
+        $ref: '#/definitions/Currency'
+      custom_fields:
+        type: object
+      customer:
+        $ref: '#/definitions/BaseCustomer'
+      id:
+        type: string
+      modified_at:
+        $ref: '#/definitions/DateTime'
+    type: object
+  Basket_Item:
+    properties:
+      additional_fields:
+        type: object
+      custom_fields:
+        type: object
+      id:
+        type: string
+      name:
+        type: string
+      options:
+        items:
+          $ref: '#/definitions/Order_Item_Option'
+        type: array
+      parent_id:
+        type: string
+      price:
+        type: number
+      product_id:
+        type: string
+      quantity:
+        type: number
+      sku:
+        type: string
+      tax:
+        type: number
+      variant_id:
+        type: string
+      weight:
+        type: number
+      weight_unit:
+        type: string
+    type: object
+  Basket_LiveShippingService:
+    properties:
+      additional_fields:
+        type: object
+      callback:
+        type: string
+      callback_err_cnt:
+        type: integer
+      custom_fields:
+        type: object
+      enabled_on_store:
+        type: boolean
+      id:
+        type: string
+      name:
+        type: string
+    type: object
+  Brand:
+    properties:
+      active:
+        type: boolean
+      additional_fields:
+        type: object
+      created_time:
+        type: string
+      custom_fields:
+        type: object
+      full_description:
+        type: string
+      id:
+        type: string
+      meta_description:
+        type: string
+      meta_keywords:
+        type: string
+      meta_title:
+        type: string
+      modified_time:
+        type: string
+      name:
+        type: string
+      short_description:
+        type: string
+      stores_ids:
+        items:
+          type: string
+        type: array
+      url:
+        type: string
+    type: object
   Carrier:
     properties:
       active:
@@ -6592,6 +8185,8 @@ definitions:
         $ref: '#/definitions/Currency'
       custom_fields:
         type: object
+      default_warehouse_id:
+        type: string
       dimension_unit:
         type: string
       language:
@@ -6604,6 +8199,10 @@ definitions:
         type: boolean
       root_category_id:
         type: integer
+      store_currencies:
+        items:
+          $ref: '#/definitions/Currency'
+        type: array
       store_id:
         type: string
       store_languages:
@@ -6800,6 +8399,10 @@ definitions:
         type: boolean
       code:
         type: string
+      codes:
+        items:
+          $ref: '#/definitions/Coupon_Code'
+        type: array
       conditions:
         items:
           $ref: '#/definitions/Coupon_Condition'
@@ -6860,6 +8463,19 @@ definitions:
       type:
         type: string
     type: object
+  Coupon_Code:
+    properties:
+      additional_fields:
+        type: object
+      code:
+        type: string
+      custom_fields:
+        type: object
+      id:
+        type: string
+      used_times:
+        type: integer
+    type: object
   Coupon_Condition:
     properties:
       additional_fields:
@@ -6884,8 +8500,6 @@ definitions:
         type: array
       value:
         type: string
-      value_type:
-        type: string
     type: object
   Coupon_History:
     properties:
@@ -6908,6 +8522,8 @@ definitions:
         type: object
       default:
         type: boolean
+      id:
+        type: string
       iso3:
         type: string
       name:
@@ -6955,12 +8571,16 @@ definitions:
         $ref: '#/definitions/DateTime'
       last_name:
         type: string
+      last_order_id:
+        type: string
       login:
         type: string
       modified_time:
         $ref: '#/definitions/DateTime'
       news_letter_subscription:
         type: boolean
+      orders_count:
+        type: integer
       phone:
         type: string
       status:
@@ -7003,9 +8623,6 @@ definitions:
               type: string
             address_book_gender:
               description: Specifies customer's gender
-              enum:
-                - male
-                - female
               type: string
             address_book_last_name:
               description: Specifies customer's last name in the address book
@@ -7024,9 +8641,6 @@ definitions:
               type: string
             address_book_type:
               description: Specifies customer's address type
-              enum:
-                - billing
-                - shipping
               type: string
             address_book_website:
               description: Specifies customer's website in the address book
@@ -7053,9 +8667,6 @@ definitions:
         type: string
       gender:
         description: Defines customer's gender
-        enum:
-          - male
-          - female
         type: string
       group:
         description: Defines the group where the customer
@@ -7085,9 +8696,6 @@ definitions:
       status:
         default: enabled
         description: Defines customer's status
-        enum:
-          - enabled
-          - disabled
         type: string
       website:
         description: Link to customer website
@@ -7276,8 +8884,14 @@ definitions:
     properties:
       additional_fields:
         type: object
+      basket_id:
+        type: string
       billing_address:
         $ref: '#/definitions/Customer_Address'
+      bundles:
+        items:
+          $ref: '#/definitions/Order_Item'
+        type: array
       comment:
         type: string
       create_at:
@@ -7318,6 +8932,10 @@ definitions:
         $ref: '#/definitions/Customer_Address'
       shipping_method:
         $ref: '#/definitions/Order_ShippingMethod'
+      shipping_methods:
+        items:
+          $ref: '#/definitions/Order_ShippingMethod'
+        type: array
       status:
         $ref: '#/definitions/Order_Status'
       store_id:
@@ -7326,11 +8944,17 @@ definitions:
         $ref: '#/definitions/Order_Total'
       totals:
         $ref: '#/definitions/Order_Totals'
+      warehouses_ids:
+        items:
+          type: string
+        type: array
     type: object
   OrderAbandoned:
     properties:
       additional_fields:
         type: object
+      basket_id:
+        type: string
       basket_url:
         type: string
       created_at:
@@ -7350,7 +8974,7 @@ definitions:
           last_name:
             type: string
       id:
-        type: integer
+        type: string
       modified_at:
         $ref: '#/definitions/DateTime'
       order_products:
@@ -7405,6 +9029,10 @@ definitions:
         default: 0
         description: Specifies order's coupon discount
         type: number
+      create_invoice:
+        default: false
+        description: Defines whether the invoice is created automatically along with the order
+        type: boolean
       currency:
         description: Currency code of order
         type: string
@@ -7439,34 +9067,35 @@ definitions:
         default: 0
         description: Specifies order's discount
         type: number
+      external_source:
+        description: Identifying the system used to generate the order
+        type: string
       financial_status:
         description: Create order with financial status
-        enum:
-          - pending
-          - authorized
-          - partially_paid
-          - paid
-          - partially_refunded
-          - refunded
-          - voided
         type: string
       fulfillment_status:
         description: Create order with fulfillment status
-        enum:
-          - fulfilled
-          - 'null'
-          - partial
         type: string
       gift_certificate_discount:
         default: 0
         description: Discounts for order with gift certificates
         type: number
+      inventory_behaviour:
+        default: bypass
+        description: 'The behaviour to use when updating inventory.<hr><div style="font-style:normal">Values description:<div style="margin-left: 2%; padding-top: 2%"><div style="font-size:85%"><b>bypass</b> = Do not claim inventory </br></br><b>decrement_ignoring_policy</b> = Ignore the product''s </br> inventory policy and claim amounts</br></br><b>decrement_obeying_policy</b> =  Obey the product''s </br> inventory policy.</br></br></div></div></div>'
+        type: string
       order_id:
         description: Defines the order id if it is supported by the cart
         type: string
       order_item:
         items:
           properties:
+            order_item_allow_refund_items_separately:
+              description: Indicates whether subitems of the grouped/bundle product can be refunded separately
+              type: boolean
+            order_item_allow_ship_items_separately:
+              description: Indicates whether subitems of the grouped/bundle product can be shipped separately
+              type: boolean
             order_item_id:
               description: Defines orders specified by order item id
               type: string
@@ -7490,9 +9119,30 @@ definitions:
                     type: string
                 type: object
               type: array
+            order_item_parent:
+              description: Index of the parent grouped/bundle product
+              type: integer
+            order_item_parent_option_name:
+              description: Option name of the parent grouped/bundle product
+              type: string
             order_item_price:
               description: Defines orders specified by order item price
               type: number
+            order_item_price_includes_tax:
+              default: false
+              description: Defines if item price includes tax
+              type: boolean
+            order_item_property:
+              items:
+                properties:
+                  order_item_property_name:
+                    description: 'Ordered product property name. Where x is order item ID, y is order item property ID'
+                    type: string
+                  order_item_property_value:
+                    description: 'Ordered product property value. Where x is order item ID, y - order item property ID'
+                    type: string
+                type: object
+              type: array
             order_item_quantity:
               description: Defines orders specified by order item quantity
               type: integer
@@ -7503,6 +9153,12 @@ definitions:
             order_item_variant_id:
               description: Ordered product variant. Where x is order item ID
               type: string
+          required:
+            - order_item_id
+            - order_item_name
+            - order_item_model
+            - order_item_price
+            - order_item_quantity
           type: object
         type: array
       order_payment_method:
@@ -7522,7 +9178,7 @@ definitions:
         description: Specifies first shipping address
         type: string
       shipp_address_2:
-        description: Specifies second shipping address
+        description: Specifies second address line of a shipping street address
         type: string
       shipp_city:
         description: Specifies shipping city
@@ -7561,6 +9217,9 @@ definitions:
       subtotal_price:
         description: 'Total price of all ordered products multiplied by their number, excluding tax, shipping price and discounts'
         type: number
+      tags:
+        description: Order tags
+        type: string
       tax_price:
         default: 0
         description: The value of tax cost for order
@@ -7581,7 +9240,7 @@ definitions:
       - bill_postcode
       - bill_state
       - bill_country
-      - total_price
+      - order_item
     type: object
   OrderRefundAdd:
     properties:
@@ -7591,12 +9250,16 @@ definitions:
       fee_price:
         description: Specifies refund's fee price
         type: number
+      is_online:
+        default: false
+        description: Indicates whether refund type is online
+        type: boolean
       item_restock:
         default: false
         description: 'Boolean, whether or not to add the line items back to the store inventory.'
         type: boolean
       items:
-        description: Defines items in the order that will be shipped
+        description: Defines items in the order that will be refunded
         items:
           properties:
             order_product_id:
@@ -7659,8 +9322,39 @@ definitions:
               type: string
           type: object
         type: array
+      warehouse_id:
+        description: This parameter is used for selecting a warehouse where you need to set/modify a product quantity.
+        type: string
     required:
       - order_id
+    type: object
+  OrderShipmentTrackingAdd:
+    properties:
+      carrier_id:
+        description: Defines tracking carrier id
+        type: string
+      order_id:
+        description: Defines the order id
+        type: string
+      shipment_id:
+        description: Shipment id indicates the number of delivery
+        type: string
+      store_id:
+        description: Store Id
+        type: string
+      tracking_link:
+        description: Defines custom tracking link
+        type: string
+      tracking_number:
+        description: Defines tracking number
+        type: string
+      tracking_provider:
+        description: Defines name of the company which provides shipment tracking
+        type: string
+    required:
+      - order_id
+      - shipment_id
+      - tracking_number
     type: object
   OrderShipmentUpdate:
     properties:
@@ -7694,6 +9388,8 @@ definitions:
         type: object
       custom_fields:
         type: object
+      discount_amount:
+        type: number
       model:
         type: string
       name:
@@ -7704,7 +9400,11 @@ definitions:
         type: array
       order_product_id:
         type: string
+      parent_order_product_id:
+        type: string
       price:
+        type: number
+      price_inc_tax:
         type: number
       product_id:
         type: string
@@ -7713,6 +9413,8 @@ definitions:
       tax_percent:
         type: number
       tax_value:
+        type: number
+      tax_value_after_discount:
         type: number
       total_price:
         type: number
@@ -7736,7 +9438,7 @@ definitions:
       price:
         type: number
       product_option_value_id:
-        type: integer
+        type: string
       type:
         type: string
       value:
@@ -7913,6 +9615,10 @@ definitions:
     properties:
       additional_fields:
         type: object
+      advanced_price:
+        items:
+          $ref: '#/definitions/Product_AdvancedPrice'
+        type: array
       avail_sale:
         type: boolean
       avail_view:
@@ -7999,6 +9705,8 @@ definitions:
         type: string
       u_brand:
         type: string
+      u_brand_id:
+        type: string
       u_model:
         type: string
       u_mpn:
@@ -8025,6 +9733,9 @@ definitions:
         default: Default
         description: Defines product’s attribute set name in Magento
         type: string
+      avail_from:
+        description: Allows to schedule a time in the future that the item becomes available. The value should be greater than the current date and time.
+        type: string
       available_for_sale:
         default: true
         description: Specifies the set of visible/invisible products for sale
@@ -8043,12 +9754,6 @@ definitions:
         type: string
       condition:
         description: 'The human-readable label for the condition (e.g., "New").'
-        enum:
-          - Brand New
-          - Like New
-          - Very Good
-          - Good
-          - Acceptable
         type: string
       created_at:
         description: Defines the date of entity creation
@@ -8078,18 +9783,13 @@ definitions:
         type: string
       lang_id:
         description: Language id
-        type: integer
+        type: string
       listing_duration:
-        description: Describes the number of days the seller wants the listing to be active.
-        enum:
-          - 'See cart.info method, param `listing_duration`'
+        description: Describes the number of days the seller wants the listing to be active. Look at cart.info method response for allowed values.
         type: string
       listing_type:
         default: FixedPrice
         description: Indicates the selling format of the eBay listing.
-        enum:
-          - Auction
-          - FixedPrice
         type: string
       manufacturer:
         description: Defines product's manufacturer
@@ -8119,9 +9819,7 @@ definitions:
           type: string
         type: array
       payment_methods:
-        description: 'Identifies the payment method (such as PayPal) that the seller will accept when the buyer pays for the item.<hr><div style="font-style:normal">Param structure:<div style="margin-left: 2%;"><code style="padding:0; background-color:#ffffff;font-size:85%;font-family:monospace;">payment_methods[0] = string</br>payment_methods[1] = string</br></code></div></div>'
-        enum:
-          - 'See cart.info method, param `payment_methods`'
+        description: 'Identifies the payment method (such as PayPal) that the seller will accept when the buyer pays for the item. Look at cart.info method response for allowed values.<hr><div style="font-style:normal">Param structure:<div style="margin-left: 2%;"><code style="padding:0; background-color:#ffffff;font-size:85%;font-family:monospace;">payment_methods[0] = string</br>payment_methods[1] = string</br></code></div></div>'
         items:
           type: string
         type: array
@@ -8139,16 +9837,12 @@ definitions:
         description: Indicates whether the seller allows the buyer to return the item.
         type: boolean
       sales_tax:
-        description: 'Percent of an item''s price to be charged as the sales tax for the order.<hr><div style="font-style:normal">Param structure:<div style="margin-left: 2%;"><code style="padding:0; background-color:#ffffff;font-size:85%;font-family:monospace;">sales_tax[<b>tax_percent</b>] = decimal (##.###)</br>sales_tax[<b>tax_state</b>] = string</br>sales_tax[<b>shipping_inc_in_tax</b>] = bool</br></code></div></div>'
-        enum:
-          - 'See cart.info method, param `eBay_tax_states`'
+        description: 'Percent of an item''s price to be charged as the sales tax for the order. Look at cart.info method response for allowed values.<hr><div style="font-style:normal">Param structure:<div style="margin-left: 2%;"><code style="padding:0; background-color:#ffffff;font-size:85%;font-family:monospace;">sales_tax[<b>tax_percent</b>] = decimal (##.###)</br>sales_tax[<b>tax_state</b>] = string</br>sales_tax[<b>shipping_inc_in_tax</b>] = bool</br></code></div></div>'
         items:
           type: string
         type: array
       shipping_details:
-        description: 'The shipping details, including flat and calculated shipping costs and shipping insurance costs.<hr><div style="font-style:normal">Param structure:<div style="margin-left: 2%;"><code style="padding:0; background-color:#ffffff;font-size:85%;font-family:monospace;">shipping_details[<b>shipping_type</b>] = string </br>shipping_details[0][<b>shipping_service</b>] = string</br>shipping_details[0][<b>shipping_cost</b>] = decimal</br>shipping_details[1][<b>shipping_service</b>] = string</br>shipping_details[1][<b>shipping_cost</b>] = decimal</br></code></div></div>'
-        enum:
-          - 'See cart.info method, param `eBay_shipping_services`'
+        description: 'The shipping details, including flat and calculated shipping costs and shipping insurance costs. Look at cart.info method response for allowed values.<hr><div style="font-style:normal">Param structure:<div style="margin-left: 2%;"><code style="padding:0; background-color:#ffffff;font-size:85%;font-family:monospace;">shipping_details[<b>shipping_type</b>] = string </br>shipping_details[0][<b>shipping_service</b>] = string</br>shipping_details[0][<b>shipping_cost</b>] = decimal</br>shipping_details[1][<b>shipping_service</b>] = string</br>shipping_details[1][<b>shipping_cost</b>] = decimal</br></code></div></div>'
         items:
           type: string
         type: array
@@ -8165,6 +9859,21 @@ definitions:
       special_price:
         description: Defines product's model that has to be added
         type: number
+      specifics:
+        description: |-
+          An array of Item Specific Name/Value pairs used by the seller to provide descriptive details of an item in a structured manner.
+                  <hr>
+                  <div style="font-style:normal">Param structure:
+                    <div style="margin-left: 2%;">
+                      <code style="padding:0; background-color:#ffffff;font-size:85%;font-family:monospace;">
+                        specifics[int][<b>name</b>] = string</br>
+                        specifics[int][<b>value</b>] = string</br>
+                      </code>
+                    </div>
+                  </div>
+        items:
+          type: string
+        type: array
       sprice_create:
         description: Defines the date of special price creation
         type: string
@@ -8173,6 +9882,10 @@ definitions:
         type: string
       sprice_modified:
         description: Defines the date of special price modification
+        type: string
+      stores_ids:
+        default: '0'
+        description: Assign product to the stores that is specified by comma-separated stores' id
         type: string
       tax_class_id:
         description: Defines tax classes where entity has to be added
@@ -8190,9 +9903,6 @@ definitions:
       type:
         default: simple
         description: Defines product's type
-        enum:
-          - simple
-          - configurable
         type: string
       upc:
         description: Universal Product Code. A UPC (UPC-A) is a commonly used identifer for many different products.
@@ -8204,17 +9914,15 @@ definitions:
         default: 0
         description: Specifies the number of product's reviews
         type: integer
+      warehouse_id:
+        description: This parameter is used for selecting a warehouse where you need to set/modify a product quantity.
+        type: string
       weight:
         default: 0
         description: Weight
         type: number
       weight_unit:
         description: Weight Unit
-        enum:
-          - g
-          - kg
-          - oz
-          - lb
         type: string
       wholesale_price:
         description: Defines product's sale price
@@ -8224,13 +9932,7 @@ definitions:
       - model
       - description
       - price
-      - shipping_template_id
-      - condition
-      - listing_duration
-      - payment_methods
-      - return_accepted
-      - shipping_details
-      - paypal_email
+      - sku
     type: object
   ProductPriceAdd:
     properties:
@@ -8445,6 +10147,8 @@ definitions:
         type: integer
       type:
         type: string
+      used_in_combination:
+        type: boolean
     type: object
   Product_Option_Item:
     properties:
@@ -8489,12 +10193,31 @@ definitions:
         type: string
       nick_name:
         type: string
+      product_id:
+        type: string
       rating:
-        type: integer
+        type: number
+      ratings:
+        items:
+          $ref: '#/definitions/Product_Review_Rating'
+        type: array
       status:
         type: string
       summary:
         type: string
+    type: object
+  Product_Review_Rating:
+    properties:
+      additional_fields:
+        type: object
+      custom_fields:
+        type: object
+      id:
+        type: string
+      name:
+        type: string
+      value:
+        type: integer
     type: object
   Product_TierPrice:
     properties:
@@ -8540,6 +10263,8 @@ definitions:
         items:
           $ref: '#/definitions/Shipment_TrackingNumber'
         type: array
+      warehouse_id:
+        type: string
     type: object
   Shipment_TrackingNumber:
     properties:
@@ -8634,6 +10359,29 @@ definitions:
       position:
         type: integer
     type: object
+  Subscriber:
+    properties:
+      additional_fields:
+        type: object
+      created_time:
+        type: string
+      custom_fields:
+        type: object
+      customer_id:
+        type: string
+      email:
+        type: string
+      first_name:
+        type: string
+      id:
+        type: string
+      last_name:
+        type: string
+      modified_time:
+        type: string
+      subscribed:
+        type: boolean
+    type: object
   TaxClass:
     properties:
       additional_fields:
@@ -8650,29 +10398,43 @@ definitions:
         type: number
       tax_rates:
         items:
-          $ref: '#/definitions/Tax_Rate'
+          $ref: '#/definitions/TaxClass_Rate'
         type: array
       tax_type:
         type: integer
     type: object
-  Tax_Rate:
+  TaxClass_Rate:
     properties:
       additional_fields:
         type: object
-      created_at:
-        type: string
+      address:
+        items:
+          type: string
+        type: array
+      cities:
+        items:
+          type: string
+        type: array
+      countries:
+        items:
+          type: string
+        type: array
       custom_fields:
         type: object
       id:
         type: string
-      modified_at:
-        type: string
       name:
         type: string
-      type:
-        type: integer
-      value:
+      tax:
         type: number
+      tax_based_on:
+        type: string
+      tax_type:
+        type: integer
+      zip_codes:
+        items:
+          type: string
+        type: array
     type: object
   Webhook:
     properties:
