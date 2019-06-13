@@ -3833,7 +3833,7 @@ definitions:
         description: 'A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request.'
       Tags:
         $ref: '#/definitions/Tags'
-        description: One or more tags.
+        description: '<p>One or more tags.</p> <p>If the plan is for an existing provisioned product, the product must have a <code>RESOURCE_UPDATE</code> constraint with <code>TagUpdatesOnProvisionedProduct</code> set to <code>ALLOWED</code> to allow tag updates.</p>'
   CreateProvisioningArtifactOutput:
     type: object
     properties:
@@ -5431,6 +5431,9 @@ definitions:
       Active:
         $ref: '#/definitions/ProvisioningArtifactActive'
         description: Indicates whether the product version is active.
+      Guidance:
+        $ref: '#/definitions/ProvisioningArtifactGuidance'
+        description: <p>Information set by the administrator to provide guidance to end users about which provisioning artifacts to use.</p> <p>The <code>DEFAULT</code> value indicates that the product version is active.</p> <p>The administrator can set the guidance to <code>DEPRECATED</code> to inform users that the product version is deprecated. Users are able to make updates to a provisioned product of a deprecated version but cannot launch new provisioned products using a deprecated version.</p>
   UpdateServiceActionOutput:
     type: object
     properties:
@@ -5818,6 +5821,9 @@ definitions:
       Active:
         $ref: '#/definitions/ProvisioningArtifactActive'
         description: Indicates whether the product version is active.
+      Guidance:
+        $ref: '#/definitions/ProvisioningArtifactGuidance'
+        description: Information set by the administrator to provide guidance to end users about which provisioning artifacts to use.
     description: Information about a provisioning artifact (also known as a version) for a product.
   ProvisionedProductPlanName:
     type: string
@@ -6599,6 +6605,11 @@ definitions:
   ProvisioningArtifactCreatedTime:
     type: string
     format: date-time
+  ProvisioningArtifactGuidance:
+    type: string
+    enum:
+      - DEFAULT
+      - DEPRECATED
   ProvisioningArtifact:
     type: object
     properties:
@@ -6614,6 +6625,9 @@ definitions:
       CreatedTime:
         $ref: '#/definitions/ProvisioningArtifactCreatedTime'
         description: The UTC time stamp of the creation time.
+      Guidance:
+        $ref: '#/definitions/ProvisioningArtifactGuidance'
+        description: Information set by the administrator to provide guidance to end users about which provisioning artifacts to use.
     description: Information about a provisioning artifact. A provisioning artifact is also known as a product version.
   ProvisioningArtifactActive:
     type: boolean
