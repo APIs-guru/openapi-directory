@@ -232,14 +232,14 @@ paths:
       tags:
         - enterprises
     get:
-      description: Gets a web app.
-      operationId: androidmanagement.enterprises.webApps.get
+      description: Gets info about an application.
+      operationId: androidmanagement.enterprises.applications.get
       parameters:
         - description: 'The preferred language for localized application info, as a BCP47 tag (e.g. "en-US", "de"). If not specified the default language of the application will be used.'
           in: query
           name: languageCode
           type: string
-        - description: 'The name of the web app in the form enterprises/{enterpriseId}/webApp/{packageName}.'
+        - description: 'The name of the application in the form enterprises/{enterpriseId}/applications/{package_name}.'
           in: path
           name: name
           required: true
@@ -249,7 +249,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/WebApp'
+            $ref: '#/definitions/Application'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidmanagement'

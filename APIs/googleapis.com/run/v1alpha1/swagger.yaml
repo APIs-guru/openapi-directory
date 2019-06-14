@@ -388,8 +388,8 @@ paths:
       tags:
         - namespaces
     get:
-      description: Rpc to get information about an EventType.
-      operationId: run.namespaces.eventtypes.get
+      description: Rpc to get information about a trigger.
+      operationId: run.namespaces.triggers.get
       parameters:
         - description: |-
             The name of the trigger being retrieved. If needed, replace
@@ -403,7 +403,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/EventType'
+            $ref: '#/definitions/Trigger'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -1124,11 +1124,11 @@ paths:
       tags:
         - projects
     get:
-      description: Rpc to get information about a domain mapping.
-      operationId: run.projects.locations.domainmappings.get
+      description: Rpc to get information about a configuration.
+      operationId: run.projects.locations.configurations.get
       parameters:
         - description: |-
-            The name of the domain mapping being retrieved. If needed, replace
+            The name of the configuration being retrieved. If needed, replace
             {namespace_id} with the project ID.
           in: path
           name: name
@@ -1139,7 +1139,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/DomainMapping'
+            $ref: '#/definitions/Configuration'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'

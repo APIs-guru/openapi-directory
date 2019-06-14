@@ -116,10 +116,14 @@ tags:
 paths:
   '/v1/{name}':
     delete:
-      description: Deletes a node.
-      operationId: tpu.projects.locations.nodes.delete
+      description: |-
+        Deletes a long-running operation. This method indicates that the client is
+        no longer interested in the operation result. It does not cancel the
+        operation. If the server doesn't support this method, it returns
+        `google.rpc.Code.UNIMPLEMENTED`.
+      operationId: tpu.projects.locations.operations.delete
       parameters:
-        - description: The resource name.
+        - description: The name of the operation resource to be deleted.
           in: path
           name: name
           required: true
@@ -129,7 +133,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Operation'
+            $ref: '#/definitions/Empty'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -138,8 +142,8 @@ paths:
       tags:
         - projects
     get:
-      description: Gets the details of a node.
-      operationId: tpu.projects.locations.nodes.get
+      description: Gets AcceleratorType.
+      operationId: tpu.projects.locations.acceleratorTypes.get
       parameters:
         - description: The resource name.
           in: path
@@ -151,7 +155,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Node'
+            $ref: '#/definitions/AcceleratorType'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'

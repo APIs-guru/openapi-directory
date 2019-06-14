@@ -302,7 +302,7 @@ paths:
         Gets the access control policy for a resource.
         Returns an empty policy if the resource exists and does not have a policy
         set.
-      operationId: binaryauthorization.projects.attestors.getIamPolicy
+      operationId: binaryauthorization.projects.policy.getIamPolicy
       parameters:
         - description: |-
             REQUIRED: The resource for which the policy is being requested.
@@ -353,7 +353,7 @@ paths:
       description: |-
         Sets the access control policy on the specified resource. Replaces any
         existing policy.
-      operationId: binaryauthorization.projects.attestors.setIamPolicy
+      operationId: binaryauthorization.projects.policy.setIamPolicy
       parameters:
         - in: body
           name: body
@@ -401,7 +401,7 @@ paths:
         Note: This operation is designed to be used for building permission-aware
         UIs and command-line tools, not for authorization checking. This operation
         may "fail open" without warning.
-      operationId: binaryauthorization.projects.attestors.testIamPermissions
+      operationId: binaryauthorization.projects.policy.testIamPermissions
       parameters:
         - in: body
           name: body

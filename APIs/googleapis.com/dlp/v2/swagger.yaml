@@ -166,13 +166,15 @@ paths:
   '/v2/{name}':
     delete:
       description: |-
-        Deletes a job trigger.
-        See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
-      operationId: dlp.projects.jobTriggers.delete
+        Deletes a stored infoType.
+        See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
+        learn more.
+      operationId: dlp.projects.storedInfoTypes.delete
       parameters:
         - description: |-
-            Resource name of the project and the triggeredJob, for example
-            `projects/dlp-test-project/jobTriggers/53234423`.
+            Resource name of the organization and storedInfoType to be deleted, for
+            example `organizations/433245324/storedInfoTypes/432452342` or
+            projects/project-id/storedInfoTypes/432452342.
           in: path
           name: name
           required: true
@@ -192,13 +194,15 @@ paths:
         - projects
     get:
       description: |-
-        Gets a job trigger.
-        See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
-      operationId: dlp.projects.jobTriggers.get
+        Gets a stored infoType.
+        See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
+        learn more.
+      operationId: dlp.projects.storedInfoTypes.get
       parameters:
         - description: |-
-            Resource name of the project and the triggeredJob, for example
-            `projects/dlp-test-project/jobTriggers/53234423`.
+            Resource name of the organization and storedInfoType to be read, for
+            example `organizations/433245324/storedInfoTypes/432452342` or
+            projects/project-id/storedInfoTypes/432452342.
           in: path
           name: name
           required: true
@@ -208,7 +212,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GooglePrivacyDlpV2JobTrigger'
+            $ref: '#/definitions/GooglePrivacyDlpV2StoredInfoType'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -230,17 +234,20 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     patch:
       description: |-
-        Updates a job trigger.
-        See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
-      operationId: dlp.projects.jobTriggers.patch
+        Updates the stored infoType by creating a new version. The existing version
+        will continue to be used until the new version is ready.
+        See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
+        learn more.
+      operationId: dlp.projects.storedInfoTypes.patch
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/GooglePrivacyDlpV2UpdateJobTriggerRequest'
+            $ref: '#/definitions/GooglePrivacyDlpV2UpdateStoredInfoTypeRequest'
         - description: |-
-            Resource name of the project and the triggeredJob, for example
-            `projects/dlp-test-project/jobTriggers/53234423`.
+            Resource name of organization and storedInfoType to be updated, for
+            example `organizations/433245324/storedInfoTypes/432452342` or
+            projects/project-id/storedInfoTypes/432452342.
           in: path
           name: name
           required: true
@@ -250,7 +257,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GooglePrivacyDlpV2JobTrigger'
+            $ref: '#/definitions/GooglePrivacyDlpV2StoredInfoType'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'

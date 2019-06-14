@@ -170,14 +170,14 @@ paths:
       - $ref: '#/parameters/upload_protocol'
   '/v3/{name}':
     delete:
-      description: Deletes a notification channel.
-      operationId: monitoring.projects.notificationChannels.delete
+      description: Deletes a metric descriptor. Only user-created custom metrics can be deleted.
+      operationId: monitoring.projects.metricDescriptors.delete
       parameters:
         - description: 'If true, the notification channel will be deleted regardless of its use in alert policies (the policies will be updated to remove the channel). If false, channels that are still referenced by an existing alerting policy will fail to be deleted in a delete operation.'
           in: query
           name: force
           type: boolean
-        - description: 'The channel for which to execute the request. The format is projects/[PROJECT_ID]/notificationChannels/[CHANNEL_ID].'
+        - description: 'The metric descriptor on which to execute the request. The format is "projects/{project_id_or_number}/metricDescriptors/{metric_id}". An example of {metric_id} is: "custom.googleapis.com/my_test_metric".'
           in: path
           name: name
           required: true
@@ -200,10 +200,10 @@ paths:
       tags:
         - projects
     get:
-      description: 'Gets a single notification channel. The channel includes the relevant configuration details with which the channel was created. However, the response may truncate or omit passwords, API keys, or other private key matter and thus the response may not be 100% identical to the information that was supplied in the call to the create method.'
-      operationId: monitoring.projects.notificationChannels.get
+      description: Gets a single metric descriptor. This method does not require a Stackdriver account.
+      operationId: monitoring.projects.metricDescriptors.get
       parameters:
-        - description: 'The channel for which to execute the request. The format is projects/[PROJECT_ID]/notificationChannels/[CHANNEL_ID].'
+        - description: 'The metric descriptor on which to execute the request. The format is "projects/{project_id_or_number}/metricDescriptors/{metric_id}". An example value of {metric_id} is "compute.googleapis.com/instance/disk/read_bytes_count".'
           in: path
           name: name
           required: true
@@ -213,7 +213,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/NotificationChannel'
+            $ref: '#/definitions/MetricDescriptor'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -246,23 +246,26 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     patch:
-      description: Updates a notification channel. Fields not specified in the field mask remain unchanged.
-      operationId: monitoring.projects.notificationChannels.patch
+      description: Updates an alerting policy. You can either replace the entire policy with a new one or replace only certain fields in the current alerting policy by specifying the fields to be updated via updateMask. Returns the updated alerting policy.
+      operationId: monitoring.projects.alertPolicies.patch
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/NotificationChannel'
+            $ref: '#/definitions/AlertPolicy'
         - description: |-
-            The full REST resource name for this channel. The syntax is:
-            projects/[PROJECT_ID]/notificationChannels/[CHANNEL_ID]
-            The [CHANNEL_ID] is automatically assigned by the server on creation.
+            Required if the policy exists. The resource name for this policy. The syntax is:
+            projects/[PROJECT_ID]/alertPolicies/[ALERT_POLICY_ID]
+            [ALERT_POLICY_ID] is assigned by Stackdriver Monitoring when the policy is created. When calling the alertPolicies.create method, do not include the name field in the alerting policy passed as part of the request.
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - description: The fields to update.
+        - description: |-
+            Optional. A list of alerting policy field names. If this field is not empty, each listed field in the existing alerting policy is set to the value of the corresponding field in the supplied policy (alert_policy), or to the field's default value if the field is not in the supplied alerting policy. Fields not listed retain their previous value.Examples of valid field masks include display_name, documentation, documentation.content, documentation.mime_type, user_labels, user_label.nameofkey, enabled, conditions, combiner, etc.If this field is empty, then the supplied alerting policy replaces the existing policy. It is the same as deleting the existing policy and adding the supplied policy, except for the following:
+            The new policy will have the same [ALERT_POLICY_ID] as the former policy. This gives you continuity with the former policy in your notifications and incidents.
+            Conditions in the new policy will keep their former [CONDITION_ID] if the supplied condition includes the name field with that [CONDITION_ID]. If the supplied condition omits the name field, then a new [CONDITION_ID] is created.
           in: query
           name: updateMask
           type: string
@@ -270,7 +273,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/NotificationChannel'
+            $ref: '#/definitions/AlertPolicy'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'

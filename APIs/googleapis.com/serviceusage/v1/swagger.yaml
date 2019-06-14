@@ -210,15 +210,13 @@ paths:
       tags:
         - operations
     get:
-      description: Returns the service configuration and enabled state for a given service.
-      operationId: serviceusage.services.get
+      description: |-
+        Gets the latest state of a long-running operation.  Clients can use this
+        method to poll the operation result at intervals as recommended by the API
+        service.
+      operationId: serviceusage.operations.get
       parameters:
-        - description: |-
-            Name of the consumer and service to get the `ConsumerState` for.
-
-            An example name would be:
-            `projects/123/services/serviceusage.googleapis.com` where `123` is the
-            project number.
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
@@ -228,18 +226,18 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GoogleApiServiceusageV1Service'
+            $ref: '#/definitions/Operation'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - 'https://www.googleapis.com/auth/service.management'
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - 'https://www.googleapis.com/auth/service.management'
       tags:
-        - services
+        - operations
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
