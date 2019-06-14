@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Manages your DoubleClick Campaign Manager ad campaigns and reports.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: DCM/DFA Reporting And Trafficking
   version: v3.2
   x-apiClientRegistration:
@@ -29,12 +33,22 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/ddmconversions': Manage DoubleClick Digital Marketing conversions
       'https://www.googleapis.com/auth/dfareporting': View and manage DoubleClick for Advertisers reports
       'https://www.googleapis.com/auth/dfatrafficking': View and manage your DoubleClick Campaign Manager's (DCM) display ad campaigns
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/ddmconversions': Manage DoubleClick Digital Marketing conversions
+      'https://www.googleapis.com/auth/dfareporting': View and manage DoubleClick for Advertisers reports
+      'https://www.googleapis.com/auth/dfatrafficking': View and manage your DoubleClick Campaign Manager's (DCM) display ad campaigns
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -162,6 +176,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfareporting'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfareporting'
       tags:
         - files
     parameters:
@@ -184,7 +200,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfareporting'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfareporting'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - userProfiles
@@ -214,7 +234,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfareporting'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfareporting'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - userProfiles
@@ -249,6 +273,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - accountActiveAdSummaries
     parameters:
@@ -276,6 +302,8 @@ paths:
             $ref: '#/definitions/AccountPermissionGroupsListResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - accountPermissionGroups
@@ -310,6 +338,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - accountPermissionGroups
     parameters:
@@ -337,6 +367,8 @@ paths:
             $ref: '#/definitions/AccountPermissionsListResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - accountPermissions
@@ -370,6 +402,8 @@ paths:
             $ref: '#/definitions/AccountPermission'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - accountPermissions
@@ -449,6 +483,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - accountUserProfiles
     parameters:
@@ -485,6 +521,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - accountUserProfiles
     post:
@@ -508,6 +546,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - accountUserProfiles
     put:
@@ -530,6 +570,8 @@ paths:
             $ref: '#/definitions/AccountUserProfile'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - accountUserProfiles
@@ -555,6 +597,8 @@ paths:
             $ref: '#/definitions/AccountUserProfile'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - accountUserProfiles
@@ -626,6 +670,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - accounts
     parameters:
@@ -662,6 +708,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - accounts
     put:
@@ -684,6 +732,8 @@ paths:
             $ref: '#/definitions/Account'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - accounts
@@ -709,6 +759,8 @@ paths:
             $ref: '#/definitions/Account'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - accounts
@@ -883,6 +935,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - ads
     parameters:
@@ -919,6 +973,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - ads
     post:
@@ -942,6 +998,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - ads
     put:
@@ -964,6 +1022,8 @@ paths:
             $ref: '#/definitions/Ad'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - ads
@@ -989,6 +1049,8 @@ paths:
             $ref: '#/definitions/Ad'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - ads
@@ -1056,6 +1118,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - advertiserGroups
     parameters:
@@ -1092,6 +1156,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - advertiserGroups
     post:
@@ -1114,6 +1180,8 @@ paths:
             $ref: '#/definitions/AdvertiserGroup'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - advertiserGroups
@@ -1138,6 +1206,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - advertiserGroups
   '/userprofiles/{profileId}/advertiserGroups/{id}':
@@ -1160,6 +1230,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - advertiserGroups
@@ -1184,6 +1256,8 @@ paths:
             $ref: '#/definitions/AdvertiserGroup'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - advertiserGroups
@@ -1273,6 +1347,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - advertiserLandingPages
     parameters:
@@ -1309,6 +1385,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - advertiserLandingPages
     post:
@@ -1332,6 +1410,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - advertiserLandingPages
     put:
@@ -1354,6 +1434,8 @@ paths:
             $ref: '#/definitions/LandingPage'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - advertiserLandingPages
@@ -1379,6 +1461,8 @@ paths:
             $ref: '#/definitions/LandingPage'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - advertiserLandingPages
@@ -1479,6 +1563,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - advertisers
     parameters:
@@ -1515,6 +1601,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - advertisers
     post:
@@ -1538,6 +1626,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - advertisers
     put:
@@ -1560,6 +1650,8 @@ paths:
             $ref: '#/definitions/Advertiser'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - advertisers
@@ -1585,6 +1677,8 @@ paths:
             $ref: '#/definitions/Advertiser'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - advertisers
@@ -1613,6 +1707,8 @@ paths:
             $ref: '#/definitions/BrowsersListResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - browsers
@@ -1717,6 +1813,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - campaigns
     parameters:
@@ -1753,6 +1851,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - campaigns
     post:
@@ -1776,6 +1876,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - campaigns
     put:
@@ -1798,6 +1900,8 @@ paths:
             $ref: '#/definitions/Campaign'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - campaigns
@@ -1843,6 +1947,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - campaignCreativeAssociations
     parameters:
@@ -1879,6 +1985,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - campaignCreativeAssociations
   '/userprofiles/{profileId}/campaigns/{id}':
@@ -1903,6 +2011,8 @@ paths:
             $ref: '#/definitions/Campaign'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - campaigns
@@ -2042,6 +2152,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - changeLogs
     parameters:
@@ -2074,6 +2186,8 @@ paths:
             $ref: '#/definitions/ChangeLog'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - changeLogs
@@ -2128,6 +2242,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - cities
     parameters:
@@ -2155,6 +2271,8 @@ paths:
             $ref: '#/definitions/ConnectionTypesListResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - connectionTypes
@@ -2188,6 +2306,8 @@ paths:
             $ref: '#/definitions/ConnectionType'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - connectionTypes
@@ -2255,6 +2375,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - contentCategories
     parameters:
@@ -2291,6 +2413,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - contentCategories
     post:
@@ -2313,6 +2437,8 @@ paths:
             $ref: '#/definitions/ContentCategory'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - contentCategories
@@ -2337,6 +2463,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - contentCategories
   '/userprofiles/{profileId}/contentCategories/{id}':
@@ -2359,6 +2487,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - contentCategories
@@ -2383,6 +2513,8 @@ paths:
             $ref: '#/definitions/ContentCategory'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - contentCategories
@@ -2424,6 +2556,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/ddmconversions'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ddmconversions'
       tags:
         - conversions
   '/userprofiles/{profileId}/conversions/batchupdate':
@@ -2456,6 +2590,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/ddmconversions'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ddmconversions'
       tags:
         - conversions
   '/userprofiles/{profileId}/countries':
@@ -2475,6 +2611,8 @@ paths:
             $ref: '#/definitions/CountriesListResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - countries
@@ -2508,6 +2646,8 @@ paths:
             $ref: '#/definitions/Country'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - countries
@@ -2555,6 +2695,8 @@ paths:
             $ref: '#/definitions/CreativeAssetMetadata'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creativeAssets
@@ -2621,6 +2763,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creativeFields
     parameters:
@@ -2657,6 +2801,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creativeFields
     post:
@@ -2680,6 +2826,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creativeFields
     put:
@@ -2702,6 +2850,8 @@ paths:
             $ref: '#/definitions/CreativeField'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creativeFields
@@ -2766,6 +2916,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creativeFieldValues
     parameters:
@@ -2807,6 +2959,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creativeFieldValues
     post:
@@ -2834,6 +2988,8 @@ paths:
             $ref: '#/definitions/CreativeFieldValue'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creativeFieldValues
@@ -2863,6 +3019,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creativeFieldValues
   '/userprofiles/{profileId}/creativeFields/{creativeFieldId}/creativeFieldValues/{id}':
@@ -2890,6 +3048,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creativeFieldValues
@@ -2919,6 +3079,8 @@ paths:
             $ref: '#/definitions/CreativeFieldValue'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creativeFieldValues
@@ -2951,6 +3113,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creativeFields
     get:
@@ -2974,6 +3138,8 @@ paths:
             $ref: '#/definitions/CreativeField'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creativeFields
@@ -3054,6 +3220,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creativeGroups
     parameters:
@@ -3090,6 +3258,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creativeGroups
     post:
@@ -3113,6 +3283,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creativeGroups
     put:
@@ -3135,6 +3307,8 @@ paths:
             $ref: '#/definitions/CreativeGroup'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creativeGroups
@@ -3160,6 +3334,8 @@ paths:
             $ref: '#/definitions/CreativeGroup'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creativeGroups
@@ -3308,6 +3484,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creatives
     parameters:
@@ -3344,6 +3522,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creatives
     post:
@@ -3367,6 +3547,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creatives
     put:
@@ -3389,6 +3571,8 @@ paths:
             $ref: '#/definitions/Creative'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creatives
@@ -3414,6 +3598,8 @@ paths:
             $ref: '#/definitions/Creative'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - creatives
@@ -3465,6 +3651,8 @@ paths:
             $ref: '#/definitions/DimensionValueList'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfareporting'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfareporting'
       tags:
         - dimensionValues
@@ -3531,6 +3719,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - directorySiteContacts
     parameters:
@@ -3563,6 +3753,8 @@ paths:
             $ref: '#/definitions/DirectorySiteContact'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - directorySiteContacts
@@ -3658,6 +3850,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - directorySites
     parameters:
@@ -3689,6 +3883,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - directorySites
   '/userprofiles/{profileId}/directorySites/{id}':
@@ -3713,6 +3909,8 @@ paths:
             $ref: '#/definitions/DirectorySite'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - directorySites
@@ -3766,6 +3964,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - dynamicTargetingKeys
     parameters:
@@ -3796,6 +3996,8 @@ paths:
             $ref: '#/definitions/DynamicTargetingKey'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - dynamicTargetingKeys
@@ -3834,6 +4036,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - dynamicTargetingKeys
@@ -3921,6 +4125,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - eventTags
     parameters:
@@ -3957,6 +4163,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - eventTags
     post:
@@ -3979,6 +4187,8 @@ paths:
             $ref: '#/definitions/EventTag'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - eventTags
@@ -4003,6 +4213,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - eventTags
   '/userprofiles/{profileId}/eventTags/{id}':
@@ -4025,6 +4237,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - eventTags
@@ -4049,6 +4263,8 @@ paths:
             $ref: '#/definitions/EventTag'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - eventTags
@@ -4113,6 +4329,8 @@ paths:
             $ref: '#/definitions/FileList'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfareporting'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfareporting'
       tags:
         - files
@@ -4214,6 +4432,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - floodlightActivities
     parameters:
@@ -4250,6 +4470,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - floodlightActivities
     post:
@@ -4273,6 +4495,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - floodlightActivities
     put:
@@ -4295,6 +4519,8 @@ paths:
             $ref: '#/definitions/FloodlightActivity'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - floodlightActivities
@@ -4328,6 +4554,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - floodlightActivities
   '/userprofiles/{profileId}/floodlightActivities/{id}':
@@ -4350,6 +4578,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - floodlightActivities
@@ -4374,6 +4604,8 @@ paths:
             $ref: '#/definitions/FloodlightActivity'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - floodlightActivities
@@ -4456,6 +4688,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - floodlightActivityGroups
     parameters:
@@ -4492,6 +4726,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - floodlightActivityGroups
     post:
@@ -4515,6 +4751,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - floodlightActivityGroups
     put:
@@ -4537,6 +4775,8 @@ paths:
             $ref: '#/definitions/FloodlightActivityGroup'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - floodlightActivityGroups
@@ -4562,6 +4802,8 @@ paths:
             $ref: '#/definitions/FloodlightActivityGroup'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - floodlightActivityGroups
@@ -4597,6 +4839,8 @@ paths:
             $ref: '#/definitions/FloodlightConfigurationsListResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - floodlightConfigurations
@@ -4634,6 +4878,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - floodlightConfigurations
     put:
@@ -4656,6 +4902,8 @@ paths:
             $ref: '#/definitions/FloodlightConfiguration'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - floodlightConfigurations
@@ -4681,6 +4929,8 @@ paths:
             $ref: '#/definitions/FloodlightConfiguration'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - floodlightConfigurations
@@ -4710,6 +4960,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - languages
     parameters:
@@ -4737,6 +4989,8 @@ paths:
             $ref: '#/definitions/MetrosListResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - metros
@@ -4799,6 +5053,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - mobileApps
     parameters:
@@ -4832,6 +5088,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - mobileApps
     parameters:
@@ -4859,6 +5117,8 @@ paths:
             $ref: '#/definitions/MobileCarriersListResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - mobileCarriers
@@ -4893,6 +5153,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - mobileCarriers
     parameters:
@@ -4920,6 +5182,8 @@ paths:
             $ref: '#/definitions/OperatingSystemVersionsListResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - operatingSystemVersions
@@ -4954,6 +5218,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - operatingSystemVersions
     parameters:
@@ -4981,6 +5247,8 @@ paths:
             $ref: '#/definitions/OperatingSystemsListResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - operatingSystems
@@ -5014,6 +5282,8 @@ paths:
             $ref: '#/definitions/OperatingSystem'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - operatingSystems
@@ -5164,6 +5434,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - placementGroups
     parameters:
@@ -5200,6 +5472,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - placementGroups
     post:
@@ -5223,6 +5497,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - placementGroups
     put:
@@ -5245,6 +5521,8 @@ paths:
             $ref: '#/definitions/PlacementGroup'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - placementGroups
@@ -5270,6 +5548,8 @@ paths:
             $ref: '#/definitions/PlacementGroup'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - placementGroups
@@ -5337,6 +5617,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - placementStrategies
     parameters:
@@ -5373,6 +5655,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - placementStrategies
     post:
@@ -5395,6 +5679,8 @@ paths:
             $ref: '#/definitions/PlacementStrategy'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - placementStrategies
@@ -5419,6 +5705,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - placementStrategies
   '/userprofiles/{profileId}/placementStrategies/{id}':
@@ -5441,6 +5729,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - placementStrategies
@@ -5465,6 +5755,8 @@ paths:
             $ref: '#/definitions/PlacementStrategy'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - placementStrategies
@@ -5643,6 +5935,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - placements
     parameters:
@@ -5679,6 +5973,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - placements
     post:
@@ -5702,6 +5998,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - placements
     put:
@@ -5724,6 +6022,8 @@ paths:
             $ref: '#/definitions/Placement'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - placements
@@ -5794,6 +6094,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - placements
   '/userprofiles/{profileId}/placements/{id}':
@@ -5818,6 +6120,8 @@ paths:
             $ref: '#/definitions/Placement'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - placements
@@ -5846,6 +6150,8 @@ paths:
             $ref: '#/definitions/PlatformTypesListResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - platformTypes
@@ -5880,6 +6186,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - platformTypes
     parameters:
@@ -5907,6 +6215,8 @@ paths:
             $ref: '#/definitions/PostalCodesListResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - postalCodes
@@ -5940,6 +6250,8 @@ paths:
             $ref: '#/definitions/PostalCode'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - postalCodes
@@ -6014,6 +6326,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - projects
     parameters:
@@ -6046,6 +6360,8 @@ paths:
             $ref: '#/definitions/Project'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - projects
@@ -6139,6 +6455,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - inventoryItems
     parameters:
@@ -6176,6 +6494,8 @@ paths:
             $ref: '#/definitions/InventoryItem'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - inventoryItems
@@ -6266,6 +6586,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - orderDocuments
     parameters:
@@ -6303,6 +6625,8 @@ paths:
             $ref: '#/definitions/OrderDocument'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - orderDocuments
@@ -6382,6 +6706,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - orders
     parameters:
@@ -6420,6 +6746,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - orders
     parameters:
@@ -6447,6 +6775,8 @@ paths:
             $ref: '#/definitions/RegionsListResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - regions
@@ -6493,6 +6823,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - remarketingListShares
     put:
@@ -6515,6 +6847,8 @@ paths:
             $ref: '#/definitions/RemarketingListShare'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - remarketingListShares
@@ -6540,6 +6874,8 @@ paths:
             $ref: '#/definitions/RemarketingListShare'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - remarketingListShares
@@ -6613,6 +6949,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - remarketingLists
     parameters:
@@ -6649,6 +6987,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - remarketingLists
     post:
@@ -6672,6 +7012,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - remarketingLists
     put:
@@ -6694,6 +7036,8 @@ paths:
             $ref: '#/definitions/RemarketingList'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - remarketingLists
@@ -6719,6 +7063,8 @@ paths:
             $ref: '#/definitions/RemarketingList'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - remarketingLists
@@ -6784,6 +7130,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfareporting'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfareporting'
       tags:
         - reports
     parameters:
@@ -6814,6 +7162,8 @@ paths:
             $ref: '#/definitions/Report'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfareporting'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfareporting'
       tags:
         - reports
@@ -6847,6 +7197,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfareporting'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfareporting'
       tags:
         - reports
   '/userprofiles/{profileId}/reports/{reportId}':
@@ -6869,6 +7221,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfareporting'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfareporting'
       tags:
         - reports
@@ -6893,6 +7247,8 @@ paths:
             $ref: '#/definitions/Report'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfareporting'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfareporting'
       tags:
         - reports
@@ -6930,6 +7286,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfareporting'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfareporting'
       tags:
         - reports
     put:
@@ -6957,6 +7315,8 @@ paths:
             $ref: '#/definitions/Report'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfareporting'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfareporting'
       tags:
         - reports
@@ -7010,6 +7370,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfareporting'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfareporting'
       tags:
         - reports
     parameters:
@@ -7047,6 +7409,8 @@ paths:
             $ref: '#/definitions/File'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfareporting'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfareporting'
       tags:
         - reports
@@ -7093,6 +7457,8 @@ paths:
             $ref: '#/definitions/File'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfareporting'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfareporting'
       tags:
         - reports
@@ -7194,6 +7560,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - sites
     parameters:
@@ -7230,6 +7598,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - sites
     post:
@@ -7253,6 +7623,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - sites
     put:
@@ -7275,6 +7647,8 @@ paths:
             $ref: '#/definitions/Site'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - sites
@@ -7300,6 +7674,8 @@ paths:
             $ref: '#/definitions/Site'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - sites
@@ -7352,6 +7728,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - sizes
     parameters:
@@ -7383,6 +7761,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - sizes
   '/userprofiles/{profileId}/sizes/{id}':
@@ -7407,6 +7787,8 @@ paths:
             $ref: '#/definitions/Size'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - sizes
@@ -7474,6 +7856,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - subaccounts
     parameters:
@@ -7510,6 +7894,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - subaccounts
     post:
@@ -7533,6 +7919,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - subaccounts
     put:
@@ -7555,6 +7943,8 @@ paths:
             $ref: '#/definitions/Subaccount'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - subaccounts
@@ -7580,6 +7970,8 @@ paths:
             $ref: '#/definitions/Subaccount'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - subaccounts
@@ -7649,6 +8041,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - targetableRemarketingLists
     parameters:
@@ -7681,6 +8075,8 @@ paths:
             $ref: '#/definitions/TargetableRemarketingList'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - targetableRemarketingLists
@@ -7752,6 +8148,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - targetingTemplates
     parameters:
@@ -7788,6 +8186,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - targetingTemplates
     post:
@@ -7811,6 +8211,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - targetingTemplates
     put:
@@ -7833,6 +8235,8 @@ paths:
             $ref: '#/definitions/TargetingTemplate'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - targetingTemplates
@@ -7858,6 +8262,8 @@ paths:
             $ref: '#/definitions/TargetingTemplate'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - targetingTemplates
@@ -7886,6 +8292,8 @@ paths:
             $ref: '#/definitions/UserRolePermissionGroupsListResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - userRolePermissionGroups
@@ -7919,6 +8327,8 @@ paths:
             $ref: '#/definitions/UserRolePermissionGroup'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - userRolePermissionGroups
@@ -7955,6 +8365,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - userRolePermissions
     parameters:
@@ -7987,6 +8399,8 @@ paths:
             $ref: '#/definitions/UserRolePermission'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - userRolePermissions
@@ -8062,6 +8476,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - userRoles
     parameters:
@@ -8098,6 +8514,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - userRoles
     post:
@@ -8120,6 +8538,8 @@ paths:
             $ref: '#/definitions/UserRole'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - userRoles
@@ -8144,6 +8564,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - userRoles
   '/userprofiles/{profileId}/userRoles/{id}':
@@ -8166,6 +8588,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - userRoles
@@ -8190,6 +8614,8 @@ paths:
             $ref: '#/definitions/UserRole'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - userRoles
@@ -8218,6 +8644,8 @@ paths:
             $ref: '#/definitions/VideoFormatsListResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - videoFormats
@@ -8251,6 +8679,8 @@ paths:
             $ref: '#/definitions/VideoFormat'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - videoFormats

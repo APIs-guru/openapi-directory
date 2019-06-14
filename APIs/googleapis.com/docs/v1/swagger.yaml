@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Reads and writes Google Docs documents.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Google Docs
   version: v1
   x-apiClientRegistration:
@@ -29,7 +33,7 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/documents': View and manage your Google Docs documents
@@ -37,6 +41,18 @@ securityDefinitions:
       'https://www.googleapis.com/auth/drive': 'See, edit, create, and delete all of your Google Drive files'
       'https://www.googleapis.com/auth/drive.file': View and manage Google Drive files and folders that you have opened or created with this app
       'https://www.googleapis.com/auth/drive.readonly': See and download all your Google Drive files
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/documents': View and manage your Google Docs documents
+      'https://www.googleapis.com/auth/documents.readonly': View your Google Docs documents
+      'https://www.googleapis.com/auth/drive': 'See, edit, create, and delete all of your Google Drive files'
+      'https://www.googleapis.com/auth/drive.file': View and manage Google Drive files and folders that you have opened or created with this app
+      'https://www.googleapis.com/auth/drive.readonly': See and download all your Google Drive files
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -139,9 +155,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/documents'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/documents'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
       tags:
         - documents
@@ -176,13 +198,23 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/documents'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/documents'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/documents.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/documents.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.readonly'
       tags:
         - documents
@@ -253,9 +285,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/documents'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/documents'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
       tags:
         - documents
@@ -942,7 +980,7 @@ definitions:
         description: The top margin of the embedded object.
       size:
         $ref: '#/definitions/Size'
-        description: The size of the embedded object.
+        description: The visible size of the image after cropping.
       title:
         description: |-
           The title of the embedded object. The `title` and `description` are both
@@ -1221,10 +1259,7 @@ definitions:
         type: number
       cropProperties:
         $ref: '#/definitions/CropProperties'
-        description: |-
-          The crop properties of the image.
-
-          After cropping, the image will be stretched to fit in its container.
+        description: The crop properties of the image.
       sourceUri:
         description: |-
           The source URI is the URI used to insert the image. The source URI can be
@@ -1445,6 +1480,25 @@ definitions:
           or footer. Since page breaks can only be inserted inside the body, the
           segment ID field must be
           empty.
+    type: object
+  InsertTableColumnRequest:
+    description: Inserts an empty column into a table.
+    properties:
+      insertRight:
+        description: |-
+          Whether to insert new column to the right of the reference cell location.
+
+          - `True`: insert to the right.
+          - `False`: insert to the left.
+        type: boolean
+      tableCellLocation:
+        $ref: '#/definitions/TableCellLocation'
+        description: |-
+          The reference table cell location from which columns will be inserted.
+
+          A new column will be inserted to the left (or right) of the column where
+          the reference cell is. If the reference cell is a merged cell, a new
+          column will be inserted to the left (or right) of the merged cell.
     type: object
   InsertTableRequest:
     description: |-
@@ -2544,6 +2598,9 @@ definitions:
       insertTable:
         $ref: '#/definitions/InsertTableRequest'
         description: Inserts a table at the specified location.
+      insertTableColumn:
+        $ref: '#/definitions/InsertTableColumnRequest'
+        description: Inserts an empty column into a table.
       insertTableRow:
         $ref: '#/definitions/InsertTableRowRequest'
         description: Inserts an empty row into a table.
@@ -2556,6 +2613,12 @@ definitions:
       updateParagraphStyle:
         $ref: '#/definitions/UpdateParagraphStyleRequest'
         description: Updates the paragraph style at the specified range.
+      updateTableColumnProperties:
+        $ref: '#/definitions/UpdateTableColumnPropertiesRequest'
+        description: Updates the properties of columns in a table.
+      updateTableRowStyle:
+        $ref: '#/definitions/UpdateTableRowStyleRequest'
+        description: Updates the row style in a table.
       updateTextStyle:
         $ref: '#/definitions/UpdateTextStyleRequest'
         description: Updates the text style at the specified range.
@@ -3471,6 +3534,74 @@ definitions:
       range:
         $ref: '#/definitions/Range'
         description: The range overlapping the paragraphs to style.
+    type: object
+  UpdateTableColumnPropertiesRequest:
+    description: |-
+      Updates the
+      TableColumnProperties of columns
+      in a table.
+    properties:
+      columnIndices:
+        description: |-
+          The list of zero-based column indices whose property should be updated. If
+          no indices are specified, all columns will be updated.
+        items:
+          format: int32
+          type: integer
+        type: array
+      fields:
+        description: |-
+          The fields that should be updated.
+
+          At least one field must be specified. The root `tableColumnProperties` is
+          implied and should not be specified. A single `"*"` can be used as
+          short-hand for listing every field.
+
+          For example to update the column width, set `fields` to `"width"`.
+        format: google-fieldmask
+        type: string
+      tableColumnProperties:
+        $ref: '#/definitions/TableColumnProperties'
+        description: |-
+          The table column properties to update.
+
+          If the value of `table_column_properties#width` is less than 5 points
+          (5/72 inch), a 400 bad request error is returned.
+      tableStartLocation:
+        $ref: '#/definitions/Location'
+        description: The location where the table starts in the document.
+    type: object
+  UpdateTableRowStyleRequest:
+    description: |-
+      Updates the TableRowStyle of rows in a
+      table.
+    properties:
+      fields:
+        description: |-
+          The fields that should be updated.
+
+          At least one field must be specified. The root `tableRowStyle` is implied
+          and should not be specified. A single `"*"` can be used as short-hand for
+          listing every field.
+
+          For example to update the minimum row height, set `fields` to
+          `"min_row_height"`.
+        format: google-fieldmask
+        type: string
+      rowIndices:
+        description: |-
+          The list of zero-based row indices whose style should be updated. If no
+          indices are specified, all rows will be updated.
+        items:
+          format: int32
+          type: integer
+        type: array
+      tableRowStyle:
+        $ref: '#/definitions/TableRowStyle'
+        description: The styles to be set on the rows.
+      tableStartLocation:
+        $ref: '#/definitions/Location'
+        description: The location where the table starts in the document.
     type: object
   UpdateTextStyleRequest:
     description: Update the styling of text.

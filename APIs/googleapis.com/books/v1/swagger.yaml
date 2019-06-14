@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Searches for books and manages your Google Books library.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Books
   version: v1
   x-apiClientRegistration:
@@ -31,10 +35,18 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/books': Manage your books
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/books': Manage your books
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -127,6 +139,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/books'
       tags:
         - cloudloading
   /cloudloading/deleteBook:
@@ -152,6 +166,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/books'
       tags:
         - cloudloading
@@ -180,6 +196,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/books'
       tags:
         - cloudloading
   /dictionary/listOfflineMetadata:
@@ -199,6 +217,8 @@ paths:
             $ref: '#/definitions/Metadata'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/books'
       tags:
         - dictionary
@@ -226,6 +246,8 @@ paths:
             $ref: '#/definitions/FamilyInfo'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/books'
       tags:
         - familysharing
@@ -268,6 +290,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/books'
       tags:
         - familysharing
   /familysharing/unshare:
@@ -301,6 +325,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/books'
       tags:
         - familysharing
   /myconfig/getUserSettings:
@@ -314,6 +340,8 @@ paths:
             $ref: '#/definitions/Usersettings'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/books'
       tags:
         - myconfig
@@ -366,6 +394,8 @@ paths:
             $ref: '#/definitions/DownloadAccesses'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/books'
       tags:
         - myconfig
@@ -421,6 +451,8 @@ paths:
             $ref: '#/definitions/RequestAccess'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/books'
       tags:
         - myconfig
@@ -488,6 +520,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/books'
       tags:
         - myconfig
   /myconfig/updateUserSettings:
@@ -514,6 +548,8 @@ paths:
             $ref: '#/definitions/Usersettings'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/books'
       tags:
         - myconfig
@@ -575,6 +611,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/books'
       tags:
         - mylibrary
     parameters:
@@ -617,6 +655,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/books'
       tags:
         - mylibrary
   /mylibrary/annotations/summary:
@@ -653,6 +693,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/books'
       tags:
         - mylibrary
   '/mylibrary/annotations/{annotationId}':
@@ -674,6 +716,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/books'
       tags:
         - mylibrary
@@ -710,6 +754,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/books'
       tags:
         - mylibrary
   /mylibrary/bookshelves:
@@ -728,6 +774,8 @@ paths:
             $ref: '#/definitions/Bookshelves'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/books'
       tags:
         - mylibrary
@@ -760,6 +808,8 @@ paths:
             $ref: '#/definitions/Bookshelf'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/books'
       tags:
         - mylibrary
@@ -812,6 +862,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/books'
       tags:
         - mylibrary
   '/mylibrary/bookshelves/{shelf}/clearVolumes':
@@ -841,6 +893,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/books'
       tags:
         - mylibrary
@@ -882,6 +936,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/books'
       tags:
         - mylibrary
   '/mylibrary/bookshelves/{shelf}/removeVolume':
@@ -922,6 +978,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/books'
       tags:
         - mylibrary
@@ -976,6 +1034,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/books'
       tags:
         - mylibrary
     parameters:
@@ -1011,6 +1071,8 @@ paths:
             $ref: '#/definitions/ReadingPosition'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/books'
       tags:
         - mylibrary
@@ -1079,6 +1141,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/books'
       tags:
         - mylibrary
   /notification/get:
@@ -1107,6 +1171,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/books'
       tags:
         - notification
     parameters:
@@ -1133,6 +1199,8 @@ paths:
             $ref: '#/definitions/Category'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/books'
       tags:
         - onboarding
@@ -1183,6 +1251,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/books'
       tags:
         - onboarding
     parameters:
@@ -1220,6 +1290,8 @@ paths:
             $ref: '#/definitions/Discoveryclusters'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/books'
       tags:
         - personalizedstream
@@ -1281,6 +1353,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/books'
       tags:
         - promooffer
   /promooffer/dismiss:
@@ -1330,6 +1404,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/books'
       tags:
         - promooffer
   /promooffer/get:
@@ -1369,6 +1445,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/books'
       tags:
         - promooffer
     parameters:
@@ -1399,6 +1477,8 @@ paths:
             $ref: '#/definitions/Series'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/books'
       tags:
         - series
@@ -1436,6 +1516,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/books'
       tags:
         - series
     parameters:
@@ -1467,6 +1549,8 @@ paths:
             $ref: '#/definitions/Bookshelves'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/books'
       tags:
         - bookshelves
@@ -1504,6 +1588,8 @@ paths:
             $ref: '#/definitions/Bookshelf'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/books'
       tags:
         - bookshelves
@@ -1555,6 +1641,8 @@ paths:
             $ref: '#/definitions/Volumes'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/books'
       tags:
         - bookshelves
@@ -1663,6 +1751,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/books'
       tags:
         - volumes
     parameters:
@@ -1736,6 +1826,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/books'
       tags:
         - volumes
     parameters:
@@ -1773,6 +1865,8 @@ paths:
             $ref: '#/definitions/Volumes'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/books'
       tags:
         - volumes
@@ -1826,6 +1920,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/books'
       tags:
         - volumes
   /volumes/useruploaded:
@@ -1877,6 +1973,8 @@ paths:
             $ref: '#/definitions/Volumes'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/books'
       tags:
         - volumes
@@ -1932,6 +2030,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/books'
       tags:
         - volumes
     parameters:
@@ -1982,6 +2082,8 @@ paths:
             $ref: '#/definitions/Volumes'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/books'
       tags:
         - volumes
@@ -2071,6 +2173,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/books'
       tags:
         - layers
     parameters:
@@ -2116,6 +2220,8 @@ paths:
             $ref: '#/definitions/Volumeannotation'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/books'
       tags:
         - layers
@@ -2201,6 +2307,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/books'
       tags:
         - layers
     parameters:
@@ -2269,6 +2377,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/books'
       tags:
         - layers
     parameters:
@@ -2315,6 +2425,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/books'
       tags:
         - layers
     parameters:
@@ -2355,6 +2467,8 @@ paths:
             $ref: '#/definitions/Layersummary'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/books'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/books'
       tags:
         - layers

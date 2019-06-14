@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Creates and manages Redis instances on the Google Cloud Platform.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Google Cloud Memorystore for Redis
   version: v1beta1
   x-apiClientRegistration:
@@ -29,10 +33,18 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -105,36 +117,14 @@ paths:
   '/v1beta1/{name}':
     delete:
       description: |-
-        Deletes a long-running operation. This method indicates that the client is
-        no longer interested in the operation result. It does not cancel the
-        operation. If the server doesn't support this method, it returns
-        `google.rpc.Code.UNIMPLEMENTED`.
-      operationId: redis.projects.locations.operations.delete
+        Deletes a specific Redis instance.  Instance stops serving and data is
+        deleted.
+      operationId: redis.projects.locations.instances.delete
       parameters:
-        - description: The name of the operation resource to be deleted.
-          in: path
-          name: name
-          required: true
-          type: string
-          x-reservedExpansion: true
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Empty'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - projects
-    get:
-      description: |-
-        Gets the latest state of a long-running operation.  Clients can use this
-        method to poll the operation result at intervals as recommended by the API
-        service.
-      operationId: redis.projects.locations.operations.get
-      parameters:
-        - description: The name of the operation resource.
+        - description: |-
+            Required. Redis instance resource name using the form:
+                `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+            where `location_id` refers to a GCP region.
           in: path
           name: name
           required: true
@@ -147,6 +137,33 @@ paths:
             $ref: '#/definitions/Operation'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    get:
+      description: Gets the details of a specific Redis instance.
+      operationId: redis.projects.locations.instances.get
+      parameters:
+        - description: |-
+            Required. Redis instance resource name using the form:
+                `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+            where `location_id` refers to a GCP region.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Instance'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -210,6 +227,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1beta1/{name}/locations':
@@ -242,6 +261,8 @@ paths:
             $ref: '#/definitions/ListLocationsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -298,6 +319,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -353,6 +376,106 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/v1beta1/{name}:export':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Export Redis instance data into a Redis RDB format file in Cloud Storage.
+
+        Redis will continue serving during this operation.
+
+        The returned operation is automatically deleted after a few hours, so
+        there is no need to call DeleteOperation.
+      operationId: redis.projects.locations.instances.export
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ExportInstanceRequest'
+        - description: |-
+            Required. Redis instance resource name using the form:
+                `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+            where `location_id` refers to a GCP region.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/v1beta1/{name}:import':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Import a Redis RDB snapshot file from Cloud Storage into a Redis instance.
+
+        Redis may stop serving during this operation. Instance state will be
+        IMPORTING for entire operation. When complete, the instance will contain
+        only data from the imported file.
+
+        The returned operation is automatically deleted after a few hours, so
+        there is no need to call DeleteOperation.
+      operationId: redis.projects.locations.instances.import
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ImportInstanceRequest'
+        - description: |-
+            Required. Redis instance resource name using the form:
+                `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+            where `location_id` refers to a GCP region.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1beta1/{parent}/instances':
@@ -388,7 +511,7 @@ paths:
         - description: |-
             Required. The resource name of the instance location using the form:
                 `projects/{project_id}/locations/{location_id}`
-            where `location_id` refers to a GCP region
+            where `location_id` refers to a GCP region.
           in: path
           name: parent
           required: true
@@ -401,6 +524,8 @@ paths:
             $ref: '#/definitions/ListInstancesResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -451,7 +576,7 @@ paths:
         - description: |-
             Required. The resource name of the instance location using the form:
                 `projects/{project_id}/locations/{location_id}`
-            where `location_id` refers to a GCP region
+            where `location_id` refers to a GCP region.
           in: path
           name: parent
           required: true
@@ -464,6 +589,8 @@ paths:
             $ref: '#/definitions/Operation'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -480,6 +607,29 @@ definitions:
 
       The JSON representation for `Empty` is empty JSON object `{}`.
     properties: {}
+    type: object
+  ExportInstanceRequest:
+    description: Request for Export.
+    properties:
+      outputConfig:
+        $ref: '#/definitions/OutputConfig'
+        description: Required. Specify data to be exported.
+    type: object
+  GcsDestination:
+    description: The Cloud Storage location for the output content
+    properties:
+      uri:
+        description: |-
+          Required. Data destination URI (e.g.
+          'gs://my_bucket/my_object'). Existing files will be overwritten.
+        type: string
+    type: object
+  GcsSource:
+    description: The Cloud Storage location for the input content
+    properties:
+      uri:
+        description: 'Required. Source data URI. (e.g. ''gs://my_bucket/my_object'').'
+        type: string
     type: object
   GoogleCloudCommonOperationMetadata:
     description: Represents the metadata of the long-running operation.
@@ -534,6 +684,20 @@ definitions:
       Defines specific information for a particular zone. Currently empty and
       reserved for future use only.
     properties: {}
+    type: object
+  ImportInstanceRequest:
+    description: Request for Import.
+    properties:
+      inputConfig:
+        $ref: '#/definitions/InputConfig'
+        description: Required. Specify data to be imported.
+    type: object
+  InputConfig:
+    description: The input content
+    properties:
+      gcsSource:
+        $ref: '#/definitions/GcsSource'
+        description: Google Cloud Storage location where input content is located.
     type: object
   Instance:
     description: A Google Cloud Redis instance.
@@ -600,6 +764,14 @@ definitions:
           should be provisioned in. Refer to [location_id] and
           [alternative_location_id] fields for more details.
         type: string
+      persistenceIamIdentity:
+        description: |-
+          Output only. Cloud IAM identity used by import / export operations to
+          transfer data to/from Cloud Storage. Format is
+          "serviceAccount:<service_account_email>". The value may change over time
+          for a given instance so should be checked before each import/export
+          operation.
+        type: string
       port:
         description: Output only. The port number of the exposed Redis endpoint.
         format: int32
@@ -612,15 +784,26 @@ definitions:
           http://redis.io/topics/config. Currently, the only supported parameters
           are:
 
+           Redis 3.2 and above:
+
            *   maxmemory-policy
            *   notify-keyspace-events
+
+           Redis 4.0 and above:
+
+           *   activedefrag
+           *   lfu-log-factor
+           *   lfu-decay-time
         type: object
       redisVersion:
         description: |-
           Optional. The version of Redis software.
           If not provided, latest supported version will be used. Updating the
           version will perform an upgrade/downgrade to the new version. Currently,
-          the supported values are `REDIS_3_2` for Redis 3.2.
+          the supported values are:
+
+           *   `REDIS_4_0` for Redis 4.0 compatibility
+           *   `REDIS_3_2` for Redis 3.2 compatibility (default)
         type: string
       reservedIpRange:
         description: |-
@@ -776,7 +959,7 @@ definitions:
         description: |-
           The server-assigned name, which is only unique within the same service that
           originally returns it. If you use the default HTTP mapping, the
-          `name` should have the format of `operations/some/unique/name`.
+          `name` should be a resource name ending with `operations/{unique_id}`.
         type: string
       response:
         additionalProperties:
@@ -792,60 +975,22 @@ definitions:
           `TakeSnapshotResponse`.
         type: object
     type: object
+  OutputConfig:
+    description: The output content
+    properties:
+      gcsDestination:
+        $ref: '#/definitions/GcsDestination'
+        description: Google Cloud Storage destination for output content.
+    type: object
   Status:
     description: |-
-      The `Status` type defines a logical error model that is suitable for different
-      programming environments, including REST APIs and RPC APIs. It is used by
-      [gRPC](https://github.com/grpc). The error model is designed to be:
+      The `Status` type defines a logical error model that is suitable for
+      different programming environments, including REST APIs and RPC APIs. It is
+      used by [gRPC](https://github.com/grpc). Each `Status` message contains
+      three pieces of data: error code, error message, and error details.
 
-      - Simple to use and understand for most users
-      - Flexible enough to meet unexpected needs
-
-      # Overview
-
-      The `Status` message contains three pieces of data: error code, error message,
-      and error details. The error code should be an enum value of
-      google.rpc.Code, but it may accept additional error codes if needed.  The
-      error message should be a developer-facing English message that helps
-      developers *understand* and *resolve* the error. If a localized user-facing
-      error message is needed, put the localized message in the error details or
-      localize it in the client. The optional error details may contain arbitrary
-      information about the error. There is a predefined set of error detail types
-      in the package `google.rpc` that can be used for common error conditions.
-
-      # Language mapping
-
-      The `Status` message is the logical representation of the error model, but it
-      is not necessarily the actual wire format. When the `Status` message is
-      exposed in different client libraries and different wire protocols, it can be
-      mapped differently. For example, it will likely be mapped to some exceptions
-      in Java, but more likely mapped to some error codes in C.
-
-      # Other uses
-
-      The error model and the `Status` message can be used in a variety of
-      environments, either with or without APIs, to provide a
-      consistent developer experience across different environments.
-
-      Example uses of this error model include:
-
-      - Partial errors. If a service needs to return partial errors to the client,
-          it may embed the `Status` in the normal response to indicate the partial
-          errors.
-
-      - Workflow errors. A typical workflow has multiple steps. Each step may
-          have a `Status` message for error reporting.
-
-      - Batch operations. If a client uses batch request and batch response, the
-          `Status` message should be used directly inside batch response, one for
-          each error sub-response.
-
-      - Asynchronous operations. If an API call embeds asynchronous operation
-          results in its response, the status of those operations should be
-          represented directly using the `Status` message.
-
-      - Logging. If some API errors are stored in logs, the message `Status` could
-          be used directly after any stripping needed for security/privacy reasons.
+      You can find out more about this error model and how to work with it in the
+      [API Design Guide](https://cloud.google.com/apis/design/errors).
     properties:
       code:
         description: 'The status code, which should be an enum value of google.rpc.Code.'

@@ -8,7 +8,11 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: Writes log entries and manages your Logging configuration.
+  description: 'Writes log entries and manages your Stackdriver Logging configuration. The table entries below are presented in alphabetical order, not in order of common use. For explanations of the concepts found in the table entries, read the Stackdriver Logging documentation.'
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Stackdriver Logging
   version: v2
   x-apiClientRegistration:
@@ -32,7 +36,7 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
@@ -40,6 +44,18 @@ securityDefinitions:
       'https://www.googleapis.com/auth/logging.admin': Administrate log data for your projects
       'https://www.googleapis.com/auth/logging.read': View log data for your projects
       'https://www.googleapis.com/auth/logging.write': Submit log data for your projects
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/logging.admin': Administrate log data for your projects
+      'https://www.googleapis.com/auth/logging.read': View log data for your projects
+      'https://www.googleapis.com/auth/logging.write': Submit log data for your projects
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -146,11 +162,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.admin'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/logging.read'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
         - entries
@@ -183,9 +207,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.admin'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/logging.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/logging.write'
       tags:
         - entries
@@ -210,11 +240,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.admin'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/logging.read'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
         - monitoredResourceDescriptors
@@ -233,7 +271,7 @@ paths:
   '/v2/{logName}':
     delete:
       description: Deletes all the log entries in a log. The log reappears if it receives new entries. Log entries written shortly before the delete operation might not be deleted.
-      operationId: logging.organizations.logs.delete
+      operationId: logging.logs.delete
       parameters:
         - description: |-
             Required. The resource name of the log to delete:
@@ -255,10 +293,14 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - organizations
+        - logs
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -292,9 +334,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.admin'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/logging.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/logging.write'
       tags:
         - projects
@@ -318,11 +366,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.admin'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/logging.read'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
         - projects
@@ -363,9 +419,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.admin'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/logging.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/logging.write'
       tags:
         - projects
@@ -394,7 +456,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
         - organizations
@@ -422,11 +488,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.admin'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/logging.read'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
         - organizations
@@ -474,7 +548,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
         - organizations
@@ -510,11 +588,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.admin'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/logging.read'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
         - organizations
@@ -558,14 +644,18 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
         - organizations
   '/v2/{parent}/logs':
     get:
       description: 'Lists the logs in projects, organizations, folders, or billing accounts. Only logs that have entries are listed.'
-      operationId: logging.organizations.logs.list
+      operationId: logging.logs.list
       parameters:
         - description: Optional. The maximum number of results to return from this request. Non-positive values are ignored. The presence of nextPageToken in the response indicates that more results might be available.
           in: query
@@ -594,14 +684,22 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.admin'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - organizations
+        - logs
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -643,11 +741,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.admin'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/logging.read'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
         - projects
@@ -688,16 +794,22 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.admin'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/logging.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/logging.write'
       tags:
         - projects
   '/v2/{parent}/sinks':
     get:
       description: Lists sinks.
-      operationId: logging.organizations.sinks.list
+      operationId: logging.sinks.list
       parameters:
         - description: Optional. The maximum number of results to return from this request. Non-positive values are ignored. The presence of nextPageToken in the response indicates that more results might be available.
           in: query
@@ -726,14 +838,22 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.admin'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - organizations
+        - sinks
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -748,7 +868,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: 'Creates a sink that exports specified log entries to a destination. The export of newly-ingested log entries begins immediately, unless the sink''s writer_identity is not permitted to write to the destination. A sink can export log entries only from the resource owning the sink.'
-      operationId: logging.organizations.sinks.create
+      operationId: logging.sinks.create
       parameters:
         - in: body
           name: body
@@ -778,14 +898,18 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - organizations
+        - sinks
   '/v2/{sinkName}':
     delete:
       description: 'Deletes a sink. If the sink has a unique writer_identity, then that service account is also deleted.'
-      operationId: logging.organizations.sinks.delete
+      operationId: logging.sinks.delete
       parameters:
         - description: |-
             Required. The full resource name of the sink to delete, including the parent resource and the sink identifier:
@@ -807,13 +931,17 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - organizations
+        - sinks
     get:
       description: Gets a sink.
-      operationId: logging.organizations.sinks.get
+      operationId: logging.sinks.get
       parameters:
         - description: |-
             Required. The resource name of the sink:
@@ -835,14 +963,22 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.admin'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - organizations
+        - sinks
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -895,13 +1031,17 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
         - organizations
     put:
       description: 'Updates a sink. This method replaces the following fields in the existing sink with values from the new sink: destination, and filter.The updated sink might also have a new writer_identity; see the unique_writer_identity field.'
-      operationId: logging.organizations.sinks.update
+      operationId: logging.sinks.update
       parameters:
         - in: body
           name: body
@@ -939,10 +1079,14 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - organizations
+        - sinks
 definitions:
   BucketOptions:
     description: 'BucketOptions describes the bucket boundaries used to create a histogram for the distribution. The buckets can be in a linear sequence, an exponential sequence, or each bucket can be specified explicitly. BucketOptions does not include the number of values in each bucket.A bucket has an inclusive lower bound and exclusive upper bound for the values that are counted for that bucket. The upper bound of a bucket must be strictly greater than the lower bound. The sequence of N buckets for a distribution consists of an underflow bucket (number 0), zero or more finite buckets (number 1 through N - 2) and an overflow bucket (number N - 1). The buckets are contiguous: the lower bound of bucket i (i > 0) is the same as the upper bound of bucket i - 1. The buckets span the whole range of finite values: lower bound of the underflow bucket is -infinity and the upper bound of the overflow bucket is +infinity. The finite buckets are so-called because both bounds are finite.'
@@ -1223,7 +1367,7 @@ definitions:
       protoPayload:
         additionalProperties:
           description: Properties of the object. Contains field @type with type URL.
-        description: 'The log entry payload, represented as a protocol buffer. Some Google Cloud Platform services use this field for their log entry payloads.'
+        description: 'The log entry payload, represented as a protocol buffer. Some Google Cloud Platform services use this field for their log entry payloads.The following protocol buffer types are supported; user-defined types are not supported:"type.googleapis.com/google.cloud.audit.AuditLog"  "type.googleapis.com/google.appengine.logging.v1.RequestLog"'
         type: object
       receiveTimestamp:
         description: Output only. The time the log entry was received by Logging.
@@ -1231,7 +1375,7 @@ definitions:
         type: string
       resource:
         $ref: '#/definitions/MonitoredResource'
-        description: 'Required. The primary monitored resource associated with this log entry.Example: a log entry that reports a database error would be associated with the monitored resource designating the particular database that reported the error.'
+        description: 'Required. The monitored resource that produced this log entry.Example: a log entry that reports a database error would be associated with the monitored resource designating the particular database that reported the error.'
       severity:
         description: Optional. The severity of the log entry. The default value is LogSeverity.DEFAULT.
         enum:
@@ -1448,6 +1592,16 @@ definitions:
         items:
           $ref: '#/definitions/LabelDescriptor'
         type: array
+      launchStage:
+        description: Optional. The launch stage of the metric definition.
+        enum:
+          - LAUNCH_STAGE_UNSPECIFIED
+          - EARLY_ACCESS
+          - ALPHA
+          - BETA
+          - GA
+          - DEPRECATED
+        type: string
       metadata:
         $ref: '#/definitions/MetricDescriptorMetadata'
         description: Optional. Metadata which can be used to guide usage of the metric.
@@ -1534,7 +1688,7 @@ definitions:
         format: google-duration
         type: string
       launchStage:
-        description: The launch stage of the metric definition.
+        description: Deprecated. Please use the MetricDescriptor.launch_stage instead. The launch stage of the metric definition.
         enum:
           - LAUNCH_STAGE_UNSPECIFIED
           - EARLY_ACCESS
@@ -1578,6 +1732,16 @@ definitions:
         items:
           $ref: '#/definitions/LabelDescriptor'
         type: array
+      launchStage:
+        description: Optional. The launch stage of the monitored resource definition.
+        enum:
+          - LAUNCH_STAGE_UNSPECIFIED
+          - EARLY_ACCESS
+          - ALPHA
+          - BETA
+          - GA
+          - DEPRECATED
+        type: string
       name:
         description: 'Optional. The resource name of the monitored resource descriptor: "projects/{project_id}/monitoredResourceDescriptors/{type}" where {type} is the value of the type field in this object and {project_id} is a project ID that provides API-specific context for accessing the type. APIs that do not use project information can use the resource name format "monitoredResourceDescriptors/{type}".'
         type: string

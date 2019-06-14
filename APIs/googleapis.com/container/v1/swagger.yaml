@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'Builds and manages container-based applications, powered by the open source Kubernetes technology.'
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Kubernetes Engine
   version: v1
   x-apiClientRegistration:
@@ -29,10 +33,18 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -141,6 +153,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -164,12 +178,12 @@ paths:
         [default network](/compute/docs/networks-and-firewalls#networks).
 
         One firewall is added for the cluster. After cluster creation,
-        the cluster creates routes for each node to allow the containers
+        the Kubelet creates routes for each node to allow the containers
         on that node to communicate with all other instances in the
         cluster.
 
         Finally, an entry is added to the project's global metadata indicating
-        which CIDR range is being used by the cluster.
+        which CIDR range the cluster is using.
       operationId: container.projects.zones.clusters.create
       parameters:
         - in: body
@@ -201,6 +215,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}':
@@ -212,9 +228,9 @@ paths:
         Firewalls and routes that were configured during cluster creation
         are also deleted.
 
-        Other Google Compute Engine resources that might be in use by the cluster
-        (e.g. load balancer resources) will not be deleted if they weren't present
-        at the initial create time.
+        Other Google Compute Engine resources that might be in use by the cluster,
+        such as load balancer resources, are not deleted if they weren't present
+        when the cluster was initially created.
       operationId: container.projects.zones.clusters.delete
       parameters:
         - description: |-
@@ -254,6 +270,8 @@ paths:
             $ref: '#/definitions/Operation'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -298,6 +316,8 @@ paths:
             $ref: '#/definitions/Cluster'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -352,6 +372,8 @@ paths:
             $ref: '#/definitions/Operation'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -408,6 +430,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/legacyAbac':
@@ -462,6 +486,8 @@ paths:
             $ref: '#/definitions/Operation'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -518,6 +544,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/logging':
@@ -572,6 +600,8 @@ paths:
             $ref: '#/definitions/Operation'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -628,6 +658,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/monitoring':
@@ -683,6 +715,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/nodePools':
@@ -727,6 +761,8 @@ paths:
             $ref: '#/definitions/ListNodePoolsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -782,6 +818,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/nodePools/{nodePoolId}':
@@ -835,10 +873,12 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     get:
-      description: Retrieves the node pool requested.
+      description: Retrieves the requested node pool.
       operationId: container.projects.zones.clusters.nodePools.get
       parameters:
         - description: |-
@@ -887,6 +927,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -915,7 +957,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Sets the autoscaling settings for a specific node pool.
+      description: Sets the autoscaling settings for the specified node pool.
       operationId: container.projects.zones.clusters.nodePools.autoscaling
       parameters:
         - in: body
@@ -960,6 +1002,8 @@ paths:
             $ref: '#/definitions/Operation'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -1023,6 +1067,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/nodePools/{nodePoolId}/setSize':
@@ -1085,6 +1131,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/nodePools/{nodePoolId}/update':
@@ -1101,7 +1149,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Updates the version and/or image type for a specific node pool.
+      description: Updates the version and/or image type for the specified node pool.
       operationId: container.projects.zones.clusters.nodePools.update
       parameters:
         - in: body
@@ -1147,6 +1195,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/nodePools/{nodePoolId}:rollback':
@@ -1164,8 +1214,8 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
-        Roll back the previously Aborted or Failed NodePool upgrade.
-        This will be an no-op if the last upgrade successfully completed.
+        Rolls back a previously Aborted or Failed NodePool upgrade.
+        This makes no changes if the last upgrade successfully completed.
       operationId: container.projects.zones.clusters.nodePools.rollback
       parameters:
         - in: body
@@ -1210,6 +1260,8 @@ paths:
             $ref: '#/definitions/Operation'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -1266,6 +1318,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}:completeIpRotation':
@@ -1321,6 +1375,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}:setMaintenancePolicy':
@@ -1372,6 +1428,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}:setMasterAuth':
@@ -1389,9 +1447,9 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
-        Used to set master auth materials. Currently supports :-
-        Changing the admin password for a specific cluster.
-        This can be either via password generation or explicitly set the password.
+        Sets master auth materials. Currently supports changing the admin password
+        or a specific cluster, either via password generation or explicitly setting
+        the password.
       operationId: container.projects.zones.clusters.setMasterAuth
       parameters:
         - in: body
@@ -1430,6 +1488,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}:setNetworkPolicy':
@@ -1446,7 +1506,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Enables/Disables Network Policy for a cluster.
+      description: Enables or disables Network Policy for a cluster.
       operationId: container.projects.zones.clusters.setNetworkPolicy
       parameters:
         - in: body
@@ -1485,6 +1545,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}:startIpRotation':
@@ -1501,7 +1563,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Start master IP rotation.
+      description: Starts master IP rotation.
       operationId: container.projects.zones.clusters.startIpRotation
       parameters:
         - in: body
@@ -1540,6 +1602,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/projects/{projectId}/zones/{zone}/operations':
@@ -1577,6 +1641,8 @@ paths:
             $ref: '#/definitions/ListOperationsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -1634,6 +1700,8 @@ paths:
             $ref: '#/definitions/Operation'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -1701,11 +1769,13 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/projects/{projectId}/zones/{zone}/serverconfig':
     get:
-      description: Returns configuration info about the Kubernetes Engine service.
+      description: Returns configuration info about the Google Kubernetes Engine service.
       operationId: container.projects.zones.getServerconfig
       parameters:
         - description: |-
@@ -1737,6 +1807,8 @@ paths:
             $ref: '#/definitions/ServerConfig'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -1801,10 +1873,12 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     get:
-      description: Retrieves the node pool requested.
+      description: Retrieves the requested node pool.
       operationId: container.projects.locations.clusters.nodePools.get
       parameters:
         - description: |-
@@ -1851,6 +1925,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -1866,7 +1942,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     put:
-      description: Updates the version and/or image type for a specific node pool.
+      description: Updates the version and/or image type for the specified node pool.
       operationId: container.projects.locations.clusters.nodePools.update
       parameters:
         - in: body
@@ -1890,11 +1966,13 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{name}/serverConfig':
     get:
-      description: Returns configuration info about the Kubernetes Engine service.
+      description: Returns configuration info about the Google Kubernetes Engine service.
       operationId: container.projects.locations.getServerConfig
       parameters:
         - description: |-
@@ -1926,6 +2004,8 @@ paths:
             $ref: '#/definitions/ServerConfig'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -1978,6 +2058,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{name}:completeIpRotation':
@@ -2017,6 +2099,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{name}:rollback':
@@ -2034,8 +2118,8 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
-        Roll back the previously Aborted or Failed NodePool upgrade.
-        This will be an no-op if the last upgrade successfully completed.
+        Rolls back a previously Aborted or Failed NodePool upgrade.
+        This makes no changes if the last upgrade successfully completed.
       operationId: container.projects.locations.clusters.nodePools.rollback
       parameters:
         - in: body
@@ -2058,6 +2142,8 @@ paths:
             $ref: '#/definitions/Operation'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -2098,6 +2184,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{name}:setAutoscaling':
@@ -2114,7 +2202,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Sets the autoscaling settings for a specific node pool.
+      description: Sets the autoscaling settings for the specified node pool.
       operationId: container.projects.locations.clusters.nodePools.setAutoscaling
       parameters:
         - in: body
@@ -2137,6 +2225,8 @@ paths:
             $ref: '#/definitions/Operation'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -2177,6 +2267,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{name}:setLocations':
@@ -2216,6 +2308,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{name}:setLogging':
@@ -2254,6 +2348,8 @@ paths:
             $ref: '#/definitions/Operation'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -2295,6 +2391,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{name}:setManagement':
@@ -2335,6 +2433,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{name}:setMasterAuth':
@@ -2352,9 +2452,9 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
-        Used to set master auth materials. Currently supports :-
-        Changing the admin password for a specific cluster.
-        This can be either via password generation or explicitly set the password.
+        Sets master auth materials. Currently supports changing the admin password
+        or a specific cluster, either via password generation or explicitly setting
+        the password.
       operationId: container.projects.locations.clusters.setMasterAuth
       parameters:
         - in: body
@@ -2376,6 +2476,8 @@ paths:
             $ref: '#/definitions/Operation'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -2416,6 +2518,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{name}:setNetworkPolicy':
@@ -2432,7 +2536,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Enables/Disables Network Policy for a cluster.
+      description: Enables or disables Network Policy for a cluster.
       operationId: container.projects.locations.clusters.setNetworkPolicy
       parameters:
         - in: body
@@ -2454,6 +2558,8 @@ paths:
             $ref: '#/definitions/Operation'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -2493,6 +2599,8 @@ paths:
             $ref: '#/definitions/Operation'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -2534,6 +2642,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{name}:startIpRotation':
@@ -2550,7 +2660,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Start master IP rotation.
+      description: Starts master IP rotation.
       operationId: container.projects.locations.clusters.startIpRotation
       parameters:
         - in: body
@@ -2572,6 +2682,8 @@ paths:
             $ref: '#/definitions/Operation'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -2612,14 +2724,18 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{parent}/.well-known/openid-configuration':
     get:
       description: |-
-        GetOpenIDConfig gets the OIDC discovery document for the cluster.
-        See the OpenID Connect Discovery 1.0 specification for details.
-        https://openid.net/specs/openid-connect-discovery-1_0.html
+        Gets the OIDC discovery document for the cluster.
+        See the
+        [OpenID Connect Discovery 1.0
+        specification](https://openid.net/specs/openid-connect-discovery-1_0.html)
+        for details.
         This API is not yet intended for general use, and is not available for all
         clusters.
       operationId: container.projects.locations.clusters.well-known.getOpenid-configuration
@@ -2637,8 +2753,64 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/GetOpenIDConfigResponse'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v1/{parent}/aggregated/usableSubnetworks':
+    get:
+      description: Lists subnetworks that are usable for creating clusters in a project.
+      operationId: container.projects.aggregated.usableSubnetworks.list
+      parameters:
+        - description: |-
+            Filtering currently only supports equality on the networkProjectId and must
+            be in the form: "networkProjectId=[PROJECTID]", where `networkProjectId`
+            is the project which owns the listed subnetworks. This defaults to the
+            parent project ID.
+          in: query
+          name: filter
+          type: string
+        - description: |-
+            The max number of results per page that should be returned. If the number
+            of available results is larger than `page_size`, a `next_page_token` is
+            returned which can be used to get the next page of results in subsequent
+            requests. Acceptable values are 0 to 500, inclusive. (Default: 500)
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            Specifies a page token to use. Set this to the nextPageToken returned by
+            previous list requests to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
+            The parent project where subnetworks are usable.
+            Specified in the format 'projects/*'.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListUsableSubnetworksResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -2693,6 +2865,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -2716,12 +2890,12 @@ paths:
         [default network](/compute/docs/networks-and-firewalls#networks).
 
         One firewall is added for the cluster. After cluster creation,
-        the cluster creates routes for each node to allow the containers
+        the Kubelet creates routes for each node to allow the containers
         on that node to communicate with all other instances in the
         cluster.
 
         Finally, an entry is added to the project's global metadata indicating
-        which CIDR range is being used by the cluster.
+        which CIDR range the cluster is using.
       operationId: container.projects.locations.clusters.create
       parameters:
         - in: body
@@ -2744,12 +2918,14 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{parent}/jwks':
     get:
       description: |-
-        GetJSONWebKeys gets the public component of the cluster signing keys in
+        Gets the public component of the cluster signing keys in
         JSON Web Key format.
         This API is not yet intended for general use, and is not available for all
         clusters.
@@ -2768,9 +2944,6 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/GetJSONWebKeysResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -2827,6 +3000,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -2866,6 +3041,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{parent}/operations':
@@ -2903,6 +3080,8 @@ paths:
             $ref: '#/definitions/ListOperationsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -2950,7 +3129,12 @@ definitions:
           makes it easy to set up HTTP load balancers for services in a cluster.
       kubernetesDashboard:
         $ref: '#/definitions/KubernetesDashboard'
-        description: Configuration for the Kubernetes Dashboard.
+        description: |-
+          Configuration for the Kubernetes Dashboard.
+          This addon is deprecated, and will be disabled in 1.15. It is recommended
+          to use the Cloud Console to manage and monitor your Kubernetes clusters,
+          workloads and applications. For more information, see:
+          https://cloud.google.com/kubernetes-engine/docs/concepts/dashboards
       networkPolicyConfig:
         $ref: '#/definitions/NetworkPolicyConfig'
         description: |-
@@ -2973,6 +3157,13 @@ definitions:
         description: |-
           [Output only] This field is set when upgrades are about to commence
           with the description of the upgrade.
+        type: string
+    type: object
+  BigQueryDestination:
+    description: Parameters for using BigQuery as the destination of resource usage export.
+    properties:
+      datasetId:
+        description: The ID of a BigQuery Dataset.
         type: string
     type: object
   CancelOperationRequest:
@@ -3053,11 +3244,17 @@ definitions:
       currentNodeVersion:
         description: |-
           [Output only] Deprecated, use
-          [NodePool.version](/kubernetes-engine/docs/reference/rest/v1/projects.zones.clusters.nodePool)
+          [NodePools.version](/kubernetes-engine/docs/reference/rest/v1/projects.zones.clusters.nodePools)
           instead. The current version of the node software components. If they are
           currently at multiple versions because they're in the process of being
           upgraded, this reflects the minimum version of all nodes.
         type: string
+      defaultMaxPodsConstraint:
+        $ref: '#/definitions/MaxPodsConstraint'
+        description: |-
+          The default constraint on the maximum number of pods that can be run
+          simultaneously on a node in the node pool of this cluster. Only honored
+          if cluster created with IP Alias support.
       description:
         description: An optional description of this cluster.
         type: string
@@ -3069,6 +3266,9 @@ definitions:
           The cluster has no SLA for uptime and master/node upgrades are disabled.
           Alpha enabled clusters are automatically deleted thirty days after
           creation.
+        type: boolean
+      enableTpu:
+        description: Enable the ability to use Cloud TPUs in this cluster.
         type: boolean
       endpoint:
         description: |-
@@ -3110,6 +3310,8 @@ definitions:
           "node_pool" object, since this configuration (along with the
           "node_config") will be used to create a "NodePool" object with an
           auto-generated name. Do not use this and a node_pool at the same time.
+
+          This field is deprecated, use node_pool.initial_node_count instead.
         format: int32
         type: integer
       instanceGroupUrls:
@@ -3146,6 +3348,8 @@ definitions:
           The logging service the cluster should use to write logs.
           Currently available options:
 
+          * "logging.googleapis.com/kubernetes" - the Google Cloud Logging
+          service with Kubernetes-native resource model in Stackdriver
           * `logging.googleapis.com` - the Google Cloud Logging service.
           * `none` - no logs will be exported from the cluster.
           * if left as an empty string,`logging.googleapis.com` will be used.
@@ -3199,20 +3403,22 @@ definitions:
         $ref: '#/definitions/NodeConfig'
         description: |-
           Parameters used in creating the cluster's nodes.
-          See `nodeConfig` for the description of its properties.
           For requests, this field should only be used in lieu of a
           "node_pool" object, since this configuration (along with the
           "initial_node_count") will be used to create a "NodePool" object with an
           auto-generated name. Do not use this and a node_pool at the same time.
           For responses, this field will be populated with the node configuration of
-          the first node pool.
+          the first node pool. (For configuration of each node pool, see
+          `node_pool.config`)
 
           If unspecified, the defaults are used.
+          This field is deprecated, use node_pool.config instead.
       nodeIpv4CidrSize:
         description: |-
           [Output only] The size of the address space on each node for hosting
           containers. This is provisioned from within the `container_ipv4_cidr`
-          range.
+          range. This field will only be set when cluster is in route-based network
+          mode.
         format: int32
         type: integer
       nodePools:
@@ -3233,6 +3439,11 @@ definitions:
           The resource labels for the cluster to use to annotate any related
           Google Compute Engine resources.
         type: object
+      resourceUsageExportConfig:
+        $ref: '#/definitions/ResourceUsageExportConfig'
+        description: |-
+          Configuration for exporting resource usages. Resource usage export is
+          disabled when this config is unspecified.
       selfLink:
         description: '[Output only] Server-defined URL for the resource.'
         type: string
@@ -3265,6 +3476,12 @@ definitions:
           The name of the Google Compute Engine
           [subnetwork](/compute/docs/subnetworks) to which the
           cluster is connected.
+        type: string
+      tpuIpv4CidrBlock:
+        description: |-
+          [Output only] The IP address range of the Cloud TPUs in this cluster, in
+          [CIDR](http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)
+          notation (e.g. `1.2.3.4/29`).
         type: string
       zone:
         description: |-
@@ -3300,6 +3517,16 @@ definitions:
         items:
           type: string
         type: array
+      desiredLoggingService:
+        description: |-
+          The logging service the cluster should use to write logs.
+          Currently available options:
+
+          * "logging.googleapis.com/kubernetes" - the Google Cloud Logging
+          service with Kubernetes-native resource model in Stackdriver
+          * "logging.googleapis.com" - the Google Cloud Logging service
+          * "none" - no logs will be exported from the cluster
+        type: string
       desiredMasterAuthorizedNetworksConfig:
         $ref: '#/definitions/MasterAuthorizedNetworksConfig'
         description: The desired configuration options for master authorized networks feature.
@@ -3321,6 +3548,8 @@ definitions:
           The monitoring service the cluster should use to write metrics.
           Currently available options:
 
+          * "monitoring.googleapis.com/kubernetes" - the Google Cloud Monitoring
+          service with Kubernetes-native resource model in Stackdriver
           * "monitoring.googleapis.com" - the Google Cloud Monitoring service
           * "none" - no metrics will be exported from the cluster
         type: string
@@ -3352,6 +3581,9 @@ definitions:
           - "1.X.Y-gke.N": picks an explicit Kubernetes version
           - "-": picks the Kubernetes master version
         type: string
+      desiredResourceUsageExportConfig:
+        $ref: '#/definitions/ResourceUsageExportConfig'
+        description: The desired configuration for exporting resource usage.
     type: object
   CompleteIPRotationRequest:
     description: CompleteIPRotationRequest moves the cluster master back into single-IP mode.
@@ -3379,6 +3611,16 @@ definitions:
           resides.
           This field has been deprecated and replaced by the name field.
         type: string
+    type: object
+  ConsumptionMeteringConfig:
+    description: Parameters for controlling consumption metering.
+    properties:
+      enabled:
+        description: |-
+          Whether to enable consumption metering for this cluster. If enabled, a
+          second BigQuery table will be created to hold resource consumption
+          records.
+        type: boolean
     type: object
   CreateClusterRequest:
     description: CreateClusterRequest creates a cluster.
@@ -3452,7 +3694,7 @@ definitions:
         description: |-
           Time within the maintenance window to start the maintenance operations.
           Time format should be in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt)
-          format "HH:MM”, where HH : [00-23] and MM : [00-59] GMT.
+          format "HH:MM", where HH : [00-23] and MM : [00-59] GMT.
         type: string
     type: object
   Empty:
@@ -3485,33 +3727,33 @@ definitions:
       See the OpenID Connect Discovery 1.0 specification for details.
     properties:
       claims_supported:
-        description: NOLINT
+        description: Supported claims.
         items:
           type: string
         type: array
       grant_types:
-        description: NOLINT
+        description: Supported grant types.
         items:
           type: string
         type: array
       id_token_signing_alg_values_supported:
-        description: NOLINT
+        description: supported ID Token signing Algorithms.
         items:
           type: string
         type: array
       issuer:
-        description: NOLINT
+        description: OIDC Issuer.
         type: string
       jwks_uri:
-        description: NOLINT
+        description: JSON Web Key uri.
         type: string
       response_types_supported:
-        description: NOLINT
+        description: Supported response types.
         items:
           type: string
         type: array
       subject_types_supported:
-        description: NOLINT
+        description: Supported subject types.
         items:
           type: string
         type: array
@@ -3638,6 +3880,24 @@ definitions:
           this field is empty, then an automatic name will be chosen for the new
           subnetwork.
         type: string
+      tpuIpv4CidrBlock:
+        description: |-
+          The IP address range of the Cloud TPUs in this cluster. If unspecified, a
+          range will be automatically chosen with the default size.
+
+          This field is only applicable when `use_ip_aliases` is true.
+
+          If unspecified, the range will use the default size.
+
+          Set to /netmask (e.g. `/14`) to have a range chosen with a specific
+          netmask.
+
+          Set to a
+          [CIDR](http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)
+          notation (e.g. `10.96.0.0/14`) from the RFC-1918 private networks (e.g.
+          `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`) to pick a specific range
+          to use.
+        type: string
       useIpAliases:
         description: Whether alias IPs will be used for pod IPs in the cluster.
         type: boolean
@@ -3646,35 +3906,31 @@ definitions:
     description: Jwk is a JSON Web Key as specified in RFC 7517
     properties:
       alg:
-        description: NOLINT
+        description: Algorithm.
         type: string
       crv:
-        description: NOLINT
+        description: Used for ECDSA keys.
         type: string
       e:
-        description: NOLINT
+        description: Used for RSA keys.
         type: string
       kid:
-        description: NOLINT
+        description: Key ID.
         type: string
       kty:
-        description: NOLINT
+        description: Key Type.
         type: string
       'n':
-        description: |-
-          Fields for RSA keys.
-          NOLINT
+        description: Used for RSA keys.
         type: string
       use:
-        description: NOLINT
+        description: Permitted uses for the public keys.
         type: string
       x:
-        description: |-
-          Fields for ECDSA keys.
-          NOLINT
+        description: Used for ECDSA keys.
         type: string
       'y':
-        description: NOLINT
+        description: Used for ECDSA keys.
         type: string
     type: object
   KubernetesDashboard:
@@ -3738,6 +3994,24 @@ definitions:
         description: A list of operations in the project in the specified zone.
         items:
           $ref: '#/definitions/Operation'
+        type: array
+    type: object
+  ListUsableSubnetworksResponse:
+    description: |-
+      ListUsableSubnetworksResponse is the response of
+      ListUsableSubnetworksRequest.
+    properties:
+      nextPageToken:
+        description: |-
+          This token allows you to get the next page of results for list requests.
+          If the number of results is larger than `page_size`, use the
+          `next_page_token` as a value for the query parameter `page_token` in the
+          next request. The value will become empty when there are no more pages.
+        type: string
+      subnetworks:
+        description: A list of usable subnetworks in the specified network project.
+        items:
+          $ref: '#/definitions/UsableSubnetwork'
         type: array
     type: object
   MaintenancePolicy:
@@ -3804,7 +4078,7 @@ definitions:
     properties:
       cidrBlocks:
         description: |-
-          cidr_blocks define up to 10 external networks that could access
+          cidr_blocks define up to 50 external networks that could access
           Kubernetes master through HTTPS.
         items:
           $ref: '#/definitions/CidrBlock'
@@ -3812,6 +4086,14 @@ definitions:
       enabled:
         description: Whether or not master authorized networks is enabled.
         type: boolean
+    type: object
+  MaxPodsConstraint:
+    description: Constraints applied to pods.
+    properties:
+      maxPodsPerNode:
+        description: Constraint enforced on the max num of pods per node.
+        format: int64
+        type: string
     type: object
   NetworkConfig:
     description: NetworkConfig reports the relative names of network & subnetwork.
@@ -3939,6 +4221,13 @@ definitions:
            "kube-env"
            "startup-script"
            "user-data"
+           "disable-address-manager"
+           "windows-startup-script-ps1"
+           "common-psm1"
+           "k8s-node-setup-psm1"
+           "install-ssh-psm1"
+           "user-profile-psm1"
+           "serial-port-logging-enable"
 
           Values are free-form strings, and only have meaning as interpreted by
           the image running in the instance. The only restriction placed on them is
@@ -4068,9 +4357,18 @@ definitions:
       management:
         $ref: '#/definitions/NodeManagement'
         description: NodeManagement configuration for this NodePool.
+      maxPodsConstraint:
+        $ref: '#/definitions/MaxPodsConstraint'
+        description: |-
+          The constraint on the maximum number of pods that can be run
+          simultaneously on a node in the node pool.
       name:
         description: The name of the node pool.
         type: string
+      podIpv4CidrSize:
+        description: '[Output only] The pod CIDR block size per node in this node pool.'
+        format: int32
+        type: integer
       selfLink:
         description: '[Output only] Server-defined URL for the resource.'
         type: string
@@ -4248,6 +4546,21 @@ definitions:
       publicEndpoint:
         description: Output only. The external IP address of this cluster's master endpoint.
         type: string
+    type: object
+  ResourceUsageExportConfig:
+    description: Configuration for exporting cluster resource usages.
+    properties:
+      bigqueryDestination:
+        $ref: '#/definitions/BigQueryDestination'
+        description: Configuration to use BigQuery as usage export destination.
+      consumptionMeteringConfig:
+        $ref: '#/definitions/ConsumptionMeteringConfig'
+        description: Configuration to enable resource consumption metering.
+      enableNetworkEgressMetering:
+        description: |-
+          Whether to enable network egress metering for this cluster. If enabled, a
+          daemonset will be created in the cluster to meter network egress traffic.
+        type: boolean
     type: object
   RollbackNodePoolUpgradeRequest:
     description: |-
@@ -4572,6 +4885,8 @@ definitions:
           The monitoring service the cluster should use to write metrics.
           Currently available options:
 
+          * "monitoring.googleapis.com/kubernetes" - the Google Cloud Monitoring
+          service with Kubernetes-native resource model in Stackdriver
           * "monitoring.googleapis.com" - the Google Cloud Monitoring service
           * "none" - no metrics will be exported from the cluster
         type: string
@@ -4905,5 +5220,57 @@ definitions:
           [zone](/compute/docs/zones#available) in which the cluster
           resides.
           This field has been deprecated and replaced by the name field.
+        type: string
+    type: object
+  UsableSubnetwork:
+    description: |-
+      UsableSubnetwork resource returns the subnetwork name, its associated network
+      and the primary CIDR range.
+    properties:
+      ipCidrRange:
+        description: The range of internal addresses that are owned by this subnetwork.
+        type: string
+      network:
+        description: |-
+          Network Name.
+          Example: projects/my-project/global/networks/my-network
+        type: string
+      secondaryIpRanges:
+        description: Secondary IP ranges.
+        items:
+          $ref: '#/definitions/UsableSubnetworkSecondaryRange'
+        type: array
+      statusMessage:
+        description: |-
+          A human readable status message representing the reasons for cases where
+          the caller cannot use the secondary ranges under the subnet. For example if
+          the secondary_ip_ranges is empty due to a permission issue, an insufficient
+          permission message will be given by status_message.
+        type: string
+      subnetwork:
+        description: |-
+          Subnetwork Name.
+          Example: projects/my-project/regions/us-central1/subnetworks/my-subnet
+        type: string
+    type: object
+  UsableSubnetworkSecondaryRange:
+    description: Secondary IP range of a usable subnetwork.
+    properties:
+      ipCidrRange:
+        description: The range of IP addresses belonging to this subnetwork secondary range.
+        type: string
+      rangeName:
+        description: |-
+          The name associated with this subnetwork secondary range, used when adding
+          an alias IP range to a VM instance.
+        type: string
+      status:
+        description: This field is to determine the status of the secondary range programmably.
+        enum:
+          - UNKNOWN
+          - UNUSED
+          - IN_USE_SERVICE
+          - IN_USE_SHAREABLE_POD
+          - IN_USE_MANAGED_POD
         type: string
     type: object

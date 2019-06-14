@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Creates and manages your customers and their subscriptions.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Enterprise Apps Reseller
   version: v1
   x-apiClientRegistration:
@@ -31,11 +35,20 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/apps.order': Manage users on your domain
       'https://www.googleapis.com/auth/apps.order.readonly': Manage users on your domain
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/apps.order': Manage users on your domain
+      'https://www.googleapis.com/auth/apps.order.readonly': Manage users on your domain
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -111,6 +124,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/apps.order'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/apps.order'
       tags:
         - customers
   '/customers/{customerId}':
@@ -131,7 +146,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/apps.order'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/apps.order'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/apps.order.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/apps.order.readonly'
       tags:
         - customers
@@ -164,6 +183,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/apps.order'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/apps.order'
       tags:
         - customers
     put:
@@ -186,6 +207,8 @@ paths:
             $ref: '#/definitions/Customer'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/apps.order'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/apps.order'
       tags:
         - customers
@@ -223,6 +246,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/apps.order'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/apps.order'
       tags:
         - subscriptions
   '/customers/{customerId}/subscriptions/{subscriptionId}':
@@ -254,6 +279,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/apps.order'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/apps.order'
       tags:
         - subscriptions
     get:
@@ -278,7 +305,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/apps.order'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/apps.order'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/apps.order.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/apps.order.readonly'
       tags:
         - subscriptions
@@ -321,6 +352,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/apps.order'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/apps.order'
       tags:
         - subscriptions
   '/customers/{customerId}/subscriptions/{subscriptionId}/changePlan':
@@ -357,6 +390,8 @@ paths:
             $ref: '#/definitions/Subscription'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/apps.order'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/apps.order'
       tags:
         - subscriptions
@@ -395,6 +430,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/apps.order'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/apps.order'
       tags:
         - subscriptions
   '/customers/{customerId}/subscriptions/{subscriptionId}/changeSeats':
@@ -432,6 +469,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/apps.order'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/apps.order'
       tags:
         - subscriptions
   '/customers/{customerId}/subscriptions/{subscriptionId}/startPaidService':
@@ -464,6 +503,8 @@ paths:
             $ref: '#/definitions/Subscription'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/apps.order'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/apps.order'
       tags:
         - subscriptions
@@ -498,6 +539,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/apps.order'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/apps.order'
       tags:
         - subscriptions
   /resellernotify/getwatchdetails:
@@ -512,7 +555,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/apps.order'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/apps.order'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/apps.order.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/apps.order.readonly'
       tags:
         - resellernotify
@@ -549,6 +596,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/apps.order'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/apps.order'
       tags:
         - resellernotify
   /resellernotify/unregister:
@@ -575,6 +624,8 @@ paths:
             $ref: '#/definitions/ResellernotifyResource'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/apps.order'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/apps.order'
       tags:
         - resellernotify
@@ -616,7 +667,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/apps.order'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/apps.order'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/apps.order.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/apps.order.readonly'
       tags:
         - subscriptions

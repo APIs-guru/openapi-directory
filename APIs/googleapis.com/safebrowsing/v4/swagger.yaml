@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Enables client applications to check web resources (most commonly URLs) against Google-generated lists of unsafe web resources.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Safe Browsing
   version: v4
   x-apiClientRegistration:
@@ -551,6 +555,7 @@ definitions:
           - SUBRESOURCE_FILTER
           - SUSPICIOUS
           - TRICK_TO_BILL
+          - HIGH_CONFIDENCE_ALLOWLIST
         type: string
     type: object
   ListUpdateResponse:
@@ -634,6 +639,7 @@ definitions:
           - SUBRESOURCE_FILTER
           - SUSPICIOUS
           - TRICK_TO_BILL
+          - HIGH_CONFIDENCE_ALLOWLIST
         type: string
     type: object
   MetadataEntry:
@@ -824,6 +830,7 @@ definitions:
           - SUBRESOURCE_FILTER
           - SUSPICIOUS
           - TRICK_TO_BILL
+          - HIGH_CONFIDENCE_ALLOWLIST
         type: string
       userInfo:
         $ref: '#/definitions/UserInfo'
@@ -887,6 +894,7 @@ definitions:
             - SUBRESOURCE_FILTER
             - SUSPICIOUS
             - TRICK_TO_BILL
+            - HIGH_CONFIDENCE_ALLOWLIST
           type: string
         type: array
     type: object
@@ -939,6 +947,7 @@ definitions:
           - SUBRESOURCE_FILTER
           - SUSPICIOUS
           - TRICK_TO_BILL
+          - HIGH_CONFIDENCE_ALLOWLIST
         type: string
     type: object
   ThreatMatch:
@@ -999,6 +1008,7 @@ definitions:
           - SUBRESOURCE_FILTER
           - SUSPICIOUS
           - TRICK_TO_BILL
+          - HIGH_CONFIDENCE_ALLOWLIST
         type: string
     type: object
   ThreatSource:

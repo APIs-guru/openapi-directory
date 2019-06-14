@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Manages Hadoop-based clusters and jobs on Google Cloud Platform.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Cloud Dataproc
   version: v1
   x-apiClientRegistration:
@@ -29,10 +33,18 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -137,6 +149,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -181,6 +195,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/projects/{projectId}/regions/{region}/clusters/{clusterName}':
@@ -219,6 +235,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     get:
@@ -247,6 +265,8 @@ paths:
             $ref: '#/definitions/Cluster'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -322,6 +342,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/projects/{projectId}/regions/{region}/clusters/{clusterName}:diagnose':
@@ -367,6 +389,8 @@ paths:
             $ref: '#/definitions/Operation'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -417,6 +441,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -459,6 +485,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     get:
@@ -487,6 +515,8 @@ paths:
             $ref: '#/definitions/Job'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -537,6 +567,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/projects/{projectId}/regions/{region}/jobs/{jobId}:cancel':
@@ -583,6 +615,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/projects/{projectId}/regions/{region}/jobs:submit':
@@ -624,12 +658,14 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{name}':
     delete:
       description: Deletes a workflow template. It does not cancel in-progress workflows.
-      operationId: dataproc.projects.locations.workflowTemplates.delete
+      operationId: dataproc.projects.regions.workflowTemplates.delete
       parameters:
         - description: 'Required. The "resource name" of the workflow template, as described in https://cloud.google.com/apis/design/resource_names of the form projects/{project_id}/regions/{region}/workflowTemplates/{template_id}'
           in: path
@@ -649,11 +685,13 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     get:
       description: Retrieves the latest workflow template.Can retrieve previously instantiated template by specifying optional version parameter.
-      operationId: dataproc.projects.locations.workflowTemplates.get
+      operationId: dataproc.projects.regions.workflowTemplates.get
       parameters:
         - description: 'Required. The "resource name" of the workflow template, as described in https://cloud.google.com/apis/design/resource_names of the form projects/{project_id}/regions/{region}/workflowTemplates/{template_id}'
           in: path
@@ -673,6 +711,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -689,7 +729,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     put:
       description: Updates (replaces) workflow template. The updated template must contain version that matches the current server version.
-      operationId: dataproc.projects.locations.workflowTemplates.update
+      operationId: dataproc.projects.regions.workflowTemplates.update
       parameters:
         - in: body
           name: body
@@ -708,6 +748,8 @@ paths:
             $ref: '#/definitions/WorkflowTemplate'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -742,6 +784,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{name}:instantiate':
@@ -759,7 +803,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: 'Instantiates a template and begins execution.The returned Operation can be used to track execution of workflow by polling operations.get. The Operation will complete when entire workflow is finished.The running workflow can be aborted via operations.cancel. This will cause any inflight jobs to be cancelled and workflow-owned clusters to be deleted.The Operation.metadata will be WorkflowMetadata.On successful completion, Operation.response will be Empty.'
-      operationId: dataproc.projects.locations.workflowTemplates.instantiate
+      operationId: dataproc.projects.regions.workflowTemplates.instantiate
       parameters:
         - in: body
           name: body
@@ -779,12 +823,14 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{parent}/workflowTemplates':
     get:
       description: Lists workflows that match the specified filter in the request.
-      operationId: dataproc.projects.locations.workflowTemplates.list
+      operationId: dataproc.projects.regions.workflowTemplates.list
       parameters:
         - description: Optional. The maximum number of results to return in each response.
           in: query
@@ -808,6 +854,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -824,7 +872,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Creates new workflow template.
-      operationId: dataproc.projects.locations.workflowTemplates.create
+      operationId: dataproc.projects.regions.workflowTemplates.create
       parameters:
         - in: body
           name: body
@@ -844,6 +892,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{parent}/workflowTemplates:instantiateInline':
@@ -861,7 +911,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: 'Instantiates a template and begins execution.This method is equivalent to executing the sequence CreateWorkflowTemplate, InstantiateWorkflowTemplate, DeleteWorkflowTemplate.The returned Operation can be used to track execution of workflow by polling operations.get. The Operation will complete when entire workflow is finished.The running workflow can be aborted via operations.cancel. This will cause any inflight jobs to be cancelled and workflow-owned clusters to be deleted.The Operation.metadata will be WorkflowMetadata.On successful completion, Operation.response will be Empty.'
-      operationId: dataproc.projects.locations.workflowTemplates.instantiateInline
+      operationId: dataproc.projects.regions.workflowTemplates.instantiateInline
       parameters:
         - in: body
           name: body
@@ -885,6 +935,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{resource}:getIamPolicy':
@@ -902,7 +954,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
-      operationId: dataproc.projects.locations.workflowTemplates.getIamPolicy
+      operationId: dataproc.projects.regions.workflowTemplates.getIamPolicy
       parameters:
         - in: body
           name: body
@@ -922,6 +974,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{resource}:setIamPolicy':
@@ -939,7 +993,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Sets the access control policy on the specified resource. Replaces any existing policy.
-      operationId: dataproc.projects.locations.workflowTemplates.setIamPolicy
+      operationId: dataproc.projects.regions.workflowTemplates.setIamPolicy
       parameters:
         - in: body
           name: body
@@ -959,6 +1013,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{resource}:testIamPermissions':
@@ -976,7 +1032,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: 'Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a NOT_FOUND error.Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may "fail open" without warning.'
-      operationId: dataproc.projects.locations.workflowTemplates.testIamPermissions
+      operationId: dataproc.projects.regions.workflowTemplates.testIamPermissions
       parameters:
         - in: body
           name: body
@@ -995,6 +1051,8 @@ paths:
             $ref: '#/definitions/TestIamPermissionsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -1019,7 +1077,7 @@ definitions:
     properties:
       condition:
         $ref: '#/definitions/Expr'
-        description: 'Unimplemented. The condition that is associated with this binding. NOTE: an unsatisfied condition will not allow user access via current binding. Different bindings, including their conditions, are examined independently.'
+        description: 'The condition that is associated with this binding. NOTE: An unsatisfied condition will not allow user access via current binding. Different bindings, including their conditions, are examined independently.'
       members:
         description: |-
           Specifies the identities requesting access for a Cloud Platform resource. members can have the following values:
@@ -1087,7 +1145,8 @@ definitions:
       initializationActions:
         description: |
           Optional. Commands to execute on each node after config is completed. By default, executables are run on master and all worker nodes. You can test a node's role metadata to run an executable on a master or worker node, as shown below using curl (you can also use wget):
-          ROLE=$(curl -H Metadata-Flavor:Google http://metadata/computeMetadata/v1/instance/attributes/dataproc-role)
+          ROLE=$(curl -H Metadata-Flavor:Google
+          http://metadata/computeMetadata/v1/instance/attributes/dataproc-role)
           if [[ "${ROLE}" == 'Master' ]]; then
             ... master specific actions ...
           else
@@ -1102,6 +1161,9 @@ definitions:
       secondaryWorkerConfig:
         $ref: '#/definitions/InstanceGroupConfig'
         description: Optional. The Compute Engine config settings for additional worker instances in a cluster.
+      securityConfig:
+        $ref: '#/definitions/SecurityConfig'
+        description: Optional. Security settings for the cluster.
       softwareConfig:
         $ref: '#/definitions/SoftwareConfig'
         description: Optional. The config settings for software inside the cluster.
@@ -1336,8 +1398,8 @@ definitions:
       subnetworkUri:
         description: |-
           Optional. The Compute Engine subnetwork to be used for machine communications. Cannot be specified with network_uri.A full URL, partial URI, or short name are valid. Examples:
-          https://www.googleapis.com/compute/v1/projects/[project_id]/regions/us-east1/sub0
-          projects/[project_id]/regions/us-east1/sub0
+          https://www.googleapis.com/compute/v1/projects/[project_id]/regions/us-east1/subnetworks/sub0
+          projects/[project_id]/regions/us-east1/subnetworks/sub0
           sub0
         type: string
       tags:
@@ -1595,6 +1657,53 @@ definitions:
           - STALE_STATUS
         type: string
     type: object
+  KerberosConfig:
+    description: Specifies Kerberos related configuration.
+    properties:
+      crossRealmTrustAdminServer:
+        description: Optional. The admin server (IP or hostname) for the remote trusted realm in a cross realm trust relationship.
+        type: string
+      crossRealmTrustKdc:
+        description: Optional. The KDC (IP or hostname) for the remote trusted realm in a cross realm trust relationship.
+        type: string
+      crossRealmTrustRealm:
+        description: 'Optional. The remote realm the Dataproc on-cluster KDC will trust, should the user enable cross realm trust.'
+        type: string
+      crossRealmTrustSharedPasswordUri:
+        description: 'Optional. The Cloud Storage URI of a KMS encrypted file containing the shared password between the on-cluster Kerberos realm and the remote trusted realm, in a cross realm trust relationship.'
+        type: string
+      enableKerberos:
+        description: Optional. Flag to indicate whether to Kerberize the cluster.
+        type: boolean
+      kdcDbKeyUri:
+        description: Optional. The Cloud Storage URI of a KMS encrypted file containing the master key of the KDC database.
+        type: string
+      keyPasswordUri:
+        description: 'Optional. The Cloud Storage URI of a KMS encrypted file containing the password to the user provided key. For the self-signed certificate, this password is generated by Dataproc.'
+        type: string
+      keystorePasswordUri:
+        description: 'Optional. The Cloud Storage URI of a KMS encrypted file containing the password to the user provided keystore. For the self-signed certificate, this password is generated by Dataproc.'
+        type: string
+      keystoreUri:
+        description: 'Optional. The Cloud Storage URI of the keystore file used for SSL encryption. If not provided, Dataproc will provide a self-signed certificate.'
+        type: string
+      kmsKeyUri:
+        description: Required. The uri of the KMS key used to encrypt various sensitive files.
+        type: string
+      rootPrincipalPasswordUri:
+        description: Required. The Cloud Storage URI of a KMS encrypted file containing the root principal password.
+        type: string
+      tgtLifetimeHours:
+        description: 'Optional. The lifetime of the ticket granting ticket, in hours. If not specified, or user specifies 0, then default value 10 will be used.'
+        format: int32
+        type: integer
+      truststorePasswordUri:
+        description: 'Optional. The Cloud Storage URI of a KMS encrypted file containing the password to the user provided truststore. For the self-signed certificate, this password is generated by Dataproc.'
+        type: string
+      truststoreUri:
+        description: 'Optional. The Cloud Storage URI of the truststore file used for SSL encryption. If not provided, Dataproc will provide a self-signed certificate.'
+        type: string
+    type: object
   ListClustersResponse:
     description: The list of all clusters in a project.
     properties:
@@ -1713,7 +1822,7 @@ definitions:
         description: 'Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.'
         type: object
       name:
-        description: 'The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the name should have the format of operations/some/unique/name.'
+        description: 'The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the name should be a resource name ending with operations/{unique_id}.'
         type: string
       response:
         additionalProperties:
@@ -1915,6 +2024,13 @@ definitions:
           type: string
         type: array
     type: object
+  SecurityConfig:
+    description: 'Security related configuration, including Kerberos.'
+    properties:
+      kerberosConfig:
+        $ref: '#/definitions/KerberosConfig'
+        description: Kerberos related configuration.
+    type: object
   SetIamPolicyRequest:
     description: Request message for SetIamPolicy method.
     properties:
@@ -1926,7 +2042,7 @@ definitions:
     description: Specifies the selection and config of software inside the cluster.
     properties:
       imageVersion:
-        description: 'Optional. The version of software inside the cluster. It must be one of the supported Cloud Dataproc Versions, such as "1.2" (including a subminor version, such as "1.2.29"), or the "preview" version. If unspecified, it defaults to the latest version.'
+        description: 'Optional. The version of software inside the cluster. It must be one of the supported Cloud Dataproc Versions, such as "1.2" (including a subminor version, such as "1.2.29"), or the "preview" version. If unspecified, it defaults to the latest Debian version.'
         type: string
       optionalComponents:
         description: The set of optional components to activate on the cluster.
@@ -2022,15 +2138,7 @@ definitions:
         type: object
     type: object
   Status:
-    description: |-
-      The Status type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by gRPC (https://github.com/grpc). The error model is designed to be:
-      Simple to use and understand for most users
-      Flexible enough to meet unexpected needsOverviewThe Status message contains three pieces of data: error code, error message, and error details. The error code should be an enum value of google.rpc.Code, but it may accept additional error codes if needed. The error message should be a developer-facing English message that helps developers understand and resolve the error. If a localized user-facing error message is needed, put the localized message in the error details or localize it in the client. The optional error details may contain arbitrary information about the error. There is a predefined set of error detail types in the package google.rpc that can be used for common error conditions.Language mappingThe Status message is the logical representation of the error model, but it is not necessarily the actual wire format. When the Status message is exposed in different client libraries and different wire protocols, it can be mapped differently. For example, it will likely be mapped to some exceptions in Java, but more likely mapped to some error codes in C.Other usesThe error model and the Status message can be used in a variety of environments, either with or without APIs, to provide a consistent developer experience across different environments.Example uses of this error model include:
-      Partial errors. If a service needs to return partial errors to the client, it may embed the Status in the normal response to indicate the partial errors.
-      Workflow errors. A typical workflow has multiple steps. Each step may have a Status message for error reporting.
-      Batch operations. If a client uses batch request and batch response, the Status message should be used directly inside batch response, one for each error sub-response.
-      Asynchronous operations. If an API call embeds asynchronous operation results in its response, the status of those operations should be represented directly using the Status message.
-      Logging. If some API errors are stored in logs, the message Status could be used directly after any stripping needed for security/privacy reasons.
+    description: 'The Status type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by gRPC (https://github.com/grpc). Each Status message contains three pieces of data: error code, error message, and error details.You can find out more about this error model and how to work with it in the API Design Guide (https://cloud.google.com/apis/design/errors).'
     properties:
       code:
         description: 'The status code, which should be an enum value of google.rpc.Code.'

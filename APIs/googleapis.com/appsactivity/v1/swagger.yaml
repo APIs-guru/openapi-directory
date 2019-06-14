@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Provides a historical view of activity.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Drive Activity
   version: v1
   x-apiClientRegistration:
@@ -29,10 +33,18 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/activity': View the activity history of your Google apps
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/activity': View the activity history of your Google apps
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -79,7 +91,7 @@ tags:
 paths:
   /activities:
     get:
-      description: 'Returns a list of activities visible to the current logged in user. Visible activities are determined by the visiblity settings of the object that was acted on, e.g. Drive files a user can see. An activity is a record of past events. Multiple events may be merged if they are similar. A request is scoped to activities from a given Google service using the source parameter.'
+      description: 'Returns a list of activities visible to the current logged in user. Visible activities are determined by the visibility settings of the object that was acted on, e.g. Drive files a user can see. An activity is a record of past events. Multiple events may be merged if they are similar. A request is scoped to activities from a given Google service using the source parameter.'
       operationId: appsactivity.activities.list
       parameters:
         - description: Identifies the Drive folder containing the items for which to return activities.
@@ -114,7 +126,7 @@ paths:
           name: source
           type: string
         - default: me
-          description: Indicates the user to return activity for. Use the special value me to indicate the currently authenticated user.
+          description: The ID used for ACL checks (does not filter the resulting event list by the assigned value). Use the special value me to indicate the currently authenticated user.
           in: query
           name: userId
           type: string
@@ -125,6 +137,8 @@ paths:
             $ref: '#/definitions/ListActivitiesResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/activity'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/activity'
       tags:
         - activities

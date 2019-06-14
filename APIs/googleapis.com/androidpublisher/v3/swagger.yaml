@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Accesses Android application developers' Google Play accounts.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Google Play Developer
   version: v3
   x-apiClientRegistration:
@@ -31,10 +35,18 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/androidpublisher': View and manage your Google Play Developer account
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/androidpublisher': View and manage your Google Play Developer account
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -79,10 +91,76 @@ parameters:
 tags:
   - name: edits
   - name: inappproducts
+  - name: internalappsharingartifacts
   - name: orders
   - name: purchases
   - name: reviews
 paths:
+  '/internalappsharing/{packageName}/artifacts/apk':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      consumes:
+        - application/octet-stream
+        - application/vnd.android.package-archive
+      description: 'Uploads an APK to internal app sharing. If you are using the Google API client libraries, please increase the timeout of the http request before calling this endpoint (a timeout of 2 minutes is recommended). See: https://developers.google.com/api-client-library/java/google-api-java-client/errors for an example in java.'
+      operationId: androidpublisher.internalappsharingartifacts.uploadapk
+      parameters:
+        - description: 'Unique identifier for the Android app; for example, "com.spiffygame".'
+          in: path
+          name: packageName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/InternalAppSharingArtifact'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+      tags:
+        - internalappsharingartifacts
+  '/internalappsharing/{packageName}/artifacts/bundle':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      consumes:
+        - application/octet-stream
+      description: 'Uploads an app bundle to internal app sharing. If you are using the Google API client libraries, please increase the timeout of the http request before calling this endpoint (a timeout of 2 minutes is recommended). See: https://developers.google.com/api-client-library/java/google-api-java-client/errors for an example in java.'
+      operationId: androidpublisher.internalappsharingartifacts.uploadbundle
+      parameters:
+        - description: 'Unique identifier for the Android app; for example, "com.spiffygame".'
+          in: path
+          name: packageName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/InternalAppSharingArtifact'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+      tags:
+        - internalappsharingartifacts
   '/{packageName}/edits':
     parameters:
       - $ref: '#/parameters/alt'
@@ -113,6 +191,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - edits
   '/{packageName}/edits/{editId}':
@@ -135,6 +215,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - edits
@@ -159,6 +241,8 @@ paths:
             $ref: '#/definitions/AppEdit'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - edits
@@ -191,6 +275,8 @@ paths:
             $ref: '#/definitions/ApksListResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - edits
@@ -225,6 +311,8 @@ paths:
             $ref: '#/definitions/Apk'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - edits
@@ -262,6 +350,8 @@ paths:
             $ref: '#/definitions/ApksAddExternallyHostedResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - edits
@@ -309,6 +399,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - edits
   '/{packageName}/edits/{editId}/apks/{apkVersionCode}/expansionFiles/{expansionFileType}':
@@ -345,6 +437,8 @@ paths:
             $ref: '#/definitions/ExpansionFile'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - edits
@@ -394,6 +488,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - edits
     post:
@@ -431,6 +527,8 @@ paths:
             $ref: '#/definitions/ExpansionFilesUploadResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - edits
@@ -472,6 +570,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - edits
   '/{packageName}/edits/{editId}/bundles':
@@ -495,6 +595,8 @@ paths:
             $ref: '#/definitions/BundlesListResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - edits
@@ -534,6 +636,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - edits
   '/{packageName}/edits/{editId}/details':
@@ -558,6 +662,8 @@ paths:
             $ref: '#/definitions/AppDetails'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - edits
@@ -595,6 +701,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - edits
     put:
@@ -623,6 +731,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - edits
   '/{packageName}/edits/{editId}/listings':
@@ -645,6 +755,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - edits
@@ -669,6 +781,8 @@ paths:
             $ref: '#/definitions/ListingsListResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - edits
@@ -706,6 +820,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - edits
     get:
@@ -734,6 +850,8 @@ paths:
             $ref: '#/definitions/Listing'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - edits
@@ -776,6 +894,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - edits
     put:
@@ -808,6 +928,8 @@ paths:
             $ref: '#/definitions/Listing'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - edits
@@ -853,6 +975,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - edits
     get:
@@ -895,6 +1019,8 @@ paths:
             $ref: '#/definitions/ImagesListResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - edits
@@ -1033,6 +1159,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - edits
   '/{packageName}/edits/{editId}/listings/{language}/{imageType}/{imageId}':
@@ -1080,6 +1208,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - edits
     parameters:
@@ -1104,7 +1234,7 @@ paths:
           name: packageName
           required: true
           type: string
-        - description: 'The track to read or modify. Acceptable values are: "alpha", "beta", "production", "rollout" or "internal".'
+        - description: The track to read or modify.
           in: path
           name: track
           required: true
@@ -1116,6 +1246,8 @@ paths:
             $ref: '#/definitions/Testers'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - edits
@@ -1144,7 +1276,7 @@ paths:
           name: packageName
           required: true
           type: string
-        - description: 'The track to read or modify. Acceptable values are: "alpha", "beta", "production", "rollout" or "internal".'
+        - description: The track to read or modify.
           in: path
           name: track
           required: true
@@ -1156,6 +1288,8 @@ paths:
             $ref: '#/definitions/Testers'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - edits
@@ -1176,7 +1310,7 @@ paths:
           name: packageName
           required: true
           type: string
-        - description: 'The track to read or modify. Acceptable values are: "alpha", "beta", "production", "rollout" or "internal".'
+        - description: The track to read or modify.
           in: path
           name: track
           required: true
@@ -1188,6 +1322,8 @@ paths:
             $ref: '#/definitions/Testers'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - edits
@@ -1213,6 +1349,8 @@ paths:
             $ref: '#/definitions/TracksListResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - edits
@@ -1252,6 +1390,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - edits
     parameters:
@@ -1263,7 +1403,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: 'Updates the track configuration for the specified track type. When halted, the rollout track cannot be updated without adding new APKs, and adding new APKs will cause it to resume. This method supports patch semantics.'
+      description: Updates the track configuration for the specified track type. This method supports patch semantics.
       operationId: androidpublisher.edits.tracks.patch
       parameters:
         - in: body
@@ -1293,10 +1433,12 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - edits
     put:
-      description: 'Updates the track configuration for the specified track type. When halted, the rollout track cannot be updated without adding new APKs, and adding new APKs will cause it to resume.'
+      description: Updates the track configuration for the specified track type.
       operationId: androidpublisher.edits.tracks.update
       parameters:
         - in: body
@@ -1325,6 +1467,8 @@ paths:
             $ref: '#/definitions/Track'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - edits
@@ -1359,6 +1503,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - edits
   '/{packageName}/edits/{editId}:validate':
@@ -1392,6 +1538,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - edits
   '/{packageName}/inappproducts':
@@ -1420,6 +1568,8 @@ paths:
             $ref: '#/definitions/InappproductsListResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - inappproducts
@@ -1456,6 +1606,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - inappproducts
   '/{packageName}/inappproducts/{sku}':
@@ -1479,6 +1631,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - inappproducts
     get:
@@ -1501,6 +1655,8 @@ paths:
             $ref: '#/definitions/InAppProduct'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - inappproducts
@@ -1542,6 +1698,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - inappproducts
     put:
@@ -1573,6 +1731,8 @@ paths:
             $ref: '#/definitions/InAppProduct'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - inappproducts
@@ -1609,6 +1769,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - orders
   '/{packageName}/purchases/products/{productId}/tokens/{token}':
@@ -1639,6 +1801,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - purchases
     parameters:
@@ -1649,6 +1813,48 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{packageName}/purchases/products/{productId}/tokens/{token}:acknowledge':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Acknowledges a purchase of an inapp item.
+      operationId: androidpublisher.purchases.products.acknowledge
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ProductPurchasesAcknowledgeRequest'
+        - description: 'The package name of the application the inapp product was sold in (for example, ''com.some.thing'').'
+          in: path
+          name: packageName
+          required: true
+          type: string
+        - description: 'The inapp product SKU (for example, ''com.some.thing.inapp1'').'
+          in: path
+          name: productId
+          required: true
+          type: string
+        - description: The token provided to the user's device when the subscription was purchased.
+          in: path
+          name: token
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+      tags:
+        - purchases
   '/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}':
     get:
       description: Checks whether a user's subscription purchase is valid and returns its expiry time.
@@ -1677,6 +1883,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - purchases
     parameters:
@@ -1687,6 +1895,48 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:acknowledge':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Acknowledges a subscription purchase.
+      operationId: androidpublisher.purchases.subscriptions.acknowledge
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SubscriptionPurchasesAcknowledgeRequest'
+        - description: 'The package name of the application for which this subscription was purchased (for example, ''com.some.thing'').'
+          in: path
+          name: packageName
+          required: true
+          type: string
+        - description: 'The purchased subscription ID (for example, ''monthly001'').'
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: The token provided to the user's device when the subscription was purchased.
+          in: path
+          name: token
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+      tags:
+        - purchases
   '/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:cancel':
     parameters:
       - $ref: '#/parameters/alt'
@@ -1720,6 +1970,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - purchases
@@ -1763,6 +2015,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - purchases
   '/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:refund':
@@ -1798,6 +2052,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - purchases
@@ -1835,6 +2091,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - purchases
   '/{packageName}/purchases/voidedpurchases':
@@ -1871,6 +2129,8 @@ paths:
             $ref: '#/definitions/VoidedPurchasesListResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - purchases
@@ -1912,6 +2172,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - reviews
     parameters:
@@ -1946,6 +2208,8 @@ paths:
             $ref: '#/definitions/Review'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - reviews
@@ -1990,6 +2254,8 @@ paths:
             $ref: '#/definitions/ReviewsReplyResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - reviews
@@ -2094,6 +2360,15 @@ definitions:
       userComment:
         $ref: '#/definitions/UserComment'
         description: A comment from a user.
+    type: object
+  CountryTargeting:
+    properties:
+      countries:
+        items:
+          type: string
+        type: array
+      includeRestOfWorld:
+        type: boolean
     type: object
   DeobfuscationFile:
     description: Represents a deobfuscation file.
@@ -2342,6 +2617,19 @@ definitions:
       tokenPagination:
         $ref: '#/definitions/TokenPagination'
     type: object
+  InternalAppSharingArtifact:
+    description: An artifact resource which gets created when uploading an APK or Android App Bundle through internal app sharing.
+    properties:
+      certificateFingerprint:
+        description: The SHA256 fingerprint of the certificate used to signed the generated artifact.
+        type: string
+      downloadUrl:
+        description: The download URL generated for the uploaded artifact. Users that are authorized to download can follow the link to the Play Store app to install it.
+        type: string
+      sha256:
+        description: 'The SHA-256 hash of the artifact represented as a lowercase hexadecimal number, matching the output of the sha256sum command.'
+        type: string
+    type: object
   Listing:
     properties:
       fullDescription:
@@ -2415,6 +2703,13 @@ definitions:
   ProductPurchase:
     description: A ProductPurchase resource indicates the status of a user's inapp product purchase.
     properties:
+      acknowledgementState:
+        description: |-
+          The acknowledgement state of the inapp product. Possible values are:  
+          - Yet to be acknowledged 
+          - Acknowledged
+        format: int32
+        type: integer
       consumptionState:
         description: |-
           The consumption state of the inapp product. Possible values are:  
@@ -2451,6 +2746,12 @@ definitions:
           - Rewarded (i.e. from watching a video ad instead of paying)
         format: int32
         type: integer
+    type: object
+  ProductPurchasesAcknowledgeRequest:
+    properties:
+      developerPayload:
+        description: Payload to attach to the purchase.
+        type: string
     type: object
   Prorate:
     properties:
@@ -2566,6 +2867,13 @@ definitions:
   SubscriptionPurchase:
     description: A SubscriptionPurchase resource indicates the status of a user's subscription purchase.
     properties:
+      acknowledgementState:
+        description: |-
+          The acknowledgement state of the subscription product. Possible values are:  
+          - Yet to be acknowledged 
+          - Acknowledged
+        format: int32
+        type: integer
       autoRenewing:
         description: Whether the subscription will automatically be renewed when it reaches its current expiry time.
         type: boolean
@@ -2640,7 +2948,7 @@ definitions:
         description: 'ISO 4217 currency code for the subscription price. For example, if the price is specified in British pounds sterling, price_currency_code is "GBP".'
         type: string
       profileId:
-        description: The profile id of the user when the subscription was purchased. Only present for purchases made with 'Subscribe with Google'.
+        description: The Google profile id of the user when the subscription was purchased. Only present for purchases made with 'Subscribe with Google'.
         type: string
       profileName:
         description: The profile name of the user when the subscription was purchased. Only present for purchases made with 'Subscribe with Google'.
@@ -2658,6 +2966,12 @@ definitions:
       userCancellationTimeMillis:
         description: 'The time at which the subscription was canceled by the user, in milliseconds since the epoch. Only present if cancelReason is 0.'
         format: int64
+        type: string
+    type: object
+  SubscriptionPurchasesAcknowledgeRequest:
+    properties:
+      developerPayload:
+        description: Payload to attach to the purchase.
         type: string
     type: object
   SubscriptionPurchasesDeferRequest:
@@ -2713,6 +3027,8 @@ definitions:
     type: object
   TrackRelease:
     properties:
+      countryTargeting:
+        $ref: '#/definitions/CountryTargeting'
       name:
         description: 'The release name, used to identify this release in the Play Console UI. Not required to be unique. This is optional, if not set it will be generated from the version_name in the APKs.'
         type: string

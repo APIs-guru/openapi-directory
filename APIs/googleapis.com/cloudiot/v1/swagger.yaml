@@ -9,6 +9,10 @@ info:
     url: 'https://google.com'
   description: |
     Registers and manages IoT (Internet of Things) devices that connect to the Google Cloud Platform.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Cloud IoT
   version: v1
   x-apiClientRegistration:
@@ -30,11 +34,20 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/cloudiot': Register and manage devices in the Google Cloud IoT service
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/cloudiot': Register and manage devices in the Google Cloud IoT service
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -126,7 +139,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudiot'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloudiot'
       tags:
         - projects
@@ -157,7 +174,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudiot'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloudiot'
       tags:
         - projects
@@ -208,7 +229,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudiot'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloudiot'
       tags:
         - projects
@@ -243,7 +268,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudiot'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloudiot'
       tags:
         - projects
@@ -290,7 +319,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudiot'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloudiot'
       tags:
         - projects
@@ -347,7 +380,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudiot'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloudiot'
       tags:
         - projects
@@ -402,7 +439,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudiot'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloudiot'
       tags:
         - projects
@@ -434,8 +475,6 @@ paths:
             fields `id` and `num_id` are always returned, along with any
             other fields specified.
           in: query
-          items:
-            type: string
           name: fieldMask
           type: string
         - description: |-
@@ -452,8 +491,6 @@ paths:
             (`id`). For example, if `123` is specified, only devices bound to the
             gateway with `num_id` 123 are returned.
           in: query
-          items:
-            type: string
           name: gatewayListOptions.associationsGatewayId
           type: string
         - description: |-
@@ -472,10 +509,6 @@ paths:
             is zero, the service will select a default size. A call may return fewer
             objects than requested. A non-empty `next_page_token` in the response
             indicates that more data is available.
-          enum:
-            - GATEWAY_TYPE_UNSPECIFIED
-            - GATEWAY
-            - NON_GATEWAY
           in: query
           name: pageSize
           type: integer
@@ -502,7 +535,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudiot'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloudiot'
       tags:
         - projects
@@ -543,7 +580,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudiot'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloudiot'
       tags:
         - projects
@@ -583,7 +624,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudiot'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloudiot'
       tags:
         - projects
@@ -623,7 +668,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudiot'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloudiot'
       tags:
         - projects
@@ -642,7 +691,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Associates the device with the gateway.
-      operationId: cloudiot.projects.locations.registries.groups.bindDeviceToGateway
+      operationId: cloudiot.projects.locations.registries.bindDeviceToGateway
       parameters:
         - in: body
           name: body
@@ -664,7 +713,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudiot'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloudiot'
       tags:
         - projects
@@ -683,7 +736,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Deletes the association between the device and the gateway.
-      operationId: cloudiot.projects.locations.registries.groups.unbindDeviceFromGateway
+      operationId: cloudiot.projects.locations.registries.unbindDeviceFromGateway
       parameters:
         - in: body
           name: body
@@ -705,7 +758,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudiot'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloudiot'
       tags:
         - projects
@@ -749,7 +806,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudiot'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloudiot'
       tags:
         - projects
@@ -792,7 +853,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudiot'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloudiot'
       tags:
         - projects
@@ -836,7 +901,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudiot'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloudiot'
       tags:
         - projects
@@ -866,8 +935,8 @@ definitions:
       condition:
         $ref: '#/definitions/Expr'
         description: |-
-          Unimplemented. The condition that is associated with this binding.
-          NOTE: an unsatisfied condition will not allow user access via current
+          The condition that is associated with this binding.
+          NOTE: An unsatisfied condition will not allow user access via current
           binding. Different bindings, including their conditions, are examined
           independently.
       members:
@@ -1532,56 +1601,11 @@ definitions:
     description: |-
       The `Status` type defines a logical error model that is suitable for
       different programming environments, including REST APIs and RPC APIs. It is
-      used by [gRPC](https://github.com/grpc). The error model is designed to be:
+      used by [gRPC](https://github.com/grpc). Each `Status` message contains
+      three pieces of data: error code, error message, and error details.
 
-      - Simple to use and understand for most users
-      - Flexible enough to meet unexpected needs
-
-      # Overview
-
-      The `Status` message contains three pieces of data: error code, error
-      message, and error details. The error code should be an enum value of
-      google.rpc.Code, but it may accept additional error codes if needed.  The
-      error message should be a developer-facing English message that helps
-      developers *understand* and *resolve* the error. If a localized user-facing
-      error message is needed, put the localized message in the error details or
-      localize it in the client. The optional error details may contain arbitrary
-      information about the error. There is a predefined set of error detail types
-      in the package `google.rpc` that can be used for common error conditions.
-
-      # Language mapping
-
-      The `Status` message is the logical representation of the error model, but it
-      is not necessarily the actual wire format. When the `Status` message is
-      exposed in different client libraries and different wire protocols, it can be
-      mapped differently. For example, it will likely be mapped to some exceptions
-      in Java, but more likely mapped to some error codes in C.
-
-      # Other uses
-
-      The error model and the `Status` message can be used in a variety of
-      environments, either with or without APIs, to provide a
-      consistent developer experience across different environments.
-
-      Example uses of this error model include:
-
-      - Partial errors. If a service needs to return partial errors to the client,
-          it may embed the `Status` in the normal response to indicate the partial
-          errors.
-
-      - Workflow errors. A typical workflow has multiple steps. Each step may
-          have a `Status` message for error reporting.
-
-      - Batch operations. If a client uses batch request and batch response, the
-          `Status` message should be used directly inside batch response, one for
-          each error sub-response.
-
-      - Asynchronous operations. If an API call embeds asynchronous operation
-          results in its response, the status of those operations should be
-          represented directly using the `Status` message.
-
-      - Logging. If some API errors are stored in logs, the message `Status` could
-          be used directly after any stripping needed for security/privacy reasons.
+      You can find out more about this error model and how to work with it in the
+      [API Design Guide](https://cloud.google.com/apis/design/errors).
     properties:
       code:
         description: 'The status code, which should be an enum value of google.rpc.Code.'

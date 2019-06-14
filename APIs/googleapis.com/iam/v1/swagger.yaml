@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'Manages identity and access control for Google Cloud Platform resources, including the creation of service accounts, which you can use to authenticate to Google and make API calls.'
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Identity and Access Management (IAM)
   version: v1
   x-apiClientRegistration:
@@ -31,10 +35,18 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -161,6 +173,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - iamPolicies
   '/v1/iamPolicies:queryAuditableServices':
@@ -194,6 +208,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - iamPolicies
   '/v1/permissions:queryTestablePermissions':
@@ -226,6 +242,8 @@ paths:
             $ref: '#/definitions/QueryTestablePermissionsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - permissions
@@ -273,6 +291,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - roles
     parameters:
@@ -319,6 +339,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - roles
   '/v1/{name}':
@@ -331,7 +353,7 @@ paths:
         Existing Bindings remains, but are inactive. The Role can be undeleted
         within 7 days. After 7 days the Role is deleted and all Bindings associated
         with the role are removed.
-      operationId: iam.projects.roles.delete
+      operationId: iam.organizations.roles.delete
       parameters:
         - description: Used to perform a consistent read-modify-write.
           in: query
@@ -354,11 +376,13 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
     get:
       description: Gets a Role definition.
-      operationId: iam.roles.get
+      operationId: iam.organizations.roles.get
       parameters:
         - description: |-
             The resource name of the role in one of the following formats:
@@ -388,8 +412,10 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - roles
+        - organizations
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -404,7 +430,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     patch:
       description: Updates a Role definition.
-      operationId: iam.projects.roles.patch
+      operationId: iam.organizations.roles.patch
       parameters:
         - in: body
           name: body
@@ -432,8 +458,10 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
     put:
       description: |-
         Note: This method is in the process of being deprecated. Use
@@ -442,8 +470,7 @@ paths:
         Updates a ServiceAccount.
 
         Currently, only the following fields are updatable:
-        `display_name` .
-        The `etag` is mandatory.
+        `display_name` and `description`.
       operationId: iam.projects.serviceAccounts.update
       parameters:
         - in: body
@@ -472,6 +499,8 @@ paths:
             $ref: '#/definitions/ServiceAccount'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -513,6 +542,8 @@ paths:
             $ref: '#/definitions/ListServiceAccountKeysResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -557,6 +588,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{name}/serviceAccounts':
@@ -593,6 +626,8 @@ paths:
             $ref: '#/definitions/ListServiceAccountsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -633,6 +668,123 @@ paths:
             $ref: '#/definitions/ServiceAccount'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/v1/{name}:disable':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        DisableServiceAccount is currently in the alpha launch stage.
+
+        Disables a ServiceAccount,
+        which immediately prevents the service account from authenticating and
+        gaining access to APIs.
+
+        Disabled service accounts can be safely restored by using
+        EnableServiceAccount at any point. Deleted service accounts cannot be
+        restored using this method.
+
+        Disabling a service account that is bound to VMs, Apps, Functions, or
+        other jobs will cause those jobs to lose access to resources if they are
+        using the disabled service account.
+
+        To improve reliability of your services and avoid unexpected outages, it
+        is recommended to first disable a service account rather than delete it.
+        After disabling the service account, wait at least 24 hours to verify there
+        are no unintended consequences, and then delete the service account.
+      operationId: iam.projects.serviceAccounts.disable
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/DisableServiceAccountRequest'
+        - description: |-
+            The resource name of the service account in the following format:
+            `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`.
+            Using `-` as a wildcard for the `PROJECT_ID` will infer the project from
+            the account. The `ACCOUNT` value can be the `email` address or the
+            `unique_id` of the service account.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/v1/{name}:enable':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        EnableServiceAccount is currently in the alpha launch stage.
+
+         Restores a disabled ServiceAccount
+         that has been manually disabled by using DisableServiceAccount. Service
+         accounts that have been disabled by other means or for other reasons,
+         such as abuse, cannot be restored using this method.
+
+         EnableServiceAccount will have no effect on a service account that is
+         not disabled.  Enabling an already enabled service account will have no
+         effect.
+      operationId: iam.projects.serviceAccounts.enable
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EnableServiceAccountRequest'
+        - description: |-
+            The resource name of the service account in the following format:
+            `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT_UNIQUE_ID}'.
+            Using `-` as a wildcard for the `PROJECT_ID` will infer the project from
+            the account.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -680,6 +832,8 @@ paths:
             $ref: '#/definitions/SignBlobResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -732,6 +886,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{name}:undelete':
@@ -749,7 +905,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: 'Undelete a Role, bringing it back in its previous state.'
-      operationId: iam.projects.roles.undelete
+      operationId: iam.organizations.roles.undelete
       parameters:
         - in: body
           name: body
@@ -772,12 +928,14 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
   '/v1/{parent}/roles':
     get:
       description: Lists the Roles defined on a resource.
-      operationId: iam.projects.roles.list
+      operationId: iam.organizations.roles.list
       parameters:
         - description: Optional limit on the number of roles to include in the response.
           in: query
@@ -820,8 +978,10 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -836,7 +996,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Creates a new Role.
-      operationId: iam.projects.roles.create
+      operationId: iam.organizations.roles.create
       parameters:
         - in: body
           name: body
@@ -859,8 +1019,10 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
   '/v1/{resource}:getIamPolicy':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -880,9 +1042,10 @@ paths:
         ServiceAccount.
 
         Note: Service accounts are both
-        [resources and identities](/iam/docs/service-accounts#service_account_permissions).
-        This method treats the service account as a resource. It returns the Cloud
-        IAM policy that reflects what members have access to the service account.
+        [resources and
+        identities](/iam/docs/service-accounts#service_account_permissions). This
+        method treats the service account as a resource. It returns the Cloud IAM
+        policy that reflects what members have access to the service account.
 
         This method does not return what resources the service account has access
         to. To see if a service account has access to a resource, call the
@@ -908,6 +1071,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{resource}:setIamPolicy':
@@ -929,10 +1094,10 @@ paths:
         ServiceAccount.
 
         Note: Service accounts are both
-        [resources and identities](/iam/docs/service-accounts#service_account_permissions).
-        This method treats the service account as a resource. Use it to grant
-        members access to the service account, such as when they need to
-        impersonate it.
+        [resources and
+        identities](/iam/docs/service-accounts#service_account_permissions). This
+        method treats the service account as a resource. Use it to grant members
+        access to the service account, such as when they need to impersonate it.
 
         This method does not grant the service account access to other resources,
         such as projects. To grant a service account access to resources, include
@@ -962,6 +1127,8 @@ paths:
             $ref: '#/definitions/Policy'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -1004,9 +1171,21 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
 definitions:
+  AdminAuditData:
+    description: |-
+      Audit log information specific to Cloud IAM admin APIs. This message is
+      serialized as an `Any` type in the `ServiceData` message of an
+      `AuditLog` message.
+    properties:
+      permissionDelta:
+        $ref: '#/definitions/PermissionDelta'
+        description: The permission_delta when when creating or updating a Role.
+    type: object
   AuditConfig:
     description: |-
       Specifies the audit configuration for a service.
@@ -1137,8 +1316,8 @@ definitions:
       condition:
         $ref: '#/definitions/Expr'
         description: |-
-          Unimplemented. The condition that is associated with this binding.
-          NOTE: an unsatisfied condition will not allow user access via current
+          The condition that is associated with this binding.
+          NOTE: An unsatisfied condition will not allow user access via current
           binding. Different bindings, including their conditions, are examined
           independently.
       members:
@@ -1258,6 +1437,10 @@ definitions:
           create. Currently, only the following values are user assignable:
           `display_name` .
     type: object
+  DisableServiceAccountRequest:
+    description: The service account disable request.
+    properties: {}
+    type: object
   Empty:
     description: |-
       A generic empty message that you can re-use to avoid defining duplicated
@@ -1269,6 +1452,10 @@ definitions:
           }
 
       The JSON representation for `Empty` is empty JSON object `{}`.
+    properties: {}
+    type: object
+  EnableServiceAccountRequest:
+    description: The service account enable request.
     properties: {}
     type: object
   Expr:
@@ -1465,6 +1652,15 @@ definitions:
           to this value.
         type: string
     type: object
+  PatchServiceAccountRequest:
+    description: The patch service account request.
+    properties:
+      serviceAccount:
+        $ref: '#/definitions/ServiceAccount'
+      updateMask:
+        format: google-fieldmask
+        type: string
+    type: object
   Permission:
     description: A permission which can be included by a role.
     properties:
@@ -1498,6 +1694,22 @@ definitions:
       title:
         description: The title of this Permission.
         type: string
+    type: object
+  PermissionDelta:
+    description: |-
+      A PermissionDelta message to record the added_permissions and
+      removed_permissions inside a role.
+    properties:
+      addedPermissions:
+        description: Added permissions.
+        items:
+          type: string
+        type: array
+      removedPermissions:
+        description: Removed permissions.
+        items:
+          type: string
+        type: array
     type: object
   Policy:
     description: |-
@@ -1753,8 +1965,15 @@ definitions:
       the account. The `ACCOUNT` value can be the `email` address or the
       `unique_id` of the service account.
     properties:
+      description:
+        description: |-
+          Optional. A user-specified opaque description of the service account.
+          Must be less than or equal to 256 UTF-8 bytes.
+        type: string
       disabled:
-        description: '@OutputOnly A bool indicate if the service account is disabled.'
+        description: |-
+          @OutputOnly A bool indicate if the service account is disabled.
+          The field is currently in alpha phase.
         type: boolean
       displayName:
         description: |-
@@ -1822,6 +2041,13 @@ definitions:
           - KEY_ALG_UNSPECIFIED
           - KEY_ALG_RSA_1024
           - KEY_ALG_RSA_2048
+        type: string
+      keyOrigin:
+        description: The key origin.
+        enum:
+          - ORIGIN_UNSPECIFIED
+          - USER_PROVIDED
+          - GOOGLE_PROVIDED
         type: string
       name:
         description: |-

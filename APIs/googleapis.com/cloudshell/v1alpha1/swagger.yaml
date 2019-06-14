@@ -9,6 +9,10 @@ info:
     url: 'https://google.com'
   description: |
     Allows users to start, configure, and connect to interactive shell sessions running in the cloud.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Cloud Shell
   version: v1alpha1
   x-apiClientRegistration:
@@ -30,10 +34,18 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -126,6 +138,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - users
     get:
@@ -147,6 +161,8 @@ paths:
             $ref: '#/definitions/Environment'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - users
@@ -191,6 +207,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - users
   '/v1alpha1/{name}:authorize':
@@ -208,9 +226,10 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
-        Sends an access token to a running environment on behalf of a user. When
-        this completes, the environment will be authorized to run gcloud commands
-        without requiring the user to manually authenticate.
+        Sends OAuth credentials to a running environment on behalf of a user. When
+        this completes, the environment will be authorized to run various Google
+        Cloud command line tools without requiring the user to manually
+        authenticate.
       operationId: cloudshell.users.environments.authorize
       parameters:
         - in: body
@@ -218,7 +237,7 @@ paths:
           schema:
             $ref: '#/definitions/AuthorizeEnvironmentRequest'
         - description: |-
-            Name of the resource that should receive the token, for example
+            Name of the resource that should receive the credentials, for example
             `users/me/environments/default` or
             `users/someone@example.com/environments/default`.
           in: path
@@ -233,6 +252,8 @@ paths:
             $ref: '#/definitions/Empty'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - users
@@ -280,6 +301,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - users
   '/v1alpha1/{parent}/publicKeys':
@@ -321,6 +344,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - users
 definitions:
@@ -332,9 +357,12 @@ definitions:
         type: string
       expireTime:
         description: |-
-          The time when the token expires. If not set, defaults to one hour from when
-          the server received the request.
+          The time when the credentials expire. If not set, defaults to one hour from
+          when the server received the request.
         format: google-datetime
+        type: string
+      idToken:
+        description: The OAuth ID token that should be sent to the environment.
         type: string
     type: object
   CreatePublicKeyRequest:
@@ -442,7 +470,7 @@ definitions:
         description: |-
           The server-assigned name, which is only unique within the same service that
           originally returns it. If you use the default HTTP mapping, the
-          `name` should have the format of `operations/some/unique/name`.
+          `name` should be a resource name ending with `operations/{unique_id}`.
         type: string
       response:
         additionalProperties:

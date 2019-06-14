@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Archiving and eDiscovery for G Suite.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: G Suite Vault
   version: v1
   x-apiClientRegistration:
@@ -31,11 +35,20 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/ediscovery': Manage your eDiscovery data
       'https://www.googleapis.com/auth/ediscovery.readonly': View your eDiscovery data
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/ediscovery': Manage your eDiscovery data
+      'https://www.googleapis.com/auth/ediscovery.readonly': View your eDiscovery data
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -147,7 +160,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/ediscovery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ediscovery'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ediscovery.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ediscovery.readonly'
       tags:
         - matters
@@ -182,6 +199,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/ediscovery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ediscovery'
       tags:
         - matters
   '/v1/matters/{matterId}':
@@ -201,6 +220,8 @@ paths:
             $ref: '#/definitions/Matter'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ediscovery'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ediscovery'
       tags:
         - matters
@@ -229,7 +250,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/ediscovery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ediscovery'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ediscovery.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ediscovery.readonly'
       tags:
         - matters
@@ -270,6 +295,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/ediscovery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ediscovery'
       tags:
         - matters
   '/v1/matters/{matterId}/exports':
@@ -298,7 +325,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/ediscovery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ediscovery'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ediscovery.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ediscovery.readonly'
       tags:
         - matters
@@ -335,6 +366,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/ediscovery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ediscovery'
       tags:
         - matters
   '/v1/matters/{matterId}/exports/{exportId}':
@@ -360,6 +393,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/ediscovery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ediscovery'
       tags:
         - matters
     get:
@@ -384,7 +419,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/ediscovery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ediscovery'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ediscovery.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ediscovery.readonly'
       tags:
         - matters
@@ -440,7 +479,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/ediscovery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ediscovery'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ediscovery.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ediscovery.readonly'
       tags:
         - matters
@@ -477,6 +520,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/ediscovery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ediscovery'
       tags:
         - matters
   '/v1/matters/{matterId}/holds/{holdId}':
@@ -501,6 +546,8 @@ paths:
             $ref: '#/definitions/Empty'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ediscovery'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ediscovery'
       tags:
         - matters
@@ -534,7 +581,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/ediscovery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ediscovery'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ediscovery.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ediscovery.readonly'
       tags:
         - matters
@@ -579,6 +630,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/ediscovery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ediscovery'
       tags:
         - matters
   '/v1/matters/{matterId}/holds/{holdId}/accounts':
@@ -608,7 +661,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/ediscovery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ediscovery'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ediscovery.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ediscovery.readonly'
       tags:
         - matters
@@ -653,6 +710,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/ediscovery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ediscovery'
       tags:
         - matters
   '/v1/matters/{matterId}/holds/{holdId}/accounts/{accountId}':
@@ -684,6 +743,8 @@ paths:
             $ref: '#/definitions/Empty'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ediscovery'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ediscovery'
       tags:
         - matters
@@ -741,6 +802,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/ediscovery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ediscovery'
       tags:
         - matters
   '/v1/matters/{matterId}/holds/{holdId}:removeHeldAccounts':
@@ -785,6 +848,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/ediscovery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ediscovery'
       tags:
         - matters
   '/v1/matters/{matterId}/savedQueries':
@@ -819,7 +884,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/ediscovery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ediscovery'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ediscovery.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ediscovery.readonly'
       tags:
         - matters
@@ -858,6 +927,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/ediscovery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ediscovery'
       tags:
         - matters
   '/v1/matters/{matterId}/savedQueries/{savedQueryId}':
@@ -885,6 +956,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/ediscovery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ediscovery'
       tags:
         - matters
     get:
@@ -911,7 +984,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/ediscovery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ediscovery'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ediscovery.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ediscovery.readonly'
       tags:
         - matters
@@ -961,6 +1038,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/ediscovery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ediscovery'
       tags:
         - matters
   '/v1/matters/{matterId}:close':
@@ -996,6 +1075,8 @@ paths:
             $ref: '#/definitions/CloseMatterResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ediscovery'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ediscovery'
       tags:
         - matters
@@ -1033,6 +1114,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/ediscovery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ediscovery'
       tags:
         - matters
   '/v1/matters/{matterId}:reopen':
@@ -1069,6 +1152,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/ediscovery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ediscovery'
       tags:
         - matters
   '/v1/matters/{matterId}:undelete':
@@ -1104,6 +1189,8 @@ paths:
             $ref: '#/definitions/Matter'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ediscovery'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ediscovery'
       tags:
         - matters
@@ -1242,13 +1329,17 @@ definitions:
       includeAccessInfo:
         description: |-
           Set to true to include access level information for users
-          with <a href="https://support.google.com/vault/answer/6099459#metadata">indirect access</a>
-          to files.
+          with <a
+          href="https://support.google.com/vault/answer/6099459#metadata">indirect
+          access</a> to files.
         type: boolean
     type: object
   DriveOptions:
     description: Drive search advanced options
     properties:
+      includeSharedDrives:
+        description: Set to true to include shared drive.
+        type: boolean
       includeTeamDrives:
         description: Set to true to include Team Drive.
         type: boolean
@@ -1401,14 +1492,28 @@ definitions:
           The account's ID as provided by the
           <a href="https://developers.google.com/admin-sdk/">Admin SDK</a>.
         type: string
+      email:
+        description: |-
+          The primary email address of the account. If used as an input, this takes
+          precedence over account ID.
+        type: string
+      firstName:
+        description: Output only. The first name of the account holder.
+        type: string
       holdTime:
-        description: When the account was put on hold.
+        description: Output only. When the account was put on hold.
         format: google-datetime
+        type: string
+      lastName:
+        description: Output only. The last name of the account holder.
         type: string
     type: object
   HeldDriveQuery:
     description: Query options for Drive holds.
     properties:
+      includeSharedDriveFiles:
+        description: 'If true, include files in shared drives in the hold.'
+        type: boolean
       includeTeamDriveFiles:
         description: 'If true, include files in Team Drives in the hold.'
         type: boolean
@@ -1635,7 +1740,9 @@ definitions:
       cease to exist.
     properties:
       accountId:
-        description: 'The account id, as provided by <a href="https://developers.google.com/admin-sdk/">Admin SDK</a>.'
+        description: |-
+          The account id, as provided by <a
+          href="https://developers.google.com/admin-sdk/">Admin SDK</a>.
         type: string
       role:
         description: The user's role in this matter.
@@ -1651,7 +1758,8 @@ definitions:
       orgUnitId:
         description: |-
           Org unit to search, as provided by the
-          <a href="https://developers.google.com/admin-sdk/directory/">Admin SDK Directory API</a>.
+          <a href="https://developers.google.com/admin-sdk/directory/">Admin SDK
+          Directory API</a>.
         type: string
     type: object
   Query:
@@ -1699,6 +1807,21 @@ definitions:
       mailOptions:
         $ref: '#/definitions/MailOptions'
         description: 'For mail search, specify more options in this field.'
+      method:
+        description: |-
+          The search method to use. This field is similar to the search_method field
+          but is introduced to support shared drives. It supports all
+          search method types. In case the search_method is TEAM_DRIVE the response
+          of this field will be SHARED_DRIVE only.
+        enum:
+          - SEARCH_METHOD_UNSPECIFIED
+          - ACCOUNT
+          - ORG_UNIT
+          - TEAM_DRIVE
+          - ENTIRE_ORG
+          - ROOM
+          - SHARED_DRIVE
+        type: string
       orgUnitInfo:
         $ref: '#/definitions/OrgUnitInfo'
         description: |-
@@ -1713,7 +1836,13 @@ definitions:
           - TEAM_DRIVE
           - ENTIRE_ORG
           - ROOM
+          - SHARED_DRIVE
         type: string
+      sharedDriveInfo:
+        $ref: '#/definitions/SharedDriveInfo'
+        description: |-
+          When 'SHARED_DRIVE' is chosen as search method, shared_drive_info needs
+          to be specified.
       startTime:
         description: |-
           The start time range for the search query. These timestamps are in GMT and
@@ -1728,8 +1857,8 @@ definitions:
       terms:
         description: |-
           The corpus-specific
-          <a href="https://support.google.com/vault/answer/2474474">search operators</a>
-          used to generate search results.
+          <a href="https://support.google.com/vault/answer/2474474">search
+          operators</a> used to generate search results.
         type: string
       timeZone:
         description: |-
@@ -1805,19 +1934,30 @@ definitions:
         description: A unique identifier for the saved query.
         type: string
     type: object
+  SharedDriveInfo:
+    description: Shared drives to search
+    properties:
+      sharedDriveIds:
+        description: |-
+          List of Shared drive ids, as provided by <a
+          href="https://developers.google.com/drive">Drive API</a>.
+        items:
+          type: string
+        type: array
+    type: object
   Status:
     description: |-
-      The `Status` type defines a logical error model that is suitable for different
-      programming environments, including REST APIs and RPC APIs. It is used by
-      [gRPC](https://github.com/grpc). The error model is designed to be:
+      The `Status` type defines a logical error model that is suitable for
+      different programming environments, including REST APIs and RPC APIs. It is
+      used by [gRPC](https://github.com/grpc). The error model is designed to be:
 
       - Simple to use and understand for most users
       - Flexible enough to meet unexpected needs
 
       # Overview
 
-      The `Status` message contains three pieces of data: error code, error message,
-      and error details. The error code should be an enum value of
+      The `Status` message contains three pieces of data: error code, error
+      message, and error details. The error code should be an enum value of
       google.rpc.Code, but it may accept additional error codes if needed.  The
       error message should be a developer-facing English message that helps
       developers *understand* and *resolve* the error. If a localized user-facing

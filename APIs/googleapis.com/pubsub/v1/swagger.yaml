@@ -10,6 +10,10 @@ info:
     url: 'https://google.com'
   description: |
     Provides reliable, many-to-many, asynchronous messaging between applications.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Cloud Pub/Sub
   version: v1
   x-apiClientRegistration:
@@ -33,11 +37,20 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/pubsub': View and manage Pub/Sub topics and subscriptions
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/pubsub': View and manage Pub/Sub topics and subscriptions
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -122,19 +135,21 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     patch:
       description: |-
-        Updates an existing snapshot. Snapshots are used in
-        <a href="https://cloud.google.com/pubsub/docs/replay-overview">Seek</a>
-        operations, which allow
-        you to manage message acknowledgments in bulk. That is, you can set the
-        acknowledgment state of messages in an existing subscription to the state
-        captured by a snapshot.
-      operationId: pubsub.projects.snapshots.patch
+        Updates an existing topic. Note that certain properties of a
+        topic are not modifiable.
+      operationId: pubsub.projects.topics.patch
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/UpdateSnapshotRequest'
-        - description: The name of the snapshot.
+            $ref: '#/definitions/UpdateTopicRequest'
+        - description: |-
+            The name of the topic. It must have the format
+            `"projects/{project}/topics/{topic}"`. `{topic}` must start with a letter,
+            and contain only letters (`[A-Za-z]`), numbers (`[0-9]`), dashes (`-`),
+            underscores (`_`), periods (`.`), tildes (`~`), plus (`+`) or percent
+            signs (`%`). It must be between 3 and 255 characters in length, and it
+            must not start with `"goog"`.
           in: path
           name: name
           required: true
@@ -144,47 +159,36 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Snapshot'
+            $ref: '#/definitions/Topic'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
     put:
       description: |-
-        Creates a snapshot from the requested subscription. Snapshots are used in
-        <a href="https://cloud.google.com/pubsub/docs/replay-overview">Seek</a>
-        operations, which allow
-        you to manage message acknowledgments in bulk. That is, you can set the
-        acknowledgment state of messages in an existing subscription to the state
-        captured by a snapshot.
-        <br><br>If the snapshot already exists, returns `ALREADY_EXISTS`.
-        If the requested subscription doesn't exist, returns `NOT_FOUND`.
-        If the backlog in the subscription is too old -- and the resulting snapshot
-        would expire in less than 1 hour -- then `FAILED_PRECONDITION` is returned.
-        See also the `Snapshot.expire_time` field. If the name is not provided in
-        the request, the server will assign a random
-        name for this snapshot on the same project as the subscription, conforming
-        to the
-        [resource name format](https://cloud.google.com/pubsub/docs/admin#resource_names).
-        The generated name is populated in the returned Snapshot object. Note that
-        for REST API requests, you must specify a name in the request.
-      operationId: pubsub.projects.snapshots.create
+        Creates the given topic with the given name. See the
+        <a href="https://cloud.google.com/pubsub/docs/admin#resource_names">
+        resource name rules</a>.
+      operationId: pubsub.projects.topics.create
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/CreateSnapshotRequest'
+            $ref: '#/definitions/Topic'
         - description: |-
-            Optional user-provided name for this snapshot.
-            If the name is not provided in the request, the server will assign a random
-            name for this snapshot on the same project as the subscription.
-            Note that for REST API requests, you must specify a name.  See the
-            <a href="https://cloud.google.com/pubsub/docs/admin#resource_names">
-            resource name rules</a>.
-            Format is `projects/{project}/snapshots/{snap}`.
+            The name of the topic. It must have the format
+            `"projects/{project}/topics/{topic}"`. `{topic}` must start with a letter,
+            and contain only letters (`[A-Za-z]`), numbers (`[0-9]`), dashes (`-`),
+            underscores (`_`), periods (`.`), tildes (`~`), plus (`+`) or percent
+            signs (`%`). It must be between 3 and 255 characters in length, and it
+            must not start with `"goog"`.
           in: path
           name: name
           required: true
@@ -194,11 +198,15 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Snapshot'
+            $ref: '#/definitions/Topic'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
@@ -240,7 +248,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
@@ -288,7 +300,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
@@ -336,7 +352,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
@@ -358,7 +378,7 @@ paths:
         Gets the access control policy for a resource.
         Returns an empty policy if the resource exists and does not have a policy
         set.
-      operationId: pubsub.projects.snapshots.getIamPolicy
+      operationId: pubsub.projects.topics.getIamPolicy
       parameters:
         - description: |-
             REQUIRED: The resource for which the policy is being requested.
@@ -376,7 +396,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
@@ -409,7 +433,7 @@ paths:
       description: |-
         Sets the access control policy on the specified resource. Replaces any
         existing policy.
-      operationId: pubsub.projects.snapshots.setIamPolicy
+      operationId: pubsub.projects.topics.setIamPolicy
       parameters:
         - in: body
           name: body
@@ -431,7 +455,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
@@ -457,7 +485,7 @@ paths:
         Note: This operation is designed to be used for building permission-aware
         UIs and command-line tools, not for authorization checking. This operation
         may "fail open" without warning.
-      operationId: pubsub.projects.snapshots.testIamPermissions
+      operationId: pubsub.projects.topics.testIamPermissions
       parameters:
         - in: body
           name: body
@@ -479,7 +507,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
@@ -514,7 +546,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
@@ -543,7 +579,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
@@ -585,7 +625,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
@@ -609,7 +653,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
@@ -669,7 +717,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
@@ -715,7 +767,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
@@ -762,7 +818,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
@@ -806,7 +866,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
@@ -853,7 +917,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
@@ -883,7 +951,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
@@ -907,7 +979,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
@@ -961,7 +1037,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
@@ -1009,7 +1089,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
@@ -1064,7 +1148,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
@@ -1086,8 +1174,8 @@ definitions:
       condition:
         $ref: '#/definitions/Expr'
         description: |-
-          Unimplemented. The condition that is associated with this binding.
-          NOTE: an unsatisfied condition will not allow user access via current
+          The condition that is associated with this binding.
+          NOTE: An unsatisfied condition will not allow user access via current
           binding. Different bindings, including their conditions, are examined
           independently.
       members:
@@ -1280,6 +1368,20 @@ definitions:
         description: The resulting topics.
         items:
           $ref: '#/definitions/Topic'
+        type: array
+    type: object
+  MessageStoragePolicy:
+    properties:
+      allowedPersistenceRegions:
+        description: |-
+          The list of GCP region IDs where messages that are published to the topic
+          may be persisted in storage. Messages published by publishers running in
+          non-allowed GCP regions (or running outside of GCP altogether) will be
+          routed for storage in one of the allowed regions. An empty list indicates a
+          misconfiguration at the project or organization level, which will result in
+          all Publish operations failing.
+        items:
+          type: string
         type: array
     type: object
   ModifyAckDeadlineRequest:
@@ -1665,9 +1767,6 @@ definitions:
           operations on the subscription. If `expiration_policy` is not set, a
           *default policy* with `ttl` of 31 days will be used. The minimum allowed
           value for `expiration_policy.ttl` is 1 day.
-          <b>BETA:</b> This feature is part of a beta release. This API might be
-          changed in backward-incompatible ways and is not recommended for production
-          use. It is not subject to any SLA or deprecation policy.
       labels:
         additionalProperties:
           type: string
@@ -1706,7 +1805,8 @@ definitions:
           messages are not expunged from the subscription's backlog, even if they are
           acknowledged, until they fall out of the `message_retention_duration`
           window. This must be true if you would like to
-          <a href="https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time">
+          <a
+          href="https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time">
           Seek to a timestamp</a>.
         type: boolean
       topic:
@@ -1744,6 +1844,13 @@ definitions:
   Topic:
     description: A topic resource.
     properties:
+      kmsKeyName:
+        description: |-
+          The resource name of the Cloud KMS CryptoKey to be used to protect access
+          to messages published on this topic.
+
+          The expected format is `projects/*/locations/*/keyRings/*/cryptoKeys/*`.
+        type: string
       labels:
         additionalProperties:
           type: string
@@ -1751,6 +1858,15 @@ definitions:
           See <a href="https://cloud.google.com/pubsub/docs/labels"> Creating and
           managing labels</a>.
         type: object
+      messageStoragePolicy:
+        $ref: '#/definitions/MessageStoragePolicy'
+        description: |-
+          Policy constraining how messages published to the topic may be stored. It
+          is determined when the topic is created based on the policy configured at
+          the project level. It must not be set by the caller in the request to
+          CreateTopic or to UpdateTopic. This field will be populated in the
+          responses for GetTopic, CreateTopic, and UpdateTopic: if not present in the
+          response, then no constraints are in effect.
       name:
         description: |-
           The name of the topic. It must have the format

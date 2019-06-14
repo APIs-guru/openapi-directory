@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Provides a historical view of activity in Google Drive.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Drive Activity
   version: v2
   x-apiClientRegistration:
@@ -29,11 +33,20 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/drive.activity': View and add to the activity record of files in your Google Drive
       'https://www.googleapis.com/auth/drive.activity.readonly': View the activity record of files in your Google Drive
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/drive.activity': View and add to the activity record of files in your Google Drive
+      'https://www.googleapis.com/auth/drive.activity.readonly': View the activity record of files in your Google Drive
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -132,7 +145,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.activity'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.activity'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.activity.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.activity.readonly'
       tags:
         - activity
@@ -353,6 +370,22 @@ definitions:
         description: 'The name of the domain, e.g. "google.com".'
         type: string
     type: object
+  Drive:
+    description: Information about a shared drive.
+    properties:
+      name:
+        description: |-
+          The resource name of the shared drive. The format is
+          "COLLECTION_ID/DRIVE_ID". Clients should not assume a specific collection
+          ID for this resource name.
+        type: string
+      root:
+        $ref: '#/definitions/DriveItem'
+        description: The root of this shared drive.
+      title:
+        description: The title of the shared drive.
+        type: string
+    type: object
   DriveActivity:
     description: |-
       A single Drive activity comprising one or more Actions by one or more
@@ -380,7 +413,7 @@ definitions:
           according to the ConsolidationStrategy in the request.
       targets:
         description: |-
-          All Drive objects this activity is about (e.g. file, folder, Team Drive).
+          All Google Drive objects this activity is about (e.g. file, folder, drive).
           This represents the state of the target immediately after the actions
           occurred.
         items:
@@ -394,15 +427,37 @@ definitions:
         format: google-datetime
         type: string
     type: object
+  DriveFile:
+    description: A Drive item which is a file.
+    properties: {}
+    type: object
+  DriveFolder:
+    description: A Drive item which is a folder.
+    properties:
+      type:
+        description: The type of Drive folder.
+        enum:
+          - TYPE_UNSPECIFIED
+          - MY_DRIVE_ROOT
+          - SHARED_DRIVE_ROOT
+          - STANDARD_FOLDER
+        type: string
+    type: object
   DriveItem:
     description: 'A Drive item, such as a file or folder.'
     properties:
+      driveFile:
+        $ref: '#/definitions/DriveFile'
+        description: The Drive item is a file.
+      driveFolder:
+        $ref: '#/definitions/DriveFolder'
+        description: The Drive item is a folder.
       file:
         $ref: '#/definitions/File'
-        description: The Drive item is a file.
+        description: This field is deprecated; please use the `driveFile` field instead.
       folder:
         $ref: '#/definitions/Folder'
-        description: The Drive item is a folder.
+        description: This field is deprecated; please use the `driveFolder` field instead.
       mimeType:
         description: |-
           The MIME type of the Drive item.  See
@@ -421,12 +476,18 @@ definitions:
   DriveItemReference:
     description: 'A lightweight reference to a Drive item, such as a file or folder.'
     properties:
+      driveFile:
+        $ref: '#/definitions/DriveFile'
+        description: The Drive item is a file.
+      driveFolder:
+        $ref: '#/definitions/DriveFolder'
+        description: The Drive item is a folder.
       file:
         $ref: '#/definitions/File'
-        description: The Drive item is a file.
+        description: This field is deprecated; please use the `driveFile` field instead.
       folder:
         $ref: '#/definitions/Folder'
-        description: The Drive item is a folder.
+        description: This field is deprecated; please use the `driveFolder` field instead.
       name:
         description: The target Drive item. The format is "items/ITEM_ID".
         type: string
@@ -434,12 +495,25 @@ definitions:
         description: The title of the Drive item.
         type: string
     type: object
+  DriveReference:
+    description: A lightweight reference to a shared drive.
+    properties:
+      name:
+        description: |-
+          The resource name of the shared drive. The format is
+          "COLLECTION_ID/DRIVE_ID". Clients should not assume a specific collection
+          ID for this resource name.
+        type: string
+      title:
+        description: The title of the shared drive.
+        type: string
+    type: object
   Edit:
     description: An empty message indicating an object was edited.
     properties: {}
     type: object
   File:
-    description: A Drive item which is a file.
+    description: This item is deprecated; please see `DriveFile` instead.
     properties: {}
     type: object
   FileComment:
@@ -468,10 +542,10 @@ definitions:
         description: The Drive item containing this comment.
     type: object
   Folder:
-    description: A Drive item which is a folder.
+    description: This item is deprecated; please see `DriveFolder` instead.
     properties:
       type:
-        description: The type of Drive folder.
+        description: This field is deprecated; please see `DriveFolder.type` instead.
         enum:
           - TYPE_UNSPECIFIED
           - MY_DRIVE_ROOT
@@ -548,9 +622,12 @@ definitions:
       domain:
         $ref: '#/definitions/Domain'
         description: The domain of the Drive item owner.
+      drive:
+        $ref: '#/definitions/DriveReference'
+        description: The drive that owns the item.
       teamDrive:
         $ref: '#/definitions/TeamDriveReference'
-        description: The Team Drive that owns the Drive item.
+        description: This field is deprecated; please use the `drive` field instead.
       user:
         $ref: '#/definitions/User'
         description: The user that owns the Drive item.
@@ -767,6 +844,9 @@ definitions:
   Target:
     description: Information about the target of activity.
     properties:
+      drive:
+        $ref: '#/definitions/Drive'
+        description: The target is a shared drive.
       driveItem:
         $ref: '#/definitions/DriveItem'
         description: The target is a Drive item.
@@ -775,43 +855,42 @@ definitions:
         description: The target is a comment on a Drive file.
       teamDrive:
         $ref: '#/definitions/TeamDrive'
-        description: The target is a Team Drive.
+        description: This field is deprecated; please use the `drive` field instead.
     type: object
   TargetReference:
     description: A lightweight reference to the target of activity.
     properties:
+      drive:
+        $ref: '#/definitions/DriveReference'
+        description: The target is a shared drive.
       driveItem:
         $ref: '#/definitions/DriveItemReference'
         description: The target is a Drive item.
       teamDrive:
         $ref: '#/definitions/TeamDriveReference'
-        description: The target is a Team Drive.
+        description: This field is deprecated; please use the `drive` field instead.
     type: object
   TeamDrive:
-    description: Information about a Team Drive.
+    description: This item is deprecated; please see `Drive` instead.
     properties:
       name:
-        description: |-
-          The resource name of the Team Drive. The format is
-          "teamDrives/TEAM_DRIVE_ID".
+        description: This field is deprecated; please see `Drive.name` instead.
         type: string
       root:
         $ref: '#/definitions/DriveItem'
-        description: The root of this Team Drive.
+        description: This field is deprecated; please see `Drive.root` instead.
       title:
-        description: The title of the Team Drive.
+        description: This field is deprecated; please see `Drive.title` instead.
         type: string
     type: object
   TeamDriveReference:
-    description: A lightweight reference to a Team Drive.
+    description: This item is deprecated; please see `DriveReference` instead.
     properties:
       name:
-        description: |-
-          The resource name of the Team Drive. The format is
-          "teamDrives/TEAM_DRIVE_ID".
+        description: This field is deprecated; please see `DriveReference.name` instead.
         type: string
       title:
-        description: The title of the Team Drive.
+        description: This field is deprecated; please see `DriveReference.title` instead.
         type: string
     type: object
   TimeRange:

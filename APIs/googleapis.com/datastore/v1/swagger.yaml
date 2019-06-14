@@ -9,6 +9,10 @@ info:
     url: 'https://google.com'
   description: |
     Accesses the schemaless NoSQL database to provide fully managed, robust, scalable storage for your application.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Cloud Datastore
   version: v1
   x-apiClientRegistration:
@@ -32,11 +36,20 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/datastore': View and manage your Google Cloud Datastore data
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/datastore': View and manage your Google Cloud Datastore data
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -140,7 +153,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -179,7 +196,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -231,7 +252,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -269,7 +294,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -309,7 +338,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -355,7 +388,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -398,7 +435,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -436,7 +477,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -476,7 +521,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -514,7 +563,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -552,7 +605,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -579,7 +636,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -604,7 +665,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -661,7 +726,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -718,7 +787,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -1447,7 +1520,9 @@ definitions:
         type: object
     type: object
   GqlQuery:
-    description: 'A [GQL query](https://cloud.google.com/datastore/docs/apis/gql/gql_reference).'
+    description: |-
+      A [GQL
+      query](https://cloud.google.com/datastore/docs/apis/gql/gql_reference).
     properties:
       allowLiterals:
         description: |-
@@ -1771,7 +1846,8 @@ definitions:
         description: |-
           An ending point for the query results. Query cursors are
           returned in query result batches and
-          [can only be used to limit the same query](https://cloud.google.com/datastore/docs/concepts/queries#cursors_limits_and_offsets).
+          [can only be used to limit the same
+          query](https://cloud.google.com/datastore/docs/concepts/queries#cursors_limits_and_offsets).
         format: byte
         type: string
       filter:
@@ -1812,7 +1888,8 @@ definitions:
         description: |-
           A starting point for the query results. Query cursors are
           returned in query result batches and
-          [can only be used to continue the same query](https://cloud.google.com/datastore/docs/concepts/queries#cursors_limits_and_offsets).
+          [can only be used to continue the same
+          query](https://cloud.google.com/datastore/docs/concepts/queries#cursors_limits_and_offsets).
         format: byte
         type: string
     type: object
@@ -1967,17 +2044,17 @@ definitions:
     type: object
   Status:
     description: |-
-      The `Status` type defines a logical error model that is suitable for different
-      programming environments, including REST APIs and RPC APIs. It is used by
-      [gRPC](https://github.com/grpc). The error model is designed to be:
+      The `Status` type defines a logical error model that is suitable for
+      different programming environments, including REST APIs and RPC APIs. It is
+      used by [gRPC](https://github.com/grpc). The error model is designed to be:
 
       - Simple to use and understand for most users
       - Flexible enough to meet unexpected needs
 
       # Overview
 
-      The `Status` message contains three pieces of data: error code, error message,
-      and error details. The error code should be an enum value of
+      The `Status` message contains three pieces of data: error code, error
+      message, and error details. The error code should be an enum value of
       google.rpc.Code, but it may accept additional error codes if needed.  The
       error message should be a developer-facing English message that helps
       developers *understand* and *resolve* the error. If a localized user-facing

@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Builds on top of the Google+ platform for Google Apps Domains.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Google+ Domains
   version: v1
   x-apiClientRegistration:
@@ -31,19 +35,32 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/plus.circles.read': View your circles and the people and pages in them
-      'https://www.googleapis.com/auth/plus.circles.write': Manage your circles and add people and pages. People and pages you add to your circles will be notified. Others may see this information publicly. People you add to circles can use Hangouts with you.
       'https://www.googleapis.com/auth/plus.login': 'View your basic profile info, including your age range and language'
-      'https://www.googleapis.com/auth/plus.me': Know who you are on Google
+      'https://www.googleapis.com/auth/plus.me': Associate you with your personal info on Google
       'https://www.googleapis.com/auth/plus.media.upload': Send your photos and videos to Google+
       'https://www.googleapis.com/auth/plus.profiles.read': View your own Google+ profile and profiles visible to you
       'https://www.googleapis.com/auth/plus.stream.read': 'View your Google+ posts, comments, and stream'
-      'https://www.googleapis.com/auth/plus.stream.write': 'Manage your Google+ posts, comments, and stream'
       'https://www.googleapis.com/auth/userinfo.email': View your email address
       'https://www.googleapis.com/auth/userinfo.profile': 'See your personal info, including any personal info you''ve made publicly available'
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/plus.circles.read': View your circles and the people and pages in them
+      'https://www.googleapis.com/auth/plus.login': 'View your basic profile info, including your age range and language'
+      'https://www.googleapis.com/auth/plus.me': Associate you with your personal info on Google
+      'https://www.googleapis.com/auth/plus.media.upload': Send your photos and videos to Google+
+      'https://www.googleapis.com/auth/plus.profiles.read': View your own Google+ profile and profiles visible to you
+      'https://www.googleapis.com/auth/plus.stream.read': 'View your Google+ posts, comments, and stream'
+      'https://www.googleapis.com/auth/userinfo.email': View your email address
+      'https://www.googleapis.com/auth/userinfo.profile': 'See your personal info, including any personal info you''ve made publicly available'
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -95,7 +112,7 @@ tags:
 paths:
   '/activities/{activityId}':
     get:
-      description: Get an activity.
+      description: 'Shut down. See https://developers.google.com/+/api-shutdown for more details.'
       operationId: plusDomains.activities.get
       parameters:
         - description: The ID of the activity to get.
@@ -111,9 +128,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.me'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.me'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.stream.read'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/plus.stream.read'
       tags:
         - activities
@@ -127,7 +150,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/activities/{activityId}/comments':
     get:
-      description: List all of the comments for an activity.
+      description: 'Shut down. See https://developers.google.com/+/api-shutdown for more details.'
       operationId: plusDomains.comments.list
       parameters:
         - description: The ID of the activity to get comments for.
@@ -162,7 +185,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.stream.read'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/plus.stream.read'
       tags:
         - comments
@@ -174,34 +201,9 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
-    post:
-      description: Create a new comment in reply to an activity.
-      operationId: plusDomains.comments.insert
-      parameters:
-        - description: The ID of the activity to reply to.
-          in: path
-          name: activityId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Comment'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Comment'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.stream.write'
-      tags:
-        - comments
   '/activities/{activityId}/people/{collection}':
     get:
-      description: List all of the people in the specified collection for a particular activity.
+      description: 'Shut down. See https://developers.google.com/+/api-shutdown for more details.'
       operationId: plusDomains.people.listByActivity
       parameters:
         - description: The ID of the activity to get the list of people for.
@@ -237,7 +239,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.stream.read'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/plus.stream.read'
       tags:
         - people
@@ -249,217 +255,9 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
-  '/circles/{circleId}':
-    delete:
-      description: Delete a circle.
-      operationId: plusDomains.circles.remove
-      parameters:
-        - description: The ID of the circle to delete.
-          in: path
-          name: circleId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.circles.write'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - circles
-    get:
-      description: Get a circle.
-      operationId: plusDomains.circles.get
-      parameters:
-        - description: The ID of the circle to get.
-          in: path
-          name: circleId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Circle'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.circles.read'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - circles
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    patch:
-      description: Update a circle's description. This method supports patch semantics.
-      operationId: plusDomains.circles.patch
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Circle'
-        - description: The ID of the circle to update.
-          in: path
-          name: circleId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Circle'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.circles.write'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - circles
-    put:
-      description: Update a circle's description.
-      operationId: plusDomains.circles.update
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Circle'
-        - description: The ID of the circle to update.
-          in: path
-          name: circleId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Circle'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.circles.write'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - circles
-  '/circles/{circleId}/people':
-    delete:
-      description: Remove a person from a circle.
-      operationId: plusDomains.circles.removePeople
-      parameters:
-        - description: The ID of the circle to remove the person from.
-          in: path
-          name: circleId
-          required: true
-          type: string
-        - collectionFormat: multi
-          description: 'Email of the people to add to the circle. Optional, can be repeated.'
-          in: query
-          items:
-            type: string
-          name: email
-          type: array
-        - collectionFormat: multi
-          description: 'IDs of the people to remove from the circle. Optional, can be repeated.'
-          in: query
-          items:
-            type: string
-          name: userId
-          type: array
-      responses:
-        '200':
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.circles.write'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - circles
-    get:
-      description: List all of the people who are members of a circle.
-      operationId: plusDomains.people.listByCircle
-      parameters:
-        - description: The ID of the circle to get the members of.
-          in: path
-          name: circleId
-          required: true
-          type: string
-        - default: 20
-          description: 'The maximum number of people to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.'
-          in: query
-          maximum: 100
-          minimum: 1
-          name: maxResults
-          type: integer
-        - description: 'The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response.'
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/PeopleFeed'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.circles.read'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - people
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    put:
-      description: 'Add a person to a circle. Google+ limits certain circle operations, including the number of circle adds. Learn More.'
-      operationId: plusDomains.circles.addPeople
-      parameters:
-        - description: The ID of the circle to add the person to.
-          in: path
-          name: circleId
-          required: true
-          type: string
-        - collectionFormat: multi
-          description: 'Email of the people to add to the circle. Optional, can be repeated.'
-          in: query
-          items:
-            type: string
-          name: email
-          type: array
-        - collectionFormat: multi
-          description: 'IDs of the people to add to the circle. Optional, can be repeated.'
-          in: query
-          items:
-            type: string
-          name: userId
-          type: array
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Circle'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.circles.write'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - circles
   '/comments/{commentId}':
     get:
-      description: Get a comment.
+      description: 'Shut down. See https://developers.google.com/+/api-shutdown for more details.'
       operationId: plusDomains.comments.get
       parameters:
         - description: The ID of the comment to get.
@@ -475,7 +273,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.stream.read'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/plus.stream.read'
       tags:
         - comments
@@ -505,13 +307,23 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.me'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/plus.me'
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.profiles.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.profiles.read'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/userinfo.email'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/userinfo.profile'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.profile'
       tags:
         - people
@@ -523,49 +335,9 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
-  '/people/{userId}/activities':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Create a new activity for the authenticated user.
-      operationId: plusDomains.activities.insert
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Activity'
-        - description: 'If "true", extract the potential media attachments for a URL. The response will include all possible attachments for a URL, including video, photos, and articles based on the content of the page.'
-          in: query
-          name: preview
-          type: boolean
-        - description: 'The ID of the user to create the activity on behalf of. Its value should be "me", to indicate the authenticated user.'
-          in: path
-          name: userId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Activity'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.me'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.stream.write'
-      tags:
-        - activities
   '/people/{userId}/activities/{collection}':
     get:
-      description: List all of the activities in the specified collection for a particular user.
+      description: 'Shut down. See https://developers.google.com/+/api-shutdown for more details.'
       operationId: plusDomains.activities.list
       parameters:
         - description: The collection of activities to list.
@@ -599,9 +371,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.me'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.me'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.stream.read'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/plus.stream.read'
       tags:
         - activities
@@ -615,7 +393,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/people/{userId}/audiences':
     get:
-      description: List all of the audiences to which a user can share.
+      description: 'Shut down. See https://developers.google.com/+/api-shutdown for more details.'
       operationId: plusDomains.audiences.list
       parameters:
         - default: 20
@@ -642,9 +420,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.circles.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.circles.read'
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.me'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/plus.me'
       tags:
         - audiences
@@ -658,7 +442,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/people/{userId}/circles':
     get:
-      description: List all of the circles for a user.
+      description: 'Shut down. See https://developers.google.com/+/api-shutdown for more details.'
       operationId: plusDomains.circles.list
       parameters:
         - default: 20
@@ -685,9 +469,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.circles.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.circles.read'
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.me'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/plus.me'
       tags:
         - circles
@@ -699,33 +489,6 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
-    post:
-      description: Create a new circle for the authenticated user.
-      operationId: plusDomains.circles.insert
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Circle'
-        - description: The ID of the user to create the circle on behalf of. The value "me" can be used to indicate the authenticated user.
-          in: path
-          name: userId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Circle'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.circles.write'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.me'
-      tags:
-        - circles
   '/people/{userId}/media/{collection}':
     parameters:
       - $ref: '#/parameters/alt'
@@ -919,7 +682,7 @@ paths:
         - video/x-msvideo
         - video/x-sgi-movie
         - video/x-smv
-      description: Add a new media item to an album. The current upload size limitations are 36MB for a photo and 1GB for a video. Uploads do not count against quota if photos are less than 2048 pixels on their longest side or videos are less than 15 minutes in length.
+      description: 'Shut down. See https://developers.google.com/+/api-shutdown for more details.'
       operationId: plusDomains.media.insert
       parameters:
         - in: body
@@ -945,9 +708,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.me'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.me'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.media.upload'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/plus.media.upload'
       tags:
         - media
@@ -994,9 +763,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.circles.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.circles.read'
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.me'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/plus.me'
       tags:
         - people

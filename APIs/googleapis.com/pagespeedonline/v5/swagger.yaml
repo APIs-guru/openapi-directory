@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Analyzes the performance of a web page and provides tailored suggestions to make that page faster.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: PageSpeed Insights
   version: v5
   x-apiClientRegistration:
@@ -339,6 +343,27 @@ definitions:
             description: A human readable message explaining the error code.
             type: string
         type: object
+      stackPacks:
+        description: The Stack Pack advice strings.
+        items:
+          properties:
+            descriptions:
+              additionalProperties:
+                description: The specific stack pack description.
+                type: string
+              description: The stack pack advice strings.
+              type: object
+            iconDataURL:
+              description: The stack pack icon data uri.
+              type: string
+            id:
+              description: The stack pack id.
+              type: string
+            title:
+              description: The stack pack title.
+              type: string
+          type: object
+        type: array
       timing:
         description: Timing information for this LHR.
         properties:

@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Manipulates events and other calendar data.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Calendar
   version: v3
   x-apiClientRegistration:
@@ -31,7 +35,7 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/calendar': 'See, edit, share, and permanently delete all the calendars you can access using Google Calendar'
@@ -39,6 +43,18 @@ securityDefinitions:
       'https://www.googleapis.com/auth/calendar.events.readonly': View events on all your calendars
       'https://www.googleapis.com/auth/calendar.readonly': View your calendars
       'https://www.googleapis.com/auth/calendar.settings.readonly': View your Calendar settings
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/calendar': 'See, edit, share, and permanently delete all the calendars you can access using Google Calendar'
+      'https://www.googleapis.com/auth/calendar.events': View and edit events on all your calendars
+      'https://www.googleapis.com/auth/calendar.events.readonly': View events on all your calendars
+      'https://www.googleapis.com/auth/calendar.readonly': View your calendars
+      'https://www.googleapis.com/auth/calendar.settings.readonly': View your Calendar settings
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -115,6 +131,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
       tags:
         - calendars
   '/calendars/{calendarId}':
@@ -132,6 +150,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar'
       tags:
         - calendars
@@ -152,7 +172,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.readonly'
       tags:
         - calendars
@@ -185,6 +209,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
       tags:
         - calendars
     put:
@@ -207,6 +233,8 @@ paths:
             $ref: '#/definitions/Calendar'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar'
       tags:
         - calendars
@@ -249,6 +277,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
       tags:
         - acl
     parameters:
@@ -283,6 +313,8 @@ paths:
             $ref: '#/definitions/AclRule'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar'
       tags:
         - acl
@@ -337,6 +369,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
       tags:
         - acl
   '/calendars/{calendarId}/acl/{ruleId}':
@@ -359,6 +393,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar'
       tags:
         - acl
@@ -384,7 +420,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.readonly'
       tags:
         - acl
@@ -426,6 +466,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
       tags:
         - acl
     put:
@@ -458,6 +500,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
       tags:
         - acl
   '/calendars/{calendarId}/clear':
@@ -483,6 +527,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar'
       tags:
         - calendars
@@ -574,11 +620,11 @@ paths:
           in: query
           name: syncToken
           type: string
-        - description: 'Upper bound (exclusive) for an event''s start time to filter by. Optional. The default is not to filter by start time. Must be an RFC3339 timestamp with mandatory time zone offset, e.g., 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but will be ignored. If timeMin is set, timeMax must be greater than timeMin.'
+        - description: 'Upper bound (exclusive) for an event''s start time to filter by. Optional. The default is not to filter by start time. Must be an RFC3339 timestamp with mandatory time zone offset, for example, 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but are ignored. If timeMin is set, timeMax must be greater than timeMin.'
           in: query
           name: timeMax
           type: string
-        - description: 'Lower bound (inclusive) for an event''s end time to filter by. Optional. The default is not to filter by end time. Must be an RFC3339 timestamp with mandatory time zone offset, e.g., 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but will be ignored. If timeMax is set, timeMin must be smaller than timeMax.'
+        - description: 'Lower bound (exclusive) for an event''s end time to filter by. Optional. The default is not to filter by end time. Must be an RFC3339 timestamp with mandatory time zone offset, for example, 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but are ignored. If timeMax is set, timeMin must be smaller than timeMax.'
           in: query
           name: timeMin
           type: string
@@ -598,11 +644,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.events'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.events'
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar.events.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar.events.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.readonly'
       tags:
         - events
@@ -665,7 +719,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.events'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.events'
       tags:
         - events
@@ -709,7 +767,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.events'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.events'
       tags:
         - events
@@ -759,7 +821,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.events'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.events'
       tags:
         - events
@@ -863,11 +929,11 @@ paths:
           in: query
           name: syncToken
           type: string
-        - description: 'Upper bound (exclusive) for an event''s start time to filter by. Optional. The default is not to filter by start time. Must be an RFC3339 timestamp with mandatory time zone offset, e.g., 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but will be ignored. If timeMin is set, timeMax must be greater than timeMin.'
+        - description: 'Upper bound (exclusive) for an event''s start time to filter by. Optional. The default is not to filter by start time. Must be an RFC3339 timestamp with mandatory time zone offset, for example, 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but are ignored. If timeMin is set, timeMax must be greater than timeMin.'
           in: query
           name: timeMax
           type: string
-        - description: 'Lower bound (inclusive) for an event''s end time to filter by. Optional. The default is not to filter by end time. Must be an RFC3339 timestamp with mandatory time zone offset, e.g., 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but will be ignored. If timeMax is set, timeMin must be smaller than timeMax.'
+        - description: 'Lower bound (exclusive) for an event''s end time to filter by. Optional. The default is not to filter by end time. Must be an RFC3339 timestamp with mandatory time zone offset, for example, 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but are ignored. If timeMax is set, timeMin must be smaller than timeMax.'
           in: query
           name: timeMin
           type: string
@@ -887,11 +953,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.events'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.events'
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar.events.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar.events.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.readonly'
       tags:
         - events
@@ -931,7 +1005,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.events'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.events'
       tags:
         - events
@@ -970,11 +1048,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.events'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.events'
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar.events.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar.events.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.readonly'
       tags:
         - events
@@ -1046,7 +1132,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.events'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.events'
       tags:
         - events
@@ -1110,7 +1200,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.events'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.events'
       tags:
         - events
@@ -1175,11 +1269,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.events'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.events'
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar.events.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar.events.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.readonly'
       tags:
         - events
@@ -1242,7 +1344,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.events'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.events'
       tags:
         - events
@@ -1269,13 +1375,23 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.events'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.events'
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar.events.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar.events.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.settings.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.settings.readonly'
       tags:
         - channels
@@ -1291,7 +1407,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.readonly'
       tags:
         - colors
@@ -1328,7 +1448,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.readonly'
       tags:
         - freebusy
@@ -1380,7 +1504,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.readonly'
       tags:
         - calendarList
@@ -1411,6 +1539,8 @@ paths:
             $ref: '#/definitions/CalendarListEntry'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar'
       tags:
         - calendarList
@@ -1474,7 +1604,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.readonly'
       tags:
         - calendarList
@@ -1493,6 +1627,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar'
       tags:
         - calendarList
@@ -1513,7 +1649,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.readonly'
       tags:
         - calendarList
@@ -1550,6 +1690,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
       tags:
         - calendarList
     put:
@@ -1576,6 +1718,8 @@ paths:
             $ref: '#/definitions/CalendarListEntry'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar'
       tags:
         - calendarList
@@ -1609,9 +1753,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.settings.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.settings.readonly'
       tags:
         - settings
@@ -1665,9 +1815,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.settings.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.settings.readonly'
       tags:
         - settings
@@ -1689,9 +1845,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.settings.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.settings.readonly'
       tags:
         - settings
@@ -2019,7 +2181,7 @@ definitions:
       signature:
         description: |-
           The signature of the conference data.
-          Genereated on server side. Must be preserved while copying the conference data between events, otherwise the conference data will not be copied.
+          Generated on server side. Must be preserved while copying the conference data between events, otherwise the conference data will not be copied.
           Unset for a conference with a failed create request.
           Optional for a conference with a pending create request.
         type: string

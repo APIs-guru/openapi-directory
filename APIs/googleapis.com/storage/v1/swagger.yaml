@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'Stores and retrieves potentially large, immutable data objects.'
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Cloud Storage
   version: v1
   x-apiClientRegistration:
@@ -31,7 +35,7 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
@@ -39,6 +43,18 @@ securityDefinitions:
       'https://www.googleapis.com/auth/devstorage.full_control': Manage your data and permissions in Google Cloud Storage
       'https://www.googleapis.com/auth/devstorage.read_only': View your data in Google Cloud Storage
       'https://www.googleapis.com/auth/devstorage.read_write': Manage your data in Google Cloud Storage
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/devstorage.full_control': Manage your data and permissions in Google Cloud Storage
+      'https://www.googleapis.com/auth/devstorage.read_only': View your data in Google Cloud Storage
+      'https://www.googleapis.com/auth/devstorage.read_write': Manage your data in Google Cloud Storage
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -121,6 +137,10 @@ paths:
           in: query
           name: projection
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: The project to be billed for this request.
           in: query
           name: userProject
@@ -133,13 +153,23 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.read_only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.read_only'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - buckets
@@ -192,6 +222,10 @@ paths:
           in: query
           name: projection
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: The project to be billed for this request.
           in: query
           name: userProject
@@ -204,9 +238,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - buckets
@@ -228,6 +268,10 @@ paths:
           in: query
           name: ifMetagenerationNotMatch
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -238,9 +282,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - buckets
@@ -268,6 +318,10 @@ paths:
           in: query
           name: projection
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -280,13 +334,23 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.read_only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.read_only'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - buckets
@@ -347,6 +411,10 @@ paths:
           in: query
           name: projection
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -359,7 +427,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - buckets
@@ -412,6 +484,10 @@ paths:
           in: query
           name: projection
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -424,7 +500,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - buckets
@@ -438,6 +518,10 @@ paths:
           name: bucket
           required: true
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -450,7 +534,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - bucketAccessControls
@@ -475,6 +563,10 @@ paths:
           name: bucket
           required: true
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -487,7 +579,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - bucketAccessControls
@@ -506,6 +602,10 @@ paths:
           name: entity
           required: true
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -516,7 +616,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - bucketAccessControls
@@ -534,6 +638,10 @@ paths:
           name: entity
           required: true
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -546,7 +654,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - bucketAccessControls
@@ -576,6 +688,10 @@ paths:
           name: entity
           required: true
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -588,7 +704,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - bucketAccessControls
@@ -610,6 +730,10 @@ paths:
           name: entity
           required: true
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -622,7 +746,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - bucketAccessControls
@@ -644,6 +772,10 @@ paths:
           in: query
           name: ifMetagenerationNotMatch
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -656,7 +788,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - defaultObjectAccessControls
@@ -681,6 +817,10 @@ paths:
           name: bucket
           required: true
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -693,7 +833,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - defaultObjectAccessControls
@@ -712,6 +856,10 @@ paths:
           name: entity
           required: true
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -722,7 +870,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - defaultObjectAccessControls
@@ -740,6 +892,10 @@ paths:
           name: entity
           required: true
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -752,7 +908,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - defaultObjectAccessControls
@@ -782,6 +942,10 @@ paths:
           name: entity
           required: true
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -794,7 +958,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - defaultObjectAccessControls
@@ -816,6 +984,10 @@ paths:
           name: entity
           required: true
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -828,7 +1000,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - defaultObjectAccessControls
@@ -842,6 +1018,10 @@ paths:
           name: bucket
           required: true
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -854,14 +1034,12 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_only'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - buckets
     parameters:
@@ -885,6 +1063,10 @@ paths:
           name: bucket
           required: true
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -897,10 +1079,12 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - buckets
   '/b/{bucket}/iam/testPermissions':
@@ -921,6 +1105,10 @@ paths:
           name: permissions
           required: true
           type: array
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -933,13 +1121,23 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.read_only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.read_only'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - buckets
@@ -974,6 +1172,10 @@ paths:
           name: ifMetagenerationMatch
           required: true
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -986,9 +1188,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - buckets
@@ -1002,6 +1210,10 @@ paths:
           name: bucket
           required: true
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -1014,13 +1226,23 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.read_only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.read_only'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - notifications
@@ -1045,6 +1267,10 @@ paths:
           name: bucket
           required: true
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -1057,9 +1283,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - notifications
@@ -1078,6 +1310,10 @@ paths:
           name: notification
           required: true
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -1088,9 +1324,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - notifications
@@ -1108,6 +1350,10 @@ paths:
           name: notification
           required: true
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -1120,13 +1366,23 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.read_only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.read_only'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - notifications
@@ -1177,6 +1433,10 @@ paths:
           in: query
           name: projection
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -1193,13 +1453,23 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.read_only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.read_only'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - objects
@@ -1272,6 +1542,10 @@ paths:
           in: query
           name: projection
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -1284,9 +1558,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - objects
@@ -1337,6 +1617,10 @@ paths:
           in: query
           name: projection
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - in: body
           name: resource
           schema:
@@ -1357,13 +1641,23 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.read_only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.read_only'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - objects
@@ -1402,6 +1696,10 @@ paths:
           name: object
           required: true
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -1412,9 +1710,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - objects
@@ -1459,6 +1763,10 @@ paths:
           in: query
           name: projection
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -1471,13 +1779,23 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.read_only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.read_only'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - objects
@@ -1545,6 +1863,10 @@ paths:
           in: query
           name: projection
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: 'The project to be billed for this request, for Requester Pays buckets.'
           in: query
           name: userProject
@@ -1557,7 +1879,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - objects
@@ -1617,6 +1943,10 @@ paths:
           in: query
           name: projection
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -1629,7 +1959,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - objects
@@ -1652,6 +1986,10 @@ paths:
           name: object
           required: true
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -1664,7 +2002,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - objectAccessControls
@@ -1698,6 +2040,10 @@ paths:
           name: object
           required: true
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -1710,7 +2056,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - objectAccessControls
@@ -1738,6 +2088,10 @@ paths:
           name: object
           required: true
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -1748,7 +2102,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - objectAccessControls
@@ -1775,6 +2133,10 @@ paths:
           name: object
           required: true
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -1787,7 +2149,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - objectAccessControls
@@ -1826,6 +2192,10 @@ paths:
           name: object
           required: true
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -1838,7 +2208,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - objectAccessControls
@@ -1869,6 +2243,10 @@ paths:
           name: object
           required: true
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -1881,7 +2259,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - objectAccessControls
@@ -1904,6 +2286,10 @@ paths:
           name: object
           required: true
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -1916,13 +2302,23 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.read_only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.read_only'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - objects
@@ -1956,6 +2352,10 @@ paths:
           name: object
           required: true
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -1968,9 +2368,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - objects
@@ -2001,6 +2407,10 @@ paths:
           name: permissions
           required: true
           type: array
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -2013,13 +2423,23 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.read_only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.read_only'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - objects
@@ -2081,6 +2501,10 @@ paths:
           in: query
           name: kmsKeyName
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -2093,9 +2517,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - objects
@@ -2176,6 +2606,10 @@ paths:
           in: query
           name: projection
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: Name of the bucket in which to find the source object.
           in: path
           name: sourceBucket
@@ -2202,9 +2636,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - objects
@@ -2293,6 +2733,10 @@ paths:
           in: query
           name: projection
           type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
+          type: string
         - description: 'Include this field (from the previous rewrite response) on each rewrite request after the first one, until the rewrite response ''done'' flag is true. Calls that provide a rewriteToken can omit all other request fields, but if included those fields must match the values provided in the first rewrite request.'
           in: query
           name: rewriteToken
@@ -2323,9 +2767,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - objects
@@ -2352,16 +2802,245 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - channels
+  '/projects/{projectId}/hmacKeys':
+    get:
+      description: Retrieves a list of HMAC keys matching the criteria.
+      operationId: storage.projects.hmacKeys.list
+      parameters:
+        - default: 250
+          description: 'Maximum number of items to return in a single page of responses. The service uses this parameter or 250 items, whichever is smaller. The max number of items per page will also be limited by the number of distinct service accounts in the response. If the number of service accounts in a single response is too high, the page will truncated and a next page token will be returned.'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: A previously-returned page token representing part of the larger set of results to view.
+          in: query
+          name: pageToken
+          type: string
+        - description: Name of the project in which to look for HMAC keys.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: 'If present, only keys for the given service account are returned.'
+          in: query
+          name: serviceAccountEmail
+          type: string
+        - description: Whether or not to show keys in the DELETED state.
+          in: query
+          name: showDeletedKeys
+          type: boolean
+        - description: The project to be billed for this request.
+          in: query
+          name: userProject
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/HmacKeysMetadata'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.read_only'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Creates a new HMAC key for the specified service account.
+      operationId: storage.projects.hmacKeys.create
+      parameters:
+        - description: Project ID owning the service account.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: Email address of the service account.
+          in: query
+          name: serviceAccountEmail
+          required: true
+          type: string
+        - description: The project to be billed for this request.
+          in: query
+          name: userProject
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/HmacKey'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+      tags:
+        - projects
+  '/projects/{projectId}/hmacKeys/{accessId}':
+    delete:
+      description: Deletes an HMAC key.
+      operationId: storage.projects.hmacKeys.delete
+      parameters:
+        - description: Name of the HMAC key to be deleted.
+          in: path
+          name: accessId
+          required: true
+          type: string
+        - description: Project ID owning the requested key
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: The project to be billed for this request.
+          in: query
+          name: userProject
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+      tags:
+        - projects
+    get:
+      description: Retrieves an HMAC key's metadata
+      operationId: storage.projects.hmacKeys.get
+      parameters:
+        - description: Name of the HMAC key.
+          in: path
+          name: accessId
+          required: true
+          type: string
+        - description: Project ID owning the service account of the requested key.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: The project to be billed for this request.
+          in: query
+          name: userProject
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/HmacKeyMetadata'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.read_only'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    put:
+      description: Updates the state of an HMAC key. See the HMAC Key resource descriptor for valid states.
+      operationId: storage.projects.hmacKeys.update
+      parameters:
+        - description: Name of the HMAC key being updated.
+          in: path
+          name: accessId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/HmacKeyMetadata'
+        - description: Project ID owning the service account of the updated key.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: The project to be billed for this request.
+          in: query
+          name: userProject
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/HmacKeyMetadata'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+      tags:
+        - projects
   '/projects/{projectId}/serviceAccount':
     get:
       description: Get the email address of this project's Google Cloud Storage service account.
@@ -2371,6 +3050,10 @@ paths:
           in: path
           name: projectId
           required: true
+          type: string
+        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
+          in: query
+          name: provisionalUserProject
           type: string
         - description: The project to be billed for this request.
           in: query
@@ -2384,13 +3067,23 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.read_only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.read_only'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - projects
@@ -2538,6 +3231,9 @@ definitions:
         type: object
       location:
         description: The location of the bucket. Object data for objects in the bucket resides in physical storage within this region. Defaults to US. See the developer's guide for the authoritative list.
+        type: string
+      locationType:
+        description: The type of the bucket location.
         type: string
       logging:
         description: 'The bucket''s logging configuration, which defines the destination bucket and optional name prefix for the current bucket''s logs.'
@@ -2783,15 +3479,78 @@ definitions:
       expression:
         description: Textual representation of an expression in Common Expression Language syntax. The application context of the containing message determines which well-known feature set of CEL is supported.
         type: string
-      kind:
-        default: 'storage#expr'
-        description: 'The kind of item this is. For storage, this is always storage#expr. This field is ignored on input.'
-        type: string
       location:
         description: 'An optional string indicating the location of the expression for error reporting, e.g. a file name and a position in the file.'
         type: string
       title:
         description: 'An optional title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.'
+        type: string
+    type: object
+  HmacKey:
+    description: JSON template to produce a JSON-style HMAC Key resource for Create responses.
+    properties:
+      kind:
+        default: 'storage#hmacKey'
+        description: 'The kind of item this is. For HMAC keys, this is always storage#hmacKey.'
+        type: string
+      metadata:
+        $ref: '#/definitions/HmacKeyMetadata'
+        description: Key metadata.
+      secret:
+        description: HMAC secret key material.
+        type: string
+    type: object
+  HmacKeyMetadata:
+    description: JSON template to produce a JSON-style HMAC Key metadata resource.
+    properties:
+      accessId:
+        description: The ID of the HMAC Key.
+        type: string
+      etag:
+        description: HTTP 1.1 Entity tag for the HMAC key.
+        type: string
+      id:
+        description: 'The ID of the HMAC key, including the Project ID and the Access ID.'
+        type: string
+      kind:
+        default: 'storage#hmacKeyMetadata'
+        description: 'The kind of item this is. For HMAC Key metadata, this is always storage#hmacKeyMetadata.'
+        type: string
+      projectId:
+        description: Project ID owning the service account to which the key authenticates.
+        type: string
+      selfLink:
+        description: The link to this resource.
+        type: string
+      serviceAccountEmail:
+        description: The email address of the key's associated service account.
+        type: string
+      state:
+        description: 'The state of the key. Can be one of ACTIVE, INACTIVE, or DELETED.'
+        type: string
+      timeCreated:
+        description: The creation time of the HMAC key in RFC 3339 format.
+        format: date-time
+        type: string
+      updated:
+        description: The last modification time of the HMAC key metadata in RFC 3339 format.
+        format: date-time
+        type: string
+    type: object
+  HmacKeysMetadata:
+    description: A list of hmacKeys.
+    properties:
+      items:
+        description: The list of items.
+        items:
+          $ref: '#/definitions/HmacKeyMetadata'
+        type: array
+      kind:
+        default: 'storage#hmacKeysMetadata'
+        description: 'The kind of item this is. For lists of hmacKeys, this is always storage#hmacKeysMetadata.'
+        type: string
+      nextPageToken:
+        description: 'The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.'
         type: string
     type: object
   Notification:

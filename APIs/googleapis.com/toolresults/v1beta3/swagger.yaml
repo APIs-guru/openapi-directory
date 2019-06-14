@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Reads and publishes results from Firebase Test Lab.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Cloud Tool Results
   version: v1beta3
   x-apiClientRegistration:
@@ -31,10 +35,18 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -130,6 +142,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -178,6 +192,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/{projectId}/histories/{historyId}':
@@ -213,6 +229,8 @@ paths:
             $ref: '#/definitions/History'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -276,6 +294,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -332,6 +352,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/{projectId}/histories/{historyId}/executions/{executionId}':
@@ -375,6 +397,8 @@ paths:
             $ref: '#/definitions/Execution'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -428,6 +452,8 @@ paths:
             $ref: '#/definitions/Execution'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -590,6 +616,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -654,6 +682,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/{projectId}/histories/{historyId}/executions/{executionId}/steps/{stepId}':
@@ -705,6 +735,8 @@ paths:
             $ref: '#/definitions/Step'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -776,6 +808,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/{projectId}/histories/{historyId}/executions/{executionId}/steps/{stepId}/perfMetricsSummary':
@@ -813,6 +847,8 @@ paths:
             $ref: '#/definitions/PerfMetricsSummary'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -862,6 +898,8 @@ paths:
             $ref: '#/definitions/PerfMetricsSummary'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -916,6 +954,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -965,6 +1005,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/{projectId}/histories/{historyId}/executions/{executionId}/steps/{stepId}/perfSampleSeries/{sampleSeriesId}':
@@ -1007,6 +1049,8 @@ paths:
             $ref: '#/definitions/PerfSampleSeries'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -1066,6 +1110,8 @@ paths:
             $ref: '#/definitions/ListPerfSamplesResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -1130,8 +1176,158 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
+  '/{projectId}/histories/{historyId}/executions/{executionId}/steps/{stepId}/testCases':
+    get:
+      description: |-
+        Lists Test Cases attached to a Step. Experimental test cases API. Still in active development.
+
+        May return any of the following canonical error codes:
+
+        - PERMISSION_DENIED - if the user is not authorized to write to project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the containing Step does not exist
+      operationId: toolresults.projects.histories.executions.steps.testCases.list
+      parameters:
+        - description: |-
+            A Execution id
+
+            Required.
+          in: path
+          name: executionId
+          required: true
+          type: string
+        - description: |-
+            A History id.
+
+            Required.
+          in: path
+          name: historyId
+          required: true
+          type: string
+        - description: |-
+            The maximum number of TestCases to fetch.
+
+            Default value: 100. The server will use this default if the field is not set or has a value of 0.
+
+            Optional.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            A continuation token to resume the query at the next item.
+
+            Optional.
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
+            A Project id.
+
+            Required.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: |-
+            A Step id. Note: This step must include a TestExecutionStep.
+
+            Required.
+          in: path
+          name: stepId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListTestCasesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{projectId}/histories/{historyId}/executions/{executionId}/steps/{stepId}/testCases/{testCaseId}':
+    get:
+      description: |-
+        Gets details of a Test Case for a Step. Experimental test cases API. Still in active development.
+
+        May return any of the following canonical error codes:
+
+        - PERMISSION_DENIED - if the user is not authorized to write to project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the containing Test Case does not exist
+      operationId: toolresults.projects.histories.executions.steps.testCases.get
+      parameters:
+        - description: |-
+            A Execution id
+
+            Required.
+          in: path
+          name: executionId
+          required: true
+          type: string
+        - description: |-
+            A History id.
+
+            Required.
+          in: path
+          name: historyId
+          required: true
+          type: string
+        - description: |-
+            A Project id.
+
+            Required.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: |-
+            A Step id. Note: This step must include a TestExecutionStep.
+
+            Required.
+          in: path
+          name: stepId
+          required: true
+          type: string
+        - description: |-
+            A Test Case id.
+
+            Required.
+          in: path
+          name: testCaseId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TestCase'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   '/{projectId}/histories/{historyId}/executions/{executionId}/steps/{stepId}/thumbnails':
     get:
       description: |-
@@ -1195,6 +1391,8 @@ paths:
             $ref: '#/definitions/ListStepThumbnailsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -1268,6 +1466,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/{projectId}/settings':
@@ -1295,6 +1495,8 @@ paths:
             $ref: '#/definitions/ProjectSettings'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -1345,6 +1547,8 @@ paths:
             $ref: '#/definitions/ProjectSettings'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -1665,6 +1869,7 @@ definitions:
         type: string
     type: object
   FailureDetail:
+    description: Details for an outcome with a FAILURE outcome summary.
     properties:
       crashed:
         description: If the failure was severe because the system (app) under test crashed.
@@ -1812,6 +2017,7 @@ definitions:
         description: The thumbnail.
     type: object
   InconclusiveDetail:
+    description: Details for an outcome with an INCONCLUSIVE outcome summary.
     properties:
       abortedByUser:
         description: 'If the end user aborted the test execution before a pass or fail could be determined. For example, the user pressed ctrl-c which sent a kill signal to the test runner while the test was running.'
@@ -1826,6 +2032,10 @@ definitions:
   IndividualOutcome:
     description: Step Id and outcome of each individual step that was run as a group with other steps with the same configuration.
     properties:
+      multistepNumber:
+        description: Unique int given to each step. Ranges from 0(inclusive) to total number of steps(exclusive). The primary step is 0.
+        format: int32
+        type: integer
       outcomeSummary:
         enum:
           - failure
@@ -1835,6 +2045,9 @@ definitions:
           - success
           - unset
         type: string
+      runDuration:
+        $ref: '#/definitions/Duration'
+        description: How long it took for this step to run.
       stepId:
         type: string
     type: object
@@ -1929,6 +2142,17 @@ definitions:
         description: Steps.
         items:
           $ref: '#/definitions/Step'
+        type: array
+    type: object
+  ListTestCasesResponse:
+    description: Response message for StepService.ListTestCases.
+    properties:
+      nextPageToken:
+        type: string
+      testCases:
+        description: List of test cases.
+        items:
+          $ref: '#/definitions/TestCase'
         type: array
     type: object
   MemoryInfo:
@@ -2169,6 +2393,7 @@ definitions:
         type: array
     type: object
   SkippedDetail:
+    description: Details for an outcome with a SKIPPED outcome summary.
     properties:
       incompatibleAppVersion:
         description: If the App doesn't support the specific API level.
@@ -2199,33 +2424,9 @@ definitions:
     type: object
   Status:
     description: |-
-      The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). The error model is designed to be:
+      The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details.
 
-      - Simple to use and understand for most users - Flexible enough to meet unexpected needs
-
-      # Overview
-
-      The `Status` message contains three pieces of data: error code, error message, and error details. The error code should be an enum value of [google.rpc.Code][], but it may accept additional error codes if needed. The error message should be a developer-facing English message that helps developers *understand* and *resolve* the error. If a localized user-facing error message is needed, put the localized message in the error details or localize it in the client. The optional error details may contain arbitrary information about the error. There is a predefined set of error detail types in the package `google.rpc` that can be used for common error conditions.
-
-      # Language mapping
-
-      The `Status` message is the logical representation of the error model, but it is not necessarily the actual wire format. When the `Status` message is exposed in different client libraries and different wire protocols, it can be mapped differently. For example, it will likely be mapped to some exceptions in Java, but more likely mapped to some error codes in C.
-
-      # Other uses
-
-      The error model and the `Status` message can be used in a variety of environments, either with or without APIs, to provide a consistent developer experience across different environments.
-
-      Example uses of this error model include:
-
-      - Partial errors. If a service needs to return partial errors to the client, it may embed the `Status` in the normal response to indicate the partial errors.
-
-      - Workflow errors. A typical workflow has multiple steps. Each step may have a `Status` message for error reporting.
-
-      - Batch operations. If a client uses batch request and batch response, the `Status` message should be used directly inside batch response, one for each error sub-response.
-
-      - Asynchronous operations. If an API call embeds asynchronous operation results in its response, the status of those operations should be represented directly using the `Status` message.
-
-      - Logging. If some API errors are stored in logs, the message `Status` could be used directly after any stripping needed for security/privacy reasons.
+      You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).
     properties:
       code:
         description: 'The status code, which should be an enum value of [google.rpc.Code][].'
@@ -2395,10 +2596,68 @@ definitions:
         type: string
     type: object
   SuccessDetail:
+    description: Details for an outcome with a SUCCESS outcome summary.
     properties:
       otherNativeCrash:
         description: If a native process other than the app crashed.
         type: boolean
+    type: object
+  TestCase:
+    properties:
+      endTime:
+        $ref: '#/definitions/Timestamp'
+        description: |-
+          The end time of the test case.
+
+          Optional.
+      skippedMessage:
+        description: |-
+          Why the test case was skipped.
+
+          Present only for skipped test case
+        type: string
+      stackTraces:
+        description: |-
+          The stack trace details if the test case failed or encountered an error.
+
+          The maximum size of the stack traces is 100KiB, beyond which the stack track will be truncated.
+
+          Zero if the test case passed.
+        items:
+          $ref: '#/definitions/StackTrace'
+        type: array
+      startTime:
+        $ref: '#/definitions/Timestamp'
+        description: |-
+          The start time of the test case.
+
+          Optional.
+      status:
+        description: |-
+          The status of the test case.
+
+          Required.
+        enum:
+          - error
+          - failed
+          - flaky
+          - passed
+          - skipped
+        type: string
+      testCaseId:
+        description: A unique identifier within a Step for this Test Case.
+        type: string
+      testCaseReference:
+        $ref: '#/definitions/TestCaseReference'
+        description: |-
+          Test case reference, e.g. name, class name and test suite name.
+
+          Required.
+      toolOutputs:
+        description: References to opaque files of any format output by the tool execution.
+        items:
+          $ref: '#/definitions/ToolOutputReference'
+        type: array
     type: object
   TestCaseReference:
     description: |-
@@ -2505,6 +2764,7 @@ definitions:
           - iosException
           - launcherActivityNotFound
           - nativeCrash
+          - nonSdkApiUsageReport
           - nonSdkApiUsageViolation
           - performedGoogleLogin
           - performedMonkeyActions

@@ -7,7 +7,11 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: 'Manages your Stackdriver Monitoring data and configurations. Most projects must be associated with a Stackdriver account, with a few exceptions as noted on the individual method pages.'
+  description: 'Manages your Stackdriver Monitoring data and configurations. Most projects must be associated with a Stackdriver account, with a few exceptions as noted on the individual method pages. The table entries below are presented in alphabetical order, not in order of common use. For explanations of the concepts found in the table entries, read the Stackdriver Monitoring documentation.'
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Stackdriver Monitoring
   version: v3
   x-apiClientRegistration:
@@ -31,13 +35,24 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/monitoring': View and write monitoring data for all of your Google and third-party Cloud and API projects
       'https://www.googleapis.com/auth/monitoring.read': View monitoring data for all of your Google Cloud and third-party projects
       'https://www.googleapis.com/auth/monitoring.write': Publish metric data to your Google Cloud projects
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/monitoring': View and write monitoring data for all of your Google and third-party Cloud and API projects
+      'https://www.googleapis.com/auth/monitoring.read': View monitoring data for all of your Google Cloud and third-party projects
+      'https://www.googleapis.com/auth/monitoring.write': Publish metric data to your Google Cloud projects
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -129,9 +144,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.read'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.read'
       tags:
         - uptimeCheckIps
@@ -149,14 +170,14 @@ paths:
       - $ref: '#/parameters/upload_protocol'
   '/v3/{name}':
     delete:
-      description: Deletes a metric descriptor. Only user-created custom metrics can be deleted.
-      operationId: monitoring.projects.metricDescriptors.delete
+      description: Deletes a notification channel.
+      operationId: monitoring.projects.notificationChannels.delete
       parameters:
         - description: 'If true, the notification channel will be deleted regardless of its use in alert policies (the policies will be updated to remove the channel). If false, channels that are still referenced by an existing alerting policy will fail to be deleted in a delete operation.'
           in: query
           name: force
           type: boolean
-        - description: 'The metric descriptor on which to execute the request. The format is "projects/{project_id_or_number}/metricDescriptors/{metric_id}". An example of {metric_id} is: "custom.googleapis.com/my_test_metric".'
+        - description: 'The channel for which to execute the request. The format is projects/[PROJECT_ID]/notificationChannels/[CHANNEL_ID].'
           in: path
           name: name
           required: true
@@ -170,15 +191,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring'
       tags:
         - projects
     get:
-      description: Gets a single metric descriptor. This method does not require a Stackdriver account.
-      operationId: monitoring.projects.metricDescriptors.get
+      description: 'Gets a single notification channel. The channel includes the relevant configuration details with which the channel was created. However, the response may truncate or omit passwords, API keys, or other private key matter and thus the response may not be 100% identical to the information that was supplied in the call to the create method.'
+      operationId: monitoring.projects.notificationChannels.get
       parameters:
-        - description: 'The metric descriptor on which to execute the request. The format is "projects/{project_id_or_number}/metricDescriptors/{metric_id}". An example value of {metric_id} is "compute.googleapis.com/instance/disk/read_bytes_count".'
+        - description: 'The channel for which to execute the request. The format is projects/[PROJECT_ID]/notificationChannels/[CHANNEL_ID].'
           in: path
           name: name
           required: true
@@ -188,15 +213,23 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/MetricDescriptor'
+            $ref: '#/definitions/NotificationChannel'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.write'
       tags:
         - projects
@@ -213,26 +246,23 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     patch:
-      description: Updates an alerting policy. You can either replace the entire policy with a new one or replace only certain fields in the current alerting policy by specifying the fields to be updated via updateMask. Returns the updated alerting policy.
-      operationId: monitoring.projects.alertPolicies.patch
+      description: Updates a notification channel. Fields not specified in the field mask remain unchanged.
+      operationId: monitoring.projects.notificationChannels.patch
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/AlertPolicy'
+            $ref: '#/definitions/NotificationChannel'
         - description: |-
-            Required if the policy exists. The resource name for this policy. The syntax is:
-            projects/[PROJECT_ID]/alertPolicies/[ALERT_POLICY_ID]
-            [ALERT_POLICY_ID] is assigned by Stackdriver Monitoring when the policy is created. When calling the alertPolicies.create method, do not include the name field in the alerting policy passed as part of the request.
+            The full REST resource name for this channel. The syntax is:
+            projects/[PROJECT_ID]/notificationChannels/[CHANNEL_ID]
+            The [CHANNEL_ID] is automatically assigned by the server on creation.
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - description: |-
-            Optional. A list of alerting policy field names. If this field is not empty, each listed field in the existing alerting policy is set to the value of the corresponding field in the supplied policy (alert_policy), or to the field's default value if the field is not in the supplied alerting policy. Fields not listed retain their previous value.Examples of valid field masks include display_name, documentation, documentation.content, documentation.mime_type, user_labels, user_label.nameofkey, enabled, conditions, combiner, etc.If this field is empty, then the supplied alerting policy replaces the existing policy. It is the same as deleting the existing policy and adding the supplied policy, except for the following:
-            The new policy will have the same [ALERT_POLICY_ID] as the former policy. This gives you continuity with the former policy in your notifications and incidents.
-            Conditions in the new policy will keep their former [CONDITION_ID] if the supplied condition includes the name field with that [CONDITION_ID]. If the supplied condition omits the name field, then a new [CONDITION_ID] is created.
+        - description: The fields to update.
           in: query
           name: updateMask
           type: string
@@ -240,11 +270,15 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/AlertPolicy'
+            $ref: '#/definitions/NotificationChannel'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring'
       tags:
         - projects
@@ -274,7 +308,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring'
       tags:
         - projects
@@ -316,9 +354,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.read'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.read'
       tags:
         - projects
@@ -356,7 +400,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring'
       tags:
         - projects
@@ -395,9 +443,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.write'
       tags:
         - projects
@@ -440,9 +494,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.read'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.read'
       tags:
         - projects
@@ -484,7 +544,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring'
       tags:
         - projects
@@ -529,9 +593,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.read'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.read'
       tags:
         - projects
@@ -580,11 +650,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.write'
       tags:
         - projects
@@ -622,9 +700,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.write'
       tags:
         - projects
@@ -661,11 +745,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.write'
       tags:
         - projects
@@ -711,9 +803,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.read'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.read'
       tags:
         - projects
@@ -764,9 +862,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.read'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.read'
       tags:
         - projects
@@ -807,7 +911,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring'
       tags:
         - projects
@@ -873,7 +981,7 @@ paths:
         - description: |
             A monitoring filter that specifies which time series should be returned. The filter must specify a single metric type, and can additionally specify metric labels and other information. For example:
             metric.type = "compute.googleapis.com/instance/cpu/usage_time" AND
-                metric.label.instance_name = "my-instance-name"
+                metric.labels.instance_name = "my-instance-name"
           in: query
           name: filter
           type: string
@@ -918,9 +1026,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.read'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.read'
       tags:
         - projects
@@ -958,9 +1072,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.write'
       tags:
         - projects
@@ -999,7 +1119,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring'
       tags:
         - projects
@@ -1038,7 +1162,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring'
       tags:
         - projects
@@ -1077,7 +1205,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring'
       tags:
         - projects
@@ -1108,9 +1240,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.read'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.read'
       tags:
         - projects
@@ -1148,7 +1286,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring'
       tags:
         - projects
@@ -1891,6 +2033,16 @@ definitions:
         items:
           $ref: '#/definitions/LabelDescriptor'
         type: array
+      launchStage:
+        description: Optional. The launch stage of the metric definition.
+        enum:
+          - LAUNCH_STAGE_UNSPECIFIED
+          - EARLY_ACCESS
+          - ALPHA
+          - BETA
+          - GA
+          - DEPRECATED
+        type: string
       metadata:
         $ref: '#/definitions/MetricDescriptorMetadata'
         description: Optional. Metadata which can be used to guide usage of the metric.
@@ -1977,7 +2129,7 @@ definitions:
         format: google-duration
         type: string
       launchStage:
-        description: The launch stage of the metric definition.
+        description: Deprecated. Please use the MetricDescriptor.launch_stage instead. The launch stage of the metric definition.
         enum:
           - LAUNCH_STAGE_UNSPECIFIED
           - EARLY_ACCESS
@@ -2050,7 +2202,7 @@ definitions:
         type: string
     type: object
   MonitoredResourceDescriptor:
-    description: 'An object that describes the schema of a MonitoredResource object using a type name and a set of labels. For example, the monitored resource descriptor for Google Compute Engine VM instances has a type of "gce_instance" and specifies the use of the labels "instance_id" and "zone" to identify particular VM instances.Different APIs can support different monitored resource types. APIs generally provide a list method that returns the monitored resource descriptors used by the API.'
+    description: 'An object that describes the schema of a MonitoredResource object using a type name and a set of labels. For example, the monitored resource descriptor for Google Compute Engine VM instances has a type of "gce_instance" and specifies the use of the labels "instance_id" and "zone" to identify particular VM instances.Different APIs can support different monitored resource types. APIs generally provide a list method that returns the monitored resource descriptors used by the API.Next ID: 10'
     properties:
       description:
         description: Optional. A detailed description of the monitored resource type that might be used in documentation.
@@ -2063,6 +2215,16 @@ definitions:
         items:
           $ref: '#/definitions/LabelDescriptor'
         type: array
+      launchStage:
+        description: Optional. The launch stage of the monitored resource definition.
+        enum:
+          - LAUNCH_STAGE_UNSPECIFIED
+          - EARLY_ACCESS
+          - ALPHA
+          - BETA
+          - GA
+          - DEPRECATED
+        type: string
       name:
         description: 'Optional. The resource name of the monitored resource descriptor: "projects/{project_id}/monitoredResourceDescriptors/{type}" where {type} is the value of the type field in this object and {project_id} is a project ID that provides API-specific context for accessing the type. APIs that do not use project information can use the resource name format "monitoredResourceDescriptors/{type}".'
         type: string
@@ -2241,15 +2403,7 @@ definitions:
         type: string
     type: object
   Status:
-    description: |-
-      The Status type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by gRPC (https://github.com/grpc). The error model is designed to be:
-      Simple to use and understand for most users
-      Flexible enough to meet unexpected needsOverviewThe Status message contains three pieces of data: error code, error message, and error details. The error code should be an enum value of google.rpc.Code, but it may accept additional error codes if needed. The error message should be a developer-facing English message that helps developers understand and resolve the error. If a localized user-facing error message is needed, put the localized message in the error details or localize it in the client. The optional error details may contain arbitrary information about the error. There is a predefined set of error detail types in the package google.rpc that can be used for common error conditions.Language mappingThe Status message is the logical representation of the error model, but it is not necessarily the actual wire format. When the Status message is exposed in different client libraries and different wire protocols, it can be mapped differently. For example, it will likely be mapped to some exceptions in Java, but more likely mapped to some error codes in C.Other usesThe error model and the Status message can be used in a variety of environments, either with or without APIs, to provide a consistent developer experience across different environments.Example uses of this error model include:
-      Partial errors. If a service needs to return partial errors to the client, it may embed the Status in the normal response to indicate the partial errors.
-      Workflow errors. A typical workflow has multiple steps. Each step may have a Status message for error reporting.
-      Batch operations. If a client uses batch request and batch response, the Status message should be used directly inside batch response, one for each error sub-response.
-      Asynchronous operations. If an API call embeds asynchronous operation results in its response, the status of those operations should be represented directly using the Status message.
-      Logging. If some API errors are stored in logs, the message Status could be used directly after any stripping needed for security/privacy reasons.
+    description: 'The Status type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by gRPC (https://github.com/grpc). Each Status message contains three pieces of data: error code, error message, and error details.You can find out more about this error model and how to work with it in the API Design Guide (https://cloud.google.com/apis/design/errors).'
     properties:
       code:
         description: 'The status code, which should be an enum value of google.rpc.Code.'
@@ -2406,9 +2560,6 @@ definitions:
         items:
           $ref: '#/definitions/InternalChecker'
         type: array
-      isInternal:
-        description: 'If this is true, then checks are made only from the ''internal_checkers''. If it is false, then checks are made only from the ''selected_regions''. It is an error to provide ''selected_regions'' when is_internal is true, or to provide ''internal_checkers'' when is_internal is false.'
-        type: boolean
       monitoredResource:
         $ref: '#/definitions/MonitoredResource'
         description: 'The monitored resource (https://cloud.google.com/monitoring/api/resources) associated with the configuration. The following monitored resource types are supported for uptime checks:  uptime_url  gce_instance  gae_app  aws_ec2_instance  aws_elb_load_balancer'

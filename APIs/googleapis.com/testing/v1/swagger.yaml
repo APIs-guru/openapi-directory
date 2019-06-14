@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Allows developers to run automated tests for their mobile applications on Google infrastructure.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Cloud Testing
   version: v1
   x-apiClientRegistration:
@@ -31,11 +35,20 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -136,6 +149,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - applicationDetailService
   '/v1/projects/{projectId}/testMatrices':
@@ -191,6 +206,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/projects/{projectId}/testMatrices/{testMatrixId}':
@@ -223,7 +240,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - projects
@@ -283,6 +304,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/testEnvironmentCatalog/{environmentType}':
@@ -320,7 +343,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - testEnvironmentCatalog
@@ -779,6 +806,10 @@ definitions:
           Full Java-style package name for this application, e.g.
           "com.example.foo".
         type: string
+      targetSdkVersion:
+        description: Specifies the API Level on which the application is designed to run.
+        format: int32
+        type: integer
     type: object
   AppBundle:
     description: |-
@@ -875,10 +906,10 @@ definitions:
     properties:
       obbFile:
         $ref: '#/definitions/ObbFile'
-        description: A reference to an opaque binary blob file
+        description: A reference to an opaque binary blob file.
       regularFile:
         $ref: '#/definitions/RegularFile'
-        description: A reference to a regular file
+        description: A reference to a regular file.
     type: object
   Distribution:
     description: |-
@@ -950,7 +981,7 @@ definitions:
   GoogleAuto:
     description: |-
       Enables automatic Google account login.
-      If set, the service will automatically generate a Google test account and add
+      If set, the service automatically generates a Google test account and adds
       it to the device, before executing the test. Note that test accounts might be
       reused.
       Many applications show their full set of functionalities when an account is
@@ -1100,7 +1131,7 @@ definitions:
         type: array
     type: object
   IosTestSetup:
-    description: A description of how to set up an iOS device prior to a test.
+    description: A description of how to set up an iOS device prior to running the test.
     properties:
       networkProfile:
         description: |-
@@ -1305,6 +1336,9 @@ definitions:
       googleCloudStorage:
         $ref: '#/definitions/GoogleCloudStorage'
         description: Required.
+      resultsUrl:
+        description: Output only. URL to the results in the Firebase Web Console.
+        type: string
       toolResultsExecution:
         $ref: '#/definitions/ToolResultsExecution'
         description: Output only. The tool results execution that results are written to.
@@ -1352,8 +1386,10 @@ definitions:
     properties:
       launcherActivity:
         $ref: '#/definitions/LauncherActivityIntent'
+        description: An intent that starts the main launcher activity.
       startActivity:
         $ref: '#/definitions/StartActivityIntent'
+        description: An intent that starts an activity with specific details.
       timeout:
         description: Timeout in seconds for each intent.
         format: google-duration
@@ -1412,13 +1448,13 @@ definitions:
         description: The software test environment provided by TestExecutionService.
     type: object
   TestExecution:
-    description: Specifies a single test to be executed in a single environment.
+    description: A single test executed in a single environment.
     properties:
       environment:
         $ref: '#/definitions/Environment'
         description: Output only. How the host machine(s) are configured.
       id:
-        description: Output only. Unique id set by the backend.
+        description: Output only. Unique id set by the service.
         type: string
       matrixId:
         description: Output only. Id of the containing TestMatrix.
@@ -1459,15 +1495,16 @@ definitions:
     type: object
   TestMatrix:
     description: |-
-      A group of one or more TestExecutions, built by taking a
-      product of values over a pre-defined set of axes.
+      TestMatrix captures all details about a test. It contains the environment
+      configuration, test specification, test executions and overall state and
+      outcome.
     properties:
       clientInfo:
         $ref: '#/definitions/ClientInfo'
         description: Information about the client which invoked the test.
       environmentMatrix:
         $ref: '#/definitions/EnvironmentMatrix'
-        description: Required. How the host machine(s) are configured.
+        description: Required. The devices the tests are being executed on.
       flakyTestAttempts:
         description: |-
           The number of times a TestExecution should be re-attempted if one or more
@@ -1516,6 +1553,17 @@ definitions:
           - INVALID_INPUT_APK
           - INVALID_APK_PREVIEW_SDK
         type: string
+      outcomeSummary:
+        description: |-
+          Output Only. The overall outcome of the test.
+          Only set when the test matrix state is FINISHED.
+        enum:
+          - OUTCOME_SUMMARY_UNSPECIFIED
+          - SUCCESS
+          - FAILURE
+          - INCONCLUSIVE
+          - SKIPPED
+        type: string
       projectId:
         description: The cloud project that owns the test matrix.
         type: string
@@ -1523,9 +1571,7 @@ definitions:
         $ref: '#/definitions/ResultStorage'
         description: Required. Where the results for the matrix are written.
       state:
-        description: |-
-          Output only. Indicates the current progress of the test matrix
-          (e.g., FINISHED).
+        description: Output only. Indicates the current progress of the test matrix.
         enum:
           - TEST_STATE_UNSPECIFIED
           - VALIDATING
@@ -1615,22 +1661,11 @@ definitions:
       androidTestLoop:
         $ref: '#/definitions/AndroidTestLoop'
         description: An Android Application with a Test Loop.
-      autoGoogleLogin:
-        description: |-
-          Enables automatic Google account login.
-          If set, the service will automatically generate a Google test account and
-          add it to the device, before executing the test. Note that test accounts
-          might be reused.
-          Many applications show their full set of functionalities when an account is
-          present on the device. Logging into the device with these generated
-          accounts allows testing more functionalities.
-          Default is false.
-        type: boolean
       disablePerformanceMetrics:
-        description: Disables performance metrics recording; may reduce test latency.
+        description: Disables performance metrics recording. May reduce test latency.
         type: boolean
       disableVideoRecording:
-        description: Disables video recording; may reduce test latency.
+        description: Disables video recording. May reduce test latency.
         type: boolean
       iosTestSetup:
         $ref: '#/definitions/IosTestSetup'

@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'Provides methods for detection, risk analysis, and de-identification of privacy-sensitive fragments in text, images, and Google Cloud Platform storage repositories.'
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Cloud Data Loss Prevention (DLP)
   version: v2
   x-apiClientRegistration:
@@ -31,10 +35,18 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -135,6 +147,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - infoTypes
     parameters:
@@ -152,15 +166,13 @@ paths:
   '/v2/{name}':
     delete:
       description: |-
-        Deletes a DeidentifyTemplate.
-        See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
-        more.
-      operationId: dlp.projects.deidentifyTemplates.delete
+        Deletes a job trigger.
+        See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
+      operationId: dlp.projects.jobTriggers.delete
       parameters:
         - description: |-
-            Resource name of the organization and deidentify template to be deleted,
-            for example `organizations/433245324/deidentifyTemplates/432452342` or
-            projects/project-id/deidentifyTemplates/432452342.
+            Resource name of the project and the triggeredJob, for example
+            `projects/dlp-test-project/jobTriggers/53234423`.
           in: path
           name: name
           required: true
@@ -174,19 +186,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     get:
       description: |-
-        Gets a DeidentifyTemplate.
-        See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
-        more.
-      operationId: dlp.projects.deidentifyTemplates.get
+        Gets a job trigger.
+        See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
+      operationId: dlp.projects.jobTriggers.get
       parameters:
         - description: |-
-            Resource name of the organization and deidentify template to be read, for
-            example `organizations/433245324/deidentifyTemplates/432452342` or
-            projects/project-id/deidentifyTemplates/432452342.
+            Resource name of the project and the triggeredJob, for example
+            `projects/dlp-test-project/jobTriggers/53234423`.
           in: path
           name: name
           required: true
@@ -196,9 +208,11 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GooglePrivacyDlpV2DeidentifyTemplate'
+            $ref: '#/definitions/GooglePrivacyDlpV2JobTrigger'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -216,19 +230,17 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     patch:
       description: |-
-        Updates the DeidentifyTemplate.
-        See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
-        more.
-      operationId: dlp.projects.deidentifyTemplates.patch
+        Updates a job trigger.
+        See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
+      operationId: dlp.projects.jobTriggers.patch
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest'
+            $ref: '#/definitions/GooglePrivacyDlpV2UpdateJobTriggerRequest'
         - description: |-
-            Resource name of organization and deidentify template to be updated, for
-            example `organizations/433245324/deidentifyTemplates/432452342` or
-            projects/project-id/deidentifyTemplates/432452342.
+            Resource name of the project and the triggeredJob, for example
+            `projects/dlp-test-project/jobTriggers/53234423`.
           in: path
           name: name
           required: true
@@ -238,9 +250,11 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GooglePrivacyDlpV2DeidentifyTemplate'
+            $ref: '#/definitions/GooglePrivacyDlpV2JobTrigger'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -283,6 +297,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v2/{name}:cancel':
@@ -324,6 +340,8 @@ paths:
             $ref: '#/definitions/GoogleProtobufEmpty'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -369,6 +387,8 @@ paths:
             $ref: '#/definitions/GooglePrivacyDlpV2DeidentifyContentResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -416,6 +436,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v2/{parent}/content:reidentify':
@@ -456,6 +478,8 @@ paths:
             $ref: '#/definitions/GooglePrivacyDlpV2ReidentifyContentResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -512,6 +536,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -554,6 +580,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v2/{parent}/dlpJobs':
@@ -577,8 +605,12 @@ paths:
                 - `state` - PENDING|RUNNING|CANCELED|FINISHED|FAILED
                 - `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
                 - `trigger_name` - The resource name of the trigger that created job.
+                - 'end_time` - Corresponds to time the job finished.
+                - 'start_time` - Corresponds to time the job finished.
             * Supported fields for risk analysis jobs:
                 - `state` - RUNNING|CANCELED|FINISHED|FAILED
+                - 'end_time` - Corresponds to time the job finished.
+                - 'start_time` - Corresponds to time the job finished.
             * The operator must be `=` or `!=`.
 
             Examples:
@@ -586,6 +618,7 @@ paths:
             * inspected_storage = cloud_storage AND state = done
             * inspected_storage = cloud_storage OR inspected_storage = bigquery
             * inspected_storage = cloud_storage AND (state = done OR state = canceled)
+            * end_time > \"2017-12-12T00:00:00+00:00\"
 
             The length of this field should be no more than 500 characters.
           in: query
@@ -638,6 +671,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -680,6 +715,8 @@ paths:
             $ref: '#/definitions/GooglePrivacyDlpV2DlpJob'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -725,6 +762,8 @@ paths:
             $ref: '#/definitions/GooglePrivacyDlpV2RedactImageResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -780,6 +819,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -820,6 +861,8 @@ paths:
             $ref: '#/definitions/GooglePrivacyDlpV2InspectTemplate'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -902,6 +945,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -940,6 +985,8 @@ paths:
             $ref: '#/definitions/GooglePrivacyDlpV2JobTrigger'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -997,6 +1044,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -1037,6 +1086,8 @@ paths:
             $ref: '#/definitions/GooglePrivacyDlpV2StoredInfoType'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -1271,6 +1322,7 @@ definitions:
           - IMAGE_PNG
           - IMAGE_SVG
           - TEXT_UTF8
+          - AVRO
         type: string
     type: object
   GooglePrivacyDlpV2CancelDlpJobRequest:
@@ -1425,6 +1477,7 @@ definitions:
             - BINARY_FILE
             - TEXT_FILE
             - IMAGE
+            - AVRO
           type: string
         type: array
       filesLimitPercent:
@@ -1709,6 +1762,67 @@ definitions:
           characters. Can be empty to allow the system to generate one.
         type: string
     type: object
+  GooglePrivacyDlpV2CryptoDeterministicConfig:
+    description: |-
+      Pseudonymization method that generates deterministic encryption for the given
+      input. Outputs a base64 encoded representation of the encrypted output.
+      Uses AES-SIV based on the RFC https://tools.ietf.org/html/rfc5297.
+    properties:
+      context:
+        $ref: '#/definitions/GooglePrivacyDlpV2FieldId'
+        description: |-
+          Optional. A context may be used for higher security and maintaining
+          referential integrity such that the same identifier in two different
+          contexts will be given a distinct surrogate. The context is appended to
+          plaintext value being encrypted. On decryption the provided context is
+          validated against the value used during encryption. If a context was
+          provided during encryption, same context must be provided during decryption
+          as well.
+
+          If the context is not set, plaintext would be used as is for encryption.
+          If the context is set but:
+
+          1. there is no record present when transforming a given value or
+          2. the field is not present when transforming a given value,
+
+          plaintext would be used as is for encryption.
+
+          Note that case (1) is expected when an `InfoTypeTransformation` is
+          applied to both structured and non-structured `ContentItem`s.
+      cryptoKey:
+        $ref: '#/definitions/GooglePrivacyDlpV2CryptoKey'
+        description: The key used by the encryption function.
+      surrogateInfoType:
+        $ref: '#/definitions/GooglePrivacyDlpV2InfoType'
+        description: |-
+          The custom info type to annotate the surrogate with.
+          This annotation will be applied to the surrogate by prefixing it with
+          the name of the custom info type followed by the number of
+          characters comprising the surrogate. The following scheme defines the
+          format: <info type name>(<surrogate character count>):<surrogate>
+
+          For example, if the name of custom info type is 'MY_TOKEN_INFO_TYPE' and
+          the surrogate is 'abc', the full replacement value
+          will be: 'MY_TOKEN_INFO_TYPE(3):abc'
+
+          This annotation identifies the surrogate when inspecting content using the
+          custom info type 'Surrogate'. This facilitates reversal of the
+          surrogate when it occurs in free text.
+
+          In order for inspection to work properly, the name of this info type must
+          not occur naturally anywhere in your data; otherwise, inspection may either
+
+          - reverse a surrogate that does not correspond to an actual identifier
+          - be unable to parse the surrogate and result in an error
+
+          Therefore, choose your custom info type name carefully after considering
+          what your data looks like. One way to select a name that has a high chance
+          of yielding reliable detection is to include one or more unicode characters
+          that are highly improbable to exist in your data.
+          For example, assuming your data is entered from a regular ASCII keyboard,
+          the symbol with the hex code point 29DD might be used like so:
+          ⧝MY_TOKEN_TYPE
+    type: object
   GooglePrivacyDlpV2CryptoHashConfig:
     description: |-
       Pseudonymization method that generates surrogates via cryptographic hashing.
@@ -1740,6 +1854,16 @@ definitions:
     type: object
   GooglePrivacyDlpV2CryptoReplaceFfxFpeConfig:
     description: |-
+      Replaces an identifier with a surrogate using Format Preserving Encryption
+      (FPE) with the FFX mode of operation; however when used in the
+      `ReidentifyContent` API method, it serves the opposite function by reversing
+      the surrogate back into the original identifier. The identifier must be
+      encoded as ASCII. For a given crypto key and context, the same identifier
+      will be replaced with the same surrogate. Identifiers must be at least two
+      characters long. In the case that the identifier is the empty string, it will
+      be skipped. See https://cloud.google.com/dlp/docs/pseudonymization to learn
+      more.
+
       Note: We recommend using  CryptoDeterministicConfig for all use cases which
       do not require preserving the input alphabet space and size, plus warrant
       referential integrity.
@@ -2158,9 +2282,10 @@ definitions:
     type: object
   GooglePrivacyDlpV2DetectionRule:
     description: |-
-      Rule for modifying a CustomInfoType to alter behavior under certain
-      circumstances, depending on the specific details of the rule. Not supported
-      for the `surrogate_type` custom info type.
+      Deprecated; use `InspectionRuleSet` instead. Rule for modifying a
+      `CustomInfoType` to alter behavior under certain circumstances, depending
+      on the specific details of the rule. Not supported for the `surrogate_type`
+      custom infoType.
     properties:
       hotwordRule:
         $ref: '#/definitions/GooglePrivacyDlpV2HotwordRule'
@@ -2768,9 +2893,7 @@ definitions:
   GooglePrivacyDlpV2InspectJobConfig:
     properties:
       actions:
-        description: |-
-          Actions to execute at the completion of the job. Are executed in the order
-          provided.
+        description: Actions to execute at the completion of the job.
         items:
           $ref: '#/definitions/GooglePrivacyDlpV2Action'
         type: array
@@ -3260,6 +3383,14 @@ definitions:
           artifacts are modified, the dictionary is considered invalid and can no
           longer be used.
     type: object
+  GooglePrivacyDlpV2LargeCustomDictionaryStats:
+    description: Summary statistics of a custom dictionary.
+    properties:
+      approxNumPhrases:
+        description: Approximate number of distinct phrases in the dictionary.
+        format: int64
+        type: string
+    type: object
   GooglePrivacyDlpV2LikelihoodAdjustment:
     description: |-
       Message for specifying an adjustment to the likelihood of a finding as
@@ -3512,6 +3643,8 @@ definitions:
         $ref: '#/definitions/GooglePrivacyDlpV2BucketingConfig'
       characterMaskConfig:
         $ref: '#/definitions/GooglePrivacyDlpV2CharacterMaskConfig'
+      cryptoDeterministicConfig:
+        $ref: '#/definitions/GooglePrivacyDlpV2CryptoDeterministicConfig'
       cryptoHashConfig:
         $ref: '#/definitions/GooglePrivacyDlpV2CryptoHashConfig'
       cryptoReplaceFfxFpeConfig:
@@ -3575,7 +3708,10 @@ definitions:
     type: object
   GooglePrivacyDlpV2PublishToPubSub:
     description: |-
-      Publish the results of a DlpJob to a pub sub channel.
+      Publish a message into given Pub/Sub topic when DlpJob has completed. The
+      message contains a single field, `DlpJobName`, which is equal to the
+      finished job's
+      [`DlpJob.name`](/dlp/docs/reference/rest/v2/projects.dlpJobs#DlpJob).
       Compatible with: Inspect, Risk
     properties:
       topic:
@@ -3994,6 +4130,13 @@ definitions:
         $ref: '#/definitions/GooglePrivacyDlpV2LargeCustomDictionaryConfig'
         description: StoredInfoType where findings are defined by a dictionary of phrases.
     type: object
+  GooglePrivacyDlpV2StoredInfoTypeStats:
+    description: Statistics for a StoredInfoType.
+    properties:
+      largeCustomDictionary:
+        $ref: '#/definitions/GooglePrivacyDlpV2LargeCustomDictionaryStats'
+        description: StoredInfoType where findings are defined by a dictionary of phrases.
+    type: object
   GooglePrivacyDlpV2StoredInfoTypeVersion:
     description: |-
       Version of a StoredInfoType, including the configuration used to build it,
@@ -4035,6 +4178,9 @@ definitions:
           - FAILED
           - INVALID
         type: string
+      stats:
+        $ref: '#/definitions/GooglePrivacyDlpV2StoredInfoTypeStats'
+        description: Statistics about this storedInfoType version.
     type: object
   GooglePrivacyDlpV2StoredType:
     description: A reference to a StoredInfoType to use with scanning.
@@ -4397,56 +4543,11 @@ definitions:
     description: |-
       The `Status` type defines a logical error model that is suitable for
       different programming environments, including REST APIs and RPC APIs. It is
-      used by [gRPC](https://github.com/grpc). The error model is designed to be:
+      used by [gRPC](https://github.com/grpc). Each `Status` message contains
+      three pieces of data: error code, error message, and error details.
 
-      - Simple to use and understand for most users
-      - Flexible enough to meet unexpected needs
-
-      # Overview
-
-      The `Status` message contains three pieces of data: error code, error
-      message, and error details. The error code should be an enum value of
-      google.rpc.Code, but it may accept additional error codes if needed.  The
-      error message should be a developer-facing English message that helps
-      developers *understand* and *resolve* the error. If a localized user-facing
-      error message is needed, put the localized message in the error details or
-      localize it in the client. The optional error details may contain arbitrary
-      information about the error. There is a predefined set of error detail types
-      in the package `google.rpc` that can be used for common error conditions.
-
-      # Language mapping
-
-      The `Status` message is the logical representation of the error model, but it
-      is not necessarily the actual wire format. When the `Status` message is
-      exposed in different client libraries and different wire protocols, it can be
-      mapped differently. For example, it will likely be mapped to some exceptions
-      in Java, but more likely mapped to some error codes in C.
-
-      # Other uses
-
-      The error model and the `Status` message can be used in a variety of
-      environments, either with or without APIs, to provide a
-      consistent developer experience across different environments.
-
-      Example uses of this error model include:
-
-      - Partial errors. If a service needs to return partial errors to the client,
-          it may embed the `Status` in the normal response to indicate the partial
-          errors.
-
-      - Workflow errors. A typical workflow has multiple steps. Each step may
-          have a `Status` message for error reporting.
-
-      - Batch operations. If a client uses batch request and batch response, the
-          `Status` message should be used directly inside batch response, one for
-          each error sub-response.
-
-      - Asynchronous operations. If an API call embeds asynchronous operation
-          results in its response, the status of those operations should be
-          represented directly using the `Status` message.
-
-      - Logging. If some API errors are stored in logs, the message `Status` could
-          be used directly after any stripping needed for security/privacy reasons.
+      You can find out more about this error model and how to work with it in the
+      [API Design Guide](https://cloud.google.com/apis/design/errors).
     properties:
       code:
         description: 'The status code, which should be an enum value of google.rpc.Code.'

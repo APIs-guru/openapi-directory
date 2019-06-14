@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Manages the execution of large numbers of distributed requests.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Cloud Tasks
   version: v2beta2
   x-apiClientRegistration:
@@ -29,10 +33,18 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -130,6 +142,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     get:
@@ -174,6 +188,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -202,8 +218,9 @@ paths:
         WARNING: Using this method may have unintended side effects if you are
         using an App Engine `queue.yaml` or `queue.xml` file to manage your queues.
         Read
-        [Overview of Queue Management and queue.yaml](https://cloud.google.com/tasks/docs/queue-yaml)
-        before using this method.
+        [Overview of Queue Management and
+        queue.yaml](https://cloud.google.com/tasks/docs/queue-yaml) before using
+        this method.
       operationId: cloudtasks.projects.locations.queues.patch
       parameters:
         - in: body
@@ -222,7 +239,8 @@ paths:
             * `PROJECT_ID` can contain letters ([A-Za-z]), numbers ([0-9]),
                hyphens (-), colons (:), or periods (.).
                For more information, see
-               [Identifying projects](https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects)
+               [Identifying
+               projects](https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects)
             * `LOCATION_ID` is the canonical ID for the queue's location.
                The list of available locations can be obtained by calling
                ListLocations.
@@ -248,6 +266,8 @@ paths:
             $ref: '#/definitions/Queue'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -281,6 +301,8 @@ paths:
             $ref: '#/definitions/ListLocationsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -348,6 +370,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v2beta2/{name}:cancelLease':
@@ -394,6 +418,8 @@ paths:
             $ref: '#/definitions/Task'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -443,6 +469,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v2beta2/{name}:purge':
@@ -490,6 +518,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v2beta2/{name}:renewLease':
@@ -536,6 +566,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v2beta2/{name}:resume':
@@ -564,7 +596,8 @@ paths:
         WARNING: Resuming many high-QPS queues at the same time can
         lead to target overloading. If you are resuming high-QPS
         queues, follow the 500/50/5 pattern described in
-        [Managing Cloud Tasks Scaling Risks](https://cloud.google.com/tasks/docs/manage-cloud-task-scaling).
+        [Managing Cloud Tasks Scaling
+        Risks](https://cloud.google.com/tasks/docs/manage-cloud-task-scaling).
       operationId: cloudtasks.projects.locations.queues.resume
       parameters:
         - in: body
@@ -588,6 +621,8 @@ paths:
             $ref: '#/definitions/Queue'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -657,6 +692,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v2beta2/{parent}/queues':
@@ -672,7 +709,8 @@ paths:
             field can be used as a filter and several operators as supported.
             For example: `<=, <, >=, >, !=, =, :`. The filter syntax is the same as
             described in
-            [Stackdriver's Advanced Logs Filters](https://cloud.google.com/logging/docs/view/advanced_filters).
+            [Stackdriver's Advanced Logs
+            Filters](https://cloud.google.com/logging/docs/view/advanced_filters).
 
             Sample filter "app_engine_http_target: *".
 
@@ -722,6 +760,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -747,8 +787,9 @@ paths:
         WARNING: Using this method may have unintended side effects if you are
         using an App Engine `queue.yaml` or `queue.xml` file to manage your queues.
         Read
-        [Overview of Queue Management and queue.yaml](https://cloud.google.com/tasks/docs/queue-yaml)
-        before using this method.
+        [Overview of Queue Management and
+        queue.yaml](https://cloud.google.com/tasks/docs/queue-yaml) before using
+        this method.
       operationId: cloudtasks.projects.locations.queues.create
       parameters:
         - in: body
@@ -777,6 +818,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v2beta2/{parent}/tasks':
@@ -794,13 +837,14 @@ paths:
       operationId: cloudtasks.projects.locations.queues.tasks.list
       parameters:
         - description: |-
-            Requested page size. Fewer tasks than requested might be returned.
+            Maximum page size.
 
-            The maximum page size is 1000. If unspecified, the page size will
-            be the maximum. Fewer tasks than requested might be returned,
-            even if more tasks exist; use
-            next_page_token in the
-            response to determine if more tasks exist.
+            Fewer tasks than requested might be returned, even if more tasks exist; use
+            next_page_token in the response to
+            determine if more tasks exist.
+
+            The maximum page size is 1000. If unspecified, the page size will be the
+            maximum.
           in: query
           name: pageSize
           type: integer
@@ -855,6 +899,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -903,6 +949,8 @@ paths:
             $ref: '#/definitions/Task'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -967,6 +1015,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v2beta2/{resource}:getIamPolicy':
@@ -1014,6 +1064,8 @@ paths:
             $ref: '#/definitions/Policy'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -1065,6 +1117,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v2beta2/{resource}:testIamPermissions':
@@ -1111,6 +1165,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
 definitions:
@@ -1150,9 +1206,11 @@ definitions:
 
       The task will be delivered to the App Engine app which belongs to the same
       project as the queue. For more information, see
-      [How Requests are Routed](https://cloud.google.com/appengine/docs/standard/python/how-requests-are-routed)
+      [How Requests are
+      Routed](https://cloud.google.com/appengine/docs/standard/python/how-requests-are-routed)
       and how routing is affected by
-      [dispatch files](https://cloud.google.com/appengine/docs/python/config/dispatchref).
+      [dispatch
+      files](https://cloud.google.com/appengine/docs/python/config/dispatchref).
       Traffic is encrypted during transport and never leaves Google datacenters.
       Because this traffic is carried over a communication mechanism internal to
       Google, you cannot explicitly set the protocol (for example, HTTP or HTTPS).
@@ -1176,19 +1234,25 @@ definitions:
 
       Tasks can be dispatched to secure app handlers, unsecure app handlers, and
       URIs restricted with
-      [`login: admin`](https://cloud.google.com/appengine/docs/standard/python/config/appref).
+      [`login:
+      admin`](https://cloud.google.com/appengine/docs/standard/python/config/appref).
       Because tasks are not run as any user, they cannot be dispatched to URIs
       restricted with
-      [`login: required`](https://cloud.google.com/appengine/docs/standard/python/config/appref)
+      [`login:
+      required`](https://cloud.google.com/appengine/docs/standard/python/config/appref)
       Task dispatches also do not follow redirects.
 
-      The task attempt has succeeded if the app's request handler returns
-      an HTTP response code in the range [`200` - `299`]. `503` is
-      considered an App Engine system error instead of an application
-      error. Requests returning error `503` will be retried regardless of
-      retry configuration and not counted against retry counts.
-      Any other response code or a failure to receive a response before the
-      deadline is a failed attempt.
+      The task attempt has succeeded if the app's request handler returns an HTTP
+      response code in the range [`200` - `299`]. The task attempt has failed if
+      the app's handler returns a non-2xx response code or Cloud Tasks does
+      not receive response before the deadline. Failed
+      tasks will be retried according to the
+      retry configuration. `503` (Service Unavailable) is
+      considered an App Engine system error instead of an application error and
+      will cause Cloud Tasks' traffic congestion control to temporarily throttle
+      the queue's dispatches. Unlike other types of task targets, a `429` (Too Many
+      Requests) response from an app handler does not cause traffic congestion
+      control to throttle the queue.
     properties:
       appEngineRouting:
         $ref: '#/definitions/AppEngineRouting'
@@ -1237,7 +1301,8 @@ definitions:
 
           In addition, Cloud Tasks sets some headers when the task is dispatched,
           such as headers containing information about the task; see
-          [request headers](https://cloud.google.com/appengine/docs/python/taskqueue/push/creating-handlers#reading_request_headers).
+          [request
+          headers](https://cloud.google.com/appengine/docs/python/taskqueue/push/creating-handlers#reading_request_headers).
           These headers are set only when the task is dispatched, so they are not
           visible when the task is returned in a Cloud Tasks response.
 
@@ -1252,10 +1317,12 @@ definitions:
           The app's request handler for the task's target URL must be able to handle
           HTTP requests with this http_method, otherwise the task attempt will fail
           with error code 405 (Method Not Allowed). See
-          [Writing a push task request handler](https://cloud.google.com/appengine/docs/java/taskqueue/push/creating-handlers#writing_a_push_task_request_handler)
+          [Writing a push task request
+          handler](https://cloud.google.com/appengine/docs/java/taskqueue/push/creating-handlers#writing_a_push_task_request_handler)
           and the documentation for the request handlers in the language your app is
           written in e.g.
-          [Python Request Handler](https://cloud.google.com/appengine/docs/python/tools/webapp/requesthandlerclass).
+          [Python Request
+          Handler](https://cloud.google.com/appengine/docs/python/tools/webapp/requesthandlerclass).
         enum:
           - HTTP_METHOD_UNSPECIFIED
           - POST
@@ -1318,17 +1385,22 @@ definitions:
       and instance.
 
       For more information about services, versions, and instances see
-      [An Overview of App Engine](https://cloud.google.com/appengine/docs/python/an-overview-of-app-engine),
-      [Microservices Architecture on Google App Engine](https://cloud.google.com/appengine/docs/python/microservices-on-app-engine),
-      [App Engine Standard request routing](https://cloud.google.com/appengine/docs/standard/python/how-requests-are-routed),
-      and [App Engine Flex request routing](https://cloud.google.com/appengine/docs/flexible/python/how-requests-are-routed).
+      [An Overview of App
+      Engine](https://cloud.google.com/appengine/docs/python/an-overview-of-app-engine),
+      [Microservices Architecture on Google App
+      Engine](https://cloud.google.com/appengine/docs/python/microservices-on-app-engine),
+      [App Engine Standard request
+      routing](https://cloud.google.com/appengine/docs/standard/python/how-requests-are-routed),
+      and [App Engine Flex request
+      routing](https://cloud.google.com/appengine/docs/flexible/python/how-requests-are-routed).
     properties:
       host:
         description: |-
           Output only. The host that the task is sent to.
 
           For more information, see
-          [How Requests are Routed](https://cloud.google.com/appengine/docs/standard/python/how-requests-are-routed).
+          [How Requests are
+          Routed](https://cloud.google.com/appengine/docs/standard/python/how-requests-are-routed).
 
           The host is constructed as:
 
@@ -1394,10 +1466,13 @@ definitions:
           the task is attempted.
 
           Requests can only be sent to a specific instance if
-          [manual scaling is used in App Engine Standard](https://cloud.google.com/appengine/docs/python/an-overview-of-app-engine?hl=en_US#scaling_types_and_instance_classes).
+          [manual scaling is used in App Engine
+          Standard](https://cloud.google.com/appengine/docs/python/an-overview-of-app-engine?hl=en_US#scaling_types_and_instance_classes).
           App Engine Flex does not support instances. For more information, see
-          [App Engine Standard request routing](https://cloud.google.com/appengine/docs/standard/python/how-requests-are-routed)
-          and [App Engine Flex request routing](https://cloud.google.com/appengine/docs/flexible/python/how-requests-are-routed).
+          [App Engine Standard request
+          routing](https://cloud.google.com/appengine/docs/standard/python/how-requests-are-routed)
+          and [App Engine Flex request
+          routing](https://cloud.google.com/appengine/docs/flexible/python/how-requests-are-routed).
         type: string
       service:
         description: |-
@@ -1476,8 +1551,8 @@ definitions:
       condition:
         $ref: '#/definitions/Expr'
         description: |-
-          Unimplemented. The condition that is associated with this binding.
-          NOTE: an unsatisfied condition will not allow user access via current
+          The condition that is associated with this binding.
+          NOTE: An unsatisfied condition will not allow user access via current
           binding. Different bindings, including their conditions, are examined
           independently.
       members:
@@ -1944,7 +2019,8 @@ definitions:
           The tag must be less than 500 characters.
 
           SDK compatibility: Although the SDK allows tags to be either
-          string or [bytes](https://cloud.google.com/appengine/docs/standard/java/javadoc/com/google/appengine/api/taskqueue/TaskOptions.html#tag-byte:A-),
+          string or
+          [bytes](https://cloud.google.com/appengine/docs/standard/java/javadoc/com/google/appengine/api/taskqueue/TaskOptions.html#tag-byte:A-),
           only UTF-8 encoded tags can be used in Cloud Tasks. If a tag isn't UTF-8
           encoded, the tag will be empty when the task is returned by Cloud Tasks.
         type: string
@@ -1982,7 +2058,8 @@ definitions:
           * `PROJECT_ID` can contain letters ([A-Za-z]), numbers ([0-9]),
              hyphens (-), colons (:), or periods (.).
              For more information, see
-             [Identifying projects](https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects)
+             [Identifying
+             projects](https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects)
           * `LOCATION_ID` is the canonical ID for the queue's location.
              The list of available locations can be obtained by calling
              ListLocations.
@@ -2004,7 +2081,8 @@ definitions:
           were purged.
 
           A queue can be purged using PurgeQueue, the
-          [App Engine Task Queue SDK, or the Cloud Console](https://cloud.google.com/appengine/docs/standard/python/taskqueue/push/deleting-tasks-and-queues#purging_all_tasks_from_a_queue).
+          [App Engine Task Queue SDK, or the Cloud
+          Console](https://cloud.google.com/appengine/docs/standard/python/taskqueue/push/deleting-tasks-and-queues#purging_all_tasks_from_a_queue).
 
           Purge time will be truncated to the nearest microsecond. Purge
           time will be unset if the queue has never been purged.
@@ -2039,7 +2117,8 @@ definitions:
           * For tasks created using the App Engine SDK: the queue-level retry
             settings apply to all tasks in the queue which do not have retry settings
             explicitly set on the task and were created by the App Engine SDK. See
-            [App Engine documentation](https://cloud.google.com/appengine/docs/standard/python/taskqueue/push/retrying-tasks).
+            [App Engine
+            documentation](https://cloud.google.com/appengine/docs/standard/python/taskqueue/push/retrying-tasks).
       state:
         description: |-
           Output only. The state of the queue.
@@ -2121,7 +2200,8 @@ definitions:
 
 
           This field has the same meaning as
-          [max_concurrent_requests in queue.yaml/xml](https://cloud.google.com/appengine/docs/standard/python/config/queueref#max_concurrent_requests).
+          [max_concurrent_requests in
+          queue.yaml/xml](https://cloud.google.com/appengine/docs/standard/python/config/queueref#max_concurrent_requests).
         format: int32
         type: integer
       maxTasksDispatchedPerSecond:
@@ -2139,7 +2219,8 @@ definitions:
 
 
           This field has the same meaning as
-          [rate in queue.yaml/xml](https://cloud.google.com/appengine/docs/standard/python/config/queueref#rate).
+          [rate in
+          queue.yaml/xml](https://cloud.google.com/appengine/docs/standard/python/config/queueref#rate).
         format: double
         type: number
     type: object
@@ -2226,7 +2307,8 @@ definitions:
           `max_backoff` will be truncated to the nearest second.
 
           This field has the same meaning as
-          [max_backoff_seconds in queue.yaml/xml](https://cloud.google.com/appengine/docs/standard/python/config/queueref#retry_parameters).
+          [max_backoff_seconds in
+          queue.yaml/xml](https://cloud.google.com/appengine/docs/standard/python/config/queueref#retry_parameters).
         format: google-duration
         type: string
       maxDoublings:
@@ -2257,7 +2339,8 @@ definitions:
 
 
           This field has the same meaning as
-          [max_doublings in queue.yaml/xml](https://cloud.google.com/appengine/docs/standard/python/config/queueref#retry_parameters).
+          [max_doublings in
+          queue.yaml/xml](https://cloud.google.com/appengine/docs/standard/python/config/queueref#retry_parameters).
         format: int32
         type: integer
       maxRetryDuration:
@@ -2280,7 +2363,8 @@ definitions:
           `max_retry_duration` will be truncated to the nearest second.
 
           This field has the same meaning as
-          [task_age_limit in queue.yaml/xml](https://cloud.google.com/appengine/docs/standard/python/config/queueref#retry_parameters).
+          [task_age_limit in
+          queue.yaml/xml](https://cloud.google.com/appengine/docs/standard/python/config/queueref#retry_parameters).
         format: google-duration
         type: string
       minBackoff:
@@ -2300,7 +2384,8 @@ definitions:
           `min_backoff` will be truncated to the nearest second.
 
           This field has the same meaning as
-          [min_backoff_seconds in queue.yaml/xml](https://cloud.google.com/appengine/docs/standard/python/config/queueref#retry_parameters).
+          [min_backoff_seconds in
+          queue.yaml/xml](https://cloud.google.com/appengine/docs/standard/python/config/queueref#retry_parameters).
         format: google-duration
         type: string
       unlimitedAttempts:
@@ -2345,58 +2430,13 @@ definitions:
     type: object
   Status:
     description: |-
-      The `Status` type defines a logical error model that is suitable for different
-      programming environments, including REST APIs and RPC APIs. It is used by
-      [gRPC](https://github.com/grpc). The error model is designed to be:
+      The `Status` type defines a logical error model that is suitable for
+      different programming environments, including REST APIs and RPC APIs. It is
+      used by [gRPC](https://github.com/grpc). Each `Status` message contains
+      three pieces of data: error code, error message, and error details.
 
-      - Simple to use and understand for most users
-      - Flexible enough to meet unexpected needs
-
-      # Overview
-
-      The `Status` message contains three pieces of data: error code, error message,
-      and error details. The error code should be an enum value of
-      google.rpc.Code, but it may accept additional error codes if needed.  The
-      error message should be a developer-facing English message that helps
-      developers *understand* and *resolve* the error. If a localized user-facing
-      error message is needed, put the localized message in the error details or
-      localize it in the client. The optional error details may contain arbitrary
-      information about the error. There is a predefined set of error detail types
-      in the package `google.rpc` that can be used for common error conditions.
-
-      # Language mapping
-
-      The `Status` message is the logical representation of the error model, but it
-      is not necessarily the actual wire format. When the `Status` message is
-      exposed in different client libraries and different wire protocols, it can be
-      mapped differently. For example, it will likely be mapped to some exceptions
-      in Java, but more likely mapped to some error codes in C.
-
-      # Other uses
-
-      The error model and the `Status` message can be used in a variety of
-      environments, either with or without APIs, to provide a
-      consistent developer experience across different environments.
-
-      Example uses of this error model include:
-
-      - Partial errors. If a service needs to return partial errors to the client,
-          it may embed the `Status` in the normal response to indicate the partial
-          errors.
-
-      - Workflow errors. A typical workflow has multiple steps. Each step may
-          have a `Status` message for error reporting.
-
-      - Batch operations. If a client uses batch request and batch response, the
-          `Status` message should be used directly inside batch response, one for
-          each error sub-response.
-
-      - Asynchronous operations. If an API call embeds asynchronous operation
-          results in its response, the status of those operations should be
-          represented directly using the `Status` message.
-
-      - Logging. If some API errors are stored in logs, the message `Status` could
-          be used directly after any stripping needed for security/privacy reasons.
+      You can find out more about this error model and how to work with it in the
+      [API Design Guide](https://cloud.google.com/apis/design/errors).
     properties:
       code:
         description: 'The status code, which should be an enum value of google.rpc.Code.'
@@ -2449,7 +2489,8 @@ definitions:
           * `PROJECT_ID` can contain letters ([A-Za-z]), numbers ([0-9]),
              hyphens (-), colons (:), or periods (.).
              For more information, see
-             [Identifying projects](https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects)
+             [Identifying
+             projects](https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects)
           * `LOCATION_ID` is the canonical ID for the task's location.
              The list of available locations can be obtained by calling
              ListLocations.

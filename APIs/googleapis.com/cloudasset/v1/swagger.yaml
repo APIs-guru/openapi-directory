@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: The cloud asset API manages the history and inventory of cloud resources.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Cloud Asset
   version: v1
   x-apiClientRegistration:
@@ -29,10 +33,18 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -125,6 +137,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - operations
     parameters:
@@ -157,7 +171,8 @@ paths:
             `//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1`.
             See [Resource
             Names](https://cloud.google.com/apis/design/resource_names#full_resource_name)
-            and [Resource Name Format](https://cloud.google.com/resource-manager/docs/cloud-asset-inventory/resource-name-format)
+            and [Resource Name
+            Format](https://cloud.google.com/resource-manager/docs/cloud-asset-inventory/resource-name-format)
             for more info.
 
             The request becomes a no-op if the asset name list is empty, and the max
@@ -201,6 +216,8 @@ paths:
             $ref: '#/definitions/BatchGetAssetsHistoryResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - v1
@@ -258,6 +275,8 @@ paths:
             $ref: '#/definitions/Operation'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - v1
@@ -408,7 +427,7 @@ definitions:
         $ref: '#/definitions/Expr'
         description: |-
           The condition that is associated with this binding.
-          NOTE: an unsatisfied condition will not allow user access via current
+          NOTE: An unsatisfied condition will not allow user access via current
           binding. Different bindings, including their conditions, are examined
           independently.
       members:
@@ -451,8 +470,8 @@ definitions:
       assetTypes:
         description: |-
           A list of asset types of which to take a snapshot for. For example:
-          "compute.googleapis.com/Disk". If specified, only matching assets will be returned.
-          See [Introduction to Cloud Asset
+          "compute.googleapis.com/Disk". If specified, only matching assets will be
+          returned. See [Introduction to Cloud Asset
           Inventory](https://cloud.google.com/resource-manager/docs/cloud-asset-inventory/overview)
           for all supported asset types.
         items:
@@ -525,6 +544,18 @@ definitions:
           Editing Object
           Metadata](https://cloud.google.com/storage/docs/viewing-editing-metadata)
           for more information.
+        type: string
+      uriPrefix:
+        description: |-
+          The uri prefix of all generated Cloud Storage objects. For example:
+          "gs://bucket_name/object_name_prefix". Each object uri is in format:
+          "gs://bucket_name/object_name_prefix/<asset type>/<shard number> and only
+          contains assets for that type. <shard number> starts from 0. For example:
+          "gs://bucket_name/object_name_prefix/compute.googleapis.com/Disk/0" is
+          the first shard of output objects containing all
+          compute.googleapis.com/Disk assets. An INVALID_ARGUMENT error will be
+          returned if file with the same name "gs://bucket_name/object_name_prefix"
+          already exists.
         type: string
     type: object
   Operation:

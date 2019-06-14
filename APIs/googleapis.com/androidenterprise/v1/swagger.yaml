@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Manages the deployment of apps to Android for Work users.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Google Play EMM
   version: v1
   x-apiClientRegistration:
@@ -29,10 +33,18 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/androidenterprise': Manage corporate Android devices
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/androidenterprise': Manage corporate Android devices
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -110,6 +122,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - enterprises
     parameters:
@@ -143,6 +157,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - enterprises
   /enterprises/completeSignup:
@@ -173,6 +189,8 @@ paths:
             $ref: '#/definitions/Enterprise'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - enterprises
@@ -205,6 +223,8 @@ paths:
             $ref: '#/definitions/Enterprise'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - enterprises
@@ -245,6 +265,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - enterprises
   /enterprises/signupUrl:
@@ -274,6 +296,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - enterprises
   '/enterprises/{enterpriseId}':
@@ -293,6 +317,8 @@ paths:
             $ref: '#/definitions/Enterprise'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - enterprises
@@ -334,37 +360,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-      tags:
-        - enterprises
-  '/enterprises/{enterpriseId}/androidDevicePolicyConfig':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    put:
-      description: Deprecated and unused.
-      operationId: androidenterprise.enterprises.setAndroidDevicePolicyConfig
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AndroidDevicePolicyConfig'
-        - description: The ID of the enterprise.
-          in: path
-          name: enterpriseId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/AndroidDevicePolicyConfig'
-      security:
-        - Oauth2:
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - enterprises
@@ -398,6 +394,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - enterprises
   '/enterprises/{enterpriseId}/groupLicenses':
@@ -417,6 +415,8 @@ paths:
             $ref: '#/definitions/GroupLicensesListResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - grouplicenses
@@ -451,6 +451,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - grouplicenses
     parameters:
@@ -483,6 +485,8 @@ paths:
             $ref: '#/definitions/GroupLicenseUsersListResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - grouplicenseusers
@@ -532,6 +536,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - products
     parameters:
@@ -569,6 +575,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - products
     parameters:
@@ -605,6 +613,8 @@ paths:
             $ref: '#/definitions/AppRestrictionsSchema'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - products
@@ -652,6 +662,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - products
   '/enterprises/{enterpriseId}/products/{productId}/generateApprovalUrl':
@@ -692,6 +704,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - products
   '/enterprises/{enterpriseId}/products/{productId}/managedConfigurationsSettings':
@@ -716,6 +730,8 @@ paths:
             $ref: '#/definitions/ManagedConfigurationsSettingsListResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - managedconfigurationssettings
@@ -749,6 +765,8 @@ paths:
             $ref: '#/definitions/ProductPermissions'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - products
@@ -789,6 +807,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - products
   '/enterprises/{enterpriseId}/sendTestPushNotification':
@@ -816,6 +836,8 @@ paths:
             $ref: '#/definitions/EnterprisesSendTestPushNotificationResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - enterprises
@@ -851,6 +873,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - enterprises
     parameters:
@@ -878,6 +902,8 @@ paths:
             $ref: '#/definitions/ServiceAccountKeysListResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - serviceaccountkeys
@@ -913,6 +939,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - serviceaccountkeys
   '/enterprises/{enterpriseId}/serviceAccountKeys/{keyId}':
@@ -935,6 +963,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - serviceaccountkeys
@@ -963,6 +993,8 @@ paths:
             $ref: '#/definitions/StoreLayout'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - enterprises
@@ -995,6 +1027,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - enterprises
   '/enterprises/{enterpriseId}/storeLayout/pages':
@@ -1014,6 +1048,8 @@ paths:
             $ref: '#/definitions/StoreLayoutPagesListResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - storelayoutpages
@@ -1046,6 +1082,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - storelayoutpages
   '/enterprises/{enterpriseId}/storeLayout/pages/{pageId}':
@@ -1068,6 +1106,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - storelayoutpages
@@ -1092,6 +1132,8 @@ paths:
             $ref: '#/definitions/StorePage'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - storelayoutpages
@@ -1129,6 +1171,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - storelayoutpages
     put:
@@ -1157,6 +1201,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - storelayoutpages
   '/enterprises/{enterpriseId}/storeLayout/pages/{pageId}/clusters':
@@ -1181,6 +1227,8 @@ paths:
             $ref: '#/definitions/StoreLayoutClustersListResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - storelayoutclusters
@@ -1218,6 +1266,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - storelayoutclusters
   '/enterprises/{enterpriseId}/storeLayout/pages/{pageId}/clusters/{clusterId}':
@@ -1245,6 +1295,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - storelayoutclusters
@@ -1274,6 +1326,8 @@ paths:
             $ref: '#/definitions/StoreCluster'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - storelayoutclusters
@@ -1316,6 +1370,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - storelayoutclusters
     put:
@@ -1349,6 +1405,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - storelayoutclusters
   '/enterprises/{enterpriseId}/unenroll':
@@ -1375,6 +1433,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - enterprises
   '/enterprises/{enterpriseId}/users':
@@ -1399,6 +1459,8 @@ paths:
             $ref: '#/definitions/UsersListResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - users
@@ -1435,6 +1497,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - users
   '/enterprises/{enterpriseId}/users/{userId}':
@@ -1457,6 +1521,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - users
@@ -1481,6 +1547,8 @@ paths:
             $ref: '#/definitions/User'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - users
@@ -1521,6 +1589,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - users
     put:
@@ -1551,6 +1621,8 @@ paths:
             $ref: '#/definitions/User'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - users
@@ -1590,6 +1662,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - users
   '/enterprises/{enterpriseId}/users/{userId}/availableProductSet':
@@ -1614,6 +1688,8 @@ paths:
             $ref: '#/definitions/ProductSet'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - users
@@ -1651,6 +1727,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - users
   '/enterprises/{enterpriseId}/users/{userId}/deviceAccess':
@@ -1676,6 +1754,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - users
@@ -1709,6 +1789,8 @@ paths:
             $ref: '#/definitions/DevicesListResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - devices
@@ -1747,6 +1829,8 @@ paths:
             $ref: '#/definitions/Device'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - devices
@@ -1796,6 +1880,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - devices
     put:
@@ -1836,6 +1922,46 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+      tags:
+        - devices
+  '/enterprises/{enterpriseId}/users/{userId}/devices/{deviceId}/forceReportUpload':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Uploads a report containing any changes in app states on the device since the last report was generated. You can call this method up to 3 times every 24 hours for a given device.
+      operationId: androidenterprise.devices.forceReportUpload
+      parameters:
+        - description: The ID of the device.
+          in: path
+          name: deviceId
+          required: true
+          type: string
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
+          required: true
+          type: string
+        - description: The ID of the user.
+          in: path
+          name: userId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - devices
   '/enterprises/{enterpriseId}/users/{userId}/devices/{deviceId}/installs':
@@ -1865,6 +1991,8 @@ paths:
             $ref: '#/definitions/InstallsListResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - installs
@@ -1907,6 +2035,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - installs
     get:
@@ -1940,6 +2070,8 @@ paths:
             $ref: '#/definitions/Install'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - installs
@@ -1987,6 +2119,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - installs
     put:
@@ -2025,6 +2159,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - installs
   '/enterprises/{enterpriseId}/users/{userId}/devices/{deviceId}/managedConfigurationsForDevice':
@@ -2054,6 +2190,8 @@ paths:
             $ref: '#/definitions/ManagedConfigurationsForDeviceListResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - managedconfigurationsfordevice
@@ -2096,6 +2234,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - managedconfigurationsfordevice
     get:
@@ -2129,6 +2269,8 @@ paths:
             $ref: '#/definitions/ManagedConfiguration'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - managedconfigurationsfordevice
@@ -2176,6 +2318,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - managedconfigurationsfordevice
     put:
@@ -2214,6 +2358,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - managedconfigurationsfordevice
   '/enterprises/{enterpriseId}/users/{userId}/devices/{deviceId}/state':
@@ -2243,6 +2389,8 @@ paths:
             $ref: '#/definitions/DeviceState'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - devices
@@ -2285,6 +2433,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - devices
   '/enterprises/{enterpriseId}/users/{userId}/entitlements':
@@ -2309,6 +2459,8 @@ paths:
             $ref: '#/definitions/EntitlementsListResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - entitlements
@@ -2346,6 +2498,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - entitlements
     get:
@@ -2374,6 +2528,8 @@ paths:
             $ref: '#/definitions/Entitlement'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - entitlements
@@ -2420,6 +2576,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - entitlements
     put:
@@ -2457,6 +2615,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - entitlements
   '/enterprises/{enterpriseId}/users/{userId}/managedConfigurationsForUser':
@@ -2481,6 +2641,8 @@ paths:
             $ref: '#/definitions/ManagedConfigurationsForUserListResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - managedconfigurationsforuser
@@ -2518,6 +2680,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - managedconfigurationsforuser
     get:
@@ -2546,6 +2710,8 @@ paths:
             $ref: '#/definitions/ManagedConfiguration'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - managedconfigurationsforuser
@@ -2588,6 +2754,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - managedconfigurationsforuser
     put:
@@ -2621,6 +2789,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - managedconfigurationsforuser
   '/enterprises/{enterpriseId}/users/{userId}/token':
@@ -2643,6 +2813,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - users
@@ -2679,6 +2851,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - users
   '/enterprises/{enterpriseId}/webApps':
@@ -2698,6 +2872,8 @@ paths:
             $ref: '#/definitions/WebAppsListResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - webapps
@@ -2730,6 +2906,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - webapps
   '/enterprises/{enterpriseId}/webApps/{webAppId}':
@@ -2752,6 +2930,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - webapps
@@ -2776,6 +2956,8 @@ paths:
             $ref: '#/definitions/WebApp'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - webapps
@@ -2813,6 +2995,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - webapps
     put:
@@ -2841,6 +3025,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - webapps
   '/permissions/{permissionId}':
@@ -2864,6 +3050,8 @@ paths:
             $ref: '#/definitions/Permission'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - permissions
@@ -2958,17 +3146,6 @@ definitions:
         description: Whether the Web Apps page is displayed. Default is true.
         type: boolean
     type: object
-  AndroidDevicePolicyConfig:
-    description: Deprecated and unused.
-    properties:
-      kind:
-        default: 'androidenterprise#androidDevicePolicyConfig'
-        description: 'Identifies what kind of resource this is. Value: the fixed string "androidenterprise#androidDevicePolicyConfig".'
-        type: string
-      state:
-        description: Deprecated and unused.
-        type: string
-    type: object
   AppRestrictionsSchema:
     description: Represents the list of app restrictions available to be pre-configured for the product.
     properties:
@@ -3043,6 +3220,18 @@ definitions:
         type: array
       valueString:
         description: 'The string value - this will be present for types string, choice and hidden.'
+        type: string
+    type: object
+  AppState:
+    description: List of states set by the app.
+    properties:
+      keyedAppState:
+        description: List of keyed app states. This field will always be present.
+        items:
+          $ref: '#/definitions/KeyedAppState'
+        type: array
+      packageName:
+        description: The package name of the app. This field will always be present.
         type: string
     type: object
   AppUpdateEvent:
@@ -3167,6 +3356,35 @@ definitions:
       policy:
         $ref: '#/definitions/Policy'
         description: The policy enforced on the device.
+      report:
+        $ref: '#/definitions/DeviceReport'
+        description: The device report updated with the latest app states.
+    type: object
+  DeviceReport:
+    description: Device report updated with the latest app states for managed apps on the device.
+    properties:
+      appState:
+        description: List of app states set by managed apps on the device. App states are defined by the app's developers. This field will always be present.
+        items:
+          $ref: '#/definitions/AppState'
+        type: array
+      lastUpdatedTimestampMillis:
+        description: The timestamp of the last report update in milliseconds since epoch. This field will always be present.
+        format: int64
+        type: string
+    type: object
+  DeviceReportUpdateEvent:
+    description: An event generated when an updated device report is available.
+    properties:
+      deviceId:
+        description: The Android ID of the device. This field will always be present.
+        type: string
+      report:
+        $ref: '#/definitions/DeviceReport'
+        description: The device report updated with the latest app states. This field will always be present.
+      userId:
+        description: The ID of the user. This field will always be present.
+        type: string
     type: object
   DeviceState:
     description: 'The state of a user''s device, as accessed by the getState and setState methods on device resources.'
@@ -3399,6 +3617,26 @@ definitions:
         description: 'Identifies what kind of resource this is. Value: the fixed string "androidenterprise#installsListResponse".'
         type: string
     type: object
+  KeyedAppState:
+    description: 'Represents a keyed app state containing a key, timestamp, severity level, optional description, and optional data.'
+    properties:
+      data:
+        description: 'Additional field intended for machine-readable data. For example, a number or JSON object. To prevent XSS, we recommend removing any HTML from the data before displaying it.'
+        type: string
+      key:
+        description: 'Key indicating what the app is providing a state for. The content of the key is set by the app''s developer. To prevent XSS, we recommend removing any HTML from the key before displaying it. This field will always be present.'
+        type: string
+      message:
+        description: 'Free-form, human-readable message describing the app state. For example, an error message. To prevent XSS, we recommend removing any HTML from the message before displaying it.'
+        type: string
+      severity:
+        description: Severity of the app state. This field will always be present.
+        type: string
+      stateTimestampMillis:
+        description: Timestamp of when the app set the state in milliseconds since epoch. This field will always be present.
+        format: int64
+        type: string
+    type: object
   LocalizedText:
     description: A localized string with its locale.
     properties:
@@ -3588,6 +3826,9 @@ definitions:
       appUpdateEvent:
         $ref: '#/definitions/AppUpdateEvent'
         description: Notifications about app updates.
+      deviceReportUpdateEvent:
+        $ref: '#/definitions/DeviceReportUpdateEvent'
+        description: Notifications about device report updates.
       enterpriseId:
         description: The ID of the enterprise for which the notification is sent. This will always be present.
         type: string
@@ -3667,6 +3908,9 @@ definitions:
     properties:
       autoUpdatePolicy:
         description: The auto-update policy for apps installed on the device. "choiceToTheUser" allows the device's user to configure the app update policy. "always" enables auto updates. "never" disables auto updates. "wifiOnly" enables auto updates only when the device is connected to wifi.
+        type: string
+      deviceReportPolicy:
+        description: Whether the device reports app states to the EMM. The default value is "deviceReportDisabled".
         type: string
       maintenanceWindow:
         $ref: '#/definitions/MaintenanceWindow'
@@ -4165,10 +4409,16 @@ definitions:
         type: string
     type: object
   WebApp:
-    description: WebApp resource info.
+    description: 'A WebApps resource represents a web app created for an enterprise. Web apps are published to managed Google Play and can be distributed like other Android apps. On a user''s device, a web app opens its specified URL.'
     properties:
       displayMode:
-        description: The display mode of the web app.
+        description: |-
+          The display mode of the web app.
+
+          Possible values include: 
+          - "minimalUi", the device's status bar, navigation bar, the app's URL, and a refresh button are visible when the app is open. For HTTP URLs, you can only select this option.
+          - "standalone", the device's status bar and navigation bar are visible when the app is open.
+          - "fullScreen", the app opens in full screen mode, hiding the device's status and navigation bars. All browser UI elements, page URL, system status bar and back button are not visible, and the web app takes up the entirety of the available display area.
         type: string
       icons:
         description: 'A list of icons representing this website. If absent, a default icon (for create) or the current icon (for update) will be used.'
@@ -4182,7 +4432,7 @@ definitions:
         description: 'The start URL, i.e. the URL that should load when the user opens the application.'
         type: string
       title:
-        description: 'The title of the web application as displayed to the user (e.g., amongst a list of other applications, or as a label for an icon).'
+        description: 'The title of the web app as displayed to the user (e.g., amongst a list of other applications, or as a label for an icon).'
         type: string
       versionCode:
         description: |-
@@ -4193,7 +4443,7 @@ definitions:
         format: int64
         type: string
       webAppId:
-        description: The ID of the application.
+        description: 'The ID of the application. A string of the form "app:<package name>" where the package name always starts with the prefix "com.google.enterprise.webapp." followed by a random id.'
         type: string
     type: object
   WebAppIcon:

@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: TPU API provides customers with access to Google TPU technology.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Cloud TPU
   version: v1alpha1
   x-apiClientRegistration:
@@ -29,10 +33,18 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -104,10 +116,14 @@ tags:
 paths:
   '/v1alpha1/{name}':
     delete:
-      description: Deletes a node.
-      operationId: tpu.projects.locations.nodes.delete
+      description: |-
+        Deletes a long-running operation. This method indicates that the client is
+        no longer interested in the operation result. It does not cancel the
+        operation. If the server doesn't support this method, it returns
+        `google.rpc.Code.UNIMPLEMENTED`.
+      operationId: tpu.projects.locations.operations.delete
       parameters:
-        - description: The resource name.
+        - description: The name of the operation resource to be deleted.
           in: path
           name: name
           required: true
@@ -117,15 +133,17 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Operation'
+            $ref: '#/definitions/Empty'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     get:
-      description: Gets the details of a node.
-      operationId: tpu.projects.locations.nodes.get
+      description: Gets AcceleratorType.
+      operationId: tpu.projects.locations.acceleratorTypes.get
       parameters:
         - description: The resource name.
           in: path
@@ -137,9 +155,11 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Node'
+            $ref: '#/definitions/AcceleratorType'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -185,6 +205,8 @@ paths:
             $ref: '#/definitions/ListLocationsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -241,6 +263,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -296,6 +320,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1alpha1/{name}:reimage':
@@ -332,6 +358,8 @@ paths:
             $ref: '#/definitions/Operation'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -370,6 +398,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1alpha1/{name}:stop':
@@ -407,6 +437,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1alpha1/{parent}/acceleratorTypes':
@@ -443,6 +475,8 @@ paths:
             $ref: '#/definitions/ListAcceleratorTypesResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -485,6 +519,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -525,6 +561,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1alpha1/{parent}/tensorflowVersions':
@@ -561,6 +599,8 @@ paths:
             $ref: '#/definitions/ListTensorFlowVersionsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -778,9 +818,9 @@ definitions:
         type: string
       networkEndpoints:
         description: |-
-          Output only. The network endpoints where TPU workers can be accessed and sent work.
-          It is recommended that Tensorflow clients of the node reach out to the 0th
-          entry in this map first.
+          Output only. The network endpoints where TPU workers can be accessed and
+          sent work. It is recommended that Tensorflow clients of the node reach out
+          to the 0th entry in this map first.
         items:
           $ref: '#/definitions/NetworkEndpoint'
         type: array
@@ -854,7 +894,7 @@ definitions:
         description: |-
           The server-assigned name, which is only unique within the same service that
           originally returns it. If you use the default HTTP mapping, the
-          `name` should have the format of `operations/some/unique/name`.
+          `name` should be a resource name ending with `operations/{unique_id}`.
         type: string
       response:
         additionalProperties:
@@ -911,6 +951,9 @@ definitions:
   SchedulingConfig:
     properties:
       preemptible:
+        type: boolean
+      reserved:
+        description: Whether the node is created under a reservation.
         type: boolean
     type: object
   StartNodeRequest:

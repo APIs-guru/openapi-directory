@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: The Management API for Google Play Game Services.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Google Play Game Services Management
   version: v1management
   x-apiClientRegistration:
@@ -31,10 +35,18 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/games': 'Create, edit, and delete your Google Play Games activity'
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/games': 'Create, edit, and delete your Google Play Games activity'
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -106,6 +118,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/games'
       tags:
         - achievements
   /achievements/resetAllForAllPlayers:
@@ -125,6 +139,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/games'
       tags:
         - achievements
@@ -150,6 +166,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/games'
       tags:
         - achievements
@@ -179,6 +197,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/games'
       tags:
         - achievements
   '/achievements/{achievementId}/resetForAllPlayers':
@@ -204,6 +224,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/games'
       tags:
         - achievements
@@ -234,6 +256,8 @@ paths:
             $ref: '#/definitions/HiddenPlayerList'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/games'
       tags:
         - applications
@@ -266,6 +290,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/games'
       tags:
         - players
     parameters:
@@ -296,6 +322,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/games'
       tags:
         - players
   /events/reset:
@@ -316,6 +344,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/games'
       tags:
         - events
   /events/resetAllForAllPlayers:
@@ -335,6 +365,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/games'
       tags:
         - events
@@ -360,6 +392,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/games'
       tags:
         - events
@@ -387,6 +421,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/games'
       tags:
         - events
   '/events/{eventId}/resetForAllPlayers':
@@ -412,6 +448,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/games'
       tags:
         - events
@@ -441,6 +479,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/games'
       tags:
         - scores
   '/leaderboards/{leaderboardId}/scores/resetForAllPlayers':
@@ -467,6 +507,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/games'
       tags:
         - scores
   /quests/reset:
@@ -487,6 +529,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/games'
       tags:
         - quests
   /quests/resetAllForAllPlayers:
@@ -506,6 +550,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/games'
       tags:
         - quests
@@ -531,6 +577,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/games'
       tags:
         - quests
@@ -558,6 +606,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/games'
       tags:
         - quests
   '/quests/{questId}/resetForAllPlayers':
@@ -584,6 +634,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/games'
       tags:
         - quests
   /rooms/reset:
@@ -604,6 +656,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/games'
       tags:
         - rooms
   /rooms/resetForAllPlayers:
@@ -623,6 +677,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/games'
       tags:
         - rooms
@@ -646,6 +702,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/games'
       tags:
         - scores
   /scores/resetAllForAllPlayers:
@@ -665,6 +723,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/games'
       tags:
         - scores
@@ -691,6 +751,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/games'
       tags:
         - scores
   /turnbasedmatches/reset:
@@ -711,6 +773,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/games'
       tags:
         - turnBasedMatches
   /turnbasedmatches/resetForAllPlayers:
@@ -730,6 +794,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/games'
       tags:
         - turnBasedMatches

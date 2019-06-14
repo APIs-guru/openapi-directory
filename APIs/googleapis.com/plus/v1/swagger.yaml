@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Builds on top of the Google+ platform.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Google+
   version: v1
   x-apiClientRegistration:
@@ -31,13 +35,24 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/plus.login': 'View your basic profile info, including your age range and language'
-      'https://www.googleapis.com/auth/plus.me': Know who you are on Google
+      'https://www.googleapis.com/auth/plus.me': Associate you with your personal info on Google
       'https://www.googleapis.com/auth/userinfo.email': View your email address
       'https://www.googleapis.com/auth/userinfo.profile': 'See your personal info, including any personal info you''ve made publicly available'
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/plus.login': 'View your basic profile info, including your age range and language'
+      'https://www.googleapis.com/auth/plus.me': Associate you with your personal info on Google
+      'https://www.googleapis.com/auth/userinfo.email': View your email address
+      'https://www.googleapis.com/auth/userinfo.profile': 'See your personal info, including any personal info you''ve made publicly available'
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -86,7 +101,7 @@ tags:
 paths:
   /activities:
     get:
-      description: Search public activities.
+      description: 'Shut down. See https://developers.google.com/+/api-shutdown for more details.'
       operationId: plus.activities.search
       parameters:
         - default: en-US
@@ -126,7 +141,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.me'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/plus.me'
       tags:
         - activities
@@ -140,7 +159,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/activities/{activityId}':
     get:
-      description: Get an activity.
+      description: 'Shut down. See https://developers.google.com/+/api-shutdown for more details.'
       operationId: plus.activities.get
       parameters:
         - description: The ID of the activity to get.
@@ -156,7 +175,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.me'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/plus.me'
       tags:
         - activities
@@ -170,7 +193,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/activities/{activityId}/comments':
     get:
-      description: List all of the comments for an activity.
+      description: 'Shut down. See https://developers.google.com/+/api-shutdown for more details.'
       operationId: plus.comments.list
       parameters:
         - description: The ID of the activity to get comments for.
@@ -205,7 +228,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.me'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/plus.me'
       tags:
         - comments
@@ -219,7 +246,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/activities/{activityId}/people/{collection}':
     get:
-      description: List all of the people in the specified collection for a particular activity.
+      description: 'Shut down. See https://developers.google.com/+/api-shutdown for more details.'
       operationId: plus.people.listByActivity
       parameters:
         - description: The ID of the activity to get the list of people for.
@@ -254,7 +281,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.me'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/plus.me'
       tags:
         - people
@@ -268,7 +299,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/comments/{commentId}':
     get:
-      description: Get a comment.
+      description: 'Shut down. See https://developers.google.com/+/api-shutdown for more details.'
       operationId: plus.comments.get
       parameters:
         - description: The ID of the comment to get.
@@ -284,7 +315,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.me'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/plus.me'
       tags:
         - comments
@@ -298,7 +333,7 @@ paths:
       - $ref: '#/parameters/userIp'
   /people:
     get:
-      description: Search all public profiles.
+      description: 'Shut down. See https://developers.google.com/+/api-shutdown for more details.'
       operationId: plus.people.search
       parameters:
         - default: en-US
@@ -330,7 +365,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.me'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/plus.me'
       tags:
         - people
@@ -360,11 +399,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.me'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/plus.me'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/userinfo.email'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/userinfo.profile'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.profile'
       tags:
         - people
@@ -378,7 +425,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/people/{userId}/activities/{collection}':
     get:
-      description: List all of the activities in the specified collection for a particular user.
+      description: 'Shut down. See https://developers.google.com/+/api-shutdown for more details.'
       operationId: plus.activities.list
       parameters:
         - description: The collection of activities to list.
@@ -412,7 +459,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.me'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/plus.me'
       tags:
         - activities
@@ -468,7 +519,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.me'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/plus.me'
       tags:
         - people

@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Supplies a Remote Execution API service for tools such as bazel.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Remote Build Execution
   version: v1
   x-apiClientRegistration:
@@ -29,10 +33,18 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -128,6 +140,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - media
     parameters:
@@ -170,6 +184,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - media
   '/v1/{name}':
@@ -194,6 +210,8 @@ paths:
             $ref: '#/definitions/GoogleProtobufEmpty'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - operations
@@ -229,6 +247,8 @@ paths:
             $ref: '#/definitions/GoogleLongrunningOperation'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -288,6 +308,8 @@ paths:
             $ref: '#/definitions/GoogleProtobufEmpty'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - operations
@@ -365,6 +387,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - v1
     parameters:
@@ -411,7 +435,9 @@ definitions:
           to run, which MUST be present in the
           ContentAddressableStorage.
       doNotCache:
-        description: 'If true, then the `Action`''s result cannot be cached.'
+        description: |-
+          If true, then the `Action`'s result cannot be cached, and in-flight
+          requests for the same `Action` may not be merged.
         type: boolean
       inputRootDigest:
         $ref: '#/definitions/BuildBazelRemoteExecutionV2Digest'
@@ -517,6 +543,8 @@ definitions:
             }
           }
           ```
+          If an output of the same name was found, but was not a directory, the
+          server will return a FAILED_PRECONDITION.
         items:
           $ref: '#/definitions/BuildBazelRemoteExecutionV2OutputDirectory'
         type: array
@@ -528,12 +556,13 @@ definitions:
           if the server supports
           SymlinkAbsolutePathStrategy.ALLOWED.
           For each output directory requested in the `output_directories` field of
-          the Action, if the directory file existed after
-          the action completed, a single entry will be present either in this field,
-          or in the `output_directories` field, if the directory was not a symbolic link.
+          the Action, if the directory existed after the action completed, a
+          single entry will be present either in this field, or in the
+          `output_directories` field, if the directory was not a symbolic link.
 
-          If the action does not produce the requested output, or produces a
-          file where a directory is expected or vice versa, then that output
+          If an output of the same name was found, but was a symbolic link to a file
+          instead of a directory, the server will return a FAILED_PRECONDITION.
+          If the action does not produce the requested output, then that output
           will be omitted from the list. The server is free to arrange the output
           list as desired; clients MUST NOT assume that the output list is sorted.
         items:
@@ -550,8 +579,9 @@ definitions:
           the action completed, a single entry will be present either in this field,
           or in the `output_files` field, if the file was not a symbolic link.
 
-          If the action does not produce the requested output, or produces a
-          directory where a regular file is expected or vice versa, then that output
+          If an output symbolic link of the same name was found, but its target
+          type was not a regular file, the server will return a FAILED_PRECONDITION.
+          If the action does not produce the requested output, then that output
           will be omitted from the list. The server is free to arrange the output
           list as desired; clients MUST NOT assume that the output list is sorted.
         items:
@@ -562,11 +592,12 @@ definitions:
           The output files of the action. For each output file requested in the
           `output_files` field of the Action, if the corresponding file existed after
           the action completed, a single entry will be present either in this field,
-          or in the output_file_symlinks field, if the file was a symbolic link to
+          or the `output_file_symlinks` field if the file was a symbolic link to
           another file.
 
-          If the action does not produce the requested output, or produces a
-          directory where a regular file is expected or vice versa, then that output
+          If an output of the same name was found, but was a directory rather
+          than a regular file, the server will return a FAILED_PRECONDITION.
+          If the action does not produce the requested output, then that output
           will be omitted from the list. The server is free to arrange the output
           list as desired; clients MUST NOT assume that the output list is sorted.
         items:
@@ -578,15 +609,13 @@ definitions:
           The digest for a blob containing the standard error of the action, which
           can be retrieved from the
           ContentAddressableStorage.
-          See `stderr_raw` for when this will be set.
       stderrRaw:
         description: |-
-          The standard error buffer of the action. The server will determine, based
-          on the size of the buffer, whether to return it in raw form or to return
-          a digest in `stderr_digest` that points to the buffer. If neither is set,
-          then the buffer is empty. The client SHOULD NOT assume it will get one of
-          the raw buffer or a digest on any given request and should be prepared to
-          handle either.
+          The standard error buffer of the action. The server SHOULD NOT inline
+          stderr unless requested by the client in the
+          GetActionResultRequest
+          message. The server MAY omit inlining, even if requested, and MUST do so if inlining
+          would cause the response to exceed message size limits.
         format: byte
         type: string
       stdoutDigest:
@@ -595,15 +624,13 @@ definitions:
           The digest for a blob containing the standard output of the action, which
           can be retrieved from the
           ContentAddressableStorage.
-          See `stdout_raw` for when this will be set.
       stdoutRaw:
         description: |-
-          The standard output buffer of the action. The server will determine, based
-          on the size of the buffer, whether to return it in raw form or to return
-          a digest in `stdout_digest` that points to the buffer. If neither is set,
-          then the buffer is empty. The client SHOULD NOT assume it will get one of
-          the raw buffer or a digest on any given request and should be prepared to
-          handle either.
+          The standard output buffer of the action. The server SHOULD NOT inline
+          stdout unless requested by the client in the
+          GetActionResultRequest
+          message. The server MAY omit inlining, even if requested, and MUST do so if inlining
+          would cause the response to exceed message size limits.
         format: byte
         type: string
     type: object
@@ -661,7 +688,8 @@ definitions:
           bytes).
 
           An output directory cannot be duplicated or have the same path as any of
-          the listed output files.
+          the listed output files. An output directory is allowed to be a parent of
+          another output directory.
 
           Directories leading up to the output directories (but not the output
           directories themselves) are created by the worker prior to execution, even
@@ -702,6 +730,7 @@ definitions:
           choose to execute the action on any worker satisfying the requirements, so
           the client SHOULD ensure that running the action on any such worker will
           have the same result.
+          A detailed lexicon for this can be found in the accompanying platform.md.
       workingDirectory:
         description: |-
           The working directory, relative to the input root, for the command to run
@@ -783,6 +812,11 @@ definitions:
       * Every child in the directory must have a path of exactly one segment.
         Multiple levels of directory hierarchy may not be collapsed.
       * Each child in the directory must have a unique path segment (file name).
+        Note that while the API itself is case-sensitive, the environment where
+        the Action is executed may or may not be case-sensitive. That is, it is
+        legal to call the API with a Directory that has both "Foo" and "foo" as
+        children, but the Action may be rejected by the remote system upon
+        execution.
       * The files, directories and symlinks in the directory must each be sorted
         in lexicographical order by path. The path strings must be sorted by code
         point, equivalently, by UTF-8 bytes.
@@ -878,6 +912,7 @@ definitions:
           The digest of the Action
           being executed.
       stage:
+        description: The current stage of execution.
         enum:
           - UNKNOWN
           - CACHE_CHECK
@@ -1039,9 +1074,16 @@ definitions:
       FileNode, but it is used as an
       output in an `ActionResult`. It allows a full file path rather than
       only a name.
-
-      `OutputFile` is binary-compatible with `FileNode`.
     properties:
+      contents:
+        description: |-
+          The contents of the file if inlining was requested. The server SHOULD NOT inline
+          file contents unless requested by the client in the
+          GetActionResultRequest
+          message. The server MAY omit inlining, even if requested, and MUST do so if inlining
+          would cause the response to exceed message size limits.
+        format: byte
+        type: string
       digest:
         $ref: '#/definitions/BuildBazelRemoteExecutionV2Digest'
         description: The digest of the file's content.
@@ -1133,6 +1175,11 @@ definitions:
 
       * name: `build.bazel.remote.execution.v2.requestmetadata-bin`
       * contents: the base64 encoded binary `RequestMetadata` message.
+      Note: the gRPC library serializes binary headers encoded in base 64 by
+      default (https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-HTTP2.md#requests).
+      Therefore, if the gRPC library is used to pass/retrieve this
+      metadata, the user may ignore the base64 encoding and assume it is simply
+      serialized as a binary message.
     properties:
       actionId:
         description: |-
@@ -1265,6 +1312,37 @@ definitions:
       numWarnings:
         description: The number of warnings reported.
         format: uint64
+        type: string
+    type: object
+  GoogleDevtoolsRemotebuildbotCommandStatus:
+    description: The internal status of the command result.
+    properties:
+      code:
+        description: The status code.
+        enum:
+          - OK
+          - INVALID_ARGUMENT
+          - DEADLINE_EXCEEDED
+          - NOT_FOUND
+          - PERMISSION_DENIED
+          - INTERNAL
+          - ABORTED
+          - CLEANUP_ERROR
+          - DOWNLOAD_INPUTS_ERROR
+          - UNKNOWN
+          - UPLOAD_OUTPUTS_ERROR
+          - DOCKER_LOGIN_ERROR
+          - DOCKER_IMAGE_PULL_ERROR
+          - DOCKER_IMAGE_EXIST_ERROR
+          - DUPLICATE_INPUTS
+          - DOCKER_IMAGE_PERMISSION_DENIED
+          - DOCKER_IMAGE_NOT_FOUND
+          - WORKING_DIR_NOT_FOUND
+          - WORKING_DIR_NOT_IN_BASE_DIR
+          - DOCKER_UNAVAILABLE
+        type: string
+      message:
+        description: The error message.
         type: string
     type: object
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateInstanceRequest:
@@ -1400,6 +1478,26 @@ definitions:
     type: object
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsRequest:
     properties:
+      filter:
+        description: |-
+          Optional. A filter to constrain the pools returned. Filters have the form:
+
+          <field> <operator> <value> [[AND|OR] <field> <operator> <value>]...
+
+          <field> is the path for a field or map key in the Pool proto message.
+          e.g. "configuration.disk_size_gb" or "configuration.labels.key".
+          <operator> can be one of "<", "<=", ">=", ">", "=", "!=", ":".
+          ":" is a HAS operation for strings and repeated primitive fields.
+          <value> is the value to test, case-insensitive for strings. "*" stands for
+          any value and can be used to test for key presence.
+          Parenthesis determine AND/OR precedence. In space separated restrictions,
+          AND is implicit, e.g. "a = b x = y" is equivalent to "a = b AND x = y".
+
+          Example filter:
+          configuration.labels.key1 = * AND (state = RUNNING OR state = UPDATING)
+
+          This field is currently ignored in all requests.
+        type: string
       parent:
         description: |-
           Resource name of the instance.
@@ -1420,7 +1518,8 @@ definitions:
       updateMask:
         description: |-
           The update mask applies to worker_pool. For the `FieldMask` definition,
-          see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+          see
+          https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
           If an empty update_mask is provided, only the non-default valued field in
           the worker pool field will be updated. Note that in order to update a field
           to the default value (zero, false, empty string) an explicit update_mask
@@ -1445,9 +1544,21 @@ definitions:
       diskType:
         description: |-
           Required. Disk Type to use for the worker.
-          See [Storage options](https://cloud.google.com/compute/docs/disks/#introduction).
+          See [Storage
+          options](https://cloud.google.com/compute/docs/disks/#introduction).
           Currently only `pd-standard` is supported.
         type: string
+      labels:
+        additionalProperties:
+          type: string
+        description: |-
+          Labels associated with the workers.
+          Label keys and values can be no longer than 63 characters, can only contain
+          lowercase letters, numeric characters, underscores and dashes.
+          International letters are permitted. Keys must start with a letter but
+          values are optional.
+          This field is currently ignored in all requests.
+        type: object
       machineType:
         description: |-
           Required. Machine type of the worker, such as `n1-standard-2`.
@@ -2419,7 +2530,7 @@ definitions:
         description: |-
           The server-assigned name, which is only unique within the same service that
           originally returns it. If you use the default HTTP mapping, the
-          `name` should have the format of `operations/some/unique/name`.
+          `name` should be a resource name ending with `operations/{unique_id}`.
         type: string
       response:
         additionalProperties:
@@ -2452,56 +2563,11 @@ definitions:
     description: |-
       The `Status` type defines a logical error model that is suitable for
       different programming environments, including REST APIs and RPC APIs. It is
-      used by [gRPC](https://github.com/grpc). The error model is designed to be:
+      used by [gRPC](https://github.com/grpc). Each `Status` message contains
+      three pieces of data: error code, error message, and error details.
 
-      - Simple to use and understand for most users
-      - Flexible enough to meet unexpected needs
-
-      # Overview
-
-      The `Status` message contains three pieces of data: error code, error
-      message, and error details. The error code should be an enum value of
-      google.rpc.Code, but it may accept additional error codes if needed.  The
-      error message should be a developer-facing English message that helps
-      developers *understand* and *resolve* the error. If a localized user-facing
-      error message is needed, put the localized message in the error details or
-      localize it in the client. The optional error details may contain arbitrary
-      information about the error. There is a predefined set of error detail types
-      in the package `google.rpc` that can be used for common error conditions.
-
-      # Language mapping
-
-      The `Status` message is the logical representation of the error model, but it
-      is not necessarily the actual wire format. When the `Status` message is
-      exposed in different client libraries and different wire protocols, it can be
-      mapped differently. For example, it will likely be mapped to some exceptions
-      in Java, but more likely mapped to some error codes in C.
-
-      # Other uses
-
-      The error model and the `Status` message can be used in a variety of
-      environments, either with or without APIs, to provide a
-      consistent developer experience across different environments.
-
-      Example uses of this error model include:
-
-      - Partial errors. If a service needs to return partial errors to the client,
-          it may embed the `Status` in the normal response to indicate the partial
-          errors.
-
-      - Workflow errors. A typical workflow has multiple steps. Each step may
-          have a `Status` message for error reporting.
-
-      - Batch operations. If a client uses batch request and batch response, the
-          `Status` message should be used directly inside batch response, one for
-          each error sub-response.
-
-      - Asynchronous operations. If an API call embeds asynchronous operation
-          results in its response, the status of those operations should be
-          represented directly using the `Status` message.
-
-      - Logging. If some API errors are stored in logs, the message `Status` could
-          be used directly after any stripping needed for security/privacy reasons.
+      You can find out more about this error model and how to work with it in the
+      [API Design Guide](https://cloud.google.com/apis/design/errors).
     properties:
       code:
         description: 'The status code, which should be an enum value of google.rpc.Code.'
@@ -2550,8 +2616,8 @@ definitions:
           If present, provides a compact representation of all the messages that have
           been received by the caller for the given entity, e.g., it could be a
           sequence number or a multi-part timestamp/version vector. This marker can
-          be provided in the Request message, allowing the caller to resume the stream
-          watching at a specific point without fetching the initial state.
+          be provided in the Request message, allowing the caller to resume the
+          stream watching at a specific point without fetching the initial state.
         format: byte
         type: string
       state:

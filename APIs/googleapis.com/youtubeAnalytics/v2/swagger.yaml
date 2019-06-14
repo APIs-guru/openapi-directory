@@ -9,6 +9,10 @@ info:
     url: 'https://google.com'
     x-twitter: youtube
   description: Retrieves your YouTube Analytics data.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: YouTube Analytics
   version: v2
   x-apiClientRegistration:
@@ -33,7 +37,7 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/youtube': Manage your YouTube account
@@ -41,6 +45,18 @@ securityDefinitions:
       'https://www.googleapis.com/auth/youtubepartner': View and manage your assets and associated content on YouTube
       'https://www.googleapis.com/auth/yt-analytics-monetary.readonly': View monetary and non-monetary YouTube Analytics reports for your YouTube content
       'https://www.googleapis.com/auth/yt-analytics.readonly': View YouTube Analytics reports for your YouTube content
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/youtube': Manage your YouTube account
+      'https://www.googleapis.com/auth/youtube.readonly': View your YouTube account
+      'https://www.googleapis.com/auth/youtubepartner': View and manage your assets and associated content on YouTube
+      'https://www.googleapis.com/auth/yt-analytics-monetary.readonly': View monetary and non-monetary YouTube Analytics reports for your YouTube content
+      'https://www.googleapis.com/auth/yt-analytics.readonly': View YouTube Analytics reports for your YouTube content
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -146,13 +162,23 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtubepartner'
         - Oauth2:
             - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/yt-analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/yt-analytics.readonly'
       tags:
         - groupItems
@@ -189,13 +215,23 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtubepartner'
         - Oauth2:
             - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/yt-analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/yt-analytics.readonly'
       tags:
         - groupItems
@@ -242,13 +278,23 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtubepartner'
         - Oauth2:
             - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/yt-analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/yt-analytics.readonly'
       tags:
         - groupItems
@@ -286,13 +332,23 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtubepartner'
         - Oauth2:
             - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/yt-analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/yt-analytics.readonly'
       tags:
         - groups
@@ -351,13 +407,23 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtubepartner'
         - Oauth2:
             - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/yt-analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/yt-analytics.readonly'
       tags:
         - groups
@@ -404,13 +470,23 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtubepartner'
         - Oauth2:
             - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/yt-analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/yt-analytics.readonly'
       tags:
         - groups
@@ -445,13 +521,23 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtubepartner'
         - Oauth2:
             - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/yt-analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/yt-analytics.readonly'
       tags:
         - groups
@@ -569,13 +655,23 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtubepartner'
         - Oauth2:
             - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/yt-analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/yt-analytics.readonly'
       tags:
         - reports
@@ -656,6 +752,7 @@ definitions:
         enum:
           - PATH
           - OTHER
+          - PARAMETER
         type: string
     type: object
   Errors:

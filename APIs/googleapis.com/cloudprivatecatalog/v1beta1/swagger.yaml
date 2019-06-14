@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Enable cloud users to discover enterprise catalogs and products in their organizations.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Cloud Private Catalog
   version: v1beta1
   x-apiClientRegistration:
@@ -25,14 +29,22 @@ info:
   x-providerName: googleapis.com
   x-serviceName: cloudprivatecatalog
 externalDocs:
-  url: 'https://sites.google.com/corp/google.com/cloudprivatecatalog'
+  url: 'https://cloud.google.com/private-catalog/'
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -109,7 +121,7 @@ paths:
       description: |-
         Search Catalog resources that consumers have access to, within the
         scope of the consumer cloud resource hierarchy context.
-      operationId: cloudprivatecatalog.organizations.catalogs.search
+      operationId: cloudprivatecatalog.projects.catalogs.search
       parameters:
         - description: The maximum number of entries that are requested.
           in: query
@@ -148,8 +160,10 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -167,7 +181,7 @@ paths:
       description: |-
         Search Product resources that consumers have access to, within the
         scope of the consumer cloud resource hierarchy context.
-      operationId: cloudprivatecatalog.organizations.products.search
+      operationId: cloudprivatecatalog.projects.products.search
       parameters:
         - description: The maximum number of entries that are requested.
           in: query
@@ -207,8 +221,10 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -226,7 +242,7 @@ paths:
       description: |-
         Search Version resources that consumers have access to, within the
         scope of the consumer cloud resource hierarchy context.
-      operationId: cloudprivatecatalog.organizations.versions.search
+      operationId: cloudprivatecatalog.projects.versions.search
       parameters:
         - description: The maximum number of entries that are requested.
           in: query
@@ -266,8 +282,10 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'

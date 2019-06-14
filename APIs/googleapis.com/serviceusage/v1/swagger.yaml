@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'Enables services that service consumers want to use on Google Cloud Platform, lists the available or enabled services, or disables services that service consumers no longer use.'
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Service Usage
   version: v1
   x-apiClientRegistration:
@@ -29,12 +33,22 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/service.management': Manage your Google API service configuration
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/service.management': Manage your Google API service configuration
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -144,7 +158,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/service.management'
       tags:
         - operations
@@ -183,7 +201,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/service.management'
       tags:
         - operations
@@ -195,8 +217,8 @@ paths:
             Name of the consumer and service to get the `ConsumerState` for.
 
             An example name would be:
-            `projects/123/services/serviceusage.googleapis.com`
-            where `123` is the project number (not project ID).
+            `projects/123/services/serviceusage.googleapis.com` where `123` is the
+            project number.
           in: path
           name: name
           required: true
@@ -210,7 +232,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - services
@@ -271,7 +297,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/service.management'
       tags:
         - operations
@@ -309,8 +339,8 @@ paths:
             The enable and disable methods currently only support projects.
 
             An example name would be:
-            `projects/123/services/serviceusage.googleapis.com`
-            where `123` is the project number (not project ID).
+            `projects/123/services/serviceusage.googleapis.com` where `123` is the
+            project number.
           in: path
           name: name
           required: true
@@ -324,7 +354,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/service.management'
       tags:
         - services
@@ -359,8 +393,8 @@ paths:
             the user enabling the service.
 
             An example name would be:
-            `projects/123/services/serviceusage.googleapis.com`
-            where `123` is the project number (not project ID).
+            `projects/123/services/serviceusage.googleapis.com` where `123` is the
+            project number.
           in: path
           name: name
           required: true
@@ -374,7 +408,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/service.management'
       tags:
         - services
@@ -413,8 +451,7 @@ paths:
             Parent to search for services on.
 
             An example name would be:
-            `projects/123`
-            where `123` is the project number (not project ID).
+            `projects/123` where `123` is the project number.
           in: path
           name: parent
           required: true
@@ -428,7 +465,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - services
@@ -471,8 +512,7 @@ paths:
             Parent to enable services on.
 
             An example name would be:
-            `projects/123`
-            where `123` is the project number (not project ID).
+            `projects/123` where `123` is the project number.
 
             The `BatchEnableServices` method currently only supports projects.
           in: path
@@ -488,7 +528,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/service.management'
       tags:
         - services
@@ -561,7 +605,7 @@ definitions:
     type: object
   AuthProvider:
     description: |-
-      Configuration for an anthentication provider, including support for
+      Configuration for an authentication provider, including support for
       [JSON Web Token
       (JWT)](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32).
     properties:
@@ -713,25 +757,6 @@ definitions:
           Refer to selector for syntax details.
         type: string
     type: object
-  AuthorizationConfig:
-    description: |-
-      Configuration of authorization.
-
-      This section determines the authorization provider, if unspecified, then no
-      authorization check will be done.
-
-      Example:
-
-          experimental:
-            authorization:
-              provider: firebaserules.googleapis.com
-    properties:
-      provider:
-        description: |-
-          The name of the authorization provider, such as
-          firebaserules.googleapis.com.
-        type: string
-    type: object
   Backend:
     description: '`Backend` defines the backend configuration for a service.'
     properties:
@@ -783,6 +808,24 @@ definitions:
 
           Refer to selector for syntax details.
         type: string
+    type: object
+  BatchCreateAdminOverridesResponse:
+    description: Response message for BatchCreateAdminOverrides
+    properties:
+      overrides:
+        description: The overrides that were created.
+        items:
+          $ref: '#/definitions/QuotaOverride'
+        type: array
+    type: object
+  BatchCreateConsumerOverridesResponse:
+    description: Response message for BatchCreateConsumerOverrides
+    properties:
+      overrides:
+        description: The overrides that were created.
+        items:
+          $ref: '#/definitions/QuotaOverride'
+        type: array
     type: object
   BatchEnableServicesRequest:
     description: Request message for the `BatchEnableServices` method.
@@ -1164,9 +1207,9 @@ definitions:
           The selector is a comma-separated list of patterns. Each pattern is a
           qualified name of the element which may end in "*", indicating a wildcard.
           Wildcards are only allowed at the end and for a whole component of the
-          qualified name, i.e. "foo.*" is ok, but not "foo.b*" or "foo.*.bar". To
-          specify a default for all applicable elements, the whole pattern "*"
-          is used.
+          qualified name, i.e. "foo.*" is ok, but not "foo.b*" or "foo.*.bar". A
+          wildcard will match one or more components. To specify a default for all
+          applicable elements, the whole pattern "*" is used.
         type: string
     type: object
   Empty:
@@ -1302,15 +1345,6 @@ definitions:
         items:
           $ref: '#/definitions/Option'
         type: array
-    type: object
-  Experimental:
-    description: |-
-      Experimental service configuration. These configuration options can
-      only be used by whitelisted users.
-    properties:
-      authorization:
-        $ref: '#/definitions/AuthorizationConfig'
-        description: Authorization configuration.
     type: object
   Field:
     description: A single field of a message type.
@@ -1464,9 +1498,6 @@ definitions:
         items:
           $ref: '#/definitions/Enum'
         type: array
-      experimental:
-        $ref: '#/definitions/Experimental'
-        description: Experimental configuration.
       http:
         $ref: '#/definitions/Http'
         description: HTTP configuration.
@@ -1728,7 +1759,9 @@ definitions:
 
       HTTP | gRPC
       -----|-----
-      `GET /v1/messages/123456?revision=2&sub.subfield=foo` | `GetMessage(message_id: "123456" revision: 2 sub: SubMessage(subfield: "foo"))`
+      `GET /v1/messages/123456?revision=2&sub.subfield=foo` |
+      `GetMessage(message_id: "123456" revision: 2 sub: SubMessage(subfield:
+      "foo"))`
 
       Note that fields which are mapped to URL query parameters must have a
       primitive type or a repeated primitive type or a non-repeated message type.
@@ -1760,7 +1793,8 @@ definitions:
 
       HTTP | gRPC
       -----|-----
-      `PATCH /v1/messages/123456 { "text": "Hi!" }` | `UpdateMessage(message_id: "123456" message { text: "Hi!" })`
+      `PATCH /v1/messages/123456 { "text": "Hi!" }` | `UpdateMessage(message_id:
+      "123456" message { text: "Hi!" })`
 
       The special name `*` can be used in the body mapping to define that
       every field not bound by the path template should be mapped to the
@@ -1785,7 +1819,8 @@ definitions:
 
       HTTP | gRPC
       -----|-----
-      `PATCH /v1/messages/123456 { "text": "Hi!" }` | `UpdateMessage(message_id: "123456" text: "Hi!")`
+      `PATCH /v1/messages/123456 { "text": "Hi!" }` | `UpdateMessage(message_id:
+      "123456" text: "Hi!")`
 
       Note that when using `*` in the body mapping, it is not possible to
       have HTTP parameters, as all fields not bound by the path end in
@@ -1816,7 +1851,8 @@ definitions:
       HTTP | gRPC
       -----|-----
       `GET /v1/messages/123456` | `GetMessage(message_id: "123456")`
-      `GET /v1/users/me/messages/123456` | `GetMessage(user_id: "me" message_id: "123456")`
+      `GET /v1/users/me/messages/123456` | `GetMessage(user_id: "me" message_id:
+      "123456")`
 
       ## Rules for HTTP mapping
 
@@ -1860,16 +1896,18 @@ definitions:
       `"{var=*}"`, when such a variable is expanded into a URL path on the client
       side, all characters except `[-_.~0-9a-zA-Z]` are percent-encoded. The
       server side does the reverse decoding. Such variables show up in the
-      [Discovery Document](https://developers.google.com/discovery/v1/reference/apis)
-      as `{var}`.
+      [Discovery
+      Document](https://developers.google.com/discovery/v1/reference/apis) as
+      `{var}`.
 
       If a variable contains multiple path segments, such as `"{var=foo/*}"`
       or `"{var=**}"`, when such a variable is expanded into a URL path on the
       client side, all characters except `[-_.~/0-9a-zA-Z]` are percent-encoded.
       The server side does the reverse decoding, except "%2F" and "%2f" are left
       unchanged. Such variables show up in the
-      [Discovery Document](https://developers.google.com/discovery/v1/reference/apis)
-      as `{+var}`.
+      [Discovery
+      Document](https://developers.google.com/discovery/v1/reference/apis) as
+      `{+var}`.
 
       ## Using gRPC API Service Configuration
 
@@ -2187,6 +2225,16 @@ definitions:
         items:
           $ref: '#/definitions/LabelDescriptor'
         type: array
+      launchStage:
+        description: Optional. The launch stage of the metric definition.
+        enum:
+          - LAUNCH_STAGE_UNSPECIFIED
+          - EARLY_ACCESS
+          - ALPHA
+          - BETA
+          - GA
+          - DEPRECATED
+        type: string
       metadata:
         $ref: '#/definitions/MetricDescriptorMetadata'
         description: Optional. Metadata which can be used to guide usage of the metric.
@@ -2307,7 +2355,9 @@ definitions:
         format: google-duration
         type: string
       launchStage:
-        description: The launch stage of the metric definition.
+        description: |-
+          Deprecated. Please use the MetricDescriptor.launch_stage instead.
+          The launch stage of the metric definition.
         enum:
           - LAUNCH_STAGE_UNSPECIFIED
           - EARLY_ACCESS
@@ -2471,6 +2521,16 @@ definitions:
         items:
           $ref: '#/definitions/LabelDescriptor'
         type: array
+      launchStage:
+        description: Optional. The launch stage of the monitored resource definition.
+        enum:
+          - LAUNCH_STAGE_UNSPECIFIED
+          - EARLY_ACCESS
+          - ALPHA
+          - BETA
+          - GA
+          - DEPRECATED
+        type: string
       name:
         description: |-
           Optional. The resource name of the monitored resource descriptor:
@@ -2627,7 +2687,7 @@ definitions:
         description: |-
           The server-assigned name, which is only unique within the same service that
           originally returns it. If you use the default HTTP mapping, the
-          `name` should have the format of `operations/some/unique/name`.
+          `name` should be a resource name ending with `operations/{unique_id}`.
         type: string
       response:
         additionalProperties:
@@ -2712,6 +2772,57 @@ definitions:
         type: array
     type: object
   Quota:
+    description: |+
+      Quota configuration helps to achieve fairness and budgeting in service
+      usage.
+
+      The metric based quota configuration works this way:
+      - The service configuration defines a set of metrics.
+      - For API calls, the quota.metric_rules maps methods to metrics with
+        corresponding costs.
+      - The quota.limits defines limits on the metrics, which will be used for
+        quota checks at runtime.
+
+      An example quota configuration in yaml format:
+
+         quota:
+           limits:
+
+           - name: apiWriteQpsPerProject
+             metric: library.googleapis.com/write_calls
+             unit: "1/min/{project}"  # rate limit for consumer projects
+             values:
+               STANDARD: 10000
+
+
+           # The metric rules bind all methods to the read_calls metric,
+           # except for the UpdateBook and DeleteBook methods. These two methods
+           # are mapped to the write_calls metric, with the UpdateBook method
+           # consuming at twice rate as the DeleteBook method.
+           metric_rules:
+           - selector: "*"
+             metric_costs:
+               library.googleapis.com/read_calls: 1
+           - selector: google.example.library.v1.LibraryService.UpdateBook
+             metric_costs:
+               library.googleapis.com/write_calls: 2
+           - selector: google.example.library.v1.LibraryService.DeleteBook
+             metric_costs:
+               library.googleapis.com/write_calls: 1
+
+       Corresponding Metric definition:
+
+           metrics:
+           - name: library.googleapis.com/read_calls
+             display_name: Read requests
+             metric_kind: DELTA
+             value_type: INT64
+
+           - name: library.googleapis.com/write_calls
+             display_name: Write requests
+             metric_kind: DELTA
+             value_type: INT64
+
     properties:
       limits:
         description: List of `QuotaLimit` definitions for the service.
@@ -2830,6 +2941,52 @@ definitions:
           specified unit. Currently only STANDARD is supported.
         type: object
     type: object
+  QuotaOverride:
+    description: A quota override
+    properties:
+      dimensions:
+        additionalProperties:
+          type: string
+        description: |-
+          If this map is nonempty, then this override applies only to specific values
+          for dimensions defined in the limit unit.
+
+          For example, an override on a limit with the unit 1/{project}/{region}
+          could contain an entry with the key "region" and the value "us-east-1";
+          the override is only applied to quota consumed in that region.
+
+          This map has the following restrictions:
+          - Keys that are not defined in the limit's unit are not valid keys.
+            Any string appearing in {brackets} in the unit (besides {project} or
+            {user}) is a defined key.
+          - "project" is not a valid key; the project is already specified in
+            the parent resource name.
+          - "user" is not a valid key; the API does not support quota overrides
+            that apply only to a specific user.
+          - If "region" appears as a key, its value must be a valid Cloud region.
+          - If "zone" appears as a key, its value must be a valid Cloud zone.
+          - If any valid key other than "region" or "zone" appears in the map, then
+            all valid keys other than "region" or "zone" must also appear in the map.
+        type: object
+      name:
+        description: |-
+          The resource name of the override.
+          This name is generated by the server when the override is created.
+
+          Example names would be:
+          `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/adminOverrides/4a3f2c1d`
+          `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/consumerOverrides/4a3f2c1d`
+
+          The resource name is intended to be opaque and should not be parsed for
+          its component strings, since its representation could change in the future.
+        type: string
+      overrideValue:
+        description: |-
+          The overriding quota limit value.
+          Can be any nonnegative integer, or -1 (unlimited quota).
+        format: int64
+        type: string
+    type: object
   SourceContext:
     description: |-
       `SourceContext` represents information about the source of a
@@ -2856,56 +3013,11 @@ definitions:
     description: |-
       The `Status` type defines a logical error model that is suitable for
       different programming environments, including REST APIs and RPC APIs. It is
-      used by [gRPC](https://github.com/grpc). The error model is designed to be:
+      used by [gRPC](https://github.com/grpc). Each `Status` message contains
+      three pieces of data: error code, error message, and error details.
 
-      - Simple to use and understand for most users
-      - Flexible enough to meet unexpected needs
-
-      # Overview
-
-      The `Status` message contains three pieces of data: error code, error
-      message, and error details. The error code should be an enum value of
-      google.rpc.Code, but it may accept additional error codes if needed.  The
-      error message should be a developer-facing English message that helps
-      developers *understand* and *resolve* the error. If a localized user-facing
-      error message is needed, put the localized message in the error details or
-      localize it in the client. The optional error details may contain arbitrary
-      information about the error. There is a predefined set of error detail types
-      in the package `google.rpc` that can be used for common error conditions.
-
-      # Language mapping
-
-      The `Status` message is the logical representation of the error model, but it
-      is not necessarily the actual wire format. When the `Status` message is
-      exposed in different client libraries and different wire protocols, it can be
-      mapped differently. For example, it will likely be mapped to some exceptions
-      in Java, but more likely mapped to some error codes in C.
-
-      # Other uses
-
-      The error model and the `Status` message can be used in a variety of
-      environments, either with or without APIs, to provide a
-      consistent developer experience across different environments.
-
-      Example uses of this error model include:
-
-      - Partial errors. If a service needs to return partial errors to the client,
-          it may embed the `Status` in the normal response to indicate the partial
-          errors.
-
-      - Workflow errors. A typical workflow has multiple steps. Each step may
-          have a `Status` message for error reporting.
-
-      - Batch operations. If a client uses batch request and batch response, the
-          `Status` message should be used directly inside batch response, one for
-          each error sub-response.
-
-      - Asynchronous operations. If an API call embeds asynchronous operation
-          results in its response, the status of those operations should be
-          represented directly using the `Status` message.
-
-      - Logging. If some API errors are stored in logs, the message `Status` could
-          be used directly after any stripping needed for security/privacy reasons.
+      You can find out more about this error model and how to work with it in the
+      [API Design Guide](https://cloud.google.com/apis/design/errors).
     properties:
       code:
         description: 'The status code, which should be an enum value of google.rpc.Code.'

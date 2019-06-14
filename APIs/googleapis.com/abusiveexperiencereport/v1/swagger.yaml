@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'Views Abusive Experience Report data, and gets a list of sites that have a significant number of abusive experiences.'
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Abusive Experience Report
   version: v1
   x-apiClientRegistration:
@@ -29,10 +33,18 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/xapi.zoo': Test scope for access to the Zoo service
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/xapi.zoo': Test scope for access to the Zoo service
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -115,6 +127,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/xapi.zoo'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/xapi.zoo'
       tags:
         - violatingSites
     parameters:
@@ -155,6 +169,8 @@ paths:
             $ref: '#/definitions/SiteSummaryResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/xapi.zoo'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/xapi.zoo'
       tags:
         - sites

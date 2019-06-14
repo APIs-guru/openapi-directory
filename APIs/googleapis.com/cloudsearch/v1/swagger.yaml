@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Cloud Search provides cloud-based search capabilities over G Suite data.  The Cloud Search API allows indexing of non-G Suite data into Cloud Search.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Cloud Search
   version: v1
   x-apiClientRegistration:
@@ -29,7 +33,7 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud_search': Index and serve your organization's data with Cloud Search
@@ -41,6 +45,22 @@ securityDefinitions:
       'https://www.googleapis.com/auth/cloud_search.settings.query': 'New Service: https://www.googleapis.com/auth/cloud_search.settings.query'
       'https://www.googleapis.com/auth/cloud_search.stats': 'New Service: https://www.googleapis.com/auth/cloud_search.stats'
       'https://www.googleapis.com/auth/cloud_search.stats.indexing': 'New Service: https://www.googleapis.com/auth/cloud_search.stats.indexing'
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud_search': Index and serve your organization's data with Cloud Search
+      'https://www.googleapis.com/auth/cloud_search.debug': 'New Service: https://www.googleapis.com/auth/cloud_search.debug'
+      'https://www.googleapis.com/auth/cloud_search.indexing': 'New Service: https://www.googleapis.com/auth/cloud_search.indexing'
+      'https://www.googleapis.com/auth/cloud_search.query': Search your organization's data in the Cloud Search index
+      'https://www.googleapis.com/auth/cloud_search.settings': 'New Service: https://www.googleapis.com/auth/cloud_search.settings'
+      'https://www.googleapis.com/auth/cloud_search.settings.indexing': 'New Service: https://www.googleapis.com/auth/cloud_search.settings.indexing'
+      'https://www.googleapis.com/auth/cloud_search.settings.query': 'New Service: https://www.googleapis.com/auth/cloud_search.settings.query'
+      'https://www.googleapis.com/auth/cloud_search.stats': 'New Service: https://www.googleapis.com/auth/cloud_search.stats'
+      'https://www.googleapis.com/auth/cloud_search.stats.indexing': 'New Service: https://www.googleapis.com/auth/cloud_search.stats.indexing'
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -155,7 +175,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.debug'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud_search.debug'
       tags:
         - debug
@@ -181,8 +205,8 @@ paths:
           schema:
             $ref: '#/definitions/Principal'
         - description: |-
-            If set, the request will enable debugging features of Cloud Search.
-            Only turn on this field, if asked by Google to help with debugging.
+            If you are asked by Google to help with debugging, set this field.
+            Otherwise, ignore this field.
           in: query
           name: debugOptions.enableDebugging
           type: boolean
@@ -202,7 +226,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.debug'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud_search.debug'
       tags:
         - debug
@@ -212,8 +240,8 @@ paths:
       operationId: cloudsearch.debug.identitysources.items.listForunmappedidentity
       parameters:
         - description: |-
-            If set, the request will enable debugging features of Cloud Search.
-            Only turn on this field, if asked by Google to help with debugging.
+            If you are asked by Google to help with debugging, set this field.
+            Otherwise, ignore this field.
           in: query
           name: debugOptions.enableDebugging
           type: boolean
@@ -249,7 +277,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.debug'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud_search.debug'
       tags:
         - debug
@@ -271,8 +303,8 @@ paths:
       operationId: cloudsearch.debug.identitysources.unmappedids.list
       parameters:
         - description: |-
-            If set, the request will enable debugging features of Cloud Search.
-            Only turn on this field, if asked by Google to help with debugging.
+            If you are asked by Google to help with debugging, set this field.
+            Otherwise, ignore this field.
           in: query
           name: debugOptions.enableDebugging
           type: boolean
@@ -313,7 +345,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.debug'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud_search.debug'
       tags:
         - debug
@@ -343,8 +379,8 @@ paths:
           name: connectorName
           type: string
         - description: |-
-            If set, the request will enable debugging features of Cloud Search.
-            Only turn on this field, if asked by Google to help with debugging.
+            If you are asked by Google to help with debugging, set this field.
+            Otherwise, ignore this field.
           in: query
           name: debugOptions.enableDebugging
           type: boolean
@@ -385,7 +421,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.indexing'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud_search.indexing'
       tags:
         - indexing
@@ -400,8 +440,8 @@ paths:
           name: connectorName
           type: string
         - description: |-
-            If set, the request will enable debugging features of Cloud Search.
-            Only turn on this field, if asked by Google to help with debugging.
+            If you are asked by Google to help with debugging, set this field.
+            Otherwise, ignore this field.
           in: query
           name: debugOptions.enableDebugging
           type: boolean
@@ -421,7 +461,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.indexing'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud_search.indexing'
       tags:
         - indexing
@@ -460,8 +504,8 @@ paths:
           name: connectorName
           type: string
         - description: |-
-            If set, the request will enable debugging features of Cloud Search.
-            Only turn on this field, if asked by Google to help with debugging.
+            If you are asked by Google to help with debugging, set this field.
+            Otherwise, ignore this field.
           in: query
           name: debugOptions.enableDebugging
           type: boolean
@@ -493,7 +537,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.indexing'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud_search.indexing'
       tags:
         - indexing
@@ -548,7 +596,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.indexing'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud_search.indexing'
       tags:
         - indexing
@@ -614,7 +666,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.indexing'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud_search.indexing'
       tags:
         - indexing
@@ -658,7 +714,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.indexing'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud_search.indexing'
       tags:
         - indexing
@@ -668,8 +728,8 @@ paths:
       operationId: cloudsearch.indexing.datasources.deleteSchema
       parameters:
         - description: |-
-            If set, the request will enable debugging features of Cloud Search.
-            Only turn on this field, if asked by Google to help with debugging.
+            If you are asked by Google to help with debugging, set this field.
+            Otherwise, ignore this field.
           in: query
           name: debugOptions.enableDebugging
           type: boolean
@@ -689,9 +749,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search.settings'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search.settings'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.settings.indexing'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud_search.settings.indexing'
       tags:
         - indexing
@@ -700,8 +766,8 @@ paths:
       operationId: cloudsearch.indexing.datasources.getSchema
       parameters:
         - description: |-
-            If set, the request will enable debugging features of Cloud Search.
-            Only turn on this field, if asked by Google to help with debugging.
+            If you are asked by Google to help with debugging, set this field.
+            Otherwise, ignore this field.
           in: query
           name: debugOptions.enableDebugging
           type: boolean
@@ -721,9 +787,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search.settings'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search.settings'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.settings.indexing'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud_search.settings.indexing'
       tags:
         - indexing
@@ -763,9 +835,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search.settings'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search.settings'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.settings.indexing'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud_search.settings.indexing'
       tags:
         - indexing
@@ -813,7 +891,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.indexing'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud_search.indexing'
       tags:
         - indexing
@@ -857,7 +939,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.indexing'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud_search.indexing'
       tags:
         - indexing
@@ -902,7 +988,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.indexing'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud_search.indexing'
       tags:
         - indexing
@@ -959,7 +1049,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.indexing'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud_search.indexing'
       tags:
         - media
@@ -996,7 +1090,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.query'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud_search.query'
       tags:
         - query
@@ -1010,8 +1108,8 @@ paths:
           name: pageToken
           type: string
         - description: |-
-            If set, the request will enable debugging features of Cloud Search.
-            Only turn on this field, if asked by Google to help with debugging.
+            If you are asked by Google to help with debugging, set this field.
+            Otherwise, ignore this field.
           in: query
           name: requestOptions.debugOptions.enableDebugging
           type: boolean
@@ -1020,6 +1118,11 @@ paths:
             For more information, see
             http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
             For translations.
+
+            When specified, the documents in search results are biased towards the
+            specified language.
+            Suggest API does not use this parameter. It autocompletes only based on
+            characters in the query.
           in: query
           name: requestOptions.languageCode
           type: string
@@ -1044,7 +1147,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.query'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud_search.query'
       tags:
         - query
@@ -1089,7 +1196,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.query'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud_search.query'
       tags:
         - query
@@ -1099,8 +1210,8 @@ paths:
       operationId: cloudsearch.settings.datasources.list
       parameters:
         - description: |-
-            If set, the request will enable debugging features of Cloud Search.
-            Only turn on this field, if asked by Google to help with debugging.
+            If you are asked by Google to help with debugging, set this field.
+            Otherwise, ignore this field.
           in: query
           name: debugOptions.enableDebugging
           type: boolean
@@ -1123,9 +1234,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search.settings'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search.settings'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.settings.indexing'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud_search.settings.indexing'
       tags:
         - settings
@@ -1157,9 +1274,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search.settings'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search.settings'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.settings.indexing'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud_search.settings.indexing'
       tags:
         - settings
@@ -1169,8 +1292,8 @@ paths:
       operationId: cloudsearch.settings.searchapplications.list
       parameters:
         - description: |-
-            If set, the request will enable debugging features of Cloud Search.
-            Only turn on this field, if asked by Google to help with debugging.
+            If you are asked by Google to help with debugging, set this field.
+            Otherwise, ignore this field.
           in: query
           name: debugOptions.enableDebugging
           type: boolean
@@ -1192,9 +1315,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search.settings'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search.settings'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.settings.query'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud_search.settings.query'
       tags:
         - settings
@@ -1226,26 +1355,32 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search.settings'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search.settings'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.settings.query'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud_search.settings.query'
       tags:
         - settings
   '/v1/settings/{name}':
     delete:
-      description: Deletes a search application.
-      operationId: cloudsearch.settings.searchapplications.delete
+      description: Deletes a datasource.
+      operationId: cloudsearch.settings.datasources.delete
       parameters:
         - description: |-
-            If set, the request will enable debugging features of Cloud Search.
-            Only turn on this field, if asked by Google to help with debugging.
+            If you are asked by Google to help with debugging, set this field.
+            Otherwise, ignore this field.
           in: query
           name: debugOptions.enableDebugging
           type: boolean
         - description: |-
-            The name of the search application to be deleted.
-            <br />Format: applications/{application_id}.
+            Name of the datasource.
+            Format: datasources/{source_id}.
           in: path
           name: name
           required: true
@@ -1259,25 +1394,31 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search.settings'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search.settings'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud_search.settings.query'
+            - 'https://www.googleapis.com/auth/cloud_search.settings.indexing'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search.settings.indexing'
       tags:
         - settings
     get:
-      description: Gets the specified search application.
-      operationId: cloudsearch.settings.searchapplications.get
+      description: Gets a datasource.
+      operationId: cloudsearch.settings.datasources.get
       parameters:
         - description: |-
-            If set, the request will enable debugging features of Cloud Search.
-            Only turn on this field, if asked by Google to help with debugging.
+            If you are asked by Google to help with debugging, set this field.
+            Otherwise, ignore this field.
           in: query
           name: debugOptions.enableDebugging
           type: boolean
         - description: |-
-            Name of the search application.
-            <br />Format: applications/{application_id}.
+            Name of the datasource resource.
+            Format: datasources/{source_id}.
           in: path
           name: name
           required: true
@@ -1287,14 +1428,20 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/SearchApplication'
+            $ref: '#/definitions/DataSource'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search.settings'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search.settings'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud_search.settings.query'
+            - 'https://www.googleapis.com/auth/cloud_search.settings.indexing'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search.settings.indexing'
       tags:
         - settings
     parameters:
@@ -1310,16 +1457,17 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     put:
-      description: Updates a search application.
-      operationId: cloudsearch.settings.searchapplications.update
+      description: Updates a datasource.
+      operationId: cloudsearch.settings.datasources.update
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/SearchApplication'
+            $ref: '#/definitions/UpdateDataSourceRequest'
         - description: |-
-            Name of the Search Application.
-            <br />Format: searchapplications/{application_id}.
+            Name of the datasource resource.
+            Format: datasources/{source_id}.
+            <br />The name is ignored when creating a datasource.
           in: path
           name: name
           required: true
@@ -1333,10 +1481,16 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search.settings'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search.settings'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud_search.settings.query'
+            - 'https://www.googleapis.com/auth/cloud_search.settings.indexing'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search.settings.indexing'
       tags:
         - settings
   '/v1/settings/{name}:reset':
@@ -1378,9 +1532,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search.settings'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search.settings'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.settings.query'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud_search.settings.query'
       tags:
         - settings
@@ -1424,9 +1584,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search.stats'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search.stats'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.stats.indexing'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud_search.stats.indexing'
       tags:
         - stats
@@ -1487,9 +1653,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search.stats'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search.stats'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.stats.indexing'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud_search.stats.indexing'
       tags:
         - stats
@@ -1527,15 +1699,27 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.debug'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud_search.debug'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search.indexing'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search.indexing'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.settings'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud_search.settings'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search.settings.indexing'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud_search.settings.indexing'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.settings.query'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud_search.settings.query'
       tags:
         - operations
@@ -1701,6 +1885,10 @@ definitions:
           the resulting expressions are joined disjunctively.
 
           The maximum number of elements is 20.
+
+          NOTE: Suggest API supports only few filters at the moment:
+            "objecttype", "type" and "mimetype".
+          For now, schema specific filters cannot be used to filter suggestions.
         items:
           $ref: '#/definitions/FilterOptions'
         type: array
@@ -1787,8 +1975,8 @@ definitions:
     properties:
       enableDebugging:
         description: |-
-          If set, the request will enable debugging features of Cloud Search.
-          Only turn on this field, if asked by Google to help with debugging.
+          If you are asked by Google to help with debugging, set this field.
+          Otherwise, ignore this field.
         type: boolean
     type: object
   DeleteQueueItemsRequest:
@@ -2891,7 +3079,9 @@ definitions:
       result to provide context.
     properties:
       properties:
-        description: The list of displayed properties for the metaline.
+        description: |-
+          The list of displayed properties for the metaline. The maxiumum number of
+          properties is 5.
         items:
           $ref: '#/definitions/DisplayedProperty'
         type: array
@@ -2975,7 +3165,7 @@ definitions:
           to specify singular properties before repeated properties in this list. All
           of the properties must set
           is_returnable
-          to true. The maximum number of elements is 3.
+          to true. The maximum number of metalines is 3.
         items:
           $ref: '#/definitions/Metaline'
         type: array
@@ -3047,7 +3237,7 @@ definitions:
         description: |-
           The server-assigned name, which is only unique within the same service that
           originally returns it. If you use the default HTTP mapping, the
-          `name` should have the format of `operations/some/unique/name`.
+          `name` should be a resource name ending with `operations/{unique_id}`.
         type: string
       response:
         additionalProperties:
@@ -3064,7 +3254,7 @@ definitions:
         type: object
     type: object
   PeopleSuggestion:
-    description: A people suggestion.
+    description: This field contains information about the person being suggested.
     properties:
       person:
         $ref: '#/definitions/Person'
@@ -3253,6 +3443,15 @@ definitions:
           is object or user identifier. IsReturnable must be true to set this option.
           Only supported for Boolean, Date, Double, Integer, and Timestamp
           properties.
+        type: boolean
+      isWildcardSearchable:
+        description: |-
+          Indicates that users can perform wildcard search for this
+          property. Only supported for Text properties. IsReturnable must be true to
+          set this option. In a given datasource maximum of 5 properties can be
+          marked as is_wildcard_searchable.
+
+          Note: This is an alpha feature and is enabled for whitelisted users only.
         type: boolean
       name:
         description: |-
@@ -3474,7 +3673,9 @@ definitions:
         description: Name of the source
     type: object
   QuerySuggestion:
-    description: A completed query suggestion.
+    description: |-
+      This field does not contain anything as of now and is just used as an
+      indicator that the suggest result was a phrase completion.
     properties: {}
     type: object
   RepositoryError:
@@ -3516,6 +3717,11 @@ definitions:
           For more information, see
           http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
           For translations.
+
+          When specified, the documents in search results are biased towards the
+          specified language.
+          Suggest API does not use this parameter. It autocompletes only based on
+          characters in the query.
         type: string
       searchApplicationId:
         description: Id of the application created using SearchApplicationsService.
@@ -3878,7 +4084,7 @@ definitions:
       url:
         description: |-
           The URL of the search result. The URL contains a Google redirect to the
-          actual item.
+          actual item. This URL is signed and shouldn't be changed.
         type: string
     type: object
   Snippet:
@@ -4038,56 +4244,11 @@ definitions:
     description: |-
       The `Status` type defines a logical error model that is suitable for
       different programming environments, including REST APIs and RPC APIs. It is
-      used by [gRPC](https://github.com/grpc). The error model is designed to be:
+      used by [gRPC](https://github.com/grpc). Each `Status` message contains
+      three pieces of data: error code, error message, and error details.
 
-      - Simple to use and understand for most users
-      - Flexible enough to meet unexpected needs
-
-      # Overview
-
-      The `Status` message contains three pieces of data: error code, error
-      message, and error details. The error code should be an enum value of
-      google.rpc.Code, but it may accept additional error codes if needed.  The
-      error message should be a developer-facing English message that helps
-      developers *understand* and *resolve* the error. If a localized user-facing
-      error message is needed, put the localized message in the error details or
-      localize it in the client. The optional error details may contain arbitrary
-      information about the error. There is a predefined set of error detail types
-      in the package `google.rpc` that can be used for common error conditions.
-
-      # Language mapping
-
-      The `Status` message is the logical representation of the error model, but it
-      is not necessarily the actual wire format. When the `Status` message is
-      exposed in different client libraries and different wire protocols, it can be
-      mapped differently. For example, it will likely be mapped to some exceptions
-      in Java, but more likely mapped to some error codes in C.
-
-      # Other uses
-
-      The error model and the `Status` message can be used in a variety of
-      environments, either with or without APIs, to provide a
-      consistent developer experience across different environments.
-
-      Example uses of this error model include:
-
-      - Partial errors. If a service needs to return partial errors to the client,
-          it may embed the `Status` in the normal response to indicate the partial
-          errors.
-
-      - Workflow errors. A typical workflow has multiple steps. Each step may
-          have a `Status` message for error reporting.
-
-      - Batch operations. If a client uses batch request and batch response, the
-          `Status` message should be used directly inside batch response, one for
-          each error sub-response.
-
-      - Asynchronous operations. If an API call embeds asynchronous operation
-          results in its response, the status of those operations should be
-          represented directly using the `Status` message.
-
-      - Logging. If some API errors are stored in logs, the message `Status` could
-          be used directly after any stripping needed for security/privacy reasons.
+      You can find out more about this error model and how to work with it in the
+      [API Design Guide](https://cloud.google.com/apis/design/errors).
     properties:
       code:
         description: 'The status code, which should be an enum value of google.rpc.Code.'
@@ -4134,11 +4295,16 @@ definitions:
         description: |-
           The sources to use for suggestions. If not specified, all data sources
           from the current search application are used.
+          Suggestions are based on Gmail titles. Suggestions from third party sources
+          are not available.
         items:
           $ref: '#/definitions/DataSourceRestriction'
         type: array
       query:
-        description: Partial query for the completion suggestion.
+        description: |-
+          Partial query for which autocomplete suggestions will be shown.
+          For example, if the query is "sea", then the server might return
+          "season", "search", "seagull" and so on.
         type: string
       requestOptions:
         $ref: '#/definitions/RequestOptions'
@@ -4148,7 +4314,7 @@ definitions:
     description: Response of the suggest API.
     properties:
       suggestResults:
-        description: List of suggestion results.
+        description: List of suggestions.
         items:
           $ref: '#/definitions/SuggestResult'
         type: array
@@ -4158,8 +4324,15 @@ definitions:
     properties:
       peopleSuggestion:
         $ref: '#/definitions/PeopleSuggestion'
+        description: |-
+          This is present when the suggestion indicates a person. It
+          contains more information about the person - like their email ID,
+          name etc.
       querySuggestion:
         $ref: '#/definitions/QuerySuggestion'
+        description: |-
+          This field will be present if the suggested query is a word/phrase
+          completion.
       source:
         $ref: '#/definitions/Source'
         description: The source of the suggestion.

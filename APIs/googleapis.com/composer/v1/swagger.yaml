@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Manages Apache Airflow environments on Google Cloud Platform.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Cloud Composer
   version: v1
   x-apiClientRegistration:
@@ -29,10 +33,18 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -104,37 +116,12 @@ tags:
 paths:
   '/v1/{name}':
     delete:
-      description: |-
-        Deletes a long-running operation. This method indicates that the client is
-        no longer interested in the operation result. It does not cancel the
-        operation. If the server doesn't support this method, it returns
-        `google.rpc.Code.UNIMPLEMENTED`.
-      operationId: composer.projects.locations.operations.delete
+      description: Delete an environment.
+      operationId: composer.projects.locations.environments.delete
       parameters:
-        - description: The name of the operation resource to be deleted.
-          in: path
-          name: name
-          required: true
-          type: string
-          x-reservedExpansion: true
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Empty'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - projects
-    get:
-      description: |-
-        Gets the latest state of a long-running operation.  Clients can use this
-        method to poll the operation result at intervals as recommended by the API
-        service.
-      operationId: composer.projects.locations.operations.get
-      parameters:
-        - description: The name of the operation resource.
+        - description: |-
+            The environment to delete, in the form:
+            "projects/{projectId}/locations/{locationId}/environments/{environmentId}"
           in: path
           name: name
           required: true
@@ -147,6 +134,32 @@ paths:
             $ref: '#/definitions/Operation'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    get:
+      description: Get an existing environment.
+      operationId: composer.projects.locations.environments.get
+      parameters:
+        - description: |-
+            The resource name of the environment to get, in the form:
+            "projects/{projectId}/locations/{locationId}/environments/{environmentId}"
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Environment'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -280,7 +293,8 @@ paths:
              <tr>
              <td>config.nodeCount</td>
              <td>Horizontally scale the number of nodes in the environment. An integer
-             greater than or equal to 3 must be provided in the `config.nodeCount` field.
+             greater than or equal to 3 must be provided in the `config.nodeCount`
+             field.
              </td>
              </tr>
              <tr>
@@ -321,6 +335,8 @@ paths:
             $ref: '#/definitions/Operation'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -365,6 +381,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -408,6 +426,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -430,7 +450,9 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/Environment'
-        - description: 'The parent must be of the form "projects/{projectId}/locations/{locationId}".'
+        - description: |-
+            The parent must be of the form
+            "projects/{projectId}/locations/{locationId}".
           in: path
           name: parent
           required: true
@@ -443,6 +465,8 @@ paths:
             $ref: '#/definitions/Operation'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -474,6 +498,8 @@ paths:
             $ref: '#/definitions/ListImageVersionsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -563,7 +589,8 @@ definitions:
         description: |-
           Output only.
           The URI of the Apache Airflow Web UI hosted within this environment (see
-          [Airflow web interface](/composer/docs/how-to/accessing/airflow-web-interface)).
+          [Airflow web
+          interface](/composer/docs/how-to/accessing/airflow-web-interface)).
         type: string
       dagGcsPrefix:
         description: |-
@@ -661,8 +688,9 @@ definitions:
         description: |-
           Optional. The Compute Engine [zone](/compute/docs/regions-zones) in which
           to deploy the VMs used to run the Apache Airflow software, specified as a
-          [relative resource name](/apis/design/resource_names#relative_resource_name).
-          For example: "projects/{projectId}/zones/{zoneId}".
+          [relative resource
+          name](/apis/design/resource_names#relative_resource_name). For example:
+          "projects/{projectId}/zones/{zoneId}".
 
           This `location` must belong to the enclosing environment's project and
           location. If both this field and `nodeConfig.machineType` are specified,
@@ -678,8 +706,8 @@ definitions:
           Optional. The Compute Engine
           [machine type](/compute/docs/machine-types) used for cluster instances,
           specified as a
-          [relative resource name](/apis/design/resource_names#relative_resource_name).
-          For example:
+          [relative resource
+          name](/apis/design/resource_names#relative_resource_name). For example:
           "projects/{projectId}/zones/{zoneId}/machineTypes/{machineTypeId}".
 
           The `machineType` must belong to the enclosing environment's project and
@@ -698,8 +726,9 @@ definitions:
         description: |-
           Optional. The Compute Engine network to be used for machine
           communications, specified as a
-          [relative resource name](/apis/design/resource_names#relative_resource_name).
-          For example: "projects/{projectId}/global/networks/{networkId}".
+          [relative resource
+          name](/apis/design/resource_names#relative_resource_name). For example:
+          "projects/{projectId}/global/networks/{networkId}".
 
           [Shared VPC](/vpc/docs/shared-vpc) is not currently supported. The
           network must belong to the environment's project. If unspecified, the
@@ -725,8 +754,8 @@ definitions:
         description: |-
           Optional. The Compute Engine subnetwork to be used for machine
           communications, specified as a
-          [relative resource name](/apis/design/resource_names#relative_resource_name).
-          For example:
+          [relative resource
+          name](/apis/design/resource_names#relative_resource_name). For example:
           "projects/{projectId}/regions/{regionId}/subnetworks/{subnetworkId}"
 
           If a subnetwork is provided, `nodeConfig.network` must also be provided,
@@ -770,7 +799,7 @@ definitions:
         description: |-
           The server-assigned name, which is only unique within the same service that
           originally returns it. If you use the default HTTP mapping, the
-          `name` should have the format of `operations/some/unique/name`.
+          `name` should be a resource name ending with `operations/{unique_id}`.
         type: string
       response:
         additionalProperties:
@@ -845,15 +874,15 @@ definitions:
         description: |-
           Optional. Apache Airflow configuration properties to override.
 
-          Property keys contain the section and property names, separated by a hyphen,
-          for example "core-dags_are_paused_at_creation". Section names must not
-          contain hyphens ("-"), opening square brackets ("["),  or closing square
-          brackets ("]"). The property name must not be empty and must not contain
-          an equals sign ("=") or semicolon (";"). Section and property names must
-          not contain a period ("."). Apache Airflow configuration property names
-          must be written in [snake_case](https://en.wikipedia.org/wiki/Snake_case).
-          Property values can contain any character, and can be written in any
-          lower/upper case format.
+          Property keys contain the section and property names, separated by a
+          hyphen, for example "core-dags_are_paused_at_creation". Section names must
+          not contain hyphens ("-"), opening square brackets ("["),  or closing
+          square brackets ("]"). The property name must not be empty and must not
+          contain an equals sign ("=") or semicolon (";"). Section and property names
+          must not contain a period ("."). Apache Airflow configuration property
+          names must be written in
+          [snake_case](https://en.wikipedia.org/wiki/Snake_case). Property values can
+          contain any character, and can be written in any lower/upper case format.
 
           Certain Apache Airflow configuration property values are
           [blacklisted](/composer/docs/how-to/managing/setting-airflow-configurations#airflow_configuration_blacklists),
@@ -906,7 +935,8 @@ definitions:
           official Apache Airflow repository
           [release name](https://github.com/apache/incubator-airflow/releases).
 
-          See also [Version List](/composer/docs/concepts/versioning/composer-versions).
+          See also [Version
+          List](/composer/docs/concepts/versioning/composer-versions).
         type: string
       pypiPackages:
         additionalProperties:

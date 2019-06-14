@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'Manages classes, rosters, and invitations in Google Classroom.'
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Google Classroom
   version: v1
   x-apiClientRegistration:
@@ -31,7 +35,7 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/classroom.announcements': View and manage announcements in Google Classroom
@@ -52,6 +56,35 @@ securityDefinitions:
       'https://www.googleapis.com/auth/classroom.rosters.readonly': View your Google Classroom class rosters
       'https://www.googleapis.com/auth/classroom.student-submissions.me.readonly': View your course work and grades in Google Classroom
       'https://www.googleapis.com/auth/classroom.student-submissions.students.readonly': View course work and grades for students in the Google Classroom classes you teach or administer
+      'https://www.googleapis.com/auth/classroom.topics': 'See, create, and edit topics in Google Classroom'
+      'https://www.googleapis.com/auth/classroom.topics.readonly': View topics in Google Classroom
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/classroom.announcements': View and manage announcements in Google Classroom
+      'https://www.googleapis.com/auth/classroom.announcements.readonly': View announcements in Google Classroom
+      'https://www.googleapis.com/auth/classroom.courses': Manage your Google Classroom classes
+      'https://www.googleapis.com/auth/classroom.courses.readonly': View your Google Classroom classes
+      'https://www.googleapis.com/auth/classroom.coursework.me': Manage your course work and view your grades in Google Classroom
+      'https://www.googleapis.com/auth/classroom.coursework.me.readonly': View your course work and grades in Google Classroom
+      'https://www.googleapis.com/auth/classroom.coursework.students': Manage course work and grades for students in the Google Classroom classes you teach and view the course work and grades for classes you administer
+      'https://www.googleapis.com/auth/classroom.coursework.students.readonly': View course work and grades for students in the Google Classroom classes you teach or administer
+      'https://www.googleapis.com/auth/classroom.guardianlinks.me.readonly': View your Google Classroom guardians
+      'https://www.googleapis.com/auth/classroom.guardianlinks.students': View and manage guardians for students in your Google Classroom classes
+      'https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly': View guardians for students in your Google Classroom classes
+      'https://www.googleapis.com/auth/classroom.profile.emails': View the email addresses of people in your classes
+      'https://www.googleapis.com/auth/classroom.profile.photos': View the profile photos of people in your classes
+      'https://www.googleapis.com/auth/classroom.push-notifications': Receive notifications about your Google Classroom data
+      'https://www.googleapis.com/auth/classroom.rosters': Manage your Google Classroom class rosters
+      'https://www.googleapis.com/auth/classroom.rosters.readonly': View your Google Classroom class rosters
+      'https://www.googleapis.com/auth/classroom.student-submissions.me.readonly': View your course work and grades in Google Classroom
+      'https://www.googleapis.com/auth/classroom.student-submissions.students.readonly': View course work and grades for students in the Google Classroom classes you teach or administer
+      'https://www.googleapis.com/auth/classroom.topics': 'See, create, and edit topics in Google Classroom'
+      'https://www.googleapis.com/auth/classroom.topics.readonly': View topics in Google Classroom
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -201,7 +234,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.courses'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.courses'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.courses.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.courses.readonly'
       tags:
         - courses
@@ -247,6 +284,8 @@ paths:
             $ref: '#/definitions/Course'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.courses'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.courses'
       tags:
         - courses
@@ -297,7 +336,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.courses'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.courses'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.courses.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.courses.readonly'
       tags:
         - courses
@@ -348,6 +391,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.courses'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.courses'
       tags:
         - courses
   '/v1/courses/{courseId}/aliases/{alias}':
@@ -387,6 +432,8 @@ paths:
             $ref: '#/definitions/Empty'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.courses'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.courses'
       tags:
         - courses
@@ -476,7 +523,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.announcements'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.announcements'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.announcements.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.announcements.readonly'
       tags:
         - courses
@@ -527,6 +578,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.announcements'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.announcements'
       tags:
         - courses
   '/v1/courses/{courseId}/announcements/{id}':
@@ -571,6 +624,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.announcements'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.announcements'
       tags:
         - courses
     get:
@@ -606,7 +661,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.announcements'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.announcements'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.announcements.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.announcements.readonly'
       tags:
         - courses
@@ -678,6 +737,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.announcements'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.announcements'
       tags:
         - courses
   '/v1/courses/{courseId}/announcements/{id}:modifyAssignees':
@@ -732,6 +793,8 @@ paths:
             $ref: '#/definitions/Announcement'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.announcements'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.announcements'
       tags:
         - courses
@@ -810,11 +873,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.coursework.me'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.coursework.me'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.coursework.me.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.coursework.me.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.coursework.students'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.coursework.students'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.coursework.students.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.coursework.students.readonly'
       tags:
         - courses
@@ -871,6 +942,8 @@ paths:
             $ref: '#/definitions/CourseWork'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.coursework.students'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.coursework.students'
       tags:
         - courses
@@ -974,15 +1047,27 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.coursework.me'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.coursework.me'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.coursework.me.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.coursework.me.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.coursework.students'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.coursework.students'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.coursework.students.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.coursework.students.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.student-submissions.me.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.student-submissions.me.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.student-submissions.students.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.student-submissions.students.readonly'
       tags:
         - courses
@@ -1037,15 +1122,27 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.coursework.me'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.coursework.me'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.coursework.me.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.coursework.me.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.coursework.students'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.coursework.students'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.coursework.students.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.coursework.students.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.student-submissions.me.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.student-submissions.me.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.student-submissions.students.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.student-submissions.students.readonly'
       tags:
         - courses
@@ -1125,7 +1222,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.coursework.me'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.coursework.me'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.coursework.students'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.coursework.students'
       tags:
         - courses
@@ -1194,7 +1295,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.coursework.me'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.coursework.me'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.coursework.students'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.coursework.students'
       tags:
         - courses
@@ -1265,6 +1370,8 @@ paths:
             $ref: '#/definitions/Empty'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.coursework.me'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.coursework.me'
       tags:
         - courses
@@ -1337,6 +1444,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.coursework.students'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.coursework.students'
       tags:
         - courses
   '/v1/courses/{courseId}/courseWork/{courseWorkId}/studentSubmissions/{id}:turnIn':
@@ -1406,6 +1515,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.coursework.me'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.coursework.me'
       tags:
         - courses
   '/v1/courses/{courseId}/courseWork/{id}':
@@ -1450,6 +1561,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.coursework.students'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.coursework.students'
       tags:
         - courses
     get:
@@ -1485,11 +1598,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.coursework.me'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.coursework.me'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.coursework.me.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.coursework.me.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.coursework.students'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.coursework.students'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.coursework.students.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.coursework.students.readonly'
       tags:
         - courses
@@ -1565,6 +1686,7 @@ paths:
             * `max_points`
             * `scheduled_time`
             * `submission_modification_mode`
+            * `topic_id`
           in: query
           name: updateMask
           type: string
@@ -1575,6 +1697,8 @@ paths:
             $ref: '#/definitions/CourseWork'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.coursework.students'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.coursework.students'
       tags:
         - courses
@@ -1631,6 +1755,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.coursework.students'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.coursework.students'
       tags:
         - courses
   '/v1/courses/{courseId}/students':
@@ -1679,11 +1805,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.profile.emails'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.profile.emails'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.profile.photos'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.profile.photos'
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.rosters'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.rosters'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.rosters.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.rosters.readonly'
       tags:
         - courses
@@ -1745,9 +1879,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.profile.emails'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.profile.emails'
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.profile.photos'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.profile.photos'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.rosters'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.rosters'
       tags:
         - courses
@@ -1791,6 +1931,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.rosters'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.rosters'
       tags:
         - courses
     get:
@@ -1832,11 +1974,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.profile.emails'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.profile.emails'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.profile.photos'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.profile.photos'
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.rosters'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.rosters'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.rosters.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.rosters.readonly'
       tags:
         - courses
@@ -1898,11 +2048,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.profile.emails'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.profile.emails'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.profile.photos'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.profile.photos'
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.rosters'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.rosters'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.rosters.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.rosters.readonly'
       tags:
         - courses
@@ -1957,9 +2115,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.profile.emails'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.profile.emails'
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.profile.photos'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.profile.photos'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.rosters'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.rosters'
       tags:
         - courses
@@ -2005,6 +2169,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.rosters'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.rosters'
       tags:
         - courses
     get:
@@ -2046,11 +2212,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.profile.emails'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.profile.emails'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.profile.photos'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.profile.photos'
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.rosters'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.rosters'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.rosters.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.rosters.readonly'
       tags:
         - courses
@@ -2066,6 +2240,256 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
+  '/v1/courses/{courseId}/topics':
+    get:
+      description: |-
+        Returns the list of topics that the requester is permitted to view.
+
+        This method returns the following error codes:
+
+        * `PERMISSION_DENIED` if the requesting user is not permitted to access
+        the requested course or for access errors.
+        * `INVALID_ARGUMENT` if the request is malformed.
+        * `NOT_FOUND` if the requested course does not exist.
+      operationId: classroom.courses.topics.list
+      parameters:
+        - description: |-
+            Identifier of the course.
+            This identifier can be either the Classroom-assigned identifier or an
+            alias.
+          in: path
+          name: courseId
+          required: true
+          type: string
+        - description: |-
+            Maximum number of items to return. Zero or unspecified indicates that the
+            server may assign a maximum.
+
+            The server may return fewer than the specified number of results.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            nextPageToken
+            value returned from a previous
+            list call,
+            indicating that the subsequent page of results should be returned.
+
+            The list request
+            must be otherwise identical to the one that resulted in this token.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListTopicResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.topics'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.topics'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.topics.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.topics.readonly'
+      tags:
+        - courses
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Creates a topic.
+
+        This method returns the following error codes:
+
+        * `PERMISSION_DENIED` if the requesting user is not permitted to access the
+        requested course, create a topic in the requested course,
+        or for access errors.
+        * `INVALID_ARGUMENT` if the request is malformed.
+        * `NOT_FOUND` if the requested course does not exist.
+      operationId: classroom.courses.topics.create
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Topic'
+        - description: |-
+            Identifier of the course.
+            This identifier can be either the Classroom-assigned identifier or an
+            alias.
+          in: path
+          name: courseId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Topic'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.topics'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.topics'
+      tags:
+        - courses
+  '/v1/courses/{courseId}/topics/{id}':
+    delete:
+      description: |-
+        Deletes a topic.
+
+        This method returns the following error codes:
+
+        * `PERMISSION_DENIED` if the requesting user is not allowed to delete the
+        requested topic or for access errors.
+        * `FAILED_PRECONDITION` if the requested topic has already been
+        deleted.
+        * `NOT_FOUND` if no course or topic exists with the requested ID.
+      operationId: classroom.courses.topics.delete
+      parameters:
+        - description: |-
+            Identifier of the course.
+            This identifier can be either the Classroom-assigned identifier or an
+            alias.
+          in: path
+          name: courseId
+          required: true
+          type: string
+        - description: Identifier of the topic to delete.
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.topics'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.topics'
+      tags:
+        - courses
+    get:
+      description: |-
+        Returns a topic.
+
+        This method returns the following error codes:
+
+        * `PERMISSION_DENIED` if the requesting user is not permitted to access the
+        requested course or topic, or for access errors.
+        * `INVALID_ARGUMENT` if the request is malformed.
+        * `NOT_FOUND` if the requested course or topic does not exist.
+      operationId: classroom.courses.topics.get
+      parameters:
+        - description: Identifier of the course.
+          in: path
+          name: courseId
+          required: true
+          type: string
+        - description: Identifier of the topic.
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Topic'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.topics'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.topics'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.topics.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.topics.readonly'
+      tags:
+        - courses
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    patch:
+      description: |-
+        Updates one or more fields of a topic.
+
+        This method returns the following error codes:
+
+        * `PERMISSION_DENIED` if the requesting developer project did not create
+        the corresponding topic or for access errors.
+        * `INVALID_ARGUMENT` if the request is malformed.
+        * `NOT_FOUND` if the requested course or topic does not exist
+      operationId: classroom.courses.topics.patch
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Topic'
+        - description: |-
+            Identifier of the course.
+            This identifier can be either the Classroom-assigned identifier or an
+            alias.
+          in: path
+          name: courseId
+          required: true
+          type: string
+        - description: Identifier of the topic.
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: |-
+            Mask that identifies which fields on the topic to update.
+            This field is required to do an update. The update fails if invalid
+            fields are specified. If a field supports empty values, it can be cleared
+            by specifying it in the update mask and not in the Topic object. If a
+            field that does not support empty values is included in the update mask and
+            not set in the Topic object, an `INVALID_ARGUMENT` error will be
+            returned.
+
+            The following fields may be specified:
+
+            * `name`
+          in: query
+          name: updateMask
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Topic'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.topics'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.topics'
+      tags:
+        - courses
   '/v1/courses/{id}':
     delete:
       description: |-
@@ -2093,6 +2517,8 @@ paths:
             $ref: '#/definitions/Empty'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.courses'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.courses'
       tags:
         - courses
@@ -2123,7 +2549,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.courses'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.courses'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.courses.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.courses.readonly'
       tags:
         - courses
@@ -2197,6 +2627,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.courses'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.courses'
       tags:
         - courses
     put:
@@ -2231,6 +2663,8 @@ paths:
             $ref: '#/definitions/Course'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.courses'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.courses'
       tags:
         - courses
@@ -2290,7 +2724,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.rosters'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.rosters'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.rosters.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.rosters.readonly'
       tags:
         - invitations
@@ -2334,6 +2772,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.rosters'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.rosters'
       tags:
         - invitations
   '/v1/invitations/{id}':
@@ -2361,6 +2801,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.rosters'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.rosters'
       tags:
         - invitations
     get:
@@ -2387,7 +2829,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.rosters'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.rosters'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.rosters.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.rosters.readonly'
       tags:
         - invitations
@@ -2446,6 +2892,8 @@ paths:
             $ref: '#/definitions/Empty'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.rosters'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.rosters'
       tags:
         - invitations
@@ -2509,6 +2957,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.push-notifications'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.push-notifications'
       tags:
         - registrations
   '/v1/registrations/{registrationId}':
@@ -2530,6 +2980,8 @@ paths:
             $ref: '#/definitions/Empty'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.push-notifications'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.push-notifications'
       tags:
         - registrations
@@ -2626,7 +3078,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.guardianlinks.students'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.guardianlinks.students'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly'
       tags:
         - userProfiles
@@ -2693,6 +3149,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.guardianlinks.students'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.guardianlinks.students'
       tags:
         - userProfiles
   '/v1/userProfiles/{studentId}/guardianInvitations/{invitationId}':
@@ -2732,7 +3190,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.guardianlinks.students'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.guardianlinks.students'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly'
       tags:
         - userProfiles
@@ -2804,6 +3266,8 @@ paths:
             $ref: '#/definitions/GuardianInvitation'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.guardianlinks.students'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.guardianlinks.students'
       tags:
         - userProfiles
@@ -2879,9 +3343,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.guardianlinks.me.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.guardianlinks.me.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.guardianlinks.students'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.guardianlinks.students'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly'
       tags:
         - userProfiles
@@ -2943,6 +3413,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.guardianlinks.students'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.guardianlinks.students'
       tags:
         - userProfiles
     get:
@@ -2987,9 +3459,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.guardianlinks.me.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.guardianlinks.me.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.guardianlinks.students'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.guardianlinks.students'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly'
       tags:
         - userProfiles
@@ -3036,11 +3514,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.profile.emails'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.profile.emails'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.profile.photos'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.profile.photos'
         - Oauth2:
             - 'https://www.googleapis.com/auth/classroom.rosters'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.rosters'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.rosters.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/classroom.rosters.readonly'
       tags:
         - userProfiles
@@ -3106,8 +3592,8 @@ definitions:
         description: |-
           Identifiers of students with access to the announcement.
           This field is set only if `assigneeMode` is `INDIVIDUAL_STUDENTS`.
-          If the `assigneeMode` is `INDIVIDUAL_STUDENTS`, then only students specified in this
-          field will be able to see the announcement.
+          If the `assigneeMode` is `INDIVIDUAL_STUDENTS`, then only students
+          specified in this field will be able to see the announcement.
       materials:
         description: |-
           Additional materials.
@@ -3340,7 +3826,8 @@ definitions:
           Information about a Drive Folder that is shared with all teachers of the
           course.
 
-          This field will only be set for teachers of the course and domain administrators.
+          This field will only be set for teachers of the course and domain
+          administrators.
 
           Read-only.
       teacherGroupEmail:
@@ -3564,6 +4051,11 @@ definitions:
           Title of this course work.
           The title must be a valid UTF-8 string containing between 1 and 3000
           characters.
+        type: string
+      topicId:
+        description: |-
+          Identifier for the topic that this coursework is associated with.
+          Must match an existing topic in the course.
         type: string
       updateTime:
         description: |-
@@ -4035,6 +4527,20 @@ definitions:
           $ref: '#/definitions/Teacher'
         type: array
     type: object
+  ListTopicResponse:
+    description: Response when listing topics.
+    properties:
+      nextPageToken:
+        description: |-
+          Token identifying the next page of results to return. If empty, no further
+          results are available.
+        type: string
+      topic:
+        description: Topic items that match the request.
+        items:
+          $ref: '#/definitions/Topic'
+        type: array
+    type: object
   Material:
     description: |-
       Material attached to course work.
@@ -4477,6 +4983,37 @@ definitions:
           allow the value 60 if it allows leap-seconds.
         format: int32
         type: integer
+    type: object
+  Topic:
+    description: Topic created by a teacher for the course
+    properties:
+      courseId:
+        description: |-
+          Identifier of the course.
+
+          Read-only.
+        type: string
+      name:
+        description: |-
+          The name of the topic, generated by the user.
+          Leading and trailing whitespaces, if any, will be trimmed. Also, multiple
+          consecutive whitespaces will be collapsed into one inside the name. The
+          result must be a non-empty string. Topic names are case sensitive, and must
+          be no longer than 100 characters.
+        type: string
+      topicId:
+        description: |-
+          Unique identifier for the topic.
+
+          Read-only.
+        type: string
+      updateTime:
+        description: |-
+          The time the topic was last updated by the system.
+
+          Read-only.
+        format: google-datetime
+        type: string
     type: object
   TurnInStudentSubmissionRequest:
     description: Request to turn in a student submission.

@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: The Cloud Filestore API is used for creating and managing cloud file servers.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Cloud Filestore
   version: v1
   x-apiClientRegistration:
@@ -29,10 +33,18 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -104,12 +116,39 @@ tags:
 paths:
   '/v1/{name}':
     delete:
-      description: Deletes an instance.
-      operationId: file.projects.locations.instances.delete
+      description: |-
+        Deletes a long-running operation. This method indicates that the client is
+        no longer interested in the operation result. It does not cancel the
+        operation. If the server doesn't support this method, it returns
+        `google.rpc.Code.UNIMPLEMENTED`.
+      operationId: file.projects.locations.operations.delete
       parameters:
-        - description: |-
-            The instance resource name, in the format
-            projects/{project_id}/locations/{location}/instances/{instance_id}
+        - description: The name of the operation resource to be deleted.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    get:
+      description: |-
+        Gets the latest state of a long-running operation.  Clients can use this
+        method to poll the operation result at intervals as recommended by the API
+        service.
+      operationId: file.projects.locations.operations.get
+      parameters:
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
@@ -123,27 +162,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - projects
-    get:
-      description: Gets the details of a specific instance.
-      operationId: file.projects.locations.instances.get
-      parameters:
-        - description: |-
-            The instance resource name, in the format
-            projects/{project_id}/locations/{location}/instances/{instance_id}.
-          in: path
-          name: name
-          required: true
-          type: string
-          x-reservedExpansion: true
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Instance'
-      security:
-        - Oauth2:
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -192,6 +211,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{name}/locations':
@@ -224,6 +245,8 @@ paths:
             $ref: '#/definitions/ListLocationsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -279,6 +302,8 @@ paths:
             $ref: '#/definitions/ListOperationsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -339,6 +364,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{parent}/instances':
@@ -385,6 +412,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -430,6 +459,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
 definitions:
@@ -461,6 +492,347 @@ definitions:
         type: string
       name:
         description: The name of the file share (must be 16 characters or less).
+        type: string
+    type: object
+  GoogleCloudSaasacceleratorManagementProvidersV1Instance:
+    description: |-
+      Instance represents the interface for SLM services to actuate the state
+      of control plane resources.
+
+      Example Instance in JSON, where
+        consumer-project=snapchat,
+        producer-project=cloud-sql:
+
+      ```json
+      Instance:
+      {
+        "name":
+        "projects/snapchat/locations/us-east1/instances/prod-instance",
+        "create_time": {
+          "seconds": 1526406431,
+        },
+        "labels": {
+          "env": "prod",
+          "foo": "bar"
+        },
+        "state": READY,
+        "software_versions": {
+          "software_update": "cloud-sql-09-28-2018",
+        },
+        "maintenance_policy_names": {
+          "UpdatePolicy":
+          "projects/snapchat/locations/us-east1/maintenancePolicies/prod-update-policy",
+        }
+        "rollout_metadata": {
+          "projects/cloud-sql/locations/global/rolloutTypes/software_update": {
+            "release":
+            "projects/cloud-sql/locations/global/releases/cloud-sql-09-28-2018",
+            "rollout":
+            "projects/cloud-sql/locations/us-east1/rollouts/cloud-sql-09-28-2018-canary",
+          },
+          "projects/cloud-sql/locations/global/rolloutTypes/instance_restart": {
+            "release":
+            "projects/cloud-sql/locations/global/releases/cloud-sql-09-20-repair",
+            "rollout":
+            "projects/cloud-sql/locations/us-east1/rollouts/cloud-sql-09-20-repair-100-percent",
+          }
+        }
+        "tenant_project_id": "cloud-sql-test-tenant",
+        "producer_metadata": {
+          "cloud-sql-tier": "basic",
+          "cloud-sql-instance-size": "1G",
+        },
+        "provisioned_resources": [
+          {
+            "resource-type": "compute-instance",
+            "resource-url":
+            "https://www.googleapis.com/compute/v1/projects/cloud-sql/zones/us-east1-b/instances/vm-1",
+          }
+        ],
+        "maintenance_schedules": {
+          "csa_rollout": {
+             "start_time": {
+                "seconds": 1526406431,
+             },
+             "end_time": {
+                "seconds": 1535406431,
+             },
+          },
+          "ncsa_rollout": {
+             "start_time": {
+                "seconds": 1526406431,
+             },
+             "end_time": {
+                "seconds": 1535406431,
+             },
+          }
+        }
+      }
+      ```
+    properties:
+      createTime:
+        description: Output only. Timestamp when the resource was created.
+        format: google-datetime
+        type: string
+      labels:
+        additionalProperties:
+          type: string
+        description: |-
+          Optional. Resource labels to represent user provided metadata. Each label
+          is a key-value pair, where both the key and the value are arbitrary strings
+          provided by the user.
+        type: object
+      maintenancePolicyNames:
+        additionalProperties:
+          type: string
+        description: |-
+          The MaintenancePolicies that have been attached to the instance.
+          The key must be of the type name of the oneof policy name defined in
+          MaintenancePolicy, and the referenced policy must define the same policy
+          type. For complete details of MaintenancePolicy, please refer to
+          go/cloud-saas-mw-ug.
+        type: object
+      maintenanceSchedules:
+        additionalProperties:
+          $ref: '#/definitions/GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule'
+        description: |-
+          The MaintenanceSchedule contains the scheduling information of published
+          maintenance schedule.
+        type: object
+      name:
+        description: |-
+          Unique name of the resource. It uses the form:
+           `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+        type: string
+      producerMetadata:
+        additionalProperties:
+          type: string
+        description: |-
+          Output only. Custom string attributes used primarily to expose
+          producer-specific information in monitoring dashboards.
+          See go/get-instance-metadata.
+        type: object
+      provisionedResources:
+        description: |-
+          Output only. The list of data plane resources provisioned for this
+          instance, e.g. compute VMs. See go/get-instance-metadata.
+        items:
+          $ref: '#/definitions/GoogleCloudSaasacceleratorManagementProvidersV1ProvisionedResource'
+        type: array
+      rolloutMetadata:
+        additionalProperties:
+          $ref: '#/definitions/GoogleCloudSaasacceleratorManagementProvidersV1RolloutMetadata'
+        description: |-
+          The map between RolloutType and the corresponding RolloutMetadata.
+          This is only mutated by rollout service. For actuation implementation,
+          this information is pass-through for Rollout management. Producer shall
+          not modify by itself.
+          For update of a single entry in this map, the update field mask shall
+          follow this sementics: go/advanced-field-masks
+        type: object
+      sloMetadata:
+        $ref: '#/definitions/GoogleCloudSaasacceleratorManagementProvidersV1SloMetadata'
+        description: |-
+          Output only. SLO metadata for instance classification in the
+          Standardized dataplane SLO platform.
+          See go/cloud-ssa-standard-slo for feature description.
+      softwareVersions:
+        additionalProperties:
+          type: string
+        description: |-
+          Software versions that are used to deploy this instance. This can be
+          mutated by rollout services.
+        type: object
+      state:
+        description: |-
+          Output only. Current lifecycle state of the resource (e.g. if it's being
+          created or ready to use).
+        enum:
+          - STATE_UNSPECIFIED
+          - CREATING
+          - READY
+          - UPDATING
+          - REPAIRING
+          - DELETING
+        type: string
+      tenantProjectId:
+        description: |-
+          Output only. ID of the associated GCP tenant project.
+          See go/get-instance-metadata.
+        type: string
+      updateTime:
+        description: Output only. Timestamp when the resource was last modified.
+        format: google-datetime
+        type: string
+    type: object
+  GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule:
+    description: |-
+      Maintenance schedule which is exposed to customer and potentially end user,
+      indicating published upcoming future maintenance schedule
+    properties:
+      canReschedule:
+        description: |-
+          Can this scheduled update be rescheduled?
+          By default, it's true and API needs to do explicitly check whether it's
+          set, if it's set as false explicitly, it's false
+        type: boolean
+      endTime:
+        description: The scheduled end time for the maintenance.
+        format: google-datetime
+        type: string
+      startTime:
+        description: The scheduled start time for the maintenance.
+        format: google-datetime
+        type: string
+    type: object
+  GoogleCloudSaasacceleratorManagementProvidersV1NodeSloMetadata:
+    description: |-
+      Node information for custom per-node SLO implementations.
+      SSA does not support per-node SLO, but producers can populate per-node
+      information in SloMetadata for custom precomputations.
+      SSA Eligibility Exporter will emit per-node metric based on this information.
+    properties:
+      exclusions:
+        description: |-
+          By default node is eligible if instance is eligible.
+          But individual node might be excluded from SLO by adding entry here.
+          For semantic see SloMetadata.exclusions.
+          If both instance and node level exclusions are present for time period,
+          the node level's reason will be reported by Eligibility Exporter.
+        items:
+          $ref: '#/definitions/GoogleCloudSaasacceleratorManagementProvidersV1SloExclusion'
+        type: array
+      nodeId:
+        description: |-
+          The id of the node.
+          This should be equal to SaasInstanceNode.node_id.
+        type: string
+    type: object
+  GoogleCloudSaasacceleratorManagementProvidersV1NotificationMetadata:
+    description: NotificationMetadata is the notification state for an instance.
+    properties:
+      rescheduled:
+        description: Whether the instance update has been rescheduled.
+        type: boolean
+      scheduledEndTime:
+        description: |-
+          The scheduled end time for the maintenance window during which update
+          can be performed on the instance.
+        format: google-datetime
+        type: string
+      scheduledStartTime:
+        description: |-
+          The scheduled start time for the maintenance window during which
+          update can be performed on the instance.
+        format: google-datetime
+        type: string
+      targetRelease:
+        description: The target release to be applied to the instance.
+        type: string
+    type: object
+  GoogleCloudSaasacceleratorManagementProvidersV1ProvisionedResource:
+    description: Describes provisioned dataplane resources.
+    properties:
+      resourceType:
+        description: |-
+          Type of the resource. This can be either a GCP resource or a custom one
+          (e.g. another cloud provider's VM). For GCP compute resources use singular
+          form of the names listed in GCP compute API documentation
+          (https://cloud.google.com/compute/docs/reference/rest/v1/), prefixed with
+          'compute-', for example: 'compute-instance', 'compute-disk',
+          'compute-autoscaler'.
+        type: string
+      resourceUrl:
+        description: |-
+          URL identifying the resource, e.g.
+          "https://www.googleapis.com/compute/v1/projects/...)".
+        type: string
+    type: object
+  GoogleCloudSaasacceleratorManagementProvidersV1RolloutMetadata:
+    description: RolloutMetadata for an actuation instance. It maps to a single RolloutType.
+    properties:
+      notification:
+        $ref: '#/definitions/GoogleCloudSaasacceleratorManagementProvidersV1NotificationMetadata'
+        description: Instance level notification metadata.
+      releaseName:
+        description: The last Release that has been applied to the instance.
+        type: string
+      rolloutName:
+        description: The last rollout that has been applied to the instance.
+        type: string
+    type: object
+  GoogleCloudSaasacceleratorManagementProvidersV1SloExclusion:
+    description: SloExclusion represents an excusion in SLI calculation applies to all SLOs.
+    properties:
+      exclusionDuration:
+        description: |-
+          Exclusion duration. No restrictions on the possible values.
+
+          When an ongoing operation is taking longer than initially expected,
+          an existing entry in the exclusion list can be updated by extending the
+          duration. This is supported by the subsystem exporting eligibility data
+          as long as such extension is committed at least 10 minutes before the
+          original exclusion expiration - otherwise it is possible that there will
+          be "gaps" in the exclusion application in the exported timeseries.
+        format: google-duration
+        type: string
+      exclusionStartTime:
+        description: Start time of the exclusion. No alignment (e.g. to a full minute) needed.
+        format: google-datetime
+        type: string
+      reason:
+        description: |-
+          Human-readable reason for the exclusion.
+          This should be a static string (e.g. "Disruptive update in progress")
+          and should not contain dynamically generated data (e.g. instance name).
+          Can be left empty.
+        type: string
+      sliName:
+        description: |-
+          Name of an SLI that this exclusion applies to. Can be left empty,
+          signaling that the instance should be excluded from all SLIs defined
+          in the service SLO configuration.
+        type: string
+    type: object
+  GoogleCloudSaasacceleratorManagementProvidersV1SloMetadata:
+    description: |-
+      SloMetadata contains resources required for proper SLO classification of the
+      instance.
+    properties:
+      exclusions:
+        description: |-
+          List of SLO exclusion windows. When multiple entries in the list match
+          (matching the exclusion time-window against current time point)
+          the exclusion reason used in the first matching entry will be published.
+
+          It is not needed to include expired exclusion in this list, as only the
+          currently applicable exclusions are taken into account by the eligibility
+          exporting subsystem (the historical state of exclusions will be reflected
+          in the historically produced timeseries regardless of the current state).
+
+          This field can be used to mark the instance as temporary ineligible
+          for the purpose of SLO calculation. For permanent instance SLO exclusion,
+          a dedicated tier name can be used that does not have targets specified
+          in the service SLO configuration.
+        items:
+          $ref: '#/definitions/GoogleCloudSaasacceleratorManagementProvidersV1SloExclusion'
+        type: array
+      nodes:
+        description: |-
+          Optional: list of nodes.
+          Some producers need to use per-node metadata to calculate SLO.
+          This field allows such producers to publish per-node SLO meta data,
+          which will be consumed by SSA Eligibility Exporter and published in the
+          form of per node metric to Monarch.
+        items:
+          $ref: '#/definitions/GoogleCloudSaasacceleratorManagementProvidersV1NodeSloMetadata'
+        type: array
+      tier:
+        description: |-
+          Name of the SLO tier the Instance belongs to. This name will be expected to
+          match the tiers specified in the service SLO configuration.
+
+          Field is mandatory and must not be empty.
         type: string
     type: object
   Instance:
@@ -619,7 +991,8 @@ definitions:
           Output only.
           IPv4 addresses in the format
           {octet 1}.{octet 2}.{octet 3}.{octet 4} or IPv6 addresses in the format
-          {block 1}:{block 2}:{block 3}:{block 4}:{block 5}:{block 6}:{block 7}:{block 8}.
+          {block 1}:{block 2}:{block 3}:{block 4}:{block 5}:{block 6}:{block
+          7}:{block 8}.
         items:
           type: string
         type: array
@@ -642,11 +1015,12 @@ definitions:
       reservedIpRange:
         description: |-
           A /29 CIDR block in one of the
-          [internal IP address ranges](https://www.arin.net/knowledge/address_filters.html)
-          that identifies the range of IP addresses reserved for this
-          instance. For example, 10.0.0.0/29 or 192.168.0.0/29. The range you specify
-          can't overlap with either existing subnets or assigned IP address ranges
-          for other Cloud Filestore instances in the selected VPC network.
+          [internal IP address
+          ranges](https://www.arin.net/knowledge/address_filters.html) that
+          identifies the range of IP addresses reserved for this instance. For
+          example, 10.0.0.0/29 or 192.168.0.0/29. The range you specify can't overlap
+          with either existing subnets or assigned IP address ranges for other Cloud
+          Filestore instances in the selected VPC network.
         type: string
     type: object
   Operation:
@@ -676,7 +1050,7 @@ definitions:
         description: |-
           The server-assigned name, which is only unique within the same service that
           originally returns it. If you use the default HTTP mapping, the
-          `name` should have the format of `operations/some/unique/name`.
+          `name` should be a resource name ending with `operations/{unique_id}`.
         type: string
       response:
         additionalProperties:
@@ -727,56 +1101,11 @@ definitions:
     description: |-
       The `Status` type defines a logical error model that is suitable for
       different programming environments, including REST APIs and RPC APIs. It is
-      used by [gRPC](https://github.com/grpc). The error model is designed to be:
+      used by [gRPC](https://github.com/grpc). Each `Status` message contains
+      three pieces of data: error code, error message, and error details.
 
-      - Simple to use and understand for most users
-      - Flexible enough to meet unexpected needs
-
-      # Overview
-
-      The `Status` message contains three pieces of data: error code, error
-      message, and error details. The error code should be an enum value of
-      google.rpc.Code, but it may accept additional error codes if needed.  The
-      error message should be a developer-facing English message that helps
-      developers *understand* and *resolve* the error. If a localized user-facing
-      error message is needed, put the localized message in the error details or
-      localize it in the client. The optional error details may contain arbitrary
-      information about the error. There is a predefined set of error detail types
-      in the package `google.rpc` that can be used for common error conditions.
-
-      # Language mapping
-
-      The `Status` message is the logical representation of the error model, but it
-      is not necessarily the actual wire format. When the `Status` message is
-      exposed in different client libraries and different wire protocols, it can be
-      mapped differently. For example, it will likely be mapped to some exceptions
-      in Java, but more likely mapped to some error codes in C.
-
-      # Other uses
-
-      The error model and the `Status` message can be used in a variety of
-      environments, either with or without APIs, to provide a
-      consistent developer experience across different environments.
-
-      Example uses of this error model include:
-
-      - Partial errors. If a service needs to return partial errors to the client,
-          it may embed the `Status` in the normal response to indicate the partial
-          errors.
-
-      - Workflow errors. A typical workflow has multiple steps. Each step may
-          have a `Status` message for error reporting.
-
-      - Batch operations. If a client uses batch request and batch response, the
-          `Status` message should be used directly inside batch response, one for
-          each error sub-response.
-
-      - Asynchronous operations. If an API call embeds asynchronous operation
-          results in its response, the status of those operations should be
-          represented directly using the `Status` message.
-
-      - Logging. If some API errors are stored in logs, the message `Status` could
-          be used directly after any stripping needed for security/privacy reasons.
+      You can find out more about this error model and how to work with it in the
+      [API Design Guide](https://cloud.google.com/apis/design/errors).
     properties:
       code:
         description: 'The status code, which should be an enum value of google.rpc.Code.'

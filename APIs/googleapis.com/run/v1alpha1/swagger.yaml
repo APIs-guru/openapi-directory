@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Deploy and manage user provided container images that scale automatically based on HTTP traffic.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Cloud Run
   version: v1alpha1
   x-apiClientRegistration:
@@ -29,10 +33,18 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -149,6 +161,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - namespaces
     get:
@@ -170,6 +184,8 @@ paths:
             $ref: '#/definitions/DomainMapping'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - namespaces
@@ -211,6 +227,8 @@ paths:
             $ref: '#/definitions/ListAuthorizedDomainsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - namespaces
@@ -284,6 +302,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - namespaces
     parameters:
@@ -321,6 +341,297 @@ paths:
             $ref: '#/definitions/DomainMapping'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - namespaces
+  '/apis/eventing.knative.dev/v1alpha1/{name}':
+    delete:
+      description: Rpc to delete a trigger.
+      operationId: run.namespaces.triggers.delete
+      parameters:
+        - description: Cloud Run currently ignores this parameter.
+          in: query
+          name: apiVersion
+          type: string
+        - description: Cloud Run currently ignores this parameter.
+          in: query
+          name: kind
+          type: string
+        - description: |-
+            The name of the trigger being deleted. If needed, replace
+            {namespace_id} with the project ID.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: |-
+            Specifies the propagation policy of delete. Cloud Run currently ignores
+            this setting, and deletes in the background. Please see
+            kubernetes.io/docs/concepts/workloads/controllers/garbage-collection/ for
+            more information.
+          in: query
+          name: propagationPolicy
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - namespaces
+    get:
+      description: Rpc to get information about an EventType.
+      operationId: run.namespaces.eventtypes.get
+      parameters:
+        - description: |-
+            The name of the trigger being retrieved. If needed, replace
+            {namespace_id} with the project ID.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/EventType'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - namespaces
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    put:
+      description: |-
+        Rpc to replace a trigger.
+
+        Only the spec and metadata labels and annotations are modifiable. After
+        the Update request, Cloud Run will work to make the 'status'
+        match the requested 'spec'.
+
+        May provide metadata.resourceVersion to enforce update from last read for
+        optimistic concurrency control.
+      operationId: run.namespaces.triggers.replaceTrigger
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Trigger'
+        - description: |-
+            The name of the trigger being retrieved. If needed, replace
+            {namespace_id} with the project ID.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Trigger'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - namespaces
+  '/apis/eventing.knative.dev/v1alpha1/{parent}/eventtypes':
+    get:
+      description: Rpc to list EventTypes.
+      operationId: run.namespaces.eventtypes.list
+      parameters:
+        - description: Optional encoded string to continue paging.
+          in: query
+          name: continue
+          type: string
+        - description: |-
+            Allows to filter resources based on a specific value for a field name.
+            Send this in a query string format. i.e. 'metadata.name%3Dlorem'.
+            Not currently used by Cloud Run.
+          in: query
+          name: fieldSelector
+          type: string
+        - description: Not currently used by Cloud Run.
+          in: query
+          name: includeUninitialized
+          type: boolean
+        - description: |-
+            Allows to filter resources based on a label. Supported operations are
+            =, !=, exists, in, and notIn.
+          in: query
+          name: labelSelector
+          type: string
+        - description: The maximum number of records that should be returned.
+          in: query
+          name: limit
+          type: integer
+        - description: |-
+            The project ID or project number from which the EventTypes should be
+            listed.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: |-
+            The baseline resource version from which the list or watch operation should
+            start. Not currently used by Cloud Run.
+          in: query
+          name: resourceVersion
+          type: string
+        - description: |-
+            Flag that indicates that the client expects to watch this resource as well.
+            Not currently used by Cloud Run.
+          in: query
+          name: watch
+          type: boolean
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListEventTypesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - namespaces
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/apis/eventing.knative.dev/v1alpha1/{parent}/triggers':
+    get:
+      description: Rpc to list triggers.
+      operationId: run.namespaces.triggers.list
+      parameters:
+        - description: Optional encoded string to continue paging.
+          in: query
+          name: continue
+          type: string
+        - description: |-
+            Allows to filter resources based on a specific value for a field name.
+            Send this in a query string format. i.e. 'metadata.name%3Dlorem'.
+            Not currently used by Cloud Run.
+          in: query
+          name: fieldSelector
+          type: string
+        - description: Not currently used by Cloud Run.
+          in: query
+          name: includeUninitialized
+          type: boolean
+        - description: |-
+            Allows to filter resources based on a label. Supported operations are
+            =, !=, exists, in, and notIn.
+          in: query
+          name: labelSelector
+          type: string
+        - description: The maximum number of records that should be returned.
+          in: query
+          name: limit
+          type: integer
+        - description: |-
+            The project ID or project number from which the triggers should
+            be listed.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: |-
+            The baseline resource version from which the list or watch operation should
+            start. Not currently used by Cloud Run.
+          in: query
+          name: resourceVersion
+          type: string
+        - description: |-
+            Flag that indicates that the client expects to watch this resource as well.
+            Not currently used by Cloud Run.
+          in: query
+          name: watch
+          type: boolean
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListTriggersResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - namespaces
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Creates a new trigger.
+      operationId: run.namespaces.triggers.create
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Trigger'
+        - description: |-
+            The project ID or project number in which this trigger should
+            be created.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Trigger'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - namespaces
@@ -370,6 +681,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - namespaces
     get:
@@ -391,6 +704,8 @@ paths:
             $ref: '#/definitions/Configuration'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - namespaces
@@ -437,6 +752,8 @@ paths:
             $ref: '#/definitions/Service'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - namespaces
@@ -497,6 +814,8 @@ paths:
             $ref: '#/definitions/ListConfigurationsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - namespaces
@@ -568,6 +887,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - namespaces
     parameters:
@@ -637,6 +958,8 @@ paths:
             $ref: '#/definitions/ListRoutesResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - namespaces
@@ -708,6 +1031,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - namespaces
     parameters:
@@ -744,15 +1069,14 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - namespaces
   '/v1alpha1/{name}':
     delete:
-      description: |-
-        Rpc to delete a service.
-        This will cause the Service to stop serving traffic and will delete the
-        child entities like Routes, Configurations and Revisions.
-      operationId: run.projects.locations.services.delete
+      description: Rpc to delete a domain mapping.
+      operationId: run.projects.locations.domainmappings.delete
       parameters:
         - description: Cloud Run currently ignores this parameter.
           in: query
@@ -763,7 +1087,7 @@ paths:
           name: kind
           type: string
         - description: |-
-            The name of the service being deleted. If needed, replace
+            The name of the domain mapping being deleted. If needed, replace
             {namespace_id} with the project ID.
           in: path
           name: name
@@ -795,14 +1119,16 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     get:
-      description: Rpc to get information about a service.
-      operationId: run.projects.locations.services.get
+      description: Rpc to get information about a domain mapping.
+      operationId: run.projects.locations.domainmappings.get
       parameters:
         - description: |-
-            The name of the service being retrieved. If needed, replace
+            The name of the domain mapping being retrieved. If needed, replace
             {namespace_id} with the project ID.
           in: path
           name: name
@@ -813,9 +1139,11 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Service'
+            $ref: '#/definitions/DomainMapping'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -863,6 +1191,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1alpha1/{name}/locations':
@@ -895,6 +1225,8 @@ paths:
             $ref: '#/definitions/ListLocationsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -936,6 +1268,8 @@ paths:
             $ref: '#/definitions/ListAuthorizedDomainsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -1009,6 +1343,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -1081,6 +1417,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -1119,8 +1457,84 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
+  '/v1alpha1/{parent}/eventtypes':
+    get:
+      description: Rpc to list EventTypes.
+      operationId: run.projects.locations.eventtypes.list
+      parameters:
+        - description: Optional encoded string to continue paging.
+          in: query
+          name: continue
+          type: string
+        - description: |-
+            Allows to filter resources based on a specific value for a field name.
+            Send this in a query string format. i.e. 'metadata.name%3Dlorem'.
+            Not currently used by Cloud Run.
+          in: query
+          name: fieldSelector
+          type: string
+        - description: Not currently used by Cloud Run.
+          in: query
+          name: includeUninitialized
+          type: boolean
+        - description: |-
+            Allows to filter resources based on a label. Supported operations are
+            =, !=, exists, in, and notIn.
+          in: query
+          name: labelSelector
+          type: string
+        - description: The maximum number of records that should be returned.
+          in: query
+          name: limit
+          type: integer
+        - description: |-
+            The project ID or project number from which the EventTypes should be
+            listed.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: |-
+            The baseline resource version from which the list or watch operation should
+            start. Not currently used by Cloud Run.
+          in: query
+          name: resourceVersion
+          type: string
+        - description: |-
+            Flag that indicates that the client expects to watch this resource as well.
+            Not currently used by Cloud Run.
+          in: query
+          name: watch
+          type: boolean
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListEventTypesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1alpha1/{parent}/revisions':
     get:
       description: Rpc to list revisions.
@@ -1176,6 +1590,8 @@ paths:
             $ref: '#/definitions/ListRevisionsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -1247,6 +1663,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -1317,6 +1735,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -1353,6 +1773,110 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/v1alpha1/{parent}/triggers':
+    get:
+      description: Rpc to list triggers.
+      operationId: run.projects.locations.triggers.list
+      parameters:
+        - description: Optional encoded string to continue paging.
+          in: query
+          name: continue
+          type: string
+        - description: |-
+            Allows to filter resources based on a specific value for a field name.
+            Send this in a query string format. i.e. 'metadata.name%3Dlorem'.
+            Not currently used by Cloud Run.
+          in: query
+          name: fieldSelector
+          type: string
+        - description: Not currently used by Cloud Run.
+          in: query
+          name: includeUninitialized
+          type: boolean
+        - description: |-
+            Allows to filter resources based on a label. Supported operations are
+            =, !=, exists, in, and notIn.
+          in: query
+          name: labelSelector
+          type: string
+        - description: The maximum number of records that should be returned.
+          in: query
+          name: limit
+          type: integer
+        - description: |-
+            The project ID or project number from which the triggers should
+            be listed.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: |-
+            The baseline resource version from which the list or watch operation should
+            start. Not currently used by Cloud Run.
+          in: query
+          name: resourceVersion
+          type: string
+        - description: |-
+            Flag that indicates that the client expects to watch this resource as well.
+            Not currently used by Cloud Run.
+          in: query
+          name: watch
+          type: boolean
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListTriggersResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Creates a new trigger.
+      operationId: run.projects.locations.triggers.create
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Trigger'
+        - description: |-
+            The project ID or project number in which this trigger should
+            be created.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Trigger'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1alpha1/{resource}:getIamPolicy':
@@ -1377,6 +1901,8 @@ paths:
             $ref: '#/definitions/Policy'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -1431,6 +1957,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1alpha1/{resource}:testIamPermissions':
@@ -1472,6 +2000,8 @@ paths:
             $ref: '#/definitions/TestIamPermissionsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -1609,7 +2139,7 @@ definitions:
         $ref: '#/definitions/Expr'
         description: |-
           The condition that is associated with this binding.
-          NOTE: an unsatisfied condition will not allow user access via current
+          NOTE: An unsatisfied condition will not allow user access via current
           binding. Different bindings, including their conditions, are examined
           independently.
       members:
@@ -1681,6 +2211,39 @@ definitions:
           +optional
         type: boolean
     type: object
+  ConfigMapVolumeSource:
+    description: |-
+      Adapts a ConfigMap into a volume.
+      The contents of the target ConfigMap's Data field will be presented in a
+      volume as files using the keys in the Data field as the file names, unless
+      the items element is populated with specific mappings of keys to paths.
+    properties:
+      defaultMode:
+        description: |-
+          Mode bits to use on created files by default. Must be a value between 0 and
+          0777. Defaults to 0644. Directories within the path are not affected by
+          this setting. This might be in conflict with other options that affect the
+          file mode, like fsGroup, and the result can be other mode bits set.
+        format: int32
+        type: integer
+      items:
+        description: |-
+          If unspecified, each key-value pair in the Data field of the referenced
+          Secret will be projected into the volume as a file whose name is the
+          key and content is the value. If specified, the listed keys will be
+          projected into the specified paths, and unlisted keys will not be
+          present. If a key is specified which is not present in the Secret,
+          the volume setup will error unless it is marked optional.
+        items:
+          $ref: '#/definitions/KeyToPath'
+        type: array
+      name:
+        description: Name of the config.
+        type: string
+      optional:
+        description: Specify whether the Secret or its keys must be defined.
+        type: boolean
+    type: object
   Configuration:
     description: |-
       Configuration represents the "floating HEAD" of a linear history of
@@ -1729,6 +2292,11 @@ definitions:
           One-word CamelCase reason for the condition's last transition.
           +optional
         type: string
+      severity:
+        description: |-
+          How to interpret failures of this condition, one of Error, Warning, Info
+          +optional
+        type: string
       status:
         description: 'Status of the condition, one of True, False, Unknown.'
         type: string
@@ -1767,6 +2335,11 @@ definitions:
 
           Cloud Run does not currently support referencing a build that is
           responsible for materializing the container image from source.
+      template:
+        $ref: '#/definitions/RevisionTemplate'
+        description: |-
+          Template holds the latest specification for the Revision to be stamped out.
+          Not currently supported by Cloud Run.
     type: object
   ConfigurationStatus:
     description: |-
@@ -2063,6 +2636,12 @@ definitions:
   DomainMappingCondition:
     description: DomainMappingCondition contains state information for a DomainMapping.
     properties:
+      lastTransitionTime:
+        description: |-
+          Last time the condition transitioned from one status to another.
+          +optional
+        format: google-datetime
+        type: string
       message:
         description: |-
           Human readable message indicating details about the current status.
@@ -2071,6 +2650,11 @@ definitions:
       reason:
         description: |-
           One-word CamelCase reason for the condition's current status.
+          +optional
+        type: string
+      severity:
+        description: |-
+          How to interpret failures of this condition, one of Error, Warning, Info
           +optional
         type: string
       status:
@@ -2184,6 +2768,48 @@ definitions:
           exists or not.
           Defaults to "".
           +optional
+        type: string
+    type: object
+  EventType:
+    properties:
+      apiVersion:
+        description: The API version for this call such as "v1alpha1".
+        type: string
+      kind:
+        description: 'The kind of resource, in this case "EventType".'
+        type: string
+      metadata:
+        $ref: '#/definitions/ObjectMeta'
+        description: Metadata associated with this EventType.
+      spec:
+        $ref: '#/definitions/EventTypeSpec'
+        description: Spec defines the desired state of the EventType.
+    type: object
+  EventTypeSpec:
+    properties:
+      broker:
+        description: Refers to the Broker that can provide the EventType.
+        type: string
+      description:
+        description: |-
+          Description is a string describing what the EventType is about.
+          +optional
+        type: string
+      schema:
+        description: |-
+          Schema is a URI with the EventType schema. It may be a JSON schema, a
+          protobuf schema, etc.
+          +optional
+        type: string
+      source:
+        description: |-
+          Source is a valid URI. Refers to the CloudEvent source as it enters into
+          the eventing mesh.
+        type: string
+      type:
+        description: |-
+          Type is authoritative. This refers to the CloudEvent type as it enters
+          into the eventing mesh.
         type: string
     type: object
   ExecAction:
@@ -2337,6 +2963,28 @@ definitions:
         format: int64
         type: string
     type: object
+  KeyToPath:
+    description: Maps a string key to a path within a volume.
+    properties:
+      key:
+        description: The key to project.
+        type: string
+      mode:
+        description: |-
+          Mode bits to use on this file, must be a value between 0 and 0777. If not
+          specified, the volume defaultMode will be used. This might be in conflict
+          with other options that affect the file mode, like fsGroup, and the result
+          can be other mode bits set. +optional
+        format: int32
+        type: integer
+      path:
+        description: |-
+          The relative path of the file to map the key to.
+          May not be an absolute path.
+          May not contain the path element '..'.
+          May not start with the string '..'.
+        type: string
+    type: object
   Lifecycle:
     description: |-
       Lifecycle describes actions that the management system should take in
@@ -2418,6 +3066,29 @@ definitions:
       metadata:
         $ref: '#/definitions/ListMeta'
         description: Metadata associated with this DomainMapping list.
+    type: object
+  ListEventTypesResponse:
+    description: ListEventTypesResponse is a list of EventType resources.
+    properties:
+      apiVersion:
+        description: The API version for this call such as "v1alpha1".
+        type: string
+      items:
+        description: List of EventTypes.
+        items:
+          $ref: '#/definitions/EventType'
+        type: array
+      kind:
+        description: 'The kind of this resource, in this case "EventTypeList".'
+        type: string
+      metadata:
+        $ref: '#/definitions/ListMeta'
+        description: Metadata associated with this EventType list.
+      unreachable:
+        description: Locations that could not be reached.
+        items:
+          type: string
+        type: array
     type: object
   ListLocationsResponse:
     description: The response message for Locations.ListLocations.
@@ -2530,6 +3201,29 @@ definitions:
       metadata:
         $ref: '#/definitions/ListMeta'
         description: Metadata associated with this Service list.
+      unreachable:
+        description: Locations that could not be reached.
+        items:
+          type: string
+        type: array
+    type: object
+  ListTriggersResponse:
+    description: ListTriggersResponse is a list of Trigger resources.
+    properties:
+      apiVersion:
+        description: The API version for this call such as "v1alpha1".
+        type: string
+      items:
+        description: List of Triggers.
+        items:
+          $ref: '#/definitions/Trigger'
+        type: array
+      kind:
+        description: 'The kind of this resource, in this case "TriggerList".'
+        type: string
+      metadata:
+        $ref: '#/definitions/ListMeta'
+        description: Metadata associated with this Trigger list.
       unreachable:
         description: Locations that could not be reached.
         items:
@@ -2780,6 +3474,64 @@ definitions:
           Populated by the system.
           Read-only.
           More info: http://kubernetes.io/docs/user-guide/identifiers#uids
+          +optional
+        type: string
+    type: object
+  ObjectReference:
+    description: |-
+      ObjectReference contains enough information to let you inspect or modify the
+      referred object.
+    properties:
+      apiVersion:
+        description: |-
+          API version of the referent.
+          +optional
+        type: string
+      fieldPath:
+        description: |-
+          If referring to a piece of an object instead of an entire object, this
+          string should contain a valid JSON/Go field access statement, such as
+          desiredState.manifest.containers[2]. For example, if the object reference
+          is to a container within a pod, this would take on a value like:
+          "spec.containers{name}" (where "name" refers to the name of the container
+          that triggered the event) or if no container name is specified
+          "spec.containers[2]" (container with index 2 in this pod). This syntax is
+          chosen only to have some well-defined way of referencing a part of an
+          object.
+        type: string
+      kind:
+        description: |-
+          Kind of the referent.
+          More info:
+          https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds
+          +optional
+        type: string
+      name:
+        description: |-
+          Name of the referent.
+          More info:
+          https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+          +optional
+        type: string
+      namespace:
+        description: |-
+          Namespace of the referent.
+          More info:
+          https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
+          +optional
+        type: string
+      resourceVersion:
+        description: |-
+          Specific resourceVersion to which this reference is made, if any.
+          More info:
+          https://git.k8s.io/community/contributors/devel/api-conventions.md#concurrency-control-and-consistency
+          +optional
+        type: string
+      uid:
+        description: |-
+          UID of the referent.
+          More info:
+          https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids
           +optional
         type: string
     type: object
@@ -3075,6 +3827,11 @@ definitions:
           One-word CamelCase reason for the condition's last transition.
           +optional
         type: string
+      severity:
+        description: |-
+          How to interpret failures of this condition, one of Error, Warning, Info
+          +optional
+        type: string
       status:
         description: 'Status of the condition, one of True, False, Unknown.'
         type: string
@@ -3120,6 +3877,14 @@ definitions:
           - `2-N` thread-safe, max concurrency of N
         format: int32
         type: integer
+      containers:
+        description: |-
+          Containers holds the single container that defines the unit of execution
+          for this Revision. In the context of a Revision, we disallow a number of
+          fields on this Container, including: name and lifecycle.
+        items:
+          $ref: '#/definitions/Container'
+        type: array
       generation:
         description: |-
           Deprecated and not currently populated by Cloud Run. See
@@ -3154,6 +3919,10 @@ definitions:
           Not currently used by Cloud Run.
         format: int32
         type: integer
+      volumes:
+        items:
+          $ref: '#/definitions/Volume'
+        type: array
     type: object
   RevisionStatus:
     description: |-
@@ -3262,6 +4031,11 @@ definitions:
       reason:
         description: |-
           One-word CamelCase reason for the condition's last transition.
+          +optional
+        type: string
+      severity:
+        description: |-
+          How to interpret failures of this condition, one of Error, Warning, Info
           +optional
         type: string
       status:
@@ -3386,6 +4160,37 @@ definitions:
           Specify whether the Secret must be defined
           +optional
         type: boolean
+    type: object
+  SecretVolumeSource:
+    description: |-
+      The contents of the target Secret's Data field will be presented in a volume
+      as files using the keys in the Data field as the file names.
+    properties:
+      defaultMode:
+        description: |-
+          Mode bits to use on created files by default. Must be a value between 0 and
+          0777. Defaults to 0644. Directories within the path are not affected by
+          this setting. This might be in conflict with other options that affect the
+          file mode, like fsGroup, and the result can be other mode bits set.
+        format: int32
+        type: integer
+      items:
+        description: |-
+          If unspecified, each key-value pair in the Data field of the referenced
+          Secret will be projected into the volume as a file whose name is the
+          key and content is the value. If specified, the listed keys will be
+          projected into the specified paths, and unlisted keys will not be
+          present. If a key is specified which is not present in the Secret,
+          the volume setup will error unless it is marked optional.
+        items:
+          $ref: '#/definitions/KeyToPath'
+        type: array
+      optional:
+        description: Specify whether the Secret or its keys must be defined.
+        type: boolean
+      secretName:
+        description: Name of the secret in the container's namespace to use.
+        type: string
     type: object
   SecurityContext:
     description: |-
@@ -3514,6 +4319,11 @@ definitions:
           One-word CamelCase reason for the condition's last transition.
           +optional
         type: string
+      severity:
+        description: |-
+          How to interpret failures of this condition, one of Error, Warning, Info
+          +optional
+        type: string
       status:
         description: 'Status of the condition, one of True, False, Unknown.'
         type: string
@@ -3571,6 +4381,24 @@ definitions:
           configure a route that keeps the latest ready revision
           from the supplied configuration running.
           +optional
+      template:
+        $ref: '#/definitions/RevisionTemplate'
+        description: |-
+          Template holds the latest specification for the Revision to
+          be stamped out.
+
+          Not currently supported by Cloud Run.
+      traffic:
+        description: |-
+          Traffic specifies how to distribute traffic over a collection of Knative
+          Revisions and Configurations. This will replace existing service specs
+          (ServiceSpecRunLatest, ServiceSpecPinnedType, ServiceSpecReleaseType, and
+          ServiceSpecManualType).
+
+          Not currently supported by Cloud Run.
+        items:
+          $ref: '#/definitions/TrafficTarget'
+        type: array
     type: object
   ServiceSpecManualType:
     description: |-
@@ -3714,6 +4542,22 @@ definitions:
         format: google-fieldmask
         type: string
     type: object
+  SubscriberSpec:
+    properties:
+      ref:
+        $ref: '#/definitions/ObjectReference'
+        description: |-
+          Reference to an object that will be used to find the target
+          endpoint, which should implement the Addressable duck type.
+          For example, this could be a reference to a Route resource
+          or a Knative Service resource.
+      uri:
+        description: |-
+          Reference to a 'known' endpoint where no resolving is done.
+          http://k8s-service for example
+          http://myexternalhandler.example.com/foo/bar
+        type: string
+    type: object
   TCPSocketAction:
     description: TCPSocketAction describes an action based on opening a socket
     properties:
@@ -3767,6 +4611,16 @@ definitions:
 
           Cloud Run currently supports a single ConfigurationName.
         type: string
+      latestRevision:
+        description: |-
+          LatestRevision may be optionally provided to indicate that the latest
+          ready Revision of the Configuration should be used for this traffic
+          target. When provided LatestRevision must be true if RevisionName is
+          empty; it must be false when RevisionName is non-empty.
+
+          Not currently supported in Cloud Run.
+          +optional
+        type: boolean
       name:
         description: |-
           Name is optionally used to expose a dedicated hostname for referencing this
@@ -3791,6 +4645,148 @@ definitions:
 
           Providing RevisionName in spec is not currently supported by Cloud Run.
         type: string
+      tag:
+        description: |-
+          Tag is optionally used to expose a dedicated url for referencing
+          this target exclusively.
+
+          Not currently supported in Cloud Run.
+          +optional
+        type: string
+      url:
+        description: |-
+          Output only. URL displays the URL for accessing named traffic targets. URL
+          is displayed in status, and is disallowed on spec. URL must contain a
+          scheme (e.g. http://) and a hostname, but may not contain anything else
+          (e.g. basic auth, url path, etc.
+
+          Not currently supported in Cloud Run.
+        type: string
+    type: object
+  Trigger:
+    properties:
+      apiVersion:
+        description: The API version for this call such as "v1alpha1".
+        type: string
+      kind:
+        description: 'The kind of resource, in this case "Trigger".'
+        type: string
+      metadata:
+        $ref: '#/definitions/ObjectMeta'
+        description: Metadata associated with this Trigger.
+      spec:
+        $ref: '#/definitions/TriggerSpec'
+        description: Spec defines the desired state of the Trigger.
+      status:
+        $ref: '#/definitions/TriggerStatus'
+        description: |-
+          Status represents the current state of the Trigger. This data may be out of
+          date.
+          +optional
+    type: object
+  TriggerCondition:
+    description: TriggerCondition contains state information for an Trigger.
+    properties:
+      lastTransitionTime:
+        description: |-
+          Last time the condition transitioned from one status to another.
+          +optional
+        format: google-datetime
+        type: string
+      message:
+        description: |-
+          Human readable message indicating details about the current status.
+          +optional
+        type: string
+      reason:
+        description: |-
+          One-word CamelCase reason for the condition's current status.
+          +optional
+        type: string
+      severity:
+        description: |-
+          How to interpret failures of this condition, one of Error, Warning, Info
+          +optional
+        type: string
+      status:
+        description: 'Status of the condition, one of True, False, Unknown.'
+        type: string
+      type:
+        description: Type of Trigger condition.
+        type: string
+    type: object
+  TriggerFilter:
+    properties:
+      sourceAndType:
+        $ref: '#/definitions/TriggerFilterSourceAndType'
+    type: object
+  TriggerFilterSourceAndType:
+    description: |-
+      TriggerFilterSourceAndType filters events based on exact matches on the cloud
+      event's type and source attributes. Only exact matches will pass the filter.
+    properties:
+      source:
+        type: string
+      type:
+        type: string
+    type: object
+  TriggerSpec:
+    description: The desired state of the Trigger.
+    properties:
+      broker:
+        description: |-
+          Broker is the broker that this trigger receives events from. If not
+          specified, will default to 'default'.
+
+          Not currently supported by Cloud Run.
+        type: string
+      filter:
+        $ref: '#/definitions/TriggerFilter'
+        description: |-
+          Filter is the filter to apply against all events from the Broker. Only
+          events that pass this filter will be sent to the Subscriber. If not
+          specified, will default to allowing all events.
+
+          This must be specified in Cloud Run.
+      subscriber:
+        $ref: '#/definitions/SubscriberSpec'
+        description: |-
+          Subscriber is the addressable that receives events from the Broker that
+          pass the Filter. It is required.
+
+          E.g. https://us-central1-myproject.cloudfunctions.net/myfunction or
+          /namespaces/my-project/services/my-service.
+    type: object
+  TriggerStatus:
+    description: TriggerStatus represents the current state of a Trigger.
+    properties:
+      conditions:
+        description: |-
+          Array of observed TriggerConditions, indicating the current state
+          of the Trigger.
+        items:
+          $ref: '#/definitions/TriggerCondition'
+        type: array
+      observedGeneration:
+        description: |-
+          ObservedGeneration is the 'Generation' of the Trigger that
+          was last processed by the controller.
+        format: int32
+        type: integer
+      subscriberUri:
+        description: SubscriberURI is the resolved URI of the receiver for this Trigger.
+        type: string
+    type: object
+  Volume:
+    description: Volume represents a named volume in a container.
+    properties:
+      configMap:
+        $ref: '#/definitions/ConfigMapVolumeSource'
+      name:
+        description: Volume's name.
+        type: string
+      secret:
+        $ref: '#/definitions/SecretVolumeSource'
     type: object
   VolumeDevice:
     description: volumeDevice describes a mapping of a raw block device within a container.

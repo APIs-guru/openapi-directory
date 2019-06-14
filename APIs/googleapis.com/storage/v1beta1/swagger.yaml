@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'Lets you store and retrieve potentially-large, immutable data objects.'
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Cloud Storage
   version: v1beta1
   x-apiClientRegistration:
@@ -31,12 +35,22 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/devstorage.full_control': Manage your data and permissions in Google Cloud Storage
       'https://www.googleapis.com/auth/devstorage.read_only': View your data in Google Cloud Storage
       'https://www.googleapis.com/auth/devstorage.read_write': Manage your data in Google Cloud Storage
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/devstorage.full_control': Manage your data and permissions in Google Cloud Storage
+      'https://www.googleapis.com/auth/devstorage.read_only': View your data in Google Cloud Storage
+      'https://www.googleapis.com/auth/devstorage.read_write': Manage your data in Google Cloud Storage
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -118,9 +132,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.read_only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.read_only'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - buckets
@@ -155,7 +175,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - buckets
@@ -175,7 +199,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - buckets
@@ -203,9 +231,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.read_only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.read_only'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - buckets
@@ -245,7 +279,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - buckets
@@ -277,7 +315,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - buckets
@@ -298,6 +340,8 @@ paths:
             $ref: '#/definitions/BucketAccessControls'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - bucketAccessControls
@@ -330,6 +374,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - bucketAccessControls
   '/b/{bucket}/acl/{entity}':
@@ -352,6 +398,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - bucketAccessControls
@@ -376,6 +424,8 @@ paths:
             $ref: '#/definitions/BucketAccessControl'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - bucketAccessControls
@@ -413,6 +463,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - bucketAccessControls
     put:
@@ -440,6 +492,8 @@ paths:
             $ref: '#/definitions/BucketAccessControl'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - bucketAccessControls
@@ -485,9 +539,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.read_only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.read_only'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - objects
@@ -533,7 +593,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - objects
@@ -558,7 +622,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - objects
@@ -591,9 +659,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.read_only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.read_only'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - objects
@@ -638,7 +712,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - objects
@@ -675,7 +753,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - objects
@@ -701,6 +783,8 @@ paths:
             $ref: '#/definitions/ObjectAccessControls'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - objectAccessControls
@@ -738,6 +822,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - objectAccessControls
   '/b/{bucket}/o/{object}/acl/{entity}':
@@ -765,6 +851,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - objectAccessControls
@@ -794,6 +882,8 @@ paths:
             $ref: '#/definitions/ObjectAccessControl'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - objectAccessControls
@@ -836,6 +926,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - objectAccessControls
     put:
@@ -868,6 +960,8 @@ paths:
             $ref: '#/definitions/ObjectAccessControl'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - objectAccessControls

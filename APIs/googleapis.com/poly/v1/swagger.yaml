@@ -9,6 +9,10 @@ info:
     url: 'https://google.com'
   description: |
     The Poly API provides read access to assets hosted on <a href="https://poly.google.com">poly.google.com</a> to all, and upload access to <a href="https://poly.google.com">poly.google.com</a> for whitelisted accounts.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Poly
   version: v1
   x-apiClientRegistration:
@@ -99,15 +103,15 @@ paths:
   /v1/assets:
     get:
       description: |-
-        Lists all public, remixable assets. These are assets with an access level of
-        PUBLIC and published under the
+        Lists all public, remixable assets. These are assets with an access level
+        of PUBLIC and published under the
         CC-By license.
       operationId: poly.assets.list
       parameters:
         - description: |-
             Filter assets based on the specified category. Supported values are:
-            `animals`, `architecture`, `art`, `food`, `nature`, `objects`, `people`, `scenes`,
-            `technology`, and `transport`.
+            `animals`, `architecture`, `art`, `food`, `nature`, `objects`, `people`,
+            `scenes`, `technology`, and `transport`.
           in: query
           name: category
           type: string
@@ -158,7 +162,8 @@ paths:
         - description: |-
             Specifies a continuation token from a previous search whose results were
             split into multiple pages. To get the next page, submit the same request
-            specifying the value from next_page_token.
+            specifying the value from
+            next_page_token.
           in: query
           name: pageToken
           type: string
@@ -186,7 +191,8 @@ paths:
       description: |-
         Returns detailed information about an asset given its name.
         PRIVATE assets are returned only if
-         the currently authenticated user (via OAuth token) is the author of the asset.
+         the currently authenticated user (via OAuth token) is the author of the
+         asset.
       operationId: poly.assets.get
       parameters:
         - description: 'Required. An asset''s name in the form `assets/{ASSET_ID}`.'
@@ -263,7 +269,9 @@ paths:
           type: string
         - description: |-
             The visibility of the assets to be returned.
-            Defaults to VISIBILITY_UNSPECIFIED which returns all assets.
+            Defaults to
+            VISIBILITY_UNSPECIFIED
+            which returns all assets.
           enum:
             - VISIBILITY_UNSPECIFIED
             - PUBLISHED
@@ -746,8 +754,9 @@ definitions:
     type: object
   StartAssetImportResponse:
     description: |-
-      A response message from a request to startImport.
-      This is returned in the response field of the Operation.
+      A response message from a request to
+      startImport. This is returned in the response
+      field of the Operation.
     properties:
       assetId:
         description: |-

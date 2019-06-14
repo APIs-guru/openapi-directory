@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: The cloud asset API manages the history and inventory of cloud resources.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Cloud Asset
   version: v1beta1
   x-apiClientRegistration:
@@ -25,14 +29,22 @@ info:
   x-providerName: googleapis.com
   x-serviceName: cloudasset
 externalDocs:
-  url: 'https://console.cloud.google.com/apis/api/cloudasset.googleapis.com/overview'
+  url: 'https://cloud.google.com/resource-manager/docs/cloud-asset-inventory/quickstart-cloud-asset-inventory'
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -110,7 +122,7 @@ paths:
         Gets the latest state of a long-running operation.  Clients can use this
         method to poll the operation result at intervals as recommended by the API
         service.
-      operationId: cloudasset.projects.operations.get
+      operationId: cloudasset.organizations.operations.get
       parameters:
         - description: The name of the operation resource.
           in: path
@@ -126,8 +138,10 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -150,7 +164,7 @@ paths:
         attached IAM POLICY both exist. This can create gaps in the output history.
         If a specified asset does not exist, this API returns an INVALID_ARGUMENT
         error.
-      operationId: cloudasset.projects.batchGetAssetsHistory
+      operationId: cloudasset.organizations.batchGetAssetsHistory
       parameters:
         - collectionFormat: multi
           description: |-
@@ -188,15 +202,9 @@ paths:
             End time of the time window (inclusive).
             Current timestamp if not specified.
           in: query
-          items:
-            type: string
           name: readTimeWindow.endTime
           type: string
         - description: Start time of the time window (exclusive).
-          enum:
-            - CONTENT_TYPE_UNSPECIFIED
-            - RESOURCE
-            - IAM_POLICY
           in: query
           name: readTimeWindow.startTime
           type: string
@@ -208,8 +216,10 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -241,7 +251,7 @@ paths:
         location. The output format is newline-delimited JSON.
         This API implements the google.longrunning.Operation API allowing you
         to keep track of the export.
-      operationId: cloudasset.projects.exportAssets
+      operationId: cloudasset.organizations.exportAssets
       parameters:
         - in: body
           name: body
@@ -265,8 +275,10 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
 definitions:
   Asset:
     description: |-
@@ -414,7 +426,7 @@ definitions:
         $ref: '#/definitions/Expr'
         description: |-
           The condition that is associated with this binding.
-          NOTE: an unsatisfied condition will not allow user access via current
+          NOTE: An unsatisfied condition will not allow user access via current
           binding. Different bindings, including their conditions, are examined
           independently.
       members:
@@ -531,6 +543,17 @@ definitions:
           Editing Object
           Metadata](https://cloud.google.com/storage/docs/viewing-editing-metadata)
           for more information.
+        type: string
+      uriPrefix:
+        description: |-
+          The uri prefix of all generated Cloud Storage objects. For example:
+          "gs://bucket_name/object_name_prefix". Each object uri is in format:
+          "gs://bucket_name/object_name_prefix/<asset type>/<shard number> and only
+          contains assets for that type. <shard number> starts from 0. For example:
+          "gs://bucket_name/object_name_prefix/google.compute.disk/0" is the first
+          shard of output objects containing all google.compute.disk assets.
+          An INVALID_ARGUMENT error will be returned if file with the same name
+          "gs://bucket_name/object_name_prefix" already exists.
         type: string
     type: object
   Operation:

@@ -9,6 +9,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Transfers data from external data sources to a Google Cloud Storage bucket or between Google Cloud Storage buckets.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Storage Transfer
   version: v1
   x-apiClientRegistration:
@@ -32,10 +36,18 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -121,9 +133,8 @@ paths:
       operationId: storagetransfer.googleServiceAccounts.get
       parameters:
         - description: |-
-            The ID of the Google Cloud Platform Console project that the Google service
-            account is associated with.
-            Required.
+            Required. The ID of the Google Cloud Platform Console project that the
+            Google service account is associated with.
           in: path
           name: projectId
           required: true
@@ -135,6 +146,8 @@ paths:
             $ref: '#/definitions/GoogleServiceAccount'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - googleServiceAccounts
@@ -156,10 +169,10 @@ paths:
       operationId: storagetransfer.transferJobs.list
       parameters:
         - description: |-
-            A list of query parameters specified as JSON text in the form of
+            Required. A list of query parameters specified as JSON text in the form of:
             {"project_id":"my_project_id",
-            "job_names":["jobid1","jobid2",...],
-            "job_statuses":["status1","status2",...]}.
+             "job_names":["jobid1","jobid2",...],
+             "job_statuses":["status1","status2",...]}.
             Since `job_names` and `job_statuses` support multiple values, their values
             must be specified with array notation. `project_id` is required.
             `job_names` and `job_statuses` are optional.  The valid values for
@@ -182,6 +195,8 @@ paths:
             $ref: '#/definitions/ListTransferJobsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - transferJobs
@@ -213,6 +228,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - transferJobs
   '/v1/{jobName}':
@@ -220,17 +237,15 @@ paths:
       description: Gets a transfer job.
       operationId: storagetransfer.transferJobs.get
       parameters:
-        - description: |-
-            The job to get.
-            Required.
+        - description: Required. The job to get.
           in: path
           name: jobName
           required: true
           type: string
           x-reservedExpansion: true
         - description: |-
-            The ID of the Google Cloud Platform Console project that owns the job.
-            Required.
+            Required. The ID of the Google Cloud Platform Console project that owns the
+            job.
           in: query
           name: projectId
           type: string
@@ -241,6 +256,8 @@ paths:
             $ref: '#/definitions/TransferJob'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - transferJobs
@@ -267,9 +284,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/UpdateTransferJobRequest'
-        - description: |-
-            The name of job to update.
-            Required.
+        - description: Required. The name of job to update.
           in: path
           name: jobName
           required: true
@@ -282,6 +297,8 @@ paths:
             $ref: '#/definitions/TransferJob'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - transferJobs
@@ -304,47 +321,32 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - transferOperations
     get:
       description: |-
-        Lists operations that match the specified filter in the request. If the
-        server doesn't support this method, it returns `UNIMPLEMENTED`.
-
-        NOTE: the `name` binding allows API services to override the binding
-        to use different resource name schemes, such as `users/*/operations`. To
-        override the binding, API services can add a binding such as
-        `"/v1/{name=users/*}/operations"` to their service configuration.
-        For backwards compatibility, the default name includes the operations
-        collection id, however overriding users must ensure the name binding
-        is the parent resource, without the operations collection id.
-      operationId: storagetransfer.transferOperations.list
+        Gets the latest state of a long-running operation.  Clients can use this
+        method to poll the operation result at intervals as recommended by the API
+        service.
+      operationId: storagetransfer.transferOperations.get
       parameters:
-        - description: 'A list of query parameters specified as JSON text in the form of {\"project_id\" : \"my_project_id\", \"job_names\" : [\"jobid1\", \"jobid2\",...], \"operation_names\" : [\"opid1\", \"opid2\",...], \"transfer_statuses\":[\"status1\", \"status2\",...]}. Since `job_names`, `operation_names`, and `transfer_statuses` support multiple values, they must be specified with array notation. `job_names`, `operation_names`, and `transfer_statuses` are optional.'
-          in: query
-          name: filter
-          type: string
-        - description: The value `transferOperations`.
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - description: The list page size. The max allowed value is 256.
-          in: query
-          name: pageSize
-          type: integer
-        - description: The list page token.
-          in: query
-          name: pageToken
-          type: string
       responses:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/ListOperationsResponse'
+            $ref: '#/definitions/Operation'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - transferOperations
@@ -391,6 +393,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - transferOperations
   '/v1/{name}:pause':
@@ -414,9 +418,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/PauseTransferOperationRequest'
-        - description: |-
-            The name of the transfer operation.
-            Required.
+        - description: Required. The name of the transfer operation.
           in: path
           name: name
           required: true
@@ -429,6 +431,8 @@ paths:
             $ref: '#/definitions/Empty'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - transferOperations
@@ -453,9 +457,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/ResumeTransferOperationRequest'
-        - description: |-
-            The name of the transfer operation.
-            Required.
+        - description: Required. The name of the transfer operation.
           in: path
           name: name
           required: true
@@ -469,6 +471,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - transferOperations
 definitions:
@@ -479,14 +483,12 @@ definitions:
       Credentials](http://docs.aws.amazon.com/general/latest/gr/aws-security-credentials.html)).
     properties:
       accessKeyId:
-        description: |-
-          AWS access key ID.
-          Required.
+        description: Required. AWS access key ID.
         type: string
       secretAccessKey:
         description: |-
-          AWS secret access key. This field is not returned in RPC responses.
-          Required.
+          Required. AWS secret access key. This field is not returned in RPC
+          responses.
         type: string
     type: object
   AwsS3Data:
@@ -497,16 +499,14 @@ definitions:
       awsAccessKey:
         $ref: '#/definitions/AwsAccessKey'
         description: |-
-          AWS access key used to sign the API requests to the AWS S3 bucket.
-          Permissions on the bucket must be granted to the access ID of the
+          Required. AWS access key used to sign the API requests to the AWS S3
+          bucket. Permissions on the bucket must be granted to the access ID of the
           AWS access key.
-          Required.
       bucketName:
         description: |-
-          S3 Bucket name (see
+          Required. S3 Bucket name (see
           [Creating a
           bucket](http://docs.aws.amazon.com/AmazonS3/latest/dev/create-bucket-get-location-example.html)).
-          Required.
         type: string
     type: object
   Date:
@@ -565,9 +565,8 @@ definitions:
         type: array
       url:
         description: |-
-          A URL that refers to the target (a data source, a data sink,
+          Required. A URL that refers to the target (a data source, a data sink,
           or an object) with which the error is associated.
-          Required.
         type: string
     type: object
   ErrorSummary:
@@ -597,9 +596,7 @@ definitions:
           - DATA_LOSS
         type: string
       errorCount:
-        description: |-
-          Count of this type of error.
-          Required.
+        description: Required. Count of this type of error.
         format: int64
         type: string
       errorLogEntries:
@@ -620,17 +617,16 @@ definitions:
     properties:
       bucketName:
         description: |-
-          Google Cloud Storage bucket name (see
+          Required. Google Cloud Storage bucket name (see
           [Bucket Name
           Requirements](https://cloud.google.com/storage/docs/naming#requirements)).
-          Required.
         type: string
     type: object
   GoogleServiceAccount:
     description: Google service account
     properties:
       accountEmail:
-        description: Required.
+        description: Email address of the service account.
         type: string
     type: object
   HttpData:
@@ -680,10 +676,9 @@ definitions:
     properties:
       listUrl:
         description: |-
-          The URL that points to the file that stores the object list entries.
-          This file must allow public access.  Currently, only URLs with HTTP and
-          HTTPS schemes are supported.
-          Required.
+          Required. The URL that points to the file that stores the object list
+          entries. This file must allow public access.  Currently, only URLs with
+          HTTP and HTTPS schemes are supported.
         type: string
     type: object
   ListOperationsResponse:
@@ -769,9 +764,10 @@ definitions:
           `NOW` - `maxTimeElapsedSinceLastModification` and objects that don't have
           a `lastModificationTime` are transferred.
 
-          Note that `NOW` refers to the creation time of the transfer job, and
+          Note that, for each `TransferOperation` started by this `TransferJob`,
+          `NOW` refers to the `start_time` of the 'TransferOperation`. Also,
           `lastModificationTime` refers to the time of the last change to the
-          object's content or metadata. Specifically, this would be the `updated`
+          object's content or metadata - specifically, this would be the `updated`
           property of GCS objects and the `LastModified` field of S3 objects.
         format: google-duration
         type: string
@@ -781,9 +777,10 @@ definitions:
           `NOW` - `minTimeElapsedSinceLastModification` and objects that don't have a
           `lastModificationTime` are transferred.
 
-          Note that `NOW` refers to the creation time of the transfer job, and
+          Note that, for each `TransferOperation` started by this `TransferJob`,
+          `NOW` refers to the `start_time` of the 'TransferOperation`. Also,
           `lastModificationTime` refers to the time of the last change to the
-          object's content or metadata. Specifically, this would be the `updated`
+          object's content or metadata - specifically, this would be the `updated`
           property of GCS objects and the `LastModified` field of S3 objects.
         format: google-duration
         type: string
@@ -844,10 +841,9 @@ definitions:
       scheduleStartDate:
         $ref: '#/definitions/Date'
         description: |-
-          The first day the recurring transfer is scheduled to run. If
+          Required. The first day the recurring transfer is scheduled to run. If
           `scheduleStartDate` is in the past, the transfer will run for the first
           time on the following day.
-          Required.
       startTimeOfDay:
         $ref: '#/definitions/TimeOfDay'
         description: |-
@@ -863,56 +859,11 @@ definitions:
     description: |-
       The `Status` type defines a logical error model that is suitable for
       different programming environments, including REST APIs and RPC APIs. It is
-      used by [gRPC](https://github.com/grpc). The error model is designed to be:
+      used by [gRPC](https://github.com/grpc). Each `Status` message contains
+      three pieces of data: error code, error message, and error details.
 
-      - Simple to use and understand for most users
-      - Flexible enough to meet unexpected needs
-
-      # Overview
-
-      The `Status` message contains three pieces of data: error code, error
-      message, and error details. The error code should be an enum value of
-      google.rpc.Code, but it may accept additional error codes if needed.  The
-      error message should be a developer-facing English message that helps
-      developers *understand* and *resolve* the error. If a localized user-facing
-      error message is needed, put the localized message in the error details or
-      localize it in the client. The optional error details may contain arbitrary
-      information about the error. There is a predefined set of error detail types
-      in the package `google.rpc` that can be used for common error conditions.
-
-      # Language mapping
-
-      The `Status` message is the logical representation of the error model, but it
-      is not necessarily the actual wire format. When the `Status` message is
-      exposed in different client libraries and different wire protocols, it can be
-      mapped differently. For example, it will likely be mapped to some exceptions
-      in Java, but more likely mapped to some error codes in C.
-
-      # Other uses
-
-      The error model and the `Status` message can be used in a variety of
-      environments, either with or without APIs, to provide a
-      consistent developer experience across different environments.
-
-      Example uses of this error model include:
-
-      - Partial errors. If a service needs to return partial errors to the client,
-          it may embed the `Status` in the normal response to indicate the partial
-          errors.
-
-      - Workflow errors. A typical workflow has multiple steps. Each step may
-          have a `Status` message for error reporting.
-
-      - Batch operations. If a client uses batch request and batch response, the
-          `Status` message should be used directly inside batch response, one for
-          each error sub-response.
-
-      - Asynchronous operations. If an API call embeds asynchronous operation
-          results in its response, the status of those operations should be
-          represented directly using the `Status` message.
-
-      - Logging. If some API errors are stored in logs, the message `Status` could
-          be used directly after any stripping needed for security/privacy reasons.
+      You can find out more about this error model and how to work with it in the
+      [API Design Guide](https://cloud.google.com/apis/design/errors).
     properties:
       code:
         description: 'The status code, which should be an enum value of google.rpc.Code.'
@@ -1049,11 +1000,11 @@ definitions:
       periodically.
     properties:
       creationTime:
-        description: This field cannot be changed by user requests.
+        description: Output only. The time that the transfer job was created.
         format: google-datetime
         type: string
       deletionTime:
-        description: This field cannot be changed by user requests.
+        description: Output only. The time that the transfer job was deleted.
         format: google-datetime
         type: string
       description:
@@ -1062,7 +1013,7 @@ definitions:
           bytes when Unicode-encoded.
         type: string
       lastModificationTime:
-        description: This field cannot be changed by user requests.
+        description: Output only. The time that the transfer job was last modified.
         format: google-datetime
         type: string
       name:
@@ -1116,9 +1067,7 @@ definitions:
         description: A globally unique ID assigned by the system.
         type: string
       projectId:
-        description: |-
-          The ID of the Google Cloud Platform Project that owns the operation.
-          Required.
+        description: The ID of the Google Cloud Platform Project that owns the operation.
         type: string
       startTime:
         description: Start time of this transfer execution.
@@ -1139,9 +1088,7 @@ definitions:
         type: string
       transferSpec:
         $ref: '#/definitions/TransferSpec'
-        description: |-
-          Transfer specification.
-          Required.
+        description: Transfer specification.
     type: object
   TransferOptions:
     description: |-
@@ -1197,17 +1144,16 @@ definitions:
     properties:
       projectId:
         description: |-
-          The ID of the Google Cloud Platform Console project that owns the job.
-          Required.
+          Required. The ID of the Google Cloud Platform Console project that owns the
+          job.
         type: string
       transferJob:
         $ref: '#/definitions/TransferJob'
         description: |-
-          The job to update. `transferJob` is expected to specify only three fields:
-          `description`, `transferSpec`, and `status`.  An UpdateTransferJobRequest
-          that specifies other fields will be rejected with an error
-          `INVALID_ARGUMENT`.
-          Required.
+          Required. The job to update. `transferJob` is expected to specify only
+          three fields: `description`, `transferSpec`, and `status`.  An
+          UpdateTransferJobRequest that specifies other fields will be rejected with
+          an error `INVALID_ARGUMENT`.
       updateTransferJobFieldMask:
         description: |-
           The field mask of the fields in `transferJob` that are to be updated in

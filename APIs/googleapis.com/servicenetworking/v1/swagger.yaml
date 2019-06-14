@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Provides automatic management of network configurations necessary for certain services.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Service Networking
   version: v1
   x-apiClientRegistration:
@@ -29,11 +33,20 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/service.management': Manage your Google API service configuration
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/service.management': Manage your Google API service configuration
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -127,7 +140,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/service.management'
       tags:
         - operations
@@ -152,7 +169,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/service.management'
       tags:
         - operations
@@ -211,7 +232,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/service.management'
       tags:
         - services
@@ -260,7 +285,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/service.management'
       tags:
         - operations
@@ -301,7 +330,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/service.management'
       tags:
         - services
@@ -351,7 +384,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/service.management'
       tags:
         - services
@@ -407,7 +444,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/service.management'
       tags:
         - services
@@ -457,7 +498,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/service.management'
       tags:
         - services
@@ -738,25 +783,6 @@ definitions:
           Selects the methods to which this rule applies.
 
           Refer to selector for syntax details.
-        type: string
-    type: object
-  AuthorizationConfig:
-    description: |-
-      Configuration of authorization.
-
-      This section determines the authorization provider, if unspecified, then no
-      authorization check will be done.
-
-      Example:
-
-          experimental:
-            authorization:
-              provider: firebaserules.googleapis.com
-    properties:
-      provider:
-        description: |-
-          The name of the authorization provider, such as
-          firebaserules.googleapis.com.
         type: string
     type: object
   Backend:
@@ -1283,15 +1309,6 @@ definitions:
           $ref: '#/definitions/Option'
         type: array
     type: object
-  Experimental:
-    description: |-
-      Experimental service configuration. These configuration options can
-      only be used by whitelisted users.
-    properties:
-      authorization:
-        $ref: '#/definitions/AuthorizationConfig'
-        description: Authorization configuration.
-    type: object
   Field:
     description: A single field of a message type.
     properties:
@@ -1479,7 +1496,9 @@ definitions:
 
       HTTP | gRPC
       -----|-----
-      `GET /v1/messages/123456?revision=2&sub.subfield=foo` | `GetMessage(message_id: "123456" revision: 2 sub: SubMessage(subfield: "foo"))`
+      `GET /v1/messages/123456?revision=2&sub.subfield=foo` |
+      `GetMessage(message_id: "123456" revision: 2 sub: SubMessage(subfield:
+      "foo"))`
 
       Note that fields which are mapped to URL query parameters must have a
       primitive type or a repeated primitive type or a non-repeated message type.
@@ -1511,7 +1530,8 @@ definitions:
 
       HTTP | gRPC
       -----|-----
-      `PATCH /v1/messages/123456 { "text": "Hi!" }` | `UpdateMessage(message_id: "123456" message { text: "Hi!" })`
+      `PATCH /v1/messages/123456 { "text": "Hi!" }` | `UpdateMessage(message_id:
+      "123456" message { text: "Hi!" })`
 
       The special name `*` can be used in the body mapping to define that
       every field not bound by the path template should be mapped to the
@@ -1536,7 +1556,8 @@ definitions:
 
       HTTP | gRPC
       -----|-----
-      `PATCH /v1/messages/123456 { "text": "Hi!" }` | `UpdateMessage(message_id: "123456" text: "Hi!")`
+      `PATCH /v1/messages/123456 { "text": "Hi!" }` | `UpdateMessage(message_id:
+      "123456" text: "Hi!")`
 
       Note that when using `*` in the body mapping, it is not possible to
       have HTTP parameters, as all fields not bound by the path end in
@@ -1567,7 +1588,8 @@ definitions:
       HTTP | gRPC
       -----|-----
       `GET /v1/messages/123456` | `GetMessage(message_id: "123456")`
-      `GET /v1/users/me/messages/123456` | `GetMessage(user_id: "me" message_id: "123456")`
+      `GET /v1/users/me/messages/123456` | `GetMessage(user_id: "me" message_id:
+      "123456")`
 
       ## Rules for HTTP mapping
 
@@ -1611,16 +1633,18 @@ definitions:
       `"{var=*}"`, when such a variable is expanded into a URL path on the client
       side, all characters except `[-_.~0-9a-zA-Z]` are percent-encoded. The
       server side does the reverse decoding. Such variables show up in the
-      [Discovery Document](https://developers.google.com/discovery/v1/reference/apis)
-      as `{var}`.
+      [Discovery
+      Document](https://developers.google.com/discovery/v1/reference/apis) as
+      `{var}`.
 
       If a variable contains multiple path segments, such as `"{var=foo/*}"`
       or `"{var=**}"`, when such a variable is expanded into a URL path on the
       client side, all characters except `[-_.~/0-9a-zA-Z]` are percent-encoded.
       The server side does the reverse decoding, except "%2F" and "%2f" are left
       unchanged. Such variables show up in the
-      [Discovery Document](https://developers.google.com/discovery/v1/reference/apis)
-      as `{+var}`.
+      [Discovery
+      Document](https://developers.google.com/discovery/v1/reference/apis) as
+      `{+var}`.
 
       ## Using gRPC API Service Configuration
 
@@ -1935,6 +1959,16 @@ definitions:
         items:
           $ref: '#/definitions/LabelDescriptor'
         type: array
+      launchStage:
+        description: Optional. The launch stage of the metric definition.
+        enum:
+          - LAUNCH_STAGE_UNSPECIFIED
+          - EARLY_ACCESS
+          - ALPHA
+          - BETA
+          - GA
+          - DEPRECATED
+        type: string
       metadata:
         $ref: '#/definitions/MetricDescriptorMetadata'
         description: Optional. Metadata which can be used to guide usage of the metric.
@@ -2055,7 +2089,9 @@ definitions:
         format: google-duration
         type: string
       launchStage:
-        description: The launch stage of the metric definition.
+        description: |-
+          Deprecated. Please use the MetricDescriptor.launch_stage instead.
+          The launch stage of the metric definition.
         enum:
           - LAUNCH_STAGE_UNSPECIFIED
           - EARLY_ACCESS
@@ -2219,6 +2255,16 @@ definitions:
         items:
           $ref: '#/definitions/LabelDescriptor'
         type: array
+      launchStage:
+        description: Optional. The launch stage of the monitored resource definition.
+        enum:
+          - LAUNCH_STAGE_UNSPECIFIED
+          - EARLY_ACCESS
+          - ALPHA
+          - BETA
+          - GA
+          - DEPRECATED
+        type: string
       name:
         description: |-
           Optional. The resource name of the monitored resource descriptor:
@@ -2375,7 +2421,7 @@ definitions:
         description: |-
           The server-assigned name, which is only unique within the same service that
           originally returns it. If you use the default HTTP mapping, the
-          `name` should have the format of `operations/some/unique/name`.
+          `name` should be a resource name ending with `operations/{unique_id}`.
         type: string
       response:
         additionalProperties:
@@ -2740,9 +2786,6 @@ definitions:
         items:
           $ref: '#/definitions/Enum'
         type: array
-      experimental:
-        $ref: '#/definitions/Experimental'
-        description: Experimental configuration.
       http:
         $ref: '#/definitions/Http'
         description: HTTP configuration.
@@ -2850,56 +2893,11 @@ definitions:
     description: |-
       The `Status` type defines a logical error model that is suitable for
       different programming environments, including REST APIs and RPC APIs. It is
-      used by [gRPC](https://github.com/grpc). The error model is designed to be:
+      used by [gRPC](https://github.com/grpc). Each `Status` message contains
+      three pieces of data: error code, error message, and error details.
 
-      - Simple to use and understand for most users
-      - Flexible enough to meet unexpected needs
-
-      # Overview
-
-      The `Status` message contains three pieces of data: error code, error
-      message, and error details. The error code should be an enum value of
-      google.rpc.Code, but it may accept additional error codes if needed.  The
-      error message should be a developer-facing English message that helps
-      developers *understand* and *resolve* the error. If a localized user-facing
-      error message is needed, put the localized message in the error details or
-      localize it in the client. The optional error details may contain arbitrary
-      information about the error. There is a predefined set of error detail types
-      in the package `google.rpc` that can be used for common error conditions.
-
-      # Language mapping
-
-      The `Status` message is the logical representation of the error model, but it
-      is not necessarily the actual wire format. When the `Status` message is
-      exposed in different client libraries and different wire protocols, it can be
-      mapped differently. For example, it will likely be mapped to some exceptions
-      in Java, but more likely mapped to some error codes in C.
-
-      # Other uses
-
-      The error model and the `Status` message can be used in a variety of
-      environments, either with or without APIs, to provide a
-      consistent developer experience across different environments.
-
-      Example uses of this error model include:
-
-      - Partial errors. If a service needs to return partial errors to the client,
-          it may embed the `Status` in the normal response to indicate the partial
-          errors.
-
-      - Workflow errors. A typical workflow has multiple steps. Each step may
-          have a `Status` message for error reporting.
-
-      - Batch operations. If a client uses batch request and batch response, the
-          `Status` message should be used directly inside batch response, one for
-          each error sub-response.
-
-      - Asynchronous operations. If an API call embeds asynchronous operation
-          results in its response, the status of those operations should be
-          represented directly using the `Status` message.
-
-      - Logging. If some API errors are stored in logs, the message `Status` could
-          be used directly after any stripping needed for security/privacy reasons.
+      You can find out more about this error model and how to work with it in the
+      [API Design Guide](https://cloud.google.com/apis/design/errors).
     properties:
       code:
         description: 'The status code, which should be an enum value of google.rpc.Code.'

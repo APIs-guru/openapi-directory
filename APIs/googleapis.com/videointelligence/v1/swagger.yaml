@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'Detects objects, explicit content, and scene changes in videos. It also specifies the region for annotation and transcribes speech to text. Supports both asynchronous API and streaming API.'
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Cloud Video Intelligence
   version: v1
   x-apiClientRegistration:
@@ -31,10 +35,18 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -103,61 +115,9 @@ parameters:
     type: string
 tags:
   - name: operations
+  - name: projects
   - name: videos
 paths:
-  /v1/operations:
-    get:
-      description: |-
-        Lists operations that match the specified filter in the request. If the
-        server doesn't support this method, it returns `UNIMPLEMENTED`.
-
-        NOTE: the `name` binding allows API services to override the binding
-        to use different resource name schemes, such as `users/*/operations`. To
-        override the binding, API services can add a binding such as
-        `"/v1/{name=users/*}/operations"` to their service configuration.
-        For backwards compatibility, the default name includes the operations
-        collection id, however overriding users must ensure the name binding
-        is the parent resource, without the operations collection id.
-      operationId: videointelligence.operations.list
-      parameters:
-        - description: The standard list filter.
-          in: query
-          name: filter
-          type: string
-        - description: The name of the operation's parent resource.
-          in: query
-          name: name
-          type: string
-        - description: The standard list page size.
-          in: query
-          name: pageSize
-          type: integer
-        - description: The standard list page token.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/GoogleLongrunning_ListOperationsResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - operations
-    parameters:
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/upload_protocol'
   '/v1/operations/{name}':
     delete:
       description: |-
@@ -165,7 +125,7 @@ paths:
         no longer interested in the operation result. It does not cancel the
         operation. If the server doesn't support this method, it returns
         `google.rpc.Code.UNIMPLEMENTED`.
-      operationId: videointelligence.operations.delete
+      operationId: videointelligence.operations.projects.locations.operations.delete
       parameters:
         - description: The name of the operation resource to be deleted.
           in: path
@@ -181,6 +141,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - operations
     get:
@@ -188,7 +150,7 @@ paths:
         Gets the latest state of a long-running operation.  Clients can use this
         method to poll the operation result at intervals as recommended by the API
         service.
-      operationId: videointelligence.operations.get
+      operationId: videointelligence.operations.projects.locations.operations.get
       parameters:
         - description: The name of the operation resource.
           in: path
@@ -203,6 +165,8 @@ paths:
             $ref: '#/definitions/GoogleLongrunning_Operation'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - operations
@@ -243,12 +207,8 @@ paths:
         the operation is not deleted; instead, it becomes an operation with
         an Operation.error value with a google.rpc.Status.code of 1,
         corresponding to `Code.CANCELLED`.
-      operationId: videointelligence.operations.cancel
+      operationId: videointelligence.operations.projects.locations.operations.cancel
       parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/GoogleLongrunning_CancelOperationRequest'
         - description: The name of the operation resource to be cancelled.
           in: path
           name: name
@@ -262,6 +222,8 @@ paths:
             $ref: '#/definitions/GoogleProtobuf_Empty'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - operations
@@ -298,8 +260,180 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - videos
+  '/v1/{name}':
+    delete:
+      description: |-
+        Deletes a long-running operation. This method indicates that the client is
+        no longer interested in the operation result. It does not cancel the
+        operation. If the server doesn't support this method, it returns
+        `google.rpc.Code.UNIMPLEMENTED`.
+      operationId: videointelligence.projects.locations.operations.delete
+      parameters:
+        - description: The name of the operation resource to be deleted.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GoogleProtobuf_Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    get:
+      description: |-
+        Gets the latest state of a long-running operation.  Clients can use this
+        method to poll the operation result at intervals as recommended by the API
+        service.
+      operationId: videointelligence.projects.locations.operations.get
+      parameters:
+        - description: The name of the operation resource.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GoogleLongrunning_Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v1/{name}/operations':
+    get:
+      description: |-
+        Lists operations that match the specified filter in the request. If the
+        server doesn't support this method, it returns `UNIMPLEMENTED`.
+
+        NOTE: the `name` binding allows API services to override the binding
+        to use different resource name schemes, such as `users/*/operations`. To
+        override the binding, API services can add a binding such as
+        `"/v1/{name=users/*}/operations"` to their service configuration.
+        For backwards compatibility, the default name includes the operations
+        collection id, however overriding users must ensure the name binding
+        is the parent resource, without the operations collection id.
+      operationId: videointelligence.projects.locations.operations.list
+      parameters:
+        - description: The standard list filter.
+          in: query
+          name: filter
+          type: string
+        - description: The name of the operation's parent resource.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: The standard list page size.
+          in: query
+          name: pageSize
+          type: integer
+        - description: The standard list page token.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GoogleLongrunning_ListOperationsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v1/{name}:cancel':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Starts asynchronous cancellation on a long-running operation.  The server
+        makes a best effort to cancel the operation, but success is not
+        guaranteed.  If the server doesn't support this method, it returns
+        `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+        Operations.GetOperation or
+        other methods to check whether the cancellation succeeded or whether the
+        operation completed despite cancellation. On successful cancellation,
+        the operation is not deleted; instead, it becomes an operation with
+        an Operation.error value with a google.rpc.Status.code of 1,
+        corresponding to `Code.CANCELLED`.
+      operationId: videointelligence.projects.locations.operations.cancel
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GoogleLongrunning_CancelOperationRequest'
+        - description: The name of the operation resource to be cancelled.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GoogleProtobuf_Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
 definitions:
   GoogleCloudVideointelligenceV1_AnnotateVideoProgress:
     description: |-
@@ -635,6 +769,16 @@ definitions:
         format: int64
         type: string
     type: object
+  GoogleCloudVideointelligenceV1_ObjectTrackingConfig:
+    description: Config for OBJECT_TRACKING.
+    properties:
+      model:
+        description: |-
+          Model to use for object tracking.
+          Supported values: "builtin/stable" (the default if unset) and
+          "builtin/latest".
+        type: string
+    type: object
   GoogleCloudVideointelligenceV1_ObjectTrackingFrame:
     description: |-
       Video frame level annotations for object detection and tracking. This field
@@ -819,6 +963,12 @@ definitions:
         items:
           type: string
         type: array
+      model:
+        description: |-
+          Model to use for text detection.
+          Supported values: "builtin/stable" (the default if unset) and
+          "builtin/latest".
+        type: string
     type: object
   GoogleCloudVideointelligenceV1_TextFrame:
     description: |-
@@ -855,6 +1005,19 @@ definitions:
   GoogleCloudVideointelligenceV1_VideoAnnotationProgress:
     description: Annotation progress for a single video.
     properties:
+      feature:
+        description: |-
+          Specifies which feature is being tracked if the request contains more than
+          one features.
+        enum:
+          - FEATURE_UNSPECIFIED
+          - LABEL_DETECTION
+          - SHOT_CHANGE_DETECTION
+          - EXPLICIT_CONTENT_DETECTION
+          - SPEECH_TRANSCRIPTION
+          - TEXT_DETECTION
+          - OBJECT_TRACKING
+        type: string
       inputUri:
         description: |-
           Video file location in
@@ -866,6 +1029,11 @@ definitions:
           100 when fully processed.
         format: int32
         type: integer
+      segment:
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1_VideoSegment'
+        description: |-
+          Specifies which segment is being tracked if the request contains more than
+          one segments.
       startTime:
         description: Time when the request was received.
         format: google-datetime
@@ -945,6 +1113,9 @@ definitions:
       labelDetectionConfig:
         $ref: '#/definitions/GoogleCloudVideointelligenceV1_LabelDetectionConfig'
         description: Config for LABEL_DETECTION.
+      objectTrackingConfig:
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1_ObjectTrackingConfig'
+        description: Config for OBJECT_TRACKING.
       segments:
         description: |-
           Video segments to annotate. The segments may overlap and are not required
@@ -1350,6 +1521,19 @@ definitions:
   GoogleCloudVideointelligenceV1beta2_VideoAnnotationProgress:
     description: Annotation progress for a single video.
     properties:
+      feature:
+        description: |-
+          Specifies which feature is being tracked if the request contains more than
+          one features.
+        enum:
+          - FEATURE_UNSPECIFIED
+          - LABEL_DETECTION
+          - SHOT_CHANGE_DETECTION
+          - EXPLICIT_CONTENT_DETECTION
+          - SPEECH_TRANSCRIPTION
+          - TEXT_DETECTION
+          - OBJECT_TRACKING
+        type: string
       inputUri:
         description: |-
           Video file location in
@@ -1361,6 +1545,11 @@ definitions:
           100 when fully processed.
         format: int32
         type: integer
+      segment:
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1beta2_VideoSegment'
+        description: |-
+          Specifies which segment is being tracked if the request contains more than
+          one segments.
       startTime:
         description: Time when the request was received.
         format: google-datetime
@@ -1818,6 +2007,19 @@ definitions:
   GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationProgress:
     description: Annotation progress for a single video.
     properties:
+      feature:
+        description: |-
+          Specifies which feature is being tracked if the request contains more than
+          one features.
+        enum:
+          - FEATURE_UNSPECIFIED
+          - LABEL_DETECTION
+          - SHOT_CHANGE_DETECTION
+          - EXPLICIT_CONTENT_DETECTION
+          - SPEECH_TRANSCRIPTION
+          - TEXT_DETECTION
+          - OBJECT_TRACKING
+        type: string
       inputUri:
         description: |-
           Video file location in
@@ -1829,6 +2031,11 @@ definitions:
           100 when fully processed.
         format: int32
         type: integer
+      segment:
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1p1beta1_VideoSegment'
+        description: |-
+          Specifies which segment is being tracked if the request contains more than
+          one segments.
       startTime:
         description: Time when the request was received.
         format: google-datetime
@@ -2286,6 +2493,19 @@ definitions:
   GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationProgress:
     description: Annotation progress for a single video.
     properties:
+      feature:
+        description: |-
+          Specifies which feature is being tracked if the request contains more than
+          one features.
+        enum:
+          - FEATURE_UNSPECIFIED
+          - LABEL_DETECTION
+          - SHOT_CHANGE_DETECTION
+          - EXPLICIT_CONTENT_DETECTION
+          - SPEECH_TRANSCRIPTION
+          - TEXT_DETECTION
+          - OBJECT_TRACKING
+        type: string
       inputUri:
         description: |-
           Video file location in
@@ -2297,6 +2517,11 @@ definitions:
           100 when fully processed.
         format: int32
         type: integer
+      segment:
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1p2beta1_VideoSegment'
+        description: |-
+          Specifies which segment is being tracked if the request contains more than
+          one segments.
       startTime:
         description: Time when the request was received.
         format: google-datetime
@@ -2451,6 +2676,24 @@ definitions:
           $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_VideoAnnotationResults'
         type: array
     type: object
+  GoogleCloudVideointelligenceV1p3beta1_DetectedAttribute:
+    description: A generic detected attribute represented by name in string format.
+    properties:
+      confidence:
+        description: 'Detected attribute confidence. Range [0, 1].'
+        format: float
+        type: number
+      name:
+        description: |-
+          The name of the attribute, i.e. glasses, dark_glasses, mouth_open etc.
+          A full list of supported type names will be provided in the document.
+        type: string
+      value:
+        description: |-
+          Text value of the detection result. For example, the value for "HairColor"
+          can be "black", "blonde", etc.
+        type: string
+    type: object
   GoogleCloudVideointelligenceV1p3beta1_Entity:
     description: Detected entity from video analysis.
     properties:
@@ -2549,6 +2792,29 @@ definitions:
       segment:
         $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_VideoSegment'
         description: Video segment where a label was detected.
+    type: object
+  GoogleCloudVideointelligenceV1p3beta1_LogoRecognitionAnnotation:
+    description: 'Annotation corresponding to one detected, tracked and recognized logo class.'
+    properties:
+      entity:
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_Entity'
+        description: |-
+          Entity category information to specify the logo class that all the logo
+          tracks within this LogoRecognitionAnnotation are recognized as.
+      segments:
+        description: |-
+          All video segments where the recognized logo appears. There might be
+          multiple instances of the same logo class appearing in one VideoSegment.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_VideoSegment'
+        type: array
+      tracks:
+        description: |-
+          All logo tracks where the recognized logo appears. Each track corresponds
+          to one logo instance appearing in consecutive frames.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_Track'
+        type: array
     type: object
   GoogleCloudVideointelligenceV1p3beta1_NormalizedBoundingBox:
     description: |-
@@ -2797,9 +3063,66 @@ definitions:
         $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_VideoSegment'
         description: Video segment where a text snippet was detected.
     type: object
+  GoogleCloudVideointelligenceV1p3beta1_TimestampedObject:
+    description: |-
+      For tracking related features, such as LOGO_RECOGNITION, FACE_DETECTION,
+      CELEBRITY_RECOGNITION, PERSON_DETECTION.
+      An object at time_offset with attributes, and located with
+      normalized_bounding_box.
+    properties:
+      attributes:
+        description: Optional. The attributes of the object in the bounding box.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_DetectedAttribute'
+        type: array
+      normalizedBoundingBox:
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_NormalizedBoundingBox'
+        description: 'Normalized Bounding box in a frame, where the object is located.'
+      timeOffset:
+        description: |-
+          Time-offset, relative to the beginning of the video,
+          corresponding to the video frame for this object.
+        format: google-duration
+        type: string
+    type: object
+  GoogleCloudVideointelligenceV1p3beta1_Track:
+    description: A track of an object instance.
+    properties:
+      attributes:
+        description: Optional. Attributes in the track level.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_DetectedAttribute'
+        type: array
+      confidence:
+        description: Optional. The confidence score of the tracked object.
+        format: float
+        type: number
+      segment:
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_VideoSegment'
+        description: Video segment of a track.
+      timestampedObjects:
+        description: The object with timestamp and attributes per frame in the track.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_TimestampedObject'
+        type: array
+    type: object
   GoogleCloudVideointelligenceV1p3beta1_VideoAnnotationProgress:
     description: Annotation progress for a single video.
     properties:
+      feature:
+        description: |-
+          Specifies which feature is being tracked if the request contains more than
+          one features.
+        enum:
+          - FEATURE_UNSPECIFIED
+          - LABEL_DETECTION
+          - SHOT_CHANGE_DETECTION
+          - EXPLICIT_CONTENT_DETECTION
+          - SPEECH_TRANSCRIPTION
+          - TEXT_DETECTION
+          - OBJECT_TRACKING
+          - LOGO_RECOGNITION
+        type: string
       inputUri:
         description: |-
           Video file location in
@@ -2811,6 +3134,11 @@ definitions:
           100 when fully processed.
         format: int32
         type: integer
+      segment:
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_VideoSegment'
+        description: |-
+          Specifies which segment is being tracked if the request contains more than
+          one segments.
       startTime:
         description: Time when the request was received.
         format: google-datetime
@@ -2843,6 +3171,11 @@ definitions:
           Video file location in
           [Google Cloud Storage](https://cloud.google.com/storage/).
         type: string
+      logoRecognitionAnnotations:
+        description: 'Annotations for list of logos detected, tracked and recognized in video.'
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_LogoRecognitionAnnotation'
+        type: array
       objectAnnotations:
         description: Annotations for list of objects detected and tracked in video.
         items:
@@ -2984,7 +3317,7 @@ definitions:
         description: |-
           The server-assigned name, which is only unique within the same service that
           originally returns it. If you use the default HTTP mapping, the
-          `name` should have the format of `operations/some/unique/name`.
+          `name` should be a resource name ending with `operations/{unique_id}`.
         type: string
       response:
         additionalProperties:
@@ -3017,56 +3350,11 @@ definitions:
     description: |-
       The `Status` type defines a logical error model that is suitable for
       different programming environments, including REST APIs and RPC APIs. It is
-      used by [gRPC](https://github.com/grpc). The error model is designed to be:
+      used by [gRPC](https://github.com/grpc). Each `Status` message contains
+      three pieces of data: error code, error message, and error details.
 
-      - Simple to use and understand for most users
-      - Flexible enough to meet unexpected needs
-
-      # Overview
-
-      The `Status` message contains three pieces of data: error code, error
-      message, and error details. The error code should be an enum value of
-      google.rpc.Code, but it may accept additional error codes if needed.  The
-      error message should be a developer-facing English message that helps
-      developers *understand* and *resolve* the error. If a localized user-facing
-      error message is needed, put the localized message in the error details or
-      localize it in the client. The optional error details may contain arbitrary
-      information about the error. There is a predefined set of error detail types
-      in the package `google.rpc` that can be used for common error conditions.
-
-      # Language mapping
-
-      The `Status` message is the logical representation of the error model, but it
-      is not necessarily the actual wire format. When the `Status` message is
-      exposed in different client libraries and different wire protocols, it can be
-      mapped differently. For example, it will likely be mapped to some exceptions
-      in Java, but more likely mapped to some error codes in C.
-
-      # Other uses
-
-      The error model and the `Status` message can be used in a variety of
-      environments, either with or without APIs, to provide a
-      consistent developer experience across different environments.
-
-      Example uses of this error model include:
-
-      - Partial errors. If a service needs to return partial errors to the client,
-          it may embed the `Status` in the normal response to indicate the partial
-          errors.
-
-      - Workflow errors. A typical workflow has multiple steps. Each step may
-          have a `Status` message for error reporting.
-
-      - Batch operations. If a client uses batch request and batch response, the
-          `Status` message should be used directly inside batch response, one for
-          each error sub-response.
-
-      - Asynchronous operations. If an API call embeds asynchronous operation
-          results in its response, the status of those operations should be
-          represented directly using the `Status` message.
-
-      - Logging. If some API errors are stored in logs, the message `Status` could
-          be used directly after any stripping needed for security/privacy reasons.
+      You can find out more about this error model and how to work with it in the
+      [API Design Guide](https://cloud.google.com/apis/design/errors).
     properties:
       code:
         description: 'The status code, which should be an enum value of google.rpc.Code.'

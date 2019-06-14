@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Provides access to information about profiles and contacts.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: People
   version: v1
   x-apiClientRegistration:
@@ -31,18 +35,32 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/contacts': 'See, edit, download, and permanently delete your contacts'
       'https://www.googleapis.com/auth/contacts.readonly': See and download your contacts
-      'https://www.googleapis.com/auth/plus.login': 'View your basic profile info, including your age range and language'
       'https://www.googleapis.com/auth/user.addresses.read': View your street addresses
       'https://www.googleapis.com/auth/user.birthday.read': View your complete date of birth
       'https://www.googleapis.com/auth/user.emails.read': View your email addresses
       'https://www.googleapis.com/auth/user.phonenumbers.read': View your phone numbers
       'https://www.googleapis.com/auth/userinfo.email': View your email address
-      'https://www.googleapis.com/auth/userinfo.profile': 'See your personal info, including any personal info you''ve made publically available'
+      'https://www.googleapis.com/auth/userinfo.profile': 'See your personal info, including any personal info you''ve made publicly available'
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/contacts': 'See, edit, download, and permanently delete your contacts'
+      'https://www.googleapis.com/auth/contacts.readonly': See and download your contacts
+      'https://www.googleapis.com/auth/user.addresses.read': View your street addresses
+      'https://www.googleapis.com/auth/user.birthday.read': View your complete date of birth
+      'https://www.googleapis.com/auth/user.emails.read': View your email addresses
+      'https://www.googleapis.com/auth/user.phonenumbers.read': View your phone numbers
+      'https://www.googleapis.com/auth/userinfo.email': View your email address
+      'https://www.googleapis.com/auth/userinfo.profile': 'See your personal info, including any personal info you''ve made publicly available'
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -145,7 +163,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/contacts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/contacts'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/contacts.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/contacts.readonly'
       tags:
         - contactGroups
@@ -177,6 +199,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/contacts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/contacts'
       tags:
         - contactGroups
   '/v1/contactGroups:batchGet':
@@ -205,7 +229,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/contacts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/contacts'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/contacts.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/contacts.readonly'
       tags:
         - contactGroups
@@ -300,21 +328,35 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/contacts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/contacts'
         - Oauth2:
             - 'https://www.googleapis.com/auth/contacts.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/contacts.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
-        - Oauth2:
+            - 'https://www.googleapis.com/auth/user.addresses.read'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/user.addresses.read'
         - Oauth2:
             - 'https://www.googleapis.com/auth/user.birthday.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/user.birthday.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/user.emails.read'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/user.emails.read'
         - Oauth2:
             - 'https://www.googleapis.com/auth/user.phonenumbers.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/user.phonenumbers.read'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/userinfo.email'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/userinfo.profile'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.profile'
       tags:
         - people
@@ -363,6 +405,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/contacts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/contacts'
       tags:
         - people
   '/v1/{resourceName}':
@@ -389,6 +433,8 @@ paths:
             $ref: '#/definitions/Empty'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/contacts'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/contacts'
       tags:
         - contactGroups
@@ -423,21 +469,35 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/contacts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/contacts'
         - Oauth2:
             - 'https://www.googleapis.com/auth/contacts.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/contacts.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
-        - Oauth2:
+            - 'https://www.googleapis.com/auth/user.addresses.read'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/user.addresses.read'
         - Oauth2:
             - 'https://www.googleapis.com/auth/user.birthday.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/user.birthday.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/user.emails.read'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/user.emails.read'
         - Oauth2:
             - 'https://www.googleapis.com/auth/user.phonenumbers.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/user.phonenumbers.read'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/userinfo.email'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/userinfo.profile'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.profile'
       tags:
         - contactGroups
@@ -478,6 +538,8 @@ paths:
             $ref: '#/definitions/ContactGroup'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/contacts'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/contacts'
       tags:
         - contactGroups
@@ -563,6 +625,7 @@ paths:
             `LAST_MODIFIED_ASCENDING`.
           enum:
             - LAST_MODIFIED_ASCENDING
+            - LAST_MODIFIED_DESCENDING
             - FIRST_NAME_ASCENDING
             - LAST_NAME_ASCENDING
           in: query
@@ -583,7 +646,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/contacts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/contacts'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/contacts.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/contacts.readonly'
       tags:
         - people
@@ -639,6 +706,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/contacts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/contacts'
       tags:
         - contactGroups
   '/v1/{resourceName}:deleteContact':
@@ -659,6 +728,8 @@ paths:
             $ref: '#/definitions/Empty'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/contacts'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/contacts'
       tags:
         - people
@@ -730,6 +801,7 @@ paths:
             * imClients
             * interests
             * locales
+            * memberships
             * names
             * nicknames
             * occupations
@@ -750,6 +822,8 @@ paths:
             $ref: '#/definitions/Person'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/contacts'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/contacts'
       tags:
         - people
@@ -929,13 +1003,16 @@ definitions:
     description: A Google contact group membership.
     properties:
       contactGroupId:
+        description: The read-only contact group ID for the contact group membership.
+        type: string
+      contactGroupResourceName:
         description: |-
-          The contact group ID for the contact group membership. The contact group
-          ID can be custom or one of these predefined values:
-
-          *  `myContacts`
-          *  `starred`
-          *  A numerical ID for user-created groups.
+          The resource name for the contact group, assigned by the server. An ASCII
+          string, in the form of `contactGroups/`<var>contact_group_id</var>.
+          Only contact_group_resource_name can be used for modifying memberships.
+          Any contact group membership can be removed, but only user group or
+          "myContacts" or "starred" system groups memberships can be added. A
+          contact must always have at least one contact group membership.
         type: string
     type: object
   ContactGroupMetadata:
@@ -1020,10 +1097,10 @@ definitions:
         type: integer
     type: object
   DomainMembership:
-    description: A Google Apps Domain membership.
+    description: A read-only G Suite Domain membership.
     properties:
       inViewerDomain:
-        description: True if the person is in the viewer's Google Apps domain.
+        description: True if the person is in the viewer's G Suite domain.
         type: boolean
     type: object
   EmailAddress:
@@ -1249,14 +1326,16 @@ definitions:
         type: string
     type: object
   Membership:
-    description: A person's read-only membership in a group.
+    description: |-
+      A person's membership in a group. Only contact group memberships can be
+      modified.
     properties:
       contactGroupMembership:
         $ref: '#/definitions/ContactGroupMembership'
         description: The contact group membership.
       domainMembership:
         $ref: '#/definitions/DomainMembership'
-        description: The domain membership.
+        description: The read-only domain membership.
       metadata:
         $ref: '#/definitions/FieldMetadata'
         description: Metadata about the membership.
@@ -1265,7 +1344,7 @@ definitions:
     description: |-
       A request to modify an existing contact group's members. Contacts can be
       removed from any group but they can only be added to a user group or
-      myContacts or starred system groups.
+      "myContacts" or "starred" system groups.
     properties:
       resourceNamesToAdd:
         description: |-
@@ -1518,7 +1597,7 @@ definitions:
           $ref: '#/definitions/Locale'
         type: array
       memberships:
-        description: The person's read-only group memberships.
+        description: The person's group memberships.
         items:
           $ref: '#/definitions/Membership'
         type: array
@@ -1937,56 +2016,11 @@ definitions:
     description: |-
       The `Status` type defines a logical error model that is suitable for
       different programming environments, including REST APIs and RPC APIs. It is
-      used by [gRPC](https://github.com/grpc). The error model is designed to be:
+      used by [gRPC](https://github.com/grpc). Each `Status` message contains
+      three pieces of data: error code, error message, and error details.
 
-      - Simple to use and understand for most users
-      - Flexible enough to meet unexpected needs
-
-      # Overview
-
-      The `Status` message contains three pieces of data: error code, error
-      message, and error details. The error code should be an enum value of
-      google.rpc.Code, but it may accept additional error codes if needed.  The
-      error message should be a developer-facing English message that helps
-      developers *understand* and *resolve* the error. If a localized user-facing
-      error message is needed, put the localized message in the error details or
-      localize it in the client. The optional error details may contain arbitrary
-      information about the error. There is a predefined set of error detail types
-      in the package `google.rpc` that can be used for common error conditions.
-
-      # Language mapping
-
-      The `Status` message is the logical representation of the error model, but it
-      is not necessarily the actual wire format. When the `Status` message is
-      exposed in different client libraries and different wire protocols, it can be
-      mapped differently. For example, it will likely be mapped to some exceptions
-      in Java, but more likely mapped to some error codes in C.
-
-      # Other uses
-
-      The error model and the `Status` message can be used in a variety of
-      environments, either with or without APIs, to provide a
-      consistent developer experience across different environments.
-
-      Example uses of this error model include:
-
-      - Partial errors. If a service needs to return partial errors to the client,
-          it may embed the `Status` in the normal response to indicate the partial
-          errors.
-
-      - Workflow errors. A typical workflow has multiple steps. Each step may
-          have a `Status` message for error reporting.
-
-      - Batch operations. If a client uses batch request and batch response, the
-          `Status` message should be used directly inside batch response, one for
-          each error sub-response.
-
-      - Asynchronous operations. If an API call embeds asynchronous operation
-          results in its response, the status of those operations should be
-          represented directly using the `Status` message.
-
-      - Logging. If some API errors are stored in logs, the message `Status` could
-          be used directly after any stripping needed for security/privacy reasons.
+      You can find out more about this error model and how to work with it in the
+      [API Design Guide](https://cloud.google.com/apis/design/errors).
     properties:
       code:
         description: 'The status code, which should be an enum value of google.rpc.Code.'

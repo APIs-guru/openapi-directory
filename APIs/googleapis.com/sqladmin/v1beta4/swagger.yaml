@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'Creates and manages Cloud SQL instances, which provide fully managed MySQL or PostgreSQL databases.'
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Cloud SQL Admin
   version: v1beta4
   x-apiClientRegistration:
@@ -31,11 +35,20 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/sqlservice.admin': Manage your Google SQL Service instances
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/sqlservice.admin': Manage your Google SQL Service instances
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -104,7 +117,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - flags
@@ -146,7 +163,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - instances
@@ -179,7 +200,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - instances
@@ -206,7 +231,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - instances
@@ -232,7 +261,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - instances
@@ -270,7 +303,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - instances
@@ -300,7 +337,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - instances
@@ -335,7 +376,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - instances
@@ -370,7 +415,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - backupRuns
@@ -408,7 +457,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - backupRuns
@@ -440,7 +493,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - backupRuns
@@ -471,7 +528,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - backupRuns
@@ -518,7 +579,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - instances
@@ -557,7 +622,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - sslCerts
@@ -584,7 +653,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - databases
@@ -622,7 +695,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - databases
@@ -654,7 +731,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - databases
@@ -685,7 +766,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - databases
@@ -728,7 +813,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - databases
@@ -763,7 +852,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - databases
@@ -802,7 +895,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - instances
@@ -841,6 +938,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - instances
   '/projects/{project}/instances/{instance}/failover':
@@ -878,7 +977,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - instances
@@ -917,6 +1020,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - instances
   '/projects/{project}/instances/{instance}/listServerCas':
@@ -942,7 +1047,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - instances
@@ -985,7 +1094,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - instances
@@ -1020,7 +1133,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - instances
@@ -1055,7 +1172,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - instances
@@ -1094,7 +1215,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - instances
@@ -1133,7 +1258,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - instances
@@ -1160,7 +1289,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - sslCerts
@@ -1198,7 +1331,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - sslCerts
@@ -1230,7 +1367,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - sslCerts
@@ -1261,7 +1402,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - sslCerts
@@ -1304,7 +1449,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - instances
@@ -1339,7 +1488,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - instances
@@ -1378,7 +1531,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - instances
@@ -1415,7 +1572,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - users
@@ -1441,7 +1602,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - users
@@ -1479,7 +1644,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - users
@@ -1518,7 +1687,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - users
@@ -1553,7 +1726,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - operations
@@ -1588,7 +1765,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - operations
@@ -1618,7 +1799,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - tiers
@@ -1672,6 +1857,9 @@ definitions:
         default: 'sql#backupConfiguration'
         description: 'This is always sql#backupConfiguration.'
         type: string
+      location:
+        description: The location of the backup.
+        type: string
       replicationLogArchivingEnabled:
         description: Reserved for future use.
         type: boolean
@@ -1706,6 +1894,9 @@ definitions:
       kind:
         default: 'sql#backupRun'
         description: 'This is always sql#backupRun.'
+        type: string
+      location:
+        description: The location of the backup.
         type: string
       selfLink:
         description: The URI of this resource.
@@ -1831,8 +2022,14 @@ definitions:
         format: int64
         type: string
       databaseVersion:
-        description: 'The database engine type and version. The databaseVersion field can not be changed after instance creation. MySQL Second Generation instances: MYSQL_5_7 (default) or MYSQL_5_6. PostgreSQL instances: POSTGRES_9_6 MySQL First Generation instances: MYSQL_5_6 (default) or MYSQL_5_5'
+        description: 'The database engine type and version. The databaseVersion field can not be changed after instance creation. MySQL Second Generation instances: MYSQL_5_7 (default) or MYSQL_5_6. PostgreSQL instances: POSTGRES_9_6 (default) or POSTGRES_11 Beta. MySQL First Generation instances: MYSQL_5_6 (default) or MYSQL_5_5'
         type: string
+      diskEncryptionConfiguration:
+        $ref: '#/definitions/DiskEncryptionConfiguration'
+        description: Disk encryption configuration specific to an instance. Applies only to Second Generation instances.
+      diskEncryptionStatus:
+        $ref: '#/definitions/DiskEncryptionStatus'
+        description: Disk encryption status specific to an instance. Applies only to Second Generation instances.
       etag:
         description: This field is deprecated and will be removed from a future version of the API. Use the settings.settingsVersion field instead.
         type: string
@@ -1895,6 +2092,9 @@ definitions:
         items:
           type: string
         type: array
+      rootPassword:
+        description: Initial root password. Use only on creation.
+        type: string
       selfLink:
         description: The URI of this resource.
         type: string
@@ -1985,6 +2185,28 @@ definitions:
         type: string
       username:
         description: The username for the replication connection.
+        type: string
+    type: object
+  DiskEncryptionConfiguration:
+    description: Disk encryption configuration.
+    properties:
+      kind:
+        default: 'sql#diskEncryptionConfiguration'
+        description: 'This is always sql#diskEncryptionConfiguration.'
+        type: string
+      kmsKeyName:
+        description: KMS key resource name
+        type: string
+    type: object
+  DiskEncryptionStatus:
+    description: Disk encryption status.
+    properties:
+      kind:
+        default: 'sql#diskEncryptionStatus'
+        description: 'This is always sql#diskEncryptionStatus.'
+        type: string
+      kmsKeyVersionName:
+        description: KMS key version used to encrypt the Cloud SQL instance disk
         type: string
     type: object
   ExportContext:
@@ -2258,7 +2480,7 @@ definitions:
         format: date-time
         type: string
       type:
-        description: 'The type of this IP address. A PRIMARY address is an address that can accept incoming connections. An OUTGOING address is the source address of connections originating from the instance, if supported.'
+        description: 'The type of this IP address. A PRIMARY address is a public address that can accept incoming connections. A PRIVATE address is a private address that can accept incoming connections. An OUTGOING address is the source address of connections originating from the instance, if supported.'
         type: string
     type: object
   LocationPreference:
@@ -2471,6 +2693,9 @@ definitions:
       kind:
         default: 'sql#restoreBackupContext'
         description: 'This is always sql#restoreBackupContext.'
+        type: string
+      project:
+        description: The full project ID of the source instance.
         type: string
     type: object
   RotateServerCaContext:

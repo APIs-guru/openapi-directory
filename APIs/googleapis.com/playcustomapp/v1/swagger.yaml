@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: An API to publish custom Android apps.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Google Play Custom App Publishing
   version: v1
   x-apiClientRegistration:
@@ -33,10 +37,18 @@ consumes:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/androidpublisher': View and manage your Google Play Developer account
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/androidpublisher': View and manage your Google Play Developer account
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -110,6 +122,8 @@ paths:
             $ref: '#/definitions/CustomApp'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - accounts

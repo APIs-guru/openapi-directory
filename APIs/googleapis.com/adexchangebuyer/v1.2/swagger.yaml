@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'Accesses your bidding-account information, submits creatives for validation, finds available direct deals, and retrieves performance reports.'
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Ad Exchange Buyer
   version: v1.2
   x-apiClientRegistration:
@@ -29,10 +33,18 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/adexchange.buyer': Manage your Ad Exchange buyer account configuration
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/adexchange.buyer': Manage your Ad Exchange buyer account configuration
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -90,6 +102,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - accounts
     parameters:
@@ -117,6 +131,8 @@ paths:
             $ref: '#/definitions/Account'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - accounts
@@ -149,6 +165,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - accounts
     put:
@@ -171,6 +189,8 @@ paths:
             $ref: '#/definitions/Account'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - accounts
@@ -205,6 +225,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - creatives
     parameters:
@@ -231,6 +253,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - creatives
   '/creatives/{accountId}/{buyerCreativeId}':
@@ -255,6 +279,8 @@ paths:
             $ref: '#/definitions/Creative'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - creatives

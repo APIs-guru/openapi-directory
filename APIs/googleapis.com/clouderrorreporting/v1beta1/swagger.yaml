@@ -10,6 +10,10 @@ info:
     url: 'https://google.com'
   description: |
     Groups and counts similar errors from cloud services and applications, reports new errors, and provides access to error groups and their associated errors.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Stackdriver Error Reporting
   version: v1beta1
   x-apiClientRegistration:
@@ -31,10 +35,18 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -131,6 +143,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -184,6 +198,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1beta1/{projectName}/events':
@@ -209,6 +225,8 @@ paths:
             $ref: '#/definitions/DeleteEventsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -276,6 +294,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -312,7 +332,8 @@ paths:
         for authentication. To use an API key, append it to the URL as the value of
         a `key` parameter. For example:
 
-        `POST https://clouderrorreporting.googleapis.com/v1beta1/projects/example-project/events:report?key=123ABC456`
+        `POST
+        https://clouderrorreporting.googleapis.com/v1beta1/projects/example-project/events:report?key=123ABC456`
       operationId: clouderrorreporting.projects.events.report
       parameters:
         - in: body
@@ -322,8 +343,9 @@ paths:
         - description: |-
             [Required] The resource name of the Google Cloud Platform project. Written
             as `projects/` plus the
-            [Google Cloud Platform project ID](https://support.google.com/cloud/answer/6158840).
-            Example: `projects/my-project-123`.
+            [Google Cloud Platform project
+            ID](https://support.google.com/cloud/answer/6158840). Example:
+            `projects/my-project-123`.
           in: path
           name: projectName
           required: true
@@ -336,6 +358,8 @@ paths:
             $ref: '#/definitions/ReportErrorEventResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -446,6 +470,8 @@ paths:
             $ref: '#/definitions/ListGroupStatsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -724,15 +750,22 @@ definitions:
           Supported languages are Java, Python, JavaScript, Ruby, C#, PHP, and Go.
           Supported stack trace formats are:
 
-          * **Java**: Must be the return value of [`Throwable.printStackTrace()`](https://docs.oracle.com/javase/7/docs/api/java/lang/Throwable.html#printStackTrace%28%29).
-          * **Python**: Must be the return value of [`traceback.format_exc()`](https://docs.python.org/2/library/traceback.html#traceback.format_exc).
-          * **JavaScript**: Must be the value of [`error.stack`](https://github.com/v8/v8/wiki/Stack-Trace-API)
-          as returned by V8.
-          * **Ruby**: Must contain frames returned by [`Exception.backtrace`](https://ruby-doc.org/core-2.2.0/Exception.html#method-i-backtrace).
-          * **C#**: Must be the return value of [`Exception.ToString()`](https://msdn.microsoft.com/en-us/library/system.exception.tostring.aspx).
+          * **Java**: Must be the return value of
+          [`Throwable.printStackTrace()`](https://docs.oracle.com/javase/7/docs/api/java/lang/Throwable.html#printStackTrace%28%29).
+          * **Python**: Must be the return value of
+          [`traceback.format_exc()`](https://docs.python.org/2/library/traceback.html#traceback.format_exc).
+          * **JavaScript**: Must be the value of
+          [`error.stack`](https://github.com/v8/v8/wiki/Stack-Trace-API) as returned
+          by V8.
+          * **Ruby**: Must contain frames returned by
+          [`Exception.backtrace`](https://ruby-doc.org/core-2.2.0/Exception.html#method-i-backtrace).
+          * **C#**: Must be the return value of
+          [`Exception.ToString()`](https://msdn.microsoft.com/en-us/library/system.exception.tostring.aspx).
           * **PHP**: Must start with `PHP (Notice|Parse error|Fatal error|Warning)`
-          and contain the result of [`(string)$exception`](http://php.net/manual/en/exception.tostring.php).
-          * **Go**: Must be the return value of [`runtime.Stack()`](https://golang.org/pkg/runtime/debug/#Stack).
+          and contain the result of
+          [`(string)$exception`](http://php.net/manual/en/exception.tostring.php).
+          * **Go**: Must be the return value of
+          [`runtime.Stack()`](https://golang.org/pkg/runtime/debug/#Stack).
         type: string
       serviceContext:
         $ref: '#/definitions/ServiceContext'

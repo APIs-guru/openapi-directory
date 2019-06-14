@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: The Android Management API provides remote enterprise management of Android devices and apps.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Android Management
   version: v1
   x-apiClientRegistration:
@@ -29,10 +33,18 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/androidmanagement': Manage Android devices and apps for your customers
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/androidmanagement': Manage Android devices and apps for your customers
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -144,6 +156,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidmanagement'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidmanagement'
       tags:
         - enterprises
   /v1/signupUrls:
@@ -179,6 +193,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidmanagement'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidmanagement'
       tags:
         - signupUrls
   '/v1/{name}':
@@ -211,17 +227,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidmanagement'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidmanagement'
       tags:
         - enterprises
     get:
-      description: Gets info about an application.
-      operationId: androidmanagement.enterprises.applications.get
+      description: Gets a web app.
+      operationId: androidmanagement.enterprises.webApps.get
       parameters:
         - description: 'The preferred language for localized application info, as a BCP47 tag (e.g. "en-US", "de"). If not specified the default language of the application will be used.'
           in: query
           name: languageCode
           type: string
-        - description: 'The name of the application in the form enterprises/{enterpriseId}/applications/{package_name}.'
+        - description: 'The name of the web app in the form enterprises/{enterpriseId}/webApp/{packageName}.'
           in: path
           name: name
           required: true
@@ -231,9 +249,11 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Application'
+            $ref: '#/definitions/WebApp'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidmanagement'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidmanagement'
       tags:
         - enterprises
@@ -250,14 +270,14 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     patch:
-      description: Updates or creates a policy.
-      operationId: androidmanagement.enterprises.policies.patch
+      description: Updates a web app.
+      operationId: androidmanagement.enterprises.webApps.patch
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/Policy'
-        - description: 'The name of the policy in the form enterprises/{enterpriseId}/policies/{policyId}.'
+            $ref: '#/definitions/WebApp'
+        - description: 'The name of the web app in the form enterprises/{enterpriseId}/webApps/{packageName}.'
           in: path
           name: name
           required: true
@@ -271,9 +291,11 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Policy'
+            $ref: '#/definitions/WebApp'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidmanagement'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidmanagement'
       tags:
         - enterprises
@@ -307,6 +329,8 @@ paths:
             $ref: '#/definitions/Empty'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidmanagement'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidmanagement'
       tags:
         - enterprises
@@ -345,6 +369,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidmanagement'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidmanagement'
       tags:
         - enterprises
   '/v1/{parent}/devices':
@@ -373,6 +399,8 @@ paths:
             $ref: '#/definitions/ListDevicesResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidmanagement'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidmanagement'
       tags:
         - enterprises
@@ -423,6 +451,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidmanagement'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidmanagement'
       tags:
         - enterprises
   '/v1/{parent}/policies':
@@ -452,6 +482,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidmanagement'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidmanagement'
       tags:
         - enterprises
     parameters:
@@ -466,6 +498,75 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
+  '/v1/{parent}/webApps':
+    get:
+      description: Lists web apps for a given enterprise.
+      operationId: androidmanagement.enterprises.webApps.list
+      parameters:
+        - description: The requested page size. The actual page size may be fixed to a min or max value.
+          in: query
+          name: pageSize
+          type: integer
+        - description: A token identifying a page of results returned by the server.
+          in: query
+          name: pageToken
+          type: string
+        - description: 'The name of the enterprise in the form enterprises/{enterpriseId}.'
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListWebAppsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidmanagement'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidmanagement'
+      tags:
+        - enterprises
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Creates a web app.
+      operationId: androidmanagement.enterprises.webApps.create
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/WebApp'
+        - description: 'The name of the enterprise in the form enterprises/{enterpriseId}.'
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/WebApp'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidmanagement'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidmanagement'
+      tags:
+        - enterprises
   '/v1/{parent}/webTokens':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -500,6 +601,8 @@ paths:
             $ref: '#/definitions/WebToken'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/androidmanagement'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/androidmanagement'
       tags:
         - enterprises
@@ -659,6 +762,11 @@ definitions:
       installerPackageName:
         description: The package name of the app that installed this app.
         type: string
+      keyedAppStates:
+        description: List of keyed app states reported by the app.
+        items:
+          $ref: '#/definitions/KeyedAppState'
+        type: array
       packageName:
         description: Package name of the app.
         type: string
@@ -683,6 +791,21 @@ definitions:
       versionName:
         description: The app version as displayed to the user.
         type: string
+    type: object
+  ApplicationReportingSettings:
+    description: Settings controlling the behavior of application reports.
+    properties:
+      includeRemovedApps:
+        description: Whether removed apps are included in application reports.
+        type: boolean
+    type: object
+  BlockAction:
+    description: 'An action to block access to apps and data on a fully managed device or in a work profile. This action also triggers a device or work profile to displays a user-facing notification with information (where possible) on how to correct the compliance issue. Note: wipeAction must also be specified.'
+    properties:
+      blockAfterDays:
+        description: 'Number of days the policy is non-compliant before the device or work profile is blocked. To block access immediately, set to 0. blockAfterDays must be less than wipeAfterDays.'
+        format: int32
+        type: integer
     type: object
   ChoosePrivateKeyRule:
     description: A rule for automatically choosing a private key and certificate to authenticate the device to a server.
@@ -886,6 +1009,11 @@ definitions:
           - DELETED
           - PROVISIONING
         type: string
+      systemProperties:
+        additionalProperties:
+          type: string
+        description: Map of selected system properties name and value related to the device.
+        type: object
       user:
         $ref: '#/definitions/User'
         description: The user who owns the device.
@@ -1172,6 +1300,34 @@ definitions:
           type: number
         type: array
     type: object
+  KeyedAppState:
+    description: Keyed app state reported by the app.
+    properties:
+      createTime:
+        description: The creation time of the app state on the device.
+        format: google-datetime
+        type: string
+      data:
+        description: 'Optionally, a machine-readable value to be read by the EMM. For example, setting values that the admin can choose to query against in the EMM console (e.g. “notify me if the battery_warning data < 10”).'
+        type: string
+      key:
+        description: 'The key for the app state. Acts as a point of reference for what the app is providing state for. For example, when providing managed configuration feedback, this key could be the managed configuration key.'
+        type: string
+      lastUpdateTime:
+        description: The time the app state was most recently updated.
+        format: google-datetime
+        type: string
+      message:
+        description: 'Optionally, a free-form message string to explain the app state. If the state was triggered by a particular value (e.g. a managed configuration value), it should be included in the message.'
+        type: string
+      severity:
+        description: The severity of the app state.
+        enum:
+          - SEVERITY_UNSPECIFIED
+          - INFO
+          - ERROR
+        type: string
+    type: object
   LaunchAppAction:
     description: An action to launch an app.
     properties:
@@ -1213,6 +1369,18 @@ definitions:
         description: The list of policies.
         items:
           $ref: '#/definitions/Policy'
+        type: array
+    type: object
+  ListWebAppsResponse:
+    description: Response to a request to list web apps for a given enterprise.
+    properties:
+      nextPageToken:
+        description: 'If there are more results, a token to retrieve next page of results.'
+        type: string
+      webApps:
+        description: The list of web apps.
+        items:
+          $ref: '#/definitions/WebApp'
         type: array
     type: object
   ManagedConfigurationTemplate:
@@ -1409,7 +1577,7 @@ definitions:
         description: 'Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.'
         type: object
       name:
-        description: 'The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the name should have the format of operations/some/unique/name.'
+        description: 'The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the name should be a resource name ending with operations/{unique_id}.'
         type: string
       response:
         additionalProperties:
@@ -1588,7 +1756,7 @@ definitions:
           $ref: '#/definitions/ChoosePrivateKeyRule'
         type: array
       complianceRules:
-        description: 'Rules declaring which mitigating actions to take when a device is not compliant with its policy. When the conditions for multiple rules are satisfied, all of the mitigating actions for the rules are taken. There is a maximum limit of 100 rules.'
+        description: 'Rules declaring which mitigating actions to take when a device is not compliant with its policy. When the conditions for multiple rules are satisfied, all of the mitigating actions for the rules are taken. There is a maximum limit of 100 rules. Use policy enforcement rules instead.'
         items:
           $ref: '#/definitions/ComplianceRule'
         type: array
@@ -1678,6 +1846,10 @@ definitions:
         description: Maximum time in milliseconds for user activity until the device locks. A value of 0 means there is no restriction.
         format: int64
         type: string
+      minimumApiLevel:
+        description: The minimum allowed Android API level.
+        format: int32
+        type: integer
       mobileNetworksConfigDisabled:
         description: Whether configuring mobile networks is disabled.
         type: boolean
@@ -1735,6 +1907,11 @@ definitions:
           - WHITELIST
           - BLACKLIST
         type: string
+      policyEnforcementRules:
+        description: Rules that define the behavior when a particular policy can not be applied on device
+        items:
+          $ref: '#/definitions/PolicyEnforcementRule'
+        type: array
       privateKeySelectionEnabled:
         description: 'Allows showing UI on a device for a user to choose a private key alias if there are no matching rules in ChoosePrivateKeyRules. For devices below Android P, setting this may leave enterprise keys vulnerable.'
         type: boolean
@@ -1820,6 +1997,19 @@ definitions:
       wifiConfigsLockdownEnabled:
         description: DEPRECATED - Use wifi_config_disabled.
         type: boolean
+    type: object
+  PolicyEnforcementRule:
+    description: A rule that defines the actions to take if a device or work profile is not compliant with the policy specified in settingName.
+    properties:
+      blockAction:
+        $ref: '#/definitions/BlockAction'
+        description: 'An action to block access to apps and data on a fully managed device or in a work profile. This action also triggers a user-facing notification with information (where possible) on how to correct the compliance issue. Note: wipeAction must also be specified.'
+      settingName:
+        description: 'The top-level policy to enforce. For example, applications or passwordPolicies.'
+        type: string
+      wipeAction:
+        $ref: '#/definitions/WipeAction'
+        description: 'An action to reset a fully managed device or delete a work profile. Note: blockAction must also be specified.'
     type: object
   PowerManagementEvent:
     description: A power management event.
@@ -1937,15 +2127,7 @@ definitions:
         type: string
     type: object
   Status:
-    description: |-
-      The Status type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by gRPC (https://github.com/grpc). The error model is designed to be:
-      Simple to use and understand for most users
-      Flexible enough to meet unexpected needsOverviewThe Status message contains three pieces of data: error code, error message, and error details. The error code should be an enum value of google.rpc.Code, but it may accept additional error codes if needed. The error message should be a developer-facing English message that helps developers understand and resolve the error. If a localized user-facing error message is needed, put the localized message in the error details or localize it in the client. The optional error details may contain arbitrary information about the error. There is a predefined set of error detail types in the package google.rpc that can be used for common error conditions.Language mappingThe Status message is the logical representation of the error model, but it is not necessarily the actual wire format. When the Status message is exposed in different client libraries and different wire protocols, it can be mapped differently. For example, it will likely be mapped to some exceptions in Java, but more likely mapped to some error codes in C.Other usesThe error model and the Status message can be used in a variety of environments, either with or without APIs, to provide a consistent developer experience across different environments.Example uses of this error model include:
-      Partial errors. If a service needs to return partial errors to the client, it may embed the Status in the normal response to indicate the partial errors.
-      Workflow errors. A typical workflow has multiple steps. Each step may have a Status message for error reporting.
-      Batch operations. If a client uses batch request and batch response, the Status message should be used directly inside batch response, one for each error sub-response.
-      Asynchronous operations. If an API call embeds asynchronous operation results in its response, the status of those operations should be represented directly using the Status message.
-      Logging. If some API errors are stored in logs, the message Status could be used directly after any stripping needed for security/privacy reasons.
+    description: 'The Status type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by gRPC (https://github.com/grpc). Each Status message contains three pieces of data: error code, error message, and error details.You can find out more about this error model and how to work with it in the API Design Guide (https://cloud.google.com/apis/design/errors).'
     properties:
       code:
         description: 'The status code, which should be an enum value of google.rpc.Code.'
@@ -1965,6 +2147,9 @@ definitions:
   StatusReportingSettings:
     description: Settings controlling the behavior of status reports.
     properties:
+      applicationReportingSettings:
+        $ref: '#/definitions/ApplicationReportingSettings'
+        description: Application reporting settings. Only applicable if application_reports_enabled is true.
       applicationReportsEnabled:
         description: Whether app reports are enabled.
         type: boolean
@@ -2039,6 +2224,43 @@ definitions:
         description: 'A map containing <locale, message> pairs, where locale is a well-formed BCP 47 language (https://www.w3.org/International/articles/language-tags/) code, such as en-US, es-ES, or fr.'
         type: object
     type: object
+  WebApp:
+    description: A web app.
+    properties:
+      displayMode:
+        description: The display mode of the web app.
+        enum:
+          - DISPLAY_MODE_UNSPECIFIED
+          - MINIMAL_UI
+          - STANDALONE
+          - FULL_SCREEN
+        type: string
+      icons:
+        description: A list of icons for the web app. Must have at least one element.
+        items:
+          $ref: '#/definitions/WebAppIcon'
+        type: array
+      name:
+        description: 'The name of the web app, which is generated by the server during creation in the form enterprises/{enterpriseId}/webApps/{packageName}.'
+        type: string
+      startUrl:
+        description: 'The start URL, i.e. the URL that should load when the user opens the application.'
+        type: string
+      title:
+        description: 'The title of the web app as displayed to the user (e.g., amongst a list of other applications, or as a label for an icon).'
+        type: string
+      versionCode:
+        description: 'The current version of the app.<p>Note that the version can automatically increase during the lifetime of the web app, while Google does internal housekeeping to keep the web app up-to-date.'
+        format: int64
+        type: string
+    type: object
+  WebAppIcon:
+    description: 'An icon for a web app. Supported formats are: png, jpg and webp.'
+    properties:
+      imageData:
+        description: 'The actual bytes of the image in a base64url encoded string (c.f. RFC4648, section 5 "Base 64 Encoding with URL and Filename Safe Alphabet"). <ul> <li>The image type can be png or jpg. <li>The image should ideally be square. <li>The image should ideally have a size of 512x512. </ul>'
+        type: string
+    type: object
   WebToken:
     description: A web token used to access the managed Google Play iframe.
     properties:
@@ -2059,4 +2281,15 @@ definitions:
       value:
         description: The token value which is used in the hosting page to generate the iframe with the embedded UI. This is a read-only field generated by the server.
         type: string
+    type: object
+  WipeAction:
+    description: 'An action to reset a fully managed device or delete a work profile. Note: blockAction must also be specified.'
+    properties:
+      preserveFrp:
+        description: Whether the factory-reset protection data is preserved on the device. This setting doesn’t apply to work profiles.
+        type: boolean
+      wipeAfterDays:
+        description: Number of days the policy is non-compliant before the device or work profile is wiped. wipeAfterDays must be greater than blockAfterDays.
+        format: int32
+        type: integer
     type: object

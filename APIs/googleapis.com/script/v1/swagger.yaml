@@ -9,6 +9,10 @@ info:
     url: 'https://google.com'
   description: |
     Manages and executes Google Apps Script projects.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Apps Script
   version: v1
   x-apiClientRegistration:
@@ -32,7 +36,7 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://mail.google.com/': 'Read, compose, send, and permanently delete all your email from Gmail'
@@ -53,6 +57,31 @@ securityDefinitions:
       'https://www.googleapis.com/auth/script.projects.readonly': View Google Apps Script projects
       'https://www.googleapis.com/auth/spreadsheets': 'See, edit, create, and delete your spreadsheets in Google Drive'
       'https://www.googleapis.com/auth/userinfo.email': View your email address
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://mail.google.com/': 'Read, compose, send, and permanently delete all your email from Gmail'
+      'https://www.google.com/calendar/feeds': 'See, edit, share, and permanently delete all the calendars you can access using Google Calendar'
+      'https://www.google.com/m8/feeds': 'See, edit, download, and permanently delete your contacts'
+      'https://www.googleapis.com/auth/admin.directory.group': View and manage the provisioning of groups on your domain
+      'https://www.googleapis.com/auth/admin.directory.user': View and manage the provisioning of users on your domain
+      'https://www.googleapis.com/auth/documents': View and manage your Google Docs documents
+      'https://www.googleapis.com/auth/drive': 'See, edit, create, and delete all of your Google Drive files'
+      'https://www.googleapis.com/auth/forms': View and manage your forms in Google Drive
+      'https://www.googleapis.com/auth/forms.currentonly': View and manage forms that this application has been installed in
+      'https://www.googleapis.com/auth/groups': View and manage your Google Groups
+      'https://www.googleapis.com/auth/script.deployments': Create and update Google Apps Script deployments
+      'https://www.googleapis.com/auth/script.deployments.readonly': View Google Apps Script deployments
+      'https://www.googleapis.com/auth/script.metrics': View Google Apps Script project's metrics
+      'https://www.googleapis.com/auth/script.processes': View Google Apps Script processes
+      'https://www.googleapis.com/auth/script.projects': Create and update Google Apps Script projects
+      'https://www.googleapis.com/auth/script.projects.readonly': View Google Apps Script projects
+      'https://www.googleapis.com/auth/spreadsheets': 'See, edit, create, and delete your spreadsheets in Google Drive'
+      'https://www.googleapis.com/auth/userinfo.email': View your email address
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -241,6 +270,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/script.processes'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/script.processes'
       tags:
         - processes
     parameters:
@@ -364,6 +395,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/script.processes'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/script.processes'
       tags:
         - processes
     parameters:
@@ -409,6 +442,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/script.projects'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/script.projects'
       tags:
         - projects
   '/v1/projects/{scriptId}':
@@ -429,7 +464,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/script.projects'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/script.projects'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/script.projects.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/script.projects.readonly'
       tags:
         - projects
@@ -471,7 +510,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/script.projects'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/script.projects'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/script.projects.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/script.projects.readonly'
       tags:
         - projects
@@ -513,6 +556,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/script.projects'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/script.projects'
       tags:
         - projects
   '/v1/projects/{scriptId}/deployments':
@@ -543,7 +588,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/script.deployments'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/script.deployments'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/script.deployments.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/script.deployments.readonly'
       tags:
         - projects
@@ -580,6 +629,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/script.deployments'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/script.deployments'
       tags:
         - projects
   '/v1/projects/{scriptId}/deployments/{deploymentId}':
@@ -605,6 +656,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/script.deployments'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/script.deployments'
       tags:
         - projects
     get:
@@ -629,7 +682,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/script.deployments'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/script.deployments'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/script.deployments.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/script.deployments.readonly'
       tags:
         - projects
@@ -671,6 +728,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/script.deployments'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/script.deployments'
       tags:
         - projects
   '/v1/projects/{scriptId}/metrics':
@@ -704,6 +763,8 @@ paths:
             $ref: '#/definitions/Metrics'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/script.metrics'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/script.metrics'
       tags:
         - projects
@@ -747,7 +808,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/script.projects'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/script.projects'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/script.projects.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/script.projects.readonly'
       tags:
         - projects
@@ -786,6 +851,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/script.projects'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/script.projects'
       tags:
         - projects
   '/v1/projects/{scriptId}/versions/{versionNumber}':
@@ -811,7 +878,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/script.projects'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/script.projects'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/script.projects.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/script.projects.readonly'
       tags:
         - projects
@@ -877,27 +948,51 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
+          Oauth2c:
+            - 'https://mail.google.com/'
         - Oauth2:
+            - 'https://www.google.com/calendar/feeds'
+          Oauth2c:
             - 'https://www.google.com/calendar/feeds'
         - Oauth2:
             - 'https://www.google.com/m8/feeds'
+          Oauth2c:
+            - 'https://www.google.com/m8/feeds'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.group'
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/documents'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/documents'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/forms'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/forms'
         - Oauth2:
             - 'https://www.googleapis.com/auth/forms.currentonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/forms.currentonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/groups'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/groups'
         - Oauth2:
             - 'https://www.googleapis.com/auth/spreadsheets'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spreadsheets'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/userinfo.email'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - scripts
@@ -1000,6 +1095,15 @@ definitions:
       webApp:
         $ref: '#/definitions/GoogleAppsScriptTypeWebAppEntryPoint'
         description: An entry point specification for web apps.
+    type: object
+  ExecuteStreamResponse:
+    description: The response for executing or debugging a function in an Apps Script project.
+    properties:
+      result:
+        $ref: '#/definitions/ScriptExecutionResult'
+        description: |-
+          The result of the execution.
+          TODO (johnlattin): Add debugging and logging.
     type: object
   ExecutionError:
     description: |-
@@ -1347,6 +1451,18 @@ definitions:
           $ref: '#/definitions/GoogleAppsScriptTypeProcess'
         type: array
     type: object
+  ListValue:
+    description: |-
+      `ListValue` is a wrapper around a repeated field of values.
+      Based on LustValue at:
+      google3/apps/maestro/api/struct.proto?q=message%5c%20ListValue
+    properties:
+      values:
+        description: Repeated field of dynamically typed values.
+        items:
+          $ref: '#/definitions/Value'
+        type: array
+    type: object
   ListVersionsResponse:
     description: Response with the list of the versions for the specified script project.
     properties:
@@ -1462,6 +1578,20 @@ definitions:
         format: google-datetime
         type: string
     type: object
+  ScriptExecutionResult:
+    description: |-
+      The result of an execution
+      Based on ScriptExecutionResult at:
+      google3/apps/maestro/api/frontend_execution_common.proto?q=message%5c%20ScriptExecutionResult
+    properties:
+      returnValue:
+        $ref: '#/definitions/Value'
+        description: |-
+          The returned value of the execution.
+          TODO (johnlattin): Add HtmlResponse
+          TODO (johnlattin): Add ExceptionResponse
+          TODO (johlnattin): Add TextResponse
+    type: object
   ScriptStackTraceElement:
     description: A stack trace through the script that shows where the execution failed.
     properties:
@@ -1491,12 +1621,67 @@ definitions:
         description: 'A developer-facing error message, which is in English. Any user-facing error message is localized and sent in the details field, or localized by the client.'
         type: string
     type: object
+  Struct:
+    description: |-
+      `Struct` represents a structured data value, consisting of fields which map
+      to dynamically typed values.
+      Based on Struct at:
+      google3/apps/maestro/api/struct.proto?q=message%5c%20Struct
+    properties:
+      fields:
+        additionalProperties:
+          $ref: '#/definitions/Value'
+        description: Unordered map of dynamically typed values.
+        type: object
+    type: object
   UpdateDeploymentRequest:
     description: Request with deployment information to update an existing deployment.
     properties:
       deploymentConfig:
         $ref: '#/definitions/DeploymentConfig'
         description: The deployment configuration.
+    type: object
+  Value:
+    description: |-
+      `Value` represents a dynamically typed value which is the outcome of an
+      executed script
+      Based on Value at:
+      google3/apps/maestro/api/struct.proto?q=message%5c%20Value
+    properties:
+      boolValue:
+        description: Represents a boolean value.
+        type: boolean
+      bytesValue:
+        description: Represents raw byte values.
+        format: byte
+        type: string
+      dateValue:
+        description: Represents a date in ms since the epoch.
+        format: int64
+        type: string
+      listValue:
+        $ref: '#/definitions/ListValue'
+        description: Represents a repeated `Value`.
+      nullValue:
+        description: Represents a null value.
+        enum:
+          - NULL_VALUE
+        type: string
+      numberValue:
+        description: Represents a double value.
+        format: double
+        type: number
+      protoValue:
+        additionalProperties:
+          description: Properties of the object. Contains field @type with type URL.
+        description: Represents a structured proto value.
+        type: object
+      stringValue:
+        description: Represents a string value.
+        type: string
+      structValue:
+        $ref: '#/definitions/Struct'
+        description: Represents a structured value.
     type: object
   Version:
     description: |-

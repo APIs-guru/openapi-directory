@@ -9,6 +9,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'Cloud Spanner is a managed, mission-critical, globally consistent and scalable relational database service.'
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Cloud Spanner
   version: v1
   x-apiClientRegistration:
@@ -32,12 +36,22 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/spanner.admin': Administer your Spanner databases
       'https://www.googleapis.com/auth/spanner.data': View and manage the contents of your Spanner databases
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/spanner.admin': Administer your Spanner databases
+      'https://www.googleapis.com/auth/spanner.data': View and manage the contents of your Spanner databases
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -126,7 +140,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
@@ -164,7 +182,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
@@ -209,7 +231,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
@@ -259,7 +285,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.data'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.data'
       tags:
         - projects
@@ -316,19 +346,24 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.data'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.data'
       tags:
         - projects
   '/v1/{name}':
     delete:
       description: |-
-        Ends a session, releasing server resources associated with it. This will
-        asynchronously trigger cancellation of any operations that are running with
-        this session.
-      operationId: spanner.projects.instances.databases.sessions.delete
+        Deletes a long-running operation. This method indicates that the client is
+        no longer interested in the operation result. It does not cancel the
+        operation. If the server doesn't support this method, it returns
+        `google.rpc.Code.UNIMPLEMENTED`.
+      operationId: spanner.projects.instances.operations.delete
       parameters:
-        - description: Required. The name of the session to delete.
+        - description: The name of the operation resource to be deleted.
           in: path
           name: name
           required: true
@@ -342,18 +377,21 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/spanner.data'
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
     get:
-      description: |-
-        Gets a session. Returns `NOT_FOUND` if the session does not exist.
-        This is mainly useful for determining whether a session is still
-        alive.
-      operationId: spanner.projects.instances.databases.sessions.get
+      description: Gets information about a particular instance configuration.
+      operationId: spanner.projects.instanceConfigs.get
       parameters:
-        - description: Required. The name of the session to retrieve.
+        - description: |-
+            Required. The name of the requested instance configuration. Values are of
+            the form `projects/<project>/instanceConfigs/<config>`.
           in: path
           name: name
           required: true
@@ -363,12 +401,16 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Session'
+            $ref: '#/definitions/InstanceConfig'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/spanner.data'
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
     parameters:
@@ -435,7 +477,7 @@ paths:
             Required. A unique identifier for the instance, which cannot be changed
             after the instance is created. Values are of the form
             `projects/<project>/instances/a-z*[a-z0-9]`. The final
-            segment of the name must be between 6 and 30 characters in length.
+            segment of the name must be between 2 and 64 characters in length.
           in: path
           name: name
           required: true
@@ -449,7 +491,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
@@ -478,7 +524,7 @@ paths:
         the operation is not deleted; instead, it becomes an operation with
         an Operation.error value with a google.rpc.Status.code of 1,
         corresponding to `Code.CANCELLED`.
-      operationId: spanner.projects.instances.databases.operations.cancel
+      operationId: spanner.projects.instances.operations.cancel
       parameters:
         - description: The name of the operation resource to be cancelled.
           in: path
@@ -494,7 +540,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
@@ -532,7 +582,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
@@ -580,7 +634,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
@@ -619,7 +677,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
@@ -692,7 +754,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
@@ -766,7 +832,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
@@ -811,7 +881,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
@@ -855,7 +929,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
@@ -900,7 +978,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
@@ -943,7 +1025,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.data'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.data'
       tags:
         - projects
@@ -990,7 +1076,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.data'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.data'
       tags:
         - projects
@@ -1048,7 +1138,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.data'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.data'
       tags:
         - projects
@@ -1098,7 +1192,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.data'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.data'
       tags:
         - projects
@@ -1142,7 +1240,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.data'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.data'
       tags:
         - projects
@@ -1192,7 +1294,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.data'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.data'
       tags:
         - projects
@@ -1244,7 +1350,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.data'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.data'
       tags:
         - projects
@@ -1296,7 +1406,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.data'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.data'
       tags:
         - projects
@@ -1343,7 +1457,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.data'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.data'
       tags:
         - projects
@@ -1387,7 +1505,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.data'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.data'
       tags:
         - projects
@@ -1405,8 +1527,8 @@ definitions:
       condition:
         $ref: '#/definitions/Expr'
         description: |-
-          Unimplemented. The condition that is associated with this binding.
-          NOTE: an unsatisfied condition will not allow user access via current
+          The condition that is associated with this binding.
+          NOTE: An unsatisfied condition will not allow user access via current
           binding. Different bindings, including their conditions, are examined
           independently.
       members:
@@ -1431,7 +1553,7 @@ definitions:
              For example, `admins@example.com`.
 
 
-          * `domain:{domain}`: A Google Apps domain name that represents all the
+          * `domain:{domain}`: The G Suite domain (primary) that represents all the
              users of that domain. For example, `google.com` or `example.com`.
 
         items:
@@ -1575,7 +1697,7 @@ definitions:
       instanceId:
         description: |-
           Required. The ID of the instance to create.  Valid identifiers are of the
-          form `a-z*[a-z0-9]` and must be between 6 and 30 characters in
+          form `a-z*[a-z0-9]` and must be between 2 and 64 characters in
           length.
         type: string
     type: object
@@ -1649,7 +1771,7 @@ definitions:
           i+1. Each statement must be a DML statement. Execution will stop at the
           first failed statement; the remaining statements will not run.
 
-          REQUIRES: statements_size() > 0.
+          REQUIRES: `statements_size()` > 0.
         items:
           $ref: '#/definitions/Statement'
         type: array
@@ -1668,19 +1790,21 @@ definitions:
       Clients can determine whether all DML statements have run successfully, or if
       a statement failed, using one of the following approaches:
 
-        1. Check if 'status' field is OkStatus.
-        2. Check if result_sets_size() equals the number of statements in
+        1. Check if `'status'` field is `OkStatus`.
+        2. Check if `result_sets_size()` equals the number of statements in
            ExecuteBatchDmlRequest.
 
       Example 1: A request with 5 DML statements, all executed successfully.
+
       Result: A response with 5 ResultSets, one for each statement in the same
-      order, and an OK status.
+      order, and an `OkStatus`.
 
       Example 2: A request with 5 DML statements. The 3rd statement has a syntax
       error.
+
       Result: A response with 2 ResultSets, for the first 2 statements that
-      run successfully, and a syntax error (INVALID_ARGUMENT) status. From
-      result_set_size() client can determine that the 3rd statement has failed.
+      run successfully, and a syntax error (`INVALID_ARGUMENT`) status. From
+      `result_set_size()` client can determine that the 3rd statement has failed.
     properties:
       resultSets:
         description: |-
@@ -1910,14 +2034,15 @@ definitions:
           Required. A unique identifier for the instance, which cannot be changed
           after the instance is created. Values are of the form
           `projects/<project>/instances/a-z*[a-z0-9]`. The final
-          segment of the name must be between 6 and 30 characters in length.
+          segment of the name must be between 2 and 64 characters in length.
         type: string
       nodeCount:
         description: |-
           Required. The number of nodes allocated to this instance. This may be zero
           in API responses for instances that are not yet in state `READY`.
 
-          See [the documentation](https://cloud.google.com/spanner/docs/instances#node_count)
+          See [the
+          documentation](https://cloud.google.com/spanner/docs/instances#node_count)
           for more information about nodes.
         format: int32
         type: integer
@@ -1948,6 +2073,13 @@ definitions:
           are of the form
           `projects/<project>/instanceConfigs/a-z*`
         type: string
+      replicas:
+        description: |-
+          The geographic placement of nodes in this instance configuration and their
+          replication properties.
+        items:
+          $ref: '#/definitions/ReplicaInfo'
+        type: array
     type: object
   KeyRange:
     description: |-
@@ -1958,7 +2090,8 @@ definitions:
 
       Keys are represented by lists, where the ith value in the list
       corresponds to the ith component of the table or index primary key.
-      Individual values are encoded as described here.
+      Individual values are encoded as described
+      here.
 
       For example, consider the following table definition:
 
@@ -2231,7 +2364,7 @@ definitions:
         description: |-
           The server-assigned name, which is only unique within the same service that
           originally returns it. If you use the default HTTP mapping, the
-          `name` should have the format of `operations/some/unique/name`.
+          `name` should be a resource name ending with `operations/{unique_id}`.
         type: string
       response:
         additionalProperties:
@@ -2802,6 +2935,27 @@ definitions:
       transaction type has no options.
     properties: {}
     type: object
+  ReplicaInfo:
+    properties:
+      defaultLeaderLocation:
+        description: |-
+          If true, this location is designated as the default leader location where
+          leader replicas are placed. See the [region types
+          documentation](https://cloud.google.com/spanner/docs/instances#region_types)
+          for more details.
+        type: boolean
+      location:
+        description: 'The location of the serving resources, e.g. "us-central1".'
+        type: string
+      type:
+        description: The type of replica.
+        enum:
+          - TYPE_UNSPECIFIED
+          - READ_WRITE
+          - READ_ONLY
+          - WITNESS
+        type: string
+    type: object
   ResultSet:
     description: |-
       Results from Read or
@@ -2998,17 +3152,17 @@ definitions:
     type: object
   Status:
     description: |-
-      The `Status` type defines a logical error model that is suitable for different
-      programming environments, including REST APIs and RPC APIs. It is used by
-      [gRPC](https://github.com/grpc). The error model is designed to be:
+      The `Status` type defines a logical error model that is suitable for
+      different programming environments, including REST APIs and RPC APIs. It is
+      used by [gRPC](https://github.com/grpc). The error model is designed to be:
 
       - Simple to use and understand for most users
       - Flexible enough to meet unexpected needs
 
       # Overview
 
-      The `Status` message contains three pieces of data: error code, error message,
-      and error details. The error code should be an enum value of
+      The `Status` message contains three pieces of data: error code, error
+      message, and error details. The error code should be an enum value of
       google.rpc.Code, but it may accept additional error codes if needed.  The
       error message should be a developer-facing English message that helps
       developers *understand* and *resolve* the error. If a localized user-facing
