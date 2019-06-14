@@ -63,6 +63,7 @@ x-servers:
           - ap-southeast-2
           - ap-south-1
           - sa-east-1
+        default: us-east-1
     description: The AmazonApiGatewayV2 multi-region endpoint
   - url: 'https://apigateway.{region}.amazonaws.com'
     variables:
@@ -88,6 +89,7 @@ x-servers:
           - ap-southeast-2
           - ap-south-1
           - sa-east-1
+        default: us-east-1
     description: The AmazonApiGatewayV2 multi-region endpoint
   - url: 'http://apigateway.{region}.amazonaws.com.cn'
     variables:
@@ -96,6 +98,7 @@ x-servers:
         enum:
           - cn-north-1
           - cn-northwest-1
+        default: cn-north-1
     description: The AmazonApiGatewayV2 endpoint for China (Beijing) and China (Ningxia)
   - url: 'https://apigateway.{region}.amazonaws.com.cn'
     variables:
@@ -104,6 +107,7 @@ x-servers:
         enum:
           - cn-north-1
           - cn-northwest-1
+        default: cn-north-1
     description: The AmazonApiGatewayV2 endpoint for China (Beijing) and China (Ningxia)
 consumes:
   - application/json

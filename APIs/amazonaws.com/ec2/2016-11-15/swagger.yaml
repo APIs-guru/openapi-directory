@@ -63,6 +63,7 @@ x-servers:
           - ap-southeast-2
           - ap-south-1
           - sa-east-1
+        default: us-east-1
     description: The Amazon EC2 multi-region endpoint
   - url: 'https://ec2.{region}.amazonaws.com'
     variables:
@@ -88,6 +89,7 @@ x-servers:
           - ap-southeast-2
           - ap-south-1
           - sa-east-1
+        default: us-east-1
     description: The Amazon EC2 multi-region endpoint
   - url: 'http://ec2.amazonaws.com'
     variables: {}
@@ -102,6 +104,7 @@ x-servers:
         enum:
           - cn-north-1
           - cn-northwest-1
+        default: cn-north-1
     description: The Amazon EC2 endpoint for China (Beijing) and China (Ningxia)
   - url: 'https://ec2.{region}.amazonaws.com.cn'
     variables:
@@ -110,6 +113,7 @@ x-servers:
         enum:
           - cn-north-1
           - cn-northwest-1
+        default: cn-north-1
     description: The Amazon EC2 endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 consumes: []
@@ -18988,6 +18992,13 @@ paths:
             - g3.8xlarge
             - g3.16xlarge
             - g3s.xlarge
+            - g4dn.xlarge
+            - g4dn.2xlarge
+            - g4dn.4xlarge
+            - g4dn.8xlarge
+            - g4dn.12xlarge
+            - g4dn.16xlarge
+            - g4dn.metal
             - cg1.4xlarge
             - p2.xlarge
             - p2.8xlarge
@@ -19324,6 +19335,13 @@ paths:
             - g3.8xlarge
             - g3.16xlarge
             - g3s.xlarge
+            - g4dn.xlarge
+            - g4dn.2xlarge
+            - g4dn.4xlarge
+            - g4dn.8xlarge
+            - g4dn.12xlarge
+            - g4dn.16xlarge
+            - g4dn.metal
             - cg1.4xlarge
             - p2.xlarge
             - p2.8xlarge
@@ -34953,6 +34971,13 @@ paths:
             - g3.8xlarge
             - g3.16xlarge
             - g3s.xlarge
+            - g4dn.xlarge
+            - g4dn.2xlarge
+            - g4dn.4xlarge
+            - g4dn.8xlarge
+            - g4dn.12xlarge
+            - g4dn.16xlarge
+            - g4dn.metal
             - cg1.4xlarge
             - p2.xlarge
             - p2.8xlarge
@@ -35468,6 +35493,13 @@ paths:
             - g3.8xlarge
             - g3.16xlarge
             - g3s.xlarge
+            - g4dn.xlarge
+            - g4dn.2xlarge
+            - g4dn.4xlarge
+            - g4dn.8xlarge
+            - g4dn.12xlarge
+            - g4dn.16xlarge
+            - g4dn.metal
             - cg1.4xlarge
             - p2.xlarge
             - p2.8xlarge
@@ -37795,6 +37827,13 @@ definitions:
       - g3.8xlarge
       - g3.16xlarge
       - g3s.xlarge
+      - g4dn.xlarge
+      - g4dn.2xlarge
+      - g4dn.4xlarge
+      - g4dn.8xlarge
+      - g4dn.12xlarge
+      - g4dn.16xlarge
+      - g4dn.metal
       - cg1.4xlarge
       - p2.xlarge
       - p2.8xlarge

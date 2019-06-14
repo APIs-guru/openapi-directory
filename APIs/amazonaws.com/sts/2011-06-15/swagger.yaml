@@ -49,6 +49,7 @@ x-servers:
         enum:
           - us-gov-west-1
           - us-gov-east-1
+        default: us-gov-west-1
     description: The AWS STS endpoint for AWS GovCloud (US) and AWS GovCloud (US-East)
   - url: 'https://sts.{region}.amazonaws.com'
     variables:
@@ -57,6 +58,7 @@ x-servers:
         enum:
           - us-gov-west-1
           - us-gov-east-1
+        default: us-gov-west-1
     description: The AWS STS endpoint for AWS GovCloud (US) and AWS GovCloud (US-East)
   - url: 'http://sts.{region}.amazonaws.com.cn'
     variables:
@@ -65,6 +67,7 @@ x-servers:
         enum:
           - cn-north-1
           - cn-northwest-1
+        default: cn-north-1
     description: The AWS STS endpoint for China (Beijing) and China (Ningxia)
   - url: 'https://sts.{region}.amazonaws.com.cn'
     variables:
@@ -73,6 +76,7 @@ x-servers:
         enum:
           - cn-north-1
           - cn-northwest-1
+        default: cn-north-1
     description: The AWS STS endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 consumes:

@@ -49,6 +49,7 @@ x-servers:
         enum:
           - cn-north-1
           - cn-northwest-1
+        default: cn-north-1
     description: The CloudFront endpoint for China (Beijing) and China (Ningxia)
   - url: 'https://cloudfront.{region}.amazonaws.com.cn'
     variables:
@@ -57,6 +58,7 @@ x-servers:
         enum:
           - cn-north-1
           - cn-northwest-1
+        default: cn-north-1
     description: The CloudFront endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 consumes:

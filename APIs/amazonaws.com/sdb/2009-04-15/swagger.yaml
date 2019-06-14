@@ -68,6 +68,7 @@ x-servers:
           - ap-southeast-2
           - ap-south-1
           - sa-east-1
+        default: us-east-2
     description: The Amazon SimpleDB multi-region endpoint
   - url: 'https://sdb.{region}.amazonaws.com'
     variables:
@@ -92,6 +93,7 @@ x-servers:
           - ap-southeast-2
           - ap-south-1
           - sa-east-1
+        default: us-east-2
     description: The Amazon SimpleDB multi-region endpoint
   - url: 'http://sdb.{region}.amazonaws.com.cn'
     variables:
@@ -100,6 +102,7 @@ x-servers:
         enum:
           - cn-north-1
           - cn-northwest-1
+        default: cn-north-1
     description: The Amazon SimpleDB endpoint for China (Beijing) and China (Ningxia)
   - url: 'https://sdb.{region}.amazonaws.com.cn'
     variables:
@@ -108,6 +111,7 @@ x-servers:
         enum:
           - cn-north-1
           - cn-northwest-1
+        default: cn-north-1
     description: The Amazon SimpleDB endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 consumes:

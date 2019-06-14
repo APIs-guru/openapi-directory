@@ -66,6 +66,7 @@ x-servers:
           - ap-southeast-2
           - ap-south-1
           - sa-east-1
+        default: us-east-1
     description: The Kafka multi-region endpoint
   - url: 'https://kafka.{region}.amazonaws.com'
     variables:
@@ -91,6 +92,7 @@ x-servers:
           - ap-southeast-2
           - ap-south-1
           - sa-east-1
+        default: us-east-1
     description: The Kafka multi-region endpoint
   - url: 'http://kafka.{region}.amazonaws.com.cn'
     variables:
@@ -99,6 +101,7 @@ x-servers:
         enum:
           - cn-north-1
           - cn-northwest-1
+        default: cn-north-1
     description: The Kafka endpoint for China (Beijing) and China (Ningxia)
   - url: 'https://kafka.{region}.amazonaws.com.cn'
     variables:
@@ -107,6 +110,7 @@ x-servers:
         enum:
           - cn-north-1
           - cn-northwest-1
+        default: cn-north-1
     description: The Kafka endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 consumes:

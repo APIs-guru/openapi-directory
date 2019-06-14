@@ -52,6 +52,7 @@ x-servers:
         enum:
           - cn-north-1
           - cn-northwest-1
+        default: cn-north-1
     description: The AWS Import/Export endpoint for China (Beijing) and China (Ningxia)
   - url: 'https://importexport.{region}.amazonaws.com.cn'
     variables:
@@ -60,6 +61,7 @@ x-servers:
         enum:
           - cn-north-1
           - cn-northwest-1
+        default: cn-north-1
     description: The AWS Import/Export endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 consumes:

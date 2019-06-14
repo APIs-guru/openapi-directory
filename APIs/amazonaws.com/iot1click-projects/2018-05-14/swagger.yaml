@@ -63,6 +63,7 @@ x-servers:
           - ap-southeast-2
           - ap-south-1
           - sa-east-1
+        default: us-east-1
     description: The AWS IoT 1-Click Projects multi-region endpoint
   - url: 'https://projects.iot1click.{region}.amazonaws.com'
     variables:
@@ -88,6 +89,7 @@ x-servers:
           - ap-southeast-2
           - ap-south-1
           - sa-east-1
+        default: us-east-1
     description: The AWS IoT 1-Click Projects multi-region endpoint
   - url: 'http://projects.iot1click.{region}.amazonaws.com.cn'
     variables:
@@ -96,6 +98,7 @@ x-servers:
         enum:
           - cn-north-1
           - cn-northwest-1
+        default: cn-north-1
     description: The AWS IoT 1-Click Projects endpoint for China (Beijing) and China (Ningxia)
   - url: 'https://projects.iot1click.{region}.amazonaws.com.cn'
     variables:
@@ -104,6 +107,7 @@ x-servers:
         enum:
           - cn-north-1
           - cn-northwest-1
+        default: cn-north-1
     description: The AWS IoT 1-Click Projects endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 consumes:

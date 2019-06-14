@@ -63,6 +63,7 @@ x-servers:
           - ap-southeast-2
           - ap-south-1
           - sa-east-1
+        default: us-east-1
     description: The Amazon GuardDuty multi-region endpoint
   - url: 'https://guardduty.{region}.amazonaws.com'
     variables:
@@ -88,6 +89,7 @@ x-servers:
           - ap-southeast-2
           - ap-south-1
           - sa-east-1
+        default: us-east-1
     description: The Amazon GuardDuty multi-region endpoint
   - url: 'http://guardduty.{region}.amazonaws.com.cn'
     variables:
@@ -96,6 +98,7 @@ x-servers:
         enum:
           - cn-north-1
           - cn-northwest-1
+        default: cn-north-1
     description: The Amazon GuardDuty endpoint for China (Beijing) and China (Ningxia)
   - url: 'https://guardduty.{region}.amazonaws.com.cn'
     variables:
@@ -104,7 +107,9 @@ x-servers:
         enum:
           - cn-north-1
           - cn-northwest-1
+        default: cn-north-1
     description: The Amazon GuardDuty endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 consumes:
   - application/json
 produces:
@@ -316,6 +321,13 @@ paths:
                   - FIFTEEN_MINUTES
                   - ONE_HOUR
                   - SIX_HOURS
+              tags:
+                description: The tags to be added to a new detector resource.
+                type: object
+                minProperties: 1
+                maxProperties: 200
+                additionalProperties:
+                  $ref: '#/definitions/TagValue'
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -432,6 +444,13 @@ paths:
                 type: string
                 minLength: 0
                 maxLength: 64
+              tags:
+                description: The tags to be added to a new filter resource.
+                type: object
+                minProperties: 1
+                maxProperties: 200
+                additionalProperties:
+                  $ref: '#/definitions/TagValue'
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -552,6 +571,13 @@ paths:
                 type: string
                 minLength: 0
                 maxLength: 64
+              tags:
+                description: The tags to be added to a new IP set resource.
+                type: object
+                minProperties: 1
+                maxProperties: 200
+                additionalProperties:
+                  $ref: '#/definitions/TagValue'
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -817,6 +843,13 @@ paths:
                 type: string
                 minLength: 0
                 maxLength: 64
+              tags:
+                description: The tags to be added to a new Threat List resource.
+                type: object
+                minProperties: 1
+                maxProperties: 200
+                additionalProperties:
+                  $ref: '#/definitions/TagValue'
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1899,6 +1932,76 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/tags/{resourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: 'Lists tags for a resource. Tagging is currently supported for detectors, finding filters, IP sets, and Threat Intel sets, with a limit of 50 tags per resource. When invoked, this operation returns all assigned tags for a given resource..'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsForResourceResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: 'The Amazon Resource Name (ARN) for the given GuardDuty resource '
+          type: string
+          pattern: '^arn:[A-Za-z_.-]{1,20}:guardduty:[A-Za-z0-9_/.-]{0,63}:\d+:detector/[A-Za-z0-9_/.-]{32,264}$'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: Adds tags to a resource.
+      responses:
+        '204':
+          description: Success
+          schema:
+            $ref: '#/definitions/TagResourceResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: 'The Amazon Resource Name (ARN) for the given GuardDuty resource '
+          type: string
+          pattern: '^arn:[A-Za-z_.-]{1,20}:guardduty:[A-Za-z0-9_/.-]{0,63}:\d+:detector/[A-Za-z0-9_/.-]{32,264}$'
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - tags
+            properties:
+              tags:
+                description: The tags to be added to a resource.
+                type: object
+                minProperties: 1
+                maxProperties: 200
+                additionalProperties:
+                  $ref: '#/definitions/TagValue'
   '/detector/{detectorId}/member/start':
     post:
       operationId: StartMonitoringMembers
@@ -2043,6 +2146,45 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/tags/{resourceArn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Removes tags from a resource.
+      responses:
+        '204':
+          description: Success
+          schema:
+            $ref: '#/definitions/UntagResourceResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: 'The Amazon Resource Name (ARN) for the given GuardDuty resource '
+          type: string
+          pattern: '^arn:[A-Za-z_.-]{1,20}:guardduty:[A-Za-z0-9_/.-]{0,63}:\d+:detector/[A-Za-z0-9_/.-]{32,264}$'
+        - name: tagKeys
+          in: query
+          required: true
+          description: The tag keys to remove from a resource.
+          type: array
+          items:
+            type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/detector/{detectorId}/findings/feedback':
     post:
       operationId: UpdateFindingsFeedback
@@ -2120,6 +2262,9 @@ definitions:
       DetectorId:
         $ref: '#/definitions/DetectorId'
         description: The unique ID of the created detector.
+  TagValue:
+    type: string
+    maxLength: 256
   CreateFilterResponse:
     type: object
     required:
@@ -2247,6 +2392,9 @@ definitions:
       UpdatedAt:
         $ref: '#/definitions/String'
         description: Detector last update timestamp.
+      Tags:
+        $ref: '#/definitions/TagMap'
+        description: The tags of the detector resource.
   GetFilterResponse:
     type: object
     required:
@@ -2269,6 +2417,9 @@ definitions:
       FindingCriteria:
         $ref: '#/definitions/FindingCriteria'
         description: Represents the criteria to be used in the filter for querying findings.
+      Tags:
+        $ref: '#/definitions/TagMap'
+        description: The tags of the filter resource.
   GetFindingsResponse:
     type: object
     required:
@@ -2316,6 +2467,9 @@ definitions:
       Status:
         $ref: '#/definitions/IpSetStatus'
         description: The status of ipSet file uploaded.
+      Tags:
+        $ref: '#/definitions/TagMap'
+        description: The tags of the IP set resource.
   GetInvitationsCountResponse:
     type: object
     properties:
@@ -2362,6 +2516,9 @@ definitions:
       Status:
         $ref: '#/definitions/ThreatIntelSetStatus'
         description: The status of threatIntelSet file uploaded.
+      Tags:
+        $ref: '#/definitions/TagMap'
+        description: The tags of the Threat List resource.
   InviteMembersResponse:
     type: object
     required:
@@ -2432,6 +2589,11 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: Pagination parameter to be used on the next list operation to retrieve more items.
+  ListTagsForResourceResponse:
+    type: object
+    properties:
+      Tags:
+        $ref: '#/definitions/TagMap'
   ListThreatIntelSetsResponse:
     type: object
     required:
@@ -2459,9 +2621,20 @@ definitions:
       UnprocessedAccounts:
         $ref: '#/definitions/UnprocessedAccounts'
         description: A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
+  TagResourceResponse:
+    type: object
+    properties: {}
   UnarchiveFindingsResponse:
     type: object
     properties: {}
+  UntagResourceResponse:
+    type: object
+    properties: {}
+  TagKey:
+    type: string
+    pattern: '^(?!aws:)[a-zA-Z+-=._:/]+$'
+    minLength: 1
+    maxLength: 128
   UpdateDetectorResponse:
     type: object
     properties: {}
@@ -2727,6 +2900,12 @@ definitions:
       - FIFTEEN_MINUTES
       - ONE_HOUR
       - SIX_HOURS
+  TagMap:
+    type: object
+    minProperties: 1
+    maxProperties: 200
+    additionalProperties:
+      $ref: '#/definitions/TagValue'
   CreateDetectorRequest:
     type: object
     required:
@@ -2741,6 +2920,9 @@ definitions:
       FindingPublishingFrequency:
         $ref: '#/definitions/FindingPublishingFrequency'
         description: A enum value that specifies how frequently customer got Finding updates published.
+      Tags:
+        $ref: '#/definitions/TagMap'
+        description: The tags to be added to a new detector resource.
   FilterName:
     type: string
     minLength: 3
@@ -2790,6 +2972,9 @@ definitions:
       ClientToken:
         $ref: '#/definitions/ClientToken'
         description: The idempotency token for the create request.
+      Tags:
+        $ref: '#/definitions/TagMap'
+        description: The tags to be added to a new filter resource.
   Name:
     type: string
     minLength: 1
@@ -2832,6 +3017,9 @@ definitions:
       ClientToken:
         $ref: '#/definitions/ClientToken'
         description: The idempotency token for the create request.
+      Tags:
+        $ref: '#/definitions/TagMap'
+        description: The tags to be added to a new IP set resource.
   CreateMembersRequest:
     type: object
     required:
@@ -2892,6 +3080,9 @@ definitions:
       ClientToken:
         $ref: '#/definitions/ClientToken'
         description: The idempotency token for the create request.
+      Tags:
+        $ref: '#/definitions/TagMap'
+        description: The tags to be added to a new Threat List resource.
   DeclineInvitationsRequest:
     type: object
     required:
@@ -3196,6 +3387,9 @@ definitions:
       - DELETED
     minLength: 1
     maxLength: 300
+  GuardDutyArn:
+    type: string
+    pattern: '^arn:[A-Za-z_.-]{1,20}:guardduty:[A-Za-z0-9_/.-]{0,63}:\d+:detector/[A-Za-z0-9_/.-]{32,264}$'
   IamInstanceProfile:
     type: object
     properties:
@@ -3333,6 +3527,9 @@ definitions:
     type: object
     properties: {}
   ListMembersRequest:
+    type: object
+    properties: {}
+  ListTagsForResourceRequest:
     type: object
     properties: {}
   ListThreatIntelSetsRequest:
@@ -3513,6 +3710,20 @@ definitions:
       Value:
         $ref: '#/definitions/String'
         description: EC2 instance tag value.
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+    minItems: 1
+    maxItems: 200
+  TagResourceRequest:
+    type: object
+    required:
+      - Tags
+    properties:
+      Tags:
+        $ref: '#/definitions/TagMap'
+        description: The tags to be added to a resource.
   UnarchiveFindingsRequest:
     type: object
     required:
@@ -3533,6 +3744,9 @@ definitions:
       Result:
         $ref: '#/definitions/String'
         description: A reason why the account hasn't been processed.
+  UntagResourceRequest:
+    type: object
+    properties: {}
   UpdateDetectorRequest:
     type: object
     properties:

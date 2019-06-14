@@ -63,6 +63,7 @@ x-servers:
           - ap-southeast-2
           - ap-south-1
           - sa-east-1
+        default: us-east-1
     description: The Amazon ElastiCache multi-region endpoint
   - url: 'https://elasticache.{region}.amazonaws.com'
     variables:
@@ -88,6 +89,7 @@ x-servers:
           - ap-southeast-2
           - ap-south-1
           - sa-east-1
+        default: us-east-1
     description: The Amazon ElastiCache multi-region endpoint
   - url: 'http://elasticache.{region}.amazonaws.com.cn'
     variables:
@@ -96,6 +98,7 @@ x-servers:
         enum:
           - cn-north-1
           - cn-northwest-1
+        default: cn-north-1
     description: The Amazon ElastiCache endpoint for China (Beijing) and China (Ningxia)
   - url: 'https://elasticache.{region}.amazonaws.com.cn'
     variables:
@@ -104,6 +107,7 @@ x-servers:
         enum:
           - cn-north-1
           - cn-northwest-1
+        default: cn-north-1
     description: The Amazon ElastiCache endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 consumes:
@@ -392,7 +396,7 @@ paths:
     get:
       x-aws-operation-name: BatchApplyUpdateAction
       operationId: GET BatchApplyUpdateAction
-      description: 'Apply the service update. For more information on service updates and applying them, see <a href="https://docs.aws.amazon.com/http:/docs.aws.amazon.com/Amazon/red-ug/applying-updates.html">Applying Service Updates</a>.'
+      description: 'Apply the service update. For more information on service updates and applying them, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/applying-updates.html">Applying Service Updates</a>.'
       responses:
         '200':
           description: Success
@@ -442,7 +446,7 @@ paths:
     post:
       x-aws-operation-name: BatchApplyUpdateAction
       operationId: POST BatchApplyUpdateAction
-      description: 'Apply the service update. For more information on service updates and applying them, see <a href="https://docs.aws.amazon.com/http:/docs.aws.amazon.com/Amazon/red-ug/applying-updates.html">Applying Service Updates</a>.'
+      description: 'Apply the service update. For more information on service updates and applying them, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/applying-updates.html">Applying Service Updates</a>.'
       responses:
         '200':
           description: Success
@@ -8828,6 +8832,9 @@ definitions:
       PrimaryEndpoint:
         $ref: '#/definitions/Endpoint'
         description: The endpoint of the primary node in this node group (shard).
+      ReaderEndpoint:
+        $ref: '#/definitions/Endpoint'
+        description: The endpoint of the replica nodes in this node group (shard).
       Slots:
         $ref: '#/definitions/String'
         description: The keyspace for this node group (shard).

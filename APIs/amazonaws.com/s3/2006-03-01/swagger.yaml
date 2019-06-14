@@ -53,11 +53,13 @@ x-servers:
           - ap-southeast-1
           - ap-southeast-2
           - sa-east-1
+        default: us-east-1
       dash-or-dot:
         description: The service/region URL separator
         enum:
           - .
           - '-'
+        default: .
     description: The Amazon S3 multi-region endpoint
   - url: 'https://s3{dash-or-dot}{region}.amazonaws.com'
     variables:
@@ -73,11 +75,13 @@ x-servers:
           - ap-southeast-1
           - ap-southeast-2
           - sa-east-1
+        default: us-east-1
       dash-or-dot:
         description: The service/region URL separator
         enum:
           - .
           - '-'
+        default: .
     description: The Amazon S3 multi-region endpoint
   - url: 'http://s3.amazonaws.com'
     variables: {}
@@ -100,6 +104,7 @@ x-servers:
           - ap-northeast-2
           - ap-northeast-3
           - ap-south-1
+        default: us-east-2
     description: The Amazon S3 multi-region endpoint
   - url: 'https://s3.{region}.amazonaws.com'
     variables:
@@ -116,6 +121,7 @@ x-servers:
           - ap-northeast-2
           - ap-northeast-3
           - ap-south-1
+        default: us-east-2
     description: The Amazon S3 multi-region endpoint
   - url: 'http://s3.{region}.amazonaws.com.cn'
     variables:
@@ -124,6 +130,7 @@ x-servers:
         enum:
           - cn-north-1
           - cn-northwest-1
+        default: cn-north-1
     description: The Amazon S3 endpoint for China (Beijing) and China (Ningxia)
   - url: 'https://s3.{region}.amazonaws.com.cn'
     variables:
@@ -132,6 +139,7 @@ x-servers:
         enum:
           - cn-north-1
           - cn-northwest-1
+        default: cn-north-1
     description: The Amazon S3 endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 consumes:

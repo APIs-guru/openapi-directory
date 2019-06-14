@@ -55,6 +55,7 @@ x-servers:
         enum:
           - cn-north-1
           - cn-northwest-1
+        default: cn-north-1
     description: The IAM endpoint for China (Beijing) and China (Ningxia)
   - url: 'https://iam.{region}.amazonaws.com.cn'
     variables:
@@ -63,6 +64,7 @@ x-servers:
         enum:
           - cn-north-1
           - cn-northwest-1
+        default: cn-north-1
     description: The IAM endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 consumes:
