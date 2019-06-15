@@ -31,28 +31,29 @@ function finish(data) {
   for (let api in data) {
 
       let p = data[api].versions[data[api].preferred];
+      if (p && p.info) {
+			  let i = {};
+			  i.title = p.info.title;
+			  i.link = p.info["x-origin"][0].url;
+			  i.description = removeMarkdown(p.info.description ? p.info.description.trim().split('\n')[0] : p.info.title);
+			  i.category = 'APIs';
+			  i.guid = {};
+			  i.guid["@isPermaLink"] = 'false';
+			  i.guid[""] = api;
+			  i.pubDate = new Date(p.updated).toUTCString();
 
-			let i = {};
-			i.title = p.info.title;
-			i.link = p.info["x-origin"][0].url;
-			i.description = removeMarkdown(p.info.description ? p.info.description.trim().split('\n')[0] : p.info.title);
-			i.category = 'APIs';
-			i.guid = {};
-			i.guid["@isPermaLink"] = 'false';
-			i.guid[""] = api;
-			i.pubDate = new Date(p.updated).toUTCString();
+			  if (p.info["x-logo"]) {
+				  i.enclosure = {};
+				  i.enclosure["@url"] = p.info["x-logo"].url;
+				  i.enclosure["@length"] = 15026;
+				  i.enclosure["@type"] = 'image/jpeg';
+          let tmp = i.enclosure["@url"].toLowerCase();
+          if (tmp.indexOf('.png')>=0) i.enclosure["@type"] = 'image/png';
+          if (tmp.indexOf('.svg')>=0) i.enclosure["@type"] = 'image/svg+xml';
+			  }
 
-			if (p.info && p.info["x-logo"]) {
-				i.enclosure = {};
-				i.enclosure["@url"] = p.info["x-logo"].url;
-				i.enclosure["@length"] = 15026;
-				i.enclosure["@type"] = 'image/jpeg';
-        let tmp = i.enclosure["@url"].toLowerCase();
-        if (tmp.indexOf('.png')>=0) i.enclosure["@type"] = 'image/png';
-        if (tmp.indexOf('.svg')>=0) i.enclosure["@type"] = 'image/svg+xml';
-			}
-
-			rss.channel.item.push(i);
+			  rss.channel.item.push(i);
+      }
 	}
 
 	feed.rss = rss;
