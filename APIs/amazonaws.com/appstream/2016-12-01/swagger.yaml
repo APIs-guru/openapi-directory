@@ -656,6 +656,10 @@ paths:
           schema:
             $ref: '#/definitions/CreateUsageReportSubscriptionResult'
         '480':
+          description: InvalidRoleException
+          schema:
+            $ref: '#/definitions/InvalidRoleException'
+        '481':
           description: InvalidAccountStatusException
           schema:
             $ref: '#/definitions/InvalidAccountStatusException'
@@ -3724,6 +3728,8 @@ definitions:
     type: string
     enum:
       - WINDOWS
+      - WINDOWS_SERVER_2016
+      - WINDOWS_SERVER_2019
   ImageStateChangeReason:
     type: object
     properties:
